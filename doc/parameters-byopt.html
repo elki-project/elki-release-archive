@@ -1,0 +1,4205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!--WARNING: THIS DOCUMENT IS AUTOMATICALLY GENERATED. MODIFICATIONS MAY GET LOST.-->
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+<title>Command line parameter overview - by option</title>
+</head>
+<body>
+<!--WARNING: THIS DOCUMENT IS AUTOMATICALLY GENERATED. MODIFICATIONS MAY GET LOST.-->
+<h1>ELKI command line parameter overview:</h1>
+<dl>
+<dt>
+<a name="abod.fast"/>
+<tt>-abod.fast </tt>
+</dt>
+<dd>
+<p>Flag to indicate that the algorithm should run the fast/approximative version.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/ABOD.html">de.lmu.ifi.dbs.elki.algorithm.outlier.ABOD</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="abod.k"/>
+<tt>-abod.k &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Parameter k for kNN queries.</p>
+<p>Default: 30</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/ABOD.html">de.lmu.ifi.dbs.elki.algorithm.outlier.ABOD</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="abod.kernelfunction"/>
+<tt>-abod.kernelfunction &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Kernel function to use.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/distance/similarityfunction/kernel/KernelFunction.html">de.lmu.ifi.dbs.elki.distance.similarityfunction.kernel.KernelFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/distance/similarityfunction/kernel/PolynomialKernelFunction.html">de.lmu.ifi.dbs.elki.distance.similarityfunction.kernel.PolynomialKernelFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/similarityfunction/kernel/LinearKernelFunction.html">LinearKernelFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/similarityfunction/kernel/PolynomialKernelFunction.html">PolynomialKernelFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/ABOD.html">de.lmu.ifi.dbs.elki.algorithm.outlier.ABOD</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="abod.samplesize"/>
+<tt>-abod.samplesize &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Sample size to use in fast mode.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/ABOD.html">de.lmu.ifi.dbs.elki.algorithm.outlier.ABOD</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="adapter.similarityfunction"/>
+<tt>-adapter.similarityfunction &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Similarity function to derive the distance between database objects from.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/distance/similarityfunction/NormalizedSimilarityFunction.html">de.lmu.ifi.dbs.elki.distance.similarityfunction.NormalizedSimilarityFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/distance/similarityfunction/FractionalSharedNearestNeighborSimilarityFunction.html">de.lmu.ifi.dbs.elki.distance.similarityfunction.FractionalSharedNearestNeighborSimilarityFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/similarityfunction/FractionalSharedNearestNeighborSimilarityFunction.html">FractionalSharedNearestNeighborSimilarityFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLn.html">de.lmu.ifi.dbs.elki.distance.distancefunction.adapter.SimilarityAdapterLn</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLinear.html">de.lmu.ifi.dbs.elki.distance.distancefunction.adapter.SimilarityAdapterLinear</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterArccos.html">de.lmu.ifi.dbs.elki.distance.distancefunction.adapter.SimilarityAdapterArccos</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="algorithm"/>
+<tt>-algorithm &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Algorithm to run.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/algorithm/Algorithm.html">de.lmu.ifi.dbs.elki.algorithm.Algorithm</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/NullAlgorithm.html">NullAlgorithm</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/ABOD.html">outlier.ABOD</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/LOF.html">outlier.LOF</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/LOCI.html">outlier.LOCI</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/SOD.html">outlier.SOD</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/APRIORI.html">APRIORI</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/DependencyDerivator.html">DependencyDerivator</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/KNNDistanceOrder.html">KNNDistanceOrder</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/KNNJoin.html">KNNJoin</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/MaterializeDistances.html">MaterializeDistances</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/EvaluateRankingQuality.html">statistics.EvaluateRankingQuality</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/RankingQualityHistogram.html">statistics.RankingQualityHistogram</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/DistanceStatisticsWithClasses.html">statistics.DistanceStatisticsWithClasses</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/DBSCAN.html">clustering.DBSCAN</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/DeLiClu.html">clustering.DeLiClu</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/EM.html">clustering.EM</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/KMeans.html">clustering.KMeans</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/OPTICS.html">clustering.OPTICS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/SLINK.html">clustering.SLINK</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/SNNClustering.html">clustering.SNNClustering</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/ByLabelClustering.html">clustering.ByLabelClustering</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/ByLabelHierarchicalClustering.html">clustering.ByLabelHierarchicalClustering</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/TrivialAllInOne.html">clustering.TrivialAllInOne</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/TrivialAllNoise.html">clustering.TrivialAllNoise</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/CASH.html">clustering.correlation.CASH</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/COPAC.html">clustering.correlation.COPAC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/ERiC.html">clustering.correlation.ERiC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/FourC.html">clustering.correlation.FourC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/ORCLUS.html">clustering.correlation.ORCLUS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/CLIQUE.html">clustering.subspace.CLIQUE</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/DiSH.html">clustering.subspace.DiSH</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PreDeCon.html">clustering.subspace.PreDeCon</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PROCLUS.html">clustering.subspace.PROCLUS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/evaluation/ComputeROCCurve.html">de.lmu.ifi.dbs.elki.evaluation.ComputeROCCurve</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/KDDTask.html">de.lmu.ifi.dbs.elki.KDDTask</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/evaluation/ComputeROCCurve.html">de.lmu.ifi.dbs.elki.evaluation.ComputeROCCurve</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="algorithm.distancefunction"/>
+<tt>-algorithm.distancefunction &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Distance function to determine the distance between database objects.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/DistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.DistanceFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.EuclideanDistanceFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ArcCosineDistanceFunction.html">ArcCosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/CosineDistanceFunction.html">CosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">EuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LPNormDistanceFunction.html">LPNormDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">LocallyWeightedDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ManhattanDistanceFunction.html">ManhattanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/RepresentationSelectingDistanceFunction.html">RepresentationSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterArccos.html">adapter.SimilarityAdapterArccos</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLn.html">adapter.SimilarityAdapterLn</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLinear.html">adapter.SimilarityAdapterLinear</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedDoubleDistanceFunction.html">external.DiskCacheBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedFloatDistanceFunction.html">external.DiskCacheBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedDoubleDistanceFunction.html">external.FileBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedFloatDistanceFunction.html">external.FileBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/ERiCDistanceFunction.html">correlation.ERiCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/PCABasedCorrelationDistanceFunction.html">correlation.PCABasedCorrelationDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionSelectingDistanceFunction.html">subspace.DimensionSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionsSelectingEuclideanDistanceFunction.html">subspace.DimensionsSelectingEuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DiSHDistanceFunction.html">subspace.DiSHDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/HiSCDistanceFunction.html">subspace.HiSCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/DTWDistanceFunction.html">timeseries.DTWDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/EDRDistanceFunction.html">timeseries.EDRDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/ERPDistanceFunction.html">timeseries.ERPDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/LCSSDistanceFunction.html">timeseries.LCSSDistanceFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/KNNJoin.html">de.lmu.ifi.dbs.elki.algorithm.KNNJoin</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/RankingQualityHistogram.html">de.lmu.ifi.dbs.elki.algorithm.statistics.RankingQualityHistogram</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/DistanceStatisticsWithClasses.html">de.lmu.ifi.dbs.elki.algorithm.statistics.DistanceStatisticsWithClasses</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/EvaluateRankingQuality.html">de.lmu.ifi.dbs.elki.algorithm.statistics.EvaluateRankingQuality</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/KMeans.html">de.lmu.ifi.dbs.elki.algorithm.clustering.KMeans</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/OPTICS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.OPTICS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/SLINK.html">de.lmu.ifi.dbs.elki.algorithm.clustering.SLINK</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/DeLiClu.html">de.lmu.ifi.dbs.elki.algorithm.clustering.DeLiClu</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/DBSCAN.html">de.lmu.ifi.dbs.elki.algorithm.clustering.DBSCAN</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/LOCI.html">de.lmu.ifi.dbs.elki.algorithm.outlier.LOCI</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/ABOD.html">de.lmu.ifi.dbs.elki.algorithm.outlier.ABOD</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/LOF.html">de.lmu.ifi.dbs.elki.algorithm.outlier.LOF</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/KNNDistanceOrder.html">de.lmu.ifi.dbs.elki.algorithm.KNNDistanceOrder</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/MaterializeDistances.html">de.lmu.ifi.dbs.elki.algorithm.MaterializeDistances</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/DependencyDerivator.html">de.lmu.ifi.dbs.elki.algorithm.DependencyDerivator</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="app.out"/>
+<tt>-app.out &lt;file&gt;</tt>
+</dt>
+<dd>
+<p>the file to write the generated data set into, if the file already exists, the generated points will be appended to this file.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/GeneratorXMLSpec.html">de.lmu.ifi.dbs.elki.application.GeneratorXMLSpec</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="apriori.minfreq"/>
+<tt>-apriori.minfreq &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>Threshold for minimum frequency as percentage value (alternatively to parameter apriori.minsupp).</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/APRIORI.html">de.lmu.ifi.dbs.elki.algorithm.APRIORI</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="apriori.minsupp"/>
+<tt>-apriori.minsupp &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Threshold for minimum support as minimally required number of transactions (alternatively to parameter apriori.minfreq - setting apriori.minsupp is slightly preferable over setting apriori.minfreq in terms of efficiency).</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/APRIORI.html">de.lmu.ifi.dbs.elki.algorithm.APRIORI</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="bymodel.randomseed"/>
+<tt>-bymodel.randomseed &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The random generator seed.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/GeneratorXMLSpec.html">de.lmu.ifi.dbs.elki.application.GeneratorXMLSpec</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="bymodel.sizescale"/>
+<tt>-bymodel.sizescale &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>Factor for scaling the specified cluster sizes.</p>
+<p>Default: 1.0</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/GeneratorXMLSpec.html">de.lmu.ifi.dbs.elki.application.GeneratorXMLSpec</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="bymodel.spec"/>
+<tt>-bymodel.spec &lt;file&gt;</tt>
+</dt>
+<dd>
+<p>The generator specification file.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/GeneratorXMLSpec.html">de.lmu.ifi.dbs.elki.application.GeneratorXMLSpec</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="cash.adjust"/>
+<tt>-cash.adjust </tt>
+</dt>
+<dd>
+<p>Flag to indicate that an adjustment of the applied heuristic for choosing an interval is performed after an interval is selected.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/CASH.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.CASH</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="cash.jitter"/>
+<tt>-cash.jitter &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>The maximum jitter for distance values.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/CASH.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.CASH</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="cash.maxlevel"/>
+<tt>-cash.maxlevel &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The maximum level for splitting the hypercube.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/CASH.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.CASH</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="cash.mindim"/>
+<tt>-cash.mindim &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The minimum dimensionality of the subspaces to be found.</p>
+<p>Default: 1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/CASH.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.CASH</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="cash.minpts"/>
+<tt>-cash.minpts &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Threshold for minimum number of points in a cluster.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/CASH.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.CASH</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="clique.prune"/>
+<tt>-clique.prune </tt>
+</dt>
+<dd>
+<p>Flag to indicate that only subspaces with large coverage (i.e. the fraction of the database that is covered by the dense units) are selected, the rest will be pruned.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/CLIQUE.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.CLIQUE</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="clique.tau"/>
+<tt>-clique.tau &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>The density threshold for the selectivity of a unit, where the selectivity isthe fraction of total feature vectors contained in this unit.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/CLIQUE.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.CLIQUE</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="clique.xsi"/>
+<tt>-clique.xsi &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The number of intervals (units) in each dimension.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/CLIQUE.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.CLIQUE</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="copac.partitionAlgorithm"/>
+<tt>-copac.partitionAlgorithm &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Clustering algorithm to apply to each partition.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/algorithm/clustering/ClusteringAlgorithm.html">de.lmu.ifi.dbs.elki.algorithm.clustering.ClusteringAlgorithm</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/ByLabelClustering.html">ByLabelClustering</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/ByLabelHierarchicalClustering.html">ByLabelHierarchicalClustering</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/DBSCAN.html">DBSCAN</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/EM.html">EM</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/KMeans.html">KMeans</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/SNNClustering.html">SNNClustering</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/TrivialAllInOne.html">TrivialAllInOne</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/TrivialAllNoise.html">TrivialAllNoise</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/CASH.html">correlation.CASH</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/COPAC.html">correlation.COPAC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/ERiC.html">correlation.ERiC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/FourC.html">correlation.FourC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/ORCLUS.html">correlation.ORCLUS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/CLIQUE.html">subspace.CLIQUE</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/DiSH.html">subspace.DiSH</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PreDeCon.html">subspace.PreDeCon</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PROCLUS.html">subspace.PROCLUS</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/COPAC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.COPAC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/COPAC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.COPAC</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="copac.partitionDB"/>
+<tt>-copac.partitionDB &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Database class for each partition. If this parameter is not set, the databases of the partitions have the same class as the original database.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/database/Database.html">de.lmu.ifi.dbs.elki.database.Database</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/MetricalIndexDatabase.html">MetricalIndexDatabase</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/SequentialDatabase.html">SequentialDatabase</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/SpatialIndexDatabase.html">SpatialIndexDatabase</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/COPAC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.COPAC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/COPAC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.COPAC</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="copac.preprocessor"/>
+<tt>-copac.preprocessor &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Preprocessor to derive partition criterion.</p>
+<p>Class Restriction: extends <a href="de/lmu/ifi/dbs/elki/preprocessing/HiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.HiCOPreprocessor</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">KnnQueryBasedHiCOPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/RangeQueryBasedHiCOPreprocessor.html">RangeQueryBasedHiCOPreprocessor</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/COPAC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.COPAC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/COPAC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.COPAC</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dbc"/>
+<tt>-dbc &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Database connection class.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/database/connection/DatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.DatabaseConnection</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/database/connection/FileBasedDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.FileBasedDatabaseConnection</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/FileBasedDatabaseConnection.html">FileBasedDatabaseConnection</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/InputStreamDatabaseConnection.html">InputStreamDatabaseConnection</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/MultipleFileBasedDatabaseConnection.html">MultipleFileBasedDatabaseConnection</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/KDDTask.html">de.lmu.ifi.dbs.elki.KDDTask</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/visualization/KNNExplorer.html">de.lmu.ifi.dbs.elki.application.visualization.KNNExplorer</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheFloatDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheFloatDistanceInOnDiskMatrix</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheDoubleDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheDoubleDistanceInOnDiskMatrix</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dbc.classLabelClass"/>
+<tt>-dbc.classLabelClass &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Class label class to use.</p>
+<p>Class Restriction: extends <a href="de/lmu/ifi/dbs/elki/data/ClassLabel.html">de.lmu.ifi.dbs.elki.data.ClassLabel</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/data/SimpleClassLabel.html">de.lmu.ifi.dbs.elki.data.SimpleClassLabel</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/data/SimpleClassLabel.html">SimpleClassLabel</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/data/HierarchicalClassLabel.html">HierarchicalClassLabel</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/InputStreamDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.InputStreamDatabaseConnection</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/MultipleFileBasedDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.MultipleFileBasedDatabaseConnection</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/FileBasedDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.FileBasedDatabaseConnection</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dbc.classLabelIndex"/>
+<tt>-dbc.classLabelIndex &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The index of the label to be used as class label.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/InputStreamDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.InputStreamDatabaseConnection</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/MultipleFileBasedDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.MultipleFileBasedDatabaseConnection</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/FileBasedDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.FileBasedDatabaseConnection</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dbc.database"/>
+<tt>-dbc.database &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Database class to be provided by the parse method.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/database/Database.html">de.lmu.ifi.dbs.elki.database.Database</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/database/SequentialDatabase.html">de.lmu.ifi.dbs.elki.database.SequentialDatabase</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/MetricalIndexDatabase.html">MetricalIndexDatabase</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/SequentialDatabase.html">SequentialDatabase</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/SpatialIndexDatabase.html">SpatialIndexDatabase</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/InputStreamDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.InputStreamDatabaseConnection</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/MultipleFileBasedDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.MultipleFileBasedDatabaseConnection</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/FileBasedDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.FileBasedDatabaseConnection</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dbc.externalIDIndex"/>
+<tt>-dbc.externalIDIndex &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The index of the label to be used as an external id.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/InputStreamDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.InputStreamDatabaseConnection</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/MultipleFileBasedDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.MultipleFileBasedDatabaseConnection</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/FileBasedDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.FileBasedDatabaseConnection</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dbc.in"/>
+<tt>-dbc.in &lt;file&gt;</tt>
+</dt>
+<dd>
+<p>The name of the input file to be parsed.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/FileBasedDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.FileBasedDatabaseConnection</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dbc.parser"/>
+<tt>-dbc.parser &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Parser to provide the database.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/parser/Parser.html">de.lmu.ifi.dbs.elki.parser.Parser</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/parser/DoubleVectorLabelParser.html">de.lmu.ifi.dbs.elki.parser.DoubleVectorLabelParser</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/BitVectorLabelParser.html">BitVectorLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/NumberDistanceParser.html">NumberDistanceParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/ParameterizationFunctionLabelParser.html">ParameterizationFunctionLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/DoubleVectorLabelParser.html">DoubleVectorLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/FloatVectorLabelParser.html">FloatVectorLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/DoubleVectorLabelTransposingParser.html">DoubleVectorLabelTransposingParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/SparseBitVectorLabelParser.html">SparseBitVectorLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/SparseFloatVectorLabelParser.html">SparseFloatVectorLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/DoubleVectorProjectionParser.html">meta.DoubleVectorProjectionParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/DoubleVectorRandomProjectionParser.html">meta.DoubleVectorRandomProjectionParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/SparseFloatVectorProjectionParser.html">meta.SparseFloatVectorProjectionParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/SparseFloatVectorRandomProjectionParser.html">meta.SparseFloatVectorRandomProjectionParser</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/InputStreamDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.InputStreamDatabaseConnection</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/FileBasedDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.FileBasedDatabaseConnection</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dbscan.epsilon"/>
+<tt>-dbscan.epsilon &lt;pattern&gt;</tt>
+</dt>
+<dd>
+<p>The maximum radius of the neighborhood to be considered.</p>
+<p>Default: the maximum radius of the neighborhood to be considered, must be suitable to de.lmu.ifi.dbs.elki.distance.distancefunction.LocallyWeightedDistanceFunction</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreDeConPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.PreDeConPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/FourCPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.FourCPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/DBSCAN.html">de.lmu.ifi.dbs.elki.algorithm.clustering.DBSCAN</a>
+<p>Default: No default value.</p>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dbscan.minpts"/>
+<tt>-dbscan.minpts &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Threshold for minimum number of points in the epsilon-neighborhood of a point.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/DBSCAN.html">de.lmu.ifi.dbs.elki.algorithm.clustering.DBSCAN</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="deliclu.minpts"/>
+<tt>-deliclu.minpts &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Threshold for minimum number of points within a cluster.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/DeLiClu.html">de.lmu.ifi.dbs.elki.algorithm.clustering.DeLiClu</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="derivator.accuracy"/>
+<tt>-derivator.accuracy &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Threshold for output accuracy fraction digits.</p>
+<p>Default: 4</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/DependencyDerivator.html">de.lmu.ifi.dbs.elki.algorithm.DependencyDerivator</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="derivator.randomSample"/>
+<tt>-derivator.randomSample </tt>
+</dt>
+<dd>
+<p>Flag to use random sample (use knn query around centroid, if flag is not set).</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/DependencyDerivator.html">de.lmu.ifi.dbs.elki.algorithm.DependencyDerivator</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="derivator.sampleSize"/>
+<tt>-derivator.sampleSize &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Threshold for the size of the random sample to use. Default value is size of the complete dataset.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/DependencyDerivator.html">de.lmu.ifi.dbs.elki.algorithm.DependencyDerivator</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="description"/>
+<tt>-description &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Class to obtain a description of. Causes immediate stop of the program.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/utilities/optionhandling/Parameterizable.html">de.lmu.ifi.dbs.elki.utilities.optionhandling.Parameterizable</a>
+</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/KDDTask.html">de.lmu.ifi.dbs.elki.KDDTask</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/GeneratorXMLSpec.html">de.lmu.ifi.dbs.elki.application.GeneratorXMLSpec</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/visualization/KNNExplorer.html">de.lmu.ifi.dbs.elki.application.visualization.KNNExplorer</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheFloatDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheFloatDistanceInOnDiskMatrix</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheDoubleDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheDoubleDistanceInOnDiskMatrix</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dim"/>
+<tt>-dim &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>an integer between 1 and the dimensionality of the feature space 1 specifying the dimension to be considered for distance computation.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionSelectingDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.subspace.DimensionSelectingDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dish.epsilon"/>
+<tt>-dish.epsilon &lt;double_1,...,double_n&gt;</tt>
+</dt>
+<dd>
+<p>a comma separated list of positive doubles specifying the maximum radius of the neighborhood to be considered in each dimension for determination of the preference vector (default is 0.0010 in each dimension). If only one value is specified, this value will be used for each dimension.</p>
+<p>Default: [0.0010]</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/DiSHPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.DiSHPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/DiSHPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.DiSHPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/DiSH.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.DiSH</a>
+<p>Default: 0.0010</p>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dish.minpts"/>
+<tt>-dish.minpts &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>positive threshold for minumum numbers of points in the epsilon-neighborhood of a point. The value of the preference vector in dimension d_i is set to 1 if the epsilon neighborhood contains more than dish.minpts points and the following condition holds: for all dimensions d_j: |neighbors(d_i) intersection neighbors(d_j)| &gt;= dish.minpts.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/DiSHPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.DiSHPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/DiSHPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.DiSHPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dish.mu"/>
+<tt>-dish.mu &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The minimum number of points as a smoothing factor to avoid the single-link-effekt.</p>
+<p>Default: 1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/DiSH.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.DiSH</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="dish.strategy"/>
+<tt>-dish.strategy &lt;pattern&gt;</tt>
+</dt>
+<dd>
+<p>the strategy for determination of the preference vector, available strategies are: [APRIORI| MAX_INTERSECTION](default is MAX_INTERSECTION)</p>
+<p>Default: MAX_INTERSECTION</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/DiSHPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.DiSHPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/DiSHPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.DiSHPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/DiSHPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.DiSHPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="distance.dims"/>
+<tt>-distance.dims &lt;int_1,...,int_n&gt;</tt>
+</dt>
+<dd>
+<p>a comma separated array of integer values, where 1 &lt;= d_i &lt;= the dimensionality of the feature space specifying the dimensions to be considered for distance computation. If this parameter is not set, no dimensions will be considered, i.e. the distance between two objects is always 0.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionsSelectingEuclideanDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.subspace.DimensionsSelectingEuclideanDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="distance.matrix"/>
+<tt>-distance.matrix &lt;file&gt;</tt>
+</dt>
+<dd>
+<p>The name of the file containing the distance matrix.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedDoubleDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.external.FileBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedFloatDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.external.FileBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedDoubleDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.external.DiskCacheBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedFloatDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.external.DiskCacheBasedFloatDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="distance.parser"/>
+<tt>-distance.parser &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Parser used to load the distance matrix.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/parser/DistanceParser.html">de.lmu.ifi.dbs.elki.parser.DistanceParser</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/parser/NumberDistanceParser.html">de.lmu.ifi.dbs.elki.parser.NumberDistanceParser</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/NumberDistanceParser.html">NumberDistanceParser</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedDoubleDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.external.FileBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedFloatDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.external.FileBasedFloatDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="distancefunction.epsilon"/>
+<tt>-distancefunction.epsilon &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>The maximum distance between two vectors with equal preference vectors before considering them as parallel.</p>
+<p>Default: 0.0010</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DiSHDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.subspace.DiSHDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/HiSCDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.subspace.HiSCDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="distancefunctions"/>
+<tt>-distancefunctions &lt;class_1,...,class_n&gt;</tt>
+</dt>
+<dd>
+<p>A comma separated list of the distance functions to determine the distance between objects within one representation.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/RepresentationSelectingDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.RepresentationSelectingDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="diststat.sampling"/>
+<tt>-diststat.sampling </tt>
+</dt>
+<dd>
+<p>Enable sampling to reduce runtime from O(2*n*n) to O(n*n)+O(n) at the cost of evenutally having more than the configured number of bins.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/DistanceStatisticsWithClasses.html">de.lmu.ifi.dbs.elki.algorithm.statistics.DistanceStatisticsWithClasses</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="edit.bandSize"/>
+<tt>-edit.bandSize &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>the band size for Edit Distance alignment (positive double value, 0 &lt;= bandSize &lt;= 1)</p>
+<p>Default: 0.1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/ERPDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.timeseries.ERPDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/EDRDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.timeseries.EDRDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/DTWDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.timeseries.DTWDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="edr.delta"/>
+<tt>-edr.delta &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>the delta parameter (similarity threshold) for EDR (positive number)</p>
+<p>Default: 1.0</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/EDRDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.timeseries.EDRDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="em.delta"/>
+<tt>-em.delta &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>The termination criterion for maximization of E(M): E(M) - E(M') &lt; em.delta</p>
+<p>Default: 0.0</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/EM.html">de.lmu.ifi.dbs.elki.algorithm.clustering.EM</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="em.k"/>
+<tt>-em.k &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The number of clusters to find.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/EM.html">de.lmu.ifi.dbs.elki.algorithm.clustering.EM</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="ericdf.delta"/>
+<tt>-ericdf.delta &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>Threshold for approximate linear dependency: the strong eigenvectors of q are approximately linear dependent from the strong eigenvectors p if the following condition holds for all stroneg eigenvectors q_i of q (lambda_q &lt; lambda_p): q_i' * M^check_p * q_i &lt;= delta^2.</p>
+<p>Default: 0.1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/ERiCDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.correlation.ERiCDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="ericdf.tau"/>
+<tt>-ericdf.tau &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>Threshold for the maximum distance between two approximately linear dependent subspaces of two objects p and q (lambda_q &lt; lambda_p) before considering them as parallel.</p>
+<p>Default: 0.1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/ERiCDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.correlation.ERiCDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="erp.g"/>
+<tt>-erp.g &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>the g parameter ERP (positive number)</p>
+<p>Default: 0.0</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/ERPDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.timeseries.ERPDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="explorer.distancefunction"/>
+<tt>-explorer.distancefunction &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Distance function to determine the distance between database objects.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/DistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.DistanceFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.EuclideanDistanceFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ArcCosineDistanceFunction.html">ArcCosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/CosineDistanceFunction.html">CosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">EuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LPNormDistanceFunction.html">LPNormDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">LocallyWeightedDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ManhattanDistanceFunction.html">ManhattanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/RepresentationSelectingDistanceFunction.html">RepresentationSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterArccos.html">adapter.SimilarityAdapterArccos</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLn.html">adapter.SimilarityAdapterLn</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLinear.html">adapter.SimilarityAdapterLinear</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedDoubleDistanceFunction.html">external.DiskCacheBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedFloatDistanceFunction.html">external.DiskCacheBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedDoubleDistanceFunction.html">external.FileBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedFloatDistanceFunction.html">external.FileBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/ERiCDistanceFunction.html">correlation.ERiCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/PCABasedCorrelationDistanceFunction.html">correlation.PCABasedCorrelationDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionSelectingDistanceFunction.html">subspace.DimensionSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionsSelectingEuclideanDistanceFunction.html">subspace.DimensionsSelectingEuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DiSHDistanceFunction.html">subspace.DiSHDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/HiSCDistanceFunction.html">subspace.HiSCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/DTWDistanceFunction.html">timeseries.DTWDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/EDRDistanceFunction.html">timeseries.EDRDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/ERPDistanceFunction.html">timeseries.ERPDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/LCSSDistanceFunction.html">timeseries.LCSSDistanceFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/visualization/KNNExplorer.html">de.lmu.ifi.dbs.elki.application.visualization.KNNExplorer</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="fookernel.max_degree"/>
+<tt>-fookernel.max_degree &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The max degree of theFooKernelFunction. Default: 2</p>
+<p>Default: 2</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/similarityfunction/kernel/FooKernelFunction.html">de.lmu.ifi.dbs.elki.distance.similarityfunction.kernel.FooKernelFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="h"/>
+<tt>-h </tt>
+</dt>
+<dd>
+<p>Request a help-message, either for the main-routine or for any specified algorithm. Causes immediate stop of the program.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/KDDTask.html">de.lmu.ifi.dbs.elki.KDDTask</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/GeneratorXMLSpec.html">de.lmu.ifi.dbs.elki.application.GeneratorXMLSpec</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/visualization/KNNExplorer.html">de.lmu.ifi.dbs.elki.application.visualization.KNNExplorer</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheFloatDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheFloatDistanceInOnDiskMatrix</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheDoubleDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheDoubleDistanceInOnDiskMatrix</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="help"/>
+<tt>-help </tt>
+</dt>
+<dd>
+<p>Request a help-message, either for the main-routine or for any specified algorithm. Causes immediate stop of the program.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/KDDTask.html">de.lmu.ifi.dbs.elki.KDDTask</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/GeneratorXMLSpec.html">de.lmu.ifi.dbs.elki.application.GeneratorXMLSpec</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/visualization/KNNExplorer.html">de.lmu.ifi.dbs.elki.application.visualization.KNNExplorer</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheFloatDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheFloatDistanceInOnDiskMatrix</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheDoubleDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheDoubleDistanceInOnDiskMatrix</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="hico.pca.distance"/>
+<tt>-hico.pca.distance &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>The distance function used to select object for running PCA.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/DistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.DistanceFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.EuclideanDistanceFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ArcCosineDistanceFunction.html">ArcCosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/CosineDistanceFunction.html">CosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">EuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LPNormDistanceFunction.html">LPNormDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">LocallyWeightedDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ManhattanDistanceFunction.html">ManhattanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/RepresentationSelectingDistanceFunction.html">RepresentationSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterArccos.html">adapter.SimilarityAdapterArccos</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLn.html">adapter.SimilarityAdapterLn</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLinear.html">adapter.SimilarityAdapterLinear</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedDoubleDistanceFunction.html">external.DiskCacheBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedFloatDistanceFunction.html">external.DiskCacheBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedDoubleDistanceFunction.html">external.FileBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedFloatDistanceFunction.html">external.FileBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/ERiCDistanceFunction.html">correlation.ERiCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/PCABasedCorrelationDistanceFunction.html">correlation.PCABasedCorrelationDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionSelectingDistanceFunction.html">subspace.DimensionSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionsSelectingEuclideanDistanceFunction.html">subspace.DimensionsSelectingEuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DiSHDistanceFunction.html">subspace.DiSHDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/HiSCDistanceFunction.html">subspace.HiSCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/DTWDistanceFunction.html">timeseries.DTWDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/EDRDistanceFunction.html">timeseries.EDRDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/ERPDistanceFunction.html">timeseries.ERPDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/LCSSDistanceFunction.html">timeseries.LCSSDistanceFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/RangeQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.RangeQueryBasedHiCOPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="hicopreprocessor.k"/>
+<tt>-hicopreprocessor.k &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The number of nearest neighbors considered in the PCA. If this parameter is not set, k ist set to three times of the dimensionality of the database objects.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="hisc.alpha"/>
+<tt>-hisc.alpha &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>a double between 0 and 1 specifying the maximum absolute variance along a coordinate axis.</p>
+<p>Default: 0.01</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/HiSCPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.HiSCPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="hisc.k"/>
+<tt>-hisc.k &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>a positive integer specifying the number of nearest neighbors considered to determine the preference vector. If this value is not defined, k ist set to three times of the dimensionality of the database objects.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/HiSCPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.HiSCPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/HiSCPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.HiSCPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="kernel"/>
+<tt>-kernel &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>the kernel function which is used to compute the similarity.Default: de.lmu.ifi.dbs.elki.distance.similarityfunction.kernel.LinearKernelFunction</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/distance/similarityfunction/kernel/KernelFunction.html">de.lmu.ifi.dbs.elki.distance.similarityfunction.kernel.KernelFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/distance/similarityfunction/kernel/LinearKernelFunction.html">de.lmu.ifi.dbs.elki.distance.similarityfunction.kernel.LinearKernelFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/similarityfunction/kernel/LinearKernelFunction.html">LinearKernelFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/similarityfunction/kernel/PolynomialKernelFunction.html">PolynomialKernelFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/KernelBasedLocallyWeightedDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.KernelBasedLocallyWeightedDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="kernel.degree"/>
+<tt>-kernel.degree &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>The degree of the polynomial kernel function. Default: 2.0</p>
+<p>Default: 2.0</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/similarityfunction/kernel/PolynomialKernelFunction.html">de.lmu.ifi.dbs.elki.distance.similarityfunction.kernel.PolynomialKernelFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="kmeans.k"/>
+<tt>-kmeans.k &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The number of clusters to find.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/KMeans.html">de.lmu.ifi.dbs.elki.algorithm.clustering.KMeans</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="knndistanceorder.k"/>
+<tt>-knndistanceorder.k &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Specifies the distance of the k-distant object to be assessed.</p>
+<p>Default: 1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/KNNDistanceOrder.html">de.lmu.ifi.dbs.elki.algorithm.KNNDistanceOrder</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="knndistanceorder.percentage"/>
+<tt>-knndistanceorder.percentage &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>The average percentage of distances randomly choosen to be provided in the result.</p>
+<p>Default: 1.0</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/KNNDistanceOrder.html">de.lmu.ifi.dbs.elki.algorithm.KNNDistanceOrder</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="knnjoin.k"/>
+<tt>-knnjoin.k &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Specifies the k-nearest neighbors to be assigned.</p>
+<p>Default: 1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/KNNJoin.html">de.lmu.ifi.dbs.elki.algorithm.KNNJoin</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="lcss.pDelta"/>
+<tt>-lcss.pDelta &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>the allowed deviation in x direction for LCSS alignment (positive double value, 0 &lt;= pDelta &lt;= 1)</p>
+<p>Default: 0.1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/LCSSDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.timeseries.LCSSDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="lcss.pEpsilon"/>
+<tt>-lcss.pEpsilon &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>the allowed deviation in y directionfor LCSS alignment (positive double value, 0 &lt;= pEpsilon &lt;= 1)</p>
+<p>Default: 0.05</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/LCSSDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.timeseries.LCSSDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="loader.diskcache"/>
+<tt>-loader.diskcache &lt;file&gt;</tt>
+</dt>
+<dd>
+<p>File name of the disk cache to create.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheFloatDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheFloatDistanceInOnDiskMatrix</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheDoubleDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheDoubleDistanceInOnDiskMatrix</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="loader.distance"/>
+<tt>-loader.distance &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Distance function to cache.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/DistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.DistanceFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ArcCosineDistanceFunction.html">ArcCosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/CosineDistanceFunction.html">CosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">EuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LPNormDistanceFunction.html">LPNormDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">LocallyWeightedDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ManhattanDistanceFunction.html">ManhattanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/RepresentationSelectingDistanceFunction.html">RepresentationSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterArccos.html">adapter.SimilarityAdapterArccos</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLn.html">adapter.SimilarityAdapterLn</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLinear.html">adapter.SimilarityAdapterLinear</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedDoubleDistanceFunction.html">external.DiskCacheBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedFloatDistanceFunction.html">external.DiskCacheBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedDoubleDistanceFunction.html">external.FileBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedFloatDistanceFunction.html">external.FileBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/ERiCDistanceFunction.html">correlation.ERiCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/PCABasedCorrelationDistanceFunction.html">correlation.PCABasedCorrelationDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionSelectingDistanceFunction.html">subspace.DimensionSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionsSelectingEuclideanDistanceFunction.html">subspace.DimensionsSelectingEuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DiSHDistanceFunction.html">subspace.DiSHDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/HiSCDistanceFunction.html">subspace.HiSCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/DTWDistanceFunction.html">timeseries.DTWDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/EDRDistanceFunction.html">timeseries.EDRDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/ERPDistanceFunction.html">timeseries.ERPDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/LCSSDistanceFunction.html">timeseries.LCSSDistanceFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheFloatDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheFloatDistanceInOnDiskMatrix</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheDoubleDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheDoubleDistanceInOnDiskMatrix</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="localpca.big"/>
+<tt>-localpca.big &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>A constant big value to reset high eigenvalues.</p>
+<p>Default: 1.0</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="localpca.small"/>
+<tt>-localpca.small &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>A constant small value to reset low eigenvalues.</p>
+<p>Default: 0.0</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="loci.alpha"/>
+<tt>-loci.alpha &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>Scaling factor for averaging neighborhood</p>
+<p>Default: 0.5</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/LOCI.html">de.lmu.ifi.dbs.elki.algorithm.outlier.LOCI</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="loci.nmin"/>
+<tt>-loci.nmin &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Minimum neighborhood size to be considered.</p>
+<p>Default: 20</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/LOCI.html">de.lmu.ifi.dbs.elki.algorithm.outlier.LOCI</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="loci.rmax"/>
+<tt>-loci.rmax &lt;pattern&gt;</tt>
+</dt>
+<dd>
+<p>The maximum radius of the neighborhood to be considered.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/LOCI.html">de.lmu.ifi.dbs.elki.algorithm.outlier.LOCI</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="lof.k"/>
+<tt>-lof.k &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The number of nearest neighbors of an object to be considered for computing its LOF_SCORE.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/LOF.html">de.lmu.ifi.dbs.elki.algorithm.outlier.LOF</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="lof.reachdistfunction"/>
+<tt>-lof.reachdistfunction &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Distance function to determine the reachability distance between database objects.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/DistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.DistanceFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ArcCosineDistanceFunction.html">ArcCosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/CosineDistanceFunction.html">CosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">EuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LPNormDistanceFunction.html">LPNormDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">LocallyWeightedDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ManhattanDistanceFunction.html">ManhattanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/RepresentationSelectingDistanceFunction.html">RepresentationSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterArccos.html">adapter.SimilarityAdapterArccos</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLn.html">adapter.SimilarityAdapterLn</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLinear.html">adapter.SimilarityAdapterLinear</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedDoubleDistanceFunction.html">external.DiskCacheBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedFloatDistanceFunction.html">external.DiskCacheBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedDoubleDistanceFunction.html">external.FileBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedFloatDistanceFunction.html">external.FileBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/ERiCDistanceFunction.html">correlation.ERiCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/PCABasedCorrelationDistanceFunction.html">correlation.PCABasedCorrelationDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionSelectingDistanceFunction.html">subspace.DimensionSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionsSelectingEuclideanDistanceFunction.html">subspace.DimensionsSelectingEuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DiSHDistanceFunction.html">subspace.DiSHDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/HiSCDistanceFunction.html">subspace.HiSCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/DTWDistanceFunction.html">timeseries.DTWDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/EDRDistanceFunction.html">timeseries.EDRDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/ERPDistanceFunction.html">timeseries.ERPDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/LCSSDistanceFunction.html">timeseries.LCSSDistanceFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/LOF.html">de.lmu.ifi.dbs.elki.algorithm.outlier.LOF</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="lpnorm.p"/>
+<tt>-lpnorm.p &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>the degree of the L-P-Norm (positive number)</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LPNormDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.LPNormDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="materialize.distance"/>
+<tt>-materialize.distance &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>the distance function to materialize the nearest neighbors</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/DistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.DistanceFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.EuclideanDistanceFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ArcCosineDistanceFunction.html">ArcCosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/CosineDistanceFunction.html">CosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">EuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LPNormDistanceFunction.html">LPNormDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">LocallyWeightedDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ManhattanDistanceFunction.html">ManhattanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/RepresentationSelectingDistanceFunction.html">RepresentationSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterArccos.html">adapter.SimilarityAdapterArccos</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLn.html">adapter.SimilarityAdapterLn</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLinear.html">adapter.SimilarityAdapterLinear</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedDoubleDistanceFunction.html">external.DiskCacheBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedFloatDistanceFunction.html">external.DiskCacheBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedDoubleDistanceFunction.html">external.FileBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedFloatDistanceFunction.html">external.FileBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/ERiCDistanceFunction.html">correlation.ERiCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/PCABasedCorrelationDistanceFunction.html">correlation.PCABasedCorrelationDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionSelectingDistanceFunction.html">subspace.DimensionSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionsSelectingEuclideanDistanceFunction.html">subspace.DimensionsSelectingEuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DiSHDistanceFunction.html">subspace.DiSHDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/HiSCDistanceFunction.html">subspace.HiSCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/DTWDistanceFunction.html">timeseries.DTWDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/EDRDistanceFunction.html">timeseries.EDRDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/ERPDistanceFunction.html">timeseries.ERPDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/LCSSDistanceFunction.html">timeseries.LCSSDistanceFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/MaterializeKNNPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.MaterializeKNNPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/SpatialApproximationMaterializeKNNPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.SpatialApproximationMaterializeKNNPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="materialize.k"/>
+<tt>-materialize.k &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The number of nearest neighbors of an object to be materialized.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/MaterializeKNNPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.MaterializeKNNPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/SpatialApproximationMaterializeKNNPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.SpatialApproximationMaterializeKNNPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="metaparser.baseparser"/>
+<tt>-metaparser.baseparser &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Parser to use as base parser</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/parser/Parser.html">de.lmu.ifi.dbs.elki.parser.Parser</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/parser/DoubleVectorLabelParser.html">de.lmu.ifi.dbs.elki.parser.DoubleVectorLabelParser</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/BitVectorLabelParser.html">BitVectorLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/NumberDistanceParser.html">NumberDistanceParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/ParameterizationFunctionLabelParser.html">ParameterizationFunctionLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/DoubleVectorLabelParser.html">DoubleVectorLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/FloatVectorLabelParser.html">FloatVectorLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/DoubleVectorLabelTransposingParser.html">DoubleVectorLabelTransposingParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/SparseBitVectorLabelParser.html">SparseBitVectorLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/SparseFloatVectorLabelParser.html">SparseFloatVectorLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/DoubleVectorProjectionParser.html">meta.DoubleVectorProjectionParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/DoubleVectorRandomProjectionParser.html">meta.DoubleVectorRandomProjectionParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/SparseFloatVectorProjectionParser.html">meta.SparseFloatVectorProjectionParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/SparseFloatVectorRandomProjectionParser.html">meta.SparseFloatVectorRandomProjectionParser</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/DoubleVectorRandomProjectionParser.html">de.lmu.ifi.dbs.elki.parser.meta.DoubleVectorRandomProjectionParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/SparseFloatVectorProjectionParser.html">de.lmu.ifi.dbs.elki.parser.meta.SparseFloatVectorProjectionParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/DoubleVectorProjectionParser.html">de.lmu.ifi.dbs.elki.parser.meta.DoubleVectorProjectionParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/SparseFloatVectorRandomProjectionParser.html">de.lmu.ifi.dbs.elki.parser.meta.SparseFloatVectorRandomProjectionParser</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="metricalindexdb.index"/>
+<tt>-metricalindexdb.index &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Metrical index class to use.</p>
+<p>Class Restriction: extends <a href="de/lmu/ifi/dbs/elki/index/tree/metrical/MetricalIndex.html">de.lmu.ifi.dbs.elki.index.tree.metrical.MetricalIndex</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mtree/MTree.html">mtreevariants.mtree.MTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkcop/MkCoPTree.html">mtreevariants.mktrees.mkcop.MkCoPTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkmax/MkMaxTree.html">mtreevariants.mktrees.mkmax.MkMaxTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mktab/MkTabTree.html">mtreevariants.mktrees.mktab.MkTabTree</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/MetricalIndexDatabase.html">de.lmu.ifi.dbs.elki.database.MetricalIndexDatabase</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="mkapp.k"/>
+<tt>-mkapp.k &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>positive integer specifying the maximal number k of reversek nearest neighbors to be supported.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkapp/MkAppTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTree</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="mkapp.nolog"/>
+<tt>-mkapp.nolog </tt>
+</dt>
+<dd>
+<p>Flag to indicate that the approximation is done in the ''normal'' space instead of the log-log space (which is default).</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkapp/MkAppTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTree</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="mkapp.p"/>
+<tt>-mkapp.p &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>positive integer specifying the order of the polynomial approximation.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkapp/MkAppTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTree</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="mkcop.k"/>
+<tt>-mkcop.k &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>positive integer specifying the maximal number k of reversek nearest neighbors to be supported.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkcop/MkCoPTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTree</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="mktree.kmax"/>
+<tt>-mktree.kmax &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Specifies the maximal number k of reverse k nearest neighbors to be supported.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkmax/MkMaxTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mktab/MkTabTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTree</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="mtree.distancefunction"/>
+<tt>-mtree.distancefunction &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Distance function to determine the distance between database objects.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/DistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.DistanceFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.EuclideanDistanceFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ArcCosineDistanceFunction.html">ArcCosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/CosineDistanceFunction.html">CosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">EuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LPNormDistanceFunction.html">LPNormDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">LocallyWeightedDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ManhattanDistanceFunction.html">ManhattanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/RepresentationSelectingDistanceFunction.html">RepresentationSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterArccos.html">adapter.SimilarityAdapterArccos</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLn.html">adapter.SimilarityAdapterLn</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLinear.html">adapter.SimilarityAdapterLinear</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedDoubleDistanceFunction.html">external.DiskCacheBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedFloatDistanceFunction.html">external.DiskCacheBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedDoubleDistanceFunction.html">external.FileBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedFloatDistanceFunction.html">external.FileBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/ERiCDistanceFunction.html">correlation.ERiCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/PCABasedCorrelationDistanceFunction.html">correlation.PCABasedCorrelationDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionSelectingDistanceFunction.html">subspace.DimensionSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionsSelectingEuclideanDistanceFunction.html">subspace.DimensionsSelectingEuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DiSHDistanceFunction.html">subspace.DiSHDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/HiSCDistanceFunction.html">subspace.HiSCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/DTWDistanceFunction.html">timeseries.DTWDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/EDRDistanceFunction.html">timeseries.EDRDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/ERPDistanceFunction.html">timeseries.ERPDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/LCSSDistanceFunction.html">timeseries.LCSSDistanceFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkmax/MkMaxTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkcop/MkCoPTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkapp/MkAppTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mktab/MkTabTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mtree/MTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mtree.MTree</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="multipledbc.in"/>
+<tt>-multipledbc.in &lt;file_1,...,file_n&gt;</tt>
+</dt>
+<dd>
+<p>A comma separated list of the names of the input files to be parsed.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/MultipleFileBasedDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.MultipleFileBasedDatabaseConnection</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="multipledbc.parsers"/>
+<tt>-multipledbc.parsers &lt;class_1,...,class_n&gt;</tt>
+</dt>
+<dd>
+<p>Comma separated list of classnames specifying the parsers to provide a database. If this parameter is not set, de.lmu.ifi.dbs.elki.parser.DoubleVectorLabelParser is used as parser for all input files.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/connection/MultipleFileBasedDatabaseConnection.html">de.lmu.ifi.dbs.elki.database.connection.MultipleFileBasedDatabaseConnection</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="norm"/>
+<tt>-norm &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Normalization class in order to normalize values in the database.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/normalization/Normalization.html">de.lmu.ifi.dbs.elki.normalization.Normalization</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/normalization/AttributeWiseMinMaxNormalization.html">AttributeWiseMinMaxNormalization</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/normalization/AttributeWiseVarianceNormalization.html">AttributeWiseVarianceNormalization</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/normalization/DummyNormalization.html">DummyNormalization</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/normalization/MultiRepresentedObjectNormalization.html">MultiRepresentedObjectNormalization</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/KDDTask.html">de.lmu.ifi.dbs.elki.KDDTask</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/visualization/KNNExplorer.html">de.lmu.ifi.dbs.elki.application.visualization.KNNExplorer</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="normalizations"/>
+<tt>-normalizations &lt;class_1,...,class_n&gt;</tt>
+</dt>
+<dd>
+<p>A comma separated list of normalizations for each representation. If in one representation no normalization is desired, please use the class 'de.lmu.ifi.dbs.elki.normalization.DummyNormalization' in the list.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/normalization/MultiRepresentedObjectNormalization.html">de.lmu.ifi.dbs.elki.normalization.MultiRepresentedObjectNormalization</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="normalize.max"/>
+<tt>-normalize.max &lt;double_1,...,double_n&gt;</tt>
+</dt>
+<dd>
+<p>a comma separated concatenation of the maximum values in each dimension that are mapped to 1. If no value is specified, the maximum value of the attribute range in this dimension will be taken.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/normalization/AttributeWiseMinMaxNormalization.html">de.lmu.ifi.dbs.elki.normalization.AttributeWiseMinMaxNormalization</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="normalize.mean"/>
+<tt>-normalize.mean &lt;double_1,...,double_n&gt;</tt>
+</dt>
+<dd>
+<p>a comma separated concatenation of the mean values in each dimension that are mapped to 0. If no value is specified, the mean value of the attribute range in this dimension will be taken.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/normalization/AttributeWiseVarianceNormalization.html">de.lmu.ifi.dbs.elki.normalization.AttributeWiseVarianceNormalization</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="normalize.min"/>
+<tt>-normalize.min &lt;double_1,...,double_n&gt;</tt>
+</dt>
+<dd>
+<p>a comma separated concatenation of the minimum values in each dimension that are mapped to 0. If no value is specified, the minimum value of the attribute range in this dimension will be taken.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/normalization/AttributeWiseMinMaxNormalization.html">de.lmu.ifi.dbs.elki.normalization.AttributeWiseMinMaxNormalization</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="normalize.stddev"/>
+<tt>-normalize.stddev &lt;double_1,...,double_n&gt;</tt>
+</dt>
+<dd>
+<p>a comma separated concatenation of the standard deviations in each dimension that are scaled to 1. If no value is specified, the standard deviation of the attribute range in this dimension will be taken.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/normalization/AttributeWiseVarianceNormalization.html">de.lmu.ifi.dbs.elki.normalization.AttributeWiseVarianceNormalization</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="normUndo"/>
+<tt>-normUndo </tt>
+</dt>
+<dd>
+<p>Revert normalization result to original values - invalid option if no normalization has been performed.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/KDDTask.html">de.lmu.ifi.dbs.elki.KDDTask</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="optics.epsilon"/>
+<tt>-optics.epsilon &lt;pattern&gt;</tt>
+</dt>
+<dd>
+<p>The maximum radius of the neighborhood to be considered.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/OPTICS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.OPTICS</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="optics.minpts"/>
+<tt>-optics.minpts &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Threshold for minimum number of points in the epsilon-neighborhood of a point.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/OPTICS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.OPTICS</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="orclus.alpha"/>
+<tt>-orclus.alpha &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>The factor for reducing the number of current clusters in each iteration.</p>
+<p>Default: 0.5</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/ORCLUS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.ORCLUS</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="out"/>
+<tt>-out &lt;file&gt;</tt>
+</dt>
+<dd>
+<p>Directory name (or name of an existing file) to write the obtained results in. If this parameter is omitted, per default the output will sequentially be given to STDOUT.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/result/ResultWriter.html">de.lmu.ifi.dbs.elki.result.ResultWriter</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="out.gzip"/>
+<tt>-out.gzip </tt>
+</dt>
+<dd>
+<p>Enable gzip compression of output files.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/result/ResultWriter.html">de.lmu.ifi.dbs.elki.result.ResultWriter</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="out.silentoverwrite"/>
+<tt>-out.silentoverwrite </tt>
+</dt>
+<dd>
+<p>Silently overwrite output files.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/result/ResultWriter.html">de.lmu.ifi.dbs.elki.result.ResultWriter</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="parser.classLabelIndex"/>
+<tt>-parser.classLabelIndex &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Index of a class label (may be numeric), counting whitespace separated entries in a line starting with 0 - the corresponding entry will be treated as a label. </p>
+<p>Default: -1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/DoubleVectorLabelParser.html">de.lmu.ifi.dbs.elki.parser.DoubleVectorLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/SparseFloatVectorLabelParser.html">de.lmu.ifi.dbs.elki.parser.SparseFloatVectorLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/FloatVectorLabelParser.html">de.lmu.ifi.dbs.elki.parser.FloatVectorLabelParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/DoubleVectorLabelTransposingParser.html">de.lmu.ifi.dbs.elki.parser.DoubleVectorLabelTransposingParser</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="parser.distancefunction"/>
+<tt>-parser.distancefunction &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Distance function.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/DistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.DistanceFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ArcCosineDistanceFunction.html">ArcCosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/CosineDistanceFunction.html">CosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">EuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LPNormDistanceFunction.html">LPNormDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">LocallyWeightedDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ManhattanDistanceFunction.html">ManhattanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/RepresentationSelectingDistanceFunction.html">RepresentationSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterArccos.html">adapter.SimilarityAdapterArccos</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLn.html">adapter.SimilarityAdapterLn</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLinear.html">adapter.SimilarityAdapterLinear</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedDoubleDistanceFunction.html">external.DiskCacheBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedFloatDistanceFunction.html">external.DiskCacheBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedDoubleDistanceFunction.html">external.FileBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedFloatDistanceFunction.html">external.FileBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/ERiCDistanceFunction.html">correlation.ERiCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/PCABasedCorrelationDistanceFunction.html">correlation.PCABasedCorrelationDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionSelectingDistanceFunction.html">subspace.DimensionSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionsSelectingEuclideanDistanceFunction.html">subspace.DimensionsSelectingEuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DiSHDistanceFunction.html">subspace.DiSHDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/HiSCDistanceFunction.html">subspace.HiSCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/DTWDistanceFunction.html">timeseries.DTWDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/EDRDistanceFunction.html">timeseries.EDRDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/ERPDistanceFunction.html">timeseries.ERPDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/LCSSDistanceFunction.html">timeseries.LCSSDistanceFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/NumberDistanceParser.html">de.lmu.ifi.dbs.elki.parser.NumberDistanceParser</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="pca.covariance"/>
+<tt>-pca.covariance &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Class used to compute the covariance matrix.</p>
+<p>Class Restriction: extends <a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/CovarianceMatrixBuilder.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.CovarianceMatrixBuilder</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/StandardCovarianceMatrixBuilder.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.StandardCovarianceMatrixBuilder</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/StandardCovarianceMatrixBuilder.html">StandardCovarianceMatrixBuilder</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/KernelCovarianceMatrixBuilder.html">KernelCovarianceMatrixBuilder</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/WeightedCovarianceMatrixBuilder.html">WeightedCovarianceMatrixBuilder</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCARunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCARunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="pca.filter"/>
+<tt>-pca.filter &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Filter class to determine the strong and weak eigenvectors.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/EigenPairFilter.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.EigenPairFilter</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PercentageEigenPairFilter.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PercentageEigenPairFilter</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/FirstNEigenPairFilter.html">FirstNEigenPairFilter</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/LimitEigenPairFilter.html">LimitEigenPairFilter</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PercentageEigenPairFilter.html">PercentageEigenPairFilter</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/ProgressiveEigenPairFilter.html">ProgressiveEigenPairFilter</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/WeakEigenPairFilter.html">WeakEigenPairFilter</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/RelativeEigenPairFilter.html">RelativeEigenPairFilter</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/SignificantEigenPairFilter.html">SignificantEigenPairFilter</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/CompositeEigenPairFilter.html">CompositeEigenPairFilter</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PCAFilteredRunner.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PCAFilteredRunner</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="pca.filter.absolute"/>
+<tt>-pca.filter.absolute </tt>
+</dt>
+<dd>
+<p>Flag to mark delta as an absolute value.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/LimitEigenPairFilter.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.LimitEigenPairFilter</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/FourCPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.FourCPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="pca.filter.alpha"/>
+<tt>-pca.filter.alpha &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>The share (0.0 to 1.0) of variance that needs to be explained by the 'strong' eigenvectors.The filter class will choose the number of strong eigenvectors by this share.</p>
+<p>Default: 0.85</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/PercentageEigenPairFilter.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.PercentageEigenPairFilter</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="pca.filter.composite.list"/>
+<tt>-pca.filter.composite.list &lt;class_1,...,class_n&gt;</tt>
+</dt>
+<dd>
+<p>A comma separated list of the class names of the filters to be used. The specified filters will be applied sequentially in the given order.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/CompositeEigenPairFilter.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.CompositeEigenPairFilter</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="pca.filter.delta"/>
+<tt>-pca.filter.delta &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>The threshold for strong Eigenvalues. If not otherwise specified, delta is a relative value w.r.t. the (absolute) highest Eigenvalues and has to be a double between 0 and 1. To mark delta as an absolute value, use the option -pca.filter.absolute.</p>
+<p>Default: 0.01</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/LimitEigenPairFilter.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.LimitEigenPairFilter</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/FourCPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.FourCPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="pca.filter.n"/>
+<tt>-pca.filter.n &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The number of strong eigenvectors: n eigenvectors with the n highesteigenvalues are marked as strong eigenvectors.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/FirstNEigenPairFilter.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.FirstNEigenPairFilter</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="pca.filter.progressivealpha"/>
+<tt>-pca.filter.progressivealpha &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>The share (0.0 to 1.0) of variance that needs to be explained by the 'strong' eigenvectors.The filter class will choose the number of strong eigenvectors by this share.</p>
+<p>Default: 0.5</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/ProgressiveEigenPairFilter.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.ProgressiveEigenPairFilter</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="pca.filter.relativealpha"/>
+<tt>-pca.filter.relativealpha &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>The sensitivity niveau for weak eigenvectors: An eigenvector which is at less than the given share of the statistical average variance is considered weak.</p>
+<p>Default: 1.1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/RelativeEigenPairFilter.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.RelativeEigenPairFilter</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="pca.filter.weakalpha"/>
+<tt>-pca.filter.weakalpha &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>The minimum strength of the statistically expected variance (1/n) share an eigenvector needs to have to be considered 'strong'.</p>
+<p>Default: 0.95</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/ProgressiveEigenPairFilter.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.ProgressiveEigenPairFilter</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/SignificantEigenPairFilter.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.SignificantEigenPairFilter</a>
+<p>Default: 0.0</p>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/WeakEigenPairFilter.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.WeakEigenPairFilter</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="pca.weight"/>
+<tt>-pca.weight &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Weight function to use in weighted PCA.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/WeightFunction.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.weightfunctions.WeightFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/ConstantWeight.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.weightfunctions.ConstantWeight</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/ConstantWeight.html">ConstantWeight</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/ErfcStddevWeight.html">ErfcStddevWeight</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/ErfcWeight.html">ErfcWeight</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/ExponentialStddevWeight.html">ExponentialStddevWeight</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/ExponentialWeight.html">ExponentialWeight</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/GaussStddevWeight.html">GaussStddevWeight</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/GaussWeight.html">GaussWeight</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/InverseLinearWeight.html">InverseLinearWeight</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/InverseProportionalStddevWeight.html">InverseProportionalStddevWeight</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/InverseProportionalWeight.html">InverseProportionalWeight</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/LinearWeight.html">LinearWeight</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/QuadraticStddevWeight.html">QuadraticStddevWeight</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/weightfunctions/QuadraticWeight.html">QuadraticWeight</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/math/linearalgebra/pca/WeightedCovarianceMatrixBuilder.html">de.lmu.ifi.dbs.elki.math.linearalgebra.pca.WeightedCovarianceMatrixBuilder</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="pcabasedcorrelationdf.delta"/>
+<tt>-pcabasedcorrelationdf.delta &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>Threshold of a distance between a vector q and a given space that indicates that q adds a new dimension to the space.</p>
+<p>Default: 0.25</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/PCABasedCorrelationDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.correlation.PCABasedCorrelationDistanceFunction</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="predecon.delta"/>
+<tt>-predecon.delta &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>a double between 0 and 1 specifying the threshold for small Eigenvalues (default is delta = 0.01).</p>
+<p>Default: 0.01</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreDeConPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.PreDeConPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="preprocessor.epsilon"/>
+<tt>-preprocessor.epsilon &lt;pattern&gt;</tt>
+</dt>
+<dd>
+<p>An epsilon value suitable to the specified distance function.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/RangeQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.RangeQueryBasedHiCOPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="preprocessorhandler.omitPreprocessing"/>
+<tt>-preprocessorhandler.omitPreprocessing </tt>
+</dt>
+<dd>
+<p>Flag to omit (a new) preprocessing if for each object the association has already been set.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="preprocessorhandler.preprocessor"/>
+<tt>-preprocessorhandler.preprocessor &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>The Classname of the preprocessor to determine the neighbors of the objects.</p>
+<p>Class Restriction: extends <a href="de/lmu/ifi/dbs/elki/preprocessing/SharedNearestNeighborsPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.SharedNearestNeighborsPreprocessor</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/preprocessing/SharedNearestNeighborsPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.SharedNearestNeighborsPreprocessor</a>
+</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/preprocessing/PreferenceVectorPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.PreferenceVectorPreprocessor</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/preprocessing/DiSHPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.DiSHPreprocessor</a>
+</p>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/preprocessing/Preprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.Preprocessor</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</p>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/preprocessing/PreferenceVectorPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.PreferenceVectorPreprocessor</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/preprocessing/HiSCPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.HiSCPreprocessor</a>
+</p>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+<p>Class Restriction: extends <a href="de/lmu/ifi/dbs/elki/preprocessing/HiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.HiCOPreprocessor</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</p>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/preprocessing/Preprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.Preprocessor</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</p>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/preprocessing/Preprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.Preprocessor</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</p>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/preprocessing/Preprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.Preprocessor</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/preprocessing/KnnQueryBasedHiCOPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.KnnQueryBasedHiCOPreprocessor</a>
+</p>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreprocessorHandler.html">de.lmu.ifi.dbs.elki.preprocessing.PreprocessorHandler</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="proclus.mi"/>
+<tt>-proclus.mi &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The multiplier for the initial number of medoids.</p>
+<p>Default: 10</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PROCLUS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.PROCLUS</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="projdbscan.distancefunction"/>
+<tt>-projdbscan.distancefunction &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Distance function to determine the distance between database objects.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/DistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.DistanceFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.EuclideanDistanceFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ArcCosineDistanceFunction.html">ArcCosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/CosineDistanceFunction.html">CosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">EuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LPNormDistanceFunction.html">LPNormDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">LocallyWeightedDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ManhattanDistanceFunction.html">ManhattanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/RepresentationSelectingDistanceFunction.html">RepresentationSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterArccos.html">adapter.SimilarityAdapterArccos</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLn.html">adapter.SimilarityAdapterLn</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLinear.html">adapter.SimilarityAdapterLinear</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedDoubleDistanceFunction.html">external.DiskCacheBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedFloatDistanceFunction.html">external.DiskCacheBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedDoubleDistanceFunction.html">external.FileBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedFloatDistanceFunction.html">external.FileBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/ERiCDistanceFunction.html">correlation.ERiCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/PCABasedCorrelationDistanceFunction.html">correlation.PCABasedCorrelationDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionSelectingDistanceFunction.html">subspace.DimensionSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionsSelectingEuclideanDistanceFunction.html">subspace.DimensionsSelectingEuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DiSHDistanceFunction.html">subspace.DiSHDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/HiSCDistanceFunction.html">subspace.HiSCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/DTWDistanceFunction.html">timeseries.DTWDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/EDRDistanceFunction.html">timeseries.EDRDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/ERPDistanceFunction.html">timeseries.ERPDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/LCSSDistanceFunction.html">timeseries.LCSSDistanceFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreDeConPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.PreDeConPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/FourCPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.FourCPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PreDeCon.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.PreDeCon</a>
+<p>Class Restriction: extends <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.LocallyWeightedDistanceFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.LocallyWeightedDistanceFunction</a>
+</p>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/FourC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.FourC</a>
+<p>Class Restriction: extends <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.LocallyWeightedDistanceFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.LocallyWeightedDistanceFunction</a>
+</p>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="projdbscan.epsilon"/>
+<tt>-projdbscan.epsilon &lt;pattern&gt;</tt>
+</dt>
+<dd>
+<p>The maximum radius of the neighborhood to be considered.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PreDeCon.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.PreDeCon</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/FourC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.FourC</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="projdbscan.lambda"/>
+<tt>-projdbscan.lambda &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The intrinsic dimensionality of the clusters to find.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PreDeCon.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.PreDeCon</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/FourC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.FourC</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="projdbscan.minpts"/>
+<tt>-projdbscan.minpts &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Threshold for minimum number of points in the epsilon-neighborhood of a point.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/PreDeConPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.PreDeConPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/FourCPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.FourCPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PreDeCon.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.PreDeCon</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/FourC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.FourC</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="projectedclustering.k"/>
+<tt>-projectedclustering.k &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The number of clusters to find.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PROCLUS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.PROCLUS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/ORCLUS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.ORCLUS</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="projectedclustering.k_i"/>
+<tt>-projectedclustering.k_i &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The multiplier for the initial number of seeds.</p>
+<p>Default: 30</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PROCLUS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.PROCLUS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/ORCLUS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.ORCLUS</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="projectedclustering.l"/>
+<tt>-projectedclustering.l &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The dimensionality of the clusters to find.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PROCLUS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.PROCLUS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/ORCLUS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.ORCLUS</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="projectionparser.selectedattributes"/>
+<tt>-projectionparser.selectedattributes &lt;int_1,...,int_n&gt;</tt>
+</dt>
+<dd>
+<p>a comma separated array of integer values d_i, where 1 &lt;= d_i &lt;= the dimensionality of the feature space specifying the dimensions to be considered for projection. If this parameter is not set, no dimensions will be considered, i.e. the projection is a zero-dimensional feature space</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/SparseFloatVectorProjectionParser.html">de.lmu.ifi.dbs.elki.parser.meta.SparseFloatVectorProjectionParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/DoubleVectorProjectionParser.html">de.lmu.ifi.dbs.elki.parser.meta.DoubleVectorProjectionParser</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="randomprojection.numberselected"/>
+<tt>-randomprojection.numberselected &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>number of selected attributes</p>
+<p>Default: 1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/DoubleVectorRandomProjectionParser.html">de.lmu.ifi.dbs.elki.parser.meta.DoubleVectorRandomProjectionParser</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/parser/meta/SparseFloatVectorRandomProjectionParser.html">de.lmu.ifi.dbs.elki.parser.meta.SparseFloatVectorRandomProjectionParser</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="rankqual.bins"/>
+<tt>-rankqual.bins &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Number of bins to use in the histogram</p>
+<p>Default: 20</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/DistanceStatisticsWithClasses.html">de.lmu.ifi.dbs.elki.algorithm.statistics.DistanceStatisticsWithClasses</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/EvaluateRankingQuality.html">de.lmu.ifi.dbs.elki.algorithm.statistics.EvaluateRankingQuality</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="rdknn.distancefunction"/>
+<tt>-rdknn.distancefunction &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Distance function to determine the distance between database objects.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/index/tree/spatial/SpatialDistanceFunction.html">de.lmu.ifi.dbs.elki.index.tree.spatial.SpatialDistanceFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.EuclideanDistanceFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionSelectingDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.subspace.DimensionSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionsSelectingEuclideanDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.subspace.DimensionsSelectingEuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.EuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.LocallyWeightedDistanceFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rdknn/RdKNNTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTree</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="rdknn.k"/>
+<tt>-rdknn.k &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>positive integer specifying the maximal number k of reverse k nearest neighbors to be supported.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rdknn/RdKNNTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTree</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="resulthandler"/>
+<tt>-resulthandler &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Result handler class.</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/result/ResultHandler.html">de.lmu.ifi.dbs.elki.result.ResultHandler</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/result/ResultWriter.html">de.lmu.ifi.dbs.elki.result.ResultWriter</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/result/ResultWriter.html">ResultWriter</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/result/DiscardResultHandler.html">DiscardResultHandler</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/visualization/ResultROCCurveVisualizer.html">de.lmu.ifi.dbs.elki.visualization.ResultROCCurveVisualizer</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/KDDTask.html">de.lmu.ifi.dbs.elki.KDDTask</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="rocauc.positive"/>
+<tt>-rocauc.positive &lt;pattern&gt;</tt>
+</dt>
+<dd>
+<p>Class label for the 'positive' class.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/evaluation/ComputeROCCurve.html">de.lmu.ifi.dbs.elki.evaluation.ComputeROCCurve</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="sharedNearestNeighbors"/>
+<tt>-sharedNearestNeighbors &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>number of nearest neighbors to consider (at least 1)</p>
+<p>Default: 1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/SharedNearestNeighborsPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.SharedNearestNeighborsPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="snn.epsilon"/>
+<tt>-snn.epsilon &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The minimum SNN density.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/SNNClustering.html">de.lmu.ifi.dbs.elki.algorithm.clustering.SNNClustering</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="snn.minpts"/>
+<tt>-snn.minpts &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>Threshold for minimum number of points in the epsilon-SNN-neighborhood of a point.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/SNNClustering.html">de.lmu.ifi.dbs.elki.algorithm.clustering.SNNClustering</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="SNNDistanceFunction"/>
+<tt>-SNNDistanceFunction &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>the distance function to asses the nearest neighbors</p>
+<p>Class Restriction: implements <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/DistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.DistanceFunction</a>
+</p>
+<p>Default: <a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">de.lmu.ifi.dbs.elki.distance.distancefunction.EuclideanDistanceFunction</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ArcCosineDistanceFunction.html">ArcCosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/CosineDistanceFunction.html">CosineDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/EuclideanDistanceFunction.html">EuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LPNormDistanceFunction.html">LPNormDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/LocallyWeightedDistanceFunction.html">LocallyWeightedDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/ManhattanDistanceFunction.html">ManhattanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/RepresentationSelectingDistanceFunction.html">RepresentationSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterArccos.html">adapter.SimilarityAdapterArccos</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLn.html">adapter.SimilarityAdapterLn</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/adapter/SimilarityAdapterLinear.html">adapter.SimilarityAdapterLinear</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedDoubleDistanceFunction.html">external.DiskCacheBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/DiskCacheBasedFloatDistanceFunction.html">external.DiskCacheBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedDoubleDistanceFunction.html">external.FileBasedDoubleDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/external/FileBasedFloatDistanceFunction.html">external.FileBasedFloatDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/ERiCDistanceFunction.html">correlation.ERiCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/correlation/PCABasedCorrelationDistanceFunction.html">correlation.PCABasedCorrelationDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionSelectingDistanceFunction.html">subspace.DimensionSelectingDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DimensionsSelectingEuclideanDistanceFunction.html">subspace.DimensionsSelectingEuclideanDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/DiSHDistanceFunction.html">subspace.DiSHDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/subspace/HiSCDistanceFunction.html">subspace.HiSCDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/DTWDistanceFunction.html">timeseries.DTWDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/EDRDistanceFunction.html">timeseries.EDRDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/ERPDistanceFunction.html">timeseries.ERPDistanceFunction</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/distance/distancefunction/timeseries/LCSSDistanceFunction.html">timeseries.LCSSDistanceFunction</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/SharedNearestNeighborsPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.SharedNearestNeighborsPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/SharedNearestNeighborsPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.SharedNearestNeighborsPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/SharedNearestNeighborsPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.SharedNearestNeighborsPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/SharedNearestNeighborsPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.SharedNearestNeighborsPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/SharedNearestNeighborsPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.SharedNearestNeighborsPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/SharedNearestNeighborsPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.SharedNearestNeighborsPreprocessor</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/preprocessing/SharedNearestNeighborsPreprocessor.html">de.lmu.ifi.dbs.elki.preprocessing.SharedNearestNeighborsPreprocessor</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="sod.alpha"/>
+<tt>-sod.alpha &lt;double&gt;</tt>
+</dt>
+<dd>
+<p>The multiplier for the discriminance value for discerning small from large variances.</p>
+<p>Default: 1.1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/SOD.html">de.lmu.ifi.dbs.elki.algorithm.outlier.SOD</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="sod.knn"/>
+<tt>-sod.knn &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The number of shared nearest neighbors to be considered for learning the subspace properties.</p>
+<p>Default: 1</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/SOD.html">de.lmu.ifi.dbs.elki.algorithm.outlier.SOD</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="spatial.bulk"/>
+<tt>-spatial.bulk </tt>
+</dt>
+<dd>
+<p>flag to specify bulk load (default is no bulk load)</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/deliclu/DeLiCluTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rstar/RStarTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.rstar.RStarTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rdknn/RdKNNTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTree</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="spatial.bulkstrategy"/>
+<tt>-spatial.bulkstrategy &lt;pattern&gt;</tt>
+</dt>
+<dd>
+<p>the strategy for bulk load, available strategies are: [MAX_EXTENSION| ZCURVE](default is ZCURVE)</p>
+<p>Default: ZCURVE</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/deliclu/DeLiCluTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rstar/RStarTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.rstar.RStarTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rdknn/RdKNNTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTree</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="spatialindexdb.index"/>
+<tt>-spatialindexdb.index &lt;class&gt;</tt>
+</dt>
+<dd>
+<p>Spatial index class to use.</p>
+<p>Class Restriction: extends <a href="de/lmu/ifi/dbs/elki/index/tree/spatial/SpatialIndex.html">de.lmu.ifi.dbs.elki.index.tree.spatial.SpatialIndex</a>
+</p>
+<p>Known implementations: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/deliclu/DeLiCluTree.html">rstarvariants.deliclu.DeLiCluTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rstar/RStarTree.html">rstarvariants.rstar.RStarTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rdknn/RdKNNTree.html">rstarvariants.rdknn.RdKNNTree</a>
+</li>
+</ul>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/database/SpatialIndexDatabase.html">de.lmu.ifi.dbs.elki.database.SpatialIndexDatabase</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="time"/>
+<tt>-time </tt>
+</dt>
+<dd>
+<p>Request output of performance time.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/KNNJoin.html">de.lmu.ifi.dbs.elki.algorithm.KNNJoin</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/NullAlgorithm.html">de.lmu.ifi.dbs.elki.algorithm.NullAlgorithm</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/RankingQualityHistogram.html">de.lmu.ifi.dbs.elki.algorithm.statistics.RankingQualityHistogram</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/DistanceStatisticsWithClasses.html">de.lmu.ifi.dbs.elki.algorithm.statistics.DistanceStatisticsWithClasses</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/EvaluateRankingQuality.html">de.lmu.ifi.dbs.elki.algorithm.statistics.EvaluateRankingQuality</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/TrivialAllNoise.html">de.lmu.ifi.dbs.elki.algorithm.clustering.TrivialAllNoise</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/KMeans.html">de.lmu.ifi.dbs.elki.algorithm.clustering.KMeans</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/ByLabelClustering.html">de.lmu.ifi.dbs.elki.algorithm.clustering.ByLabelClustering</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/OPTICS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.OPTICS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/ByLabelHierarchicalClustering.html">de.lmu.ifi.dbs.elki.algorithm.clustering.ByLabelHierarchicalClustering</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/DiSH.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.DiSH</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/OPTICS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.OPTICS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/CLIQUE.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.CLIQUE</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PreDeCon.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.PreDeCon</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PROCLUS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.PROCLUS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/SLINK.html">de.lmu.ifi.dbs.elki.algorithm.clustering.SLINK</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/SNNClustering.html">de.lmu.ifi.dbs.elki.algorithm.clustering.SNNClustering</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/CASH.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.CASH</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/COPAC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.COPAC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/ORCLUS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.ORCLUS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/FourC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.FourC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/ERiC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.ERiC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/COPAC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.COPAC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/DeLiClu.html">de.lmu.ifi.dbs.elki.algorithm.clustering.DeLiClu</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/TrivialAllInOne.html">de.lmu.ifi.dbs.elki.algorithm.clustering.TrivialAllInOne</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/DBSCAN.html">de.lmu.ifi.dbs.elki.algorithm.clustering.DBSCAN</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/EM.html">de.lmu.ifi.dbs.elki.algorithm.clustering.EM</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/APRIORI.html">de.lmu.ifi.dbs.elki.algorithm.APRIORI</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/DummyAlgorithm.html">de.lmu.ifi.dbs.elki.algorithm.DummyAlgorithm</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/LOCI.html">de.lmu.ifi.dbs.elki.algorithm.outlier.LOCI</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/ABOD.html">de.lmu.ifi.dbs.elki.algorithm.outlier.ABOD</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/LOF.html">de.lmu.ifi.dbs.elki.algorithm.outlier.LOF</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/SOD.html">de.lmu.ifi.dbs.elki.algorithm.outlier.SOD</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/KNNDistanceOrder.html">de.lmu.ifi.dbs.elki.algorithm.KNNDistanceOrder</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/MaterializeDistances.html">de.lmu.ifi.dbs.elki.algorithm.MaterializeDistances</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/DependencyDerivator.html">de.lmu.ifi.dbs.elki.algorithm.DependencyDerivator</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/evaluation/ComputeROCCurve.html">de.lmu.ifi.dbs.elki.evaluation.ComputeROCCurve</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="treeindex.cachesize"/>
+<tt>-treeindex.cachesize &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The size of the cache in bytes.</p>
+<p>Default: 2147483647</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkmax/MkMaxTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkcop/MkCoPTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkapp/MkAppTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mktab/MkTabTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mtree/MTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mtree.MTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/deliclu/DeLiCluTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rstar/RStarTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.rstar.RStarTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rdknn/RdKNNTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTree</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="treeindex.file"/>
+<tt>-treeindex.file &lt;file&gt;</tt>
+</dt>
+<dd>
+<p>The name of the file storing the index. If this parameter is not set the index is hold in the main memory.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkmax/MkMaxTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkcop/MkCoPTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkapp/MkAppTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mktab/MkTabTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mtree/MTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mtree.MTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/deliclu/DeLiCluTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rstar/RStarTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.rstar.RStarTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rdknn/RdKNNTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTree</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="treeindex.pagesize"/>
+<tt>-treeindex.pagesize &lt;int&gt;</tt>
+</dt>
+<dd>
+<p>The size of a page in bytes.</p>
+<p>Default: 4000</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkmax/MkMaxTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkcop/MkCoPTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mkapp/MkAppTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mktrees/mktab/MkTabTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/metrical/mtreevariants/mtree/MTree.html">de.lmu.ifi.dbs.elki.index.tree.metrical.mtreevariants.mtree.MTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/deliclu/DeLiCluTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rstar/RStarTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.rstar.RStarTree</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/index/tree/spatial/rstarvariants/rdknn/RdKNNTree.html">de.lmu.ifi.dbs.elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTree</a>
+</li>
+</ul>
+</dd>
+<dt>
+<a name="verbose"/>
+<tt>-verbose </tt>
+</dt>
+<dd>
+<p>Enable verbose messages while performing the algorithm.</p>
+<p>Parameter for: </p>
+<ul>
+<li>
+<a href="de/lmu/ifi/dbs/elki/KDDTask.html">de.lmu.ifi.dbs.elki.KDDTask</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/KNNJoin.html">de.lmu.ifi.dbs.elki.algorithm.KNNJoin</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/NullAlgorithm.html">de.lmu.ifi.dbs.elki.algorithm.NullAlgorithm</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/RankingQualityHistogram.html">de.lmu.ifi.dbs.elki.algorithm.statistics.RankingQualityHistogram</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/DistanceStatisticsWithClasses.html">de.lmu.ifi.dbs.elki.algorithm.statistics.DistanceStatisticsWithClasses</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/statistics/EvaluateRankingQuality.html">de.lmu.ifi.dbs.elki.algorithm.statistics.EvaluateRankingQuality</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/TrivialAllNoise.html">de.lmu.ifi.dbs.elki.algorithm.clustering.TrivialAllNoise</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/KMeans.html">de.lmu.ifi.dbs.elki.algorithm.clustering.KMeans</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/ByLabelClustering.html">de.lmu.ifi.dbs.elki.algorithm.clustering.ByLabelClustering</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/OPTICS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.OPTICS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/ByLabelHierarchicalClustering.html">de.lmu.ifi.dbs.elki.algorithm.clustering.ByLabelHierarchicalClustering</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/DiSH.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.DiSH</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/OPTICS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.OPTICS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/CLIQUE.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.CLIQUE</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PreDeCon.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.PreDeCon</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/subspace/PROCLUS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.subspace.PROCLUS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/SLINK.html">de.lmu.ifi.dbs.elki.algorithm.clustering.SLINK</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/SNNClustering.html">de.lmu.ifi.dbs.elki.algorithm.clustering.SNNClustering</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/CASH.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.CASH</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/COPAC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.COPAC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/ORCLUS.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.ORCLUS</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/FourC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.FourC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/ERiC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.ERiC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/correlation/COPAC.html">de.lmu.ifi.dbs.elki.algorithm.clustering.correlation.COPAC</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/DeLiClu.html">de.lmu.ifi.dbs.elki.algorithm.clustering.DeLiClu</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/TrivialAllInOne.html">de.lmu.ifi.dbs.elki.algorithm.clustering.TrivialAllInOne</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/DBSCAN.html">de.lmu.ifi.dbs.elki.algorithm.clustering.DBSCAN</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/clustering/EM.html">de.lmu.ifi.dbs.elki.algorithm.clustering.EM</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/APRIORI.html">de.lmu.ifi.dbs.elki.algorithm.APRIORI</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/DummyAlgorithm.html">de.lmu.ifi.dbs.elki.algorithm.DummyAlgorithm</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/LOCI.html">de.lmu.ifi.dbs.elki.algorithm.outlier.LOCI</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/ABOD.html">de.lmu.ifi.dbs.elki.algorithm.outlier.ABOD</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/LOF.html">de.lmu.ifi.dbs.elki.algorithm.outlier.LOF</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/outlier/SOD.html">de.lmu.ifi.dbs.elki.algorithm.outlier.SOD</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/KNNDistanceOrder.html">de.lmu.ifi.dbs.elki.algorithm.KNNDistanceOrder</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/MaterializeDistances.html">de.lmu.ifi.dbs.elki.algorithm.MaterializeDistances</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/algorithm/DependencyDerivator.html">de.lmu.ifi.dbs.elki.algorithm.DependencyDerivator</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/GeneratorXMLSpec.html">de.lmu.ifi.dbs.elki.application.GeneratorXMLSpec</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/visualization/KNNExplorer.html">de.lmu.ifi.dbs.elki.application.visualization.KNNExplorer</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheFloatDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheFloatDistanceInOnDiskMatrix</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/application/cache/CacheDoubleDistanceInOnDiskMatrix.html">de.lmu.ifi.dbs.elki.application.cache.CacheDoubleDistanceInOnDiskMatrix</a>
+</li>
+<li>
+<a href="de/lmu/ifi/dbs/elki/evaluation/ComputeROCCurve.html">de.lmu.ifi.dbs.elki.evaluation.ComputeROCCurve</a>
+</li>
+</ul>
+</dd>
+</dl>
+</body>
+</html>
