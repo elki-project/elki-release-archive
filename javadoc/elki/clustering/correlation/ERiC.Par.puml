@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ERiC.Par\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ERiC.Par [[ERiC.Par.html]] {
+        {static} +K_ID: OptionID
+        {static} +DELTA_ID: OptionID
+        {static} +TAU_ID: OptionID
+        #settings: Settings
+        +configure(Parameterization): void
+        +make(): ERiC
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ERiC\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ERiC [[ERiC.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.correlation.ERiC.Par
+    elki.clustering.correlation.ERiC +-- elki.clustering.correlation.ERiC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

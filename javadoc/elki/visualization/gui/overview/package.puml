@@ -1,0 +1,169 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.gui.overview {
+
+        class RectangleArranger<T> [[RectangleArranger.html]] {
+            {static} -LOG: Logging
+            -ratio: double
+            -twidth: double
+            -theight: double
+            -widths: DoubleArray
+            -heights: DoubleArray
+            -usage: ArrayList<ArrayList<Object>>
+            -map: Map<T, double[]>
+            +RectangleArranger(double)
+            +RectangleArranger(double, double)
+            +put(double, double, T): void
+            #computeIncreaseArea(double, double): double
+            #splitRow(int, double): void
+            #splitCol(int, double): void
+            -resize(double): void
+            +get(T): double[]
+            -assertConsistent(): boolean
+            #logSizes(): void
+            +relativeFill(): double
+            +getWidth(): double
+            +getHeight(): double
+            +entrySet(): Set<Entry<T, double[]>>
+            +keySet(): Set<T>
+        }
+
+        class OverviewPlot [[OverviewPlot.html]] {
+            {static} -LOG: Logging
+            {static} +OVERVIEW_REFRESHING: String
+            {static} +OVERVIEW_REFRESHED: String
+            {static} -DEBUG_LAYOUT: boolean
+            -context: VisualizerContext
+            -plot: VisualizationPlot
+            -actionListeners: ArrayList<ActionListener>
+            -single: boolean
+            +screenwidth: int
+            +screenheight: int
+            -hoverer: EventListener
+            -plotlayer: Element
+            -hoverlayer: Element
+            -selcss: CSSClass
+            -ratio: double
+            ~pendingRefresh: AtomicReference<Runnable>
+            -reinitOnRefresh: boolean
+            +OverviewPlot(VisualizerContext, boolean)
+            -arrangeVisualizations(double, double): RectangleArranger<PlotItem>
+            +initialize(double): void
+            -reinitialize(): void
+            -initializePlot(): void
+            -embedOrThumbnail(int, PlotItem, VisualizationTask, Element): Visualization
+            ~refresh(): void
+            #visibleInOverview(VisualizationTask): boolean
+            -recalcViewbox(): void
+            +makeDetailView(PlotItem): DetailView
+            +addActionListener(ActionListener): void
+            #triggerSubplotSelectEvent(PlotItem): void
+            +destroy(): void
+            +getPlot(): SVGPlot
+            +getRatio(): double
+            +setRatio(double): void
+            +lazyRefresh(): void
+            +resultAdded(Object, Object): void
+            +resultChanged(Object): void
+            +resultRemoved(Object, Object): void
+            +visualizationChanged(VisualizationItem): void
+        }
+
+        class PlotItem [[PlotItem.html]] {
+            +x: double
+            +y: double
+            +w: double
+            +h: double
+            +proj: Projection
+            +tasks: List<VisualizationTask>
+            +PlotItem(double, double, Projection)
+            +PlotItem(double, double, double, double, Projection)
+            +PlotItem(PlotItem)
+            +sort(): void
+            +add(VisualizationTask): void
+            +taskSize(): int
+            +itemIterator(): Iterator<PlotItem>
+        }
+
+        class elki.visualization.gui.overview.PlotItem.ItmItr [[PlotItem.ItmItr.html]] {
+            ~cur: Iterator<PlotItem>
+            ~sub: Iterator<PlotItem>
+            +ItmItr(PlotItem)
+            +hasNext(): boolean
+            +next(): PlotItem
+        }
+
+        class LayerMap [[LayerMap.html]] {
+            -map: HashMap<Pair<PlotItem, VisualizationTask>, Pair<Element, Visualization>>
+            -key(PlotItem, VisualizationTask): Pair<PlotItem, VisualizationTask>
+            -value(Element, Visualization): Pair<Element, Visualization>
+            +getVisualization(PlotItem, VisualizationTask): Visualization
+            +getContainer(PlotItem, VisualizationTask): Element
+            +values(): Iterable<Pair<Element, Visualization>>
+            +clear(): void
+            +put(PlotItem, VisualizationTask, Element, Visualization): void
+            +remove(PlotItem, VisualizationTask): Pair<Element, Visualization>
+            +put(PlotItem, VisualizationTask, Pair<Element, Visualization>): void
+            +get(PlotItem, VisualizationTask): Pair<Element, Visualization>
+        }
+
+        class DetailViewSelectedEvent [[DetailViewSelectedEvent.html]] {
+            {static} -serialVersionUID: long
+            +DetailViewSelectedEvent(OverviewPlot, int, String, int, PlotItem)
+            +makeDetailView(): DetailView
+        }
+
+        elki.result.ResultListener <|.. OverviewPlot
+        elki.visualization.VisualizationListener <|.. OverviewPlot
+        OverviewPlot --> RectangleArranger: plotmap
+        OverviewPlot --> LayerMap: vistoelem
+        PlotItem --> "*" PlotItem: subitems
+        java.util.Iterator <|.. elki.visualization.gui.overview.PlotItem.ItmItr
+        PlotItem +-- elki.visualization.gui.overview.PlotItem.ItmItr
+        elki.visualization.gui.overview.PlotItem.ItmItr --> PlotItem: next
+        java.awt.event.ActionEvent <|-- DetailViewSelectedEvent
+        DetailViewSelectedEvent --> OverviewPlot: overview
+        DetailViewSelectedEvent --> PlotItem: it
+    }
+
+    namespace elki.result {
+        interface ResultListener [[../../../result/ResultListener.html]] {
+            +resultAdded(Object, Object): void
+            +resultChanged(Object): void
+            +resultRemoved(Object, Object): void
+        }
+    }
+
+    namespace elki.visualization {
+        interface VisualizationListener [[../../VisualizationListener.html]] {
+            {abstract} +visualizationChanged(VisualizationItem): void
+        }
+    }
+
+    namespace java.util {
+        interface Iterator<E> {
+            {abstract} +hasNext(): boolean
+            {abstract} +next(): E
+            +remove(): void
+            +forEachRemaining(Consumer<? super E>): void
+        }
+    }
+
+    namespace java.awt.event {
+        class ActionEvent {
+            {static} +SHIFT_MASK: int
+            {static} +CTRL_MASK: int
+            {static} +META_MASK: int
+            {static} +ALT_MASK: int
+            {static} +ACTION_FIRST: int
+            {static} +ACTION_LAST: int
+            {static} +ACTION_PERFORMED: int
+            ~actionCommand: String
+            ~when: long
+            ~modifiers: int
+            {static} -serialVersionUID: long
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

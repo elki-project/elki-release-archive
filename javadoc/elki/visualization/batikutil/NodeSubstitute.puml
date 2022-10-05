@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NodeSubstitute\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.NodeSubstitute [[NodeSubstitute.html]] {
+        -prev: Element
+        -newe: Element
+        +NodeSubstitute(Element, Element)
+        +run(): void
+    }
+
+    interface "<size:14>Runnable\n<size:10>java.lang" as java.lang.Runnable {
+        {abstract} +run(): void
+    }
+
+    java.lang.Runnable <|.. elki.visualization.batikutil.NodeSubstitute
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

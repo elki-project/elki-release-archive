@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InMemoryLSHIndex.Par\n<size:10>elki.index.lsh" as elki.index.lsh.InMemoryLSHIndex.Par<V> [[InMemoryLSHIndex.Par.html]] {
+        {static} +FAMILY_ID: OptionID
+        {static} +L_ID: OptionID
+        {static} +BUCKETS_ID: OptionID
+        ~family: LocalitySensitiveHashFunctionFamily<? super V>
+        ~l: int
+        ~numberOfBuckets: int
+        +configure(Parameterization): void
+        +make(): InMemoryLSHIndex<V>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>InMemoryLSHIndex\n<size:10>elki.index.lsh" as elki.index.lsh.InMemoryLSHIndex<V> [[InMemoryLSHIndex.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.lsh.InMemoryLSHIndex.Par
+    elki.index.lsh.InMemoryLSHIndex +-- elki.index.lsh.InMemoryLSHIndex.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

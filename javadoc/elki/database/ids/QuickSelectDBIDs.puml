@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>QuickSelectDBIDs\n<size:10>elki.database.ids" as elki.database.ids.QuickSelectDBIDs [[QuickSelectDBIDs.html]] {
+        {static} -SMALL: int
+        {static} -bestPivot(int, int, int, int, int, int): int
+        {static} +quickSelect(ArrayModifiableDBIDs, Comparator<? super DBIDRef>, int): void
+        {static} +median(ArrayModifiableDBIDs, Comparator<? super DBIDRef>): int
+        {static} +median(ArrayModifiableDBIDs, Comparator<? super DBIDRef>, int, int): int
+        {static} +quantile(ArrayModifiableDBIDs, Comparator<? super DBIDRef>, double): int
+        {static} +quantile(ArrayModifiableDBIDs, Comparator<? super DBIDRef>, int, int, double): int
+        {static} +quickSelect(ArrayModifiableDBIDs, Comparator<? super DBIDRef>, int, int, int): void
+        {static} -insertionSort(ArrayModifiableDBIDs, Comparator<? super DBIDRef>, int, int, DBIDArrayIter, DBIDArrayIter): void
+        {static} +quickSelect(ModifiableDoubleDBIDList, int): void
+        {static} +median(ModifiableDoubleDBIDList): int
+        {static} +median(ModifiableDoubleDBIDList, int, int): int
+        {static} +quantile(ModifiableDoubleDBIDList, double): int
+        {static} +quantile(ModifiableDoubleDBIDList, int, int, double): int
+        {static} +quickSelect(ModifiableDoubleDBIDList, int, int, int): void
+        {static} -insertionSort(ModifiableDoubleDBIDList, int, int, DoubleDBIDListIter, DoubleDBIDListIter): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

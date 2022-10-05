@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>COP\n<size:10>elki.outlier" as elki.outlier.COP<V extends NumberVector> [[COP.html]] {
+        {static} -LOG: Logging
+        {static} +COP_SCORES: String
+        {static} +COP_DIM: String
+        {static} +COP_ERRORVEC: String
+        {static} -SHORTENED_ARRAY: DoubleArrayAdapter
+        #distance: Distance<? super NumberVector>
+        #k: int
+        #pca: PCARunner
+        #expect: double
+        #dist: DistanceDist
+        #models: boolean
+        +COP(Distance<? super NumberVector>, int, PCARunner, double, DistanceDist, boolean)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V extends NumberVector>): OutlierResult
+        {static} -computeCentroid(double[], Relation<? extends NumberVector>, DBIDs): void
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[OutlierAlgorithm.html]]
+    enum "<size:14>COP.DistanceDist\n<size:10>elki.outlier" as elki.outlier.COP.DistanceDist [[COP.DistanceDist.html]]
+    class "<size:14>COP.Par\n<size:10>elki.outlier" as elki.outlier.COP.Par<V extends NumberVector> [[COP.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.COP
+    elki.outlier.COP +-- elki.outlier.COP.DistanceDist
+    elki.outlier.COP +-- elki.outlier.COP.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

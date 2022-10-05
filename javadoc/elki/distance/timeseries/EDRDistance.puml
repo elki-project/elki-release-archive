@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EDRDistance\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.EDRDistance [[EDRDistance.html]] {
+        -delta: double
+        +EDRDistance(double, double)
+        +distance(NumberVector, NumberVector): double
+        #delta(double, double): double
+    }
+
+    class "<size:14>DTWDistance\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.DTWDistance [[DTWDistance.html]]
+    class "<size:14>EDRDistance.Par\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.EDRDistance.Par [[EDRDistance.Par.html]]
+
+    elki.distance.timeseries.DTWDistance <|-- elki.distance.timeseries.EDRDistance
+    elki.distance.timeseries.EDRDistance +-- elki.distance.timeseries.EDRDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="233px" preserveAspectRatio="none" style="width:303px;height:233px;background:#FFFFFF;" version="1.1" viewBox="0 0 303 233" width="303px" zoomAndPan="magnify"><defs/><g><!--MD5=[03ddc2e421279da83ce0d70246345ea0]
+class elki.visualization.style.StylingPolicy--><a href="StylingPolicy.html" target="_top" title="StylingPolicy.html" xlink:actuate="onRequest" xlink:href="StylingPolicy.html" xlink:show="new" xlink:title="StylingPolicy.html" xlink:type="simple"><g id="elem_elki.visualization.style.StylingPolicy"><rect codeLine="6" fill="#F1F1F1" height="78.5313" id="elki.visualization.style.StylingPolicy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="289" x="7" y="129"/><ellipse cx="92.25" cy="147.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M88.1719,143.7344 L88.1719,141.5781 L95.5625,141.5781 L95.5625,143.7344 L93.0938,143.7344 L93.0938,151.8125 L95.5625,151.8125 L95.5625,153.9688 L88.1719,153.9688 L88.1719,151.8125 L90.6406,151.8125 L90.6406,143.7344 L88.1719,143.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="89" x="123.25" y="146.9951">StylingPolicy</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="110" x="112.75" y="159.5791">elki.visualization.style</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="295" y1="166.9375" y2="166.9375"/><ellipse cx="18" cy="180.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="215" x="27" y="183.9326">getColorForDBID(DBIDRef): int</text><ellipse cx="18" cy="196.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="263" x="27" y="200.2295">getIntensityForDBID(DBIDRef): double</text></g></a><!--MD5=[b53d57550fb9810376f16637ce471e23]
+class elki.visualization.VisualizationItem--><a href="../VisualizationItem.html" target="_top" title="../VisualizationItem.html" xlink:actuate="onRequest" xlink:href="../VisualizationItem.html" xlink:show="new" xlink:title="../VisualizationItem.html" xlink:type="simple"><g id="elem_elki.visualization.VisualizationItem"><rect codeLine="11" fill="#F1F1F1" height="62.2344" id="elki.visualization.VisualizationItem" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="191" x="56" y="7"/><ellipse cx="87.65" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M83.5719,21.7344 L83.5719,19.5781 L90.9625,19.5781 L90.9625,21.7344 L88.4938,21.7344 L88.4938,29.8125 L90.9625,29.8125 L90.9625,31.9688 L83.5719,31.9688 L83.5719,29.8125 L86.0406,29.8125 L86.0406,21.7344 L83.5719,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="122" x="105.35" y="24.9951">VisualizationItem</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="83" x="124.85" y="37.5791">elki.visualization</text><line style="stroke:#181818;stroke-width:0.5;" x1="57" x2="246" y1="44.9375" y2="44.9375"/><ellipse cx="67" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="165" x="76" y="61.9326">getMenuName(): String</text></g></a><!--MD5=[f8f6a60d255b45dd6a02485e2fdf7943]
+reverse link elki.visualization.VisualizationItem to elki.visualization.style.StylingPolicy--><g id="link_elki.visualization.VisualizationItem_elki.visualization.style.StylingPolicy"><path codeLine="15" d="M151.5,89.36 C151.5,102.47 151.5,116.38 151.5,128.78 " fill="none" id="elki.visualization.VisualizationItem-backto-elki.visualization.style.StylingPolicy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="144.5,89.13,151.5,69.13,158.5,89.13,144.5,89.13" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="51.5" y="213.5313"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="51.5" y="222.8135">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[6f3d70d7089f894ed7ff4628ee35b01e]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>StylingPolicy\n<size:10>elki.visualization.style" as elki.visualization.style.StylingPolicy [[StylingPolicy.html]] {
+        {abstract} +getColorForDBID(DBIDRef): int
+        +getIntensityForDBID(DBIDRef): double
+    }
+
+    interface "<size:14>VisualizationItem\n<size:10>elki.visualization" as elki.visualization.VisualizationItem [[../VisualizationItem.html]] {
+        {abstract} +getMenuName(): String
+    }
+
+    elki.visualization.VisualizationItem <|- - elki.visualization.style.StylingPolicy
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>COP.DistanceDist\n<size:10>elki.outlier" as elki.outlier.COP.DistanceDist [[COP.DistanceDist.html]] {
+        {static} +CHISQUARED
+        {static} +GAMMA
+    }
+
+    class "<size:14>COP\n<size:10>elki.outlier" as elki.outlier.COP<V extends NumberVector> [[COP.html]]
+
+    elki.outlier.COP +-- elki.outlier.COP.DistanceDist
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UniformEnhancedMinMaxEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.UniformEnhancedMinMaxEstimator [[UniformEnhancedMinMaxEstimator.html]] {
+        {static} +STATIC: UniformEnhancedMinMaxEstimator
+        +estimate(A, NumberArrayAdapter<?, A>): UniformDistribution
+        +estimate(double, double, int): UniformDistribution
+        +getDistributionClass(): Class<? super UniformDistribution>
+    }
+
+    interface "<size:14>DistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.DistributionEstimator<UniformDistribution> [[DistributionEstimator.html]] {
+        {abstract} +estimate(A, NumberArrayAdapter<?, A>): UniformDistribution
+        {abstract} +getDistributionClass(): Class<? super Distribution>
+    }
+    class "<size:14>UniformEnhancedMinMaxEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.UniformEnhancedMinMaxEstimator.Par [[UniformEnhancedMinMaxEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.DistributionEstimator <|.. elki.math.statistics.distribution.estimator.UniformEnhancedMinMaxEstimator
+    elki.math.statistics.distribution.estimator.UniformEnhancedMinMaxEstimator +-- elki.math.statistics.distribution.estimator.UniformEnhancedMinMaxEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

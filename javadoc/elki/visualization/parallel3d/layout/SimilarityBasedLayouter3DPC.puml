@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>SimilarityBasedLayouter3DPC\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.SimilarityBasedLayouter3DPC [[SimilarityBasedLayouter3DPC.html]] {
+        {static} +SIM_ID: OptionID
+        {abstract} +getSimilarity(): Dependence
+        {abstract} +layout(int, double[]): Layout
+    }
+
+    interface "<size:14>Layouter3DPC\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.Layouter3DPC<NumberVector> [[Layouter3DPC.html]] {
+        {abstract} +layout(Relation<? extends V>): Layout
+    }
+
+    elki.visualization.parallel3d.layout.Layouter3DPC <|-- elki.visualization.parallel3d.layout.SimilarityBasedLayouter3DPC
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

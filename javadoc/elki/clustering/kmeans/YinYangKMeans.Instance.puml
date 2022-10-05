@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>YinYangKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.YinYangKMeans.Instance [[YinYangKMeans.Instance.html]] {
+        ~groups: int[]
+        ~gdrift: double[]
+        ~cdrift: double[]
+        ~sums: double[]
+        ~glabel: int[]
+        ~upper: WritableDoubleDataStore
+        ~lower: WritableDataStore<double[]>
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[], int)
+        +run(int): void
+        -groupKMeans(int): int[]
+        -initialGroupAssignment(int, double[], int[]): void
+        -updateGroupAssignment(int, double[], int[]): boolean
+        #iterate(int): int
+        -updateCenters(): void
+        #assignToNearestCluster(): int
+        -initialAssignToNearestCluster(): int
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Instance [[AbstractKMeans.Instance.html]] {
+        {abstract} #iterate(int): int
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>YinYangKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.YinYangKMeans<V extends NumberVector> [[YinYangKMeans.html]]
+
+    elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.YinYangKMeans.Instance
+    elki.clustering.kmeans.YinYangKMeans +-- elki.clustering.kmeans.YinYangKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

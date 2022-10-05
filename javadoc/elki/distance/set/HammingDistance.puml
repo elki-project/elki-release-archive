@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HammingDistance\n<size:10>elki.distance.set" as elki.distance.set.HammingDistance [[HammingDistance.html]] {
+        {static} +STATIC: HammingDistance
+        +isMetric(): boolean
+        +distance(FeatureVector<?>, FeatureVector<?>): double
+        +distance(NumberVector, NumberVector): double
+        -hammingDistanceNumberVector(NumberVector, NumberVector): double
+        +getInputTypeRestriction(): SimpleTypeInformation<? super FeatureVector<?>>
+    }
+
+    abstract class "<size:14>AbstractSetDistance\n<size:10>elki.distance.set" as elki.distance.set.AbstractSetDistance<FeatureVector<?>> [[AbstractSetDistance.html]]
+    interface "<size:14>NumberVectorDistance\n<size:10>elki.distance" as elki.distance.NumberVectorDistance<FeatureVector<?>> [[../NumberVectorDistance.html]] {
+        {abstract} +distance(NumberVector, NumberVector): double
+    }
+    class "<size:14>HammingDistance.Par\n<size:10>elki.distance.set" as elki.distance.set.HammingDistance.Par [[HammingDistance.Par.html]]
+
+    elki.distance.set.AbstractSetDistance <|-- elki.distance.set.HammingDistance
+    elki.distance.NumberVectorDistance <|.. elki.distance.set.HammingDistance
+    elki.distance.set.HammingDistance +-- elki.distance.set.HammingDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

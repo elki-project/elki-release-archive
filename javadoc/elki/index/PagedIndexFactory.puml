@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>PagedIndexFactory\n<size:10>elki.index" as elki.index.PagedIndexFactory<O> [[PagedIndexFactory.html]] {
+        -pageFileFactory: PageFileFactory<?>
+        +PagedIndexFactory(PageFileFactory<?>)
+        #makePageFile(Class<N extends Externalizable>): PageFile<N extends Externalizable>
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<O> [[IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    abstract class "<size:14>PagedIndexFactory.Par\n<size:10>elki.index" as elki.index.PagedIndexFactory.Par<O> [[PagedIndexFactory.Par.html]]
+
+    elki.index.IndexFactory <|.. elki.index.PagedIndexFactory
+    elki.index.PagedIndexFactory +-- elki.index.PagedIndexFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

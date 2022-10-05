@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MTreeSearchCandidate\n<size:10>elki.index.tree.metrical.mtreevariants.query" as elki.index.tree.metrical.mtreevariants.query.MTreeSearchCandidate [[MTreeSearchCandidate.html]] {
+        +mindist: double
+        +nodeID: int
+        +routingObjectID: DBID
+        +routingDistance: double
+        +MTreeSearchCandidate(double, int, DBID, double)
+        +compareTo(MTreeSearchCandidate): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<MTreeSearchCandidate> {
+        {abstract} +compareTo(MTreeSearchCandidate): int
+    }
+
+    java.lang.Comparable <|.. elki.index.tree.metrical.mtreevariants.query.MTreeSearchCandidate
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UnmodifiableIntegerArrayDBIDs\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.UnmodifiableIntegerArrayDBIDs [[UnmodifiableIntegerArrayDBIDs.html]] {
+        -inner: IntegerArrayDBIDs
+        +UnmodifiableIntegerArrayDBIDs(IntegerArrayDBIDs)
+        +contains(DBIDRef): boolean
+        +isEmpty(): boolean
+        +iter(): IntegerDBIDArrayIter
+        +size(): int
+        +--get--(int): DBID
+        +assignVar(int, DBIDVar): DBIDVar
+        +binarySearch(DBIDRef): int
+        +slice(int, int): IntegerArrayDBIDs
+    }
+
+    interface "<size:14>IntegerArrayStaticDBIDs\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerArrayStaticDBIDs [[IntegerArrayStaticDBIDs.html]] {
+        {abstract} +iter(): IntegerDBIDArrayIter
+    }
+    class "<size:14>UnmodifiableIntegerArrayDBIDs.Itr\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.UnmodifiableIntegerArrayDBIDs.Itr [[UnmodifiableIntegerArrayDBIDs.Itr.html]]
+
+    elki.database.ids.integer.IntegerArrayStaticDBIDs <|.. elki.database.ids.integer.UnmodifiableIntegerArrayDBIDs
+    elki.database.ids.integer.UnmodifiableIntegerArrayDBIDs +-- elki.database.ids.integer.UnmodifiableIntegerArrayDBIDs.Itr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

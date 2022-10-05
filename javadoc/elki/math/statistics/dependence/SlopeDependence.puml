@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SlopeDependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.SlopeDependence [[SlopeDependence.html]] {
+        {static} +STATIC: SlopeDependence
+        {static} #PRECISION: int
+        {static} #LOG_PRECISION: double
+        {static} #RESCALE: double
+        +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+    }
+
+    interface "<size:14>Dependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.Dependence [[Dependence.html]] {
+        {abstract} +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+    }
+    class "<size:14>SlopeDependence.Par\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.SlopeDependence.Par [[SlopeDependence.Par.html]]
+
+    elki.math.statistics.dependence.Dependence <|.. elki.math.statistics.dependence.SlopeDependence
+    elki.math.statistics.dependence.SlopeDependence +-- elki.math.statistics.dependence.SlopeDependence.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

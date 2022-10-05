@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RVEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.RVEstimator [[RVEstimator.html]] {
+        {static} +STATIC: RVEstimator
+        +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+    }
+
+    interface "<size:14>DistanceBasedIntrinsicDimensionalityEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.DistanceBasedIntrinsicDimensionalityEstimator [[DistanceBasedIntrinsicDimensionalityEstimator.html]] {
+        {abstract} +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+    }
+    class "<size:14>RVEstimator.Par\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.RVEstimator.Par [[RVEstimator.Par.html]]
+
+    elki.math.statistics.intrinsicdimensionality.DistanceBasedIntrinsicDimensionalityEstimator <|.. elki.math.statistics.intrinsicdimensionality.RVEstimator
+    elki.math.statistics.intrinsicdimensionality.RVEstimator +-- elki.math.statistics.intrinsicdimensionality.RVEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

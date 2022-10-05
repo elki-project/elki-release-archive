@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="94px" preserveAspectRatio="none" style="width:256px;height:94px;background:#FFFFFF;" version="1.1" viewBox="0 0 256 94" width="256px" zoomAndPan="magnify"><defs/><g><!--MD5=[a036fe86152ba8fe97cb74b572509015]
+class elki.parallel.processor.AbstractDoubleProcessor--><a href="AbstractDoubleProcessor.html" target="_top" title="AbstractDoubleProcessor.html" xlink:actuate="onRequest" xlink:href="AbstractDoubleProcessor.html" xlink:show="new" xlink:title="AbstractDoubleProcessor.html" xlink:type="simple"><g id="elem_elki.parallel.processor.AbstractDoubleProcessor"><rect codeLine="15" fill="#F1F1F1" height="62.2344" id="elki.parallel.processor.AbstractDoubleProcessor" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="242" x="7" y="7"/><ellipse cx="37.3" cy="25.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M37.4094,21.3125 L36.2531,26.3906 L38.5813,26.3906 L37.4094,21.3125 Z M35.925,19.0781 L38.9094,19.0781 L42.2688,31.4688 L39.8156,31.4688 L39.05,28.4063 L35.7688,28.4063 L35.0188,31.4688 L32.5813,31.4688 L35.925,19.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="176" x="54.7" y="24.9951">AbstractDoubleProcessor</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="109" x="88.2" y="37.5791">elki.parallel.processor</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="248" y1="44.9375" y2="44.9375"/><ellipse cx="18" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="216" x="27" y="61.9326">instantiate(Executor): Instance</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="28" y="75.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="28" y="84.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[d835a0b329e737b23a280208abed57f7]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractDoubleProcessor.Instance\n<size:10>elki.parallel.processor" as elki.parallel.processor.AbstractDoubleProcessor.Instance [[AbstractDoubleProcessor.Instance.html]] {
+        #output: Instance
+        +Instance(Instance)
+        {abstract} +map(DBIDRef): void
+    }
+
+    interface "<size:14>Processor.Instance\n<size:10>elki.parallel.processor" as elki.parallel.processor.Processor.Instance [[Processor.Instance.html]] {
+        {abstract} +map(DBIDRef): void
+    }
+    abstract class "<size:14>AbstractDoubleProcessor\n<size:10>elki.parallel.processor" as elki.parallel.processor.AbstractDoubleProcessor [[AbstractDoubleProcessor.html]] {
+        {abstract} +instantiate(Executor): Instance
+    }
+
+    elki.parallel.processor.Processor.Instance <|.. elki.parallel.processor.AbstractDoubleProcessor.Instance
+    elki.parallel.processor.AbstractDoubleProcessor +- - elki.parallel.processor.AbstractDoubleProcessor.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

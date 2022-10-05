@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TriangularDiscriminationDistance.Par\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.TriangularDiscriminationDistance.Par [[TriangularDiscriminationDistance.Par.html]] {
+        +make(): TriangularDiscriminationDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>TriangularDiscriminationDistance\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.TriangularDiscriminationDistance [[TriangularDiscriminationDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.probabilistic.TriangularDiscriminationDistance.Par
+    elki.distance.probabilistic.TriangularDiscriminationDistance +-- elki.distance.probabilistic.TriangularDiscriminationDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

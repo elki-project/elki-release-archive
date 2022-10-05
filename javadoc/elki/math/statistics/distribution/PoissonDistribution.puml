@@ -1,0 +1,46 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PoissonDistribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.PoissonDistribution [[PoissonDistribution.html]] {
+        -n: int
+        -p: double
+        {static} -S0: double
+        {static} -S1: double
+        {static} -S2: double
+        {static} -S3: double
+        {static} -S4: double
+        {static} -STIRLING_EXACT_ERROR: double[]
+        +PoissonDistribution(int, double)
+        +pmf(int): double
+        +pdf(double): double
+        +logpdf(double): double
+        {static} +pmf(double, int, double): double
+        {static} +logpmf(double, int, double): double
+        +cdf(double): double
+        +quantile(double): double
+        +nextRandom(Random): double
+        {static} +poissonPDFm1(double, double): double
+        {static} +logpoissonPDFm1(double, double): double
+        {static} -stirlingError(int): double
+        {static} -stirlingError(double): double
+        {static} -devianceTerm(double, double): double
+        {static} +rawProbability(double, double): double
+        {static} +rawLogProbability(double, double): double
+    }
+
+    interface "<size:14>Distribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution [[Distribution.html]] {
+        {abstract} +pdf(double): double
+        {abstract} +logpdf(double): double
+        {abstract} +cdf(double): double
+        {abstract} +quantile(double): double
+    }
+    class "<size:14>PoissonDistribution.Par\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.PoissonDistribution.Par [[PoissonDistribution.Par.html]]
+
+    elki.math.statistics.distribution.Distribution <|.. elki.math.statistics.distribution.PoissonDistribution
+    elki.math.statistics.distribution.PoissonDistribution +-- elki.math.statistics.distribution.PoissonDistribution.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

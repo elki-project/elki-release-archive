@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="252px" preserveAspectRatio="none" style="width:274px;height:252px;background:#FFFFFF;" version="1.1" viewBox="0 0 274 252" width="274px" zoomAndPan="magnify"><defs/><g><!--MD5=[009aff6d7a075ca3b787d8e956c56726]
+class elki.utilities.io.FixedSizeByteBufferSerializer--><a href="FixedSizeByteBufferSerializer.html" target="_top" title="FixedSizeByteBufferSerializer.html" xlink:actuate="onRequest" xlink:href="FixedSizeByteBufferSerializer.html" xlink:show="new" xlink:title="FixedSizeByteBufferSerializer.html" xlink:type="simple"><g id="elem_elki.utilities.io.FixedSizeByteBufferSerializer"><rect codeLine="6" fill="#F1F1F1" height="62.2344" id="elki.utilities.io.FixedSizeByteBufferSerializer" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="250" x="10" y="165"/><ellipse cx="25" cy="183.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M20.9219,179.7344 L20.9219,177.5781 L28.3125,177.5781 L28.3125,179.7344 L25.8438,179.7344 L25.8438,187.8125 L28.3125,187.8125 L28.3125,189.9688 L20.9219,189.9688 L20.9219,187.8125 L23.3906,187.8125 L23.3906,179.7344 L20.9219,179.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="207" x="39" y="182.9951">FixedSizeByteBufferSerializer</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="70" x="107.5" y="195.5791">elki.utilities.io</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="9" x="254" y="162"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="7" x="255" y="174.1387">T</text><line style="stroke:#181818;stroke-width:0.5;" x1="11" x2="259" y1="202.9375" y2="202.9375"/><ellipse cx="21" cy="216.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="159" x="30" y="219.9326">getFixedByteSize(): int</text></g></a><!--MD5=[fafa09e96069e64ae7d93037ec06383a]
+class elki.utilities.io.ByteBufferSerializer--><a href="ByteBufferSerializer.html" target="_top" title="ByteBufferSerializer.html" xlink:actuate="onRequest" xlink:href="ByteBufferSerializer.html" xlink:show="new" xlink:title="ByteBufferSerializer.html" xlink:type="simple"><g id="elem_elki.utilities.io.ByteBufferSerializer"><rect codeLine="10" fill="#F1F1F1" height="94.8281" id="elki.utilities.io.ByteBufferSerializer" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="256" x="7" y="10"/><ellipse cx="55.25" cy="28.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M51.1719,24.7344 L51.1719,22.5781 L58.5625,22.5781 L58.5625,24.7344 L56.0938,24.7344 L56.0938,32.8125 L58.5625,32.8125 L58.5625,34.9688 L51.1719,34.9688 L51.1719,32.8125 L53.6406,32.8125 L53.6406,24.7344 L51.1719,24.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="140" x="75.75" y="27.9951">ByteBufferSerializer</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="70" x="110.75" y="40.5791">elki.utilities.io</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="9" x="257" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="7" x="258" y="19.1387">T</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="262" y1="47.9375" y2="47.9375"/><ellipse cx="18" cy="61.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="211" x="27" y="64.9326">fromByteBuffer(ByteBuffer): T</text><ellipse cx="18" cy="77.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="230" x="27" y="81.2295">toByteBuffer(ByteBuffer, T): void</text><ellipse cx="18" cy="94.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="130" x="27" y="97.5264">getByteSize(T): int</text></g></a><!--MD5=[c716b0b052839b2ee9a31b02f4f15450]
+reverse link elki.utilities.io.ByteBufferSerializer to elki.utilities.io.FixedSizeByteBufferSerializer--><g id="link_elki.utilities.io.ByteBufferSerializer_elki.utilities.io.FixedSizeByteBufferSerializer"><path codeLine="16" d="M135,125.16 C135,139.08 135,153.1 135,164.88 " fill="none" id="elki.utilities.io.ByteBufferSerializer-backto-elki.utilities.io.FixedSizeByteBufferSerializer" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="128,125.09,135,105.09,142,125.09,128,125.09" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="37" y="233.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="37" y="242.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[7f877e21fdcbbbde19cfa96356ec5cbb]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>FixedSizeByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.FixedSizeByteBufferSerializer<T> [[FixedSizeByteBufferSerializer.html]] {
+        {abstract} +getFixedByteSize(): int
+    }
+
+    interface "<size:14>ByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteBufferSerializer<T> [[ByteBufferSerializer.html]] {
+        {abstract} +fromByteBuffer(ByteBuffer): T
+        {abstract} +toByteBuffer(ByteBuffer, T): void
+        {abstract} +getByteSize(T): int
+    }
+
+    elki.utilities.io.ByteBufferSerializer <|- - elki.utilities.io.FixedSizeByteBufferSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

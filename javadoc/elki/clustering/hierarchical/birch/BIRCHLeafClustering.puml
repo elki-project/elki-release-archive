@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BIRCHLeafClustering\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.BIRCHLeafClustering [[BIRCHLeafClustering.html]] {
+        ~cffactory: Factory
+        +BIRCHLeafClustering(Factory)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<NumberVector>): Clustering<MeanModel>
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<MeanModel>> [[../../ClusteringAlgorithm.html]]
+    class "<size:14>BIRCHLeafClustering.Par\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.BIRCHLeafClustering.Par [[BIRCHLeafClustering.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.hierarchical.birch.BIRCHLeafClustering
+    elki.clustering.hierarchical.birch.BIRCHLeafClustering +-- elki.clustering.hierarchical.birch.BIRCHLeafClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

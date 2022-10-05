@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HACAM.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HACAM.Par<O> {
+        {static} +VARIANT_ID: OptionID
+        #distance: Distance<? super O>
+        #variant: Variant
+        +configure(Parameterization): void
+        +make(): HACAM<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>HACAM\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HACAM<O> [[HACAM.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.HACAM.Par
+    elki.clustering.hierarchical.HACAM +-- elki.clustering.hierarchical.HACAM.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

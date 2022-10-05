@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DeLiClu.SpatialObjectPair\n<size:10>elki.clustering.optics" as elki.clustering.optics.DeLiClu.SpatialObjectPair [[DeLiClu.SpatialObjectPair.html]] {
+        ~entry1: DeLiCluEntry
+        ~entry2: DeLiCluEntry
+        ~isExpandable: boolean
+        ~distance: double
+        +SpatialObjectPair(double, DeLiCluEntry, DeLiCluEntry, boolean)
+        +compareTo(SpatialObjectPair): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<SpatialObjectPair> {
+        {abstract} +compareTo(SpatialObjectPair): int
+    }
+    class "<size:14>DeLiClu\n<size:10>elki.clustering.optics" as elki.clustering.optics.DeLiClu<V extends NumberVector> [[DeLiClu.html]]
+
+    java.lang.Comparable <|.. elki.clustering.optics.DeLiClu.SpatialObjectPair
+    elki.clustering.optics.DeLiClu +-- elki.clustering.optics.DeLiClu.SpatialObjectPair
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FlexibleLOF.LOFResult\n<size:10>elki.outlier.lof" as elki.outlier.lof.FlexibleLOF.LOFResult<O> [[FlexibleLOF.LOFResult.html]] {
+        -result: OutlierResult
+        -kNNRefer: KNNSearcher<DBIDRef>
+        -kNNReach: KNNSearcher<DBIDRef>
+        -rkNNRefer: RKNNSearcher<DBIDRef>
+        -rkNNReach: RKNNSearcher<DBIDRef>
+        -lrds: WritableDoubleDataStore
+        -lofs: WritableDoubleDataStore
+        +LOFResult(OutlierResult, KNNSearcher<DBIDRef>, KNNSearcher<DBIDRef>, WritableDoubleDataStore, WritableDoubleDataStore)
+        +getKNNRefer(): KNNSearcher<DBIDRef>
+        +getKNNReach(): KNNSearcher<DBIDRef>
+        +getLrds(): WritableDoubleDataStore
+        +getLofs(): WritableDoubleDataStore
+        +getResult(): OutlierResult
+        +setRkNNRefer(RKNNSearcher<DBIDRef>): void
+        +getRkNNRefer(): RKNNSearcher<DBIDRef>
+        +getRkNNReach(): RKNNSearcher<DBIDRef>
+        +setRkNNReach(RKNNSearcher<DBIDRef>): void
+    }
+
+    class "<size:14>FlexibleLOF\n<size:10>elki.outlier.lof" as elki.outlier.lof.FlexibleLOF<O> [[FlexibleLOF.html]]
+
+    elki.outlier.lof.FlexibleLOF +-- elki.outlier.lof.FlexibleLOF.LOFResult
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

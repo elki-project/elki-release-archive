@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SpatialPointLeafEntry\n<size:10>elki.index.tree.spatial" as elki.index.tree.spatial.SpatialPointLeafEntry [[SpatialPointLeafEntry.html]] {
+        {static} -serialVersionUID: long
+        -id: DBID
+        -values: double[]
+        +SpatialPointLeafEntry()
+        +SpatialPointLeafEntry(DBID, double[])
+        +SpatialPointLeafEntry(DBID, NumberVector)
+        +getDBID(): DBID
+        +getDimensionality(): int
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+        +doubleValue(int): double
+        +longValue(int): long
+        +toArray(): double[]
+    }
+
+    interface "<size:14>LeafEntry\n<size:10>elki.index.tree" as elki.index.tree.LeafEntry [[../LeafEntry.html]] {
+        {abstract} +getDBID(): DBID
+    }
+    interface "<size:14>SpatialEntry\n<size:10>elki.index.tree.spatial" as elki.index.tree.spatial.SpatialEntry [[SpatialEntry.html]]
+    interface "<size:14>NumberVector\n<size:10>elki.data" as elki.data.NumberVector [[../../../data/NumberVector.html]] {
+        {abstract} +doubleValue(int): double
+        {abstract} +longValue(int): long
+        {abstract} +toArray(): double[]
+    }
+
+    elki.index.tree.LeafEntry <|.. elki.index.tree.spatial.SpatialPointLeafEntry
+    elki.index.tree.spatial.SpatialEntry <|.. elki.index.tree.spatial.SpatialPointLeafEntry
+    elki.data.NumberVector <|.. elki.index.tree.spatial.SpatialPointLeafEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>KMedoidsInitialization\n<size:10>elki.clustering.kmedoids.initialization" as elki.clustering.kmedoids.initialization.KMedoidsInitialization<O> [[KMedoidsInitialization.html]] {
+        {abstract} +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

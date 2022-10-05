@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FeatureSelection.ProjectedFeatureVectorAdapter\n<size:10>elki.data.projection" as elki.data.projection.FeatureSelection.ProjectedFeatureVectorAdapter [[FeatureSelection.ProjectedFeatureVectorAdapter.html]] {
+        +size(V extends FeatureVector<F>): int
+        +get(V extends FeatureVector<F>, int): F
+    }
+
+    interface "<size:14>ArrayAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.ArrayAdapter<F, V extends FeatureVector<F>> [[../../utilities/datastructures/arraylike/ArrayAdapter.html]] {
+        {abstract} +size(V extends FeatureVector<F>): int
+        {abstract} +get(V extends FeatureVector<F>, int): F
+    }
+    class "<size:14>FeatureSelection\n<size:10>elki.data.projection" as elki.data.projection.FeatureSelection<V extends FeatureVector<F>, F> [[FeatureSelection.html]]
+
+    elki.utilities.datastructures.arraylike.ArrayAdapter <|.. elki.data.projection.FeatureSelection.ProjectedFeatureVectorAdapter
+    elki.data.projection.FeatureSelection +-- elki.data.projection.FeatureSelection.ProjectedFeatureVectorAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

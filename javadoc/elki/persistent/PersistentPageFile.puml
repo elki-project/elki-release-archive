@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PersistentPageFile\n<size:10>elki.persistent" as elki.persistent.PersistentPageFile<P extends ExternalizablePage> [[PersistentPageFile.html]] {
+        {static} -LOG: Logging
+        {static} -EMPTY_PAGE: int
+        {static} -FILLED_PAGE: int
+        -file: FileChannel
+        #header: PageHeader
+        #pageclass: Class<P extends ExternalizablePage>
+        -existed: boolean
+        +PersistentPageFile(int, Path, Class<P extends ExternalizablePage>)
+        +readPage(int): P extends ExternalizablePage
+        +deletePage(int): void
+        +writePage(int, P extends ExternalizablePage): void
+        +close(): void
+        +clear(): void
+        -byteArrayToPage(byte[]): P extends ExternalizablePage
+        -pageToByteArray(P extends ExternalizablePage): byte[]
+        +getFile(): FileChannel
+        +getHeader(): PageHeader
+        +setNextPageID(int): void
+        +initialize(PageHeader): boolean
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractStoringPageFile\n<size:10>elki.persistent" as elki.persistent.AbstractStoringPageFile<P extends ExternalizablePage> [[AbstractStoringPageFile.html]]
+
+    elki.persistent.AbstractStoringPageFile <|-- elki.persistent.PersistentPageFile
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

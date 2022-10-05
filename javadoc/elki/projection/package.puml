@@ -1,0 +1,311 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.projection {
+
+        class TSNE<O> [[TSNE.html]] {
+            {static} -LOG: Logging
+            {static} #MIN_QIJ: double
+            {static} #EARLY_EXAGGERATION: double
+            {static} #EARLY_EXAGGERATION_ITERATIONS: int
+            {static} #INITIAL_SOLUTION_SCALE: double
+            {static} #MIN_GAIN: double
+            #projectedDistances: long
+            #dim: int
+            #learningRate: double
+            #initialMomentum: double
+            #finalMomentum: double
+            #momentumSwitch: int
+            #iterations: int
+            #random: RandomFactory
+            +TSNE(AffinityMatrixBuilder<? super O>, int, RandomFactory)
+            +TSNE(AffinityMatrixBuilder<? super O>, int, double, double, int, RandomFactory, boolean)
+            +getInputTypeRestriction(): TypeInformation[]
+            +autorun(Database): Relation<DoubleVector>
+            +run(Relation<O>): Relation<DoubleVector>
+            {static} #randomInitialSolution(int, int, Random): double[]
+            #optimizetSNE(AffinityMatrix, double[]): void
+            #computeQij(double[], double[]): double
+            #sqDist(double[], double[]): double
+            #computeGradient(AffinityMatrix, double[], double, double[], double[]): void
+            #updateSolution(double[], double[], int): void
+        }
+
+        class elki.projection.TSNE.Par<O> {
+            {static} +AFFINITY_ID: OptionID
+            {static} +DIM_ID: OptionID
+            {static} +MOMENTUM_ID: OptionID
+            {static} +LEARNING_RATE_ID: OptionID
+            {static} +ITER_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            #dim: int
+            #learningRate: double
+            #finalMomentum: double
+            #iterations: int
+            #random: RandomFactory
+            #keep: boolean
+            +configure(Parameterization): void
+            #getDefaultAffinity(): Class<?>
+            +make(): TSNE<O>
+        }
+
+        class SparseAffinityMatrix [[SparseAffinityMatrix.html]] {
+            ~pij: double[]
+            ~indices: int[]
+            ~ids: ArrayDBIDs
+            +SparseAffinityMatrix(double[], int[], ArrayDBIDs)
+            +get(int, int): double
+            +scale(double): void
+            +size(): int
+            +iterDBIDs(): DBIDArrayIter
+            +iter(int): int
+            +iterAdvance(int, int): int
+            +iterDim(int, int): int
+            +iterValue(int, int): double
+            +iterValid(int, int): boolean
+        }
+
+        class DenseAffinityMatrix [[DenseAffinityMatrix.html]] {
+            ~pij: double[]
+            ~ids: ArrayDBIDs
+            +DenseAffinityMatrix(double[], ArrayDBIDs)
+            +get(int, int): double
+            +scale(double): void
+            +size(): int
+            +iterDBIDs(): DBIDArrayIter
+            +iter(int): int
+            +iterAdvance(int, int): int
+            +iterDim(int, int): int
+            +iterValue(int, int): double
+            +iterValid(int, int): boolean
+        }
+
+        class IntrinsicNearestNeighborAffinityMatrixBuilder<O> [[IntrinsicNearestNeighborAffinityMatrixBuilder.html]] {
+            {static} -LOG: Logging
+            ~estimator: DistanceBasedIntrinsicDimensionalityEstimator
+            +IntrinsicNearestNeighborAffinityMatrixBuilder(Distance<? super O>, double, DistanceBasedIntrinsicDimensionalityEstimator)
+            +computeAffinityMatrix(Relation<T extends O>, double): AffinityMatrix
+            #computePij(DBIDRange, KNNSearcher<DBIDRef>, boolean, int, double[], int[], double): void
+            #convertNeighbors(DBIDRange, DBIDRef, boolean, KNNList, DoubleArray, IntegerArray, Mean): void
+        }
+
+        class elki.projection.IntrinsicNearestNeighborAffinityMatrixBuilder.Par<O> [[IntrinsicNearestNeighborAffinityMatrixBuilder.Par.html]] {
+            {static} +ESTIMATOR_ID: OptionID
+            ~estimator: DistanceBasedIntrinsicDimensionalityEstimator
+            +configure(Parameterization): void
+            +make(): IntrinsicNearestNeighborAffinityMatrixBuilder<O>
+        }
+
+        class PerplexityAffinityMatrixBuilder<O> [[PerplexityAffinityMatrixBuilder.html]] {
+            {static} -LOG: Logging
+            {static} #PERPLEXITY_ERROR: double
+            {static} #PERPLEXITY_MAXITER: int
+            {static} #MIN_PIJ: double
+            #distance: Distance<? super O>
+            #perplexity: double
+            +PerplexityAffinityMatrixBuilder(Distance<? super O>, double)
+            +computeAffinityMatrix(Relation<T extends O>, double): AffinityMatrix
+            {static} #computePij(double[], double, double): double[]
+            {static} #computePi(int, double[], double[], double, double): double
+            {static} #estimateInitialBeta(double[], double): double
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.projection.PerplexityAffinityMatrixBuilder.Par<O> [[PerplexityAffinityMatrixBuilder.Par.html]] {
+            {static} +PERPLEXITY_ID: OptionID
+            #perplexity: double
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): PerplexityAffinityMatrixBuilder<O>
+        }
+
+        interface AffinityMatrixBuilder<O> [[AffinityMatrixBuilder.html]] {
+            {abstract} +computeAffinityMatrix(Relation<T extends O>, double): AffinityMatrix
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+
+        abstract class AbstractProjectionAlgorithm<R> [[AbstractProjectionAlgorithm.html]] {
+            -keep: boolean
+            {static} +KEEP_ID: OptionID
+            +AbstractProjectionAlgorithm(boolean)
+            #removePreviousRelation(Relation<?>): void
+        }
+
+        class BarnesHutTSNE<O> [[BarnesHutTSNE.html]] {
+            {static} -LOG: Logging
+            {static} #PERPLEXITY_ERROR: double
+            {static} #PERPLEXITY_MAXITER: int
+            {static} -QUADTREE_MIN_RESOLUION: double
+            #sqtheta: double
+            +BarnesHutTSNE(AffinityMatrixBuilder<? super O>, int, double, double, int, RandomFactory, boolean, double)
+            +run(Database, Relation<O>): Relation<DoubleVector>
+            #optimizetSNE(AffinityMatrix, double[]): void
+            -computeGradient(AffinityMatrix, double[], double[]): void
+            -computeAttractiveForces(double[], AffinityMatrix, double[]): void
+            -computeRepulsiveForces(double[], int, double[], QuadTree): double
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.projection.BarnesHutTSNE.QuadTree [[BarnesHutTSNE.QuadTree.html]] {
+            +center: double[]
+            +points: double[]
+            +squareSize: double
+            +weight: int
+            -QuadTree(double[], QuadTree[], double[], int, double)
+            {static} +build(int, double[]): QuadTree
+            {static} -build(int, double[], int, int): QuadTree
+            {static} -splitRecursively(double[], int, int, int, int, double[], ArrayList<double[]>, ArrayList<QuadTree>): void
+            {static} -computeCenterofMass(int, double[], int, int): double[]
+            {static} -computeExtend(int, double[], int, int): double[]
+            {static} -computeSquareSize(double[]): double
+        }
+
+        class elki.projection.BarnesHutTSNE.Par<O> {
+            {static} +THETA_ID: OptionID
+            +theta: double
+            +configure(Parameterization): void
+            #getDefaultAffinity(): Class<?>
+            +make(): BarnesHutTSNE<O>
+        }
+
+        class NearestNeighborAffinityMatrixBuilder<O> [[NearestNeighborAffinityMatrixBuilder.html]] {
+            {static} -LOG: Logging
+            #numberOfNeighbours: int
+            +NearestNeighborAffinityMatrixBuilder(Distance<? super O>, double)
+            +NearestNeighborAffinityMatrixBuilder(Distance<? super O>, double, int)
+            +computeAffinityMatrix(Relation<T extends O>, double): AffinityMatrix
+            #computePij(DBIDRange, KNNSearcher<DBIDRef>, boolean, int, double[], int[], double): void
+            #convertNeighbors(DBIDRange, DBIDRef, boolean, KNNList, DoubleArray, IntegerArray): void
+            {static} #computeSigma(int, DoubleArray, double, double, double[]): double
+            {static} #computeH(DoubleArray, double[], double): double
+            {static} #containsIndex(int[], int): int
+        }
+
+        class elki.projection.NearestNeighborAffinityMatrixBuilder.Par<O> [[NearestNeighborAffinityMatrixBuilder.Par.html]] {
+            +make(): NearestNeighborAffinityMatrixBuilder<O>
+        }
+
+        class SNE<O> [[SNE.html]] {
+            {static} -LOG: Logging
+            {static} #MIN_QIJ: double
+            {static} #INITIAL_SOLUTION_SCALE: double
+            {static} #MIN_GAIN: double
+            #projectedDistances: long
+            #dim: int
+            #learningRate: double
+            #initialMomentum: double
+            #finalMomentum: double
+            #momentumSwitch: int
+            #iterations: int
+            #random: RandomFactory
+            +SNE(AffinityMatrixBuilder<? super O>, int, RandomFactory)
+            +SNE(AffinityMatrixBuilder<? super O>, int, double, double, int, RandomFactory, boolean)
+            +getInputTypeRestriction(): TypeInformation[]
+            +autorun(Database): Relation<DoubleVector>
+            +run(Relation<O>): Relation<DoubleVector>
+            {static} #randomInitialSolution(int, int, Random): double[]
+            #optimizeSNE(AffinityMatrix, double[]): void
+            #computeQij(double[], double[]): double
+            #sqDist(double[], double[]): double
+            #computeGradient(AffinityMatrix, double[], double, double[], double[]): void
+            #updateSolution(double[], double[], int): void
+        }
+
+        class elki.projection.SNE.Par<O> {
+            {static} +AFFINITY_ID: OptionID
+            {static} +DIM_ID: OptionID
+            {static} +MOMENTUM_ID: OptionID
+            {static} +LEARNING_RATE_ID: OptionID
+            {static} +ITER_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            #dim: int
+            #learningRate: double
+            #finalMomentum: double
+            #iterations: int
+            #random: RandomFactory
+            #keep: boolean
+            +configure(Parameterization): void
+            #getDefaultAffinity(): Class<?>
+            +make(): SNE<O>
+        }
+
+        class GaussianAffinityMatrixBuilder<O> [[GaussianAffinityMatrixBuilder.html]] {
+            {static} -LOG: Logging
+            {static} #MIN_PIJ: double
+            #distance: Distance<? super O>
+            #sigma: double
+            +GaussianAffinityMatrixBuilder(Distance<? super O>, double)
+            +computeAffinityMatrix(Relation<T extends O>, double): AffinityMatrix
+            #buildDistanceMatrix(ArrayDBIDs, DistanceQuery<?>): double[]
+            {static} #computePij(double[], double, double): double[]
+            {static} #computeH(int, double[], double[], double): double
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.projection.GaussianAffinityMatrixBuilder.Par<O> [[GaussianAffinityMatrixBuilder.Par.html]] {
+            {static} +SIGMA_ID: OptionID
+            #sigma: double
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): GaussianAffinityMatrixBuilder<O>
+        }
+
+        interface AffinityMatrix [[AffinityMatrix.html]] {
+            {abstract} +scale(double): void
+            {abstract} +size(): int
+            {abstract} +get(int, int): double
+            {abstract} +iter(int): int
+            {abstract} +iterDim(int, int): int
+            {abstract} +iterValue(int, int): double
+            {abstract} +iterAdvance(int, int): int
+            {abstract} +iterValid(int, int): boolean
+            {abstract} +iterDBIDs(): DBIDArrayIter
+        }
+
+        AbstractProjectionAlgorithm <|-- TSNE
+        TSNE --> AffinityMatrixBuilder: affinity
+        elki.utilities.optionhandling.Parameterizer <|.. elki.projection.TSNE.Par
+        TSNE +-- elki.projection.TSNE.Par
+        elki.projection.TSNE.Par --> AffinityMatrixBuilder: affinity
+        AffinityMatrix <|.. SparseAffinityMatrix
+        AffinityMatrix <|.. DenseAffinityMatrix
+        NearestNeighborAffinityMatrixBuilder <|-- IntrinsicNearestNeighborAffinityMatrixBuilder
+        elki.projection.NearestNeighborAffinityMatrixBuilder.Par <|-- elki.projection.IntrinsicNearestNeighborAffinityMatrixBuilder.Par
+        IntrinsicNearestNeighborAffinityMatrixBuilder +-- elki.projection.IntrinsicNearestNeighborAffinityMatrixBuilder.Par
+        GaussianAffinityMatrixBuilder <|-- PerplexityAffinityMatrixBuilder
+        elki.utilities.optionhandling.Parameterizer <|.. elki.projection.PerplexityAffinityMatrixBuilder.Par
+        PerplexityAffinityMatrixBuilder +-- elki.projection.PerplexityAffinityMatrixBuilder.Par
+        elki.Algorithm <|.. AbstractProjectionAlgorithm
+        TSNE <|-- BarnesHutTSNE
+        BarnesHutTSNE +-- elki.projection.BarnesHutTSNE.QuadTree
+        elki.projection.BarnesHutTSNE.QuadTree --> "*" elki.projection.BarnesHutTSNE.QuadTree: children
+        elki.projection.TSNE.Par <|-- elki.projection.BarnesHutTSNE.Par
+        BarnesHutTSNE +-- elki.projection.BarnesHutTSNE.Par
+        PerplexityAffinityMatrixBuilder <|-- NearestNeighborAffinityMatrixBuilder
+        elki.projection.PerplexityAffinityMatrixBuilder.Par <|-- elki.projection.NearestNeighborAffinityMatrixBuilder.Par
+        NearestNeighborAffinityMatrixBuilder +-- elki.projection.NearestNeighborAffinityMatrixBuilder.Par
+        AbstractProjectionAlgorithm <|-- SNE
+        SNE --> AffinityMatrixBuilder: affinity
+        elki.utilities.optionhandling.Parameterizer <|.. elki.projection.SNE.Par
+        SNE +-- elki.projection.SNE.Par
+        elki.projection.SNE.Par --> AffinityMatrixBuilder: affinity
+        AffinityMatrixBuilder <|.. GaussianAffinityMatrixBuilder
+        elki.utilities.optionhandling.Parameterizer <|.. elki.projection.GaussianAffinityMatrixBuilder.Par
+        GaussianAffinityMatrixBuilder +-- elki.projection.GaussianAffinityMatrixBuilder.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki {
+        interface Algorithm [[../Algorithm.html]] {
+            +autorun(Database): Object
+            {abstract} +getInputTypeRestriction(): TypeInformation[]
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

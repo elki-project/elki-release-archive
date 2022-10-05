@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FeatureSelection\n<size:10>elki.data.projection" as elki.data.projection.FeatureSelection<V extends FeatureVector<F>, F> [[FeatureSelection.html]] {
+        -mindim: int
+        -dims: int[]
+        -factory: Factory<V extends FeatureVector<F>, F>
+        -project: Function<V extends FeatureVector<F>, V extends FeatureVector<F>>
+        +FeatureSelection(int[])
+        +initialize(SimpleTypeInformation<? extends FeatureVector<F>>): void
+        +project(V extends FeatureVector<F>): V extends FeatureVector<F>
+        +getOutputDataTypeInformation(): SimpleTypeInformation<V extends FeatureVector<F>>
+        +getInputDataTypeInformation(): TypeInformation
+    }
+
+    interface "<size:14>Projection\n<size:10>elki.data.projection" as elki.data.projection.Projection<V extends FeatureVector<F>, V extends FeatureVector<F>> [[Projection.html]] {
+        {abstract} +initialize(SimpleTypeInformation<? extends IN>): void
+        {abstract} +project(V extends FeatureVector<F>): V extends FeatureVector<F>
+        {abstract} +getInputDataTypeInformation(): TypeInformation
+        {abstract} +getOutputDataTypeInformation(): SimpleTypeInformation<OUT>
+    }
+    class "<size:14>FeatureSelection.ProjectedFeatureVectorAdapter\n<size:10>elki.data.projection" as elki.data.projection.FeatureSelection.ProjectedFeatureVectorAdapter [[FeatureSelection.ProjectedFeatureVectorAdapter.html]]
+    class "<size:14>FeatureSelection.ProjectedNumberFeatureVectorAdapter\n<size:10>elki.data.projection" as elki.data.projection.FeatureSelection.ProjectedNumberFeatureVectorAdapter [[FeatureSelection.ProjectedNumberFeatureVectorAdapter.html]]
+    class "<size:14>FeatureSelection.Par\n<size:10>elki.data.projection" as elki.data.projection.FeatureSelection.Par<V extends FeatureVector<F>, F> [[FeatureSelection.Par.html]]
+
+    elki.data.projection.Projection <|.. elki.data.projection.FeatureSelection
+    elki.data.projection.FeatureSelection +-- elki.data.projection.FeatureSelection.ProjectedFeatureVectorAdapter
+    elki.data.projection.FeatureSelection +-- elki.data.projection.FeatureSelection.ProjectedNumberFeatureVectorAdapter
+    elki.data.projection.FeatureSelection +-- elki.data.projection.FeatureSelection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

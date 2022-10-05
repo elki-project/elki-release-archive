@@ -1,0 +1,199 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.betula.features {
+
+        interface AsClusterFeature [[AsClusterFeature.html]] {
+            {abstract} +getCF(): ClusterFeature
+        }
+
+        class VVIFeature [[VVIFeature.html]] {
+            ~n: int
+            ~mean: double[]
+            ~ssd: double[]
+            +VVIFeature(int)
+            +addToStatistics(NumberVector): void
+            +addToStatistics(ClusterFeature): void
+            +addToStatistics(VVIFeature): void
+            +resetStatistics(): void
+            +centroid(int): double
+            +variance(): double
+            +sumdev(): double
+            +variance(int): double
+            +covariance(): double[]
+            +sumOfSquaredDev(int): double
+            +getDimensionality(): int
+            +getWeight(): int
+            +toArray(): double[]
+        }
+
+        class elki.index.tree.betula.features.VVIFeature.Factory [[VVIFeature.Factory.html]] {
+            +make(int): VVIFeature
+        }
+
+        class elki.index.tree.betula.features.VVIFeature.Factory.Par [[VVIFeature.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class VIIFeature [[VIIFeature.html]] {
+            ~n: int
+            ~mean: double[]
+            ~ssd: double
+            +VIIFeature(int)
+            +addToStatistics(NumberVector): void
+            +addToStatistics(ClusterFeature): void
+            +addToStatistics(VIIFeature): void
+            +resetStatistics(): void
+            +centroid(int): double
+            +variance(): double
+            +sumdev(): double
+            +variance(int): double
+            +covariance(): double[]
+            +sumOfSquaredDev(): double
+            +getDimensionality(): int
+            +getWeight(): int
+            +toArray(): double[]
+        }
+
+        class elki.index.tree.betula.features.VIIFeature.Factory [[VIIFeature.Factory.html]] {
+            +make(int): VIIFeature
+        }
+
+        class elki.index.tree.betula.features.VIIFeature.Factory.Par [[VIIFeature.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class BIRCHCF [[BIRCHCF.html]] {
+            ~n: int
+            ~ls: double[]
+            ~ss: double
+            +BIRCHCF(int)
+            +addToStatistics(NumberVector): void
+            +addToStatistics(ClusterFeature): void
+            +addToStatistics(BIRCHCF): void
+            +resetStatistics(): void
+            +centroid(int): double
+            +sumOfSumOfSquares(): double
+            +sumOfSquaresOfSums(): double
+            +getDimensionality(): int
+            {static} +sumOfSquares(NumberVector): double
+            +ls(int): double
+            +variance(int): double
+            +getWeight(): int
+            +variance(): double
+            +sumdev(): double
+            +covariance(): double[]
+            +toArray(): double[]
+        }
+
+        class elki.index.tree.betula.features.BIRCHCF.Factory [[BIRCHCF.Factory.html]] {
+            +make(int): BIRCHCF
+        }
+
+        class elki.index.tree.betula.features.BIRCHCF.Factory.Par [[BIRCHCF.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class VVVFeature [[VVVFeature.html]] {
+            ~n: int
+            ~mean: double[]
+            ~ssd: double[]
+            +VVVFeature(int)
+            +addToStatistics(NumberVector): void
+            +addToStatistics(ClusterFeature): void
+            +addToStatistics(VVVFeature): void
+            +resetStatistics(): void
+            +centroid(int): double
+            +variance(): double
+            +sumdev(): double
+            +variance(int): double
+            +covariance(): double[]
+            +getDimensionality(): int
+            +getWeight(): int
+            +toArray(): double[]
+        }
+
+        class elki.index.tree.betula.features.VVVFeature.Factory [[VVVFeature.Factory.html]] {
+            +make(int): VVVFeature
+        }
+
+        class elki.index.tree.betula.features.VVVFeature.Factory.Par [[VVVFeature.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        interface ClusterFeature [[ClusterFeature.html]] {
+            {abstract} +addToStatistics(NumberVector): void
+            {abstract} +addToStatistics(ClusterFeature): void
+            {abstract} +resetStatistics(): void
+            {abstract} +getWeight(): int
+            {abstract} +centroid(int): double
+            +doubleValue(int): double
+            +longValue(int): long
+            {abstract} +variance(): double
+            {abstract} +sumdev(): double
+            {abstract} +variance(int): double
+            {abstract} +covariance(): double[]
+        }
+
+        interface elki.index.tree.betula.features.ClusterFeature.Factory<F extends ClusterFeature> [[ClusterFeature.Factory.html]] {
+            {abstract} +make(int): F extends ClusterFeature
+        }
+
+        ClusterFeature <|.. VVIFeature
+        elki.index.tree.betula.features.ClusterFeature.Factory <|.. elki.index.tree.betula.features.VVIFeature.Factory
+        VVIFeature +-- elki.index.tree.betula.features.VVIFeature.Factory
+        elki.index.tree.betula.features.VVIFeature.Factory --> elki.index.tree.betula.features.VVIFeature.Factory: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.features.VVIFeature.Factory.Par
+        elki.index.tree.betula.features.VVIFeature.Factory +-- elki.index.tree.betula.features.VVIFeature.Factory.Par
+        ClusterFeature <|.. VIIFeature
+        elki.index.tree.betula.features.ClusterFeature.Factory <|.. elki.index.tree.betula.features.VIIFeature.Factory
+        VIIFeature +-- elki.index.tree.betula.features.VIIFeature.Factory
+        elki.index.tree.betula.features.VIIFeature.Factory --> elki.index.tree.betula.features.VIIFeature.Factory: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.features.VIIFeature.Factory.Par
+        elki.index.tree.betula.features.VIIFeature.Factory +-- elki.index.tree.betula.features.VIIFeature.Factory.Par
+        ClusterFeature <|.. BIRCHCF
+        elki.index.tree.betula.features.ClusterFeature.Factory <|.. elki.index.tree.betula.features.BIRCHCF.Factory
+        BIRCHCF +-- elki.index.tree.betula.features.BIRCHCF.Factory
+        elki.index.tree.betula.features.BIRCHCF.Factory --> elki.index.tree.betula.features.BIRCHCF.Factory: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.features.BIRCHCF.Factory.Par
+        elki.index.tree.betula.features.BIRCHCF.Factory +-- elki.index.tree.betula.features.BIRCHCF.Factory.Par
+        ClusterFeature <|.. VVVFeature
+        elki.index.tree.betula.features.ClusterFeature.Factory <|.. elki.index.tree.betula.features.VVVFeature.Factory
+        VVVFeature +-- elki.index.tree.betula.features.VVVFeature.Factory
+        elki.index.tree.betula.features.VVVFeature.Factory --> elki.index.tree.betula.features.VVVFeature.Factory: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.features.VVVFeature.Factory.Par
+        elki.index.tree.betula.features.VVVFeature.Factory +-- elki.index.tree.betula.features.VVVFeature.Factory.Par
+        AsClusterFeature <|-- ClusterFeature
+        elki.data.NumberVector <|-- ClusterFeature
+        ClusterFeature --> ClusterFeature: cF
+        ClusterFeature +-- elki.index.tree.betula.features.ClusterFeature.Factory
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.data {
+        interface NumberVector [[../../../../data/NumberVector.html]] {
+            {static} +ATTRIBUTE_SEPARATOR: String
+            {static} +VARIABLE_LENGTH: VectorTypeInformation<NumberVector>
+            {static} +FIELD: VectorFieldTypeInformation<NumberVector>
+            {static} +FIELD_1D: VectorFieldTypeInformation<NumberVector>
+            {static} +FIELD_2D: VectorFieldTypeInformation<NumberVector>
+            +--getValue--(int): Number
+            +getMin(int): double
+            +getMax(int): double
+            {abstract} +doubleValue(int): double
+            +floatValue(int): float
+            +intValue(int): int
+            {abstract} +longValue(int): long
+            +shortValue(int): short
+            +byteValue(int): byte
+            {abstract} +toArray(): double[]
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

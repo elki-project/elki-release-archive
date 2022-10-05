@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByteArrayUtil.VarintSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil.VarintSerializer [[ByteArrayUtil.VarintSerializer.html]] {
+        +--fromByteBuffer--(ByteBuffer): Integer
+        +--toByteBuffer--(ByteBuffer, Integer): void
+        +--getByteSize--(Integer): int
+    }
+
+    interface "<size:14>ByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteBufferSerializer<Integer> [[ByteBufferSerializer.html]] {
+        {abstract} +fromByteBuffer(ByteBuffer): Integer
+        {abstract} +toByteBuffer(ByteBuffer, Integer): void
+        {abstract} +getByteSize(Integer): int
+    }
+    class "<size:14>ByteArrayUtil\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil [[ByteArrayUtil.html]]
+
+    elki.utilities.io.ByteBufferSerializer <|.. elki.utilities.io.ByteArrayUtil.VarintSerializer
+    elki.utilities.io.ByteArrayUtil +-- elki.utilities.io.ByteArrayUtil.VarintSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

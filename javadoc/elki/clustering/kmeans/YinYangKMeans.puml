@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>YinYangKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.YinYangKMeans<V extends NumberVector> [[YinYangKMeans.html]] {
+        {static} -LOG: Logging
+        {static} -GROUP_KMEANS_MAXITER: int
+        -t: int
+        +YinYangKMeans(int, int, KMeansInitialization, int)
+        +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans<V extends NumberVector, KMeansModel> [[AbstractKMeans.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>YinYangKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.YinYangKMeans.Instance [[YinYangKMeans.Instance.html]]
+    class "<size:14>YinYangKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.YinYangKMeans.Par<V extends NumberVector> [[YinYangKMeans.Par.html]]
+
+    elki.clustering.kmeans.AbstractKMeans <|-- elki.clustering.kmeans.YinYangKMeans
+    elki.clustering.kmeans.YinYangKMeans +-- elki.clustering.kmeans.YinYangKMeans.Instance
+    elki.clustering.kmeans.YinYangKMeans +-- elki.clustering.kmeans.YinYangKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LUDecomposition\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.LUDecomposition [[LUDecomposition.html]] {
+        {static} -serialVersionUID: long
+        -LU: double[]
+        -m: int
+        -n: int
+        -pivsign: int
+        -piv: int[]
+        +LUDecomposition(double[])
+        +LUDecomposition(double[], int, int)
+        +isNonsingular(): boolean
+        +getL(): double[]
+        +getU(): double[]
+        +getPivot(): int[]
+        +det(): double
+        +solve(double[]): double[]
+        -solveInplace(double[]): double[]
+        +solve(double[]): double[]
+        +solveInplace(double[]): double[]
+        +inverse(): double[]
+    }
+
+    interface "<size:14>Serializable\n<size:10>java.io" as java.io.Serializable
+
+    java.io.Serializable <|.. elki.math.linearalgebra.LUDecomposition
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

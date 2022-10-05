@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearMemoryNNChain.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.LinearMemoryNNChain.Instance<O extends NumberVector> [[LinearMemoryNNChain.Instance.html]] {
+        -linkage: GeometricLinkage
+        +Instance(GeometricLinkage)
+        +run(ArrayDBIDs, Relation<O extends NumberVector>, ClusterMergeHistoryBuilder): ClusterMergeHistory
+        -nnChainCore(DBIDArrayIter, DBIDArrayIter, ClusterMergeHistoryBuilder, Relation<O extends NumberVector>): void
+        #merge(int, double[], ClusterMergeHistoryBuilder, int[], double, int, int): void
+    }
+
+    class "<size:14>LinearMemoryNNChain\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.LinearMemoryNNChain<O extends NumberVector> [[LinearMemoryNNChain.html]]
+
+    elki.clustering.hierarchical.LinearMemoryNNChain +-- elki.clustering.hierarchical.LinearMemoryNNChain.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

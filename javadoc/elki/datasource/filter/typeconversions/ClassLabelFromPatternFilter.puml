@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClassLabelFromPatternFilter\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.ClassLabelFromPatternFilter [[ClassLabelFromPatternFilter.html]] {
+        ~meta: BundleMeta
+        ~labelcols: IntArrayList
+        ~positive: SimpleClassLabel
+        ~negative: SimpleClassLabel
+        ~pattern: Pattern
+        +ClassLabelFromPatternFilter(Pattern, String, String)
+        +ClassLabelFromPatternFilter(Pattern, SimpleClassLabel, SimpleClassLabel)
+        +getMeta(): BundleMeta
+        +data(int): Object
+        +nextEvent(): Event
+    }
+
+    abstract class "<size:14>AbstractStreamFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractStreamFilter [[../AbstractStreamFilter.html]]
+    class "<size:14>ClassLabelFromPatternFilter.Par\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.ClassLabelFromPatternFilter.Par [[ClassLabelFromPatternFilter.Par.html]]
+
+    elki.datasource.filter.AbstractStreamFilter <|-- elki.datasource.filter.typeconversions.ClassLabelFromPatternFilter
+    elki.datasource.filter.typeconversions.ClassLabelFromPatternFilter +-- elki.datasource.filter.typeconversions.ClassLabelFromPatternFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

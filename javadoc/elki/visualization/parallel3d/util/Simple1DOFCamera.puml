@@ -1,0 +1,44 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Simple1DOFCamera\n<size:10>elki.visualization.parallel3d.util" as elki.visualization.parallel3d.util.Simple1DOFCamera [[Simple1DOFCamera.html]] {
+        -rotationZ: double
+        -distance: double
+        -height: double
+        -ratio: double
+        -viewp: int[]
+        -modelview: double[]
+        -projection: double[]
+        -glu: GLU
+        -cosZ: double
+        -sinZ: double
+        ~listeners: ArrayList<CameraListener>
+        +Simple1DOFCamera(GLU)
+        +Simple1DOFCamera(Simple1DOFCamera)
+        +getDistance(): double
+        +setDistance(double): void
+        +getHeight(): double
+        +setHeight(double): void
+        +getRatio(): double
+        +setRatio(double): void
+        +getRotationZ(): double
+        +setRotationZ(double): void
+        +apply(GL2): void
+        +unproject(double, double, double): double[]
+        +unproject(double, double, double, double[]): void
+        +project(double, double, double, double[]): void
+        +squaredDistanceFromCamera(double, double): double
+        +squaredDistanceFromCamera(double, double, double): double
+        +addCameraListener(CameraListener): void
+        +removeCameraListener(CameraListener): void
+        #fireCameraChangedEvent(): void
+    }
+    interface "<size:14>Simple1DOFCamera.CameraListener\n<size:10>elki.visualization.parallel3d.util" as elki.visualization.parallel3d.util.Simple1DOFCamera.CameraListener [[Simple1DOFCamera.CameraListener.html]]
+
+    elki.visualization.parallel3d.util.Simple1DOFCamera +-- elki.visualization.parallel3d.util.Simple1DOFCamera.CameraListener
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

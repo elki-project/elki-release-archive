@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExternalIDJoinDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.ExternalIDJoinDatabaseConnection [[ExternalIDJoinDatabaseConnection.html]] {
+        {static} -LOG: Logging
+        #sources: List<? extends DatabaseConnection>
+        +ExternalIDJoinDatabaseConnection(List<? extends ObjectFilter>, List<? extends DatabaseConnection>)
+        +loadData(): MultipleObjectsBundle
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.AbstractDatabaseConnection [[AbstractDatabaseConnection.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>ExternalIDJoinDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.ExternalIDJoinDatabaseConnection.Par [[ExternalIDJoinDatabaseConnection.Par.html]]
+
+    elki.datasource.AbstractDatabaseConnection <|-- elki.datasource.ExternalIDJoinDatabaseConnection
+    elki.datasource.ExternalIDJoinDatabaseConnection +-- elki.datasource.ExternalIDJoinDatabaseConnection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>HySortOD.DensityStrategy\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD.DensityStrategy [[HySortOD.DensityStrategy.html]] {
+        ~Wmax: int
+        ~H: List<Hypercube>
+        {abstract} ~buildIndex(List<Hypercube>): DensityStrategy
+        {abstract} ~getDensities(): int[]
+        ~getMaxDensity(): double
+        #isImmediate(Hypercube, Hypercube): boolean
+        #isProspective(Hypercube, Hypercube, int): boolean
+    }
+
+    class "<size:14>HySortOD\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD [[HySortOD.html]]
+
+    elki.outlier.density.HySortOD +-- elki.outlier.density.HySortOD.DensityStrategy
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

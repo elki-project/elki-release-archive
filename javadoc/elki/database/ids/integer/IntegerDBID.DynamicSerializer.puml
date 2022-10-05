@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntegerDBID.DynamicSerializer\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBID.DynamicSerializer [[IntegerDBID.DynamicSerializer.html]] {
+        +fromByteBuffer(ByteBuffer): DBID
+        +toByteBuffer(ByteBuffer, DBID): void
+        +getByteSize(DBID): int
+    }
+
+    interface "<size:14>ByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteBufferSerializer<DBID> [[../../../utilities/io/ByteBufferSerializer.html]] {
+        {abstract} +fromByteBuffer(ByteBuffer): DBID
+        {abstract} +toByteBuffer(ByteBuffer, DBID): void
+        {abstract} +getByteSize(DBID): int
+    }
+    class "<size:14>IntegerDBID\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBID [[IntegerDBID.html]]
+
+    elki.utilities.io.ByteBufferSerializer <|.. elki.database.ids.integer.IntegerDBID.DynamicSerializer
+    elki.database.ids.integer.IntegerDBID +-- elki.database.ids.integer.IntegerDBID.DynamicSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

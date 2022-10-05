@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>XYPlot.Curve.Itr\n<size:10>elki.math.geometry" as elki.math.geometry.XYPlot.Curve.Itr [[XYPlot.Curve.Itr.html]] {
+        #pos: int
+        +getX(): double
+        +getY(): double
+        +advance(): void
+        +valid(): boolean
+    }
+
+    class "<size:14>XYPlot.Curve\n<size:10>elki.math.geometry" as elki.math.geometry.XYPlot.Curve [[XYPlot.Curve.html]]
+
+    elki.math.geometry.XYPlot.Curve +-- elki.math.geometry.XYPlot.Curve.Itr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

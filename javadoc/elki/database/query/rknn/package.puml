@@ -1,0 +1,60 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.database.query.rknn {
+
+        class PreprocessorRKNNQuery<O> [[PreprocessorRKNNQuery.html]] {
+            #relation: Relation<? extends O>
+            -preprocessor: MaterializeKNNAndRKNNPreprocessor<O>
+            -warned: boolean
+            +PreprocessorRKNNQuery(Relation<O>, MaterializeKNNAndRKNNPreprocessor<O>)
+            +PreprocessorRKNNQuery(Relation<O>, Factory<O>)
+            +getRKNN(DBIDRef, int): DoubleDBIDList
+        }
+
+        class LinearScanRKNNByObject<O> [[LinearScanRKNNByObject.html]] {
+            -distanceQuery: DistanceQuery<O>
+            -knnQuery: KNNSearcher<DBIDRef>
+            +LinearScanRKNNByObject(DistanceQuery<O>, KNNSearcher<DBIDRef>)
+            +getRKNN(O, int): DoubleDBIDList
+        }
+
+        class LinearScanRKNNByDBID<O> [[LinearScanRKNNByDBID.html]] {
+            -distanceQuery: DistanceQuery<O>
+            -knnQuery: KNNSearcher<DBIDRef>
+            +LinearScanRKNNByDBID(DistanceQuery<O>, KNNSearcher<DBIDRef>)
+            +getRKNN(DBIDRef, int): DoubleDBIDList
+        }
+
+        interface RKNNSearcher<O> [[RKNNSearcher.html]] {
+            {abstract} +getRKNN(O, int): DoubleDBIDList
+        }
+
+        class WrappedRKNNDBIDByLookup<O> [[WrappedRKNNDBIDByLookup.html]] {
+            -relation: Relation<? extends O>
+            -WrappedRKNNDBIDByLookup(Relation<? extends O>, RKNNSearcher<O>)
+            +getRKNN(DBIDRef, int): DoubleDBIDList
+            {static} +wrap(Relation<? extends O>, RKNNSearcher<O>): RKNNSearcher<DBIDRef>
+        }
+
+        class elki.database.query.rknn.WrappedRKNNDBIDByLookup.Linear<O> [[WrappedRKNNDBIDByLookup.Linear.html]] {
+            -Linear(Relation<? extends O>, RKNNSearcher<O>)
+        }
+
+        RKNNSearcher <|.. PreprocessorRKNNQuery
+        RKNNSearcher <|.. LinearScanRKNNByObject
+        elki.database.query.LinearScanQuery <|.. LinearScanRKNNByObject
+        RKNNSearcher <|.. LinearScanRKNNByDBID
+        elki.database.query.LinearScanQuery <|.. LinearScanRKNNByDBID
+        RKNNSearcher <|.. WrappedRKNNDBIDByLookup
+        WrappedRKNNDBIDByLookup --> RKNNSearcher: inner
+        WrappedRKNNDBIDByLookup <|-- elki.database.query.rknn.WrappedRKNNDBIDByLookup.Linear
+        elki.database.query.LinearScanQuery <|.. elki.database.query.rknn.WrappedRKNNDBIDByLookup.Linear
+        WrappedRKNNDBIDByLookup +-- elki.database.query.rknn.WrappedRKNNDBIDByLookup.Linear
+    }
+
+    namespace elki.database.query {
+        interface LinearScanQuery [[../LinearScanQuery.html]]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

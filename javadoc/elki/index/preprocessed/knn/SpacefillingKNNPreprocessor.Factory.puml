@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SpacefillingKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.Factory<V extends NumberVector> [[SpacefillingKNNPreprocessor.Factory.html]] {
+        ~curvegen: List<? extends SpatialSorter>
+        ~window: double
+        ~variants: int
+        ~odim: int
+        ~proj: RandomProjectionFamily
+        ~random: RandomFactory
+        +Factory(List<? extends SpatialSorter>, double, int, int, RandomProjectionFamily, RandomFactory)
+        +instantiate(Relation<V extends NumberVector>): SpacefillingKNNPreprocessor<V extends NumberVector>
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<V extends NumberVector> [[../../IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>SpacefillingKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpacefillingKNNPreprocessor<O extends NumberVector> [[SpacefillingKNNPreprocessor.html]]
+    class "<size:14>SpacefillingKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.Factory.Par [[SpacefillingKNNPreprocessor.Factory.Par.html]]
+
+    elki.index.IndexFactory <|.. elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.SpacefillingKNNPreprocessor +-- elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

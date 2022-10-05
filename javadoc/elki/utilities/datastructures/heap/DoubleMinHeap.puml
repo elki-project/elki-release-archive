@@ -1,0 +1,43 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleMinHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleMinHeap [[DoubleMinHeap.html]] {
+        #twoheap: double[]
+        #size: int
+        {static} -TWO_HEAP_INITIAL_SIZE: int
+        +DoubleMinHeap()
+        +DoubleMinHeap(int)
+        +clear(): void
+        +size(): int
+        +isEmpty(): boolean
+        +add(double): void
+        +add(double, int): void
+        +replaceTopElement(double): double
+        -heapifyUp(int, double): void
+        +poll(): double
+        -heapifyDown(double): void
+        +peek(): double
+        +unsortedIter(): UnsortedIter
+    }
+
+    interface "<size:14>DoubleHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleHeap [[DoubleHeap.html]] {
+        {abstract} +add(double): void
+        {abstract} +add(double, int): void
+        {abstract} +replaceTopElement(double): double
+        {abstract} +peek(): double
+        {abstract} +poll(): double
+        {abstract} +clear(): void
+        {abstract} +size(): int
+        {abstract} +isEmpty(): boolean
+        {abstract} +unsortedIter(): UnsortedIter
+    }
+    class "<size:14>DoubleMinHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleMinHeap.UnsortedIter [[DoubleMinHeap.UnsortedIter.html]]
+
+    elki.utilities.datastructures.heap.DoubleHeap <|.. elki.utilities.datastructures.heap.DoubleMinHeap
+    elki.utilities.datastructures.heap.DoubleMinHeap +-- elki.utilities.datastructures.heap.DoubleMinHeap.UnsortedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

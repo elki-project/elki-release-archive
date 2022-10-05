@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastDOC.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.FastDOC.Par [[FastDOC.Par.html]] {
+        {static} +D_ZERO_ID: OptionID
+        #d_zero: int
+        +configure(Parameterization): void
+        +make(): FastDOC
+    }
+
+    class "<size:14>DOC.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DOC.Par [[DOC.Par.html]]
+    class "<size:14>FastDOC\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.FastDOC [[FastDOC.html]]
+
+    elki.clustering.subspace.DOC.Par <|-- elki.clustering.subspace.FastDOC.Par
+    elki.clustering.subspace.FastDOC +-- elki.clustering.subspace.FastDOC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MaximumDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.MaximumDistance [[MaximumDistance.html]] {
+        {static} +STATIC: MaximumDistance
+        -preDistance(NumberVector, NumberVector, int, int): double
+        -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+        -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+        -preNorm(NumberVector, int, int): double
+        -preNormMBR(SpatialComparable, int, int): double
+        +distance(NumberVector, NumberVector): double
+        +norm(NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +isMetric(): boolean
+    }
+
+    class "<size:14>LPNormDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.LPNormDistance [[LPNormDistance.html]]
+    class "<size:14>MaximumDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.MaximumDistance.Par [[MaximumDistance.Par.html]]
+
+    elki.distance.minkowski.LPNormDistance <|-- elki.distance.minkowski.MaximumDistance
+    elki.distance.minkowski.MaximumDistance +-- elki.distance.minkowski.MaximumDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

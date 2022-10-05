@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MapIntegerDBIDIntegerStore\n<size:10>elki.database.datastore.memory" as elki.database.datastore.memory.MapIntegerDBIDIntegerStore [[MapIntegerDBIDIntegerStore.html]] {
+        -map: Int2IntOpenHashMap
+        +MapIntegerDBIDIntegerStore(int)
+        +MapIntegerDBIDIntegerStore(int, int)
+        +--get--(DBIDRef): Integer
+        +intValue(DBIDRef): int
+        +--put--(DBIDRef, Integer): Integer
+        +destroy(): void
+        +delete(DBIDRef): void
+        +putInt(DBIDRef, int): int
+        +put(DBIDRef, int): int
+        +increment(DBIDRef, int): void
+        +clear(): void
+    }
+
+    interface "<size:14>WritableIntegerDataStore\n<size:10>elki.database.datastore" as elki.database.datastore.WritableIntegerDataStore [[../WritableIntegerDataStore.html]] {
+        {abstract} +--put--(DBIDRef, Integer): Integer
+        {abstract} +putInt(DBIDRef, int): int
+        {abstract} +put(DBIDRef, int): int
+        {abstract} +increment(DBIDRef, int): void
+    }
+
+    elki.database.datastore.WritableIntegerDataStore <|.. elki.database.datastore.memory.MapIntegerDBIDIntegerStore
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

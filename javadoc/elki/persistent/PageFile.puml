@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>PageFile\n<size:10>elki.persistent" as elki.persistent.PageFile<P extends Page> [[PageFile.html]] {
+        {abstract} +setPageID(P extends Page): int
+        {abstract} +writePage(P extends Page): int
+        {abstract} +readPage(int): P extends Page
+        {abstract} +deletePage(int): void
+        {abstract} +close(): void
+        {abstract} +clear(): void
+        {abstract} +getNextPageID(): int
+        {abstract} +setNextPageID(int): void
+        {abstract} +getPageSize(): int
+        {abstract} +initialize(PageHeader): boolean
+        {abstract} +logStatistics(): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

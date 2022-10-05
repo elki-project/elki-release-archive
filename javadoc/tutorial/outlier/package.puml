@@ -1,0 +1,68 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace tutorial.outlier {
+
+        class ODIN<O> [[ODIN.html]] {
+            ~distance: Distance<? super O>
+            ~kplus: int
+            +ODIN(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class tutorial.outlier.ODIN.Par<O> {
+            {static} +K_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): ODIN<O>
+        }
+
+        class SimpleScoreDumper [[SimpleScoreDumper.html]] {
+            +processNewResult(Object): void
+        }
+
+        class DistanceStddevOutlier<O> [[DistanceStddevOutlier.html]] {
+            #distance: Distance<? super O>
+            #k: int
+            +DistanceStddevOutlier(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class tutorial.outlier.DistanceStddevOutlier.Par<O> {
+            {static} +K_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): DistanceStddevOutlier<O>
+        }
+
+        elki.outlier.OutlierAlgorithm <|.. ODIN
+        elki.utilities.optionhandling.Parameterizer <|.. tutorial.outlier.ODIN.Par
+        ODIN +-- tutorial.outlier.ODIN.Par
+        elki.result.ResultHandler <|.. SimpleScoreDumper
+        elki.outlier.OutlierAlgorithm <|.. DistanceStddevOutlier
+        elki.utilities.optionhandling.Parameterizer <|.. tutorial.outlier.DistanceStddevOutlier.Par
+        DistanceStddevOutlier +-- tutorial.outlier.DistanceStddevOutlier.Par
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../../elki/outlier/OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../elki/utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.result {
+        interface ResultHandler [[../../elki/result/ResultHandler.html]]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SingleThreadedExecutor\n<size:10>elki.parallel" as elki.parallel.SingleThreadedExecutor [[SingleThreadedExecutor.html]] {
+        {static} +run(DBIDs, Processor...): void
+    }
+    class "<size:14>SingleThreadedExecutor.SingleThreadedRunner\n<size:10>elki.parallel" as elki.parallel.SingleThreadedExecutor.SingleThreadedRunner [[SingleThreadedExecutor.SingleThreadedRunner.html]]
+
+    elki.parallel.SingleThreadedExecutor +-- elki.parallel.SingleThreadedExecutor.SingleThreadedRunner
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

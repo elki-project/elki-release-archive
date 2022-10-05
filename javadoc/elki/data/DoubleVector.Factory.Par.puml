@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleVector.Factory.Par\n<size:10>elki.data" as elki.data.DoubleVector.Factory.Par [[DoubleVector.Factory.Par.html]] {
+        +make(): Factory
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>DoubleVector.Factory\n<size:10>elki.data" as elki.data.DoubleVector.Factory [[DoubleVector.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.data.DoubleVector.Factory.Par
+    elki.data.DoubleVector.Factory +-- elki.data.DoubleVector.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

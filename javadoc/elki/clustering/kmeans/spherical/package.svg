@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="777px" preserveAspectRatio="none" style="width:3374px;height:777px;background:#FFFFFF;" version="1.1" viewBox="0 0 3374 777" width="3374px" zoomAndPan="magnify"><defs/><g><!--MD5=[358b2b0130d2c024bc40517de9868e55]
+cluster elki.clustering.kmeans.spherical--><g id="cluster_elki.clustering.kmeans.spherical"><path d="M8.5,210 L263.5,210 A3.75,3.75 0 0 1 266,212.5 L273,232.2969 L3364.5,232.2969 A2.5,2.5 0 0 1 3367,234.7969 L3367,749.5 A2.5,2.5 0 0 1 3364.5,752 L8.5,752 A2.5,2.5 0 0 1 6,749.5 L6,212.5 A2.5,2.5 0 0 1 8.5,210 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="273" y1="232.2969" y2="232.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="254" x="10" y="224.9951">elki.clustering.kmeans.spherical</text></g><!--MD5=[db165ef3061ef93741a143c91ec23e3f]
+cluster elki.clustering.kmeans--><g id="cluster_elki.clustering.kmeans"><path d="M1433.5,6 L1611.5,6 A3.75,3.75 0 0 1 1614,8.5 L1621,28.2969 L1894.5,28.2969 A2.5,2.5 0 0 1 1897,30.7969 L1897,183.5 A2.5,2.5 0 0 1 1894.5,186 L1433.5,186 A2.5,2.5 0 0 1 1431,183.5 L1431,8.5 A2.5,2.5 0 0 1 1433.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1431" x2="1621" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="177" x="1435" y="20.9951">elki.clustering.kmeans</text></g><!--MD5=[42547652502e543bd61cafe1aa762eab]
+class elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans--><a href="SphericalSimplifiedHamerlyKMeans.html" target="_top" title="SphericalSimplifiedHamerlyKMeans.html" xlink:actuate="onRequest" xlink:href="SphericalSimplifiedHamerlyKMeans.html" xlink:show="new" xlink:title="SphericalSimplifiedHamerlyKMeans.html" xlink:type="simple"><g id="elem_elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans"><rect codeLine="4" fill="#F1F1F1" height="129.4844" id="elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="522" x="22" y="434"/><ellipse cx="82.75" cy="450" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M85.7188,455.6406 Q85.1406,455.9375 84.5,456.0781 Q83.8594,456.2344 83.1563,456.2344 Q80.6563,456.2344 79.3281,454.5938 Q78.0156,452.9375 78.0156,449.8125 Q78.0156,446.6875 79.3281,445.0313 Q80.6563,443.375 83.1563,443.375 Q83.8594,443.375 84.5,443.5313 Q85.1563,443.6875 85.7188,443.9844 L85.7188,446.7031 Q85.0938,446.125 84.5,445.8594 Q83.9063,445.5781 83.2813,445.5781 Q81.9375,445.5781 81.25,446.6563 Q80.5625,447.7188 80.5625,449.8125 Q80.5625,451.9063 81.25,452.9844 Q81.9375,454.0469 83.2813,454.0469 Q83.9063,454.0469 84.5,453.7813 Q85.0938,453.5 85.7188,452.9219 L85.7188,455.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="238" x="103.25" y="454.8467">SphericalSimplifiedHamerlyKMeans</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="395" y="431"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="396" y="443.1387">V extends NumberVector</text><line style="stroke:#181818;stroke-width:0.5;" x1="23" x2="543" y1="466" y2="466"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="30" y="476.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="42" y="482.9951">LOG: Logging</text><polygon fill="none" points="33,490.9453,37,494.9453,33,498.9453,29,494.9453" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="42" y="499.292">varstat: boolean</text><line style="stroke:#181818;stroke-width:0.5;" x1="23" x2="543" y1="506.5938" y2="506.5938"/><ellipse cx="33" cy="520.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="496" x="42" y="523.5889">SphericalSimplifiedHamerlyKMeans(int, int, KMeansInitialization, boolean)</text><ellipse cx="33" cy="536.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="486" x="42" y="539.8857">run(Relation&lt;V extends NumberVector&gt;): Clustering&lt;KMeansModel&gt;</text><polygon fill="#FFFF44" points="33,547.8359,37,551.8359,33,555.8359,29,551.8359" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="42" y="556.1826">getLogger(): Logging</text></g></a><!--MD5=[c954bcb4df4b3325d03d764b84895968]
+class elki.clustering.kmeans.spherical.SphericalHamerlyKMeans--><a href="SphericalHamerlyKMeans.html" target="_top" title="SphericalHamerlyKMeans.html" xlink:actuate="onRequest" xlink:href="SphericalHamerlyKMeans.html" xlink:show="new" xlink:title="SphericalHamerlyKMeans.html" xlink:type="simple"><g id="elem_elki.clustering.kmeans.spherical.SphericalHamerlyKMeans"><rect codeLine="31" fill="#F1F1F1" height="129.4844" id="elki.clustering.kmeans.spherical.SphericalHamerlyKMeans" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="512" x="579" y="434"/><ellipse cx="667.25" cy="450" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M670.2188,455.6406 Q669.6406,455.9375 669,456.0781 Q668.3594,456.2344 667.6563,456.2344 Q665.1563,456.2344 663.8281,454.5938 Q662.5156,452.9375 662.5156,449.8125 Q662.5156,446.6875 663.8281,445.0313 Q665.1563,443.375 667.6563,443.375 Q668.3594,443.375 669,443.5313 Q669.6563,443.6875 670.2188,443.9844 L670.2188,446.7031 Q669.5938,446.125 669,445.8594 Q668.4063,445.5781 667.7813,445.5781 Q666.4375,445.5781 665.75,446.6563 Q665.0625,447.7188 665.0625,449.8125 Q665.0625,451.9063 665.75,452.9844 Q666.4375,454.0469 667.7813,454.0469 Q668.4063,454.0469 669,453.7813 Q669.5938,453.5 670.2188,452.9219 L670.2188,455.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="173" x="687.75" y="454.8467">SphericalHamerlyKMeans</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="942" y="431"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="943" y="443.1387">V extends NumberVector</text><line style="stroke:#181818;stroke-width:0.5;" x1="580" x2="1090" y1="466" y2="466"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="587" y="476.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="599" y="482.9951">LOG: Logging</text><polygon fill="none" points="590,490.9453,594,494.9453,590,498.9453,586,494.9453" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="599" y="499.292">varstat: boolean</text><line style="stroke:#181818;stroke-width:0.5;" x1="580" x2="1090" y1="506.5938" y2="506.5938"/><ellipse cx="590" cy="520.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="431" x="599" y="523.5889">SphericalHamerlyKMeans(int, int, KMeansInitialization, boolean)</text><ellipse cx="590" cy="536.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="486" x="599" y="539.8857">run(Relation&lt;V extends NumberVector&gt;): Clustering&lt;KMeansModel&gt;</text><polygon fill="#FFFF44" points="590,547.8359,594,551.8359,590,555.8359,586,551.8359" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="599" y="556.1826">getLogger(): Logging</text></g></a><!--MD5=[1ff37c043bbbaecfbab0e52a7fee67c5]
+class elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans--><a href="EuclideanSphericalHamerlyKMeans.html" target="_top" title="EuclideanSphericalHamerlyKMeans.html" xlink:actuate="onRequest" xlink:href="EuclideanSphericalHamerlyKMeans.html" xlink:show="new" xlink:title="EuclideanSphericalHamerlyKMeans.html" xlink:type="simple"><g id="elem_elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans"><rect codeLine="59" fill="#F1F1F1" height="129.4844" id="elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="524" x="1126" y="434"/><ellipse cx="1186.75" cy="450" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1189.7188,455.6406 Q1189.1406,455.9375 1188.5,456.0781 Q1187.8594,456.2344 1187.1563,456.2344 Q1184.6563,456.2344 1183.3281,454.5938 Q1182.0156,452.9375 1182.0156,449.8125 Q1182.0156,446.6875 1183.3281,445.0313 Q1184.6563,443.375 1187.1563,443.375 Q1187.8594,443.375 1188.5,443.5313 Q1189.1563,443.6875 1189.7188,443.9844 L1189.7188,446.7031 Q1189.0938,446.125 1188.5,445.8594 Q1187.9063,445.5781 1187.2813,445.5781 Q1185.9375,445.5781 1185.25,446.6563 Q1184.5625,447.7188 1184.5625,449.8125 Q1184.5625,451.9063 1185.25,452.9844 Q1185.9375,454.0469 1187.2813,454.0469 Q1187.9063,454.0469 1188.5,453.7813 Q1189.0938,453.5 1189.7188,452.9219 L1189.7188,455.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="240" x="1207.25" y="454.8467">EuclideanSphericalHamerlyKMeans</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="1501" y="431"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="1502" y="443.1387">V extends NumberVector</text><line style="stroke:#181818;stroke-width:0.5;" x1="1127" x2="1649" y1="466" y2="466"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1134" y="476.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="1146" y="482.9951">LOG: Logging</text><polygon fill="none" points="1137,490.9453,1141,494.9453,1137,498.9453,1133,494.9453" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="1146" y="499.292">varstat: boolean</text><line style="stroke:#181818;stroke-width:0.5;" x1="1127" x2="1649" y1="506.5938" y2="506.5938"/><ellipse cx="1137" cy="520.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="498" x="1146" y="523.5889">EuclideanSphericalHamerlyKMeans(int, int, KMeansInitialization, boolean)</text><ellipse cx="1137" cy="536.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="486" x="1146" y="539.8857">run(Relation&lt;V extends NumberVector&gt;): Clustering&lt;KMeansModel&gt;</text><polygon fill="#FFFF44" points="1137,547.8359,1141,551.8359,1137,555.8359,1133,551.8359" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="1146" y="556.1826">getLogger(): Logging</text></g></a><!--MD5=[5016b617c9e0775aad79ea72b6e0c933]
+class elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans--><a href="EuclideanSphericalElkanKMeans.html" target="_top" title="EuclideanSphericalElkanKMeans.html" xlink:actuate="onRequest" xlink:href="EuclideanSphericalElkanKMeans.html" xlink:show="new" xlink:title="EuclideanSphericalElkanKMeans.html" xlink:type="simple"><g id="elem_elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans"><rect codeLine="86" fill="#F1F1F1" height="113.1875" id="elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="512" x="2809" y="623"/><ellipse cx="2872.75" cy="639" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2875.7188,644.6406 Q2875.1406,644.9375 2874.5,645.0781 Q2873.8594,645.2344 2873.1563,645.2344 Q2870.6563,645.2344 2869.3281,643.5938 Q2868.0156,641.9375 2868.0156,638.8125 Q2868.0156,635.6875 2869.3281,634.0313 Q2870.6563,632.375 2873.1563,632.375 Q2873.8594,632.375 2874.5,632.5313 Q2875.1563,632.6875 2875.7188,632.9844 L2875.7188,635.7031 Q2875.0938,635.125 2874.5,634.8594 Q2873.9063,634.5781 2873.2813,634.5781 Q2871.9375,634.5781 2871.25,635.6563 Q2870.5625,636.7188 2870.5625,638.8125 Q2870.5625,640.9063 2871.25,641.9844 Q2871.9375,643.0469 2873.2813,643.0469 Q2873.9063,643.0469 2874.5,642.7813 Q2875.0938,642.5 2875.7188,641.9219 L2875.7188,644.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="222" x="2893.25" y="643.8467">EuclideanSphericalElkanKMeans</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="3172" y="620"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="3173" y="632.1387">V extends NumberVector</text><line style="stroke:#181818;stroke-width:0.5;" x1="2810" x2="3320" y1="655" y2="655"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2817" y="665.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="2829" y="671.9951">LOG: Logging</text><line style="stroke:#181818;stroke-width:0.5;" x1="2810" x2="3320" y1="679.2969" y2="679.2969"/><ellipse cx="2820" cy="692.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="480" x="2829" y="696.292">EuclideanSphericalElkanKMeans(int, int, KMeansInitialization, boolean)</text><ellipse cx="2820" cy="709.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="486" x="2829" y="712.5889">run(Relation&lt;V extends NumberVector&gt;): Clustering&lt;KMeansModel&gt;</text><polygon fill="#FFFF44" points="2820,720.5391,2824,724.5391,2820,728.5391,2816,724.5391" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="2829" y="728.8857">getLogger(): Logging</text></g></a><!--MD5=[2e34b613df32ba542b608e0579897ffd]
+class elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans--><a href="SphericalSimplifiedElkanKMeans.html" target="_top" title="SphericalSimplifiedElkanKMeans.html" xlink:actuate="onRequest" xlink:href="SphericalSimplifiedElkanKMeans.html" xlink:show="new" xlink:title="SphericalSimplifiedElkanKMeans.html" xlink:type="simple"><g id="elem_elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans"><rect codeLine="105" fill="#F1F1F1" height="129.4844" id="elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="512" x="1685" y="434"/><ellipse cx="1749.75" cy="450" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1752.7188,455.6406 Q1752.1406,455.9375 1751.5,456.0781 Q1750.8594,456.2344 1750.1563,456.2344 Q1747.6563,456.2344 1746.3281,454.5938 Q1745.0156,452.9375 1745.0156,449.8125 Q1745.0156,446.6875 1746.3281,445.0313 Q1747.6563,443.375 1750.1563,443.375 Q1750.8594,443.375 1751.5,443.5313 Q1752.1563,443.6875 1752.7188,443.9844 L1752.7188,446.7031 Q1752.0938,446.125 1751.5,445.8594 Q1750.9063,445.5781 1750.2813,445.5781 Q1748.9375,445.5781 1748.25,446.6563 Q1747.5625,447.7188 1747.5625,449.8125 Q1747.5625,451.9063 1748.25,452.9844 Q1748.9375,454.0469 1750.2813,454.0469 Q1750.9063,454.0469 1751.5,453.7813 Q1752.0938,453.5 1752.7188,452.9219 L1752.7188,455.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="220" x="1770.25" y="454.8467">SphericalSimplifiedElkanKMeans</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="2048" y="431"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="2049" y="443.1387">V extends NumberVector</text><line style="stroke:#181818;stroke-width:0.5;" x1="1686" x2="2196" y1="466" y2="466"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1693" y="476.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="1705" y="482.9951">LOG: Logging</text><polygon fill="none" points="1696,490.9453,1700,494.9453,1696,498.9453,1692,494.9453" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="1705" y="499.292">varstat: boolean</text><line style="stroke:#181818;stroke-width:0.5;" x1="1686" x2="2196" y1="506.5938" y2="506.5938"/><ellipse cx="1696" cy="520.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="478" x="1705" y="523.5889">SphericalSimplifiedElkanKMeans(int, int, KMeansInitialization, boolean)</text><ellipse cx="1696" cy="536.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="486" x="1705" y="539.8857">run(Relation&lt;V extends NumberVector&gt;): Clustering&lt;KMeansModel&gt;</text><polygon fill="#FFFF44" points="1696,547.8359,1700,551.8359,1696,555.8359,1692,551.8359" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="1705" y="556.1826">getLogger(): Logging</text></g></a><!--MD5=[0605dfa52b54fed472f9d5b1c2bec218]
+class elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans--><a href="SphericalSingleAssignmentKMeans.html" target="_top" title="SphericalSingleAssignmentKMeans.html" xlink:actuate="onRequest" xlink:href="SphericalSingleAssignmentKMeans.html" xlink:show="new" xlink:title="SphericalSingleAssignmentKMeans.html" xlink:type="simple"><g id="elem_elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans"><rect codeLine="132" fill="#F1F1F1" height="113.1875" id="elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="512" x="2232" y="442"/><ellipse cx="2285.75" cy="458" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2288.7188,463.6406 Q2288.1406,463.9375 2287.5,464.0781 Q2286.8594,464.2344 2286.1563,464.2344 Q2283.6563,464.2344 2282.3281,462.5938 Q2281.0156,460.9375 2281.0156,457.8125 Q2281.0156,454.6875 2282.3281,453.0313 Q2283.6563,451.375 2286.1563,451.375 Q2286.8594,451.375 2287.5,451.5313 Q2288.1563,451.6875 2288.7188,451.9844 L2288.7188,454.7031 Q2288.0938,454.125 2287.5,453.8594 Q2286.9063,453.5781 2286.2813,453.5781 Q2284.9375,453.5781 2284.25,454.6563 Q2283.5625,455.7188 2283.5625,457.8125 Q2283.5625,459.9063 2284.25,460.9844 Q2284.9375,462.0469 2286.2813,462.0469 Q2286.9063,462.0469 2287.5,461.7813 Q2288.0938,461.5 2288.7188,460.9219 L2288.7188,463.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="242" x="2306.25" y="462.8467">SphericalSingleAssignmentKMeans</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="2595" y="439"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="2596" y="451.1387">V extends NumberVector</text><line style="stroke:#181818;stroke-width:0.5;" x1="2233" x2="2743" y1="474" y2="474"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2240" y="484.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="2252" y="490.9951">LOG: Logging</text><line style="stroke:#181818;stroke-width:0.5;" x1="2233" x2="2743" y1="498.2969" y2="498.2969"/><ellipse cx="2243" cy="511.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="411" x="2252" y="515.292">SphericalSingleAssignmentKMeans(int, KMeansInitialization)</text><ellipse cx="2243" cy="528.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="486" x="2252" y="531.5889">run(Relation&lt;V extends NumberVector&gt;): Clustering&lt;KMeansModel&gt;</text><polygon fill="#FFFF44" points="2243,539.5391,2247,543.5391,2243,547.5391,2239,543.5391" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="2252" y="547.8857">getLogger(): Logging</text></g></a><!--MD5=[3043ec3e1a66a25c4d5cdbfdfc906622]
+class elki.clustering.kmeans.spherical.SphericalKMeans--><a href="SphericalKMeans.html" target="_top" title="SphericalKMeans.html" xlink:actuate="onRequest" xlink:href="SphericalKMeans.html" xlink:show="new" xlink:title="SphericalKMeans.html" xlink:type="simple"><g id="elem_elki.clustering.kmeans.spherical.SphericalKMeans"><rect codeLine="150" fill="#F1F1F1" height="129.4844" id="elki.clustering.kmeans.spherical.SphericalKMeans" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="512" x="1408" y="245"/><ellipse cx="1523.75" cy="261" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1526.7188,266.6406 Q1526.1406,266.9375 1525.5,267.0781 Q1524.8594,267.2344 1524.1563,267.2344 Q1521.6563,267.2344 1520.3281,265.5938 Q1519.0156,263.9375 1519.0156,260.8125 Q1519.0156,257.6875 1520.3281,256.0313 Q1521.6563,254.375 1524.1563,254.375 Q1524.8594,254.375 1525.5,254.5313 Q1526.1563,254.6875 1526.7188,254.9844 L1526.7188,257.7031 Q1526.0938,257.125 1525.5,256.8594 Q1524.9063,256.5781 1524.2813,256.5781 Q1522.9375,256.5781 1522.25,257.6563 Q1521.5625,258.7188 1521.5625,260.8125 Q1521.5625,262.9063 1522.25,263.9844 Q1522.9375,265.0469 1524.2813,265.0469 Q1524.9063,265.0469 1525.5,264.7813 Q1526.0938,264.5 1526.7188,263.9219 L1526.7188,266.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="1544.25" y="265.8467">SphericalKMeans</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="1771" y="242"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="1772" y="254.1387">V extends NumberVector</text><line style="stroke:#181818;stroke-width:0.5;" x1="1409" x2="1919" y1="277" y2="277"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1416" y="287.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="1428" y="293.9951">LOG: Logging</text><line style="stroke:#181818;stroke-width:0.5;" x1="1409" x2="1919" y1="301.2969" y2="301.2969"/><ellipse cx="1419" cy="314.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="312" x="1428" y="318.292">SphericalKMeans(int, int, KMeansInitialization)</text><ellipse cx="1419" cy="331.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="486" x="1428" y="334.5889">run(Relation&lt;V extends NumberVector&gt;): Clustering&lt;KMeansModel&gt;</text><ellipse cx="1419" cy="347.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="306" x="1428" y="350.8857">getInputTypeRestriction(): TypeInformation[]</text><polygon fill="#FFFF44" points="1419,358.8359,1423,362.8359,1419,366.8359,1415,362.8359" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="1428" y="367.1826">getLogger(): Logging</text></g></a><!--MD5=[5cab9812626ba750a855c3da614abd75]
+class elki.clustering.kmeans.spherical.SphericalElkanKMeans--><a href="SphericalElkanKMeans.html" target="_top" title="SphericalElkanKMeans.html" xlink:actuate="onRequest" xlink:href="SphericalElkanKMeans.html" xlink:show="new" xlink:title="SphericalElkanKMeans.html" xlink:type="simple"><g id="elem_elki.clustering.kmeans.spherical.SphericalElkanKMeans"><rect codeLine="182" fill="#F1F1F1" height="113.1875" id="elki.clustering.kmeans.spherical.SphericalElkanKMeans" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="512" x="1685" y="623"/><ellipse cx="1782.25" cy="639" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1785.2188,644.6406 Q1784.6406,644.9375 1784,645.0781 Q1783.3594,645.2344 1782.6563,645.2344 Q1780.1563,645.2344 1778.8281,643.5938 Q1777.5156,641.9375 1777.5156,638.8125 Q1777.5156,635.6875 1778.8281,634.0313 Q1780.1563,632.375 1782.6563,632.375 Q1783.3594,632.375 1784,632.5313 Q1784.6563,632.6875 1785.2188,632.9844 L1785.2188,635.7031 Q1784.5938,635.125 1784,634.8594 Q1783.4063,634.5781 1782.7813,634.5781 Q1781.4375,634.5781 1780.75,635.6563 Q1780.0625,636.7188 1780.0625,638.8125 Q1780.0625,640.9063 1780.75,641.9844 Q1781.4375,643.0469 1782.7813,643.0469 Q1783.4063,643.0469 1784,642.7813 Q1784.5938,642.5 1785.2188,641.9219 L1785.2188,644.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="155" x="1802.75" y="643.8467">SphericalElkanKMeans</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="2048" y="620"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="2049" y="632.1387">V extends NumberVector</text><line style="stroke:#181818;stroke-width:0.5;" x1="1686" x2="2196" y1="655" y2="655"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1693" y="665.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="1705" y="671.9951">LOG: Logging</text><line style="stroke:#181818;stroke-width:0.5;" x1="1686" x2="2196" y1="679.2969" y2="679.2969"/><ellipse cx="1696" cy="692.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="413" x="1705" y="696.292">SphericalElkanKMeans(int, int, KMeansInitialization, boolean)</text><ellipse cx="1696" cy="709.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="486" x="1705" y="712.5889">run(Relation&lt;V extends NumberVector&gt;): Clustering&lt;KMeansModel&gt;</text><polygon fill="#FFFF44" points="1696,720.5391,1700,724.5391,1696,728.5391,1692,724.5391" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="1705" y="728.8857">getLogger(): Logging</text></g></a><!--MD5=[3021e87e610cf762e4a1f7c3273e23bc]
+class elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans--><a href="EuclideanSphericalSimplifiedElkanKMeans.html" target="_top" title="EuclideanSphericalSimplifiedElkanKMeans.html" xlink:actuate="onRequest" xlink:href="EuclideanSphericalSimplifiedElkanKMeans.html" xlink:show="new" xlink:title="EuclideanSphericalSimplifiedElkanKMeans.html" xlink:type="simple"><g id="elem_elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans"><rect codeLine="202" fill="#F1F1F1" height="129.4844" id="elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="571" x="2779.5" y="434"/><ellipse cx="2840.25" cy="450" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2843.2188,455.6406 Q2842.6406,455.9375 2842,456.0781 Q2841.3594,456.2344 2840.6563,456.2344 Q2838.1563,456.2344 2836.8281,454.5938 Q2835.5156,452.9375 2835.5156,449.8125 Q2835.5156,446.6875 2836.8281,445.0313 Q2838.1563,443.375 2840.6563,443.375 Q2841.3594,443.375 2842,443.5313 Q2842.6563,443.6875 2843.2188,443.9844 L2843.2188,446.7031 Q2842.5938,446.125 2842,445.8594 Q2841.4063,445.5781 2840.7813,445.5781 Q2839.4375,445.5781 2838.75,446.6563 Q2838.0625,447.7188 2838.0625,449.8125 Q2838.0625,451.9063 2838.75,452.9844 Q2839.4375,454.0469 2840.7813,454.0469 Q2841.4063,454.0469 2842,453.7813 Q2842.5938,453.5 2843.2188,452.9219 L2843.2188,455.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="287" x="2860.75" y="454.8467">EuclideanSphericalSimplifiedElkanKMeans</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="3201.5" y="431"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="3202.5" y="443.1387">V extends NumberVector</text><line style="stroke:#181818;stroke-width:0.5;" x1="2780.5" x2="3349.5" y1="466" y2="466"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2787.5" y="476.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="2799.5" y="482.9951">LOG: Logging</text><polygon fill="none" points="2790.5,490.9453,2794.5,494.9453,2790.5,498.9453,2786.5,494.9453" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="2799.5" y="499.292">varstat: boolean</text><line style="stroke:#181818;stroke-width:0.5;" x1="2780.5" x2="3349.5" y1="506.5938" y2="506.5938"/><ellipse cx="2790.5" cy="520.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="545" x="2799.5" y="523.5889">EuclideanSphericalSimplifiedElkanKMeans(int, int, KMeansInitialization, boolean)</text><ellipse cx="2790.5" cy="536.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="486" x="2799.5" y="539.8857">run(Relation&lt;V extends NumberVector&gt;): Clustering&lt;KMeansModel&gt;</text><polygon fill="#FFFF44" points="2790.5,547.8359,2794.5,551.8359,2790.5,555.8359,2786.5,551.8359" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="2799.5" y="556.1826">getLogger(): Logging</text></g></a><!--MD5=[65741f9ab1d9b71be36c274839b2c01a]
+class elki.clustering.kmeans.AbstractKMeans--><a href="../AbstractKMeans.html" target="_top" title="../AbstractKMeans.html" xlink:actuate="onRequest" xlink:href="../AbstractKMeans.html" xlink:show="new" xlink:title="../AbstractKMeans.html" xlink:type="simple"><g id="elem_elki.clustering.kmeans.AbstractKMeans"><rect codeLine="277" fill="#F1F1F1" height="129.4844" id="elki.clustering.kmeans.AbstractKMeans" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="434" x="1447" y="41"/><ellipse cx="1474.15" cy="57" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1474.2594,52.3438 L1473.1031,57.4219 L1475.4313,57.4219 L1474.2594,52.3438 Z M1472.775,50.1094 L1475.7594,50.1094 L1479.1188,62.5 L1476.6656,62.5 L1475.9,59.4375 L1472.6188,59.4375 L1471.8688,62.5 L1469.4313,62.5 L1472.775,50.1094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="113" x="1490.85" y="61.8467">AbstractKMeans</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="260" x="1624" y="38"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="258" x="1625" y="50.1387">V extends NumberVector, M extends Model</text><line style="stroke:#181818;stroke-width:0.5;" x1="1448" x2="1880" y1="73" y2="73"/><polygon fill="none" points="1458,81.6484,1462,85.6484,1458,89.6484,1454,85.6484" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="408" x="1467" y="89.9951">distance: NumberVectorDistance&lt;? super NumberVector&gt;</text><polygon fill="none" points="1458,97.9453,1462,101.9453,1458,105.9453,1454,101.9453" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="1467" y="106.292">k: int</text><polygon fill="none" points="1458,114.2422,1462,118.2422,1458,122.2422,1454,118.2422" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76" x="1467" y="122.5889">maxiter: int</text><polygon fill="none" points="1458,130.5391,1462,134.5391,1458,138.5391,1454,134.5391" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="202" x="1467" y="138.8857">initializer: KMeansInitialization</text><line style="stroke:#181818;stroke-width:0.5;" x1="1448" x2="1880" y1="146.1875" y2="146.1875"/><polygon fill="#FFFF44" points="1458,154.8359,1462,158.8359,1458,162.8359,1454,158.8359" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="148" x="1467" y="163.1826">getLogger(): Logging</text></g></a><!--MD5=[e43cbf7183b99e32450d723aaa594f16]
+reverse link elki.clustering.kmeans.spherical.SphericalKMeans to elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans--><g id="link_elki.clustering.kmeans.spherical.SphericalKMeans_elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans"><path codeLine="229" d="M1387.93,332.79 C1164.3,352.92 841.61,386.67 562,434 C556.12,434.99 550.18,436.04 544.2,437.12 " fill="none" id="elki.clustering.kmeans.spherical.SphericalKMeans-backto-elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1387.35,325.81,1407.9,331,1388.6,339.75,1387.35,325.81" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[fb491010ea50e950bf7c668824fd204f]
+reverse link elki.clustering.kmeans.spherical.SphericalKMeans to elki.clustering.kmeans.spherical.SphericalHamerlyKMeans--><g id="link_elki.clustering.kmeans.spherical.SphericalKMeans_elki.clustering.kmeans.spherical.SphericalHamerlyKMeans"><path codeLine="234" d="M1388.22,371.37 C1299.08,391.18 1199.82,413.37 1109,434 C1103.17,435.32 1097.26,436.67 1091.31,438.03 " fill="none" id="elki.clustering.kmeans.spherical.SphericalKMeans-backto-elki.clustering.kmeans.spherical.SphericalHamerlyKMeans" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1386.92,364.48,1407.97,366.98,1389.96,378.15,1386.92,364.48" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[94e7099ada3aa4034c2ed511330f9a2d]
+reverse link elki.clustering.kmeans.spherical.SphericalKMeans to elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans--><g id="link_elki.clustering.kmeans.spherical.SphericalKMeans_elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans"><path codeLine="239" d="M1553.57,385.32 C1529.87,401.37 1505.04,418.2 1482.04,433.79 " fill="none" id="elki.clustering.kmeans.spherical.SphericalKMeans-backto-elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1549.69,379.49,1570.17,374.07,1557.54,391.08,1549.69,379.49" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a70a57bc6e5bebfc505ea75c514ed340]
+reverse link elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans to elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans--><g id="link_elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans_elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans"><path codeLine="244" d="M3065,583.21 C3065,596.64 3065,610.25 3065,622.82 " fill="none" id="elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans-backto-elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3058,583.11,3065,563.11,3072,583.11,3058,583.11" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[5138d24512de7c375a89ea504d8a9d77]
+reverse link elki.clustering.kmeans.spherical.SphericalKMeans to elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans--><g id="link_elki.clustering.kmeans.spherical.SphericalKMeans_elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans"><path codeLine="249" d="M1774.83,385.32 C1798.61,401.37 1823.53,418.2 1846.62,433.79 " fill="none" id="elki.clustering.kmeans.spherical.SphericalKMeans-backto-elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1770.83,391.06,1758.17,374.07,1778.66,379.46,1770.83,391.06" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[dfb015c4934929ae7a151a83984a8385]
+reverse link elki.clustering.kmeans.spherical.SphericalKMeans to elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans--><g id="link_elki.clustering.kmeans.spherical.SphericalKMeans_elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans"><path codeLine="254" d="M1940.03,371.91 C2027.95,391.6 2125.59,413.58 2215,434 C2226.39,436.6 2238.04,439.27 2249.8,441.98 " fill="none" id="elki.clustering.kmeans.spherical.SphericalKMeans-backto-elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1938.24,378.69,1920.26,367.49,1941.3,365.02,1938.24,378.69" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[2942289a9003a7c144748aa54ca338eb]
+reverse link elki.clustering.kmeans.AbstractKMeans to elki.clustering.kmeans.spherical.SphericalKMeans--><g id="link_elki.clustering.kmeans.AbstractKMeans_elki.clustering.kmeans.spherical.SphericalKMeans"><path codeLine="259" d="M1664,190.27 C1664,208.51 1664,227.53 1664,244.84 " fill="none" id="elki.clustering.kmeans.AbstractKMeans-backto-elki.clustering.kmeans.spherical.SphericalKMeans" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1657,190.14,1664,170.14,1671,190.14,1657,190.14" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[29a36cf9f14c94361a84a309a23d3d0b]
+reverse link elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans to elki.clustering.kmeans.spherical.SphericalElkanKMeans--><g id="link_elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans_elki.clustering.kmeans.spherical.SphericalElkanKMeans"><path codeLine="264" d="M1941,583.21 C1941,596.64 1941,610.25 1941,622.82 " fill="none" id="elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans-backto-elki.clustering.kmeans.spherical.SphericalElkanKMeans" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1934,583.11,1941,563.11,1948,583.11,1934,583.11" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a60d3668336298fc6b305b6f398b4701]
+reverse link elki.clustering.kmeans.spherical.SphericalKMeans to elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans--><g id="link_elki.clustering.kmeans.spherical.SphericalKMeans_elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans"><path codeLine="269" d="M1940.29,334.28 C2162.93,355.2 2483.61,389.27 2762,434 C2767.7,434.92 2773.46,435.87 2779.26,436.85 " fill="none" id="elki.clustering.kmeans.spherical.SphericalKMeans-backto-elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1939.33,341.22,1920.07,332.39,1940.64,327.28,1939.33,341.22" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="1587" y="758"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="1587" y="767.2822">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[cbec686a27a5e4c39a65860662c140be]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.kmeans.spherical {
+
+        class SphericalSimplifiedHamerlyKMeans<V extends NumberVector> [[SphericalSimplifiedHamerlyKMeans.html]] {
+            {static} -LOG: Logging
+            #varstat: boolean
+            +SphericalSimplifiedHamerlyKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans.Instance [[SphericalSimplifiedHamerlyKMeans.Instance.html]] {
+            ~sums: double[]
+            ~newmeans: double[]
+            ~lsim: WritableDoubleDataStore
+            ~usim: WritableDoubleDataStore
+            ~csim: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #updateBounds(double[]): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans.Par<V extends NumberVector> [[SphericalSimplifiedHamerlyKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): SphericalSimplifiedHamerlyKMeans<V extends NumberVector>
+        }
+
+        class SphericalHamerlyKMeans<V extends NumberVector> [[SphericalHamerlyKMeans.html]] {
+            {static} -LOG: Logging
+            #varstat: boolean
+            +SphericalHamerlyKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalHamerlyKMeans.Instance [[SphericalHamerlyKMeans.Instance.html]] {
+            ~sums: double[]
+            ~newmeans: double[]
+            ~lsim: WritableDoubleDataStore
+            ~usim: WritableDoubleDataStore
+            ~csim: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #initialAssignToNearestCluster(): int
+            #recomputeSeperation(double[]): void
+            #assignToNearestCluster(): int
+            #updateBounds(double[]): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalHamerlyKMeans.Par<V extends NumberVector> [[SphericalHamerlyKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): SphericalHamerlyKMeans<V extends NumberVector>
+        }
+
+        class EuclideanSphericalHamerlyKMeans<V extends NumberVector> [[EuclideanSphericalHamerlyKMeans.html]] {
+            {static} -LOG: Logging
+            #varstat: boolean
+            +EuclideanSphericalHamerlyKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Instance [[EuclideanSphericalHamerlyKMeans.Instance.html]] {
+            ~sums: double[]
+            ~newmeans: double[]
+            ~upper: WritableDoubleDataStore
+            ~lower: WritableDoubleDataStore
+            ~sep: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #updateBounds(double[]): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Par<V extends NumberVector> [[EuclideanSphericalHamerlyKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): EuclideanSphericalHamerlyKMeans<V extends NumberVector>
+        }
+
+        class EuclideanSphericalElkanKMeans<V extends NumberVector> [[EuclideanSphericalElkanKMeans.html]] {
+            {static} -LOG: Logging
+            +EuclideanSphericalElkanKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans.Instance [[EuclideanSphericalElkanKMeans.Instance.html]] {
+            ~cdist: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans.Par<V extends NumberVector> [[EuclideanSphericalElkanKMeans.Par.html]] {
+            +make(): EuclideanSphericalElkanKMeans<V extends NumberVector>
+        }
+
+        class SphericalSimplifiedElkanKMeans<V extends NumberVector> [[SphericalSimplifiedElkanKMeans.html]] {
+            {static} -LOG: Logging
+            #varstat: boolean
+            +SphericalSimplifiedElkanKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Instance [[SphericalSimplifiedElkanKMeans.Instance.html]] {
+            ~sums: double[]
+            ~newmeans: double[]
+            ~lsim: WritableDoubleDataStore
+            ~usim: WritableDataStore<double[]>
+            ~csim: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #updateBounds(double[]): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Par<V extends NumberVector> [[SphericalSimplifiedElkanKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): SphericalSimplifiedElkanKMeans<V extends NumberVector>
+        }
+
+        class SphericalSingleAssignmentKMeans<V extends NumberVector> [[SphericalSingleAssignmentKMeans.html]] {
+            {static} -LOG: Logging
+            +SphericalSingleAssignmentKMeans(int, KMeansInitialization)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Instance [[SphericalSingleAssignmentKMeans.Instance.html]] {
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Par<V extends NumberVector> [[SphericalSingleAssignmentKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): SphericalSingleAssignmentKMeans<V extends NumberVector>
+        }
+
+        class SphericalKMeans<V extends NumberVector> [[SphericalKMeans.html]] {
+            {static} -LOG: Logging
+            +SphericalKMeans(int, int, KMeansInitialization)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            +getInputTypeRestriction(): TypeInformation[]
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalKMeans.Instance [[SphericalKMeans.Instance.html]] {
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #assignToNearestCluster(): int
+            #similarity(NumberVector, double[]): double
+            #similarity(double[], double[]): double
+            #distance(double[], double[]): double
+            #distance(NumberVector, double[]): double
+            #distance(NumberVector, NumberVector): double
+            #sqrtdistance(NumberVector, double[]): double
+            #sqrtdistance(NumberVector, NumberVector): double
+            #initialSeparation(double[]): void
+            #movedSimilarity(double[], double[], double[]): void
+            #meansFromSums(double[], double[], double[]): void
+            #recomputeVariance(Relation<? extends NumberVector>): void
+            #getLogger(): Logging
+            {static} #means(List<? extends DBIDs>, double[], Relation<? extends NumberVector>): double[]
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalKMeans.Par<V extends NumberVector> [[SphericalKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): SphericalKMeans<V extends NumberVector>
+        }
+
+        class SphericalElkanKMeans<V extends NumberVector> [[SphericalElkanKMeans.html]] {
+            {static} -LOG: Logging
+            +SphericalElkanKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalElkanKMeans.Instance [[SphericalElkanKMeans.Instance.html]] {
+            ~ccsim: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            #initialAssignToNearestCluster(): int
+            #recomputeSeperation(double[], double[]): void
+            #assignToNearestCluster(): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalElkanKMeans.Par<V extends NumberVector> [[SphericalElkanKMeans.Par.html]] {
+            +make(): SphericalElkanKMeans<V extends NumberVector>
+        }
+
+        class EuclideanSphericalSimplifiedElkanKMeans<V extends NumberVector> [[EuclideanSphericalSimplifiedElkanKMeans.html]] {
+            {static} -LOG: Logging
+            #varstat: boolean
+            +EuclideanSphericalSimplifiedElkanKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Instance [[EuclideanSphericalSimplifiedElkanKMeans.Instance.html]] {
+            ~sums: double[]
+            ~newmeans: double[]
+            ~upper: WritableDoubleDataStore
+            ~lower: WritableDataStore<double[]>
+            ~sep: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #updateBounds(double[]): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Par<V extends NumberVector> [[EuclideanSphericalSimplifiedElkanKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): EuclideanSphericalSimplifiedElkanKMeans<V extends NumberVector>
+        }
+
+        SphericalKMeans <|- - SphericalSimplifiedHamerlyKMeans
+        elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|- - elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans.Instance
+        SphericalSimplifiedHamerlyKMeans +- - elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalKMeans.Par <|- - elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans.Par
+        SphericalSimplifiedHamerlyKMeans +- - elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans.Par
+        SphericalKMeans <|- - SphericalHamerlyKMeans
+        elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|- - elki.clustering.kmeans.spherical.SphericalHamerlyKMeans.Instance
+        SphericalHamerlyKMeans +- - elki.clustering.kmeans.spherical.SphericalHamerlyKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalKMeans.Par <|- - elki.clustering.kmeans.spherical.SphericalHamerlyKMeans.Par
+        SphericalHamerlyKMeans +- - elki.clustering.kmeans.spherical.SphericalHamerlyKMeans.Par
+        SphericalKMeans <|- - EuclideanSphericalHamerlyKMeans
+        elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|- - elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Instance
+        EuclideanSphericalHamerlyKMeans +- - elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalKMeans.Par <|- - elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Par
+        EuclideanSphericalHamerlyKMeans +- - elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Par
+        EuclideanSphericalSimplifiedElkanKMeans <|- - EuclideanSphericalElkanKMeans
+        elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Instance <|- - elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans.Instance
+        EuclideanSphericalElkanKMeans +- - elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans.Instance
+        elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Par <|- - elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans.Par
+        EuclideanSphericalElkanKMeans +- - elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans.Par
+        SphericalKMeans <|- - SphericalSimplifiedElkanKMeans
+        elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|- - elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Instance
+        SphericalSimplifiedElkanKMeans +- - elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalKMeans.Par <|- - elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Par
+        SphericalSimplifiedElkanKMeans +- - elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Par
+        SphericalKMeans <|- - SphericalSingleAssignmentKMeans
+        elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|- - elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Instance
+        SphericalSingleAssignmentKMeans +- - elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalKMeans.Par <|- - elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Par
+        SphericalSingleAssignmentKMeans +- - elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Par
+        elki.clustering.kmeans.AbstractKMeans <|- - SphericalKMeans
+        elki.clustering.kmeans.AbstractKMeans.Instance <|- - elki.clustering.kmeans.spherical.SphericalKMeans.Instance
+        SphericalKMeans +- - elki.clustering.kmeans.spherical.SphericalKMeans.Instance
+        elki.clustering.kmeans.AbstractKMeans.Par <|- - elki.clustering.kmeans.spherical.SphericalKMeans.Par
+        SphericalKMeans +- - elki.clustering.kmeans.spherical.SphericalKMeans.Par
+        SphericalSimplifiedElkanKMeans <|- - SphericalElkanKMeans
+        elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Instance <|- - elki.clustering.kmeans.spherical.SphericalElkanKMeans.Instance
+        SphericalElkanKMeans +- - elki.clustering.kmeans.spherical.SphericalElkanKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Par <|- - elki.clustering.kmeans.spherical.SphericalElkanKMeans.Par
+        SphericalElkanKMeans +- - elki.clustering.kmeans.spherical.SphericalElkanKMeans.Par
+        SphericalKMeans <|- - EuclideanSphericalSimplifiedElkanKMeans
+        elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|- - elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Instance
+        EuclideanSphericalSimplifiedElkanKMeans +- - elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalKMeans.Par <|- - elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Par
+        EuclideanSphericalSimplifiedElkanKMeans +- - elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Par
+    }
+
+    namespace elki.clustering.kmeans {
+        abstract class AbstractKMeans<V extends NumberVector, M extends Model> [[../AbstractKMeans.html]] {
+            #distance: NumberVectorDistance<? super NumberVector>
+            #k: int
+            #maxiter: int
+            #initializer: KMeansInitialization
+            {abstract} #getLogger(): Logging
+        }
+        abstract class elki.clustering.kmeans.AbstractKMeans.Instance [[../AbstractKMeans.Instance.html]] {
+            #means: double[]
+            #clusters: List<ModifiableDBIDs>
+            #assignment: WritableIntegerDataStore
+            #varsum: double[]
+            #relation: Relation<? extends NumberVector>
+            #diststat: long
+            -df: NumberVectorDistance<?>
+            #k: int
+            #isSquared: boolean
+            #key: String
+            {abstract} #iterate(int): int
+            {abstract} #getLogger(): Logging
+        }
+        abstract class elki.clustering.kmeans.AbstractKMeans.Par<V extends NumberVector> [[../AbstractKMeans.Par.html]] {
+            #k: int
+            #maxiter: int
+            #initializer: KMeansInitialization
+            #varstat: boolean
+            #distance: NumberVectorDistance<? super NumberVector>
+            {abstract} +make(): AbstractKMeans<V extends NumberVector, ?>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

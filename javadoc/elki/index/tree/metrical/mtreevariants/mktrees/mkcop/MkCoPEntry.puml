@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>MkCoPEntry\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkcop" as elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPEntry [[MkCoPEntry.html]] {
+        {abstract} +approximateConservativeKnnDistance(int): double
+        {abstract} +getConservativeKnnDistanceApproximation(): ApproximationLine
+        {abstract} +setConservativeKnnDistanceApproximation(ApproximationLine): void
+    }
+
+    interface "<size:14>MTreeEntry\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeEntry [[../../MTreeEntry.html]] {
+        {abstract} +getRoutingObjectID(): DBID
+        {abstract} +setRoutingObjectID(DBID): boolean
+        {abstract} +getParentDistance(): double
+        {abstract} +setParentDistance(double): boolean
+        {abstract} +getCoveringRadius(): double
+        {abstract} +setCoveringRadius(double): boolean
+    }
+
+    elki.index.tree.metrical.mtreevariants.MTreeEntry <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

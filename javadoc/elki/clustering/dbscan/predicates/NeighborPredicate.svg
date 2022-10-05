@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="130px" preserveAspectRatio="none" style="width:368px;height:130px;background:#FFFFFF;" version="1.1" viewBox="0 0 368 130" width="368px" zoomAndPan="magnify"><defs/><g><!--MD5=[dc2f1f18b4a80662db4d20a3774e6bfc]
+class elki.clustering.dbscan.predicates.NeighborPredicate--><a href="NeighborPredicate.html" target="_top" title="NeighborPredicate.html" xlink:actuate="onRequest" xlink:href="NeighborPredicate.html" xlink:show="new" xlink:title="NeighborPredicate.html" xlink:type="simple"><g id="elem_elki.clustering.dbscan.predicates.NeighborPredicate"><rect codeLine="6" fill="#F1F1F1" height="94.8281" id="elki.clustering.dbscan.predicates.NeighborPredicate" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="350" x="7" y="10"/><ellipse cx="90.75" cy="28.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M86.6719,24.7344 L86.6719,22.5781 L94.0625,22.5781 L94.0625,24.7344 L91.5938,24.7344 L91.5938,32.8125 L94.0625,32.8125 L94.0625,34.9688 L86.6719,34.9688 L86.6719,32.8125 L89.1406,32.8125 L89.1406,24.7344 L86.6719,24.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="131" x="127.25" y="27.9951">NeighborPredicate</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="163" x="111.25" y="40.5791">elki.clustering.dbscan.predicates</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="9" x="351" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="7" x="352" y="19.1387">T</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="356" y1="47.9375" y2="47.9375"/><ellipse cx="18" cy="61.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="255" x="27" y="64.9326">instantiate(Database): Instance&lt;T&gt;</text><ellipse cx="18" cy="77.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="305" x="27" y="81.2295">getInputTypeRestriction(): TypeInformation</text><ellipse cx="18" cy="94.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="324" x="27" y="97.5264">getOutputType(): SimpleTypeInformation&lt;T&gt;</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="84" y="110.8281"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="84" y="120.1104">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[5fe41effeb1537bf79bde48e0718f9ee]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>NeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.NeighborPredicate<T> [[NeighborPredicate.html]] {
+        {abstract} +instantiate(Database): Instance<T>
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +getOutputType(): SimpleTypeInformation<T>
+    }
+    interface "<size:14>NeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.NeighborPredicate.Instance<T> [[NeighborPredicate.Instance.html]]
+
+    elki.clustering.dbscan.predicates.NeighborPredicate +- - elki.clustering.dbscan.predicates.NeighborPredicate.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

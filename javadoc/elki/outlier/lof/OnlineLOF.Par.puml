@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OnlineLOF.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.OnlineLOF.Par<O> [[OnlineLOF.Par.html]] {
+        +make(): OnlineLOF<O>
+    }
+
+    class "<size:14>FlexibleLOF.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.FlexibleLOF.Par<O> [[FlexibleLOF.Par.html]]
+    class "<size:14>OnlineLOF\n<size:10>elki.outlier.lof" as elki.outlier.lof.OnlineLOF<O> [[OnlineLOF.html]]
+
+    elki.outlier.lof.FlexibleLOF.Par <|-- elki.outlier.lof.OnlineLOF.Par
+    elki.outlier.lof.OnlineLOF +-- elki.outlier.lof.OnlineLOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

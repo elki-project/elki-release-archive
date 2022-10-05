@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CLARANS.Assignment\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.CLARANS.Assignment [[CLARANS.Assignment.html]] {
+        ~ids: DBIDs
+        ~distQ: DistanceQuery<?>
+        ~nearest: WritableDoubleDataStore
+        ~second: WritableDoubleDataStore
+        ~assignment: WritableIntegerDataStore
+        ~secondid: WritableIntegerDataStore
+        ~medoids: ArrayModifiableDBIDs
+        ~miter: DBIDArrayMIter
+        +Assignment(DistanceQuery<?>, DBIDs, int)
+        #computeCostDifferential(DBIDRef, int, Assignment): double
+        #recompute(DBIDRef, int, double, int, double): double
+        #assignToNearestCluster(): double
+    }
+
+    class "<size:14>CLARANS\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.CLARANS<O> [[CLARANS.html]]
+
+    elki.clustering.kmedoids.CLARANS +-- elki.clustering.kmedoids.CLARANS.Assignment
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

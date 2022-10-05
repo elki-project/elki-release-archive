@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>PrototypeModel\n<size:10>elki.data.model" as elki.data.model.PrototypeModel<V> [[PrototypeModel.html]] {
+        {abstract} +getPrototype(): V
+        +writeToText(TextWriterStream, String): void
+        {abstract} +getPrototypeType(): String
+    }
+
+    interface "<size:14>Model\n<size:10>elki.data.model" as elki.data.model.Model [[Model.html]]
+
+    elki.data.model.Model <|-- elki.data.model.PrototypeModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

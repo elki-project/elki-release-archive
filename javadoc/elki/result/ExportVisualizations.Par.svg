@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="69px" preserveAspectRatio="none" style="width:194px;height:69px;background:#FFFFFF;" version="1.1" viewBox="0 0 194 69" width="194px" zoomAndPan="magnify"><defs/><g><!--MD5=[27add722f6d1fe9fce400c73197ff9ec]
+class elki.result.ExportVisualizations--><a href="ExportVisualizations.html" target="_top" title="ExportVisualizations.html" xlink:actuate="onRequest" xlink:href="ExportVisualizations.html" xlink:show="new" xlink:title="ExportVisualizations.html" xlink:type="simple"><g id="elem_elki.result.ExportVisualizations"><rect codeLine="23" fill="#F1F1F1" height="37.9375" id="elki.result.ExportVisualizations" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="169" x="15.5" y="7"/><ellipse cx="30.5" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M33.4688,31.6094 Q32.8906,31.9063 32.25,32.0469 Q31.6094,32.2031 30.9063,32.2031 Q28.4063,32.2031 27.0781,30.5625 Q25.7656,28.9063 25.7656,25.7813 Q25.7656,22.6563 27.0781,21 Q28.4063,19.3438 30.9063,19.3438 Q31.6094,19.3438 32.25,19.5 Q32.9063,19.6563 33.4688,19.9531 L33.4688,22.6719 Q32.8438,22.0938 32.25,21.8281 Q31.6563,21.5469 31.0313,21.5469 Q29.6875,21.5469 29,22.625 Q28.3125,23.6875 28.3125,25.7813 Q28.3125,27.875 29,28.9531 Q29.6875,30.0156 31.0313,30.0156 Q31.6563,30.0156 32.25,29.75 Q32.8438,29.4688 33.4688,28.8906 L33.4688,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="137" x="44.5" y="24.9951">ExportVisualizations</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="45" x="90.5" y="37.5791">elki.result</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="0" y="49.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="0" y="59.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[2576eb66aa348dfa5f2958625f3c75a9]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExportVisualizations.Par\n<size:10>elki.result" as elki.result.ExportVisualizations.Par [[ExportVisualizations.Par.html]] {
+        {static} +RATIO_ID: OptionID
+        {static} +FOLDER_ID: OptionID
+        {static} +FORMAT_ID: OptionID
+        {static} +IWIDTH_ID: OptionID
+        ~manager: VisualizerParameterizer
+        ~output: Path
+        ~ratio: double
+        ~format: Format
+        ~iwidth: int
+        +configure(Parameterization): void
+        +make(): ExportVisualizations
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ExportVisualizations\n<size:10>elki.result" as elki.result.ExportVisualizations [[ExportVisualizations.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.result.ExportVisualizations.Par
+    elki.result.ExportVisualizations +- - elki.result.ExportVisualizations.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

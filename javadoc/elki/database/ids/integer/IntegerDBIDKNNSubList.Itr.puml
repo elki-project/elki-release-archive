@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntegerDBIDKNNSubList.Itr\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDKNNSubList.Itr [[IntegerDBIDKNNSubList.Itr.html]] {
+        -inneriter: DoubleIntegerDBIDListIter
+        +valid(): boolean
+        +advance(): Itr
+        +doubleValue(): double
+        +internalGetIndex(): int
+        +getOffset(): int
+        +advance(int): Itr
+        +retract(): Itr
+        +seek(int): Itr
+    }
+
+    interface "<size:14>DoubleIntegerDBIDListIter\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDListIter [[DoubleIntegerDBIDListIter.html]] {
+        {abstract} +advance(): DoubleIntegerDBIDListIter
+        {abstract} +advance(int): DoubleIntegerDBIDListIter
+        {abstract} +retract(): DoubleIntegerDBIDListIter
+        {abstract} +seek(int): DoubleIntegerDBIDListIter
+    }
+    class "<size:14>IntegerDBIDKNNSubList\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDKNNSubList [[IntegerDBIDKNNSubList.html]]
+
+    elki.database.ids.integer.DoubleIntegerDBIDListIter <|.. elki.database.ids.integer.IntegerDBIDKNNSubList.Itr
+    elki.database.ids.integer.IntegerDBIDKNNSubList +-- elki.database.ids.integer.IntegerDBIDKNNSubList.Itr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

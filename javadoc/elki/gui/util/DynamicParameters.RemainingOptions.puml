@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DynamicParameters.RemainingOptions\n<size:10>elki.gui.util" as elki.gui.util.DynamicParameters.RemainingOptions [[DynamicParameters.RemainingOptions.html]]
+
+    class "<size:14>StringParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.StringParameter [[../../utilities/optionhandling/parameters/StringParameter.html]]
+    class "<size:14>DynamicParameters\n<size:10>elki.gui.util" as elki.gui.util.DynamicParameters [[DynamicParameters.html]]
+
+    elki.utilities.optionhandling.parameters.StringParameter <|-- elki.gui.util.DynamicParameters.RemainingOptions
+    elki.gui.util.DynamicParameters +-- elki.gui.util.DynamicParameters.RemainingOptions
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

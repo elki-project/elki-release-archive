@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="209px" preserveAspectRatio="none" style="width:561px;height:209px;background:#FFFFFF;" version="1.1" viewBox="0 0 561 209" width="561px" zoomAndPan="magnify"><defs/><g><!--MD5=[8b8dfbe616d549dea96110a98c296108]
+class tutorial.distancefunction.TutorialDistance--><a href="TutorialDistance.html" target="_top" title="TutorialDistance.html" xlink:actuate="onRequest" xlink:href="TutorialDistance.html" xlink:show="new" xlink:title="TutorialDistance.html" xlink:type="simple"><g id="elem_tutorial.distancefunction.TutorialDistance"><rect codeLine="6" fill="#F1F1F1" height="78.5313" id="tutorial.distancefunction.TutorialDistance" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="547" x="7" y="105"/><ellipse cx="218.25" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M221.2188,129.6094 Q220.6406,129.9063 220,130.0469 Q219.3594,130.2031 218.6563,130.2031 Q216.1563,130.2031 214.8281,128.5625 Q213.5156,126.9063 213.5156,123.7813 Q213.5156,120.6563 214.8281,119 Q216.1563,117.3438 218.6563,117.3438 Q219.3594,117.3438 220,117.5 Q220.6563,117.6563 221.2188,117.9531 L221.2188,120.6719 Q220.5938,120.0938 220,119.8281 Q219.4063,119.5469 218.7813,119.5469 Q217.4375,119.5469 216.75,120.625 Q216.0625,121.6875 216.0625,123.7813 Q216.0625,125.875 216.75,126.9531 Q217.4375,128.0156 218.7813,128.0156 Q219.4063,128.0156 220,127.75 Q220.5938,127.4688 221.2188,126.8906 L221.2188,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="240.75" y="122.9951">TutorialDistance</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="116" x="238.75" y="135.5791">tutorial.distancefunction</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="553" y1="142.9375" y2="142.9375"/><ellipse cx="18" cy="156.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="334" x="27" y="159.9326">distance(NumberVector, NumberVector): double</text><ellipse cx="18" cy="172.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="521" x="27" y="176.2295">getInputTypeRestriction(): SimpleTypeInformation&lt;? super NumberVector&gt;</text></g></a><!--MD5=[b1a010d4da3e8e2631d5f818e480f936]
+class elki.distance.AbstractNumberVectorDistance--><a href="../../elki/distance/AbstractNumberVectorDistance.html" target="_top" title="../../elki/distance/AbstractNumberVectorDistance.html" xlink:actuate="onRequest" xlink:href="../../elki/distance/AbstractNumberVectorDistance.html" xlink:show="new" xlink:title="../../elki/distance/AbstractNumberVectorDistance.html" xlink:type="simple"><g id="elem_elki.distance.AbstractNumberVectorDistance"><rect codeLine="11" fill="#F1F1F1" height="37.9375" id="elki.distance.AbstractNumberVectorDistance" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="255" x="153" y="7"/><ellipse cx="168" cy="25.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M168.1094,21.3125 L166.9531,26.3906 L169.2813,26.3906 L168.1094,21.3125 Z M166.625,19.0781 L169.6094,19.0781 L172.9688,31.4688 L170.5156,31.4688 L169.75,28.4063 L166.4688,28.4063 L165.7188,31.4688 L163.2813,31.4688 L166.625,19.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="223" x="182" y="24.9951">AbstractNumberVectorDistance</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="63" x="262" y="37.5791">elki.distance</text></g></a><!--MD5=[52517948fb759976fc6e8238415a888a]
+reverse link elki.distance.AbstractNumberVectorDistance to tutorial.distancefunction.TutorialDistance--><g id="link_elki.distance.AbstractNumberVectorDistance_tutorial.distancefunction.TutorialDistance"><path codeLine="13" d="M280.5,65.24 C280.5,77.9 280.5,92 280.5,104.71 " fill="none" id="elki.distance.AbstractNumberVectorDistance-backto-tutorial.distancefunction.TutorialDistance" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="273.5,65.2,280.5,45.2,287.5,65.2,273.5,65.2" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="180.5" y="189.5313"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="180.5" y="198.8135">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[69dd63ecf5d560b720a116fa7d59c4f1]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TutorialDistance\n<size:10>tutorial.distancefunction" as tutorial.distancefunction.TutorialDistance [[TutorialDistance.html]] {
+        +distance(NumberVector, NumberVector): double
+        +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../../elki/distance/AbstractNumberVectorDistance.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|- - tutorial.distancefunction.TutorialDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

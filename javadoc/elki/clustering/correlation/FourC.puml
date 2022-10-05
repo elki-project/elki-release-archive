@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FourC\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.FourC [[FourC.html]] {
+        +FourC(Settings)
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    class "<size:14>GeneralizedDBSCAN\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.GeneralizedDBSCAN [[../dbscan/GeneralizedDBSCAN.html]]
+    class "<size:14>FourC.Settings\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.FourC.Settings [[FourC.Settings.html]]
+    class "<size:14>FourC.Par\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.FourC.Par [[FourC.Par.html]]
+
+    elki.clustering.dbscan.GeneralizedDBSCAN <|-- elki.clustering.correlation.FourC
+    elki.clustering.correlation.FourC +-- elki.clustering.correlation.FourC.Settings
+    elki.clustering.correlation.FourC +-- elki.clustering.correlation.FourC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

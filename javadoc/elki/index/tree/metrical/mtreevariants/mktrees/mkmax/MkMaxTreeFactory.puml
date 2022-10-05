@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkMaxTreeFactory\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkmax" as elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeFactory<O> [[MkMaxTreeFactory.html]] {
+        +MkMaxTreeFactory(PageFileFactory<?>, MkTreeSettings<O, MkMaxTreeNode<O>, MkMaxEntry>)
+        +instantiate(Relation<O>): MkMaxTreeIndex<O>
+        #getNodeClass(): Class<MkMaxTreeNode<O>>
+    }
+
+    abstract class "<size:14>AbstractMkTreeUnifiedFactory\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory<O, MkMaxTreeNode<O>, MkMaxEntry, MkTreeSettings<O, MkMaxTreeNode<O>, MkMaxEntry>> [[../AbstractMkTreeUnifiedFactory.html]]
+    class "<size:14>MkMaxTreeFactory.Par\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkmax" as elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeFactory.Par<O>
+
+    elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeFactory
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeFactory +-- elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

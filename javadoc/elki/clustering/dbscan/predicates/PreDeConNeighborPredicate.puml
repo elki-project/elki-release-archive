@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PreDeConNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.PreDeConNeighborPredicate [[PreDeConNeighborPredicate.html]] {
+        {static} -LOG: Logging
+        -mvSize: MeanVariance
+        -mvVar: MeanVariance
+        -settings: Settings
+        +PreDeConNeighborPredicate(Settings)
+        +instantiate(Database): Instance
+        #computeLocalModel(DBIDRef, DoubleDBIDList, Relation<? extends NumberVector>): PreDeConModel
+        ~getLogger(): Logging
+        +getOutputType(): SimpleTypeInformation<PreDeConModel>
+    }
+
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate<NumberVector, PreDeConModel, PreDeConModel> [[AbstractRangeQueryNeighborPredicate.html]] {
+        {abstract} #computeLocalModel(DBIDRef, DoubleDBIDList, Relation<? extends O>): PreDeConModel
+        {abstract} ~getLogger(): Logging
+    }
+    class "<size:14>PreDeConNeighborPredicate.PreDeConModel\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.PreDeConModel [[PreDeConNeighborPredicate.PreDeConModel.html]]
+    class "<size:14>PreDeConNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.Instance [[PreDeConNeighborPredicate.Instance.html]]
+    class "<size:14>PreDeConNeighborPredicate.Par\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.Par [[PreDeConNeighborPredicate.Par.html]]
+
+    elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate <|-- elki.clustering.dbscan.predicates.PreDeConNeighborPredicate
+    elki.clustering.dbscan.predicates.PreDeConNeighborPredicate +-- elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.PreDeConModel
+    elki.clustering.dbscan.predicates.PreDeConNeighborPredicate +-- elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.Instance
+    elki.clustering.dbscan.predicates.PreDeConNeighborPredicate +-- elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

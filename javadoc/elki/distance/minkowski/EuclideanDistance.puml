@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EuclideanDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.EuclideanDistance [[EuclideanDistance.html]] {
+        {static} +STATIC: EuclideanDistance
+        -preDistance(NumberVector, NumberVector, int, int): double
+        -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+        -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+        -preNorm(NumberVector, int, int): double
+        -preNormMBR(SpatialComparable, int, int): double
+        +distance(NumberVector, NumberVector): double
+        +norm(NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +maxDist(SpatialComparable, SpatialComparable): double
+        +isMetric(): boolean
+    }
+
+    class "<size:14>LPIntegerNormDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.LPIntegerNormDistance [[LPIntegerNormDistance.html]]
+    class "<size:14>EuclideanDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.EuclideanDistance.Par [[EuclideanDistance.Par.html]]
+
+    elki.distance.minkowski.LPIntegerNormDistance <|-- elki.distance.minkowski.EuclideanDistance
+    elki.distance.minkowski.EuclideanDistance +-- elki.distance.minkowski.EuclideanDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

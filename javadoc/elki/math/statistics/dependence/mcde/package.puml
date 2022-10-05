@@ -1,0 +1,49 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.statistics.dependence.mcde {
+
+        interface MCDETest<R extends RankStruct> [[MCDETest.html]] {
+            {abstract} +correctedRanks(NumberArrayAdapter<?, A>, A, int): R extends RankStruct
+            {abstract} +statisticalTest(int, int, boolean[], R extends RankStruct): double
+        }
+
+        class elki.math.statistics.dependence.mcde.MCDETest.RankStruct [[MCDETest.RankStruct.html]] {
+            +index: int[]
+            +RankStruct(int[])
+        }
+
+        class MWPTest [[MWPTest.html]] {
+            #rnd: RandomFactory
+            +correctedRanks(NumberArrayAdapter<?, A>, A, int): MWPRanking
+            +statisticalTest(int, int, boolean[], MWPRanking): double
+            #getSafeCut(int, double[]): int
+        }
+
+        class elki.math.statistics.dependence.mcde.MWPTest.MWPRanking [[MWPTest.MWPRanking.html]] {
+            #correction: long[]
+            #adjusted: double[]
+            +MWPRanking(int[])
+        }
+
+        class elki.math.statistics.dependence.mcde.MWPTest.Par [[MWPTest.Par.html]] {
+            +make(): MWPTest
+        }
+
+        MCDETest +-- elki.math.statistics.dependence.mcde.MCDETest.RankStruct
+        MCDETest <|.. MWPTest
+        MWPTest --> MWPTest: STATIC
+        elki.math.statistics.dependence.mcde.MCDETest.RankStruct <|-- elki.math.statistics.dependence.mcde.MWPTest.MWPRanking
+        MWPTest +-- elki.math.statistics.dependence.mcde.MWPTest.MWPRanking
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.mcde.MWPTest.Par
+        MWPTest +-- elki.math.statistics.dependence.mcde.MWPTest.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

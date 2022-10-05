@@ -1,0 +1,45 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TextbookMultivariateGaussianModel\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.TextbookMultivariateGaussianModel [[TextbookMultivariateGaussianModel.html]] {
+        ~mean: double[]
+        ~covariance: double[]
+        ~chol: CholeskyDecomposition
+        ~tmp: double[]
+        ~logNorm: double
+        ~logNormDet: double
+        ~weight: double
+        ~wsum: double
+        ~priormatrix: double[]
+        +TextbookMultivariateGaussianModel(double, double[])
+        +TextbookMultivariateGaussianModel(double, double[], double[])
+        +beginEStep(): void
+        +updateE(NumberVector, double): void
+        +updateE(double[], double[], double, double): void
+        +finalizeEStep(double, double): void
+        +mahalanobisDistance(NumberVector): double
+        +estimateLogDensity(NumberVector): double
+        +getWeight(): double
+        +setWeight(double): void
+        +finalizeCluster(): EMModel
+        +clone(TextbookMultivariateGaussianModel): void
+        +calculateModelLimits(double[], double[], ConstrainedQuadraticProblemSolver, double, double[], double[], double[]): void
+    }
+
+    interface "<size:14>EMClusterModel\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.EMClusterModel<NumberVector, EMModel> [[EMClusterModel.html]] {
+        {abstract} +beginEStep(): void
+        {abstract} +updateE(NumberVector, double): void
+        {abstract} +finalizeEStep(double, double): void
+        {abstract} +estimateLogDensity(NumberVector): double
+        {abstract} +finalizeCluster(): EMModel
+        {abstract} +getWeight(): double
+        {abstract} +setWeight(double): void
+    }
+
+    elki.clustering.em.models.EMClusterModel <|.. elki.clustering.em.models.TextbookMultivariateGaussianModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

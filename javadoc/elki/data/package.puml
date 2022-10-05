@@ -1,0 +1,970 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.data {
+
+        class Cluster<M extends Model> [[Cluster.html]] {
+            #name: String
+            -ids: DBIDs
+            -noise: boolean
+            {static} +BY_NAME_SORTER: Comparator<Cluster<?>>
+            +Cluster(String, DBIDs, boolean, M extends Model)
+            +Cluster(String, DBIDs, M extends Model)
+            +Cluster(DBIDs, boolean, M extends Model)
+            +Cluster(DBIDs, M extends Model)
+            +Cluster(String, DBIDs, boolean)
+            +Cluster(String, DBIDs)
+            +Cluster(DBIDs, boolean)
+            +Cluster(DBIDs)
+            +size(): int
+            +getNameAutomatic(): String
+            +getName(): String
+            +setName(String): void
+            +getIDs(): DBIDs
+            +setIDs(DBIDs): void
+            +writeToText(TextWriterStream, String): void
+            +isNoise(): boolean
+            +setNoise(boolean): void
+        }
+
+        class Clustering<M extends Model> [[Clustering.html]] {
+            -hierarchy: ModifiableHierarchy<Cluster<M extends Model>>
+            +Clustering(List<Cluster<M extends Model>>)
+            +Clustering()
+            +addToplevelCluster(Cluster<M extends Model>): void
+            +addChildCluster(Cluster<M extends Model>, Cluster<M extends Model>): void
+            +getClusterHierarchy(): Hierarchy<Cluster<M extends Model>>
+            +iterToplevelClusters(): It<Cluster<M extends Model>>
+            {static} +getClusteringResults(Object): List<Clustering<? extends Model>>
+        }
+
+        class Subspace [[Subspace.html]] {
+            -dimensions: long[]
+            -dimensionality: int
+            {static} +DIMENSION_COMPARATOR: Comparator<Subspace>
+            +Subspace(int)
+            +Subspace(long[])
+            +getDimensions(): long[]
+            +dimensionality(): int
+            +join(Subspace): Subspace
+            +dimensionsToString(): String
+            +dimensonsToString(String): String
+            +isSubspace(Subspace): boolean
+            #joinLastDimensions(Subspace): long[]
+        }
+
+        class BitVector [[BitVector.html]] {
+            {static} +SHORT_SERIALIZER: ByteBufferSerializer<BitVector>
+            -bits: long[]
+            -dimensionality: int
+            +BitVector(long[], int)
+            +getDimensionality(): int
+            +setDimensionality(int): void
+            +booleanValue(int): boolean
+            +--getValue--(int): Bit
+            +doubleValue(int): double
+            +longValue(int): long
+            +iter(): int
+            +iterAdvance(int): int
+            +iterRetract(int): int
+            +iterValid(int): boolean
+            +iterDim(int): int
+            +iterDoubleValue(int): double
+            +iterLongValue(int): long
+            +toArray(): double[]
+            +contains(long[]): boolean
+            +cloneBits(): long[]
+            +cardinality(): int
+            +jaccardSimilarity(BitVector): double
+            +hammingDistance(BitVector): int
+            +intersectionSize(BitVector): int
+            +unionSize(BitVector): int
+            +intersect(BitVector): boolean
+            +andOnto(long[]): void
+            +orOnto(long[]): void
+            +xorOnto(long[]): void
+        }
+
+        class elki.data.BitVector.Factory [[BitVector.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): BitVector
+            +newNumberVector(A, NumberArrayAdapter<?, ? super A>): BitVector
+            +newNumberVector(Int2DoubleOpenHashMap, int): BitVector
+            +getDefaultSerializer(): ByteBufferSerializer<BitVector>
+            +getRestrictionClass(): Class<? super BitVector>
+        }
+
+        class elki.data.BitVector.Factory.Par [[BitVector.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class elki.data.BitVector.ShortSerializer [[BitVector.ShortSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): BitVector
+            +toByteBuffer(ByteBuffer, BitVector): void
+            +getByteSize(BitVector): int
+        }
+
+        class Bit [[Bit.html]] {
+            {static} -serialVersionUID: long
+            {static} +BIT_PATTERN: Pattern
+            -bit: boolean
+            +--Bit--(boolean)
+            +--Bit--(int)
+            {static} +valueOf(String): Bit
+            {static} +valueOf(boolean): Bit
+            +intValue(): int
+            +longValue(): long
+            +floatValue(): float
+            +doubleValue(): double
+            +bitValue(): boolean
+        }
+
+        abstract class ClassLabel [[ClassLabel.html]]
+
+        abstract class elki.data.ClassLabel.Factory<L extends ClassLabel> [[ClassLabel.Factory.html]] {
+            #existing: HashMap<String, L extends ClassLabel>
+            {abstract} +makeFromString(String): L extends ClassLabel
+            {abstract} +getTypeInformation(): SimpleTypeInformation<? super ClassLabel>
+        }
+
+        class IntegerVector [[IntegerVector.html]] {
+            {static} +BYTE_SERIALIZER: ByteBufferSerializer<IntegerVector>
+            {static} +SHORT_SERIALIZER: ByteBufferSerializer<IntegerVector>
+            {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<IntegerVector>
+            -values: int[]
+            -IntegerVector(int[], boolean)
+            +IntegerVector(int[])
+            +getDimensionality(): int
+            +--getValue--(int): Integer
+            +doubleValue(int): double
+            +longValue(int): long
+            +intValue(int): int
+            +toArray(): double[]
+        }
+
+        class elki.data.IntegerVector.Factory [[IntegerVector.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): IntegerVector
+            +newNumberVector(A, NumberArrayAdapter<?, ? super A>): IntegerVector
+            +getDefaultSerializer(): ByteBufferSerializer<IntegerVector>
+            +getRestrictionClass(): Class<? super IntegerVector>
+        }
+
+        class elki.data.IntegerVector.Factory.Par [[IntegerVector.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class elki.data.IntegerVector.SmallSerializer [[IntegerVector.SmallSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): IntegerVector
+            +toByteBuffer(ByteBuffer, IntegerVector): void
+            +getByteSize(IntegerVector): int
+        }
+
+        class elki.data.IntegerVector.ShortSerializer [[IntegerVector.ShortSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): IntegerVector
+            +toByteBuffer(ByteBuffer, IntegerVector): void
+            +getByteSize(IntegerVector): int
+        }
+
+        class elki.data.IntegerVector.VariableSerializer [[IntegerVector.VariableSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): IntegerVector
+            +toByteBuffer(ByteBuffer, IntegerVector): void
+            +getByteSize(IntegerVector): int
+        }
+
+        class ExternalID [[ExternalID.html]] {
+            -name: String
+            +ExternalID(String)
+        }
+
+        class HierarchicalClassLabel [[HierarchicalClassLabel.html]] {
+            {static} +DEFAULT_SEPARATOR: Pattern
+            {static} +DEFAULT_SEPARATOR_STRING: String
+            -separatorPattern: Pattern
+            -separatorString: String
+            -levelwiseNames: Comparable<?>[]
+            +HierarchicalClassLabel(String, Pattern, String)
+            +HierarchicalClassLabel(String)
+            +compareTo(ClassLabel): int
+            +depth(): int
+            +getNameAt(int): String
+            +toString(int): String
+        }
+
+        class elki.data.HierarchicalClassLabel.Factory [[HierarchicalClassLabel.Factory.html]] {
+            +makeFromString(String): HierarchicalClassLabel
+        }
+
+        class SparseDoubleVector [[SparseDoubleVector.html]] {
+            {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<SparseDoubleVector>
+            {static} -DOUBLE0: double
+            -indexes: int[]
+            -values: double[]
+            -dimensionality: int
+            +SparseDoubleVector(int[], double[], int)
+            +SparseDoubleVector(Int2DoubleOpenHashMap, int)
+            +SparseDoubleVector(double[])
+            -getMaxDim(): int
+            +getDimensionality(): int
+            +setDimensionality(int): void
+            +--getValue--(int): Double
+            +--doubleValue--(int): double
+            +--longValue--(int): long
+            +toArray(): double[]
+            +iterDim(int): int
+            +iterValid(int): boolean
+            +iterDoubleValue(int): double
+            +iterLongValue(int): long
+        }
+
+        class elki.data.SparseDoubleVector.Factory [[SparseDoubleVector.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): SparseDoubleVector
+            +newNumberVector(A, NumberArrayAdapter<?, ? super A>): SparseDoubleVector
+            +newNumberVector(Int2DoubleOpenHashMap, int): SparseDoubleVector
+            +getDefaultSerializer(): ByteBufferSerializer<SparseDoubleVector>
+            +getRestrictionClass(): Class<? super SparseDoubleVector>
+        }
+
+        class elki.data.SparseDoubleVector.Factory.Par [[SparseDoubleVector.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class elki.data.SparseDoubleVector.VariableSerializer [[SparseDoubleVector.VariableSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): SparseDoubleVector
+            +toByteBuffer(ByteBuffer, SparseDoubleVector): void
+            +getByteSize(SparseDoubleVector): int
+        }
+
+        class ShortVector [[ShortVector.html]] {
+            {static} +SHORT_SERIALIZER: ByteBufferSerializer<ShortVector>
+            {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<ShortVector>
+            -values: short[]
+            -ShortVector(short[], boolean)
+            +ShortVector(short[])
+            +getDimensionality(): int
+            +--getValue--(int): Short
+            +doubleValue(int): double
+            +longValue(int): long
+            +shortValue(int): short
+            +getValues(): short[]
+            +toArray(): double[]
+        }
+
+        class elki.data.ShortVector.Factory [[ShortVector.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): ShortVector
+            +newNumberVector(A, NumberArrayAdapter<?, ? super A>): ShortVector
+            +getDefaultSerializer(): ByteBufferSerializer<ShortVector>
+            +getRestrictionClass(): Class<? super ShortVector>
+        }
+
+        class elki.data.ShortVector.Factory.Par [[ShortVector.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class elki.data.ShortVector.ShortSerializer [[ShortVector.ShortSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): ShortVector
+            +toByteBuffer(ByteBuffer, ShortVector): void
+            +getByteSize(ShortVector): int
+        }
+
+        class elki.data.ShortVector.VariableSerializer [[ShortVector.VariableSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): ShortVector
+            +toByteBuffer(ByteBuffer, ShortVector): void
+            +getByteSize(ShortVector): int
+        }
+
+        class SparseShortVector [[SparseShortVector.html]] {
+            {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<SparseShortVector>
+            {static} -SHORT0: short
+            -indexes: int[]
+            -values: short[]
+            -dimensionality: int
+            +SparseShortVector(int[], short[], int)
+            +SparseShortVector(Int2DoubleOpenHashMap, int)
+            +SparseShortVector(short[])
+            -getMaxDim(): int
+            +getDimensionality(): int
+            +setDimensionality(int): void
+            +--getValue--(int): Short
+            +--doubleValue--(int): double
+            +--longValue--(int): long
+            +--shortValue--(int): short
+            +toArray(): double[]
+            +iterDim(int): int
+            +iterValid(int): boolean
+            +iterDoubleValue(int): double
+            +iterShortValue(int): short
+            +iterLongValue(int): long
+        }
+
+        class elki.data.SparseShortVector.Factory [[SparseShortVector.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): SparseShortVector
+            +newNumberVector(A, NumberArrayAdapter<?, ? super A>): SparseShortVector
+            +newNumberVector(Int2DoubleOpenHashMap, int): SparseShortVector
+            +getDefaultSerializer(): ByteBufferSerializer<SparseShortVector>
+            +getRestrictionClass(): Class<? super SparseShortVector>
+        }
+
+        class elki.data.SparseShortVector.Factory.Par [[SparseShortVector.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class elki.data.SparseShortVector.VariableSerializer [[SparseShortVector.VariableSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): SparseShortVector
+            +toByteBuffer(ByteBuffer, SparseShortVector): void
+            +getByteSize(SparseShortVector): int
+        }
+
+        class SparseIntegerVector [[SparseIntegerVector.html]] {
+            {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<SparseIntegerVector>
+            {static} -INT0: int
+            -indexes: int[]
+            -values: int[]
+            -dimensionality: int
+            +SparseIntegerVector(int[], int[], int)
+            +SparseIntegerVector(Int2DoubleOpenHashMap, int)
+            +SparseIntegerVector(int[])
+            -getMaxDim(): int
+            +getDimensionality(): int
+            +setDimensionality(int): void
+            +--getValue--(int): Integer
+            +--doubleValue--(int): double
+            +--longValue--(int): long
+            +--intValue--(int): int
+            +toArray(): double[]
+            +iterDim(int): int
+            +iterValid(int): boolean
+            +iterDoubleValue(int): double
+            +iterIntValue(int): int
+            +iterLongValue(int): long
+        }
+
+        class elki.data.SparseIntegerVector.Factory [[SparseIntegerVector.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): SparseIntegerVector
+            +newNumberVector(A, NumberArrayAdapter<?, ? super A>): SparseIntegerVector
+            +newNumberVector(Int2DoubleOpenHashMap, int): SparseIntegerVector
+            +getDefaultSerializer(): ByteBufferSerializer<SparseIntegerVector>
+            +getRestrictionClass(): Class<? super SparseIntegerVector>
+        }
+
+        class elki.data.SparseIntegerVector.Factory.Par [[SparseIntegerVector.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class elki.data.SparseIntegerVector.VariableSerializer [[SparseIntegerVector.VariableSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): SparseIntegerVector
+            +toByteBuffer(ByteBuffer, SparseIntegerVector): void
+            +getByteSize(SparseIntegerVector): int
+        }
+
+        class SparseByteVector [[SparseByteVector.html]] {
+            {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<SparseByteVector>
+            -indexes: int[]
+            -values: byte[]
+            -dimensionality: int
+            {static} -BYTE0: Byte
+            +SparseByteVector(int[], byte[], int)
+            +SparseByteVector(Int2DoubleOpenHashMap, int)
+            +SparseByteVector(byte[])
+            -getMaxDim(): int
+            +getDimensionality(): int
+            +setDimensionality(int): void
+            +--getValue--(int): Byte
+            +--doubleValue--(int): double
+            +--longValue--(int): long
+            +byteValue(int): byte
+            +toArray(): double[]
+            +iterDim(int): int
+            +iterValid(int): boolean
+            +iterDoubleValue(int): double
+            +iterLongValue(int): long
+            +iterByteValue(int): byte
+        }
+
+        class elki.data.SparseByteVector.Factory [[SparseByteVector.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): SparseByteVector
+            +newNumberVector(A, NumberArrayAdapter<?, ? super A>): SparseByteVector
+            +newNumberVector(Int2DoubleOpenHashMap, int): SparseByteVector
+            +getDefaultSerializer(): ByteBufferSerializer<SparseByteVector>
+            +getRestrictionClass(): Class<? super SparseByteVector>
+        }
+
+        class elki.data.SparseByteVector.Factory.Par [[SparseByteVector.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class elki.data.SparseByteVector.VariableSerializer [[SparseByteVector.VariableSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): SparseByteVector
+            +toByteBuffer(ByteBuffer, SparseByteVector): void
+            +getByteSize(SparseByteVector): int
+        }
+
+        class FloatVector [[FloatVector.html]] {
+            {static} +BYTE_SERIALIZER: ByteBufferSerializer<FloatVector>
+            {static} +SHORT_SERIALIZER: ByteBufferSerializer<FloatVector>
+            {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<FloatVector>
+            -values: float[]
+            -FloatVector(float[], boolean)
+            +FloatVector(float[])
+            +getDimensionality(): int
+            +--getValue--(int): Float
+            +doubleValue(int): double
+            +floatValue(int): float
+            +longValue(int): long
+            +toArray(): double[]
+        }
+
+        class elki.data.FloatVector.Factory [[FloatVector.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): FloatVector
+            +newNumberVector(A, NumberArrayAdapter<?, ? super A>): FloatVector
+            +getDefaultSerializer(): ByteBufferSerializer<FloatVector>
+            +getRestrictionClass(): Class<? super FloatVector>
+        }
+
+        class elki.data.FloatVector.Factory.Par [[FloatVector.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class elki.data.FloatVector.SmallSerializer [[FloatVector.SmallSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): FloatVector
+            +toByteBuffer(ByteBuffer, FloatVector): void
+            +getByteSize(FloatVector): int
+        }
+
+        class elki.data.FloatVector.ShortSerializer [[FloatVector.ShortSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): FloatVector
+            +toByteBuffer(ByteBuffer, FloatVector): void
+            +getByteSize(FloatVector): int
+        }
+
+        class elki.data.FloatVector.VariableSerializer [[FloatVector.VariableSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): FloatVector
+            +toByteBuffer(ByteBuffer, FloatVector): void
+            +getByteSize(FloatVector): int
+        }
+
+        class SimpleClassLabel [[SimpleClassLabel.html]] {
+            {static} +SERIALIZER: ByteBufferSerializer<SimpleClassLabel>
+            -label: String
+            +SimpleClassLabel(String)
+            +compareTo(ClassLabel): int
+        }
+
+        class elki.data.SimpleClassLabel.Serializer [[SimpleClassLabel.Serializer.html]] {
+            +fromByteBuffer(ByteBuffer): SimpleClassLabel
+            +toByteBuffer(ByteBuffer, SimpleClassLabel): void
+            +getByteSize(SimpleClassLabel): int
+        }
+
+        class elki.data.SimpleClassLabel.Factory [[SimpleClassLabel.Factory.html]] {
+            +makeFromString(String): SimpleClassLabel
+        }
+
+        class LabelList [[LabelList.html]] {
+            {static} +SERIALIZER: ByteBufferSerializer<LabelList>
+            -labels: String[]
+            -LabelList(int)
+            #LabelList(String[])
+            {static} +make(Collection<String>): LabelList
+            +size(): int
+            +get(int): String
+        }
+
+        class elki.data.LabelList.Serializer [[LabelList.Serializer.html]] {
+            +fromByteBuffer(ByteBuffer): LabelList
+            +toByteBuffer(ByteBuffer, LabelList): void
+            +getByteSize(LabelList): int
+        }
+
+        class SparseFloatVector [[SparseFloatVector.html]] {
+            {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<SparseFloatVector>
+            {static} -FLOAT0: float
+            -indexes: int[]
+            -values: float[]
+            -dimensionality: int
+            +SparseFloatVector(int[], float[], int)
+            +SparseFloatVector(Int2FloatOpenHashMap, int)
+            +SparseFloatVector(float[])
+            -getMaxDim(): int
+            +getDimensionality(): int
+            +setDimensionality(int): void
+            +--getValue--(int): Float
+            +--doubleValue--(int): double
+            +--floatValue--(int): float
+            +--longValue--(int): long
+            +toArray(): double[]
+            +iterDim(int): int
+            +iterValid(int): boolean
+            +iterDoubleValue(int): double
+            +iterFloatValue(int): float
+            +iterLongValue(int): long
+        }
+
+        class elki.data.SparseFloatVector.Factory [[SparseFloatVector.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): SparseFloatVector
+            +newNumberVector(A, NumberArrayAdapter<?, ? super A>): SparseFloatVector
+            +newNumberVector(Int2DoubleOpenHashMap, int): SparseFloatVector
+            +getDefaultSerializer(): ByteBufferSerializer<SparseFloatVector>
+            +getRestrictionClass(): Class<? super SparseFloatVector>
+        }
+
+        class elki.data.SparseFloatVector.Factory.Par [[SparseFloatVector.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class elki.data.SparseFloatVector.VariableSerializer [[SparseFloatVector.VariableSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): SparseFloatVector
+            +toByteBuffer(ByteBuffer, SparseFloatVector): void
+            +getByteSize(SparseFloatVector): int
+        }
+
+        class DoubleVector [[DoubleVector.html]] {
+            {static} +BYTE_SERIALIZER: ByteBufferSerializer<DoubleVector>
+            {static} +SHORT_SERIALIZER: ByteBufferSerializer<DoubleVector>
+            {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<DoubleVector>
+            -values: double[]
+            -DoubleVector(double[], boolean)
+            +DoubleVector(double[])
+            +getDimensionality(): int
+            +doubleValue(int): double
+            +longValue(int): long
+            +toArray(): double[]
+            {static} +copy(double[]): DoubleVector
+            {static} +wrap(double[]): DoubleVector
+        }
+
+        class elki.data.DoubleVector.Factory [[DoubleVector.Factory.html]] {
+            +newNumberVector(double[]): DoubleVector
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): DoubleVector
+            +newNumberVector(A, NumberArrayAdapter<?, ? super A>): DoubleVector
+            +getDefaultSerializer(): ByteBufferSerializer<DoubleVector>
+            +getRestrictionClass(): Class<? super DoubleVector>
+        }
+
+        class elki.data.DoubleVector.Factory.Par [[DoubleVector.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class elki.data.DoubleVector.SmallSerializer [[DoubleVector.SmallSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): DoubleVector
+            +toByteBuffer(ByteBuffer, DoubleVector): void
+            +getByteSize(DoubleVector): int
+        }
+
+        class elki.data.DoubleVector.ShortSerializer [[DoubleVector.ShortSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): DoubleVector
+            +toByteBuffer(ByteBuffer, DoubleVector): void
+            +getByteSize(DoubleVector): int
+        }
+
+        class elki.data.DoubleVector.VariableSerializer [[DoubleVector.VariableSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): DoubleVector
+            +toByteBuffer(ByteBuffer, DoubleVector): void
+            +getByteSize(DoubleVector): int
+        }
+
+        class ByteVector [[ByteVector.html]] {
+            {static} +BYTE_SERIALIZER: ByteBufferSerializer<ByteVector>
+            {static} +SHORT_SERIALIZER: ByteBufferSerializer<ByteVector>
+            -values: byte[]
+            -ByteVector(byte[], boolean)
+            +ByteVector(byte[])
+            +getDimensionality(): int
+            +--getValue--(int): Byte
+            +doubleValue(int): double
+            +longValue(int): long
+            +byteValue(int): byte
+            +getValues(): byte[]
+            +toArray(): double[]
+        }
+
+        class elki.data.ByteVector.Factory [[ByteVector.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): ByteVector
+            +newNumberVector(A, NumberArrayAdapter<?, ? super A>): ByteVector
+            +getDefaultSerializer(): ByteBufferSerializer<ByteVector>
+            +getRestrictionClass(): Class<? super ByteVector>
+        }
+
+        class elki.data.ByteVector.Factory.Par [[ByteVector.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class elki.data.ByteVector.SmallSerializer [[ByteVector.SmallSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): ByteVector
+            +toByteBuffer(ByteBuffer, ByteVector): void
+            +getByteSize(ByteVector): int
+        }
+
+        class elki.data.ByteVector.ShortSerializer [[ByteVector.ShortSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): ByteVector
+            +toByteBuffer(ByteBuffer, ByteVector): void
+            +getByteSize(ByteVector): int
+        }
+
+        class OneDimensionalDoubleVector [[OneDimensionalDoubleVector.html]] {
+            ~val: double
+            +OneDimensionalDoubleVector(double)
+            +getDimensionality(): int
+            +doubleValue(int): double
+            +longValue(int): long
+            +toArray(): double[]
+        }
+
+        class elki.data.OneDimensionalDoubleVector.Factory [[OneDimensionalDoubleVector.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): OneDimensionalDoubleVector
+            +newNumberVector(A, NumberArrayAdapter<?, ? super A>): OneDimensionalDoubleVector
+            +getDefaultSerializer(): ByteBufferSerializer<OneDimensionalDoubleVector>
+            +getRestrictionClass(): Class<? super OneDimensionalDoubleVector>
+        }
+
+        class elki.data.OneDimensionalDoubleVector.Factory.Par [[OneDimensionalDoubleVector.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class VectorUtil [[VectorUtil.html]] {
+            {static} +randomVector(Factory<V extends NumberVector>, int, Random): V extends NumberVector
+            {static} +randomVector(Factory<V extends NumberVector>, int): V extends NumberVector
+            {static} +angleDense(NumberVector, NumberVector): double
+            {static} +angleSparse(SparseNumberVector, SparseNumberVector): double
+            {static} +angleSparseDense(SparseNumberVector, NumberVector): double
+            {static} +cosAngle(NumberVector, NumberVector): double
+            {static} +minCosAngle(SpatialComparable, SpatialComparable): double
+            {static} +angle(NumberVector, NumberVector, NumberVector): double
+            {static} +dotDense(NumberVector, NumberVector): double
+            {static} +dotDense(NumberVector, double[]): double
+            {static} +dotSparse(SparseNumberVector, SparseNumberVector): double
+            {static} +dotSparseDense(SparseNumberVector, NumberVector): double
+            {static} +dotSparseDense(SparseNumberVector, double[]): double
+            {static} +dot(NumberVector, NumberVector): double
+            {static} +dot(NumberVector, double[]): double
+            {static} +minDot(SpatialComparable, SpatialComparable): double
+            {static} +project(V extends NumberVector, long[], Factory<V extends NumberVector>): V extends NumberVector
+        }
+
+        class elki.data.VectorUtil.SortDBIDsBySingleDimension [[VectorUtil.SortDBIDsBySingleDimension.html]] {
+            -d: int
+            -data: Relation<? extends NumberVector>
+            +SortDBIDsBySingleDimension(Relation<? extends NumberVector>, int)
+            +SortDBIDsBySingleDimension(Relation<? extends NumberVector>)
+            +getDimension(): int
+            +setDimension(int): void
+            +compare(DBIDRef, DBIDRef): int
+        }
+
+        class elki.data.VectorUtil.SortVectorsBySingleDimension [[VectorUtil.SortVectorsBySingleDimension.html]] {
+            -d: int
+            +SortVectorsBySingleDimension(int)
+            +SortVectorsBySingleDimension()
+            +getDimension(): int
+            +setDimension(int): void
+            +compare(NumberVector, NumberVector): int
+        }
+
+        interface SparseNumberVector [[SparseNumberVector.html]] {
+            +iter(): int
+            {abstract} +setDimensionality(int): void
+            {abstract} +iterDoubleValue(int): double
+            +iterFloatValue(int): float
+            +iterIntValue(int): int
+            +iterShortValue(int): short
+            {abstract} +iterLongValue(int): long
+            +iterByteValue(int): byte
+            {abstract} +--doubleValue--(int): double
+            +--floatValue--(int): float
+            +--intValue--(int): int
+            {abstract} +--longValue--(int): long
+            +--shortValue--(int): short
+            +--byteValue--(int): byte
+        }
+
+        interface elki.data.SparseNumberVector.Factory<V extends SparseNumberVector> [[SparseNumberVector.Factory.html]] {
+            {abstract} +newNumberVector(Int2DoubleOpenHashMap, int): V extends SparseNumberVector
+        }
+
+        interface FeatureVector<D> [[FeatureVector.html]] {
+            {abstract} +getDimensionality(): int
+            {abstract} +getValue(int): D
+        }
+
+        interface elki.data.FeatureVector.Factory<V extends FeatureVector<? extends D>, D> [[FeatureVector.Factory.html]] {
+            {abstract} +newFeatureVector(A, ArrayAdapter<? extends D, A>): V extends FeatureVector<? extends D>
+            {abstract} +getDefaultSerializer(): ByteBufferSerializer<V extends FeatureVector<? extends D>>
+            {abstract} +getRestrictionClass(): Class<? super FeatureVector<? extends D>>
+        }
+
+        interface SparseFeatureVector<D> [[SparseFeatureVector.html]] {
+            +iter(): int
+            {abstract} +iterDim(int): int
+            +iterAdvance(int): int
+            +iterRetract(int): int
+            {abstract} +iterValid(int): boolean
+        }
+
+        interface NumberVector [[NumberVector.html]] {
+            {static} +ATTRIBUTE_SEPARATOR: String
+            +--getValue--(int): Number
+            +getMin(int): double
+            +getMax(int): double
+            {abstract} +doubleValue(int): double
+            +floatValue(int): float
+            +intValue(int): int
+            {abstract} +longValue(int): long
+            +shortValue(int): short
+            +byteValue(int): byte
+            {abstract} +toArray(): double[]
+        }
+
+        interface elki.data.NumberVector.Factory<V extends NumberVector> [[NumberVector.Factory.html]] {
+            +newNumberVector(double[]): V extends NumberVector
+            +newNumberVector(NumberVector): V extends NumberVector
+            {abstract} +newNumberVector(A, NumberArrayAdapter<?, ? super A>): V extends NumberVector
+        }
+
+        class HyperBoundingBox [[HyperBoundingBox.html]] {
+            {static} -serialVersionUID: long
+            ~min: double[]
+            ~max: double[]
+            +HyperBoundingBox()
+            +HyperBoundingBox(double[], double[])
+            +HyperBoundingBox(SpatialComparable)
+            +getMin(int): double
+            +getMax(int): double
+            +getDimensionality(): int
+            +toString(String, NumberFormat): String
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        class ModifiableHyperBoundingBox [[ModifiableHyperBoundingBox.html]] {
+            {static} -serialVersionUID: long
+            +ModifiableHyperBoundingBox()
+            +ModifiableHyperBoundingBox(SpatialComparable)
+            +ModifiableHyperBoundingBox(double[], double[])
+            +ModifiableHyperBoundingBox(int, double, double)
+            +setMax(int, double): void
+            +setMin(int, double): void
+            +getMinRef(): double[]
+            +getMaxRef(): double[]
+            +set(SpatialComparable): void
+            +extend(SpatialComparable): boolean
+        }
+
+        elki.result.textwriter.TextWriteable <|.. Cluster
+        Cluster --> elki.data.model.Model: model
+        Clustering --> elki.data.type.SimpleTypeInformation: TYPE
+        Clustering --> "*" Cluster: toplevelclusters\ntoplevelClusters\nallClusters
+        SparseNumberVector <|.. BitVector
+        BitVector --> elki.data.BitVector.Factory: FACTORY
+        elki.data.SparseNumberVector.Factory <|.. elki.data.BitVector.Factory
+        BitVector +-- elki.data.BitVector.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.BitVector.Factory.Par
+        elki.data.BitVector.Factory +-- elki.data.BitVector.Factory.Par
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.BitVector.ShortSerializer
+        BitVector +-- elki.data.BitVector.ShortSerializer
+        java.lang.Number <|-- Bit
+        Bit --> Bit: TRUE\nFALSE
+        java.lang.Comparable <|.. ClassLabel
+        ClassLabel +-- elki.data.ClassLabel.Factory
+        NumberVector <|.. IntegerVector
+        IntegerVector --> elki.data.IntegerVector.Factory: STATIC
+        elki.data.NumberVector.Factory <|.. elki.data.IntegerVector.Factory
+        IntegerVector +-- elki.data.IntegerVector.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.IntegerVector.Factory.Par
+        elki.data.IntegerVector.Factory +-- elki.data.IntegerVector.Factory.Par
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.IntegerVector.SmallSerializer
+        IntegerVector +-- elki.data.IntegerVector.SmallSerializer
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.IntegerVector.ShortSerializer
+        IntegerVector +-- elki.data.IntegerVector.ShortSerializer
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.IntegerVector.VariableSerializer
+        IntegerVector +-- elki.data.IntegerVector.VariableSerializer
+        ClassLabel <|-- HierarchicalClassLabel
+        HierarchicalClassLabel --> elki.data.type.SimpleTypeInformation: TYPE
+        elki.data.ClassLabel.Factory <|-- elki.data.HierarchicalClassLabel.Factory
+        HierarchicalClassLabel +-- elki.data.HierarchicalClassLabel.Factory
+        elki.data.HierarchicalClassLabel.Factory --> elki.data.type.SimpleTypeInformation: typeInformation
+        SparseNumberVector <|.. SparseDoubleVector
+        SparseDoubleVector --> elki.data.SparseDoubleVector.Factory: FACTORY
+        elki.data.SparseNumberVector.Factory <|.. elki.data.SparseDoubleVector.Factory
+        SparseDoubleVector +-- elki.data.SparseDoubleVector.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.SparseDoubleVector.Factory.Par
+        elki.data.SparseDoubleVector.Factory +-- elki.data.SparseDoubleVector.Factory.Par
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.SparseDoubleVector.VariableSerializer
+        SparseDoubleVector +-- elki.data.SparseDoubleVector.VariableSerializer
+        NumberVector <|.. ShortVector
+        ShortVector --> elki.data.ShortVector.Factory: STATIC
+        elki.data.NumberVector.Factory <|.. elki.data.ShortVector.Factory
+        ShortVector +-- elki.data.ShortVector.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.ShortVector.Factory.Par
+        elki.data.ShortVector.Factory +-- elki.data.ShortVector.Factory.Par
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.ShortVector.ShortSerializer
+        ShortVector +-- elki.data.ShortVector.ShortSerializer
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.ShortVector.VariableSerializer
+        ShortVector +-- elki.data.ShortVector.VariableSerializer
+        SparseNumberVector <|.. SparseShortVector
+        SparseShortVector --> elki.data.SparseShortVector.Factory: FACTORY
+        elki.data.SparseNumberVector.Factory <|.. elki.data.SparseShortVector.Factory
+        SparseShortVector +-- elki.data.SparseShortVector.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.SparseShortVector.Factory.Par
+        elki.data.SparseShortVector.Factory +-- elki.data.SparseShortVector.Factory.Par
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.SparseShortVector.VariableSerializer
+        SparseShortVector +-- elki.data.SparseShortVector.VariableSerializer
+        SparseNumberVector <|.. SparseIntegerVector
+        SparseIntegerVector --> elki.data.SparseIntegerVector.Factory: FACTORY
+        elki.data.SparseNumberVector.Factory <|.. elki.data.SparseIntegerVector.Factory
+        SparseIntegerVector +-- elki.data.SparseIntegerVector.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.SparseIntegerVector.Factory.Par
+        elki.data.SparseIntegerVector.Factory +-- elki.data.SparseIntegerVector.Factory.Par
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.SparseIntegerVector.VariableSerializer
+        SparseIntegerVector +-- elki.data.SparseIntegerVector.VariableSerializer
+        SparseNumberVector <|.. SparseByteVector
+        SparseByteVector --> elki.data.SparseByteVector.Factory: FACTORY
+        elki.data.SparseNumberVector.Factory <|.. elki.data.SparseByteVector.Factory
+        SparseByteVector +-- elki.data.SparseByteVector.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.SparseByteVector.Factory.Par
+        elki.data.SparseByteVector.Factory +-- elki.data.SparseByteVector.Factory.Par
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.SparseByteVector.VariableSerializer
+        SparseByteVector +-- elki.data.SparseByteVector.VariableSerializer
+        NumberVector <|.. FloatVector
+        FloatVector --> elki.data.FloatVector.Factory: FACTORY
+        elki.data.NumberVector.Factory <|.. elki.data.FloatVector.Factory
+        FloatVector +-- elki.data.FloatVector.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.FloatVector.Factory.Par
+        elki.data.FloatVector.Factory +-- elki.data.FloatVector.Factory.Par
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.FloatVector.SmallSerializer
+        FloatVector +-- elki.data.FloatVector.SmallSerializer
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.FloatVector.ShortSerializer
+        FloatVector +-- elki.data.FloatVector.ShortSerializer
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.FloatVector.VariableSerializer
+        FloatVector +-- elki.data.FloatVector.VariableSerializer
+        ClassLabel <|-- SimpleClassLabel
+        SimpleClassLabel --> elki.data.type.SimpleTypeInformation: TYPE
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.SimpleClassLabel.Serializer
+        SimpleClassLabel +-- elki.data.SimpleClassLabel.Serializer
+        elki.data.ClassLabel.Factory <|-- elki.data.SimpleClassLabel.Factory
+        SimpleClassLabel +-- elki.data.SimpleClassLabel.Factory
+        elki.data.SimpleClassLabel.Factory --> elki.data.type.SimpleTypeInformation: typeInformation
+        LabelList --> LabelList: EMPTY_LABELS
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.LabelList.Serializer
+        LabelList +-- elki.data.LabelList.Serializer
+        SparseNumberVector <|.. SparseFloatVector
+        SparseFloatVector --> elki.data.SparseFloatVector.Factory: FACTORY
+        elki.data.SparseNumberVector.Factory <|.. elki.data.SparseFloatVector.Factory
+        SparseFloatVector +-- elki.data.SparseFloatVector.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.SparseFloatVector.Factory.Par
+        elki.data.SparseFloatVector.Factory +-- elki.data.SparseFloatVector.Factory.Par
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.SparseFloatVector.VariableSerializer
+        SparseFloatVector +-- elki.data.SparseFloatVector.VariableSerializer
+        NumberVector <|.. DoubleVector
+        DoubleVector --> elki.data.DoubleVector.Factory: FACTORY
+        elki.data.NumberVector.Factory <|.. elki.data.DoubleVector.Factory
+        DoubleVector +-- elki.data.DoubleVector.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.DoubleVector.Factory.Par
+        elki.data.DoubleVector.Factory +-- elki.data.DoubleVector.Factory.Par
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.DoubleVector.SmallSerializer
+        DoubleVector +-- elki.data.DoubleVector.SmallSerializer
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.DoubleVector.ShortSerializer
+        DoubleVector +-- elki.data.DoubleVector.ShortSerializer
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.DoubleVector.VariableSerializer
+        DoubleVector +-- elki.data.DoubleVector.VariableSerializer
+        NumberVector <|.. ByteVector
+        ByteVector --> elki.data.ByteVector.Factory: STATIC
+        elki.data.NumberVector.Factory <|.. elki.data.ByteVector.Factory
+        ByteVector +-- elki.data.ByteVector.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.ByteVector.Factory.Par
+        elki.data.ByteVector.Factory +-- elki.data.ByteVector.Factory.Par
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.ByteVector.SmallSerializer
+        ByteVector +-- elki.data.ByteVector.SmallSerializer
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.ByteVector.ShortSerializer
+        ByteVector +-- elki.data.ByteVector.ShortSerializer
+        NumberVector <|.. OneDimensionalDoubleVector
+        OneDimensionalDoubleVector --> elki.data.OneDimensionalDoubleVector.Factory: STATIC
+        elki.data.NumberVector.Factory <|.. elki.data.OneDimensionalDoubleVector.Factory
+        OneDimensionalDoubleVector +-- elki.data.OneDimensionalDoubleVector.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.OneDimensionalDoubleVector.Factory.Par
+        elki.data.OneDimensionalDoubleVector.Factory +-- elki.data.OneDimensionalDoubleVector.Factory.Par
+        java.util.Comparator <|.. elki.data.VectorUtil.SortDBIDsBySingleDimension
+        VectorUtil +-- elki.data.VectorUtil.SortDBIDsBySingleDimension
+        java.util.Comparator <|.. elki.data.VectorUtil.SortVectorsBySingleDimension
+        VectorUtil +-- elki.data.VectorUtil.SortVectorsBySingleDimension
+        NumberVector <|-- SparseNumberVector
+        SparseFeatureVector <|-- SparseNumberVector
+        SparseNumberVector --> elki.data.type.VectorTypeInformation: VARIABLE_LENGTH
+        SparseNumberVector --> elki.data.type.VectorFieldTypeInformation: FIELD
+        elki.data.NumberVector.Factory <|-- elki.data.SparseNumberVector.Factory
+        SparseNumberVector +-- elki.data.SparseNumberVector.Factory
+        FeatureVector --> elki.data.type.VectorTypeInformation: TYPE
+        FeatureVector +-- elki.data.FeatureVector.Factory
+        FeatureVector <|-- SparseFeatureVector
+        FeatureVector <|-- NumberVector
+        elki.data.spatial.SpatialComparable <|-- NumberVector
+        NumberVector --> elki.data.type.VectorTypeInformation: VARIABLE_LENGTH
+        NumberVector --> elki.data.type.VectorFieldTypeInformation: FIELD\nFIELD_1D\nFIELD_2D
+        elki.data.FeatureVector.Factory <|-- elki.data.NumberVector.Factory
+        NumberVector +-- elki.data.NumberVector.Factory
+        elki.data.spatial.SpatialComparable <|.. HyperBoundingBox
+        java.io.Externalizable <|.. HyperBoundingBox
+        HyperBoundingBox <|-- ModifiableHyperBoundingBox
+    }
+
+    namespace elki.result.textwriter {
+        interface TextWriteable [[../result/textwriter/TextWriteable.html]] {
+            {abstract} +writeToText(TextWriterStream, String): void
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.utilities.io {
+        interface ByteBufferSerializer<T> [[../utilities/io/ByteBufferSerializer.html]] {
+            {abstract} +fromByteBuffer(ByteBuffer): T
+            {abstract} +toByteBuffer(ByteBuffer, T): void
+            {abstract} +getByteSize(T): int
+        }
+    }
+
+    namespace java.lang {
+        abstract class Number {
+            {static} -serialVersionUID: long
+            {abstract} +intValue(): int
+            {abstract} +longValue(): long
+            {abstract} +floatValue(): float
+            {abstract} +doubleValue(): double
+        }
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    namespace java.util {
+        interface Comparator<T> {
+            {abstract} +compare(T, T): int
+            +reversed(): Comparator<T>
+            +thenComparing(Comparator<? super T>): Comparator<T>
+            +thenComparing(Function<? super T, ? extends U>, Comparator<? super U>): Comparator<T>
+            +thenComparing(Function<? super T, ? extends Comparable<? super U>>): Comparator<T>
+            +thenComparingInt(ToIntFunction<? super T>): Comparator<T>
+            +thenComparingLong(ToLongFunction<? super T>): Comparator<T>
+            +thenComparingDouble(ToDoubleFunction<? super T>): Comparator<T>
+            {static} +reverseOrder(): Comparator<T extends Comparable<? super T>>
+            {static} +naturalOrder(): Comparator<T extends Comparable<? super T>>
+            {static} +nullsFirst(Comparator<? super T>): Comparator<T>
+            {static} +nullsLast(Comparator<? super T>): Comparator<T>
+            {static} +comparing(Function<? super T, ? extends U>, Comparator<? super U>): Comparator<T>
+            {static} +comparing(Function<? super T, ? extends Comparable<? super U>>): Comparator<T>
+            {static} +comparingInt(ToIntFunction<? super T>): Comparator<T>
+            {static} +comparingLong(ToLongFunction<? super T>): Comparator<T>
+            {static} +comparingDouble(ToDoubleFunction<? super T>): Comparator<T>
+        }
+    }
+
+    namespace java.io {
+        interface Externalizable {
+            {abstract} +writeExternal(ObjectOutput): void
+            {abstract} +readExternal(ObjectInput): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

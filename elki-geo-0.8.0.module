@@ -1,0 +1,166 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-geo",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-geo-0.8.0.jar",
+          "url": "elki-geo-0.8.0.jar",
+          "size": 69944,
+          "sha512": "7222cd5ba72aa65f22f40ee176d9e91f20726623ca590b94a93974371441339c1b4a9d08903f1f535667a59c30883ef2832a63d294b8da4d0a82693a645ccf7f",
+          "sha256": "4c5a80eed0fdbdff1c155fa3f4df47f9d168220b0999c1fa8f4b1e989b2e030f",
+          "sha1": "5427d8346c31564106433b9f04dcc092ec26f4e1",
+          "md5": "bd684db308bc4f8b336d3acbae142512"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-geo-0.8.0.jar",
+          "url": "elki-geo-0.8.0.jar",
+          "size": 69944,
+          "sha512": "7222cd5ba72aa65f22f40ee176d9e91f20726623ca590b94a93974371441339c1b4a9d08903f1f535667a59c30883ef2832a63d294b8da4d0a82693a645ccf7f",
+          "sha256": "4c5a80eed0fdbdff1c155fa3f4df47f9d168220b0999c1fa8f4b1e989b2e030f",
+          "sha1": "5427d8346c31564106433b9f04dcc092ec26f4e1",
+          "md5": "bd684db308bc4f8b336d3acbae142512"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-geo",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-geo-0.8.0-test-fixtures.jar",
+          "url": "elki-geo-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "04873de484017eb9e3385205a56312374e08a712d5e3c43dd333f8fe5d6380aba731657e0debd10697b534c68b38239662713229e0f4e4cdbc2cac8f670651d5",
+          "sha256": "195039e3d1b8882d63a059a24e147a5db7cfdaf1717fe8579163d3981bda8f77",
+          "sha1": "78c9217a32e31759f601b9bef489b081b05f8b75",
+          "md5": "595993c1b8f3eef0f10f79e34f9a51da"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-geo-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-geo",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-geo-0.8.0-test-fixtures.jar",
+          "url": "elki-geo-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "04873de484017eb9e3385205a56312374e08a712d5e3c43dd333f8fe5d6380aba731657e0debd10697b534c68b38239662713229e0f4e4cdbc2cac8f670651d5",
+          "sha256": "195039e3d1b8882d63a059a24e147a5db7cfdaf1717fe8579163d3981bda8f77",
+          "sha1": "78c9217a32e31759f601b9bef489b081b05f8b75",
+          "md5": "595993c1b8f3eef0f10f79e34f9a51da"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-geo-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

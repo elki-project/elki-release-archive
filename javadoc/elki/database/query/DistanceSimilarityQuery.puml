@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DistanceSimilarityQuery\n<size:10>elki.database.query" as elki.database.query.DistanceSimilarityQuery<O> [[DistanceSimilarityQuery.html]]
+
+    interface "<size:14>DistanceQuery\n<size:10>elki.database.query.distance" as elki.database.query.distance.DistanceQuery<O> [[distance/DistanceQuery.html]] {
+        {abstract} +distance(DBIDRef, DBIDRef): double
+        {abstract} +distance(O, DBIDRef): double
+        {abstract} +distance(DBIDRef, O): double
+        {abstract} +distance(O, O): double
+        {abstract} +getDistance(): Distance<? super O>
+        {abstract} +getRelation(): Relation<? extends O>
+    }
+    interface "<size:14>SimilarityQuery\n<size:10>elki.database.query.similarity" as elki.database.query.similarity.SimilarityQuery<O> [[similarity/SimilarityQuery.html]] {
+        {abstract} +similarity(DBIDRef, DBIDRef): double
+        {abstract} +similarity(O, DBIDRef): double
+        {abstract} +similarity(DBIDRef, O): double
+        {abstract} +similarity(O, O): double
+        {abstract} +getRelation(): Relation<? extends O>
+        {abstract} +getSimilarity(): Similarity<? super O>
+    }
+
+    elki.database.query.distance.DistanceQuery <|-- elki.database.query.DistanceSimilarityQuery
+    elki.database.query.similarity.SimilarityQuery <|-- elki.database.query.DistanceSimilarityQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

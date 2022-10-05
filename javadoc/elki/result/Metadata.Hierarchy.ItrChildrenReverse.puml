@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Metadata.Hierarchy.ItrChildrenReverse\n<size:10>elki.result" as elki.result.Metadata.Hierarchy.ItrChildrenReverse [[Metadata.Hierarchy.ItrChildrenReverse.html]] {
+        -pos: int
+        +advance(): It<Object>
+    }
+
+    abstract class "<size:14>Metadata.EagerIt\n<size:10>elki.result" as elki.result.Metadata.EagerIt<Object> [[Metadata.EagerIt.html]]
+    class "<size:14>Metadata.Hierarchy\n<size:10>elki.result" as elki.result.Metadata.Hierarchy [[Metadata.Hierarchy.html]]
+
+    elki.result.Metadata.EagerIt <|-- elki.result.Metadata.Hierarchy.ItrChildrenReverse
+    elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrChildrenReverse
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

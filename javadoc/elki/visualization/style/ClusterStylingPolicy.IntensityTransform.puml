@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>ClusterStylingPolicy.IntensityTransform\n<size:10>elki.visualization.style" as elki.visualization.style.ClusterStylingPolicy.IntensityTransform [[ClusterStylingPolicy.IntensityTransform.html]] {
+        {static} +MAXLINEAR
+        {static} +SCALEDLINEAR
+        {static} +MAXQUADRATIC
+        {static} +MAX2QUOTIENT
+        {static} +MAX2QUOTIENTQUAD
+        {static} +MAX2SUBTRACT
+        {abstract} +transform(double[]): double
+        +scale(double, double, double): double
+    }
+
+    class "<size:14>ClusterStylingPolicy\n<size:10>elki.visualization.style" as elki.visualization.style.ClusterStylingPolicy [[ClusterStylingPolicy.html]]
+
+    elki.visualization.style.ClusterStylingPolicy +-- elki.visualization.style.ClusterStylingPolicy.IntensityTransform
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

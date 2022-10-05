@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OneDimensionalDoubleVector.Factory\n<size:10>elki.data" as elki.data.OneDimensionalDoubleVector.Factory [[OneDimensionalDoubleVector.Factory.html]] {
+        +newFeatureVector(A, ArrayAdapter<? extends Number, A>): OneDimensionalDoubleVector
+        +newNumberVector(A, NumberArrayAdapter<?, ? super A>): OneDimensionalDoubleVector
+        +getDefaultSerializer(): ByteBufferSerializer<OneDimensionalDoubleVector>
+        +getRestrictionClass(): Class<? super OneDimensionalDoubleVector>
+    }
+
+    interface "<size:14>NumberVector.Factory\n<size:10>elki.data" as elki.data.NumberVector.Factory<OneDimensionalDoubleVector> [[NumberVector.Factory.html]] {
+        {abstract} +newNumberVector(A, NumberArrayAdapter<?, ? super A>): OneDimensionalDoubleVector
+    }
+    class "<size:14>OneDimensionalDoubleVector\n<size:10>elki.data" as elki.data.OneDimensionalDoubleVector [[OneDimensionalDoubleVector.html]]
+    class "<size:14>OneDimensionalDoubleVector.Factory.Par\n<size:10>elki.data" as elki.data.OneDimensionalDoubleVector.Factory.Par [[OneDimensionalDoubleVector.Factory.Par.html]]
+
+    elki.data.NumberVector.Factory <|.. elki.data.OneDimensionalDoubleVector.Factory
+    elki.data.OneDimensionalDoubleVector +-- elki.data.OneDimensionalDoubleVector.Factory
+    elki.data.OneDimensionalDoubleVector.Factory +-- elki.data.OneDimensionalDoubleVector.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

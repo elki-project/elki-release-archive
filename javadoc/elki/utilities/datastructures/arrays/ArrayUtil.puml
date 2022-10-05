@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ArrayUtil\n<size:10>elki.utilities.datastructures.arrays" as elki.utilities.datastructures.arrays.ArrayUtil [[ArrayUtil.html]] {
+        {static} +swap(ArrayList<T>, int, int): void
+        {static} +swap(T[], int, int): void
+        {static} +swap(int[], int, int): void
+        {static} +swap(short[], int, int): void
+        {static} +swap(byte[], int, int): void
+        {static} +swap(double[], int, int): void
+        {static} +swap(float[], int, int): void
+        {static} +randomShuffle(int[], Random, int): void
+        {static} +randomShuffle(short[], Random, int): void
+        {static} +randomShuffle(byte[], Random, int): void
+        {static} +randomShuffle(double[], Random, int): void
+        {static} +randomShuffle(float[], Random, int): void
+        {static} +randomShuffle(T[], Random, int): void
+        {static} +randomShuffle(ArrayList<T>, Random, int): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

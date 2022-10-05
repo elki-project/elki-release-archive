@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AutomaticVisualization\n<size:10>elki.result" as elki.result.AutomaticVisualization [[AutomaticVisualization.html]] {
+        {static} -LOG: Logging
+        ~title: String
+        {static} #DEFAULT_TITLE: String
+        ~manager: VisualizerParameterizer
+        ~single: boolean
+        ~window: ResultWindow
+        +AutomaticVisualization(String, VisualizerParameterizer, boolean)
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>ResultHandler\n<size:10>elki.result" as elki.result.ResultHandler [[ResultHandler.html]]
+    class "<size:14>AutomaticVisualization.Par\n<size:10>elki.result" as elki.result.AutomaticVisualization.Par [[AutomaticVisualization.Par.html]]
+
+    elki.result.ResultHandler <|.. elki.result.AutomaticVisualization
+    elki.result.AutomaticVisualization +-- elki.result.AutomaticVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

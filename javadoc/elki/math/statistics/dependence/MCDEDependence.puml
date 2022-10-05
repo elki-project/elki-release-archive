@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MCDEDependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.MCDEDependence [[MCDEDependence.html]] {
+        #m: int
+        #alpha: double
+        #beta: double
+        #rnd: RandomFactory
+        #mcdeTest: MCDETest<RankStruct>
+        +MCDEDependence(int, double, double, RandomFactory, MCDETest<?>)
+        #randomSlice(Random, RankStruct): boolean[]
+        #randomSlice(Random, RankStruct[], int, int): boolean[]
+        +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+        +dependence(NumberArrayAdapter<?, A>, List<? extends A>): double[]
+        +higherOrderDependence(NumberArrayAdapter<?, A>, List<? extends A>): double
+    }
+
+    interface "<size:14>Dependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.Dependence [[Dependence.html]] {
+        {abstract} +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+    }
+    class "<size:14>MCDEDependence.Par\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.MCDEDependence.Par [[MCDEDependence.Par.html]]
+
+    elki.math.statistics.dependence.Dependence <|.. elki.math.statistics.dependence.MCDEDependence
+    elki.math.statistics.dependence.MCDEDependence +-- elki.math.statistics.dependence.MCDEDependence.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

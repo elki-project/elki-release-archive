@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>CoverTree.CoverTreePrioritySearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.CoverTreePrioritySearcher<Q> [[CoverTree.CoverTreePrioritySearcher.html]] {
+        ~threshold: double
+        -tmp: DBIDVar
+        -pq: DoubleObjectMinHeap<Node>
+        -candidates: DoubleDBIDListIter
+        -routingDist: double
+        -lb: double
+        {abstract} #queryDistance(DBIDRef): double
+        #doSearch(): PrioritySearcher<Q>
+        +decreaseCutoff(double): PrioritySearcher<Q>
+        +allLowerBound(): double
+        +valid(): boolean
+        +advance(): PrioritySearcher<Q>
+        #advanceQueue(): boolean
+        +getApproximateDistance(): double
+        +getApproximateAccuracy(): double
+        +getLowerBound(): double
+        +getUpperBound(): double
+        +computeExactDistance(): double
+        +internalGetIndex(): int
+    }
+
+    interface "<size:14>PrioritySearcher\n<size:10>elki.database.query" as elki.database.query.PrioritySearcher<Q> [[../../../../database/query/PrioritySearcher.html]] {
+        {abstract} +search(Q): PrioritySearcher<O>
+        {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+        {abstract} +computeExactDistance(): double
+        {abstract} +allLowerBound(): double
+        {abstract} +advance(): PrioritySearcher<O>
+    }
+    class "<size:14>CoverTree\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree<O> [[CoverTree.html]]
+
+    elki.database.query.PrioritySearcher <|.. elki.index.tree.metrical.covertree.CoverTree.CoverTreePrioritySearcher
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreePrioritySearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

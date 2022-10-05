@@ -1,0 +1,83 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.dbscan.parallel {
+
+        class ParallelGeneralizedDBSCAN [[ParallelGeneralizedDBSCAN.html]] {
+            {static} -LOG: Logging
+            #npred: NeighborPredicate<?>
+            #corepred: CorePredicate<?>
+            #coremodel: boolean
+            +ParallelGeneralizedDBSCAN(NeighborPredicate<?>, CorePredicate<?>, boolean)
+            +getInputTypeRestriction(): TypeInformation[]
+            +autorun(Database): Clustering<Model>
+        }
+
+        class elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance<T> [[ParallelGeneralizedDBSCAN.Instance.html]] {
+            #npred: Instance<T>
+            #corepred: Instance<? super T>
+            #coremodel: boolean
+            -clusterids: WritableDataStore<Assignment>
+            -cores: Core[]
+            -borders: Border[]
+            -nextclus: int
+            -database: Database
+            -npreds: NeighborPredicate<? extends T>
+            -progress: FiniteProgress
+            +Instance(Database, NeighborPredicate<T>, CorePredicate<? super T>, boolean)
+            +run(): Clustering<Model>
+            #processNeighbors(DBIDRef, T): void
+            +instantiate(Executor): Mapper
+            +cleanup(Instance): void
+        }
+
+        class elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance.Mapper [[ParallelGeneralizedDBSCAN.Instance.Mapper.html]] {
+            ~predicate: Instance<? extends T>
+            +Mapper(Instance<? extends T>)
+            +map(DBIDRef): void
+        }
+
+        class elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Par [[ParallelGeneralizedDBSCAN.Par.html]] {
+            {static} +NEIGHBORHOODPRED_ID: OptionID
+            {static} +COREPRED_ID: OptionID
+            {static} +COREMODEL_ID: OptionID
+            #npred: NeighborPredicate<?>
+            #corepred: CorePredicate<?>
+            #coremodel: boolean
+            +configure(Parameterization): void
+            +make(): ParallelGeneralizedDBSCAN
+        }
+
+        elki.clustering.ClusteringAlgorithm <|.. ParallelGeneralizedDBSCAN
+        elki.parallel.processor.Processor <|.. elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance
+        ParallelGeneralizedDBSCAN +-- elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance
+        elki.parallel.processor.Processor.Instance <|.. elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance.Mapper
+        elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance +-- elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance.Mapper
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Par
+        ParallelGeneralizedDBSCAN +-- elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Par
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace elki.parallel.processor {
+        interface Processor [[../../../parallel/processor/Processor.html]] {
+            {abstract} +instantiate(Executor): Instance
+            {abstract} +cleanup(Instance): void
+        }
+        interface elki.parallel.processor.Processor.Instance [[../../../parallel/processor/Processor.Instance.html]] {
+            {abstract} +map(DBIDRef): void
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

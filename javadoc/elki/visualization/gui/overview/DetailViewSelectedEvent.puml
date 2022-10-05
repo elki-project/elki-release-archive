@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DetailViewSelectedEvent\n<size:10>elki.visualization.gui.overview" as elki.visualization.gui.overview.DetailViewSelectedEvent [[DetailViewSelectedEvent.html]] {
+        {static} -serialVersionUID: long
+        ~overview: OverviewPlot
+        ~it: PlotItem
+        +DetailViewSelectedEvent(OverviewPlot, int, String, int, PlotItem)
+        +makeDetailView(): DetailView
+    }
+
+    class "<size:14>ActionEvent\n<size:10>java.awt.event" as java.awt.event.ActionEvent
+
+    java.awt.event.ActionEvent <|-- elki.visualization.gui.overview.DetailViewSelectedEvent
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

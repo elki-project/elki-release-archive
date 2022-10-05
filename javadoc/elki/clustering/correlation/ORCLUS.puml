@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ORCLUS\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ORCLUS [[ORCLUS.html]] {
+        {static} -LOG: Logging
+        -alpha: double
+        -rnd: RandomFactory
+        -pca: PCARunner
+        +ORCLUS(int, int, int, double, RandomFactory, PCARunner)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends NumberVector>): Clustering<Model>
+        -initialSeeds(Relation<? extends NumberVector>, int): List<ORCLUSCluster>
+        -assign(Relation<? extends NumberVector>, List<ORCLUSCluster>): void
+        -findBasis(Relation<? extends NumberVector>, ORCLUSCluster, int): double[]
+        -merge(Relation<? extends NumberVector>, List<ORCLUSCluster>, int, int, IndefiniteProgress): void
+        -projectedEnergy(Relation<? extends NumberVector>, ORCLUSCluster, ORCLUSCluster, int, int, int): ProjectedEnergy
+        -union(Relation<? extends NumberVector>, ORCLUSCluster, ORCLUSCluster, int): ORCLUSCluster
+    }
+
+    abstract class "<size:14>AbstractProjectedClustering\n<size:10>elki.clustering" as elki.clustering.AbstractProjectedClustering<Clustering<Model>> [[../AbstractProjectedClustering.html]]
+    class "<size:14>ORCLUS.ORCLUSCluster\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ORCLUS.ORCLUSCluster [[ORCLUS.ORCLUSCluster.html]]
+    class "<size:14>ORCLUS.ProjectedEnergy\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ORCLUS.ProjectedEnergy [[ORCLUS.ProjectedEnergy.html]]
+    class "<size:14>ORCLUS.Par\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ORCLUS.Par [[ORCLUS.Par.html]]
+
+    elki.clustering.AbstractProjectedClustering <|-- elki.clustering.correlation.ORCLUS
+    elki.clustering.correlation.ORCLUS +-- elki.clustering.correlation.ORCLUS.ORCLUSCluster
+    elki.clustering.correlation.ORCLUS +-- elki.clustering.correlation.ORCLUS.ProjectedEnergy
+    elki.clustering.correlation.ORCLUS +-- elki.clustering.correlation.ORCLUS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Eclat\n<size:10>elki.itemsetmining" as elki.itemsetmining.Eclat [[Eclat.html]] {
+        {static} -LOG: Logging
+        {static} -STAT: String
+        +Eclat(double, int, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<BitVector>): FrequentItemsetsResult
+        -extractItemsets(DBIDs[], int, int, List<Itemset>): void
+        -extractItemsets(DBIDs, DBIDs[], int[], int, int, int, List<Itemset>): void
+        -mergeJoin(DBIDs, DBIDs): DBIDs
+        -buildIndex(Relation<BitVector>, int, int): DBIDs[]
+    }
+
+    abstract class "<size:14>AbstractFrequentItemsetAlgorithm\n<size:10>elki.itemsetmining" as elki.itemsetmining.AbstractFrequentItemsetAlgorithm [[AbstractFrequentItemsetAlgorithm.html]]
+    class "<size:14>Eclat.Par\n<size:10>elki.itemsetmining" as elki.itemsetmining.Eclat.Par [[Eclat.Par.html]]
+
+    elki.itemsetmining.AbstractFrequentItemsetAlgorithm <|-- elki.itemsetmining.Eclat
+    elki.itemsetmining.Eclat +-- elki.itemsetmining.Eclat.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

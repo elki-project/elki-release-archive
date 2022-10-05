@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusteringFeature\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.ClusteringFeature [[ClusteringFeature.html]] {
+        ~n: int
+        ~ls: double[]
+        ~ss: double
+        +ClusteringFeature(int)
+        #addToStatistics(NumberVector): void
+        #addToStatistics(ClusteringFeature): void
+        #resetStatistics(): void
+        +centroid(int): double
+        +sumOfSumOfSquares(): double
+        +sumOfSquaresOfSums(): double
+        +getDimensionality(): int
+        {static} +sumOfSquares(NumberVector): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NumberVectorAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.NumberVectorAdapter [[NumberVectorAdapter.html]] {
+        {static} +STATIC: NumberVectorAdapter
+        +size(NumberVector): int
+        +--get--(NumberVector, int): Number
+        +getDouble(NumberVector, int): double
+        +getFloat(NumberVector, int): float
+        +getInteger(NumberVector, int): int
+        +getShort(NumberVector, int): short
+        +getLong(NumberVector, int): long
+        +getByte(NumberVector, int): byte
+    }
+
+    interface "<size:14>NumberArrayAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.NumberArrayAdapter<Number, NumberVector> [[NumberArrayAdapter.html]] {
+        {abstract} +size(NumberVector): int
+        {abstract} +get(NumberVector, int): Number
+        {abstract} +getDouble(NumberVector, int): double
+        {abstract} +getLong(NumberVector, int): long
+    }
+
+    elki.utilities.datastructures.arraylike.NumberArrayAdapter <|.. elki.utilities.datastructures.arraylike.NumberVectorAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

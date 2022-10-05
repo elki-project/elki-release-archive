@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DistancePriorityIndex\n<size:10>elki.index" as elki.index.DistancePriorityIndex<O> [[DistancePriorityIndex.html]] {
+        +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+        +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+        {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+        +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+    }
+
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<O> [[KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    interface "<size:14>RangeIndex\n<size:10>elki.index" as elki.index.RangeIndex<O> [[RangeIndex.html]] {
+        {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+    }
+
+    elki.index.KNNIndex <|-- elki.index.DistancePriorityIndex
+    elki.index.RangeIndex <|-- elki.index.DistancePriorityIndex
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

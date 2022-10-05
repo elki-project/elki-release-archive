@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WeightedDiscreteUncertainObject\n<size:10>elki.data.uncertain" as elki.data.uncertain.WeightedDiscreteUncertainObject [[WeightedDiscreteUncertainObject.html]] {
+        {static} +FACTORY: Factory<WeightedDiscreteUncertainObject, ?>
+        -samples: DoubleVector[]
+        -weights: double[]
+        +WeightedDiscreteUncertainObject(DoubleVector[], double[])
+        +drawSample(Random): DoubleVector
+        +getCenterOfMass(): DoubleVector
+        +getNumberSamples(): int
+        +getSample(int): DoubleVector
+        +getWeight(int): double
+    }
+
+    abstract class "<size:14>AbstractUncertainObject\n<size:10>elki.data.uncertain" as elki.data.uncertain.AbstractUncertainObject [[AbstractUncertainObject.html]] {
+        {abstract} +drawSample(Random): DoubleVector
+        {abstract} +getCenterOfMass(): DoubleVector
+    }
+    interface "<size:14>DiscreteUncertainObject\n<size:10>elki.data.uncertain" as elki.data.uncertain.DiscreteUncertainObject [[DiscreteUncertainObject.html]] {
+        {abstract} +getNumberSamples(): int
+        {abstract} +getSample(int): DoubleVector
+        {abstract} +getWeight(int): double
+    }
+    class "<size:14>WeightedDiscreteUncertainObject.Factory\n<size:10>elki.data.uncertain" as elki.data.uncertain.WeightedDiscreteUncertainObject.Factory [[WeightedDiscreteUncertainObject.Factory.html]]
+
+    elki.data.uncertain.AbstractUncertainObject <|-- elki.data.uncertain.WeightedDiscreteUncertainObject
+    elki.data.uncertain.DiscreteUncertainObject <|.. elki.data.uncertain.WeightedDiscreteUncertainObject
+    elki.data.uncertain.WeightedDiscreteUncertainObject +-- elki.data.uncertain.WeightedDiscreteUncertainObject.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

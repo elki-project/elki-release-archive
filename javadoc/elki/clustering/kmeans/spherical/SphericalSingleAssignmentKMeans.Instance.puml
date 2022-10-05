@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SphericalSingleAssignmentKMeans.Instance\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Instance [[SphericalSingleAssignmentKMeans.Instance.html]] {
+        +Instance(Relation<? extends NumberVector>, double[])
+        +iterate(int): int
+        #getLogger(): Logging
+    }
+
+    class "<size:14>SphericalKMeans.Instance\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.SphericalKMeans.Instance [[SphericalKMeans.Instance.html]]
+    class "<size:14>SphericalSingleAssignmentKMeans\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans<V extends NumberVector> [[SphericalSingleAssignmentKMeans.html]]
+
+    elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|-- elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Instance
+    elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans +-- elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

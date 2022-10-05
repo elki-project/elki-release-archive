@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CoverTree.Node\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.Node [[CoverTree.Node.html]] {
+        ~singletons: ModifiableDoubleDBIDList
+        ~maxDist: double
+        ~parentDist: double
+        ~children: List<Node>
+        +Node(DBIDRef, double, double)
+        +Node(DBIDRef, double, double, DoubleDBIDList)
+    }
+
+    class "<size:14>CoverTree\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree<O> [[CoverTree.html]]
+
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.Node
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

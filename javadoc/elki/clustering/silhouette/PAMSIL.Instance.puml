@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PAMSIL.Instance\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.PAMSIL.Instance [[PAMSIL.Instance.html]] {
+        ~ids: DBIDs
+        ~distQ: DistanceQuery<?>
+        ~assignment: WritableIntegerDataStore
+        ~scratch: WritableIntegerDataStore
+        ~silhouettes: WritableDoubleDataStore
+        +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+        #run(ArrayModifiableDBIDs, int): double
+        #assignToNearestCluster(ArrayDBIDs): void
+        #silhouette(IntegerDataStore, int): double
+        #reassignToNearestCluster(IntegerDataStore, WritableIntegerDataStore, ArrayDBIDs, int, DBIDRef): void
+        +silhouetteScores(): DoubleDataStore
+    }
+
+    class "<size:14>PAMSIL\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.PAMSIL<O> [[PAMSIL.html]]
+
+    elki.clustering.silhouette.PAMSIL +-- elki.clustering.silhouette.PAMSIL.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntegerDBID\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBID [[IntegerDBID.html]] {
+        #id: int
+        {static} +DYNAMIC_SERIALIZER: ByteBufferSerializer<DBID>
+        {static} +STATIC_SERIALIZER: FixedSizeByteBufferSerializer<DBID>
+        #IntegerDBID(int)
+        #IntegerDBID(Integer)
+        +internalGetIndex(): int
+        +size(): int
+        +isEmpty(): boolean
+        +compareTo(DBIDRef): int
+        +iter(): Itr
+        +get(int): DBID
+        +assignVar(int, DBIDVar): DBIDVar
+        +contains(DBIDRef): boolean
+        +binarySearch(DBIDRef): int
+        +slice(int, int): ArrayDBIDs
+    }
+
+    interface "<size:14>DBID\n<size:10>elki.database.ids" as elki.database.ids.DBID [[../DBID.html]] {
+        {abstract} +compareTo(DBIDRef): int
+    }
+    interface "<size:14>IntegerDBIDRef\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDRef [[IntegerDBIDRef.html]] {
+        {abstract} +internalGetIndex(): int
+    }
+    class "<size:14>IntegerDBID.Itr\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBID.Itr [[IntegerDBID.Itr.html]]
+    class "<size:14>IntegerDBID.DynamicSerializer\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBID.DynamicSerializer [[IntegerDBID.DynamicSerializer.html]]
+    class "<size:14>IntegerDBID.StaticSerializer\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBID.StaticSerializer [[IntegerDBID.StaticSerializer.html]]
+
+    elki.database.ids.DBID <|.. elki.database.ids.integer.IntegerDBID
+    elki.database.ids.integer.IntegerDBIDRef <|.. elki.database.ids.integer.IntegerDBID
+    elki.database.ids.integer.IntegerDBID +-- elki.database.ids.integer.IntegerDBID.Itr
+    elki.database.ids.integer.IntegerDBID +-- elki.database.ids.integer.IntegerDBID.DynamicSerializer
+    elki.database.ids.integer.IntegerDBID +-- elki.database.ids.integer.IntegerDBID.StaticSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

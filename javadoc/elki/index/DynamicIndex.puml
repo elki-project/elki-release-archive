@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DynamicIndex\n<size:10>elki.index" as elki.index.DynamicIndex [[DynamicIndex.html]] {
+        {abstract} +delete(DBIDRef): boolean
+        {abstract} +insert(DBIDRef): void
+        {abstract} +deleteAll(DBIDs): void
+        {abstract} +insertAll(DBIDs): void
+    }
+
+    interface "<size:14>Index\n<size:10>elki.index" as elki.index.Index [[Index.html]] {
+        {abstract} +initialize(): void
+    }
+
+    elki.index.Index <|-- elki.index.DynamicIndex
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

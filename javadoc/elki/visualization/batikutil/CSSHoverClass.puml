@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CSSHoverClass\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.CSSHoverClass [[CSSHoverClass.html]] {
+        -overclass: String
+        -outclass: String
+        -clickisout: boolean
+        +CSSHoverClass(String, String, boolean)
+        +CSSHoverClass(String, String)
+        +handleEvent(Event): void
+    }
+
+    interface "<size:14>EventListener\n<size:10>org.w3c.dom.events" as org.w3c.dom.events.EventListener {
+        {abstract} +handleEvent(Event): void
+    }
+
+    org.w3c.dom.events.EventListener <|.. elki.visualization.batikutil.CSSHoverClass
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HySortOD.TreeStrategy.Node\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD.TreeStrategy.Node [[HySortOD.TreeStrategy.Node.html]] {
+        +value: int
+        +begin: int
+        +end: int
+        +children: Int2ObjectOpenHashMap<Node>
+        +Node(int, int, int)
+        +add(Node): void
+    }
+
+    class "<size:14>HySortOD.TreeStrategy\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD.TreeStrategy [[HySortOD.TreeStrategy.html]]
+
+    elki.outlier.density.HySortOD.TreeStrategy +-- elki.outlier.density.HySortOD.TreeStrategy.Node
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CommonConstraints\n<size:10>elki.utilities.optionhandling.constraints" as elki.utilities.optionhandling.constraints.CommonConstraints [[CommonConstraints.html]] {
+        {static} +GREATER_EQUAL_MINUSONE_INT: AbstractNumberConstraint
+        {static} +GREATER_EQUAL_ZERO_INT: AbstractNumberConstraint
+        {static} +GREATER_EQUAL_ONE_INT: AbstractNumberConstraint
+        {static} +GREATER_THAN_ONE_INT: AbstractNumberConstraint
+        {static} +GREATER_EQUAL_ZERO_DOUBLE: AbstractNumberConstraint
+        {static} +GREATER_THAN_ZERO_DOUBLE: AbstractNumberConstraint
+        {static} +LESS_THAN_HALF_DOUBLE: AbstractNumberConstraint
+        {static} +GREATER_EQUAL_ONE_DOUBLE: AbstractNumberConstraint
+        {static} +GREATER_THAN_ONE_DOUBLE: AbstractNumberConstraint
+        {static} +LESS_THAN_ONE_DOUBLE: AbstractNumberConstraint
+        {static} +LESS_EQUAL_ONE_DOUBLE: AbstractNumberConstraint
+        {static} +GREATER_EQUAL_ZERO_INT_LIST: ParameterConstraint<int[]>
+        {static} +GREATER_EQUAL_ONE_INT_LIST: ParameterConstraint<int[]>
+        {static} +GREATER_THAN_ONE_INT_LIST: ParameterConstraint<int[]>
+        {static} +GREATER_EQUAL_ZERO_DOUBLE_LIST: ParameterConstraint<double[]>
+        {static} +GREATER_EQUAL_ONE_DOUBLE_LIST: ParameterConstraint<double[]>
+        {static} +GREATER_THAN_ONE_DOUBLE_LIST: ParameterConstraint<double[]>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

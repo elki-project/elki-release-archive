@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DWOF\n<size:10>elki.outlier" as elki.outlier.DWOF<O> [[DWOF.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super O>
+        #kplus: int
+        #delta: double
+        +DWOF(Distance<? super O>, int, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+        -initializeRadii(DBIDs, KNNSearcher<DBIDRef>, DistanceQuery<O>, WritableDoubleDataStore): void
+        -clusterData(DBIDs, RangeSearcher<DBIDRef>, WritableDoubleDataStore, WritableDataStore<ModifiableDBIDs>): void
+        -updateSizes(DBIDs, WritableDataStore<ModifiableDBIDs>, WritableIntegerDataStore): int
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[OutlierAlgorithm.html]]
+    class "<size:14>DWOF.Par\n<size:10>elki.outlier" as elki.outlier.DWOF.Par<O>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.DWOF
+    elki.outlier.DWOF +-- elki.outlier.DWOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

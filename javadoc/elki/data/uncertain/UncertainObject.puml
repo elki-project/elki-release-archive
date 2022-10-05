@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>UncertainObject\n<size:10>elki.data.uncertain" as elki.data.uncertain.UncertainObject [[UncertainObject.html]] {
+        {static} +UNCERTAIN_OBJECT_FIELD: VectorFieldTypeInformation<UncertainObject>
+        {static} +DISCRETE_UNCERTAIN_OBJECT: VectorFieldTypeInformation<DiscreteUncertainObject>
+        {abstract} +drawSample(Random): DoubleVector
+        {abstract} +getCenterOfMass(): DoubleVector
+    }
+
+    interface "<size:14>SpatialComparable\n<size:10>elki.data.spatial" as elki.data.spatial.SpatialComparable [[../spatial/SpatialComparable.html]] {
+        {abstract} +getDimensionality(): int
+        {abstract} +getMin(int): double
+        {abstract} +getMax(int): double
+    }
+    interface "<size:14>FeatureVector\n<size:10>elki.data" as elki.data.FeatureVector<Double> [[../FeatureVector.html]] {
+        {abstract} +getDimensionality(): int
+        {abstract} +getValue(int): Double
+    }
+
+    elki.data.spatial.SpatialComparable <|-- elki.data.uncertain.UncertainObject
+    elki.data.FeatureVector <|-- elki.data.uncertain.UncertainObject
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

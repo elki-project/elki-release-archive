@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BetulaLloydKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.BetulaLloydKMeans [[BetulaLloydKMeans.html]] {
+        {static} -LOG: Logging
+        ~cffactory: Factory<?>
+        ~initialization: AbstractCFKMeansInitialization
+        ~storeIds: boolean
+        ~ignoreWeight: boolean
+        ~diststat: long
+        +BetulaLloydKMeans(int, int, Factory<?>, AbstractCFKMeansInitialization, boolean, boolean)
+        +run(Relation<NumberVector>): Clustering<KMeansModel>
+        -kmeans(ArrayList<? extends ClusterFeature>, int[], int[], CFTree<?>): double[]
+        -means(int[], double[], ArrayList<? extends ClusterFeature>, int[]): double[]
+        -assignToNearestCluster(int[], double[], ArrayList<? extends ClusterFeature>, int[]): int
+        #calculateVariances(int[], double[], ArrayList<? extends ClusterFeature>, int[]): double[]
+        -distance(NumberVector, double[]): double
+        -distance(double[], double[]): double
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans<NumberVector, KMeansModel> [[AbstractKMeans.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>BetulaLloydKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.BetulaLloydKMeans.Par [[BetulaLloydKMeans.Par.html]]
+
+    elki.clustering.kmeans.AbstractKMeans <|-- elki.clustering.kmeans.BetulaLloydKMeans
+    elki.clustering.kmeans.BetulaLloydKMeans +-- elki.clustering.kmeans.BetulaLloydKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

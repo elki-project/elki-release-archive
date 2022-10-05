@@ -1,0 +1,2722 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide circle
+    hide empty fields
+    hide empty methods
+
+    elki.algorithm --> elki
+    elki.algorithm --> elki.utilities.optionhandling
+    elki.algorithm --> elki.distance
+    elki.algorithm --> elki.math.linearalgebra.pca
+    elki.algorithm --> elki.math.linearalgebra.pca.filter
+    elki.algorithm --> elki.utilities.optionhandling.parameterization
+    elki.algorithm --> elki.logging
+    elki.algorithm --> elki.data.type
+    elki.algorithm --> elki.data.model
+    elki.algorithm --> elki.database.relation
+    elki.algorithm --> elki.database.ids
+    elki.algorithm --> elki.math.geometry
+    elki.algorithm --> elki.utilities.random
+    elki.algorithm --> elki.database
+    elki.algorithm --> elki.database.datastore
+    elki.algorithm --> elki.index.tree.spatial.rstarvariants
+    elki.algorithm.statistics --> elki
+    elki.algorithm.statistics --> elki.utilities.optionhandling
+    elki.algorithm.statistics --> elki.distance
+    elki.algorithm.statistics --> elki.utilities.random
+    elki.algorithm.statistics --> elki.utilities.optionhandling.parameterization
+    elki.algorithm.statistics --> elki.logging
+    elki.algorithm.statistics --> elki.data.type
+    elki.algorithm.statistics --> elki.database.relation
+    elki.algorithm.statistics --> elki.database.query.knn
+    elki.algorithm.statistics --> elki.result
+    elki.algorithm.statistics --> elki.database
+    elki.algorithm.statistics --> elki.math
+    elki.algorithm.statistics --> elki.database.query.distance
+    elki.algorithm.statistics --> elki.database.ids
+    elki.algorithm.statistics --> it.unimi.dsi.fastutil.objects
+    elki.algorithm.statistics --> elki.result.textwriter
+    elki.clustering.subspace --> elki.clustering.optics
+    elki.clustering.subspace --> elki.database.ids
+    elki.clustering.subspace --> elki.database.relation
+    elki.clustering.subspace --> elki.database.datastore
+    elki.clustering.subspace --> elki.logging
+    elki.clustering.subspace --> elki.utilities.optionhandling
+    elki.clustering.subspace --> elki.utilities.optionhandling.parameterization
+    elki.clustering.subspace --> elki.data.type
+    elki.clustering.subspace --> elki.data
+    elki.clustering.subspace --> it.unimi.dsi.fastutil.objects
+    elki.clustering.subspace --> elki.utilities.pairs
+    elki.clustering.subspace --> elki.utilities.datastructures.iterator
+    elki.clustering.subspace --> elki.clustering.dbscan
+    elki.clustering.subspace --> elki.utilities.random
+    elki.clustering.subspace --> elki.clustering
+    elki.clustering.subspace --> elki.database.query.distance
+    elki.clustering.subspace --> elki.database.query.range
+    elki.clustering.subspace --> elki.distance.subspace
+    elki.clustering.optics --> elki.index.tree.spatial.rstarvariants.deliclu
+    elki.clustering.optics --> elki.utilities.optionhandling
+    elki.clustering.optics --> elki.distance
+    elki.clustering.optics --> elki.utilities.optionhandling.parameterization
+    elki.clustering.optics --> elki.logging
+    elki.clustering.optics --> elki.utilities.datastructures.heap
+    elki.clustering.optics --> elki.data.type
+    elki.clustering.optics --> elki.database.relation
+    elki.clustering.optics --> elki.database.datastore
+    elki.clustering.optics --> elki.index.tree
+    elki.clustering.optics --> elki.database.ids
+    elki.clustering.optics --> elki.result
+    elki.clustering.optics --> elki.logging.progress
+    elki.clustering.optics --> elki.database.query.range
+    elki.clustering.optics --> elki
+    elki.clustering.optics --> elki.database
+    elki.clustering.optics --> elki.clustering
+    elki.clustering.optics --> elki.data
+    elki.clustering.optics --> elki.index.preprocessed.fastoptics
+    elki.clustering.optics --> elki.database.query.distance
+    elki.clustering.correlation --> elki.clustering
+    elki.clustering.correlation --> elki.utilities.optionhandling
+    elki.clustering.correlation --> elki.utilities.optionhandling.parameterization
+    elki.clustering.correlation --> elki.logging
+    elki.clustering.correlation --> elki.database.ids
+    elki.clustering.correlation --> elki.database.relation
+    elki.clustering.correlation --> elki.data
+    elki.clustering.correlation --> elki.logging.progress
+    elki.clustering.correlation --> elki.utilities.datastructures.heap
+    elki.clustering.correlation --> elki.clustering.correlation.cash
+    elki.clustering.correlation --> elki.math.linearalgebra
+    elki.clustering.correlation --> elki.data.type
+    elki.clustering.correlation --> elki.utilities.random
+    elki.clustering.correlation --> elki.utilities.datastructures.histogram
+    elki.clustering.correlation --> elki.clustering.optics
+    elki.clustering.correlation --> elki.database.datastore
+    elki.clustering.correlation --> elki.math.linearalgebra.pca
+    elki.clustering.correlation --> elki.math.linearalgebra.pca.filter
+    elki.clustering.correlation --> elki.database
+    elki.clustering.correlation --> elki.clustering.dbscan
+    elki.clustering.correlation --> elki.clustering.dbscan.predicates
+    elki.clustering.correlation --> elki.utilities.datastructures.iterator
+    elki.clustering.correlation.cash --> elki.logging
+    elki.clustering.correlation.cash --> elki.database.relation
+    elki.clustering.correlation.cash --> elki.database.ids
+    elki.clustering.correlation.cash --> elki.data
+    elki.index.idistance --> elki.index
+    elki.index.idistance --> elki.database.query.knn
+    elki.index.idistance --> elki.database.query.distance
+    elki.index.idistance --> elki.database.ids
+    elki.index.idistance --> elki.database.query.range
+    elki.index.idistance --> elki.utilities.optionhandling
+    elki.index.idistance --> elki.distance
+    elki.index.idistance --> elki.clustering.kmedoids.initialization
+    elki.index.idistance --> elki.utilities.optionhandling.parameterization
+    elki.index.idistance --> elki.database.relation
+    elki.index.idistance --> elki.data.type
+    elki.index.idistance --> elki.logging
+    elki.index.idistance --> elki.utilities.pairs
+    elki.index.preprocessed.knn --> elki.distance
+    elki.index.preprocessed.knn --> elki.database.relation
+    elki.index.preprocessed.knn --> elki.logging
+    elki.index.preprocessed.knn --> elki.index.tree.metrical
+    elki.index.preprocessed.knn --> elki.index.tree.spatial.rstarvariants
+    elki.index.preprocessed.knn --> elki.utilities.optionhandling
+    elki.index.preprocessed.knn --> elki.utilities.optionhandling.parameterization
+    elki.index.preprocessed.knn --> elki.utilities.random
+    elki.index.preprocessed.knn --> elki.database.datastore
+    elki.index.preprocessed.knn --> elki.database.ids
+    elki.index.preprocessed.knn --> elki.database.query.knn
+    elki.index.preprocessed.knn --> elki.database.query.distance
+    elki.index.preprocessed.knn --> elki.data.type
+    elki.index.preprocessed.knn --> elki.math
+    elki.index.preprocessed.knn --> elki.index
+    elki.index.preprocessed.knn --> elki.data.projection.random
+    elki.index.preprocessed.knn --> elki.logging.progress
+    elki.index.preprocessed.knn --> elki.database.query.rknn
+    elki.index.preprocessed.knn --> elki.utilities.pairs
+    elki.index.preprocessed.knn --> elki.data.spatial
+    elki.evaluation.similaritymatrix --> elki.evaluation
+    elki.evaluation.similaritymatrix --> elki.result
+    elki.evaluation.similaritymatrix --> elki.database.relation
+    elki.evaluation.similaritymatrix --> elki.database.ids
+    elki.evaluation.similaritymatrix --> elki.utilities.optionhandling
+    elki.evaluation.similaritymatrix --> elki.distance
+    elki.evaluation.similaritymatrix --> elki.utilities.scaling
+    elki.evaluation.similaritymatrix --> elki.utilities.optionhandling.parameterization
+    elki.evaluation.similaritymatrix --> elki.logging
+    elki.evaluation.index --> elki.evaluation
+    elki.evaluation.index --> elki.result
+    elki.evaluation.outlier --> elki.evaluation
+    elki.evaluation.outlier --> elki.utilities.optionhandling
+    elki.evaluation.outlier --> elki.utilities.scaling
+    elki.evaluation.outlier --> elki.utilities.optionhandling.parameterization
+    elki.evaluation.outlier --> elki.data
+    elki.evaluation.outlier --> elki.result.outlier
+    elki.evaluation.outlier --> elki.result
+    elki.evaluation.outlier --> elki.database
+    elki.evaluation.outlier --> elki.math.geometry
+    elki.evaluation.outlier --> elki.logging
+    elki.evaluation.outlier --> elki.database.ids
+    elki.evaluation --> elki.utilities.optionhandling
+    elki.evaluation --> elki.logging
+    elki.evaluation --> elki.database
+    elki.evaluation --> elki.result
+    elki.data.model --> elki.result.textwriter
+    elki.data.model --> elki.math.linearalgebra
+    elki.data.model --> elki.database.relation
+    elki.data.model --> elki.datasource.filter.normalization
+    elki.data.model --> elki.data
+    elki.data.model --> elki.data.synthetic.bymodel
+    elki.data.model --> elki.database.ids
+    elki.data.model --> elki.data.type
+    elki.data.model --> elki.math.linearalgebra.pca
+    elki --> elki.utilities.optionhandling
+    elki --> elki.workflow
+    elki --> elki.utilities.optionhandling.parameterization
+    elki --> elki.database
+    elki --> elki.data.type
+    elki.outlier.clustering --> elki.utilities.optionhandling
+    elki.outlier.clustering --> elki.clustering.kmeans
+    elki.outlier.clustering --> elki.utilities.optionhandling.parameterization
+    elki.outlier.clustering --> elki.result.outlier
+    elki.outlier.clustering --> elki.database
+    elki.outlier.clustering --> elki.outlier
+    elki.outlier.clustering --> elki.clustering.hierarchical.extraction
+    elki.outlier.clustering --> elki.database.relation
+    elki.outlier.clustering --> elki.data.type
+    elki.outlier.clustering --> elki.clustering
+    elki.outlier.clustering --> elki.distance
+    elki.outlier.clustering --> elki.logging
+    elki.outlier.clustering --> elki.database.datastore
+    elki.outlier.clustering --> elki.math
+    elki.outlier.clustering --> elki.database.ids
+    elki.outlier.clustering --> elki.data
+    elki.outlier.clustering --> elki.clustering.em.models
+    elki.outlier.clustering --> elki.clustering.dbscan
+    elki.outlier.clustering --> elki.evaluation.clustering.internal
+    elki.outlier.subspace --> elki.outlier
+    elki.outlier.subspace --> elki.utilities.optionhandling
+    elki.outlier.subspace --> elki.clustering.subspace
+    elki.outlier.subspace --> elki.utilities.optionhandling.parameterization
+    elki.outlier.subspace --> elki.data.type
+    elki.outlier.subspace --> elki.result.outlier
+    elki.outlier.subspace --> elki.database
+    elki.outlier.subspace --> elki.logging
+    elki.outlier.subspace --> elki.database.relation
+    elki.outlier.subspace --> elki.utilities.datastructures.heap
+    elki.outlier.subspace --> elki.utilities.pairs
+    elki.outlier.subspace --> it.unimi.dsi.fastutil.ints
+    elki.outlier.subspace --> elki.utilities.random
+    elki.outlier.subspace --> elki.database.ids
+    elki.outlier.subspace --> elki.result.textwriter
+    elki.outlier.subspace --> elki.similarity
+    elki.outlier.subspace --> elki.database.query.similarity
+    elki.outlier.subspace --> elki.math.statistics.kernelfunctions
+    elki.outlier.subspace --> elki.distance
+    elki.outlier --> elki.utilities.optionhandling
+    elki.outlier --> elki.distance
+    elki.outlier --> elki.utilities.optionhandling.parameterization
+    elki.outlier --> elki.data.type
+    elki.outlier --> elki.result.outlier
+    elki.outlier --> elki.database.relation
+    elki.outlier --> elki.math.linearalgebra.pca
+    elki.outlier --> elki.math.linearalgebra.pca.filter
+    elki.outlier --> elki.logging
+    elki.outlier --> elki.algorithm
+    elki.outlier --> elki.database.ids
+    elki.outlier --> elki.math.linearalgebra
+    elki.outlier --> elki.utilities.datastructures.arraylike
+    elki.outlier --> elki.database.query.knn
+    elki.outlier --> elki.database.query.distance
+    elki.outlier --> elki.database.datastore
+    elki.outlier --> elki.database.query.range
+    elki.outlier --> elki
+    elki.outlier --> elki.database
+    elki.result --> elki.utilities.optionhandling
+    elki.result --> elki.visualization
+    elki.result --> elki.utilities.optionhandling.parameterization
+    elki.result --> elki.logging
+    elki.result --> elki.visualization.gui
+    elki.result --> elki.visualization.gui.overview
+    elki.result --> elki.utilities.scaling.outlier
+    elki.result --> elki.result.outlier
+    elki.result --> elki.database
+    elki.result --> elki.data
+    elki.result --> elki.utilities.pairs
+    elki.result --> elki.utilities.datastructures.hierarchy
+    elki.result --> elki.database.relation
+    elki.result --> elki.database.ids
+    elki.result --> elki.math.scales
+    elki.result --> elki.result.textwriter
+    elki.result --> elki.data.type
+    elki.result --> elki.utilities.datastructures.iterator
+    elki.result.textwriter --> elki.utilities
+    elki.result.textwriter --> elki.database
+    elki.result.textwriter --> elki.database.ids
+    elki.result.textwriter --> elki.data
+    elki.result.textwriter --> elki.result.textwriter.naming
+    elki.result.textwriter --> elki.result
+    elki.result.textwriter --> elki.logging
+    elki.result.textwriter.naming --> elki.data
+    elki.result.textwriter.naming --> it.unimi.dsi.fastutil.objects
+    elki.result.textwriter.writers --> elki.result.textwriter
+    elki.result.textwriter.writers --> elki.evaluation.classification
+    elki.result.textwriter.writers --> elki.math.geometry
+    elki.result.textwriter.writers --> elki.utilities.pairs
+    elki.application --> elki
+    elki.application --> elki.utilities.optionhandling.parameterization
+    elki.application --> elki.workflow
+    elki.application --> elki.distance
+    elki.application --> elki.utilities.optionhandling
+    elki.application --> elki.datasource
+    elki.application --> elki.classification
+    elki.application --> elki.evaluation.classification.holdout
+    elki.application --> elki.logging
+    elki.application --> elki.datasource.bundle
+    elki.application.experiments --> elki.application
+    elki.application.experiments --> elki.utilities.optionhandling
+    elki.application.experiments --> elki.utilities.random
+    elki.application.experiments --> elki.utilities.optionhandling.parameterization
+    elki.application.experiments --> elki.clustering.kmedoids.initialization
+    elki.application.experiments --> elki.logging
+    elki.application.experiments --> elki.utilities.io
+    elki.application.experiments --> elki.math.geodesy
+    elki.application.benchmark --> elki.application
+    elki.application.benchmark --> elki.utilities.optionhandling
+    elki.application.benchmark --> elki.datasource
+    elki.application.benchmark --> elki.utilities.random
+    elki.application.benchmark --> elki.utilities.optionhandling.parameterization
+    elki.application.benchmark --> elki.logging
+    elki.application.benchmark --> elki.workflow
+    elki.application.benchmark --> elki.distance
+    elki.application.benchmark --> elki.database
+    elki.application.benchmark --> elki.database.query.range
+    elki.application.benchmark --> elki.database.relation
+    elki.application.benchmark --> elki.logging.statistics
+    elki.application.benchmark --> elki.math
+    elki.application.benchmark --> elki.database.ids
+    elki.application.benchmark --> elki.database.query.knn
+    elki.application.benchmark --> elki.database.query
+    elki.application.greedyensemble --> elki.application
+    elki.application.greedyensemble --> elki.workflow
+    elki.application.greedyensemble --> elki.visualization
+    elki.application.greedyensemble --> elki.utilities.scaling
+    elki.application.greedyensemble --> elki.utilities.ensemble
+    elki.application.greedyensemble --> elki.utilities.optionhandling.parameterization
+    elki.application.greedyensemble --> elki.logging
+    elki.application.greedyensemble --> elki.visualization.visualizers.visunproj
+    elki.application.greedyensemble --> elki.utilities.optionhandling
+    elki.application.greedyensemble --> elki.data
+    elki.application.greedyensemble --> elki.database.relation
+    elki.application.greedyensemble --> elki.database.ids
+    elki.application.greedyensemble --> elki.distance
+    elki.application.greedyensemble --> elki.utilities.datastructures.range
+    elki.application.greedyensemble --> elki.outlier.trivial
+    elki.application.greedyensemble --> elki.result.outlier
+    elki.application.greedyensemble --> elki.datasource.parser
+    elki.application.statistics --> elki.application
+    elki.application.statistics --> elki.utilities.optionhandling
+    elki.application.statistics --> elki.math.statistics.intrinsicdimensionality
+    elki.application.statistics --> elki.utilities.optionhandling.parameterization
+    elki.application.statistics --> elki.logging
+    elki.application.statistics --> elki.workflow
+    elki.application.statistics --> elki.distance
+    elki.application.statistics --> elki.utilities.random
+    elki.persistent --> elki.utilities.optionhandling
+    elki.persistent --> elki.utilities.optionhandling.parameterization
+    elki.persistent --> elki.logging
+    elki.persistent --> elki.utilities.datastructures.arraylike
+    elki.persistent --> it.unimi.dsi.fastutil.ints
+    elki.persistent --> elki.logging.statistics
+    elki.projection --> elki.utilities.optionhandling
+    elki.projection --> elki.utilities.random
+    elki.projection --> elki.utilities.optionhandling.parameterization
+    elki.projection --> elki.logging
+    elki.projection --> elki.data.type
+    elki.projection --> elki.database.relation
+    elki.projection --> elki.database
+    elki.projection --> elki.database.ids
+    elki.projection --> elki.math.statistics.intrinsicdimensionality
+    elki.projection --> elki.distance
+    elki.projection --> elki.database.query.knn
+    elki.projection --> elki.utilities.datastructures.arraylike
+    elki.projection --> elki.math
+    elki.projection --> elki
+    elki.projection --> elki.database.query.distance
+    elki.workflow --> elki.utilities.optionhandling
+    elki.workflow --> elki.database
+    elki.workflow --> elki.utilities.optionhandling.parameterization
+    elki.workflow --> elki.result
+    elki.workflow --> elki.logging
+    elki.visualization.parallel3d.util --> com.jogamp.opengl.util.awt
+    elki.visualization.parallel3d --> elki.logging
+    elki.visualization.parallel3d --> elki.utilities.pairs
+    elki.visualization.parallel3d --> elki.visualization.style
+    elki.visualization.parallel3d --> elki.result
+    elki.visualization.parallel3d --> elki.math.statistics.dependence
+    elki.visualization.parallel3d --> elki.visualization.parallel3d.layout
+    elki.visualization.parallel3d --> elki.database.relation
+    elki.visualization.parallel3d --> elki.visualization.projections
+    elki.visualization.parallel3d --> elki.visualization.parallel3d.util
+    elki.visualization.parallel3d --> com.jogamp.opengl.util.awt
+    elki.visualization.parallel3d --> elki.utilities.optionhandling
+    elki.visualization.parallel3d --> elki.utilities.optionhandling.parameterization
+    elki.visualization.parallel3d.layout --> elki.database.relation
+    elki.visualization.parallel3d.layout --> elki.math.statistics.dependence
+    elki.visualization.parallel3d.layout --> elki.utilities.optionhandling
+    elki.visualization.parallel3d.layout --> elki.math.geometry
+    elki.visualization.parallel3d.layout --> elki.utilities.optionhandling.parameterization
+    elki.visualization --> elki.utilities.datastructures.hierarchy
+    elki.visualization --> elki.utilities.datastructures.iterator
+    elki.visualization --> elki.database.datastore
+    elki.visualization --> elki.logging
+    elki.visualization --> elki.result
+    elki.visualization --> elki.visualization.style
+    elki.visualization --> elki.data
+    elki.visualization --> elki.utilities.optionhandling
+    elki.visualization --> elki.utilities.optionhandling.parameterization
+    elki.visualization --> elki.utilities.random
+    elki.visualization --> elki.database
+    elki.visualization --> elki.visualization.visualizers
+    elki.visualization --> elki.database.relation
+    elki.visualization.opticsplot --> elki.data
+    elki.visualization.opticsplot --> elki.logging
+    elki.visualization.opticsplot --> elki.math.scales
+    elki.visualization.opticsplot --> elki.clustering.optics
+    elki.visualization.opticsplot --> elki.visualization.style
+    elki.visualization.opticsplot --> elki.visualization
+    elki.visualization.css --> org.w3c.dom
+    elki.visualization.projector --> elki.database.relation
+    elki.visualization.projector --> elki.visualization
+    elki.visualization.projector --> elki.utilities.optionhandling
+    elki.visualization.projector --> elki.utilities.optionhandling.parameterization
+    elki.visualization.projector --> elki.data
+    elki.visualization.projector --> elki.visualization.silhouette
+    elki.visualization.projector --> elki.database.ids
+    elki.visualization.projector --> elki.clustering.optics
+    elki.visualization.projector --> elki.visualization.opticsplot
+    elki.visualization.projections --> elki.visualization.projector
+    elki.visualization.projections --> elki.math.scales
+    elki.visualization.projections --> elki.data
+    elki.visualization.projections --> elki.visualization.opticsplot
+    elki.visualization.projections --> elki.visualization
+    elki.visualization.projections --> elki.clustering.optics
+    elki.visualization.projections --> elki.visualization.silhouette
+    elki.visualization.projections --> elki.database.ids
+    elki.visualization.projections --> elki.math.linearalgebra
+    elki.visualization.visualizers --> elki.visualization
+    elki.visualization.visualizers --> elki.visualization.gui
+    elki.visualization.visualizers --> elki.visualization.projections
+    elki.visualization.visualizers --> org.w3c.dom
+    elki.visualization.visualizers --> elki.result
+    elki.visualization.visualizers --> elki.database.datastore
+    elki.visualization.visualizers.parallel.selection --> elki.visualization.visualizers
+    elki.visualization.visualizers.parallel.selection --> elki.visualization.visualizers.parallel
+    elki.visualization.visualizers.parallel.selection --> elki.database.datastore
+    elki.visualization.visualizers.parallel.selection --> elki.visualization
+    elki.visualization.visualizers.parallel.selection --> elki.visualization.gui
+    elki.visualization.visualizers.parallel.selection --> elki.visualization.projections
+    elki.visualization.visualizers.parallel.selection --> org.w3c.dom
+    elki.visualization.visualizers.parallel.selection --> elki.database.ids
+    elki.visualization.visualizers.parallel.selection --> elki.visualization.svg
+    elki.visualization.visualizers.parallel.selection --> elki.visualization.batikutil
+    elki.visualization.visualizers.parallel.selection --> org.w3c.dom.svg
+    elki.visualization.visualizers.parallel.selection --> org.w3c.dom.events
+    elki.visualization.visualizers.parallel.selection --> elki.data
+    elki.visualization.visualizers.parallel.selection --> elki.logging
+    elki.visualization.visualizers.parallel --> elki.visualization.visualizers
+    elki.visualization.visualizers.parallel --> elki.visualization.projections
+    elki.visualization.visualizers.parallel --> elki.database.relation
+    elki.visualization.visualizers.parallel --> elki.visualization
+    elki.visualization.visualizers.parallel --> elki.visualization.gui
+    elki.visualization.visualizers.parallel --> org.w3c.dom
+    elki.visualization.visualizers.parallel --> elki.visualization.svg
+    elki.visualization.visualizers.parallel --> elki.logging
+    elki.visualization.visualizers.parallel --> elki.database.datastore
+    elki.visualization.visualizers.parallel --> elki.result
+    elki.visualization.visualizers.parallel --> elki.database.ids
+    elki.visualization.visualizers.parallel.cluster --> elki.visualization.visualizers
+    elki.visualization.visualizers.parallel.cluster --> elki.visualization.visualizers.parallel
+    elki.visualization.visualizers.parallel.cluster --> elki.database.datastore
+    elki.visualization.visualizers.parallel.cluster --> elki.visualization
+    elki.visualization.visualizers.parallel.cluster --> elki.visualization.gui
+    elki.visualization.visualizers.parallel.cluster --> elki.visualization.projections
+    elki.visualization.visualizers.parallel.cluster --> elki.visualization.svg
+    elki.visualization.visualizers.parallel.cluster --> elki.utilities.optionhandling
+    elki.visualization.visualizers.parallel.cluster --> elki.utilities.optionhandling.parameterization
+    elki.visualization.visualizers.parallel.index --> elki.visualization.visualizers
+    elki.visualization.visualizers.parallel.index --> elki.visualization.visualizers.parallel
+    elki.visualization.visualizers.parallel.index --> elki.database.datastore
+    elki.visualization.visualizers.parallel.index --> elki.index.tree.spatial.rstarvariants
+    elki.visualization.visualizers.parallel.index --> elki.visualization
+    elki.visualization.visualizers.parallel.index --> elki.visualization.gui
+    elki.visualization.visualizers.parallel.index --> elki.visualization.projections
+    elki.visualization.visualizers.parallel.index --> elki.visualization.svg
+    elki.visualization.visualizers.parallel.index --> org.w3c.dom
+    elki.visualization.visualizers.parallel.index --> elki.utilities.optionhandling
+    elki.visualization.visualizers.parallel.index --> elki.utilities.optionhandling.parameterization
+    elki.visualization.visualizers.histogram --> elki.visualization.visualizers
+    elki.visualization.visualizers.histogram --> elki.visualization.projections
+    elki.visualization.visualizers.histogram --> elki.visualization
+    elki.visualization.visualizers.histogram --> elki.visualization.gui
+    elki.visualization.visualizers.histogram --> elki.database.relation
+    elki.visualization.visualizers.histogram --> elki.result
+    elki.visualization.visualizers.histogram --> elki.visualization.svg
+    elki.visualization.visualizers.histogram --> elki.utilities.optionhandling
+    elki.visualization.visualizers.histogram --> elki.utilities.optionhandling.parameterization
+    elki.visualization.visualizers.silhouette --> elki.visualization.visualizers
+    elki.visualization.visualizers.silhouette --> elki.visualization
+    elki.visualization.visualizers.silhouette --> elki.visualization.gui
+    elki.visualization.visualizers.silhouette --> elki.visualization.projections
+    elki.visualization.visualizers.silhouette --> elki.visualization.batikutil
+    elki.visualization.visualizers.silhouette --> org.w3c.dom
+    elki.visualization.visualizers.silhouette --> org.w3c.dom.svg
+    elki.visualization.visualizers.silhouette --> org.w3c.dom.events
+    elki.visualization.visualizers.silhouette --> elki.logging
+    elki.visualization.visualizers.thumbs --> elki.visualization.visualizers
+    elki.visualization.visualizers.thumbs --> elki.database.datastore
+    elki.visualization.visualizers.thumbs --> elki.visualization
+    elki.visualization.visualizers.thumbs --> elki.visualization.svg
+    elki.visualization.visualizers.thumbs --> elki.visualization.projections
+    elki.visualization.visualizers.thumbs --> elki.visualization.gui
+    elki.visualization.visualizers.thumbs --> org.w3c.dom
+    elki.visualization.visualizers.visunproj --> elki.visualization.visualizers
+    elki.visualization.visualizers.visunproj --> elki.visualization
+    elki.visualization.visualizers.visunproj --> elki.visualization.gui
+    elki.visualization.visualizers.visunproj --> elki.visualization.projections
+    elki.visualization.visualizers.visunproj --> elki.visualization.svg
+    elki.visualization.visualizers.visunproj --> elki.math.geometry
+    elki.visualization.visualizers.visunproj --> elki.math.scales
+    elki.visualization.visualizers.visunproj --> elki.result
+    elki.visualization.visualizers.visunproj --> elki.visualization.style.marker
+    elki.visualization.visualizers.visunproj --> elki.utilities.pairs
+    elki.visualization.visualizers.visunproj --> elki.data
+    elki.visualization.visualizers.visunproj --> it.unimi.dsi.fastutil.objects
+    elki.visualization.visualizers.visunproj --> elki.utilities.datastructures.hierarchy
+    elki.visualization.visualizers.visunproj --> elki.evaluation.similaritymatrix
+    elki.visualization.visualizers.visunproj --> org.w3c.dom
+    elki.visualization.visualizers.visunproj --> elki.visualization.style
+    elki.visualization.visualizers.visunproj --> elki.utilities.optionhandling
+    elki.visualization.visualizers.visunproj --> elki.utilities.optionhandling.parameterization
+    elki.visualization.visualizers.scatterplot.selection --> elki.visualization.visualizers
+    elki.visualization.visualizers.scatterplot.selection --> elki.visualization.visualizers.scatterplot
+    elki.visualization.visualizers.scatterplot.selection --> elki.database.datastore
+    elki.visualization.visualizers.scatterplot.selection --> elki.visualization
+    elki.visualization.visualizers.scatterplot.selection --> elki.visualization.gui
+    elki.visualization.visualizers.scatterplot.selection --> elki.visualization.projections
+    elki.visualization.visualizers.scatterplot.selection --> elki.visualization.batikutil
+    elki.visualization.visualizers.scatterplot.selection --> org.w3c.dom
+    elki.visualization.visualizers.scatterplot.selection --> elki.data
+    elki.visualization.visualizers.scatterplot.selection --> org.w3c.dom.svg
+    elki.visualization.visualizers.scatterplot.selection --> org.w3c.dom.events
+    elki.visualization.visualizers.scatterplot.selection --> elki.visualization.svg
+    elki.visualization.visualizers.scatterplot.selection --> elki.logging
+    elki.visualization.visualizers.scatterplot.selection --> elki.index.preprocessed.knn
+    elki.visualization.visualizers.scatterplot.selection --> elki.database.ids
+    elki.visualization.visualizers.scatterplot.selection --> elki.utilities.optionhandling
+    elki.visualization.visualizers.scatterplot.selection --> elki.utilities.optionhandling.parameterization
+    elki.visualization.visualizers.scatterplot --> elki.visualization.visualizers
+    elki.visualization.visualizers.scatterplot --> elki.visualization
+    elki.visualization.visualizers.scatterplot --> elki.visualization.gui
+    elki.visualization.visualizers.scatterplot --> elki.visualization.projections
+    elki.visualization.visualizers.scatterplot --> elki.database.relation
+    elki.visualization.visualizers.scatterplot --> elki.result
+    elki.visualization.visualizers.scatterplot --> org.w3c.dom
+    elki.visualization.visualizers.scatterplot --> elki.visualization.svg
+    elki.visualization.visualizers.scatterplot --> elki.database.datastore
+    elki.visualization.visualizers.scatterplot --> org.w3c.dom.events
+    elki.visualization.visualizers.scatterplot --> elki.database.ids
+    elki.visualization.visualizers.scatterplot --> elki.visualization.projector
+    elki.visualization.visualizers.scatterplot --> elki.utilities.optionhandling
+    elki.visualization.visualizers.scatterplot --> elki.utilities.optionhandling.parameterization
+    elki.visualization.visualizers.scatterplot.cluster --> elki.visualization.visualizers
+    elki.visualization.visualizers.scatterplot.cluster --> elki.visualization.visualizers.scatterplot
+    elki.visualization.visualizers.scatterplot.cluster --> elki.database.datastore
+    elki.visualization.visualizers.scatterplot.cluster --> elki.clustering.optics
+    elki.visualization.visualizers.scatterplot.cluster --> elki.visualization
+    elki.visualization.visualizers.scatterplot.cluster --> elki.visualization.gui
+    elki.visualization.visualizers.scatterplot.cluster --> elki.visualization.projections
+    elki.visualization.visualizers.scatterplot.cluster --> org.w3c.dom
+    elki.visualization.visualizers.scatterplot.cluster --> elki.visualization.svg
+    elki.visualization.visualizers.scatterplot.cluster --> elki.utilities.optionhandling
+    elki.visualization.visualizers.scatterplot.cluster --> elki.utilities.optionhandling.parameterization
+    elki.visualization.visualizers.scatterplot.cluster --> elki.utilities.pairs
+    elki.visualization.visualizers.scatterplot.cluster --> elki.data
+    elki.visualization.visualizers.scatterplot.cluster --> elki.utilities.datastructures.hierarchy
+    elki.visualization.visualizers.scatterplot.cluster --> elki.data.spatial
+    elki.visualization.visualizers.scatterplot.cluster --> elki.logging
+    elki.visualization.visualizers.scatterplot.index --> elki.visualization.visualizers
+    elki.visualization.visualizers.scatterplot.index --> elki.visualization.visualizers.scatterplot
+    elki.visualization.visualizers.scatterplot.index --> elki.database.datastore
+    elki.visualization.visualizers.scatterplot.index --> elki.index.tree.spatial.rstarvariants
+    elki.visualization.visualizers.scatterplot.index --> elki.visualization
+    elki.visualization.visualizers.scatterplot.index --> elki.visualization.gui
+    elki.visualization.visualizers.scatterplot.index --> elki.visualization.projections
+    elki.visualization.visualizers.scatterplot.index --> elki.visualization.svg
+    elki.visualization.visualizers.scatterplot.index --> org.w3c.dom
+    elki.visualization.visualizers.scatterplot.index --> elki.utilities.optionhandling
+    elki.visualization.visualizers.scatterplot.index --> elki.utilities.optionhandling.parameterization
+    elki.visualization.visualizers.scatterplot.index --> elki.index.tree.metrical.mtreevariants
+    elki.visualization.visualizers.scatterplot.index --> elki.database.relation
+    elki.visualization.visualizers.scatterplot.outlier --> elki.visualization.visualizers
+    elki.visualization.visualizers.scatterplot.outlier --> elki.visualization.visualizers.scatterplot
+    elki.visualization.visualizers.scatterplot.outlier --> elki.database.datastore
+    elki.visualization.visualizers.scatterplot.outlier --> elki.result.outlier
+    elki.visualization.visualizers.scatterplot.outlier --> elki.visualization
+    elki.visualization.visualizers.scatterplot.outlier --> elki.visualization.gui
+    elki.visualization.visualizers.scatterplot.outlier --> elki.visualization.projections
+    elki.visualization.visualizers.scatterplot.outlier --> elki.visualization.svg
+    elki.visualization.visualizers.scatterplot.outlier --> elki.visualization.style
+    elki.visualization.visualizers.scatterplot.outlier --> elki.database.ids
+    elki.visualization.visualizers.scatterplot.outlier --> elki.utilities.optionhandling
+    elki.visualization.visualizers.scatterplot.outlier --> elki.utilities.scaling
+    elki.visualization.visualizers.scatterplot.outlier --> elki.utilities.optionhandling.parameterization
+    elki.visualization.visualizers.scatterplot.outlier --> elki.database.relation
+    elki.visualization.visualizers.scatterplot.density --> elki.visualization.visualizers
+    elki.visualization.visualizers.scatterplot.density --> elki.visualization.visualizers.scatterplot
+    elki.visualization.visualizers.scatterplot.density --> elki.visualization
+    elki.visualization.visualizers.scatterplot.density --> elki.visualization.gui
+    elki.visualization.visualizers.scatterplot.density --> elki.visualization.projections
+    elki.visualization.visualizers.scatterplot.uncertain --> elki.visualization.visualizers
+    elki.visualization.visualizers.scatterplot.uncertain --> elki.visualization.visualizers.scatterplot
+    elki.visualization.visualizers.scatterplot.uncertain --> elki.visualization
+    elki.visualization.visualizers.scatterplot.uncertain --> elki.visualization.gui
+    elki.visualization.visualizers.scatterplot.uncertain --> elki.visualization.projections
+    elki.visualization.visualizers.scatterplot.uncertain --> elki.database.relation
+    elki.visualization.visualizers.scatterplot.uncertain --> elki.utilities.random
+    elki.visualization.visualizers.scatterplot.uncertain --> elki.data.uncertain
+    elki.visualization.visualizers.scatterplot.uncertain --> elki.visualization.style.marker
+    elki.visualization.visualizers.pairsegments --> elki.visualization.style
+    elki.visualization.visualizers.pairsegments --> elki.evaluation.clustering.pairsegments
+    elki.visualization.visualizers.pairsegments --> elki.database.ids
+    elki.visualization.visualizers.pairsegments --> elki.visualization.colors
+    elki.visualization.visualizers.pairsegments --> elki.visualization.visualizers
+    elki.visualization.visualizers.pairsegments --> elki.result
+    elki.visualization.visualizers.pairsegments --> org.w3c.dom.events
+    elki.visualization.visualizers.pairsegments --> org.w3c.dom
+    elki.visualization.visualizers.pairsegments --> elki.visualization
+    elki.visualization.visualizers.pairsegments --> elki.visualization.gui
+    elki.visualization.visualizers.pairsegments --> elki.logging
+    elki.visualization.visualizers.pairsegments --> elki.visualization.projections
+    elki.visualization.visualizers.optics --> elki.visualization.visualizers
+    elki.visualization.visualizers.optics --> elki.visualization
+    elki.visualization.visualizers.optics --> elki.visualization.gui
+    elki.visualization.visualizers.optics --> elki.visualization.projections
+    elki.visualization.visualizers.optics --> elki.data
+    elki.visualization.visualizers.optics --> elki.utilities.datastructures.iterator
+    elki.visualization.visualizers.optics --> elki.logging
+    elki.visualization.visualizers.optics --> elki.clustering.optics
+    elki.visualization.visualizers.optics --> elki.visualization.batikutil
+    elki.visualization.visualizers.optics --> org.w3c.dom
+    elki.visualization.visualizers.optics --> org.w3c.dom.svg
+    elki.visualization.visualizers.optics --> org.w3c.dom.events
+    elki.visualization.visualizers.actions --> elki.visualization.visualizers
+    elki.visualization.visualizers.actions --> elki.visualization
+    elki.visualization.visualizers.actions --> elki.data
+    elki.visualization.visualizers.actions --> elki.visualization.gui
+    elki.visualization.visualizers.actions --> elki.visualization.projections
+    elki.visualization.svg --> elki.visualization.projections
+    elki.visualization.svg --> elki.utilities.xml
+    elki.visualization.svg --> org.w3c.dom
+    elki.visualization.svg --> elki.data.spatial
+    elki.visualization.svg --> elki.visualization.css
+    elki.visualization.svg --> elki.visualization.style
+    elki.visualization.svg --> elki.math.scales
+    elki.visualization.svg --> elki.data
+    elki.visualization.svg --> it.unimi.dsi.fastutil.objects
+    elki.visualization.svg --> org.w3c.dom.svg
+    elki.visualization.svg --> org.w3c.dom.events
+    elki.visualization.svg --> org.apache.batik.transcoder
+    elki.visualization.batikutil --> org.w3c.dom
+    elki.visualization.batikutil --> elki.visualization.svg
+    elki.visualization.batikutil --> org.apache.batik.ext.awt.image.spi
+    elki.visualization.batikutil --> org.apache.batik.util
+    elki.visualization.batikutil --> elki.logging
+    elki.visualization.batikutil --> it.unimi.dsi.fastutil.ints
+    elki.visualization.batikutil --> org.apache.batik.ext.awt.image.renderable
+    elki.visualization.batikutil --> org.apache.batik.swing
+    elki.visualization.batikutil --> org.apache.batik.bridge
+    elki.visualization.batikutil --> org.apache.batik.swing.svg
+    elki.visualization.batikutil --> org.w3c.dom.events
+    elki.visualization.batikutil --> org.apache.batik.transcoder.image
+    elki.visualization.batikutil --> org.apache.batik.transcoder
+    elki.visualization.batikutil --> org.w3c.dom.svg
+    elki.visualization.style --> elki.database.ids
+    elki.visualization.style --> elki.visualization.colors
+    elki.visualization.style --> elki.visualization.style.lines
+    elki.visualization.style --> elki.visualization.style.marker
+    elki.visualization.style --> elki.logging
+    elki.visualization.style --> elki.visualization
+    elki.visualization.style --> it.unimi.dsi.fastutil.objects
+    elki.visualization.style --> it.unimi.dsi.fastutil.ints
+    elki.visualization.style --> elki.data
+    elki.visualization.style --> elki.database.datastore
+    elki.visualization.style.lines --> elki.visualization.colors
+    elki.visualization.style.lines --> elki.visualization.style
+    elki.visualization.style.lines --> elki.visualization.css
+    elki.visualization.style.marker --> org.w3c.dom
+    elki.visualization.style.marker --> elki.visualization.svg
+    elki.visualization.style.marker --> elki.visualization.colors
+    elki.visualization.style.marker --> elki.visualization.style
+    elki.visualization.silhouette --> elki.logging
+    elki.visualization.silhouette --> elki.math.scales
+    elki.visualization.silhouette --> elki.database.ids
+    elki.visualization.silhouette --> elki.visualization.style
+    elki.visualization.silhouette --> elki.visualization
+    elki.visualization.savedialog --> elki.logging
+    elki.visualization.savedialog --> elki.visualization.svg
+    elki.visualization.gui --> elki.visualization.batikutil
+    elki.visualization.gui --> elki.visualization.svg
+    elki.visualization.gui --> elki.visualization
+    elki.visualization.gui --> elki.visualization.visualizers
+    elki.visualization.gui --> elki.result
+    elki.visualization.gui --> elki.utilities.datastructures.hierarchy
+    elki.visualization.gui --> elki.visualization.projections
+    elki.visualization.gui --> elki.visualization.gui.overview
+    elki.visualization.gui --> elki.visualization.gui.detail
+    elki.visualization.gui --> elki.database.datastore
+    elki.visualization.gui --> elki.logging
+    elki.visualization.gui --> elki.database.ids
+    elki.visualization.gui --> elki.database
+    elki.visualization.gui --> elki.database.relation
+    elki.visualization.gui.detail --> elki.visualization.gui
+    elki.visualization.gui.detail --> elki.result
+    elki.visualization.gui.detail --> elki.visualization
+    elki.visualization.gui.detail --> elki.logging
+    elki.visualization.gui.detail --> elki.visualization.gui.overview
+    elki.visualization.gui.detail --> elki.visualization.visualizers
+    elki.visualization.gui.overview --> elki.logging
+    elki.visualization.gui.overview --> elki.utilities.datastructures.arraylike
+    elki.visualization.gui.overview --> elki.result
+    elki.visualization.gui.overview --> elki.visualization
+    elki.visualization.gui.overview --> elki.visualization.gui
+    elki.visualization.gui.overview --> org.w3c.dom.events
+    elki.visualization.gui.overview --> org.w3c.dom
+    elki.visualization.gui.overview --> elki.visualization.css
+    elki.visualization.gui.overview --> elki.visualization.visualizers
+    elki.visualization.gui.overview --> elki.visualization.gui.detail
+    elki.visualization.gui.overview --> elki.visualization.svg
+    elki.visualization.gui.overview --> elki.visualization.projections
+    elki.visualization.gui.overview --> elki.utilities.pairs
+    elki.evaluation.classification.holdout --> elki.datasource.bundle
+    elki.evaluation.classification.holdout --> elki.utilities.optionhandling
+    elki.evaluation.classification.holdout --> elki.utilities.optionhandling.parameterization
+    elki.evaluation.classification.holdout --> elki.utilities.random
+    elki.classification --> elki
+    elki.classification --> elki.database
+    elki.classification --> elki.database.relation
+    elki.classification --> elki.data
+    elki.classification --> elki.utilities.optionhandling
+    elki.classification --> elki.distance
+    elki.classification --> elki.utilities.optionhandling.parameterization
+    elki.classification --> elki.database.query.knn
+    elki.classification --> elki.data.type
+    elki.clustering.kmeans --> elki.utilities.optionhandling
+    elki.clustering.kmeans --> elki.utilities.optionhandling.parameterization
+    elki.clustering.kmeans --> elki.logging
+    elki.clustering.kmeans --> elki.data.type
+    elki.clustering.kmeans --> elki.data
+    elki.clustering.kmeans --> elki.database.relation
+    elki.clustering.kmeans --> elki.distance
+    elki.clustering.kmeans --> elki.clustering.kmeans.initialization
+    elki.clustering.kmeans --> elki.database.datastore
+    elki.clustering.kmeans --> elki.utilities.datastructures.heap
+    elki.clustering.kmeans --> elki.clustering
+    elki.clustering.kmeans --> elki.database.ids
+    elki.clustering.kmeans --> elki.utilities.random
+    elki.clustering.kmeans --> elki.index.tree.betula
+    elki.clustering.kmeans --> elki.clustering.kmeans.initialization.betula
+    elki.clustering.kmeans --> elki.clustering.kmeans.quality
+    elki.clustering.kmeans.spherical --> elki.database.datastore
+    elki.clustering.kmeans.spherical --> elki.database.relation
+    elki.clustering.kmeans.spherical --> elki.logging
+    elki.clustering.kmeans.spherical --> elki.utilities.optionhandling.parameterization
+    elki.clustering.kmeans.spherical --> elki.clustering.kmeans.initialization
+    elki.clustering.kmeans.spherical --> elki.data
+    elki.clustering.kmeans.spherical --> elki.clustering.kmeans
+    elki.clustering.kmeans.spherical --> elki.data.type
+    elki.clustering.kmeans.parallel --> elki.clustering.kmeans
+    elki.clustering.kmeans.parallel --> elki.distance
+    elki.clustering.kmeans.parallel --> elki.clustering.kmeans.initialization
+    elki.clustering.kmeans.parallel --> elki.logging
+    elki.clustering.kmeans.parallel --> elki.data.type
+    elki.clustering.kmeans.parallel --> elki.data
+    elki.clustering.kmeans.parallel --> elki.database.relation
+    elki.clustering.kmeans.parallel --> elki.parallel.processor
+    elki.clustering.kmeans.parallel --> elki.database.datastore
+    elki.clustering.kmeans.parallel --> elki.database.ids
+    elki.clustering.kmeans.parallel --> elki.parallel
+    elki.clustering.kmeans.initialization --> elki.database.relation
+    elki.clustering.kmeans.initialization --> elki.distance
+    elki.clustering.kmeans.initialization --> elki.database.datastore
+    elki.clustering.kmeans.initialization --> elki.utilities.random
+    elki.clustering.kmeans.initialization --> elki.data
+    elki.clustering.kmeans.initialization --> elki.database.ids
+    elki.clustering.kmeans.initialization --> elki.logging
+    elki.clustering.kmeans.initialization --> elki.utilities.optionhandling
+    elki.clustering.kmeans.initialization --> elki.utilities.optionhandling.parameterization
+    elki.clustering.kmeans.initialization --> elki.clustering.kmedoids.initialization
+    elki.clustering.kmeans.initialization --> elki.database.query.distance
+    elki.clustering.kmeans.initialization --> elki.clustering.kmeans
+    elki.clustering.kmeans.initialization.betula --> elki.index.tree.betula.features
+    elki.clustering.kmeans.initialization.betula --> elki.utilities.optionhandling
+    elki.clustering.kmeans.initialization.betula --> elki.utilities.optionhandling.parameterization
+    elki.clustering.kmeans.initialization.betula --> elki.utilities.random
+    elki.clustering.kmeans.initialization.betula --> elki.index.tree.betula
+    elki.clustering.kmeans.quality --> elki.data
+    elki.clustering.kmeans.quality --> elki.distance
+    elki.clustering.kmeans.quality --> elki.database.relation
+    elki.clustering.subspace.clique --> elki.database.ids
+    elki.clustering.subspace.clique --> elki.data
+    elki.clustering --> elki.utilities.optionhandling
+    elki.clustering --> elki.math.statistics.kernelfunctions
+    elki.clustering --> elki.distance
+    elki.clustering --> elki.utilities.optionhandling.parameterization
+    elki.clustering --> elki.logging
+    elki.clustering --> elki.data.type
+    elki.clustering --> elki.data
+    elki.clustering --> elki.database.relation
+    elki.clustering --> elki
+    elki.clustering --> elki.database
+    elki.clustering --> elki.similarity
+    elki.clustering --> elki.database.ids
+    elki.clustering --> elki.database.query.similarity
+    elki.clustering --> elki.logging.progress
+    elki.clustering --> elki.database.datastore
+    elki.clustering --> elki.index.tree.betula
+    elki.clustering.onedimensional --> elki.clustering
+    elki.clustering.onedimensional --> elki.utilities.optionhandling
+    elki.clustering.onedimensional --> elki.math.statistics.kernelfunctions
+    elki.clustering.onedimensional --> elki.utilities.optionhandling.parameterization
+    elki.clustering.onedimensional --> elki.logging
+    elki.clustering.onedimensional --> elki.data.type
+    elki.clustering.onedimensional --> elki.data
+    elki.clustering.onedimensional --> elki.database.relation
+    elki.clustering.affinitypropagation --> elki.utilities.optionhandling
+    elki.clustering.affinitypropagation --> elki.database.relation
+    elki.clustering.affinitypropagation --> elki.database.ids
+    elki.clustering.affinitypropagation --> elki.data.type
+    elki.clustering.affinitypropagation --> elki.distance
+    elki.clustering.affinitypropagation --> elki.utilities.optionhandling.parameterization
+    elki.clustering.affinitypropagation --> elki.clustering
+    elki.clustering.affinitypropagation --> elki.logging
+    elki.clustering.affinitypropagation --> elki.data
+    elki.clustering.affinitypropagation --> it.unimi.dsi.fastutil.ints
+    elki.clustering.affinitypropagation --> elki.similarity
+    elki.clustering.kmedoids --> elki.clustering
+    elki.clustering.kmedoids --> elki.data
+    elki.clustering.kmedoids --> elki.database.relation
+    elki.clustering.kmedoids --> elki.database.query.distance
+    elki.clustering.kmedoids --> elki.database.ids
+    elki.clustering.kmedoids --> elki.database.datastore
+    elki.clustering.kmedoids --> elki.logging
+    elki.clustering.kmedoids --> elki.distance
+    elki.clustering.kmedoids --> elki.clustering.kmedoids.initialization
+    elki.clustering.kmedoids --> elki.utilities.optionhandling
+    elki.clustering.kmedoids --> elki.utilities.optionhandling.parameterization
+    elki.clustering.kmedoids --> elki.utilities.random
+    elki.clustering.kmedoids --> elki.data.type
+    elki.clustering.kmedoids --> it.unimi.dsi.fastutil.longs
+    elki.clustering.kmedoids.initialization --> elki.clustering.kmeans.initialization
+    elki.clustering.kmedoids.initialization --> elki.utilities.optionhandling
+    elki.clustering.kmedoids.initialization --> elki.logging
+    elki.clustering.kmedoids.initialization --> elki.database.relation
+    elki.clustering.kmedoids.initialization --> elki.distance
+    elki.clustering.kmedoids.initialization --> elki.database.ids
+    elki.clustering.kmedoids.initialization --> elki.database.query.distance
+    elki.clustering.kmedoids.initialization --> elki.clustering.kmedoids
+    elki.clustering.kmedoids.initialization --> elki.utilities.optionhandling.parameterization
+    elki.clustering.kmedoids.initialization --> elki.utilities.random
+    elki.clustering.kmedoids.initialization --> elki.database.datastore
+    elki.clustering.trivial --> elki.clustering
+    elki.clustering.trivial --> elki.utilities.optionhandling
+    elki.clustering.trivial --> elki.utilities.optionhandling.parameterization
+    elki.clustering.trivial --> elki.data.type
+    elki.clustering.trivial --> elki.data
+    elki.clustering.trivial --> elki.database.relation
+    elki.clustering.trivial --> elki.database
+    elki.clustering.trivial --> elki.database.ids
+    elki.clustering.trivial --> elki.logging
+    elki.clustering.dbscan.predicates --> elki.database.ids
+    elki.clustering.dbscan.predicates --> elki.utilities.optionhandling
+    elki.clustering.dbscan.predicates --> elki.utilities.optionhandling.parameterization
+    elki.clustering.dbscan.predicates --> elki.logging
+    elki.clustering.dbscan.predicates --> elki.database
+    elki.clustering.dbscan.predicates --> elki.data.type
+    elki.clustering.dbscan.predicates --> elki.database.datastore
+    elki.clustering.dbscan.predicates --> elki.clustering.subspace
+    elki.clustering.dbscan.predicates --> elki.math
+    elki.clustering.dbscan.predicates --> elki.database.relation
+    elki.clustering.dbscan.predicates --> elki.database.query.range
+    elki.clustering.dbscan.predicates --> elki.similarity
+    elki.clustering.dbscan.predicates --> elki.clustering.correlation
+    elki.clustering.dbscan.predicates --> elki.distance
+    elki.clustering.dbscan.predicates --> elki.data
+    elki.clustering.dbscan.predicates --> elki.math.linearalgebra.pca
+    elki.clustering.dbscan.predicates --> elki.math.linearalgebra.pca.filter
+    elki.clustering.dbscan --> elki.clustering
+    elki.clustering.dbscan --> elki.database.ids
+    elki.clustering.dbscan --> elki.logging.progress
+    elki.clustering.dbscan --> elki.database.query.range
+    elki.clustering.dbscan --> elki.database.relation
+    elki.clustering.dbscan --> elki.utilities.optionhandling
+    elki.clustering.dbscan --> elki.distance
+    elki.clustering.dbscan --> elki.utilities.optionhandling.parameterization
+    elki.clustering.dbscan --> elki.logging
+    elki.clustering.dbscan --> elki.data.type
+    elki.clustering.dbscan --> elki.data
+    elki.clustering.dbscan --> elki.database.datastore
+    elki.clustering.dbscan --> elki.database.query.knn
+    elki.clustering.dbscan --> elki.clustering.dbscan.predicates
+    elki.clustering.dbscan --> elki.database
+    elki.clustering.dbscan --> it.unimi.dsi.fastutil.longs
+    elki.clustering.dbscan --> elki.clustering.dbscan.util
+    elki.clustering.dbscan --> elki.distance.minkowski
+    elki.clustering.dbscan.parallel --> elki.clustering
+    elki.clustering.dbscan.parallel --> elki.parallel.processor
+    elki.clustering.dbscan.parallel --> elki.clustering.dbscan.predicates
+    elki.clustering.dbscan.parallel --> elki.database.ids
+    elki.clustering.dbscan.parallel --> elki.database.datastore
+    elki.clustering.dbscan.parallel --> elki.clustering.dbscan.util
+    elki.clustering.dbscan.parallel --> elki.database
+    elki.clustering.dbscan.parallel --> elki.logging.progress
+    elki.clustering.dbscan.parallel --> elki.data
+    elki.clustering.dbscan.parallel --> elki.parallel
+    elki.clustering.dbscan.parallel --> elki.utilities.optionhandling
+    elki.clustering.dbscan.parallel --> elki.utilities.optionhandling.parameterization
+    elki.clustering.dbscan.parallel --> elki.logging
+    elki.clustering.dbscan.parallel --> elki.data.type
+    elki.clustering.hierarchical --> elki.clustering.hierarchical.linkage
+    elki.clustering.hierarchical --> elki.utilities.optionhandling
+    elki.clustering.hierarchical --> elki.distance
+    elki.clustering.hierarchical --> elki.utilities.optionhandling.parameterization
+    elki.clustering.hierarchical --> elki.logging
+    elki.clustering.hierarchical --> elki.database.relation
+    elki.clustering.hierarchical --> elki.database.ids
+    elki.clustering.hierarchical --> elki.database.query.distance
+    elki.clustering.hierarchical --> elki.data.type
+    elki.clustering.hierarchical --> it.unimi.dsi.fastutil.ints
+    elki.clustering.hierarchical --> elki.database.datastore
+    elki.clustering.hierarchical --> elki.clustering.optics
+    elki.clustering.hierarchical --> elki.database
+    elki.clustering.hierarchical --> elki
+    elki.clustering.hierarchical --> elki.math.geometry
+    elki.clustering.hierarchical --> elki.utilities.datastructures.heap
+    elki.clustering.hierarchical --> elki.logging.progress
+    elki.clustering.hierarchical --> elki.database.query.knn
+    elki.clustering.hierarchical.extraction --> elki.clustering
+    elki.clustering.hierarchical.extraction --> elki.clustering.hierarchical
+    elki.clustering.hierarchical.extraction --> elki.database.datastore
+    elki.clustering.hierarchical.extraction --> elki.data
+    elki.clustering.hierarchical.extraction --> elki.database.ids
+    elki.clustering.hierarchical.extraction --> elki.utilities.optionhandling
+    elki.clustering.hierarchical.extraction --> elki.utilities.optionhandling.parameterization
+    elki.clustering.hierarchical.extraction --> elki.logging
+    elki.clustering.hierarchical.extraction --> elki.database
+    elki.clustering.hierarchical.extraction --> elki.data.type
+    elki.clustering.hierarchical.extraction --> it.unimi.dsi.fastutil.ints
+    elki.clustering.hierarchical.extraction --> elki.utilities.datastructures.arraylike
+    elki.clustering.hierarchical.extraction --> elki.logging.progress
+    elki.clustering.hierarchical.birch --> elki.utilities.datastructures.iterator
+    elki.clustering.hierarchical.birch --> elki.utilities.optionhandling
+    elki.clustering.hierarchical.birch --> elki.utilities.optionhandling.parameterization
+    elki.clustering.hierarchical.birch --> elki.database.ids
+    elki.clustering.hierarchical.birch --> elki.database.relation
+    elki.clustering.hierarchical.birch --> elki.logging
+    elki.clustering.hierarchical.birch --> elki.data
+    elki.clustering.hierarchical.birch --> elki.clustering
+    elki.clustering.hierarchical.birch --> elki.data.type
+    elki.clustering.hierarchical.birch --> elki.utilities.random
+    elki.clustering.hierarchical.linkage --> elki.utilities.optionhandling
+    elki.clustering.hierarchical.linkage --> elki.utilities.optionhandling.parameterization
+    elki.clustering.kcenter --> elki.clustering
+    elki.clustering.kcenter --> elki.utilities.optionhandling
+    elki.clustering.kcenter --> elki.distance
+    elki.clustering.kcenter --> elki.utilities.random
+    elki.clustering.kcenter --> elki.utilities.optionhandling.parameterization
+    elki.clustering.kcenter --> elki.logging
+    elki.clustering.kcenter --> elki.data
+    elki.clustering.kcenter --> elki.database.relation
+    elki.clustering.kcenter --> elki.data.type
+    elki.clustering.silhouette --> elki.database.ids
+    elki.clustering.silhouette --> elki.database.query.distance
+    elki.clustering.silhouette --> elki.database.datastore
+    elki.clustering.silhouette --> elki.logging
+    elki.clustering.silhouette --> elki.distance
+    elki.clustering.silhouette --> elki.clustering.kmedoids.initialization
+    elki.clustering.silhouette --> elki.data
+    elki.clustering.silhouette --> elki.database.relation
+    elki.clustering.silhouette --> elki.clustering.kmedoids
+    elki.clustering.biclustering --> elki.math.statistics.distribution
+    elki.clustering.biclustering --> elki.utilities.optionhandling
+    elki.clustering.biclustering --> elki.utilities.random
+    elki.clustering.biclustering --> elki.utilities.optionhandling.parameterization
+    elki.clustering.biclustering --> elki.logging
+    elki.clustering.biclustering --> elki.data
+    elki.clustering.biclustering --> elki.data.type
+    elki.clustering.biclustering --> elki.clustering
+    elki.clustering.biclustering --> elki.database.relation
+    elki.clustering.biclustering --> elki.database.ids
+    elki.clustering.em --> elki.clustering
+    elki.clustering.em --> elki.utilities.optionhandling
+    elki.clustering.em --> elki.index.tree.betula
+    elki.clustering.em --> elki.clustering.em.models
+    elki.clustering.em --> elki.utilities.optionhandling.parameterization
+    elki.clustering.em --> elki.logging
+    elki.clustering.em --> elki.data.type
+    elki.clustering.em --> elki.data
+    elki.clustering.em --> elki.database.relation
+    elki.clustering.em --> elki.database.datastore
+    elki.clustering.em --> elki.database.ids
+    elki.clustering.em --> elki.math.linearalgebra
+    elki.clustering.em.models --> elki.database.relation
+    elki.clustering.em.models --> elki.utilities.optionhandling
+    elki.clustering.em.models --> elki.index.tree.betula.features
+    elki.clustering.em.models --> elki.clustering.kmeans.initialization
+    elki.clustering.em.models --> elki.utilities.optionhandling.parameterization
+    elki.clustering.em.models --> elki.clustering.kmeans.initialization.betula
+    elki.clustering.em.models --> elki.index.tree.betula
+    elki.clustering.em.models --> elki.math.linearalgebra
+    elki.clustering.em.models --> elki.data
+    elki.clustering.em.models --> elki.data.model
+    elki.clustering.em.models --> elki.logging
+    elki.clustering.meta --> elki.clustering
+    elki.clustering.meta --> elki.utilities.optionhandling
+    elki.clustering.meta --> elki.utilities.optionhandling.parameterization
+    elki.clustering.meta --> elki.logging
+    elki.clustering.meta --> elki.data.type
+    elki.clustering.meta --> elki.data
+    elki.clustering.meta --> elki.database
+    elki.clustering.meta --> elki.database.relation
+    elki.clustering.meta --> it.unimi.dsi.fastutil.ints
+    elki.similarity.cluster --> elki.distance
+    elki.similarity.cluster --> elki.similarity
+    elki.similarity.cluster --> elki.utilities.optionhandling
+    elki.similarity.cluster --> elki.data
+    elki.similarity.cluster --> elki.database.query
+    elki.similarity.cluster --> elki.database.relation
+    elki.similarity.cluster --> elki.data.type
+    elki.index.tree.betula --> elki.utilities.datastructures.iterator
+    elki.index.tree.betula --> elki.utilities.optionhandling
+    elki.index.tree.betula --> elki.index.tree.betula.features
+    elki.index.tree.betula --> elki.index.tree.betula.distance
+    elki.index.tree.betula --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.betula --> elki.database.ids
+    elki.index.tree.betula --> elki.database.relation
+    elki.index.tree.betula --> elki.logging
+    elki.index.tree.betula --> elki.data
+    elki.index.tree.betula.distance --> elki.data
+    elki.index.tree.betula.distance --> elki.index.tree.betula.features
+    elki.index.tree.betula.distance --> elki.utilities.optionhandling
+    elki.index.tree.betula.features --> elki.utilities.optionhandling
+    elki.index.tree.betula.features --> elki.data
+    elki.index.preprocessed.fastoptics --> elki.utilities.optionhandling
+    elki.index.preprocessed.fastoptics --> elki.utilities.random
+    elki.index.preprocessed.fastoptics --> elki.utilities.optionhandling.parameterization
+    elki.index.preprocessed.fastoptics --> elki.logging
+    elki.index.preprocessed.fastoptics --> elki.database.relation
+    elki.index.preprocessed.fastoptics --> elki.database.datastore
+    elki.index.preprocessed.fastoptics --> elki.database.ids
+    elki.evaluation.clustering --> elki.evaluation
+    elki.evaluation.clustering --> elki.result
+    elki.evaluation.clustering --> elki.utilities.optionhandling
+    elki.evaluation.clustering --> elki.clustering
+    elki.evaluation.clustering --> elki.utilities.optionhandling.parameterization
+    elki.evaluation.clustering --> elki.logging
+    elki.evaluation.clustering --> elki.evaluation.scores
+    elki.evaluation.clustering --> elki.data
+    elki.evaluation.clustering --> elki.database.ids
+    elki.evaluation.clustering --> elki.database
+    elki.evaluation.clustering --> elki.math
+    elki.evaluation.clustering.extractor --> elki.evaluation
+    elki.evaluation.clustering.extractor --> elki.clustering.hierarchical
+    elki.evaluation.clustering.extractor --> elki.data.type
+    elki.evaluation.clustering.extractor --> elki.database
+    elki.evaluation.clustering.extractor --> elki.utilities.optionhandling
+    elki.evaluation.clustering.extractor --> elki.clustering.hierarchical.extraction
+    elki.evaluation.clustering.extractor --> elki.utilities.optionhandling.parameterization
+    elki.evaluation.clustering.internal --> elki.evaluation
+    elki.evaluation.clustering.internal --> elki.utilities.optionhandling
+    elki.evaluation.clustering.internal --> elki.distance
+    elki.evaluation.clustering.internal --> elki.utilities.optionhandling.parameterization
+    elki.evaluation.clustering.internal --> elki.logging
+    elki.evaluation.clustering.internal --> elki.database.relation
+    elki.evaluation.clustering.internal --> elki.data
+    elki.evaluation.clustering.internal --> elki.database.query.distance
+    elki.evaluation.clustering.internal --> elki.math.linearalgebra
+    elki.evaluation.clustering.internal --> elki.database
+    elki.evaluation.clustering.internal --> elki.utilities.datastructures.heap
+    elki.evaluation.clustering.pairsegments --> elki.database.ids
+    elki.evaluation.clustering.pairsegments --> elki.evaluation
+    elki.evaluation.clustering.pairsegments --> elki.logging
+    elki.data --> elki.result.textwriter
+    elki.data --> elki.database.ids
+    elki.data --> elki.data.type
+    elki.data --> elki.utilities.datastructures.hierarchy
+    elki.data --> elki.utilities.datastructures.iterator
+    elki.data --> elki.utilities.optionhandling
+    elki.data --> elki.utilities.datastructures.arraylike
+    elki.data --> it.unimi.dsi.fastutil.ints
+    elki.data --> elki.utilities.io
+    elki.data --> elki.database.relation
+    elki.data --> elki.data.spatial
+    elki.datasource.parser --> elki.logging
+    elki.datasource.parser --> elki.datasource.bundle
+    elki.datasource.parser --> elki.data
+    elki.datasource.parser --> it.unimi.dsi.fastutil.ints
+    elki.datasource.parser --> elki.database.ids
+    elki.datasource.parser --> elki.utilities.optionhandling
+    elki.datasource.parser --> elki.utilities.optionhandling.parameterization
+    elki.datasource.parser --> elki.data.type
+    elki.datasource.parser --> it.unimi.dsi.fastutil.objects
+    elki.datasource.parser --> elki.data.spatial
+    elki.datasource.parser --> elki.utilities.datastructures.arraylike
+    elki.datasource.parser --> it.unimi.dsi.fastutil.longs
+    elki.datasource.parser --> elki.utilities.io
+    elki.database --> elki.database.relation
+    elki.database --> elki.database.ids
+    elki.database --> elki.utilities.optionhandling
+    elki.database --> elki.datasource.bundle
+    elki.database --> elki.data.type
+    elki.database --> elki.database.datastore
+    elki.database --> elki.logging
+    elki.database --> elki.result
+    elki.database --> elki.datasource
+    elki.database --> elki.utilities.optionhandling.parameterization
+    elki.evaluation.scores --> elki.utilities.optionhandling
+    elki.evaluation.scores --> elki.utilities.optionhandling.parameterization
+    elki.evaluation.scores --> elki.math.geometry
+    elki.evaluation.scores --> elki.utilities.datastructures.iterator
+    elki.evaluation.scores --> elki.database.ids
+    elki.evaluation.scores.adapter --> elki.evaluation.scores
+    elki.evaluation.scores.adapter --> elki.database.ids
+    elki.evaluation.scores.adapter --> elki.database.relation
+    elki.evaluation.scores.adapter --> elki.result.outlier
+    elki.evaluation.scores.adapter --> elki.utilities.datastructures.iterator
+    elki.evaluation.scores.adapter --> elki.data
+    elki.evaluation.scores.adapter --> it.unimi.dsi.fastutil.ints
+    elki.datasource.filter.transform --> elki.datasource.filter
+    elki.datasource.filter.transform --> elki.utilities.optionhandling
+    elki.datasource.filter.transform --> elki.math.geodesy
+    elki.datasource.filter.transform --> elki.utilities.optionhandling.parameterization
+    elki.datasource.filter.transform --> elki.data
+    elki.datasource.filter.transform --> elki.data.type
+    elki.datasource.filter.transform --> elki.data.projection
+    elki.datasource.filter.transform --> elki.datasource.bundle
+    elki.datasource.filter.transform --> elki.logging
+    elki.datasource.filter.transform --> elki.utilities.random
+    elki.datasource.filter.transform --> elki.distance
+    elki.datasource.filter.transform --> elki.math.linearalgebra.pca.filter
+    elki.datasource.filter.transform --> elki.math.linearalgebra
+    elki.datasource.filter.transform --> elki.math
+    elki.datasource.filter.transform --> elki.math.statistics.distribution
+    elki.math.linearalgebra.pca --> elki.utilities.optionhandling
+    elki.math.linearalgebra.pca --> elki.math.linearalgebra.pca.weightfunctions
+    elki.math.linearalgebra.pca --> elki.utilities.optionhandling.parameterization
+    elki.math.linearalgebra.pca --> elki.distance
+    elki.math.linearalgebra.pca --> elki.database.ids
+    elki.math.linearalgebra.pca --> elki.database.relation
+    elki.math.linearalgebra.pca --> elki.math.linearalgebra.pca.filter
+    elki.math.linearalgebra.pca --> elki.utilities.random
+    elki.math.linearalgebra.pca --> elki.math.linearalgebra
+    elki.utilities --> elki.logging
+    elki.utilities --> elki.utilities.optionhandling
+    elki.utilities --> elki.utilities.exceptions
+    elki.utilities --> elki.utilities.optionhandling.parameterization
+    elki.utilities.ensemble --> elki.utilities.optionhandling
+    elki.utilities.ensemble --> elki.utilities.optionhandling.parameterization
+    elki.utilities.datastructures.histogram --> elki.utilities.datastructures.iterator
+    elki.utilities.datastructures.arraylike --> elki.data
+    elki.utilities.datastructures.unionfind --> elki.database.ids
+    elki.utilities.datastructures.unionfind --> it.unimi.dsi.fastutil.ints
+    elki.utilities.datastructures.unionfind --> elki.database.datastore
+    elki.utilities.referencepoints --> elki.utilities.optionhandling
+    elki.utilities.referencepoints --> elki.utilities.random
+    elki.utilities.referencepoints --> elki.utilities.optionhandling.parameterization
+    elki.utilities.referencepoints --> elki.database.relation
+    elki.utilities.referencepoints --> elki.logging
+    elki.utilities.scaling --> elki.math
+    elki.utilities.scaling --> elki.utilities.optionhandling
+    elki.utilities.scaling --> elki.utilities.optionhandling.parameterization
+    elki.database.relation --> elki.data.type
+    elki.database.relation --> elki.database.datastore
+    elki.database.relation --> elki.database.ids
+    elki.database.relation --> elki.data.projection
+    elki.database.relation --> elki.data
+    elki.database.query --> elki.logging
+    elki.database.query --> elki.database.relation
+    elki.database.query --> elki.distance
+    elki.database.query --> elki.similarity
+    elki.database.query --> elki.database.query.distance
+    elki.database.query --> elki.database.query.similarity
+    elki.database.query --> elki.database.query.knn
+    elki.database.query --> elki.database.query.range
+    elki.database.query --> elki.database.query.rknn
+    elki.database.query --> elki.index
+    elki.database.query --> elki.utilities.optionhandling
+    elki.database.query --> elki.database.ids
+    elki.database.query.similarity --> elki.database.ids
+    elki.database.query.similarity --> elki.database.relation
+    elki.database.query.similarity --> elki.similarity
+    elki.database.query.range --> elki.database.query
+    elki.database.query.range --> elki.database.query.distance
+    elki.database.query.range --> elki.database.ids
+    elki.database.query.range --> elki.database.relation
+    elki.database.query.range --> elki.database.query.similarity
+    elki.database.query.distance --> elki.distance
+    elki.database.query.distance --> elki.database.ids
+    elki.database.query.distance --> elki.database.relation
+    elki.database.query.distance --> elki.database.query
+    elki.database.query.distance --> elki.distance.minkowski
+    elki.database.query.distance --> elki.similarity
+    elki.database.query.distance --> elki.data.spatial
+    elki.database.query.rknn --> elki.database.relation
+    elki.database.query.rknn --> elki.index.preprocessed.knn
+    elki.database.query.rknn --> elki.database.ids
+    elki.database.query.rknn --> elki.database.query
+    elki.database.query.rknn --> elki.database.query.distance
+    elki.database.query.rknn --> elki.database.query.knn
+    elki.database.query.knn --> elki.logging
+    elki.database.query.knn --> elki.database.relation
+    elki.database.query.knn --> elki.index.preprocessed.knn
+    elki.database.query.knn --> elki.database.ids
+    elki.database.query.knn --> elki.database.query
+    elki.database.query.knn --> elki.distance
+    elki.database.query.knn --> elki.database.query.distance
+    elki.similarity --> elki.database.relation
+    elki.similarity --> elki.index.preprocessed.snn
+    elki.similarity --> elki.database.ids
+    elki.similarity --> elki.utilities.optionhandling.parameterization
+    elki.similarity --> elki.utilities.optionhandling
+    elki.similarity --> elki.data.type
+    elki.similarity --> elki.database.query.similarity
+    elki.similarity --> elki.distance
+    elki.similarity --> elki.data
+    elki.similarity --> elki.data.spatial
+    elki.similarity --> elki.database.query.distance
+    elki.index --> elki.database.query.distance
+    elki.index --> elki.database.ids
+    elki.index --> elki.database.relation
+    elki.index --> elki.logging.statistics
+    elki.index --> elki.logging
+    elki.index --> elki.utilities.optionhandling
+    elki.index --> elki.persistent
+    elki.index --> elki.utilities.optionhandling.parameterization
+    elki.index --> elki.data.type
+    elki.index --> elki.database.query.rknn
+    elki.index --> elki.database.query.range
+    elki.index --> elki.database.query.similarity
+    elki.index --> elki.similarity
+    elki.index --> elki.database.query.knn
+    elki.index --> elki.distance
+    elki.index --> elki.database.query
+    elki.data.type --> elki.data
+    elki.data.type --> elki.utilities.io
+    elki.data.spatial --> elki.utilities.datastructures.iterator
+    elki.data.spatial --> elki.data
+    elki.datasource --> elki.utilities.optionhandling
+    elki.datasource --> elki.utilities.random
+    elki.datasource --> elki.utilities.optionhandling.parameterization
+    elki.datasource --> elki.logging
+    elki.datasource --> elki.datasource.bundle
+    elki.datasource --> elki.data.synthetic.bymodel
+    elki.datasource --> org.w3c.dom
+    elki.datasource --> elki.datasource.parser
+    elki.datasource.bundle --> elki.database.ids
+    elki.datasource.bundle --> elki.logging
+    elki.datasource.bundle --> elki.data.type
+    elki.datasource.bundle --> elki.utilities.io
+    elki.datasource.filter --> elki.utilities.optionhandling
+    elki.datasource.filter --> elki.utilities.optionhandling.parameterization
+    elki.datasource.filter --> elki.datasource.bundle
+    elki.datasource.filter --> elki.logging
+    elki.datasource.filter --> elki.data.type
+    elki.datasource.filter --> elki.data
+    elki.datasource.filter --> elki.database.ids
+    elki.distance --> elki.database.relation
+    elki.distance --> elki.index.preprocessed.snn
+    elki.distance --> elki.database.ids
+    elki.distance --> elki.utilities.optionhandling.parameterization
+    elki.distance --> elki.database.query.distance
+    elki.distance --> elki.data.type
+    elki.distance --> elki.utilities.optionhandling
+    elki.distance --> elki.data
+    elki.distance --> elki.data.spatial
+    elki.data.projection --> elki.utilities.optionhandling
+    elki.data.projection --> elki.math.geodesy
+    elki.data.projection --> elki.utilities.optionhandling.parameterization
+    elki.data.projection --> elki.data
+    elki.data.projection --> elki.data.type
+    elki.data.projection --> elki.utilities.datastructures.arraylike
+    elki.data.projection --> elki.data.projection.random
+    elki.data.projection --> elki.logging
+    elki.data.projection.random --> elki.utilities.random
+    elki.data.projection.random --> elki.data
+    elki.data.projection.random --> elki.utilities.optionhandling
+    elki.data.projection.random --> elki.utilities.optionhandling.parameterization
+    elki.database.ids --> elki.database.datastore
+    elki.database.ids --> elki.utilities.io
+    elki.database.ids --> elki.utilities.datastructures.iterator
+    elki.database.ids --> elki.utilities.random
+    elki.database.datastore --> elki.database.ids
+    elki.database.datastore.memory --> elki.database.datastore
+    elki.database.datastore.memory --> elki.database.ids
+    elki.database.datastore.memory --> it.unimi.dsi.fastutil.ints
+    elki.database.ids.integer --> elki.database.ids
+    elki.database.ids.integer --> elki.utilities.io
+    elki.database.ids.integer --> elki.database.datastore
+    elki.database.ids.integer --> it.unimi.dsi.fastutil.ints
+    elki.database.ids.integer --> elki.utilities.datastructures.heap
+    elki.similarity.kernel --> elki.database.ids
+    elki.similarity.kernel --> elki.similarity
+    elki.similarity.kernel --> elki.database.relation
+    elki.similarity.kernel --> elki.database.query.similarity
+    elki.similarity.kernel --> elki.utilities.optionhandling
+    elki.similarity.kernel --> elki.data
+    elki.similarity.kernel --> elki.utilities.optionhandling.parameterization
+    elki.similarity.kernel --> elki.distance
+    elki.similarity.kernel --> elki.database.query
+    elki.distance.colorhistogram --> elki.distance
+    elki.distance.colorhistogram --> elki.utilities.optionhandling
+    elki.distance.colorhistogram --> elki.utilities.optionhandling.parameterization
+    elki.distance.colorhistogram --> elki.data
+    elki.distance.colorhistogram --> elki.data.spatial
+    elki.distance.strings --> elki.distance
+    elki.distance.strings --> elki.utilities.optionhandling
+    elki.distance.strings --> elki.data.type
+    elki.distance.subspace --> elki.data
+    elki.distance.subspace --> elki.data.spatial
+    elki.distance.subspace --> elki.distance
+    elki.distance.subspace --> elki.utilities.optionhandling
+    elki.distance.subspace --> elki.utilities.optionhandling.parameterization
+    elki.distance.subspace --> elki.data.type
+    elki.distance.subspace --> elki.database.query.distance
+    elki.distance.subspace --> elki.database.relation
+    elki.distance.timeseries --> elki.distance
+    elki.distance.timeseries --> elki.utilities.optionhandling
+    elki.distance.timeseries --> elki.utilities.optionhandling.parameterization
+    elki.distance.timeseries --> elki.data
+    elki.distance.timeseries --> elki.data.type
+    elki.distance.histogram --> elki.distance
+    elki.distance.histogram --> elki.utilities.optionhandling
+    elki.distance.histogram --> elki.data
+    elki.distance.histogram --> elki.data.spatial
+    elki.distance.set --> elki.distance
+    elki.distance.set --> elki.similarity
+    elki.distance.set --> elki.data
+    elki.distance.set --> elki.data.type
+    elki.distance.set --> elki.database.query
+    elki.distance.set --> elki.database.relation
+    elki.distance.set --> elki.utilities.optionhandling
+    elki.distance.probabilistic --> elki.distance
+    elki.distance.probabilistic --> elki.utilities.optionhandling
+    elki.distance.probabilistic --> elki.data
+    elki.distance.probabilistic --> elki.data.spatial
+    elki.distance.probabilistic --> elki.data.type
+    elki.distance.probabilistic --> elki.similarity
+    elki.distance.probabilistic --> elki.database.query.distance
+    elki.distance.probabilistic --> elki.database.relation
+    elki.distance.correlation --> elki.distance
+    elki.distance.correlation --> elki.utilities.optionhandling
+    elki.distance.correlation --> elki.data
+    elki.distance.correlation --> elki.utilities.optionhandling.parameterization
+    elki.distance.minkowski --> elki.utilities.optionhandling
+    elki.distance.minkowski --> elki.utilities.optionhandling.parameterization
+    elki.distance.minkowski --> elki.data
+    elki.distance.minkowski --> elki.data.spatial
+    elki.distance.minkowski --> elki.distance
+    elki.distance.minkowski --> elki.data.type
+    elki.math.geometry --> elki.data.spatial
+    elki.math.geometry --> elki.utilities.datastructures.arraylike
+    elki.math.geometry --> elki.math
+    elki.math.geometry --> elki.logging
+    elki.math.geodesy --> elki.utilities.optionhandling
+    elki.math.linearalgebra --> elki.data
+    elki.math.linearalgebra --> elki.database.relation
+    elki.math.linearalgebra --> elki.database.ids
+    elki.math.linearalgebra --> elki.logging
+    elki.math.linearalgebra.pca.filter --> elki.utilities.optionhandling
+    elki.math.linearalgebra.pca.filter --> elki.utilities.optionhandling.parameterization
+    elki.math --> elki.database.relation
+    elki.math --> elki.data
+    elki.math.spacefillingcurves --> elki.database.relation
+    elki.math.spacefillingcurves --> elki.database.ids
+    elki.math.spacefillingcurves --> elki.data
+    elki.math.spacefillingcurves --> elki.data.spatial
+    elki.math.spacefillingcurves --> elki.utilities.optionhandling
+    elki.math.scales --> elki.database.relation
+    elki.math.statistics --> elki.math.statistics.kernelfunctions
+    elki.math.statistics --> elki.utilities.datastructures.arraylike
+    elki.math.statistics.distribution --> elki.utilities.optionhandling.parameterization
+    elki.math.statistics.distribution --> elki.utilities.optionhandling
+    elki.math.statistics.distribution --> elki.utilities.random
+    elki.math.statistics.distribution.estimator --> elki.utilities.optionhandling
+    elki.math.statistics.distribution.estimator --> elki.math.statistics.distribution
+    elki.math.statistics.distribution.estimator --> elki.utilities.datastructures.arraylike
+    elki.math.statistics.distribution.estimator --> elki.math
+    elki.math.statistics.distribution.estimator.meta --> elki.math.statistics.distribution.estimator
+    elki.math.statistics.distribution.estimator.meta --> elki.math.statistics.distribution
+    elki.math.statistics.distribution.estimator.meta --> elki.utilities.optionhandling
+    elki.math.statistics.distribution.estimator.meta --> elki.logging
+    elki.math.statistics.distribution.estimator.meta --> elki.utilities.datastructures.arraylike
+    elki.math.statistics.distribution.estimator.meta --> elki.utilities.optionhandling.parameterization
+    elki.math.statistics.dependence --> elki.utilities.optionhandling
+    elki.math.statistics.dependence --> elki.utilities.datastructures.arraylike
+    elki.math.statistics.dependence --> elki.logging
+    elki.math.statistics.dependence --> elki.math.statistics.tests
+    elki.math.statistics.dependence --> elki.utilities.random
+    elki.math.statistics.dependence --> elki.utilities.optionhandling.parameterization
+    elki.math.statistics.dependence --> elki.math
+    elki.math.statistics.dependence --> elki.math.statistics.dependence.mcde
+    elki.math.statistics.dependence.mcde --> elki.utilities.datastructures.arraylike
+    elki.math.statistics.dependence.mcde --> elki.utilities.optionhandling
+    elki.math.statistics.dependence.mcde --> elki.utilities.random
+    elki.math.statistics.tests --> elki.utilities.optionhandling
+    elki.math.statistics.intrinsicdimensionality --> elki.utilities.optionhandling
+    elki.math.statistics.intrinsicdimensionality --> elki.utilities.datastructures.arraylike
+    elki.math.statistics.intrinsicdimensionality --> elki.database.query.knn
+    elki.math.statistics.intrinsicdimensionality --> elki.database.query.distance
+    elki.math.statistics.intrinsicdimensionality --> elki.database.ids
+    elki.math.statistics.intrinsicdimensionality --> elki.database.query.range
+    elki.math.statistics.intrinsicdimensionality --> elki.math.linearalgebra.pca.filter
+    elki.math.statistics.intrinsicdimensionality --> elki.utilities.optionhandling.parameterization
+    elki.math.statistics.intrinsicdimensionality --> elki.math.linearalgebra.pca
+    elki.math.statistics.intrinsicdimensionality --> elki.database.relation
+    elki.math.statistics.kernelfunctions --> elki.utilities.optionhandling
+    elki.parallel --> elki.database.ids
+    elki.parallel --> elki.parallel.processor
+    elki.parallel --> elki.parallel.variables
+    elki.parallel.processor --> elki.parallel.variables
+    elki.parallel.processor --> elki.database.ids
+    elki.parallel.processor --> elki.parallel
+    elki.parallel.processor --> elki.database.datastore
+    elki.parallel.processor --> elki.math
+    elki.parallel.processor --> elki.database.query.knn
+    elki.application.internal --> elki.logging
+    elki.utilities.xml --> org.w3c.dom
+    elki.utilities.io --> elki.logging
+    elki.utilities.io --> elki.utilities.datastructures.iterator
+    elki.utilities.datastructures.heap --> elki.utilities.datastructures.iterator
+    elki.utilities.datastructures.heap --> it.unimi.dsi.fastutil.objects
+    elki.utilities.datastructures --> elki.logging
+    elki.utilities.datastructures --> it.unimi.dsi.fastutil
+    elki.utilities.datastructures.hierarchy --> elki.utilities.datastructures.iterator
+    elki.utilities.datastructures.arrays --> it.unimi.dsi.fastutil.ints
+    elki.utilities.optionhandling.parameterization --> elki.utilities.optionhandling.parameters
+    elki.utilities.optionhandling.parameterization --> elki.utilities.optionhandling
+    elki.utilities.optionhandling.parameterization --> elki.logging
+    elki.utilities.optionhandling --> elki.utilities.optionhandling.parameters
+    elki.utilities.optionhandling --> elki.utilities.optionhandling.parameterization
+    elki.utilities.optionhandling --> elki.utilities.exceptions
+    elki.utilities.optionhandling.constraints --> elki.utilities.optionhandling
+    elki.utilities.optionhandling.parameters --> elki.utilities.optionhandling
+    elki.utilities.optionhandling.parameters --> elki.utilities.optionhandling.parameterization
+    elki.utilities.optionhandling.parameters --> elki.utilities.optionhandling.constraints
+    elki.utilities.optionhandling.parameters --> elki.logging
+    elki.utilities.optionhandling.parameters --> elki.utilities.random
+    elki.utilities.optionhandling.parameters --> elki.utilities.datastructures.range
+    elki.data.synthetic.bymodel --> elki.math.linearalgebra
+    elki.data.synthetic.bymodel --> elki.math.statistics.distribution
+    elki.data.synthetic.bymodel --> elki.data.model
+    elki.data.synthetic.bymodel --> elki.data
+    elki.data.synthetic.bymodel --> elki.logging
+    elki.data.synthetic.bymodel --> elki.datasource.bundle
+    elki.outlier.trivial --> elki.outlier
+    elki.outlier.trivial --> elki.utilities.optionhandling
+    elki.outlier.trivial --> elki.utilities.optionhandling.parameterization
+    elki.outlier.trivial --> elki.logging
+    elki.outlier.trivial --> elki.data.type
+    elki.outlier.trivial --> elki.result.outlier
+    elki.outlier.trivial --> elki.database
+    elki.outlier.trivial --> elki.database.relation
+    elki.distance.adapter --> elki.database.relation
+    elki.distance.adapter --> elki.distance
+    elki.distance.adapter --> elki.database.query.similarity
+    elki.distance.adapter --> elki.similarity
+    elki.distance.adapter --> elki.database.query.distance
+    elki.distance.adapter --> elki.database.ids
+    elki.distance.adapter --> elki.utilities.optionhandling
+    elki.distance.adapter --> elki.utilities.optionhandling.parameterization
+    elki.distance.adapter --> elki.data.type
+    elki.index.projected --> elki.utilities.optionhandling
+    elki.index.projected --> elki.index
+    elki.index.projected --> elki.math.geodesy
+    elki.index.projected --> elki.utilities.optionhandling.parameterization
+    elki.index.projected --> elki.database.relation
+    elki.index.projected --> elki.data.projection
+    elki.index.projected --> elki.database.query.knn
+    elki.index.projected --> elki.database.query.distance
+    elki.index.projected --> elki.database.query.range
+    elki.index.projected --> elki.database.query.rknn
+    elki.index.projected --> elki.utilities.random
+    elki.index.projected --> elki.database.ids
+    elki.index.projected --> elki.data.type
+    elki.index.projected --> elki.logging
+    elki.index.projected --> elki.logging.statistics
+    elki.distance.geo --> elki.distance
+    elki.distance.geo --> elki.utilities.optionhandling
+    elki.distance.geo --> elki.math.geodesy
+    elki.distance.geo --> elki.utilities.optionhandling.parameterization
+    elki.distance.geo --> elki.data
+    elki.distance.geo --> elki.data.spatial
+    elki.distance.geo --> elki.data.type
+    elki.gui --> elki.logging
+    elki.gui.util --> elki.logging.progress
+    elki.gui.util --> elki.utilities.optionhandling.parameters
+    elki.gui.util --> elki.utilities.pairs
+    elki.gui.util --> elki.utilities.optionhandling.parameterization
+    elki.gui.util --> elki.utilities.optionhandling
+    elki.gui.util --> elki.logging
+    elki.gui.configurator --> elki.utilities.optionhandling.parameters
+    elki.gui.configurator --> elki.utilities.optionhandling.parameterization
+    elki.gui.configurator --> elki.gui.util
+    elki.gui.multistep --> elki.application
+    elki.gui.multistep --> elki.logging
+    elki.gui.multistep --> elki.gui.util
+    elki.gui.multistep --> elki.gui.multistep.panels
+    elki.gui.multistep --> elki.utilities.optionhandling.parameterization
+    elki.gui.multistep.panels --> elki.workflow
+    elki.gui.multistep.panels --> elki.utilities.optionhandling.parameterization
+    elki.gui.multistep.panels --> elki.logging
+    elki.gui.multistep.panels --> elki.gui.configurator
+    elki.gui.multistep.panels --> elki.gui.util
+    elki.gui.multistep.panels --> elki.gui.multistep
+    elki.gui.minigui --> elki.application
+    elki.gui.minigui --> elki.gui.util
+    elki.gui.minigui --> elki.logging
+    elki.gui.minigui --> elki.utilities.optionhandling.parameterization
+    elki.index.distancematrix --> elki.index
+    elki.index.distancematrix --> elki.database.query.similarity
+    elki.index.distancematrix --> elki.database.ids
+    elki.index.distancematrix --> elki.similarity
+    elki.index.distancematrix --> elki.database.relation
+    elki.index.distancematrix --> elki.database.query.range
+    elki.index.distancematrix --> elki.utilities.optionhandling
+    elki.index.distancematrix --> elki.utilities.optionhandling.parameterization
+    elki.index.distancematrix --> elki.data.type
+    elki.index.distancematrix --> elki.logging
+    elki.index.distancematrix --> elki.database.query.distance
+    elki.index.distancematrix --> elki.distance
+    elki.index.distancematrix --> elki.database.query.knn
+    elki.index.distancematrix --> elki.database.query
+    elki.index.distancematrix --> elki.utilities.datastructures
+    elki.index.tree --> elki.persistent
+    elki.index.tree --> elki.utilities.datastructures.arraylike
+    elki.index.tree --> elki.database.ids
+    elki.index.tree --> elki.index
+    elki.index.tree --> elki.logging
+    elki.index.lsh.hashfunctions --> elki.data.projection.random
+    elki.index.lsh.hashfunctions --> elki.data
+    elki.index.lsh --> elki.index
+    elki.index.lsh --> elki.database.query.knn
+    elki.index.lsh --> elki.database.query.distance
+    elki.index.lsh --> elki.database.ids
+    elki.index.lsh --> elki.database.query.range
+    elki.index.lsh --> elki.database.relation
+    elki.index.lsh --> elki.logging
+    elki.index.lsh --> elki.utilities.optionhandling
+    elki.index.lsh --> elki.index.lsh.hashfamilies
+    elki.index.lsh --> elki.utilities.optionhandling.parameterization
+    elki.index.lsh --> elki.data.type
+    elki.index.lsh.hashfamilies --> elki.utilities.random
+    elki.index.lsh.hashfamilies --> elki.distance
+    elki.index.lsh.hashfamilies --> elki.utilities.optionhandling
+    elki.index.lsh.hashfamilies --> elki.utilities.optionhandling.parameterization
+    elki.index.lsh.hashfamilies --> elki.data.projection.random
+    elki.index.lsh.hashfamilies --> elki.data.type
+    elki.index.lsh.hashfamilies --> elki.database.relation
+    elki.index.tree.metrical --> elki.index.tree
+    elki.index.tree.metrical --> elki.persistent
+    elki.index.tree.metrical --> elki.distance
+    elki.index.tree.metrical.mtreevariants --> elki.index.tree
+    elki.index.tree.metrical.mtreevariants --> elki.database.ids
+    elki.index.tree.metrical.mtreevariants --> elki.index.tree.metrical
+    elki.index.tree.metrical.mtreevariants --> elki.logging.statistics
+    elki.index.tree.metrical.mtreevariants --> elki.persistent
+    elki.index.tree.metrical.mtreevariants --> elki.distance
+    elki.index.tree.metrical.mtreevariants --> elki.index
+    elki.index.tree.metrical.mtreevariants --> elki.utilities.optionhandling
+    elki.index.tree.metrical.mtreevariants --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.metrical.mtreevariants --> elki.data.type
+    elki.index.tree.metrical.mtreevariants --> elki.index.tree.metrical.mtreevariants.strategies.split
+    elki.index.tree.metrical.mtreevariants --> elki.index.tree.metrical.mtreevariants.strategies.insert
+    elki.index.tree.metrical.mtreevariants.strategies.insert --> elki.index.tree
+    elki.index.tree.metrical.mtreevariants.strategies.insert --> elki.index.tree.metrical.mtreevariants
+    elki.index.tree.metrical.mtreevariants.strategies.split --> elki.index.tree.metrical.mtreevariants.strategies.split.distribution
+    elki.index.tree.metrical.mtreevariants.strategies.split --> elki.index.tree.metrical.mtreevariants
+    elki.index.tree.metrical.mtreevariants.strategies.split --> elki.utilities.optionhandling
+    elki.index.tree.metrical.mtreevariants.strategies.split --> elki.utilities.random
+    elki.index.tree.metrical.mtreevariants.strategies.split --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.metrical.mtreevariants.strategies.split.distribution --> elki.index.tree
+    elki.index.tree.metrical.mtreevariants.strategies.split.distribution --> elki.database.ids
+    elki.index.tree.metrical.mtreevariants.mtree --> elki.index
+    elki.index.tree.metrical.mtreevariants.mtree --> elki.database.relation
+    elki.index.tree.metrical.mtreevariants.mtree --> elki.database.query.distance
+    elki.index.tree.metrical.mtreevariants.mtree --> elki.persistent
+    elki.index.tree.metrical.mtreevariants.mtree --> elki.index.tree.metrical.mtreevariants
+    elki.index.tree.metrical.mtreevariants.mtree --> elki.database.ids
+    elki.index.tree.metrical.mtreevariants.mtree --> elki.database.query.knn
+    elki.index.tree.metrical.mtreevariants.mtree --> elki.database.query.range
+    elki.index.tree.metrical.mtreevariants.mtree --> elki.logging
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop --> elki.index.tree.metrical.mtreevariants
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop --> elki.database.ids
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop --> elki.index
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop --> elki.database.relation
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop --> elki.persistent
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop --> elki.index.tree.metrical.mtreevariants.mktrees
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop --> elki.database.query.knn
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop --> elki.database.query.distance
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop --> elki.database.query.range
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop --> elki.database.query.rknn
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop --> elki.utilities.optionhandling
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop --> elki.logging
+    elki.index.tree.metrical.mtreevariants.mktrees --> elki.database.relation
+    elki.index.tree.metrical.mtreevariants.mktrees --> elki.persistent
+    elki.index.tree.metrical.mtreevariants.mktrees --> elki.index.tree
+    elki.index.tree.metrical.mtreevariants.mktrees --> elki.index.tree.metrical.mtreevariants
+    elki.index.tree.metrical.mtreevariants.mktrees --> elki.utilities.optionhandling
+    elki.index.tree.metrical.mtreevariants.mktrees --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.metrical.mtreevariants.mktrees --> elki.database.query.knn
+    elki.index.tree.metrical.mtreevariants.mktrees --> elki.database.query.distance
+    elki.index.tree.metrical.mtreevariants.mktrees --> elki.database.ids
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax --> elki.index.tree.metrical.mtreevariants.mktrees
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax --> elki.persistent
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax --> elki.database.relation
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax --> elki.index.tree.metrical.mtreevariants
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax --> elki.database.ids
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax --> elki.logging
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax --> elki.index
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax --> elki.database.query.knn
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax --> elki.database.query.distance
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax --> elki.database.query.range
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax --> elki.database.query.rknn
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp --> elki.index.tree.metrical.mtreevariants
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp --> elki.utilities.optionhandling
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp --> elki.persistent
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp --> elki.database.relation
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp --> elki.logging
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp --> elki.database.ids
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp --> elki.index
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp --> elki.database.query.knn
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp --> elki.database.query.distance
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp --> elki.database.query.range
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp --> elki.database.query.rknn
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp --> elki.index.tree.metrical.mtreevariants.mktrees
+    elki.index.tree.metrical.mtreevariants.mktrees.mktab --> elki.index.tree.metrical.mtreevariants
+    elki.index.tree.metrical.mtreevariants.mktrees.mktab --> elki.database.ids
+    elki.index.tree.metrical.mtreevariants.mktrees.mktab --> elki.index
+    elki.index.tree.metrical.mtreevariants.mktrees.mktab --> elki.database.relation
+    elki.index.tree.metrical.mtreevariants.mktrees.mktab --> elki.persistent
+    elki.index.tree.metrical.mtreevariants.mktrees.mktab --> elki.index.tree.metrical.mtreevariants.mktrees
+    elki.index.tree.metrical.mtreevariants.mktrees.mktab --> elki.database.query.knn
+    elki.index.tree.metrical.mtreevariants.mktrees.mktab --> elki.database.query.distance
+    elki.index.tree.metrical.mtreevariants.mktrees.mktab --> elki.database.query.range
+    elki.index.tree.metrical.mtreevariants.mktrees.mktab --> elki.database.query.rknn
+    elki.index.tree.metrical.mtreevariants.mktrees.mktab --> elki.logging
+    elki.index.tree.metrical.mtreevariants.query --> elki.database.query.knn
+    elki.index.tree.metrical.mtreevariants.query --> elki.index.tree.metrical.mtreevariants
+    elki.index.tree.metrical.mtreevariants.query --> elki.database.query.distance
+    elki.index.tree.metrical.mtreevariants.query --> elki.database.ids
+    elki.index.tree.metrical.mtreevariants.query --> elki.database.query.range
+    elki.index.tree.metrical.mtreevariants.query --> elki.database.query.rknn
+    elki.index.tree.metrical.mtreevariants.query --> elki.index.tree.metrical.mtreevariants.mktrees
+    elki.index.preprocessed.snn --> elki.index
+    elki.index.preprocessed.snn --> elki.database.relation
+    elki.index.preprocessed.snn --> elki.database.ids
+    elki.index.preprocessed.snn --> elki.utilities.optionhandling
+    elki.index.preprocessed.snn --> elki.distance
+    elki.index.preprocessed.snn --> elki.utilities.optionhandling.parameterization
+    elki.index.preprocessed.snn --> elki.data.type
+    elki.index.preprocessed.snn --> elki.logging
+    elki.index.preprocessed.snn --> elki.database.datastore
+    elki.index.tree.spatial --> elki.data.spatial
+    elki.index.tree.spatial --> elki.index.tree
+    elki.index.tree.spatial --> elki.data
+    elki.index.tree.spatial --> elki.database.ids
+    elki.index.tree.spatial.rstarvariants --> elki.persistent
+    elki.index.tree.spatial.rstarvariants --> elki.index.tree
+    elki.index.tree.spatial.rstarvariants --> elki.data
+    elki.index.tree.spatial.rstarvariants --> elki.data.spatial
+    elki.index.tree.spatial.rstarvariants --> elki.logging.statistics
+    elki.index.tree.spatial.rstarvariants --> elki.database.ids
+    elki.index.tree.spatial.rstarvariants --> elki.index.tree.spatial.rstarvariants.strategies.bulk
+    elki.index.tree.spatial.rstarvariants --> elki.index.tree.spatial.rstarvariants.strategies.split
+    elki.index.tree.spatial.rstarvariants --> elki.index.tree.spatial.rstarvariants.strategies.insert
+    elki.index.tree.spatial.rstarvariants --> elki.index.tree.spatial.rstarvariants.strategies.overflow
+    elki.index.tree.spatial.rstarvariants --> elki.index
+    elki.index.tree.spatial.rstarvariants --> elki.utilities.optionhandling
+    elki.index.tree.spatial.rstarvariants --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.spatial.rstarvariants --> elki.data.type
+    elki.index.tree.spatial.rstarvariants.util --> elki.utilities.datastructures.arraylike
+    elki.index.tree.spatial.rstarvariants.util --> elki.index.tree
+    elki.index.tree.spatial.rstarvariants.util --> elki.index.tree.spatial
+    elki.index.tree.spatial.rstarvariants.flat --> elki.index.tree.spatial.rstarvariants
+    elki.index.tree.spatial.rstarvariants.flat --> elki.logging
+    elki.index.tree.spatial.rstarvariants.flat --> elki.persistent
+    elki.index.tree.spatial.rstarvariants.flat --> elki.index.tree
+    elki.index.tree.spatial.rstarvariants.flat --> elki.index.tree.spatial
+    elki.index.tree.spatial.rstarvariants.flat --> elki.database.relation
+    elki.index.tree.spatial.rstarvariants.flat --> elki.index
+    elki.index.tree.spatial.rstarvariants.flat --> elki.database.ids
+    elki.index.tree.spatial.rstarvariants.flat --> elki.database.query.knn
+    elki.index.tree.spatial.rstarvariants.flat --> elki.database.query.distance
+    elki.index.tree.spatial.rstarvariants.flat --> elki.database.query.range
+    elki.index.tree.spatial.rstarvariants.flat --> elki.database.query
+    elki.index.tree.spatial.rstarvariants.deliclu --> elki.index.tree.spatial
+    elki.index.tree.spatial.rstarvariants.deliclu --> elki.index.tree.spatial.rstarvariants
+    elki.index.tree.spatial.rstarvariants.deliclu --> elki.logging
+    elki.index.tree.spatial.rstarvariants.deliclu --> it.unimi.dsi.fastutil.ints
+    elki.index.tree.spatial.rstarvariants.deliclu --> elki.persistent
+    elki.index.tree.spatial.rstarvariants.deliclu --> elki.database.ids
+    elki.index.tree.spatial.rstarvariants.deliclu --> elki.data
+    elki.index.tree.spatial.rstarvariants.deliclu --> elki.database.relation
+    elki.index.tree.spatial.rstarvariants.deliclu --> elki.index
+    elki.index.tree.spatial.rstarvariants.deliclu --> elki.index.tree
+    elki.index.tree.spatial.rstarvariants.deliclu --> elki.database.query.knn
+    elki.index.tree.spatial.rstarvariants.deliclu --> elki.database.query.distance
+    elki.index.tree.spatial.rstarvariants.deliclu --> elki.database.query.range
+    elki.index.tree.spatial.rstarvariants.deliclu --> elki.database.query
+    elki.index.tree.spatial.rstarvariants.rstar --> elki.index.tree.spatial.rstarvariants
+    elki.index.tree.spatial.rstarvariants.rstar --> elki.persistent
+    elki.index.tree.spatial.rstarvariants.rstar --> elki.database.relation
+    elki.index.tree.spatial.rstarvariants.rstar --> elki.index
+    elki.index.tree.spatial.rstarvariants.rstar --> elki.logging
+    elki.index.tree.spatial.rstarvariants.rstar --> elki.index.tree.spatial
+    elki.index.tree.spatial.rstarvariants.rstar --> elki.database.ids
+    elki.index.tree.spatial.rstarvariants.rstar --> elki.database.query.knn
+    elki.index.tree.spatial.rstarvariants.rstar --> elki.database.query.distance
+    elki.index.tree.spatial.rstarvariants.rstar --> elki.database.query.range
+    elki.index.tree.spatial.rstarvariants.rstar --> elki.database.query
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.index.tree.spatial.rstarvariants
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.index.tree
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.index
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.logging
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.database.query.distance
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.database.query.knn
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.database.relation
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.persistent
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.database.ids
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.distance
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.data.spatial
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.database.query.range
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.database.query
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.database.query.rknn
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.index.tree.spatial
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.data
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.spatial.rstarvariants.rdknn --> elki.utilities.optionhandling
+    elki.index.tree.spatial.rstarvariants.strategies.reinsert --> elki.distance
+    elki.index.tree.spatial.rstarvariants.strategies.reinsert --> elki.utilities.datastructures.arraylike
+    elki.index.tree.spatial.rstarvariants.strategies.reinsert --> elki.data.spatial
+    elki.index.tree.spatial.rstarvariants.strategies.reinsert --> elki.utilities.optionhandling
+    elki.index.tree.spatial.rstarvariants.strategies.reinsert --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.spatial.rstarvariants.strategies.insert --> elki.utilities.optionhandling
+    elki.index.tree.spatial.rstarvariants.strategies.insert --> elki.utilities.datastructures.arraylike
+    elki.index.tree.spatial.rstarvariants.strategies.insert --> elki.data.spatial
+    elki.index.tree.spatial.rstarvariants.strategies.insert --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.spatial.rstarvariants.strategies.bulk --> elki.utilities.optionhandling
+    elki.index.tree.spatial.rstarvariants.strategies.bulk --> elki.data.spatial
+    elki.index.tree.spatial.rstarvariants.strategies.bulk --> elki.math.spacefillingcurves
+    elki.index.tree.spatial.rstarvariants.strategies.bulk --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.spatial.rstarvariants.strategies.bulk --> elki.logging
+    elki.index.tree.spatial.rstarvariants.strategies.overflow --> elki.index.tree.spatial.rstarvariants
+    elki.index.tree.spatial.rstarvariants.strategies.overflow --> elki.index.tree
+    elki.index.tree.spatial.rstarvariants.strategies.overflow --> elki.utilities.optionhandling
+    elki.index.tree.spatial.rstarvariants.strategies.overflow --> elki.index.tree.spatial.rstarvariants.strategies.reinsert
+    elki.index.tree.spatial.rstarvariants.strategies.overflow --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.spatial.rstarvariants.strategies.split --> elki.utilities.optionhandling
+    elki.index.tree.spatial.rstarvariants.strategies.split --> elki.utilities.datastructures.arraylike
+    elki.index.tree.spatial.rstarvariants.strategies.split --> elki.logging
+    elki.index.tree.spatial.rstarvariants.strategies.split --> elki.utilities.pairs
+    elki.index.tree.spatial.rstarvariants.strategies.split --> elki.data
+    elki.index.tree.spatial.rstarvariants.query --> elki.database.query.range
+    elki.index.tree.spatial.rstarvariants.query --> elki.index.tree.spatial.rstarvariants
+    elki.index.tree.spatial.rstarvariants.query --> elki.distance
+    elki.index.tree.spatial.rstarvariants.query --> elki.database.relation
+    elki.index.tree.spatial.rstarvariants.query --> elki.database.ids
+    elki.index.tree.spatial.rstarvariants.query --> elki.database.query
+    elki.index.tree.spatial.rstarvariants.query --> elki.utilities.datastructures.heap
+    elki.index.tree.spatial.rstarvariants.query --> elki.distance.minkowski
+    elki.index.tree.spatial.rstarvariants.query --> elki.database.query.knn
+    elki.index.tree.spatial.rstarvariants.query --> elki.database.query.distance
+    elki.index.invertedlist --> elki.index
+    elki.index.invertedlist --> elki.database.query.knn
+    elki.index.invertedlist --> elki.database.ids
+    elki.index.invertedlist --> elki.database.query.range
+    elki.index.invertedlist --> elki.utilities.optionhandling
+    elki.index.invertedlist --> elki.database.relation
+    elki.index.invertedlist --> elki.data.type
+    elki.index.invertedlist --> elki.logging
+    elki.index.invertedlist --> elki.database.datastore
+    elki.index.invertedlist --> elki.data
+    elki.index.invertedlist --> elki.database.query.distance
+    elki.index.tree.metrical.covertree --> elki.index
+    elki.index.tree.metrical.covertree --> elki.database.ids
+    elki.index.tree.metrical.covertree --> elki.database.query.range
+    elki.index.tree.metrical.covertree --> elki.utilities.datastructures.heap
+    elki.index.tree.metrical.covertree --> elki.database.query.knn
+    elki.index.tree.metrical.covertree --> elki.database.query
+    elki.index.tree.metrical.covertree --> elki.distance
+    elki.index.tree.metrical.covertree --> elki.database.relation
+    elki.index.tree.metrical.covertree --> elki.logging
+    elki.index.tree.metrical.covertree --> elki.database.query.distance
+    elki.index.tree.metrical.covertree --> elki.utilities.optionhandling
+    elki.index.tree.metrical.covertree --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.metrical.covertree --> elki.data.type
+    elki.index.tree.metrical.vptree --> elki.index
+    elki.index.tree.metrical.vptree --> elki.database.ids
+    elki.index.tree.metrical.vptree --> elki.database.query.knn
+    elki.index.tree.metrical.vptree --> elki.database.query.range
+    elki.index.tree.metrical.vptree --> elki.database.query
+    elki.index.tree.metrical.vptree --> elki.utilities.datastructures.heap
+    elki.index.tree.metrical.vptree --> elki.utilities.optionhandling
+    elki.index.tree.metrical.vptree --> elki.distance
+    elki.index.tree.metrical.vptree --> elki.utilities.random
+    elki.index.tree.metrical.vptree --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.metrical.vptree --> elki.database.relation
+    elki.index.tree.metrical.vptree --> elki.data.type
+    elki.index.tree.metrical.vptree --> elki.logging
+    elki.index.tree.metrical.vptree --> elki.database.query.distance
+    elki.index.tree.spatial.kd --> elki.data
+    elki.index.tree.spatial.kd --> elki.index
+    elki.index.tree.spatial.kd --> elki.database.query.knn
+    elki.index.tree.spatial.kd --> elki.database.ids
+    elki.index.tree.spatial.kd --> elki.database.query.range
+    elki.index.tree.spatial.kd --> elki.database.query
+    elki.index.tree.spatial.kd --> elki.distance
+    elki.index.tree.spatial.kd --> elki.utilities.datastructures.heap
+    elki.index.tree.spatial.kd --> elki.utilities.optionhandling
+    elki.index.tree.spatial.kd --> elki.utilities.optionhandling.parameterization
+    elki.index.tree.spatial.kd --> elki.database.relation
+    elki.index.tree.spatial.kd --> elki.data.type
+    elki.index.tree.spatial.kd --> elki.logging
+    elki.index.tree.spatial.kd --> elki.logging.statistics
+    elki.index.tree.spatial.kd --> elki.database.query.distance
+    elki.index.tree.spatial.kd --> elki.distance.minkowski
+    elki.index.tree.spatial.kd --> elki.index.tree.spatial.kd.split
+    elki.index.tree.spatial.kd.split --> elki.utilities.optionhandling
+    elki.index.tree.spatial.kd.split --> elki.database.relation
+    elki.index.tree.spatial.kd.split --> elki.database.ids
+    elki.index.tree.spatial.kd.split --> elki.data
+    elki.index.laesa --> elki.index
+    elki.index.laesa --> elki.database.query.knn
+    elki.index.laesa --> elki.database.ids
+    elki.index.laesa --> elki.database.datastore
+    elki.index.laesa --> elki.database.query.range
+    elki.index.laesa --> elki.utilities.optionhandling
+    elki.index.laesa --> elki.distance
+    elki.index.laesa --> elki.utilities.random
+    elki.index.laesa --> elki.utilities.optionhandling.parameterization
+    elki.index.laesa --> elki.database.relation
+    elki.index.laesa --> elki.data.type
+    elki.index.laesa --> elki.logging
+    elki.index.laesa --> elki.database.query.distance
+    elki.index.vafile --> elki.index
+    elki.index.vafile --> elki.logging.statistics
+    elki.index.vafile --> elki.database.ids
+    elki.index.vafile --> elki.database.query.range
+    elki.index.vafile --> elki.database.query.distance
+    elki.index.vafile --> elki.database.query.knn
+    elki.index.vafile --> elki.utilities.optionhandling
+    elki.index.vafile --> elki.utilities.optionhandling.parameterization
+    elki.index.vafile --> elki.database.relation
+    elki.index.vafile --> elki.data.type
+    elki.index.vafile --> elki.logging
+    elki.index.vafile --> elki.data
+    elki.datasource.filter.selection --> elki.datasource.filter
+    elki.datasource.filter.selection --> elki.utilities.optionhandling
+    elki.datasource.filter.selection --> elki.utilities.random
+    elki.datasource.filter.selection --> elki.utilities.optionhandling.parameterization
+    elki.datasource.filter.selection --> elki.logging
+    elki.datasource.filter.selection --> elki.datasource.bundle
+    elki.datasource.filter.cleaning --> elki.datasource.filter
+    elki.datasource.filter.cleaning --> elki.utilities.optionhandling
+    elki.datasource.filter.cleaning --> elki.logging
+    elki.datasource.filter.cleaning --> elki.datasource.bundle
+    elki.datasource.filter.cleaning --> elki.utilities.optionhandling.parameterization
+    elki.datasource.filter.cleaning --> elki.math.statistics.distribution
+    elki.datasource.filter.cleaning --> elki.utilities.random
+    elki.datasource.filter.cleaning --> elki.data
+    elki.datasource.filter.typeconversions --> elki.datasource.filter
+    elki.datasource.filter.typeconversions --> elki.utilities.optionhandling
+    elki.datasource.filter.typeconversions --> elki.data.uncertain.uncertainifier
+    elki.datasource.filter.typeconversions --> elki.utilities.random
+    elki.datasource.filter.typeconversions --> elki.utilities.optionhandling.parameterization
+    elki.datasource.filter.typeconversions --> elki.logging
+    elki.datasource.filter.typeconversions --> elki.datasource.bundle
+    elki.datasource.filter.typeconversions --> elki.data.uncertain
+    elki.datasource.filter.typeconversions --> elki.data
+    elki.datasource.filter.typeconversions --> elki.data.type
+    elki.datasource.filter.typeconversions --> it.unimi.dsi.fastutil.ints
+    elki.datasource.filter.normalization --> elki.datasource.filter
+    elki.datasource.filter.normalization --> elki.math.linearalgebra
+    elki.datasource.filter.normalization.columnwise --> elki.datasource.filter
+    elki.datasource.filter.normalization.columnwise --> elki.datasource.filter.normalization
+    elki.datasource.filter.normalization.columnwise --> elki.utilities.optionhandling
+    elki.datasource.filter.normalization.columnwise --> elki.utilities.optionhandling.parameterization
+    elki.datasource.filter.normalization.columnwise --> elki.logging
+    elki.datasource.filter.normalization.columnwise --> elki.math
+    elki.datasource.filter.normalization.columnwise --> elki.data.type
+    elki.datasource.filter.normalization.columnwise --> elki.math.linearalgebra
+    elki.datasource.filter.normalization.columnwise --> it.unimi.dsi.fastutil.ints
+    elki.datasource.filter.normalization.columnwise --> elki.data
+    elki.datasource.filter.normalization.columnwise --> elki.datasource.bundle
+    elki.datasource.filter.normalization.columnwise --> elki.utilities.datastructures.arraylike
+    elki.datasource.filter.normalization.columnwise --> elki.math.statistics.distribution
+    elki.datasource.filter.normalization.instancewise --> elki.datasource.filter
+    elki.datasource.filter.normalization.instancewise --> elki.datasource.filter.normalization
+    elki.datasource.filter.normalization.instancewise --> elki.utilities.optionhandling
+    elki.datasource.filter.normalization.instancewise --> elki.data.type
+    elki.datasource.filter.normalization.instancewise --> elki.utilities.optionhandling.parameterization
+    elki.datasource.filter.normalization.instancewise --> elki.distance
+    elki.datasource.filter.normalization.instancewise --> it.unimi.dsi.fastutil.ints
+    elki.itemsetmining --> elki.data
+    elki.itemsetmining --> elki.data.type
+    elki.itemsetmining --> elki.logging
+    elki.itemsetmining --> elki.result
+    elki.itemsetmining --> elki.database.relation
+    elki.itemsetmining --> elki.database.ids
+    elki.itemsetmining --> elki
+    elki.itemsetmining --> elki.utilities.optionhandling
+    elki.itemsetmining --> elki.utilities.optionhandling.parameterization
+    elki.itemsetmining --> elki.database
+    elki.itemsetmining.associationrules --> elki.itemsetmining
+    elki.itemsetmining.associationrules --> elki.data.type
+    elki.itemsetmining.associationrules --> elki
+    elki.itemsetmining.associationrules --> elki.result
+    elki.itemsetmining.associationrules --> elki.utilities.datastructures.arraylike
+    elki.itemsetmining.associationrules --> elki.utilities.optionhandling
+    elki.itemsetmining.associationrules --> elki.itemsetmining.associationrules.interest
+    elki.itemsetmining.associationrules --> elki.utilities.optionhandling.parameterization
+    elki.itemsetmining.associationrules --> elki.logging
+    elki.itemsetmining.associationrules --> elki.database
+    elki.outlier.svm --> elki.outlier
+    elki.outlier.svm --> elki.utilities.optionhandling
+    elki.outlier.svm --> elki.similarity
+    elki.outlier.svm --> elki.utilities.optionhandling.parameterization
+    elki.outlier.svm --> elki.logging
+    elki.outlier.svm --> elki.data.type
+    elki.outlier.svm --> elki.result.outlier
+    elki.outlier.svm --> elki.database.relation
+    elki.outlier.svm --> libsvm
+    elki.logging --> elki.logging.progress
+    elki.logging --> elki.logging.statistics
+    elki.logging.progress --> elki.logging
+    elki.outlier.intrinsic --> elki.outlier
+    elki.outlier.intrinsic --> elki.utilities.optionhandling
+    elki.outlier.intrinsic --> elki.distance
+    elki.outlier.intrinsic --> elki.math.statistics.intrinsicdimensionality
+    elki.outlier.intrinsic --> elki.utilities.optionhandling.parameterization
+    elki.outlier.intrinsic --> elki.logging
+    elki.outlier.intrinsic --> elki.data.type
+    elki.outlier.intrinsic --> elki.result.outlier
+    elki.outlier.intrinsic --> elki.database.relation
+    elki.outlier.intrinsic --> elki.database.datastore
+    elki.outlier.intrinsic --> elki.database.ids
+    elki.outlier.intrinsic --> elki.database.query.knn
+    elki.outlier.intrinsic --> elki.database.query.distance
+    elki.outlier.intrinsic --> elki.math
+    elki.outlier.lof --> elki.outlier
+    elki.outlier.lof --> elki.utilities.optionhandling
+    elki.outlier.lof --> elki.distance
+    elki.outlier.lof --> elki.utilities.optionhandling.parameterization
+    elki.outlier.lof --> elki.logging
+    elki.outlier.lof --> elki.data.type
+    elki.outlier.lof --> elki.result.outlier
+    elki.outlier.lof --> elki.database.relation
+    elki.outlier.lof --> elki.database.datastore
+    elki.outlier.lof --> elki.database.ids
+    elki.outlier.lof --> elki.database.query.knn
+    elki.outlier.lof --> elki.math
+    elki.outlier.lof --> elki.index.preprocessed.knn
+    elki.outlier.lof --> elki.utilities.pairs
+    elki.outlier.lof --> elki.logging.progress
+    elki.outlier.lof --> elki.database.query.range
+    elki.outlier.lof --> elki.math.statistics.kernelfunctions
+    elki.outlier.lof --> elki.database.query.rknn
+    elki.outlier.lof --> elki.database.query.distance
+    elki.outlier.lof --> elki.data
+    elki.outlier.lof --> elki.utilities.random
+    elki.outlier.lof.parallel --> elki.parallel.processor
+    elki.outlier.lof.parallel --> elki.parallel.variables
+    elki.outlier.lof.parallel --> elki.database.ids
+    elki.outlier.lof.parallel --> elki.database.datastore
+    elki.outlier.lof.parallel --> elki.parallel
+    elki.outlier.lof.parallel --> elki.outlier
+    elki.outlier.lof.parallel --> elki.utilities.optionhandling
+    elki.outlier.lof.parallel --> elki.distance
+    elki.outlier.lof.parallel --> elki.utilities.optionhandling.parameterization
+    elki.outlier.lof.parallel --> elki.data.type
+    elki.outlier.lof.parallel --> elki.result.outlier
+    elki.outlier.lof.parallel --> elki.database.relation
+    elki.outlier.density --> elki.outlier
+    elki.outlier.density --> elki.database.relation
+    elki.outlier.density --> elki.database.ids
+    elki.outlier.density --> elki.utilities.optionhandling
+    elki.outlier.density --> elki.utilities.random
+    elki.outlier.density --> elki.utilities.optionhandling.parameterization
+    elki.outlier.density --> elki.logging
+    elki.outlier.density --> elki.result.outlier
+    elki.outlier.density --> elki.data
+    elki.outlier.density --> elki.data.type
+    elki.outlier.density --> it.unimi.dsi.fastutil.ints
+    elki.outlier.density --> elki.database
+    elki.outlier.distance --> elki.outlier
+    elki.outlier.distance --> elki.utilities.optionhandling
+    elki.outlier.distance --> elki.distance
+    elki.outlier.distance --> elki.utilities.optionhandling.parameterization
+    elki.outlier.distance --> elki.logging
+    elki.outlier.distance --> elki.data.type
+    elki.outlier.distance --> elki.result.outlier
+    elki.outlier.distance --> elki.database.relation
+    elki.outlier.distance --> elki.utilities.datastructures.heap
+    elki.outlier.distance --> elki.database.ids
+    elki.outlier.distance --> elki.data
+    elki.outlier.distance --> elki.distance.minkowski
+    elki.outlier.distance --> elki.database.query.distance
+    elki.outlier.distance --> elki.database.datastore
+    elki.outlier.distance --> elki.utilities.referencepoints
+    elki.outlier.distance.parallel --> elki.parallel.processor
+    elki.outlier.distance.parallel --> elki.parallel.variables
+    elki.outlier.distance.parallel --> elki.database.ids
+    elki.outlier.distance.parallel --> elki.parallel
+    elki.outlier.distance.parallel --> elki.outlier
+    elki.outlier.distance.parallel --> elki.utilities.optionhandling
+    elki.outlier.distance.parallel --> elki.distance
+    elki.outlier.distance.parallel --> elki.utilities.optionhandling.parameterization
+    elki.outlier.distance.parallel --> elki.data.type
+    elki.outlier.distance.parallel --> elki.result.outlier
+    elki.outlier.distance.parallel --> elki.database.relation
+    elki.outlier.anglebased --> elki.utilities.optionhandling
+    elki.outlier.anglebased --> elki.utilities.optionhandling.parameterization
+    elki.outlier.anglebased --> elki.similarity
+    elki.outlier.anglebased --> elki.result.outlier
+    elki.outlier.anglebased --> elki.database.relation
+    elki.outlier.anglebased --> elki.database.ids
+    elki.outlier.anglebased --> elki.database.datastore
+    elki.outlier.anglebased --> elki.math
+    elki.outlier.anglebased --> elki.data.type
+    elki.outlier.anglebased --> elki.outlier
+    elki.outlier.anglebased --> elki.similarity.kernel
+    elki.outlier.anglebased --> elki.logging
+    elki.outlier.spatial --> elki.logging
+    elki.outlier.spatial --> elki.outlier.spatial.neighborhood
+    elki.outlier.spatial --> elki.data.type
+    elki.outlier.spatial --> elki.result.outlier
+    elki.outlier.spatial --> elki.database
+    elki.outlier.spatial --> elki.database.relation
+    elki.outlier.spatial --> elki.utilities.optionhandling
+    elki.outlier.spatial --> elki.utilities.optionhandling.parameterization
+    elki.outlier.spatial --> elki.distance
+    elki.outlier.spatial --> elki.outlier
+    elki.outlier.spatial --> elki.utilities.pairs
+    elki.outlier.spatial.neighborhood --> elki.database
+    elki.outlier.spatial.neighborhood --> elki.database.relation
+    elki.outlier.spatial.neighborhood --> elki.data.type
+    elki.outlier.spatial.neighborhood --> elki.database.ids
+    elki.outlier.spatial.neighborhood --> elki.utilities.optionhandling
+    elki.outlier.spatial.neighborhood --> elki.utilities.optionhandling.parameterization
+    elki.outlier.spatial.neighborhood --> elki.database.datastore
+    elki.outlier.spatial.neighborhood --> elki.logging
+    elki.outlier.spatial.neighborhood --> elki.distance
+    elki.outlier.spatial.neighborhood.weighted --> elki.utilities.optionhandling
+    elki.outlier.spatial.neighborhood.weighted --> elki.outlier.spatial.neighborhood
+    elki.outlier.spatial.neighborhood.weighted --> elki.utilities.optionhandling.parameterization
+    elki.outlier.spatial.neighborhood.weighted --> elki.database
+    elki.outlier.spatial.neighborhood.weighted --> elki.database.relation
+    elki.outlier.spatial.neighborhood.weighted --> elki.data.type
+    elki.outlier.spatial.neighborhood.weighted --> elki.database.ids
+    elki.outlier.meta --> elki.outlier
+    elki.outlier.meta --> elki.utilities.optionhandling
+    elki.outlier.meta --> elki.utilities.scaling
+    elki.outlier.meta --> elki.utilities.optionhandling.parameterization
+    elki.outlier.meta --> elki.logging
+    elki.outlier.meta --> elki.data.type
+    elki.outlier.meta --> elki.result.outlier
+    elki.outlier.meta --> elki.database.relation
+    elki.outlier.meta --> elki.math.statistics.tests
+    elki.outlier.meta --> elki.utilities.random
+    elki.outlier.meta --> elki
+    elki.outlier.meta --> elki.database
+    elki.outlier.meta --> elki.utilities.ensemble
+    elki.result.outlier --> elki.result
+    elki.result.outlier --> elki.database.relation
+    elki.result.outlier --> elki.database.ids
+    elki.result.outlier --> elki.evaluation.scores
+    elki.utilities.scaling.outlier --> elki.utilities.optionhandling
+    elki.utilities.scaling.outlier --> elki.utilities.optionhandling.parameterization
+    elki.utilities.scaling.outlier --> elki.result.outlier
+    elki.utilities.scaling.outlier --> elki.utilities.datastructures.arraylike
+    elki.utilities.scaling.outlier --> elki.logging
+    elki.utilities.scaling.outlier --> elki.utilities.scaling
+    elki.utilities.scaling.outlier --> elki.database.ids
+    elki.utilities.scaling.outlier --> elki.database.relation
+    elki.utilities.scaling.outlier --> elki.math.statistics.distribution
+    elki.application.cache --> elki.application
+    elki.application.cache --> elki.utilities.optionhandling
+    elki.application.cache --> elki.database
+    elki.application.cache --> elki.distance
+    elki.application.cache --> elki.utilities.optionhandling.parameterization
+    elki.application.cache --> elki.logging
+    elki.distance.external --> elki.utilities.optionhandling
+    elki.distance.external --> elki.datasource.parser
+    elki.distance.external --> elki.utilities.optionhandling.parameterization
+    elki.distance.external --> elki.logging
+    elki.distance.external --> elki.utilities.io
+    elki.distance.external --> elki.distance
+    elki.distance.external --> elki.persistent
+    elki.distance.external --> elki.database.ids
+    elki.distance.external --> it.unimi.dsi.fastutil.longs
+    elki.distance.external --> elki.database.query.distance
+    elki.distance.external --> elki.database.relation
+    elki.clustering.svm --> elki.clustering
+    elki.clustering.svm --> elki.utilities.optionhandling
+    elki.clustering.svm --> elki.similarity
+    elki.clustering.svm --> elki.utilities.optionhandling.parameterization
+    elki.clustering.svm --> elki.logging
+    elki.clustering.svm --> elki.data
+    elki.clustering.svm --> elki.database.relation
+    elki.clustering.svm --> elki.database.ids
+    elki.clustering.svm --> elki.svm.model
+    elki.clustering.svm --> elki.database.query.similarity
+    elki.clustering.svm --> elki.utilities.datastructures.unionfind
+    elki.clustering.svm --> elki.data.type
+    elki.svm --> elki.logging
+    elki.svm --> elki.svm.solver
+    elki.svm --> elki.svm.data
+    elki.svm --> elki.svm.model
+    elki.svm.solver --> elki.logging
+    elki.svm.solver --> elki.svm.qmatrix
+    elki.svm.data --> elki.database.query.similarity
+    elki.svm.data --> elki.database.ids
+    elki.svm.qmatrix --> elki.svm.data
+    elki.svm.model --> elki.svm.data
+    elki.svm.model --> elki.logging
+    elki.timeseries --> elki
+    elki.timeseries --> elki.database.ids
+    elki.timeseries --> elki.database.relation
+    elki.timeseries --> elki.utilities.optionhandling
+    elki.timeseries --> elki.utilities.random
+    elki.timeseries --> elki.utilities.optionhandling.parameterization
+    elki.timeseries --> elki.data.type
+    elki.timeseries --> elki.utilities.pairs
+    elki.timeseries --> elki.data
+    elki.timeseries --> elki.result.textwriter
+    tutorial.clustering --> elki.clustering.kmeans
+    tutorial.clustering --> it.unimi.dsi.fastutil.ints
+    tutorial.clustering --> elki.utilities.optionhandling
+    tutorial.clustering --> elki.clustering.kmeans.initialization
+    tutorial.clustering --> elki.distance
+    tutorial.clustering --> elki.utilities.optionhandling.parameterization
+    tutorial.clustering --> elki.logging
+    tutorial.clustering --> elki.data
+    tutorial.clustering --> elki.database.relation
+    tutorial.clustering --> elki.database.datastore
+    tutorial.clustering --> elki.database.ids
+    tutorial.clustering --> elki
+    tutorial.clustering --> elki.data.type
+    tutorial.clustering --> elki.clustering
+    tutorial.clustering --> elki.clustering.hierarchical
+    tutorial.outlier --> elki.outlier
+    tutorial.outlier --> elki.utilities.optionhandling
+    tutorial.outlier --> elki.distance
+    tutorial.outlier --> elki.utilities.optionhandling.parameterization
+    tutorial.outlier --> elki.data.type
+    tutorial.outlier --> elki.result.outlier
+    tutorial.outlier --> elki.database.relation
+    tutorial.outlier --> elki.result
+    tutorial.distancefunction --> elki.distance
+    tutorial.distancefunction --> elki.data
+    tutorial.distancefunction --> elki.data.type
+    tutorial.distancefunction --> elki.utilities.optionhandling
+    tutorial.distancefunction --> elki.utilities.optionhandling.parameterization
+    elki.clustering.uncertain --> elki.clustering
+    elki.clustering.uncertain --> elki.result
+    elki.clustering.uncertain --> elki.utilities.optionhandling
+    elki.clustering.uncertain --> elki.similarity.cluster
+    elki.clustering.uncertain --> elki.utilities.random
+    elki.clustering.uncertain --> elki.utilities.optionhandling.parameterization
+    elki.clustering.uncertain --> elki.logging
+    elki.clustering.uncertain --> elki.data.type
+    elki.clustering.uncertain --> elki.data
+    elki.clustering.uncertain --> elki.database
+    elki.clustering.uncertain --> elki.database.relation
+    elki.clustering.uncertain --> elki.database.ids
+    elki.clustering.uncertain --> elki.database.datastore
+    elki.clustering.uncertain --> elki.data.uncertain
+    elki.clustering.uncertain --> elki.logging.statistics
+    elki.clustering.uncertain --> elki.clustering.dbscan.predicates
+    elki.clustering.uncertain --> elki.clustering.kmeans
+    elki.clustering.uncertain --> elki.distance
+    elki.clustering.uncertain --> elki.clustering.kmeans.initialization
+    elki.clustering.uncertain --> elki.clustering.dbscan
+    elki.data.uncertain --> elki.data.spatial
+    elki.data.uncertain --> elki.data
+    elki.data.uncertain --> elki.data.type
+    elki.data.uncertain --> elki.utilities.datastructures.arraylike
+    elki.data.uncertain --> elki.utilities.io
+    elki.data.uncertain.uncertainifier --> elki.data.uncertain
+    elki.data.uncertain.uncertainifier --> elki.utilities.datastructures.arraylike
+    elki.data.uncertain.uncertainifier --> elki.data
+    elki.data.uncertain.uncertainifier --> elki.utilities.optionhandling
+    elki.data.uncertain.uncertainifier --> elki.utilities.optionhandling.parameterization
+
+    ' Package links
+    class "elki.algorithm" [[elki/algorithm/package-summary.html]] {
+    }
+    class "elki" [[elki/package-summary.html]] {
+    }
+    class "elki.utilities.optionhandling" [[elki/utilities/optionhandling/package-summary.html]] {
+    }
+    class "elki.distance" [[elki/distance/package-summary.html]] {
+    }
+    class "elki.math.linearalgebra.pca" [[elki/math/linearalgebra/pca/package-summary.html]] {
+    }
+    class "elki.math.linearalgebra.pca.filter" [[elki/math/linearalgebra/pca/filter/package-summary.html]] {
+    }
+    class "elki.utilities.optionhandling.parameterization" [[elki/utilities/optionhandling/parameterization/package-summary.html]] {
+    }
+    class "elki.logging" [[elki/logging/package-summary.html]] {
+    }
+    class "elki.data.type" [[elki/data/type/package-summary.html]] {
+    }
+    class "elki.data.model" [[elki/data/model/package-summary.html]] {
+    }
+    class "elki.database.relation" [[elki/database/relation/package-summary.html]] {
+    }
+    class "elki.database.ids" [[elki/database/ids/package-summary.html]] {
+    }
+    class "elki.math.geometry" [[elki/math/geometry/package-summary.html]] {
+    }
+    class "elki.utilities.random" [[elki/utilities/random/package-summary.html]] {
+    }
+    class "elki.database" [[elki/database/package-summary.html]] {
+    }
+    class "elki.database.datastore" [[elki/database/datastore/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.rstarvariants" [[elki/index/tree/spatial/rstarvariants/package-summary.html]] {
+    }
+    class "elki.algorithm.statistics" [[elki/algorithm/statistics/package-summary.html]] {
+    }
+    class "elki.database.query.knn" [[elki/database/query/knn/package-summary.html]] {
+    }
+    class "elki.result" [[elki/result/package-summary.html]] {
+    }
+    class "elki.math" [[elki/math/package-summary.html]] {
+    }
+    class "elki.database.query.distance" [[elki/database/query/distance/package-summary.html]] {
+    }
+    class "elki.result.textwriter" [[elki/result/textwriter/package-summary.html]] {
+    }
+    class "elki.clustering.subspace" [[elki/clustering/subspace/package-summary.html]] {
+    }
+    class "elki.clustering.optics" [[elki/clustering/optics/package-summary.html]] {
+    }
+    class "elki.data" [[elki/data/package-summary.html]] {
+    }
+    class "elki.utilities.pairs" [[elki/utilities/pairs/package-summary.html]] {
+    }
+    class "elki.utilities.datastructures.iterator" [[elki/utilities/datastructures/iterator/package-summary.html]] {
+    }
+    class "elki.clustering.dbscan" [[elki/clustering/dbscan/package-summary.html]] {
+    }
+    class "elki.clustering" [[elki/clustering/package-summary.html]] {
+    }
+    class "elki.database.query.range" [[elki/database/query/range/package-summary.html]] {
+    }
+    class "elki.distance.subspace" [[elki/distance/subspace/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.rstarvariants.deliclu" [[elki/index/tree/spatial/rstarvariants/deliclu/package-summary.html]] {
+    }
+    class "elki.utilities.datastructures.heap" [[elki/utilities/datastructures/heap/package-summary.html]] {
+    }
+    class "elki.index.tree" [[elki/index/tree/package-summary.html]] {
+    }
+    class "elki.logging.progress" [[elki/logging/progress/package-summary.html]] {
+    }
+    class "elki.index.preprocessed.fastoptics" [[elki/index/preprocessed/fastoptics/package-summary.html]] {
+    }
+    class "elki.clustering.correlation" [[elki/clustering/correlation/package-summary.html]] {
+    }
+    class "elki.clustering.correlation.cash" [[elki/clustering/correlation/cash/package-summary.html]] {
+    }
+    class "elki.math.linearalgebra" [[elki/math/linearalgebra/package-summary.html]] {
+    }
+    class "elki.utilities.datastructures.histogram" [[elki/utilities/datastructures/histogram/package-summary.html]] {
+    }
+    class "elki.clustering.dbscan.predicates" [[elki/clustering/dbscan/predicates/package-summary.html]] {
+    }
+    class "elki.index.idistance" [[elki/index/idistance/package-summary.html]] {
+    }
+    class "elki.index" [[elki/index/package-summary.html]] {
+    }
+    class "elki.clustering.kmedoids.initialization" [[elki/clustering/kmedoids/initialization/package-summary.html]] {
+    }
+    class "elki.index.preprocessed.knn" [[elki/index/preprocessed/knn/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical" [[elki/index/tree/metrical/package-summary.html]] {
+    }
+    class "elki.data.projection.random" [[elki/data/projection/random/package-summary.html]] {
+    }
+    class "elki.database.query.rknn" [[elki/database/query/rknn/package-summary.html]] {
+    }
+    class "elki.data.spatial" [[elki/data/spatial/package-summary.html]] {
+    }
+    class "elki.evaluation.similaritymatrix" [[elki/evaluation/similaritymatrix/package-summary.html]] {
+    }
+    class "elki.evaluation" [[elki/evaluation/package-summary.html]] {
+    }
+    class "elki.utilities.scaling" [[elki/utilities/scaling/package-summary.html]] {
+    }
+    class "elki.evaluation.index" [[elki/evaluation/index/package-summary.html]] {
+    }
+    class "elki.evaluation.outlier" [[elki/evaluation/outlier/package-summary.html]] {
+    }
+    class "elki.result.outlier" [[elki/result/outlier/package-summary.html]] {
+    }
+    class "elki.datasource.filter.normalization" [[elki/datasource/filter/normalization/package-summary.html]] {
+    }
+    class "elki.data.synthetic.bymodel" [[elki/data/synthetic/bymodel/package-summary.html]] {
+    }
+    class "elki.workflow" [[elki/workflow/package-summary.html]] {
+    }
+    class "elki.outlier.clustering" [[elki/outlier/clustering/package-summary.html]] {
+    }
+    class "elki.clustering.kmeans" [[elki/clustering/kmeans/package-summary.html]] {
+    }
+    class "elki.outlier" [[elki/outlier/package-summary.html]] {
+    }
+    class "elki.clustering.hierarchical.extraction" [[elki/clustering/hierarchical/extraction/package-summary.html]] {
+    }
+    class "elki.clustering.em.models" [[elki/clustering/em/models/package-summary.html]] {
+    }
+    class "elki.evaluation.clustering.internal" [[elki/evaluation/clustering/internal/package-summary.html]] {
+    }
+    class "elki.outlier.subspace" [[elki/outlier/subspace/package-summary.html]] {
+    }
+    class "elki.similarity" [[elki/similarity/package-summary.html]] {
+    }
+    class "elki.database.query.similarity" [[elki/database/query/similarity/package-summary.html]] {
+    }
+    class "elki.math.statistics.kernelfunctions" [[elki/math/statistics/kernelfunctions/package-summary.html]] {
+    }
+    class "elki.utilities.datastructures.arraylike" [[elki/utilities/datastructures/arraylike/package-summary.html]] {
+    }
+    class "elki.visualization" [[elki/visualization/package-summary.html]] {
+    }
+    class "elki.visualization.gui" [[elki/visualization/gui/package-summary.html]] {
+    }
+    class "elki.visualization.gui.overview" [[elki/visualization/gui/overview/package-summary.html]] {
+    }
+    class "elki.utilities.scaling.outlier" [[elki/utilities/scaling/outlier/package-summary.html]] {
+    }
+    class "elki.utilities.datastructures.hierarchy" [[elki/utilities/datastructures/hierarchy/package-summary.html]] {
+    }
+    class "elki.math.scales" [[elki/math/scales/package-summary.html]] {
+    }
+    class "elki.utilities" [[elki/utilities/package-summary.html]] {
+    }
+    class "elki.result.textwriter.naming" [[elki/result/textwriter/naming/package-summary.html]] {
+    }
+    class "elki.result.textwriter.writers" [[elki/result/textwriter/writers/package-summary.html]] {
+    }
+    class "elki.evaluation.classification" [[elki/evaluation/classification/package-summary.html]] {
+    }
+    class "elki.application" [[elki/application/package-summary.html]] {
+    }
+    class "elki.datasource" [[elki/datasource/package-summary.html]] {
+    }
+    class "elki.classification" [[elki/classification/package-summary.html]] {
+    }
+    class "elki.evaluation.classification.holdout" [[elki/evaluation/classification/holdout/package-summary.html]] {
+    }
+    class "elki.datasource.bundle" [[elki/datasource/bundle/package-summary.html]] {
+    }
+    class "elki.application.experiments" [[elki/application/experiments/package-summary.html]] {
+    }
+    class "elki.utilities.io" [[elki/utilities/io/package-summary.html]] {
+    }
+    class "elki.math.geodesy" [[elki/math/geodesy/package-summary.html]] {
+    }
+    class "elki.application.benchmark" [[elki/application/benchmark/package-summary.html]] {
+    }
+    class "elki.logging.statistics" [[elki/logging/statistics/package-summary.html]] {
+    }
+    class "elki.database.query" [[elki/database/query/package-summary.html]] {
+    }
+    class "elki.application.greedyensemble" [[elki/application/greedyensemble/package-summary.html]] {
+    }
+    class "elki.utilities.ensemble" [[elki/utilities/ensemble/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.visunproj" [[elki/visualization/visualizers/visunproj/package-summary.html]] {
+    }
+    class "elki.utilities.datastructures.range" [[elki/utilities/datastructures/range/package-summary.html]] {
+    }
+    class "elki.outlier.trivial" [[elki/outlier/trivial/package-summary.html]] {
+    }
+    class "elki.datasource.parser" [[elki/datasource/parser/package-summary.html]] {
+    }
+    class "elki.application.statistics" [[elki/application/statistics/package-summary.html]] {
+    }
+    class "elki.math.statistics.intrinsicdimensionality" [[elki/math/statistics/intrinsicdimensionality/package-summary.html]] {
+    }
+    class "elki.persistent" [[elki/persistent/package-summary.html]] {
+    }
+    class "elki.projection" [[elki/projection/package-summary.html]] {
+    }
+    class "elki.visualization.parallel3d.util" [[elki/visualization/parallel3d/util/package-summary.html]] {
+    }
+    class "elki.visualization.parallel3d" [[elki/visualization/parallel3d/package-summary.html]] {
+    }
+    class "elki.visualization.style" [[elki/visualization/style/package-summary.html]] {
+    }
+    class "elki.math.statistics.dependence" [[elki/math/statistics/dependence/package-summary.html]] {
+    }
+    class "elki.visualization.parallel3d.layout" [[elki/visualization/parallel3d/layout/package-summary.html]] {
+    }
+    class "elki.visualization.projections" [[elki/visualization/projections/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers" [[elki/visualization/visualizers/package-summary.html]] {
+    }
+    class "elki.visualization.opticsplot" [[elki/visualization/opticsplot/package-summary.html]] {
+    }
+    class "elki.visualization.css" [[elki/visualization/css/package-summary.html]] {
+    }
+    class "elki.visualization.projector" [[elki/visualization/projector/package-summary.html]] {
+    }
+    class "elki.visualization.silhouette" [[elki/visualization/silhouette/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.parallel.selection" [[elki/visualization/visualizers/parallel/selection/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.parallel" [[elki/visualization/visualizers/parallel/package-summary.html]] {
+    }
+    class "elki.visualization.svg" [[elki/visualization/svg/package-summary.html]] {
+    }
+    class "elki.visualization.batikutil" [[elki/visualization/batikutil/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.parallel.cluster" [[elki/visualization/visualizers/parallel/cluster/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.parallel.index" [[elki/visualization/visualizers/parallel/index/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.histogram" [[elki/visualization/visualizers/histogram/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.silhouette" [[elki/visualization/visualizers/silhouette/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.thumbs" [[elki/visualization/visualizers/thumbs/package-summary.html]] {
+    }
+    class "elki.visualization.style.marker" [[elki/visualization/style/marker/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.scatterplot.selection" [[elki/visualization/visualizers/scatterplot/selection/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.scatterplot" [[elki/visualization/visualizers/scatterplot/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.scatterplot.cluster" [[elki/visualization/visualizers/scatterplot/cluster/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.scatterplot.index" [[elki/visualization/visualizers/scatterplot/index/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical.mtreevariants" [[elki/index/tree/metrical/mtreevariants/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.scatterplot.outlier" [[elki/visualization/visualizers/scatterplot/outlier/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.scatterplot.density" [[elki/visualization/visualizers/scatterplot/density/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.scatterplot.uncertain" [[elki/visualization/visualizers/scatterplot/uncertain/package-summary.html]] {
+    }
+    class "elki.data.uncertain" [[elki/data/uncertain/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.pairsegments" [[elki/visualization/visualizers/pairsegments/package-summary.html]] {
+    }
+    class "elki.evaluation.clustering.pairsegments" [[elki/evaluation/clustering/pairsegments/package-summary.html]] {
+    }
+    class "elki.visualization.colors" [[elki/visualization/colors/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.optics" [[elki/visualization/visualizers/optics/package-summary.html]] {
+    }
+    class "elki.visualization.visualizers.actions" [[elki/visualization/visualizers/actions/package-summary.html]] {
+    }
+    class "elki.utilities.xml" [[elki/utilities/xml/package-summary.html]] {
+    }
+    class "elki.visualization.style.lines" [[elki/visualization/style/lines/package-summary.html]] {
+    }
+    class "elki.visualization.savedialog" [[elki/visualization/savedialog/package-summary.html]] {
+    }
+    class "elki.visualization.gui.detail" [[elki/visualization/gui/detail/package-summary.html]] {
+    }
+    class "elki.clustering.kmeans.initialization" [[elki/clustering/kmeans/initialization/package-summary.html]] {
+    }
+    class "elki.index.tree.betula" [[elki/index/tree/betula/package-summary.html]] {
+    }
+    class "elki.clustering.kmeans.initialization.betula" [[elki/clustering/kmeans/initialization/betula/package-summary.html]] {
+    }
+    class "elki.clustering.kmeans.quality" [[elki/clustering/kmeans/quality/package-summary.html]] {
+    }
+    class "elki.clustering.kmeans.spherical" [[elki/clustering/kmeans/spherical/package-summary.html]] {
+    }
+    class "elki.clustering.kmeans.parallel" [[elki/clustering/kmeans/parallel/package-summary.html]] {
+    }
+    class "elki.parallel.processor" [[elki/parallel/processor/package-summary.html]] {
+    }
+    class "elki.parallel" [[elki/parallel/package-summary.html]] {
+    }
+    class "elki.index.tree.betula.features" [[elki/index/tree/betula/features/package-summary.html]] {
+    }
+    class "elki.clustering.subspace.clique" [[elki/clustering/subspace/clique/package-summary.html]] {
+    }
+    class "elki.clustering.onedimensional" [[elki/clustering/onedimensional/package-summary.html]] {
+    }
+    class "elki.clustering.affinitypropagation" [[elki/clustering/affinitypropagation/package-summary.html]] {
+    }
+    class "elki.clustering.kmedoids" [[elki/clustering/kmedoids/package-summary.html]] {
+    }
+    class "elki.clustering.trivial" [[elki/clustering/trivial/package-summary.html]] {
+    }
+    class "elki.clustering.dbscan.util" [[elki/clustering/dbscan/util/package-summary.html]] {
+    }
+    class "elki.distance.minkowski" [[elki/distance/minkowski/package-summary.html]] {
+    }
+    class "elki.clustering.dbscan.parallel" [[elki/clustering/dbscan/parallel/package-summary.html]] {
+    }
+    class "elki.clustering.hierarchical" [[elki/clustering/hierarchical/package-summary.html]] {
+    }
+    class "elki.clustering.hierarchical.linkage" [[elki/clustering/hierarchical/linkage/package-summary.html]] {
+    }
+    class "elki.clustering.hierarchical.birch" [[elki/clustering/hierarchical/birch/package-summary.html]] {
+    }
+    class "elki.clustering.kcenter" [[elki/clustering/kcenter/package-summary.html]] {
+    }
+    class "elki.clustering.silhouette" [[elki/clustering/silhouette/package-summary.html]] {
+    }
+    class "elki.clustering.biclustering" [[elki/clustering/biclustering/package-summary.html]] {
+    }
+    class "elki.math.statistics.distribution" [[elki/math/statistics/distribution/package-summary.html]] {
+    }
+    class "elki.clustering.em" [[elki/clustering/em/package-summary.html]] {
+    }
+    class "elki.clustering.meta" [[elki/clustering/meta/package-summary.html]] {
+    }
+    class "elki.similarity.cluster" [[elki/similarity/cluster/package-summary.html]] {
+    }
+    class "elki.index.tree.betula.distance" [[elki/index/tree/betula/distance/package-summary.html]] {
+    }
+    class "elki.evaluation.clustering" [[elki/evaluation/clustering/package-summary.html]] {
+    }
+    class "elki.evaluation.scores" [[elki/evaluation/scores/package-summary.html]] {
+    }
+    class "elki.evaluation.clustering.extractor" [[elki/evaluation/clustering/extractor/package-summary.html]] {
+    }
+    class "elki.evaluation.scores.adapter" [[elki/evaluation/scores/adapter/package-summary.html]] {
+    }
+    class "elki.datasource.filter.transform" [[elki/datasource/filter/transform/package-summary.html]] {
+    }
+    class "elki.datasource.filter" [[elki/datasource/filter/package-summary.html]] {
+    }
+    class "elki.data.projection" [[elki/data/projection/package-summary.html]] {
+    }
+    class "elki.math.linearalgebra.pca.weightfunctions" [[elki/math/linearalgebra/pca/weightfunctions/package-summary.html]] {
+    }
+    class "elki.utilities.exceptions" [[elki/utilities/exceptions/package-summary.html]] {
+    }
+    class "elki.utilities.datastructures.unionfind" [[elki/utilities/datastructures/unionfind/package-summary.html]] {
+    }
+    class "elki.utilities.referencepoints" [[elki/utilities/referencepoints/package-summary.html]] {
+    }
+    class "elki.index.preprocessed.snn" [[elki/index/preprocessed/snn/package-summary.html]] {
+    }
+    class "elki.database.datastore.memory" [[elki/database/datastore/memory/package-summary.html]] {
+    }
+    class "elki.database.ids.integer" [[elki/database/ids/integer/package-summary.html]] {
+    }
+    class "elki.similarity.kernel" [[elki/similarity/kernel/package-summary.html]] {
+    }
+    class "elki.distance.colorhistogram" [[elki/distance/colorhistogram/package-summary.html]] {
+    }
+    class "elki.distance.strings" [[elki/distance/strings/package-summary.html]] {
+    }
+    class "elki.distance.timeseries" [[elki/distance/timeseries/package-summary.html]] {
+    }
+    class "elki.distance.histogram" [[elki/distance/histogram/package-summary.html]] {
+    }
+    class "elki.distance.set" [[elki/distance/set/package-summary.html]] {
+    }
+    class "elki.distance.probabilistic" [[elki/distance/probabilistic/package-summary.html]] {
+    }
+    class "elki.distance.correlation" [[elki/distance/correlation/package-summary.html]] {
+    }
+    class "elki.math.spacefillingcurves" [[elki/math/spacefillingcurves/package-summary.html]] {
+    }
+    class "elki.math.statistics" [[elki/math/statistics/package-summary.html]] {
+    }
+    class "elki.math.statistics.distribution.estimator" [[elki/math/statistics/distribution/estimator/package-summary.html]] {
+    }
+    class "elki.math.statistics.distribution.estimator.meta" [[elki/math/statistics/distribution/estimator/meta/package-summary.html]] {
+    }
+    class "elki.math.statistics.tests" [[elki/math/statistics/tests/package-summary.html]] {
+    }
+    class "elki.math.statistics.dependence.mcde" [[elki/math/statistics/dependence/mcde/package-summary.html]] {
+    }
+    class "elki.parallel.variables" [[elki/parallel/variables/package-summary.html]] {
+    }
+    class "elki.application.internal" [[elki/application/internal/package-summary.html]] {
+    }
+    class "elki.utilities.datastructures" [[elki/utilities/datastructures/package-summary.html]] {
+    }
+    class "elki.utilities.datastructures.arrays" [[elki/utilities/datastructures/arrays/package-summary.html]] {
+    }
+    class "elki.utilities.optionhandling.parameters" [[elki/utilities/optionhandling/parameters/package-summary.html]] {
+    }
+    class "elki.utilities.optionhandling.constraints" [[elki/utilities/optionhandling/constraints/package-summary.html]] {
+    }
+    class "elki.distance.adapter" [[elki/distance/adapter/package-summary.html]] {
+    }
+    class "elki.index.projected" [[elki/index/projected/package-summary.html]] {
+    }
+    class "elki.distance.geo" [[elki/distance/geo/package-summary.html]] {
+    }
+    class "elki.gui" [[elki/gui/package-summary.html]] {
+    }
+    class "elki.gui.util" [[elki/gui/util/package-summary.html]] {
+    }
+    class "elki.gui.configurator" [[elki/gui/configurator/package-summary.html]] {
+    }
+    class "elki.gui.multistep" [[elki/gui/multistep/package-summary.html]] {
+    }
+    class "elki.gui.multistep.panels" [[elki/gui/multistep/panels/package-summary.html]] {
+    }
+    class "elki.gui.minigui" [[elki/gui/minigui/package-summary.html]] {
+    }
+    class "elki.index.distancematrix" [[elki/index/distancematrix/package-summary.html]] {
+    }
+    class "elki.index.lsh.hashfunctions" [[elki/index/lsh/hashfunctions/package-summary.html]] {
+    }
+    class "elki.index.lsh" [[elki/index/lsh/package-summary.html]] {
+    }
+    class "elki.index.lsh.hashfamilies" [[elki/index/lsh/hashfamilies/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical.mtreevariants.strategies.split" [[elki/index/tree/metrical/mtreevariants/strategies/split/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical.mtreevariants.strategies.insert" [[elki/index/tree/metrical/mtreevariants/strategies/insert/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical.mtreevariants.strategies.split.distribution" [[elki/index/tree/metrical/mtreevariants/strategies/split/distribution/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical.mtreevariants.mtree" [[elki/index/tree/metrical/mtreevariants/mtree/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical.mtreevariants.mktrees.mkcop" [[elki/index/tree/metrical/mtreevariants/mktrees/mkcop/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical.mtreevariants.mktrees" [[elki/index/tree/metrical/mtreevariants/mktrees/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical.mtreevariants.mktrees.mkmax" [[elki/index/tree/metrical/mtreevariants/mktrees/mkmax/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical.mtreevariants.mktrees.mkapp" [[elki/index/tree/metrical/mtreevariants/mktrees/mkapp/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical.mtreevariants.mktrees.mktab" [[elki/index/tree/metrical/mtreevariants/mktrees/mktab/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical.mtreevariants.query" [[elki/index/tree/metrical/mtreevariants/query/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial" [[elki/index/tree/spatial/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.rstarvariants.strategies.bulk" [[elki/index/tree/spatial/rstarvariants/strategies/bulk/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.rstarvariants.strategies.split" [[elki/index/tree/spatial/rstarvariants/strategies/split/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.rstarvariants.strategies.insert" [[elki/index/tree/spatial/rstarvariants/strategies/insert/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.rstarvariants.strategies.overflow" [[elki/index/tree/spatial/rstarvariants/strategies/overflow/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.rstarvariants.util" [[elki/index/tree/spatial/rstarvariants/util/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.rstarvariants.flat" [[elki/index/tree/spatial/rstarvariants/flat/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.rstarvariants.rstar" [[elki/index/tree/spatial/rstarvariants/rstar/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.rstarvariants.rdknn" [[elki/index/tree/spatial/rstarvariants/rdknn/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.rstarvariants.strategies.reinsert" [[elki/index/tree/spatial/rstarvariants/strategies/reinsert/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.rstarvariants.query" [[elki/index/tree/spatial/rstarvariants/query/package-summary.html]] {
+    }
+    class "elki.index.invertedlist" [[elki/index/invertedlist/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical.covertree" [[elki/index/tree/metrical/covertree/package-summary.html]] {
+    }
+    class "elki.index.tree.metrical.vptree" [[elki/index/tree/metrical/vptree/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.kd" [[elki/index/tree/spatial/kd/package-summary.html]] {
+    }
+    class "elki.index.tree.spatial.kd.split" [[elki/index/tree/spatial/kd/split/package-summary.html]] {
+    }
+    class "elki.index.laesa" [[elki/index/laesa/package-summary.html]] {
+    }
+    class "elki.index.vafile" [[elki/index/vafile/package-summary.html]] {
+    }
+    class "elki.datasource.filter.selection" [[elki/datasource/filter/selection/package-summary.html]] {
+    }
+    class "elki.datasource.filter.cleaning" [[elki/datasource/filter/cleaning/package-summary.html]] {
+    }
+    class "elki.datasource.filter.typeconversions" [[elki/datasource/filter/typeconversions/package-summary.html]] {
+    }
+    class "elki.data.uncertain.uncertainifier" [[elki/data/uncertain/uncertainifier/package-summary.html]] {
+    }
+    class "elki.datasource.filter.normalization.columnwise" [[elki/datasource/filter/normalization/columnwise/package-summary.html]] {
+    }
+    class "elki.datasource.filter.normalization.instancewise" [[elki/datasource/filter/normalization/instancewise/package-summary.html]] {
+    }
+    class "elki.itemsetmining" [[elki/itemsetmining/package-summary.html]] {
+    }
+    class "elki.itemsetmining.associationrules" [[elki/itemsetmining/associationrules/package-summary.html]] {
+    }
+    class "elki.itemsetmining.associationrules.interest" [[elki/itemsetmining/associationrules/interest/package-summary.html]] {
+    }
+    class "elki.outlier.svm" [[elki/outlier/svm/package-summary.html]] {
+    }
+    class "elki.outlier.intrinsic" [[elki/outlier/intrinsic/package-summary.html]] {
+    }
+    class "elki.outlier.lof" [[elki/outlier/lof/package-summary.html]] {
+    }
+    class "elki.outlier.lof.parallel" [[elki/outlier/lof/parallel/package-summary.html]] {
+    }
+    class "elki.outlier.density" [[elki/outlier/density/package-summary.html]] {
+    }
+    class "elki.outlier.distance" [[elki/outlier/distance/package-summary.html]] {
+    }
+    class "elki.outlier.distance.parallel" [[elki/outlier/distance/parallel/package-summary.html]] {
+    }
+    class "elki.outlier.anglebased" [[elki/outlier/anglebased/package-summary.html]] {
+    }
+    class "elki.outlier.spatial" [[elki/outlier/spatial/package-summary.html]] {
+    }
+    class "elki.outlier.spatial.neighborhood" [[elki/outlier/spatial/neighborhood/package-summary.html]] {
+    }
+    class "elki.outlier.spatial.neighborhood.weighted" [[elki/outlier/spatial/neighborhood/weighted/package-summary.html]] {
+    }
+    class "elki.outlier.meta" [[elki/outlier/meta/package-summary.html]] {
+    }
+    class "elki.application.cache" [[elki/application/cache/package-summary.html]] {
+    }
+    class "elki.distance.external" [[elki/distance/external/package-summary.html]] {
+    }
+    class "elki.clustering.svm" [[elki/clustering/svm/package-summary.html]] {
+    }
+    class "elki.svm.model" [[elki/svm/model/package-summary.html]] {
+    }
+    class "elki.svm" [[elki/svm/package-summary.html]] {
+    }
+    class "elki.svm.solver" [[elki/svm/solver/package-summary.html]] {
+    }
+    class "elki.svm.data" [[elki/svm/data/package-summary.html]] {
+    }
+    class "elki.svm.qmatrix" [[elki/svm/qmatrix/package-summary.html]] {
+    }
+    class "elki.timeseries" [[elki/timeseries/package-summary.html]] {
+    }
+    class "tutorial.clustering" [[tutorial/clustering/package-summary.html]] {
+    }
+    class "tutorial.outlier" [[tutorial/outlier/package-summary.html]] {
+    }
+    class "tutorial.distancefunction" [[tutorial/distancefunction/package-summary.html]] {
+    }
+    class "elki.clustering.uncertain" [[elki/clustering/uncertain/package-summary.html]] {
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

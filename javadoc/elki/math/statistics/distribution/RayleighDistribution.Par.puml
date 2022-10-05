@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RayleighDistribution.Par\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.RayleighDistribution.Par [[RayleighDistribution.Par.html]] {
+        ~mean: double
+        ~scale: double
+        +configure(Parameterization): void
+        +make(): RayleighDistribution
+    }
+
+    interface "<size:14>Distribution.Parameterizer\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution.Parameterizer [[Distribution.Parameterizer.html]]
+    class "<size:14>RayleighDistribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.RayleighDistribution [[RayleighDistribution.html]]
+
+    elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.RayleighDistribution.Par
+    elki.math.statistics.distribution.RayleighDistribution +-- elki.math.statistics.distribution.RayleighDistribution.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

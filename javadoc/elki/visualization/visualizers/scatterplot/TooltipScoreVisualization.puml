@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TooltipScoreVisualization\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.TooltipScoreVisualization [[TooltipScoreVisualization.html]] {
+        {static} +NAME: String
+        {static} +NAME_GEN: String
+        #settings: Par
+        +TooltipScoreVisualization(Par)
+        +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        +processNewResult(VisualizerContext, Object): void
+        -addTooltips(String, Relation<?>, VisualizerContext, ScatterPlotProjector<?>, Relation<?>): void
+    }
+
+    interface "<size:14>VisFactory\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.VisFactory [[../VisFactory.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+        {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+    }
+    class "<size:14>TooltipScoreVisualization.Instance\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Instance [[TooltipScoreVisualization.Instance.html]]
+    class "<size:14>TooltipScoreVisualization.Par\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Par [[TooltipScoreVisualization.Par.html]]
+
+    elki.visualization.visualizers.VisFactory <|.. elki.visualization.visualizers.scatterplot.TooltipScoreVisualization
+    elki.visualization.visualizers.scatterplot.TooltipScoreVisualization +-- elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Instance
+    elki.visualization.visualizers.scatterplot.TooltipScoreVisualization +-- elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

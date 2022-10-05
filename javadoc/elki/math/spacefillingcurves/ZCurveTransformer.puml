@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ZCurveTransformer\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.ZCurveTransformer [[ZCurveTransformer.html]] {
+        -maxValues: double[]
+        -minValues: double[]
+        -dimensionality: int
+        +ZCurveTransformer(Relation<? extends NumberVector>, DBIDs)
+        +asByteArray(NumberVector): byte[]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

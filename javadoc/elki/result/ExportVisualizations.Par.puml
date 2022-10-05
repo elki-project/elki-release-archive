@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExportVisualizations.Par\n<size:10>elki.result" as elki.result.ExportVisualizations.Par [[ExportVisualizations.Par.html]] {
+        {static} +RATIO_ID: OptionID
+        {static} +FOLDER_ID: OptionID
+        {static} +FORMAT_ID: OptionID
+        {static} +IWIDTH_ID: OptionID
+        ~manager: VisualizerParameterizer
+        ~output: Path
+        ~ratio: double
+        ~format: Format
+        ~iwidth: int
+        +configure(Parameterization): void
+        +make(): ExportVisualizations
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ExportVisualizations\n<size:10>elki.result" as elki.result.ExportVisualizations [[ExportVisualizations.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.result.ExportVisualizations.Par
+    elki.result.ExportVisualizations +-- elki.result.ExportVisualizations.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

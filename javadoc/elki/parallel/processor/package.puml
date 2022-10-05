@@ -1,0 +1,147 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.parallel.processor {
+
+        class KDistanceProcessor [[KDistanceProcessor.html]] {
+            ~k: int
+            ~input: SharedObject<? extends KNNList>
+            +KDistanceProcessor(int)
+            +connectKNNInput(SharedObject<? extends KNNList>): void
+            +instantiate(Executor): Instance
+        }
+
+        class elki.parallel.processor.KDistanceProcessor.Instance [[KDistanceProcessor.Instance.html]] {
+            ~k: int
+            ~input: Instance<? extends KNNList>
+            #Instance(int, Instance<? extends KNNList>, Instance)
+            +map(DBIDRef): void
+        }
+
+        class WriteDataStoreProcessor<T> [[WriteDataStoreProcessor.html]] {
+            ~store: WritableDataStore<T>
+            ~input: SharedObject<T>
+            +WriteDataStoreProcessor(WritableDataStore<T>)
+            +connectInput(SharedObject<T>): void
+            +instantiate(Executor): Instance
+            +cleanup(Instance): void
+        }
+
+        class elki.parallel.processor.WriteDataStoreProcessor.Instance [[WriteDataStoreProcessor.Instance.html]] {
+            ~input: Instance<T>
+            +Instance(Instance<T>)
+            +map(DBIDRef): void
+        }
+
+        class DoubleMinMaxProcessor [[DoubleMinMaxProcessor.html]] {
+            ~minmax: DoubleMinMax
+            ~input: SharedDouble
+            +connectInput(SharedDouble): void
+            +instantiate(Executor): Instance
+            +cleanup(Instance): void
+            #merge(DoubleMinMax): void
+            +getMinMax(): DoubleMinMax
+        }
+
+        class elki.parallel.processor.DoubleMinMaxProcessor.Instance [[DoubleMinMaxProcessor.Instance.html]] {
+            -minmax: DoubleMinMax
+            -input: Instance
+            +Instance(Instance)
+            +map(DBIDRef): void
+        }
+
+        class KNNProcessor [[KNNProcessor.html]] {
+            ~k: int
+            ~knnq: Supplier<KNNSearcher<DBIDRef>>
+            ~out: SharedObject<KNNList>
+            +KNNProcessor(int, Supplier<KNNSearcher<DBIDRef>>)
+            +connectKNNOutput(SharedObject<KNNList>): void
+            +instantiate(Executor): Instance
+            +cleanup(Instance): void
+        }
+
+        class elki.parallel.processor.KNNProcessor.Instance [[KNNProcessor.Instance.html]] {
+            ~k: int
+            ~knnq: KNNSearcher<DBIDRef>
+            ~out: Instance<KNNList>
+            #Instance(int, KNNSearcher<DBIDRef>, Instance<KNNList>)
+            +map(DBIDRef): void
+        }
+
+        interface Processor [[Processor.html]] {
+            {abstract} +instantiate(Executor): Instance
+            {abstract} +cleanup(Instance): void
+        }
+
+        interface elki.parallel.processor.Processor.Instance [[Processor.Instance.html]] {
+            {abstract} +map(DBIDRef): void
+        }
+
+        abstract class AbstractDoubleProcessor [[AbstractDoubleProcessor.html]] {
+            #output: SharedDouble
+            +connectOutput(SharedDouble): void
+            {abstract} +instantiate(Executor): Instance
+            +cleanup(Instance): void
+        }
+
+        abstract class elki.parallel.processor.AbstractDoubleProcessor.Instance [[AbstractDoubleProcessor.Instance.html]] {
+            #output: Instance
+            +Instance(Instance)
+            {abstract} +map(DBIDRef): void
+        }
+
+        class WriteIntegerDataStoreProcessor [[WriteIntegerDataStoreProcessor.html]] {
+            ~store: WritableIntegerDataStore
+            ~input: SharedInteger
+            +WriteIntegerDataStoreProcessor(WritableIntegerDataStore)
+            +connectInput(SharedInteger): void
+            +instantiate(Executor): Instance
+            +cleanup(Instance): void
+        }
+
+        class elki.parallel.processor.WriteIntegerDataStoreProcessor.Instance [[WriteIntegerDataStoreProcessor.Instance.html]] {
+            ~input: Instance
+            +Instance(Instance)
+            +map(DBIDRef): void
+        }
+
+        class WriteDoubleDataStoreProcessor [[WriteDoubleDataStoreProcessor.html]] {
+            ~store: WritableDoubleDataStore
+            ~input: SharedDouble
+            +WriteDoubleDataStoreProcessor(WritableDoubleDataStore)
+            +connectInput(SharedDouble): void
+            +instantiate(Executor): Instance
+            +cleanup(Instance): void
+        }
+
+        class elki.parallel.processor.WriteDoubleDataStoreProcessor.Instance [[WriteDoubleDataStoreProcessor.Instance.html]] {
+            ~input: Instance
+            +Instance(Instance)
+            +map(DBIDRef): void
+        }
+
+        AbstractDoubleProcessor <|-- KDistanceProcessor
+        elki.parallel.processor.AbstractDoubleProcessor.Instance <|-- elki.parallel.processor.KDistanceProcessor.Instance
+        KDistanceProcessor +-- elki.parallel.processor.KDistanceProcessor.Instance
+        Processor <|.. WriteDataStoreProcessor
+        elki.parallel.processor.Processor.Instance <|.. elki.parallel.processor.WriteDataStoreProcessor.Instance
+        WriteDataStoreProcessor +-- elki.parallel.processor.WriteDataStoreProcessor.Instance
+        Processor <|.. DoubleMinMaxProcessor
+        elki.parallel.processor.Processor.Instance <|.. elki.parallel.processor.DoubleMinMaxProcessor.Instance
+        DoubleMinMaxProcessor +-- elki.parallel.processor.DoubleMinMaxProcessor.Instance
+        Processor <|.. KNNProcessor
+        elki.parallel.processor.Processor.Instance <|.. elki.parallel.processor.KNNProcessor.Instance
+        KNNProcessor +-- elki.parallel.processor.KNNProcessor.Instance
+        Processor +-- elki.parallel.processor.Processor.Instance
+        Processor <|.. AbstractDoubleProcessor
+        elki.parallel.processor.Processor.Instance <|.. elki.parallel.processor.AbstractDoubleProcessor.Instance
+        AbstractDoubleProcessor +-- elki.parallel.processor.AbstractDoubleProcessor.Instance
+        Processor <|.. WriteIntegerDataStoreProcessor
+        elki.parallel.processor.Processor.Instance <|.. elki.parallel.processor.WriteIntegerDataStoreProcessor.Instance
+        WriteIntegerDataStoreProcessor +-- elki.parallel.processor.WriteIntegerDataStoreProcessor.Instance
+        Processor <|.. WriteDoubleDataStoreProcessor
+        elki.parallel.processor.Processor.Instance <|.. elki.parallel.processor.WriteDoubleDataStoreProcessor.Instance
+        WriteDoubleDataStoreProcessor +-- elki.parallel.processor.WriteDoubleDataStoreProcessor.Instance
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>NeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.NeighborPredicate.Instance<T> [[NeighborPredicate.Instance.html]] {
+        {abstract} +getNeighbors(DBIDRef): T
+        {abstract} +getIDs(): DBIDs
+        {abstract} +iterDBIDs(T): DBIDIter
+    }
+
+    interface "<size:14>NeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.NeighborPredicate<T> [[NeighborPredicate.html]] {
+        {abstract} +instantiate(Database): Instance<T>
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +getOutputType(): SimpleTypeInformation<T>
+    }
+
+    elki.clustering.dbscan.predicates.NeighborPredicate +-- elki.clustering.dbscan.predicates.NeighborPredicate.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

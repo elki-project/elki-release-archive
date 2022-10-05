@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NDCGEvaluation\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.NDCGEvaluation [[NDCGEvaluation.html]] {
+        {static} +STATIC: NDCGEvaluation
+        +evaluate(Adapter): double
+        +expected(int, int): double
+        {static} +computeNDCG(Adapter): double
+    }
+
+    interface "<size:14>ScoreEvaluation\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.ScoreEvaluation [[ScoreEvaluation.html]] {
+        {abstract} +evaluate(Adapter): double
+        {abstract} +expected(int, int): double
+    }
+    class "<size:14>NDCGEvaluation.Par\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.NDCGEvaluation.Par [[NDCGEvaluation.Par.html]]
+
+    elki.evaluation.scores.ScoreEvaluation <|.. elki.evaluation.scores.NDCGEvaluation
+    elki.evaluation.scores.NDCGEvaluation +-- elki.evaluation.scores.NDCGEvaluation.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

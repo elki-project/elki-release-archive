@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractCutDendrogram.Par\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Par [[AbstractCutDendrogram.Par.html]] {
+        {static} +HIERARCHICAL_ID: OptionID
+        {static} +NOSIMPLIFY_ID: OptionID
+        ~hierarchical: boolean
+        ~algorithm: HierarchicalClusteringAlgorithm
+        ~simplify: boolean
+        +configure(Parameterization): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractCutDendrogram\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.AbstractCutDendrogram [[AbstractCutDendrogram.html]] {
+        {abstract} +run(ClusterMergeHistory): Clustering<DendrogramModel>
+        {abstract} #getLogger(): Logging
+    }
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Par
+    elki.clustering.hierarchical.extraction.AbstractCutDendrogram +-- elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

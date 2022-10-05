@@ -1,0 +1,112 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.distance.adapter {
+
+        class LnSimilarityAdapter<O> [[LnSimilarityAdapter.html]] {
+            +LnSimilarityAdapter(NormalizedSimilarity<? super O>)
+            +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+        }
+
+        class elki.distance.adapter.LnSimilarityAdapter.Instance<O> [[LnSimilarityAdapter.Instance.html]] {
+            +Instance(Relation<O>, Distance<? super O>, SimilarityQuery<O>)
+            +transform(double): double
+        }
+
+        class elki.distance.adapter.LnSimilarityAdapter.Par<O> [[LnSimilarityAdapter.Par.html]] {
+            +make(): LnSimilarityAdapter<O>
+            #getSimilarityRestriction(): Class<? extends NormalizedSimilarity<? super O>>
+        }
+
+        class LinearSimilarityAdapter<O> [[LinearSimilarityAdapter.html]] {
+            +LinearSimilarityAdapter(NormalizedSimilarity<? super O>)
+            +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+        }
+
+        class elki.distance.adapter.LinearSimilarityAdapter.Instance<O> [[LinearSimilarityAdapter.Instance.html]] {
+            +Instance(Relation<O>, Distance<? super O>, SimilarityQuery<? super O>)
+            +transform(double): double
+        }
+
+        class elki.distance.adapter.LinearSimilarityAdapter.Par<O> [[LinearSimilarityAdapter.Par.html]] {
+            +make(): LinearSimilarityAdapter<O>
+            #getSimilarityRestriction(): Class<? extends NormalizedSimilarity<? super O>>
+        }
+
+        class ArccosSimilarityAdapter<O> [[ArccosSimilarityAdapter.html]] {
+            +ArccosSimilarityAdapter(NormalizedSimilarity<? super O>)
+            +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+        }
+
+        class elki.distance.adapter.ArccosSimilarityAdapter.Instance<O> [[ArccosSimilarityAdapter.Instance.html]] {
+            +Instance(Relation<O>, Distance<? super O>, SimilarityQuery<O>)
+            +transform(double): double
+        }
+
+        class elki.distance.adapter.ArccosSimilarityAdapter.Par<O> [[ArccosSimilarityAdapter.Par.html]] {
+            +make(): ArccosSimilarityAdapter<O>
+            #getSimilarityRestriction(): Class<? extends NormalizedSimilarity<? super O>>
+        }
+
+        abstract class AbstractSimilarityAdapter<O> [[AbstractSimilarityAdapter.html]] {
+            #similarityFunction: Similarity<? super O>
+            +AbstractSimilarityAdapter(Similarity<? super O>)
+            +getInputTypeRestriction(): TypeInformation
+            +isSymmetric(): boolean
+            {abstract} +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+        }
+
+        abstract class elki.distance.adapter.AbstractSimilarityAdapter.Instance<O> [[AbstractSimilarityAdapter.Instance.html]] {
+            -similarityQuery: SimilarityQuery<? super O>
+            +Instance(Relation<O>, Distance<? super O>, SimilarityQuery<? super O>)
+            {abstract} +transform(double): double
+            +distance(DBIDRef, DBIDRef): double
+        }
+
+        abstract class elki.distance.adapter.AbstractSimilarityAdapter.Par<O, S extends Similarity<? super O>> [[AbstractSimilarityAdapter.Par.html]] {
+            {static} +SIMILARITY_FUNCTION_ID: OptionID
+            #similarityFunction: S extends Similarity<? super O>
+            #ARBITRARY_SIMILARITY: Class<Similarity<? super O>>
+            #NORMALIZED_SIMILARITY: Class<NormalizedSimilarity<? super O>>
+            +configure(Parameterization): void
+            {abstract} #getSimilarityRestriction(): Class<? extends Similarity<? super O>>
+        }
+
+        AbstractSimilarityAdapter <|-- LnSimilarityAdapter
+        elki.distance.adapter.AbstractSimilarityAdapter.Instance <|-- elki.distance.adapter.LnSimilarityAdapter.Instance
+        LnSimilarityAdapter +-- elki.distance.adapter.LnSimilarityAdapter.Instance
+        elki.distance.adapter.AbstractSimilarityAdapter.Par <|-- elki.distance.adapter.LnSimilarityAdapter.Par
+        LnSimilarityAdapter +-- elki.distance.adapter.LnSimilarityAdapter.Par
+        AbstractSimilarityAdapter <|-- LinearSimilarityAdapter
+        elki.distance.adapter.AbstractSimilarityAdapter.Instance <|-- elki.distance.adapter.LinearSimilarityAdapter.Instance
+        LinearSimilarityAdapter +-- elki.distance.adapter.LinearSimilarityAdapter.Instance
+        elki.distance.adapter.AbstractSimilarityAdapter.Par <|-- elki.distance.adapter.LinearSimilarityAdapter.Par
+        LinearSimilarityAdapter +-- elki.distance.adapter.LinearSimilarityAdapter.Par
+        AbstractSimilarityAdapter <|-- ArccosSimilarityAdapter
+        elki.distance.adapter.AbstractSimilarityAdapter.Instance <|-- elki.distance.adapter.ArccosSimilarityAdapter.Instance
+        ArccosSimilarityAdapter +-- elki.distance.adapter.ArccosSimilarityAdapter.Instance
+        elki.distance.adapter.AbstractSimilarityAdapter.Par <|-- elki.distance.adapter.ArccosSimilarityAdapter.Par
+        ArccosSimilarityAdapter +-- elki.distance.adapter.ArccosSimilarityAdapter.Par
+        elki.distance.AbstractDatabaseDistance <|-- AbstractSimilarityAdapter
+        elki.distance.AbstractDatabaseDistance.Instance <|-- elki.distance.adapter.AbstractSimilarityAdapter.Instance
+        AbstractSimilarityAdapter +-- elki.distance.adapter.AbstractSimilarityAdapter.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.adapter.AbstractSimilarityAdapter.Par
+        AbstractSimilarityAdapter +-- elki.distance.adapter.AbstractSimilarityAdapter.Par
+    }
+
+    namespace elki.distance {
+        abstract class AbstractDatabaseDistance<O> [[../AbstractDatabaseDistance.html]]
+        abstract class elki.distance.AbstractDatabaseDistance.Instance<O> [[../AbstractDatabaseDistance.Instance.html]] {
+            #relation: Relation<O>
+            #parent: Distance<? super O>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

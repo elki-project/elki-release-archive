@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntegerDBID.StaticSerializer\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBID.StaticSerializer [[IntegerDBID.StaticSerializer.html]] {
+        +fromByteBuffer(ByteBuffer): DBID
+        +toByteBuffer(ByteBuffer, DBID): void
+        +getByteSize(DBID): int
+        +getFixedByteSize(): int
+    }
+
+    interface "<size:14>FixedSizeByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.FixedSizeByteBufferSerializer<DBID> [[../../../utilities/io/FixedSizeByteBufferSerializer.html]] {
+        {abstract} +getFixedByteSize(): int
+    }
+    class "<size:14>IntegerDBID\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBID [[IntegerDBID.html]]
+
+    elki.utilities.io.FixedSizeByteBufferSerializer <|.. elki.database.ids.integer.IntegerDBID.StaticSerializer
+    elki.database.ids.integer.IntegerDBID +-- elki.database.ids.integer.IntegerDBID.StaticSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

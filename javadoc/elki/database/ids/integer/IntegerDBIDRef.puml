@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>IntegerDBIDRef\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDRef [[IntegerDBIDRef.html]] {
+        {abstract} +internalGetIndex(): int
+    }
+
+    interface "<size:14>DBIDRef\n<size:10>elki.database.ids" as elki.database.ids.DBIDRef [[../DBIDRef.html]] {
+        {abstract} +internalGetIndex(): int
+    }
+
+    elki.database.ids.DBIDRef <|-- elki.database.ids.integer.IntegerDBIDRef
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

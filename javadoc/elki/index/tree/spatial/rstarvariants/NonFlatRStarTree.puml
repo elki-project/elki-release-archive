@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>NonFlatRStarTree\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.NonFlatRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[NonFlatRStarTree.html]] {
+        +NonFlatRStarTree(PageFile<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>>, S extends RTreeSettings)
+        #hasOverflow(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): boolean
+        #hasUnderflow(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): boolean
+        #computeHeight(): int
+        #createEmptyRoot(E extends SpatialEntry): void
+        #bulkLoad(List<E extends SpatialEntry>): void
+        -createBulkDirectoryNodes(List<E extends SpatialEntry>): List<E extends SpatialEntry>
+        -createRoot(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, List<E extends SpatialEntry>): N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>
+    }
+
+    abstract class "<size:14>AbstractRStarTree\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[AbstractRStarTree.html]] {
+        {abstract} #bulkLoad(List<E extends SpatialEntry>): void
+        {abstract} #computeHeight(): int
+        {abstract} #hasOverflow(N extends AbstractRStarTreeNode<N, E extends SpatialEntry>): boolean
+        {abstract} #hasUnderflow(N extends AbstractRStarTreeNode<N, E extends SpatialEntry>): boolean
+        {abstract} #createNewDirectoryEntry(N extends AbstractRStarTreeNode<N, E extends SpatialEntry>): E extends SpatialEntry
+    }
+
+    elki.index.tree.spatial.rstarvariants.AbstractRStarTree <|-- elki.index.tree.spatial.rstarvariants.NonFlatRStarTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

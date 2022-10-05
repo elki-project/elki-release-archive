@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DBIDIter\n<size:10>elki.database.ids" as elki.database.ids.DBIDIter [[DBIDIter.html]] {
+        {abstract} +advance(): DBIDIter
+        +addTo(T extends ModifiableDBIDs): T extends ModifiableDBIDs
+    }
+
+    interface "<size:14>DBIDRef\n<size:10>elki.database.ids" as elki.database.ids.DBIDRef [[DBIDRef.html]] {
+        {abstract} +internalGetIndex(): int
+    }
+    interface "<size:14>Iter\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.Iter [[../../utilities/datastructures/iterator/Iter.html]] {
+        {abstract} +valid(): boolean
+        {abstract} +advance(): Iter
+    }
+
+    elki.database.ids.DBIDRef <|-- elki.database.ids.DBIDIter
+    elki.utilities.datastructures.iterator.Iter <|-- elki.database.ids.DBIDIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

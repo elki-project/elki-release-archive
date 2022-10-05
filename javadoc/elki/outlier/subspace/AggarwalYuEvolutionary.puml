@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AggarwalYuEvolutionary\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.AggarwalYuEvolutionary [[AggarwalYuEvolutionary.html]] {
+        {static} -LOG: Logging
+        {static} #MAX_ITERATIONS: int
+        {static} #CONVERGENCE: double
+        -m: int
+        -rnd: RandomFactory
+        +AggarwalYuEvolutionary(int, int, int, RandomFactory)
+        +run(Relation<? extends NumberVector>): OutlierResult
+    }
+
+    abstract class "<size:14>AbstractAggarwalYuOutlier\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.AbstractAggarwalYuOutlier [[AbstractAggarwalYuOutlier.html]]
+    class "<size:14>AggarwalYuEvolutionary.EvolutionarySearch\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.AggarwalYuEvolutionary.EvolutionarySearch [[AggarwalYuEvolutionary.EvolutionarySearch.html]]
+    class "<size:14>AggarwalYuEvolutionary.Individuum\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.AggarwalYuEvolutionary.Individuum [[AggarwalYuEvolutionary.Individuum.html]]
+    class "<size:14>AggarwalYuEvolutionary.Par\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.AggarwalYuEvolutionary.Par [[AggarwalYuEvolutionary.Par.html]]
+
+    elki.outlier.subspace.AbstractAggarwalYuOutlier <|-- elki.outlier.subspace.AggarwalYuEvolutionary
+    elki.outlier.subspace.AggarwalYuEvolutionary +-- elki.outlier.subspace.AggarwalYuEvolutionary.EvolutionarySearch
+    elki.outlier.subspace.AggarwalYuEvolutionary +-- elki.outlier.subspace.AggarwalYuEvolutionary.Individuum
+    elki.outlier.subspace.AggarwalYuEvolutionary +-- elki.outlier.subspace.AggarwalYuEvolutionary.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

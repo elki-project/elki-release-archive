@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CTLuMedianMultipleAttributes.Par\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.CTLuMedianMultipleAttributes.Par<N, O extends NumberVector> {
+        +make(): CTLuMedianMultipleAttributes<N, O extends NumberVector>
+    }
+
+    abstract class "<size:14>AbstractNeighborhoodOutlier.Par\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.AbstractNeighborhoodOutlier.Par<N>
+    class "<size:14>CTLuMedianMultipleAttributes\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.CTLuMedianMultipleAttributes<N, O extends NumberVector> [[CTLuMedianMultipleAttributes.html]]
+
+    elki.outlier.spatial.AbstractNeighborhoodOutlier.Par <|-- elki.outlier.spatial.CTLuMedianMultipleAttributes.Par
+    elki.outlier.spatial.CTLuMedianMultipleAttributes +-- elki.outlier.spatial.CTLuMedianMultipleAttributes.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

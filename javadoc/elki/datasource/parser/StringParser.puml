@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>StringParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.StringParser [[StringParser.html]] {
+        ~comment: Matcher
+        ~trimWhitespace: boolean
+        +StringParser(Pattern, boolean)
+        +parse(InputStream): MultipleObjectsBundle
+        +cleanup(): void
+    }
+
+    interface "<size:14>Parser\n<size:10>elki.datasource.parser" as elki.datasource.parser.Parser [[Parser.html]] {
+        {abstract} +parse(InputStream): MultipleObjectsBundle
+        {abstract} +cleanup(): void
+    }
+    class "<size:14>StringParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.StringParser.Par [[StringParser.Par.html]]
+
+    elki.datasource.parser.Parser <|.. elki.datasource.parser.StringParser
+    elki.datasource.parser.StringParser +-- elki.datasource.parser.StringParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

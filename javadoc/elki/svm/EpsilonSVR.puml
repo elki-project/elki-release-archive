@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EpsilonSVR\n<size:10>elki.svm" as elki.svm.EpsilonSVR [[EpsilonSVR.html]] {
+        {static} -LOG: Logging
+        #p: double
+        #C: double
+        +EpsilonSVR(double, boolean, double, double, double)
+        #solve(DataSet): SolutionInfo
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractSVR\n<size:10>elki.svm" as elki.svm.AbstractSVR [[AbstractSVR.html]]
+
+    elki.svm.AbstractSVR <|-- elki.svm.EpsilonSVR
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="128px" preserveAspectRatio="none" style="width:844px;height:128px;background:#FFFFFF;" version="1.1" viewBox="0 0 844 128" width="844px" zoomAndPan="magnify"><defs/><g><!--MD5=[7201ba819fa9210e212f6c557a59a5ba]
+class elki.index.tree.metrical.mtreevariants.MTreeSettings--><a href="MTreeSettings.html" target="_top" title="MTreeSettings.html" xlink:actuate="onRequest" xlink:href="MTreeSettings.html" xlink:show="new" xlink:title="MTreeSettings.html" xlink:type="simple"><g id="elem_elki.index.tree.metrical.mtreevariants.MTreeSettings"><rect codeLine="6" fill="#F1F1F1" height="94.8281" id="elki.index.tree.metrical.mtreevariants.MTreeSettings" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="823" x="7" y="7"/><ellipse cx="61.25" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M64.2188,31.6094 Q63.6406,31.9063 63,32.0469 Q62.3594,32.2031 61.6563,32.2031 Q59.1563,32.2031 57.8281,30.5625 Q56.5156,28.9063 56.5156,25.7813 Q56.5156,22.6563 57.8281,21 Q59.1563,19.3438 61.6563,19.3438 Q62.3594,19.3438 63,19.5 Q63.6563,19.6563 64.2188,19.9531 L64.2188,22.6719 Q63.5938,22.0938 63,21.8281 Q62.4063,21.5469 61.7813,21.5469 Q60.4375,21.5469 59.75,22.625 Q59.0625,23.6875 59.0625,25.7813 Q59.0625,27.875 59.75,28.9531 Q60.4375,30.0156 61.7813,30.0156 Q62.4063,30.0156 63,29.75 Q63.5938,29.4688 64.2188,28.8906 L64.2188,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="121.75" y="24.9951">MTreeSettings</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="181" x="81.75" y="37.5791">elki.index.tree.metrical.mtreevariants</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="523" x="310" y="4"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="521" x="311" y="16.1387">O, N extends AbstractMTreeNode&lt;O, N, E extends MTreeEntry&gt;, E extends MTreeEntry</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="829" y1="44.9375" y2="44.9375"/><polygon fill="none" points="18,53.5859,22,57.5859,18,61.5859,14,57.5859" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="279" x="27" y="61.9326">distanceFunction: Distance&lt;? super O&gt;</text><polygon fill="none" points="18,69.8828,22,73.8828,18,77.8828,14,73.8828" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="776" x="27" y="78.2295">splitStrategy: MTreeSplit&lt;E extends MTreeEntry, N extends AbstractMTreeNode&lt;O, N, E extends MTreeEntry&gt;&gt;</text><polygon fill="none" points="18,86.1797,22,90.1797,18,94.1797,14,90.1797" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="797" x="27" y="94.5264">insertStrategy: MTreeInsert&lt;E extends MTreeEntry, N extends AbstractMTreeNode&lt;O, N, E extends MTreeEntry&gt;&gt;</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="325" y="108.8281"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="325" y="118.1104">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[e21dbd6f3027a6ff0eaee70a18437e5a]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MTreeSettings\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[MTreeSettings.html]] {
+        #distanceFunction: Distance<? super O>
+        #splitStrategy: MTreeSplit<E extends MTreeEntry, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>>
+        #insertStrategy: MTreeInsert<E extends MTreeEntry, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

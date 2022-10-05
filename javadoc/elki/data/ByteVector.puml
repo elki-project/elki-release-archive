@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByteVector\n<size:10>elki.data" as elki.data.ByteVector [[ByteVector.html]] {
+        {static} +STATIC: Factory
+        {static} +BYTE_SERIALIZER: ByteBufferSerializer<ByteVector>
+        {static} +SHORT_SERIALIZER: ByteBufferSerializer<ByteVector>
+        -values: byte[]
+        -ByteVector(byte[], boolean)
+        +ByteVector(byte[])
+        +getDimensionality(): int
+        +--getValue--(int): Byte
+        +doubleValue(int): double
+        +longValue(int): long
+        +byteValue(int): byte
+        +getValues(): byte[]
+        +toArray(): double[]
+    }
+
+    interface "<size:14>NumberVector\n<size:10>elki.data" as elki.data.NumberVector [[NumberVector.html]] {
+        {abstract} +doubleValue(int): double
+        {abstract} +longValue(int): long
+        {abstract} +toArray(): double[]
+    }
+    class "<size:14>ByteVector.Factory\n<size:10>elki.data" as elki.data.ByteVector.Factory [[ByteVector.Factory.html]]
+    class "<size:14>ByteVector.SmallSerializer\n<size:10>elki.data" as elki.data.ByteVector.SmallSerializer [[ByteVector.SmallSerializer.html]]
+    class "<size:14>ByteVector.ShortSerializer\n<size:10>elki.data" as elki.data.ByteVector.ShortSerializer [[ByteVector.ShortSerializer.html]]
+
+    elki.data.NumberVector <|.. elki.data.ByteVector
+    elki.data.ByteVector +-- elki.data.ByteVector.Factory
+    elki.data.ByteVector +-- elki.data.ByteVector.SmallSerializer
+    elki.data.ByteVector +-- elki.data.ByteVector.ShortSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

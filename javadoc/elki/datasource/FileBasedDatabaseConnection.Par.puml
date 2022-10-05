@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FileBasedDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.FileBasedDatabaseConnection.Par [[FileBasedDatabaseConnection.Par.html]] {
+        {static} +INPUT_ID: OptionID
+        #infile: URI
+        +configure(Parameterization): void
+        +make(): FileBasedDatabaseConnection
+    }
+
+    class "<size:14>InputStreamDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.InputStreamDatabaseConnection.Par [[InputStreamDatabaseConnection.Par.html]]
+    class "<size:14>FileBasedDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.FileBasedDatabaseConnection [[FileBasedDatabaseConnection.html]]
+
+    elki.datasource.InputStreamDatabaseConnection.Par <|-- elki.datasource.FileBasedDatabaseConnection.Par
+    elki.datasource.FileBasedDatabaseConnection +-- elki.datasource.FileBasedDatabaseConnection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

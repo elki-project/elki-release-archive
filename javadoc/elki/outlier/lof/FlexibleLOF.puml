@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FlexibleLOF\n<size:10>elki.outlier.lof" as elki.outlier.lof.FlexibleLOF<O> [[FlexibleLOF.html]] {
+        {static} -LOG: Logging
+        #krefer: int
+        #kreach: int
+        #referenceDistance: Distance<? super O>
+        #reachabilityDistance: Distance<? super O>
+        +FlexibleLOF(int, int, Distance<? super O>, Distance<? super O>)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+        #doRunInTime(DBIDs, KNNSearcher<DBIDRef>, KNNSearcher<DBIDRef>, StepProgress): LOFResult<O>
+        #computeLRDs(KNNSearcher<DBIDRef>, DBIDs, WritableDoubleDataStore): void
+        #computeLOFs(KNNSearcher<DBIDRef>, DBIDs, DoubleDataStore, WritableDoubleDataStore, DoubleMinMax): void
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>FlexibleLOF.LOFResult\n<size:10>elki.outlier.lof" as elki.outlier.lof.FlexibleLOF.LOFResult<O> [[FlexibleLOF.LOFResult.html]]
+    class "<size:14>FlexibleLOF.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.FlexibleLOF.Par<O> [[FlexibleLOF.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.lof.FlexibleLOF
+    elki.outlier.lof.FlexibleLOF +-- elki.outlier.lof.FlexibleLOF.LOFResult
+    elki.outlier.lof.FlexibleLOF +-- elki.outlier.lof.FlexibleLOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

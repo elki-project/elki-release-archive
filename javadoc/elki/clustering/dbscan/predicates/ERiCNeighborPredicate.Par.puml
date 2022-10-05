@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ERiCNeighborPredicate.Par\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Par [[ERiCNeighborPredicate.Par.html]] {
+        #settings: Settings
+        +configure(Parameterization): void
+        +make(): ERiCNeighborPredicate
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ERiCNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.ERiCNeighborPredicate [[ERiCNeighborPredicate.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Par
+    elki.clustering.dbscan.predicates.ERiCNeighborPredicate +-- elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

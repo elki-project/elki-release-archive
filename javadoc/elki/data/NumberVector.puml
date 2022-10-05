@@ -1,0 +1,41 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>NumberVector\n<size:10>elki.data" as elki.data.NumberVector [[NumberVector.html]] {
+        {static} +ATTRIBUTE_SEPARATOR: String
+        {static} +VARIABLE_LENGTH: VectorTypeInformation<NumberVector>
+        {static} +FIELD: VectorFieldTypeInformation<NumberVector>
+        {static} +FIELD_1D: VectorFieldTypeInformation<NumberVector>
+        {static} +FIELD_2D: VectorFieldTypeInformation<NumberVector>
+        +--getValue--(int): Number
+        +getMin(int): double
+        +getMax(int): double
+        {abstract} +doubleValue(int): double
+        +floatValue(int): float
+        +intValue(int): int
+        {abstract} +longValue(int): long
+        +shortValue(int): short
+        +byteValue(int): byte
+        {abstract} +toArray(): double[]
+    }
+
+    interface "<size:14>FeatureVector\n<size:10>elki.data" as elki.data.FeatureVector<Number> [[FeatureVector.html]] {
+        {abstract} +getDimensionality(): int
+        {abstract} +getValue(int): Number
+    }
+    interface "<size:14>SpatialComparable\n<size:10>elki.data.spatial" as elki.data.spatial.SpatialComparable [[spatial/SpatialComparable.html]] {
+        {abstract} +getDimensionality(): int
+        {abstract} +getMin(int): double
+        {abstract} +getMax(int): double
+    }
+    interface "<size:14>NumberVector.Factory\n<size:10>elki.data" as elki.data.NumberVector.Factory<V extends NumberVector> [[NumberVector.Factory.html]]
+
+    elki.data.FeatureVector <|-- elki.data.NumberVector
+    elki.data.spatial.SpatialComparable <|-- elki.data.NumberVector
+    elki.data.NumberVector +-- elki.data.NumberVector.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

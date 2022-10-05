@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FourCNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.FourCNeighborPredicate.Instance [[FourCNeighborPredicate.Instance.html]] {
+        +Instance(DBIDs, DataStore<PreDeConModel>)
+        +getNeighbors(DBIDRef): PreDeConModel
+        +iterDBIDs(PreDeConModel): DBIDIter
+    }
+
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance<PreDeConModel, PreDeConModel> [[AbstractRangeQueryNeighborPredicate.Instance.html]]
+    class "<size:14>FourCNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.FourCNeighborPredicate [[FourCNeighborPredicate.html]]
+
+    elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance <|-- elki.clustering.dbscan.predicates.FourCNeighborPredicate.Instance
+    elki.clustering.dbscan.predicates.FourCNeighborPredicate +-- elki.clustering.dbscan.predicates.FourCNeighborPredicate.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

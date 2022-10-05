@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="236px" preserveAspectRatio="none" style="width:517px;height:236px;background:#FFFFFF;" version="1.1" viewBox="0 0 517 236" width="517px" zoomAndPan="magnify"><defs/><g><!--MD5=[14c8191f11d08be6e3c292a67a2cb5e4]
+class elki.distance.DBIDDistance--><a href="DBIDDistance.html" target="_top" title="DBIDDistance.html" xlink:actuate="onRequest" xlink:href="DBIDDistance.html" xlink:show="new" xlink:title="DBIDDistance.html" xlink:type="simple"><g id="elem_elki.distance.DBIDDistance"><rect codeLine="6" fill="#F1F1F1" height="62.2344" id="elki.distance.DBIDDistance" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="282" x="115.5" y="149"/><ellipse cx="203.25" cy="167.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M199.1719,163.7344 L199.1719,161.5781 L206.5625,161.5781 L206.5625,163.7344 L204.0938,163.7344 L204.0938,171.8125 L206.5625,171.8125 L206.5625,173.9688 L199.1719,173.9688 L199.1719,171.8125 L201.6406,171.8125 L201.6406,163.7344 L199.1719,163.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="223.75" y="166.9951">DBIDDistance</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="63" x="241.25" y="179.5791">elki.distance</text><line style="stroke:#181818;stroke-width:0.5;" x1="116.5" x2="396.5" y1="186.9375" y2="186.9375"/><ellipse cx="126.5" cy="200.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="256" x="135.5" y="203.9326">distance(DBIDRef, DBIDRef): double</text></g></a><!--MD5=[1f4838d083d28018a0e06ec509a3c72f]
+class elki.distance.Distance--><a href="Distance.html" target="_top" title="Distance.html" xlink:actuate="onRequest" xlink:href="Distance.html" xlink:show="new" xlink:title="Distance.html" xlink:type="simple"><g id="elem_elki.distance.Distance"><rect codeLine="10" fill="#F1F1F1" height="78.5313" id="elki.distance.Distance" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="499" x="7" y="10"/><ellipse cx="203.75" cy="28.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M199.6719,24.7344 L199.6719,22.5781 L207.0625,22.5781 L207.0625,24.7344 L204.5938,24.7344 L204.5938,32.8125 L207.0625,32.8125 L207.0625,34.9688 L199.6719,34.9688 L199.6719,32.8125 L202.1406,32.8125 L202.1406,24.7344 L199.6719,24.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="62" x="224.75" y="27.9951">Distance</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="63" x="224.25" y="40.5791">elki.distance</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="32" x="477" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="30" x="478" y="19.1387">DBID</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="505" y1="47.9375" y2="47.9375"/><ellipse cx="18" cy="61.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="305" x="27" y="64.9326">getInputTypeRestriction(): TypeInformation</text><ellipse cx="18" cy="77.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="473" x="27" y="81.2295">instantiate(Relation&lt;T extends O&gt;): DistanceQuery&lt;T extends O&gt;</text></g></a><!--MD5=[a88d98f325b9d548ef7c186173699ac4]
+reverse link elki.distance.Distance to elki.distance.DBIDDistance--><g id="link_elki.distance.Distance_elki.distance.DBIDDistance"><path codeLine="15" d="M256.5,109.18 C256.5,122.82 256.5,136.8 256.5,148.64 " fill="none" id="elki.distance.Distance-backto-elki.distance.DBIDDistance" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="249.5,109.05,256.5,89.05,263.5,109.05,249.5,109.05" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="158.5" y="217.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="158.5" y="226.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[675455b1b4bfc96f58f181a45a36a271]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DBIDDistance\n<size:10>elki.distance" as elki.distance.DBIDDistance [[DBIDDistance.html]] {
+        {abstract} +distance(DBIDRef, DBIDRef): double
+    }
+
+    interface "<size:14>Distance\n<size:10>elki.distance" as elki.distance.Distance<DBID> [[Distance.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+    }
+
+    elki.distance.Distance <|- - elki.distance.DBIDDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

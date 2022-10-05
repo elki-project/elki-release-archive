@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMeansPlusPlus.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMeansPlusPlus.Par<V> [[KMeansPlusPlus.Par.html]] {
+        +make(): KMeansPlusPlus<V>
+    }
+
+    abstract class "<size:14>AbstractKMeansInitialization.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par [[AbstractKMeansInitialization.Par.html]]
+    class "<size:14>KMeansPlusPlus\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMeansPlusPlus<O> [[KMeansPlusPlus.html]]
+
+    elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.KMeansPlusPlus.Par
+    elki.clustering.kmeans.initialization.KMeansPlusPlus +-- elki.clustering.kmeans.initialization.KMeansPlusPlus.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

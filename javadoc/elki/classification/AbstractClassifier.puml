@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractClassifier\n<size:10>elki.classification" as elki.classification.AbstractClassifier<O, R> [[AbstractClassifier.html]] {
+        +--autorun--(Database): R
+        #alignLabels(List<ClassLabel>, double[], Collection<ClassLabel>): double[]
+    }
+
+    interface "<size:14>Classifier\n<size:10>elki.classification" as elki.classification.Classifier<O> [[Classifier.html]] {
+        {abstract} +buildClassifier(Database, Relation<? extends ClassLabel>): void
+        {abstract} +classify(O): ClassLabel
+        {abstract} +model(): String
+    }
+
+    elki.classification.Classifier <|.. elki.classification.AbstractClassifier
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

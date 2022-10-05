@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProxyView\n<size:10>elki.database.relation" as elki.database.relation.ProxyView<O> [[ProxyView.html]] {
+        -idview: DBIDs
+        -inner: Relation<O>
+        +ProxyView(DBIDs, Relation<O>)
+        +get(DBIDRef): O
+        +getDBIDs(): DBIDs
+        +iterDBIDs(): DBIDIter
+        +size(): int
+        +getDataTypeInformation(): SimpleTypeInformation<O>
+        +getLongName(): String
+        +setDBIDs(DBIDs): void
+    }
+
+    interface "<size:14>Relation\n<size:10>elki.database.relation" as elki.database.relation.Relation<O> [[Relation.html]] {
+        {abstract} +get(DBIDRef): O
+        {abstract} +getDataTypeInformation(): SimpleTypeInformation<O>
+        {abstract} +getDBIDs(): DBIDs
+        {abstract} +iterDBIDs(): DBIDIter
+        {abstract} +size(): int
+        {abstract} +getLongName(): String
+    }
+
+    elki.database.relation.Relation <|.. elki.database.relation.ProxyView
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

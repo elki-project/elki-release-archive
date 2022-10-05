@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HistogramResult\n<size:10>elki.result" as elki.result.HistogramResult [[HistogramResult.html]] {
+        +HistogramResult(Collection<double[]>)
+        +HistogramResult(Collection<double[]>, Collection<String>)
+    }
+
+    class "<size:14>CollectionResult\n<size:10>elki.result" as elki.result.CollectionResult<double[]> [[CollectionResult.html]]
+
+    elki.result.CollectionResult <|-- elki.result.HistogramResult
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

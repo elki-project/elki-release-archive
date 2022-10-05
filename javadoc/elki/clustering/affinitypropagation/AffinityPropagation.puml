@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AffinityPropagation\n<size:10>elki.clustering.affinitypropagation" as elki.clustering.affinitypropagation.AffinityPropagation<O> [[AffinityPropagation.html]] {
+        {static} -LOG: Logging
+        ~initialization: AffinityPropagationInitialization<O>
+        ~lambda: double
+        ~convergence: int
+        ~maxiter: int
+        +AffinityPropagation(AffinityPropagationInitialization<O>, double, int, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): Clustering<MedoidModel>
+        -updateResponsibilities(double[], double[], double[]): void
+        -updateAvailabilities(double[], double[]): void
+        -updateAssignment(double[], double[], int[]): int
+        -makeClusterMap(ArrayDBIDs, int[]): Int2ObjectOpenHashMap<ModifiableDBIDs>
+        -buildResult(ArrayDBIDs, int[]): Clustering<MedoidModel>
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<MedoidModel>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>AffinityPropagation.Par\n<size:10>elki.clustering.affinitypropagation" as elki.clustering.affinitypropagation.AffinityPropagation.Par<O>
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.affinitypropagation.AffinityPropagation
+    elki.clustering.affinitypropagation.AffinityPropagation +-- elki.clustering.affinitypropagation.AffinityPropagation.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

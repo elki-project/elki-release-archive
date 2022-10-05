@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearSimilarityAdapter\n<size:10>elki.distance.adapter" as elki.distance.adapter.LinearSimilarityAdapter<O> [[LinearSimilarityAdapter.html]] {
+        +LinearSimilarityAdapter(NormalizedSimilarity<? super O>)
+        +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+    }
+
+    abstract class "<size:14>AbstractSimilarityAdapter\n<size:10>elki.distance.adapter" as elki.distance.adapter.AbstractSimilarityAdapter<O> [[AbstractSimilarityAdapter.html]] {
+        {abstract} +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+    }
+    class "<size:14>LinearSimilarityAdapter.Instance\n<size:10>elki.distance.adapter" as elki.distance.adapter.LinearSimilarityAdapter.Instance<O> [[LinearSimilarityAdapter.Instance.html]]
+    class "<size:14>LinearSimilarityAdapter.Par\n<size:10>elki.distance.adapter" as elki.distance.adapter.LinearSimilarityAdapter.Par<O> [[LinearSimilarityAdapter.Par.html]]
+
+    elki.distance.adapter.AbstractSimilarityAdapter <|-- elki.distance.adapter.LinearSimilarityAdapter
+    elki.distance.adapter.LinearSimilarityAdapter +-- elki.distance.adapter.LinearSimilarityAdapter.Instance
+    elki.distance.adapter.LinearSimilarityAdapter +-- elki.distance.adapter.LinearSimilarityAdapter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

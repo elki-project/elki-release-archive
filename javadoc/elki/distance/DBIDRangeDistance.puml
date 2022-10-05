@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DBIDRangeDistance\n<size:10>elki.distance" as elki.distance.DBIDRangeDistance [[DBIDRangeDistance.html]] {
+        {abstract} +distance(int, int): double
+        {abstract} +checkRange(DBIDRange): void
+    }
+
+    interface "<size:14>DBIDDistance\n<size:10>elki.distance" as elki.distance.DBIDDistance [[DBIDDistance.html]] {
+        {abstract} +distance(DBIDRef, DBIDRef): double
+    }
+
+    elki.distance.DBIDDistance <|-- elki.distance.DBIDRangeDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

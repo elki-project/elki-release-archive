@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GeneralizedDBSCAN.Par\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.GeneralizedDBSCAN.Par [[GeneralizedDBSCAN.Par.html]] {
+        {static} +NEIGHBORHOODPRED_ID: OptionID
+        {static} +COREPRED_ID: OptionID
+        {static} +COREMODEL_ID: OptionID
+        #npred: NeighborPredicate<?>
+        #corepred: CorePredicate<?>
+        #coremodel: boolean
+        +configure(Parameterization): void
+        +make(): GeneralizedDBSCAN
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>GeneralizedDBSCAN\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.GeneralizedDBSCAN [[GeneralizedDBSCAN.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.GeneralizedDBSCAN.Par
+    elki.clustering.dbscan.GeneralizedDBSCAN +-- elki.clustering.dbscan.GeneralizedDBSCAN.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

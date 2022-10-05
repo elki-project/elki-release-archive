@@ -1,0 +1,46 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InMemoryIDistanceIndex\n<size:10>elki.index.idistance" as elki.index.idistance.InMemoryIDistanceIndex<O> [[InMemoryIDistanceIndex.html]] {
+        {static} -LOG: Logging
+        -distanceQuery: DistanceQuery<O>
+        -initialization: KMedoidsInitialization<O>
+        -numref: int
+        -referencepoints: ArrayDBIDs
+        -index: ModifiableDoubleDBIDList[]
+        +InMemoryIDistanceIndex(Relation<O>, DistanceQuery<O>, KMedoidsInitialization<O>, int)
+        +initialize(): void
+        +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+        +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+        -getDistance(): Distance<? super O>
+        +getLogger(): Logging
+        +logStatistics(): void
+        {static} #rankReferencePoints(DistanceQuery<O>, O, ArrayDBIDs): DoubleIntPair[]
+        {static} #binarySearch(ModifiableDoubleDBIDList, DoubleDBIDListIter, double): void
+    }
+
+    abstract class "<size:14>AbstractRefiningIndex\n<size:10>elki.index" as elki.index.AbstractRefiningIndex<O> [[../AbstractRefiningIndex.html]] {
+        {abstract} +getLogger(): Logging
+    }
+    interface "<size:14>RangeIndex\n<size:10>elki.index" as elki.index.RangeIndex<O> [[../RangeIndex.html]] {
+        {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+    }
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<O> [[../KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    class "<size:14>InMemoryIDistanceIndex.IDistanceKNNSearcher\n<size:10>elki.index.idistance" as elki.index.idistance.InMemoryIDistanceIndex.IDistanceKNNSearcher [[InMemoryIDistanceIndex.IDistanceKNNSearcher.html]]
+    class "<size:14>InMemoryIDistanceIndex.IDistanceRangeSearcher\n<size:10>elki.index.idistance" as elki.index.idistance.InMemoryIDistanceIndex.IDistanceRangeSearcher [[InMemoryIDistanceIndex.IDistanceRangeSearcher.html]]
+    class "<size:14>InMemoryIDistanceIndex.Factory\n<size:10>elki.index.idistance" as elki.index.idistance.InMemoryIDistanceIndex.Factory<V> [[InMemoryIDistanceIndex.Factory.html]]
+
+    elki.index.AbstractRefiningIndex <|-- elki.index.idistance.InMemoryIDistanceIndex
+    elki.index.RangeIndex <|.. elki.index.idistance.InMemoryIDistanceIndex
+    elki.index.KNNIndex <|.. elki.index.idistance.InMemoryIDistanceIndex
+    elki.index.idistance.InMemoryIDistanceIndex +-- elki.index.idistance.InMemoryIDistanceIndex.IDistanceKNNSearcher
+    elki.index.idistance.InMemoryIDistanceIndex +-- elki.index.idistance.InMemoryIDistanceIndex.IDistanceRangeSearcher
+    elki.index.idistance.InMemoryIDistanceIndex +-- elki.index.idistance.InMemoryIDistanceIndex.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

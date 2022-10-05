@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VectorApproximation\n<size:10>elki.index.vafile" as elki.index.vafile.VectorApproximation [[VectorApproximation.html]] {
+        ~approximation: int[]
+        ~id: int
+        +VectorApproximation(DBIDRef, int[])
+        +getDimensionality(): int
+        +getApproximation(int): int
+        +internalGetIndex(): int
+        {static} +byteOnDisk(int, int): int
+    }
+
+    interface "<size:14>DBIDRef\n<size:10>elki.database.ids" as elki.database.ids.DBIDRef [[../../database/ids/DBIDRef.html]] {
+        {abstract} +internalGetIndex(): int
+    }
+
+    elki.database.ids.DBIDRef <|.. elki.index.vafile.VectorApproximation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

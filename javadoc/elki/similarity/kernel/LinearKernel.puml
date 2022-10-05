@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearKernel\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.LinearKernel [[LinearKernel.html]] {
+        {static} +STATIC: LinearKernel
+        +similarity(NumberVector, NumberVector): double
+        +distance(NumberVector, NumberVector): double
+    }
+
+    class "<size:14>PolynomialKernel\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.PolynomialKernel [[PolynomialKernel.html]]
+    class "<size:14>LinearKernel.Par\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.LinearKernel.Par [[LinearKernel.Par.html]]
+
+    elki.similarity.kernel.PolynomialKernel <|-- elki.similarity.kernel.LinearKernel
+    elki.similarity.kernel.LinearKernel +-- elki.similarity.kernel.LinearKernel.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

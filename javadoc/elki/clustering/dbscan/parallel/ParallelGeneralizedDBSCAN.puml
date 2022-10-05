@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParallelGeneralizedDBSCAN\n<size:10>elki.clustering.dbscan.parallel" as elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN [[ParallelGeneralizedDBSCAN.html]] {
+        {static} -LOG: Logging
+        #npred: NeighborPredicate<?>
+        #corepred: CorePredicate<?>
+        #coremodel: boolean
+        +ParallelGeneralizedDBSCAN(NeighborPredicate<?>, CorePredicate<?>, boolean)
+        +getInputTypeRestriction(): TypeInformation[]
+        +autorun(Database): Clustering<Model>
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<Model>> [[../../ClusteringAlgorithm.html]]
+    class "<size:14>ParallelGeneralizedDBSCAN.Instance\n<size:10>elki.clustering.dbscan.parallel" as elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance<T> [[ParallelGeneralizedDBSCAN.Instance.html]]
+    class "<size:14>ParallelGeneralizedDBSCAN.Par\n<size:10>elki.clustering.dbscan.parallel" as elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Par [[ParallelGeneralizedDBSCAN.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN
+    elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN +-- elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance
+    elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN +-- elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

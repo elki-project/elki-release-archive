@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkTreeSettings\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[MkTreeSettings.html]] {
+        +kmax: int
+    }
+
+    class "<size:14>MTreeSettings\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[../MTreeSettings.html]]
+
+    elki.index.tree.metrical.mtreevariants.MTreeSettings <|-- elki.index.tree.metrical.mtreevariants.mktrees.MkTreeSettings
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

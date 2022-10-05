@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TextWriterStream\n<size:10>elki.result.textwriter" as elki.result.textwriter.TextWriterStream [[TextWriterStream.html]] {
+        -outStream: PrintStream
+        -inline: StringBuilder
+        -comment: StringBuilder
+        -writers: HandlerList<TextWriterWriterInterface<?>>
+        {static} +SEPARATOR: String
+        {static} +QUOTE: String
+        {static} +COMMENTSEP: String
+        {static} -NEWLINE: String
+        {static} +SER_MARKER: String
+        -fallbackwriter: TextWriterWriterInterface<?>
+        +TextWriterStream(PrintStream, HandlerList<TextWriterWriterInterface<?>>, TextWriterWriterInterface<?>)
+        +commentPrint(Object): void
+        +commentPrint(CharSequence): void
+        +commentPrintLn(CharSequence): void
+        +commentPrintLn(Object): void
+        +commentPrintLn(): void
+        +commentPrintSeparator(): void
+        +inlinePrint(Object): void
+        +inlinePrintNoQuotes(Object): void
+        +flush(): void
+        -quotePrintln(PrintStream, String): void
+        +getWriterFor(Object): TextWriterWriterInterface<?>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

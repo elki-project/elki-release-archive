@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluationStep.Evaluation\n<size:10>elki.workflow" as elki.workflow.EvaluationStep.Evaluation [[EvaluationStep.Evaluation.html]] {
+        -evaluators: List<? extends Evaluator>
+        +Evaluation(List<? extends Evaluator>, Database)
+        +update(Object): void
+        +resultAdded(Object, Object): void
+    }
+
+    interface "<size:14>ResultListener\n<size:10>elki.result" as elki.result.ResultListener [[../result/ResultListener.html]]
+    class "<size:14>EvaluationStep\n<size:10>elki.workflow" as elki.workflow.EvaluationStep [[EvaluationStep.html]]
+
+    elki.result.ResultListener <|.. elki.workflow.EvaluationStep.Evaluation
+    elki.workflow.EvaluationStep +-- elki.workflow.EvaluationStep.Evaluation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

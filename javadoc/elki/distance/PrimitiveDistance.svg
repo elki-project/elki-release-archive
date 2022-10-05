@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="269px" preserveAspectRatio="none" style="width:517px;height:269px;background:#FFFFFF;" version="1.1" viewBox="0 0 517 269" width="517px" zoomAndPan="magnify"><defs/><g><!--MD5=[bfc45539f9b843de53ae40bf5bbd7393]
+class elki.distance.PrimitiveDistance--><a href="PrimitiveDistance.html" target="_top" title="PrimitiveDistance.html" xlink:actuate="onRequest" xlink:href="PrimitiveDistance.html" xlink:show="new" xlink:title="PrimitiveDistance.html" xlink:type="simple"><g id="elem_elki.distance.PrimitiveDistance"><rect codeLine="6" fill="#F1F1F1" height="94.8281" id="elki.distance.PrimitiveDistance" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="491" x="11" y="149"/><ellipse cx="184.75" cy="167.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M180.6719,163.7344 L180.6719,161.5781 L188.0625,161.5781 L188.0625,163.7344 L185.5938,163.7344 L185.5938,171.8125 L188.0625,171.8125 L188.0625,173.9688 L180.6719,173.9688 L180.6719,171.8125 L183.1406,171.8125 L183.1406,163.7344 L180.6719,163.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="123" x="205.25" y="166.9951">PrimitiveDistance</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="63" x="235.25" y="179.5791">elki.distance</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="495" y="146"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="496" y="158.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="12" x2="501" y1="186.9375" y2="186.9375"/><ellipse cx="22" cy="200.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="158" x="31" y="203.9326">distance(O, O): double</text><ellipse cx="22" cy="216.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="443" x="31" y="220.2295">getInputTypeRestriction(): SimpleTypeInformation&lt;? super O&gt;</text><ellipse cx="22" cy="233.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="465" x="31" y="236.5264">instantiate(Relation&lt;T extends O&gt;): DistanceQuery&lt;T extends O&gt;</text></g></a><!--MD5=[1f4838d083d28018a0e06ec509a3c72f]
+class elki.distance.Distance--><a href="Distance.html" target="_top" title="Distance.html" xlink:actuate="onRequest" xlink:href="Distance.html" xlink:show="new" xlink:title="Distance.html" xlink:type="simple"><g id="elem_elki.distance.Distance"><rect codeLine="12" fill="#F1F1F1" height="78.5313" id="elki.distance.Distance" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="499" x="7" y="10"/><ellipse cx="214.75" cy="28.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M210.6719,24.7344 L210.6719,22.5781 L218.0625,22.5781 L218.0625,24.7344 L215.5938,24.7344 L215.5938,32.8125 L218.0625,32.8125 L218.0625,34.9688 L210.6719,34.9688 L210.6719,32.8125 L213.1406,32.8125 L213.1406,24.7344 L210.6719,24.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="62" x="235.75" y="27.9951">Distance</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="63" x="235.25" y="40.5791">elki.distance</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="499" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="500" y="19.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="505" y1="47.9375" y2="47.9375"/><ellipse cx="18" cy="61.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="305" x="27" y="64.9326">getInputTypeRestriction(): TypeInformation</text><ellipse cx="18" cy="77.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="473" x="27" y="81.2295">instantiate(Relation&lt;T extends O&gt;): DistanceQuery&lt;T extends O&gt;</text></g></a><!--MD5=[1c4801621afbf05777a4991a6a4ad748]
+reverse link elki.distance.Distance to elki.distance.PrimitiveDistance--><g id="link_elki.distance.Distance_elki.distance.PrimitiveDistance"><path codeLine="17" d="M256.5,109.73 C256.5,122.74 256.5,136.35 256.5,148.79 " fill="none" id="elki.distance.Distance-backto-elki.distance.PrimitiveDistance" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="249.5,109.36,256.5,89.36,263.5,109.36,249.5,109.36" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="158.5" y="249.8281"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="158.5" y="259.1104">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[22ed22c4b403f6561818021cf3d79630]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>PrimitiveDistance\n<size:10>elki.distance" as elki.distance.PrimitiveDistance<O> [[PrimitiveDistance.html]] {
+        {abstract} +distance(O, O): double
+        {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+        +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+    }
+
+    interface "<size:14>Distance\n<size:10>elki.distance" as elki.distance.Distance<O> [[Distance.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+    }
+
+    elki.distance.Distance <|- - elki.distance.PrimitiveDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

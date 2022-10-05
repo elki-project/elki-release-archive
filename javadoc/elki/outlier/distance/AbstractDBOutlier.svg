@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="282px" preserveAspectRatio="none" style="width:495px;height:282px;background:#FFFFFF;" version="1.1" viewBox="0 0 495 282" width="495px" zoomAndPan="magnify"><defs/><g><!--MD5=[1c2a3e3f059a0c5fb93634bac16f9fbe]
+class elki.outlier.distance.AbstractDBOutlier--><a href="AbstractDBOutlier.html" target="_top" title="AbstractDBOutlier.html" xlink:actuate="onRequest" xlink:href="AbstractDBOutlier.html" xlink:show="new" xlink:title="AbstractDBOutlier.html" xlink:type="simple"><g id="elem_elki.outlier.distance.AbstractDBOutlier"><rect codeLine="6" fill="#F1F1F1" height="151.7188" id="elki.outlier.distance.AbstractDBOutlier" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="475" x="9" y="105"/><ellipse cx="173.25" cy="123.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M173.3594,119.3125 L172.2031,124.3906 L174.5313,124.3906 L173.3594,119.3125 Z M171.875,117.0781 L174.8594,117.0781 L178.2188,129.4688 L175.7656,129.4688 L175,126.4063 L171.7188,126.4063 L170.9688,129.4688 L168.5313,129.4688 L171.875,117.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="126" x="193.75" y="122.9951">AbstractDBOutlier</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="98" x="207.75" y="135.5791">elki.outlier.distance</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="477" y="102"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="478" y="114.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="483" y1="142.9375" y2="142.9375"/><polygon fill="none" points="20,151.5859,24,155.5859,20,159.5859,16,155.5859" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="219" x="29" y="159.9326">distance: Distance&lt;? super O&gt;</text><polygon fill="none" points="20,167.8828,24,171.8828,20,175.8828,16,171.8828" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="29" y="176.2295">d: double</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="483" y1="183.5313" y2="183.5313"/><ellipse cx="20" cy="197.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="340" x="29" y="200.5264">AbstractDBOutlier(Distance&lt;? super O&gt;, double)</text><ellipse cx="20" cy="213.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="222" x="29" y="216.8232">run(Relation&lt;O&gt;): OutlierResult</text><polygon fill="#FFFF44" points="20,224.7734,24,228.7734,20,232.7734,16,228.7734" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="449" x="29" y="233.1201">computeOutlierScores(Relation&lt;O&gt;, double): DoubleDataStore</text><ellipse cx="20" cy="246.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="306" x="29" y="249.417">getInputTypeRestriction(): TypeInformation[]</text></g></a><!--MD5=[81019799438b1b9471ca37184b444d57]
+class elki.outlier.OutlierAlgorithm--><a href="../OutlierAlgorithm.html" target="_top" title="../OutlierAlgorithm.html" xlink:actuate="onRequest" xlink:href="../OutlierAlgorithm.html" xlink:show="new" xlink:title="../OutlierAlgorithm.html" xlink:type="simple"><g id="elem_elki.outlier.OutlierAlgorithm"><rect codeLine="15" fill="#F1F1F1" height="37.9375" id="elki.outlier.OutlierAlgorithm" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="148" x="172.5" y="7"/><ellipse cx="187.5" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M183.4219,21.7344 L183.4219,19.5781 L190.8125,19.5781 L190.8125,21.7344 L188.3438,21.7344 L188.3438,29.8125 L190.8125,29.8125 L190.8125,31.9688 L183.4219,31.9688 L183.4219,29.8125 L185.8906,29.8125 L185.8906,21.7344 L183.4219,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="116" x="201.5" y="24.9951">OutlierAlgorithm</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="53" x="233" y="37.5791">elki.outlier</text></g></a><!--MD5=[a029f06166fbf83bd862b3471f58cd9c]
+reverse link elki.outlier.OutlierAlgorithm to elki.outlier.distance.AbstractDBOutlier--><g id="link_elki.outlier.OutlierAlgorithm_elki.outlier.distance.AbstractDBOutlier"><path codeLine="18" d="M246.5,65.26 C246.5,77.35 246.5,91.17 246.5,104.93 " fill="none" id="elki.outlier.OutlierAlgorithm-backto-elki.outlier.distance.AbstractDBOutlier" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="239.5,65.15,246.5,45.15,253.5,65.15,239.5,65.15" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="147.5" y="262.7188"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="147.5" y="272.001">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[af230de35ac39fdbc69670fbb05cdc57]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractDBOutlier\n<size:10>elki.outlier.distance" as elki.outlier.distance.AbstractDBOutlier<O> [[AbstractDBOutlier.html]] {
+        #distance: Distance<? super O>
+        #d: double
+        +AbstractDBOutlier(Distance<? super O>, double)
+        +run(Relation<O>): OutlierResult
+        {abstract} #computeOutlierScores(Relation<O>, double): DoubleDataStore
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    abstract class "<size:14>AbstractDBOutlier.Par\n<size:10>elki.outlier.distance" as elki.outlier.distance.AbstractDBOutlier.Par<O> [[AbstractDBOutlier.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.distance.AbstractDBOutlier
+    elki.outlier.distance.AbstractDBOutlier +- - elki.outlier.distance.AbstractDBOutlier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

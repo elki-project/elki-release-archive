@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClustersWithNoiseExtraction\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction [[ClustersWithNoiseExtraction.html]] {
+        {static} -LOG: Logging
+        -numCl: int
+        -minClSize: int
+        -algorithm: HierarchicalClusteringAlgorithm
+        +ClustersWithNoiseExtraction(HierarchicalClusteringAlgorithm, int, int)
+        +autorun(Database): Clustering<Model>
+        +run(ClusterMergeHistory): Clustering<Model>
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<Model>> [[../../ClusteringAlgorithm.html]]
+    class "<size:14>ClustersWithNoiseExtraction.Instance\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Instance [[ClustersWithNoiseExtraction.Instance.html]]
+    class "<size:14>ClustersWithNoiseExtraction.Par\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Par [[ClustersWithNoiseExtraction.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction
+    elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction +-- elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Instance
+    elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction +-- elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ChengAndChurch.Par\n<size:10>elki.clustering.biclustering" as elki.clustering.biclustering.ChengAndChurch.Par {
+        {static} +DIST_ID: OptionID
+        {static} +RANDOM_ID: OptionID
+        {static} +DELTA_ID: OptionID
+        {static} +ALPHA_ID: OptionID
+        {static} +N_ID: OptionID
+        -delta: double
+        -alpha: double
+        -n: int
+        -dist: Distribution
+        -rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): ChengAndChurch
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ChengAndChurch\n<size:10>elki.clustering.biclustering" as elki.clustering.biclustering.ChengAndChurch [[ChengAndChurch.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.biclustering.ChengAndChurch.Par
+    elki.clustering.biclustering.ChengAndChurch +-- elki.clustering.biclustering.ChengAndChurch.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

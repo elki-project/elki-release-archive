@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DataStoreFactory\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreFactory [[DataStoreFactory.html]] {
+        {static} +FACTORY: DataStoreFactory
+        {static} +HINT_TEMP: int
+        {static} +HINT_HOT: int
+        {static} +HINT_STATIC: int
+        {static} +HINT_SORTED: int
+        {static} +HINT_DB: int
+        {abstract} +makeStorage(DBIDs, int, Class<? super T>): WritableDataStore<T>
+        {abstract} +makeDBIDStorage(DBIDs, int): WritableDBIDDataStore
+        {abstract} +makeDoubleStorage(DBIDs, int): WritableDoubleDataStore
+        {abstract} +makeDoubleStorage(DBIDs, int, double): WritableDoubleDataStore
+        {abstract} +makeIntegerStorage(DBIDs, int): WritableIntegerDataStore
+        {abstract} +makeIntegerStorage(DBIDs, int, int): WritableIntegerDataStore
+        {abstract} +makeRecordStorage(DBIDs, int, Class<?>...): WritableRecordStore
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

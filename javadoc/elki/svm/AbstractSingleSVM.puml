@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractSingleSVM\n<size:10>elki.svm" as elki.svm.AbstractSingleSVM [[AbstractSingleSVM.html]] {
+        {static} #ONE: byte
+        {static} #MONE: byte
+        #eps: double
+        #shrinking: boolean
+        #cache_size: double
+        +AbstractSingleSVM(double, boolean, double)
+        {abstract} #solve(DataSet): SolutionInfo
+        #train_one(DataSet): SolutionInfo
+        +set_weights(double, double): void
+        {static} +shuffledIndex(int[], int): int[]
+        {static} +makeFolds(int, int): int[]
+        {static} +stratifiedFolds(DataSet, int, int[]): int[]
+        {static} #groupClasses(DataSet, int[], int[]): int
+        {static} +nonzero(double): boolean
+        {abstract} #getLogger(): Logging
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

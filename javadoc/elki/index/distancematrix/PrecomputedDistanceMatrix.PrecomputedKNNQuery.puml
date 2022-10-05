@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrecomputedDistanceMatrix.PrecomputedKNNQuery\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedKNNQuery [[PrecomputedDistanceMatrix.PrecomputedKNNQuery.html]] {
+        ~it: DBIDArrayIter
+        +getKNN(DBIDRef, int): KNNList
+    }
+
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<DBIDRef> [[../../database/query/knn/KNNSearcher.html]] {
+        {abstract} +getKNN(DBIDRef, int): KNNList
+    }
+    class "<size:14>PrecomputedDistanceMatrix\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix<O> [[PrecomputedDistanceMatrix.html]]
+
+    elki.database.query.knn.KNNSearcher <|.. elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedKNNQuery
+    elki.index.distancematrix.PrecomputedDistanceMatrix +-- elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedKNNQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

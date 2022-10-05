@@ -1,0 +1,43 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace tutorial.distancefunction {
+
+        class TutorialDistance [[TutorialDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class MultiLPNorm [[MultiLPNorm.html]] {
+            ~ps: double[]
+            ~pinv: double
+            +MultiLPNorm(double[])
+            +distance(NumberVector, NumberVector): double
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class tutorial.distancefunction.MultiLPNorm.Par [[MultiLPNorm.Par.html]] {
+            {static} +EXPONENTS_ID: OptionID
+            ~ps: double[]
+            +configure(Parameterization): void
+            +make(): MultiLPNorm
+        }
+
+        elki.distance.AbstractNumberVectorDistance <|-- TutorialDistance
+        elki.distance.AbstractNumberVectorDistance <|-- MultiLPNorm
+        elki.utilities.optionhandling.Parameterizer <|.. tutorial.distancefunction.MultiLPNorm.Par
+        MultiLPNorm +-- tutorial.distancefunction.MultiLPNorm.Par
+    }
+
+    namespace elki.distance {
+        abstract class AbstractNumberVectorDistance [[../../elki/distance/AbstractNumberVectorDistance.html]]
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../elki/utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

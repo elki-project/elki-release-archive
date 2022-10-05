@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NodeAppendChild\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.NodeAppendChild [[NodeAppendChild.html]] {
+        #parent: Element
+        #child: Element
+        #plot: SVGPlot
+        #id: String
+        +NodeAppendChild(Element, Element)
+        +NodeAppendChild(Element, Element, SVGPlot, String)
+        +run(): void
+    }
+
+    interface "<size:14>Runnable\n<size:10>java.lang" as java.lang.Runnable {
+        {abstract} +run(): void
+    }
+
+    java.lang.Runnable <|.. elki.visualization.batikutil.NodeAppendChild
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

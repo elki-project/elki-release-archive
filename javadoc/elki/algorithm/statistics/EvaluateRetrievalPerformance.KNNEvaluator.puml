@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluateRetrievalPerformance.KNNEvaluator\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.EvaluateRetrievalPerformance.KNNEvaluator [[EvaluateRetrievalPerformance.KNNEvaluator.html]] {
+        {static} +STATIC: KNNEvaluator
+        +evaluateKNN(double[], ModifiableDoubleDBIDList, Relation<?>, Object2IntOpenHashMap<Object>, Object): void
+        +countkNN(Object2IntOpenHashMap<Object>, Object): int
+    }
+
+    class "<size:14>EvaluateRetrievalPerformance\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.EvaluateRetrievalPerformance<O> [[EvaluateRetrievalPerformance.html]]
+
+    elki.algorithm.statistics.EvaluateRetrievalPerformance +-- elki.algorithm.statistics.EvaluateRetrievalPerformance.KNNEvaluator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

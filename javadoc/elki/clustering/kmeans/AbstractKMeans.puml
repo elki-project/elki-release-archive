@@ -1,0 +1,50 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans<V extends NumberVector, M extends Model> [[AbstractKMeans.html]] {
+        #distance: NumberVectorDistance<? super NumberVector>
+        #k: int
+        #maxiter: int
+        #initializer: KMeansInitialization
+        +AbstractKMeans(int, int, KMeansInitialization)
+        +AbstractKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+        +getInputTypeRestriction(): TypeInformation[]
+        #initialMeans(Relation<V extends NumberVector>): double[]
+        {static} #means(List<? extends DBIDs>, double[], Relation<? extends NumberVector>): double[]
+        {static} -denseMeans(List<? extends DBIDs>, double[], Relation<? extends NumberVector>): double[]
+        {static} +plusEquals(double[], NumberVector): void
+        {static} -densePlusEquals(double[], NumberVector): void
+        {static} -sparsePlusEquals(double[], SparseNumberVector): void
+        {static} +minusEquals(double[], NumberVector): void
+        {static} +plusMinusEquals(double[], double[], NumberVector): void
+        {static} -densePlusMinusEquals(double[], double[], NumberVector): void
+        {static} -sparsePlusMinusEquals(double[], double[], SparseNumberVector): void
+        {static} -sparseMeans(List<? extends DBIDs>, double[], Relation<? extends SparseNumberVector>): double[]
+        {static} #nearestMeans(double[], int[]): void
+        {static} #incrementalUpdateMean(double[], NumberVector, int, double): void
+        +setK(int): void
+        +getDistance(): NumberVectorDistance<? super NumberVector>
+        +setDistance(NumberVectorDistance<? super NumberVector>): void
+        +setInitializer(KMeansInitialization): void
+        {abstract} #getLogger(): Logging
+    }
+
+    interface "<size:14>KMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KMeans<V extends NumberVector, M extends Model> [[KMeans.html]] {
+        {abstract} +run(Relation<V extends NumberVector>): Clustering<M extends Model>
+        {abstract} +setK(int): void
+        {abstract} +setDistance(NumberVectorDistance<? super NumberVector>): void
+        {abstract} +getDistance(): NumberVectorDistance<? super NumberVector>
+        {abstract} +setInitializer(KMeansInitialization): void
+    }
+    abstract class "<size:14>AbstractKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Instance [[AbstractKMeans.Instance.html]]
+    abstract class "<size:14>AbstractKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Par<V extends NumberVector> [[AbstractKMeans.Par.html]]
+
+    elki.clustering.kmeans.KMeans <|.. elki.clustering.kmeans.AbstractKMeans
+    elki.clustering.kmeans.AbstractKMeans +-- elki.clustering.kmeans.AbstractKMeans.Instance
+    elki.clustering.kmeans.AbstractKMeans +-- elki.clustering.kmeans.AbstractKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

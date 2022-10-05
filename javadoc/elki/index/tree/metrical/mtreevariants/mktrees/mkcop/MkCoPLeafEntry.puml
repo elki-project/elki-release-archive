@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkCoPLeafEntry\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkcop" as elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPLeafEntry [[MkCoPLeafEntry.html]] {
+        {static} -serialVersionUID: long
+        -conservativeApproximation: ApproximationLine
+        -progressiveApproximation: ApproximationLine
+        +MkCoPLeafEntry()
+        +MkCoPLeafEntry(DBID, double, ApproximationLine, ApproximationLine)
+        +approximateConservativeKnnDistance(int): double
+        +approximateProgressiveKnnDistance(int): double
+        +getConservativeKnnDistanceApproximation(): ApproximationLine
+        +getProgressiveKnnDistanceApproximation(): ApproximationLine
+        +setConservativeKnnDistanceApproximation(ApproximationLine): void
+        +setProgressiveKnnDistanceApproximation(ApproximationLine): void
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+    }
+
+    class "<size:14>MTreeLeafEntry\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeLeafEntry [[../../MTreeLeafEntry.html]]
+    interface "<size:14>MkCoPEntry\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkcop" as elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPEntry [[MkCoPEntry.html]] {
+        {abstract} +approximateConservativeKnnDistance(int): double
+        {abstract} +getConservativeKnnDistanceApproximation(): ApproximationLine
+        {abstract} +setConservativeKnnDistanceApproximation(ApproximationLine): void
+    }
+
+    elki.index.tree.metrical.mtreevariants.MTreeLeafEntry <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPLeafEntry
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPEntry <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPLeafEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

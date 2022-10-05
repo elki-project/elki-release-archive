@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ModelUtil\n<size:10>elki.data.model" as elki.data.model.ModelUtil [[ModelUtil.html]] {
+        {static} +getPrototype(Model, Relation<? extends NumberVector>, Factory<V extends NumberVector>): V extends NumberVector
+        {static} +getPrototype(Model, Relation<? extends NumberVector>): NumberVector
+        {static} +getPrototypeOrCentroid(Model, Relation<? extends NumberVector>, DBIDs, Factory<V extends NumberVector>): V extends NumberVector
+        {static} +getPrototypeOrCentroid(Model, Relation<? extends NumberVector>, DBIDs): NumberVector
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

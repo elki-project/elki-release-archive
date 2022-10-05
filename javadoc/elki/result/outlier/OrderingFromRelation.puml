@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OrderingFromRelation\n<size:10>elki.result.outlier" as elki.result.outlier.OrderingFromRelation [[OrderingFromRelation.html]] {
+        #scores: DoubleRelation
+        #ascending: boolean
+        +OrderingFromRelation(DoubleRelation, boolean)
+        +OrderingFromRelation(DoubleRelation)
+        +getDBIDs(): DBIDs
+        +order(DBIDs): ArrayModifiableDBIDs
+        +getLongName(): String
+    }
+
+    interface "<size:14>OrderingResult\n<size:10>elki.result" as elki.result.OrderingResult [[../OrderingResult.html]] {
+        {abstract} +getDBIDs(): DBIDs
+        {abstract} +order(DBIDs): ArrayModifiableDBIDs
+    }
+
+    elki.result.OrderingResult <|.. elki.result.outlier.OrderingFromRelation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

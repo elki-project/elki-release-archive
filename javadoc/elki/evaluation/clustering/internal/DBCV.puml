@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DBCV\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.DBCV<O> [[DBCV.html]] {
+        -distance: Distance<? super O>
+        +DBCV(Distance<? super O>)
+        +evaluateClustering(Relation<O>, Clustering<?>): double
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../../Evaluator.html]]
+    class "<size:14>DBCV.Par\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.DBCV.Par<O> [[DBCV.Par.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.clustering.internal.DBCV
+    elki.evaluation.clustering.internal.DBCV +-- elki.evaluation.clustering.internal.DBCV.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

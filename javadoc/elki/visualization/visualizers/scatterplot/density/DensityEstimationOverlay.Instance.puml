@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DensityEstimationOverlay.Instance\n<size:10>elki.visualization.visualizers.scatterplot.density" as elki.visualization.visualizers.scatterplot.density.DensityEstimationOverlay.Instance [[DensityEstimationOverlay.Instance.html]] {
+        -resolution: int
+        -img: BufferedImage
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        -initializeBandwidth(double[]): double[]
+        -renderImage(): void
+        -unflip(int): int
+    }
+
+    abstract class "<size:14>AbstractScatterplotVisualization\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization [[../AbstractScatterplotVisualization.html]]
+    class "<size:14>DensityEstimationOverlay\n<size:10>elki.visualization.visualizers.scatterplot.density" as elki.visualization.visualizers.scatterplot.density.DensityEstimationOverlay [[DensityEstimationOverlay.html]]
+
+    elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.density.DensityEstimationOverlay.Instance
+    elki.visualization.visualizers.scatterplot.density.DensityEstimationOverlay +-- elki.visualization.visualizers.scatterplot.density.DensityEstimationOverlay.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

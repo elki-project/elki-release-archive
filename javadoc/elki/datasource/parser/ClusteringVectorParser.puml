@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusteringVectorParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.ClusteringVectorParser [[ClusteringVectorParser.html]] {
+        {static} -LOG: Logging
+        ~numterms: int
+        #meta: BundleMeta
+        ~nextevent: Event
+        ~curclu: Clustering<Model>
+        ~curlbl: LabelList
+        ~buf1: IntArrayList
+        ~range: DBIDRange
+        ~lbl: ArrayList<String>
+        ~haslbl: boolean
+        +ClusteringVectorParser(CSVReaderFormat)
+        +initStream(InputStream): void
+        +nextEvent(): Event
+        +data(int): Object
+        +getMeta(): BundleMeta
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractStreamingParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.AbstractStreamingParser [[AbstractStreamingParser.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>ClusteringVectorParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.ClusteringVectorParser.Par [[ClusteringVectorParser.Par.html]]
+
+    elki.datasource.parser.AbstractStreamingParser <|-- elki.datasource.parser.ClusteringVectorParser
+    elki.datasource.parser.ClusteringVectorParser +-- elki.datasource.parser.ClusteringVectorParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

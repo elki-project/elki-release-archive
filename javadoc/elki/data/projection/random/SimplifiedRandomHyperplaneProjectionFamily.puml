@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimplifiedRandomHyperplaneProjectionFamily\n<size:10>elki.data.projection.random" as elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily [[SimplifiedRandomHyperplaneProjectionFamily.html]] {
+        #random: Random
+        +SimplifiedRandomHyperplaneProjectionFamily(RandomFactory)
+        +generateProjection(int, int): Projection
+    }
+
+    interface "<size:14>RandomProjectionFamily\n<size:10>elki.data.projection.random" as elki.data.projection.random.RandomProjectionFamily [[RandomProjectionFamily.html]] {
+        {abstract} +generateProjection(int, int): Projection
+    }
+    class "<size:14>SimplifiedRandomHyperplaneProjectionFamily.SignedProjection\n<size:10>elki.data.projection.random" as elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily.SignedProjection [[SimplifiedRandomHyperplaneProjectionFamily.SignedProjection.html]]
+    class "<size:14>SimplifiedRandomHyperplaneProjectionFamily.Par\n<size:10>elki.data.projection.random" as elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily.Par [[SimplifiedRandomHyperplaneProjectionFamily.Par.html]]
+
+    elki.data.projection.random.RandomProjectionFamily <|.. elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily
+    elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily +-- elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily.SignedProjection
+    elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily +-- elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

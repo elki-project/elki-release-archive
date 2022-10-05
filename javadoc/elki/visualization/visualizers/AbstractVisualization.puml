@@ -1,0 +1,47 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractVisualization\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.AbstractVisualization [[AbstractVisualization.html]] {
+        #task: VisualizationTask
+        #context: VisualizerContext
+        #svgp: VisualizationPlot
+        #layer: Element
+        -width: double
+        -height: double
+        +AbstractVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double)
+        #addListeners(): void
+        +destroy(): void
+        +getLayer(): Element
+        #getWidth(): double
+        #getHeight(): double
+        +incrementalRedraw(): void
+        {abstract} +fullRedraw(): void
+        +resultChanged(Object): void
+        +visualizationChanged(VisualizationItem): void
+        +contentChanged(DataStoreEvent): void
+    }
+
+    interface "<size:14>Visualization\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.Visualization [[Visualization.html]] {
+        {abstract} +getLayer(): Element
+        {abstract} +incrementalRedraw(): void
+        {abstract} +fullRedraw(): void
+        {abstract} +destroy(): void
+    }
+    interface "<size:14>ResultListener\n<size:10>elki.result" as elki.result.ResultListener [[../../result/ResultListener.html]]
+    interface "<size:14>VisualizationListener\n<size:10>elki.visualization" as elki.visualization.VisualizationListener [[../VisualizationListener.html]] {
+        {abstract} +visualizationChanged(VisualizationItem): void
+    }
+    interface "<size:14>DataStoreListener\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreListener [[../../database/datastore/DataStoreListener.html]] {
+        {abstract} +contentChanged(DataStoreEvent): void
+    }
+
+    elki.visualization.visualizers.Visualization <|.. elki.visualization.visualizers.AbstractVisualization
+    elki.result.ResultListener <|.. elki.visualization.visualizers.AbstractVisualization
+    elki.visualization.VisualizationListener <|.. elki.visualization.visualizers.AbstractVisualization
+    elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.AbstractVisualization
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

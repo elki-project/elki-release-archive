@@ -1,0 +1,44 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TreePopup.Handler\n<size:10>elki.gui.util" as elki.gui.util.TreePopup.Handler [[TreePopup.Handler.html]] {
+        +keyTyped(KeyEvent): void
+        +keyPressed(KeyEvent): void
+        +keyReleased(KeyEvent): void
+        +mouseClicked(MouseEvent): void
+        +mousePressed(MouseEvent): void
+        +mouseReleased(MouseEvent): void
+        +mouseEntered(MouseEvent): void
+        +mouseExited(MouseEvent): void
+        +focusGained(FocusEvent): void
+        +focusLost(FocusEvent): void
+    }
+
+    interface "<size:14>MouseListener\n<size:10>java.awt.event" as java.awt.event.MouseListener {
+        {abstract} +mouseClicked(MouseEvent): void
+        {abstract} +mousePressed(MouseEvent): void
+        {abstract} +mouseReleased(MouseEvent): void
+        {abstract} +mouseEntered(MouseEvent): void
+        {abstract} +mouseExited(MouseEvent): void
+    }
+    interface "<size:14>KeyListener\n<size:10>java.awt.event" as java.awt.event.KeyListener {
+        {abstract} +keyTyped(KeyEvent): void
+        {abstract} +keyPressed(KeyEvent): void
+        {abstract} +keyReleased(KeyEvent): void
+    }
+    interface "<size:14>FocusListener\n<size:10>java.awt.event" as java.awt.event.FocusListener {
+        {abstract} +focusGained(FocusEvent): void
+        {abstract} +focusLost(FocusEvent): void
+    }
+    class "<size:14>TreePopup\n<size:10>elki.gui.util" as elki.gui.util.TreePopup [[TreePopup.html]]
+
+    java.awt.event.MouseListener <|.. elki.gui.util.TreePopup.Handler
+    java.awt.event.KeyListener <|.. elki.gui.util.TreePopup.Handler
+    java.awt.event.FocusListener <|.. elki.gui.util.TreePopup.Handler
+    elki.gui.util.TreePopup +-- elki.gui.util.TreePopup.Handler
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

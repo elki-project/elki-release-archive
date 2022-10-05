@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClassifierHoldoutEvaluationTask\n<size:10>elki.application" as elki.application.ClassifierHoldoutEvaluationTask<O> [[ClassifierHoldoutEvaluationTask.html]] {
+        {static} -LOG: Logging
+        #databaseConnection: DatabaseConnection
+        #indexFactories: Collection<? extends IndexFactory<?>>
+        #algorithm: Classifier<O>
+        #holdout: Holdout
+        +ClassifierHoldoutEvaluationTask(DatabaseConnection, Collection<? extends IndexFactory<?>>, Classifier<O>, Holdout)
+        +run(): void
+        {static} +main(String[]): void
+    }
+
+    abstract class "<size:14>AbstractApplication\n<size:10>elki.application" as elki.application.AbstractApplication [[AbstractApplication.html]] {
+        {abstract} +run(): void
+    }
+    class "<size:14>ClassifierHoldoutEvaluationTask.Par\n<size:10>elki.application" as elki.application.ClassifierHoldoutEvaluationTask.Par<O> [[ClassifierHoldoutEvaluationTask.Par.html]]
+
+    elki.application.AbstractApplication <|-- elki.application.ClassifierHoldoutEvaluationTask
+    elki.application.ClassifierHoldoutEvaluationTask +-- elki.application.ClassifierHoldoutEvaluationTask.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

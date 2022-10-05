@@ -1,0 +1,232 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.itemsetmining {
+
+        abstract class Itemset [[Itemset.html]] {
+            ~support: int
+            +increaseSupport(): int
+            +getSupport(): int
+            +containedIn(SparseNumberVector): boolean
+            {abstract} +length(): int
+            {static} +toBitset(Itemset, long[]): long[]
+            {abstract} +iter(): int
+            {abstract} +iterAdvance(int): int
+            {abstract} +iterValid(int): boolean
+            {abstract} +iterDim(int): int
+            +compareTo(Itemset): int
+            {static} #compareLexicographical(Itemset, Itemset): int
+            +appendTo(StringBuilder, VectorFieldTypeInformation<BitVector>): StringBuilder
+            +appendItemsTo(StringBuilder, VectorFieldTypeInformation<BitVector>): StringBuilder
+        }
+
+        class FPGrowth [[FPGrowth.html]] {
+            {static} -LOG: Logging
+            {static} -STAT: String
+            +FPGrowth(double, int, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<BitVector>): FrequentItemsetsResult
+            -countItemSupport(Relation<BitVector>, int): int[]
+            -buildFPTree(Relation<BitVector>, int[], int): FPTree
+            -buildIndex(int[], int[], int): int[]
+        }
+
+        class elki.itemsetmining.FPGrowth.FPTree [[FPGrowth.FPTree.html]] {
+            ~nodes: int
+            +FPTree(int)
+            +insert(int[], int, int, int): void
+            +newNode(FPNode, int): FPNode
+            +extract(int, int, int, boolean, Collector): void
+            -extract(int, int, int, int, int[], int, int[], int[], boolean, Collector): void
+            -extractLinear(int, int, int, int, int[], int, int[], Collector): void
+            +logStatistics(): void
+        }
+
+        interface elki.itemsetmining.FPGrowth.FPTree.Collector [[FPGrowth.FPTree.Collector.html]] {
+            {abstract} +collect(int, int[], int, int): void
+        }
+
+        class elki.itemsetmining.FPGrowth.FPNode [[FPGrowth.FPNode.html]] {
+            ~key: int
+            ~count: int
+            ~numchildren: int
+            ~INITIAL_SIZE: int
+            {static} -SPACES: char[]
+            +FPNode(FPNode, int)
+            +insert(FPTree, int[], int, int, int): void
+            -ensureSize(): void
+            +appendTo(StringBuilder, Translator): StringBuilder
+            -appendTo(StringBuilder, Translator, int): StringBuilder
+            +reduceMemory(): void
+        }
+
+        interface elki.itemsetmining.FPGrowth.FPNode.Translator [[FPGrowth.FPNode.Translator.html]] {
+            {abstract} +appendTo(StringBuilder, int): StringBuilder
+        }
+
+        class elki.itemsetmining.FPGrowth.Par [[FPGrowth.Par.html]] {
+            +make(): FPGrowth
+        }
+
+        class APRIORI [[APRIORI.html]] {
+            {static} -LOG: Logging
+            -STAT: String
+            +APRIORI(double, int, int)
+            +APRIORI(double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<BitVector>): FrequentItemsetsResult
+            #buildFrequentOneItemsets(Relation<? extends SparseFeatureVector<?>>, int, int): List<OneItemset>
+            #buildFrequentTwoItemsets(List<OneItemset>, Relation<BitVector>, int, int, DBIDs, ArrayModifiableDBIDs): List<SparseItemset>
+            #aprioriGenerate(List<? extends Itemset>, int, int): List<Itemset>
+            #frequentItemsets(List<? extends Itemset>, Relation<BitVector>, int, DBIDs, ArrayModifiableDBIDs, int): List<? extends Itemset>
+            #frequentItemsetsSparse(List<SparseItemset>, Relation<BitVector>, int, DBIDs, ArrayModifiableDBIDs, int): List<SparseItemset>
+            -initializeSearchItemset(BitVector, int[], int[]): boolean
+            -nextSearchItemset(BitVector, int[], int[]): boolean
+            -binarySearch(List<SparseItemset>, SparseItemset, int, int): int
+            -debugDumpCandidates(StringBuilder, List<? extends Itemset>, VectorFieldTypeInformation<BitVector>): StringBuilder
+        }
+
+        class elki.itemsetmining.APRIORI.Par [[APRIORI.Par.html]] {
+            +make(): APRIORI
+        }
+
+        class SparseItemset [[SparseItemset.html]] {
+            ~indices: int[]
+            +SparseItemset(int[])
+            +SparseItemset(int[], int)
+            +SparseItemset(OneItemset, OneItemset)
+            +length(): int
+            +iter(): int
+            +iterValid(int): boolean
+            +iterAdvance(int): int
+            +iterDim(int): int
+            +compareTo(Itemset): int
+            +prefixTest(SparseItemset): boolean
+        }
+
+        abstract class AbstractFrequentItemsetAlgorithm [[AbstractFrequentItemsetAlgorithm.html]] {
+            -minsupp: double
+            #minlength: int
+            #maxlength: int
+            +AbstractFrequentItemsetAlgorithm(double, int, int)
+            +AbstractFrequentItemsetAlgorithm(double)
+            +autorun(Database): FrequentItemsetsResult
+            +getMinimumSupport(int): int
+        }
+
+        abstract class elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par [[AbstractFrequentItemsetAlgorithm.Par.html]] {
+            {static} +MINSUPP_ID: OptionID
+            {static} +MINLENGTH_ID: OptionID
+            {static} +MAXLENGTH_ID: OptionID
+            #minsupp: double
+            #minlength: int
+            #maxlength: int
+            +configure(Parameterization): void
+        }
+
+        class OneItemset [[OneItemset.html]] {
+            ~item: int
+            +OneItemset(int)
+            +OneItemset(int, int)
+            +length(): int
+            +containedIn(SparseNumberVector): boolean
+            +iter(): int
+            +iterValid(int): boolean
+            +iterAdvance(int): int
+            +iterDim(int): int
+            +compareTo(Itemset): int
+            +appendItemsTo(StringBuilder, VectorFieldTypeInformation<BitVector>): StringBuilder
+        }
+
+        class SmallDenseItemset [[SmallDenseItemset.html]] {
+            ~items: long
+            ~length: int
+            +SmallDenseItemset(long, int)
+            +length(): int
+            +containedIn(SparseNumberVector): boolean
+            +iter(): int
+            +iterValid(int): boolean
+            +iterAdvance(int): int
+            +iterDim(int): int
+            +compareTo(Itemset): int
+            +appendItemsTo(StringBuilder, VectorFieldTypeInformation<BitVector>): StringBuilder
+        }
+
+        class Eclat [[Eclat.html]] {
+            {static} -LOG: Logging
+            {static} -STAT: String
+            +Eclat(double, int, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<BitVector>): FrequentItemsetsResult
+            -extractItemsets(DBIDs[], int, int, List<Itemset>): void
+            -extractItemsets(DBIDs, DBIDs[], int[], int, int, int, List<Itemset>): void
+            -mergeJoin(DBIDs, DBIDs): DBIDs
+            -buildIndex(Relation<BitVector>, int, int): DBIDs[]
+        }
+
+        class elki.itemsetmining.Eclat.Par [[Eclat.Par.html]] {
+            +make(): Eclat
+        }
+
+        class DenseItemset [[DenseItemset.html]] {
+            ~items: long[]
+            ~length: int
+            +DenseItemset(long[], int)
+            +length(): int
+            +containedIn(SparseNumberVector): boolean
+            +iter(): int
+            +iterValid(int): boolean
+            +iterAdvance(int): int
+            +iterDim(int): int
+            +compareTo(Itemset): int
+            +appendItemsTo(StringBuilder, VectorFieldTypeInformation<BitVector>): StringBuilder
+        }
+
+        java.lang.Comparable <|.. Itemset
+        AbstractFrequentItemsetAlgorithm <|-- FPGrowth
+        elki.itemsetmining.FPGrowth.FPNode <|-- elki.itemsetmining.FPGrowth.FPTree
+        FPGrowth +-- elki.itemsetmining.FPGrowth.FPTree
+        elki.itemsetmining.FPGrowth.FPTree --> "*" elki.itemsetmining.FPGrowth.FPNode: header
+        elki.itemsetmining.FPGrowth.FPTree +-- elki.itemsetmining.FPGrowth.FPTree.Collector
+        FPGrowth +-- elki.itemsetmining.FPGrowth.FPNode
+        elki.itemsetmining.FPGrowth.FPNode --> elki.itemsetmining.FPGrowth.FPNode: parent\nsibling
+        elki.itemsetmining.FPGrowth.FPNode --> "*" elki.itemsetmining.FPGrowth.FPNode: children\nEMPTY_CHILDREN
+        elki.itemsetmining.FPGrowth.FPNode +-- elki.itemsetmining.FPGrowth.FPNode.Translator
+        elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par <|-- elki.itemsetmining.FPGrowth.Par
+        FPGrowth +-- elki.itemsetmining.FPGrowth.Par
+        AbstractFrequentItemsetAlgorithm <|-- APRIORI
+        elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par <|-- elki.itemsetmining.APRIORI.Par
+        APRIORI +-- elki.itemsetmining.APRIORI.Par
+        Itemset <|-- SparseItemset
+        elki.Algorithm <|.. AbstractFrequentItemsetAlgorithm
+        elki.utilities.optionhandling.Parameterizer <|.. elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par
+        AbstractFrequentItemsetAlgorithm +-- elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par
+        Itemset <|-- OneItemset
+        Itemset <|-- SmallDenseItemset
+        AbstractFrequentItemsetAlgorithm <|-- Eclat
+        elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par <|-- elki.itemsetmining.Eclat.Par
+        Eclat +-- elki.itemsetmining.Eclat.Par
+        Itemset <|-- DenseItemset
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    namespace elki {
+        interface Algorithm [[../Algorithm.html]] {
+            +autorun(Database): Object
+            {abstract} +getInputTypeRestriction(): TypeInformation[]
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

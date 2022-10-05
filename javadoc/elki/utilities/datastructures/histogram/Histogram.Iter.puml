@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Histogram.Iter\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.Histogram.Iter [[Histogram.Iter.html]] {
+        {abstract} +getCenter(): double
+        {abstract} +getLeft(): double
+        {abstract} +getRight(): double
+    }
+
+    interface "<size:14>ArrayIter\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.ArrayIter [[../iterator/ArrayIter.html]] {
+        {abstract} +advance(): ArrayIter
+        {abstract} +advance(int): ArrayIter
+        {abstract} +retract(): ArrayIter
+        {abstract} +seek(int): ArrayIter
+        {abstract} +getOffset(): int
+    }
+    interface "<size:14>Histogram\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.Histogram [[Histogram.html]] {
+        {abstract} +getNumBins(): int
+        {abstract} +getBinsize(): double
+        {abstract} +getCoverMinimum(): double
+        {abstract} +getCoverMaximum(): double
+        {abstract} +iter(): Iter
+    }
+
+    elki.utilities.datastructures.iterator.ArrayIter <|-- elki.utilities.datastructures.histogram.Histogram.Iter
+    elki.utilities.datastructures.histogram.Histogram +-- elki.utilities.datastructures.histogram.Histogram.Iter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

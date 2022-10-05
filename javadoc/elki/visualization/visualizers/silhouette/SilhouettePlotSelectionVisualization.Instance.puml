@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SilhouettePlotSelectionVisualization.Instance\n<size:10>elki.visualization.visualizers.silhouette" as elki.visualization.visualizers.silhouette.SilhouettePlotSelectionVisualization.Instance [[SilhouettePlotSelectionVisualization.Instance.html]] {
+        {static} #CSS_MARKER: String
+        {static} #CSS_RANGEMARKER: String
+        -mtag: Element
+        -plotSize: int
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        +addMarker(): void
+        -addMarkerRect(double, double): Element
+        -addCSSClasses(): void
+    }
+
+    abstract class "<size:14>AbstractSilhouetteVisualization\n<size:10>elki.visualization.visualizers.silhouette" as elki.visualization.visualizers.silhouette.AbstractSilhouetteVisualization [[AbstractSilhouetteVisualization.html]]
+    class "<size:14>SilhouettePlotSelectionVisualization\n<size:10>elki.visualization.visualizers.silhouette" as elki.visualization.visualizers.silhouette.SilhouettePlotSelectionVisualization [[SilhouettePlotSelectionVisualization.html]]
+
+    elki.visualization.visualizers.silhouette.AbstractSilhouetteVisualization <|-- elki.visualization.visualizers.silhouette.SilhouettePlotSelectionVisualization.Instance
+    elki.visualization.visualizers.silhouette.SilhouettePlotSelectionVisualization +-- elki.visualization.visualizers.silhouette.SilhouettePlotSelectionVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KNNDistancesSampler.Par\n<size:10>elki.algorithm" as elki.algorithm.KNNDistancesSampler.Par<O> [[KNNDistancesSampler.Par.html]] {
+        {static} +K_ID: OptionID
+        {static} +SAMPLING_ID: OptionID
+        {static} +SEED_ID: OptionID
+        #distance: Distance<? super O>
+        #k: int
+        #percentage: double
+        #rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): KNNDistancesSampler<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>KNNDistancesSampler\n<size:10>elki.algorithm" as elki.algorithm.KNNDistancesSampler<O> [[KNNDistancesSampler.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.KNNDistancesSampler.Par
+    elki.algorithm.KNNDistancesSampler +-- elki.algorithm.KNNDistancesSampler.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

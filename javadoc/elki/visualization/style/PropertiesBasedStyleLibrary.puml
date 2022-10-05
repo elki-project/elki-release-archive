@@ -1,0 +1,57 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PropertiesBasedStyleLibrary\n<size:10>elki.visualization.style" as elki.visualization.style.PropertiesBasedStyleLibrary [[PropertiesBasedStyleLibrary.html]] {
+        {static} -LOG: Logging
+        {static} +DEFAULT_SCHEME_NAME: String
+        {static} +DEFAULT_SCHEME_FILENAME: String
+        {static} +DEFAULT_PROPERTIES_EXTENSION: String
+        {static} -DEFAULT_PROPERTIES_PATH: String
+        {static} +LIST_SEPARATOR: String
+        {static} +PROP_LINES_LIBRARY: String
+        {static} +PROP_MARKER_LIBRARY: String
+        -properties: Properties
+        -name: String
+        -cache: Map<String, Object>
+        -linelib: LineStyleLibrary
+        -markerlib: MarkerLibrary
+        +PropertiesBasedStyleLibrary()
+        +PropertiesBasedStyleLibrary(String, String)
+        #getName(): String
+        -getCached(String, String, Class<T>): T
+        -setCached(String, String, T): void
+        #getPropertyValue(String, String): String
+        +getColor(String): String
+        +getBackgroundColor(String): String
+        +getTextColor(String): String
+        +getColorSet(String): ColorLibrary
+        +getLineWidth(String): double
+        +getTextSize(String): double
+        +getFontFamily(String): String
+        +getSize(String): double
+        +getOpacity(String): double
+        +lines(): LineStyleLibrary
+        +markers(): MarkerLibrary
+    }
+
+    interface "<size:14>StyleLibrary\n<size:10>elki.visualization.style" as elki.visualization.style.StyleLibrary [[StyleLibrary.html]] {
+        {abstract} +getColor(String): String
+        {abstract} +getBackgroundColor(String): String
+        {abstract} +getTextColor(String): String
+        {abstract} +getColorSet(String): ColorLibrary
+        {abstract} +getLineWidth(String): double
+        {abstract} +getSize(String): double
+        {abstract} +getTextSize(String): double
+        {abstract} +getFontFamily(String): String
+        {abstract} +getOpacity(String): double
+        {abstract} +lines(): LineStyleLibrary
+        {abstract} +markers(): MarkerLibrary
+    }
+
+    elki.visualization.style.StyleLibrary <|.. elki.visualization.style.PropertiesBasedStyleLibrary
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

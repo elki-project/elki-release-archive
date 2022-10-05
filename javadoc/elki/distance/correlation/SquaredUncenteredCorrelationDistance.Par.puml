@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SquaredUncenteredCorrelationDistance.Par\n<size:10>elki.distance.correlation" as elki.distance.correlation.SquaredUncenteredCorrelationDistance.Par [[SquaredUncenteredCorrelationDistance.Par.html]] {
+        +make(): SquaredUncenteredCorrelationDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SquaredUncenteredCorrelationDistance\n<size:10>elki.distance.correlation" as elki.distance.correlation.SquaredUncenteredCorrelationDistance [[SquaredUncenteredCorrelationDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.correlation.SquaredUncenteredCorrelationDistance.Par
+    elki.distance.correlation.SquaredUncenteredCorrelationDistance +-- elki.distance.correlation.SquaredUncenteredCorrelationDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FarthestBalancedDistribution\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split.distribution" as elki.index.tree.metrical.mtreevariants.strategies.split.distribution.FarthestBalancedDistribution [[FarthestBalancedDistribution.html]] {
+        +distribute(AbstractNode<E extends MTreeEntry>, int, double[], int, double[]): Assignments<E extends MTreeEntry>
+    }
+
+    interface "<size:14>DistributionStrategy\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split.distribution" as elki.index.tree.metrical.mtreevariants.strategies.split.distribution.DistributionStrategy [[DistributionStrategy.html]] {
+        {abstract} +distribute(AbstractNode<E extends MTreeEntry>, int, double[], int, double[]): Assignments<E extends MTreeEntry>
+    }
+
+    elki.index.tree.metrical.mtreevariants.strategies.split.distribution.DistributionStrategy <|.. elki.index.tree.metrical.mtreevariants.strategies.split.distribution.FarthestBalancedDistribution
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MWPTest.MWPRanking\n<size:10>elki.math.statistics.dependence.mcde" as elki.math.statistics.dependence.mcde.MWPTest.MWPRanking [[MWPTest.MWPRanking.html]] {
+        #correction: long[]
+        #adjusted: double[]
+        +MWPRanking(int[])
+    }
+
+    class "<size:14>MCDETest.RankStruct\n<size:10>elki.math.statistics.dependence.mcde" as elki.math.statistics.dependence.mcde.MCDETest.RankStruct [[MCDETest.RankStruct.html]]
+    class "<size:14>MWPTest\n<size:10>elki.math.statistics.dependence.mcde" as elki.math.statistics.dependence.mcde.MWPTest [[MWPTest.html]]
+
+    elki.math.statistics.dependence.mcde.MCDETest.RankStruct <|-- elki.math.statistics.dependence.mcde.MWPTest.MWPRanking
+    elki.math.statistics.dependence.mcde.MWPTest +-- elki.math.statistics.dependence.mcde.MWPTest.MWPRanking
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

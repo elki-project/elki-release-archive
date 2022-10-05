@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KNNKernelDensityMinimaClustering.Par\n<size:10>elki.clustering.onedimensional" as elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Par [[KNNKernelDensityMinimaClustering.Par.html]] {
+        {static} +DIM_ID: OptionID
+        {static} +KERNEL_ID: OptionID
+        {static} +MODE_ID: OptionID
+        {static} +K_ID: OptionID
+        {static} +WINDOW_ID: OptionID
+        #dim: int
+        #kernel: KernelDensityFunction
+        #mode: Mode
+        #k: int
+        #minwindow: int
+        +configure(Parameterization): void
+        +make(): KNNKernelDensityMinimaClustering
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>KNNKernelDensityMinimaClustering\n<size:10>elki.clustering.onedimensional" as elki.clustering.onedimensional.KNNKernelDensityMinimaClustering [[KNNKernelDensityMinimaClustering.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Par
+    elki.clustering.onedimensional.KNNKernelDensityMinimaClustering +-- elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

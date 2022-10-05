@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AlphaShape\n<size:10>elki.math.geometry" as elki.math.geometry.AlphaShape [[AlphaShape.html]] {
+        -alpha2: double
+        -points: List<double[]>
+        -delaunay: ArrayList<Triangle>
+        +AlphaShape(List<double[]>, double)
+        +compute(): List<Polygon>
+        -checkNeighbors(List<IntegerArray>, long[], IntegerArray): void
+        -addEdge(List<IntegerArray>, int, int): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

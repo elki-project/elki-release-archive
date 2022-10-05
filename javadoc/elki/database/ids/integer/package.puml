@@ -1,0 +1,917 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.database.ids.integer {
+
+        interface IntegerArrayDBIDs [[IntegerArrayDBIDs.html]] {
+            {abstract} +iter(): IntegerDBIDArrayIter
+            {abstract} +slice(int, int): IntegerArrayDBIDs
+        }
+
+        interface IntegerDBIDArrayMIter [[IntegerDBIDArrayMIter.html]]
+
+        interface IntegerDBIDs [[IntegerDBIDs.html]] {
+            {abstract} +iter(): IntegerDBIDIter
+        }
+
+        class DoubleIntegerDBIDKNNHeap [[DoubleIntegerDBIDKNNHeap.html]] {
+            -k: int
+            -ties: int[]
+            -numties: int
+            -kdist: double
+            {static} -INITIAL_TIES_SIZE: int
+            #DoubleIntegerDBIDKNNHeap(int)
+            +getK(): int
+            +getKNNDistance(): double
+            +insert(double, DBIDRef): double
+            -addToTies(int): void
+            +poll(): void
+            +size(): int
+            +isEmpty(): boolean
+            +clear(): void
+            +toKNNList(): DoubleIntegerDBIDKNNList
+            +toKNNListSqrt(): DoubleIntegerDBIDKNNList
+            +peekKey(): double
+            +internalGetIndex(): int
+            +contains(DBIDRef): boolean
+            +unorderedIterator(): DoubleDBIDIter
+        }
+
+        class elki.database.ids.integer.DoubleIntegerDBIDKNNHeap.UnorderedIter [[DoubleIntegerDBIDKNNHeap.UnorderedIter.html]] {
+            -it: DoubleDBIDIter
+            -t: int
+            +UnorderedIter(DoubleDBIDIter)
+            +internalGetIndex(): int
+            +valid(): boolean
+            +doubleValue(): double
+            +advance(): DoubleDBIDIter
+        }
+
+        class ArrayStaticIntegerDBIDs [[ArrayStaticIntegerDBIDs.html]] {
+            #store: int[]
+            #ArrayStaticIntegerDBIDs(int...)
+            +size(): int
+            +contains(DBIDRef): boolean
+            +get(int): DBID
+            +assignVar(int, DBIDVar): DBIDVar
+            +binarySearch(DBIDRef): int
+            +iter(): Itr
+            +slice(int, int): Slice
+        }
+
+        class elki.database.ids.integer.ArrayStaticIntegerDBIDs.Itr [[ArrayStaticIntegerDBIDs.Itr.html]] {
+            ~pos: int
+            +valid(): boolean
+            +advance(): Itr
+            +advance(int): Itr
+            +retract(): Itr
+            +seek(int): Itr
+            +getOffset(): int
+            +internalGetIndex(): int
+        }
+
+        class elki.database.ids.integer.ArrayStaticIntegerDBIDs.Slice [[ArrayStaticIntegerDBIDs.Slice.html]] {
+            ~begin: int
+            ~end: int
+            +Slice(int, int)
+            +size(): int
+            +contains(DBIDRef): boolean
+            +isEmpty(): boolean
+            +get(int): DBID
+            +assignVar(int, DBIDVar): DBIDVar
+            +binarySearch(DBIDRef): int
+            +iter(): SliceItr
+            +slice(int, int): Slice
+        }
+
+        class elki.database.ids.integer.ArrayStaticIntegerDBIDs.Slice.SliceItr [[ArrayStaticIntegerDBIDs.Slice.SliceItr.html]] {
+            ~pos: int
+            +internalGetIndex(): int
+            +valid(): boolean
+            +advance(): SliceItr
+            +getOffset(): int
+            +advance(int): SliceItr
+            +retract(): SliceItr
+            +seek(int): SliceItr
+        }
+
+        interface DoubleIntegerDBIDListMIter [[DoubleIntegerDBIDListMIter.html]] {
+            {abstract} +seek(int): DoubleIntegerDBIDListMIter
+        }
+
+        interface IntegerDBIDMIter [[IntegerDBIDMIter.html]]
+
+        class UnmodifiableIntegerArrayDBIDs [[UnmodifiableIntegerArrayDBIDs.html]] {
+            +UnmodifiableIntegerArrayDBIDs(IntegerArrayDBIDs)
+            +contains(DBIDRef): boolean
+            +isEmpty(): boolean
+            +iter(): IntegerDBIDArrayIter
+            +size(): int
+            +--get--(int): DBID
+            +assignVar(int, DBIDVar): DBIDVar
+            +binarySearch(DBIDRef): int
+            +slice(int, int): IntegerArrayDBIDs
+        }
+
+        class elki.database.ids.integer.UnmodifiableIntegerArrayDBIDs.Itr [[UnmodifiableIntegerArrayDBIDs.Itr.html]] {
+            +Itr(IntegerDBIDArrayIter)
+            +valid(): boolean
+            +advance(): DBIDArrayIter
+            +advance(int): DBIDArrayIter
+            +retract(): DBIDArrayIter
+            +seek(int): DBIDArrayIter
+            +getOffset(): int
+            +internalGetIndex(): int
+        }
+
+        class IntegerDBID [[IntegerDBID.html]] {
+            #id: int
+            {static} +DYNAMIC_SERIALIZER: ByteBufferSerializer<DBID>
+            {static} +STATIC_SERIALIZER: FixedSizeByteBufferSerializer<DBID>
+            #IntegerDBID(int)
+            #IntegerDBID(Integer)
+            +internalGetIndex(): int
+            +size(): int
+            +isEmpty(): boolean
+            +compareTo(DBIDRef): int
+            +iter(): Itr
+            +get(int): DBID
+            +assignVar(int, DBIDVar): DBIDVar
+            +contains(DBIDRef): boolean
+            +binarySearch(DBIDRef): int
+            +slice(int, int): ArrayDBIDs
+        }
+
+        class elki.database.ids.integer.IntegerDBID.Itr [[IntegerDBID.Itr.html]] {
+            ~pos: int
+            +advance(): Itr
+            +advance(int): Itr
+            +retract(): Itr
+            +seek(int): Itr
+            +getOffset(): int
+            +internalGetIndex(): int
+            +valid(): boolean
+        }
+
+        class elki.database.ids.integer.IntegerDBID.DynamicSerializer [[IntegerDBID.DynamicSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): DBID
+            +toByteBuffer(ByteBuffer, DBID): void
+            +getByteSize(DBID): int
+        }
+
+        class elki.database.ids.integer.IntegerDBID.StaticSerializer [[IntegerDBID.StaticSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): DBID
+            +toByteBuffer(ByteBuffer, DBID): void
+            +getByteSize(DBID): int
+            +getFixedByteSize(): int
+        }
+
+        class DoubleIntegerDBIDSubList [[DoubleIntegerDBIDSubList.html]] {
+            -begin: int
+            -end: int
+            +DoubleIntegerDBIDSubList(DoubleIntegerDBIDList, int, int)
+            +assignVar(int, DBIDVar): DBIDVar
+            +doubleValue(int): double
+            +iter(): Itr
+            +contains(DBIDRef): boolean
+            +isEmpty(): boolean
+            +size(): int
+            +slice(int, int): DoubleIntegerDBIDList
+        }
+
+        class elki.database.ids.integer.DoubleIntegerDBIDSubList.Itr [[DoubleIntegerDBIDSubList.Itr.html]] {
+            +valid(): boolean
+            +advance(): Itr
+            +doubleValue(): double
+            +internalGetIndex(): int
+            +getOffset(): int
+            +advance(int): Itr
+            +retract(): Itr
+            +seek(int): Itr
+        }
+
+        class DoubleIntegerDBIDKNNList [[DoubleIntegerDBIDKNNList.html]] {
+            ~k: int
+            +DoubleIntegerDBIDKNNList()
+            +DoubleIntegerDBIDKNNList(int, int)
+            +getK(): int
+            +getKNNDistance(): double
+            +subList(int): KNNList
+            +map(DoubleUnaryOperator): KNNList
+        }
+
+        abstract class AbstractIntegerDBIDFactory [[AbstractIntegerDBIDFactory.html]] {
+            ~invalid: DBID
+            +importInteger(int): DBID
+            +assignVar(DBIDVar, int): DBIDVar
+            +compare(DBIDRef, DBIDRef): int
+            +equal(DBIDRef, DBIDRef): boolean
+            +toString(DBIDRef): String
+            +newVar(DBIDRef): DBIDVar
+            +newArray(): ArrayModifiableDBIDs
+            +newHashSet(): HashSetModifiableDBIDs
+            +newArray(int): ArrayModifiableDBIDs
+            +newHashSet(int): HashSetModifiableDBIDs
+            +newArray(DBIDs): ArrayModifiableDBIDs
+            +newHashSet(DBIDs): HashSetModifiableDBIDs
+            +newPair(DBIDRef, DBIDRef): DBIDPair
+            +newPair(double, DBIDRef): DoubleDBIDPair
+            +newMinHeap(int): DoubleDBIDHeap
+            +newMaxHeap(int): DoubleDBIDHeap
+            +newHeap(int): KNNHeap
+            +newHeap(KNNList): KNNHeap
+            +newDistanceDBIDList(int): ModifiableDoubleDBIDList
+            +newDistanceDBIDList(): ModifiableDoubleDBIDList
+            +makeUnmodifiable(DBIDs): StaticDBIDs
+            +getDBIDSerializer(): ByteBufferSerializer<DBID>
+            +getDBIDSerializerStatic(): FixedSizeByteBufferSerializer<DBID>
+            +getTypeRestriction(): Class<? extends DBID>
+            +invalid(): DBIDRef
+        }
+
+        class IntegerDBIDVar [[IntegerDBIDVar.html]] {
+            ~id: int
+            #IntegerDBIDVar()
+            #IntegerDBIDVar(DBIDRef)
+            +internalGetIndex(): int
+            #internalSetIndex(int): void
+            +set(DBIDRef): DBIDVar
+            +--get--(int): DBID
+            +size(): int
+            +isEmpty(): boolean
+            +unset(): void
+            +isSet(): boolean
+            +binarySearch(DBIDRef): int
+            +contains(DBIDRef): boolean
+            +assignVar(int, DBIDVar): DBIDVar
+            +from(DBIDDataStore, DBIDRef): DBIDVar
+            +slice(int, int): ArrayDBIDs
+            +iter(): Itr
+        }
+
+        class elki.database.ids.integer.IntegerDBIDVar.Itr [[IntegerDBIDVar.Itr.html]] {
+            ~pos: int
+            +advance(): Itr
+            +advance(int): Itr
+            +retract(): Itr
+            +seek(int): Itr
+            +getOffset(): int
+            +internalGetIndex(): int
+            +valid(): boolean
+        }
+
+        interface IntegerDBIDIter [[IntegerDBIDIter.html]]
+
+        interface DoubleIntegerDBIDListIter [[DoubleIntegerDBIDListIter.html]] {
+            {abstract} +advance(): DoubleIntegerDBIDListIter
+            {abstract} +advance(int): DoubleIntegerDBIDListIter
+            {abstract} +retract(): DoubleIntegerDBIDListIter
+            {abstract} +seek(int): DoubleIntegerDBIDListIter
+        }
+
+        interface IntegerDBIDArrayIter [[IntegerDBIDArrayIter.html]]
+
+        class FastutilIntOpenHashSetModifiableDBIDs [[FastutilIntOpenHashSetModifiableDBIDs.html]] {
+            ~store: IntOpenHashSet
+            #FastutilIntOpenHashSetModifiableDBIDs(int)
+            #FastutilIntOpenHashSetModifiableDBIDs()
+            #FastutilIntOpenHashSetModifiableDBIDs(DBIDs)
+            +iter(): Itr
+            +addDBIDs(DBIDs): boolean
+            +removeDBIDs(DBIDs): boolean
+            +add(DBIDRef): boolean
+            +remove(DBIDRef): boolean
+            +retainAll(DBIDs): boolean
+            +size(): int
+            +isEmpty(): boolean
+            +clear(): FastutilIntOpenHashSetModifiableDBIDs
+            +contains(DBIDRef): boolean
+            +pop(DBIDVar): DBIDVar
+        }
+
+        class elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.IntOpenHashSet [[FastutilIntOpenHashSetModifiableDBIDs.IntOpenHashSet.html]] {
+            {static} -serialVersionUID: long
+            -c: int
+            +IntOpenHashSet()
+            +IntOpenHashSet(int)
+            +popInt(): int
+        }
+
+        class elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.Itr [[FastutilIntOpenHashSetModifiableDBIDs.Itr.html]] {
+            ~it: IntIterator
+            ~prev: int
+            +Itr(IntIterator)
+            +valid(): boolean
+            +advance(): IntegerDBIDMIter
+            +internalGetIndex(): int
+            +remove(): void
+        }
+
+        interface IntegerArrayStaticDBIDs [[IntegerArrayStaticDBIDs.html]] {
+            {abstract} +iter(): IntegerDBIDArrayIter
+        }
+
+        class IntegerDBIDRange [[IntegerDBIDRange.html]] {
+            #start: int
+            #len: int
+            #IntegerDBIDRange(int, int)
+            +size(): int
+            +contains(DBIDRef): boolean
+            +get(int): DBID
+            +getOffset(DBIDRef): int
+            +assignVar(int, DBIDVar): DBIDVar
+            +binarySearch(DBIDRef): int
+            +mapDBIDToOffset(DBIDRef): int
+            +slice(int, int): ArrayDBIDs
+            +iter(): Itr
+        }
+
+        class elki.database.ids.integer.IntegerDBIDRange.Itr [[IntegerDBIDRange.Itr.html]] {
+            -pos: int
+            -len: int
+            -start: int
+            +Itr(int, int)
+            +valid(): boolean
+            +advance(): Itr
+            +advance(int): Itr
+            +retract(): Itr
+            +seek(int): Itr
+            +getOffset(): int
+            +internalGetIndex(): int
+        }
+
+        class IntegerDBIDKNNSubList [[IntegerDBIDKNNSubList.html]] {
+            -k: int
+            -size: int
+            +IntegerDBIDKNNSubList(DoubleIntegerDBIDKNNList, int)
+            +getK(): int
+            +assignVar(int, DBIDVar): DBIDVar
+            +doubleValue(int): double
+            +getKNNDistance(): double
+            +iter(): Itr
+            +contains(DBIDRef): boolean
+            +size(): int
+            +subList(int): KNNList
+            +map(DoubleUnaryOperator): KNNList
+        }
+
+        class elki.database.ids.integer.IntegerDBIDKNNSubList.Itr [[IntegerDBIDKNNSubList.Itr.html]] {
+            +valid(): boolean
+            +advance(): Itr
+            +doubleValue(): double
+            +internalGetIndex(): int
+            +getOffset(): int
+            +advance(int): Itr
+            +retract(): Itr
+            +seek(int): Itr
+        }
+
+        class TrivialDBIDFactory [[TrivialDBIDFactory.html]] {
+            ~next: AtomicInteger
+            +generateSingleDBID(): DBID
+            +deallocateSingleDBID(DBIDRef): void
+            +generateStaticDBIDRange(int): DBIDRange
+            +generateStaticDBIDRange(int, int): DBIDRange
+            +deallocateDBIDRange(DBIDRange): void
+        }
+
+        class DoubleIntegerDBIDArrayList [[DoubleIntegerDBIDArrayList.html]] {
+            {static} -INITIAL_SIZE: int
+            ~size: int
+            ~dists: double[]
+            ~ids: int[]
+            {static} -EMPTY_DISTS: double[]
+            {static} -EMPTY_IDS: int[]
+            #DoubleIntegerDBIDArrayList()
+            #DoubleIntegerDBIDArrayList(int)
+            +iter(): Itr
+            +contains(DBIDRef): boolean
+            +size(): int
+            +assignVar(int, DBIDVar): DBIDVar
+            +doubleValue(int): double
+            #addInternal(double, int): void
+            #grow(): void
+            +add(double, DBIDRef): void
+            +add(DoubleDBIDPair): void
+            +clear(): ModifiableDoubleDBIDList
+            +sort(): ModifiableDoubleDBIDList
+            +sortDescending(): ModifiableDoubleDBIDList
+            #reverse(): void
+            +remove(int): void
+            +removeSwap(int): void
+            +swap(int, int): void
+            +truncate(int): void
+            +slice(int, int): DoubleIntegerDBIDList
+        }
+
+        class elki.database.ids.integer.DoubleIntegerDBIDArrayList.Itr [[DoubleIntegerDBIDArrayList.Itr.html]] {
+            ~pos: int
+            +valid(): boolean
+            +advance(): Itr
+            +getOffset(): int
+            +advance(int): Itr
+            +retract(): Itr
+            +seek(int): Itr
+            +internalGetIndex(): int
+            +doubleValue(): double
+            +remove(): void
+            +setDBID(DBIDRef): void
+            +setDouble(double): void
+        }
+
+        class IntegerDBIDArrayQuickSort [[IntegerDBIDArrayQuickSort.html]] {
+            {static} -INSERTION_THRESHOLD: int
+            {static} +sort(int[], Comparator<? super DBIDRef>): void
+            {static} +sort(int[], int, int, Comparator<? super DBIDRef>): void
+            {static} -quickSort(int[], int, int, Comparator<? super DBIDRef>, IntegerDBIDVar, IntegerDBIDVar, IntegerDBIDVar): void
+            {static} -compare(IntegerDBIDVar, int, IntegerDBIDVar, int, Comparator<? super DBIDRef>): int
+        }
+
+        class DoubleIntegerDBIDPair [[DoubleIntegerDBIDPair.html]] {
+            ~value: double
+            ~id: int
+            #DoubleIntegerDBIDPair(double, int)
+            +internalGetIndex(): int
+            +compareTo(DoubleDBIDPair): int
+            +doubleValue(): double
+        }
+
+        class DoubleIntegerDBIDHeap [[DoubleIntegerDBIDHeap.html]] {
+            -heap: DoubleIntegerHeap
+            #DoubleIntegerDBIDHeap(DoubleIntegerHeap)
+            +insert(double, DBIDRef): double
+            +insert(double, DBIDRef, int): double
+            +replaceTopElement(double, DBIDRef): void
+            +poll(): void
+            +size(): int
+            +isEmpty(): boolean
+            +clear(): void
+            +peekKey(): double
+            +internalGetIndex(): int
+            +contains(DBIDRef): boolean
+            +unorderedIterator(): DoubleDBIDIter
+        }
+
+        class elki.database.ids.integer.DoubleIntegerDBIDHeap.UnorderedIter [[DoubleIntegerDBIDHeap.UnorderedIter.html]] {
+            -it: UnsortedIter
+            +internalGetIndex(): int
+            +valid(): boolean
+            +doubleValue(): double
+            +advance(): DoubleDBIDIter
+        }
+
+        interface DoubleIntegerDBIDList [[DoubleIntegerDBIDList.html]] {
+            +slice(int, int): DoubleIntegerDBIDList
+            {abstract} +iter(): DoubleIntegerDBIDListIter
+        }
+
+        class ArrayModifiableIntegerDBIDs [[ArrayModifiableIntegerDBIDs.html]] {
+            -store: int[]
+            -size: int
+            {static} +INITIAL_SIZE: int
+            #ArrayModifiableIntegerDBIDs(int)
+            #ArrayModifiableIntegerDBIDs()
+            #ArrayModifiableIntegerDBIDs(DBIDs)
+            +size(): int
+            +get(int): DBID
+            +assignVar(int, DBIDVar): DBIDVar
+            -ensureSize(int): void
+            -grow(): void
+            +addDBIDs(DBIDs): boolean
+            +removeDBIDs(DBIDs): boolean
+            +add(DBIDRef): boolean
+            +remove(DBIDRef): boolean
+            +set(int, DBIDRef): void
+            +insert(int, DBIDRef): void
+            +remove(int): void
+            +removeSwap(int): void
+            +clear(): ArrayModifiableIntegerDBIDs
+            +binarySearch(DBIDRef): int
+            +contains(DBIDRef): boolean
+            +sort(): void
+            +sort(Comparator<? super DBIDRef>): void
+            +sort(int, int, Comparator<? super DBIDRef>): void
+            +swap(int, int): void
+            +pop(DBIDVar): DBIDVar
+            +slice(int, int): Slice
+            +iter(): Itr
+        }
+
+        class elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Itr [[ArrayModifiableIntegerDBIDs.Itr.html]] {
+            ~pos: int
+            +internalGetIndex(): int
+            +valid(): boolean
+            +advance(): Itr
+            +getOffset(): int
+            +advance(int): Itr
+            +retract(): Itr
+            +seek(int): Itr
+            +setDBID(DBIDRef): void
+            +remove(): void
+        }
+
+        class elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Slice [[ArrayModifiableIntegerDBIDs.Slice.html]] {
+            ~begin: int
+            ~end: int
+            +Slice(int, int)
+            +size(): int
+            +contains(DBIDRef): boolean
+            +isEmpty(): boolean
+            +get(int): DBID
+            +assignVar(int, DBIDVar): DBIDVar
+            +binarySearch(DBIDRef): int
+            +iter(): SliceItr
+            +slice(int, int): Slice
+        }
+
+        class elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Slice.SliceItr [[ArrayModifiableIntegerDBIDs.Slice.SliceItr.html]] {
+            ~pos: int
+            +internalGetIndex(): int
+            +valid(): boolean
+            +advance(): SliceItr
+            +getOffset(): int
+            +advance(int): SliceItr
+            +retract(): SliceItr
+            +seek(int): SliceItr
+        }
+
+        class UnmodifiableIntegerDBIDs [[UnmodifiableIntegerDBIDs.html]] {
+            +UnmodifiableIntegerDBIDs(IntegerDBIDs)
+            +contains(DBIDRef): boolean
+            +isEmpty(): boolean
+            +iter(): IntegerDBIDIter
+            +size(): int
+        }
+
+        class elki.database.ids.integer.UnmodifiableIntegerDBIDs.UnmodifiableDBIDIter [[UnmodifiableIntegerDBIDs.UnmodifiableDBIDIter.html]] {
+            +UnmodifiableDBIDIter(IntegerDBIDIter)
+            +valid(): boolean
+            +advance(): DBIDIter
+            +internalGetIndex(): int
+        }
+
+        interface IntegerDBIDRef [[IntegerDBIDRef.html]] {
+            {abstract} +internalGetIndex(): int
+        }
+
+        class IntegerDBIDPair [[IntegerDBIDPair.html]] {
+            +first: int
+            +second: int
+            #IntegerDBIDPair(int, int)
+            +--get--(int): DBID
+            +size(): int
+            +contains(DBIDRef): boolean
+            +isEmpty(): boolean
+            +assignVar(int, DBIDVar): DBIDVar
+            +slice(int, int): ArrayDBIDs
+            +binarySearch(DBIDRef): int
+            +iter(): IntegerDBIDArrayIter
+        }
+
+        class elki.database.ids.integer.IntegerDBIDPair.Itr [[IntegerDBIDPair.Itr.html]] {
+            ~first: int
+            ~second: int
+            ~pos: int
+            +Itr(int, int)
+            +valid(): boolean
+            +advance(): Itr
+            +internalGetIndex(): int
+            +getOffset(): int
+            +advance(int): DBIDArrayIter
+            +retract(): DBIDArrayIter
+            +seek(int): DBIDArrayIter
+        }
+
+        class elki.database.ids.integer.IntegerDBIDPair.Slice [[IntegerDBIDPair.Slice.html]] {
+            ~begin: int
+            ~end: int
+            +Slice(int, int)
+            +size(): int
+            +contains(DBIDRef): boolean
+            +isEmpty(): boolean
+            +get(int): DBID
+            +assignVar(int, DBIDVar): DBIDVar
+            +binarySearch(DBIDRef): int
+            +iter(): IntegerDBIDArrayIter
+            +slice(int, int): Slice
+        }
+
+        class elki.database.ids.integer.IntegerDBIDPair.Slice.SliceItr [[IntegerDBIDPair.Slice.SliceItr.html]] {
+            ~pos: int
+            +internalGetIndex(): int
+            +valid(): boolean
+            +advance(): SliceItr
+            +getOffset(): int
+            +advance(int): SliceItr
+            +retract(): SliceItr
+            +seek(int): SliceItr
+        }
+
+        IntegerDBIDs <|-- IntegerArrayDBIDs
+        elki.database.ids.ArrayDBIDs <|-- IntegerArrayDBIDs
+        IntegerDBIDArrayIter <|-- IntegerDBIDArrayMIter
+        IntegerDBIDMIter <|-- IntegerDBIDArrayMIter
+        elki.database.ids.DBIDArrayMIter <|-- IntegerDBIDArrayMIter
+        elki.database.ids.DBIDs <|-- IntegerDBIDs
+        DoubleIntegerDBIDHeap <|-- DoubleIntegerDBIDKNNHeap
+        elki.database.ids.KNNHeap <|.. DoubleIntegerDBIDKNNHeap
+        elki.database.ids.DoubleDBIDIter <|.. elki.database.ids.integer.DoubleIntegerDBIDKNNHeap.UnorderedIter
+        DoubleIntegerDBIDKNNHeap +-- elki.database.ids.integer.DoubleIntegerDBIDKNNHeap.UnorderedIter
+        IntegerArrayStaticDBIDs <|.. ArrayStaticIntegerDBIDs
+        IntegerDBIDArrayIter <|.. elki.database.ids.integer.ArrayStaticIntegerDBIDs.Itr
+        ArrayStaticIntegerDBIDs +-- elki.database.ids.integer.ArrayStaticIntegerDBIDs.Itr
+        IntegerArrayDBIDs <|.. elki.database.ids.integer.ArrayStaticIntegerDBIDs.Slice
+        ArrayStaticIntegerDBIDs +-- elki.database.ids.integer.ArrayStaticIntegerDBIDs.Slice
+        IntegerDBIDArrayIter <|.. elki.database.ids.integer.ArrayStaticIntegerDBIDs.Slice.SliceItr
+        elki.database.ids.integer.ArrayStaticIntegerDBIDs.Slice +-- elki.database.ids.integer.ArrayStaticIntegerDBIDs.Slice.SliceItr
+        DoubleIntegerDBIDListIter <|-- DoubleIntegerDBIDListMIter
+        elki.database.ids.DoubleDBIDListMIter <|-- DoubleIntegerDBIDListMIter
+        elki.database.ids.DBIDMIter <|-- IntegerDBIDMIter
+        IntegerDBIDIter <|-- IntegerDBIDMIter
+        IntegerArrayStaticDBIDs <|.. UnmodifiableIntegerArrayDBIDs
+        UnmodifiableIntegerArrayDBIDs --> IntegerArrayDBIDs: inner
+        IntegerDBIDArrayIter <|.. elki.database.ids.integer.UnmodifiableIntegerArrayDBIDs.Itr
+        UnmodifiableIntegerArrayDBIDs +-- elki.database.ids.integer.UnmodifiableIntegerArrayDBIDs.Itr
+        elki.database.ids.integer.UnmodifiableIntegerArrayDBIDs.Itr --> IntegerDBIDArrayIter: it
+        elki.database.ids.DBID <|.. IntegerDBID
+        IntegerDBIDRef <|.. IntegerDBID
+        elki.database.ids.DBIDArrayIter <|.. elki.database.ids.integer.IntegerDBID.Itr
+        IntegerDBIDRef <|.. elki.database.ids.integer.IntegerDBID.Itr
+        IntegerDBID +-- elki.database.ids.integer.IntegerDBID.Itr
+        elki.utilities.io.ByteBufferSerializer <|.. elki.database.ids.integer.IntegerDBID.DynamicSerializer
+        IntegerDBID +-- elki.database.ids.integer.IntegerDBID.DynamicSerializer
+        elki.utilities.io.FixedSizeByteBufferSerializer <|.. elki.database.ids.integer.IntegerDBID.StaticSerializer
+        IntegerDBID +-- elki.database.ids.integer.IntegerDBID.StaticSerializer
+        DoubleIntegerDBIDList <|.. DoubleIntegerDBIDSubList
+        DoubleIntegerDBIDSubList --> DoubleIntegerDBIDList: inner
+        DoubleIntegerDBIDListIter <|.. elki.database.ids.integer.DoubleIntegerDBIDSubList.Itr
+        DoubleIntegerDBIDSubList +-- elki.database.ids.integer.DoubleIntegerDBIDSubList.Itr
+        elki.database.ids.integer.DoubleIntegerDBIDSubList.Itr --> DoubleIntegerDBIDListIter: it
+        DoubleIntegerDBIDArrayList <|-- DoubleIntegerDBIDKNNList
+        elki.database.ids.KNNList <|.. DoubleIntegerDBIDKNNList
+        DoubleIntegerDBIDList <|.. DoubleIntegerDBIDKNNList
+        elki.database.ids.DBIDFactory <|.. AbstractIntegerDBIDFactory
+        elki.database.ids.DBIDVar <|.. IntegerDBIDVar
+        IntegerDBIDs <|.. IntegerDBIDVar
+        IntegerDBIDArrayIter <|.. elki.database.ids.integer.IntegerDBIDVar.Itr
+        IntegerDBIDRef <|.. elki.database.ids.integer.IntegerDBIDVar.Itr
+        IntegerDBIDVar +-- elki.database.ids.integer.IntegerDBIDVar.Itr
+        IntegerDBIDRef <|-- IntegerDBIDIter
+        elki.database.ids.DBIDIter <|-- IntegerDBIDIter
+        elki.database.ids.DoubleDBIDListIter <|-- DoubleIntegerDBIDListIter
+        IntegerDBIDIter <|-- DoubleIntegerDBIDListIter
+        IntegerDBIDIter <|-- IntegerDBIDArrayIter
+        elki.database.ids.DBIDArrayIter <|-- IntegerDBIDArrayIter
+        elki.database.ids.HashSetModifiableDBIDs <|.. FastutilIntOpenHashSetModifiableDBIDs
+        IntegerDBIDs <|.. FastutilIntOpenHashSetModifiableDBIDs
+        it.unimi.dsi.fastutil.ints.IntOpenHashSet <|-- elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.IntOpenHashSet
+        FastutilIntOpenHashSetModifiableDBIDs +-- elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.IntOpenHashSet
+        IntegerDBIDMIter <|.. elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.Itr
+        FastutilIntOpenHashSetModifiableDBIDs +-- elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.Itr
+        elki.database.ids.ArrayStaticDBIDs <|-- IntegerArrayStaticDBIDs
+        IntegerArrayDBIDs <|-- IntegerArrayStaticDBIDs
+        IntegerDBIDs <|.. IntegerDBIDRange
+        elki.database.ids.DBIDRange <|.. IntegerDBIDRange
+        elki.database.ids.SetDBIDs <|.. IntegerDBIDRange
+        IntegerDBIDArrayIter <|.. elki.database.ids.integer.IntegerDBIDRange.Itr
+        IntegerDBIDRange +-- elki.database.ids.integer.IntegerDBIDRange.Itr
+        elki.database.ids.KNNList <|.. IntegerDBIDKNNSubList
+        DoubleIntegerDBIDList <|.. IntegerDBIDKNNSubList
+        IntegerDBIDKNNSubList --> DoubleIntegerDBIDKNNList: inner
+        DoubleIntegerDBIDListIter <|.. elki.database.ids.integer.IntegerDBIDKNNSubList.Itr
+        IntegerDBIDKNNSubList +-- elki.database.ids.integer.IntegerDBIDKNNSubList.Itr
+        elki.database.ids.integer.IntegerDBIDKNNSubList.Itr --> DoubleIntegerDBIDListIter: inneriter
+        AbstractIntegerDBIDFactory <|-- TrivialDBIDFactory
+        elki.database.ids.ModifiableDoubleDBIDList <|.. DoubleIntegerDBIDArrayList
+        DoubleIntegerDBIDList <|.. DoubleIntegerDBIDArrayList
+        DoubleIntegerDBIDListMIter <|.. elki.database.ids.integer.DoubleIntegerDBIDArrayList.Itr
+        DoubleIntegerDBIDArrayList +-- elki.database.ids.integer.DoubleIntegerDBIDArrayList.Itr
+        elki.database.ids.DoubleDBIDPair <|.. DoubleIntegerDBIDPair
+        IntegerDBIDRef <|.. DoubleIntegerDBIDPair
+        elki.database.ids.DoubleDBIDHeap <|.. DoubleIntegerDBIDHeap
+        elki.database.ids.DoubleDBIDIter <|.. elki.database.ids.integer.DoubleIntegerDBIDHeap.UnorderedIter
+        DoubleIntegerDBIDHeap +-- elki.database.ids.integer.DoubleIntegerDBIDHeap.UnorderedIter
+        elki.database.ids.DoubleDBIDList <|-- DoubleIntegerDBIDList
+        IntegerDBIDs <|-- DoubleIntegerDBIDList
+        elki.database.ids.ArrayModifiableDBIDs <|.. ArrayModifiableIntegerDBIDs
+        IntegerArrayDBIDs <|.. ArrayModifiableIntegerDBIDs
+        IntegerDBIDArrayMIter <|.. elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Itr
+        ArrayModifiableIntegerDBIDs +-- elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Itr
+        IntegerArrayDBIDs <|.. elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Slice
+        ArrayModifiableIntegerDBIDs +-- elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Slice
+        IntegerDBIDArrayIter <|.. elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Slice.SliceItr
+        elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Slice +-- elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Slice.SliceItr
+        elki.database.ids.StaticDBIDs <|.. UnmodifiableIntegerDBIDs
+        IntegerDBIDs <|.. UnmodifiableIntegerDBIDs
+        UnmodifiableIntegerDBIDs --> IntegerDBIDs: inner
+        IntegerDBIDIter <|.. elki.database.ids.integer.UnmodifiableIntegerDBIDs.UnmodifiableDBIDIter
+        UnmodifiableIntegerDBIDs +-- elki.database.ids.integer.UnmodifiableIntegerDBIDs.UnmodifiableDBIDIter
+        elki.database.ids.integer.UnmodifiableIntegerDBIDs.UnmodifiableDBIDIter --> IntegerDBIDIter: it
+        elki.database.ids.DBIDRef <|-- IntegerDBIDRef
+        elki.database.ids.DBIDPair <|.. IntegerDBIDPair
+        IntegerDBIDs <|.. IntegerDBIDPair
+        IntegerDBIDPair --> IntegerDBID: first\nsecond
+        IntegerDBIDArrayIter <|.. elki.database.ids.integer.IntegerDBIDPair.Itr
+        IntegerDBIDPair +-- elki.database.ids.integer.IntegerDBIDPair.Itr
+        IntegerArrayDBIDs <|.. elki.database.ids.integer.IntegerDBIDPair.Slice
+        IntegerDBIDPair +-- elki.database.ids.integer.IntegerDBIDPair.Slice
+        IntegerDBIDArrayIter <|.. elki.database.ids.integer.IntegerDBIDPair.Slice.SliceItr
+        elki.database.ids.integer.IntegerDBIDPair.Slice +-- elki.database.ids.integer.IntegerDBIDPair.Slice.SliceItr
+    }
+
+    namespace elki.database.ids {
+        interface ArrayDBIDs [[../ArrayDBIDs.html]] {
+            {abstract} +--get--(int): DBID
+            {abstract} +assignVar(int, DBIDVar): DBIDVar
+            {abstract} +iter(): DBIDArrayIter
+            {abstract} +size(): int
+            {abstract} +binarySearch(DBIDRef): int
+            {abstract} +slice(int, int): ArrayDBIDs
+        }
+        interface DBIDArrayMIter [[../DBIDArrayMIter.html]] {
+            {abstract} +setDBID(DBIDRef): void
+            {abstract} +seek(int): DBIDArrayMIter
+        }
+        interface DBIDs [[../DBIDs.html]] {
+            {abstract} +iter(): DBIDIter
+            {abstract} +size(): int
+            {abstract} +contains(DBIDRef): boolean
+            +isEmpty(): boolean
+            +forEach(Consumer<? super DBIDRef>): void
+        }
+        interface KNNHeap [[../KNNHeap.html]] {
+            {abstract} +toKNNList(): KNNList
+            {abstract} +toKNNListSqrt(): KNNList
+            {abstract} +insert(double, DBIDRef): double
+            +--insert--(double, DBIDRef, int): double
+            {abstract} +getK(): int
+            {abstract} +getKNNDistance(): double
+        }
+        interface DoubleDBIDIter [[../DoubleDBIDIter.html]] {
+            {abstract} +doubleValue(): double
+            {abstract} +advance(): DoubleDBIDIter
+        }
+        interface DoubleDBIDListMIter [[../DoubleDBIDListMIter.html]] {
+            {abstract} +setDouble(double): void
+            {abstract} +seek(int): DoubleDBIDListMIter
+        }
+        interface DBIDMIter [[../DBIDMIter.html]] {
+            {abstract} +remove(): void
+        }
+        interface DBID [[../DBID.html]] {
+            {abstract} +compareTo(DBIDRef): int
+        }
+        interface DBIDArrayIter [[../DBIDArrayIter.html]] {
+            {abstract} +advance(): DBIDArrayIter
+            {abstract} +advance(int): DBIDArrayIter
+            {abstract} +retract(): DBIDArrayIter
+            {abstract} +seek(int): DBIDArrayIter
+        }
+        interface KNNList [[../KNNList.html]] {
+            {abstract} +getK(): int
+            {abstract} +getKNNDistance(): double
+            {abstract} +subList(int): KNNList
+            {abstract} +map(DoubleUnaryOperator): KNNList
+        }
+        interface DBIDFactory [[../DBIDFactory.html]] {
+            {static} +FACTORY: DBIDFactory
+            {abstract} +newVar(DBIDRef): DBIDVar
+            {abstract} +importInteger(int): DBID
+            {abstract} +assignVar(DBIDVar, int): DBIDVar
+            {abstract} +generateSingleDBID(): DBID
+            {abstract} +deallocateSingleDBID(DBIDRef): void
+            {abstract} +generateStaticDBIDRange(int): DBIDRange
+            {abstract} +generateStaticDBIDRange(int, int): DBIDRange
+            {abstract} +deallocateDBIDRange(DBIDRange): void
+            {abstract} +newPair(DBIDRef, DBIDRef): DBIDPair
+            {abstract} +newPair(double, DBIDRef): DoubleDBIDPair
+            {abstract} +newArray(): ArrayModifiableDBIDs
+            {abstract} +newHashSet(): HashSetModifiableDBIDs
+            {abstract} +newArray(int): ArrayModifiableDBIDs
+            {abstract} +newHashSet(int): HashSetModifiableDBIDs
+            {abstract} +newArray(DBIDs): ArrayModifiableDBIDs
+            {abstract} +newHashSet(DBIDs): HashSetModifiableDBIDs
+            {abstract} +newMinHeap(int): DoubleDBIDHeap
+            {abstract} +newMaxHeap(int): DoubleDBIDHeap
+            {abstract} +newHeap(int): KNNHeap
+            {abstract} +newHeap(KNNList): KNNHeap
+            {abstract} +getDBIDSerializer(): ByteBufferSerializer<DBID>
+            {abstract} +getDBIDSerializerStatic(): FixedSizeByteBufferSerializer<DBID>
+            {abstract} +getTypeRestriction(): Class<? extends DBID>
+            {abstract} +compare(DBIDRef, DBIDRef): int
+            {abstract} +equal(DBIDRef, DBIDRef): boolean
+            {abstract} +toString(DBIDRef): String
+            {abstract} +invalid(): DBIDRef
+            {abstract} +newDistanceDBIDList(int): ModifiableDoubleDBIDList
+            {abstract} +newDistanceDBIDList(): ModifiableDoubleDBIDList
+            {abstract} +makeUnmodifiable(DBIDs): StaticDBIDs
+        }
+        interface DBIDVar [[../DBIDVar.html]] {
+            {abstract} +set(DBIDRef): DBIDVar
+            {abstract} +from(DBIDDataStore, DBIDRef): DBIDVar
+            {abstract} +unset(): void
+            {abstract} +isSet(): boolean
+        }
+        interface DBIDIter [[../DBIDIter.html]] {
+            {abstract} +advance(): DBIDIter
+            +addTo(T extends ModifiableDBIDs): T extends ModifiableDBIDs
+        }
+        interface DoubleDBIDListIter [[../DoubleDBIDListIter.html]] {
+            {static} +EMPTY: DoubleDBIDListIter
+            {abstract} +advance(): DoubleDBIDListIter
+            {abstract} +advance(int): DoubleDBIDListIter
+            {abstract} +retract(): DoubleDBIDListIter
+            {abstract} +seek(int): DoubleDBIDListIter
+        }
+        interface HashSetModifiableDBIDs [[../HashSetModifiableDBIDs.html]] {
+            {abstract} +retainAll(DBIDs): boolean
+            {abstract} +clear(): HashSetModifiableDBIDs
+            {abstract} +iter(): DBIDMIter
+        }
+        interface ArrayStaticDBIDs [[../ArrayStaticDBIDs.html]]
+        interface DBIDRange [[../DBIDRange.html]] {
+            {abstract} +getOffset(DBIDRef): int
+        }
+        interface SetDBIDs [[../SetDBIDs.html]]
+        interface ModifiableDoubleDBIDList [[../ModifiableDoubleDBIDList.html]] {
+            {abstract} +add(double, DBIDRef): void
+            {abstract} +add(DoubleDBIDPair): void
+            {abstract} +clear(): ModifiableDoubleDBIDList
+            {abstract} +sort(): ModifiableDoubleDBIDList
+            {abstract} +sortDescending(): ModifiableDoubleDBIDList
+            {abstract} +swap(int, int): void
+            {abstract} +remove(int): void
+            {abstract} +removeSwap(int): void
+            {abstract} +iter(): DoubleDBIDListMIter
+        }
+        interface DoubleDBIDPair [[../DoubleDBIDPair.html]] {
+            {abstract} +doubleValue(): double
+        }
+        interface DoubleDBIDHeap [[../DoubleDBIDHeap.html]] {
+            {abstract} +peekKey(): double
+            {abstract} +poll(): void
+            {abstract} +insert(double, DBIDRef): double
+            {abstract} +insert(double, DBIDRef, int): double
+            {abstract} +size(): int
+            +isEmpty(): boolean
+            {abstract} +clear(): void
+            {abstract} +unorderedIterator(): DoubleDBIDIter
+            {abstract} +contains(DBIDRef): boolean
+        }
+        interface DoubleDBIDList [[../DoubleDBIDList.html]] {
+            {abstract} +size(): int
+            {abstract} +assignVar(int, DBIDVar): DBIDVar
+            {abstract} +doubleValue(int): double
+            {abstract} +iter(): DoubleDBIDListIter
+            {abstract} +slice(int, int): DoubleDBIDList
+            +forEachDouble(Consumer): void
+        }
+        interface ArrayModifiableDBIDs [[../ArrayModifiableDBIDs.html]] {
+            {abstract} +sort(): void
+            {abstract} +sort(Comparator<? super DBIDRef>): void
+            {abstract} +sort(int, int, Comparator<? super DBIDRef>): void
+            {abstract} +clear(): ArrayModifiableDBIDs
+            {abstract} +remove(int): void
+            {abstract} +removeSwap(int): void
+            {abstract} +set(int, DBIDRef): void
+            {abstract} +insert(int, DBIDRef): void
+            {abstract} +swap(int, int): void
+            {abstract} +iter(): DBIDArrayMIter
+        }
+        interface StaticDBIDs [[../StaticDBIDs.html]]
+        interface DBIDRef [[../DBIDRef.html]] {
+            {abstract} +internalGetIndex(): int
+        }
+        interface DBIDPair [[../DBIDPair.html]] {
+            {abstract} +--getFirst--(): DBID
+            {abstract} +--getSecond--(): DBID
+        }
+    }
+
+    namespace elki.utilities.io {
+        interface ByteBufferSerializer<T> [[../../../utilities/io/ByteBufferSerializer.html]] {
+            {abstract} +fromByteBuffer(ByteBuffer): T
+            {abstract} +toByteBuffer(ByteBuffer, T): void
+            {abstract} +getByteSize(T): int
+        }
+        interface FixedSizeByteBufferSerializer<T> [[../../../utilities/io/FixedSizeByteBufferSerializer.html]] {
+            {abstract} +getFixedByteSize(): int
+        }
+    }
+
+    namespace it.unimi.dsi.fastutil.ints {
+        class IntOpenHashSet {
+            {static} -serialVersionUID: long
+            {static} -ASSERTS: boolean
+            #key: int[]
+            #mask: int
+            #containsNull: boolean
+            #n: int
+            #maxFill: int
+            #minN: int
+            #size: int
+            #f: float
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ConcatenateFilesDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.ConcatenateFilesDatabaseConnection.Par [[ConcatenateFilesDatabaseConnection.Par.html]] {
+        {static} +INPUT_ID: OptionID
+        -files: List<URI>
+        +configure(Parameterization): void
+        +make(): ConcatenateFilesDatabaseConnection
+    }
+
+    abstract class "<size:14>AbstractDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.AbstractDatabaseConnection.Par [[AbstractDatabaseConnection.Par.html]]
+    class "<size:14>ConcatenateFilesDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.ConcatenateFilesDatabaseConnection [[ConcatenateFilesDatabaseConnection.html]]
+
+    elki.datasource.AbstractDatabaseConnection.Par <|-- elki.datasource.ConcatenateFilesDatabaseConnection.Par
+    elki.datasource.ConcatenateFilesDatabaseConnection +-- elki.datasource.ConcatenateFilesDatabaseConnection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

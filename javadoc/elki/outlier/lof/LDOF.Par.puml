@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LDOF.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.LDOF.Par<O> [[LDOF.Par.html]] {
+        {static} +K_ID: OptionID
+        #distance: Distance<? super O>
+        #k: int
+        +configure(Parameterization): void
+        +make(): LDOF<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LDOF\n<size:10>elki.outlier.lof" as elki.outlier.lof.LDOF<O> [[LDOF.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.LDOF.Par
+    elki.outlier.lof.LDOF +-- elki.outlier.lof.LDOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

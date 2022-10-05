@@ -1,0 +1,48 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.style.marker {
+
+        interface MarkerLibrary [[MarkerLibrary.html]] {
+            +useMarker(SVGPlot, double, double, int, double): Element
+            {abstract} +useMarker(SVGPlot, double, double, int, double, double): Element
+        }
+
+        class MinimalMarkers [[MinimalMarkers.html]] {
+            -colors: ColorLibrary
+            -dotcolor: String
+            -greycolor: String
+            ~interpol: ColorInterpolation
+            +MinimalMarkers(StyleLibrary)
+            +useMarker(SVGPlot, double, double, int, double, double): Element
+        }
+
+        class CircleMarkers [[CircleMarkers.html]] {
+            -colors: ColorLibrary
+            -dotcolor: String
+            -greycolor: String
+            ~interpol: ColorInterpolation
+            +CircleMarkers(StyleLibrary)
+            +useMarker(SVGPlot, double, double, int, double, double): Element
+        }
+
+        class PrettyMarkers [[PrettyMarkers.html]] {
+            -colors: ColorLibrary
+            {static} -DEFAULT_PREFIX: String
+            -prefix: String
+            -dotcolor: String
+            -graycolor: String
+            ~interpol: ColorInterpolation
+            +PrettyMarkers(String, StyleLibrary)
+            +PrettyMarkers(StyleLibrary)
+            +plotMarker(SVGPlot, double, double, int, double, double): Element
+            #plotSimple(SVGPlot, double, double, double, String): Element
+            +useMarker(SVGPlot, double, double, int, double, double): Element
+        }
+
+        MarkerLibrary <|.. MinimalMarkers
+        MarkerLibrary <|.. CircleMarkers
+        MarkerLibrary <|.. PrettyMarkers
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

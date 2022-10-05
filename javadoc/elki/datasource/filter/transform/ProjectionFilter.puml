@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProjectionFilter\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.ProjectionFilter<I, O> [[ProjectionFilter.html]] {
+        ~projection: Projection<I, O>
+        +ProjectionFilter(Projection<I, O>)
+        #filterSingleObject(I): O
+        #getInputTypeRestriction(): TypeInformation
+        #convertedType(SimpleTypeInformation<​I>): SimpleTypeInformation<? super O>
+    }
+
+    abstract class "<size:14>AbstractStreamConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractStreamConversionFilter<I, O> [[../AbstractStreamConversionFilter.html]] {
+        {abstract} #filterSingleObject(I): O
+        {abstract} #getInputTypeRestriction(): TypeInformation
+        {abstract} #convertedType(SimpleTypeInformation<​I>): SimpleTypeInformation<? super O>
+    }
+    class "<size:14>ProjectionFilter.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.ProjectionFilter.Par<I, O>
+
+    elki.datasource.filter.AbstractStreamConversionFilter <|-- elki.datasource.filter.transform.ProjectionFilter
+    elki.datasource.filter.transform.ProjectionFilter +-- elki.datasource.filter.transform.ProjectionFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

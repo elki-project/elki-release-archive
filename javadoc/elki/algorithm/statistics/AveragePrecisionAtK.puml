@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AveragePrecisionAtK\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.AveragePrecisionAtK<O> [[AveragePrecisionAtK.html]] {
+        {static} -LOG: Logging
+        -distance: Distance<? super O>
+        -k: int
+        -sampling: double
+        -random: RandomFactory
+        -includeSelf: boolean
+        +AveragePrecisionAtK(Distance<? super O>, int, double, RandomFactory, boolean)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>, Relation<?>): CollectionResult<double[]>
+        {static} #match(Object, Object): boolean
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    class "<size:14>AveragePrecisionAtK.Par\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.AveragePrecisionAtK.Par<O>
+
+    elki.Algorithm <|.. elki.algorithm.statistics.AveragePrecisionAtK
+    elki.algorithm.statistics.AveragePrecisionAtK +-- elki.algorithm.statistics.AveragePrecisionAtK.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

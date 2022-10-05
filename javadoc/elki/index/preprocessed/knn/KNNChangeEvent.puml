@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KNNChangeEvent\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.KNNChangeEvent [[KNNChangeEvent.html]] {
+        {static} -serialVersionUID: long
+        -type: Type
+        -objects: DBIDs
+        -updates: DBIDs
+        +KNNChangeEvent(Object, Type, DBIDs, DBIDs)
+        +getType(): Type
+        +getObjects(): DBIDs
+        +getUpdates(): DBIDs
+    }
+
+    class "<size:14>EventObject\n<size:10>java.util" as java.util.EventObject
+    enum "<size:14>KNNChangeEvent.Type\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.KNNChangeEvent.Type [[KNNChangeEvent.Type.html]]
+
+    java.util.EventObject <|-- elki.index.preprocessed.knn.KNNChangeEvent
+    elki.index.preprocessed.knn.KNNChangeEvent +-- elki.index.preprocessed.knn.KNNChangeEvent.Type
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

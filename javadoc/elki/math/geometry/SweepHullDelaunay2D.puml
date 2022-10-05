@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SweepHullDelaunay2D\n<size:10>elki.math.geometry" as elki.math.geometry.SweepHullDelaunay2D [[SweepHullDelaunay2D.html]] {
+        {static} -LOG: Logging
+        -points: List<double[]>
+        -tris: ArrayList<Triangle>
+        -hull: LinkedList<IntIntPair>
+        +SweepHullDelaunay2D()
+        +SweepHullDelaunay2D(List<double[]>)
+        +add(double...): void
+        ~run(boolean): void
+        #findSmallest(int, int, double[], int[], int): Triangle
+        ~debugHull(): void
+        ~flipTriangles(long[]): int
+        ~flipTriangles(long[], long[]): int
+        ~flipTriangle(int, long[]): int
+        +getHull(): Polygon
+        +getDelaunay(): ArrayList<Triangle>
+        {static} +quadraticEuclidean(double[], double[]): double
+        ~leftOf(double[], double[], double[]): boolean
+    }
+    enum "<size:14>SweepHullDelaunay2D.Orientation\n<size:10>elki.math.geometry" as elki.math.geometry.SweepHullDelaunay2D.Orientation [[SweepHullDelaunay2D.Orientation.html]]
+    class "<size:14>SweepHullDelaunay2D.Triangle\n<size:10>elki.math.geometry" as elki.math.geometry.SweepHullDelaunay2D.Triangle [[SweepHullDelaunay2D.Triangle.html]]
+
+    elki.math.geometry.SweepHullDelaunay2D +-- elki.math.geometry.SweepHullDelaunay2D.Orientation
+    elki.math.geometry.SweepHullDelaunay2D +-- elki.math.geometry.SweepHullDelaunay2D.Triangle
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

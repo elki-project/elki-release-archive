@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RationalQuadraticKernel\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.RationalQuadraticKernel [[RationalQuadraticKernel.html]] {
+        -c: double
+        +RationalQuadraticKernel(double)
+        +similarity(NumberVector, NumberVector): double
+    }
+
+    abstract class "<size:14>AbstractVectorSimilarity\n<size:10>elki.similarity" as elki.similarity.AbstractVectorSimilarity [[../AbstractVectorSimilarity.html]]
+    class "<size:14>RationalQuadraticKernel.Par\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.RationalQuadraticKernel.Par [[RationalQuadraticKernel.Par.html]]
+
+    elki.similarity.AbstractVectorSimilarity <|-- elki.similarity.kernel.RationalQuadraticKernel
+    elki.similarity.kernel.RationalQuadraticKernel +-- elki.similarity.kernel.RationalQuadraticKernel.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

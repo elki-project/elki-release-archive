@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SqrtStandardDeviationScaling.Par\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.SqrtStandardDeviationScaling.Par [[SqrtStandardDeviationScaling.Par.html]] {
+        {static} +MIN_ID: OptionID
+        {static} +MEAN_ID: OptionID
+        {static} +LAMBDA_ID: OptionID
+        ~min: double
+        ~mean: double
+        #lambda: double
+        +configure(Parameterization): void
+        +make(): SqrtStandardDeviationScaling
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SqrtStandardDeviationScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.SqrtStandardDeviationScaling [[SqrtStandardDeviationScaling.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.outlier.SqrtStandardDeviationScaling.Par
+    elki.utilities.scaling.outlier.SqrtStandardDeviationScaling +-- elki.utilities.scaling.outlier.SqrtStandardDeviationScaling.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

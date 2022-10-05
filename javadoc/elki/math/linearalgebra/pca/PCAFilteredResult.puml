@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PCAFilteredResult\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.PCAFilteredResult [[PCAFilteredResult.html]] {
+        -strongEigenvalues: double[]
+        -strongEigenvectors: double[]
+        -weakEigenvalues: double[]
+        -weakEigenvectors: double[]
+        -explainedVariance: double
+        -m_hat: double[]
+        -m_czech: double[]
+        +PCAFilteredResult(EigenPair[], int, double, double)
+        +getStrongEigenvectors(): double[]
+        +getStrongEigenvalues(): double[]
+        +getWeakEigenvectors(): double[]
+        +getWeakEigenvalues(): double[]
+        +getCorrelationDimension(): int
+        +getExplainedVariance(): double
+        +similarityMatrix(): double[]
+        +dissimilarityMatrix(): double[]
+    }
+
+    class "<size:14>PCAResult\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.PCAResult [[PCAResult.html]]
+
+    elki.math.linearalgebra.pca.PCAResult <|-- elki.math.linearalgebra.pca.PCAFilteredResult
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

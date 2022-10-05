@@ -1,0 +1,120 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.referencepoints {
+
+        class RandomSampleReferencePoints [[RandomSampleReferencePoints.html]] {
+            #samplesize: int
+            #rnd: RandomFactory
+            +RandomSampleReferencePoints(int, RandomFactory)
+            +getReferencePoints(Relation<? extends NumberVector>): Collection<? extends NumberVector>
+        }
+
+        class elki.utilities.referencepoints.RandomSampleReferencePoints.Par [[RandomSampleReferencePoints.Par.html]] {
+            {static} +N_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            #samplesize: int
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): RandomSampleReferencePoints
+        }
+
+        class GridBasedReferencePoints [[GridBasedReferencePoints.html]] {
+            {static} -LOG: Logging
+            #gridres: int
+            #gridscale: double
+            +GridBasedReferencePoints(int, double)
+            +getReferencePoints(Relation<? extends NumberVector>): Collection<? extends NumberVector>
+        }
+
+        class elki.utilities.referencepoints.GridBasedReferencePoints.Par [[GridBasedReferencePoints.Par.html]] {
+            {static} +GRID_ID: OptionID
+            {static} +GRID_SCALE_ID: OptionID
+            #gridres: int
+            #gridscale: double
+            +configure(Parameterization): void
+            +make(): GridBasedReferencePoints
+        }
+
+        class FullDatabaseReferencePoints [[FullDatabaseReferencePoints.html]] {
+            +getReferencePoints(Relation<? extends NumberVector>): Collection<? extends NumberVector>
+        }
+
+        interface ReferencePointsHeuristic [[ReferencePointsHeuristic.html]] {
+            {abstract} +getReferencePoints(Relation<? extends NumberVector>): Collection<? extends NumberVector>
+        }
+
+        class StarBasedReferencePoints [[StarBasedReferencePoints.html]] {
+            #nocenter: boolean
+            #scale: double
+            +StarBasedReferencePoints(boolean, double)
+            +getReferencePoints(Relation<? extends NumberVector>): Collection<? extends NumberVector>
+        }
+
+        class elki.utilities.referencepoints.StarBasedReferencePoints.Par [[StarBasedReferencePoints.Par.html]] {
+            {static} +NOCENTER_ID: OptionID
+            {static} +SCALE_ID: OptionID
+            #nocenter: boolean
+            #scale: double
+            +configure(Parameterization): void
+            +make(): StarBasedReferencePoints
+        }
+
+        class AxisBasedReferencePoints [[AxisBasedReferencePoints.html]] {
+            #spacescale: double
+            +AxisBasedReferencePoints(double)
+            +getReferencePoints(Relation<? extends NumberVector>): Collection<? extends NumberVector>
+        }
+
+        class elki.utilities.referencepoints.AxisBasedReferencePoints.Par [[AxisBasedReferencePoints.Par.html]] {
+            {static} +SPACE_SCALE_ID: OptionID
+            #spacescale: double
+            +configure(Parameterization): void
+            +make(): AxisBasedReferencePoints
+        }
+
+        class RandomGeneratedReferencePoints [[RandomGeneratedReferencePoints.html]] {
+            #samplesize: int
+            #scale: double
+            #rnd: RandomFactory
+            +RandomGeneratedReferencePoints(int, double, RandomFactory)
+            +getReferencePoints(Relation<? extends NumberVector>): Collection<? extends NumberVector>
+        }
+
+        class elki.utilities.referencepoints.RandomGeneratedReferencePoints.Par [[RandomGeneratedReferencePoints.Par.html]] {
+            {static} +N_ID: OptionID
+            {static} +SCALE_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            #samplesize: int
+            #scale: double
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): RandomGeneratedReferencePoints
+        }
+
+        ReferencePointsHeuristic <|.. RandomSampleReferencePoints
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.referencepoints.RandomSampleReferencePoints.Par
+        RandomSampleReferencePoints +-- elki.utilities.referencepoints.RandomSampleReferencePoints.Par
+        ReferencePointsHeuristic <|.. GridBasedReferencePoints
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.referencepoints.GridBasedReferencePoints.Par
+        GridBasedReferencePoints +-- elki.utilities.referencepoints.GridBasedReferencePoints.Par
+        ReferencePointsHeuristic <|.. FullDatabaseReferencePoints
+        ReferencePointsHeuristic <|.. StarBasedReferencePoints
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.referencepoints.StarBasedReferencePoints.Par
+        StarBasedReferencePoints +-- elki.utilities.referencepoints.StarBasedReferencePoints.Par
+        ReferencePointsHeuristic <|.. AxisBasedReferencePoints
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.referencepoints.AxisBasedReferencePoints.Par
+        AxisBasedReferencePoints +-- elki.utilities.referencepoints.AxisBasedReferencePoints.Par
+        ReferencePointsHeuristic <|.. RandomGeneratedReferencePoints
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.referencepoints.RandomGeneratedReferencePoints.Par
+        RandomGeneratedReferencePoints +-- elki.utilities.referencepoints.RandomGeneratedReferencePoints.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

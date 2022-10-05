@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LOCI.DoubleIntArrayList\n<size:10>elki.outlier.lof" as elki.outlier.lof.LOCI.DoubleIntArrayList [[LOCI.DoubleIntArrayList.html]] {
+        ~keys: double[]
+        ~vals: int[]
+        ~size: int
+        +DoubleIntArrayList(int)
+        +size(): int
+        +getDouble(int): double
+        +getInt(int): int
+        +setValue(int, int): void
+        +append(double, int): void
+        +find(double): int
+        +sort(): void
+    }
+
+    class "<size:14>LOCI\n<size:10>elki.outlier.lof" as elki.outlier.lof.LOCI<O> [[LOCI.html]]
+
+    elki.outlier.lof.LOCI +-- elki.outlier.lof.LOCI.DoubleIntArrayList
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

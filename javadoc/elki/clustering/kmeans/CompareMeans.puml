@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CompareMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.CompareMeans<V extends NumberVector> [[CompareMeans.html]] {
+        {static} -LOG: Logging
+        +CompareMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+        +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans<V extends NumberVector, KMeansModel> [[AbstractKMeans.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>CompareMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.CompareMeans.Instance [[CompareMeans.Instance.html]]
+    class "<size:14>CompareMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.CompareMeans.Par<V extends NumberVector> [[CompareMeans.Par.html]]
+
+    elki.clustering.kmeans.AbstractKMeans <|-- elki.clustering.kmeans.CompareMeans
+    elki.clustering.kmeans.CompareMeans +-- elki.clustering.kmeans.CompareMeans.Instance
+    elki.clustering.kmeans.CompareMeans +-- elki.clustering.kmeans.CompareMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

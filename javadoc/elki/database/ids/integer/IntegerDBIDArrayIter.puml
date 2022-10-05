@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>IntegerDBIDArrayIter\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDArrayIter [[IntegerDBIDArrayIter.html]]
+
+    interface "<size:14>IntegerDBIDIter\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDIter [[IntegerDBIDIter.html]]
+    interface "<size:14>DBIDArrayIter\n<size:10>elki.database.ids" as elki.database.ids.DBIDArrayIter [[../DBIDArrayIter.html]] {
+        {abstract} +advance(): DBIDArrayIter
+        {abstract} +advance(int): DBIDArrayIter
+        {abstract} +retract(): DBIDArrayIter
+        {abstract} +seek(int): DBIDArrayIter
+    }
+
+    elki.database.ids.integer.IntegerDBIDIter <|-- elki.database.ids.integer.IntegerDBIDArrayIter
+    elki.database.ids.DBIDArrayIter <|-- elki.database.ids.integer.IntegerDBIDArrayIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

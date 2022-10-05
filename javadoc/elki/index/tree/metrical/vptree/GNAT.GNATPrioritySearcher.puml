@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>GNAT.GNATPrioritySearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATPrioritySearcher<T> [[GNAT.GNATPrioritySearcher.html]] {
+        -heap: ComparableMinHeap<PrioritySearchBranch>
+        -threshold: double
+        -cur: PrioritySearchBranch
+        #doSearch(): PrioritySearcher<T>
+        +advance(): PrioritySearcher<T>
+        +internalGetIndex(): int
+        +valid(): boolean
+        +decreaseCutoff(double): PrioritySearcher<T>
+        +computeExactDistance(): double
+        +allLowerBound(): double
+        +getLowerBound(): double
+        {abstract} #queryDistance(DBIDRef): double
+    }
+
+    interface "<size:14>PrioritySearcher\n<size:10>elki.database.query" as elki.database.query.PrioritySearcher<T> [[../../../../database/query/PrioritySearcher.html]] {
+        {abstract} +search(T): PrioritySearcher<O>
+        {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+        {abstract} +computeExactDistance(): double
+        {abstract} +allLowerBound(): double
+        {abstract} +advance(): PrioritySearcher<O>
+    }
+    class "<size:14>GNAT\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT<O> [[GNAT.html]]
+
+    elki.database.query.PrioritySearcher <|.. elki.index.tree.metrical.vptree.GNAT.GNATPrioritySearcher
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATPrioritySearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

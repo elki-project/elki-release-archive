@@ -1,0 +1,113 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.lof.parallel {
+
+        class SimplifiedLRDProcessor [[SimplifiedLRDProcessor.html]] {
+            -knns: DataStore<? extends KNNList>
+            +SimplifiedLRDProcessor(DataStore<? extends KNNList>)
+            +instantiate(Executor): Instance
+        }
+
+        class elki.outlier.lof.parallel.SimplifiedLRDProcessor.Instance [[SimplifiedLRDProcessor.Instance.html]] {
+            +Instance(Instance)
+            +map(DBIDRef): void
+        }
+
+        class ParallelSimplifiedLOF<O> [[ParallelSimplifiedLOF.html]] {
+            #distance: Distance<? super O>
+            #kplus: int
+            +ParallelSimplifiedLOF(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.lof.parallel.ParallelSimplifiedLOF.Par<O> {
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): ParallelSimplifiedLOF<O>
+        }
+
+        class LOFProcessor [[LOFProcessor.html]] {
+            -knns: DataStore<? extends KNNList>
+            -lrds: DoubleDataStore
+            -noself: boolean
+            +LOFProcessor(DataStore<? extends KNNList>, DoubleDataStore, boolean)
+            +instantiate(Executor): Instance
+        }
+
+        class elki.outlier.lof.parallel.LOFProcessor.Instance [[LOFProcessor.Instance.html]] {
+            #Instance(Instance)
+            +map(DBIDRef): void
+        }
+
+        class ParallelLOF<O> [[ParallelLOF.html]] {
+            #distance: Distance<? super O>
+            #kplus: int
+            +ParallelLOF(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.lof.parallel.ParallelLOF.Par<O> {
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): ParallelLOF<O>
+        }
+
+        class LRDProcessor [[LRDProcessor.html]] {
+            -knns: DataStore<? extends KNNList>
+            -kdists: DoubleDataStore
+            +LRDProcessor(DataStore<? extends KNNList>, DoubleDataStore)
+            +instantiate(Executor): Instance
+        }
+
+        class elki.outlier.lof.parallel.LRDProcessor.Instance [[LRDProcessor.Instance.html]] {
+            #Instance(Instance)
+            +map(DBIDRef): void
+        }
+
+        elki.parallel.processor.AbstractDoubleProcessor <|-- SimplifiedLRDProcessor
+        elki.parallel.processor.AbstractDoubleProcessor.Instance <|-- elki.outlier.lof.parallel.SimplifiedLRDProcessor.Instance
+        SimplifiedLRDProcessor +-- elki.outlier.lof.parallel.SimplifiedLRDProcessor.Instance
+        elki.outlier.OutlierAlgorithm <|.. ParallelSimplifiedLOF
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.parallel.ParallelSimplifiedLOF.Par
+        ParallelSimplifiedLOF +-- elki.outlier.lof.parallel.ParallelSimplifiedLOF.Par
+        elki.parallel.processor.AbstractDoubleProcessor <|-- LOFProcessor
+        elki.parallel.processor.AbstractDoubleProcessor.Instance <|-- elki.outlier.lof.parallel.LOFProcessor.Instance
+        LOFProcessor +-- elki.outlier.lof.parallel.LOFProcessor.Instance
+        elki.outlier.OutlierAlgorithm <|.. ParallelLOF
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.parallel.ParallelLOF.Par
+        ParallelLOF +-- elki.outlier.lof.parallel.ParallelLOF.Par
+        elki.parallel.processor.AbstractDoubleProcessor <|-- LRDProcessor
+        elki.parallel.processor.AbstractDoubleProcessor.Instance <|-- elki.outlier.lof.parallel.LRDProcessor.Instance
+        LRDProcessor +-- elki.outlier.lof.parallel.LRDProcessor.Instance
+    }
+
+    namespace elki.parallel.processor {
+        abstract class AbstractDoubleProcessor [[../../../parallel/processor/AbstractDoubleProcessor.html]] {
+            #output: SharedDouble
+            {abstract} +instantiate(Executor): Instance
+        }
+        abstract class elki.parallel.processor.AbstractDoubleProcessor.Instance [[../../../parallel/processor/AbstractDoubleProcessor.Instance.html]] {
+            #output: Instance
+            {abstract} +map(DBIDRef): void
+        }
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

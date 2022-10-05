@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HeDESNormalizationOutlierScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.HeDESNormalizationOutlierScaling [[HeDESNormalizationOutlierScaling.html]] {
+        ~mean: double
+        ~stddev: double
+        ~scaledmin: double
+        ~scaledmax: double
+        +prepare(OutlierResult): void
+        +prepare(A, NumberArrayAdapter<?, A>): void
+        +getMax(): double
+        +getMin(): double
+        +getScaled(double): double
+    }
+
+    interface "<size:14>OutlierScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierScaling [[OutlierScaling.html]] {
+        {abstract} +prepare(OutlierResult): void
+        {abstract} +prepare(A, NumberArrayAdapter<?, A>): void
+    }
+
+    elki.utilities.scaling.outlier.OutlierScaling <|.. elki.utilities.scaling.outlier.HeDESNormalizationOutlierScaling
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

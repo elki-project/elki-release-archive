@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AbstractLayout3DPC.AbstractNode\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.AbstractLayout3DPC.AbstractNode<N extends AbstractNode<N>> [[AbstractLayout3DPC.AbstractNode.html]] {
+        +dim: int
+        +x: double
+        +y: double
+        +children: List<N extends AbstractNode<N>>
+        +AbstractNode(int, List<N extends AbstractNode<N>>)
+        +getDim(): int
+        +getX(): double
+        +getY(): double
+        +getChild(int): N extends AbstractNode<N extends AbstractNode<N>>
+        +numChildren(): int
+    }
+
+    interface "<size:14>Layout.Node\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.Layout.Node [[Layout.Node.html]] {
+        {abstract} +getDim(): int
+        {abstract} +getX(): double
+        {abstract} +getY(): double
+        {abstract} +getChild(int): Node
+        {abstract} +numChildren(): int
+    }
+    abstract class "<size:14>AbstractLayout3DPC\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.AbstractLayout3DPC<N extends Node> [[AbstractLayout3DPC.html]] {
+        {abstract} +layout(int, double[]): Layout
+        {abstract} ~makeNode(int, List<N extends Node>): N extends Node
+    }
+
+    elki.visualization.parallel3d.layout.Layout.Node <|.. elki.visualization.parallel3d.layout.AbstractLayout3DPC.AbstractNode
+    elki.visualization.parallel3d.layout.AbstractLayout3DPC +-- elki.visualization.parallel3d.layout.AbstractLayout3DPC.AbstractNode
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

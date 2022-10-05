@@ -1,0 +1,377 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.distance.minkowski {
+
+        class WeightedEuclideanDistance [[WeightedEuclideanDistance.html]] {
+            +WeightedEuclideanDistance(double[])
+            -preDistance(NumberVector, NumberVector, int, int): double
+            -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+            -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+            -preNorm(NumberVector, int, int): double
+            -preNormMBR(SpatialComparable, int, int): double
+            +distance(NumberVector, NumberVector): double
+            +norm(NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+        }
+
+        class elki.distance.minkowski.WeightedEuclideanDistance.Par [[WeightedEuclideanDistance.Par.html]] {
+            #weights: double[]
+            +configure(Parameterization): void
+            +make(): WeightedEuclideanDistance
+        }
+
+        class MinimumDistance [[MinimumDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +norm(NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isMetric(): boolean
+        }
+
+        class elki.distance.minkowski.MinimumDistance.Par [[MinimumDistance.Par.html]] {
+            +make(): MinimumDistance
+        }
+
+        class SparseLPNormDistance [[SparseLPNormDistance.html]] {
+            -p: double
+            -invp: double
+            +SparseLPNormDistance(double)
+            +distance(SparseNumberVector, SparseNumberVector): double
+            +norm(SparseNumberVector): double
+            +getInputTypeRestriction(): SimpleTypeInformation<? super SparseNumberVector>
+            +isMetric(): boolean
+        }
+
+        class elki.distance.minkowski.SparseLPNormDistance.Par [[SparseLPNormDistance.Par.html]] {
+            ~p: double
+            +configure(Parameterization): void
+            +make(): SparseLPNormDistance
+        }
+
+        class WeightedSquaredEuclideanDistance [[WeightedSquaredEuclideanDistance.html]] {
+            #weights: double[]
+            +WeightedSquaredEuclideanDistance(double[])
+            +distance(NumberVector, NumberVector): double
+            +norm(NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isSquared(): boolean
+        }
+
+        class elki.distance.minkowski.WeightedSquaredEuclideanDistance.Par [[WeightedSquaredEuclideanDistance.Par.html]] {
+            #weights: double[]
+            +configure(Parameterization): void
+            +make(): WeightedSquaredEuclideanDistance
+        }
+
+        class ManhattanDistance [[ManhattanDistance.html]] {
+            -preDistance(NumberVector, NumberVector, int, int): double
+            -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+            -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+            -preNorm(NumberVector, int, int): double
+            -preNormMBR(SpatialComparable, int, int): double
+            +distance(NumberVector, NumberVector): double
+            +norm(NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isMetric(): boolean
+        }
+
+        class elki.distance.minkowski.ManhattanDistance.Par [[ManhattanDistance.Par.html]] {
+            +make(): ManhattanDistance
+        }
+
+        class SparseEuclideanDistance [[SparseEuclideanDistance.html]] {
+            +distance(SparseNumberVector, SparseNumberVector): double
+            +norm(SparseNumberVector): double
+        }
+
+        class elki.distance.minkowski.SparseEuclideanDistance.Par [[SparseEuclideanDistance.Par.html]] {
+            +make(): SparseEuclideanDistance
+        }
+
+        class SparseSquaredEuclideanDistance [[SparseSquaredEuclideanDistance.html]] {
+            +distance(SparseNumberVector, SparseNumberVector): double
+            +norm(SparseNumberVector): double
+            +getInputTypeRestriction(): SimpleTypeInformation<? super SparseNumberVector>
+            +isSquared(): boolean
+            +isMetric(): boolean
+        }
+
+        class elki.distance.minkowski.SparseSquaredEuclideanDistance.Par [[SparseSquaredEuclideanDistance.Par.html]] {
+            +make(): SparseSquaredEuclideanDistance
+        }
+
+        class EuclideanDistance [[EuclideanDistance.html]] {
+            -preDistance(NumberVector, NumberVector, int, int): double
+            -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+            -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+            -preNorm(NumberVector, int, int): double
+            -preNormMBR(SpatialComparable, int, int): double
+            +distance(NumberVector, NumberVector): double
+            +norm(NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +maxDist(SpatialComparable, SpatialComparable): double
+            +isMetric(): boolean
+        }
+
+        class elki.distance.minkowski.EuclideanDistance.Par [[EuclideanDistance.Par.html]] {
+            +make(): EuclideanDistance
+        }
+
+        class SquaredEuclideanDistance [[SquaredEuclideanDistance.html]] {
+            -preDistance(double[], double[], int, int): double
+            -preDistance(NumberVector, NumberVector, int, int): double
+            -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+            -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+            -preNorm(NumberVector, int, int): double
+            -preNorm(double[], int, int): double
+            -preNormMBR(SpatialComparable, int, int): double
+            +distance(NumberVector, NumberVector): double
+            +distance(double[], double[]): double
+            +norm(NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isSquared(): boolean
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.minkowski.SquaredEuclideanDistance.Par [[SquaredEuclideanDistance.Par.html]] {
+            +make(): SquaredEuclideanDistance
+        }
+
+        class WeightedMaximumDistance [[WeightedMaximumDistance.html]] {
+            +WeightedMaximumDistance(double[])
+            -preDistance(NumberVector, NumberVector, int, int): double
+            -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+            -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+            -preNorm(NumberVector, int, int): double
+            -preNormMBR(SpatialComparable, int, int): double
+            +distance(NumberVector, NumberVector): double
+            +norm(NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+        }
+
+        class elki.distance.minkowski.WeightedMaximumDistance.Par [[WeightedMaximumDistance.Par.html]] {
+            #weights: double[]
+            +configure(Parameterization): void
+            +make(): WeightedMaximumDistance
+        }
+
+        class LPIntegerNormDistance [[LPIntegerNormDistance.html]] {
+            ~intp: int
+            +LPIntegerNormDistance(int)
+            -preDistance(NumberVector, NumberVector, int, int): double
+            -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+            -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+            -preNorm(NumberVector, int, int): double
+            -preNormMBR(SpatialComparable, int, int): double
+            +distance(NumberVector, NumberVector): double
+            +norm(NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+        }
+
+        class elki.distance.minkowski.LPIntegerNormDistance.Par [[LPIntegerNormDistance.Par.html]] {
+            #p: int
+            +configure(Parameterization): void
+            +make(): LPIntegerNormDistance
+        }
+
+        class WeightedLPNormDistance [[WeightedLPNormDistance.html]] {
+            #weights: double[]
+            +WeightedLPNormDistance(double, double[])
+            -preDistance(NumberVector, NumberVector, int, int): double
+            -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+            -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+            -preNorm(NumberVector, int, int): double
+            -preNormMBR(SpatialComparable, int, int): double
+            +distance(NumberVector, NumberVector): double
+            +norm(NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.minkowski.WeightedLPNormDistance.Par [[WeightedLPNormDistance.Par.html]] {
+            #weights: double[]
+            +configure(Parameterization): void
+            +make(): WeightedLPNormDistance
+        }
+
+        class SparseManhattanDistance [[SparseManhattanDistance.html]] {
+            +distance(SparseNumberVector, SparseNumberVector): double
+            +norm(SparseNumberVector): double
+        }
+
+        class elki.distance.minkowski.SparseManhattanDistance.Par [[SparseManhattanDistance.Par.html]] {
+            +make(): SparseManhattanDistance
+        }
+
+        class SparseMaximumDistance [[SparseMaximumDistance.html]] {
+            +distance(SparseNumberVector, SparseNumberVector): double
+            +norm(SparseNumberVector): double
+        }
+
+        class elki.distance.minkowski.SparseMaximumDistance.Par [[SparseMaximumDistance.Par.html]] {
+            +make(): SparseMaximumDistance
+        }
+
+        class LPNormDistance [[LPNormDistance.html]] {
+            #p: double
+            #invp: double
+            +LPNormDistance(double)
+            -preDistance(NumberVector, NumberVector, int, int): double
+            -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+            -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+            -preNorm(NumberVector, int, int): double
+            -preNormMBR(SpatialComparable, int, int): double
+            +distance(NumberVector, NumberVector): double
+            +norm(NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isMetric(): boolean
+            +getP(): double
+            +getInvP(): double
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.minkowski.LPNormDistance.Par [[LPNormDistance.Par.html]] {
+            {static} +P_ID: OptionID
+            #p: double
+            +configure(Parameterization): void
+            +make(): LPNormDistance
+        }
+
+        class MaximumDistance [[MaximumDistance.html]] {
+            -preDistance(NumberVector, NumberVector, int, int): double
+            -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+            -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+            -preNorm(NumberVector, int, int): double
+            -preNormMBR(SpatialComparable, int, int): double
+            +distance(NumberVector, NumberVector): double
+            +norm(NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isMetric(): boolean
+        }
+
+        class elki.distance.minkowski.MaximumDistance.Par [[MaximumDistance.Par.html]] {
+            +make(): MaximumDistance
+        }
+
+        class WeightedManhattanDistance [[WeightedManhattanDistance.html]] {
+            +WeightedManhattanDistance(double[])
+            -preDistance(NumberVector, NumberVector, int, int): double
+            -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+            -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+            -preNorm(NumberVector, int, int): double
+            -preNormMBR(SpatialComparable, int, int): double
+            +distance(NumberVector, NumberVector): double
+            +norm(NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+        }
+
+        class elki.distance.minkowski.WeightedManhattanDistance.Par [[WeightedManhattanDistance.Par.html]] {
+            #weights: double[]
+            +configure(Parameterization): void
+            +make(): WeightedManhattanDistance
+        }
+
+        WeightedLPNormDistance <|-- WeightedEuclideanDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.WeightedEuclideanDistance.Par
+        WeightedEuclideanDistance +-- elki.distance.minkowski.WeightedEuclideanDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- MinimumDistance
+        elki.distance.SpatialPrimitiveDistance <|.. MinimumDistance
+        elki.distance.Norm <|.. MinimumDistance
+        MinimumDistance --> MinimumDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.MinimumDistance.Par
+        MinimumDistance +-- elki.distance.minkowski.MinimumDistance.Par
+        elki.distance.PrimitiveDistance <|.. SparseLPNormDistance
+        elki.distance.Norm <|.. SparseLPNormDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.SparseLPNormDistance.Par
+        SparseLPNormDistance +-- elki.distance.minkowski.SparseLPNormDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- WeightedSquaredEuclideanDistance
+        elki.distance.SpatialPrimitiveDistance <|.. WeightedSquaredEuclideanDistance
+        elki.distance.WeightedNumberVectorDistance <|.. WeightedSquaredEuclideanDistance
+        elki.distance.Norm <|.. WeightedSquaredEuclideanDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.WeightedSquaredEuclideanDistance.Par
+        WeightedSquaredEuclideanDistance +-- elki.distance.minkowski.WeightedSquaredEuclideanDistance.Par
+        LPIntegerNormDistance <|-- ManhattanDistance
+        ManhattanDistance --> ManhattanDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.ManhattanDistance.Par
+        ManhattanDistance +-- elki.distance.minkowski.ManhattanDistance.Par
+        SparseLPNormDistance <|-- SparseEuclideanDistance
+        SparseEuclideanDistance --> SparseEuclideanDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.SparseEuclideanDistance.Par
+        SparseEuclideanDistance +-- elki.distance.minkowski.SparseEuclideanDistance.Par
+        elki.distance.PrimitiveDistance <|.. SparseSquaredEuclideanDistance
+        elki.distance.Norm <|.. SparseSquaredEuclideanDistance
+        SparseSquaredEuclideanDistance --> SparseSquaredEuclideanDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.SparseSquaredEuclideanDistance.Par
+        SparseSquaredEuclideanDistance +-- elki.distance.minkowski.SparseSquaredEuclideanDistance.Par
+        LPIntegerNormDistance <|-- EuclideanDistance
+        EuclideanDistance --> EuclideanDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.EuclideanDistance.Par
+        EuclideanDistance +-- elki.distance.minkowski.EuclideanDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- SquaredEuclideanDistance
+        elki.distance.SpatialPrimitiveDistance <|.. SquaredEuclideanDistance
+        elki.distance.Norm <|.. SquaredEuclideanDistance
+        SquaredEuclideanDistance --> SquaredEuclideanDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.SquaredEuclideanDistance.Par
+        SquaredEuclideanDistance +-- elki.distance.minkowski.SquaredEuclideanDistance.Par
+        WeightedLPNormDistance <|-- WeightedMaximumDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.WeightedMaximumDistance.Par
+        WeightedMaximumDistance +-- elki.distance.minkowski.WeightedMaximumDistance.Par
+        LPNormDistance <|-- LPIntegerNormDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.LPIntegerNormDistance.Par
+        LPIntegerNormDistance +-- elki.distance.minkowski.LPIntegerNormDistance.Par
+        LPNormDistance <|-- WeightedLPNormDistance
+        elki.distance.WeightedNumberVectorDistance <|.. WeightedLPNormDistance
+        elki.distance.minkowski.LPNormDistance.Par <|-- elki.distance.minkowski.WeightedLPNormDistance.Par
+        WeightedLPNormDistance +-- elki.distance.minkowski.WeightedLPNormDistance.Par
+        SparseLPNormDistance <|-- SparseManhattanDistance
+        SparseManhattanDistance --> SparseManhattanDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.SparseManhattanDistance.Par
+        SparseManhattanDistance +-- elki.distance.minkowski.SparseManhattanDistance.Par
+        SparseLPNormDistance <|-- SparseMaximumDistance
+        SparseMaximumDistance --> SparseMaximumDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.SparseMaximumDistance.Par
+        SparseMaximumDistance +-- elki.distance.minkowski.SparseMaximumDistance.Par
+        elki.distance.SpatialPrimitiveDistance <|.. LPNormDistance
+        elki.distance.NumberVectorDistance <|.. LPNormDistance
+        elki.distance.Norm <|.. LPNormDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.LPNormDistance.Par
+        LPNormDistance +-- elki.distance.minkowski.LPNormDistance.Par
+        LPNormDistance <|-- MaximumDistance
+        MaximumDistance --> MaximumDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.MaximumDistance.Par
+        MaximumDistance +-- elki.distance.minkowski.MaximumDistance.Par
+        WeightedLPNormDistance <|-- WeightedManhattanDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.WeightedManhattanDistance.Par
+        WeightedManhattanDistance +-- elki.distance.minkowski.WeightedManhattanDistance.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.distance {
+        abstract class AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+        interface SpatialPrimitiveDistance<V extends SpatialComparable> [[../SpatialPrimitiveDistance.html]] {
+            {abstract} +minDist(SpatialComparable, SpatialComparable): double
+            +instantiate(Relation<T extends SpatialComparable>): SpatialPrimitiveDistanceQuery<T extends SpatialComparable>
+        }
+        interface Norm<O> [[../Norm.html]] {
+            {abstract} +norm(O): double
+        }
+        interface PrimitiveDistance<O> [[../PrimitiveDistance.html]] {
+            {abstract} +distance(O, O): double
+            {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+            +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+        }
+        interface WeightedNumberVectorDistance<V> [[../WeightedNumberVectorDistance.html]] {
+            {static} +WEIGHTS_ID: OptionID
+        }
+        interface NumberVectorDistance<O> [[../NumberVectorDistance.html]] {
+            {abstract} +distance(NumberVector, NumberVector): double
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

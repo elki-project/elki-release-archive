@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-index-lsh",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-index-lsh-0.8.0.jar",
+          "url": "elki-index-lsh-0.8.0.jar",
+          "size": 37141,
+          "sha512": "4972af226a3b439a592c7af545e8ee12f681c825fbc8092ce71e06eafc974cc7b3aefce131319bd72fdcdc4f8d4836b8f7446666c8eba574c4d2f77cc1624cac",
+          "sha256": "f1be47bf16338271f1fc5f15abba903823aefbd168b43a09d5b3a2e88f4aea28",
+          "sha1": "18eb4057db62e2db982d47053a72703c61d25821",
+          "md5": "9f1e7784fc7a0ff7d88506ae889ceb73"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-index-lsh-0.8.0.jar",
+          "url": "elki-index-lsh-0.8.0.jar",
+          "size": 37141,
+          "sha512": "4972af226a3b439a592c7af545e8ee12f681c825fbc8092ce71e06eafc974cc7b3aefce131319bd72fdcdc4f8d4836b8f7446666c8eba574c4d2f77cc1624cac",
+          "sha256": "f1be47bf16338271f1fc5f15abba903823aefbd168b43a09d5b3a2e88f4aea28",
+          "sha1": "18eb4057db62e2db982d47053a72703c61d25821",
+          "md5": "9f1e7784fc7a0ff7d88506ae889ceb73"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-lsh",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-index-lsh-0.8.0-test-fixtures.jar",
+          "url": "elki-index-lsh-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "2f7df70741803d8e5c6397238fb763efcaabf74329e1ec2468a9ba7258b21df857c69f605462c25a211a6b1070ffbed4fc687bf0f8337bd147230acd9f17c10a",
+          "sha256": "9cef4484c1366ba9fb33085c75dabba95a14ff47814b492f25c255555b9d8307",
+          "sha1": "ba990ece926b42f29495de723d2cef32915d197f",
+          "md5": "f882936df1fed54e927443240364b823"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-index-lsh-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-lsh",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-index-lsh-0.8.0-test-fixtures.jar",
+          "url": "elki-index-lsh-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "2f7df70741803d8e5c6397238fb763efcaabf74329e1ec2468a9ba7258b21df857c69f605462c25a211a6b1070ffbed4fc687bf0f8337bd147230acd9f17c10a",
+          "sha256": "9cef4484c1366ba9fb33085c75dabba95a14ff47814b492f25c255555b9d8307",
+          "sha1": "ba990ece926b42f29495de723d2cef32915d197f",
+          "md5": "f882936df1fed54e927443240364b823"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-index-lsh-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

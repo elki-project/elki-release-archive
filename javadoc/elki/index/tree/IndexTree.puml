@@ -1,0 +1,49 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>IndexTree\n<size:10>elki.index.tree" as elki.index.tree.IndexTree<N extends Node<E>, E> [[IndexTree.html]] {
+        -file: PageFile<N extends Node<E>>
+        #initialized: boolean
+        #dirCapacity: int
+        #leafCapacity: int
+        #dirMinimum: int
+        #leafMinimum: int
+        -rootEntry: E
+        +IndexTree(PageFile<N extends Node<E>>)
+        +initialize(): void
+        {abstract} #getLogger(): Logging
+        +getRootEntry(): E
+        +getRootID(): int
+        #isRoot(N extends Node<E>): boolean
+        #getPageID(E): int
+        +getNode(int): N extends Node<E>
+        +getNode(E): N extends Node<E>
+        #writeNode(N extends Node<E>): void
+        #deleteNode(N extends Node<E>): void
+        #createHeader(): TreeIndexHeader
+        +initializeFromFile(TreeIndexHeader, PageFile<N extends Node<E>>): void
+        #initialize(E): void
+        +getRootPath(): IndexTreePath<E>
+        {abstract} #initializeCapacities(E): void
+        {abstract} #createEmptyRoot(E): void
+        {abstract} #createRootEntry(): E
+        {abstract} #createNewLeafNode(): N extends Node<E>
+        {abstract} #createNewDirectoryNode(): N extends Node<E>
+        #preInsert(E): void
+        #postDelete(E): void
+        +logStatistics(): void
+        #getPageSize(): int
+        #--getFile--(): PageFile<N extends Node<E>>
+    }
+
+    interface "<size:14>Index\n<size:10>elki.index" as elki.index.Index [[../Index.html]] {
+        {abstract} +initialize(): void
+    }
+
+    elki.index.Index <|.. elki.index.tree.IndexTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

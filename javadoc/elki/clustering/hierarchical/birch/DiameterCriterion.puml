@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DiameterCriterion\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.DiameterCriterion [[DiameterCriterion.html]] {
+        {static} +STATIC: DiameterCriterion
+        +squaredCriterion(ClusteringFeature, NumberVector): double
+        +squaredCriterion(ClusteringFeature, ClusteringFeature): double
+    }
+
+    interface "<size:14>BIRCHAbsorptionCriterion\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.BIRCHAbsorptionCriterion [[BIRCHAbsorptionCriterion.html]] {
+        {abstract} +squaredCriterion(ClusteringFeature, NumberVector): double
+        {abstract} +squaredCriterion(ClusteringFeature, ClusteringFeature): double
+    }
+    class "<size:14>DiameterCriterion.Par\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.DiameterCriterion.Par [[DiameterCriterion.Par.html]]
+
+    elki.clustering.hierarchical.birch.BIRCHAbsorptionCriterion <|.. elki.clustering.hierarchical.birch.DiameterCriterion
+    elki.clustering.hierarchical.birch.DiameterCriterion +-- elki.clustering.hierarchical.birch.DiameterCriterion.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

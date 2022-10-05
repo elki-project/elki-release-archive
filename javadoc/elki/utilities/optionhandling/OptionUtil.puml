@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OptionUtil\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.OptionUtil [[OptionUtil.html]] {
+        {static} +formatForConsole(StringBuilder, int, Collection<TrackedParameter>): void
+        {static} +getFullDescription(Parameter<?>): String
+        {static} -println(StringBuilder, int, String): void
+        {static} +describeParameterizable(StringBuilder, Class<?>, int): StringBuilder
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

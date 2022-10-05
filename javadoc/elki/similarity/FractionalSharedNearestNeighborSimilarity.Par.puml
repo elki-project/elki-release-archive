@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FractionalSharedNearestNeighborSimilarity.Par\n<size:10>elki.similarity" as elki.similarity.FractionalSharedNearestNeighborSimilarity.Par<O> {
+        +configure(Parameterization): void
+        +make(): FractionalSharedNearestNeighborSimilarity<O>
+    }
+
+    abstract class "<size:14>AbstractIndexBasedSimilarity.Par\n<size:10>elki.similarity" as elki.similarity.AbstractIndexBasedSimilarity.Par<Factory<O>> [[AbstractIndexBasedSimilarity.Par.html]]
+    class "<size:14>FractionalSharedNearestNeighborSimilarity\n<size:10>elki.similarity" as elki.similarity.FractionalSharedNearestNeighborSimilarity<O> [[FractionalSharedNearestNeighborSimilarity.html]]
+
+    elki.similarity.AbstractIndexBasedSimilarity.Par <|-- elki.similarity.FractionalSharedNearestNeighborSimilarity.Par
+    elki.similarity.FractionalSharedNearestNeighborSimilarity +-- elki.similarity.FractionalSharedNearestNeighborSimilarity.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

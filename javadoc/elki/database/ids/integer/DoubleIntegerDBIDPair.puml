@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleIntegerDBIDPair\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDPair [[DoubleIntegerDBIDPair.html]] {
+        ~value: double
+        ~id: int
+        #DoubleIntegerDBIDPair(double, int)
+        +internalGetIndex(): int
+        +compareTo(DoubleDBIDPair): int
+        +doubleValue(): double
+    }
+
+    interface "<size:14>DoubleDBIDPair\n<size:10>elki.database.ids" as elki.database.ids.DoubleDBIDPair [[../DoubleDBIDPair.html]] {
+        {abstract} +doubleValue(): double
+    }
+    interface "<size:14>IntegerDBIDRef\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDRef [[IntegerDBIDRef.html]] {
+        {abstract} +internalGetIndex(): int
+    }
+
+    elki.database.ids.DoubleDBIDPair <|.. elki.database.ids.integer.DoubleIntegerDBIDPair
+    elki.database.ids.integer.IntegerDBIDRef <|.. elki.database.ids.integer.DoubleIntegerDBIDPair
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

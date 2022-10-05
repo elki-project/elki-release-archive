@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleGaussianUncertainifier\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.SimpleGaussianUncertainifier [[SimpleGaussianUncertainifier.html]] {
+        ~minDev: double
+        ~maxDev: double
+        ~symmetric: boolean
+        +SimpleGaussianUncertainifier(double, double, boolean)
+        +newFeatureVector(Random, A, NumberArrayAdapter<?, A>): SimpleGaussianContinuousUncertainObject
+        +getFactory(): Factory<SimpleGaussianContinuousUncertainObject, ?>
+    }
+
+    interface "<size:14>Uncertainifier\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.Uncertainifier<SimpleGaussianContinuousUncertainObject> [[Uncertainifier.html]] {
+        {abstract} +newFeatureVector(Random, A, NumberArrayAdapter<?, A>): SimpleGaussianContinuousUncertainObject
+        {abstract} +getFactory(): Factory<UO extends UncertainObject, ?>
+    }
+    class "<size:14>SimpleGaussianUncertainifier.Par\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.SimpleGaussianUncertainifier.Par [[SimpleGaussianUncertainifier.Par.html]]
+
+    elki.data.uncertain.uncertainifier.Uncertainifier <|.. elki.data.uncertain.uncertainifier.SimpleGaussianUncertainifier
+    elki.data.uncertain.uncertainifier.SimpleGaussianUncertainifier +-- elki.data.uncertain.uncertainifier.SimpleGaussianUncertainifier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

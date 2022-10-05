@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VPTree.VPTreeRangeObjectSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreeRangeObjectSearcher [[VPTree.VPTreeRangeObjectSearcher.html]] {
+        -query: O
+        +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        #queryDistance(DBIDRef): double
+    }
+
+    abstract class "<size:14>VPTree.VPTreeRangeSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreeRangeSearcher [[VPTree.VPTreeRangeSearcher.html]] {
+        {abstract} #queryDistance(DBIDRef): double
+    }
+    interface "<size:14>RangeSearcher\n<size:10>elki.database.query.range" as elki.database.query.range.RangeSearcher<O> [[../../../../database/query/range/RangeSearcher.html]] {
+        {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+    class "<size:14>VPTree\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree<O> [[VPTree.html]]
+
+    elki.index.tree.metrical.vptree.VPTree.VPTreeRangeSearcher <|-- elki.index.tree.metrical.vptree.VPTree.VPTreeRangeObjectSearcher
+    elki.database.query.range.RangeSearcher <|.. elki.index.tree.metrical.vptree.VPTree.VPTreeRangeObjectSearcher
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeRangeObjectSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

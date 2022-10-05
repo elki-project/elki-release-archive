@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ConvertToStringView\n<size:10>elki.database.relation" as elki.database.relation.ConvertToStringView [[ConvertToStringView.html]] {
+        ~existing: Relation<?>
+        +ConvertToStringView(Relation<?>)
+        +get(DBIDRef): String
+        +getDBIDs(): DBIDs
+        +iterDBIDs(): DBIDIter
+        +size(): int
+        +getDataTypeInformation(): SimpleTypeInformation<String>
+        +getLongName(): String
+    }
+
+    interface "<size:14>Relation\n<size:10>elki.database.relation" as elki.database.relation.Relation<String> [[Relation.html]] {
+        {abstract} +get(DBIDRef): String
+        {abstract} +getDataTypeInformation(): SimpleTypeInformation<O>
+        {abstract} +getDBIDs(): DBIDs
+        {abstract} +iterDBIDs(): DBIDIter
+        {abstract} +size(): int
+        {abstract} +getLongName(): String
+    }
+
+    elki.database.relation.Relation <|.. elki.database.relation.ConvertToStringView
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

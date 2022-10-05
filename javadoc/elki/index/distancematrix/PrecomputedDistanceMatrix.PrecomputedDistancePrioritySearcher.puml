@@ -1,0 +1,51 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher [[PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher.html]] {
+        ~it: DBIDArrayIter
+        ~off: int
+        ~sorted: int
+        ~lbsorted: int
+        ~upsorted: int
+        ~threshold: double
+        ~idx: int[]
+        ~dists: double[]
+        +search(DBIDRef): PrioritySearcher<DBIDRef>
+        -partialSort(int): void
+        +advance(): PrioritySearcher<DBIDRef>
+        +valid(): boolean
+        +decreaseCutoff(double): PrioritySearcher<DBIDRef>
+        +internalGetIndex(): int
+        +computeExactDistance(): double
+        +getApproximateDistance(): double
+        +getApproximateAccuracy(): double
+        +getLowerBound(): double
+        +getUpperBound(): double
+        +allLowerBound(): double
+        +compare(PrecomputedDistancePrioritySearcher, int, int): int
+        +swap(PrecomputedDistancePrioritySearcher, int, int): void
+        +isSorted(PrecomputedDistancePrioritySearcher, int, int): void
+    }
+
+    interface "<size:14>PrioritySearcher\n<size:10>elki.database.query" as elki.database.query.PrioritySearcher<DBIDRef> [[../../database/query/PrioritySearcher.html]] {
+        {abstract} +search(DBIDRef): PrioritySearcher<O>
+        {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+        {abstract} +computeExactDistance(): double
+        {abstract} +allLowerBound(): double
+        {abstract} +advance(): PrioritySearcher<O>
+    }
+    interface "<size:14>QuickSelect.Adapter\n<size:10>elki.utilities.datastructures" as elki.utilities.datastructures.QuickSelect.Adapter<PrecomputedDistancePrioritySearcher> [[../../utilities/datastructures/QuickSelect.Adapter.html]] {
+        {abstract} +swap(PrecomputedDistancePrioritySearcher, int, int): void
+        {abstract} +compare(PrecomputedDistancePrioritySearcher, int, int): int
+    }
+    class "<size:14>PrecomputedDistanceMatrix\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix<O> [[PrecomputedDistanceMatrix.html]]
+
+    elki.database.query.PrioritySearcher <|.. elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher
+    elki.utilities.datastructures.QuickSelect.Adapter <|.. elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher
+    elki.index.distancematrix.PrecomputedDistanceMatrix +-- elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

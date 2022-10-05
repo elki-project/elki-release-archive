@@ -1,0 +1,133 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.parallel.selection {
+
+        class SelectionLineVisualization [[SelectionLineVisualization.html]] {
+            {static} +NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.parallel.selection.SelectionLineVisualization.Instance [[SelectionLineVisualization.Instance.html]] {
+            {static} +MARKER: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -drawLine(DBIDRef): Element
+            -addCSSClasses(SVGPlot): void
+        }
+
+        class SelectionToolLineVisualization [[SelectionToolLineVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        enum elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization.Mode [[SelectionToolLineVisualization.Mode.html]] {
+            {static} +REPLACE
+            {static} +ADD
+            {static} +INVERT
+        }
+
+        class elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization.Instance [[SelectionToolLineVisualization.Instance.html]] {
+            {static} -CSS_RANGEMARKER: String
+            ~rtag: Element
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -deleteChildren(Element): void
+            +startDrag(SVGPoint, Event): boolean
+            +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            -getInputMode(Event): Mode
+            -updateSelection(Mode, SVGPoint, SVGPoint): void
+            -getAxisRange(double, double): int[]
+            -checkSelected(int[], double[], double, double, double, double): boolean
+            #addCSSClasses(SVGPlot): void
+        }
+
+        class SelectionToolAxisRangeVisualization [[SelectionToolAxisRangeVisualization.html]] {
+            {static} -LOG: Logging
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.parallel.selection.SelectionToolAxisRangeVisualization.Instance [[SelectionToolAxisRangeVisualization.Instance.html]] {
+            {static} -CSS_RANGEMARKER: String
+            -rtag: Element
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -deleteChildren(Element): void
+            -updateSelectionRectKoordinates(double, double, double, double, ModifiableHyperBoundingBox): void
+            +startDrag(SVGPoint, Event): boolean
+            +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            -updateSelection(Projection, SVGPoint, SVGPoint): void
+            #addCSSClasses(SVGPlot): void
+        }
+
+        class SelectionAxisRangeVisualization [[SelectionAxisRangeVisualization.html]] {
+            {static} +NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.parallel.selection.SelectionAxisRangeVisualization.Instance [[SelectionAxisRangeVisualization.Instance.html]] {
+            {static} +MARKER: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            -addCSSClasses(SVGPlot): void
+            +fullRedraw(): void
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. SelectionLineVisualization
+        elki.visualization.visualizers.parallel.AbstractParallelVisualization <|-- elki.visualization.visualizers.parallel.selection.SelectionLineVisualization.Instance
+        elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.parallel.selection.SelectionLineVisualization.Instance
+        SelectionLineVisualization +-- elki.visualization.visualizers.parallel.selection.SelectionLineVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. SelectionToolLineVisualization
+        SelectionToolLineVisualization +-- elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization.Mode
+        elki.visualization.visualizers.parallel.AbstractParallelVisualization <|-- elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization.Instance
+        elki.visualization.batikutil.DragableArea.DragListener <|.. elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization.Instance
+        SelectionToolLineVisualization +-- elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. SelectionToolAxisRangeVisualization
+        elki.visualization.visualizers.parallel.AbstractParallelVisualization <|-- elki.visualization.visualizers.parallel.selection.SelectionToolAxisRangeVisualization.Instance
+        elki.visualization.batikutil.DragableArea.DragListener <|.. elki.visualization.visualizers.parallel.selection.SelectionToolAxisRangeVisualization.Instance
+        SelectionToolAxisRangeVisualization +-- elki.visualization.visualizers.parallel.selection.SelectionToolAxisRangeVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. SelectionAxisRangeVisualization
+        elki.visualization.visualizers.parallel.AbstractParallelVisualization <|-- elki.visualization.visualizers.parallel.selection.SelectionAxisRangeVisualization.Instance
+        SelectionAxisRangeVisualization +-- elki.visualization.visualizers.parallel.selection.SelectionAxisRangeVisualization.Instance
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+    }
+
+    namespace elki.visualization.visualizers.parallel {
+        abstract class AbstractParallelVisualization<NV> [[../AbstractParallelVisualization.html]] {
+            #proj: ProjectionParallel
+            #relation: Relation<NV>
+            ~margins: double[]
+            #axsep: double
+            ~size: double[]
+        }
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreListener [[../../../../database/datastore/DataStoreListener.html]] {
+            {abstract} +contentChanged(DataStoreEvent): void
+        }
+    }
+
+    namespace elki.visualization.batikutil {
+        interface elki.visualization.batikutil.DragableArea.DragListener [[../../../batikutil/DragableArea.DragListener.html]] {
+            {abstract} +startDrag(SVGPoint, Event): boolean
+            {abstract} +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            {abstract} +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

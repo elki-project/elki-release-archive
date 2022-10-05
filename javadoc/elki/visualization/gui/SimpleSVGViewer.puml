@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleSVGViewer\n<size:10>elki.visualization.gui" as elki.visualization.gui.SimpleSVGViewer [[SimpleSVGViewer.html]] {
+        {static} -serialVersionUID: long
+        -svgCanvas: JSVGSynchronizedCanvas
+        +close(): void
+        +saveCurrentPlot(): void
+        +setPlot(SVGPlot): void
+    }
+
+    class "<size:14>JFrame\n<size:10>javax.swing" as javax.swing.JFrame
+
+    javax.swing.JFrame <|-- elki.visualization.gui.SimpleSVGViewer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

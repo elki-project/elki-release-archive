@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Projection2D\n<size:10>elki.visualization.projections" as elki.visualization.projections.Projection2D [[Projection2D.html]] {
+        {abstract} +fastProjectDataToRenderSpace(double[]): double[]
+        {abstract} +fastProjectDataToRenderSpace(NumberVector): double[]
+        {abstract} +fastProjectDataToScaledSpace(double[]): double[]
+        {abstract} +fastProjectDataToScaledSpace(NumberVector): double[]
+        {abstract} +fastProjectScaledToRenderSpace(double[]): double[]
+        {abstract} +fastProjectRenderToDataSpace(double, double): double[]
+        {abstract} +fastProjectRenderToScaledSpace(double, double): double[]
+        {abstract} +fastProjectRelativeDataToRenderSpace(double[]): double[]
+        {abstract} +fastProjectRelativeDataToRenderSpace(NumberVector): double[]
+        {abstract} +fastProjectRelativeScaledToRenderSpace(double[]): double[]
+        {abstract} +estimateViewport(): CanvasSize
+        {abstract} +getVisibleDimensions2D(): long[]
+    }
+
+    interface "<size:14>Projection\n<size:10>elki.visualization.projections" as elki.visualization.projections.Projection [[Projection.html]] {
+        {abstract} +getInputDimensionality(): int
+        {abstract} +getScale(int): LinearScale
+        {abstract} +getProjector(): Projector
+    }
+
+    elki.visualization.projections.Projection <|-- elki.visualization.projections.Projection2D
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

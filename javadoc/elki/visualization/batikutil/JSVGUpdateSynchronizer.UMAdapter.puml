@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>JSVGUpdateSynchronizer.UMAdapter\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.JSVGUpdateSynchronizer.UMAdapter [[JSVGUpdateSynchronizer.UMAdapter.html]] {
+        +managerStarted(UpdateManagerEvent): void
+        +managerStopped(UpdateManagerEvent): void
+    }
+
+    class "<size:14>UpdateManagerAdapter\n<size:10>org.apache.batik.bridge" as org.apache.batik.bridge.UpdateManagerAdapter
+    class "<size:14>JSVGUpdateSynchronizer\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.JSVGUpdateSynchronizer [[JSVGUpdateSynchronizer.html]]
+
+    org.apache.batik.bridge.UpdateManagerAdapter <|-- elki.visualization.batikutil.JSVGUpdateSynchronizer.UMAdapter
+    elki.visualization.batikutil.JSVGUpdateSynchronizer +-- elki.visualization.batikutil.JSVGUpdateSynchronizer.UMAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractSupervisedProjectionVectorFilter\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter<V extends NumberVector> [[AbstractSupervisedProjectionVectorFilter.html]] {
+        #tdim: int
+        +AbstractSupervisedProjectionVectorFilter(int)
+        +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        #convertedType(SimpleTypeInformation<?>, Factory<V extends NumberVector>): SimpleTypeInformation<?>
+        {abstract} #getLogger(): Logging
+        {abstract} #computeProjectionMatrix(List<V extends NumberVector>, List<? extends ClassLabel>, int): double[]
+        #partition(List<? extends O>): Map<O, IntList>
+    }
+
+    interface "<size:14>ObjectFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.ObjectFilter [[../ObjectFilter.html]] {
+        {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+    abstract class "<size:14>AbstractSupervisedProjectionVectorFilter.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter.Par<V extends NumberVector>
+
+    elki.datasource.filter.ObjectFilter <|.. elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter
+    elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter +-- elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

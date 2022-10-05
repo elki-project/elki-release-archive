@@ -1,0 +1,108 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.datastructures.iterator {
+
+        class SubtypeIt<O> [[SubtypeIt.html]] {
+            ~filter: Class<? super O>
+            ~current: O
+            +SubtypeIt(It<?>, Class<? super O>)
+            +get(): O
+            +valid(): boolean
+            +advance(): SubtypeIt<O>
+        }
+
+        class ArrayListIter<O> [[ArrayListIter.html]] {
+            ~data: List<O>
+            ~pos: int
+            +ArrayListIter(List<O>)
+            +valid(): boolean
+            +advance(): ArrayListIter<O>
+            +getOffset(): int
+            +advance(int): ArrayListIter<O>
+            +retract(): ArrayListIter<O>
+            +seek(int): ArrayListIter<O>
+            +get(): O
+        }
+
+        class IterableIt<O> [[IterableIt.html]] {
+            ~inner: Iterator<O>
+            ~cur: Object
+            {static} -END_VALUE: Object
+            +IterableIt(Iterable<O>)
+            +valid(): boolean
+            +advance(): It<O>
+            +get(): O
+        }
+
+        interface It<O> [[It.html]] {
+            {abstract} +get(): O
+            {abstract} +advance(): It<O>
+            +filter(Class<? super T>): It<T>
+            +filter(Predicate<? super O>): It<O>
+            +find(Object): boolean
+            +forEach(Consumer<? super O>): void
+            +collect(T extends Collection<? super O>): T extends Collection<? super O>
+        }
+
+        interface MIter [[MIter.html]] {
+            {abstract} +remove(): void
+        }
+
+        interface Iter [[Iter.html]] {
+            {abstract} +valid(): boolean
+            {abstract} +advance(): Iter
+        }
+
+        class EmptyIterator<O> [[EmptyIterator.html]] {
+            {static} +empty(): It<O>
+            +valid(): boolean
+            +advance(): It<O>
+            +get(): O
+            +filter(Class<? super T>): It<T>
+            +filter(Predicate<? super O>): It<O>
+            +forEach(Consumer<? super O>): void
+        }
+
+        class FilteredIt<O> [[FilteredIt.html]] {
+            ~filter: Predicate<? super O>
+            ~current: O
+            +FilteredIt(It<O>, Predicate<? super O>)
+            +get(): O
+            +valid(): boolean
+            +advance(): FilteredIt<O>
+        }
+
+        interface ArrayIter [[ArrayIter.html]] {
+            {abstract} +advance(): ArrayIter
+            {abstract} +advance(int): ArrayIter
+            {abstract} +retract(): ArrayIter
+            {abstract} +seek(int): ArrayIter
+            {abstract} +getOffset(): int
+        }
+
+        class ConcatIt<O> [[ConcatIt.html]] {
+            -it: int
+            +ConcatIt(It<? extends O>...)
+            +valid(): boolean
+            +get(): O
+            +advance(): It<O>
+        }
+
+        It <|.. SubtypeIt
+        SubtypeIt --> It: it
+        ArrayIter <|.. ArrayListIter
+        It <|.. ArrayListIter
+        It <|.. IterableIt
+        Iter <|-- It
+        Iter <|-- MIter
+        It <|.. EmptyIterator
+        EmptyIterator --> It: STATIC
+        It <|.. FilteredIt
+        FilteredIt --> It: it
+        Iter <|-- ArrayIter
+        It <|.. ConcatIt
+        ConcatIt --> "*" It: its
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

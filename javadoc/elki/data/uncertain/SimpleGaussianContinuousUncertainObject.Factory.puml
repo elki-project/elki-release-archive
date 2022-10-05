@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleGaussianContinuousUncertainObject.Factory\n<size:10>elki.data.uncertain" as elki.data.uncertain.SimpleGaussianContinuousUncertainObject.Factory [[SimpleGaussianContinuousUncertainObject.Factory.html]] {
+        +newFeatureVector(A, ArrayAdapter<? extends Number, A>): SimpleGaussianContinuousUncertainObject
+        +getDefaultSerializer(): ByteBufferSerializer<SimpleGaussianContinuousUncertainObject>
+        +getRestrictionClass(): Class<? super SimpleGaussianContinuousUncertainObject>
+    }
+
+    interface "<size:14>FeatureVector.Factory\n<size:10>elki.data" as elki.data.FeatureVector.Factory<SimpleGaussianContinuousUncertainObject, Number> [[../FeatureVector.Factory.html]] {
+        {abstract} +newFeatureVector(A, ArrayAdapter<? extends D, A>): SimpleGaussianContinuousUncertainObject
+        {abstract} +getDefaultSerializer(): ByteBufferSerializer<V extends FeatureVector<? extends D>>
+        {abstract} +getRestrictionClass(): Class<? super FeatureVector<? extends D>>
+    }
+    class "<size:14>SimpleGaussianContinuousUncertainObject\n<size:10>elki.data.uncertain" as elki.data.uncertain.SimpleGaussianContinuousUncertainObject [[SimpleGaussianContinuousUncertainObject.html]]
+
+    elki.data.FeatureVector.Factory <|.. elki.data.uncertain.SimpleGaussianContinuousUncertainObject.Factory
+    elki.data.uncertain.SimpleGaussianContinuousUncertainObject +-- elki.data.uncertain.SimpleGaussianContinuousUncertainObject.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

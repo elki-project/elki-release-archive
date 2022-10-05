@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SpatialSortBulkSplit\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.bulk" as elki.index.tree.spatial.rstarvariants.strategies.bulk.SpatialSortBulkSplit [[SpatialSortBulkSplit.html]] {
+        ~sorter: SpatialSorter
+        #SpatialSortBulkSplit(SpatialSorter)
+        +partition(List<T extends SpatialComparable>, int, int): List<List<T extends SpatialComparable>>
+    }
+
+    abstract class "<size:14>AbstractBulkSplit\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.bulk" as elki.index.tree.spatial.rstarvariants.strategies.bulk.AbstractBulkSplit [[AbstractBulkSplit.html]]
+    class "<size:14>SpatialSortBulkSplit.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.bulk" as elki.index.tree.spatial.rstarvariants.strategies.bulk.SpatialSortBulkSplit.Par [[SpatialSortBulkSplit.Par.html]]
+
+    elki.index.tree.spatial.rstarvariants.strategies.bulk.AbstractBulkSplit <|-- elki.index.tree.spatial.rstarvariants.strategies.bulk.SpatialSortBulkSplit
+    elki.index.tree.spatial.rstarvariants.strategies.bulk.SpatialSortBulkSplit +-- elki.index.tree.spatial.rstarvariants.strategies.bulk.SpatialSortBulkSplit.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

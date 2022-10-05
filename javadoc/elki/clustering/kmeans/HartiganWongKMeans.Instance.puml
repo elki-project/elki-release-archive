@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HartiganWongKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.HartiganWongKMeans.Instance [[HartiganWongKMeans.Instance.html]] {
+        ~secondary: WritableIntegerDataStore
+        ~r1s: WritableDoubleDataStore
+        ~ncp: int[]
+        ~live: int[]
+        ~itran: boolean[]
+        ~an1: double[]
+        ~an2: double[]
+        -optries: int
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+        #iterate(int): int
+        -initialAssignToNearestCluster(): int
+        -initialize(): void
+        -optimalTransfer(): int
+        -quickTransfer(): int
+        -cacheR1(DBIDIter, NumberVector, int): double
+        -transfer(DBIDRef, NumberVector, int, int): void
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Instance [[AbstractKMeans.Instance.html]] {
+        {abstract} #iterate(int): int
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>HartiganWongKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.HartiganWongKMeans<V extends NumberVector> [[HartiganWongKMeans.html]]
+
+    elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.HartiganWongKMeans.Instance
+    elki.clustering.kmeans.HartiganWongKMeans +-- elki.clustering.kmeans.HartiganWongKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutputStreamLogger\n<size:10>elki.logging" as elki.logging.OutputStreamLogger [[OutputStreamLogger.html]] {
+        -charsSinceNewline: int
+        {static} #CARRIAGE_RETURN: char
+        {static} +UNIX_NEWLINE: char
+        {static} +NEWLINE: String
+        {static} +NEWLINEC: char[]
+        {static} +WHITESPACE: String
+        +OutputStreamLogger(OutputStream)
+        +OutputStreamLogger(OutputStream, String)
+        +OutputStreamLogger(OutputStream, Charset)
+        +OutputStreamLogger(OutputStream, CharsetEncoder)
+        +close(): void
+        -tailingNonNewline(char[], int, int): int
+        -tailingNonNewline(String, int, int): int
+        -countNonNewline(char[], int, int): int
+        -countNonNewline(String, int, int): int
+        +write(char[], int, int): void
+        +write(String, int, int): void
+    }
+
+    class "<size:14>OutputStreamWriter\n<size:10>java.io" as java.io.OutputStreamWriter
+
+    java.io.OutputStreamWriter <|-- elki.logging.OutputStreamLogger
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,256 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.evaluation.clustering.internal {
+
+        class SimplifiedSilhouette [[SimplifiedSilhouette.html]] {
+            {static} -LOG: Logging
+            -distance: NumberVectorDistance<?>
+            -penalize: boolean
+            -key: String
+            +SimplifiedSilhouette(NumberVectorDistance<?>, NoiseHandling, boolean)
+            +evaluateClustering(Relation<? extends NumberVector>, Clustering<?>): double
+            {static} +centroids(Relation<? extends NumberVector>, List<? extends Cluster<?>>, NumberVector[], NoiseHandling): int
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.internal.SimplifiedSilhouette.Par [[SimplifiedSilhouette.Par.html]] {
+            -distance: NumberVectorDistance<?>
+            -penalize: boolean
+            +configure(Parameterization): void
+            +make(): SimplifiedSilhouette
+        }
+
+        class SquaredErrors [[SquaredErrors.html]] {
+            {static} -LOG: Logging
+            -distance: NumberVectorDistance<?>
+            -key: String
+            +SquaredErrors(NumberVectorDistance<?>, NoiseHandling)
+            +evaluateClustering(Relation<? extends NumberVector>, Clustering<?>): double
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.internal.SquaredErrors.Par [[SquaredErrors.Par.html]] {
+            {static} +DISTANCE_ID: OptionID
+            {static} +NOISE_ID: OptionID
+            -distance: NumberVectorDistance<?>
+            +configure(Parameterization): void
+            +make(): SquaredErrors
+        }
+
+        class Silhouette<O> [[Silhouette.html]] {
+            {static} -LOG: Logging
+            {static} +SILHOUETTE_NAME: String
+            -distance: Distance<? super O>
+            -penalize: boolean
+            {static} -key: String
+            +Silhouette(Distance<? super O>, NoiseHandling, boolean)
+            +Silhouette(Distance<? super O>, boolean)
+            +evaluateClustering(Relation<O>, DistanceQuery<O>, Clustering<?>): double
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.internal.Silhouette.Par<O> [[Silhouette.Par.html]] {
+            {static} +DISTANCE_ID: OptionID
+            {static} +NOISE_ID: OptionID
+            {static} +NO_PENALIZE_ID: OptionID
+            -distance: Distance<? super O>
+            -penalize: boolean
+            +configure(Parameterization): void
+            +make(): Silhouette<O>
+        }
+
+        class VarianceRatioCriterion [[VarianceRatioCriterion.html]] {
+            {static} -LOG: Logging
+            -penalize: boolean
+            -key: String
+            +VarianceRatioCriterion(NoiseHandling, boolean)
+            +evaluateClustering(Relation<? extends NumberVector>, Clustering<?>): double
+            {static} +globalCentroid(Centroid, Relation<? extends NumberVector>, List<? extends Cluster<?>>, NumberVector[], NoiseHandling): int
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.internal.VarianceRatioCriterion.Par [[VarianceRatioCriterion.Par.html]] {
+            {static} +NOISE_ID: OptionID
+            {static} +NO_PENALIZE_ID: OptionID
+            -penalize: boolean
+            +configure(Parameterization): void
+            +make(): VarianceRatioCriterion
+        }
+
+        class DaviesBouldinIndex [[DaviesBouldinIndex.html]] {
+            {static} -LOG: Logging
+            -distance: NumberVectorDistance<?>
+            -p: double
+            -key: String
+            +DaviesBouldinIndex(NumberVectorDistance<?>, NoiseHandling, double)
+            +evaluateClustering(Relation<? extends NumberVector>, Clustering<?>): double
+            +withinGroupDistances(Relation<? extends NumberVector>, List<? extends Cluster<?>>, NumberVector[]): double[]
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.internal.DaviesBouldinIndex.Par [[DaviesBouldinIndex.Par.html]] {
+            {static} +DISTANCE_ID: OptionID
+            {static} +NOISE_ID: OptionID
+            {static} +POWER_ID: OptionID
+            -distance: NumberVectorDistance<?>
+            -p: double
+            +configure(Parameterization): void
+            +make(): DaviesBouldinIndex
+        }
+
+        enum NoiseHandling [[NoiseHandling.html]] {
+            {static} +MERGE_NOISE
+            {static} +TREAT_NOISE_AS_SINGLETONS
+            {static} +IGNORE_NOISE
+        }
+
+        class ClusterRadius [[ClusterRadius.html]] {
+            {static} -LOG: Logging
+            -distance: NumberVectorDistance<?>
+            -key: String
+            +ClusterRadius(NumberVectorDistance<?>, NoiseHandling)
+            +evaluateClustering(Database, Relation<? extends NumberVector>, Clustering<?>): double
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.internal.ClusterRadius.Par [[ClusterRadius.Par.html]] {
+            {static} +DISTANCE_ID: OptionID
+            {static} +NOISE_ID: OptionID
+            -distance: NumberVectorDistance<?>
+            +configure(Parameterization): void
+            +make(): ClusterRadius
+        }
+
+        class DBCV<O> [[DBCV.html]] {
+            -distance: Distance<? super O>
+            +DBCV(Distance<? super O>)
+            +evaluateClustering(Relation<O>, Clustering<?>): double
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.internal.DBCV.Par<O> [[DBCV.Par.html]] {
+            {static} +DISTANCE_ID: OptionID
+            -distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): DBCV<O>
+        }
+
+        class CIndex<O> [[CIndex.html]] {
+            {static} -LOG: Logging
+            -distance: Distance<? super O>
+            -key: String
+            +CIndex(Distance<? super O>, NoiseHandling)
+            +evaluateClustering(Relation<? extends O>, DistanceQuery<O>, Clustering<?>): double
+            #processCluster(Cluster<?>, List<? extends Cluster<?>>, int, DistanceQuery<O>, DoubleHeap, DoubleHeap, int): double
+            #processSingleton(Cluster<?>, Relation<? extends O>, DistanceQuery<O>, DoubleHeap, DoubleHeap, int): void
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.internal.CIndex.Par<O> [[CIndex.Par.html]] {
+            {static} +DISTANCE_ID: OptionID
+            {static} +NOISE_ID: OptionID
+            -distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): CIndex<O>
+        }
+
+        class ConcordantPairsGammaTau [[ConcordantPairsGammaTau.html]] {
+            {static} -LOG: Logging
+            -distance: PrimitiveDistance<? super NumberVector>
+            -key: String
+            +ConcordantPairsGammaTau(PrimitiveDistance<? super NumberVector>, NoiseHandling)
+            +evaluateClustering(Relation<? extends NumberVector>, Clustering<?>): double
+            #countTies(double[], int[]): int
+            #computeWithinDistances(Relation<? extends NumberVector>, List<? extends Cluster<?>>, int): double[]
+            +computeTau(long, long, double, long, long): double
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.internal.ConcordantPairsGammaTau.Par [[ConcordantPairsGammaTau.Par.html]] {
+            {static} +DISTANCE_ID: OptionID
+            {static} +NOISE_ID: OptionID
+            -distance: PrimitiveDistance<NumberVector>
+            +configure(Parameterization): void
+            +make(): ConcordantPairsGammaTau
+        }
+
+        class PBMIndex [[PBMIndex.html]] {
+            {static} -LOG: Logging
+            -distance: NumberVectorDistance<?>
+            -key: String
+            +PBMIndex(NumberVectorDistance<?>, NoiseHandling)
+            +evaluateClustering(Relation<? extends NumberVector>, Clustering<?>): double
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.internal.PBMIndex.Par [[PBMIndex.Par.html]] {
+            {static} +DISTANCE_ID: OptionID
+            {static} +NOISE_ID: OptionID
+            -distance: NumberVectorDistance<?>
+            +configure(Parameterization): void
+            +make(): PBMIndex
+        }
+
+        elki.evaluation.Evaluator <|.. SimplifiedSilhouette
+        SimplifiedSilhouette --> NoiseHandling: noiseOption
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.internal.SimplifiedSilhouette.Par
+        SimplifiedSilhouette +-- elki.evaluation.clustering.internal.SimplifiedSilhouette.Par
+        elki.evaluation.clustering.internal.SimplifiedSilhouette.Par --> NoiseHandling: noiseOption
+        elki.evaluation.Evaluator <|.. SquaredErrors
+        SquaredErrors --> NoiseHandling: noiseOption
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.internal.SquaredErrors.Par
+        SquaredErrors +-- elki.evaluation.clustering.internal.SquaredErrors.Par
+        elki.evaluation.clustering.internal.SquaredErrors.Par --> NoiseHandling: noiseOption
+        elki.evaluation.Evaluator <|.. Silhouette
+        Silhouette --> NoiseHandling: noiseOption
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.internal.Silhouette.Par
+        Silhouette +-- elki.evaluation.clustering.internal.Silhouette.Par
+        elki.evaluation.clustering.internal.Silhouette.Par --> NoiseHandling: noiseOption
+        elki.evaluation.Evaluator <|.. VarianceRatioCriterion
+        VarianceRatioCriterion --> NoiseHandling: noiseOption
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.internal.VarianceRatioCriterion.Par
+        VarianceRatioCriterion +-- elki.evaluation.clustering.internal.VarianceRatioCriterion.Par
+        elki.evaluation.clustering.internal.VarianceRatioCriterion.Par --> NoiseHandling: noiseOption
+        elki.evaluation.Evaluator <|.. DaviesBouldinIndex
+        DaviesBouldinIndex --> NoiseHandling: noiseOption
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.internal.DaviesBouldinIndex.Par
+        DaviesBouldinIndex +-- elki.evaluation.clustering.internal.DaviesBouldinIndex.Par
+        elki.evaluation.clustering.internal.DaviesBouldinIndex.Par --> NoiseHandling: noiseOption
+        elki.evaluation.Evaluator <|.. ClusterRadius
+        ClusterRadius --> NoiseHandling: noiseOption
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.internal.ClusterRadius.Par
+        ClusterRadius +-- elki.evaluation.clustering.internal.ClusterRadius.Par
+        elki.evaluation.clustering.internal.ClusterRadius.Par --> NoiseHandling: noiseOption
+        elki.evaluation.Evaluator <|.. DBCV
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.internal.DBCV.Par
+        DBCV +-- elki.evaluation.clustering.internal.DBCV.Par
+        elki.evaluation.Evaluator <|.. CIndex
+        CIndex --> NoiseHandling: noiseOption
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.internal.CIndex.Par
+        CIndex +-- elki.evaluation.clustering.internal.CIndex.Par
+        elki.evaluation.clustering.internal.CIndex.Par --> NoiseHandling: noiseOption
+        elki.evaluation.Evaluator <|.. ConcordantPairsGammaTau
+        ConcordantPairsGammaTau --> NoiseHandling: noiseHandling
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.internal.ConcordantPairsGammaTau.Par
+        ConcordantPairsGammaTau +-- elki.evaluation.clustering.internal.ConcordantPairsGammaTau.Par
+        elki.evaluation.clustering.internal.ConcordantPairsGammaTau.Par --> NoiseHandling: noiseHandling
+        elki.evaluation.Evaluator <|.. PBMIndex
+        PBMIndex --> NoiseHandling: noiseHandling
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.internal.PBMIndex.Par
+        PBMIndex +-- elki.evaluation.clustering.internal.PBMIndex.Par
+        elki.evaluation.clustering.internal.PBMIndex.Par --> NoiseHandling: noiseHandling
+    }
+
+    namespace elki.evaluation {
+        interface Evaluator [[../../Evaluator.html]]
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

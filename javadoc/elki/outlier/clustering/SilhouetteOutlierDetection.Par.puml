@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SilhouetteOutlierDetection.Par\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.SilhouetteOutlierDetection.Par<O> {
+        {static} +CLUSTERING_ID: OptionID
+        #distance: Distance<? super O>
+        #clusterer: ClusteringAlgorithm<?>
+        #noiseOption: NoiseHandling
+        +configure(Parameterization): void
+        +make(): SilhouetteOutlierDetection<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SilhouetteOutlierDetection\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.SilhouetteOutlierDetection<O> [[SilhouetteOutlierDetection.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.clustering.SilhouetteOutlierDetection.Par
+    elki.outlier.clustering.SilhouetteOutlierDetection +-- elki.outlier.clustering.SilhouetteOutlierDetection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

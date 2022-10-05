@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SpatialApproximationMaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor<O extends NumberVector> [[SpatialApproximationMaterializeKNNPreprocessor.html]] {
+        {static} -LOG: Logging
+        +SpatialApproximationMaterializeKNNPreprocessor(Relation<O extends NumberVector>, Distance<? super NumberVector>, int)
+        #preprocess(): void
+        #getSpatialIndex(Relation<O extends NumberVector>): AbstractRStarTree<?, SpatialEntry, ?>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor<O extends NumberVector> [[AbstractMaterializeKNNPreprocessor.html]] {
+        {abstract} #preprocess(): void
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>SpatialApproximationMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory [[SpatialApproximationMaterializeKNNPreprocessor.Factory.html]]
+
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor <|-- elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor
+    elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

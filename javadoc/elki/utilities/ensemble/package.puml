@@ -1,0 +1,81 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.ensemble {
+
+        class EnsembleVotingMedian [[EnsembleVotingMedian.html]] {
+            -quantile: double
+            +EnsembleVotingMedian(double)
+            +combine(double[]): double
+            +combine(double[], int): double
+        }
+
+        class elki.utilities.ensemble.EnsembleVotingMedian.Par [[EnsembleVotingMedian.Par.html]] {
+            {static} +QUANTILE_ID: OptionID
+            -quantile: double
+            +configure(Parameterization): void
+            +make(): EnsembleVotingMedian
+        }
+
+        class EnsembleVotingMultiplicative [[EnsembleVotingMultiplicative.html]] {
+            +combine(double[]): double
+            +combine(double[], int): double
+        }
+
+        class elki.utilities.ensemble.EnsembleVotingMultiplicative.Par [[EnsembleVotingMultiplicative.Par.html]] {
+            +make(): EnsembleVotingMultiplicative
+        }
+
+        class EnsembleVotingMin [[EnsembleVotingMin.html]] {
+            +combine(double[]): double
+            +combine(double[], int): double
+        }
+
+        class EnsembleVotingMean [[EnsembleVotingMean.html]] {
+            +combine(double[]): double
+            +combine(double[], int): double
+        }
+
+        class EnsembleVotingMax [[EnsembleVotingMax.html]] {
+            +combine(double[]): double
+            +combine(double[], int): double
+        }
+
+        class EnsembleVotingInverseMultiplicative [[EnsembleVotingInverseMultiplicative.html]] {
+            +combine(double[]): double
+            +combine(double[], int): double
+        }
+
+        class elki.utilities.ensemble.EnsembleVotingInverseMultiplicative.Par [[EnsembleVotingInverseMultiplicative.Par.html]] {
+            +make(): EnsembleVotingInverseMultiplicative
+        }
+
+        interface EnsembleVoting [[EnsembleVoting.html]] {
+            {abstract} +combine(double[]): double
+            {abstract} +combine(double[], int): double
+        }
+
+        EnsembleVoting <|.. EnsembleVotingMedian
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.ensemble.EnsembleVotingMedian.Par
+        EnsembleVotingMedian +-- elki.utilities.ensemble.EnsembleVotingMedian.Par
+        EnsembleVoting <|.. EnsembleVotingMultiplicative
+        EnsembleVotingMultiplicative --> EnsembleVotingMultiplicative: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.ensemble.EnsembleVotingMultiplicative.Par
+        EnsembleVotingMultiplicative +-- elki.utilities.ensemble.EnsembleVotingMultiplicative.Par
+        EnsembleVoting <|.. EnsembleVotingMin
+        EnsembleVoting <|.. EnsembleVotingMean
+        EnsembleVoting <|.. EnsembleVotingMax
+        EnsembleVoting <|.. EnsembleVotingInverseMultiplicative
+        EnsembleVotingInverseMultiplicative --> EnsembleVotingInverseMultiplicative: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.ensemble.EnsembleVotingInverseMultiplicative.Par
+        EnsembleVotingInverseMultiplicative +-- elki.utilities.ensemble.EnsembleVotingInverseMultiplicative.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParameterTable.ClassListEditor\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable.ClassListEditor [[ParameterTable.ClassListEditor.html]] {
+        {static} -serialVersionUID: long
+        ~panel: JPanel
+        ~textfield: JTextField
+        ~button: JButton
+        ~popup: TreePopup
+        -model: TreeModel
+        -option: Parameter<?>
+        +actionPerformed(ActionEvent): void
+        +getCellEditorValue(): Object
+        +keyTyped(KeyEvent): void
+        +keyPressed(KeyEvent): void
+        +keyReleased(KeyEvent): void
+        +getTableCellEditorComponent(JTable, Object, boolean, int, int): Component
+    }
+
+    abstract class "<size:14>AbstractCellEditor\n<size:10>javax.swing" as javax.swing.AbstractCellEditor
+    interface "<size:14>TableCellEditor\n<size:10>javax.swing.table" as javax.swing.table.TableCellEditor {
+        {abstract} +getTableCellEditorComponent(JTable, Object, boolean, int, int): Component
+    }
+    interface "<size:14>ActionListener\n<size:10>java.awt.event" as java.awt.event.ActionListener {
+        {abstract} +actionPerformed(ActionEvent): void
+    }
+    interface "<size:14>KeyListener\n<size:10>java.awt.event" as java.awt.event.KeyListener {
+        {abstract} +keyTyped(KeyEvent): void
+        {abstract} +keyPressed(KeyEvent): void
+        {abstract} +keyReleased(KeyEvent): void
+    }
+    class "<size:14>ParameterTable\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable [[ParameterTable.html]]
+
+    javax.swing.AbstractCellEditor <|-- elki.gui.util.ParameterTable.ClassListEditor
+    javax.swing.table.TableCellEditor <|.. elki.gui.util.ParameterTable.ClassListEditor
+    java.awt.event.ActionListener <|.. elki.gui.util.ParameterTable.ClassListEditor
+    java.awt.event.KeyListener <|.. elki.gui.util.ParameterTable.ClassListEditor
+    elki.gui.util.ParameterTable +-- elki.gui.util.ParameterTable.ClassListEditor
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

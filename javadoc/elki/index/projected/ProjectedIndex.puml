@@ -1,0 +1,58 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProjectedIndex\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex<O, I> [[ProjectedIndex.html]] {
+        {static} -LOG: Logging
+        ~inner: Index
+        ~proj: Projection<O, I>
+        ~relation: Relation<? extends O>
+        ~view: Relation<​I>
+        ~norefine: boolean
+        ~kmulti: double
+        ~refinements: Counter
+        +ProjectedIndex(Relation<? extends O>, Projection<O, I>, Relation<​I>, Index, boolean, double)
+        -countRefinement(): void
+        +initialize(): void
+        +logStatistics(): void
+        +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+        +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+        +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+        +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+    }
+
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<O> [[../KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    interface "<size:14>RKNNIndex\n<size:10>elki.index" as elki.index.RKNNIndex<O> [[../RKNNIndex.html]] {
+        {abstract} +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+        {abstract} +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+    }
+    interface "<size:14>RangeIndex\n<size:10>elki.index" as elki.index.RangeIndex<O> [[../RangeIndex.html]] {
+        {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+    }
+    class "<size:14>ProjectedIndex.ProjectedKNNByObject\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.ProjectedKNNByObject [[ProjectedIndex.ProjectedKNNByObject.html]]
+    class "<size:14>ProjectedIndex.ProjectedKNNByDBID\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.ProjectedKNNByDBID [[ProjectedIndex.ProjectedKNNByDBID.html]]
+    class "<size:14>ProjectedIndex.ProjectedRangeByObject\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.ProjectedRangeByObject [[ProjectedIndex.ProjectedRangeByObject.html]]
+    class "<size:14>ProjectedIndex.ProjectedRangeByDBID\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.ProjectedRangeByDBID [[ProjectedIndex.ProjectedRangeByDBID.html]]
+    class "<size:14>ProjectedIndex.ProjectedRKNNByObject\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.ProjectedRKNNByObject [[ProjectedIndex.ProjectedRKNNByObject.html]]
+    class "<size:14>ProjectedIndex.ProjectedRKNNByDBID\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.ProjectedRKNNByDBID [[ProjectedIndex.ProjectedRKNNByDBID.html]]
+    class "<size:14>ProjectedIndex.Factory\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.Factory<O, I> [[ProjectedIndex.Factory.html]]
+
+    elki.index.KNNIndex <|.. elki.index.projected.ProjectedIndex
+    elki.index.RKNNIndex <|.. elki.index.projected.ProjectedIndex
+    elki.index.RangeIndex <|.. elki.index.projected.ProjectedIndex
+    elki.index.projected.ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedKNNByObject
+    elki.index.projected.ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedKNNByDBID
+    elki.index.projected.ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedRangeByObject
+    elki.index.projected.ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedRangeByDBID
+    elki.index.projected.ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedRKNNByObject
+    elki.index.projected.ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedRKNNByDBID
+    elki.index.projected.ProjectedIndex +-- elki.index.projected.ProjectedIndex.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>SimilarityQuery\n<size:10>elki.database.query.similarity" as elki.database.query.similarity.SimilarityQuery<O> [[SimilarityQuery.html]] {
+        {abstract} +similarity(DBIDRef, DBIDRef): double
+        {abstract} +similarity(O, DBIDRef): double
+        {abstract} +similarity(DBIDRef, O): double
+        {abstract} +similarity(O, O): double
+        {abstract} +getRelation(): Relation<? extends O>
+        {abstract} +getSimilarity(): Similarity<? super O>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

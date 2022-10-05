@@ -1,0 +1,348 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-batik-visualization",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-gui-minigui",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-uncertain",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "org.apache.xmlgraphics",
+          "module": "batik-dom",
+          "version": {
+            "requires": "[1.14,)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        },
+        {
+          "group": "org.apache.xmlgraphics",
+          "module": "batik-swing",
+          "version": {
+            "requires": "[1.14,)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        },
+        {
+          "group": "org.apache.xmlgraphics",
+          "module": "batik-rasterizer",
+          "version": {
+            "requires": "[1.14,)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        },
+        {
+          "group": "org.apache.xmlgraphics",
+          "module": "batik-ext",
+          "version": {
+            "requires": "[1.14,)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        },
+        {
+          "group": "org.apache.xmlgraphics",
+          "module": "batik-codec",
+          "version": {
+            "requires": "[1.14,)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        },
+        {
+          "group": "org.apache.xmlgraphics",
+          "module": "xmlgraphics-commons",
+          "version": {
+            "requires": "[2.6,)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-batik-visualization-0.8.0.jar",
+          "url": "elki-batik-visualization-0.8.0.jar",
+          "size": 635390,
+          "sha512": "146ebf9aafffbf6d8142dcf68b288cf5b5482858bc7ff55c4b89bef37fcbe6f68b8f409dfbc1659257d7774dd1bc641cacf73eff770853580985ad7e3d40b465",
+          "sha256": "1c9b83b5dec2a662095ea75f2bfac578a618a8c31a5a0ef642af141257955f23",
+          "sha1": "3a38c45ca4073e087b0572a9346db59e66a70468",
+          "md5": "acce58440c2b68c87c74a9450b304093"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "xalan",
+          "module": "serializer",
+          "version": {
+            "requires": "[2.7.2,3)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        },
+        {
+          "group": "xalan",
+          "module": "xalan",
+          "version": {
+            "requires": "[2.7.2,3)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-gui-minigui",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-uncertain",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "org.apache.xmlgraphics",
+          "module": "batik-dom",
+          "version": {
+            "requires": "[1.14,)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        },
+        {
+          "group": "org.apache.xmlgraphics",
+          "module": "batik-swing",
+          "version": {
+            "requires": "[1.14,)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        },
+        {
+          "group": "org.apache.xmlgraphics",
+          "module": "batik-rasterizer",
+          "version": {
+            "requires": "[1.14,)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        },
+        {
+          "group": "org.apache.xmlgraphics",
+          "module": "batik-ext",
+          "version": {
+            "requires": "[1.14,)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        },
+        {
+          "group": "org.apache.xmlgraphics",
+          "module": "batik-codec",
+          "version": {
+            "requires": "[1.14,)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        },
+        {
+          "group": "org.apache.xmlgraphics",
+          "module": "xmlgraphics-commons",
+          "version": {
+            "requires": "[2.6,)"
+          },
+          "excludes": [
+            {
+              "group": "xml-apis",
+              "module": "xml-apis"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-batik-visualization-0.8.0.jar",
+          "url": "elki-batik-visualization-0.8.0.jar",
+          "size": 635390,
+          "sha512": "146ebf9aafffbf6d8142dcf68b288cf5b5482858bc7ff55c4b89bef37fcbe6f68b8f409dfbc1659257d7774dd1bc641cacf73eff770853580985ad7e3d40b465",
+          "sha256": "1c9b83b5dec2a662095ea75f2bfac578a618a8c31a5a0ef642af141257955f23",
+          "sha1": "3a38c45ca4073e087b0572a9346db59e66a70468",
+          "md5": "acce58440c2b68c87c74a9450b304093"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-batik-visualization",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-batik-visualization-0.8.0-test-fixtures.jar",
+          "url": "elki-batik-visualization-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "66cf731de768159362d997a85b057cf3974e2112f6bc42df2b49ba56369b1f30c6fa26e682ca1f5bda74749d4c60130b24c2159bccf0aa0b730eef35b2c29fd0",
+          "sha256": "4f0eb851ed19413ac9a49439192c4e62a6f240b4721a76ead651cf39cafaffea",
+          "sha1": "b2e4921e565d231d8b4f495a4e2675fa0236d813",
+          "md5": "47c70bb7d2eaf671955544c56f994149"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-batik-visualization-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-batik-visualization",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-batik-visualization-0.8.0-test-fixtures.jar",
+          "url": "elki-batik-visualization-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "66cf731de768159362d997a85b057cf3974e2112f6bc42df2b49ba56369b1f30c6fa26e682ca1f5bda74749d4c60130b24c2159bccf0aa0b730eef35b2c29fd0",
+          "sha256": "4f0eb851ed19413ac9a49439192c4e62a6f240b4721a76ead651cf39cafaffea",
+          "sha1": "b2e4921e565d231d8b4f495a4e2675fa0236d813",
+          "md5": "47c70bb7d2eaf671955544c56f994149"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-batik-visualization-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

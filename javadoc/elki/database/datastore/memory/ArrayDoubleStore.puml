@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ArrayDoubleStore\n<size:10>elki.database.datastore.memory" as elki.database.datastore.memory.ArrayDoubleStore [[ArrayDoubleStore.html]] {
+        -data: double[]
+        -def: double
+        -idmap: DataStoreIDMap
+        +ArrayDoubleStore(int, DataStoreIDMap)
+        +ArrayDoubleStore(int, DataStoreIDMap, double)
+        +--get--(DBIDRef): Double
+        +--put--(DBIDRef, Double): Double
+        +doubleValue(DBIDRef): double
+        +putDouble(DBIDRef, double): double
+        +put(DBIDRef, double): double
+        +increment(DBIDRef, double): void
+        +clear(): void
+        +destroy(): void
+        +delete(DBIDRef): void
+    }
+
+    interface "<size:14>WritableDoubleDataStore\n<size:10>elki.database.datastore" as elki.database.datastore.WritableDoubleDataStore [[../WritableDoubleDataStore.html]] {
+        {abstract} +--put--(DBIDRef, Double): Double
+        {abstract} +putDouble(DBIDRef, double): double
+        {abstract} +put(DBIDRef, double): double
+        {abstract} +increment(DBIDRef, double): void
+    }
+
+    elki.database.datastore.WritableDoubleDataStore <|.. elki.database.datastore.memory.ArrayDoubleStore
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

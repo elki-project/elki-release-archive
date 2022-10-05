@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>Metadata.EagerIt\n<size:10>elki.result" as elki.result.Metadata.EagerIt<O> [[Metadata.EagerIt.html]] {
+        #current: Object
+        +valid(): boolean
+        +get(): O
+    }
+
+    interface "<size:14>It\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.It<O> [[../utilities/datastructures/iterator/It.html]] {
+        {abstract} +get(): O
+        {abstract} +advance(): It<O>
+    }
+    class "<size:14>Metadata\n<size:10>elki.result" as elki.result.Metadata [[Metadata.html]]
+
+    elki.utilities.datastructures.iterator.It <|.. elki.result.Metadata.EagerIt
+    elki.result.Metadata +-- elki.result.Metadata.EagerIt
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

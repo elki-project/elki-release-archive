@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>SpatialEntry\n<size:10>elki.index.tree.spatial" as elki.index.tree.spatial.SpatialEntry [[SpatialEntry.html]]
+
+    interface "<size:14>Externalizable\n<size:10>java.io" as java.io.Externalizable {
+        {abstract} +writeExternal(ObjectOutput): void
+        {abstract} +readExternal(ObjectInput): void
+    }
+    interface "<size:14>SpatialComparable\n<size:10>elki.data.spatial" as elki.data.spatial.SpatialComparable [[../../../data/spatial/SpatialComparable.html]] {
+        {abstract} +getDimensionality(): int
+        {abstract} +getMin(int): double
+        {abstract} +getMax(int): double
+    }
+
+    java.io.Externalizable <|-- elki.index.tree.spatial.SpatialEntry
+    elki.data.spatial.SpatialComparable <|-- elki.index.tree.spatial.SpatialEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

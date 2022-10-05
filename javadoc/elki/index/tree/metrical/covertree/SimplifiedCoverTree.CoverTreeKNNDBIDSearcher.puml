@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimplifiedCoverTree.CoverTreeKNNDBIDSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNDBIDSearcher [[SimplifiedCoverTree.CoverTreeKNNDBIDSearcher.html]] {
+        -query: DBIDRef
+        +getKNN(DBIDRef, int): KNNList
+        #queryDistance(DBIDRef): double
+    }
+
+    abstract class "<size:14>SimplifiedCoverTree.CoverTreeKNNSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNSearcher [[SimplifiedCoverTree.CoverTreeKNNSearcher.html]] {
+        {abstract} #queryDistance(DBIDRef): double
+    }
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<DBIDRef> [[../../../../database/query/knn/KNNSearcher.html]] {
+        {abstract} +getKNN(DBIDRef, int): KNNList
+    }
+    class "<size:14>SimplifiedCoverTree\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree<O> [[SimplifiedCoverTree.html]]
+
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNSearcher <|-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNDBIDSearcher
+    elki.database.query.knn.KNNSearcher <|.. elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNDBIDSearcher
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNDBIDSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

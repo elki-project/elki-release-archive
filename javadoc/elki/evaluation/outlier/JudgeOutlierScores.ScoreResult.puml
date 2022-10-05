@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>JudgeOutlierScores.ScoreResult\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.JudgeOutlierScores.ScoreResult [[JudgeOutlierScores.ScoreResult.html]] {
+        +ScoreResult(Collection<double[]>)
+    }
+
+    class "<size:14>CollectionResult\n<size:10>elki.result" as elki.result.CollectionResult<double[]> [[../../result/CollectionResult.html]]
+    class "<size:14>JudgeOutlierScores\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.JudgeOutlierScores [[JudgeOutlierScores.html]]
+
+    elki.result.CollectionResult <|-- elki.evaluation.outlier.JudgeOutlierScores.ScoreResult
+    elki.evaluation.outlier.JudgeOutlierScores +-- elki.evaluation.outlier.JudgeOutlierScores.ScoreResult
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

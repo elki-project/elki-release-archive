@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="339px" preserveAspectRatio="none" style="width:434px;height:339px;background:#FFFFFF;" version="1.1" viewBox="0 0 434 339" width="434px" zoomAndPan="magnify"><defs/><g><!--MD5=[20e84f1b8c5f7cc3466798b5ba59742d]
+class elki.svm.AbstractSVC--><a href="AbstractSVC.html" target="_top" title="AbstractSVC.html" xlink:actuate="onRequest" xlink:href="AbstractSVC.html" xlink:show="new" xlink:title="AbstractSVC.html" xlink:type="simple"><g id="elem_elki.svm.AbstractSVC"><rect codeLine="6" fill="#F1F1F1" height="168.0156" id="elki.svm.AbstractSVC" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="418" x="9" y="146"/><ellipse cx="170.25" cy="164.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M170.3594,160.3125 L169.2031,165.3906 L171.5313,165.3906 L170.3594,160.3125 Z M168.875,158.0781 L171.8594,158.0781 L175.2188,170.4688 L172.7656,170.4688 L172,167.4063 L168.7188,167.4063 L167.9688,170.4688 L165.5313,170.4688 L168.875,158.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="87" x="190.75" y="163.9951">AbstractSVC</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="42" x="213.25" y="176.5791">elki.svm</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="426" y1="183.9375" y2="183.9375"/><polygon fill="none" points="20,193.5859,16,199.5859,24,199.5859" style="stroke:#1963A0;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135" x="29" y="200.9326">probability: boolean</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="426" y1="208.2344" y2="208.2344"/><ellipse cx="20" cy="221.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="263" x="29" y="225.2295">AbstractSVC(double, boolean, double)</text><ellipse cx="20" cy="238.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="235" x="29" y="241.5264">train(DataSet): ClassificationModel</text><ellipse cx="20" cy="254.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="301" x="29" y="257.8232">train(DataSet, double[]): ClassificationModel</text><ellipse cx="20" cy="270.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="368" x="29" y="274.1201">cross_validation(DataSet, double[], int, double[]): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="284.0703"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="289" x="29" y="290.417">sigmoid_train(double[], DataSet): double[]</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="300.3672"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="392" x="29" y="306.7139">binary_svc_probability(DataSet, double, double): double[]</text></g></a><!--MD5=[d153faf1f05020937e733185cac508ac]
+class elki.svm.AbstractSingleSVM--><a href="AbstractSingleSVM.html" target="_top" title="AbstractSingleSVM.html" xlink:actuate="onRequest" xlink:href="AbstractSingleSVM.html" xlink:show="new" xlink:title="AbstractSingleSVM.html" xlink:type="simple"><g id="elem_elki.svm.AbstractSingleSVM"><rect codeLine="16" fill="#F1F1F1" height="78.5313" id="elki.svm.AbstractSingleSVM" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="224" x="106" y="7"/><ellipse cx="147.55" cy="25.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M147.6594,21.3125 L146.5031,26.3906 L148.8313,26.3906 L147.6594,21.3125 Z M146.175,19.0781 L149.1594,19.0781 L152.5188,31.4688 L150.0656,31.4688 L149.3,28.4063 L146.0188,28.4063 L145.2688,31.4688 L142.8313,31.4688 L146.175,19.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="133" x="167.45" y="24.9951">AbstractSingleSVM</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="42" x="212.95" y="37.5791">elki.svm</text><line style="stroke:#181818;stroke-width:0.5;" x1="107" x2="329" y1="44.9375" y2="44.9375"/><polygon fill="#FFFF44" points="117,53.5859,121,57.5859,117,61.5859,113,57.5859" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="198" x="126" y="61.9326">solve(DataSet): SolutionInfo</text><polygon fill="#FFFF44" points="117,69.8828,121,73.8828,117,77.8828,113,73.8828" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="148" x="126" y="78.2295">getLogger(): Logging</text></g></a><!--MD5=[4e1893d623d037b480b7a09ced84c159]
+reverse link elki.svm.AbstractSingleSVM to elki.svm.AbstractSVC--><g id="link_elki.svm.AbstractSingleSVM_elki.svm.AbstractSVC"><path codeLine="21" d="M218,106.47 C218,119.01 218,132.48 218,145.74 " fill="none" id="elki.svm.AbstractSingleSVM-backto-elki.svm.AbstractSVC" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="211,106.44,218,86.44,225,106.44,211,106.44" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="117" y="320.0156"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="117" y="329.2979">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[85790bc7c2a39817b585e3dd01be3171]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractSVC\n<size:10>elki.svm" as elki.svm.AbstractSVC [[AbstractSVC.html]] {
+        ~probability: boolean
+        +AbstractSVC(double, boolean, double)
+        +train(DataSet): ClassificationModel
+        +train(DataSet, double[]): ClassificationModel
+        +cross_validation(DataSet, double[], int, double[]): void
+        -sigmoid_train(double[], DataSet): double[]
+        -binary_svc_probability(DataSet, double, double): double[]
+    }
+
+    abstract class "<size:14>AbstractSingleSVM\n<size:10>elki.svm" as elki.svm.AbstractSingleSVM [[AbstractSingleSVM.html]] {
+        {abstract} #solve(DataSet): SolutionInfo
+        {abstract} #getLogger(): Logging
+    }
+
+    elki.svm.AbstractSingleSVM <|- - elki.svm.AbstractSVC
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

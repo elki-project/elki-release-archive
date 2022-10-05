@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DendrogramVisualization.Instance\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization.Instance [[DendrogramVisualization.Instance.html]] {
+        {static} -KEY_CAPTION: String
+        {static} -KEY_HIERLINE: String
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double)
+        +fullRedraw(): void
+        #setupCSS(SVGPlot, double): void
+        #setupCSS(SVGPlot, ClassStylingPolicy, double): void
+    }
+
+    abstract class "<size:14>AbstractVisualization\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.AbstractVisualization [[../AbstractVisualization.html]] {
+        {abstract} +fullRedraw(): void
+    }
+    class "<size:14>DendrogramVisualization\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization [[DendrogramVisualization.html]]
+
+    elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.visunproj.DendrogramVisualization.Instance
+    elki.visualization.visualizers.visunproj.DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

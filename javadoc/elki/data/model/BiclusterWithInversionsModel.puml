@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BiclusterWithInversionsModel\n<size:10>elki.data.model" as elki.data.model.BiclusterWithInversionsModel [[BiclusterWithInversionsModel.html]] {
+        -invertedRows: DBIDs
+        +BiclusterWithInversionsModel(int[], DBIDs)
+        +setInvertedRows(DBIDs): void
+        +getInvertedRows(): DBIDs
+    }
+
+    class "<size:14>BiclusterModel\n<size:10>elki.data.model" as elki.data.model.BiclusterModel [[BiclusterModel.html]]
+
+    elki.data.model.BiclusterModel <|-- elki.data.model.BiclusterWithInversionsModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

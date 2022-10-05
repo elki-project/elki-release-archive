@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Database\n<size:10>elki.database" as elki.database.Database [[Database.html]] {
+        {abstract} +initialize(): void
+        {abstract} +getRelations(): Collection<Relation<?>>
+        {abstract} +getRelation(TypeInformation, Object...): Relation<O>
+        {abstract} +getBundle(DBIDRef): SingleObjectBundle
+        {abstract} +addDataStoreListener(DataStoreListener): void
+        {abstract} +removeDataStoreListener(DataStoreListener): void
+        {abstract} +accumulateDataStoreEvents(): void
+        {abstract} +flushDataStoreEvents(): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

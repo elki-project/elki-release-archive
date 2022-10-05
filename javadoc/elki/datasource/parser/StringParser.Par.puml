@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>StringParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.StringParser.Par [[StringParser.Par.html]] {
+        {static} +TRIM_ID: OptionID
+        ~comment: Pattern
+        ~trimWhitespace: boolean
+        +configure(Parameterization): void
+        +make(): StringParser
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>StringParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.StringParser [[StringParser.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.parser.StringParser.Par
+    elki.datasource.parser.StringParser +-- elki.datasource.parser.StringParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

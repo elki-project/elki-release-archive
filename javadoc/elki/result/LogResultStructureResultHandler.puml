@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LogResultStructureResultHandler\n<size:10>elki.result" as elki.result.LogResultStructureResultHandler [[LogResultStructureResultHandler.html]] {
+        {static} -LOG: Logging
+        +processNewResult(Object): void
+        -recursiveLogResult(StringBuilder, Object, int): void
+    }
+
+    interface "<size:14>ResultHandler\n<size:10>elki.result" as elki.result.ResultHandler [[ResultHandler.html]]
+
+    elki.result.ResultHandler <|.. elki.result.LogResultStructureResultHandler
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

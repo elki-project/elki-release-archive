@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CSSClass\n<size:10>elki.visualization.css" as elki.visualization.css.CSSClass [[CSSClass.html]] {
+        -name: String
+        -statements: Collection<Pair<String, String>>
+        -owner: WeakReference<Object>
+        +CSSClass(Object, String, Collection<Pair<String, String>>)
+        +CSSClass(Object, String)
+        +CSSClass(Object, String, CSSClass)
+        {static} +checkName(String): boolean
+        {static} +sanitizeName(String): String
+        {static} +checkCSSStatement(String, String): boolean
+        {static} +checkCSSStatements(Collection<Pair<String, String>>): boolean
+        +getName(): String
+        +setName(String): void
+        +getOwner(): Object
+        +getStatement(String): String
+        +getStatements(): Collection<Pair<String, String>>
+        +setStatement(String, String): void
+        +setStatement(String, int): void
+        +setStatement(String, double): void
+        +removeStatement(String): void
+        +appendCSSDefinition(StringBuilder): void
+        +inlineCSS(): String
+    }
+    class "<size:14>CSSClass.InvalidCSS\n<size:10>elki.visualization.css" as elki.visualization.css.CSSClass.InvalidCSS [[CSSClass.InvalidCSS.html]]
+
+    elki.visualization.css.CSSClass +-- elki.visualization.css.CSSClass.InvalidCSS
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

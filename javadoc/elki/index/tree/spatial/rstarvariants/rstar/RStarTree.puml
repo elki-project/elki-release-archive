@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>RStarTree\n<size:10>elki.index.tree.spatial.rstarvariants.rstar" as elki.index.tree.spatial.rstarvariants.rstar.RStarTree [[RStarTree.html]] {
+        {static} -LOG: Logging
+        +RStarTree(PageFile<RStarTreeNode>, RTreeSettings)
+        #createRootEntry(): SpatialEntry
+        #createNewDirectoryEntry(RStarTreeNode): SpatialEntry
+        #createNewLeafNode(): RStarTreeNode
+        #createNewDirectoryNode(): RStarTreeNode
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>NonFlatRStarTree\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.NonFlatRStarTree<RStarTreeNode, SpatialEntry, RTreeSettings> [[../NonFlatRStarTree.html]]
+
+    elki.index.tree.spatial.rstarvariants.NonFlatRStarTree <|-- elki.index.tree.spatial.rstarvariants.rstar.RStarTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

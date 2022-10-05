@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HDBSCANHierarchyExtraction\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction [[HDBSCANHierarchyExtraction.html]] {
+        {static} -LOG: Logging
+        -minClSize: int
+        -algorithm: HierarchicalClusteringAlgorithm
+        -hierarchical: boolean
+        +HDBSCANHierarchyExtraction(HierarchicalClusteringAlgorithm, int, boolean)
+        +autorun(Database): Clustering<DendrogramModel>
+        +run(ClusterMergeHistory): Clustering<DendrogramModel>
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<DendrogramModel>> [[../../ClusteringAlgorithm.html]]
+    class "<size:14>HDBSCANHierarchyExtraction.Instance\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Instance [[HDBSCANHierarchyExtraction.Instance.html]]
+    class "<size:14>HDBSCANHierarchyExtraction.TempCluster\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.TempCluster [[HDBSCANHierarchyExtraction.TempCluster.html]]
+    class "<size:14>HDBSCANHierarchyExtraction.Par\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Par [[HDBSCANHierarchyExtraction.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction
+    elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction +-- elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Instance
+    elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction +-- elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.TempCluster
+    elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction +-- elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

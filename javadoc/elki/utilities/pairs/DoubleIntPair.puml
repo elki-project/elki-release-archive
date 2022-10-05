@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleIntPair\n<size:10>elki.utilities.pairs" as elki.utilities.pairs.DoubleIntPair [[DoubleIntPair.html]] {
+        +first: double
+        +second: int
+        {static} +BYFIRST_COMPARATOR: Comparator<DoubleIntPair>
+        {static} +BYSECOND_COMPARATOR: Comparator<DoubleIntPair>
+        {static} +SWAPPED_COMPARATOR: Comparator<DoubleIntPair>
+        +DoubleIntPair(double, int)
+        +compareTo(DoubleIntPair): int
+        +compareSwappedTo(DoubleIntPair): int
+        +setFirst(double): void
+        +setSecond(int): void
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<DoubleIntPair> {
+        {abstract} +compareTo(DoubleIntPair): int
+    }
+
+    java.lang.Comparable <|.. elki.utilities.pairs.DoubleIntPair
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

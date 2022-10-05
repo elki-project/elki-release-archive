@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AffinityPropagation.Par\n<size:10>elki.clustering.affinitypropagation" as elki.clustering.affinitypropagation.AffinityPropagation.Par<O> {
+        {static} +INITIALIZATION_ID: OptionID
+        {static} +LAMBDA_ID: OptionID
+        {static} +CONVERGENCE_ID: OptionID
+        {static} +MAXITER_ID: OptionID
+        ~initialization: AffinityPropagationInitialization<O>
+        ~lambda: double
+        ~convergence: int
+        ~maxiter: int
+        +configure(Parameterization): void
+        +make(): AffinityPropagation<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AffinityPropagation\n<size:10>elki.clustering.affinitypropagation" as elki.clustering.affinitypropagation.AffinityPropagation<O> [[AffinityPropagation.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.affinitypropagation.AffinityPropagation.Par
+    elki.clustering.affinitypropagation.AffinityPropagation +-- elki.clustering.affinitypropagation.AffinityPropagation.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

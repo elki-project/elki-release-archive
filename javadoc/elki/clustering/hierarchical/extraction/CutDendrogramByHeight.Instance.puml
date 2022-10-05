@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CutDendrogramByHeight.Instance\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.CutDendrogramByHeight.Instance [[CutDendrogramByHeight.Instance.html]] {
+        +Instance(ClusterMergeHistory)
+        #findSplit(): int
+    }
+
+    abstract class "<size:14>AbstractCutDendrogram.Instance\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Instance [[AbstractCutDendrogram.Instance.html]] {
+        {abstract} #findSplit(): int
+    }
+    class "<size:14>CutDendrogramByHeight\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.CutDendrogramByHeight [[CutDendrogramByHeight.html]]
+
+    elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Instance <|-- elki.clustering.hierarchical.extraction.CutDendrogramByHeight.Instance
+    elki.clustering.hierarchical.extraction.CutDendrogramByHeight +-- elki.clustering.hierarchical.extraction.CutDendrogramByHeight.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

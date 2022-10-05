@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>KNNList\n<size:10>elki.database.ids" as elki.database.ids.KNNList [[KNNList.html]] {
+        {abstract} +getK(): int
+        {abstract} +getKNNDistance(): double
+        {abstract} +subList(int): KNNList
+        {abstract} +map(DoubleUnaryOperator): KNNList
+    }
+
+    interface "<size:14>DoubleDBIDList\n<size:10>elki.database.ids" as elki.database.ids.DoubleDBIDList [[DoubleDBIDList.html]] {
+        {abstract} +size(): int
+        {abstract} +assignVar(int, DBIDVar): DBIDVar
+        {abstract} +doubleValue(int): double
+        {abstract} +iter(): DoubleDBIDListIter
+        {abstract} +slice(int, int): DoubleDBIDList
+    }
+
+    elki.database.ids.DoubleDBIDList <|-- elki.database.ids.KNNList
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

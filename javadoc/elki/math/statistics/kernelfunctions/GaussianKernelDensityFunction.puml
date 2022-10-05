@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GaussianKernelDensityFunction\n<size:10>elki.math.statistics.kernelfunctions" as elki.math.statistics.kernelfunctions.GaussianKernelDensityFunction [[GaussianKernelDensityFunction.html]] {
+        {static} +KERNEL: GaussianKernelDensityFunction
+        {static} +CANONICAL_BANDWIDTH: double
+        {static} +R: double
+        +density(double): double
+        +canonicalBandwidth(): double
+        +standardDeviation(): double
+        +getR(): double
+    }
+
+    interface "<size:14>KernelDensityFunction\n<size:10>elki.math.statistics.kernelfunctions" as elki.math.statistics.kernelfunctions.KernelDensityFunction [[KernelDensityFunction.html]] {
+        {abstract} +density(double): double
+        {abstract} +canonicalBandwidth(): double
+        {abstract} +standardDeviation(): double
+        {abstract} +getR(): double
+    }
+    class "<size:14>GaussianKernelDensityFunction.Par\n<size:10>elki.math.statistics.kernelfunctions" as elki.math.statistics.kernelfunctions.GaussianKernelDensityFunction.Par [[GaussianKernelDensityFunction.Par.html]]
+
+    elki.math.statistics.kernelfunctions.KernelDensityFunction <|.. elki.math.statistics.kernelfunctions.GaussianKernelDensityFunction
+    elki.math.statistics.kernelfunctions.GaussianKernelDensityFunction +-- elki.math.statistics.kernelfunctions.GaussianKernelDensityFunction.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

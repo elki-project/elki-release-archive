@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MaterializeKNNAndRKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory<O> [[MaterializeKNNAndRKNNPreprocessor.Factory.html]] {
+        +Factory(int, Distance<? super O>)
+        +instantiate(Relation<O>): MaterializeKNNAndRKNNPreprocessor<O>
+    }
+
+    class "<size:14>MaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory<O> [[MaterializeKNNPreprocessor.Factory.html]]
+    class "<size:14>MaterializeKNNAndRKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor<O> [[MaterializeKNNAndRKNNPreprocessor.html]]
+    class "<size:14>MaterializeKNNAndRKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory.Par<O> [[MaterializeKNNAndRKNNPreprocessor.Factory.Par.html]]
+
+    elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor +-- elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

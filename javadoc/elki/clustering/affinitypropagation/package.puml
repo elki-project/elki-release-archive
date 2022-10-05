@@ -1,0 +1,97 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.affinitypropagation {
+
+        interface AffinityPropagationInitialization<O> [[AffinityPropagationInitialization.html]] {
+            {static} +QUANTILE_ID: OptionID
+            {abstract} +getSimilarityMatrix(Relation<O>, ArrayDBIDs): double[]
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+
+        class DistanceBasedInitializationWithMedian<O> [[DistanceBasedInitializationWithMedian.html]] {
+            ~distance: Distance<? super O>
+            ~quantile: double
+            +DistanceBasedInitializationWithMedian(Distance<? super O>, double)
+            +getSimilarityMatrix(Relation<O>, ArrayDBIDs): double[]
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.clustering.affinitypropagation.DistanceBasedInitializationWithMedian.Par<O> {
+            {static} +DISTANCE_ID: OptionID
+            ~distance: Distance<? super O>
+            ~quantile: double
+            +configure(Parameterization): void
+            +make(): DistanceBasedInitializationWithMedian<O>
+        }
+
+        class AffinityPropagation<O> [[AffinityPropagation.html]] {
+            {static} -LOG: Logging
+            ~lambda: double
+            ~convergence: int
+            ~maxiter: int
+            +AffinityPropagation(AffinityPropagationInitialization<O>, double, int, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): Clustering<MedoidModel>
+            -updateResponsibilities(double[], double[], double[]): void
+            -updateAvailabilities(double[], double[]): void
+            -updateAssignment(double[], double[], int[]): int
+            -makeClusterMap(ArrayDBIDs, int[]): Int2ObjectOpenHashMap<ModifiableDBIDs>
+            -buildResult(ArrayDBIDs, int[]): Clustering<MedoidModel>
+        }
+
+        class elki.clustering.affinitypropagation.AffinityPropagation.Par<O> {
+            {static} +INITIALIZATION_ID: OptionID
+            {static} +LAMBDA_ID: OptionID
+            {static} +CONVERGENCE_ID: OptionID
+            {static} +MAXITER_ID: OptionID
+            ~lambda: double
+            ~convergence: int
+            ~maxiter: int
+            +configure(Parameterization): void
+            +make(): AffinityPropagation<O>
+        }
+
+        class SimilarityBasedInitializationWithMedian<O> [[SimilarityBasedInitializationWithMedian.html]] {
+            ~similarity: Similarity<? super O>
+            ~quantile: double
+            +SimilarityBasedInitializationWithMedian(Similarity<? super O>, double)
+            +getSimilarityMatrix(Relation<O>, ArrayDBIDs): double[]
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.clustering.affinitypropagation.SimilarityBasedInitializationWithMedian.Par<O> {
+            {static} +SIMILARITY_ID: OptionID
+            ~similarity: Similarity<? super O>
+            ~quantile: double
+            +configure(Parameterization): void
+            +make(): SimilarityBasedInitializationWithMedian<O>
+        }
+
+        AffinityPropagationInitialization <|.. DistanceBasedInitializationWithMedian
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.affinitypropagation.DistanceBasedInitializationWithMedian.Par
+        DistanceBasedInitializationWithMedian +-- elki.clustering.affinitypropagation.DistanceBasedInitializationWithMedian.Par
+        elki.clustering.ClusteringAlgorithm <|.. AffinityPropagation
+        AffinityPropagation --> AffinityPropagationInitialization: initialization
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.affinitypropagation.AffinityPropagation.Par
+        AffinityPropagation +-- elki.clustering.affinitypropagation.AffinityPropagation.Par
+        elki.clustering.affinitypropagation.AffinityPropagation.Par --> AffinityPropagationInitialization: initialization
+        AffinityPropagationInitialization <|.. SimilarityBasedInitializationWithMedian
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.affinitypropagation.SimilarityBasedInitializationWithMedian.Par
+        SimilarityBasedInitializationWithMedian +-- elki.clustering.affinitypropagation.SimilarityBasedInitializationWithMedian.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

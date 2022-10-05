@@ -1,0 +1,47 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseShortVector\n<size:10>elki.data" as elki.data.SparseShortVector [[SparseShortVector.html]] {
+        {static} +FACTORY: Factory
+        {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<SparseShortVector>
+        {static} -SHORT0: short
+        -indexes: int[]
+        -values: short[]
+        -dimensionality: int
+        +SparseShortVector(int[], short[], int)
+        +SparseShortVector(Int2DoubleOpenHashMap, int)
+        +SparseShortVector(short[])
+        -getMaxDim(): int
+        +getDimensionality(): int
+        +setDimensionality(int): void
+        +--getValue--(int): Short
+        +--doubleValue--(int): double
+        +--longValue--(int): long
+        +--shortValue--(int): short
+        +toArray(): double[]
+        +iterDim(int): int
+        +iterValid(int): boolean
+        +iterDoubleValue(int): double
+        +iterShortValue(int): short
+        +iterLongValue(int): long
+    }
+
+    interface "<size:14>SparseNumberVector\n<size:10>elki.data" as elki.data.SparseNumberVector [[SparseNumberVector.html]] {
+        {abstract} +setDimensionality(int): void
+        {abstract} +iterDoubleValue(int): double
+        {abstract} +iterLongValue(int): long
+        {abstract} +--doubleValue--(int): double
+        {abstract} +--longValue--(int): long
+    }
+    class "<size:14>SparseShortVector.Factory\n<size:10>elki.data" as elki.data.SparseShortVector.Factory [[SparseShortVector.Factory.html]]
+    class "<size:14>SparseShortVector.VariableSerializer\n<size:10>elki.data" as elki.data.SparseShortVector.VariableSerializer [[SparseShortVector.VariableSerializer.html]]
+
+    elki.data.SparseNumberVector <|.. elki.data.SparseShortVector
+    elki.data.SparseShortVector +-- elki.data.SparseShortVector.Factory
+    elki.data.SparseShortVector +-- elki.data.SparseShortVector.VariableSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

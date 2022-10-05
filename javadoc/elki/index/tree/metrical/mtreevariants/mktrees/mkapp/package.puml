@@ -1,0 +1,194 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.metrical.mtreevariants.mktrees.mkapp {
+
+        class PolynomialApproximation [[PolynomialApproximation.html]] {
+            {static} -serialVersionUID: long
+            -b: double[]
+            +PolynomialApproximation()
+            +PolynomialApproximation(double[])
+            +getB(int): double
+            +getCoefficients(): double[]
+            +getPolynomialOrder(): int
+            +getValueAt(int): double
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        class MkAppTreeFactory<O> [[MkAppTreeFactory.html]] {
+            +MkAppTreeFactory(PageFileFactory<?>, MkAppTreeSettings<O>)
+            +instantiate(Relation<O>): MkAppTreeIndex<O>
+            #getNodeClass(): Class<MkAppTreeNode<O>>
+        }
+
+        class elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTreeFactory.Par<O> {
+            {static} +NOLOG_ID: OptionID
+            {static} +K_ID: OptionID
+            {static} +P_ID: OptionID
+            +configure(Parameterization): void
+            +make(): MkAppTreeFactory<O>
+            #makeSettings(): MkAppTreeSettings<O>
+        }
+
+        class MkAppTreeNode<O> [[MkAppTreeNode.html]] {
+            {static} -serialVersionUID: long
+            {static} -LOG: Logging
+            +MkAppTreeNode()
+            +MkAppTreeNode(int, boolean)
+            #knnDistanceApproximation(): PolynomialApproximation
+            +adjustEntry(MkAppEntry, DBID, double, AbstractMTree<O, MkAppTreeNode<O>, MkAppEntry, ?>): boolean
+            #integrityCheckParameters(MkAppEntry, MkAppTreeNode<O>, int, AbstractMTree<O, MkAppTreeNode<O>, MkAppEntry, ?>): void
+        }
+
+        class MkAppTreeIndex<O> [[MkAppTreeIndex.html]] {
+            -relation: Relation<O>
+            +MkAppTreeIndex(Relation<O>, PageFile<MkAppTreeNode<O>>, MkAppTreeSettings<O>)
+            #createNewLeafEntry(DBID, O, double): MkAppEntry
+            +initialize(): void
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+            +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+            +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+        }
+
+        abstract class MkAppTree<O> [[MkAppTree.html]] {
+            {static} -LOG: Logging
+            +MkAppTree(Relation<O>, PageFile<MkAppTreeNode<O>>, MkAppTreeSettings<O>)
+            +insert(MkAppEntry, boolean): void
+            #preInsert(MkAppEntry): void
+            +insertAll(List<MkAppEntry>): void
+            +reverseKNNQuery(DBIDRef, int): DoubleDBIDList
+            +getK_max(): int
+            #initializeCapacities(MkAppEntry): void
+            -getMeanKNNList(DBIDs, Map<DBID, KNNList>): double[]
+            -adjustApproximatedKNNDistances(MkAppEntry, Map<DBID, KNNList>): void
+            -leafEntryIDs(MkAppTreeNode<O>, ModifiableDBIDs): void
+            -approximateKnnDistances(double[]): PolynomialApproximation
+            #createNewLeafNode(): MkAppTreeNode<O>
+            #createNewDirectoryNode(): MkAppTreeNode<O>
+            #createNewDirectoryEntry(MkAppTreeNode<O>, DBID, double): MkAppEntry
+            #createRootEntry(): MkAppEntry
+            #getLogger(): Logging
+        }
+
+        class MkAppDirectoryEntry [[MkAppDirectoryEntry.html]] {
+            {static} -serialVersionUID: long
+            +MkAppDirectoryEntry()
+            +MkAppDirectoryEntry(DBID, double, int, double, PolynomialApproximation)
+            +approximatedValueAt(int): double
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        interface MkAppEntry [[MkAppEntry.html]] {
+            {abstract} +approximatedValueAt(int): double
+            {abstract} +getKnnDistanceApproximation(): PolynomialApproximation
+            {abstract} +setKnnDistanceApproximation(PolynomialApproximation): void
+        }
+
+        class MkAppTreeSettings<O> [[MkAppTreeSettings.html]] {
+            #p: int
+            #log: boolean
+        }
+
+        class MkAppLeafEntry [[MkAppLeafEntry.html]] {
+            {static} -serialVersionUID: long
+            +MkAppLeafEntry()
+            +MkAppLeafEntry(DBID, double, PolynomialApproximation)
+            +approximatedValueAt(int): double
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        java.io.Externalizable <|.. PolynomialApproximation
+        elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory <|-- MkAppTreeFactory
+        elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTreeFactory.Par
+        MkAppTreeFactory +-- elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTreeFactory.Par
+        elki.index.tree.metrical.mtreevariants.AbstractMTreeNode <|-- MkAppTreeNode
+        MkAppTree <|-- MkAppTreeIndex
+        elki.index.RangeIndex <|.. MkAppTreeIndex
+        elki.index.KNNIndex <|.. MkAppTreeIndex
+        elki.index.RKNNIndex <|.. MkAppTreeIndex
+        elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTree <|-- MkAppTree
+        elki.index.tree.metrical.mtreevariants.MTreeDirectoryEntry <|-- MkAppDirectoryEntry
+        MkAppEntry <|.. MkAppDirectoryEntry
+        MkAppDirectoryEntry --> PolynomialApproximation: approximation\nknnDistanceApproximation
+        elki.index.tree.metrical.mtreevariants.MTreeEntry <|-- MkAppEntry
+        elki.index.tree.metrical.mtreevariants.mktrees.MkTreeSettings <|-- MkAppTreeSettings
+        elki.index.tree.metrical.mtreevariants.MTreeLeafEntry <|-- MkAppLeafEntry
+        MkAppEntry <|.. MkAppLeafEntry
+        MkAppLeafEntry --> PolynomialApproximation: approximation\nknnDistanceApproximation
+    }
+
+    namespace java.io {
+        interface Externalizable {
+            {abstract} +writeExternal(ObjectOutput): void
+            {abstract} +readExternal(ObjectInput): void
+        }
+    }
+
+    namespace elki.index.tree.metrical.mtreevariants {
+        abstract class AbstractMTreeFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../../AbstractMTreeFactory.html]] {
+            #settings: S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+        }
+        abstract class elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../../AbstractMTreeFactory.Par.html]] {
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            {static} +SPLIT_STRATEGY_ID: OptionID
+            {static} +INSERT_STRATEGY_ID: OptionID
+            #settings: S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+            {abstract} #makeSettings(): S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+            {abstract} +make(): AbstractMTreeFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>
+        }
+        abstract class AbstractMTreeNode<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[../../AbstractMTreeNode.html]]
+        class MTreeDirectoryEntry [[../../MTreeDirectoryEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: int
+            -routingObjectID: DBID
+            -parentDistance: double
+            -coveringRadius: double
+        }
+        interface MTreeEntry [[../../MTreeEntry.html]] {
+            {abstract} +getRoutingObjectID(): DBID
+            {abstract} +setRoutingObjectID(DBID): boolean
+            {abstract} +getParentDistance(): double
+            {abstract} +setParentDistance(double): boolean
+            {abstract} +getCoveringRadius(): double
+            {abstract} +setCoveringRadius(double): boolean
+        }
+        class MTreeLeafEntry [[../../MTreeLeafEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: DBID
+            -parentDistance: double
+        }
+    }
+
+    namespace elki.index {
+        interface RangeIndex<O> [[../../../../../RangeIndex.html]] {
+            {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+        interface KNNIndex<O> [[../../../../../KNNIndex.html]] {
+            {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        }
+        interface RKNNIndex<O> [[../../../../../RKNNIndex.html]] {
+            {abstract} +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+            {abstract} +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+        }
+    }
+
+    namespace elki.index.tree.metrical.mtreevariants.mktrees {
+        abstract class AbstractMkTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMkTree.html]] {
+            #knnq: KNNSearcher<DBIDRef>
+            -distanceQuery: DistanceQuery<O>
+            {abstract} +reverseKNNQuery(DBIDRef, int): DoubleDBIDList
+        }
+        class MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[../MkTreeSettings.html]] {
+            +kmax: int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

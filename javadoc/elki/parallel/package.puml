@@ -1,0 +1,65 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.parallel {
+
+        class SingleThreadedExecutor [[SingleThreadedExecutor.html]] {
+            {static} +run(DBIDs, Processor...): void
+        }
+
+        class elki.parallel.SingleThreadedExecutor.SingleThreadedRunner [[SingleThreadedExecutor.SingleThreadedRunner.html]] {
+            -ids: DBIDs
+            -variables: HashMap<SharedVariable<?>, Instance<?>>
+            #SingleThreadedRunner(DBIDs, Processor[])
+            +run(): void
+            +getInstance(SharedVariable<I extends Instance<?>>): I extends Instance<?>
+        }
+
+        class ParallelCore [[ParallelCore.html]] {
+            {static} +ALL_PROCESSORS: int
+            -executor: ThreadPoolExecutor
+            -connected: int
+            -processors: int
+            #ParallelCore(int)
+            {static} +getCore(): ParallelCore
+            +getParallelism(): int
+            +submit(Callable<T>): Future<T>
+            +connect(): void
+            +disconnect(): void
+        }
+
+        interface Executor [[Executor.html]] {
+            {abstract} +getInstance(SharedVariable<I extends Instance<?>>): I extends Instance<?>
+        }
+
+        class ParallelExecutor [[ParallelExecutor.html]] {
+            {static} +run(DBIDs, Processor...): void
+        }
+
+        class elki.parallel.ParallelExecutor.BlockArrayRunner [[ParallelExecutor.BlockArrayRunner.html]] {
+            -ids: ArrayDBIDs
+            -start: int
+            -end: int
+            -variables: HashMap<SharedVariable<?>, Instance<?>>
+            #BlockArrayRunner(ArrayDBIDs, int, int, Processor[])
+            +call(): ArrayDBIDs
+            +getInstance(SharedVariable<I extends Instance<?>>): I extends Instance<?>
+        }
+
+        Executor <|.. elki.parallel.SingleThreadedExecutor.SingleThreadedRunner
+        SingleThreadedExecutor +-- elki.parallel.SingleThreadedExecutor.SingleThreadedRunner
+        elki.parallel.SingleThreadedExecutor.SingleThreadedRunner --> "*" elki.parallel.processor.Processor: procs
+        ParallelCore --> ParallelCore: STATIC
+        java.util.concurrent.Callable <|.. elki.parallel.ParallelExecutor.BlockArrayRunner
+        Executor <|.. elki.parallel.ParallelExecutor.BlockArrayRunner
+        ParallelExecutor +-- elki.parallel.ParallelExecutor.BlockArrayRunner
+        elki.parallel.ParallelExecutor.BlockArrayRunner --> "*" elki.parallel.processor.Processor: procs
+    }
+
+    namespace java.util.concurrent {
+        interface Callable<V> {
+            {abstract} +call(): V
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

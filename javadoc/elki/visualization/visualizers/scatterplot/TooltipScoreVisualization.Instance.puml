@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TooltipScoreVisualization.Instance\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Instance [[TooltipScoreVisualization.Instance.html]] {
+        -result: Relation<? extends Number>
+        -fontsize: double
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        #makeTooltip(DBIDRef, double, double, double): Element
+        #setupCSS(SVGPlot): void
+    }
+
+    abstract class "<size:14>AbstractTooltipVisualization\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.AbstractTooltipVisualization [[AbstractTooltipVisualization.html]] {
+        {abstract} #makeTooltip(DBIDRef, double, double, double): Element
+        {abstract} #setupCSS(SVGPlot): void
+    }
+    class "<size:14>TooltipScoreVisualization\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.TooltipScoreVisualization [[TooltipScoreVisualization.html]]
+
+    elki.visualization.visualizers.scatterplot.AbstractTooltipVisualization <|-- elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Instance
+    elki.visualization.visualizers.scatterplot.TooltipScoreVisualization +-- elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

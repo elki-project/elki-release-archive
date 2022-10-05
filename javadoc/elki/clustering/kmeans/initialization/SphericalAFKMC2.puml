@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SphericalAFKMC2\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SphericalAFKMC2 [[SphericalAFKMC2.html]] {
+        {static} -LOG: Logging
+        #alpha: double
+        +SphericalAFKMC2(int, double, RandomFactory)
+        +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+    }
+
+    class "<size:14>AFKMC2\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AFKMC2 [[AFKMC2.html]]
+    class "<size:14>SphericalAFKMC2.Instance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SphericalAFKMC2.Instance [[SphericalAFKMC2.Instance.html]]
+    class "<size:14>SphericalAFKMC2.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SphericalAFKMC2.Par [[SphericalAFKMC2.Par.html]]
+
+    elki.clustering.kmeans.initialization.AFKMC2 <|-- elki.clustering.kmeans.initialization.SphericalAFKMC2
+    elki.clustering.kmeans.initialization.SphericalAFKMC2 +-- elki.clustering.kmeans.initialization.SphericalAFKMC2.Instance
+    elki.clustering.kmeans.initialization.SphericalAFKMC2 +-- elki.clustering.kmeans.initialization.SphericalAFKMC2.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

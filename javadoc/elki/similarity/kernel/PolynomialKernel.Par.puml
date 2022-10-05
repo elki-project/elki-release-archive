@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PolynomialKernel.Par\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.PolynomialKernel.Par [[PolynomialKernel.Par.html]] {
+        {static} +DEGREE_ID: OptionID
+        {static} +BIAS_ID: OptionID
+        #degree: int
+        #bias: double
+        +configure(Parameterization): void
+        +make(): PolynomialKernel
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>PolynomialKernel\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.PolynomialKernel [[PolynomialKernel.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.kernel.PolynomialKernel.Par
+    elki.similarity.kernel.PolynomialKernel +-- elki.similarity.kernel.PolynomialKernel.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

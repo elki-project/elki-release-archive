@@ -1,0 +1,13 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ELKILauncher\n<size:10>elki.application" as elki.application.ELKILauncher [[ELKILauncher.html]] {
+        {static} +DEFAULT_APPLICATION: Class<? extends AbstractApplication>
+        {static} +main(String[]): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,97 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.itemsetmining.associationrules.interest {
+
+        interface InterestingnessMeasure [[InterestingnessMeasure.html]] {
+            {abstract} +measure(int, int, int, int): double
+        }
+
+        class PhiCorrelationCoefficient [[PhiCorrelationCoefficient.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class AddedValue [[AddedValue.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class Jaccard [[Jaccard.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class JMeasure [[JMeasure.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class OddsRatio [[OddsRatio.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class CertaintyFactor [[CertaintyFactor.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class Confidence [[Confidence.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class SebagSchonauer [[SebagSchonauer.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class Cosine [[Cosine.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class YulesQ [[YulesQ.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class LaplaceCorrectedConfidence [[LaplaceCorrectedConfidence.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class Leverage [[Leverage.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class Lift [[Lift.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class Conviction [[Conviction.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class Klosgen [[Klosgen.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class YulesY [[YulesY.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        class GiniIndex [[GiniIndex.html]] {
+            +measure(int, int, int, int): double
+        }
+
+        InterestingnessMeasure <|.. PhiCorrelationCoefficient
+        InterestingnessMeasure <|.. AddedValue
+        InterestingnessMeasure <|.. Jaccard
+        InterestingnessMeasure <|.. JMeasure
+        InterestingnessMeasure <|.. OddsRatio
+        InterestingnessMeasure <|.. CertaintyFactor
+        InterestingnessMeasure <|.. Confidence
+        InterestingnessMeasure <|.. SebagSchonauer
+        InterestingnessMeasure <|.. Cosine
+        OddsRatio <|-- YulesQ
+        InterestingnessMeasure <|.. LaplaceCorrectedConfidence
+        InterestingnessMeasure <|.. Leverage
+        InterestingnessMeasure <|.. Lift
+        InterestingnessMeasure <|.. Conviction
+        InterestingnessMeasure <|.. Klosgen
+        OddsRatio <|-- YulesY
+        InterestingnessMeasure <|.. GiniIndex
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CSSClassManager.CSSNamingConflict\n<size:10>elki.visualization.css" as elki.visualization.css.CSSClassManager.CSSNamingConflict [[CSSClassManager.CSSNamingConflict.html]] {
+        {static} -serialVersionUID: long
+        +CSSNamingConflict(String)
+    }
+
+    class "<size:14>Exception\n<size:10>java.lang" as java.lang.Exception
+    class "<size:14>CSSClassManager\n<size:10>elki.visualization.css" as elki.visualization.css.CSSClassManager [[CSSClassManager.html]]
+
+    java.lang.Exception <|-- elki.visualization.css.CSSClassManager.CSSNamingConflict
+    elki.visualization.css.CSSClassManager +-- elki.visualization.css.CSSClassManager.CSSNamingConflict
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

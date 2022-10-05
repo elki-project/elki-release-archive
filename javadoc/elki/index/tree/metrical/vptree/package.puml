@@ -1,0 +1,374 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.metrical.vptree {
+
+        class GNAT<O> [[GNAT.html]] {
+            {static} -LOG: Logging
+            #distComputations: long
+            #relation: Relation<O>
+            ~distFunc: Distance<? super O>
+            ~distQuery: DistanceQuery<O>
+            ~sorted: ModifiableDoubleDBIDList
+            ~random: RandomFactory
+            ~numberVPs: int
+            +GNAT(Relation<O>, Distance<? super O>, RandomFactory, int)
+            +initialize(): void
+            -distance(DBIDRef, DBIDRef): double
+            -distance(O, DBIDRef): double
+            -buildTree(Node, DBIDs, int): void
+            -findVantagePoints(DBIDs, int): ArrayDBIDs
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+            +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+            {static} -intersect(double, double, double, double): boolean
+            +logStatistics(): void
+        }
+
+        class elki.index.tree.metrical.vptree.GNAT.Node [[GNAT.Node.html]] {
+            ~vps: ArrayDBIDs
+            ~lowerBound: double[]
+            ~upperBound: double[]
+            +Node(int)
+        }
+
+        abstract class elki.index.tree.metrical.vptree.GNAT.GNATKNNSearcher [[GNAT.GNATKNNSearcher.html]] {
+            #mvpKNNSearch(KNNHeap, Node, double): double
+            {abstract} #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.GNAT.GNATKNNObjectSearcher [[GNAT.GNATKNNObjectSearcher.html]] {
+            -query: O
+            +getKNN(O, int): KNNList
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.GNAT.GNATKNNDBIDSearcher [[GNAT.GNATKNNDBIDSearcher.html]] {
+            -query: DBIDRef
+            +getKNN(DBIDRef, int): KNNList
+            #queryDistance(DBIDRef): double
+        }
+
+        abstract class elki.index.tree.metrical.vptree.GNAT.GNATRangeSearcher [[GNAT.GNATRangeSearcher.html]] {
+            #mvpRangeSearch(ModifiableDoubleDBIDList, Node, double): void
+            {abstract} #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.GNAT.GNATRangeObjectSearcher [[GNAT.GNATRangeObjectSearcher.html]] {
+            -query: O
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.GNAT.GNATRangeDBIDSearcher [[GNAT.GNATRangeDBIDSearcher.html]] {
+            -query: DBIDRef
+            +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.GNAT.PrioritySearchBranch [[GNAT.PrioritySearchBranch.html]] {
+            ~mindist: double
+            ~vp: DBID
+            +PrioritySearchBranch(double, Node, DBID)
+            +compareTo(PrioritySearchBranch): int
+        }
+
+        abstract class elki.index.tree.metrical.vptree.GNAT.GNATPrioritySearcher<T> [[GNAT.GNATPrioritySearcher.html]] {
+            -heap: ComparableMinHeap<PrioritySearchBranch>
+            -threshold: double
+            #doSearch(): PrioritySearcher<T>
+            +advance(): PrioritySearcher<T>
+            +internalGetIndex(): int
+            +valid(): boolean
+            +decreaseCutoff(double): PrioritySearcher<T>
+            +computeExactDistance(): double
+            +allLowerBound(): double
+            +getLowerBound(): double
+            {abstract} #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.GNAT.GNATPriorityObjectSearcher [[GNAT.GNATPriorityObjectSearcher.html]] {
+            -query: O
+            +search(O): PrioritySearcher<O>
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.GNAT.GNATPriorityDBIDSearcher [[GNAT.GNATPriorityDBIDSearcher.html]] {
+            -query: DBIDRef
+            +search(DBIDRef): PrioritySearcher<DBIDRef>
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.GNAT.Factory<O extends NumberVector> [[GNAT.Factory.html]] {
+            ~distance: Distance<? super NumberVector>
+            ~random: RandomFactory
+            ~numbervps: int
+            +Factory(Distance<? super NumberVector>, RandomFactory, int)
+            +instantiate(Relation<O extends NumberVector>): GNAT<O extends NumberVector>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.tree.metrical.vptree.GNAT.Factory.Par<O extends NumberVector> [[GNAT.Factory.Par.html]] {
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            {static} +NUMBER_VANTAGE_POINTS_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #distance: Distance<? super NumberVector>
+            #random: RandomFactory
+            #amountVantagePoints: int
+            +configure(Parameterization): void
+            +make(): Factory<O extends NumberVector>
+        }
+
+        class VPTree<O> [[VPTree.html]] {
+            {static} -LOG: Logging
+            #relation: Relation<O>
+            ~distFunc: Distance<? super O>
+            -distQuery: DistanceQuery<O>
+            ~random: RandomFactory
+            ~sampleSize: int
+            ~truncate: int
+            ~distComputations: long
+            +VPTree(Relation<O>, Distance<? super O>, int)
+            +VPTree(Relation<O>, Distance<? super O>, RandomFactory, int, int)
+            +initialize(): void
+            -distance(DBIDRef, DBIDRef): double
+            -distance(O, DBIDRef): double
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+            +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+            +logStatistics(): void
+        }
+
+        class elki.index.tree.metrical.vptree.VPTree.Builder [[VPTree.Builder.html]] {
+            ~scratch: ModifiableDoubleDBIDList
+            ~scratchit: DoubleDBIDListMIter
+            ~rnd: Random
+            -buildTree(int, int): Node
+            -chooseVantagePoint(int, int): DBIDVar
+            -calcMoment(DBIDRef, DBIDs, int): double
+        }
+
+        class elki.index.tree.metrical.vptree.VPTree.Node [[VPTree.Node.html]] {
+            ~vp: ModifiableDoubleDBIDList
+            ~lowBound: double
+            ~highBound: double
+            +Node(ModifiableDoubleDBIDList)
+        }
+
+        abstract class elki.index.tree.metrical.vptree.VPTree.VPTreeKNNSearcher [[VPTree.VPTreeKNNSearcher.html]] {
+            #vpKNNSearch(KNNHeap, Node): double
+            {abstract} #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.VPTree.VPTreeKNNObjectSearcher [[VPTree.VPTreeKNNObjectSearcher.html]] {
+            -query: O
+            +getKNN(O, int): KNNList
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.VPTree.VPTreeKNNDBIDSearcher [[VPTree.VPTreeKNNDBIDSearcher.html]] {
+            -query: DBIDRef
+            +getKNN(DBIDRef, int): KNNList
+            #queryDistance(DBIDRef): double
+        }
+
+        abstract class elki.index.tree.metrical.vptree.VPTree.VPTreeRangeSearcher [[VPTree.VPTreeRangeSearcher.html]] {
+            #vpRangeSearch(ModifiableDoubleDBIDList, Node, double): void
+            {abstract} #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.VPTree.VPTreeRangeObjectSearcher [[VPTree.VPTreeRangeObjectSearcher.html]] {
+            -query: O
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.VPTree.VPTreeRangeDBIDSearcher [[VPTree.VPTreeRangeDBIDSearcher.html]] {
+            -query: DBIDRef
+            +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            #queryDistance(DBIDRef): double
+        }
+
+        abstract class elki.index.tree.metrical.vptree.VPTree.VPTreePrioritySearcher<Q> [[VPTree.VPTreePrioritySearcher.html]] {
+            -heap: DoubleObjectMinHeap<Node>
+            -threshold: double
+            -candidates: DoubleDBIDListIter
+            -curdist: double
+            -vpdist: double
+            +doSearch(): void
+            +advance(): PrioritySearcher<Q>
+            #advanceQueue(): boolean
+            {abstract} #queryDistance(DBIDRef): double
+            +internalGetIndex(): int
+            +valid(): boolean
+            +decreaseCutoff(double): PrioritySearcher<Q>
+            +computeExactDistance(): double
+            +getApproximateDistance(): double
+            +getApproximateAccuracy(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            +allLowerBound(): double
+        }
+
+        class elki.index.tree.metrical.vptree.VPTree.VPTreePriorityObjectSearcher [[VPTree.VPTreePriorityObjectSearcher.html]] {
+            -query: O
+            +search(O): PrioritySearcher<O>
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.VPTree.VPTreePriorityDBIDSearcher [[VPTree.VPTreePriorityDBIDSearcher.html]] {
+            -query: DBIDRef
+            +search(DBIDRef): PrioritySearcher<DBIDRef>
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.vptree.VPTree.Factory<O extends NumberVector> [[VPTree.Factory.html]] {
+            ~distance: Distance<? super NumberVector>
+            ~random: RandomFactory
+            ~sampleSize: int
+            ~truncate: int
+            +Factory(Distance<? super NumberVector>, RandomFactory, int, int)
+            +instantiate(Relation<O extends NumberVector>): VPTree<O extends NumberVector>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.tree.metrical.vptree.VPTree.Factory.Par<O extends NumberVector> [[VPTree.Factory.Par.html]] {
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            {static} +SAMPLE_SIZE_ID: OptionID
+            {static} +TRUNCATE_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #distance: Distance<? super NumberVector>
+            #random: RandomFactory
+            #sampleSize: int
+            ~truncate: int
+            +configure(Parameterization): void
+            +make(): Factory<O extends NumberVector>
+        }
+
+        elki.index.DistancePriorityIndex <|.. GNAT
+        GNAT --> elki.index.tree.metrical.vptree.GNAT.Node: root
+        GNAT +-- elki.index.tree.metrical.vptree.GNAT.Node
+        elki.index.tree.metrical.vptree.GNAT.Node --> "*" elki.index.tree.metrical.vptree.GNAT.Node: children
+        GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATKNNSearcher
+        elki.index.tree.metrical.vptree.GNAT.GNATKNNSearcher <|-- elki.index.tree.metrical.vptree.GNAT.GNATKNNObjectSearcher
+        elki.database.query.knn.KNNSearcher <|.. elki.index.tree.metrical.vptree.GNAT.GNATKNNObjectSearcher
+        GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATKNNObjectSearcher
+        elki.index.tree.metrical.vptree.GNAT.GNATKNNSearcher <|-- elki.index.tree.metrical.vptree.GNAT.GNATKNNDBIDSearcher
+        elki.database.query.knn.KNNSearcher <|.. elki.index.tree.metrical.vptree.GNAT.GNATKNNDBIDSearcher
+        GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATKNNDBIDSearcher
+        GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATRangeSearcher
+        elki.index.tree.metrical.vptree.GNAT.GNATRangeSearcher <|-- elki.index.tree.metrical.vptree.GNAT.GNATRangeObjectSearcher
+        elki.database.query.range.RangeSearcher <|.. elki.index.tree.metrical.vptree.GNAT.GNATRangeObjectSearcher
+        GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATRangeObjectSearcher
+        elki.index.tree.metrical.vptree.GNAT.GNATRangeSearcher <|-- elki.index.tree.metrical.vptree.GNAT.GNATRangeDBIDSearcher
+        elki.database.query.range.RangeSearcher <|.. elki.index.tree.metrical.vptree.GNAT.GNATRangeDBIDSearcher
+        GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATRangeDBIDSearcher
+        java.lang.Comparable <|.. elki.index.tree.metrical.vptree.GNAT.PrioritySearchBranch
+        GNAT +-- elki.index.tree.metrical.vptree.GNAT.PrioritySearchBranch
+        elki.index.tree.metrical.vptree.GNAT.PrioritySearchBranch --> elki.index.tree.metrical.vptree.GNAT.Node: node
+        elki.database.query.PrioritySearcher <|.. elki.index.tree.metrical.vptree.GNAT.GNATPrioritySearcher
+        GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATPrioritySearcher
+        elki.index.tree.metrical.vptree.GNAT.GNATPrioritySearcher --> elki.index.tree.metrical.vptree.GNAT.PrioritySearchBranch: cur
+        elki.index.tree.metrical.vptree.GNAT.GNATPrioritySearcher <|-- elki.index.tree.metrical.vptree.GNAT.GNATPriorityObjectSearcher
+        GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATPriorityObjectSearcher
+        elki.index.tree.metrical.vptree.GNAT.GNATPrioritySearcher <|-- elki.index.tree.metrical.vptree.GNAT.GNATPriorityDBIDSearcher
+        GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATPriorityDBIDSearcher
+        elki.index.IndexFactory <|.. elki.index.tree.metrical.vptree.GNAT.Factory
+        GNAT +-- elki.index.tree.metrical.vptree.GNAT.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.metrical.vptree.GNAT.Factory.Par
+        elki.index.tree.metrical.vptree.GNAT.Factory +-- elki.index.tree.metrical.vptree.GNAT.Factory.Par
+        elki.index.DistancePriorityIndex <|.. VPTree
+        VPTree --> elki.index.tree.metrical.vptree.VPTree.Node: root
+        VPTree +-- elki.index.tree.metrical.vptree.VPTree.Builder
+        VPTree +-- elki.index.tree.metrical.vptree.VPTree.Node
+        elki.index.tree.metrical.vptree.VPTree.Node --> elki.index.tree.metrical.vptree.VPTree.Node: leftChild\nrightChild
+        VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeKNNSearcher
+        elki.index.tree.metrical.vptree.VPTree.VPTreeKNNSearcher <|-- elki.index.tree.metrical.vptree.VPTree.VPTreeKNNObjectSearcher
+        elki.database.query.knn.KNNSearcher <|.. elki.index.tree.metrical.vptree.VPTree.VPTreeKNNObjectSearcher
+        VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeKNNObjectSearcher
+        elki.index.tree.metrical.vptree.VPTree.VPTreeKNNSearcher <|-- elki.index.tree.metrical.vptree.VPTree.VPTreeKNNDBIDSearcher
+        elki.database.query.knn.KNNSearcher <|.. elki.index.tree.metrical.vptree.VPTree.VPTreeKNNDBIDSearcher
+        VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeKNNDBIDSearcher
+        VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeRangeSearcher
+        elki.index.tree.metrical.vptree.VPTree.VPTreeRangeSearcher <|-- elki.index.tree.metrical.vptree.VPTree.VPTreeRangeObjectSearcher
+        elki.database.query.range.RangeSearcher <|.. elki.index.tree.metrical.vptree.VPTree.VPTreeRangeObjectSearcher
+        VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeRangeObjectSearcher
+        elki.index.tree.metrical.vptree.VPTree.VPTreeRangeSearcher <|-- elki.index.tree.metrical.vptree.VPTree.VPTreeRangeDBIDSearcher
+        elki.database.query.range.RangeSearcher <|.. elki.index.tree.metrical.vptree.VPTree.VPTreeRangeDBIDSearcher
+        VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeRangeDBIDSearcher
+        elki.database.query.PrioritySearcher <|.. elki.index.tree.metrical.vptree.VPTree.VPTreePrioritySearcher
+        VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreePrioritySearcher
+        elki.index.tree.metrical.vptree.VPTree.VPTreePrioritySearcher --> elki.index.tree.metrical.vptree.VPTree.Node: cur
+        elki.index.tree.metrical.vptree.VPTree.VPTreePrioritySearcher <|-- elki.index.tree.metrical.vptree.VPTree.VPTreePriorityObjectSearcher
+        VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreePriorityObjectSearcher
+        elki.index.tree.metrical.vptree.VPTree.VPTreePrioritySearcher <|-- elki.index.tree.metrical.vptree.VPTree.VPTreePriorityDBIDSearcher
+        VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreePriorityDBIDSearcher
+        elki.index.IndexFactory <|.. elki.index.tree.metrical.vptree.VPTree.Factory
+        VPTree +-- elki.index.tree.metrical.vptree.VPTree.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.metrical.vptree.VPTree.Factory.Par
+        elki.index.tree.metrical.vptree.VPTree.Factory +-- elki.index.tree.metrical.vptree.VPTree.Factory.Par
+    }
+
+    namespace elki.index {
+        interface DistancePriorityIndex<O> [[../../../DistancePriorityIndex.html]] {
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        }
+        interface IndexFactory<V> [[../../../IndexFactory.html]] {
+            {abstract} +instantiate(Relation<V>): Index
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+    }
+
+    namespace elki.database.query.knn {
+        interface KNNSearcher<O> [[../../../../database/query/knn/KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+    }
+
+    namespace elki.database.query.range {
+        interface RangeSearcher<O> [[../../../../database/query/range/RangeSearcher.html]] {
+            +getRange(O, double): DoubleDBIDList
+            {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    namespace elki.database.query {
+        interface PrioritySearcher<O> [[../../../../database/query/PrioritySearcher.html]] {
+            +search(O, double): PrioritySearcher<O>
+            {abstract} +search(O): PrioritySearcher<O>
+            +getKNN(O, int): KNNList
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+            {abstract} +computeExactDistance(): double
+            +getApproximateDistance(): double
+            +getApproximateAccuracy(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            {abstract} +allLowerBound(): double
+            {abstract} +advance(): PrioritySearcher<O>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

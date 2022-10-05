@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HistogramJitterFilter.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.HistogramJitterFilter.Par [[HistogramJitterFilter.Par.html]] {
+        {static} +JITTER_ID: OptionID
+        {static} +SEED_ID: OptionID
+        ~jitter: double
+        ~rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): HistogramJitterFilter<DoubleVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>HistogramJitterFilter\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.HistogramJitterFilter<V extends NumberVector> [[HistogramJitterFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.HistogramJitterFilter.Par
+    elki.datasource.filter.transform.HistogramJitterFilter +-- elki.datasource.filter.transform.HistogramJitterFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

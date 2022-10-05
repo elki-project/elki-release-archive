@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>ParameterTabPanel\n<size:10>elki.gui.multistep.panels" as elki.gui.multistep.panels.ParameterTabPanel [[ParameterTabPanel.html]] {
+        {static} -serialVersionUID: long
+        {static} -LOG: Logging
+        -parameterTable: ConfiguratorPanel
+        -runButton: JButton
+        -statusText: JLabel
+        #updateParameterTable(): void
+        +setParameters(Parameterization): void
+        +appendParameters(ListParameterization): void
+        #reportErrors(Parameterization): void
+        #execute(): void
+        {abstract} #configureStep(Parameterization): void
+        {abstract} #getStatus(): Status
+        {abstract} #executeStep(): void
+        +canRun(): boolean
+        +isComplete(): boolean
+        #updateStatus(): void
+        #firePanelUpdated(): void
+        +addPanelListener(ParameterTabPanel): void
+        +removePanelListener(ParameterTabPanel): void
+        +stateChanged(ChangeEvent): void
+        ~panelUpdated(ParameterTabPanel): void
+    }
+
+    class "<size:14>JPanel\n<size:10>javax.swing" as javax.swing.JPanel
+    interface "<size:14>ChangeListener\n<size:10>javax.swing.event" as javax.swing.event.ChangeListener {
+        {abstract} +stateChanged(ChangeEvent): void
+    }
+    enum "<size:14>ParameterTabPanel.Status\n<size:10>elki.gui.multistep.panels" as elki.gui.multistep.panels.ParameterTabPanel.Status [[ParameterTabPanel.Status.html]]
+
+    javax.swing.JPanel <|-- elki.gui.multistep.panels.ParameterTabPanel
+    javax.swing.event.ChangeListener <|.. elki.gui.multistep.panels.ParameterTabPanel
+    elki.gui.multistep.panels.ParameterTabPanel +-- elki.gui.multistep.panels.ParameterTabPanel.Status
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

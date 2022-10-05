@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierThresholdClustering.Par\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierThresholdClustering.Par [[OutlierThresholdClustering.Par.html]] {
+        {static} +SCALING_ID: OptionID
+        {static} +THRESHOLD_ID: OptionID
+        ~scaling: ScalingFunction
+        ~threshold: double[]
+        +configure(Parameterization): void
+        +make(): OutlierThresholdClustering
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>OutlierThresholdClustering\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierThresholdClustering [[OutlierThresholdClustering.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.outlier.OutlierThresholdClustering.Par
+    elki.evaluation.outlier.OutlierThresholdClustering +-- elki.evaluation.outlier.OutlierThresholdClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

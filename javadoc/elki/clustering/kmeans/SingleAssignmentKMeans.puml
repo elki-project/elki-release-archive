@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SingleAssignmentKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.SingleAssignmentKMeans<V extends NumberVector> [[SingleAssignmentKMeans.html]] {
+        {static} -LOG: Logging
+        +SingleAssignmentKMeans(NumberVectorDistance<? super NumberVector>, int, KMeansInitialization)
+        +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans<V extends NumberVector, KMeansModel> [[AbstractKMeans.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>SingleAssignmentKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.SingleAssignmentKMeans.Instance [[SingleAssignmentKMeans.Instance.html]]
+    class "<size:14>SingleAssignmentKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.SingleAssignmentKMeans.Par<V extends NumberVector> [[SingleAssignmentKMeans.Par.html]]
+
+    elki.clustering.kmeans.AbstractKMeans <|-- elki.clustering.kmeans.SingleAssignmentKMeans
+    elki.clustering.kmeans.SingleAssignmentKMeans +-- elki.clustering.kmeans.SingleAssignmentKMeans.Instance
+    elki.clustering.kmeans.SingleAssignmentKMeans +-- elki.clustering.kmeans.SingleAssignmentKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

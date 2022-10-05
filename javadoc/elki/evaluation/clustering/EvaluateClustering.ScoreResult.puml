@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluateClustering.ScoreResult\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.EvaluateClustering.ScoreResult [[EvaluateClustering.ScoreResult.html]] {
+        #contmat: ClusterContingencyTable
+        +ScoreResult(ClusterContingencyTable)
+        +getContingencyTable(): ClusterContingencyTable
+        +visualizeSingleton(): boolean
+    }
+
+    class "<size:14>EvaluationResult\n<size:10>elki.result" as elki.result.EvaluationResult [[../../result/EvaluationResult.html]]
+    class "<size:14>EvaluateClustering\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.EvaluateClustering [[EvaluateClustering.html]]
+
+    elki.result.EvaluationResult <|-- elki.evaluation.clustering.EvaluateClustering.ScoreResult
+    elki.evaluation.clustering.EvaluateClustering +-- elki.evaluation.clustering.EvaluateClustering.ScoreResult
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

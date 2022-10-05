@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ResultWindow.TextWriterPanel\n<size:10>elki.visualization.gui" as elki.visualization.gui.ResultWindow.TextWriterPanel [[ResultWindow.TextWriterPanel.html]] {
+        {static} -serialVersionUID: long
+        ~compress: JCheckBox
+        ~filterField: JTextField
+    }
+
+    class "<size:14>JPanel\n<size:10>javax.swing" as javax.swing.JPanel
+    class "<size:14>ResultWindow\n<size:10>elki.visualization.gui" as elki.visualization.gui.ResultWindow [[ResultWindow.html]]
+
+    javax.swing.JPanel <|-- elki.visualization.gui.ResultWindow.TextWriterPanel
+    elki.visualization.gui.ResultWindow +-- elki.visualization.gui.ResultWindow.TextWriterPanel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

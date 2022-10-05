@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseIntegerVector.Factory.Par\n<size:10>elki.data" as elki.data.SparseIntegerVector.Factory.Par [[SparseIntegerVector.Factory.Par.html]] {
+        +make(): Factory
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SparseIntegerVector.Factory\n<size:10>elki.data" as elki.data.SparseIntegerVector.Factory [[SparseIntegerVector.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.data.SparseIntegerVector.Factory.Par
+    elki.data.SparseIntegerVector.Factory +-- elki.data.SparseIntegerVector.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

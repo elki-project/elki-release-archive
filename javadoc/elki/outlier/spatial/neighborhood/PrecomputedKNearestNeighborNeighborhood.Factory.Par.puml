@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrecomputedKNearestNeighborNeighborhood.Factory.Par\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory.Par<O> {
+        {static} +K_ID: OptionID
+        {static} +DISTANCEFUNCTION_ID: OptionID
+        ~k: int
+        ~distFunc: Distance<? super O>
+        +configure(Parameterization): void
+        +make(): Factory<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>PrecomputedKNearestNeighborNeighborhood.Factory\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory<O> [[PrecomputedKNearestNeighborNeighborhood.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory.Par
+    elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory +-- elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

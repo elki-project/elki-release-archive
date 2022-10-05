@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="69px" preserveAspectRatio="none" style="width:194px;height:69px;background:#FFFFFF;" version="1.1" viewBox="0 0 194 69" width="194px" zoomAndPan="magnify"><defs/><g><!--MD5=[588a7a6f09470e7b6754ef4185185c61]
+class elki.outlier.density.IsolationForest--><a href="IsolationForest.html" target="_top" title="IsolationForest.html" xlink:actuate="onRequest" xlink:href="IsolationForest.html" xlink:show="new" xlink:title="IsolationForest.html" xlink:type="simple"><g id="elem_elki.outlier.density.IsolationForest"><rect codeLine="20" fill="#F1F1F1" height="37.9375" id="elki.outlier.density.IsolationForest" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="133" x="33.5" y="7"/><ellipse cx="48.5" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M51.4688,31.6094 Q50.8906,31.9063 50.25,32.0469 Q49.6094,32.2031 48.9063,32.2031 Q46.4063,32.2031 45.0781,30.5625 Q43.7656,28.9063 43.7656,25.7813 Q43.7656,22.6563 45.0781,21 Q46.4063,19.3438 48.9063,19.3438 Q49.6094,19.3438 50.25,19.5 Q50.9063,19.6563 51.4688,19.9531 L51.4688,22.6719 Q50.8438,22.0938 50.25,21.8281 Q49.6563,21.5469 49.0313,21.5469 Q47.6875,21.5469 47,22.625 Q46.3125,23.6875 46.3125,25.7813 Q46.3125,27.875 47,28.9531 Q47.6875,30.0156 49.0313,30.0156 Q49.6563,30.0156 50.25,29.75 Q50.8438,29.4688 51.4688,28.8906 L51.4688,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="62.5" y="24.9951">IsolationForest</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="86" x="70" y="37.5791">elki.outlier.density</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="0" y="49.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="0" y="59.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[9090d7aa1dc4747cd558f9ffd08ee68b]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IsolationForest.Par\n<size:10>elki.outlier.density" as elki.outlier.density.IsolationForest.Par [[IsolationForest.Par.html]] {
+        {static} +NUM_TREES_ID: OptionID
+        {static} +SUBSAMPLE_SIZE_ID: OptionID
+        {static} +SEED_ID: OptionID
+        #numTrees: int
+        #subsampleSize: int
+        #rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): IsolationForest
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>IsolationForest\n<size:10>elki.outlier.density" as elki.outlier.density.IsolationForest [[IsolationForest.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.density.IsolationForest.Par
+    elki.outlier.density.IsolationForest +- - elki.outlier.density.IsolationForest.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

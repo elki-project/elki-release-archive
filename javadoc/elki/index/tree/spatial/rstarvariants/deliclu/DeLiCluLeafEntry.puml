@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DeLiCluLeafEntry\n<size:10>elki.index.tree.spatial.rstarvariants.deliclu" as elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluLeafEntry [[DeLiCluLeafEntry.html]] {
+        {static} -serialVersionUID: long
+        -hasHandled: boolean
+        -hasUnhandled: boolean
+        +DeLiCluLeafEntry()
+        +DeLiCluLeafEntry(DBID, NumberVector)
+        +hasHandled(): boolean
+        +hasUnhandled(): boolean
+        +setHasHandled(boolean): void
+        +setHasUnhandled(boolean): void
+    }
+
+    class "<size:14>SpatialPointLeafEntry\n<size:10>elki.index.tree.spatial" as elki.index.tree.spatial.SpatialPointLeafEntry [[../../SpatialPointLeafEntry.html]]
+    interface "<size:14>DeLiCluEntry\n<size:10>elki.index.tree.spatial.rstarvariants.deliclu" as elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluEntry [[DeLiCluEntry.html]] {
+        {abstract} +hasHandled(): boolean
+        {abstract} +hasUnhandled(): boolean
+        {abstract} +setHasHandled(boolean): void
+        {abstract} +setHasUnhandled(boolean): void
+    }
+
+    elki.index.tree.spatial.SpatialPointLeafEntry <|-- elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluLeafEntry
+    elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluEntry <|.. elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluLeafEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WeakEigenPairFilter.Par\n<size:10>elki.math.linearalgebra.pca.filter" as elki.math.linearalgebra.pca.filter.WeakEigenPairFilter.Par [[WeakEigenPairFilter.Par.html]] {
+        {static} +EIGENPAIR_FILTER_WALPHA: OptionID
+        -walpha: double
+        +configure(Parameterization): void
+        +make(): WeakEigenPairFilter
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>WeakEigenPairFilter\n<size:10>elki.math.linearalgebra.pca.filter" as elki.math.linearalgebra.pca.filter.WeakEigenPairFilter [[WeakEigenPairFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.filter.WeakEigenPairFilter.Par
+    elki.math.linearalgebra.pca.filter.WeakEigenPairFilter +-- elki.math.linearalgebra.pca.filter.WeakEigenPairFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

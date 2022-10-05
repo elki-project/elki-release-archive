@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BIRCHAverageIntraclusterDistance\n<size:10>elki.index.tree.betula.distance" as elki.index.tree.betula.distance.BIRCHAverageIntraclusterDistance [[BIRCHAverageIntraclusterDistance.html]] {
+        {static} +STATIC: BIRCHAverageIntraclusterDistance
+        +squaredDistance(NumberVector, ClusterFeature): double
+        +squaredDistance(ClusterFeature, ClusterFeature): double
+    }
+
+    interface "<size:14>CFDistance\n<size:10>elki.index.tree.betula.distance" as elki.index.tree.betula.distance.CFDistance [[CFDistance.html]] {
+        {abstract} +squaredDistance(NumberVector, ClusterFeature): double
+        {abstract} +squaredDistance(ClusterFeature, ClusterFeature): double
+    }
+    class "<size:14>BIRCHAverageIntraclusterDistance.Par\n<size:10>elki.index.tree.betula.distance" as elki.index.tree.betula.distance.BIRCHAverageIntraclusterDistance.Par [[BIRCHAverageIntraclusterDistance.Par.html]]
+
+    elki.index.tree.betula.distance.CFDistance <|.. elki.index.tree.betula.distance.BIRCHAverageIntraclusterDistance
+    elki.index.tree.betula.distance.BIRCHAverageIntraclusterDistance +-- elki.index.tree.betula.distance.BIRCHAverageIntraclusterDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

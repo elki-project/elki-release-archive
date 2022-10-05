@@ -1,0 +1,102 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.result.outlier {
+
+        class OrderingFromRelation [[OrderingFromRelation.html]] {
+            #scores: DoubleRelation
+            #ascending: boolean
+            +OrderingFromRelation(DoubleRelation, boolean)
+            +OrderingFromRelation(DoubleRelation)
+            +getDBIDs(): DBIDs
+            +order(DBIDs): ArrayModifiableDBIDs
+            +getLongName(): String
+        }
+
+        class OutlierResult [[OutlierResult.html]] {
+            -scores: DoubleRelation
+            -ordering: OrderingResult
+            +OutlierResult(OutlierScoreMeta, DoubleRelation)
+            +getScores(): DoubleRelation
+            +getOrdering(): OrderingResult
+            {static} +getOutlierResults(Object): List<OutlierResult>
+            ~evaluateBy(ScoreEvaluation): double
+        }
+
+        class QuotientOutlierScoreMeta [[QuotientOutlierScoreMeta.html]] {
+            +QuotientOutlierScoreMeta(double, double)
+            +QuotientOutlierScoreMeta(double, double, double, double)
+            +QuotientOutlierScoreMeta(double, double, double, double, double)
+        }
+
+        interface OutlierScoreMeta [[OutlierScoreMeta.html]] {
+            {abstract} +getActualMinimum(): double
+            {abstract} +getActualMaximum(): double
+            {abstract} +getTheoreticalMinimum(): double
+            {abstract} +getTheoreticalMaximum(): double
+            {abstract} +getTheoreticalBaseline(): double
+            {abstract} +normalizeScore(double): double
+        }
+
+        class ProbabilisticOutlierScore [[ProbabilisticOutlierScore.html]] {
+            -actualMinimum: double
+            -actualMaximum: double
+            -theoreticalBaseline: double
+            +ProbabilisticOutlierScore()
+            +ProbabilisticOutlierScore(double)
+            +ProbabilisticOutlierScore(double, double)
+            +ProbabilisticOutlierScore(double, double, double)
+            +getActualMinimum(): double
+            +getActualMaximum(): double
+            +getTheoreticalBaseline(): double
+            +getTheoreticalMaximum(): double
+            +getTheoreticalMinimum(): double
+            +normalizeScore(double): double
+            +getLongName(): String
+            +getShortName(): String
+        }
+
+        class InvertedOutlierScoreMeta [[InvertedOutlierScoreMeta.html]] {
+            +InvertedOutlierScoreMeta(double, double, double, double, double)
+            +InvertedOutlierScoreMeta(double, double, double, double)
+            +InvertedOutlierScoreMeta(double, double)
+            +normalizeScore(double): double
+        }
+
+        class BasicOutlierScoreMeta [[BasicOutlierScoreMeta.html]] {
+            ~actualMinimum: double
+            ~actualMaximum: double
+            ~theoreticalMinimum: double
+            ~theoreticalMaximum: double
+            ~theoreticalBaseline: double
+            +BasicOutlierScoreMeta(double, double)
+            +BasicOutlierScoreMeta(double, double, double, double)
+            +BasicOutlierScoreMeta(double, double, double, double, double)
+            +getActualMaximum(): double
+            +getActualMinimum(): double
+            +getTheoreticalBaseline(): double
+            +getTheoreticalMaximum(): double
+            +getTheoreticalMinimum(): double
+            +normalizeScore(double): double
+            +setActualMinimum(double): void
+            +setActualMaximum(double): void
+            +getLongName(): String
+            +getShortName(): String
+        }
+
+        elki.result.OrderingResult <|.. OrderingFromRelation
+        OutlierResult --> OutlierScoreMeta: meta\noutlierMeta
+        BasicOutlierScoreMeta <|-- QuotientOutlierScoreMeta
+        OutlierScoreMeta <|.. ProbabilisticOutlierScore
+        BasicOutlierScoreMeta <|-- InvertedOutlierScoreMeta
+        OutlierScoreMeta <|.. BasicOutlierScoreMeta
+    }
+
+    namespace elki.result {
+        interface OrderingResult [[../OrderingResult.html]] {
+            {abstract} +getDBIDs(): DBIDs
+            {abstract} +order(DBIDs): ArrayModifiableDBIDs
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

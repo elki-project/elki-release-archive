@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DWOF.Par\n<size:10>elki.outlier" as elki.outlier.DWOF.Par<O> {
+        {static} +K_ID: OptionID
+        {static} +DELTA_ID: OptionID
+        #k: int
+        #delta: double
+        #distance: Distance<? super O>
+        +configure(Parameterization): void
+        +make(): DWOF<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>DWOF\n<size:10>elki.outlier" as elki.outlier.DWOF<O> [[DWOF.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.DWOF.Par
+    elki.outlier.DWOF +-- elki.outlier.DWOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

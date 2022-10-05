@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GaussianRandomProjectionFamily\n<size:10>elki.data.projection.random" as elki.data.projection.random.GaussianRandomProjectionFamily [[GaussianRandomProjectionFamily.html]] {
+        +GaussianRandomProjectionFamily(RandomFactory)
+        +generateProjection(int, int): Projection
+    }
+
+    abstract class "<size:14>AbstractRandomProjectionFamily\n<size:10>elki.data.projection.random" as elki.data.projection.random.AbstractRandomProjectionFamily [[AbstractRandomProjectionFamily.html]]
+    class "<size:14>GaussianRandomProjectionFamily.Par\n<size:10>elki.data.projection.random" as elki.data.projection.random.GaussianRandomProjectionFamily.Par [[GaussianRandomProjectionFamily.Par.html]]
+
+    elki.data.projection.random.AbstractRandomProjectionFamily <|-- elki.data.projection.random.GaussianRandomProjectionFamily
+    elki.data.projection.random.GaussianRandomProjectionFamily +-- elki.data.projection.random.GaussianRandomProjectionFamily.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

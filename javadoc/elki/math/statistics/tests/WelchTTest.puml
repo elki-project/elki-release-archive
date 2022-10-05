@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WelchTTest\n<size:10>elki.math.statistics.tests" as elki.math.statistics.tests.WelchTTest [[WelchTTest.html]] {
+        {static} +STATIC: WelchTTest
+        +deviation(double[], double[]): double
+    }
+
+    interface "<size:14>GoodnessOfFitTest\n<size:10>elki.math.statistics.tests" as elki.math.statistics.tests.GoodnessOfFitTest [[GoodnessOfFitTest.html]] {
+        {abstract} +deviation(double[], double[]): double
+    }
+    class "<size:14>WelchTTest.Par\n<size:10>elki.math.statistics.tests" as elki.math.statistics.tests.WelchTTest.Par [[WelchTTest.Par.html]]
+
+    elki.math.statistics.tests.GoodnessOfFitTest <|.. elki.math.statistics.tests.WelchTTest
+    elki.math.statistics.tests.WelchTTest +-- elki.math.statistics.tests.WelchTTest.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

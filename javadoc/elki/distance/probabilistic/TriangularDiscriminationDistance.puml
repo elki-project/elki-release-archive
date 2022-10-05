@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TriangularDiscriminationDistance\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.TriangularDiscriminationDistance [[TriangularDiscriminationDistance.html]] {
+        {static} +STATIC: TriangularDiscriminationDistance
+        +distance(NumberVector, NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +isSquared(): boolean
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[../SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    class "<size:14>TriangularDiscriminationDistance.Par\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.TriangularDiscriminationDistance.Par [[TriangularDiscriminationDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.probabilistic.TriangularDiscriminationDistance
+    elki.distance.SpatialPrimitiveDistance <|.. elki.distance.probabilistic.TriangularDiscriminationDistance
+    elki.distance.probabilistic.TriangularDiscriminationDistance +-- elki.distance.probabilistic.TriangularDiscriminationDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

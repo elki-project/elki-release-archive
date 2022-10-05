@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AttributeWiseMADNormalization\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseMADNormalization<V extends NumberVector> [[AttributeWiseMADNormalization.html]] {
+        {static} -LOG: Logging
+        #factory: Factory<V extends NumberVector>
+        -median: double[]
+        -imadsigma: double[]
+        +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        +restore(V extends NumberVector): V extends NumberVector
+        -normalize(int, double): double
+        -restore(int, double): double
+    }
+
+    interface "<size:14>Normalization\n<size:10>elki.datasource.filter.normalization" as elki.datasource.filter.normalization.Normalization<V extends NumberVector> [[../Normalization.html]]
+
+    elki.datasource.filter.normalization.Normalization <|.. elki.datasource.filter.normalization.columnwise.AttributeWiseMADNormalization
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

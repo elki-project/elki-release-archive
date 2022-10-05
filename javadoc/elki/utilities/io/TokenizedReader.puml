@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TokenizedReader\n<size:10>elki.utilities.io" as elki.utilities.io.TokenizedReader [[TokenizedReader.html]] {
+        -comment: Matcher
+        #tokenizer: Tokenizer
+        +TokenizedReader(Pattern, String, Pattern)
+        +nextLineExceptComments(): boolean
+        +nextLine(): boolean
+        +reset(): void
+        +close(): void
+        +getTokenizer(): Tokenizer
+    }
+
+    class "<size:14>BufferedLineReader\n<size:10>elki.utilities.io" as elki.utilities.io.BufferedLineReader [[BufferedLineReader.html]]
+
+    elki.utilities.io.BufferedLineReader <|-- elki.utilities.io.TokenizedReader
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

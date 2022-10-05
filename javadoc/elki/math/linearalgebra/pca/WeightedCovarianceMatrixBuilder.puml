@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WeightedCovarianceMatrixBuilder\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.WeightedCovarianceMatrixBuilder [[WeightedCovarianceMatrixBuilder.html]] {
+        #weightfunction: WeightFunction
+        -weightDistance: PrimitiveDistance<? super NumberVector>
+        +WeightedCovarianceMatrixBuilder(WeightFunction)
+        +processIds(DBIDs, Relation<? extends NumberVector>): double[]
+        +processQueryResults(DoubleDBIDList, Relation<? extends NumberVector>, int): double[]
+    }
+
+    interface "<size:14>CovarianceMatrixBuilder\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.CovarianceMatrixBuilder [[CovarianceMatrixBuilder.html]] {
+        {abstract} +processIds(DBIDs, Relation<? extends NumberVector>): double[]
+    }
+    class "<size:14>WeightedCovarianceMatrixBuilder.Par\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.WeightedCovarianceMatrixBuilder.Par [[WeightedCovarianceMatrixBuilder.Par.html]]
+
+    elki.math.linearalgebra.pca.CovarianceMatrixBuilder <|.. elki.math.linearalgebra.pca.WeightedCovarianceMatrixBuilder
+    elki.math.linearalgebra.pca.WeightedCovarianceMatrixBuilder +-- elki.math.linearalgebra.pca.WeightedCovarianceMatrixBuilder.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

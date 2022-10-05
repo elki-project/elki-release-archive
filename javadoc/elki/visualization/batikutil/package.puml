@@ -1,0 +1,310 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.batikutil {
+
+        class NodeReplaceAllChildren [[NodeReplaceAllChildren.html]] {
+            +NodeReplaceAllChildren(Element, Element)
+            +NodeReplaceAllChildren(Element, Element, SVGPlot, String)
+            +run(): void
+        }
+
+        class ThumbnailRegistryEntry [[ThumbnailRegistryEntry.html]] {
+            {static} +INTERNAL_PROTOCOL: String
+            {static} +INTERNAL_PREFIX: String
+            {static} +INTERNAL_MIME_TYPE: String
+            {static} +PRIORITY: float
+            {static} -LOG: Logging
+            {static} -images: Int2ObjectOpenHashMap<SoftReference<RenderedImage>>
+            {static} -counter: int
+            {static} +registerImage(RenderedImage): int
+            +isCompatibleURL(ParsedURL): boolean
+            {static} +isCompatibleURLStatic(ParsedURL): boolean
+            +handleURL(ParsedURL, boolean): Filter
+            {static} +handleURL(ParsedURL): Filter
+            +parseURL(String): ParsedURLData
+            +parseURL(ParsedURL, String): ParsedURLData
+            +getProtocolHandled(): String
+        }
+
+        class elki.visualization.batikutil.ThumbnailRegistryEntry.InternalParsedURLData [[ThumbnailRegistryEntry.InternalParsedURLData.html]] {
+            +InternalParsedURLData(String)
+            +getContentType(String): String
+            +complete(): boolean
+            +openStream(String, Iterator): InputStream
+        }
+
+        class JSVGSynchronizedCanvas [[JSVGSynchronizedCanvas.html]] {
+            {static} -serialVersionUID: long
+            -plot: SVGPlot
+            -latest: AtomicReference<Runnable>
+            +getPlot(): SVGPlot
+            +--setDocument--(Document): void
+            +setPlot(SVGPlot): void
+            -scheduleSetPlot(SVGPlot, SVGPlot): void
+            -attachPlot(SVGPlot): void
+            -detachPlot(SVGPlot): void
+        }
+
+        class JSVGUpdateSynchronizer [[JSVGUpdateSynchronizer.html]] {
+            -cref: WeakReference<JSVGComponent>
+            -updaterunner: Set<WeakReference<UpdateRunner>>
+            -pending: AtomicReference<Runnable>
+            #JSVGUpdateSynchronizer(JSVGComponent)
+            +activate(): void
+            #makeRunnerIfNeeded(): void
+            +addUpdateRunner(UpdateRunner): void
+        }
+
+        class elki.visualization.batikutil.JSVGUpdateSynchronizer.UMAdapter [[JSVGUpdateSynchronizer.UMAdapter.html]] {
+            +managerStarted(UpdateManagerEvent): void
+            +managerStopped(UpdateManagerEvent): void
+        }
+
+        class NodeReplaceByID [[NodeReplaceByID.html]] {
+            -plot: SVGPlot
+            -id: String
+            -newe: Element
+            +NodeReplaceByID(Element, SVGPlot, String)
+            +run(): void
+        }
+
+        class NodeSubstitute [[NodeSubstitute.html]] {
+            -prev: Element
+            -newe: Element
+            +NodeSubstitute(Element, Element)
+            +run(): void
+        }
+
+        class AttributeModifier [[AttributeModifier.html]] {
+            -e: Element
+            -attribute: String
+            -newValue: String
+            +AttributeModifier(Element, String, String)
+            +run(): void
+        }
+
+        class RemoveCSSClass [[RemoveCSSClass.html]] {
+            -cssclass: String
+            +RemoveCSSClass(String)
+            +handleEvent(Event): void
+        }
+
+        abstract class LazyCanvasResizer [[LazyCanvasResizer.html]] {
+            {static} +DEFAULT_THRESHOLD: double
+            ~threshold: double
+            ~activeRatio: double
+            ~component: Component
+            +LazyCanvasResizer(Component, double)
+            +LazyCanvasResizer(Component)
+            +componentResized(ComponentEvent): void
+            +getCurrentRatio(): double
+            {abstract} +executeResize(double): void
+            +getActiveRatio(): double
+        }
+
+        class ThumbnailTranscoder [[ThumbnailTranscoder.html]] {
+            -lastimg: BufferedImage
+            +createImage(int, int): BufferedImage
+            +writeImage(BufferedImage, TranscoderOutput): void
+            +getLastImage(): BufferedImage
+        }
+
+        class DragableArea [[DragableArea.html]] {
+            #element: Element
+            #coordref: Element
+            #svgp: SVGPlot
+            #startDragPoint: SVGPoint
+            +DragableArea(SVGPlot, double, double, double, double)
+            +DragableArea(SVGPlot, Element, double, double, double, double)
+            +DragableArea(SVGPlot, double, double, double, double, DragListener)
+            +DragableArea(SVGPlot, Element, double, double, double, double, DragListener)
+            +destroy(): void
+            +getElement(): Element
+            +enableStart(): void
+            +disableStart(): void
+            #enableStop(): void
+            #disableStop(): void
+            +handleEvent(Event): void
+            #getCoordinates(Event): SVGPoint
+            #startDrag(SVGPoint, Event): boolean
+            #duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            #endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            +makeInvisible(): void
+            +makeVisible(): void
+        }
+
+        interface elki.visualization.batikutil.DragableArea.DragListener [[DragableArea.DragListener.html]] {
+            {abstract} +startDrag(SVGPoint, Event): boolean
+            {abstract} +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            {abstract} +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+        }
+
+        class AddCSSClass [[AddCSSClass.html]] {
+            -cssclass: String
+            +AddCSSClass(String)
+            +handleEvent(Event): void
+        }
+
+        class CloneInlineImages [[CloneInlineImages.html]] {
+            +cloneNode(Document, Node): Node
+            #inlineThumbnail(Document, ParsedURL, Node): Node
+            #inlineExternal(Document, ParsedURL, Node): Node
+        }
+
+        class CSSHoverClass [[CSSHoverClass.html]] {
+            -overclass: String
+            -outclass: String
+            -clickisout: boolean
+            +CSSHoverClass(String, String, boolean)
+            +CSSHoverClass(String, String)
+            +handleEvent(Event): void
+        }
+
+        class NodeAppendChild [[NodeAppendChild.html]] {
+            #parent: Element
+            #child: Element
+            #plot: SVGPlot
+            #id: String
+            +NodeAppendChild(Element, Element)
+            +NodeAppendChild(Element, Element, SVGPlot, String)
+            +run(): void
+        }
+
+        class BatikUtil [[BatikUtil.html]] {
+            {static} +getRelativeCoordinates(Event, Element): double[]
+            {static} +hasFOPInstalled(): boolean
+        }
+
+        NodeAppendChild <|-- NodeReplaceAllChildren
+        org.apache.batik.ext.awt.image.spi.AbstractRegistryEntry <|-- ThumbnailRegistryEntry
+        org.apache.batik.ext.awt.image.spi.URLRegistryEntry <|.. ThumbnailRegistryEntry
+        org.apache.batik.util.ParsedURLProtocolHandler <|.. ThumbnailRegistryEntry
+        org.apache.batik.util.ParsedURLData <|-- elki.visualization.batikutil.ThumbnailRegistryEntry.InternalParsedURLData
+        ThumbnailRegistryEntry +-- elki.visualization.batikutil.ThumbnailRegistryEntry.InternalParsedURLData
+        org.apache.batik.swing.JSVGCanvas <|-- JSVGSynchronizedCanvas
+        JSVGSynchronizedCanvas --> JSVGUpdateSynchronizer: synchronizer
+        elki.visualization.svg.UpdateSynchronizer <|.. JSVGUpdateSynchronizer
+        JSVGUpdateSynchronizer --> elki.visualization.batikutil.JSVGUpdateSynchronizer.UMAdapter: umadapter
+        org.apache.batik.bridge.UpdateManagerAdapter <|-- elki.visualization.batikutil.JSVGUpdateSynchronizer.UMAdapter
+        JSVGUpdateSynchronizer +-- elki.visualization.batikutil.JSVGUpdateSynchronizer.UMAdapter
+        org.w3c.dom.events.EventListener <|.. RemoveCSSClass
+        java.awt.event.ComponentAdapter <|-- LazyCanvasResizer
+        org.apache.batik.transcoder.image.ImageTranscoder <|-- ThumbnailTranscoder
+        org.w3c.dom.events.EventListener <|.. DragableArea
+        DragableArea --> elki.visualization.batikutil.DragableArea.DragListener: listener
+        DragableArea +-- elki.visualization.batikutil.DragableArea.DragListener
+        org.w3c.dom.events.EventListener <|.. AddCSSClass
+        elki.visualization.svg.SVGCloneVisible <|-- CloneInlineImages
+        org.w3c.dom.events.EventListener <|.. CSSHoverClass
+    }
+
+    namespace org.apache.batik.ext.awt.image.spi {
+        abstract class AbstractRegistryEntry {
+            ~name: String
+            ~priority: float
+            ~exts: List
+            ~mimeTypes: List
+        }
+        interface URLRegistryEntry {
+            {abstract} +isCompatibleURL(ParsedURL): boolean
+            {abstract} +handleURL(ParsedURL, boolean): Filter
+        }
+    }
+
+    namespace org.apache.batik.util {
+        interface ParsedURLProtocolHandler {
+            {abstract} +getProtocolHandled(): String
+            {abstract} +parseURL(String): ParsedURLData
+            {abstract} +parseURL(ParsedURL, String): ParsedURLData
+        }
+        class ParsedURLData {
+            {static} #HTTP_USER_AGENT_HEADER: String
+            {static} #HTTP_ACCEPT_HEADER: String
+            {static} #HTTP_ACCEPT_LANGUAGE_HEADER: String
+            {static} #HTTP_ACCEPT_ENCODING_HEADER: String
+            {static} #acceptedEncodings: List
+            {static} +GZIP_MAGIC: byte[]
+            +protocol: String
+            +host: String
+            +port: int
+            +path: String
+            +ref: String
+            +contentType: String
+            +contentEncoding: String
+            +stream: InputStream
+            +hasBeenOpened: boolean
+            #contentTypeMediaType: String
+            #contentTypeCharset: String
+            #postConnectionURL: URL
+        }
+    }
+
+    namespace org.apache.batik.swing {
+        class JSVGCanvas {
+            {static} +SCROLL_RIGHT_ACTION: String
+            {static} +SCROLL_LEFT_ACTION: String
+            {static} +SCROLL_UP_ACTION: String
+            {static} +SCROLL_DOWN_ACTION: String
+            {static} +FAST_SCROLL_RIGHT_ACTION: String
+            {static} +FAST_SCROLL_LEFT_ACTION: String
+            {static} +FAST_SCROLL_UP_ACTION: String
+            {static} +FAST_SCROLL_DOWN_ACTION: String
+            {static} +ZOOM_IN_ACTION: String
+            {static} +ZOOM_OUT_ACTION: String
+            {static} +RESET_TRANSFORM_ACTION: String
+            -isZoomInteractorEnabled: boolean
+            -isImageZoomInteractorEnabled: boolean
+            -isPanInteractorEnabled: boolean
+            -isRotateInteractorEnabled: boolean
+            -isResetTransformInteractorEnabled: boolean
+            #pcs: PropertyChangeSupport
+            #uri: String
+            #locationListener: LocationListener
+            #toolTipMap: Map
+            #toolTipListener: EventListener
+            #lastTarget: EventTarget
+            #toolTipDocs: Map
+            {static} #MAP_TOKEN: Object
+            #lastToolTipEventTimeStamp: long
+            #lastToolTipEventTarget: EventTarget
+            #zoomInteractor: Interactor
+            #imageZoomInteractor: Interactor
+            #panInteractor: Interactor
+            #rotateInteractor: Interactor
+            #resetTransformInteractor: Interactor
+        }
+    }
+
+    namespace elki.visualization.svg {
+        interface UpdateSynchronizer [[../svg/UpdateSynchronizer.html]] {
+            {abstract} +activate(): void
+            {abstract} +addUpdateRunner(UpdateRunner): void
+        }
+        class SVGCloneVisible [[../svg/SVGCloneVisible.html]]
+    }
+
+    namespace org.apache.batik.bridge {
+        class UpdateManagerAdapter
+    }
+
+    namespace org.w3c.dom.events {
+        interface EventListener {
+            {abstract} +handleEvent(Event): void
+        }
+    }
+
+    namespace java.awt.event {
+        abstract class ComponentAdapter
+    }
+
+    namespace org.apache.batik.transcoder.image {
+        abstract class ImageTranscoder {
+            {static} +KEY_BACKGROUND_COLOR: Key
+            {static} +KEY_FORCE_TRANSPARENT_WHITE: Key
+            {abstract} +createImage(int, int): BufferedImage
+            {abstract} +writeImage(BufferedImage, TranscoderOutput): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GreedyEnsembleExperiment\n<size:10>elki.application.greedyensemble" as elki.application.greedyensemble.GreedyEnsembleExperiment [[GreedyEnsembleExperiment.html]] {
+        {static} -LOG: Logging
+        -inputstep: InputStep
+        ~refine_truth: boolean
+        ~voting: EnsembleVoting
+        ~prescaling: ScalingFunction
+        ~scaling: ScalingFunction
+        ~rate: double
+        ~minvote: int
+        ~distance: Distance
+        +GreedyEnsembleExperiment(InputStep, EnsembleVoting, Distance, ScalingFunction, ScalingFunction, double)
+        +run(): void
+        #singleEnsemble(double[], NumberVector): void
+        {static} +applyPrescaling(ScalingFunction, Relation<NumberVector>, DBIDs): Relation<NumberVector>
+        {static} -applyScaling(double[], ScalingFunction): void
+        #updateEstimations(int[], int, double[], double[]): void
+        -getDistance(double[]): PrimitiveDistance<NumberVector>
+        ~gain(double, double, double): double
+        {static} +main(String[]): void
+    }
+
+    abstract class "<size:14>AbstractApplication\n<size:10>elki.application" as elki.application.AbstractApplication [[../AbstractApplication.html]] {
+        {abstract} +run(): void
+    }
+    enum "<size:14>GreedyEnsembleExperiment.Distance\n<size:10>elki.application.greedyensemble" as elki.application.greedyensemble.GreedyEnsembleExperiment.Distance [[GreedyEnsembleExperiment.Distance.html]]
+    class "<size:14>GreedyEnsembleExperiment.Par\n<size:10>elki.application.greedyensemble" as elki.application.greedyensemble.GreedyEnsembleExperiment.Par [[GreedyEnsembleExperiment.Par.html]]
+
+    elki.application.AbstractApplication <|-- elki.application.greedyensemble.GreedyEnsembleExperiment
+    elki.application.greedyensemble.GreedyEnsembleExperiment +-- elki.application.greedyensemble.GreedyEnsembleExperiment.Distance
+    elki.application.greedyensemble.GreedyEnsembleExperiment +-- elki.application.greedyensemble.GreedyEnsembleExperiment.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="72px" preserveAspectRatio="none" style="width:309px;height:72px;background:#FFFFFF;" version="1.1" viewBox="0 0 309 72" width="309px" zoomAndPan="magnify"><defs/><g><!--MD5=[732ebbbe9581693179bb9e3677b53dfd]
+class elki.clustering.kmeans.LloydKMeans--><a href="LloydKMeans.html" target="_top" title="LloydKMeans.html" xlink:actuate="onRequest" xlink:href="LloydKMeans.html" xlink:show="new" xlink:title="LloydKMeans.html" xlink:type="simple"><g id="elem_elki.clustering.kmeans.LloydKMeans"><rect codeLine="13" fill="#F1F1F1" height="37.9375" id="elki.clustering.kmeans.LloydKMeans" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="291" x="7" y="10"/><ellipse cx="22" cy="28.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M24.9688,34.6094 Q24.3906,34.9063 23.75,35.0469 Q23.1094,35.2031 22.4063,35.2031 Q19.9063,35.2031 18.5781,33.5625 Q17.2656,31.9063 17.2656,28.7813 Q17.2656,25.6563 18.5781,24 Q19.9063,22.3438 22.4063,22.3438 Q23.1094,22.3438 23.75,22.5 Q24.4063,22.6563 24.9688,22.9531 L24.9688,25.6719 Q24.3438,25.0938 23.75,24.8281 Q23.1563,24.5469 22.5313,24.5469 Q21.1875,24.5469 20.5,25.625 Q19.8125,26.6875 19.8125,28.7813 Q19.8125,30.875 20.5,31.9531 Q21.1875,33.0156 22.5313,33.0156 Q23.1563,33.0156 23.75,32.75 Q24.3438,32.4688 24.9688,31.8906 L24.9688,34.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="90" x="43.5" y="27.9951">LloydKMeans</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="105" x="36" y="40.5791">elki.clustering.kmeans</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="149" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="150" y="19.1387">V extends NumberVector</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="54.5" y="52.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="54.5" y="62.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[b3963ec756b61a4796c5a2c46a9aeea8]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LloydKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.LloydKMeans.Par<V extends NumberVector> [[LloydKMeans.Par.html]] {
+        +make(): LloydKMeans<V extends NumberVector>
+    }
+
+    abstract class "<size:14>AbstractKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Par<V extends NumberVector> [[AbstractKMeans.Par.html]] {
+        {abstract} +make(): AbstractKMeans<V extends NumberVector, ?>
+    }
+    class "<size:14>LloydKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.LloydKMeans<V extends NumberVector> [[LloydKMeans.html]]
+
+    elki.clustering.kmeans.AbstractKMeans.Par <|- - elki.clustering.kmeans.LloydKMeans.Par
+    elki.clustering.kmeans.LloydKMeans +- - elki.clustering.kmeans.LloydKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

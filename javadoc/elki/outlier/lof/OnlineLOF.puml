@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OnlineLOF\n<size:10>elki.outlier.lof" as elki.outlier.lof.OnlineLOF<O> [[OnlineLOF.html]] {
+        {static} -LOG: Logging
+        +OnlineLOF(int, int, Distance<? super O>, Distance<? super O>)
+        +run(Relation<O>): OutlierResult
+        -getKNNAndRkNNQueries(Relation<O>, StepProgress): Pair<Pair<KNNSearcher<DBIDRef>, KNNSearcher<DBIDRef>>, Pair<RKNNSearcher<DBIDRef>, RKNNSearcher<DBIDRef>>>
+    }
+
+    class "<size:14>FlexibleLOF\n<size:10>elki.outlier.lof" as elki.outlier.lof.FlexibleLOF<O> [[FlexibleLOF.html]]
+    class "<size:14>OnlineLOF.LOFKNNListener\n<size:10>elki.outlier.lof" as elki.outlier.lof.OnlineLOF.LOFKNNListener [[OnlineLOF.LOFKNNListener.html]]
+    class "<size:14>OnlineLOF.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.OnlineLOF.Par<O> [[OnlineLOF.Par.html]]
+
+    elki.outlier.lof.FlexibleLOF <|-- elki.outlier.lof.OnlineLOF
+    elki.outlier.lof.OnlineLOF +-- elki.outlier.lof.OnlineLOF.LOFKNNListener
+    elki.outlier.lof.OnlineLOF +-- elki.outlier.lof.OnlineLOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

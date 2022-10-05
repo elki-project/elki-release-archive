@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractSetDistance\n<size:10>elki.distance.set" as elki.distance.set.AbstractSetDistance<O> [[AbstractSetDistance.html]] {
+        {static} +INTEGER_NULL: Integer
+        {static} +DOUBLE_NULL: Double
+        {static} +STRING_NULL: String
+        {static} #isNull(Object): boolean
+    }
+
+    interface "<size:14>PrimitiveDistance\n<size:10>elki.distance" as elki.distance.PrimitiveDistance<O> [[../PrimitiveDistance.html]] {
+        {abstract} +distance(O, O): double
+        {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+    }
+
+    elki.distance.PrimitiveDistance <|.. elki.distance.set.AbstractSetDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

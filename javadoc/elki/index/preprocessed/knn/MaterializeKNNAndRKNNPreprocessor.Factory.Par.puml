@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MaterializeKNNAndRKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory.Par<O> [[MaterializeKNNAndRKNNPreprocessor.Factory.Par.html]] {
+        +make(): Factory<O>
+    }
+
+    class "<size:14>MaterializeKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory.Par<O> [[MaterializeKNNPreprocessor.Factory.Par.html]]
+    class "<size:14>MaterializeKNNAndRKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory<O> [[MaterializeKNNAndRKNNPreprocessor.Factory.html]]
+
+    elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory.Par
+    elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

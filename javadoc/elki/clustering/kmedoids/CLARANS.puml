@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CLARANS\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.CLARANS<O> [[CLARANS.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super O>
+        #k: int
+        #numlocal: int
+        #maxneighbor: double
+        #random: RandomFactory
+        +CLARANS(Distance<? super O>, int, int, double, RandomFactory)
+        +run(Relation<O>): Clustering<MedoidModel>
+        +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>KMedoidsClustering\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.KMedoidsClustering<O> [[KMedoidsClustering.html]] {
+        {abstract} +run(Relation<O>): Clustering<MedoidModel>
+        {abstract} +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+    }
+    class "<size:14>CLARANS.Assignment\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.CLARANS.Assignment [[CLARANS.Assignment.html]]
+    class "<size:14>CLARANS.Par\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.CLARANS.Par<V> [[CLARANS.Par.html]]
+
+    elki.clustering.kmedoids.KMedoidsClustering <|.. elki.clustering.kmedoids.CLARANS
+    elki.clustering.kmedoids.CLARANS +-- elki.clustering.kmedoids.CLARANS.Assignment
+    elki.clustering.kmedoids.CLARANS +-- elki.clustering.kmedoids.CLARANS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

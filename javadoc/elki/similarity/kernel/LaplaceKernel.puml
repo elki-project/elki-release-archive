@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LaplaceKernel\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.LaplaceKernel [[LaplaceKernel.html]] {
+        -mgamma: double
+        +LaplaceKernel(double)
+        +similarity(NumberVector, NumberVector): double
+    }
+
+    abstract class "<size:14>AbstractVectorSimilarity\n<size:10>elki.similarity" as elki.similarity.AbstractVectorSimilarity [[../AbstractVectorSimilarity.html]]
+    class "<size:14>LaplaceKernel.Par\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.LaplaceKernel.Par [[LaplaceKernel.Par.html]]
+
+    elki.similarity.AbstractVectorSimilarity <|-- elki.similarity.kernel.LaplaceKernel
+    elki.similarity.kernel.LaplaceKernel +-- elki.similarity.kernel.LaplaceKernel.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

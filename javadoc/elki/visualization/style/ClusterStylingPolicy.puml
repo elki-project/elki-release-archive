@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterStylingPolicy\n<size:10>elki.visualization.style" as elki.visualization.style.ClusterStylingPolicy [[ClusterStylingPolicy.html]] {
+        ~inttrans: IntensityTransform
+        ~ids: ArrayList<DBIDs>
+        ~cmap: Object2IntOpenHashMap<Cluster<?>>
+        ~colors: IntArrayList
+        ~clustering: Clustering<?>
+        ~intensities: WritableDoubleDataStore
+        ~minint: double
+        ~maxint: double
+        +ClusterStylingPolicy(Clustering<?>, StyleLibrary)
+        +getStyleForDBID(DBIDRef): int
+        +getColorForDBID(DBIDRef): int
+        +getIntensityForDBID(DBIDRef): double
+        +getMinStyle(): int
+        +getMaxStyle(): int
+        +iterateClass(int): DBIDIter
+        +classSize(int): int
+        +getClustering(): Clustering<?>
+        +getStyleForCluster(Cluster<?>): int
+        +getMenuName(): String
+    }
+
+    interface "<size:14>ClassStylingPolicy\n<size:10>elki.visualization.style" as elki.visualization.style.ClassStylingPolicy [[ClassStylingPolicy.html]] {
+        {abstract} +getStyleForDBID(DBIDRef): int
+        {abstract} +getMinStyle(): int
+        {abstract} +getMaxStyle(): int
+        {abstract} +iterateClass(int): DBIDIter
+        {abstract} +classSize(int): int
+    }
+    enum "<size:14>ClusterStylingPolicy.IntensityTransform\n<size:10>elki.visualization.style" as elki.visualization.style.ClusterStylingPolicy.IntensityTransform [[ClusterStylingPolicy.IntensityTransform.html]]
+
+    elki.visualization.style.ClassStylingPolicy <|.. elki.visualization.style.ClusterStylingPolicy
+    elki.visualization.style.ClusterStylingPolicy +-- elki.visualization.style.ClusterStylingPolicy.IntensityTransform
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,69 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.statistics.tests {
+
+        class WelchTTest [[WelchTTest.html]] {
+            +deviation(double[], double[]): double
+        }
+
+        class elki.math.statistics.tests.WelchTTest.Par [[WelchTTest.Par.html]] {
+            +make(): WelchTTest
+        }
+
+        class StandardizedTwoSampleAndersonDarlingTest [[StandardizedTwoSampleAndersonDarlingTest.html]] {
+            +deviation(double[], double[]): double
+            +deviation(double[]): double
+            +unstandardized(double[]): double
+            -unstandardized(double[], int): double
+            +unstandardized(double[], double[]): double
+            -totalLength(double[]): int
+        }
+
+        class AndersonDarlingTest [[AndersonDarlingTest.html]] {
+            {static} -SMALL: double
+            {static} +A2StandardNormal(double[]): double
+            {static} +A2Noncentral(double[]): double
+            {static} +removeBiasNormalDistribution(double, int): double
+            {static} +removeBiasNormalDistributionDAgostino(double, int): double
+            {static} +calculateQuantileCase3(double): double
+            {static} +pValueCase3(double): double
+            {static} +calculateQuantileCase0(double, int): double
+            {static} +pValueCase0(double, int): double
+        }
+
+        class KolmogorovSmirnovTest [[KolmogorovSmirnovTest.html]] {
+            +deviation(double[], double[]): double
+            {static} +calculateTestStatistic(double[], double[]): double
+            {static} +simpleTest(double[]): double
+            {static} +simpleTest(double[], double, double): double
+        }
+
+        class elki.math.statistics.tests.KolmogorovSmirnovTest.Par [[KolmogorovSmirnovTest.Par.html]] {
+            +make(): KolmogorovSmirnovTest
+        }
+
+        interface GoodnessOfFitTest [[GoodnessOfFitTest.html]] {
+            {abstract} +deviation(double[], double[]): double
+        }
+
+        GoodnessOfFitTest <|.. WelchTTest
+        WelchTTest --> WelchTTest: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.tests.WelchTTest.Par
+        WelchTTest +-- elki.math.statistics.tests.WelchTTest.Par
+        GoodnessOfFitTest <|.. StandardizedTwoSampleAndersonDarlingTest
+        StandardizedTwoSampleAndersonDarlingTest --> StandardizedTwoSampleAndersonDarlingTest: STATIC
+        GoodnessOfFitTest <|.. KolmogorovSmirnovTest
+        KolmogorovSmirnovTest --> KolmogorovSmirnovTest: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.tests.KolmogorovSmirnovTest.Par
+        KolmogorovSmirnovTest +-- elki.math.statistics.tests.KolmogorovSmirnovTest.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

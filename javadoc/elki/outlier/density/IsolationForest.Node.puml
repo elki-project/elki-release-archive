@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IsolationForest.Node\n<size:10>elki.outlier.density" as elki.outlier.density.IsolationForest.Node [[IsolationForest.Node.html]] {
+        ~dim: int
+        ~split: double
+        ~size: int
+        ~left: Node
+        ~right: Node
+        +Node(int, double, int, Node, Node)
+    }
+
+    class "<size:14>IsolationForest\n<size:10>elki.outlier.density" as elki.outlier.density.IsolationForest [[IsolationForest.html]]
+
+    elki.outlier.density.IsolationForest +-- elki.outlier.density.IsolationForest.Node
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

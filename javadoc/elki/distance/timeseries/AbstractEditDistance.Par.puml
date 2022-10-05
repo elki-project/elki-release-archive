@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractEditDistance.Par\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.AbstractEditDistance.Par [[AbstractEditDistance.Par.html]] {
+        {static} +BANDSIZE_ID: OptionID
+        #bandSize: double
+        +configure(Parameterization): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractEditDistance\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.AbstractEditDistance [[AbstractEditDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.timeseries.AbstractEditDistance.Par
+    elki.distance.timeseries.AbstractEditDistance +-- elki.distance.timeseries.AbstractEditDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

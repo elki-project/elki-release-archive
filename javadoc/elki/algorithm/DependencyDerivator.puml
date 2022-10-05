@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DependencyDerivator\n<size:10>elki.algorithm" as elki.algorithm.DependencyDerivator<V extends NumberVector> [[DependencyDerivator.html]] {
+        {static} -LOG: Logging
+        -distance: NumberVectorDistance<? super NumberVector>
+        -sampleSize: int
+        -pca: PCARunner
+        -filter: EigenPairFilter
+        -nf: NumberFormat
+        -randomsample: boolean
+        +DependencyDerivator(NumberVectorDistance<? super NumberVector>, NumberFormat, PCARunner, EigenPairFilter, int, boolean)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V extends NumberVector>): CorrelationAnalysisSolution
+        +generateModel(Relation<V extends NumberVector>, DBIDs): CorrelationAnalysisSolution
+        +generateModel(Relation<V extends NumberVector>, DBIDs, double[]): CorrelationAnalysisSolution
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    class "<size:14>DependencyDerivator.Par\n<size:10>elki.algorithm" as elki.algorithm.DependencyDerivator.Par<V extends NumberVector> [[DependencyDerivator.Par.html]]
+
+    elki.Algorithm <|.. elki.algorithm.DependencyDerivator
+    elki.algorithm.DependencyDerivator +-- elki.algorithm.DependencyDerivator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

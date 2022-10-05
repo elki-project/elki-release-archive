@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>BetulaClusterModel\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.BetulaClusterModel [[BetulaClusterModel.html]] {
+        {abstract} +estimateLogDensity(ClusterFeature): double
+        {abstract} +updateE(ClusterFeature, double): void
+    }
+
+    interface "<size:14>EMClusterModel\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.EMClusterModel<NumberVector, EMModel> [[EMClusterModel.html]] {
+        {abstract} +beginEStep(): void
+        {abstract} +updateE(NumberVector, double): void
+        {abstract} +finalizeEStep(double, double): void
+        {abstract} +estimateLogDensity(NumberVector): double
+        {abstract} +finalizeCluster(): EMModel
+        {abstract} +getWeight(): double
+        {abstract} +setWeight(double): void
+    }
+
+    elki.clustering.em.models.EMClusterModel <|-- elki.clustering.em.models.BetulaClusterModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

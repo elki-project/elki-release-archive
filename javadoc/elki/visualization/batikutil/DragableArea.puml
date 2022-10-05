@@ -1,0 +1,41 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DragableArea\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.DragableArea [[DragableArea.html]] {
+        #element: Element
+        #coordref: Element
+        #svgp: SVGPlot
+        #startDragPoint: SVGPoint
+        #listener: DragListener
+        +DragableArea(SVGPlot, double, double, double, double)
+        +DragableArea(SVGPlot, Element, double, double, double, double)
+        +DragableArea(SVGPlot, double, double, double, double, DragListener)
+        +DragableArea(SVGPlot, Element, double, double, double, double, DragListener)
+        +destroy(): void
+        +getElement(): Element
+        +enableStart(): void
+        +disableStart(): void
+        #enableStop(): void
+        #disableStop(): void
+        +handleEvent(Event): void
+        #getCoordinates(Event): SVGPoint
+        #startDrag(SVGPoint, Event): boolean
+        #duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+        #endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+        +makeInvisible(): void
+        +makeVisible(): void
+    }
+
+    interface "<size:14>EventListener\n<size:10>org.w3c.dom.events" as org.w3c.dom.events.EventListener {
+        {abstract} +handleEvent(Event): void
+    }
+    interface "<size:14>DragableArea.DragListener\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.DragableArea.DragListener [[DragableArea.DragListener.html]]
+
+    org.w3c.dom.events.EventListener <|.. elki.visualization.batikutil.DragableArea
+    elki.visualization.batikutil.DragableArea +-- elki.visualization.batikutil.DragableArea.DragListener
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

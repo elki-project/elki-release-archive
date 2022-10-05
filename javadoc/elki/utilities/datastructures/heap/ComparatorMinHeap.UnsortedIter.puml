@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ComparatorMinHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.ComparatorMinHeap.UnsortedIter [[ComparatorMinHeap.UnsortedIter.html]] {
+        #pos: int
+        +valid(): boolean
+        +advance(): UnsortedIter
+        +get(): K
+    }
+
+    interface "<size:14>ObjectHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.ObjectHeap.UnsortedIter<K> [[ObjectHeap.UnsortedIter.html]] {
+        {abstract} +get(): K
+    }
+    class "<size:14>ComparatorMinHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.ComparatorMinHeap<K> [[ComparatorMinHeap.html]]
+
+    elki.utilities.datastructures.heap.ObjectHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.ComparatorMinHeap.UnsortedIter
+    elki.utilities.datastructures.heap.ComparatorMinHeap +-- elki.utilities.datastructures.heap.ComparatorMinHeap.UnsortedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

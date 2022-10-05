@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MatrixWeightedQuadraticDistance\n<size:10>elki.distance" as elki.distance.MatrixWeightedQuadraticDistance [[MatrixWeightedQuadraticDistance.html]] {
+        #weightMatrix: double[]
+        +MatrixWeightedQuadraticDistance(double[])
+        +distance(NumberVector, NumberVector): double
+        +isSquared(): boolean
+        +norm(NumberVector): double
+        +getInputTypeRestriction(): VectorFieldTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[AbstractNumberVectorDistance.html]]
+    interface "<size:14>Norm\n<size:10>elki.distance" as elki.distance.Norm<NumberVector> [[Norm.html]] {
+        {abstract} +norm(NumberVector): double
+    }
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.MatrixWeightedQuadraticDistance
+    elki.distance.Norm <|.. elki.distance.MatrixWeightedQuadraticDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

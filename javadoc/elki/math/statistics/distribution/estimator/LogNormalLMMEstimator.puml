@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LogNormalLMMEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LogNormalLMMEstimator [[LogNormalLMMEstimator.html]] {
+        {static} +STATIC: LogNormalLMMEstimator
+        {static} -A0: double
+        {static} -A1: double
+        {static} -A2: double
+        {static} -A3: double
+        {static} -B1: double
+        {static} -B2: double
+        {static} -B3: double
+        +getNumMoments(): int
+        +estimateFromLMoments(double[]): LogNormalDistribution
+        +getDistributionClass(): Class<? super LogNormalDistribution>
+    }
+
+    interface "<size:14>LMMDistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LMMDistributionEstimator<LogNormalDistribution> [[LMMDistributionEstimator.html]] {
+        {abstract} +estimateFromLMoments(double[]): LogNormalDistribution
+        {abstract} +getNumMoments(): int
+    }
+    class "<size:14>LogNormalLMMEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LogNormalLMMEstimator.Par [[LogNormalLMMEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.LMMDistributionEstimator <|.. elki.math.statistics.distribution.estimator.LogNormalLMMEstimator
+    elki.math.statistics.distribution.estimator.LogNormalLMMEstimator +-- elki.math.statistics.distribution.estimator.LogNormalLMMEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

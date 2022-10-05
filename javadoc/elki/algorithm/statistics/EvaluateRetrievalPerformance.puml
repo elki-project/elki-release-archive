@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluateRetrievalPerformance\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.EvaluateRetrievalPerformance<O> [[EvaluateRetrievalPerformance.html]] {
+        {static} -LOG: Logging
+        -PREFIX: String
+        #distance: Distance<? super O>
+        #sampling: double
+        #random: RandomFactory
+        #includeSelf: boolean
+        #maxk: int
+        +EvaluateRetrievalPerformance(Distance<? super O>, double, RandomFactory, boolean, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>, Relation<?>): RetrievalPerformanceResult
+        {static} #match(Object, Object): boolean
+        -findMatches(ModifiableDBIDs, Relation<?>, Object): void
+        -computeDistances(ModifiableDoubleDBIDList, DBIDIter, DistanceQuery<O>, Relation<O>): void
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    class "<size:14>EvaluateRetrievalPerformance.KNNEvaluator\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.EvaluateRetrievalPerformance.KNNEvaluator [[EvaluateRetrievalPerformance.KNNEvaluator.html]]
+    class "<size:14>EvaluateRetrievalPerformance.RetrievalPerformanceResult\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.EvaluateRetrievalPerformance.RetrievalPerformanceResult [[EvaluateRetrievalPerformance.RetrievalPerformanceResult.html]]
+    class "<size:14>EvaluateRetrievalPerformance.Par\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.EvaluateRetrievalPerformance.Par<O>
+
+    elki.Algorithm <|.. elki.algorithm.statistics.EvaluateRetrievalPerformance
+    elki.algorithm.statistics.EvaluateRetrievalPerformance +-- elki.algorithm.statistics.EvaluateRetrievalPerformance.KNNEvaluator
+    elki.algorithm.statistics.EvaluateRetrievalPerformance +-- elki.algorithm.statistics.EvaluateRetrievalPerformance.RetrievalPerformanceResult
+    elki.algorithm.statistics.EvaluateRetrievalPerformance +-- elki.algorithm.statistics.EvaluateRetrievalPerformance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

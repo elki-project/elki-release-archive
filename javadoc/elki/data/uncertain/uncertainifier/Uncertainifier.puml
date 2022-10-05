@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Uncertainifier\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.Uncertainifier<UO extends UncertainObject> [[Uncertainifier.html]] {
+        {static} +SYMMETRIC_ID: OptionID
+        {abstract} +newFeatureVector(Random, A, NumberArrayAdapter<?, A>): UO extends UncertainObject
+        {abstract} +getFactory(): Factory<UO extends UncertainObject, ?>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

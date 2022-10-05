@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-gui-minigui",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-gui-minigui-0.8.0.jar",
+          "url": "elki-gui-minigui-0.8.0.jar",
+          "size": 139411,
+          "sha512": "3954bf86d20e0abe9a1e1faa461bb6f53ff15f076bd3d51c397f89ac0e2f408e1873e6d42423a3cb530abd20032f9e30f0765a1df0d78607243a7c88ef97e472",
+          "sha256": "6bdf69d450ca140eff6aca5eb2068444359183fede22918102fb22f0728af9d5",
+          "sha1": "e78b380246d1c005e510bb3b935e80a62d38c7f7",
+          "md5": "4c422b1f2235afe465d09ad18578d801"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-gui-minigui-0.8.0.jar",
+          "url": "elki-gui-minigui-0.8.0.jar",
+          "size": 139411,
+          "sha512": "3954bf86d20e0abe9a1e1faa461bb6f53ff15f076bd3d51c397f89ac0e2f408e1873e6d42423a3cb530abd20032f9e30f0765a1df0d78607243a7c88ef97e472",
+          "sha256": "6bdf69d450ca140eff6aca5eb2068444359183fede22918102fb22f0728af9d5",
+          "sha1": "e78b380246d1c005e510bb3b935e80a62d38c7f7",
+          "md5": "4c422b1f2235afe465d09ad18578d801"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-gui-minigui",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-gui-minigui-0.8.0-test-fixtures.jar",
+          "url": "elki-gui-minigui-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "63c32eecd9636e252692157487766c5449de214d864ab58a5b37ac8cae722ec192970c6f54007c4733a1fd1ad660ae3347504078e84608e4983eadbac818fa8e",
+          "sha256": "e3397d3cded13637ceaa69519ab6ee88a7492290eaad22cfed5d38f1076a6dfe",
+          "sha1": "f347f49787d6779068af805d770990a8b9bb437b",
+          "md5": "57299c87da0de22092c54e98ca701ff4"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-gui-minigui-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-gui-minigui",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-gui-minigui-0.8.0-test-fixtures.jar",
+          "url": "elki-gui-minigui-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "63c32eecd9636e252692157487766c5449de214d864ab58a5b37ac8cae722ec192970c6f54007c4733a1fd1ad660ae3347504078e84608e4983eadbac818fa8e",
+          "sha256": "e3397d3cded13637ceaa69519ab6ee88a7492290eaad22cfed5d38f1076a6dfe",
+          "sha1": "f347f49787d6779068af805d770990a8b9bb437b",
+          "md5": "57299c87da0de22092c54e98ca701ff4"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-gui-minigui-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

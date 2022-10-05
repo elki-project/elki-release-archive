@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ELKIBuilder\n<size:10>elki.utilities" as elki.utilities.ELKIBuilder<T> [[ELKIBuilder.html]] {
+        {static} -LOG: Logging
+        -clazz: Class<? super T>
+        -p: ListParameterization
+        +ELKIBuilder(Class<? super T>)
+        +with(OptionID, Object): ELKIBuilder<T>
+        +with(OptionID): ELKIBuilder<T>
+        +with(String, Object): ELKIBuilder<T>
+        +with(String): ELKIBuilder<T>
+        +build(): C extends T
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

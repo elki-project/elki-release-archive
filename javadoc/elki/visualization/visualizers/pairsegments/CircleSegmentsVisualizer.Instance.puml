@@ -1,0 +1,58 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CircleSegmentsVisualizer.Instance\n<size:10>elki.visualization.visualizers.pairsegments" as elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance [[CircleSegmentsVisualizer.Instance.html]] {
+        {static} -SEGMENT_MIN_ANGLE: double
+        {static} -SEGMENT_MIN_SEP_ANGLE: double
+        {static} -RADIUS_INNER: double
+        {static} -RADIUS_DISTANCE: double
+        {static} -RADIUS_OUTER: double
+        {static} -RADIUS_SELECTION: double
+        {static} -CLR_CLUSTER_CLASS_PREFIX: String
+        {static} +CLR_BORDER_CLASS: String
+        {static} +CLR_UNPAIRED_CLASS: String
+        {static} +CLR_HOVER_CLASS: String
+        {static} +SEG_UNPAIRED_SELECTED_CLASS: String
+        {static} +STYLE: String
+        {static} +STYLE_BORDER: String
+        {static} +STYLE_HOVER: String
+        {static} +STYLE_GRADIENT_FIRST: String
+        {static} +STYLE_GRADIENT_SECOND: String
+        #segments: Segments
+        -visLayer: Element
+        -ctrlLayer: Element
+        +segmentToElements: Map<Segment, List<Element>>
+        ~showUnclusteredPairs: boolean
+        #policy: SegmentsStylingPolicy
+        -noIncrementalRedraw: boolean
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double)
+        +toggleUnclusteredPairs(boolean): void
+        +resultChanged(Object): void
+        +incrementalRedraw(): void
+        +fullRedraw(): void
+        #addCSSClasses(int): void
+        -drawSegments(): void
+        -redrawSelection(): void
+        #makeGradient(int, String[]): String[]
+        #drawClusteringInfo(): Element
+        #segmentHover(Segment, int, boolean): void
+        #segmentClick(Segment, Event, boolean): void
+    }
+
+    abstract class "<size:14>AbstractVisualization\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.AbstractVisualization [[../AbstractVisualization.html]] {
+        {abstract} +fullRedraw(): void
+    }
+    interface "<size:14>ResultListener\n<size:10>elki.result" as elki.result.ResultListener [[../../../result/ResultListener.html]]
+    class "<size:14>CircleSegmentsVisualizer\n<size:10>elki.visualization.visualizers.pairsegments" as elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer [[CircleSegmentsVisualizer.html]]
+    class "<size:14>CircleSegmentsVisualizer.Instance.SegmentListenerProxy\n<size:10>elki.visualization.visualizers.pairsegments" as elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance.SegmentListenerProxy [[CircleSegmentsVisualizer.Instance.SegmentListenerProxy.html]]
+
+    elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance
+    elki.result.ResultListener <|.. elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance
+    elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer +-- elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance
+    elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance +-- elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance.SegmentListenerProxy
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluatePrecomputedOutlierScores.Par\n<size:10>elki.application.greedyensemble" as elki.application.greedyensemble.EvaluatePrecomputedOutlierScores.Par [[EvaluatePrecomputedOutlierScores.Par.html]] {
+        {static} +NAME_ID: OptionID
+        {static} +PARSER_ID: OptionID
+        {static} +REVERSED_ID: OptionID
+        ~infile: URI
+        ~parser: StreamingParser
+        ~reverse: Pattern
+        ~outfile: Path
+        ~name: String
+        +configure(Parameterization): void
+        +make(): EvaluatePrecomputedOutlierScores
+    }
+
+    abstract class "<size:14>AbstractApplication.Par\n<size:10>elki.application" as elki.application.AbstractApplication.Par [[../AbstractApplication.Par.html]] {
+        {abstract} +make(): AbstractApplication
+    }
+    class "<size:14>EvaluatePrecomputedOutlierScores\n<size:10>elki.application.greedyensemble" as elki.application.greedyensemble.EvaluatePrecomputedOutlierScores [[EvaluatePrecomputedOutlierScores.html]]
+
+    elki.application.AbstractApplication.Par <|-- elki.application.greedyensemble.EvaluatePrecomputedOutlierScores.Par
+    elki.application.greedyensemble.EvaluatePrecomputedOutlierScores +-- elki.application.greedyensemble.EvaluatePrecomputedOutlierScores.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

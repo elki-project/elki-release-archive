@@ -1,0 +1,228 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.database.relation {
+
+        class MaterializedRelation<O> [[MaterializedRelation.html]] {
+            -type: SimpleTypeInformation<O>
+            -content: DataStore<O>
+            -ids: StaticDBIDs
+            -name: String
+            +MaterializedRelation(SimpleTypeInformation<O>, DBIDs)
+            +MaterializedRelation(String, SimpleTypeInformation<O>, DBIDs)
+            +MaterializedRelation(String, SimpleTypeInformation<O>, DBIDs, DataStore<O>)
+            +get(DBIDRef): O
+            +insert(DBIDRef, O): void
+            +delete(DBIDRef): void
+            +getDBIDs(): StaticDBIDs
+            +iterDBIDs(): DBIDIter
+            +size(): int
+            +getDataTypeInformation(): SimpleTypeInformation<O>
+            +getLongName(): String
+        }
+
+        class DBIDView [[DBIDView.html]] {
+            -ids: DBIDs
+            +DBIDView(DBIDs)
+            +get(DBIDRef): DBID
+            +getDataTypeInformation(): SimpleTypeInformation<DBID>
+            +getDBIDs(): DBIDs
+            +iterDBIDs(): DBIDIter
+            +setDBIDs(DBIDs): void
+            +size(): int
+            +getLongName(): String
+        }
+
+        class ProxyView<O> [[ProxyView.html]] {
+            -idview: DBIDs
+            +ProxyView(DBIDs, Relation<O>)
+            +get(DBIDRef): O
+            +getDBIDs(): DBIDs
+            +iterDBIDs(): DBIDIter
+            +size(): int
+            +getDataTypeInformation(): SimpleTypeInformation<O>
+            +getLongName(): String
+            +setDBIDs(DBIDs): void
+        }
+
+        class ConvertToStringView [[ConvertToStringView.html]] {
+            +ConvertToStringView(Relation<?>)
+            +get(DBIDRef): String
+            +getDBIDs(): DBIDs
+            +iterDBIDs(): DBIDIter
+            +size(): int
+            +getDataTypeInformation(): SimpleTypeInformation<String>
+            +getLongName(): String
+        }
+
+        class ProjectedView<IN, OUT> [[ProjectedView.html]] {
+            -projection: Projection<IN, OUT>
+            +ProjectedView(Relation<? extends IN>, Projection<IN, OUT>)
+            +getLongName(): String
+            +get(DBIDRef): OUT
+            +getDataTypeInformation(): SimpleTypeInformation<OUT>
+            +getDBIDs(): DBIDs
+            +iterDBIDs(): DBIDIter
+            +size(): int
+        }
+
+        class MaterializedDoubleRelation [[MaterializedDoubleRelation.html]] {
+            -content: DoubleDataStore
+            -ids: StaticDBIDs
+            -name: String
+            +MaterializedDoubleRelation(String, DBIDs)
+            +MaterializedDoubleRelation(String, DBIDs, DoubleDataStore)
+            +doubleValue(DBIDRef): double
+            +set(DBIDRef, double): void
+            +--insert--(DBIDRef, Double): void
+            +delete(DBIDRef): void
+            +getDBIDs(): StaticDBIDs
+            +iterDBIDs(): DBIDIter
+            +size(): int
+            +getDataTypeInformation(): SimpleTypeInformation<Double>
+            +getLongName(): String
+        }
+
+        interface DoubleRelation [[DoubleRelation.html]] {
+            {abstract} +doubleValue(DBIDRef): double
+            +--get--(DBIDRef): Double
+            {abstract} +set(DBIDRef, double): void
+            {abstract} +--insert--(DBIDRef, Double): void
+            +forEachDouble(Consumer): void
+        }
+
+        interface elki.database.relation.DoubleRelation.Consumer [[DoubleRelation.Consumer.html]] {
+            {abstract} +accept(DBIDRef, double): void
+        }
+
+        interface Relation<O> [[Relation.html]] {
+            {abstract} +get(DBIDRef): O
+            {abstract} +getDataTypeInformation(): SimpleTypeInformation<O>
+            {abstract} +getDBIDs(): DBIDs
+            {abstract} +iterDBIDs(): DBIDIter
+            {abstract} +size(): int
+            {abstract} +getLongName(): String
+            +forEach(BiConsumer<? super DBIDRef, ? super O>): void
+        }
+
+        class RelationUtil [[RelationUtil.html]] {
+            {static} +assumeVectorField(Relation<V extends FeatureVector<?>>): VectorFieldTypeInformation<V extends FeatureVector<?>>
+            {static} +getNumberVectorFactory(Relation<V extends NumberVector>): Factory<V extends NumberVector>
+            {static} +dimensionality(Relation<? extends SpatialComparable>): int
+            {static} +maxDimensionality(Relation<? extends SpatialComparable>): int
+            {static} +computeMinMax(Relation<? extends NumberVector>): double[]
+            {static} +relationAsMatrix(Relation<? extends NumberVector>, ArrayDBIDs): double[]
+            {static} +getColumnLabel(Relation<? extends SpatialComparable>, int): String
+            {static} +relationUglyVectorCast(Relation<T extends NumberVector>): Relation<V extends NumberVector>
+        }
+
+        class elki.database.relation.RelationUtil.RelationObjectIterator<O> [[RelationUtil.RelationObjectIterator.html]] {
+            ~iter: DBIDIter
+            +RelationObjectIterator(DBIDIter, Relation<? extends O>)
+            +RelationObjectIterator(Relation<? extends O>)
+            +hasNext(): boolean
+            +next(): O
+        }
+
+        class elki.database.relation.RelationUtil.CollectionFromRelation<O> [[RelationUtil.CollectionFromRelation.html]] {
+            +CollectionFromRelation(Relation<? extends O>)
+            +iterator(): Iterator<O>
+            +size(): int
+        }
+
+        class elki.database.relation.RelationUtil.AscendingByDoubleRelation [[RelationUtil.AscendingByDoubleRelation.html]] {
+            +AscendingByDoubleRelation(DoubleRelation)
+            +compare(DBIDRef, DBIDRef): int
+        }
+
+        class elki.database.relation.RelationUtil.DescendingByDoubleRelation [[RelationUtil.DescendingByDoubleRelation.html]] {
+            +DescendingByDoubleRelation(DoubleRelation)
+            +compare(DBIDRef, DBIDRef): int
+        }
+
+        interface ModifiableRelation<O> [[ModifiableRelation.html]] {
+            {abstract} +insert(DBIDRef, O): void
+            {abstract} +delete(DBIDRef): void
+        }
+
+        ModifiableRelation <|.. MaterializedRelation
+        Relation <|.. DBIDView
+        Relation <|.. ProxyView
+        ProxyView --> Relation: inner
+        Relation <|.. ConvertToStringView
+        ConvertToStringView --> Relation: existing
+        Relation <|.. ProjectedView
+        ProjectedView --> Relation: inner
+        DoubleRelation <|.. MaterializedDoubleRelation
+        ModifiableRelation <|-- DoubleRelation
+        DoubleRelation +-- elki.database.relation.DoubleRelation.Consumer
+        java.util.Iterator <|.. elki.database.relation.RelationUtil.RelationObjectIterator
+        RelationUtil +-- elki.database.relation.RelationUtil.RelationObjectIterator
+        elki.database.relation.RelationUtil.RelationObjectIterator --> Relation: database
+        java.util.AbstractCollection <|-- elki.database.relation.RelationUtil.CollectionFromRelation
+        java.util.Collection <|.. elki.database.relation.RelationUtil.CollectionFromRelation
+        RelationUtil +-- elki.database.relation.RelationUtil.CollectionFromRelation
+        elki.database.relation.RelationUtil.CollectionFromRelation --> Relation: db
+        java.util.Comparator <|.. elki.database.relation.RelationUtil.AscendingByDoubleRelation
+        RelationUtil +-- elki.database.relation.RelationUtil.AscendingByDoubleRelation
+        elki.database.relation.RelationUtil.AscendingByDoubleRelation --> DoubleRelation: scores
+        java.util.Comparator <|.. elki.database.relation.RelationUtil.DescendingByDoubleRelation
+        RelationUtil +-- elki.database.relation.RelationUtil.DescendingByDoubleRelation
+        elki.database.relation.RelationUtil.DescendingByDoubleRelation --> DoubleRelation: scores
+        Relation <|-- ModifiableRelation
+    }
+
+    namespace java.util {
+        interface Iterator<E> {
+            {abstract} +hasNext(): boolean
+            {abstract} +next(): E
+            +remove(): void
+            +forEachRemaining(Consumer<? super E>): void
+        }
+        abstract class AbstractCollection<E> {
+            {static} -MAX_ARRAY_SIZE: int
+            {abstract} +iterator(): Iterator<E>
+            {abstract} +size(): int
+        }
+        interface Collection<E> {
+            {abstract} +size(): int
+            {abstract} +isEmpty(): boolean
+            {abstract} +contains(Object): boolean
+            {abstract} +iterator(): Iterator<E>
+            {abstract} +toArray(): Object[]
+            {abstract} +toArray(T[]): T[]
+            +toArray(IntFunction<T[]>): T[]
+            {abstract} +add(E): boolean
+            {abstract} +remove(Object): boolean
+            {abstract} +containsAll(Collection<?>): boolean
+            {abstract} +addAll(Collection<? extends E>): boolean
+            {abstract} +removeAll(Collection<?>): boolean
+            +removeIf(Predicate<? super E>): boolean
+            {abstract} +retainAll(Collection<?>): boolean
+            {abstract} +clear(): void
+            +spliterator(): Spliterator<E>
+            +stream(): Stream<E>
+            +parallelStream(): Stream<E>
+        }
+        interface Comparator<T> {
+            {abstract} +compare(T, T): int
+            +reversed(): Comparator<T>
+            +thenComparing(Comparator<? super T>): Comparator<T>
+            +thenComparing(Function<? super T, ? extends U>, Comparator<? super U>): Comparator<T>
+            +thenComparing(Function<? super T, ? extends Comparable<? super U>>): Comparator<T>
+            +thenComparingInt(ToIntFunction<? super T>): Comparator<T>
+            +thenComparingLong(ToLongFunction<? super T>): Comparator<T>
+            +thenComparingDouble(ToDoubleFunction<? super T>): Comparator<T>
+            {static} +reverseOrder(): Comparator<T extends Comparable<? super T>>
+            {static} +naturalOrder(): Comparator<T extends Comparable<? super T>>
+            {static} +nullsFirst(Comparator<? super T>): Comparator<T>
+            {static} +nullsLast(Comparator<? super T>): Comparator<T>
+            {static} +comparing(Function<? super T, ? extends U>, Comparator<? super U>): Comparator<T>
+            {static} +comparing(Function<? super T, ? extends Comparable<? super U>>): Comparator<T>
+            {static} +comparingInt(ToIntFunction<? super T>): Comparator<T>
+            {static} +comparingLong(ToLongFunction<? super T>): Comparator<T>
+            {static} +comparingDouble(ToDoubleFunction<? super T>): Comparator<T>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

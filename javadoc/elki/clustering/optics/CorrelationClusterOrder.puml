@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CorrelationClusterOrder\n<size:10>elki.clustering.optics" as elki.clustering.optics.CorrelationClusterOrder [[CorrelationClusterOrder.html]] {
+        #correlationValue: WritableIntegerDataStore
+        +CorrelationClusterOrder(ArrayModifiableDBIDs, WritableDoubleDataStore, WritableDBIDDataStore, WritableIntegerDataStore)
+        +getCorrelationValue(DBIDRef): int
+        +getEuclideanValue(DBIDRef): double
+    }
+
+    class "<size:14>ClusterOrder\n<size:10>elki.clustering.optics" as elki.clustering.optics.ClusterOrder [[ClusterOrder.html]]
+
+    elki.clustering.optics.ClusterOrder <|-- elki.clustering.optics.CorrelationClusterOrder
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

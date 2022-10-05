@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProgressiveEigenPairFilter\n<size:10>elki.math.linearalgebra.pca.filter" as elki.math.linearalgebra.pca.filter.ProgressiveEigenPairFilter [[ProgressiveEigenPairFilter.html]] {
+        {static} +DEFAULT_PALPHA: double
+        {static} +DEFAULT_WALPHA: double
+        -palpha: double
+        -walpha: double
+        +ProgressiveEigenPairFilter(double, double)
+        +filter(double[]): int
+    }
+
+    interface "<size:14>EigenPairFilter\n<size:10>elki.math.linearalgebra.pca.filter" as elki.math.linearalgebra.pca.filter.EigenPairFilter [[EigenPairFilter.html]] {
+        {abstract} +filter(double[]): int
+    }
+    class "<size:14>ProgressiveEigenPairFilter.Par\n<size:10>elki.math.linearalgebra.pca.filter" as elki.math.linearalgebra.pca.filter.ProgressiveEigenPairFilter.Par [[ProgressiveEigenPairFilter.Par.html]]
+
+    elki.math.linearalgebra.pca.filter.EigenPairFilter <|.. elki.math.linearalgebra.pca.filter.ProgressiveEigenPairFilter
+    elki.math.linearalgebra.pca.filter.ProgressiveEigenPairFilter +-- elki.math.linearalgebra.pca.filter.ProgressiveEigenPairFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

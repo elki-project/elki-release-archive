@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SpacefillingMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory<V extends NumberVector> [[SpacefillingMaterializeKNNPreprocessor.Factory.html]] {
+        ~curvegen: List<? extends SpatialSorter>
+        ~window: double
+        ~variants: int
+        ~random: RandomFactory
+        +Factory(int, Distance<? super NumberVector>, List<? extends SpatialSorter>, double, int, RandomFactory)
+        +instantiate(Relation<V extends NumberVector>): SpacefillingMaterializeKNNPreprocessor<V extends NumberVector>
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory<V extends NumberVector> [[AbstractMaterializeKNNPreprocessor.Factory.html]] {
+        {abstract} +instantiate(Relation<O>): AbstractMaterializeKNNPreprocessor<O>
+    }
+    class "<size:14>SpacefillingMaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor<O extends NumberVector> [[SpacefillingMaterializeKNNPreprocessor.html]]
+    class "<size:14>SpacefillingMaterializeKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory.Par<V extends NumberVector>
+
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UnweightedNeighborhoodAdapter.Factory\n<size:10>elki.outlier.spatial.neighborhood.weighted" as elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter.Factory<O> [[UnweightedNeighborhoodAdapter.Factory.html]] {
+        ~inner: Factory<O>
+        +Factory(Factory<O>)
+        +instantiate(Database, Relation<? extends O>): UnweightedNeighborhoodAdapter
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>WeightedNeighborSetPredicate.Factory\n<size:10>elki.outlier.spatial.neighborhood.weighted" as elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate.Factory<O> [[WeightedNeighborSetPredicate.Factory.html]] {
+        {abstract} +instantiate(Database, Relation<? extends O>): WeightedNeighborSetPredicate
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>UnweightedNeighborhoodAdapter\n<size:10>elki.outlier.spatial.neighborhood.weighted" as elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter [[UnweightedNeighborhoodAdapter.html]]
+    class "<size:14>UnweightedNeighborhoodAdapter.Factory.Par\n<size:10>elki.outlier.spatial.neighborhood.weighted" as elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter.Factory.Par<O>
+
+    elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate.Factory <|.. elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter.Factory
+    elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter +-- elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter.Factory
+    elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter.Factory +-- elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

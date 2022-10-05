@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractDimensionsSelectingDistance\n<size:10>elki.distance.subspace" as elki.distance.subspace.AbstractDimensionsSelectingDistance<V extends FeatureVector<?>> [[AbstractDimensionsSelectingDistance.html]] {
+        #dimensions: long[]
+        +AbstractDimensionsSelectingDistance(long[])
+        +distance(V extends FeatureVector<?>, V extends FeatureVector<?>): double
+        +getSelectedDimensions(): long[]
+        +setSelectedDimensions(long[]): void
+    }
+
+    interface "<size:14>PrimitiveDistance\n<size:10>elki.distance" as elki.distance.PrimitiveDistance<V extends FeatureVector<?>> [[../PrimitiveDistance.html]] {
+        {abstract} +distance(V extends FeatureVector<?>, V extends FeatureVector<?>): double
+        {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+    }
+    interface "<size:14>DimensionSelectingSubspaceDistance\n<size:10>elki.distance.subspace" as elki.distance.subspace.DimensionSelectingSubspaceDistance<V extends FeatureVector<?>> [[DimensionSelectingSubspaceDistance.html]] {
+        {abstract} +getSelectedDimensions(): long[]
+        {abstract} +setSelectedDimensions(long[]): void
+    }
+    abstract class "<size:14>AbstractDimensionsSelectingDistance.Par\n<size:10>elki.distance.subspace" as elki.distance.subspace.AbstractDimensionsSelectingDistance.Par [[AbstractDimensionsSelectingDistance.Par.html]]
+
+    elki.distance.PrimitiveDistance <|.. elki.distance.subspace.AbstractDimensionsSelectingDistance
+    elki.distance.subspace.DimensionSelectingSubspaceDistance <|.. elki.distance.subspace.AbstractDimensionsSelectingDistance
+    elki.distance.subspace.AbstractDimensionsSelectingDistance +-- elki.distance.subspace.AbstractDimensionsSelectingDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

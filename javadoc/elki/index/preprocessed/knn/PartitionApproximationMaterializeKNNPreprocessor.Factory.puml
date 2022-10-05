@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PartitionApproximationMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor.Factory<O> [[PartitionApproximationMaterializeKNNPreprocessor.Factory.html]] {
+        ~partitions: int
+        -rnd: RandomFactory
+        +Factory(int, Distance<? super O>, int, RandomFactory)
+        +instantiate(Relation<O>): PartitionApproximationMaterializeKNNPreprocessor<O>
+    }
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory<O> [[AbstractMaterializeKNNPreprocessor.Factory.html]] {
+        {abstract} +instantiate(Relation<O>): AbstractMaterializeKNNPreprocessor<O>
+    }
+    class "<size:14>PartitionApproximationMaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor<O> [[PartitionApproximationMaterializeKNNPreprocessor.html]]
+    class "<size:14>PartitionApproximationMaterializeKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor.Factory.Par<O> [[PartitionApproximationMaterializeKNNPreprocessor.Factory.Par.html]]
+
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

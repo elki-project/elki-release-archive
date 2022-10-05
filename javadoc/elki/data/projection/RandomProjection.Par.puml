@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomProjection.Par\n<size:10>elki.data.projection" as elki.data.projection.RandomProjection.Par [[RandomProjection.Par.html]] {
+        {static} +FAMILY_ID: OptionID
+        {static} +DIMENSIONALITY_ID: OptionID
+        -dimensionality: int
+        -family: RandomProjectionFamily
+        +configure(Parameterization): void
+        +make(): RandomProjection<NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>RandomProjection\n<size:10>elki.data.projection" as elki.data.projection.RandomProjection<V extends NumberVector> [[RandomProjection.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.data.projection.RandomProjection.Par
+    elki.data.projection.RandomProjection +-- elki.data.projection.RandomProjection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

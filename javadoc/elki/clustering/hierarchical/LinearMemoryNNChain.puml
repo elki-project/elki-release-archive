@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearMemoryNNChain\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.LinearMemoryNNChain<O extends NumberVector> [[LinearMemoryNNChain.html]] {
+        {static} -LOG: Logging
+        -linkage: GeometricLinkage
+        +LinearMemoryNNChain(GeometricLinkage)
+        +run(Relation<O extends NumberVector>): ClusterMergeHistory
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>HierarchicalClusteringAlgorithm\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HierarchicalClusteringAlgorithm [[HierarchicalClusteringAlgorithm.html]]
+    class "<size:14>LinearMemoryNNChain.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.LinearMemoryNNChain.Instance<O extends NumberVector> [[LinearMemoryNNChain.Instance.html]]
+    class "<size:14>LinearMemoryNNChain.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.LinearMemoryNNChain.Par<O extends NumberVector>
+
+    elki.clustering.hierarchical.HierarchicalClusteringAlgorithm <|.. elki.clustering.hierarchical.LinearMemoryNNChain
+    elki.clustering.hierarchical.LinearMemoryNNChain +-- elki.clustering.hierarchical.LinearMemoryNNChain.Instance
+    elki.clustering.hierarchical.LinearMemoryNNChain +-- elki.clustering.hierarchical.LinearMemoryNNChain.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

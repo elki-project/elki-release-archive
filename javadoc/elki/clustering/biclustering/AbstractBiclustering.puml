@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractBiclustering\n<size:10>elki.clustering.biclustering" as elki.clustering.biclustering.AbstractBiclustering<M extends BiclusterModel> [[AbstractBiclustering.html]] {
+        #relation: Relation<? extends NumberVector>
+        -iter: DBIDArrayIter
+        #rowIDs: ArrayDBIDs
+        -colDim: int
+        +run(Relation<? extends NumberVector>): Clustering<M extends BiclusterModel>
+        {abstract} #biclustering(): Clustering<M extends BiclusterModel>
+        #colsBitsetToIDs(BitSet): int[]
+        #rowsBitsetToIDs(BitSet): ArrayDBIDs
+        #defineBicluster(BitSet, BitSet): Cluster<BiclusterModel>
+        #defineBicluster(long[], long[]): Cluster<BiclusterModel>
+        #valueAt(int, int): double
+        #--getRowDBID--(int): DBID
+        #colsBitsetToIDs(long[]): int[]
+        #rowsBitsetToIDs(long[]): ArrayDBIDs
+        #getRowDim(): int
+        #getColDim(): int
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<M extends BiclusterModel>> [[../ClusteringAlgorithm.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.biclustering.AbstractBiclustering
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SNE\n<size:10>elki.projection" as elki.projection.SNE<O> [[SNE.html]] {
+        {static} -LOG: Logging
+        {static} #MIN_QIJ: double
+        {static} #INITIAL_SOLUTION_SCALE: double
+        {static} #MIN_GAIN: double
+        #affinity: AffinityMatrixBuilder<? super O>
+        #projectedDistances: long
+        #dim: int
+        #learningRate: double
+        #initialMomentum: double
+        #finalMomentum: double
+        #momentumSwitch: int
+        #iterations: int
+        #random: RandomFactory
+        +SNE(AffinityMatrixBuilder<? super O>, int, RandomFactory)
+        +SNE(AffinityMatrixBuilder<? super O>, int, double, double, int, RandomFactory, boolean)
+        +getInputTypeRestriction(): TypeInformation[]
+        +autorun(Database): Relation<DoubleVector>
+        +run(Relation<O>): Relation<DoubleVector>
+        {static} #randomInitialSolution(int, int, Random): double[]
+        #optimizeSNE(AffinityMatrix, double[]): void
+        #computeQij(double[], double[]): double
+        #sqDist(double[], double[]): double
+        #computeGradient(AffinityMatrix, double[], double, double[], double[]): void
+        #updateSolution(double[], double[], int): void
+    }
+
+    abstract class "<size:14>AbstractProjectionAlgorithm\n<size:10>elki.projection" as elki.projection.AbstractProjectionAlgorithm<Relation<DoubleVector>> [[AbstractProjectionAlgorithm.html]]
+    class "<size:14>SNE.Par\n<size:10>elki.projection" as elki.projection.SNE.Par<O>
+
+    elki.projection.AbstractProjectionAlgorithm <|-- elki.projection.SNE
+    elki.projection.SNE +-- elki.projection.SNE.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LogPanel.LogPanelHandler\n<size:10>elki.gui.util" as elki.gui.util.LogPanel.LogPanelHandler [[LogPanel.LogPanelHandler.html]] {
+        +close(): void
+        +flush(): void
+        +publish(LogRecord): void
+    }
+
+    abstract class "<size:14>Handler\n<size:10>java.util.logging" as java.util.logging.Handler {
+        {abstract} +publish(LogRecord): void
+        {abstract} +flush(): void
+        {abstract} +close(): void
+    }
+    class "<size:14>LogPanel\n<size:10>elki.gui.util" as elki.gui.util.LogPanel [[LogPanel.html]]
+
+    java.util.logging.Handler <|-- elki.gui.util.LogPanel.LogPanelHandler
+    elki.gui.util.LogPanel +-- elki.gui.util.LogPanel.LogPanelHandler
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>WritableDBIDDataStore\n<size:10>elki.database.datastore" as elki.database.datastore.WritableDBIDDataStore [[WritableDBIDDataStore.html]] {
+        {abstract} +--put--(DBIDRef, DBID): DBID
+        {abstract} +putDBID(DBIDRef, DBIDRef): void
+        {abstract} +put(DBIDRef, DBIDRef): void
+    }
+
+    interface "<size:14>DBIDDataStore\n<size:10>elki.database.datastore" as elki.database.datastore.DBIDDataStore [[DBIDDataStore.html]] {
+        {abstract} +--get--(DBIDRef): DBID
+        {abstract} +assignVar(DBIDRef, DBIDVar): DBIDVar
+    }
+    interface "<size:14>WritableDataStore\n<size:10>elki.database.datastore" as elki.database.datastore.WritableDataStore<DBID> [[WritableDataStore.html]] {
+        {abstract} +put(DBIDRef, DBID): DBID
+        {abstract} +destroy(): void
+        {abstract} +delete(DBIDRef): void
+        {abstract} +clear(): void
+    }
+
+    elki.database.datastore.DBIDDataStore <|-- elki.database.datastore.WritableDBIDDataStore
+    elki.database.datastore.WritableDataStore <|-- elki.database.datastore.WritableDBIDDataStore
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

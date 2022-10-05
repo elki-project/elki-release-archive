@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>EvaluateIntrinsicDimensionalityEstimators.Aggregate\n<size:10>elki.application.experiments" as elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Aggregate [[EvaluateIntrinsicDimensionalityEstimators.Aggregate.html]] {
+        {static} +MEAN
+        {static} +MEAN_STDDEV
+        {static} +MEAN_STDDEV_MIN_MAX
+        {static} +HMEAN
+        {static} +MEDIAN
+        {static} +MED_MAD
+        {static} +MED_MAD_MIN_MAX
+        {static} +QUANTILES
+        {abstract} ~aggregate(double[]): double[]
+        {abstract} ~description(): String[]
+    }
+
+    class "<size:14>EvaluateIntrinsicDimensionalityEstimators\n<size:10>elki.application.experiments" as elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators [[EvaluateIntrinsicDimensionalityEstimators.html]]
+
+    elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators +-- elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Aggregate
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

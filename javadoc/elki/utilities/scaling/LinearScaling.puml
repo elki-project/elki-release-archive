@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearScaling\n<size:10>elki.utilities.scaling" as elki.utilities.scaling.LinearScaling [[LinearScaling.html]] {
+        -factor: double
+        -shift: double
+        +LinearScaling()
+        +LinearScaling(double)
+        +LinearScaling(double, double)
+        +LinearScaling(DoubleMinMax)
+        +getScaled(double): double
+        +getMin(): double
+        +getMax(): double
+        {static} +fromMinMax(double, double): LinearScaling
+    }
+
+    interface "<size:14>StaticScalingFunction\n<size:10>elki.utilities.scaling" as elki.utilities.scaling.StaticScalingFunction [[StaticScalingFunction.html]]
+
+    elki.utilities.scaling.StaticScalingFunction <|.. elki.utilities.scaling.LinearScaling
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

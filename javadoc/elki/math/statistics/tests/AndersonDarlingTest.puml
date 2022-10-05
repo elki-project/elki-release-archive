@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AndersonDarlingTest\n<size:10>elki.math.statistics.tests" as elki.math.statistics.tests.AndersonDarlingTest [[AndersonDarlingTest.html]] {
+        {static} -SMALL: double
+        {static} +A2StandardNormal(double[]): double
+        {static} +A2Noncentral(double[]): double
+        {static} +removeBiasNormalDistribution(double, int): double
+        {static} +removeBiasNormalDistributionDAgostino(double, int): double
+        {static} +calculateQuantileCase3(double): double
+        {static} +pValueCase3(double): double
+        {static} +calculateQuantileCase0(double, int): double
+        {static} +pValueCase0(double, int): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

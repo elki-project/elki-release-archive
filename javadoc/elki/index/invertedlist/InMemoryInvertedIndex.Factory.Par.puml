@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InMemoryInvertedIndex.Factory.Par\n<size:10>elki.index.invertedlist" as elki.index.invertedlist.InMemoryInvertedIndex.Factory.Par<V extends NumberVector> {
+        +make(): Factory<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>InMemoryInvertedIndex.Factory\n<size:10>elki.index.invertedlist" as elki.index.invertedlist.InMemoryInvertedIndex.Factory<V extends NumberVector> [[InMemoryInvertedIndex.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.invertedlist.InMemoryInvertedIndex.Factory.Par
+    elki.index.invertedlist.InMemoryInvertedIndex.Factory +-- elki.index.invertedlist.InMemoryInvertedIndex.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

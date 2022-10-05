@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="282px" preserveAspectRatio="none" style="width:224px;height:282px;background:#FFFFFF;" version="1.1" viewBox="0 0 224 282" width="224px" zoomAndPan="magnify"><defs/><g><!--MD5=[b4a5e47e3033f93d3df1e811e9494c7f]
+class elki.utilities.scaling.GammaScaling--><a href="GammaScaling.html" target="_top" title="GammaScaling.html" xlink:actuate="onRequest" xlink:href="GammaScaling.html" xlink:show="new" xlink:title="GammaScaling.html" xlink:type="simple"><g id="elem_elki.utilities.scaling.GammaScaling"><rect codeLine="6" fill="#F1F1F1" height="151.7188" id="elki.utilities.scaling.GammaScaling" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="210" x="7" y="105"/><ellipse cx="56.75" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M59.7188,129.6094 Q59.1406,129.9063 58.5,130.0469 Q57.8594,130.2031 57.1563,130.2031 Q54.6563,130.2031 53.3281,128.5625 Q52.0156,126.9063 52.0156,123.7813 Q52.0156,120.6563 53.3281,119 Q54.6563,117.3438 57.1563,117.3438 Q57.8594,117.3438 58.5,117.5 Q59.1563,117.6563 59.7188,117.9531 L59.7188,120.6719 Q59.0938,120.0938 58.5,119.8281 Q57.9063,119.5469 57.2813,119.5469 Q55.9375,119.5469 55.25,120.625 Q54.5625,121.6875 54.5625,123.7813 Q54.5625,125.875 55.25,126.9531 Q55.9375,128.0156 57.2813,128.0156 Q57.9063,128.0156 58.5,127.75 Q59.0938,127.4688 59.7188,126.8906 L59.7188,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102" x="77.25" y="122.9951">GammaScaling</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="86" x="85.25" y="135.5791">elki.utilities.scaling</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="216" y1="142.9375" y2="142.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="153.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="27" y="159.9326">gamma: double</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="216" y1="167.2344" y2="167.2344"/><ellipse cx="18" cy="180.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="27" y="184.2295">GammaScaling()</text><ellipse cx="18" cy="197.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160" x="27" y="200.5264">GammaScaling(double)</text><ellipse cx="18" cy="213.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="184" x="27" y="216.8232">getScaled(double): double</text><ellipse cx="18" cy="229.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114" x="27" y="233.1201">getMin(): double</text><ellipse cx="18" cy="246.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="117" x="27" y="249.417">getMax(): double</text></g></a><!--MD5=[d5465c2f12cf87aabf0728275ad73542]
+class elki.utilities.scaling.StaticScalingFunction--><a href="StaticScalingFunction.html" target="_top" title="StaticScalingFunction.html" xlink:actuate="onRequest" xlink:href="StaticScalingFunction.html" xlink:show="new" xlink:title="StaticScalingFunction.html" xlink:type="simple"><g id="elem_elki.utilities.scaling.StaticScalingFunction"><rect codeLine="15" fill="#F1F1F1" height="37.9375" id="elki.utilities.scaling.StaticScalingFunction" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="185" x="19.5" y="7"/><ellipse cx="34.5" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M30.4219,21.7344 L30.4219,19.5781 L37.8125,19.5781 L37.8125,21.7344 L35.3438,21.7344 L35.3438,29.8125 L37.8125,29.8125 L37.8125,31.9688 L30.4219,31.9688 L30.4219,29.8125 L32.8906,29.8125 L32.8906,21.7344 L30.4219,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="153" x="48.5" y="24.9951">StaticScalingFunction</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="96" x="77" y="37.5791">elki.utilities.scaling</text></g></a><!--MD5=[7c6d04b9caeb0be4171a44bdc10dbf01]
+reverse link elki.utilities.scaling.StaticScalingFunction to elki.utilities.scaling.GammaScaling--><g id="link_elki.utilities.scaling.StaticScalingFunction_elki.utilities.scaling.GammaScaling"><path codeLine="18" d="M112,65.26 C112,77.35 112,91.17 112,104.93 " fill="none" id="elki.utilities.scaling.StaticScalingFunction-backto-elki.utilities.scaling.GammaScaling" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="105,65.15,112,45.15,119,65.15,105,65.15" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="12" y="262.7188"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="12" y="272.001">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[7f62f38078d19f941e2bb0df97961d77]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GammaScaling\n<size:10>elki.utilities.scaling" as elki.utilities.scaling.GammaScaling [[GammaScaling.html]] {
+        -gamma: double
+        +GammaScaling()
+        +GammaScaling(double)
+        +getScaled(double): double
+        +getMin(): double
+        +getMax(): double
+    }
+
+    interface "<size:14>StaticScalingFunction\n<size:10>elki.utilities.scaling" as elki.utilities.scaling.StaticScalingFunction [[StaticScalingFunction.html]]
+    class "<size:14>GammaScaling.Par\n<size:10>elki.utilities.scaling" as elki.utilities.scaling.GammaScaling.Par [[GammaScaling.Par.html]]
+
+    elki.utilities.scaling.StaticScalingFunction <|.. elki.utilities.scaling.GammaScaling
+    elki.utilities.scaling.GammaScaling +- - elki.utilities.scaling.GammaScaling.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

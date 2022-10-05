@@ -1,0 +1,150 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.application {
+
+        class ELKILauncher [[ELKILauncher.html]] {
+            {static} +DEFAULT_APPLICATION: Class<? extends AbstractApplication>
+            {static} +main(String[]): void
+        }
+
+        class KDDCLIApplication [[KDDCLIApplication.html]] {
+            ~task: KDDTask
+            +KDDCLIApplication(KDDTask)
+            +run(): void
+            {static} +main(String[]): void
+        }
+
+        class elki.application.KDDCLIApplication.Par [[KDDCLIApplication.Par.html]] {
+            #task: KDDTask
+            +configure(Parameterization): void
+            +make(): KDDCLIApplication
+        }
+
+        abstract class AbstractDistanceBasedApplication<O> [[AbstractDistanceBasedApplication.html]] {
+            #distance: Distance<? super O>
+            #inputstep: InputStep
+            +AbstractDistanceBasedApplication(InputStep, Distance<? super O>)
+        }
+
+        abstract class elki.application.AbstractDistanceBasedApplication.Par<O> {
+            #inputstep: InputStep
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+        }
+
+        class ClassifierHoldoutEvaluationTask<O> [[ClassifierHoldoutEvaluationTask.html]] {
+            {static} -LOG: Logging
+            #databaseConnection: DatabaseConnection
+            #indexFactories: Collection<? extends IndexFactory<?>>
+            #algorithm: Classifier<O>
+            #holdout: Holdout
+            +ClassifierHoldoutEvaluationTask(DatabaseConnection, Collection<? extends IndexFactory<?>>, Classifier<O>, Holdout)
+            +run(): void
+            {static} +main(String[]): void
+        }
+
+        class elki.application.ClassifierHoldoutEvaluationTask.Par<O> [[ClassifierHoldoutEvaluationTask.Par.html]] {
+            {static} +HOLDOUT_ID: OptionID
+            #databaseConnection: DatabaseConnection
+            #indexFactories: Collection<? extends IndexFactory<?>>
+            #algorithm: Classifier<O>
+            #holdout: Holdout
+            +configure(Parameterization): void
+            +make(): ClassifierHoldoutEvaluationTask<O>
+        }
+
+        class GeneratorXMLSpec [[GeneratorXMLSpec.html]] {
+            {static} -LOG: Logging
+            {static} +LINE_SEPARATOR: String
+            -outputFile: Path
+            -generator: GeneratorXMLDatabaseConnection
+            +GeneratorXMLSpec(Path, GeneratorXMLDatabaseConnection)
+            +run(): void
+            +writeClusters(BufferedWriter, MultipleObjectsBundle): void
+            {static} +main(String[]): void
+        }
+
+        class elki.application.GeneratorXMLSpec.Par [[GeneratorXMLSpec.Par.html]] {
+            -outputFile: Path
+            -generator: GeneratorXMLDatabaseConnection
+            +configure(Parameterization): void
+            +make(): GeneratorXMLSpec
+        }
+
+        class ConvertToBundleApplication [[ConvertToBundleApplication.html]] {
+            {static} -LOG: Logging
+            -input: DatabaseConnection
+            -outfile: Path
+            +ConvertToBundleApplication(DatabaseConnection, Path)
+            +run(): void
+            {static} +main(String[]): void
+        }
+
+        class elki.application.ConvertToBundleApplication.Par [[ConvertToBundleApplication.Par.html]] {
+            {static} +DATABASE_CONNECTION_ID: OptionID
+            -input: DatabaseConnection
+            -outfile: Path
+            +configure(Parameterization): void
+            +make(): ConvertToBundleApplication
+        }
+
+        abstract class AbstractApplication [[AbstractApplication.html]] {
+            {static} -LOG: Logging
+            {static} -NEWLINE: String
+            {static} +VERSION: String
+            {static} -REFERENCE_VERSION: String
+            {static} +REFERENCE: String
+            {static} +runCLIApplication(Class<?>, String[]): void
+            {static} +usage(Collection<TrackedParameter>): String
+            {static} #printErrorMessage(Exception): void
+            {static} -printDescription(Class<?>): void
+            {abstract} +run(): void
+        }
+
+        abstract class elki.application.AbstractApplication.Par [[AbstractApplication.Par.html]] {
+            {static} +OUTPUT_ID: OptionID
+            {static} +INPUT_ID: OptionID
+            {static} +DATABASE_ID: OptionID
+            {static} +HELP_ID: OptionID
+            {static} +HELP_LONG_ID: OptionID
+            {static} +DESCRIPTION_ID: OptionID
+            {static} +DEBUG_ID: OptionID
+            {static} +VERBOSE_ID: OptionID
+            {static} +parseVerbose(Parameterization): Level
+            {static} +parseDebugParameter(Parameterization): String[]
+            {static} +applyLoggingLevels(String[]): void
+            #getParameterOutputFile(Parameterization): Path
+            #getParameterOutputFile(Parameterization, String): Path
+            #getParameterInputFile(Parameterization): URI
+            #getParameterInputFile(Parameterization, String): URI
+            {abstract} +make(): AbstractApplication
+        }
+
+        AbstractApplication <|-- KDDCLIApplication
+        elki.application.AbstractApplication.Par <|-- elki.application.KDDCLIApplication.Par
+        KDDCLIApplication +-- elki.application.KDDCLIApplication.Par
+        AbstractApplication <|-- AbstractDistanceBasedApplication
+        elki.application.AbstractApplication.Par <|-- elki.application.AbstractDistanceBasedApplication.Par
+        AbstractDistanceBasedApplication +-- elki.application.AbstractDistanceBasedApplication.Par
+        AbstractApplication <|-- ClassifierHoldoutEvaluationTask
+        elki.application.AbstractApplication.Par <|-- elki.application.ClassifierHoldoutEvaluationTask.Par
+        ClassifierHoldoutEvaluationTask +-- elki.application.ClassifierHoldoutEvaluationTask.Par
+        AbstractApplication <|-- GeneratorXMLSpec
+        elki.application.AbstractApplication.Par <|-- elki.application.GeneratorXMLSpec.Par
+        GeneratorXMLSpec +-- elki.application.GeneratorXMLSpec.Par
+        AbstractApplication <|-- ConvertToBundleApplication
+        elki.application.AbstractApplication.Par <|-- elki.application.ConvertToBundleApplication.Par
+        ConvertToBundleApplication +-- elki.application.ConvertToBundleApplication.Par
+        elki.utilities.optionhandling.Parameterizer <|.. elki.application.AbstractApplication.Par
+        AbstractApplication +-- elki.application.AbstractApplication.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

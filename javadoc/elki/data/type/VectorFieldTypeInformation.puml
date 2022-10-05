@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VectorFieldTypeInformation\n<size:10>elki.data.type" as elki.data.type.VectorFieldTypeInformation<V extends FeatureVector<?>> [[VectorFieldTypeInformation.html]] {
+        -labels: String[]
+        +VectorFieldTypeInformation(Factory<V extends FeatureVector<?>, ?>, int, String[], ByteBufferSerializer<? super FeatureVector<?>>)
+        +VectorFieldTypeInformation(Factory<V extends FeatureVector<?>, ?>, int, int, ByteBufferSerializer<? super FeatureVector<?>>)
+        +VectorFieldTypeInformation(Factory<V extends FeatureVector<?>, ?>, int, ByteBufferSerializer<? super FeatureVector<?>>)
+        +VectorFieldTypeInformation(Factory<V extends FeatureVector<?>, ?>, int, String[])
+        -VectorFieldTypeInformation(Class<? super FeatureVector<?>>, int, int)
+        +VectorFieldTypeInformation(Factory<V extends FeatureVector<?>, ?>, int)
+        {static} +typeRequest(Class<? super FeatureVector<?>>): VectorFieldTypeInformation<V extends FeatureVector<?>>
+        {static} +typeRequest(Class<? super FeatureVector<?>>, int, int): VectorFieldTypeInformation<V extends FeatureVector<?>>
+        +isAssignableFromType(TypeInformation): boolean
+        +getDimensionality(): int
+        +getLabel(int): String
+        #getLabels(): String[]
+    }
+
+    class "<size:14>VectorTypeInformation\n<size:10>elki.data.type" as elki.data.type.VectorTypeInformation<V extends FeatureVector<?>> [[VectorTypeInformation.html]]
+    interface "<size:14>FieldTypeInformation\n<size:10>elki.data.type" as elki.data.type.FieldTypeInformation [[FieldTypeInformation.html]] {
+        {abstract} +getDimensionality(): int
+    }
+
+    elki.data.type.VectorTypeInformation <|-- elki.data.type.VectorFieldTypeInformation
+    elki.data.type.FieldTypeInformation <|.. elki.data.type.VectorFieldTypeInformation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

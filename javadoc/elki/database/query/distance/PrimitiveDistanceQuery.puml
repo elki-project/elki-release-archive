@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrimitiveDistanceQuery\n<size:10>elki.database.query.distance" as elki.database.query.distance.PrimitiveDistanceQuery<O> [[PrimitiveDistanceQuery.html]] {
+        #relation: Relation<? extends O>
+        #distanceFunction: PrimitiveDistance<? super O>
+        +PrimitiveDistanceQuery(Relation<? extends O>, PrimitiveDistance<? super O>)
+        +distance(DBIDRef, DBIDRef): double
+        +distance(O, DBIDRef): double
+        +distance(DBIDRef, O): double
+        +distance(O, O): double
+        +getRelation(): Relation<? extends O>
+        +getDistance(): PrimitiveDistance<? super O>
+    }
+
+    interface "<size:14>DistanceQuery\n<size:10>elki.database.query.distance" as elki.database.query.distance.DistanceQuery<O> [[DistanceQuery.html]] {
+        {abstract} +distance(DBIDRef, DBIDRef): double
+        {abstract} +distance(O, DBIDRef): double
+        {abstract} +distance(DBIDRef, O): double
+        {abstract} +distance(O, O): double
+        {abstract} +getDistance(): Distance<? super O>
+        {abstract} +getRelation(): Relation<? extends O>
+    }
+
+    elki.database.query.distance.DistanceQuery <|.. elki.database.query.distance.PrimitiveDistanceQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

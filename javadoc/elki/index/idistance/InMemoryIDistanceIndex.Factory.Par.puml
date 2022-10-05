@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InMemoryIDistanceIndex.Factory.Par\n<size:10>elki.index.idistance" as elki.index.idistance.InMemoryIDistanceIndex.Factory.Par<V> {
+        {static} +DISTANCE_ID: OptionID
+        {static} +REFERENCE_ID: OptionID
+        {static} +K_ID: OptionID
+        ~distance: Distance<? super V>
+        ~initialization: KMedoidsInitialization<V>
+        ~k: int
+        +configure(Parameterization): void
+        +make(): Factory<V>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>InMemoryIDistanceIndex.Factory\n<size:10>elki.index.idistance" as elki.index.idistance.InMemoryIDistanceIndex.Factory<V> [[InMemoryIDistanceIndex.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.idistance.InMemoryIDistanceIndex.Factory.Par
+    elki.index.idistance.InMemoryIDistanceIndex.Factory +-- elki.index.idistance.InMemoryIDistanceIndex.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

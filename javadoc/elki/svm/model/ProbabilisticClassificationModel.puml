@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProbabilisticClassificationModel\n<size:10>elki.svm.model" as elki.svm.model.ProbabilisticClassificationModel [[ProbabilisticClassificationModel.html]] {
+        {static} -LOG: Logging
+        +probA: double[]
+        +probB: double[]
+        +predict_prob(DataSet, int, double[]): int
+        {static} -sigmoid_predict(double, double, double): double
+        {static} -multiclass_probability(int, double[], double[]): void
+    }
+
+    class "<size:14>ClassificationModel\n<size:10>elki.svm.model" as elki.svm.model.ClassificationModel [[ClassificationModel.html]]
+
+    elki.svm.model.ClassificationModel <|-- elki.svm.model.ProbabilisticClassificationModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

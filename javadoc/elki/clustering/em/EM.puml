@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EM\n<size:10>elki.clustering.em" as elki.clustering.em.EM<O, M extends MeanModel> [[EM.html]] {
+        {static} -LOG: Logging
+        {static} -KEY: String
+        #k: int
+        #delta: double
+        #mfactory: EMClusterModelFactory<? super O, M extends MeanModel>
+        #miniter: int
+        #maxiter: int
+        #prior: double
+        #soft: boolean
+        {static} #MIN_LOGLIKELIHOOD: double
+        {static} +SOFT_TYPE: SimpleTypeInformation<double[]>
+        +EM(int, double, EMClusterModelFactory<? super O, M extends MeanModel>)
+        +EM(int, double, EMClusterModelFactory<? super O, M extends MeanModel>, int, boolean)
+        +EM(int, double, EMClusterModelFactory<? super O, M extends MeanModel>, int, double, boolean)
+        +EM(int, double, EMClusterModelFactory<? super O, M extends MeanModel>, int, int, double, boolean)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): Clustering<M extends MeanModel>
+        {static} +recomputeCovarianceMatrices(Relation<? extends O>, WritableDataStore<double[]>, List<? extends EMClusterModel<? super O, ?>>, double): void
+        {static} +assignProbabilitiesToInstances(Relation<? extends O>, List<? extends EMClusterModel<? super O, ?>>, WritableDataStore<double[]>, WritableDoubleDataStore): double
+        {static} +logSumExp(double[]): double
+        {static} #logSumExp(double, double): double
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<M extends MeanModel>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>EM.Par\n<size:10>elki.clustering.em" as elki.clustering.em.EM.Par<O, M extends MeanModel> [[EM.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.em.EM
+    elki.clustering.em.EM +-- elki.clustering.em.EM.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

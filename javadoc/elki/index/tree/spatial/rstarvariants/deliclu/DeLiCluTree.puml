@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>DeLiCluTree\n<size:10>elki.index.tree.spatial.rstarvariants.deliclu" as elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluTree [[DeLiCluTree.html]] {
+        {static} -LOG: Logging
+        -expanded: Int2ObjectOpenHashMap<IntSet>
+        +DeLiCluTree(PageFile<DeLiCluNode>, RTreeSettings)
+        +setExpanded(DeLiCluEntry, DeLiCluEntry): void
+        +getExpanded(DeLiCluEntry): IntSet
+        +getExpanded(DeLiCluNode): IntSet
+        #createNewLeafNode(): DeLiCluNode
+        #createNewDirectoryNode(): DeLiCluNode
+        #createNewDirectoryEntry(DeLiCluNode): DeLiCluEntry
+        #createRootEntry(): DeLiCluEntry
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>NonFlatRStarTree\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.NonFlatRStarTree<DeLiCluNode, DeLiCluEntry, RTreeSettings> [[../NonFlatRStarTree.html]]
+
+    elki.index.tree.spatial.rstarvariants.NonFlatRStarTree <|-- elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

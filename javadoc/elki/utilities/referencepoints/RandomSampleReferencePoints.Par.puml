@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomSampleReferencePoints.Par\n<size:10>elki.utilities.referencepoints" as elki.utilities.referencepoints.RandomSampleReferencePoints.Par [[RandomSampleReferencePoints.Par.html]] {
+        {static} +N_ID: OptionID
+        {static} +RANDOM_ID: OptionID
+        #samplesize: int
+        #rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): RandomSampleReferencePoints
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>RandomSampleReferencePoints\n<size:10>elki.utilities.referencepoints" as elki.utilities.referencepoints.RandomSampleReferencePoints [[RandomSampleReferencePoints.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.referencepoints.RandomSampleReferencePoints.Par
+    elki.utilities.referencepoints.RandomSampleReferencePoints +-- elki.utilities.referencepoints.RandomSampleReferencePoints.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SegmentsStylingPolicy\n<size:10>elki.visualization.visualizers.pairsegments" as elki.visualization.visualizers.pairsegments.SegmentsStylingPolicy [[SegmentsStylingPolicy.html]] {
+        #segments: Segments
+        #selectedSegments: ArrayList<Segment>
+        #indirectSelections: TreeMap<Segment, Segment>
+        #unselectedObjects: ModifiableDBIDs
+        ~colorset: ColorLibrary
+        +SegmentsStylingPolicy(Segments)
+        +setStyleLibrary(StyleLibrary): void
+        +isSelected(Segment): boolean
+        +getStyleForDBID(DBIDRef): int
+        +getColorForDBID(DBIDRef): int
+        +getMinStyle(): int
+        +getMaxStyle(): int
+        +iterateClass(int): DBIDIter
+        +classSize(int): int
+        +select(Segment, boolean): void
+        +deselectAllSegments(): void
+        #deselectSegment(Segment): void
+        #selectSegment(Segment): void
+        +indexOfSegment(Segment): int
+        +getMenuName(): String
+    }
+
+    interface "<size:14>ClassStylingPolicy\n<size:10>elki.visualization.style" as elki.visualization.style.ClassStylingPolicy [[../../style/ClassStylingPolicy.html]] {
+        {abstract} +getStyleForDBID(DBIDRef): int
+        {abstract} +getMinStyle(): int
+        {abstract} +getMaxStyle(): int
+        {abstract} +iterateClass(int): DBIDIter
+        {abstract} +classSize(int): int
+    }
+
+    elki.visualization.style.ClassStylingPolicy <|.. elki.visualization.visualizers.pairsegments.SegmentsStylingPolicy
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

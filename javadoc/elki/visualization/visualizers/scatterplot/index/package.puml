@@ -1,0 +1,108 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.scatterplot.index {
+
+        class TreeMBRVisualization [[TreeMBRVisualization.html]] {
+            {static} +INDEX: String
+            {static} +NAME: String
+            +TreeMBRVisualization(Par)
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.index.TreeMBRVisualization.Instance<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry> [[TreeMBRVisualization.Instance.html]] {
+            #tree: AbstractRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, ?>
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -visualizeRTreeEntry(SVGPlot, Element, Projection2D, AbstractRStarTree<? extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, ?>, E extends SpatialEntry, int): void
+            +destroy(): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.index.TreeMBRVisualization.Par [[TreeMBRVisualization.Par.html]] {
+            {static} +FILL_ID: OptionID
+            #fill: boolean
+            +configure(Parameterization): void
+            +make(): TreeMBRVisualization
+        }
+
+        class TreeSphereVisualization [[TreeSphereVisualization.html]] {
+            {static} +INDEX: String
+            {static} +NAME: String
+            +TreeSphereVisualization(Par)
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            {static} +getLPNormP(AbstractMTree<?, ?, ?, ?>): double
+            {static} +canVisualize(Relation<?>, AbstractMTree<?, ?, ?, ?>): boolean
+        }
+
+        enum elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Mode [[TreeSphereVisualization.Mode.html]] {
+            {static} +MANHATTAN
+            {static} +EUCLIDEAN
+            {static} +LPCROSS
+        }
+
+        class elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Instance<N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry> [[TreeSphereVisualization.Instance.html]] {
+            #p: double
+            #tree: AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -visualizeMTreeEntry(SVGPlot, Element, Projection2D, AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, E extends MTreeEntry, int): void
+            +destroy(): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Par [[TreeSphereVisualization.Par.html]] {
+            #fill: boolean
+            +configure(Parameterization): void
+            +make(): TreeSphereVisualization
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. TreeMBRVisualization
+        TreeMBRVisualization --> elki.visualization.visualizers.scatterplot.index.TreeMBRVisualization.Par: settings
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.index.TreeMBRVisualization.Instance
+        elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.scatterplot.index.TreeMBRVisualization.Instance
+        TreeMBRVisualization +-- elki.visualization.visualizers.scatterplot.index.TreeMBRVisualization.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.scatterplot.index.TreeMBRVisualization.Par
+        TreeMBRVisualization +-- elki.visualization.visualizers.scatterplot.index.TreeMBRVisualization.Par
+        elki.visualization.visualizers.VisFactory <|.. TreeSphereVisualization
+        TreeSphereVisualization --> elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Par: settings
+        TreeSphereVisualization +-- elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Mode
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Instance
+        elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Instance
+        TreeSphereVisualization +-- elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Instance
+        elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Instance --> elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Mode: dist
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Par
+        TreeSphereVisualization +-- elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Par
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+    }
+
+    namespace elki.visualization.visualizers.scatterplot {
+        abstract class AbstractScatterplotVisualization [[../AbstractScatterplotVisualization.html]] {
+            #proj: Projection2D
+            #rel: Relation<? extends NumberVector>
+            #sample: SamplingResult
+        }
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreListener [[../../../../database/datastore/DataStoreListener.html]] {
+            {abstract} +contentChanged(DataStoreEvent): void
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

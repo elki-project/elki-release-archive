@@ -1,0 +1,57 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.onedimensional {
+
+        class KNNKernelDensityMinimaClustering [[KNNKernelDensityMinimaClustering.html]] {
+            {static} -LOG: Logging
+            #dim: int
+            #kernel: KernelDensityFunction
+            #k: int
+            #minwindow: int
+            +KNNKernelDensityMinimaClustering(int, KernelDensityFunction, Mode, int, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): Clustering<ClusterModel>
+        }
+
+        enum elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Mode [[KNNKernelDensityMinimaClustering.Mode.html]] {
+            {static} +BALLOON
+            {static} +SAMPLE
+        }
+
+        class elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Par [[KNNKernelDensityMinimaClustering.Par.html]] {
+            {static} +DIM_ID: OptionID
+            {static} +KERNEL_ID: OptionID
+            {static} +MODE_ID: OptionID
+            {static} +K_ID: OptionID
+            {static} +WINDOW_ID: OptionID
+            #dim: int
+            #kernel: KernelDensityFunction
+            #k: int
+            #minwindow: int
+            +configure(Parameterization): void
+            +make(): KNNKernelDensityMinimaClustering
+        }
+
+        elki.clustering.ClusteringAlgorithm <|.. KNNKernelDensityMinimaClustering
+        KNNKernelDensityMinimaClustering --> elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Mode: mode
+        KNNKernelDensityMinimaClustering +-- elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Mode
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Par
+        KNNKernelDensityMinimaClustering +-- elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Par
+        elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Par --> elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Mode: mode
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HashMapHierarchy\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy<O> [[HashMapHierarchy.html]] {
+        -graph: HashMap<O, Rec<O>>
+        ~elems: Object[]
+        ~numelems: int
+        +contains(O): boolean
+        +size(): int
+        +add(O, O): boolean
+        +add(O): boolean
+        +remove(O, O): boolean
+        +remove(O): boolean
+        +removeSubtree(O): boolean
+        +numChildren(O): int
+        +iterChildren(O): It<O>
+        +iterChildrenReverse(O): It<O>
+        +iterDescendants(O): It<O>
+        +iterDescendantsSelf(O): It<O>
+        +numParents(O): int
+        +iterParents(O): It<O>
+        +iterParentsReverse(O): It<O>
+        +iterAncestors(O): It<O>
+        +iterAncestorsSelf(O): It<O>
+        +iterAll(): It<O>
+        -getRec(O): Rec<O>
+        -putRec(O, Rec<O>): void
+        -removeRec(O): void
+    }
+
+    interface "<size:14>ModifiableHierarchy\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.ModifiableHierarchy<O> [[ModifiableHierarchy.html]] {
+        {abstract} +add(O, O): boolean
+        {abstract} +add(O): boolean
+        {abstract} +remove(O, O): boolean
+        {abstract} +remove(O): boolean
+        {abstract} +removeSubtree(O): boolean
+    }
+    class "<size:14>HashMapHierarchy.Rec\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec<O>
+    class "<size:14>HashMapHierarchy.ItrDesc\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrDesc [[HashMapHierarchy.ItrDesc.html]]
+    class "<size:14>HashMapHierarchy.ItrAnc\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrAnc [[HashMapHierarchy.ItrAnc.html]]
+    class "<size:14>HashMapHierarchy.ItrAll\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrAll [[HashMapHierarchy.ItrAll.html]]
+
+    elki.utilities.datastructures.hierarchy.ModifiableHierarchy <|.. elki.utilities.datastructures.hierarchy.HashMapHierarchy
+    elki.utilities.datastructures.hierarchy.HashMapHierarchy +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec
+    elki.utilities.datastructures.hierarchy.HashMapHierarchy +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrDesc
+    elki.utilities.datastructures.hierarchy.HashMapHierarchy +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrAnc
+    elki.utilities.datastructures.hierarchy.HashMapHierarchy +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrAll
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

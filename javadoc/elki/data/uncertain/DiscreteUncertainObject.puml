@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DiscreteUncertainObject\n<size:10>elki.data.uncertain" as elki.data.uncertain.DiscreteUncertainObject [[DiscreteUncertainObject.html]] {
+        {abstract} +getNumberSamples(): int
+        {abstract} +getSample(int): DoubleVector
+        {abstract} +getWeight(int): double
+    }
+
+    interface "<size:14>UncertainObject\n<size:10>elki.data.uncertain" as elki.data.uncertain.UncertainObject [[UncertainObject.html]] {
+        {abstract} +drawSample(Random): DoubleVector
+        {abstract} +getCenterOfMass(): DoubleVector
+    }
+
+    elki.data.uncertain.UncertainObject <|-- elki.data.uncertain.DiscreteUncertainObject
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HistogramMatchDistance\n<size:10>elki.distance.histogram" as elki.distance.histogram.HistogramMatchDistance [[HistogramMatchDistance.html]] {
+        {static} +STATIC: HistogramMatchDistance
+        +distance(NumberVector, NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +isMetric(): boolean
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[../SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    class "<size:14>HistogramMatchDistance.Par\n<size:10>elki.distance.histogram" as elki.distance.histogram.HistogramMatchDistance.Par [[HistogramMatchDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.histogram.HistogramMatchDistance
+    elki.distance.SpatialPrimitiveDistance <|.. elki.distance.histogram.HistogramMatchDistance
+    elki.distance.histogram.HistogramMatchDistance +-- elki.distance.histogram.HistogramMatchDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

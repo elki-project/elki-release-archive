@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MinimumDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.MinimumDistance [[MinimumDistance.html]] {
+        {static} +STATIC: MinimumDistance
+        +distance(NumberVector, NumberVector): double
+        +norm(NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +isMetric(): boolean
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[../SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    interface "<size:14>Norm\n<size:10>elki.distance" as elki.distance.Norm<NumberVector> [[../Norm.html]] {
+        {abstract} +norm(NumberVector): double
+    }
+    class "<size:14>MinimumDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.MinimumDistance.Par [[MinimumDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.minkowski.MinimumDistance
+    elki.distance.SpatialPrimitiveDistance <|.. elki.distance.minkowski.MinimumDistance
+    elki.distance.Norm <|.. elki.distance.minkowski.MinimumDistance
+    elki.distance.minkowski.MinimumDistance +-- elki.distance.minkowski.MinimumDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

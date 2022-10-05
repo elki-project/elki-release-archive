@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>QMatrix\n<size:10>elki.svm.qmatrix" as elki.svm.qmatrix.QMatrix [[QMatrix.html]] {
+        +get_Q(int, int, float[]): void
+        {abstract} +get_QD(): double[]
+        {abstract} +swap_index(int, int): void
+        {abstract} +similarity(int, int): double
+        {abstract} +initialize(): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

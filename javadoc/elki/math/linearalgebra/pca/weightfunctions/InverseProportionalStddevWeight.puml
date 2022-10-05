@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InverseProportionalStddevWeight\n<size:10>elki.math.linearalgebra.pca.weightfunctions" as elki.math.linearalgebra.pca.weightfunctions.InverseProportionalStddevWeight [[InverseProportionalStddevWeight.html]] {
+        +getWeight(double, double, double): double
+    }
+
+    interface "<size:14>WeightFunction\n<size:10>elki.math.linearalgebra.pca.weightfunctions" as elki.math.linearalgebra.pca.weightfunctions.WeightFunction [[WeightFunction.html]] {
+        {abstract} +getWeight(double, double, double): double
+    }
+
+    elki.math.linearalgebra.pca.weightfunctions.WeightFunction <|.. elki.math.linearalgebra.pca.weightfunctions.InverseProportionalStddevWeight
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

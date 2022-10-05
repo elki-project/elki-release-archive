@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ELKIServiceScanner.DirClassIterator\n<size:10>elki.utilities" as elki.utilities.ELKIServiceScanner.DirClassIterator [[ELKIServiceScanner.DirClassIterator.html]] {
+        {static} -CLASS_EXT: String
+        {static} -FACTORY_FILE_EXT: String
+        {static} -CLASS_EXT_LENGTH: int
+        -prefix: String
+        -files: ArrayList<String>
+        -folders: ArrayList<File>
+        +DirClassIterator(File)
+        +hasNext(): boolean
+        -findNext(): void
+        +next(): String
+    }
+
+    interface "<size:14>Iterator\n<size:10>java.util" as java.util.Iterator<String> {
+        {abstract} +hasNext(): boolean
+        {abstract} +next(): String
+    }
+    class "<size:14>ELKIServiceScanner\n<size:10>elki.utilities" as elki.utilities.ELKIServiceScanner [[ELKIServiceScanner.html]]
+
+    java.util.Iterator <|.. elki.utilities.ELKIServiceScanner.DirClassIterator
+    elki.utilities.ELKIServiceScanner +-- elki.utilities.ELKIServiceScanner.DirClassIterator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

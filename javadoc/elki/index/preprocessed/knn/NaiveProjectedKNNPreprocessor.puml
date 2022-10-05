@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NaiveProjectedKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor<O extends NumberVector> [[NaiveProjectedKNNPreprocessor.html]] {
+        #relation: Relation<O extends NumberVector>
+        {static} -LOG: Logging
+        ~window: double
+        ~projections: int
+        ~positions: WritableDataStore<int[]>
+        ~mean: Mean
+        ~proj: RandomProjectionFamily
+        ~random: Random
+        ~projected: List<ModifiableDoubleDBIDList>
+        +NaiveProjectedKNNPreprocessor(Relation<O extends NumberVector>, double, int, RandomProjectionFamily, Random)
+        +initialize(): void
+        #preprocess(): void
+        {static} +range(int, int): int[]
+        {static} +randomPermutation(int[], Random): int[]
+        +logStatistics(): void
+        +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+        +kNNByDBID(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<DBIDRef>
+    }
+
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<O extends NumberVector> [[../../KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    class "<size:14>NaiveProjectedKNNPreprocessor.NaiveProjectedKNNQuery\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.NaiveProjectedKNNQuery [[NaiveProjectedKNNPreprocessor.NaiveProjectedKNNQuery.html]]
+    class "<size:14>NaiveProjectedKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory<V extends NumberVector> [[NaiveProjectedKNNPreprocessor.Factory.html]]
+
+    elki.index.KNNIndex <|.. elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor
+    elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor +-- elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.NaiveProjectedKNNQuery
+    elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor +-- elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

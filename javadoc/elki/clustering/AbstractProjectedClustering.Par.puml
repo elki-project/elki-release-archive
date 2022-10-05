@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractProjectedClustering.Par\n<size:10>elki.clustering" as elki.clustering.AbstractProjectedClustering.Par [[AbstractProjectedClustering.Par.html]] {
+        {static} +K_ID: OptionID
+        {static} +K_I_ID: OptionID
+        {static} +L_ID: OptionID
+        #k: int
+        #k_i: int
+        #l: int
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractProjectedClustering\n<size:10>elki.clustering" as elki.clustering.AbstractProjectedClustering<R extends Clustering<?>> [[AbstractProjectedClustering.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.AbstractProjectedClustering.Par
+    elki.clustering.AbstractProjectedClustering +-- elki.clustering.AbstractProjectedClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

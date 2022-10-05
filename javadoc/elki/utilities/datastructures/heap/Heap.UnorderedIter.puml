@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Heap.UnorderedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.Heap.UnorderedIter [[Heap.UnorderedIter.html]] {
+        ~pos: int
+        +valid(): boolean
+        +advance(): UnorderedIter
+        +get(): E
+    }
+
+    interface "<size:14>Iter\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.Iter [[../iterator/Iter.html]] {
+        {abstract} +valid(): boolean
+        {abstract} +advance(): Iter
+    }
+    class "<size:14>Heap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.Heap<E> [[Heap.html]]
+
+    elki.utilities.datastructures.iterator.Iter <|.. elki.utilities.datastructures.heap.Heap.UnorderedIter
+    elki.utilities.datastructures.heap.Heap +-- elki.utilities.datastructures.heap.Heap.UnorderedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

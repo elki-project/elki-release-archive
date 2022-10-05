@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleListParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.DoubleListParameter [[DoubleListParameter.html]] {
+        +DoubleListParameter(OptionID)
+        +getValueAsString(): String
+        +getDefaultValueAsString(): String
+        #parseValue(Object): double[]
+        +size(): int
+        +getSyntax(): String
+        +grab(Parameterization, Consumer<double[]>): boolean
+    }
+
+    abstract class "<size:14>ListParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.ListParameter<DoubleListParameter, double[]> [[ListParameter.html]] {
+        {abstract} +size(): int
+    }
+
+    elki.utilities.optionhandling.parameters.ListParameter <|-- elki.utilities.optionhandling.parameters.DoubleListParameter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

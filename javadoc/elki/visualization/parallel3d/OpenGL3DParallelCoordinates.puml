@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OpenGL3DParallelCoordinates\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates<O extends NumberVector> [[OpenGL3DParallelCoordinates.html]] {
+        {static} -LOG: Logging
+        ~settings: Settings<O extends NumberVector>
+        +OpenGL3DParallelCoordinates(Layouter3DPC<? super NumberVector>)
+        +processNewResult(Object): void
+        +getStylePolicy(Object, StyleLibrary): StylingPolicy
+    }
+
+    interface "<size:14>ResultHandler\n<size:10>elki.result" as elki.result.ResultHandler [[../../result/ResultHandler.html]]
+    class "<size:14>OpenGL3DParallelCoordinates.Settings\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Settings<O> [[OpenGL3DParallelCoordinates.Settings.html]]
+    class "<size:14>OpenGL3DParallelCoordinates.Instance\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance<O extends NumberVector> [[OpenGL3DParallelCoordinates.Instance.html]]
+    class "<size:14>OpenGL3DParallelCoordinates.Par\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Par<O extends NumberVector>
+
+    elki.result.ResultHandler <|.. elki.visualization.parallel3d.OpenGL3DParallelCoordinates
+    elki.visualization.parallel3d.OpenGL3DParallelCoordinates +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Settings
+    elki.visualization.parallel3d.OpenGL3DParallelCoordinates +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance
+    elki.visualization.parallel3d.OpenGL3DParallelCoordinates +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

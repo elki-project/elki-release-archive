@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractIndexBasedDistance.Par\n<size:10>elki.distance" as elki.distance.AbstractIndexBasedDistance.Par<F extends IndexFactory<?>> {
+        #factory: F extends IndexFactory<?>
+        +configIndexFactory(Parameterization, Class<?>, Class<?>): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractIndexBasedDistance\n<size:10>elki.distance" as elki.distance.AbstractIndexBasedDistance<O, F extends IndexFactory<O>> [[AbstractIndexBasedDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.AbstractIndexBasedDistance.Par
+    elki.distance.AbstractIndexBasedDistance +-- elki.distance.AbstractIndexBasedDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

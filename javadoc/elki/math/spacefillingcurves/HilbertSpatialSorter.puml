@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HilbertSpatialSorter\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.HilbertSpatialSorter [[HilbertSpatialSorter.html]] {
+        {static} +STATIC: HilbertSpatialSorter
+        +sort(List<? extends SpatialComparable>, int, int, double[], int[]): void
+        {static} +coordinatesToHilbert(long[], int, int): long[]
+        {static} +coordinatesToHilbert(int[], int, int): long[]
+        {static} +coordinatesToHilbert(short[], int, int): long[]
+        {static} +coordinatesToHilbert(byte[], int, int): long[]
+        {static} +interleaveBits(long[], int): long[]
+        {static} +interleaveBits(int[], int): long[]
+        {static} +interleaveBits(short[], int): long[]
+        {static} +interleaveBits(byte[], int): long[]
+    }
+
+    interface "<size:14>SpatialSorter\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.SpatialSorter [[SpatialSorter.html]] {
+        {abstract} +sort(List<? extends SpatialComparable>, int, int, double[], int[]): void
+    }
+    class "<size:14>HilbertSpatialSorter.HilbertRef\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.HilbertSpatialSorter.HilbertRef [[HilbertSpatialSorter.HilbertRef.html]]
+    class "<size:14>HilbertSpatialSorter.Par\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.HilbertSpatialSorter.Par [[HilbertSpatialSorter.Par.html]]
+
+    elki.math.spacefillingcurves.SpatialSorter <|.. elki.math.spacefillingcurves.HilbertSpatialSorter
+    elki.math.spacefillingcurves.HilbertSpatialSorter +-- elki.math.spacefillingcurves.HilbertSpatialSorter.HilbertRef
+    elki.math.spacefillingcurves.HilbertSpatialSorter +-- elki.math.spacefillingcurves.HilbertSpatialSorter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

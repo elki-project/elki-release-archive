@@ -1,0 +1,159 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.linearalgebra.pca.filter {
+
+        class SignificantEigenPairFilter [[SignificantEigenPairFilter.html]] {
+            {static} +DEFAULT_WALPHA: double
+            -walpha: double
+            +SignificantEigenPairFilter(double)
+            +filter(double[]): int
+        }
+
+        class elki.math.linearalgebra.pca.filter.SignificantEigenPairFilter.Par [[SignificantEigenPairFilter.Par.html]] {
+            -walpha: double
+            +configure(Parameterization): void
+            +make(): SignificantEigenPairFilter
+        }
+
+        class RelativeEigenPairFilter [[RelativeEigenPairFilter.html]] {
+            {static} +DEFAULT_RALPHA: double
+            -ralpha: double
+            +RelativeEigenPairFilter(double)
+            +filter(double[]): int
+        }
+
+        class elki.math.linearalgebra.pca.filter.RelativeEigenPairFilter.Par [[RelativeEigenPairFilter.Par.html]] {
+            {static} +EIGENPAIR_FILTER_RALPHA: OptionID
+            #ralpha: double
+            +configure(Parameterization): void
+            +make(): RelativeEigenPairFilter
+        }
+
+        class LimitEigenPairFilter [[LimitEigenPairFilter.html]] {
+            {static} +DEFAULT_DELTA: double
+            -delta: double
+            -absolute: boolean
+            +LimitEigenPairFilter(double, boolean)
+            +filter(double[]): int
+        }
+
+        class elki.math.linearalgebra.pca.filter.LimitEigenPairFilter.Par [[LimitEigenPairFilter.Par.html]] {
+            {static} +EIGENPAIR_FILTER_ABSOLUTE: OptionID
+            {static} +EIGENPAIR_FILTER_DELTA: OptionID
+            -delta: double
+            -absolute: boolean
+            +configure(Parameterization): void
+            +make(): LimitEigenPairFilter
+        }
+
+        class WeakEigenPairFilter [[WeakEigenPairFilter.html]] {
+            {static} +DEFAULT_WALPHA: double
+            -walpha: double
+            +WeakEigenPairFilter(double)
+            +filter(double[]): int
+        }
+
+        class elki.math.linearalgebra.pca.filter.WeakEigenPairFilter.Par [[WeakEigenPairFilter.Par.html]] {
+            {static} +EIGENPAIR_FILTER_WALPHA: OptionID
+            -walpha: double
+            +configure(Parameterization): void
+            +make(): WeakEigenPairFilter
+        }
+
+        class FirstNEigenPairFilter [[FirstNEigenPairFilter.html]] {
+            -n: int
+            +FirstNEigenPairFilter(int)
+            +filter(double[]): int
+        }
+
+        class elki.math.linearalgebra.pca.filter.FirstNEigenPairFilter.Par [[FirstNEigenPairFilter.Par.html]] {
+            {static} +EIGENPAIR_FILTER_N: OptionID
+            #n: int
+            +configure(Parameterization): void
+            +make(): FirstNEigenPairFilter
+        }
+
+        class ProgressiveEigenPairFilter [[ProgressiveEigenPairFilter.html]] {
+            {static} +DEFAULT_PALPHA: double
+            {static} +DEFAULT_WALPHA: double
+            -palpha: double
+            -walpha: double
+            +ProgressiveEigenPairFilter(double, double)
+            +filter(double[]): int
+        }
+
+        class elki.math.linearalgebra.pca.filter.ProgressiveEigenPairFilter.Par [[ProgressiveEigenPairFilter.Par.html]] {
+            {static} +EIGENPAIR_FILTER_PALPHA: OptionID
+            -palpha: double
+            -walpha: double
+            +configure(Parameterization): void
+            +make(): ProgressiveEigenPairFilter
+        }
+
+        interface EigenPairFilter [[EigenPairFilter.html]] {
+            {static} +PCA_EIGENPAIR_FILTER: OptionID
+            {abstract} +filter(double[]): int
+        }
+
+        class PercentageEigenPairFilter [[PercentageEigenPairFilter.html]] {
+            {static} +DEFAULT_ALPHA: double
+            -alpha: double
+            +PercentageEigenPairFilter(double)
+            +filter(double[]): int
+        }
+
+        class elki.math.linearalgebra.pca.filter.PercentageEigenPairFilter.Par [[PercentageEigenPairFilter.Par.html]] {
+            {static} +ALPHA_ID: OptionID
+            -alpha: double
+            +configure(Parameterization): void
+            +make(): PercentageEigenPairFilter
+        }
+
+        class DropEigenPairFilter [[DropEigenPairFilter.html]] {
+            {static} +DEFAULT_WALPHA: double
+            -walpha: double
+            +DropEigenPairFilter(double)
+            +filter(double[]): int
+        }
+
+        class elki.math.linearalgebra.pca.filter.DropEigenPairFilter.Par [[DropEigenPairFilter.Par.html]] {
+            -walpha: double
+            +configure(Parameterization): void
+            +make(): DropEigenPairFilter
+        }
+
+        EigenPairFilter <|.. SignificantEigenPairFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.filter.SignificantEigenPairFilter.Par
+        SignificantEigenPairFilter +-- elki.math.linearalgebra.pca.filter.SignificantEigenPairFilter.Par
+        EigenPairFilter <|.. RelativeEigenPairFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.filter.RelativeEigenPairFilter.Par
+        RelativeEigenPairFilter +-- elki.math.linearalgebra.pca.filter.RelativeEigenPairFilter.Par
+        EigenPairFilter <|.. LimitEigenPairFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.filter.LimitEigenPairFilter.Par
+        LimitEigenPairFilter +-- elki.math.linearalgebra.pca.filter.LimitEigenPairFilter.Par
+        EigenPairFilter <|.. WeakEigenPairFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.filter.WeakEigenPairFilter.Par
+        WeakEigenPairFilter +-- elki.math.linearalgebra.pca.filter.WeakEigenPairFilter.Par
+        EigenPairFilter <|.. FirstNEigenPairFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.filter.FirstNEigenPairFilter.Par
+        FirstNEigenPairFilter +-- elki.math.linearalgebra.pca.filter.FirstNEigenPairFilter.Par
+        EigenPairFilter <|.. ProgressiveEigenPairFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.filter.ProgressiveEigenPairFilter.Par
+        ProgressiveEigenPairFilter +-- elki.math.linearalgebra.pca.filter.ProgressiveEigenPairFilter.Par
+        EigenPairFilter <|.. PercentageEigenPairFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.filter.PercentageEigenPairFilter.Par
+        PercentageEigenPairFilter +-- elki.math.linearalgebra.pca.filter.PercentageEigenPairFilter.Par
+        EigenPairFilter <|.. DropEigenPairFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.filter.DropEigenPairFilter.Par
+        DropEigenPairFilter +-- elki.math.linearalgebra.pca.filter.DropEigenPairFilter.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

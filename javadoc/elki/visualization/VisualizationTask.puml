@@ -1,0 +1,60 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VisualizationTask\n<size:10>elki.visualization" as elki.visualization.VisualizationTask [[VisualizationTask.html]] {
+        -level: int
+        -visible: boolean
+        -flags: int
+        -updatemask: int
+        -tool: boolean
+        {static} +LEVEL_BACKGROUND: int
+        {static} +LEVEL_DATA: int
+        {static} +LEVEL_STATIC: int
+        {static} +LEVEL_FOREGROUND: int
+        {static} +LEVEL_INTERACTIVE: int
+        -name: String
+        -factory: VisFactory
+        -result: Object
+        -relation: Relation<?>
+        -reqwidth: double
+        -reqheight: double
+        +VisualizationTask(VisFactory, String, Object, Relation<?>)
+        +with(UpdateFlag): VisualizationTask
+        +has(UpdateFlag): boolean
+        +with(RenderFlag): VisualizationTask
+        +has(RenderFlag): boolean
+        +level(int): VisualizationTask
+        +level(): int
+        +tool(boolean): VisualizationTask
+        +isTool(): boolean
+        +visibility(boolean): VisualizationTask
+        +isVisible(): boolean
+        +requestSize(double, double): VisualizationTask
+        +getRequestedWidth(): double
+        +getRequestedHeight(): double
+        +getFactory(): VisFactory
+        +getResult(): R
+        +getRelation(): R extends Relation<?>
+        +getMenuName(): String
+        +compareTo(VisualizationTask): int
+    }
+
+    interface "<size:14>VisualizationItem\n<size:10>elki.visualization" as elki.visualization.VisualizationItem [[VisualizationItem.html]] {
+        {abstract} +getMenuName(): String
+    }
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<VisualizationTask> {
+        {abstract} +compareTo(VisualizationTask): int
+    }
+    enum "<size:14>VisualizationTask.RenderFlag\n<size:10>elki.visualization" as elki.visualization.VisualizationTask.RenderFlag [[VisualizationTask.RenderFlag.html]]
+    enum "<size:14>VisualizationTask.UpdateFlag\n<size:10>elki.visualization" as elki.visualization.VisualizationTask.UpdateFlag [[VisualizationTask.UpdateFlag.html]]
+
+    elki.visualization.VisualizationItem <|.. elki.visualization.VisualizationTask
+    java.lang.Comparable <|.. elki.visualization.VisualizationTask
+    elki.visualization.VisualizationTask +-- elki.visualization.VisualizationTask.RenderFlag
+    elki.visualization.VisualizationTask +-- elki.visualization.VisualizationTask.UpdateFlag
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

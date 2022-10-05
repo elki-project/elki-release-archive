@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KNNBenchmark\n<size:10>elki.application.benchmark" as elki.application.benchmark.KNNBenchmark<O> [[KNNBenchmark.html]] {
+        {static} -LOG: Logging
+        #k: int
+        #queries: DatabaseConnection
+        #sampling: double
+        #random: RandomFactory
+        +KNNBenchmark(InputStep, Distance<? super O>, int, DatabaseConnection, double, RandomFactory)
+        +run(): void
+        -logIndexStatistics(Database): void
+        -run(KNNSearcher<DBIDRef>, Relation<O>, Duration, MeanVariance, MeanVariance): int
+        -run(KNNSearcher<O>, Duration, MeanVariance, MeanVariance): int
+        {static} +main(String[]): void
+    }
+
+    abstract class "<size:14>AbstractDistanceBasedApplication\n<size:10>elki.application" as elki.application.AbstractDistanceBasedApplication<O> [[../AbstractDistanceBasedApplication.html]]
+    class "<size:14>KNNBenchmark.Par\n<size:10>elki.application.benchmark" as elki.application.benchmark.KNNBenchmark.Par<O>
+
+    elki.application.AbstractDistanceBasedApplication <|-- elki.application.benchmark.KNNBenchmark
+    elki.application.benchmark.KNNBenchmark +-- elki.application.benchmark.KNNBenchmark.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

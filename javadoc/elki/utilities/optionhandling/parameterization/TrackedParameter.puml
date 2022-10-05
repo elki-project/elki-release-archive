@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TrackedParameter\n<size:10>elki.utilities.optionhandling.parameterization" as elki.utilities.optionhandling.parameterization.TrackedParameter [[TrackedParameter.html]] {
+        -owner: Object
+        -parameter: Parameter<?>
+        +TrackedParameter(Object, Parameter<?>)
+        +getOwner(): Object
+        +getParameter(): Parameter<?>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

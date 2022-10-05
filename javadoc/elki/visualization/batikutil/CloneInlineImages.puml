@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CloneInlineImages\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.CloneInlineImages [[CloneInlineImages.html]] {
+        +cloneNode(Document, Node): Node
+        #inlineThumbnail(Document, ParsedURL, Node): Node
+        #inlineExternal(Document, ParsedURL, Node): Node
+    }
+
+    class "<size:14>SVGCloneVisible\n<size:10>elki.visualization.svg" as elki.visualization.svg.SVGCloneVisible [[../svg/SVGCloneVisible.html]]
+
+    elki.visualization.svg.SVGCloneVisible <|-- elki.visualization.batikutil.CloneInlineImages
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

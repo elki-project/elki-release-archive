@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MemoryKDTree.KDTreeKNNSearcher\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree.KDTreeKNNSearcher [[MemoryKDTree.KDTreeKNNSearcher.html]] {
+        -distance: PartialDistance<? super NumberVector>
+        +KDTreeKNNSearcher(PartialDistance<? super NumberVector>)
+        +getKNN(O extends NumberVector, int): KNNList
+        -kdKNNSearch(Object, O extends NumberVector, KNNHeap, DBIDArrayIter, double[], double, double): double
+    }
+
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<O extends NumberVector> [[../../../../database/query/knn/KNNSearcher.html]] {
+        {abstract} +getKNN(O extends NumberVector, int): KNNList
+    }
+    class "<size:14>MemoryKDTree\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree<O extends NumberVector> [[MemoryKDTree.html]]
+
+    elki.database.query.knn.KNNSearcher <|.. elki.index.tree.spatial.kd.MemoryKDTree.KDTreeKNNSearcher
+    elki.index.tree.spatial.kd.MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.KDTreeKNNSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

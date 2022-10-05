@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LSDBC\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.LSDBC<O extends NumberVector> [[LSDBC.html]] {
+        {static} -LOG: Logging
+        #kplus: int
+        #alpha: double
+        #distance: Distance<? super NumberVector>
+        {static} #UNPROCESSED: int
+        {static} #NOISE: int
+        +LSDBC(Distance<? super NumberVector>, int, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O extends NumberVector>): Clustering<Model>
+        -isLocalMaximum(double, DBIDs, WritableDoubleDataStore): boolean
+        #expandCluster(int, WritableIntegerDataStore, KNNSearcher<DBIDRef>, DBIDs, double, FiniteProgress): int
+        -fillDensities(KNNSearcher<DBIDRef>, DBIDs, WritableDoubleDataStore): void
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<Model>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>LSDBC.Par\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.LSDBC.Par<O extends NumberVector> [[LSDBC.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.dbscan.LSDBC
+    elki.clustering.dbscan.LSDBC +-- elki.clustering.dbscan.LSDBC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

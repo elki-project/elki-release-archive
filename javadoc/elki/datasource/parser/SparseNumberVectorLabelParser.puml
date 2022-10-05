@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseNumberVectorLabelParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.SparseNumberVectorLabelParser<V extends SparseNumberVector> [[SparseNumberVectorLabelParser.html]] {
+        {static} -LOG: Logging
+        #sparsefactory: Factory<V extends SparseNumberVector>
+        ~values: Int2DoubleOpenHashMap
+        ~labels: ArrayList<String>
+        +SparseNumberVectorLabelParser(CSVReaderFormat, long[], Factory<V extends SparseNumberVector>)
+        +SparseNumberVectorLabelParser(Pattern, String, Pattern, long[], Factory<V extends SparseNumberVector>)
+        #parseLineInternal(): boolean
+        #getTypeInformation(int, int): SimpleTypeInformation<V extends SparseNumberVector>
+        #getLogger(): Logging
+    }
+
+    class "<size:14>NumberVectorLabelParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.NumberVectorLabelParser<V extends SparseNumberVector> [[NumberVectorLabelParser.html]]
+    class "<size:14>SparseNumberVectorLabelParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.SparseNumberVectorLabelParser.Par<V extends SparseNumberVector> [[SparseNumberVectorLabelParser.Par.html]]
+
+    elki.datasource.parser.NumberVectorLabelParser <|-- elki.datasource.parser.SparseNumberVectorLabelParser
+    elki.datasource.parser.SparseNumberVectorLabelParser +-- elki.datasource.parser.SparseNumberVectorLabelParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

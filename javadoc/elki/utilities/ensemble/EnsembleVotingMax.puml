@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EnsembleVotingMax\n<size:10>elki.utilities.ensemble" as elki.utilities.ensemble.EnsembleVotingMax [[EnsembleVotingMax.html]] {
+        +combine(double[]): double
+        +combine(double[], int): double
+    }
+
+    interface "<size:14>EnsembleVoting\n<size:10>elki.utilities.ensemble" as elki.utilities.ensemble.EnsembleVoting [[EnsembleVoting.html]] {
+        {abstract} +combine(double[]): double
+        {abstract} +combine(double[], int): double
+    }
+
+    elki.utilities.ensemble.EnsembleVoting <|.. elki.utilities.ensemble.EnsembleVotingMax
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

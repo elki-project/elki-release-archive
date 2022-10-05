@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SingleStreamOutput\n<size:10>elki.result.textwriter" as elki.result.textwriter.SingleStreamOutput [[SingleStreamOutput.html]] {
+        -stream: PrintStream
+        +SingleStreamOutput()
+        +SingleStreamOutput(Path)
+        +SingleStreamOutput(Path, boolean)
+        +SingleStreamOutput(OutputStream)
+        +SingleStreamOutput(OutputStream, boolean)
+        +SingleStreamOutput(PrintStream)
+        +openStream(String): PrintStream
+        +closeStream(PrintStream): void
+        +close(): void
+    }
+
+    interface "<size:14>StreamFactory\n<size:10>elki.result.textwriter" as elki.result.textwriter.StreamFactory [[StreamFactory.html]] {
+        {abstract} +openStream(String): PrintStream
+        {abstract} +closeStream(PrintStream): void
+        {abstract} +close(): void
+    }
+
+    elki.result.textwriter.StreamFactory <|.. elki.result.textwriter.SingleStreamOutput
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

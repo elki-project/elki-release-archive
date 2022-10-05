@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ElkanKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.ElkanKMeans<V extends NumberVector> [[ElkanKMeans.html]] {
+        {static} -LOG: Logging
+        +ElkanKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization, boolean)
+        +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+        #getLogger(): Logging
+    }
+
+    class "<size:14>SimplifiedElkanKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.SimplifiedElkanKMeans<V extends NumberVector> [[SimplifiedElkanKMeans.html]]
+    class "<size:14>ElkanKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.ElkanKMeans.Instance [[ElkanKMeans.Instance.html]]
+    class "<size:14>ElkanKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.ElkanKMeans.Par<V extends NumberVector> [[ElkanKMeans.Par.html]]
+
+    elki.clustering.kmeans.SimplifiedElkanKMeans <|-- elki.clustering.kmeans.ElkanKMeans
+    elki.clustering.kmeans.ElkanKMeans +-- elki.clustering.kmeans.ElkanKMeans.Instance
+    elki.clustering.kmeans.ElkanKMeans +-- elki.clustering.kmeans.ElkanKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

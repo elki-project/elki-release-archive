@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>INFLO.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.INFLO.Par<O> [[INFLO.Par.html]] {
+        {static} +M_ID: OptionID
+        {static} +K_ID: OptionID
+        #distance: Distance<? super O>
+        #m: double
+        #k: int
+        +configure(Parameterization): void
+        +make(): INFLO<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>INFLO\n<size:10>elki.outlier.lof" as elki.outlier.lof.INFLO<O> [[INFLO.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.INFLO.Par
+    elki.outlier.lof.INFLO +-- elki.outlier.lof.INFLO.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

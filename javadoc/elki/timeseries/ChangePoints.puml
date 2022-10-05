@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ChangePoints\n<size:10>elki.timeseries" as elki.timeseries.ChangePoints [[ChangePoints.html]] {
+        ~changepoints: List<ChangePoint>
+        +writeToText(TextWriterStream, String): void
+        +add(DBIDRef, int, double): void
+    }
+
+    interface "<size:14>TextWriteable\n<size:10>elki.result.textwriter" as elki.result.textwriter.TextWriteable [[../result/textwriter/TextWriteable.html]] {
+        {abstract} +writeToText(TextWriterStream, String): void
+    }
+
+    elki.result.textwriter.TextWriteable <|.. elki.timeseries.ChangePoints
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

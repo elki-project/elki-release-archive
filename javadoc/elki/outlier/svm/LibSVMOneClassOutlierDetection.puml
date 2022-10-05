@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LibSVMOneClassOutlierDetection\n<size:10>elki.outlier.svm" as elki.outlier.svm.LibSVMOneClassOutlierDetection<V extends NumberVector> [[LibSVMOneClassOutlierDetection.html]] {
+        {static} -LOG: Logging
+        #kernel: SVMKernel
+        ~nu: double
+        ~gamma: double
+        {static} ~LOG_HELPER: svm_print_interface
+        +LibSVMOneClassOutlierDetection(SVMKernel, double, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V extends NumberVector>): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    enum "<size:14>LibSVMOneClassOutlierDetection.SVMKernel\n<size:10>elki.outlier.svm" as elki.outlier.svm.LibSVMOneClassOutlierDetection.SVMKernel [[LibSVMOneClassOutlierDetection.SVMKernel.html]]
+    class "<size:14>LibSVMOneClassOutlierDetection.Par\n<size:10>elki.outlier.svm" as elki.outlier.svm.LibSVMOneClassOutlierDetection.Par<V extends NumberVector>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.svm.LibSVMOneClassOutlierDetection
+    elki.outlier.svm.LibSVMOneClassOutlierDetection +-- elki.outlier.svm.LibSVMOneClassOutlierDetection.SVMKernel
+    elki.outlier.svm.LibSVMOneClassOutlierDetection +-- elki.outlier.svm.LibSVMOneClassOutlierDetection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

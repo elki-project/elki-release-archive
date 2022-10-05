@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EuclideanSphericalSimplifiedElkanKMeans.Instance\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Instance [[EuclideanSphericalSimplifiedElkanKMeans.Instance.html]] {
+        ~sums: double[]
+        ~newmeans: double[]
+        ~upper: WritableDoubleDataStore
+        ~lower: WritableDataStore<double[]>
+        ~sep: double[]
+        +Instance(Relation<? extends NumberVector>, double[])
+        +iterate(int): int
+        #initialAssignToNearestCluster(): int
+        #assignToNearestCluster(): int
+        #updateBounds(double[]): void
+        #getLogger(): Logging
+    }
+
+    class "<size:14>SphericalKMeans.Instance\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.SphericalKMeans.Instance [[SphericalKMeans.Instance.html]]
+    class "<size:14>EuclideanSphericalSimplifiedElkanKMeans\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans<V extends NumberVector> [[EuclideanSphericalSimplifiedElkanKMeans.html]]
+
+    elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|-- elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Instance
+    elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans +-- elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

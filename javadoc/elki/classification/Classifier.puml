@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Classifier\n<size:10>elki.classification" as elki.classification.Classifier<O> [[Classifier.html]] {
+        {abstract} +buildClassifier(Database, Relation<? extends ClassLabel>): void
+        {abstract} +classify(O): ClassLabel
+        {abstract} +model(): String
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    elki.Algorithm <|-- elki.classification.Classifier
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

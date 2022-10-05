@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ColoredHistogramVisualizer.Par\n<size:10>elki.visualization.visualizers.histogram" as elki.visualization.visualizers.histogram.ColoredHistogramVisualizer.Par [[ColoredHistogramVisualizer.Par.html]] {
+        {static} +STYLE_CURVES_ID: OptionID
+        {static} +HISTOGRAM_BINS_ID: OptionID
+        #curves: boolean
+        #bins: int
+        +configure(Parameterization): void
+        +make(): ColoredHistogramVisualizer
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ColoredHistogramVisualizer\n<size:10>elki.visualization.visualizers.histogram" as elki.visualization.visualizers.histogram.ColoredHistogramVisualizer [[ColoredHistogramVisualizer.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.histogram.ColoredHistogramVisualizer.Par
+    elki.visualization.visualizers.histogram.ColoredHistogramVisualizer +-- elki.visualization.visualizers.histogram.ColoredHistogramVisualizer.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

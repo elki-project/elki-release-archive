@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AlternatingKMedoids\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.AlternatingKMedoids<O> [[AlternatingKMedoids.html]] {
+        {static} -LOG: Logging
+        {static} -KEY: String
+        #distance: Distance<? super O>
+        #k: int
+        #maxiter: int
+        #initializer: KMedoidsInitialization<O>
+        +AlternatingKMedoids(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): Clustering<MedoidModel>
+        +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+    }
+
+    interface "<size:14>KMedoidsClustering\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.KMedoidsClustering<O> [[KMedoidsClustering.html]] {
+        {abstract} +run(Relation<O>): Clustering<MedoidModel>
+        {abstract} +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+    }
+    class "<size:14>AlternatingKMedoids.Par\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.AlternatingKMedoids.Par<V> [[AlternatingKMedoids.Par.html]]
+
+    elki.clustering.kmedoids.KMedoidsClustering <|.. elki.clustering.kmedoids.AlternatingKMedoids
+    elki.clustering.kmedoids.AlternatingKMedoids +-- elki.clustering.kmedoids.AlternatingKMedoids.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

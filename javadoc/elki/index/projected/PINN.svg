@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="97px" preserveAspectRatio="none" style="width:625px;height:97px;background:#FFFFFF;" version="1.1" viewBox="0 0 625 97" width="625px" zoomAndPan="magnify"><defs/><g><!--MD5=[5f18d39f2e3f5aa7434b62319eb69f87]
+class elki.index.projected.PINN--><a href="PINN.html" target="_top" title="PINN.html" xlink:actuate="onRequest" xlink:href="PINN.html" xlink:show="new" xlink:title="PINN.html" xlink:type="simple"><g id="elem_elki.index.projected.PINN"><rect codeLine="6" fill="#F1F1F1" height="62.2344" id="elki.index.projected.PINN" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="607" x="7" y="10"/><ellipse cx="183.25" cy="28.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M186.2188,34.6094 Q185.6406,34.9063 185,35.0469 Q184.3594,35.2031 183.6563,35.2031 Q181.1563,35.2031 179.8281,33.5625 Q178.5156,31.9063 178.5156,28.7813 Q178.5156,25.6563 179.8281,24 Q181.1563,22.3438 183.6563,22.3438 Q184.3594,22.3438 185,22.5 Q185.6563,22.6563 186.2188,22.9531 L186.2188,25.6719 Q185.5938,25.0938 185,24.8281 Q184.4063,24.5469 183.7813,24.5469 Q182.4375,24.5469 181.75,25.625 Q181.0625,26.6875 181.0625,28.7813 Q181.0625,30.875 181.75,31.9531 Q182.4375,33.0156 183.7813,33.0156 Q184.4063,33.0156 185,32.75 Q185.5938,32.4688 186.2188,31.8906 L186.2188,34.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="233.75" y="27.9951">PINN</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="92" x="203.75" y="40.5791">elki.index.projected</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="465" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="466" y="19.1387">O extends NumberVector</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="613" y1="47.9375" y2="47.9375"/><ellipse cx="18" cy="61.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="581" x="27" y="64.9326">PINN(IndexFactory&lt;O extends NumberVector&gt;, int, double, double, RandomFactory)</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="212.5" y="78.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="212.5" y="87.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[3b0dfd52f268681688cd482c8b8741c5]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PINN\n<size:10>elki.index.projected" as elki.index.projected.PINN<O extends NumberVector> [[PINN.html]] {
+        +PINN(IndexFactory<O extends NumberVector>, int, double, double, RandomFactory)
+    }
+
+    class "<size:14>ProjectedIndex.Factory\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.Factory<O extends NumberVector, O extends NumberVector> [[ProjectedIndex.Factory.html]]
+    class "<size:14>PINN.Par\n<size:10>elki.index.projected" as elki.index.projected.PINN.Par<O extends NumberVector>
+
+    elki.index.projected.ProjectedIndex.Factory <|- - elki.index.projected.PINN
+    elki.index.projected.PINN +- - elki.index.projected.PINN.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

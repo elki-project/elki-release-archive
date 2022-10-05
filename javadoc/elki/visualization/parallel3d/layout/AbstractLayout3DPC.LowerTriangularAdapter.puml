@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AbstractLayout3DPC.LowerTriangularAdapter\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.AbstractLayout3DPC.LowerTriangularAdapter [[AbstractLayout3DPC.LowerTriangularAdapter.html]] {
+        ~dim: int
+        +LowerTriangularAdapter(int)
+        +distance(double[], int, int): double
+        +size(double[]): int
+    }
+
+    interface "<size:14>PrimsMinimumSpanningTree.Adapter\n<size:10>elki.math.geometry" as elki.math.geometry.PrimsMinimumSpanningTree.Adapter<double[]> [[../../../math/geometry/PrimsMinimumSpanningTree.Adapter.html]] {
+        {abstract} +distance(double[], int, int): double
+        {abstract} +size(double[]): int
+    }
+    abstract class "<size:14>AbstractLayout3DPC\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.AbstractLayout3DPC<N extends Node> [[AbstractLayout3DPC.html]] {
+        {abstract} +layout(int, double[]): Layout
+        {abstract} ~makeNode(int, List<N extends Node>): N extends Node
+    }
+
+    elki.math.geometry.PrimsMinimumSpanningTree.Adapter <|.. elki.visualization.parallel3d.layout.AbstractLayout3DPC.LowerTriangularAdapter
+    elki.visualization.parallel3d.layout.AbstractLayout3DPC +-- elki.visualization.parallel3d.layout.AbstractLayout3DPC.LowerTriangularAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ComputeKNNOutlierScores.TimeoutException\n<size:10>elki.application.greedyensemble" as elki.application.greedyensemble.ComputeKNNOutlierScores.TimeoutException [[ComputeKNNOutlierScores.TimeoutException.html]] {
+        {static} -serialVersionUID: long
+        +TimeoutException(String)
+    }
+
+    class "<size:14>RuntimeException\n<size:10>java.lang" as java.lang.RuntimeException
+    class "<size:14>ComputeKNNOutlierScores\n<size:10>elki.application.greedyensemble" as elki.application.greedyensemble.ComputeKNNOutlierScores<O extends NumberVector> [[ComputeKNNOutlierScores.html]]
+
+    java.lang.RuntimeException <|-- elki.application.greedyensemble.ComputeKNNOutlierScores.TimeoutException
+    elki.application.greedyensemble.ComputeKNNOutlierScores +-- elki.application.greedyensemble.ComputeKNNOutlierScores.TimeoutException
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

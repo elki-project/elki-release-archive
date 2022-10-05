@@ -1,0 +1,142 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.data.projection.random {
+
+        class GaussianRandomProjectionFamily [[GaussianRandomProjectionFamily.html]] {
+            +GaussianRandomProjectionFamily(RandomFactory)
+            +generateProjection(int, int): Projection
+        }
+
+        class elki.data.projection.random.GaussianRandomProjectionFamily.Par [[GaussianRandomProjectionFamily.Par.html]] {
+            +make(): GaussianRandomProjectionFamily
+        }
+
+        interface RandomProjectionFamily [[RandomProjectionFamily.html]] {
+            {abstract} +generateProjection(int, int): Projection
+        }
+
+        interface elki.data.projection.random.RandomProjectionFamily.Projection [[RandomProjectionFamily.Projection.html]] {
+            {abstract} +project(NumberVector): double[]
+            {abstract} +project(NumberVector, double[]): double[]
+            {abstract} +getOutputDimensionality(): int
+        }
+
+        abstract class AbstractRandomProjectionFamily [[AbstractRandomProjectionFamily.html]] {
+            #random: Random
+            +AbstractRandomProjectionFamily(RandomFactory)
+        }
+
+        class elki.data.projection.random.AbstractRandomProjectionFamily.MatrixProjection [[AbstractRandomProjectionFamily.MatrixProjection.html]] {
+            ~matrix: double[]
+            -buf: double[]
+            +MatrixProjection(double[])
+            +project(NumberVector): double[]
+            +project(NumberVector, double[]): double[]
+            -projectSparse(SparseNumberVector, double[]): double[]
+            +getOutputDimensionality(): int
+        }
+
+        abstract class elki.data.projection.random.AbstractRandomProjectionFamily.Par [[AbstractRandomProjectionFamily.Par.html]] {
+            {static} +RANDOM_ID: OptionID
+            #random: RandomFactory
+            +configure(Parameterization): void
+        }
+
+        class RandomSubsetProjectionFamily [[RandomSubsetProjectionFamily.html]] {
+            +RandomSubsetProjectionFamily(RandomFactory)
+            +generateProjection(int, int): Projection
+            {static} +randomPermutation(int[], Random): int[]
+            {static} -sequence(int): int[]
+        }
+
+        class elki.data.projection.random.RandomSubsetProjectionFamily.SubsetProjection [[RandomSubsetProjectionFamily.SubsetProjection.html]] {
+            -dims: int[]
+            +SubsetProjection(int[])
+            +project(NumberVector): double[]
+            +project(NumberVector, double[]): double[]
+            +getOutputDimensionality(): int
+        }
+
+        class elki.data.projection.random.RandomSubsetProjectionFamily.Par [[RandomSubsetProjectionFamily.Par.html]] {
+            +make(): RandomSubsetProjectionFamily
+        }
+
+        class SimplifiedRandomHyperplaneProjectionFamily [[SimplifiedRandomHyperplaneProjectionFamily.html]] {
+            #random: Random
+            +SimplifiedRandomHyperplaneProjectionFamily(RandomFactory)
+            +generateProjection(int, int): Projection
+        }
+
+        class elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily.SignedProjection [[SimplifiedRandomHyperplaneProjectionFamily.SignedProjection.html]] {
+            ~mat: boolean[]
+            -k: int
+            -buf: double[]
+            +SignedProjection(int, int, Random)
+            +project(NumberVector): double[]
+            +project(NumberVector, double[]): double[]
+            -projectDense(NumberVector, double[]): double[]
+            +getOutputDimensionality(): int
+        }
+
+        class elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily.Par [[SimplifiedRandomHyperplaneProjectionFamily.Par.html]] {
+            +make(): SimplifiedRandomHyperplaneProjectionFamily
+        }
+
+        class AchlioptasRandomProjectionFamily [[AchlioptasRandomProjectionFamily.html]] {
+            -sparsity: double
+            +AchlioptasRandomProjectionFamily(double, RandomFactory)
+            +generateProjection(int, int): Projection
+        }
+
+        class elki.data.projection.random.AchlioptasRandomProjectionFamily.Par [[AchlioptasRandomProjectionFamily.Par.html]] {
+            {static} +SPARSITY_ID: OptionID
+            -sparsity: double
+            +configure(Parameterization): void
+            +make(): AchlioptasRandomProjectionFamily
+        }
+
+        class CauchyRandomProjectionFamily [[CauchyRandomProjectionFamily.html]] {
+            +CauchyRandomProjectionFamily(RandomFactory)
+            +generateProjection(int, int): Projection
+        }
+
+        class elki.data.projection.random.CauchyRandomProjectionFamily.Par [[CauchyRandomProjectionFamily.Par.html]] {
+            +make(): CauchyRandomProjectionFamily
+        }
+
+        AbstractRandomProjectionFamily <|-- GaussianRandomProjectionFamily
+        elki.data.projection.random.AbstractRandomProjectionFamily.Par <|-- elki.data.projection.random.GaussianRandomProjectionFamily.Par
+        GaussianRandomProjectionFamily +-- elki.data.projection.random.GaussianRandomProjectionFamily.Par
+        RandomProjectionFamily +-- elki.data.projection.random.RandomProjectionFamily.Projection
+        RandomProjectionFamily <|.. AbstractRandomProjectionFamily
+        elki.data.projection.random.RandomProjectionFamily.Projection <|.. elki.data.projection.random.AbstractRandomProjectionFamily.MatrixProjection
+        AbstractRandomProjectionFamily +-- elki.data.projection.random.AbstractRandomProjectionFamily.MatrixProjection
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.projection.random.AbstractRandomProjectionFamily.Par
+        AbstractRandomProjectionFamily +-- elki.data.projection.random.AbstractRandomProjectionFamily.Par
+        AbstractRandomProjectionFamily <|-- RandomSubsetProjectionFamily
+        elki.data.projection.random.RandomProjectionFamily.Projection <|.. elki.data.projection.random.RandomSubsetProjectionFamily.SubsetProjection
+        RandomSubsetProjectionFamily +-- elki.data.projection.random.RandomSubsetProjectionFamily.SubsetProjection
+        elki.data.projection.random.AbstractRandomProjectionFamily.Par <|-- elki.data.projection.random.RandomSubsetProjectionFamily.Par
+        RandomSubsetProjectionFamily +-- elki.data.projection.random.RandomSubsetProjectionFamily.Par
+        RandomProjectionFamily <|.. SimplifiedRandomHyperplaneProjectionFamily
+        elki.data.projection.random.RandomProjectionFamily.Projection <|.. elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily.SignedProjection
+        SimplifiedRandomHyperplaneProjectionFamily +-- elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily.SignedProjection
+        elki.data.projection.random.AbstractRandomProjectionFamily.Par <|-- elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily.Par
+        SimplifiedRandomHyperplaneProjectionFamily +-- elki.data.projection.random.SimplifiedRandomHyperplaneProjectionFamily.Par
+        AbstractRandomProjectionFamily <|-- AchlioptasRandomProjectionFamily
+        elki.data.projection.random.AbstractRandomProjectionFamily.Par <|-- elki.data.projection.random.AchlioptasRandomProjectionFamily.Par
+        AchlioptasRandomProjectionFamily +-- elki.data.projection.random.AchlioptasRandomProjectionFamily.Par
+        AbstractRandomProjectionFamily <|-- CauchyRandomProjectionFamily
+        elki.data.projection.random.AbstractRandomProjectionFamily.Par <|-- elki.data.projection.random.CauchyRandomProjectionFamily.Par
+        CauchyRandomProjectionFamily +-- elki.data.projection.random.CauchyRandomProjectionFamily.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

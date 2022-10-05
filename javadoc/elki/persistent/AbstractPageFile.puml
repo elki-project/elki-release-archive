@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractPageFile\n<size:10>elki.persistent" as elki.persistent.AbstractPageFile<P extends Page> [[AbstractPageFile.html]] {
+        -readAccess: Counter
+        -writeAccess: Counter
+        {abstract} #getLogger(): Logging
+        +writePage(P extends Page): int
+        {abstract} #writePage(int, P extends Page): void
+        +close(): void
+        +logStatistics(): void
+        #countRead(): void
+        #countWrite(): void
+    }
+
+    interface "<size:14>PageFile\n<size:10>elki.persistent" as elki.persistent.PageFile<P extends Page> [[PageFile.html]] {
+        {abstract} +setPageID(P extends Page): int
+        {abstract} +writePage(P extends Page): int
+        {abstract} +readPage(int): P extends Page
+        {abstract} +deletePage(int): void
+        {abstract} +close(): void
+        {abstract} +clear(): void
+        {abstract} +getNextPageID(): int
+        {abstract} +setNextPageID(int): void
+        {abstract} +getPageSize(): int
+        {abstract} +initialize(PageHeader): boolean
+        {abstract} +logStatistics(): void
+    }
+
+    elki.persistent.PageFile <|.. elki.persistent.AbstractPageFile
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SelectionTableWindow\n<size:10>elki.visualization.gui" as elki.visualization.gui.SelectionTableWindow [[SelectionTableWindow.html]] {
+        {static} -NAME: String
+        {static} -serialVersionUID: long
+        -table: JTable
+        -closeButton: JButton
+        -deleteButton: JButton
+        -dotTableModel: DatabaseTableModel
+        {static} -LOG: Logging
+        ~dbids: ArrayModifiableDBIDs
+        ~database: UpdatableDatabase
+        ~crep: ModifiableRelation<ClassLabel>
+        ~orep: ModifiableRelation<String>
+        #context: VisualizerContext
+        +SelectionTableWindow(VisualizerContext)
+        +dispose(): void
+        #updateFromSelection(): void
+        #handleDelete(): void
+        +contentChanged(DataStoreEvent): void
+        +resultChanged(Object): void
+    }
+
+    class "<size:14>JFrame\n<size:10>javax.swing" as javax.swing.JFrame
+    interface "<size:14>DataStoreListener\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreListener [[../../database/datastore/DataStoreListener.html]] {
+        {abstract} +contentChanged(DataStoreEvent): void
+    }
+    interface "<size:14>ResultListener\n<size:10>elki.result" as elki.result.ResultListener [[../../result/ResultListener.html]]
+    class "<size:14>SelectionTableWindow.DatabaseTableModel\n<size:10>elki.visualization.gui" as elki.visualization.gui.SelectionTableWindow.DatabaseTableModel [[SelectionTableWindow.DatabaseTableModel.html]]
+
+    javax.swing.JFrame <|-- elki.visualization.gui.SelectionTableWindow
+    elki.database.datastore.DataStoreListener <|.. elki.visualization.gui.SelectionTableWindow
+    elki.result.ResultListener <|.. elki.visualization.gui.SelectionTableWindow
+    elki.visualization.gui.SelectionTableWindow +-- elki.visualization.gui.SelectionTableWindow.DatabaseTableModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

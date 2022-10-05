@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OfflineChangePointDetectionAlgorithm.Par\n<size:10>elki.timeseries" as elki.timeseries.OfflineChangePointDetectionAlgorithm.Par [[OfflineChangePointDetectionAlgorithm.Par.html]] {
+        {static} +BOOTSTRAP_ID: OptionID
+        {static} +CONFIDENCE_ID: OptionID
+        {static} +RANDOM_ID: OptionID
+        ~bootstrapSamples: int
+        ~minConfidence: double
+        ~rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): OfflineChangePointDetectionAlgorithm
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>OfflineChangePointDetectionAlgorithm\n<size:10>elki.timeseries" as elki.timeseries.OfflineChangePointDetectionAlgorithm [[OfflineChangePointDetectionAlgorithm.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.timeseries.OfflineChangePointDetectionAlgorithm.Par
+    elki.timeseries.OfflineChangePointDetectionAlgorithm +-- elki.timeseries.OfflineChangePointDetectionAlgorithm.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MapStore\n<size:10>elki.database.datastore.memory" as elki.database.datastore.memory.MapStore<T> [[MapStore.html]] {
+        -data: Map<DBID, T>
+        +MapStore(Map<DBID, T>)
+        +MapStore()
+        +get(DBIDRef): T
+        +put(DBIDRef, T): T
+        +destroy(): void
+        +delete(DBIDRef): void
+        +clear(): void
+    }
+
+    interface "<size:14>WritableDataStore\n<size:10>elki.database.datastore" as elki.database.datastore.WritableDataStore<T> [[../WritableDataStore.html]] {
+        {abstract} +put(DBIDRef, T): T
+        {abstract} +destroy(): void
+        {abstract} +delete(DBIDRef): void
+        {abstract} +clear(): void
+    }
+
+    elki.database.datastore.WritableDataStore <|.. elki.database.datastore.memory.MapStore
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

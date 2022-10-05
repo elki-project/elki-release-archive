@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AsciiDistanceParser\n<size:10>elki.distance.external" as elki.distance.external.AsciiDistanceParser [[AsciiDistanceParser.html]] {
+        {static} -LOG: Logging
+        #reader: TokenizedReader
+        #tokenizer: Tokenizer
+        +AsciiDistanceParser(CSVReaderFormat)
+        +parse(InputStream, DistanceCacheWriter): void
+    }
+
+    interface "<size:14>DistanceParser\n<size:10>elki.distance.external" as elki.distance.external.DistanceParser [[DistanceParser.html]] {
+        {abstract} +parse(InputStream, DistanceCacheWriter): void
+    }
+    class "<size:14>AsciiDistanceParser.Par\n<size:10>elki.distance.external" as elki.distance.external.AsciiDistanceParser.Par [[AsciiDistanceParser.Par.html]]
+
+    elki.distance.external.DistanceParser <|.. elki.distance.external.AsciiDistanceParser
+    elki.distance.external.AsciiDistanceParser +-- elki.distance.external.AsciiDistanceParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DoubleDBIDHeap\n<size:10>elki.database.ids" as elki.database.ids.DoubleDBIDHeap [[DoubleDBIDHeap.html]] {
+        {abstract} +peekKey(): double
+        {abstract} +poll(): void
+        {abstract} +insert(double, DBIDRef): double
+        {abstract} +insert(double, DBIDRef, int): double
+        {abstract} +size(): int
+        +isEmpty(): boolean
+        {abstract} +clear(): void
+        {abstract} +unorderedIterator(): DoubleDBIDIter
+        {abstract} +contains(DBIDRef): boolean
+    }
+
+    interface "<size:14>DBIDRef\n<size:10>elki.database.ids" as elki.database.ids.DBIDRef [[DBIDRef.html]] {
+        {abstract} +internalGetIndex(): int
+    }
+
+    elki.database.ids.DBIDRef <|-- elki.database.ids.DoubleDBIDHeap
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

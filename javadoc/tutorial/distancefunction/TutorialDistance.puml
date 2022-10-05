@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TutorialDistance\n<size:10>tutorial.distancefunction" as tutorial.distancefunction.TutorialDistance [[TutorialDistance.html]] {
+        +distance(NumberVector, NumberVector): double
+        +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../../elki/distance/AbstractNumberVectorDistance.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- tutorial.distancefunction.TutorialDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

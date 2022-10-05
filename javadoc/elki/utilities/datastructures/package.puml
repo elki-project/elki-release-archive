@@ -1,0 +1,185 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.datastructures {
+
+        class QuickSelect [[QuickSelect.html]] {
+            {static} -SMALL: int
+            {static} -bestPivot(int, int, int, int, int, int): int
+            {static} +quickSelect(T, Adapter<T>, int, int, int): void
+            {static} -insertionSort(T, Adapter<T>, int, int): void
+            {static} +quickSelect(double[], int): double
+            {static} +median(double[]): double
+            {static} +median(double[], int, int): double
+            {static} +quantile(double[], double): double
+            {static} +quantile(double[], int, int, double): double
+            {static} +quickSelect(double[], int, int, int): double
+            {static} -insertionSort(double[], int, int): void
+            {static} -swap(double[], int, int): void
+            {static} -swap(List<T>, int, int): void
+            {static} +quickSelect(List<? extends T>, Comparator<? super T>, int): T
+            {static} +median(List<? extends T>, Comparator<? super T>): T
+            {static} +median(List<? extends T>, Comparator<? super T>, int, int): T
+            {static} +quantile(List<? extends T>, Comparator<? super T>, double): T
+            {static} +quantile(List<? extends T>, Comparator<? super T>, int, int, double): T
+            {static} +quickSelect(List<? extends T>, Comparator<? super T>, int, int, int): void
+            {static} -insertionSort(List<T>, Comparator<? super T>, int, int): void
+        }
+
+        interface elki.utilities.datastructures.QuickSelect.Adapter<T> [[QuickSelect.Adapter.html]] {
+            {abstract} +swap(T, int, int): void
+            {abstract} +compare(T, int, int): int
+            +isSorted(T, int, int): void
+        }
+
+        class KuhnMunkresWong [[KuhnMunkresWong.html]] {
+            ~radj: double[]
+            ~cadj: double[]
+            ~rmin: double[]
+            ~rptr: int[]
+            +run(double[]): int[]
+            #initialize(double[]): void
+            #initialCover(): void
+            #initUncoveredMinimum(): void
+            #findUncoveredMinimum(): double
+            #removeCost(double): void
+            -pivot(): boolean
+            -updateStars(): void
+            #costOf(int, int): double
+        }
+
+        class KuhnMunkres [[KuhnMunkres.html]] {
+            {static} -LOG: Logging
+            ~cost: double[]
+            ~selected: int
+            ~rsel: int[]
+            ~csel: int[]
+            ~rmark: int[]
+            ~cmark: int[]
+            ~minr: int
+            ~minc: int
+            +run(double[]): int[]
+            #initialize(double[]): void
+            #initialCover(): void
+            -findUncoveredMinimum(): double
+            -removeCost(double): void
+            -pivot(): boolean
+            -updateStars(): void
+            #debugLogMatrix(Level, long, String): void
+            #costOf(int, int): double
+        }
+
+        class KuhnMunkresStern [[KuhnMunkresStern.html]] {
+            -cptr: int[]
+            -cmin: double[]
+            +run(double[]): int[]
+            #initUncoveredMinimum(): void
+            #findUncoveredMinimum(): double
+            #removeCost(double): void
+        }
+
+        class BitsUtil [[BitsUtil.html]] {
+            {static} -LONG_LOG2_SIZE: int
+            {static} -LONG_LOG2_MASK: int
+            {static} -LONG_ALL_BITS: long
+            {static} -LONG_63_BITS: long
+            {static} -LONG_32_BITS: long
+            {static} -POW5_INT: int[]
+            {static} +FASTUTIL_HASH_STRATEGY: Strategy<long[]>
+            {static} +zero(int): long[]
+            {static} +make(int, long): long[]
+            {static} +of(int...): long[]
+            {static} +ones(int): long[]
+            {static} +random(int, int, Random): long[]
+            {static} +copy(long[]): long[]
+            {static} +copy(long[], int): long[]
+            {static} +copy(long[], int, int): long[]
+            {static} +grayC(long): long
+            {static} +grayI(long[]): long[]
+            {static} +invgrayC(long): long
+            {static} +invgrayI(long[]): long[]
+            {static} +isZero(long[]): boolean
+            {static} +cardinality(long): int
+            {static} +cardinality(long[]): int
+            {static} +flipC(long, int): long
+            {static} +flipI(long[], int): long[]
+            {static} +setC(long, int): long
+            {static} +setI(long[], int): long[]
+            {static} +setI(long[], long[]): long[]
+            {static} +clearC(long, int): long
+            {static} +clearI(long[], int): long[]
+            {static} +get(long, int): boolean
+            {static} +get(long[], int): boolean
+            {static} +onesI(long[], int): void
+            {static} +zeroI(long[]): long[]
+            {static} +xorI(long[], long[]): long[]
+            {static} +xorI(long[], long[], int): long[]
+            {static} +orI(long[], long[]): long[]
+            {static} +orI(long[], long[], int): long[]
+            {static} +andI(long[], long[]): long[]
+            {static} +andI(long[], long[], int): long[]
+            {static} +andCMin(long[], long[]): long[]
+            {static} +nandI(long[], long[]): long[]
+            {static} +invertI(long[]): long[]
+            {static} +shiftRightI(long[], int): long[]
+            {static} +shiftLeftI(long[], int): long[]
+            {static} +cycleRightC(long, int, int): long
+            {static} +cycleRightI(long[], int, int): long[]
+            {static} +truncateI(long[], int): long[]
+            {static} +cycleLeftC(long, int, int): long
+            {static} +cycleLeftI(long[], int, int): long[]
+            {static} +toString(long[]): String
+            {static} +toString(long[], int): String
+            {static} +toString(long): String
+            {static} +toStringLow(long[]): String
+            {static} +toStringLow(long[], int): String
+            {static} +toStringLow(long): String
+            {static} +toString(long[], String, int): String
+            {static} +numberOfTrailingZerosSigned(long[]): int
+            {static} +numberOfTrailingZeros(long[]): int
+            {static} +numberOfTrailingZerosSigned(long): int
+            {static} +numberOfTrailingZeros(long): int
+            {static} +numberOfTrailingZeros(int): int
+            {static} +numberOfLeadingZerosSigned(long[]): int
+            {static} +numberOfLeadingZeros(long[]): int
+            {static} +numberOfLeadingZerosSigned(long): int
+            {static} +numberOfLeadingZerosSigned(int): int
+            {static} +numberOfLeadingZeros(long): int
+            {static} +numberOfLeadingZeros(int): int
+            {static} +previousSetBit(long, int): int
+            {static} +previousSetBit(long[], int): int
+            {static} +previousClearBit(long, int): int
+            {static} +previousClearBit(long[], int): int
+            {static} +nextSetBit(long, int): int
+            {static} +nextSetBit(long[], int): int
+            {static} +nextClearBit(long, int): int
+            {static} +nextClearBit(long[], int): int
+            {static} +magnitude(long[]): int
+            {static} +magnitude(long): int
+            {static} +magnitude(int): int
+            {static} +intersect(long, long): boolean
+            {static} +intersect(long[], long[]): boolean
+            {static} +intersectionSize(long, long): int
+            {static} +intersectionSize(long[], long[]): int
+            {static} +unionSize(long, long): int
+            {static} +unionSize(long[], long[]): int
+            {static} +hammingDistance(long, long): int
+            {static} +hammingDistance(long[], long[]): int
+            {static} +capacity(long[]): int
+            {static} +equal(long, long): boolean
+            {static} +equal(long[], long[]): boolean
+            {static} +compare(long, long): int
+            {static} +compare(long[], long[]): int
+            {static} +hashCode(long): int
+            {static} +hashCode(long[]): int
+            {static} +lpow2(long, int): double
+            {static} +lpow10(long, int): double
+        }
+
+        QuickSelect --> elki.utilities.datastructures.QuickSelect.Adapter: DOUBLE_ADAPTER\nINTEGER_ADAPTER\nFLOAT_ADAPTER\nSHORT_ADAPTER\nLONG_ADAPTER\nBYTE_ADAPTER\nCHAR_ADAPTER
+        QuickSelect +-- elki.utilities.datastructures.QuickSelect.Adapter
+        KuhnMunkres <|-- KuhnMunkresWong
+        KuhnMunkresWong <|-- KuhnMunkresStern
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

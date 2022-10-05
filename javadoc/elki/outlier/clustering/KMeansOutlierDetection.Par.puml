@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMeansOutlierDetection.Par\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.KMeansOutlierDetection.Par<O extends NumberVector> {
+        {static} +CLUSTERING_ID: OptionID
+        {static} +RULE_ID: OptionID
+        ~clusterer: KMeans<O extends NumberVector, ?>
+        ~rule: Rule
+        +configure(Parameterization): void
+        +make(): KMeansOutlierDetection<O extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>KMeansOutlierDetection\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.KMeansOutlierDetection<O extends NumberVector> [[KMeansOutlierDetection.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.clustering.KMeansOutlierDetection.Par
+    elki.outlier.clustering.KMeansOutlierDetection +-- elki.outlier.clustering.KMeansOutlierDetection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

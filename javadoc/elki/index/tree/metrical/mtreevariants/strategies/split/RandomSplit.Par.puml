@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomSplit.Par\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.RandomSplit.Par<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> {
+        {static} +RANDOM_ID: OptionID
+        ~rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): RandomSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>>
+    }
+
+    abstract class "<size:14>AbstractMTreeSplit.Par\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit.Par<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> {
+        {abstract} +make(): MTreeSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>>
+    }
+    class "<size:14>RandomSplit\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.RandomSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> [[RandomSplit.html]]
+
+    elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit.Par <|-- elki.index.tree.metrical.mtreevariants.strategies.split.RandomSplit.Par
+    elki.index.tree.metrical.mtreevariants.strategies.split.RandomSplit +-- elki.index.tree.metrical.mtreevariants.strategies.split.RandomSplit.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

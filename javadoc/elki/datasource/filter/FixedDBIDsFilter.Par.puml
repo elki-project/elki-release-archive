@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FixedDBIDsFilter.Par\n<size:10>elki.datasource.filter" as elki.datasource.filter.FixedDBIDsFilter.Par [[FixedDBIDsFilter.Par.html]] {
+        {static} +IDSTART_ID: OptionID
+        ~startid: int
+        +configure(Parameterization): void
+        +make(): FixedDBIDsFilter
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>FixedDBIDsFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.FixedDBIDsFilter [[FixedDBIDsFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.FixedDBIDsFilter.Par
+    elki.datasource.filter.FixedDBIDsFilter +-- elki.datasource.filter.FixedDBIDsFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

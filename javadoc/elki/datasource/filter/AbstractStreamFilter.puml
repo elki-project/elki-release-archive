@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractStreamFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractStreamFilter [[AbstractStreamFilter.html]] {
+        #source: BundleStreamSource
+        +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        +init(BundleStreamSource): BundleStreamSource
+        +hasDBIDs(): boolean
+        +assignDBID(DBIDVar): boolean
+        +asMultipleObjectsBundle(): MultipleObjectsBundle
+    }
+
+    interface "<size:14>StreamFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.StreamFilter [[StreamFilter.html]] {
+        {abstract} +init(BundleStreamSource): BundleStreamSource
+    }
+
+    elki.datasource.filter.StreamFilter <|.. elki.datasource.filter.AbstractStreamFilter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

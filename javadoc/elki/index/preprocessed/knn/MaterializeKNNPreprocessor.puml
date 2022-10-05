@@ -1,0 +1,46 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MaterializeKNNPreprocessor<O> [[MaterializeKNNPreprocessor.html]] {
+        {static} -LOG: Logging
+        #knnQuery: KNNSearcher<DBIDRef>
+        #listenerList: EventListenerList
+        +MaterializeKNNPreprocessor(Relation<O>, Distance<? super O>, int)
+        +MaterializeKNNPreprocessor(Relation<O>, DistanceQuery<O>, int, boolean)
+        #preprocess(): void
+        +insert(DBIDRef): void
+        +insertAll(DBIDs): void
+        +delete(DBIDRef): boolean
+        +deleteAll(DBIDs): void
+        #objectsInserted(DBIDs): void
+        -updateKNNsAfterInsertion(DBIDs): ArrayDBIDs
+        -updateKNNsAfterDeletion(DBIDs): ArrayDBIDs
+        #objectsRemoved(DBIDs): void
+        #fireKNNsInserted(DBIDs, DBIDs): void
+        #fireKNNsRemoved(DBIDs, DBIDs): void
+        +addKNNListener(KNNListener): void
+        +removeKNNListener(KNNListener): void
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor<O> [[AbstractMaterializeKNNPreprocessor.html]] {
+        {abstract} #preprocess(): void
+        {abstract} #getLogger(): Logging
+    }
+    interface "<size:14>DynamicIndex\n<size:10>elki.index" as elki.index.DynamicIndex [[../../DynamicIndex.html]] {
+        {abstract} +delete(DBIDRef): boolean
+        {abstract} +insert(DBIDRef): void
+        {abstract} +deleteAll(DBIDs): void
+        {abstract} +insertAll(DBIDs): void
+    }
+    class "<size:14>MaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory<O> [[MaterializeKNNPreprocessor.Factory.html]]
+
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor <|-- elki.index.preprocessed.knn.MaterializeKNNPreprocessor
+    elki.index.DynamicIndex <|.. elki.index.preprocessed.knn.MaterializeKNNPreprocessor
+    elki.index.preprocessed.knn.MaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,70 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.css {
+
+        class CSSClass [[CSSClass.html]] {
+            -name: String
+            -statements: Collection<Pair<String, String>>
+            -owner: WeakReference<Object>
+            +CSSClass(Object, String, Collection<Pair<String, String>>)
+            +CSSClass(Object, String)
+            +CSSClass(Object, String, CSSClass)
+            {static} +checkName(String): boolean
+            {static} +sanitizeName(String): String
+            {static} +checkCSSStatement(String, String): boolean
+            {static} +checkCSSStatements(Collection<Pair<String, String>>): boolean
+            +getName(): String
+            +setName(String): void
+            +getOwner(): Object
+            +getStatement(String): String
+            +getStatements(): Collection<Pair<String, String>>
+            +setStatement(String, String): void
+            +setStatement(String, int): void
+            +setStatement(String, double): void
+            +removeStatement(String): void
+            +appendCSSDefinition(StringBuilder): void
+            +inlineCSS(): String
+        }
+
+        class elki.visualization.css.CSSClass.InvalidCSS [[CSSClass.InvalidCSS.html]] {
+            {static} -serialVersionUID: long
+            +InvalidCSS(String)
+        }
+
+        class CSSClassManager [[CSSClassManager.html]] {
+            -store: HashMap<String, CSSClass>
+            +addClass(CSSClass): CSSClass
+            +removeClass(CSSClass): void
+            +getClass(String, Object): CSSClass
+            +getClass(String): CSSClass
+            +contains(String): boolean
+            +serialize(StringBuilder): void
+            +testMergeable(CSSClassManager): boolean
+            +mergeCSSFrom(CSSClassManager): boolean
+            +updateStyleElement(Document, Element): void
+            +makeStyleElement(Document): Element
+        }
+
+        class elki.visualization.css.CSSClassManager.CSSNamingConflict [[CSSClassManager.CSSNamingConflict.html]] {
+            {static} -serialVersionUID: long
+            +CSSNamingConflict(String)
+        }
+
+        java.lang.RuntimeException <|-- elki.visualization.css.CSSClass.InvalidCSS
+        CSSClass +-- elki.visualization.css.CSSClass.InvalidCSS
+        CSSClassManager --> "*" CSSClass: classes
+        java.lang.Exception <|-- elki.visualization.css.CSSClassManager.CSSNamingConflict
+        CSSClassManager +-- elki.visualization.css.CSSClassManager.CSSNamingConflict
+    }
+
+    namespace java.lang {
+        class RuntimeException {
+            {static} ~serialVersionUID: long
+        }
+        class Exception {
+            {static} ~serialVersionUID: long
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

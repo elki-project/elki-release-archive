@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MinimalisticMemoryKDTree.PrioritySearchBranch\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.PrioritySearchBranch [[MinimalisticMemoryKDTree.PrioritySearchBranch.html]] {
+        ~mindist: double
+        ~left: int
+        ~right: int
+        ~axis: int
+        +PrioritySearchBranch(double, int, int, int)
+        +compareTo(PrioritySearchBranch): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<PrioritySearchBranch> {
+        {abstract} +compareTo(PrioritySearchBranch): int
+    }
+    class "<size:14>MinimalisticMemoryKDTree\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree<O extends NumberVector> [[MinimalisticMemoryKDTree.html]]
+
+    java.lang.Comparable <|.. elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.PrioritySearchBranch
+    elki.index.tree.spatial.kd.MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.PrioritySearchBranch
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

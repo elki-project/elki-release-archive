@@ -1,0 +1,358 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.distance {
+
+        class SharedNearestNeighborJaccardDistance<O> [[SharedNearestNeighborJaccardDistance.html]] {
+            +SharedNearestNeighborJaccardDistance(Factory<O>)
+            +instantiate(Relation<T extends O>): Instance<T extends O>
+        }
+
+        class elki.distance.SharedNearestNeighborJaccardDistance.Instance<T> [[SharedNearestNeighborJaccardDistance.Instance.html]] {
+            +Instance(Relation<T>, SharedNearestNeighborIndex<T>, SharedNearestNeighborJaccardDistance<T>)
+            {static} #jaccardCoefficient(DBIDs, DBIDs): double
+            +distance(DBIDRef, DBIDRef): double
+        }
+
+        class elki.distance.SharedNearestNeighborJaccardDistance.Par<O> [[SharedNearestNeighborJaccardDistance.Par.html]] {
+            +configure(Parameterization): void
+            +make(): SharedNearestNeighborJaccardDistance<O>
+        }
+
+        abstract class AbstractDatabaseDistance<O> [[AbstractDatabaseDistance.html]]
+
+        abstract class elki.distance.AbstractDatabaseDistance.Instance<O> [[AbstractDatabaseDistance.Instance.html]] {
+            #relation: Relation<O>
+            +Instance(Relation<O>, Distance<? super O>)
+            +getRelation(): Relation<? extends O>
+        }
+
+        abstract class AbstractDBIDRangeDistance [[AbstractDBIDRangeDistance.html]] {
+            +distance(DBIDRef, DBIDRef): double
+            +getInputTypeRestriction(): SimpleTypeInformation<DBID>
+            +instantiate(Relation<O extends DBID>): DistanceQuery<O extends DBID>
+        }
+
+        abstract class AbstractIndexBasedDistance<O, F extends IndexFactory<O>> [[AbstractIndexBasedDistance.html]] {
+            #indexFactory: F extends IndexFactory<O>
+            +AbstractIndexBasedDistance(F extends IndexFactory<O>)
+            +isMetric(): boolean
+            +isSymmetric(): boolean
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        abstract class elki.distance.AbstractIndexBasedDistance.Instance<O, I extends Index, F extends Distance<? super O>> [[AbstractIndexBasedDistance.Instance.html]] {
+            #relation: Relation<O>
+            #index: I extends Index
+            +Instance(Relation<O>, I extends Index, F extends Distance<? super O>)
+            +getRelation(): Relation<? extends O>
+            +getIndex(): I extends Index
+        }
+
+        abstract class elki.distance.AbstractIndexBasedDistance.Par<F extends IndexFactory<?>> {
+            #factory: F extends IndexFactory<?>
+            +configIndexFactory(Parameterization, Class<?>, Class<?>): void
+        }
+
+        interface IndexBasedDistance<O> [[IndexBasedDistance.html]] {
+            {static} +INDEX_ID: OptionID
+        }
+
+        interface elki.distance.IndexBasedDistance.Instance<T, I extends Index> [[IndexBasedDistance.Instance.html]] {
+            {abstract} +getIndex(): I extends Index
+        }
+
+        class RandomStableDistance [[RandomStableDistance.html]] {
+            -seed: long
+            +RandomStableDistance(long)
+            +distance(DBIDRef, DBIDRef): double
+            -pseudoRandom(long, int): double
+            +getInputTypeRestriction(): TypeInformation
+            +instantiate(Relation<T extends DBID>): DistanceQuery<T extends DBID>
+        }
+
+        class elki.distance.RandomStableDistance.Par [[RandomStableDistance.Par.html]] {
+            +make(): RandomStableDistance
+        }
+
+        class ArcCosineUnitlengthDistance [[ArcCosineUnitlengthDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.ArcCosineUnitlengthDistance.Par [[ArcCosineUnitlengthDistance.Par.html]] {
+            +make(): ArcCosineUnitlengthDistance
+        }
+
+        class CosineUnitlengthDistance [[CosineUnitlengthDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isSquared(): boolean
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.CosineUnitlengthDistance.Par [[CosineUnitlengthDistance.Par.html]] {
+            +make(): CosineUnitlengthDistance
+        }
+
+        class SqrtCosineDistance [[SqrtCosineDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isSquared(): boolean
+            +isMetric(): boolean
+        }
+
+        class elki.distance.SqrtCosineDistance.Par [[SqrtCosineDistance.Par.html]] {
+            +make(): SqrtCosineDistance
+        }
+
+        class ClarkDistance [[ClarkDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.ClarkDistance.Par [[ClarkDistance.Par.html]] {
+            +make(): ClarkDistance
+        }
+
+        class BrayCurtisDistance [[BrayCurtisDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+        }
+
+        class elki.distance.BrayCurtisDistance.Par [[BrayCurtisDistance.Par.html]] {
+            +make(): BrayCurtisDistance
+        }
+
+        class SqrtCosineUnitlengthDistance [[SqrtCosineUnitlengthDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isSquared(): boolean
+            +isMetric(): boolean
+        }
+
+        class elki.distance.SqrtCosineUnitlengthDistance.Par [[SqrtCosineUnitlengthDistance.Par.html]] {
+            +make(): SqrtCosineUnitlengthDistance
+        }
+
+        abstract class AbstractNumberVectorDistance [[AbstractNumberVectorDistance.html]] {
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+            {static} +dimensionality(SpatialComparable, SpatialComparable): int
+            {static} +dimensionality(double[], SpatialComparable): int
+            {static} +dimensionality(double[], double[]): int
+            {static} +dimensionality(SpatialComparable, SpatialComparable, int): int
+            {static} +dimensionality(double[], SpatialComparable, int): int
+            {static} +dimensionality(double[], double[], int): int
+            {static} +dimensionality(NumberVector, NumberVector): int
+            {static} +dimensionality(NumberVector, NumberVector, int): int
+        }
+
+        class ArcCosineDistance [[ArcCosineDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isMetric(): boolean
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.ArcCosineDistance.Par [[ArcCosineDistance.Par.html]] {
+            +make(): ArcCosineDistance
+        }
+
+        class WeightedCanberraDistance [[WeightedCanberraDistance.html]] {
+            #weights: double[]
+            +WeightedCanberraDistance(double[])
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isMetric(): boolean
+        }
+
+        class elki.distance.WeightedCanberraDistance.Par [[WeightedCanberraDistance.Par.html]] {
+            #weights: double[]
+            +configure(Parameterization): void
+            +make(): WeightedCanberraDistance
+        }
+
+        class CanberraDistance [[CanberraDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isMetric(): boolean
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.CanberraDistance.Par [[CanberraDistance.Par.html]] {
+            +make(): CanberraDistance
+        }
+
+        class MatrixWeightedQuadraticDistance [[MatrixWeightedQuadraticDistance.html]] {
+            #weightMatrix: double[]
+            +MatrixWeightedQuadraticDistance(double[])
+            +distance(NumberVector, NumberVector): double
+            +isSquared(): boolean
+            +norm(NumberVector): double
+            +getInputTypeRestriction(): VectorFieldTypeInformation<? super NumberVector>
+        }
+
+        class MahalanobisDistance [[MahalanobisDistance.html]] {
+            +MahalanobisDistance(double[])
+            +distance(NumberVector, NumberVector): double
+            +norm(NumberVector): double
+            +isMetric(): boolean
+            +isSquared(): boolean
+        }
+
+        interface DBIDRangeDistance [[DBIDRangeDistance.html]] {
+            {abstract} +distance(int, int): double
+            {abstract} +checkRange(DBIDRange): void
+        }
+
+        class CosineDistance [[CosineDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isSquared(): boolean
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.CosineDistance.Par [[CosineDistance.Par.html]] {
+            +make(): CosineDistance
+        }
+
+        interface WeightedNumberVectorDistance<V> [[WeightedNumberVectorDistance.html]] {
+            {static} +WEIGHTS_ID: OptionID
+        }
+
+        interface Distance<O> [[Distance.html]] {
+            +isSymmetric(): boolean
+            +isMetric(): boolean
+            +isSquared(): boolean
+            {abstract} +getInputTypeRestriction(): TypeInformation
+            {abstract} +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+        }
+
+        interface PrimitiveDistance<O> [[PrimitiveDistance.html]] {
+            {abstract} +distance(O, O): double
+            {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+            +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+        }
+
+        interface DBIDDistance [[DBIDDistance.html]] {
+            {abstract} +distance(DBIDRef, DBIDRef): double
+        }
+
+        interface SpatialPrimitiveDistance<V extends SpatialComparable> [[SpatialPrimitiveDistance.html]] {
+            {abstract} +minDist(SpatialComparable, SpatialComparable): double
+            +instantiate(Relation<T extends SpatialComparable>): SpatialPrimitiveDistanceQuery<T extends SpatialComparable>
+        }
+
+        interface NumberVectorDistance<O> [[NumberVectorDistance.html]] {
+            {abstract} +distance(NumberVector, NumberVector): double
+        }
+
+        interface Norm<O> [[Norm.html]] {
+            {abstract} +norm(O): double
+        }
+
+        AbstractIndexBasedDistance <|-- SharedNearestNeighborJaccardDistance
+        elki.distance.AbstractIndexBasedDistance.Instance <|-- elki.distance.SharedNearestNeighborJaccardDistance.Instance
+        SharedNearestNeighborJaccardDistance +-- elki.distance.SharedNearestNeighborJaccardDistance.Instance
+        elki.distance.AbstractIndexBasedDistance.Par <|-- elki.distance.SharedNearestNeighborJaccardDistance.Par
+        SharedNearestNeighborJaccardDistance +-- elki.distance.SharedNearestNeighborJaccardDistance.Par
+        Distance <|.. AbstractDatabaseDistance
+        elki.database.query.distance.DatabaseDistanceQuery <|.. elki.distance.AbstractDatabaseDistance.Instance
+        AbstractDatabaseDistance +-- elki.distance.AbstractDatabaseDistance.Instance
+        elki.distance.AbstractDatabaseDistance.Instance --> Distance: parent\ndistance
+        AbstractDatabaseDistance <|-- AbstractDBIDRangeDistance
+        DBIDRangeDistance <|.. AbstractDBIDRangeDistance
+        AbstractDatabaseDistance <|-- AbstractIndexBasedDistance
+        IndexBasedDistance <|.. AbstractIndexBasedDistance
+        elki.distance.IndexBasedDistance.Instance <|.. elki.distance.AbstractIndexBasedDistance.Instance
+        AbstractIndexBasedDistance +-- elki.distance.AbstractIndexBasedDistance.Instance
+        elki.distance.AbstractIndexBasedDistance.Instance --> Distance: parent\ndistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.AbstractIndexBasedDistance.Par
+        AbstractIndexBasedDistance +-- elki.distance.AbstractIndexBasedDistance.Par
+        Distance <|-- IndexBasedDistance
+        elki.database.query.distance.DatabaseDistanceQuery <|-- elki.distance.IndexBasedDistance.Instance
+        IndexBasedDistance +-- elki.distance.IndexBasedDistance.Instance
+        AbstractDatabaseDistance <|-- RandomStableDistance
+        DBIDDistance <|.. RandomStableDistance
+        RandomStableDistance --> RandomStableDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.RandomStableDistance.Par
+        RandomStableDistance +-- elki.distance.RandomStableDistance.Par
+        SpatialPrimitiveDistance <|.. ArcCosineUnitlengthDistance
+        NumberVectorDistance <|.. ArcCosineUnitlengthDistance
+        ArcCosineUnitlengthDistance --> ArcCosineUnitlengthDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.ArcCosineUnitlengthDistance.Par
+        ArcCosineUnitlengthDistance +-- elki.distance.ArcCosineUnitlengthDistance.Par
+        SpatialPrimitiveDistance <|.. CosineUnitlengthDistance
+        NumberVectorDistance <|.. CosineUnitlengthDistance
+        CosineUnitlengthDistance --> CosineUnitlengthDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.CosineUnitlengthDistance.Par
+        CosineUnitlengthDistance +-- elki.distance.CosineUnitlengthDistance.Par
+        CosineDistance <|-- SqrtCosineDistance
+        SqrtCosineDistance --> SqrtCosineDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.SqrtCosineDistance.Par
+        SqrtCosineDistance +-- elki.distance.SqrtCosineDistance.Par
+        SpatialPrimitiveDistance <|.. ClarkDistance
+        NumberVectorDistance <|.. ClarkDistance
+        ClarkDistance --> ClarkDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.ClarkDistance.Par
+        ClarkDistance +-- elki.distance.ClarkDistance.Par
+        AbstractNumberVectorDistance <|-- BrayCurtisDistance
+        SpatialPrimitiveDistance <|.. BrayCurtisDistance
+        BrayCurtisDistance --> BrayCurtisDistance: STATIC_CONTINUOUS
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.BrayCurtisDistance.Par
+        BrayCurtisDistance +-- elki.distance.BrayCurtisDistance.Par
+        CosineUnitlengthDistance <|-- SqrtCosineUnitlengthDistance
+        SqrtCosineUnitlengthDistance --> SqrtCosineUnitlengthDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.SqrtCosineUnitlengthDistance.Par
+        SqrtCosineUnitlengthDistance +-- elki.distance.SqrtCosineUnitlengthDistance.Par
+        NumberVectorDistance <|.. AbstractNumberVectorDistance
+        SpatialPrimitiveDistance <|.. ArcCosineDistance
+        NumberVectorDistance <|.. ArcCosineDistance
+        ArcCosineDistance --> ArcCosineDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.ArcCosineDistance.Par
+        ArcCosineDistance +-- elki.distance.ArcCosineDistance.Par
+        AbstractNumberVectorDistance <|-- WeightedCanberraDistance
+        SpatialPrimitiveDistance <|.. WeightedCanberraDistance
+        WeightedNumberVectorDistance <|.. WeightedCanberraDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.WeightedCanberraDistance.Par
+        WeightedCanberraDistance +-- elki.distance.WeightedCanberraDistance.Par
+        SpatialPrimitiveDistance <|.. CanberraDistance
+        NumberVectorDistance <|.. CanberraDistance
+        CanberraDistance --> CanberraDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.CanberraDistance.Par
+        CanberraDistance +-- elki.distance.CanberraDistance.Par
+        AbstractNumberVectorDistance <|-- MatrixWeightedQuadraticDistance
+        Norm <|.. MatrixWeightedQuadraticDistance
+        MatrixWeightedQuadraticDistance <|-- MahalanobisDistance
+        DBIDDistance <|-- DBIDRangeDistance
+        SpatialPrimitiveDistance <|.. CosineDistance
+        NumberVectorDistance <|.. CosineDistance
+        CosineDistance --> CosineDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.CosineDistance.Par
+        CosineDistance +-- elki.distance.CosineDistance.Par
+        NumberVectorDistance <|-- WeightedNumberVectorDistance
+        Distance <|-- PrimitiveDistance
+        Distance <|-- DBIDDistance
+        PrimitiveDistance <|-- SpatialPrimitiveDistance
+        PrimitiveDistance <|-- NumberVectorDistance
+        PrimitiveDistance <|-- Norm
+    }
+
+    namespace elki.database.query.distance {
+        interface DatabaseDistanceQuery<O> [[../database/query/distance/DatabaseDistanceQuery.html]] {
+            +distance(O, DBIDRef): double
+            +distance(DBIDRef, O): double
+            +distance(O, O): double
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

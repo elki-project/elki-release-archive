@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EmptyParameterization\n<size:10>elki.utilities.optionhandling.parameterization" as elki.utilities.optionhandling.parameterization.EmptyParameterization [[EmptyParameterization.html]] {
+        +hasUnusedParameters(): boolean
+        +setValueForOption(Parameter<?>): boolean
+    }
+
+    abstract class "<size:14>AbstractParameterization\n<size:10>elki.utilities.optionhandling.parameterization" as elki.utilities.optionhandling.parameterization.AbstractParameterization [[AbstractParameterization.html]]
+
+    elki.utilities.optionhandling.parameterization.AbstractParameterization <|-- elki.utilities.optionhandling.parameterization.EmptyParameterization
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

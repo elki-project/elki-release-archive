@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NotImplementedException\n<size:10>elki.utilities.exceptions" as elki.utilities.exceptions.NotImplementedException [[NotImplementedException.html]] {
+        {static} -serialVersionUID: long
+        +NotImplementedException(String, Throwable)
+        +NotImplementedException(String)
+        +NotImplementedException()
+    }
+
+    class "<size:14>AbortException\n<size:10>elki.utilities.exceptions" as elki.utilities.exceptions.AbortException [[AbortException.html]]
+
+    elki.utilities.exceptions.AbortException <|-- elki.utilities.exceptions.NotImplementedException
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

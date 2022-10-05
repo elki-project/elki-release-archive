@@ -1,0 +1,41 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.actions {
+
+        class ClusterStyleAction [[ClusterStyleAction.html]] {
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        }
+
+        class elki.visualization.visualizers.actions.ClusterStyleAction.SetStyleAction [[ClusterStyleAction.SetStyleAction.html]] {
+            -c: Clustering<?>
+            -context: VisualizerContext
+            -SetStyleAction(Clustering<?>, VisualizerContext)
+            +activate(): void
+            +getMenuName(): String
+            +enabled(): boolean
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. ClusterStyleAction
+        elki.visualization.VisualizationMenuAction <|.. elki.visualization.visualizers.actions.ClusterStyleAction.SetStyleAction
+        ClusterStyleAction +-- elki.visualization.visualizers.actions.ClusterStyleAction.SetStyleAction
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+    }
+
+    namespace elki.visualization {
+        interface VisualizationMenuAction [[../../VisualizationMenuAction.html]] {
+            {abstract} +activate(): void
+            +enabled(): boolean
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

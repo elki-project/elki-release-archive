@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntrinsicNearestNeighborAffinityMatrixBuilder\n<size:10>elki.projection" as elki.projection.IntrinsicNearestNeighborAffinityMatrixBuilder<O> [[IntrinsicNearestNeighborAffinityMatrixBuilder.html]] {
+        {static} -LOG: Logging
+        ~estimator: DistanceBasedIntrinsicDimensionalityEstimator
+        +IntrinsicNearestNeighborAffinityMatrixBuilder(Distance<? super O>, double, DistanceBasedIntrinsicDimensionalityEstimator)
+        +computeAffinityMatrix(Relation<T extends O>, double): AffinityMatrix
+        #computePij(DBIDRange, KNNSearcher<DBIDRef>, boolean, int, double[], int[], double): void
+        #convertNeighbors(DBIDRange, DBIDRef, boolean, KNNList, DoubleArray, IntegerArray, Mean): void
+    }
+
+    class "<size:14>NearestNeighborAffinityMatrixBuilder\n<size:10>elki.projection" as elki.projection.NearestNeighborAffinityMatrixBuilder<O> [[NearestNeighborAffinityMatrixBuilder.html]]
+    class "<size:14>IntrinsicNearestNeighborAffinityMatrixBuilder.Par\n<size:10>elki.projection" as elki.projection.IntrinsicNearestNeighborAffinityMatrixBuilder.Par<O> [[IntrinsicNearestNeighborAffinityMatrixBuilder.Par.html]]
+
+    elki.projection.NearestNeighborAffinityMatrixBuilder <|-- elki.projection.IntrinsicNearestNeighborAffinityMatrixBuilder
+    elki.projection.IntrinsicNearestNeighborAffinityMatrixBuilder +-- elki.projection.IntrinsicNearestNeighborAffinityMatrixBuilder.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

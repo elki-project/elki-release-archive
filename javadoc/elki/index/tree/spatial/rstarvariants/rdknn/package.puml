@@ -1,0 +1,195 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.spatial.rstarvariants.rdknn {
+
+        class RdKNNNode [[RdKNNNode.html]] {
+            {static} -serialVersionUID: long
+            +RdKNNNode()
+            +RdKNNNode(int, boolean)
+            #kNNDistance(): double
+            +adjustEntry(RdKNNEntry): boolean
+            #integrityCheckParameters(RdKNNNode, int): void
+        }
+
+        class RdKNNTreeHeader [[RdKNNTreeHeader.html]] {
+            {static} -SIZE: int
+            ~k_max: int
+            +RdKNNTreeHeader()
+            +RdKNNTreeHeader(int, int, int, int, int, int)
+            +readHeader(ByteBuffer): void
+            +writeHeader(ByteBuffer): void
+            +size(): int
+        }
+
+        class RdKNNTree<O extends NumberVector> [[RdKNNTree.html]] {
+            {static} -LOG: Logging
+            -distanceQuery: SpatialDistanceQuery<O extends NumberVector>
+            #knnQuery: KNNSearcher<DBIDRef>
+            -relation: Relation<O extends NumberVector>
+            +RdKNNTree(Relation<O extends NumberVector>, PageFile<RdKNNNode>, RdkNNSettings)
+            #preInsert(RdKNNEntry): void
+            #postDelete(RdKNNEntry): void
+            #bulkLoad(List<RdKNNEntry>): void
+            +reverseKNNQuery(DBID, int, SpatialPrimitiveDistance<? super NumberVector>): DoubleDBIDList
+            #createHeader(): TreeIndexHeader
+            #initializeCapacities(RdKNNEntry): void
+            #getSortedEntries(AbstractRStarTreeNode<?, ?>, SpatialComparable, SpatialPrimitiveDistance<?>): List<DoubleObjPair<RdKNNEntry>>
+            -preInsert(RdKNNEntry, RdKNNEntry, KNNHeap): void
+            -doReverseKNN(RdKNNNode, DBID, ModifiableDoubleDBIDList): void
+            -adjustKNNDistances(RdKNNEntry, ArrayDBIDs, double[]): void
+            #createNewLeafNode(): RdKNNNode
+            #createNewDirectoryNode(): RdKNNNode
+            #createNewDirectoryEntry(RdKNNNode): RdKNNEntry
+            #createRootEntry(): RdKNNEntry
+            -checkDistance(SpatialPrimitiveDistance<? super NumberVector>): void
+            #createNewLeafEntry(DBID): RdKNNLeafEntry
+            +initialize(): void
+            +insert(DBIDRef): void
+            +insertAll(DBIDs): void
+            +delete(DBIDRef): boolean
+            +deleteAll(DBIDs): void
+            +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+            +rangeByObject(DistanceQuery<O extends NumberVector>, double, int): RangeSearcher<O extends NumberVector>
+            +priorityByObject(DistanceQuery<O extends NumberVector>, double, int): PrioritySearcher<O extends NumberVector>
+            +rkNNByObject(DistanceQuery<O extends NumberVector>, int, int): RKNNSearcher<O extends NumberVector>
+            +rkNNByDBID(DistanceQuery<O extends NumberVector>, int, int): RKNNSearcher<DBIDRef>
+            #getLogger(): Logging
+        }
+
+        class RdKNNDirectoryEntry [[RdKNNDirectoryEntry.html]] {
+            {static} -serialVersionUID: long
+            -knnDistance: double
+            +RdKNNDirectoryEntry()
+            +RdKNNDirectoryEntry(int, ModifiableHyperBoundingBox, double)
+            +getKnnDistance(): double
+            +setKnnDistance(double): void
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        interface RdKNNEntry [[RdKNNEntry.html]] {
+            {abstract} +getKnnDistance(): double
+            {abstract} +setKnnDistance(double): void
+        }
+
+        class RdKNNLeafEntry [[RdKNNLeafEntry.html]] {
+            {static} -serialVersionUID: long
+            -knnDistance: double
+            +RdKNNLeafEntry()
+            +RdKNNLeafEntry(DBID, NumberVector, double)
+            +getKnnDistance(): double
+            +setKnnDistance(double): void
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        class RdkNNSettings [[RdkNNSettings.html]] {
+            ~k_max: int
+            ~distance: SpatialPrimitiveDistance<NumberVector>
+            +RdkNNSettings(int, SpatialPrimitiveDistance<NumberVector>)
+        }
+
+        class RdKNNTreeFactory<O extends NumberVector> [[RdKNNTreeFactory.html]] {
+            {static} +K_ID: OptionID
+            {static} +DEFAULT_DISTANCE_FUNCTION: Class<?>
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            +RdKNNTreeFactory(PageFileFactory<?>, RdkNNSettings)
+            +instantiate(Relation<O extends NumberVector>): RdKNNTree<O extends NumberVector>
+            #getNodeClass(): Class<RdKNNNode>
+        }
+
+        class elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTreeFactory.Par<O extends NumberVector> [[RdKNNTreeFactory.Par.html]] {
+            +configure(Parameterization): void
+            +make(): RdKNNTreeFactory<O extends NumberVector>
+            #createSettings(): RdkNNSettings
+        }
+
+        elki.index.tree.spatial.rstarvariants.AbstractRStarTreeNode <|-- RdKNNNode
+        elki.index.tree.TreeIndexHeader <|-- RdKNNTreeHeader
+        elki.index.tree.spatial.rstarvariants.NonFlatRStarTree <|-- RdKNNTree
+        elki.index.DistancePriorityIndex <|.. RdKNNTree
+        elki.index.RKNNIndex <|.. RdKNNTree
+        elki.index.DynamicIndex <|.. RdKNNTree
+        elki.index.tree.spatial.SpatialDirectoryEntry <|-- RdKNNDirectoryEntry
+        RdKNNEntry <|.. RdKNNDirectoryEntry
+        elki.index.tree.spatial.SpatialEntry <|-- RdKNNEntry
+        elki.index.tree.spatial.SpatialPointLeafEntry <|-- RdKNNLeafEntry
+        RdKNNEntry <|.. RdKNNLeafEntry
+        elki.index.tree.spatial.rstarvariants.RTreeSettings <|-- RdkNNSettings
+        elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory <|-- RdKNNTreeFactory
+        elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par <|-- elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTreeFactory.Par
+        RdKNNTreeFactory +-- elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTreeFactory.Par
+    }
+
+    namespace elki.index.tree.spatial.rstarvariants {
+        abstract class AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry> [[../AbstractRStarTreeNode.html]]
+        abstract class NonFlatRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[../NonFlatRStarTree.html]]
+        class RTreeSettings [[../RTreeSettings.html]] {
+            #bulkSplitter: BulkSplit
+            #nodeSplitter: SplitStrategy
+            #insertionStrategy: InsertionStrategy
+            -overflowTreatment: OverflowTreatment
+            #relativeMinFill: double
+        }
+        abstract class AbstractRStarTreeFactory<O extends NumberVector, N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[../AbstractRStarTreeFactory.html]] {
+            #settings: S extends RTreeSettings
+        }
+        abstract class elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par<O extends NumberVector, S extends RTreeSettings> {
+            {static} +INSERTION_STRATEGY_ID: OptionID
+            {static} +SPLIT_STRATEGY_ID: OptionID
+            {static} +BULK_SPLIT_ID: OptionID
+            {static} +MINIMUM_FILL_ID: OptionID
+            {static} +OVERFLOW_STRATEGY_ID: OptionID
+            #settings: S extends RTreeSettings
+            {abstract} #createSettings(): S extends RTreeSettings
+            {abstract} +make(): AbstractRStarTreeFactory<O extends NumberVector, ?, ?, ?>
+        }
+    }
+
+    namespace elki.index.tree {
+        class TreeIndexHeader [[../../../TreeIndexHeader.html]] {
+            {static} -SIZE: int
+            ~dirCapacity: int
+            ~leafCapacity: int
+            ~dirMinimum: int
+            ~leafMinimum: int
+            -emptyPagesSize: int
+            -largestPageID: int
+        }
+    }
+
+    namespace elki.index {
+        interface DistancePriorityIndex<O> [[../../../../DistancePriorityIndex.html]] {
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        }
+        interface RKNNIndex<O> [[../../../../RKNNIndex.html]] {
+            {abstract} +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+            {abstract} +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+        }
+        interface DynamicIndex [[../../../../DynamicIndex.html]] {
+            {abstract} +delete(DBIDRef): boolean
+            {abstract} +insert(DBIDRef): void
+            {abstract} +deleteAll(DBIDs): void
+            {abstract} +insertAll(DBIDs): void
+        }
+    }
+
+    namespace elki.index.tree.spatial {
+        class SpatialDirectoryEntry [[../../SpatialDirectoryEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: int
+            -mbr: ModifiableHyperBoundingBox
+        }
+        interface SpatialEntry [[../../SpatialEntry.html]]
+        class SpatialPointLeafEntry [[../../SpatialPointLeafEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: DBID
+            -values: double[]
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LngLatAsECEFIndex.Factory.Par\n<size:10>elki.index.projected" as elki.index.projected.LngLatAsECEFIndex.Factory.Par<O extends NumberVector> {
+        ~inner: IndexFactory<O extends NumberVector>
+        ~materialize: boolean
+        ~norefine: boolean
+        ~model: EarthModel
+        +configure(Parameterization): void
+        +make(): Factory<O extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LngLatAsECEFIndex.Factory\n<size:10>elki.index.projected" as elki.index.projected.LngLatAsECEFIndex.Factory<O extends NumberVector> [[LngLatAsECEFIndex.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.projected.LngLatAsECEFIndex.Factory.Par
+    elki.index.projected.LngLatAsECEFIndex.Factory +-- elki.index.projected.LngLatAsECEFIndex.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

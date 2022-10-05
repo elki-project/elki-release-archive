@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HSBHistogramQuadraticDistance\n<size:10>elki.distance.colorhistogram" as elki.distance.colorhistogram.HSBHistogramQuadraticDistance [[HSBHistogramQuadraticDistance.html]] {
+        +HSBHistogramQuadraticDistance(int, int, int)
+        {static} +computeWeightMatrix(int, int, int): double[]
+    }
+
+    class "<size:14>MatrixWeightedQuadraticDistance\n<size:10>elki.distance" as elki.distance.MatrixWeightedQuadraticDistance [[../MatrixWeightedQuadraticDistance.html]]
+    class "<size:14>HSBHistogramQuadraticDistance.Par\n<size:10>elki.distance.colorhistogram" as elki.distance.colorhistogram.HSBHistogramQuadraticDistance.Par [[HSBHistogramQuadraticDistance.Par.html]]
+
+    elki.distance.MatrixWeightedQuadraticDistance <|-- elki.distance.colorhistogram.HSBHistogramQuadraticDistance
+    elki.distance.colorhistogram.HSBHistogramQuadraticDistance +-- elki.distance.colorhistogram.HSBHistogramQuadraticDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

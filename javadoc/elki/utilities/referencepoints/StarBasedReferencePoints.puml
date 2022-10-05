@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>StarBasedReferencePoints\n<size:10>elki.utilities.referencepoints" as elki.utilities.referencepoints.StarBasedReferencePoints [[StarBasedReferencePoints.html]] {
+        #nocenter: boolean
+        #scale: double
+        +StarBasedReferencePoints(boolean, double)
+        +getReferencePoints(Relation<? extends NumberVector>): Collection<? extends NumberVector>
+    }
+
+    interface "<size:14>ReferencePointsHeuristic\n<size:10>elki.utilities.referencepoints" as elki.utilities.referencepoints.ReferencePointsHeuristic [[ReferencePointsHeuristic.html]] {
+        {abstract} +getReferencePoints(Relation<? extends NumberVector>): Collection<? extends NumberVector>
+    }
+    class "<size:14>StarBasedReferencePoints.Par\n<size:10>elki.utilities.referencepoints" as elki.utilities.referencepoints.StarBasedReferencePoints.Par [[StarBasedReferencePoints.Par.html]]
+
+    elki.utilities.referencepoints.ReferencePointsHeuristic <|.. elki.utilities.referencepoints.StarBasedReferencePoints
+    elki.utilities.referencepoints.StarBasedReferencePoints +-- elki.utilities.referencepoints.StarBasedReferencePoints.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

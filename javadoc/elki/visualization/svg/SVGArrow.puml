@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SVGArrow\n<size:10>elki.visualization.svg" as elki.visualization.svg.SVGArrow [[SVGArrow.html]] {
+        {static} +makeArrow(SVGPlot, Direction, double, double, double): Element
+    }
+    enum "<size:14>SVGArrow.Direction\n<size:10>elki.visualization.svg" as elki.visualization.svg.SVGArrow.Direction [[SVGArrow.Direction.html]]
+
+    elki.visualization.svg.SVGArrow +-- elki.visualization.svg.SVGArrow.Direction
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

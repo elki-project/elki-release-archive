@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AlgorithmStep.Par\n<size:10>elki.workflow" as elki.workflow.AlgorithmStep.Par [[AlgorithmStep.Par.html]] {
+        #time: boolean
+        #algorithms: List<? extends Algorithm>
+        {static} +TIME_ID: OptionID
+        {static} +ALGORITHM_ID: OptionID
+        +configure(Parameterization): void
+        +make(): AlgorithmStep
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AlgorithmStep\n<size:10>elki.workflow" as elki.workflow.AlgorithmStep [[AlgorithmStep.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.workflow.AlgorithmStep.Par
+    elki.workflow.AlgorithmStep +-- elki.workflow.AlgorithmStep.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

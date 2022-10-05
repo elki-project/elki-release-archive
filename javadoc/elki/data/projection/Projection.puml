@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Projection\n<size:10>elki.data.projection" as elki.data.projection.Projection<IN, OUT> [[Projection.html]] {
+        {abstract} +initialize(SimpleTypeInformation<? extends IN>): void
+        {abstract} +project(IN): OUT
+        {abstract} +getInputDataTypeInformation(): TypeInformation
+        {abstract} +getOutputDataTypeInformation(): SimpleTypeInformation<OUT>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

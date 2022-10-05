@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WeightedQuickUnionInteger\n<size:10>elki.utilities.datastructures.unionfind" as elki.utilities.datastructures.unionfind.WeightedQuickUnionInteger [[WeightedQuickUnionInteger.html]] {
+        -used: int
+        -parent: int[]
+        -weight: int[]
+        {static} -INITIAL_SIZE: int
+        +WeightedQuickUnionInteger()
+        +WeightedQuickUnionInteger(int)
+        +nextIndex(int): int
+        +find(int): int
+        +union(int, int): int
+        +isConnected(int, int): boolean
+        +getRoots(): IntList
+        +size(): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

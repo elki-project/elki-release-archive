@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSToHierarchical\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.OPTICSToHierarchical [[OPTICSToHierarchical.html]] {
+        ~inner: OPTICSTypeAlgorithm
+        +OPTICSToHierarchical(OPTICSTypeAlgorithm)
+        +autorun(Database): ClusterMergeHistory
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>HierarchicalClusteringAlgorithm\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HierarchicalClusteringAlgorithm [[HierarchicalClusteringAlgorithm.html]]
+    class "<size:14>OPTICSToHierarchical.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.OPTICSToHierarchical.Par [[OPTICSToHierarchical.Par.html]]
+
+    elki.clustering.hierarchical.HierarchicalClusteringAlgorithm <|.. elki.clustering.hierarchical.OPTICSToHierarchical
+    elki.clustering.hierarchical.OPTICSToHierarchical +-- elki.clustering.hierarchical.OPTICSToHierarchical.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

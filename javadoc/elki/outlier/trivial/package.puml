@@ -1,0 +1,79 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.trivial {
+
+        class TrivialGeneratedOutlier [[TrivialGeneratedOutlier.html]] {
+            {static} -LOG: Logging
+            ~expect: double
+            +TrivialGeneratedOutlier(double)
+            +TrivialGeneratedOutlier()
+            +getInputTypeRestriction(): TypeInformation[]
+            +autorun(Database): OutlierResult
+            +run(Relation<Model>, Relation<NumberVector>, Relation<?>): OutlierResult
+        }
+
+        class elki.outlier.trivial.TrivialGeneratedOutlier.Par [[TrivialGeneratedOutlier.Par.html]] {
+            {static} +EXPECT_ID: OptionID
+            ~expect: double
+            +configure(Parameterization): void
+            +make(): TrivialGeneratedOutlier
+        }
+
+        class TrivialAverageCoordinateOutlier [[TrivialAverageCoordinateOutlier.html]] {
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): OutlierResult
+        }
+
+        class ByLabelOutlier [[ByLabelOutlier.html]] {
+            {static} +DEFAULT_PATTERN: String
+            ~pattern: Pattern
+            +ByLabelOutlier(Pattern)
+            +ByLabelOutlier()
+            +getInputTypeRestriction(): TypeInformation[]
+            +autorun(Database): OutlierResult
+            +run(Relation<?>): OutlierResult
+        }
+
+        class elki.outlier.trivial.ByLabelOutlier.Par [[ByLabelOutlier.Par.html]] {
+            {static} +OUTLIER_PATTERN_ID: OptionID
+            -pattern: Pattern
+            +configure(Parameterization): void
+            +make(): ByLabelOutlier
+        }
+
+        class TrivialAllOutlier [[TrivialAllOutlier.html]] {
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<?>): OutlierResult
+        }
+
+        class TrivialNoOutlier [[TrivialNoOutlier.html]] {
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<?>): OutlierResult
+        }
+
+        elki.outlier.OutlierAlgorithm <|.. TrivialGeneratedOutlier
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.trivial.TrivialGeneratedOutlier.Par
+        TrivialGeneratedOutlier +-- elki.outlier.trivial.TrivialGeneratedOutlier.Par
+        elki.outlier.OutlierAlgorithm <|.. TrivialAverageCoordinateOutlier
+        elki.outlier.OutlierAlgorithm <|.. ByLabelOutlier
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.trivial.ByLabelOutlier.Par
+        ByLabelOutlier +-- elki.outlier.trivial.ByLabelOutlier.Par
+        elki.outlier.OutlierAlgorithm <|.. TrivialAllOutlier
+        elki.outlier.OutlierAlgorithm <|.. TrivialNoOutlier
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

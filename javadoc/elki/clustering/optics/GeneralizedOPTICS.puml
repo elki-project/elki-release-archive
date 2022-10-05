@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>GeneralizedOPTICS\n<size:10>elki.clustering.optics" as elki.clustering.optics.GeneralizedOPTICS [[GeneralizedOPTICS.html]]
+
+    interface "<size:14>OPTICSTypeAlgorithm\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSTypeAlgorithm [[OPTICSTypeAlgorithm.html]] {
+        {abstract} +getMinPts(): int
+    }
+    abstract class "<size:14>GeneralizedOPTICS.Instance\n<size:10>elki.clustering.optics" as elki.clustering.optics.GeneralizedOPTICS.Instance<R> [[GeneralizedOPTICS.Instance.html]]
+
+    elki.clustering.optics.OPTICSTypeAlgorithm <|-- elki.clustering.optics.GeneralizedOPTICS
+    elki.clustering.optics.GeneralizedOPTICS +-- elki.clustering.optics.GeneralizedOPTICS.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

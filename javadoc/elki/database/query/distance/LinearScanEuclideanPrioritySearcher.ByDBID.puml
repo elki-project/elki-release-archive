@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearScanEuclideanPrioritySearcher.ByDBID\n<size:10>elki.database.query.distance" as elki.database.query.distance.LinearScanEuclideanPrioritySearcher.ByDBID<O extends NumberVector> [[LinearScanEuclideanPrioritySearcher.ByDBID.html]] {
+        +ByDBID(DistanceQuery<O extends NumberVector>)
+        +search(DBIDRef): PrioritySearcher<DBIDRef>
+    }
+
+    abstract class "<size:14>LinearScanEuclideanPrioritySearcher\n<size:10>elki.database.query.distance" as elki.database.query.distance.LinearScanEuclideanPrioritySearcher<Q, O extends NumberVector> [[LinearScanEuclideanPrioritySearcher.html]]
+    abstract class "<size:14>LinearScanEuclideanPrioritySearcher\n<size:10>elki.database.query.distance" as elki.database.query.distance.LinearScanEuclideanPrioritySearcher<Q, O extends NumberVector> [[LinearScanEuclideanPrioritySearcher.html]]
+
+    elki.database.query.distance.LinearScanEuclideanPrioritySearcher <|-- elki.database.query.distance.LinearScanEuclideanPrioritySearcher.ByDBID
+    elki.database.query.distance.LinearScanEuclideanPrioritySearcher +-- elki.database.query.distance.LinearScanEuclideanPrioritySearcher.ByDBID
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

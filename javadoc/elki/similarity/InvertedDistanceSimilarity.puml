@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InvertedDistanceSimilarity\n<size:10>elki.similarity" as elki.similarity.InvertedDistanceSimilarity<O> [[InvertedDistanceSimilarity.html]] {
+        {static} +DISTANCE_FUNCTION_ID: OptionID
+        #distanceFunction: PrimitiveDistance<? super O>
+        +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+        +similarity(O, O): double
+    }
+
+    interface "<size:14>PrimitiveSimilarity\n<size:10>elki.similarity" as elki.similarity.PrimitiveSimilarity<O> [[PrimitiveSimilarity.html]] {
+        {abstract} +similarity(O, O): double
+    }
+
+    elki.similarity.PrimitiveSimilarity <|.. elki.similarity.InvertedDistanceSimilarity
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

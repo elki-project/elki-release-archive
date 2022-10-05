@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntegerDBID.Itr\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBID.Itr [[IntegerDBID.Itr.html]] {
+        ~pos: int
+        +advance(): Itr
+        +advance(int): Itr
+        +retract(): Itr
+        +seek(int): Itr
+        +getOffset(): int
+        +internalGetIndex(): int
+        +valid(): boolean
+    }
+
+    interface "<size:14>DBIDArrayIter\n<size:10>elki.database.ids" as elki.database.ids.DBIDArrayIter [[../DBIDArrayIter.html]] {
+        {abstract} +advance(): DBIDArrayIter
+        {abstract} +advance(int): DBIDArrayIter
+        {abstract} +retract(): DBIDArrayIter
+        {abstract} +seek(int): DBIDArrayIter
+    }
+    interface "<size:14>IntegerDBIDRef\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDRef [[IntegerDBIDRef.html]] {
+        {abstract} +internalGetIndex(): int
+    }
+    class "<size:14>IntegerDBID\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBID [[IntegerDBID.html]]
+
+    elki.database.ids.DBIDArrayIter <|.. elki.database.ids.integer.IntegerDBID.Itr
+    elki.database.ids.integer.IntegerDBIDRef <|.. elki.database.ids.integer.IntegerDBID.Itr
+    elki.database.ids.integer.IntegerDBID +-- elki.database.ids.integer.IntegerDBID.Itr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

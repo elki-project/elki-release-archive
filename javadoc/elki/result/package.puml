@@ -1,0 +1,541 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.result {
+
+        class AutomaticVisualization [[AutomaticVisualization.html]] {
+            {static} -LOG: Logging
+            ~title: String
+            {static} #DEFAULT_TITLE: String
+            ~manager: VisualizerParameterizer
+            ~single: boolean
+            ~window: ResultWindow
+            +AutomaticVisualization(String, VisualizerParameterizer, boolean)
+            +processNewResult(Object): void
+        }
+
+        class elki.result.AutomaticVisualization.Par [[AutomaticVisualization.Par.html]] {
+            {static} +WINDOW_TITLE_ID: OptionID
+            {static} +SINGLE_ID: OptionID
+            ~title: String
+            ~manager: VisualizerParameterizer
+            ~single: boolean
+            +configure(Parameterization): void
+            +make(): AutomaticVisualization
+        }
+
+        class ExportVisualizations [[ExportVisualizations.html]] {
+            {static} -LOG: Logging
+            ~output: Path
+            ~manager: VisualizerParameterizer
+            ~ratio: double
+            ~baseResult: Object
+            ~context: VisualizerContext
+            ~counter: Map<String, Integer>
+            ~iwidth: int
+            +ExportVisualizations(Path, VisualizerParameterizer, double, Format)
+            +ExportVisualizations(Path, VisualizerParameterizer, double, Format, int)
+            +processNewResult(Object): void
+            -processItem(PlotItem): void
+        }
+
+        enum elki.result.ExportVisualizations.Format [[ExportVisualizations.Format.html]] {
+            {static} +SVG
+            {static} +PNG
+            {static} +PDF
+            {static} +PS
+            {static} +EPS
+            {static} +JPEG
+        }
+
+        class elki.result.ExportVisualizations.Par [[ExportVisualizations.Par.html]] {
+            {static} +RATIO_ID: OptionID
+            {static} +FOLDER_ID: OptionID
+            {static} +FORMAT_ID: OptionID
+            {static} +IWIDTH_ID: OptionID
+            ~manager: VisualizerParameterizer
+            ~output: Path
+            ~ratio: double
+            ~iwidth: int
+            +configure(Parameterization): void
+            +make(): ExportVisualizations
+        }
+
+        class LogResultStructureResultHandler [[LogResultStructureResultHandler.html]] {
+            {static} -LOG: Logging
+            +processNewResult(Object): void
+            -recursiveLogResult(StringBuilder, Object, int): void
+        }
+
+        class KMLOutputHandler [[KMLOutputHandler.html]] {
+            {static} -LOG: Logging
+            {static} -NUMSTYLES: int
+            ~filename: Path
+            ~scaling: OutlierScaling
+            -compat: boolean
+            -autoopen: boolean
+            +KMLOutputHandler(Path, OutlierScaling, boolean, boolean)
+            +processNewResult(Object): void
+            -writeOutlierResult(XMLStreamWriter, OutlierResult, Database): void
+            -writeClusteringResult(XMLStreamWriter, Clustering<Model>, Database): void
+            -buildHullsRecursively(Cluster<Model>, Hierarchy<Cluster<Model>>, Map<Object, DoubleObjPair<Polygon>>, Relation<? extends NumberVector>): DoubleObjPair<Polygon>
+            -makeDescription(Collection<Relation<?>>, DBIDRef): StringBuilder
+            -makeDescription(Cluster<?>): StringBuilder
+            -writeNewlineOnDebug(XMLStreamWriter): void
+            {static} +getColorForValue(double): Color
+        }
+
+        class elki.result.KMLOutputHandler.Par [[KMLOutputHandler.Par.html]] {
+            {static} +SCALING_ID: OptionID
+            {static} +COMPAT_ID: OptionID
+            {static} +AUTOOPEN_ID: OptionID
+            ~filename: Path
+            ~scaling: OutlierScaling
+            ~compat: boolean
+            ~autoopen: boolean
+            +configure(Parameterization): void
+            +make(): KMLOutputHandler
+        }
+
+        class SelectionResult [[SelectionResult.html]] {
+            +getLongName(): String
+            +getShortName(): String
+            {static} +ensureSelectionResult(Database): SelectionResult
+        }
+
+        class ScalesResult [[ScalesResult.html]] {
+            -scales: LinearScale[]
+            +ScalesResult(Relation<? extends SpatialComparable>)
+            +ScalesResult(LinearScale[])
+            +getScale(int): LinearScale
+            +setScale(int, LinearScale): void
+            +getScales(): LinearScale[]
+            {static} +getScalesResult(Relation<? extends SpatialComparable>): ScalesResult
+        }
+
+        class DBIDSelection [[DBIDSelection.html]] {
+            -selectedIds: DBIDs
+            +DBIDSelection(DBIDs)
+            +getSelectedIds(): DBIDs
+        }
+
+        class ResultWriter [[ResultWriter.html]] {
+            {static} -LOG: Logging
+            -out: Path
+            -gzip: boolean
+            -warnoverwrite: boolean
+            -filter: Pattern
+            +ResultWriter(Path, boolean, boolean, Pattern)
+            +processNewResult(Object): void
+            -openStreamFactory(): StreamFactory
+        }
+
+        class elki.result.ResultWriter.Par [[ResultWriter.Par.html]] {
+            {static} +GZIP_OUTPUT_ID: OptionID
+            {static} +OVERWRITE_OPTION_ID: OptionID
+            {static} +FILTER_PATTERN_ID: OptionID
+            -out: Path
+            -gzip: boolean
+            -warnoverwrite: boolean
+            -filter: Pattern
+            +configure(Parameterization): void
+            +make(): ResultWriter
+        }
+
+        interface PixmapResult [[PixmapResult.html]] {
+            {abstract} +getImage(): RenderedImage
+            {abstract} +getAsFile(): File
+        }
+
+        class RangeSelection [[RangeSelection.html]] {
+            -range: ModifiableHyperBoundingBox
+            +RangeSelection(DBIDs)
+            +RangeSelection(DBIDs, ModifiableHyperBoundingBox)
+            +getRanges(): ModifiableHyperBoundingBox
+        }
+
+        class SettingsResult [[SettingsResult.html]] {
+            +SettingsResult(Collection<TrackedParameter>)
+            {static} +getSettingsResults(Object): List<SettingsResult>
+        }
+
+        class elki.result.SettingsResult.SettingInformation [[SettingsResult.SettingInformation.html]] {
+            +owner: String
+            +name: String
+            +value: String
+            +SettingInformation(String, String, String)
+        }
+
+        class SamplingResult [[SamplingResult.html]] {
+            ~sample: DBIDs
+            +SamplingResult(Relation<?>)
+            +getSample(): DBIDs
+            +setSample(DBIDs): void
+            +getLongName(): String
+            +getShortName(): String
+            {static} +getSamplingResult(Relation<?>): SamplingResult
+        }
+
+        class DiscardResultHandler [[DiscardResultHandler.html]] {
+            +processNewResult(Object): void
+        }
+
+        class ClusteringVectorDumper [[ClusteringVectorDumper.html]] {
+            {static} -LOG: Logging
+            -outputFile: Path
+            -forceLabel: String
+            -append: boolean
+            +ClusteringVectorDumper(Path, boolean, String)
+            +ClusteringVectorDumper(Path, boolean)
+            +processNewResult(Object): void
+            #dumpClusteringOutput(Appendable, Clustering<?>): void
+        }
+
+        class elki.result.ClusteringVectorDumper.Par [[ClusteringVectorDumper.Par.html]] {
+            {static} +OUT_ID: OptionID
+            {static} +APPEND_ID: OptionID
+            {static} +FORCE_LABEL_ID: OptionID
+            -outputFile: Path
+            -forceLabel: String
+            -append: boolean
+            +configure(Parameterization): void
+            +make(): ClusteringVectorDumper
+        }
+
+        class AssociationRuleResult [[AssociationRuleResult.html]] {
+            -rules: List<AssociationRule>
+            -meta: VectorFieldTypeInformation<BitVector>
+            +AssociationRuleResult(List<AssociationRule>, VectorFieldTypeInformation<BitVector>)
+            +getRules(): List<AssociationRule>
+            +getMeta(): VectorFieldTypeInformation<BitVector>
+            +writeToText(TextWriterStream, String): void
+        }
+
+        class FrequentItemsetsResult [[FrequentItemsetsResult.html]] {
+            -itemsets: List<Itemset>
+            -meta: VectorFieldTypeInformation<BitVector>
+            -total: int
+            +FrequentItemsetsResult(List<Itemset>, VectorFieldTypeInformation<BitVector>, int)
+            +getItemsets(): List<Itemset>
+            +writeToText(TextWriterStream, String): void
+            +getMeta(): VectorFieldTypeInformation<BitVector>
+            +getTotal(): int
+        }
+
+        class HistogramResult [[HistogramResult.html]] {
+            +HistogramResult(Collection<double[]>)
+            +HistogramResult(Collection<double[]>, Collection<String>)
+        }
+
+        interface ResultHandler [[ResultHandler.html]]
+
+        class EvaluationResult [[EvaluationResult.html]] {
+            {static} +RANKING: String
+            ~header: ArrayList<String>
+            +newGroup(String): MeasurementGroup
+            +findOrCreateGroup(String): MeasurementGroup
+            +writeToText(TextWriterStream, String): void
+            +addHeader(String): void
+            +getHeaderLines(): Iterable<String>
+            +iterator(): Iterator<MeasurementGroup>
+            +numLines(): int
+            {static} +findOrCreate(Object, String): EvaluationResult
+            +visualizeSingleton(): boolean
+        }
+
+        class elki.result.EvaluationResult.MeasurementGroup [[EvaluationResult.MeasurementGroup.html]] {
+            -groupname: String
+            #MeasurementGroup(String)
+            +getName(): String
+            +addMeasure(String, double, double, double, boolean): MeasurementGroup
+            +addMeasure(String, double, double, double, double, boolean): MeasurementGroup
+            +hasMeasure(String): boolean
+            +getMeasure(String): Measurement
+            +iterator(): Iterator<Measurement>
+        }
+
+        class elki.result.EvaluationResult.Measurement [[EvaluationResult.Measurement.html]] {
+            ~name: String
+            ~val: double
+            ~min: double
+            ~max: double
+            ~exp: double
+            -lowerisbetter: boolean
+            #Measurement(String, double, double, double, boolean)
+            #Measurement(String, double, double, double, double, boolean)
+            +getName(): String
+            +getVal(): double
+            +getMin(): double
+            +getMax(): double
+            +getExp(): double
+            +lowerIsBetter(): boolean
+        }
+
+        interface OrderingResult [[OrderingResult.html]] {
+            {abstract} +getDBIDs(): DBIDs
+            {abstract} +order(DBIDs): ArrayModifiableDBIDs
+        }
+
+        class CollectionResult<O> [[CollectionResult.html]] {
+            -col: Collection<O>
+            -header: Collection<String>
+            +CollectionResult(Collection<O>, Collection<String>)
+            +CollectionResult(Collection<O>)
+            +addHeader(String): void
+            +getHeader(): Collection<String>
+            +iterator(): Iterator<O>
+            +size(): int
+        }
+
+        class ReferencePointsResult<O> [[ReferencePointsResult.html]] {
+            +ReferencePointsResult(Collection<O>)
+            +ReferencePointsResult(Collection<O>, Collection<String>)
+        }
+
+        class ResultUtil [[ResultUtil.html]] {
+            {static} +getRelations(Object): List<Relation<?>>
+            {static} +getOrderingResults(Object): List<OrderingResult>
+            {static} +getCollectionResults(Object): List<CollectionResult<?>>
+            {static} +getIterableResults(Object): List<IterableResult<?>>
+            {static} +filterResults(Object, Class<? super C>): ArrayList<C>
+            {static} +addChildResult(Object, Object): void
+            {static} +findDatabase(Object): Database
+            {static} +removeRecursive(Object): void
+        }
+
+        interface IterableResult<O> [[IterableResult.html]] {
+            {abstract} +iterator(): Iterator<O>
+        }
+
+        class Metadata [[Metadata.html]] {
+            {static} -LOG: Logging
+            {static} -queue: ReferenceQueue<? super Object>
+            {static} -global: Map<Object, Metadata>
+            -name: String
+            {static} -EMPTY_CHILDREN: Object[]
+            -Metadata(Object)
+            {static} +of(Object): Metadata
+            {static} +get(Object): Metadata
+            {static} +hierarchyOf(Object): Hierarchy
+            {static} +expungeStaleEntries(): void
+            -cleanup(): void
+            +hierarchy(): Hierarchy
+            +setLongName(String): void
+            +getLongName(): String
+            {static} -deref(Object): Object
+            +addResultListener(ResultListener): void
+            +removeResultListener(ResultListener): void
+            -notifyChildAdded(Object): void
+            +notifyChanged(): void
+            -notifyChildRemoved(Object): void
+            -doNotify(Consumer<ResultListener>): void
+        }
+
+        class elki.result.Metadata.CleanerThread [[Metadata.CleanerThread.html]] {
+            +run(): void
+        }
+
+        class elki.result.Metadata.Hierarchy [[Metadata.Hierarchy.html]] {
+            ~nump: int
+            ~numc: int
+            -children: Object[]
+            +addChild(Object): boolean
+            +addWeakChild(Object): boolean
+            +removeChild(Object): boolean
+            -addParentInt(Metadata): boolean
+            -addChildInt(Object): boolean
+            -removeParentInt(Metadata): boolean
+            -removeChildInt(Object): boolean
+            +hasChildren(): boolean
+            +iterParents(): It<Object>
+            +iterParentsReverse(): It<Object>
+            +iterAncestors(): It<Object>
+            +iterAncestorsSelf(): It<Object>
+            +iterChildren(): It<Object>
+            +iterChildrenReverse(): It<Object>
+            +iterDescendants(): It<Object>
+            +iterDescendantsSelf(): It<Object>
+        }
+
+        class elki.result.Metadata.Hierarchy.ItrParents [[Metadata.Hierarchy.ItrParents.html]] {
+            -pos: int
+            +advance(): It<Object>
+        }
+
+        class elki.result.Metadata.Hierarchy.ItrParentsReverse [[Metadata.Hierarchy.ItrParentsReverse.html]] {
+            -pos: int
+            +advance(): It<Object>
+        }
+
+        class elki.result.Metadata.Hierarchy.ItrChildren [[Metadata.Hierarchy.ItrChildren.html]] {
+            -pos: int
+            +advance(): It<Object>
+        }
+
+        class elki.result.Metadata.Hierarchy.ItrChildrenReverse [[Metadata.Hierarchy.ItrChildrenReverse.html]] {
+            -pos: int
+            +advance(): It<Object>
+        }
+
+        class elki.result.Metadata.Hierarchy.ItrDesc [[Metadata.Hierarchy.ItrDesc.html]] {
+            ~childiter: It<Object>
+            ~subiter: It<Object>
+            ~extra: Object
+            ~ItrDesc()
+            ~ItrDesc(Object)
+            +valid(): boolean
+            +advance(): It<Object>
+            -lookahead(): boolean
+            +get(): Object
+        }
+
+        class elki.result.Metadata.Hierarchy.ItrAnc [[Metadata.Hierarchy.ItrAnc.html]] {
+            ~parentiter: It<Object>
+            ~subiter: It<Object>
+            ~extra: Object
+            ~ItrAnc()
+            ~ItrAnc(Object)
+            +valid(): boolean
+            +advance(): It<Object>
+            -lookahead(): boolean
+            +get(): Object
+        }
+
+        abstract class elki.result.Metadata.EagerIt<O> [[Metadata.EagerIt.html]] {
+            #current: Object
+            +valid(): boolean
+            +get(): O
+        }
+
+        interface ResultProcessor [[ResultProcessor.html]] {
+            {abstract} +processNewResult(Object): void
+        }
+
+        interface ResultListener [[ResultListener.html]] {
+            +resultAdded(Object, Object): void
+            +resultChanged(Object): void
+            +resultRemoved(Object, Object): void
+        }
+
+        ResultHandler <|.. AutomaticVisualization
+        elki.utilities.optionhandling.Parameterizer <|.. elki.result.AutomaticVisualization.Par
+        AutomaticVisualization +-- elki.result.AutomaticVisualization.Par
+        ResultHandler <|.. ExportVisualizations
+        ExportVisualizations --> elki.result.ExportVisualizations.Format: format
+        ExportVisualizations +-- elki.result.ExportVisualizations.Format
+        elki.utilities.optionhandling.Parameterizer <|.. elki.result.ExportVisualizations.Par
+        ExportVisualizations +-- elki.result.ExportVisualizations.Par
+        elki.result.ExportVisualizations.Par --> elki.result.ExportVisualizations.Format: format
+        ResultHandler <|.. LogResultStructureResultHandler
+        ResultHandler <|.. KMLOutputHandler
+        elki.utilities.optionhandling.Parameterizer <|.. elki.result.KMLOutputHandler.Par
+        KMLOutputHandler +-- elki.result.KMLOutputHandler.Par
+        SelectionResult --> DBIDSelection: selection
+        ResultHandler <|.. ResultWriter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.result.ResultWriter.Par
+        ResultWriter +-- elki.result.ResultWriter.Par
+        DBIDSelection <|-- RangeSelection
+        SettingsResult --> "*" elki.result.SettingsResult.SettingInformation: settings
+        SettingsResult +-- elki.result.SettingsResult.SettingInformation
+        ResultHandler <|.. DiscardResultHandler
+        ResultHandler <|.. ClusteringVectorDumper
+        elki.utilities.optionhandling.Parameterizer <|.. elki.result.ClusteringVectorDumper.Par
+        ClusteringVectorDumper +-- elki.result.ClusteringVectorDumper.Par
+        elki.result.textwriter.TextWriteable <|.. AssociationRuleResult
+        elki.result.textwriter.TextWriteable <|.. FrequentItemsetsResult
+        CollectionResult <|-- HistogramResult
+        ResultProcessor <|-- ResultHandler
+        elki.result.textwriter.TextWriteable <|.. EvaluationResult
+        EvaluationResult --> "*" elki.result.EvaluationResult.MeasurementGroup: groups
+        EvaluationResult +-- elki.result.EvaluationResult.MeasurementGroup
+        elki.result.EvaluationResult.MeasurementGroup --> "*" elki.result.EvaluationResult.Measurement: measurements
+        EvaluationResult +-- elki.result.EvaluationResult.Measurement
+        IterableResult <|.. CollectionResult
+        CollectionResult <|-- ReferencePointsResult
+        java.lang.ref.WeakReference <|-- Metadata
+        Metadata --> elki.result.Metadata.CleanerThread: CLEANER
+        Metadata --> elki.result.Metadata.Hierarchy: hierarchy
+        Metadata --> "*" ResultListener: listeners
+        Metadata --> "*" Metadata: EMPTY_PARENTS
+        java.lang.Thread <|-- elki.result.Metadata.CleanerThread
+        Metadata +-- elki.result.Metadata.CleanerThread
+        Metadata +-- elki.result.Metadata.Hierarchy
+        elki.result.Metadata.Hierarchy --> "*" Metadata: parents
+        elki.result.Metadata.EagerIt <|-- elki.result.Metadata.Hierarchy.ItrParents
+        elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrParents
+        elki.result.Metadata.EagerIt <|-- elki.result.Metadata.Hierarchy.ItrParentsReverse
+        elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrParentsReverse
+        elki.result.Metadata.EagerIt <|-- elki.result.Metadata.Hierarchy.ItrChildren
+        elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrChildren
+        elki.result.Metadata.EagerIt <|-- elki.result.Metadata.Hierarchy.ItrChildrenReverse
+        elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrChildrenReverse
+        elki.utilities.datastructures.iterator.It <|.. elki.result.Metadata.Hierarchy.ItrDesc
+        elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrDesc
+        elki.utilities.datastructures.iterator.It <|.. elki.result.Metadata.Hierarchy.ItrAnc
+        elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrAnc
+        elki.utilities.datastructures.iterator.It <|.. elki.result.Metadata.EagerIt
+        Metadata +-- elki.result.Metadata.EagerIt
+        java.util.EventListener <|-- ResultListener
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace java.lang {
+        class Thread {
+            -name: String
+            -priority: int
+            -daemon: boolean
+            -stillborn: boolean
+            -eetop: long
+            -target: Runnable
+            -group: ThreadGroup
+            -contextClassLoader: ClassLoader
+            -inheritedAccessControlContext: AccessControlContext
+            {static} -threadInitNumber: int
+            ~threadLocals: ThreadLocalMap
+            ~inheritableThreadLocals: ThreadLocalMap
+            -stackSize: long
+            -tid: long
+            {static} -threadSeqNumber: long
+            -threadStatus: int
+            ~parkBlocker: Object
+            -blocker: Interruptible
+            -blockerLock: Object
+            {static} +MIN_PRIORITY: int
+            {static} +NORM_PRIORITY: int
+            {static} +MAX_PRIORITY: int
+            {static} -EMPTY_STACK_TRACE: StackTraceElement[]
+            -uncaughtExceptionHandler: UncaughtExceptionHandler
+            {static} -defaultUncaughtExceptionHandler: UncaughtExceptionHandler
+            ~threadLocalRandomSeed: long
+            ~threadLocalRandomProbe: int
+            ~threadLocalRandomSecondarySeed: int
+        }
+    }
+
+    namespace java.lang.ref {
+        class WeakReference<T>
+    }
+
+    namespace elki.utilities.datastructures.iterator {
+        interface It<O> [[../utilities/datastructures/iterator/It.html]] {
+            {abstract} +get(): O
+            {abstract} +advance(): It<O>
+            +filter(Class<? super T>): It<T>
+            +filter(Predicate<? super O>): It<O>
+            +find(Object): boolean
+            +forEach(Consumer<? super O>): void
+            +collect(T extends Collection<? super O>): T extends Collection<? super O>
+        }
+    }
+
+    namespace java.util {
+        interface EventListener
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

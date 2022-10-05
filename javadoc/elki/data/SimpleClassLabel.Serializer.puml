@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleClassLabel.Serializer\n<size:10>elki.data" as elki.data.SimpleClassLabel.Serializer [[SimpleClassLabel.Serializer.html]] {
+        +fromByteBuffer(ByteBuffer): SimpleClassLabel
+        +toByteBuffer(ByteBuffer, SimpleClassLabel): void
+        +getByteSize(SimpleClassLabel): int
+    }
+
+    interface "<size:14>ByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteBufferSerializer<SimpleClassLabel> [[../utilities/io/ByteBufferSerializer.html]] {
+        {abstract} +fromByteBuffer(ByteBuffer): SimpleClassLabel
+        {abstract} +toByteBuffer(ByteBuffer, SimpleClassLabel): void
+        {abstract} +getByteSize(SimpleClassLabel): int
+    }
+    class "<size:14>SimpleClassLabel\n<size:10>elki.data" as elki.data.SimpleClassLabel [[SimpleClassLabel.html]]
+
+    elki.utilities.io.ByteBufferSerializer <|.. elki.data.SimpleClassLabel.Serializer
+    elki.data.SimpleClassLabel +-- elki.data.SimpleClassLabel.Serializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,118 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.svm {
+
+        class EpsilonSVR [[EpsilonSVR.html]] {
+            {static} -LOG: Logging
+            #p: double
+            #C: double
+            +EpsilonSVR(double, boolean, double, double, double)
+            #solve(DataSet): SolutionInfo
+            #getLogger(): Logging
+        }
+
+        abstract class AbstractSVR [[AbstractSVR.html]] {
+            ~probability: boolean
+            +AbstractSVR(double, boolean, double)
+            +cross_validation(DataSet, int, double[]): void
+            -svr_probability(DataSet, double[]): double
+            +train(DataSet): RegressionModel
+        }
+
+        class NuSVR [[NuSVR.html]] {
+            {static} -LOG: Logging
+            #nu: double
+            #C: double
+            +NuSVR(double, boolean, double, double, double)
+            #solve(DataSet): SolutionInfo
+            #getLogger(): Logging
+        }
+
+        class SVDD [[SVDD.html]] {
+            {static} -LOG: Logging
+            -C: double
+            +SVDD(double, boolean, double, double)
+            #solve(DataSet): SolutionInfo
+            #getLogger(): Logging
+        }
+
+        interface elki.svm.SVDD.RadiusAcceptor [[SVDD.RadiusAcceptor.html]] {
+            {abstract} +setRSquare(double): void
+        }
+
+        class OneClassSVM [[OneClassSVM.html]] {
+            {static} -LOG: Logging
+            #nu: double
+            +OneClassSVM(double, boolean, double, double)
+            #solve(DataSet): SolutionInfo
+            #getLogger(): Logging
+        }
+
+        abstract class AbstractSingleSVM [[AbstractSingleSVM.html]] {
+            {static} #ONE: byte
+            {static} #MONE: byte
+            #eps: double
+            #shrinking: boolean
+            #cache_size: double
+            +AbstractSingleSVM(double, boolean, double)
+            {abstract} #solve(DataSet): SolutionInfo
+            #train_one(DataSet): SolutionInfo
+            +set_weights(double, double): void
+            {static} +shuffledIndex(int[], int): int[]
+            {static} +makeFolds(int, int): int[]
+            {static} +stratifiedFolds(DataSet, int, int[]): int[]
+            {static} #groupClasses(DataSet, int[], int[]): int
+            {static} +nonzero(double): boolean
+            {abstract} #getLogger(): Logging
+        }
+
+        abstract class AbstractSVC [[AbstractSVC.html]] {
+            ~probability: boolean
+            +AbstractSVC(double, boolean, double)
+            +train(DataSet): ClassificationModel
+            +train(DataSet, double[]): ClassificationModel
+            +cross_validation(DataSet, double[], int, double[]): void
+            -sigmoid_train(double[], DataSet): double[]
+            -binary_svc_probability(DataSet, double, double): double[]
+        }
+
+        class NuSVC [[NuSVC.html]] {
+            {static} -LOG: Logging
+            #nu: double
+            +NuSVC(double, boolean, double, double)
+            #solve(DataSet): SolutionInfo
+            #getLogger(): Logging
+        }
+
+        class R2q [[R2q.html]] {
+            {static} -LOG: Logging
+            -C: double
+            +R2q(double, boolean, double, double)
+            #solve(DataSet): SolutionInfo
+            #getLogger(): Logging
+        }
+
+        class CSVC [[CSVC.html]] {
+            {static} -LOG: Logging
+            ~Cp: double
+            ~Cn: double
+            +CSVC(double, boolean, double)
+            +set_weights(double, double): void
+            #solve(DataSet): SolutionInfo
+            #getLogger(): Logging
+        }
+
+        AbstractSVR <|-- EpsilonSVR
+        AbstractSingleSVM <|-- AbstractSVR
+        AbstractSVR <|-- NuSVR
+        AbstractSVR <|-- SVDD
+        SVDD +-- elki.svm.SVDD.RadiusAcceptor
+        AbstractSVR <|-- OneClassSVM
+        AbstractSingleSVM <|-- AbstractSVC
+        AbstractSVC <|-- NuSVC
+        AbstractSVR <|-- R2q
+        AbstractSVC <|-- CSVC
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GNAT.GNATPriorityObjectSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATPriorityObjectSearcher [[GNAT.GNATPriorityObjectSearcher.html]] {
+        -query: O
+        +search(O): PrioritySearcher<O>
+        #queryDistance(DBIDRef): double
+    }
+
+    abstract class "<size:14>GNAT.GNATPrioritySearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATPrioritySearcher<O> [[GNAT.GNATPrioritySearcher.html]] {
+        {abstract} #queryDistance(DBIDRef): double
+    }
+    class "<size:14>GNAT\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT<O> [[GNAT.html]]
+
+    elki.index.tree.metrical.vptree.GNAT.GNATPrioritySearcher <|-- elki.index.tree.metrical.vptree.GNAT.GNATPriorityObjectSearcher
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATPriorityObjectSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExponionKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.ExponionKMeans.Instance [[ExponionKMeans.Instance.html]] {
+        ~cdist: double[]
+        ~cnum: int[]
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+        #initialAssignToNearestCluster(): int
+        #assignToNearestCluster(): int
+        #getLogger(): Logging
+    }
+
+    class "<size:14>HamerlyKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.HamerlyKMeans.Instance [[HamerlyKMeans.Instance.html]]
+    class "<size:14>ExponionKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.ExponionKMeans<V extends NumberVector> [[ExponionKMeans.html]]
+
+    elki.clustering.kmeans.HamerlyKMeans.Instance <|-- elki.clustering.kmeans.ExponionKMeans.Instance
+    elki.clustering.kmeans.ExponionKMeans +-- elki.clustering.kmeans.ExponionKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

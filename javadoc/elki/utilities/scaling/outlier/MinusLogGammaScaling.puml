@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MinusLogGammaScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.MinusLogGammaScaling [[MinusLogGammaScaling.html]] {
+        ~max: double
+        ~mlogmax: double
+        #preScale(double): double
+        +prepare(OutlierResult): void
+    }
+
+    class "<size:14>OutlierGammaScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierGammaScaling [[OutlierGammaScaling.html]]
+    class "<size:14>MinusLogGammaScaling.Par\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.MinusLogGammaScaling.Par [[MinusLogGammaScaling.Par.html]]
+
+    elki.utilities.scaling.outlier.OutlierGammaScaling <|-- elki.utilities.scaling.outlier.MinusLogGammaScaling
+    elki.utilities.scaling.outlier.MinusLogGammaScaling +-- elki.utilities.scaling.outlier.MinusLogGammaScaling.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParallelExecutor\n<size:10>elki.parallel" as elki.parallel.ParallelExecutor [[ParallelExecutor.html]] {
+        {static} +run(DBIDs, Processor...): void
+    }
+    class "<size:14>ParallelExecutor.BlockArrayRunner\n<size:10>elki.parallel" as elki.parallel.ParallelExecutor.BlockArrayRunner [[ParallelExecutor.BlockArrayRunner.html]]
+
+    elki.parallel.ParallelExecutor +-- elki.parallel.ParallelExecutor.BlockArrayRunner
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>JensenShannonEquiwidthDependence.Par\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.JensenShannonEquiwidthDependence.Par [[JensenShannonEquiwidthDependence.Par.html]] {
+        +make(): JensenShannonEquiwidthDependence
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>JensenShannonEquiwidthDependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.JensenShannonEquiwidthDependence [[JensenShannonEquiwidthDependence.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.JensenShannonEquiwidthDependence.Par
+    elki.math.statistics.dependence.JensenShannonEquiwidthDependence +-- elki.math.statistics.dependence.JensenShannonEquiwidthDependence.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SLINKHDBSCANLinearMemory.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.SLINKHDBSCANLinearMemory.Par<O> {
+        +make(): SLINKHDBSCANLinearMemory<O>
+    }
+
+    abstract class "<size:14>AbstractHDBSCAN.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AbstractHDBSCAN.Par<O>
+    class "<size:14>SLINKHDBSCANLinearMemory\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.SLINKHDBSCANLinearMemory<O> [[SLINKHDBSCANLinearMemory.html]]
+
+    elki.clustering.hierarchical.AbstractHDBSCAN.Par <|-- elki.clustering.hierarchical.SLINKHDBSCANLinearMemory.Par
+    elki.clustering.hierarchical.SLINKHDBSCANLinearMemory +-- elki.clustering.hierarchical.SLINKHDBSCANLinearMemory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

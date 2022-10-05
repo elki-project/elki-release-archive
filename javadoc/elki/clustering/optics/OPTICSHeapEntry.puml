@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSHeapEntry\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSHeapEntry [[OPTICSHeapEntry.html]] {
+        ~objectID: DBID
+        ~predecessorID: DBID
+        ~reachability: double
+        +OPTICSHeapEntry(DBID, DBID, double)
+        +compareTo(OPTICSHeapEntry): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<OPTICSHeapEntry> {
+        {abstract} +compareTo(OPTICSHeapEntry): int
+    }
+
+    java.lang.Comparable <|.. elki.clustering.optics.OPTICSHeapEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

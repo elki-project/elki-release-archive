@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParametersModel\n<size:10>elki.gui.util" as elki.gui.util.ParametersModel [[ParametersModel.html]] {
+        {static} -serialVersionUID: long
+        {static} -LOG: Logging
+        -parameters: DynamicParameters
+        {static} +columns: String[]
+        +ParametersModel(DynamicParameters)
+        +getColumnCount(): int
+        +getRowCount(): int
+        +getValueAt(int, int): Object
+        +getColumnName(int): String
+        +getColumnClass(int): Class<?>
+        +isCellEditable(int, int): boolean
+        +setValueAt(Object, int, int): void
+    }
+
+    abstract class "<size:14>AbstractTableModel\n<size:10>javax.swing.table" as javax.swing.table.AbstractTableModel
+
+    javax.swing.table.AbstractTableModel <|-- elki.gui.util.ParametersModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

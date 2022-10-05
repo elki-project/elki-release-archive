@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DisjointCrossValidation.Par\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.DisjointCrossValidation.Par [[DisjointCrossValidation.Par.html]] {
+        {static} +N_DEFAULT: int
+        {static} +NFOLD_ID: OptionID
+        #nfold: int
+        +configure(Parameterization): void
+        +make(): DisjointCrossValidation
+    }
+
+    abstract class "<size:14>RandomizedHoldout.Par\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.RandomizedHoldout.Par [[RandomizedHoldout.Par.html]]
+    class "<size:14>DisjointCrossValidation\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.DisjointCrossValidation [[DisjointCrossValidation.html]]
+
+    elki.evaluation.classification.holdout.RandomizedHoldout.Par <|-- elki.evaluation.classification.holdout.DisjointCrossValidation.Par
+    elki.evaluation.classification.holdout.DisjointCrossValidation +-- elki.evaluation.classification.holdout.DisjointCrossValidation.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

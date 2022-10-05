@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimplifiedLRDProcessor\n<size:10>elki.outlier.lof.parallel" as elki.outlier.lof.parallel.SimplifiedLRDProcessor [[SimplifiedLRDProcessor.html]] {
+        -knns: DataStore<? extends KNNList>
+        +SimplifiedLRDProcessor(DataStore<? extends KNNList>)
+        +instantiate(Executor): Instance
+    }
+
+    abstract class "<size:14>AbstractDoubleProcessor\n<size:10>elki.parallel.processor" as elki.parallel.processor.AbstractDoubleProcessor [[../../../parallel/processor/AbstractDoubleProcessor.html]] {
+        {abstract} +instantiate(Executor): Instance
+    }
+    class "<size:14>SimplifiedLRDProcessor.Instance\n<size:10>elki.outlier.lof.parallel" as elki.outlier.lof.parallel.SimplifiedLRDProcessor.Instance [[SimplifiedLRDProcessor.Instance.html]]
+
+    elki.parallel.processor.AbstractDoubleProcessor <|-- elki.outlier.lof.parallel.SimplifiedLRDProcessor
+    elki.outlier.lof.parallel.SimplifiedLRDProcessor +-- elki.outlier.lof.parallel.SimplifiedLRDProcessor.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

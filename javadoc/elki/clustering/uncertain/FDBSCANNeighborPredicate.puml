@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FDBSCANNeighborPredicate\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.FDBSCANNeighborPredicate [[FDBSCANNeighborPredicate.html]] {
+        #epsilon: double
+        #sampleSize: int
+        #threshold: double
+        #rand: RandomFactory
+        +FDBSCANNeighborPredicate(double, int, double, RandomFactory)
+        +instantiate(Database): Instance
+        +getInputTypeRestriction(): TypeInformation
+        +getOutputType(): SimpleTypeInformation<DBIDs>
+    }
+
+    interface "<size:14>NeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.NeighborPredicate<DBIDs> [[../dbscan/predicates/NeighborPredicate.html]] {
+        {abstract} +instantiate(Database): Instance<T>
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +getOutputType(): SimpleTypeInformation<T>
+    }
+    class "<size:14>FDBSCANNeighborPredicate.Instance\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.FDBSCANNeighborPredicate.Instance [[FDBSCANNeighborPredicate.Instance.html]]
+    class "<size:14>FDBSCANNeighborPredicate.Par\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.FDBSCANNeighborPredicate.Par [[FDBSCANNeighborPredicate.Par.html]]
+
+    elki.clustering.dbscan.predicates.NeighborPredicate <|.. elki.clustering.uncertain.FDBSCANNeighborPredicate
+    elki.clustering.uncertain.FDBSCANNeighborPredicate +-- elki.clustering.uncertain.FDBSCANNeighborPredicate.Instance
+    elki.clustering.uncertain.FDBSCANNeighborPredicate +-- elki.clustering.uncertain.FDBSCANNeighborPredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

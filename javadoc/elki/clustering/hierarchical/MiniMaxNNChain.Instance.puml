@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MiniMaxNNChain.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.MiniMaxNNChain.Instance [[MiniMaxNNChain.Instance.html]] {
+        +run(ArrayDBIDs, ClusterDistanceMatrix, ClusterMergeHistoryBuilder, DistanceQuery<?>, DBIDArrayMIter): ClusterPrototypeMergeHistory
+        -nnChainCore(): void
+    }
+
+    class "<size:14>MiniMax.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.MiniMax.Instance [[MiniMax.Instance.html]]
+    class "<size:14>MiniMaxNNChain\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.MiniMaxNNChain<O> [[MiniMaxNNChain.html]]
+
+    elki.clustering.hierarchical.MiniMax.Instance <|-- elki.clustering.hierarchical.MiniMaxNNChain.Instance
+    elki.clustering.hierarchical.MiniMaxNNChain +-- elki.clustering.hierarchical.MiniMaxNNChain.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

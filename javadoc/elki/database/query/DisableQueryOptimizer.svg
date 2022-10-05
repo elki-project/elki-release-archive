@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="192px" preserveAspectRatio="none" style="width:256px;height:192px;background:#FFFFFF;" version="1.1" viewBox="0 0 256 192" width="256px" zoomAndPan="magnify"><defs/><g><!--MD5=[af98a7b9e886640b9ba36a03ea3a7027]
+class elki.database.query.DisableQueryOptimizer--><a href="DisableQueryOptimizer.html" target="_top" title="DisableQueryOptimizer.html" xlink:actuate="onRequest" xlink:href="DisableQueryOptimizer.html" xlink:show="new" xlink:title="DisableQueryOptimizer.html" xlink:type="simple"><g id="elem_elki.database.query.DisableQueryOptimizer"><rect codeLine="6" fill="#F1F1F1" height="62.2344" id="elki.database.query.DisableQueryOptimizer" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="242" x="7" y="105"/><ellipse cx="45.4" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M48.3688,129.6094 Q47.7906,129.9063 47.15,130.0469 Q46.5094,130.2031 45.8063,130.2031 Q43.3063,130.2031 41.9781,128.5625 Q40.6656,126.9063 40.6656,123.7813 Q40.6656,120.6563 41.9781,119 Q43.3063,117.3438 45.8063,117.3438 Q46.5094,117.3438 47.15,117.5 Q47.8063,117.6563 48.3688,117.9531 L48.3688,120.6719 Q47.7438,120.0938 47.15,119.8281 Q46.5563,119.5469 45.9313,119.5469 Q44.5875,119.5469 43.9,120.625 Q43.2125,121.6875 43.2125,123.7813 Q43.2125,125.875 43.9,126.9531 Q44.5875,128.0156 45.9313,128.0156 Q46.5563,128.0156 47.15,127.75 Q47.7438,127.4688 48.3688,126.8906 L48.3688,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="158" x="64.6" y="122.9951">DisableQueryOptimizer</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="94" x="96.6" y="135.5791">elki.database.query</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="248" y1="142.9375" y2="142.9375"/><ellipse cx="18" cy="156.5859" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="216" x="27" y="159.9326">STATIC: DisableQueryOptimizer</text></g></a><!--MD5=[d591f7f34875115f143ac989af0be383]
+class elki.database.query.QueryOptimizer--><a href="QueryOptimizer.html" target="_top" title="QueryOptimizer.html" xlink:actuate="onRequest" xlink:href="QueryOptimizer.html" xlink:show="new" xlink:title="QueryOptimizer.html" xlink:type="simple"><g id="elem_elki.database.query.QueryOptimizer"><rect codeLine="10" fill="#F1F1F1" height="37.9375" id="elki.database.query.QueryOptimizer" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="142" x="57" y="7"/><ellipse cx="72" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M67.9219,21.7344 L67.9219,19.5781 L75.3125,19.5781 L75.3125,21.7344 L72.8438,21.7344 L72.8438,29.8125 L75.3125,29.8125 L75.3125,31.9688 L67.9219,31.9688 L67.9219,29.8125 L70.3906,29.8125 L70.3906,21.7344 L67.9219,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="110" x="86" y="24.9951">QueryOptimizer</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="97" x="92.5" y="37.5791">elki.database.query</text></g></a><!--MD5=[633d881034c82d802e0f72513a42c9ab]
+reverse link elki.database.query.QueryOptimizer to elki.database.query.DisableQueryOptimizer--><g id="link_elki.database.query.QueryOptimizer_elki.database.query.DisableQueryOptimizer"><path codeLine="13" d="M128,65.74 C128,78.56 128,92.64 128,104.73 " fill="none" id="elki.database.query.QueryOptimizer-backto-elki.database.query.DisableQueryOptimizer" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="121,65.32,128,45.32,135,65.32,121,65.32" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="28" y="173.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="28" y="182.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[a7941da71571c778db4babebc4a32c58]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DisableQueryOptimizer\n<size:10>elki.database.query" as elki.database.query.DisableQueryOptimizer [[DisableQueryOptimizer.html]] {
+        {static} +STATIC: DisableQueryOptimizer
+    }
+
+    interface "<size:14>QueryOptimizer\n<size:10>elki.database.query" as elki.database.query.QueryOptimizer [[QueryOptimizer.html]]
+    class "<size:14>DisableQueryOptimizer.Par\n<size:10>elki.database.query" as elki.database.query.DisableQueryOptimizer.Par [[DisableQueryOptimizer.Par.html]]
+
+    elki.database.query.QueryOptimizer <|.. elki.database.query.DisableQueryOptimizer
+    elki.database.query.DisableQueryOptimizer +- - elki.database.query.DisableQueryOptimizer.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

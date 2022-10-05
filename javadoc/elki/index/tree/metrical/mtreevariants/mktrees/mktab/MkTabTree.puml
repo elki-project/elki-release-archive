@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>MkTabTree\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mktab" as elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTree<O> [[MkTabTree.html]] {
+        {static} -LOG: Logging
+        +MkTabTree(Relation<O>, PageFile<MkTabTreeNode<O>>, MkTreeSettings<O, MkTabTreeNode<O>, MkTabEntry>)
+        #preInsert(MkTabEntry): void
+        +insert(MkTabEntry, boolean): void
+        +reverseKNNQuery(DBIDRef, int): DoubleDBIDList
+        #initializeCapacities(MkTabEntry): void
+        #kNNdistanceAdjustment(MkTabEntry, Map<DBID, KNNList>): void
+        #createNewLeafNode(): MkTabTreeNode<O>
+        #createNewDirectoryNode(): MkTabTreeNode<O>
+        #createNewDirectoryEntry(MkTabTreeNode<O>, DBID, double): MkTabEntry
+        #createRootEntry(): MkTabEntry
+        -doReverseKNNQuery(int, DBIDRef, MkTabEntry, MkTabTreeNode<O>, ModifiableDoubleDBIDList): void
+        -max(double[], double[]): double[]
+        -initKnnDistanceList(): double[]
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractMkTreeUnified\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnified<O, MkTabTreeNode<O>, MkTabEntry, MkTreeSettings<O, MkTabTreeNode<O>, MkTabEntry>> [[../AbstractMkTreeUnified.html]] {
+        {abstract} #kNNdistanceAdjustment(MkTabEntry, Map<DBID, KNNList>): void
+    }
+
+    elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnified <|-- elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

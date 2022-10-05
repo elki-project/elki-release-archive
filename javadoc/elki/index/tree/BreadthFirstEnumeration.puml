@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BreadthFirstEnumeration\n<size:10>elki.index.tree" as elki.index.tree.BreadthFirstEnumeration<N extends Node<E>, E> [[BreadthFirstEnumeration.html]] {
+        +EMPTY_ENUMERATION: Iterator<IndexTreePath<E>>
+        -queue: Queue<Iterator<IndexTreePath<E>>>
+        -index: IndexTree<N extends Node<E>, E>
+        +BreadthFirstEnumeration(IndexTree<N extends Node<E>, E>, IndexTreePath<E>)
+        +hasNext(): boolean
+        +next(): IndexTreePath<E>
+    }
+
+    interface "<size:14>Iterator\n<size:10>java.util" as java.util.Iterator<IndexTreePath<E>> {
+        {abstract} +hasNext(): boolean
+        {abstract} +next(): IndexTreePath<E>
+    }
+
+    java.util.Iterator <|.. elki.index.tree.BreadthFirstEnumeration
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

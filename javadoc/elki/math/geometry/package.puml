@@ -1,0 +1,241 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.geometry {
+
+        class FilteredConvexHull2D [[FilteredConvexHull2D.html]] {
+            -points: List<double[]>
+            -leftx: double
+            -rightx: double
+            -topy: double
+            -bottomy: double
+            -topleft: double[]
+            -topright: double[]
+            -bottomright: double[]
+            -bottomleft: double[]
+            -poly: Polygon
+            +add(double...): void
+            -computeConvexHull(): Polygon
+            -checkCandidate(double[]): boolean
+            -checkCandidateUpdate(double[]): boolean
+            +getHull(): Polygon
+        }
+
+        class AlphaShape [[AlphaShape.html]] {
+            -alpha2: double
+            -points: List<double[]>
+            +AlphaShape(List<double[]>, double)
+            +compute(): List<Polygon>
+            -checkNeighbors(List<IntegerArray>, long[], IntegerArray): void
+            -addEdge(List<IntegerArray>, int, int): void
+        }
+
+        class GrahamScanConvexHull2D [[GrahamScanConvexHull2D.html]] {
+            -points: List<double[]>
+            -minmaxX: DoubleMinMax
+            -minmaxY: DoubleMinMax
+            -ok: boolean
+            -factor: double
+            +add(double...): void
+            -computeConvexHull(): void
+            -findStartingPoint(): void
+            -getRX(double[], double[]): double
+            -getRY(double[], double[]): double
+            #isLeft(double[], double[], double[]): int
+            -mdist(double[], double[]): double
+            -isConvex(double[], double[], double[]): boolean
+            -grahamScan(): void
+            +getHull(): Polygon
+        }
+
+        class XYPlot [[XYPlot.html]] {
+            {static} #THRESHOLD: double
+            #labelx: String
+            #labely: String
+            #minx: double
+            #maxx: double
+            #miny: double
+            #maxy: double
+            +XYPlot(String, String)
+            +XYPlot()
+            +makeCurve(): Curve
+            +makeCurve(int): Curve
+            +makeCurve(int, int): Curve
+            +getLabelx(): String
+            +getLabely(): String
+            +getMinx(): double
+            +getMaxx(): double
+            +getMiny(): double
+            +getMaxy(): double
+            +iterator(): Iterator<Curve>
+            +getLongName(): String
+            +getShortName(): String
+        }
+
+        class elki.math.geometry.XYPlot.Curve [[XYPlot.Curve.html]] {
+            #data: double[]
+            #len: int
+            #color: int
+            +Curve(int)
+            +Curve(int, int)
+            +getColor(): int
+            +add(double, double): void
+            +getX(int): double
+            +getY(int): double
+            +size(): int
+            +iterator(): Itr
+        }
+
+        class elki.math.geometry.XYPlot.Curve.Itr [[XYPlot.Curve.Itr.html]] {
+            #pos: int
+            +getX(): double
+            +getY(): double
+            +advance(): void
+            +valid(): boolean
+        }
+
+        class XYCurve [[XYCurve.html]] {
+            {static} #THRESHOLD: double
+            #data: DoubleArray
+            #labelx: String
+            #labely: String
+            #minx: double
+            #maxx: double
+            #miny: double
+            #maxy: double
+            #mindx: double
+            #maxdx: double
+            #mindy: double
+            #maxdy: double
+            +XYCurve(String, String)
+            +XYCurve(String, String, int)
+            +XYCurve()
+            +XYCurve(int)
+            +XYCurve(XYCurve)
+            +add(double, double): void
+            +addAndSimplify(double, double): void
+            +getLabelx(): String
+            +getLabely(): String
+            +getMinx(): double
+            +getMaxx(): double
+            +getMiny(): double
+            +getMaxy(): double
+            +getMindx(): double
+            +getMaxdx(): double
+            +getMindy(): double
+            +getMaxdy(): double
+            +getX(int): double
+            +getY(int): double
+            +rescale(double, double): void
+            +setAxes(double, double, double, double): void
+            +setDrawingBounds(double, double, double, double): void
+            +isInDrawingBounds(double, double): boolean
+            +size(): int
+            +iterator(): Itr
+            {static} +areaUnderCurve(XYCurve): double
+        }
+
+        class elki.math.geometry.XYCurve.Itr [[XYCurve.Itr.html]] {
+            #pos: int
+            +getX(): double
+            +getY(): double
+            +advance(): void
+            +valid(): boolean
+        }
+
+        class PrimsMinimumSpanningTree [[PrimsMinimumSpanningTree.html]] {
+            {static} +processDense(double[]): int[]
+            {static} +processDense(T, Adapter<T>): int[]
+            {static} +processDense(T, Adapter<T>, Collector): void
+            {static} +pruneTree(int, int[], int): int[]
+        }
+
+        interface elki.math.geometry.PrimsMinimumSpanningTree.Adapter<T> [[PrimsMinimumSpanningTree.Adapter.html]] {
+            {abstract} +distance(T, int, int): double
+            {abstract} +size(T): int
+        }
+
+        interface elki.math.geometry.PrimsMinimumSpanningTree.Collector [[PrimsMinimumSpanningTree.Collector.html]] {
+            {abstract} +addEdge(double, int, int): void
+        }
+
+        class elki.math.geometry.PrimsMinimumSpanningTree.Array2DAdapter [[PrimsMinimumSpanningTree.Array2DAdapter.html]] {
+            +distance(double[], int, int): double
+            +size(double[]): int
+        }
+
+        class SweepHullDelaunay2D [[SweepHullDelaunay2D.html]] {
+            {static} -LOG: Logging
+            -points: List<double[]>
+            -hull: LinkedList<IntIntPair>
+            +SweepHullDelaunay2D()
+            +SweepHullDelaunay2D(List<double[]>)
+            +add(double...): void
+            ~run(boolean): void
+            #findSmallest(int, int, double[], int[], int): Triangle
+            ~debugHull(): void
+            ~flipTriangles(long[]): int
+            ~flipTriangles(long[], long[]): int
+            ~flipTriangle(int, long[]): int
+            +getHull(): Polygon
+            {static} +quadraticEuclidean(double[], double[]): double
+            ~leftOf(double[], double[], double[]): boolean
+        }
+
+        enum elki.math.geometry.SweepHullDelaunay2D.Orientation [[SweepHullDelaunay2D.Orientation.html]] {
+            {static} +ORIENT_AB_BA
+            {static} +ORIENT_AB_CB
+            {static} +ORIENT_AB_AC
+            {static} +ORIENT_BC_BA
+            {static} +ORIENT_BC_CB
+            {static} +ORIENT_BC_AC
+            {static} +ORIENT_CA_BA
+            {static} +ORIENT_CA_CB
+            {static} +ORIENT_CA_AC
+        }
+
+        class elki.math.geometry.SweepHullDelaunay2D.Triangle [[SweepHullDelaunay2D.Triangle.html]] {
+            +a: int
+            +b: int
+            +c: int
+            +ab: int
+            +ca: int
+            +bc: int
+            +r2: double
+            +m: double[]
+            +Triangle(int, int, int)
+            ~replaceEdge(int, int, int, int): void
+            ~set(int, int, int, int, int, int): void
+            +inCircle(double[]): boolean
+            ~findOrientation(Triangle): Orientation
+            ~makeClockwise(List<double[]>): void
+            ~isClockwise(List<double[]>): boolean
+            ~copyFrom(Triangle): void
+            -updateCircumcircle(List<double[]>): boolean
+        }
+
+        AlphaShape --> "*" elki.math.geometry.SweepHullDelaunay2D.Triangle: delaunay
+        java.lang.Iterable <|.. XYPlot
+        XYPlot --> "*" elki.math.geometry.XYPlot.Curve: curves
+        XYPlot +-- elki.math.geometry.XYPlot.Curve
+        elki.math.geometry.XYPlot.Curve +-- elki.math.geometry.XYPlot.Curve.Itr
+        XYCurve +-- elki.math.geometry.XYCurve.Itr
+        PrimsMinimumSpanningTree --> elki.math.geometry.PrimsMinimumSpanningTree.Array2DAdapter: ARRAY2D_ADAPTER
+        PrimsMinimumSpanningTree +-- elki.math.geometry.PrimsMinimumSpanningTree.Adapter
+        PrimsMinimumSpanningTree +-- elki.math.geometry.PrimsMinimumSpanningTree.Collector
+        elki.math.geometry.PrimsMinimumSpanningTree.Adapter <|.. elki.math.geometry.PrimsMinimumSpanningTree.Array2DAdapter
+        PrimsMinimumSpanningTree +-- elki.math.geometry.PrimsMinimumSpanningTree.Array2DAdapter
+        SweepHullDelaunay2D --> "*" elki.math.geometry.SweepHullDelaunay2D.Triangle: tris\ndelaunay
+        SweepHullDelaunay2D +-- elki.math.geometry.SweepHullDelaunay2D.Orientation
+        SweepHullDelaunay2D +-- elki.math.geometry.SweepHullDelaunay2D.Triangle
+    }
+
+    namespace java.lang {
+        interface Iterable<T> {
+            {abstract} +iterator(): Iterator<T>
+            +forEach(Consumer<? super T>): void
+            +spliterator(): Spliterator<T>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

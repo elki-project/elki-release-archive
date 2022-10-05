@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DistanceBasedInitializationWithMedian\n<size:10>elki.clustering.affinitypropagation" as elki.clustering.affinitypropagation.DistanceBasedInitializationWithMedian<O> [[DistanceBasedInitializationWithMedian.html]] {
+        ~distance: Distance<? super O>
+        ~quantile: double
+        +DistanceBasedInitializationWithMedian(Distance<? super O>, double)
+        +getSimilarityMatrix(Relation<O>, ArrayDBIDs): double[]
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>AffinityPropagationInitialization\n<size:10>elki.clustering.affinitypropagation" as elki.clustering.affinitypropagation.AffinityPropagationInitialization<O> [[AffinityPropagationInitialization.html]] {
+        {abstract} +getSimilarityMatrix(Relation<O>, ArrayDBIDs): double[]
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>DistanceBasedInitializationWithMedian.Par\n<size:10>elki.clustering.affinitypropagation" as elki.clustering.affinitypropagation.DistanceBasedInitializationWithMedian.Par<O>
+
+    elki.clustering.affinitypropagation.AffinityPropagationInitialization <|.. elki.clustering.affinitypropagation.DistanceBasedInitializationWithMedian
+    elki.clustering.affinitypropagation.DistanceBasedInitializationWithMedian +-- elki.clustering.affinitypropagation.DistanceBasedInitializationWithMedian.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

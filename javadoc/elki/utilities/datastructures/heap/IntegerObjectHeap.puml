@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>IntegerObjectHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.IntegerObjectHeap<V> [[IntegerObjectHeap.html]] {
+        {abstract} +add(int, V): void
+        {abstract} +add(int, V, int): void
+        {abstract} +replaceTopElement(int, V): void
+        {abstract} +peekKey(): int
+        {abstract} +peekValue(): V
+        {abstract} +containsKey(int): boolean
+        {abstract} +containsValue(V): boolean
+        {abstract} +poll(): void
+        {abstract} +clear(): void
+        {abstract} +size(): int
+        {abstract} +isEmpty(): boolean
+        {abstract} +unsortedIter(): UnsortedIter<V>
+    }
+    interface "<size:14>IntegerObjectHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.IntegerObjectHeap.UnsortedIter<V> [[IntegerObjectHeap.UnsortedIter.html]]
+
+    elki.utilities.datastructures.heap.IntegerObjectHeap +-- elki.utilities.datastructures.heap.IntegerObjectHeap.UnsortedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

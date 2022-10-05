@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BufferedLineReader\n<size:10>elki.utilities.io" as elki.utilities.io.BufferedLineReader [[BufferedLineReader.html]] {
+        -reader: LineReader
+        #buf: StringBuilder
+        #lineNumber: int
+        +BufferedLineReader()
+        +BufferedLineReader(LineReader)
+        +BufferedLineReader(InputStream)
+        +BufferedLineReader(InputStreamReader)
+        +reset(): void
+        +reset(LineReader): void
+        +reset(InputStream): void
+        +reset(InputStreamReader): void
+        +getBuffer(): CharSequence
+        +getLineNumber(): int
+        +nextLine(): boolean
+        +close(): void
+        {static} +lengthWithoutLinefeed(CharSequence): int
+    }
+
+    interface "<size:14>AutoCloseable\n<size:10>java.lang" as java.lang.AutoCloseable {
+        {abstract} +close(): void
+    }
+
+    java.lang.AutoCloseable <|.. elki.utilities.io.BufferedLineReader
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

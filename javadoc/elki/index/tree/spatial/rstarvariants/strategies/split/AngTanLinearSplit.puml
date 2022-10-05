@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AngTanLinearSplit\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.split" as elki.index.tree.spatial.rstarvariants.strategies.split.AngTanLinearSplit [[AngTanLinearSplit.html]] {
+        {static} -LOG: Logging
+        {static} +STATIC: AngTanLinearSplit
+        +split(A, ArrayAdapter<E extends SpatialComparable, A>, int): long[]
+        #computeOverlap(A, ArrayAdapter<E extends SpatialComparable, A>, long[]): double
+    }
+
+    interface "<size:14>SplitStrategy\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.split" as elki.index.tree.spatial.rstarvariants.strategies.split.SplitStrategy [[SplitStrategy.html]] {
+        {abstract} +split(A, ArrayAdapter<E extends SpatialComparable, A>, int): long[]
+    }
+    class "<size:14>AngTanLinearSplit.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.split" as elki.index.tree.spatial.rstarvariants.strategies.split.AngTanLinearSplit.Par [[AngTanLinearSplit.Par.html]]
+
+    elki.index.tree.spatial.rstarvariants.strategies.split.SplitStrategy <|.. elki.index.tree.spatial.rstarvariants.strategies.split.AngTanLinearSplit
+    elki.index.tree.spatial.rstarvariants.strategies.split.AngTanLinearSplit +-- elki.index.tree.spatial.rstarvariants.strategies.split.AngTanLinearSplit.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

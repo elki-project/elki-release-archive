@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TermFrequencyParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.TermFrequencyParser<V extends SparseNumberVector> [[TermFrequencyParser.html]] {
+        {static} -LOG: Logging
+        ~numterms: int
+        ~keymap: Object2IntOpenHashMap<String>
+        ~normalize: boolean
+        -sparsefactory: Factory<V extends SparseNumberVector>
+        ~values: Int2DoubleOpenHashMap
+        ~labels: ArrayList<String>
+        +TermFrequencyParser(boolean, Factory<V extends SparseNumberVector>)
+        +TermFrequencyParser(boolean, CSVReaderFormat, long[], Factory<V extends SparseNumberVector>)
+        #parseLineInternal(): boolean
+        #getTypeInformation(int, int): SimpleTypeInformation<V extends SparseNumberVector>
+        #getLogger(): Logging
+    }
+
+    class "<size:14>NumberVectorLabelParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.NumberVectorLabelParser<V extends SparseNumberVector> [[NumberVectorLabelParser.html]]
+    class "<size:14>TermFrequencyParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.TermFrequencyParser.Par<V extends SparseNumberVector> [[TermFrequencyParser.Par.html]]
+
+    elki.datasource.parser.NumberVectorLabelParser <|-- elki.datasource.parser.TermFrequencyParser
+    elki.datasource.parser.TermFrequencyParser +-- elki.datasource.parser.TermFrequencyParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

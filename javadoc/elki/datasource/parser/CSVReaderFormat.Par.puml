@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CSVReaderFormat.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.CSVReaderFormat.Par [[CSVReaderFormat.Par.html]] {
+        {static} +COLUMN_SEPARATOR_ID: OptionID
+        {static} +QUOTE_ID: OptionID
+        {static} +COMMENT_ID: OptionID
+        #colSep: Pattern
+        #quoteChars: String
+        #comment: Pattern
+        +configure(Parameterization): void
+        +make(): CSVReaderFormat
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>CSVReaderFormat\n<size:10>elki.datasource.parser" as elki.datasource.parser.CSVReaderFormat [[CSVReaderFormat.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.parser.CSVReaderFormat.Par
+    elki.datasource.parser.CSVReaderFormat +-- elki.datasource.parser.CSVReaderFormat.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

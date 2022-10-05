@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimplifiedElkanKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.SimplifiedElkanKMeans.Instance [[SimplifiedElkanKMeans.Instance.html]] {
+        ~sums: double[]
+        ~newmeans: double[]
+        ~upper: WritableDoubleDataStore
+        ~lower: WritableDataStore<double[]>
+        ~sep: double[]
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+        #iterate(int): int
+        #initialAssignToNearestCluster(): int
+        #assignToNearestCluster(): int
+        #updateBounds(double[]): void
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Instance [[AbstractKMeans.Instance.html]] {
+        {abstract} #iterate(int): int
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>SimplifiedElkanKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.SimplifiedElkanKMeans<V extends NumberVector> [[SimplifiedElkanKMeans.html]]
+
+    elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.SimplifiedElkanKMeans.Instance
+    elki.clustering.kmeans.SimplifiedElkanKMeans +-- elki.clustering.kmeans.SimplifiedElkanKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

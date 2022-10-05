@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.gui.multistep {
+
+        class MultiStepGUI [[MultiStepGUI.html]] {
+            {static} -LOG: Logging
+            {static} -ACTION_QUIT: String
+            ~frame: JFrame
+            #outputArea: LogPanel
+            -addPanels(JTabbedPane): void
+            +setParameters(Parameterization): void
+            +serializeParameters(): ArrayList<String>
+            +run(): void
+            {static} +main(String[]): void
+        }
+
+        elki.application.AbstractApplication <|-- MultiStepGUI
+        MultiStepGUI --> elki.gui.multistep.panels.InputTabPanel: inputTab
+        MultiStepGUI --> elki.gui.multistep.panels.AlgorithmTabPanel: algTab
+        MultiStepGUI --> elki.gui.multistep.panels.EvaluationTabPanel: evalTab
+        MultiStepGUI --> elki.gui.multistep.panels.OutputTabPanel: outTab
+        MultiStepGUI --> elki.gui.multistep.panels.LoggingTabPanel: logTab
+        MultiStepGUI --> elki.gui.multistep.panels.SavedSettingsTabPanel: setTab
+    }
+
+    namespace elki.application {
+        abstract class AbstractApplication [[../../application/AbstractApplication.html]] {
+            {static} -LOG: Logging
+            {static} -NEWLINE: String
+            {static} +VERSION: String
+            {static} -REFERENCE_VERSION: String
+            {static} +REFERENCE: String
+            {abstract} +run(): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

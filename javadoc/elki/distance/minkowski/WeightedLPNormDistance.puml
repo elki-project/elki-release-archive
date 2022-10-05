@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WeightedLPNormDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.WeightedLPNormDistance [[WeightedLPNormDistance.html]] {
+        #weights: double[]
+        +WeightedLPNormDistance(double, double[])
+        -preDistance(NumberVector, NumberVector, int, int): double
+        -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+        -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+        -preNorm(NumberVector, int, int): double
+        -preNormMBR(SpatialComparable, int, int): double
+        +distance(NumberVector, NumberVector): double
+        +norm(NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    class "<size:14>LPNormDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.LPNormDistance [[LPNormDistance.html]]
+    interface "<size:14>WeightedNumberVectorDistance\n<size:10>elki.distance" as elki.distance.WeightedNumberVectorDistance<NumberVector> [[../WeightedNumberVectorDistance.html]]
+    class "<size:14>WeightedLPNormDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.WeightedLPNormDistance.Par [[WeightedLPNormDistance.Par.html]]
+
+    elki.distance.minkowski.LPNormDistance <|-- elki.distance.minkowski.WeightedLPNormDistance
+    elki.distance.WeightedNumberVectorDistance <|.. elki.distance.minkowski.WeightedLPNormDistance
+    elki.distance.minkowski.WeightedLPNormDistance +-- elki.distance.minkowski.WeightedLPNormDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

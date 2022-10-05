@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Eclat.Par\n<size:10>elki.itemsetmining" as elki.itemsetmining.Eclat.Par [[Eclat.Par.html]] {
+        +make(): Eclat
+    }
+
+    abstract class "<size:14>AbstractFrequentItemsetAlgorithm.Par\n<size:10>elki.itemsetmining" as elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par [[AbstractFrequentItemsetAlgorithm.Par.html]]
+    class "<size:14>Eclat\n<size:10>elki.itemsetmining" as elki.itemsetmining.Eclat [[Eclat.html]]
+
+    elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par <|-- elki.itemsetmining.Eclat.Par
+    elki.itemsetmining.Eclat +-- elki.itemsetmining.Eclat.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

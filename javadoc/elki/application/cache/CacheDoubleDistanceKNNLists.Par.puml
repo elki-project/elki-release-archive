@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CacheDoubleDistanceKNNLists.Par\n<size:10>elki.application.cache" as elki.application.cache.CacheDoubleDistanceKNNLists.Par<O> [[CacheDoubleDistanceKNNLists.Par.html]] {
+        {static} +CACHE_ID: OptionID
+        {static} +DISTANCE_ID: OptionID
+        {static} +K_ID: OptionID
+        -database: Database
+        -distance: Distance<? super O>
+        -k: int
+        -out: Path
+        +configure(Parameterization): void
+        +make(): CacheDoubleDistanceKNNLists<O>
+    }
+
+    abstract class "<size:14>AbstractApplication.Par\n<size:10>elki.application" as elki.application.AbstractApplication.Par [[../AbstractApplication.Par.html]] {
+        {abstract} +make(): AbstractApplication
+    }
+    class "<size:14>CacheDoubleDistanceKNNLists\n<size:10>elki.application.cache" as elki.application.cache.CacheDoubleDistanceKNNLists<O> [[CacheDoubleDistanceKNNLists.html]]
+
+    elki.application.AbstractApplication.Par <|-- elki.application.cache.CacheDoubleDistanceKNNLists.Par
+    elki.application.cache.CacheDoubleDistanceKNNLists +-- elki.application.cache.CacheDoubleDistanceKNNLists.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

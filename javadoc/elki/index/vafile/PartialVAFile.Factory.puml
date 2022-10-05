@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PartialVAFile.Factory\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile.Factory<V extends NumberVector> [[PartialVAFile.Factory.html]] {
+        {static} +PARTITIONS_ID: OptionID
+        ~pagesize: int
+        ~numpart: int
+        +Factory(int, int)
+        +instantiate(Relation<V extends NumberVector>): PartialVAFile<V extends NumberVector>
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<V extends NumberVector> [[../IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>PartialVAFile\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile<V extends NumberVector> [[PartialVAFile.html]]
+    class "<size:14>PartialVAFile.Factory.Par\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile.Factory.Par [[PartialVAFile.Factory.Par.html]]
+
+    elki.index.IndexFactory <|.. elki.index.vafile.PartialVAFile.Factory
+    elki.index.vafile.PartialVAFile +-- elki.index.vafile.PartialVAFile.Factory
+    elki.index.vafile.PartialVAFile.Factory +-- elki.index.vafile.PartialVAFile.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

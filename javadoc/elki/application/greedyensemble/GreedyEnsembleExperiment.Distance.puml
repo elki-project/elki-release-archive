@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>GreedyEnsembleExperiment.Distance\n<size:10>elki.application.greedyensemble" as elki.application.greedyensemble.GreedyEnsembleExperiment.Distance [[GreedyEnsembleExperiment.Distance.html]] {
+        {static} +PEARSON
+        {static} +SQEUCLIDEAN
+        {static} +EUCLIDEAN
+        {static} +MANHATTAN
+    }
+
+    class "<size:14>GreedyEnsembleExperiment\n<size:10>elki.application.greedyensemble" as elki.application.greedyensemble.GreedyEnsembleExperiment [[GreedyEnsembleExperiment.html]]
+
+    elki.application.greedyensemble.GreedyEnsembleExperiment +-- elki.application.greedyensemble.GreedyEnsembleExperiment.Distance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

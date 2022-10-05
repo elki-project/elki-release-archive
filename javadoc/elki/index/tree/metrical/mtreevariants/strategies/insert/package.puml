@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.metrical.mtreevariants.strategies.insert {
+
+        interface MTreeInsert<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> [[MTreeInsert.html]] {
+            {abstract} +choosePath(AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, E extends MTreeEntry): IndexTreePath<E extends MTreeEntry>
+        }
+
+        class MinimumEnlargementInsert<N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry> [[MinimumEnlargementInsert.html]] {
+            +choosePath(AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, E extends MTreeEntry): IndexTreePath<E extends MTreeEntry>
+            -choosePath(AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, E extends MTreeEntry, IndexTreePath<E extends MTreeEntry>): IndexTreePath<E extends MTreeEntry>
+        }
+
+        MTreeInsert <|.. MinimumEnlargementInsert
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

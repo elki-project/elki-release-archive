@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WinsorizingEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator.meta" as elki.math.statistics.distribution.estimator.meta.WinsorizingEstimator.Par<D extends Distribution> {
+        {static} +INNER_ID: OptionID
+        {static} +WINSORIZE_ID: OptionID
+        -inner: DistributionEstimator<D extends Distribution>
+        -winsorize: double
+        +configure(Parameterization): void
+        +make(): WinsorizingEstimator<D extends Distribution>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>WinsorizingEstimator\n<size:10>elki.math.statistics.distribution.estimator.meta" as elki.math.statistics.distribution.estimator.meta.WinsorizingEstimator<D extends Distribution> [[WinsorizingEstimator.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.meta.WinsorizingEstimator.Par
+    elki.math.statistics.distribution.estimator.meta.WinsorizingEstimator +-- elki.math.statistics.distribution.estimator.meta.WinsorizingEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

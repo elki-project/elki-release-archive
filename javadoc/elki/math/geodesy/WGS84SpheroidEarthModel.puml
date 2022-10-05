@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WGS84SpheroidEarthModel\n<size:10>elki.math.geodesy" as elki.math.geodesy.WGS84SpheroidEarthModel [[WGS84SpheroidEarthModel.html]] {
+        {static} +STATIC: WGS84SpheroidEarthModel
+        {static} +WGS84_RADIUS: double
+        {static} +WGS84_INV_FLATTENING: double
+        {static} +WGS84_FLATTENING: double
+    }
+
+    abstract class "<size:14>AbstractEarthModel\n<size:10>elki.math.geodesy" as elki.math.geodesy.AbstractEarthModel [[AbstractEarthModel.html]]
+    class "<size:14>WGS84SpheroidEarthModel.Par\n<size:10>elki.math.geodesy" as elki.math.geodesy.WGS84SpheroidEarthModel.Par [[WGS84SpheroidEarthModel.Par.html]]
+
+    elki.math.geodesy.AbstractEarthModel <|-- elki.math.geodesy.WGS84SpheroidEarthModel
+    elki.math.geodesy.WGS84SpheroidEarthModel +-- elki.math.geodesy.WGS84SpheroidEarthModel.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HDBSCANHierarchyExtraction.TempCluster\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.TempCluster [[HDBSCANHierarchyExtraction.TempCluster.html]] {
+        #seq: int
+        #members: ModifiableDBIDs
+        #dist: double
+        #dmin: double
+        #aggregate: double
+        #childrenTotal: int
+        #children: Collection<TempCluster>
+        +TempCluster(int, double, DBIDRef)
+        +TempCluster(int, double, TempCluster, TempCluster)
+        +grow(int, double, TempCluster): TempCluster
+        +grow(int, double, DBIDRef): TempCluster
+        +resetAggregate(): TempCluster
+        +totalElements(): int
+        +excessOfMass(): double
+        +totalStability(): double
+        +isSpurious(int): boolean
+    }
+
+    class "<size:14>HDBSCANHierarchyExtraction\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction [[HDBSCANHierarchyExtraction.html]]
+
+    elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction +-- elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.TempCluster
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

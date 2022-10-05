@@ -1,0 +1,39 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RStarTreeIndex\n<size:10>elki.index.tree.spatial.rstarvariants.rstar" as elki.index.tree.spatial.rstarvariants.rstar.RStarTreeIndex<O extends NumberVector> [[RStarTreeIndex.html]] {
+        {static} -LOG: Logging
+        -relation: Relation<O extends NumberVector>
+        +RStarTreeIndex(Relation<O extends NumberVector>, PageFile<RStarTreeNode>, RTreeSettings)
+        #createNewLeafEntry(DBIDRef): SpatialPointLeafEntry
+        +initialize(): void
+        +insert(DBIDRef): void
+        +insertAll(DBIDs): void
+        +delete(DBIDRef): boolean
+        +deleteAll(DBIDs): void
+        +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+        +rangeByObject(DistanceQuery<O extends NumberVector>, double, int): RangeSearcher<O extends NumberVector>
+        +priorityByObject(DistanceQuery<O extends NumberVector>, double, int): PrioritySearcher<O extends NumberVector>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>RStarTree\n<size:10>elki.index.tree.spatial.rstarvariants.rstar" as elki.index.tree.spatial.rstarvariants.rstar.RStarTree [[RStarTree.html]]
+    interface "<size:14>DistancePriorityIndex\n<size:10>elki.index" as elki.index.DistancePriorityIndex<O extends NumberVector> [[../../../../DistancePriorityIndex.html]] {
+        {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+    }
+    interface "<size:14>DynamicIndex\n<size:10>elki.index" as elki.index.DynamicIndex [[../../../../DynamicIndex.html]] {
+        {abstract} +delete(DBIDRef): boolean
+        {abstract} +insert(DBIDRef): void
+        {abstract} +deleteAll(DBIDs): void
+        {abstract} +insertAll(DBIDs): void
+    }
+
+    elki.index.tree.spatial.rstarvariants.rstar.RStarTree <|-- elki.index.tree.spatial.rstarvariants.rstar.RStarTreeIndex
+    elki.index.DistancePriorityIndex <|.. elki.index.tree.spatial.rstarvariants.rstar.RStarTreeIndex
+    elki.index.DynamicIndex <|.. elki.index.tree.spatial.rstarvariants.rstar.RStarTreeIndex
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

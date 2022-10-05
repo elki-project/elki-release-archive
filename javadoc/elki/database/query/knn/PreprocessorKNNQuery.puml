@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PreprocessorKNNQuery\n<size:10>elki.database.query.knn" as elki.database.query.knn.PreprocessorKNNQuery [[PreprocessorKNNQuery.html]] {
+        {static} -LOG: Logging
+        #relation: Relation<?>
+        -preprocessor: AbstractMaterializeKNNPreprocessor<?>
+        -warned: boolean
+        +PreprocessorKNNQuery(Relation<?>, AbstractMaterializeKNNPreprocessor<?>)
+        +getKNN(DBIDRef, int): KNNList
+        +getPreprocessor(): AbstractMaterializeKNNPreprocessor<?>
+        #getLogger(): Logging
+    }
+
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<DBIDRef> [[KNNSearcher.html]] {
+        {abstract} +getKNN(DBIDRef, int): KNNList
+    }
+
+    elki.database.query.knn.KNNSearcher <|.. elki.database.query.knn.PreprocessorKNNQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

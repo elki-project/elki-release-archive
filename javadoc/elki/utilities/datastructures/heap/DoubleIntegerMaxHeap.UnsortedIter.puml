@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleIntegerMaxHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleIntegerMaxHeap.UnsortedIter [[DoubleIntegerMaxHeap.UnsortedIter.html]] {
+        #pos: int
+        +valid(): boolean
+        +advance(): UnsortedIter
+        +getKey(): double
+        +getValue(): int
+    }
+
+    interface "<size:14>DoubleIntegerHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleIntegerHeap.UnsortedIter [[DoubleIntegerHeap.UnsortedIter.html]] {
+        {abstract} +getKey(): double
+        {abstract} +getValue(): int
+    }
+    class "<size:14>DoubleIntegerMaxHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleIntegerMaxHeap [[DoubleIntegerMaxHeap.html]]
+
+    elki.utilities.datastructures.heap.DoubleIntegerHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.DoubleIntegerMaxHeap.UnsortedIter
+    elki.utilities.datastructures.heap.DoubleIntegerMaxHeap +-- elki.utilities.datastructures.heap.DoubleIntegerMaxHeap.UnsortedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

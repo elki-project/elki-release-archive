@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ListParameterization\n<size:10>elki.utilities.optionhandling.parameterization" as elki.utilities.optionhandling.parameterization.ListParameterization [[ListParameterization.html]] {
+        ~parameters: List<ParameterPair>
+        +ListParameterization()
+        +ListParameterization(Collection<ParameterPair>)
+        +addFlag(OptionID): ListParameterization
+        +addFlag(String): ListParameterization
+        +addParameter(OptionID, Object): ListParameterization
+        #addParameter(ParameterPair): ListParameterization
+        +addParameter(String, Object): ListParameterization
+        +setValueForOption(Parameter<?>): boolean
+        +getRemainingParameters(): List<ParameterPair>
+        +hasUnusedParameters(): boolean
+        +descend(Object): ListParameterization
+        +serialize(): ArrayList<String>
+    }
+
+    abstract class "<size:14>AbstractParameterization\n<size:10>elki.utilities.optionhandling.parameterization" as elki.utilities.optionhandling.parameterization.AbstractParameterization [[AbstractParameterization.html]]
+    class "<size:14>ListParameterization.ParameterPair\n<size:10>elki.utilities.optionhandling.parameterization" as elki.utilities.optionhandling.parameterization.ListParameterization.ParameterPair [[ListParameterization.ParameterPair.html]]
+
+    elki.utilities.optionhandling.parameterization.AbstractParameterization <|-- elki.utilities.optionhandling.parameterization.ListParameterization
+    elki.utilities.optionhandling.parameterization.ListParameterization +-- elki.utilities.optionhandling.parameterization.ListParameterization.ParameterPair
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

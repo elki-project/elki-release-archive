@@ -1,0 +1,47 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.svm {
+
+        class SupportVectorClustering [[SupportVectorClustering.html]] {
+            {static} -LOG: Logging
+            ~kernel: PrimitiveSimilarity<? super NumberVector>
+            ~C: double
+            ~lsz: int
+            +SupportVectorClustering(PrimitiveSimilarity<? super NumberVector>, double)
+            +run(Relation<NumberVector>): Clustering<Model>
+            -checkConnectivity(Relation<NumberVector>, double[], DBIDRef, RegressionModel, double, ArrayDBIDs, SimilarityQuery<NumberVector>, double): boolean
+            -accept(NumberVector, RegressionModel, double, ArrayDBIDs, SimilarityQuery<NumberVector>, double): boolean
+            -calcfixedpart(RegressionModel, ArrayDBIDs, SimilarityQuery<NumberVector>): double
+            -collectClusters(StaticDBIDs, UnionFind): ArrayList<ArrayModifiableDBIDs>
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.svm.SupportVectorClustering.Par {
+            {static} +KERNEL_ID: OptionID
+            {static} +C_ID: OptionID
+            #kernel: PrimitiveSimilarity<? super NumberVector>
+            #C: double
+            +configure(Parameterization): void
+            +make(): SupportVectorClustering
+        }
+
+        elki.clustering.ClusteringAlgorithm <|.. SupportVectorClustering
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.svm.SupportVectorClustering.Par
+        SupportVectorClustering +-- elki.clustering.svm.SupportVectorClustering.Par
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

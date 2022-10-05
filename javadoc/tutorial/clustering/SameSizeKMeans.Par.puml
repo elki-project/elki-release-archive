@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SameSizeKMeans.Par\n<size:10>tutorial.clustering" as tutorial.clustering.SameSizeKMeans.Par<V extends NumberVector> [[SameSizeKMeans.Par.html]] {
+        #k: int
+        #maxiter: int
+        #initializer: KMeansInitialization
+        #distance: NumberVectorDistance<? super NumberVector>
+        +configure(Parameterization): void
+        +make(): SameSizeKMeans<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../elki/utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SameSizeKMeans\n<size:10>tutorial.clustering" as tutorial.clustering.SameSizeKMeans<V extends NumberVector> [[SameSizeKMeans.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. tutorial.clustering.SameSizeKMeans.Par
+    tutorial.clustering.SameSizeKMeans +-- tutorial.clustering.SameSizeKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

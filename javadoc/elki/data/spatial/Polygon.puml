@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Polygon\n<size:10>elki.data.spatial" as elki.data.spatial.Polygon [[Polygon.html]] {
+        -points: List<double[]>
+        -min: double[]
+        -max: double[]
+        +Polygon(List<double[]>)
+        +Polygon(List<double[]>, double, double, double, double)
+        +iter(): ArrayListIter<double[]>
+        +appendToBuffer(StringBuilder): StringBuilder
+        +size(): int
+        +get(int): double[]
+        +getDimensionality(): int
+        +getMin(int): double
+        +getMax(int): double
+        +testClockwise(): int
+        +intersects2DIncomplete(Polygon): boolean
+        +containsPoint2D(double[]): boolean
+        +areaShoelace(): double
+        +iterator(): Iterator<double[]>
+    }
+
+    interface "<size:14>SpatialComparable\n<size:10>elki.data.spatial" as elki.data.spatial.SpatialComparable [[SpatialComparable.html]] {
+        {abstract} +getDimensionality(): int
+        {abstract} +getMin(int): double
+        {abstract} +getMax(int): double
+    }
+    interface "<size:14>Iterable\n<size:10>java.lang" as java.lang.Iterable<double[]> {
+        {abstract} +iterator(): Iterator<T>
+    }
+
+    elki.data.spatial.SpatialComparable <|.. elki.data.spatial.Polygon
+    java.lang.Iterable <|.. elki.data.spatial.Polygon
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

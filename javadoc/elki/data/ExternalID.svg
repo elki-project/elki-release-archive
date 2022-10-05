@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="120px" preserveAspectRatio="none" style="width:194px;height:120px;background:#FFFFFF;" version="1.1" viewBox="0 0 194 120" width="194px" zoomAndPan="magnify"><defs/><g><!--MD5=[a4f15f4752bd8d1e479d75821d91e903]
+class elki.data.ExternalID--><a href="ExternalID.html" target="_top" title="ExternalID.html" xlink:actuate="onRequest" xlink:href="ExternalID.html" xlink:show="new" xlink:title="ExternalID.html" xlink:type="simple"><g id="elem_elki.data.ExternalID"><rect codeLine="6" fill="#F1F1F1" height="86.5313" id="elki.data.ExternalID" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="145" x="21" y="7"/><ellipse cx="55.8" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M58.7688,31.6094 Q58.1906,31.9063 57.55,32.0469 Q56.9094,32.2031 56.2063,32.2031 Q53.7063,32.2031 52.3781,30.5625 Q51.0656,28.9063 51.0656,25.7813 Q51.0656,22.6563 52.3781,21 Q53.7063,19.3438 56.2063,19.3438 Q56.9094,19.3438 57.55,19.5 Q58.2063,19.6563 58.7688,19.9531 L58.7688,22.6719 Q58.1438,22.0938 57.55,21.8281 Q56.9563,21.5469 56.3313,21.5469 Q54.9875,21.5469 54.3,22.625 Q53.6125,23.6875 53.6125,25.7813 Q53.6125,27.875 54.3,28.9531 Q54.9875,30.0156 56.3313,30.0156 Q56.9563,30.0156 57.55,29.75 Q58.1438,29.4688 58.7688,28.8906 L58.7688,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69" x="74.2" y="24.9951">ExternalID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="40" x="88.7" y="37.5791">elki.data</text><line style="stroke:#181818;stroke-width:0.5;" x1="22" x2="165" y1="44.9375" y2="44.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="29" y="55.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="41" y="61.9326">name: String</text><line style="stroke:#181818;stroke-width:0.5;" x1="22" x2="165" y1="69.2344" y2="69.2344"/><ellipse cx="32" cy="82.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="41" y="86.2295">ExternalID(String)</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="0" y="100.5313"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="0" y="109.8135">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[65c7e0e4deb86d0e9b579cbb285fba07]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExternalID\n<size:10>elki.data" as elki.data.ExternalID [[ExternalID.html]] {
+        -name: String
+        +ExternalID(String)
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

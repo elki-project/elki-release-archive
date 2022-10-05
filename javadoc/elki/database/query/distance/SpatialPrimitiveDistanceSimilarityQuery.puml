@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SpatialPrimitiveDistanceSimilarityQuery\n<size:10>elki.database.query.distance" as elki.database.query.distance.SpatialPrimitiveDistanceSimilarityQuery<O extends SpatialComparable> [[SpatialPrimitiveDistanceSimilarityQuery.html]] {
+        -similarityFunction: PrimitiveSimilarity<? super SpatialComparable>
+        +SpatialPrimitiveDistanceSimilarityQuery(Relation<? extends SpatialComparable>, SpatialPrimitiveDistance<? super SpatialComparable>, PrimitiveSimilarity<? super SpatialComparable>)
+        +similarity(DBIDRef, DBIDRef): double
+        +similarity(O extends SpatialComparable, DBIDRef): double
+        +similarity(DBIDRef, O extends SpatialComparable): double
+        +similarity(O extends SpatialComparable, O extends SpatialComparable): double
+        +getSimilarity(): PrimitiveSimilarity<? super SpatialComparable>
+    }
+
+    class "<size:14>SpatialPrimitiveDistanceQuery\n<size:10>elki.database.query.distance" as elki.database.query.distance.SpatialPrimitiveDistanceQuery<O extends SpatialComparable> [[SpatialPrimitiveDistanceQuery.html]]
+    interface "<size:14>DistanceSimilarityQuery\n<size:10>elki.database.query" as elki.database.query.DistanceSimilarityQuery<O extends SpatialComparable> [[../DistanceSimilarityQuery.html]]
+
+    elki.database.query.distance.SpatialPrimitiveDistanceQuery <|-- elki.database.query.distance.SpatialPrimitiveDistanceSimilarityQuery
+    elki.database.query.DistanceSimilarityQuery <|.. elki.database.query.distance.SpatialPrimitiveDistanceSimilarityQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

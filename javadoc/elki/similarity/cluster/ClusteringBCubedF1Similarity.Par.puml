@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusteringBCubedF1Similarity.Par\n<size:10>elki.similarity.cluster" as elki.similarity.cluster.ClusteringBCubedF1Similarity.Par [[ClusteringBCubedF1Similarity.Par.html]] {
+        +make(): ClusteringBCubedF1Similarity
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ClusteringBCubedF1Similarity\n<size:10>elki.similarity.cluster" as elki.similarity.cluster.ClusteringBCubedF1Similarity [[ClusteringBCubedF1Similarity.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.cluster.ClusteringBCubedF1Similarity.Par
+    elki.similarity.cluster.ClusteringBCubedF1Similarity +-- elki.similarity.cluster.ClusteringBCubedF1Similarity.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

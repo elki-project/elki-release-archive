@@ -1,0 +1,158 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.linearalgebra.pca {
+
+        class WeightedCovarianceMatrixBuilder [[WeightedCovarianceMatrixBuilder.html]] {
+            -weightDistance: PrimitiveDistance<? super NumberVector>
+            +WeightedCovarianceMatrixBuilder(WeightFunction)
+            +processIds(DBIDs, Relation<? extends NumberVector>): double[]
+            +processQueryResults(DoubleDBIDList, Relation<? extends NumberVector>, int): double[]
+        }
+
+        class elki.math.linearalgebra.pca.WeightedCovarianceMatrixBuilder.Par [[WeightedCovarianceMatrixBuilder.Par.html]] {
+            {static} +WEIGHT_ID: OptionID
+            +configure(Parameterization): void
+            +make(): WeightedCovarianceMatrixBuilder
+        }
+
+        class AutotuningPCA [[AutotuningPCA.html]] {
+            +AutotuningPCA(CovarianceMatrixBuilder, EigenPairFilter)
+            +processIds(DBIDs, Relation<? extends NumberVector>): PCAResult
+            +processQueryResult(DoubleDBIDList, Relation<? extends NumberVector>): PCAResult
+            {static} -reversed(double[]): double[]
+            -computeExplainedVariance(double[], int): double
+            -assertSortedByDistance(DoubleDBIDList): void
+        }
+
+        class elki.math.linearalgebra.pca.AutotuningPCA.Cand [[AutotuningPCA.Cand.html]] {
+            ~m: double[]
+            ~explain: double
+            ~dim: int
+            ~Cand(double[], double, int)
+        }
+
+        class elki.math.linearalgebra.pca.AutotuningPCA.Par [[AutotuningPCA.Par.html]] {
+            {static} +PCA_EIGENPAIR_FILTER: OptionID
+            +configure(Parameterization): void
+            +make(): AutotuningPCA
+        }
+
+        class EigenPair [[EigenPair.html]] {
+            -eigenvector: double[]
+            -eigenvalue: double
+            +EigenPair(double[], double)
+            +compareTo(EigenPair): int
+            +getEigenvector(): double[]
+            +getEigenvalue(): double
+        }
+
+        class PCAFilteredResult [[PCAFilteredResult.html]] {
+            -strongEigenvalues: double[]
+            -strongEigenvectors: double[]
+            -weakEigenvalues: double[]
+            -weakEigenvectors: double[]
+            -explainedVariance: double
+            -m_hat: double[]
+            -m_czech: double[]
+            +PCAFilteredResult(EigenPair[], int, double, double)
+            +getStrongEigenvectors(): double[]
+            +getStrongEigenvalues(): double[]
+            +getWeakEigenvectors(): double[]
+            +getWeakEigenvalues(): double[]
+            +getCorrelationDimension(): int
+            +getExplainedVariance(): double
+            +similarityMatrix(): double[]
+            +dissimilarityMatrix(): double[]
+        }
+
+        class StandardCovarianceMatrixBuilder [[StandardCovarianceMatrixBuilder.html]] {
+            +processIds(DBIDs, Relation<? extends NumberVector>): double[]
+        }
+
+        class RANSACCovarianceMatrixBuilder [[RANSACCovarianceMatrixBuilder.html]] {
+            ~iterations: int
+            ~rnd: RandomFactory
+            +RANSACCovarianceMatrixBuilder(int, RandomFactory)
+            +processIds(DBIDs, Relation<? extends NumberVector>): double[]
+        }
+
+        class elki.math.linearalgebra.pca.RANSACCovarianceMatrixBuilder.Par [[RANSACCovarianceMatrixBuilder.Par.html]] {
+            {static} +ITER_ID: OptionID
+            {static} +SEED_ID: OptionID
+            ~iterations: int
+            ~rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): RANSACCovarianceMatrixBuilder
+        }
+
+        class PCARunner [[PCARunner.html]] {
+            +PCARunner(CovarianceMatrixBuilder)
+            +processIds(DBIDs, Relation<? extends NumberVector>): PCAResult
+            +processQueryResult(DoubleDBIDList, Relation<? extends NumberVector>): PCAResult
+            +processCovarMatrix(double[]): PCAResult
+            +processEVD(EigenvalueDecomposition): PCAResult
+        }
+
+        class elki.math.linearalgebra.pca.PCARunner.Par [[PCARunner.Par.html]] {
+            {static} +PCARUNNER_ID: OptionID
+            {static} +PCA_COVARIANCE_MATRIX: OptionID
+            +configure(Parameterization): void
+            +make(): PCARunner
+        }
+
+        class PCAResult [[PCAResult.html]] {
+            -eigenvalues: double[]
+            -eigenvectors: double[]
+            +PCAResult(EigenPair[])
+            +PCAResult(EigenvalueDecomposition)
+            {static} -processDecomposition(EigenvalueDecomposition): EigenPair[]
+            +getEigenvectors(): double[]
+            +getEigenvalues(): double[]
+        }
+
+        interface CovarianceMatrixBuilder [[CovarianceMatrixBuilder.html]] {
+            +processRelation(Relation<? extends NumberVector>): double[]
+            {abstract} +processIds(DBIDs, Relation<? extends NumberVector>): double[]
+            +processQueryResults(DoubleDBIDList, Relation<? extends NumberVector>, int): double[]
+            +processQueryResults(DoubleDBIDList, Relation<? extends NumberVector>): double[]
+        }
+
+        CovarianceMatrixBuilder <|.. WeightedCovarianceMatrixBuilder
+        WeightedCovarianceMatrixBuilder --> elki.math.linearalgebra.pca.weightfunctions.WeightFunction: weightfunction
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.WeightedCovarianceMatrixBuilder.Par
+        WeightedCovarianceMatrixBuilder +-- elki.math.linearalgebra.pca.WeightedCovarianceMatrixBuilder.Par
+        elki.math.linearalgebra.pca.WeightedCovarianceMatrixBuilder.Par --> elki.math.linearalgebra.pca.weightfunctions.WeightFunction: weightfunction
+        PCARunner <|-- AutotuningPCA
+        AutotuningPCA --> elki.math.linearalgebra.pca.filter.EigenPairFilter: filter
+        AutotuningPCA +-- elki.math.linearalgebra.pca.AutotuningPCA.Cand
+        elki.math.linearalgebra.pca.PCARunner.Par <|-- elki.math.linearalgebra.pca.AutotuningPCA.Par
+        AutotuningPCA +-- elki.math.linearalgebra.pca.AutotuningPCA.Par
+        elki.math.linearalgebra.pca.AutotuningPCA.Par --> elki.math.linearalgebra.pca.filter.EigenPairFilter: filter
+        java.lang.Comparable <|.. EigenPair
+        PCAResult <|-- PCAFilteredResult
+        CovarianceMatrixBuilder <|.. StandardCovarianceMatrixBuilder
+        CovarianceMatrixBuilder <|.. RANSACCovarianceMatrixBuilder
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.RANSACCovarianceMatrixBuilder.Par
+        RANSACCovarianceMatrixBuilder +-- elki.math.linearalgebra.pca.RANSACCovarianceMatrixBuilder.Par
+        PCARunner --> CovarianceMatrixBuilder: covarianceMatrixBuilder
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.PCARunner.Par
+        PCARunner +-- elki.math.linearalgebra.pca.PCARunner.Par
+        elki.math.linearalgebra.pca.PCARunner.Par --> CovarianceMatrixBuilder: covarianceMatrixBuilder
+        PCAResult --> "*" EigenPair: eigenPairs
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

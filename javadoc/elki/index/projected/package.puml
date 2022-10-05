@@ -1,0 +1,235 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.projected {
+
+        class LngLatAsECEFIndex<O extends NumberVector> [[LngLatAsECEFIndex.html]] {
+            +LngLatAsECEFIndex(Relation<? extends NumberVector>, Projection<O extends NumberVector, O extends NumberVector>, Relation<O extends NumberVector>, Index, boolean)
+            +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+            +rangeByObject(DistanceQuery<O extends NumberVector>, double, int): RangeSearcher<O extends NumberVector>
+            +rkNNByObject(DistanceQuery<O extends NumberVector>, int, int): RKNNSearcher<O extends NumberVector>
+        }
+
+        class elki.index.projected.LngLatAsECEFIndex.Factory<O extends NumberVector> [[LngLatAsECEFIndex.Factory.html]] {
+            +Factory(IndexFactory<O extends NumberVector>, boolean, boolean, EarthModel)
+            +instantiate(Relation<O extends NumberVector>): ProjectedIndex<O extends NumberVector, O extends NumberVector>
+        }
+
+        class elki.index.projected.LngLatAsECEFIndex.Factory.Par<O extends NumberVector> {
+            ~inner: IndexFactory<O extends NumberVector>
+            ~materialize: boolean
+            ~norefine: boolean
+            ~model: EarthModel
+            +configure(Parameterization): void
+            +make(): Factory<O extends NumberVector>
+        }
+
+        class LatLngAsECEFIndex<O extends NumberVector> [[LatLngAsECEFIndex.html]] {
+            +LatLngAsECEFIndex(Relation<? extends NumberVector>, Projection<O extends NumberVector, O extends NumberVector>, Relation<O extends NumberVector>, Index, boolean)
+            +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+            +rangeByObject(DistanceQuery<O extends NumberVector>, double, int): RangeSearcher<O extends NumberVector>
+            +rkNNByObject(DistanceQuery<O extends NumberVector>, int, int): RKNNSearcher<O extends NumberVector>
+        }
+
+        class elki.index.projected.LatLngAsECEFIndex.Factory<O extends NumberVector> [[LatLngAsECEFIndex.Factory.html]] {
+            ~norefine: boolean
+            +Factory(IndexFactory<O extends NumberVector>, boolean, boolean, EarthModel)
+            +instantiate(Relation<O extends NumberVector>): ProjectedIndex<O extends NumberVector, O extends NumberVector>
+        }
+
+        class elki.index.projected.LatLngAsECEFIndex.Factory.Par<O extends NumberVector> {
+            ~inner: IndexFactory<O extends NumberVector>
+            ~materialize: boolean
+            ~norefine: boolean
+            ~model: EarthModel
+            +configure(Parameterization): void
+            +make(): Factory<O extends NumberVector>
+        }
+
+        class PINN<O extends NumberVector> [[PINN.html]] {
+            +PINN(IndexFactory<O extends NumberVector>, int, double, double, RandomFactory)
+        }
+
+        class elki.index.projected.PINN.Par<O extends NumberVector> {
+            {static} +T_ID: OptionID
+            {static} +S_ID: OptionID
+            {static} +H_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            ~inner: IndexFactory<O extends NumberVector>
+            ~t: int
+            ~s: double
+            ~h: double
+            ~random: RandomFactory
+            +configure(Parameterization): void
+            +make(): PINN<O extends NumberVector>
+        }
+
+        class ProjectedIndex<O, I> [[ProjectedIndex.html]] {
+            {static} -LOG: Logging
+            ~inner: Index
+            ~proj: Projection<O, I>
+            ~relation: Relation<? extends O>
+            ~view: Relation<​I>
+            ~norefine: boolean
+            ~kmulti: double
+            ~refinements: Counter
+            +ProjectedIndex(Relation<? extends O>, Projection<O, I>, Relation<​I>, Index, boolean, double)
+            -countRefinement(): void
+            +initialize(): void
+            +logStatistics(): void
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+            +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+            +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+        }
+
+        class elki.index.projected.ProjectedIndex.ProjectedKNNByObject [[ProjectedIndex.ProjectedKNNByObject.html]] {
+            ~inner: KNNSearcher<​I>
+            ~distq: DistanceQuery<O>
+            +ProjectedKNNByObject(DistanceQuery<O>, KNNSearcher<​I>)
+            +getKNN(O, int): KNNList
+        }
+
+        class elki.index.projected.ProjectedIndex.ProjectedKNNByDBID [[ProjectedIndex.ProjectedKNNByDBID.html]] {
+            ~inner: KNNSearcher<​I>
+            ~distq: DistanceQuery<O>
+            +ProjectedKNNByDBID(DistanceQuery<O>, KNNSearcher<​I>)
+            +getKNN(DBIDRef, int): KNNList
+        }
+
+        class elki.index.projected.ProjectedIndex.ProjectedRangeByObject [[ProjectedIndex.ProjectedRangeByObject.html]] {
+            #distanceQuery: DistanceQuery<O>
+            ~inner: RangeSearcher<​I>
+            +ProjectedRangeByObject(DistanceQuery<O>, RangeSearcher<​I>)
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class elki.index.projected.ProjectedIndex.ProjectedRangeByDBID [[ProjectedIndex.ProjectedRangeByDBID.html]] {
+            #distanceQuery: DistanceQuery<O>
+            ~inner: RangeSearcher<​I>
+            +ProjectedRangeByDBID(DistanceQuery<O>, RangeSearcher<​I>)
+            +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class elki.index.projected.ProjectedIndex.ProjectedRKNNByObject [[ProjectedIndex.ProjectedRKNNByObject.html]] {
+            ~inner: RKNNSearcher<​I>
+            ~distq: DistanceQuery<O>
+            +ProjectedRKNNByObject(DistanceQuery<O>, RKNNSearcher<​I>)
+            +getRKNN(O, int): DoubleDBIDList
+        }
+
+        class elki.index.projected.ProjectedIndex.ProjectedRKNNByDBID [[ProjectedIndex.ProjectedRKNNByDBID.html]] {
+            ~inner: RKNNSearcher<​I>
+            ~distq: DistanceQuery<O>
+            +ProjectedRKNNByDBID(DistanceQuery<O>, RKNNSearcher<​I>)
+            +getRKNN(DBIDRef, int): DoubleDBIDList
+        }
+
+        class elki.index.projected.ProjectedIndex.Factory<O, I> [[ProjectedIndex.Factory.html]] {
+            ~proj: Projection<O, I>
+            ~inner: IndexFactory<​I>
+            ~materialize: boolean
+            ~norefine: boolean
+            ~kmulti: double
+            +Factory(Projection<O, I>, IndexFactory<​I>, boolean, boolean, double)
+            +instantiate(Relation<O>): ProjectedIndex<O, I>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.projected.ProjectedIndex.Factory.Par<O, I> {
+            {static} +PROJ_ID: OptionID
+            {static} +INDEX_ID: OptionID
+            {static} +MATERIALIZE_FLAG: OptionID
+            {static} +DISABLE_REFINE_FLAG: OptionID
+            {static} +K_MULTIPLIER_ID: OptionID
+            ~proj: Projection<O, I>
+            ~inner: IndexFactory<​I>
+            ~materialize: boolean
+            ~norefine: boolean
+            ~kmulti: double
+            +configure(Parameterization): void
+            +make(): Factory<O, I>
+        }
+
+        ProjectedIndex <|-- LngLatAsECEFIndex
+        elki.index.projected.ProjectedIndex.Factory <|-- elki.index.projected.LngLatAsECEFIndex.Factory
+        LngLatAsECEFIndex +-- elki.index.projected.LngLatAsECEFIndex.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.projected.LngLatAsECEFIndex.Factory.Par
+        elki.index.projected.LngLatAsECEFIndex.Factory +-- elki.index.projected.LngLatAsECEFIndex.Factory.Par
+        ProjectedIndex <|-- LatLngAsECEFIndex
+        elki.index.projected.ProjectedIndex.Factory <|-- elki.index.projected.LatLngAsECEFIndex.Factory
+        LatLngAsECEFIndex +-- elki.index.projected.LatLngAsECEFIndex.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.projected.LatLngAsECEFIndex.Factory.Par
+        elki.index.projected.LatLngAsECEFIndex.Factory +-- elki.index.projected.LatLngAsECEFIndex.Factory.Par
+        elki.index.projected.ProjectedIndex.Factory <|-- PINN
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.projected.PINN.Par
+        PINN +-- elki.index.projected.PINN.Par
+        elki.index.KNNIndex <|.. ProjectedIndex
+        elki.index.RKNNIndex <|.. ProjectedIndex
+        elki.index.RangeIndex <|.. ProjectedIndex
+        elki.database.query.knn.KNNSearcher <|.. elki.index.projected.ProjectedIndex.ProjectedKNNByObject
+        ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedKNNByObject
+        elki.database.query.knn.KNNSearcher <|.. elki.index.projected.ProjectedIndex.ProjectedKNNByDBID
+        ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedKNNByDBID
+        elki.database.query.range.RangeSearcher <|.. elki.index.projected.ProjectedIndex.ProjectedRangeByObject
+        ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedRangeByObject
+        elki.database.query.range.RangeSearcher <|.. elki.index.projected.ProjectedIndex.ProjectedRangeByDBID
+        ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedRangeByDBID
+        elki.database.query.rknn.RKNNSearcher <|.. elki.index.projected.ProjectedIndex.ProjectedRKNNByObject
+        ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedRKNNByObject
+        elki.database.query.rknn.RKNNSearcher <|.. elki.index.projected.ProjectedIndex.ProjectedRKNNByDBID
+        ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedRKNNByDBID
+        elki.index.IndexFactory <|.. elki.index.projected.ProjectedIndex.Factory
+        ProjectedIndex +-- elki.index.projected.ProjectedIndex.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.projected.ProjectedIndex.Factory.Par
+        elki.index.projected.ProjectedIndex.Factory +-- elki.index.projected.ProjectedIndex.Factory.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.index {
+        interface KNNIndex<O> [[../KNNIndex.html]] {
+            {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        }
+        interface RKNNIndex<O> [[../RKNNIndex.html]] {
+            {abstract} +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+            {abstract} +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+        }
+        interface RangeIndex<O> [[../RangeIndex.html]] {
+            {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+        interface IndexFactory<V> [[../IndexFactory.html]] {
+            {abstract} +instantiate(Relation<V>): Index
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+    }
+
+    namespace elki.database.query.knn {
+        interface KNNSearcher<O> [[../../database/query/knn/KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+    }
+
+    namespace elki.database.query.range {
+        interface RangeSearcher<O> [[../../database/query/range/RangeSearcher.html]] {
+            +getRange(O, double): DoubleDBIDList
+            {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+    }
+
+    namespace elki.database.query.rknn {
+        interface RKNNSearcher<O> [[../../database/query/rknn/RKNNSearcher.html]] {
+            {abstract} +getRKNN(O, int): DoubleDBIDList
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

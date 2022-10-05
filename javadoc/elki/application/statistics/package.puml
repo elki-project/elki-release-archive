@@ -1,0 +1,65 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.application.statistics {
+
+        class EstimateIntrinsicDimensionality<O> [[EstimateIntrinsicDimensionality.html]] {
+            {static} -LOG: Logging
+            #krate: double
+            #samples: double
+            #estimator: IntrinsicDimensionalityEstimator<? super O>
+            +EstimateIntrinsicDimensionality(InputStep, Distance<? super O>, IntrinsicDimensionalityEstimator<? super O>, double, double)
+            +run(): void
+        }
+
+        class elki.application.statistics.EstimateIntrinsicDimensionality.Par<O> {
+            {static} +ESTIMATOR_ID: OptionID
+            {static} +KRATE_ID: OptionID
+            {static} +SAMPLES_ID: OptionID
+            #estimator: IntrinsicDimensionalityEstimator<? super O>
+            #krate: double
+            #samples: double
+            +configure(Parameterization): void
+            +make(): EstimateIntrinsicDimensionality<O>
+        }
+
+        class RangeQuerySelectivity<V extends NumberVector> [[RangeQuerySelectivity.html]] {
+            {static} -LOG: Logging
+            #radius: double
+            #sampling: double
+            #random: RandomFactory
+            +RangeQuerySelectivity(InputStep, Distance<? super NumberVector>, double, double, RandomFactory)
+            +run(): void
+        }
+
+        class elki.application.statistics.RangeQuerySelectivity.Par<V extends NumberVector> {
+            {static} +RADIUS_ID: OptionID
+            {static} +SAMPLING_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #radius: double
+            #sampling: double
+            #random: RandomFactory
+            +configure(Parameterization): void
+            +make(): RangeQuerySelectivity<V extends NumberVector>
+        }
+
+        elki.application.AbstractDistanceBasedApplication <|-- EstimateIntrinsicDimensionality
+        elki.application.AbstractDistanceBasedApplication.Par <|-- elki.application.statistics.EstimateIntrinsicDimensionality.Par
+        EstimateIntrinsicDimensionality +-- elki.application.statistics.EstimateIntrinsicDimensionality.Par
+        elki.application.AbstractDistanceBasedApplication <|-- RangeQuerySelectivity
+        elki.application.AbstractDistanceBasedApplication.Par <|-- elki.application.statistics.RangeQuerySelectivity.Par
+        RangeQuerySelectivity +-- elki.application.statistics.RangeQuerySelectivity.Par
+    }
+
+    namespace elki.application {
+        abstract class AbstractDistanceBasedApplication<O> [[../AbstractDistanceBasedApplication.html]] {
+            #distance: Distance<? super O>
+            #inputstep: InputStep
+        }
+        abstract class elki.application.AbstractDistanceBasedApplication.Par<O> {
+            #inputstep: InputStep
+            #distance: Distance<? super O>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

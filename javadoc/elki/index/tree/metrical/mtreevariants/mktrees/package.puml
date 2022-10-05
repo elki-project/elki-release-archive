@@ -1,0 +1,95 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.metrical.mtreevariants.mktrees {
+
+        abstract class AbstractMkTreeUnified<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMkTreeUnified.html]] {
+            +AbstractMkTreeUnified(Relation<O>, PageFile<N extends AbstractMTreeNode<O, N, E extends MTreeEntry>>, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>)
+            #createHeader(): TreeIndexHeader
+            +insertAll(List<E extends MTreeEntry>): void
+            {abstract} #kNNdistanceAdjustment(E extends MTreeEntry, Map<DBID, KNNList>): void
+            +getKmax(): int
+        }
+
+        abstract class AbstractMkTreeUnifiedFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMkTreeUnifiedFactory.html]] {
+            +AbstractMkTreeUnifiedFactory(PageFileFactory<?>, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>)
+        }
+
+        abstract class elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMkTreeUnifiedFactory.Par.html]] {
+            {static} +K_MAX_ID: OptionID
+            +configure(Parameterization): void
+            {abstract} +make(): AbstractMkTreeUnifiedFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>>
+        }
+
+        class MkTreeHeader [[MkTreeHeader.html]] {
+            {static} -SIZE: int
+            -k_max: int
+            +MkTreeHeader()
+            +MkTreeHeader(int, int, int, int)
+            +readHeader(ByteBuffer): void
+            +writeHeader(ByteBuffer): void
+            +getK_max(): int
+            +size(): int
+        }
+
+        class MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[MkTreeSettings.html]] {
+            +kmax: int
+        }
+
+        abstract class AbstractMkTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMkTree.html]] {
+            #knnq: KNNSearcher<DBIDRef>
+            -distanceQuery: DistanceQuery<O>
+            +AbstractMkTree(Relation<O>, PageFile<N extends AbstractMTreeNode<O, N, E extends MTreeEntry>>, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>)
+            +distance(DBIDRef, DBIDRef): double
+            {abstract} +reverseKNNQuery(DBIDRef, int): DoubleDBIDList
+            #--batchNN--(N extends AbstractMTreeNode<O, N extends AbstractMTreeNode<O,N,E>, E extends MTreeEntry>, DBIDs, int): Map<DBID, KNNList>
+        }
+
+        AbstractMkTree <|-- AbstractMkTreeUnified
+        elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory <|-- AbstractMkTreeUnifiedFactory
+        elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par <|-- elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par
+        AbstractMkTreeUnifiedFactory +-- elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par
+        elki.index.tree.TreeIndexHeader <|-- MkTreeHeader
+        elki.index.tree.metrical.mtreevariants.MTreeSettings <|-- MkTreeSettings
+        elki.index.tree.metrical.mtreevariants.AbstractMTree <|-- AbstractMkTree
+    }
+
+    namespace elki.index.tree.metrical.mtreevariants {
+        abstract class AbstractMTreeFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMTreeFactory.html]] {
+            #settings: S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+        }
+        abstract class elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMTreeFactory.Par.html]] {
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            {static} +SPLIT_STRATEGY_ID: OptionID
+            {static} +INSERT_STRATEGY_ID: OptionID
+            #settings: S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+            {abstract} #makeSettings(): S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+            {abstract} +make(): AbstractMTreeFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>
+        }
+        class MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[../MTreeSettings.html]] {
+            #distanceFunction: Distance<? super O>
+            #splitStrategy: MTreeSplit<E extends MTreeEntry, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>>
+            #insertStrategy: MTreeInsert<E extends MTreeEntry, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>>
+        }
+        abstract class AbstractMTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMTree.html]] {
+            {static} -EXTRA_INTEGRITY_CHECKS: boolean
+            #settings: S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+            +statistics: Statistics
+            {abstract} +distance(DBIDRef, DBIDRef): double
+            {abstract} #createNewDirectoryEntry(N extends AbstractMTreeNode<O, N extends AbstractMTreeNode<O,N,E>, E extends MTreeEntry>, DBID, double): E extends MTreeEntry
+        }
+    }
+
+    namespace elki.index.tree {
+        class TreeIndexHeader [[../../../TreeIndexHeader.html]] {
+            {static} -SIZE: int
+            ~dirCapacity: int
+            ~leafCapacity: int
+            ~dirMinimum: int
+            ~leafMinimum: int
+            -emptyPagesSize: int
+            -largestPageID: int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

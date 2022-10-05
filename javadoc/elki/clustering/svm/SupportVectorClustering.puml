@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SupportVectorClustering\n<size:10>elki.clustering.svm" as elki.clustering.svm.SupportVectorClustering [[SupportVectorClustering.html]] {
+        {static} -LOG: Logging
+        ~kernel: PrimitiveSimilarity<? super NumberVector>
+        ~C: double
+        ~lsz: int
+        +SupportVectorClustering(PrimitiveSimilarity<? super NumberVector>, double)
+        +run(Relation<NumberVector>): Clustering<Model>
+        -checkConnectivity(Relation<NumberVector>, double[], DBIDRef, RegressionModel, double, ArrayDBIDs, SimilarityQuery<NumberVector>, double): boolean
+        -accept(NumberVector, RegressionModel, double, ArrayDBIDs, SimilarityQuery<NumberVector>, double): boolean
+        -calcfixedpart(RegressionModel, ArrayDBIDs, SimilarityQuery<NumberVector>): double
+        -collectClusters(StaticDBIDs, UnionFind): ArrayList<ArrayModifiableDBIDs>
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<? extends Model>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>SupportVectorClustering.Par\n<size:10>elki.clustering.svm" as elki.clustering.svm.SupportVectorClustering.Par
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.svm.SupportVectorClustering
+    elki.clustering.svm.SupportVectorClustering +-- elki.clustering.svm.SupportVectorClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

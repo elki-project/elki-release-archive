@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HiCSDependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.HiCSDependence [[HiCSDependence.html]] {
+        -m: int
+        -alphasqrt: double
+        -statTest: GoodnessOfFitTest
+        -rnd: RandomFactory
+        +HiCSDependence(GoodnessOfFitTest, int, double, RandomFactory)
+        +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+    }
+
+    interface "<size:14>Dependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.Dependence [[Dependence.html]] {
+        {abstract} +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+    }
+    class "<size:14>HiCSDependence.Par\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.HiCSDependence.Par [[HiCSDependence.Par.html]]
+
+    elki.math.statistics.dependence.Dependence <|.. elki.math.statistics.dependence.HiCSDependence
+    elki.math.statistics.dependence.HiCSDependence +-- elki.math.statistics.dependence.HiCSDependence.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleGaussianContinuousUncertainObject\n<size:10>elki.data.uncertain" as elki.data.uncertain.SimpleGaussianContinuousUncertainObject [[SimpleGaussianContinuousUncertainObject.html]] {
+        {static} +FACTORY: Factory<SimpleGaussianContinuousUncertainObject, ?>
+        {static} -DIV: double
+        +SimpleGaussianContinuousUncertainObject(SpatialComparable)
+        +getCenterOfMass(): DoubleVector
+        +drawSample(Random): DoubleVector
+    }
+
+    abstract class "<size:14>AbstractUncertainObject\n<size:10>elki.data.uncertain" as elki.data.uncertain.AbstractUncertainObject [[AbstractUncertainObject.html]] {
+        {abstract} +drawSample(Random): DoubleVector
+        {abstract} +getCenterOfMass(): DoubleVector
+    }
+    class "<size:14>SimpleGaussianContinuousUncertainObject.Factory\n<size:10>elki.data.uncertain" as elki.data.uncertain.SimpleGaussianContinuousUncertainObject.Factory [[SimpleGaussianContinuousUncertainObject.Factory.html]]
+
+    elki.data.uncertain.AbstractUncertainObject <|-- elki.data.uncertain.SimpleGaussianContinuousUncertainObject
+    elki.data.uncertain.SimpleGaussianContinuousUncertainObject +-- elki.data.uncertain.SimpleGaussianContinuousUncertainObject.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

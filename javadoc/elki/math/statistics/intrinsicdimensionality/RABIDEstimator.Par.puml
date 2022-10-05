@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RABIDEstimator.Par\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.RABIDEstimator.Par [[RABIDEstimator.Par.html]] {
+        +make(): RABIDEstimator
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>RABIDEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.RABIDEstimator [[RABIDEstimator.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.RABIDEstimator.Par
+    elki.math.statistics.intrinsicdimensionality.RABIDEstimator +-- elki.math.statistics.intrinsicdimensionality.RABIDEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CovarianceMatrix\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.CovarianceMatrix [[CovarianceMatrix.html]] {
+        {static} +ERR_TOO_LITTLE_WEIGHT: String
+        ~mean: double[]
+        ~elements: double[]
+        ~nmea: double[]
+        #wsum: double
+        +CovarianceMatrix(int)
+        +getDimensionality(): int
+        +put(double[]): void
+        +put(double[], double): void
+        +put(NumberVector): void
+        +put(NumberVector, double): void
+        +getWeight(): double
+        +getMeanVector(): double[]
+        +getMeanVector(Relation<? extends NumberVector>): F extends NumberVector
+        +makeSampleMatrix(): double[]
+        +makePopulationMatrix(): double[]
+        +destroyToSampleMatrix(): double[]
+        +destroyToPopulationMatrix(): double[]
+        +reset(): void
+        {static} +make(Relation<? extends NumberVector>): CovarianceMatrix
+        {static} +make(Relation<? extends NumberVector>, DBIDs): CovarianceMatrix
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

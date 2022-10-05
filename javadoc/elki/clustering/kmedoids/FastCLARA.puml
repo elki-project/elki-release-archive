@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastCLARA\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastCLARA<V> [[FastCLARA.html]] {
+        {static} -LOG: Logging
+        ~sampling: double
+        ~numsamples: int
+        ~keepmed: boolean
+        ~random: RandomFactory
+        +FastCLARA(Distance<? super V>, int, int, KMedoidsInitialization<V>, double, int, double, boolean, RandomFactory)
+        +run(Relation<V>): Clustering<MedoidModel>
+        +run(Relation<V>, int, DistanceQuery<? super V>): Clustering<MedoidModel>
+    }
+
+    class "<size:14>FastPAM\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastPAM<V> [[FastPAM.html]]
+    class "<size:14>FastCLARA.Par\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastCLARA.Par<V> [[FastCLARA.Par.html]]
+
+    elki.clustering.kmedoids.FastPAM <|-- elki.clustering.kmedoids.FastCLARA
+    elki.clustering.kmedoids.FastCLARA +-- elki.clustering.kmedoids.FastCLARA.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

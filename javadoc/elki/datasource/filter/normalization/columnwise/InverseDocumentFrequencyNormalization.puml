@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InverseDocumentFrequencyNormalization\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.InverseDocumentFrequencyNormalization<V extends SparseNumberVector> [[InverseDocumentFrequencyNormalization.html]] {
+        {static} -LOG: Logging
+        ~idf: Int2DoubleOpenHashMap
+        ~objcnt: int
+        #prepareStart(SimpleTypeInformation<V extends SparseNumberVector>): boolean
+        #prepareProcessInstance(V extends SparseNumberVector): void
+        #prepareComplete(): void
+        #filterSingleObject(V extends SparseNumberVector): V extends SparseNumberVector
+        +restore(V extends SparseNumberVector): V extends SparseNumberVector
+        #convertedType(SimpleTypeInformation<V extends SparseNumberVector>): SimpleTypeInformation<? super SparseNumberVector>
+        #getInputTypeRestriction(): SimpleTypeInformation<? super SparseNumberVector>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractVectorConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractVectorConversionFilter<V extends SparseNumberVector, V extends SparseNumberVector> [[../../AbstractVectorConversionFilter.html]]
+    interface "<size:14>Normalization\n<size:10>elki.datasource.filter.normalization" as elki.datasource.filter.normalization.Normalization<V extends SparseNumberVector> [[../Normalization.html]]
+
+    elki.datasource.filter.AbstractVectorConversionFilter <|-- elki.datasource.filter.normalization.columnwise.InverseDocumentFrequencyNormalization
+    elki.datasource.filter.normalization.Normalization <|.. elki.datasource.filter.normalization.columnwise.InverseDocumentFrequencyNormalization
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

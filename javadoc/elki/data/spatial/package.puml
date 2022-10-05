@@ -1,0 +1,98 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.data.spatial {
+
+        class SpatialSingleMeanComparator [[SpatialSingleMeanComparator.html]] {
+            ~dim: int
+            +SpatialSingleMeanComparator(int)
+            +setDimension(int): void
+            +compare(SpatialComparable, SpatialComparable): int
+        }
+
+        class PolygonsObject [[PolygonsObject.html]] {
+            +PolygonsObject(Collection<Polygon>)
+            +appendToBuffer(StringBuilder): void
+            +getDimensionality(): int
+            +getMin(int): double
+            +getMax(int): double
+        }
+
+        class SpatialSingleMinComparator [[SpatialSingleMinComparator.html]] {
+            ~dim: int
+            +SpatialSingleMinComparator(int)
+            +setDimension(int): void
+            +compare(SpatialComparable, SpatialComparable): int
+        }
+
+        class SpatialSingleMaxComparator [[SpatialSingleMaxComparator.html]] {
+            ~dim: int
+            +SpatialSingleMaxComparator(int)
+            +setDimension(int): void
+            +compare(SpatialComparable, SpatialComparable): int
+        }
+
+        class Polygon [[Polygon.html]] {
+            -points: List<double[]>
+            -min: double[]
+            -max: double[]
+            +Polygon(List<double[]>)
+            +Polygon(List<double[]>, double, double, double, double)
+            +iter(): ArrayListIter<double[]>
+            +appendToBuffer(StringBuilder): StringBuilder
+            +size(): int
+            +get(int): double[]
+            +getDimensionality(): int
+            +getMin(int): double
+            +getMax(int): double
+            +testClockwise(): int
+            +intersects2DIncomplete(Polygon): boolean
+            +containsPoint2D(double[]): boolean
+            +areaShoelace(): double
+            +iterator(): Iterator<double[]>
+        }
+
+        class SpatialUtil [[SpatialUtil.html]] {
+            {static} +assertSameDimensionality(SpatialComparable, SpatialComparable): int
+            {static} +getMin(SpatialComparable): double[]
+            {static} +getMax(SpatialComparable): double[]
+            {static} +intersects(SpatialComparable, SpatialComparable): boolean
+            {static} +contains(SpatialComparable, SpatialComparable): boolean
+            {static} +contains(SpatialComparable, double[]): boolean
+            {static} +volume(SpatialComparable): double
+            {static} +volumeUnion(SpatialComparable, SpatialComparable): double
+            {static} +volumeScaled(SpatialComparable, double): double
+            {static} +volumeUnionScaled(SpatialComparable, SpatialComparable, double): double
+            {static} +enlargement(SpatialComparable, SpatialComparable): double
+            {static} +perimeter(SpatialComparable): double
+            {static} +overlap(SpatialComparable, SpatialComparable): double
+            {static} +relativeOverlap(SpatialComparable, SpatialComparable): double
+            {static} +union(SpatialComparable, SpatialComparable): ModifiableHyperBoundingBox
+            {static} +unionTolerant(SpatialComparable, SpatialComparable): ModifiableHyperBoundingBox
+            {static} +intersection(SpatialComparable, SpatialComparable): ModifiableHyperBoundingBox
+            {static} +centroid(SpatialComparable): double[]
+            {static} +equals(SpatialComparable, SpatialComparable): boolean
+        }
+
+        interface SpatialComparable [[SpatialComparable.html]] {
+            {abstract} +getDimensionality(): int
+            {abstract} +getMin(int): double
+            {abstract} +getMax(int): double
+        }
+
+        SpatialComparable <|.. PolygonsObject
+        PolygonsObject --> PolygonsObject: PROTOTYPE
+        PolygonsObject --> "*" Polygon: polygons
+        SpatialComparable <|.. Polygon
+        java.lang.Iterable <|.. Polygon
+    }
+
+    namespace java.lang {
+        interface Iterable<T> {
+            {abstract} +iterator(): Iterator<T>
+            +forEach(Consumer<? super T>): void
+            +spliterator(): Spliterator<T>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

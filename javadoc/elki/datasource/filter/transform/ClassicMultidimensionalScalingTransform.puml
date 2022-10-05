@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClassicMultidimensionalScalingTransform\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.ClassicMultidimensionalScalingTransform<I, O extends NumberVector> [[ClassicMultidimensionalScalingTransform.html]] {
+        {static} -LOG: Logging
+        ~dist: PrimitiveDistance<? super I>
+        ~tdim: int
+        ~factory: Factory<O extends NumberVector>
+        +ClassicMultidimensionalScalingTransform(int, PrimitiveDistance<? super I>, Factory<O extends NumberVector>)
+        +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        {static} #computeSquaredDistanceMatrix(List<​I>, PrimitiveDistance<? super I>): double[]
+        {static} +doubleCenterSymmetric(double[]): void
+    }
+
+    interface "<size:14>ObjectFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.ObjectFilter [[../ObjectFilter.html]] {
+        {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+    class "<size:14>ClassicMultidimensionalScalingTransform.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.ClassicMultidimensionalScalingTransform.Par<I, O extends NumberVector>
+
+    elki.datasource.filter.ObjectFilter <|.. elki.datasource.filter.transform.ClassicMultidimensionalScalingTransform
+    elki.datasource.filter.transform.ClassicMultidimensionalScalingTransform +-- elki.datasource.filter.transform.ClassicMultidimensionalScalingTransform.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

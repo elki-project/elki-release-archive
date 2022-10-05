@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AbsolutePearsonCorrelationDistance.Par\n<size:10>elki.distance.correlation" as elki.distance.correlation.AbsolutePearsonCorrelationDistance.Par [[AbsolutePearsonCorrelationDistance.Par.html]] {
+        +make(): AbsolutePearsonCorrelationDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AbsolutePearsonCorrelationDistance\n<size:10>elki.distance.correlation" as elki.distance.correlation.AbsolutePearsonCorrelationDistance [[AbsolutePearsonCorrelationDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.correlation.AbsolutePearsonCorrelationDistance.Par
+    elki.distance.correlation.AbsolutePearsonCorrelationDistance +-- elki.distance.correlation.AbsolutePearsonCorrelationDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

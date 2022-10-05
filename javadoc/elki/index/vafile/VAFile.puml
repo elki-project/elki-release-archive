@@ -1,0 +1,46 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VAFile\n<size:10>elki.index.vafile" as elki.index.vafile.VAFile<V extends NumberVector> [[VAFile.html]] {
+        {static} -LOG: Logging
+        -vectorApprox: List<VectorApproximation>
+        -partitions: int
+        -splitPositions: double[]
+        ~pageSize: int
+        ~scans: int
+        +VAFile(int, Relation<V extends NumberVector>, int)
+        +initialize(): void
+        +setPartitions(Relation<V extends NumberVector>): void
+        +calculateApproximation(DBIDRef, V extends NumberVector): VectorApproximation
+        +getScannedPages(): long
+        +getLogger(): Logging
+        +logStatistics(): void
+        +kNNByObject(DistanceQuery<V extends NumberVector>, int, int): KNNSearcher<V extends NumberVector>
+        +rangeByObject(DistanceQuery<V extends NumberVector>, double, int): RangeSearcher<V extends NumberVector>
+    }
+
+    abstract class "<size:14>AbstractRefiningIndex\n<size:10>elki.index" as elki.index.AbstractRefiningIndex<V extends NumberVector> [[../AbstractRefiningIndex.html]] {
+        {abstract} +getLogger(): Logging
+    }
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<V extends NumberVector> [[../KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    interface "<size:14>RangeIndex\n<size:10>elki.index" as elki.index.RangeIndex<V extends NumberVector> [[../RangeIndex.html]] {
+        {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+    }
+    class "<size:14>VAFile.VAFileRangeQuery\n<size:10>elki.index.vafile" as elki.index.vafile.VAFile.VAFileRangeQuery [[VAFile.VAFileRangeQuery.html]]
+    class "<size:14>VAFile.VAFileKNNQuery\n<size:10>elki.index.vafile" as elki.index.vafile.VAFile.VAFileKNNQuery [[VAFile.VAFileKNNQuery.html]]
+    class "<size:14>VAFile.Factory\n<size:10>elki.index.vafile" as elki.index.vafile.VAFile.Factory<V extends NumberVector> [[VAFile.Factory.html]]
+
+    elki.index.AbstractRefiningIndex <|-- elki.index.vafile.VAFile
+    elki.index.KNNIndex <|.. elki.index.vafile.VAFile
+    elki.index.RangeIndex <|.. elki.index.vafile.VAFile
+    elki.index.vafile.VAFile +-- elki.index.vafile.VAFile.VAFileRangeQuery
+    elki.index.vafile.VAFile +-- elki.index.vafile.VAFile.VAFileKNNQuery
+    elki.index.vafile.VAFile +-- elki.index.vafile.VAFile.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrioritySearchBenchmark.Par\n<size:10>elki.application.benchmark" as elki.application.benchmark.PrioritySearchBenchmark.Par<O> {
+        {static} +K_ID: OptionID
+        {static} +QUERY_ID: OptionID
+        {static} +SAMPLING_ID: OptionID
+        {static} +RANDOM_ID: OptionID
+        #k: int
+        #queries: DatabaseConnection
+        #sampling: double
+        #random: RandomFactory
+        +configure(Parameterization): void
+        +make(): PrioritySearchBenchmark<O>
+    }
+
+    abstract class "<size:14>AbstractDistanceBasedApplication.Par\n<size:10>elki.application" as elki.application.AbstractDistanceBasedApplication.Par<O>
+    class "<size:14>PrioritySearchBenchmark\n<size:10>elki.application.benchmark" as elki.application.benchmark.PrioritySearchBenchmark<O> [[PrioritySearchBenchmark.html]]
+
+    elki.application.AbstractDistanceBasedApplication.Par <|-- elki.application.benchmark.PrioritySearchBenchmark.Par
+    elki.application.benchmark.PrioritySearchBenchmark +-- elki.application.benchmark.PrioritySearchBenchmark.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

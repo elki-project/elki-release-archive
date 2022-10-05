@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ArrayRecordStore\n<size:10>elki.database.datastore.memory" as elki.database.datastore.memory.ArrayRecordStore [[ArrayRecordStore.html]] {
+        -data: Object[]
+        -idmap: DataStoreIDMap
+        +ArrayRecordStore(Object[], DataStoreIDMap)
+        +getStorage(int, Class<? super T>): WritableDataStore<T>
+        #get(DBIDRef, int): T
+        #set(DBIDRef, int, T): T
+        +remove(DBIDRef): boolean
+    }
+
+    interface "<size:14>WritableRecordStore\n<size:10>elki.database.datastore" as elki.database.datastore.WritableRecordStore [[../WritableRecordStore.html]] {
+        {abstract} +getStorage(int, Class<? super T>): WritableDataStore<T>
+        {abstract} +remove(DBIDRef): boolean
+    }
+    class "<size:14>ArrayRecordStore.StorageAccessor\n<size:10>elki.database.datastore.memory" as elki.database.datastore.memory.ArrayRecordStore.StorageAccessor<T> [[ArrayRecordStore.StorageAccessor.html]]
+
+    elki.database.datastore.WritableRecordStore <|.. elki.database.datastore.memory.ArrayRecordStore
+    elki.database.datastore.memory.ArrayRecordStore +-- elki.database.datastore.memory.ArrayRecordStore.StorageAccessor
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

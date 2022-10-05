@@ -1,0 +1,242 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.evaluation.outlier {
+
+        class OutlierThresholdClustering [[OutlierThresholdClustering.html]] {
+            ~scaling: ScalingFunction
+            ~threshold: double[]
+            +OutlierThresholdClustering(ScalingFunction, double[])
+            +processNewResult(Object): void
+            -split(OutlierResult): Clustering<Model>
+        }
+
+        class elki.evaluation.outlier.OutlierThresholdClustering.Par [[OutlierThresholdClustering.Par.html]] {
+            {static} +SCALING_ID: OptionID
+            {static} +THRESHOLD_ID: OptionID
+            ~scaling: ScalingFunction
+            ~threshold: double[]
+            +configure(Parameterization): void
+            +make(): OutlierThresholdClustering
+        }
+
+        class ComputeOutlierHistogram [[ComputeOutlierHistogram.html]] {
+            -positiveClassName: Pattern
+            -bins: int
+            -scaling: ScalingFunction
+            -splitfreq: boolean
+            +ComputeOutlierHistogram(Pattern, int, ScalingFunction, boolean)
+            +evaluateOutlierResult(Database, OutlierResult): HistogramResult
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.outlier.ComputeOutlierHistogram.Par [[ComputeOutlierHistogram.Par.html]] {
+            {static} +POSITIVE_CLASS_NAME_ID: OptionID
+            {static} +BINS_ID: OptionID
+            {static} +SCALING_ID: OptionID
+            {static} +SPLITFREQ_ID: OptionID
+            #positiveClassName: Pattern
+            #bins: int
+            #scaling: ScalingFunction
+            #splitfreq: boolean
+            +configure(Parameterization): void
+            +make(): ComputeOutlierHistogram
+        }
+
+        class OutlierPrecisionAtKCurve [[OutlierPrecisionAtKCurve.html]] {
+            {static} -LOG: Logging
+            -positiveClassName: Pattern
+            -maxk: int
+            +OutlierPrecisionAtKCurve(Pattern, int)
+            +processNewResult(Object): void
+            -computePrecisionResult(int, SetDBIDs, DBIDs): XYCurve
+        }
+
+        class elki.evaluation.outlier.OutlierPrecisionAtKCurve.PrecisionAtKCurve [[OutlierPrecisionAtKCurve.PrecisionAtKCurve.html]] {
+            +PrecisionAtKCurve(int)
+        }
+
+        class elki.evaluation.outlier.OutlierPrecisionAtKCurve.Par [[OutlierPrecisionAtKCurve.Par.html]] {
+            {static} +POSITIVE_CLASS_NAME_ID: OptionID
+            {static} +MAX_K_ID: OptionID
+            -positiveClassName: Pattern
+            -maxk: int
+            +configure(Parameterization): void
+            +make(): OutlierPrecisionAtKCurve
+        }
+
+        class OutlierPrecisionRecallGainCurve [[OutlierPrecisionRecallGainCurve.html]] {
+            {static} +AUPRGC_LABEL: String
+            {static} -LOG: Logging
+            -positiveClassName: Pattern
+            +OutlierPrecisionRecallGainCurve(Pattern)
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.outlier.OutlierPrecisionRecallGainCurve.Par [[OutlierPrecisionRecallGainCurve.Par.html]] {
+            {static} +POSITIVE_CLASS_NAME_ID: OptionID
+            #positiveClassName: Pattern
+            +configure(Parameterization): void
+            +make(): OutlierPrecisionRecallGainCurve
+        }
+
+        class OutlierPrecisionRecallCurve [[OutlierPrecisionRecallCurve.html]] {
+            {static} +PRAUC_LABEL: String
+            {static} -LOG: Logging
+            -positiveClassName: Pattern
+            +OutlierPrecisionRecallCurve(Pattern)
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.outlier.OutlierPrecisionRecallCurve.Par [[OutlierPrecisionRecallCurve.Par.html]] {
+            {static} +POSITIVE_CLASS_NAME_ID: OptionID
+            #positiveClassName: Pattern
+            +configure(Parameterization): void
+            +make(): OutlierPrecisionRecallCurve
+        }
+
+        class OutlierROCCurve [[OutlierROCCurve.html]] {
+            {static} +AUROC_LABEL: String
+            {static} -LOG: Logging
+            -positiveClassName: Pattern
+            +OutlierROCCurve(Pattern)
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.outlier.OutlierROCCurve.Par [[OutlierROCCurve.Par.html]] {
+            {static} +POSITIVE_CLASS_NAME_ID: OptionID
+            #positiveClassName: Pattern
+            +configure(Parameterization): void
+            +make(): OutlierROCCurve
+        }
+
+        class OutlierRankingEvaluation [[OutlierRankingEvaluation.html]] {
+            {static} -LOG: Logging
+            -positiveClassName: Pattern
+            -key: String
+            +OutlierRankingEvaluation(Pattern)
+            -evaluate(EvaluationResult, int, int, Supplier<Adapter>): void
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.outlier.OutlierRankingEvaluation.Par [[OutlierRankingEvaluation.Par.html]] {
+            {static} +POSITIVE_CLASS_NAME_ID: OptionID
+            #positiveClassName: Pattern
+            +configure(Parameterization): void
+            +make(): OutlierRankingEvaluation
+        }
+
+        class OutlierSmROCCurve [[OutlierSmROCCurve.html]] {
+            {static} +SMAUROC_LABEL: String
+            {static} -LOG: Logging
+            -positiveClassName: Pattern
+            +OutlierSmROCCurve(Pattern)
+            -computeSmROCResult(SetDBIDs, OutlierResult): SmROCResult
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.outlier.OutlierSmROCCurve.SmROCResult [[OutlierSmROCCurve.SmROCResult.html]] {
+            ~auc: double
+            +SmROCResult(int)
+            +getAUC(): double
+        }
+
+        class elki.evaluation.outlier.OutlierSmROCCurve.Par [[OutlierSmROCCurve.Par.html]] {
+            #positiveClassName: Pattern
+            +configure(Parameterization): void
+            +make(): OutlierSmROCCurve
+        }
+
+        class JudgeOutlierScores [[JudgeOutlierScores.html]] {
+            {static} -LOG: Logging
+            -positiveClassName: Pattern
+            -scaling: ScalingFunction
+            +JudgeOutlierScores(Pattern, ScalingFunction)
+            #computeScore(DBIDs, DBIDs, OutlierResult): ScoreResult
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.outlier.JudgeOutlierScores.ScoreResult [[JudgeOutlierScores.ScoreResult.html]] {
+            +ScoreResult(Collection<double[]>)
+        }
+
+        class elki.evaluation.outlier.JudgeOutlierScores.Par [[JudgeOutlierScores.Par.html]] {
+            {static} +POSITIVE_CLASS_NAME_ID: OptionID
+            {static} +SCALING_ID: OptionID
+            -positiveClassName: Pattern
+            -scaling: ScalingFunction
+            +configure(Parameterization): void
+            +make(): JudgeOutlierScores
+        }
+
+        elki.evaluation.Evaluator <|.. OutlierThresholdClustering
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.outlier.OutlierThresholdClustering.Par
+        OutlierThresholdClustering +-- elki.evaluation.outlier.OutlierThresholdClustering.Par
+        elki.evaluation.Evaluator <|.. ComputeOutlierHistogram
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.outlier.ComputeOutlierHistogram.Par
+        ComputeOutlierHistogram +-- elki.evaluation.outlier.ComputeOutlierHistogram.Par
+        elki.evaluation.Evaluator <|.. OutlierPrecisionAtKCurve
+        elki.math.geometry.XYCurve <|-- elki.evaluation.outlier.OutlierPrecisionAtKCurve.PrecisionAtKCurve
+        OutlierPrecisionAtKCurve +-- elki.evaluation.outlier.OutlierPrecisionAtKCurve.PrecisionAtKCurve
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.outlier.OutlierPrecisionAtKCurve.Par
+        OutlierPrecisionAtKCurve +-- elki.evaluation.outlier.OutlierPrecisionAtKCurve.Par
+        elki.evaluation.Evaluator <|.. OutlierPrecisionRecallGainCurve
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.outlier.OutlierPrecisionRecallGainCurve.Par
+        OutlierPrecisionRecallGainCurve +-- elki.evaluation.outlier.OutlierPrecisionRecallGainCurve.Par
+        elki.evaluation.Evaluator <|.. OutlierPrecisionRecallCurve
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.outlier.OutlierPrecisionRecallCurve.Par
+        OutlierPrecisionRecallCurve +-- elki.evaluation.outlier.OutlierPrecisionRecallCurve.Par
+        elki.evaluation.Evaluator <|.. OutlierROCCurve
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.outlier.OutlierROCCurve.Par
+        OutlierROCCurve +-- elki.evaluation.outlier.OutlierROCCurve.Par
+        elki.evaluation.Evaluator <|.. OutlierRankingEvaluation
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.outlier.OutlierRankingEvaluation.Par
+        OutlierRankingEvaluation +-- elki.evaluation.outlier.OutlierRankingEvaluation.Par
+        elki.evaluation.Evaluator <|.. OutlierSmROCCurve
+        elki.math.geometry.XYCurve <|-- elki.evaluation.outlier.OutlierSmROCCurve.SmROCResult
+        OutlierSmROCCurve +-- elki.evaluation.outlier.OutlierSmROCCurve.SmROCResult
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.outlier.OutlierSmROCCurve.Par
+        OutlierSmROCCurve +-- elki.evaluation.outlier.OutlierSmROCCurve.Par
+        elki.evaluation.Evaluator <|.. JudgeOutlierScores
+        elki.result.CollectionResult <|-- elki.evaluation.outlier.JudgeOutlierScores.ScoreResult
+        JudgeOutlierScores +-- elki.evaluation.outlier.JudgeOutlierScores.ScoreResult
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.outlier.JudgeOutlierScores.Par
+        JudgeOutlierScores +-- elki.evaluation.outlier.JudgeOutlierScores.Par
+    }
+
+    namespace elki.evaluation {
+        interface Evaluator [[../Evaluator.html]]
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.math.geometry {
+        class XYCurve [[../../math/geometry/XYCurve.html]] {
+            {static} #THRESHOLD: double
+            #data: DoubleArray
+            #labelx: String
+            #labely: String
+            #minx: double
+            #maxx: double
+            #miny: double
+            #maxy: double
+            #mindx: double
+            #maxdx: double
+            #mindy: double
+            #maxdy: double
+        }
+    }
+
+    namespace elki.result {
+        class CollectionResult<O> [[../../result/CollectionResult.html]] {
+            -col: Collection<O>
+            -header: Collection<String>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SameSizeKMeans.Meta\n<size:10>tutorial.clustering" as tutorial.clustering.SameSizeKMeans.Meta [[SameSizeKMeans.Meta.html]] {
+        ~dists: double[]
+        ~primary: int
+        ~secondary: int
+        #Meta(int)
+        #priority(): double
+        #gain(int): double
+    }
+
+    class "<size:14>SameSizeKMeans\n<size:10>tutorial.clustering" as tutorial.clustering.SameSizeKMeans<V extends NumberVector> [[SameSizeKMeans.html]]
+
+    tutorial.clustering.SameSizeKMeans +-- tutorial.clustering.SameSizeKMeans.Meta
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

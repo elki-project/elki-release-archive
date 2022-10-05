@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GaussianAffinityMatrixBuilder\n<size:10>elki.projection" as elki.projection.GaussianAffinityMatrixBuilder<O> [[GaussianAffinityMatrixBuilder.html]] {
+        {static} -LOG: Logging
+        {static} #MIN_PIJ: double
+        #distance: Distance<? super O>
+        #sigma: double
+        +GaussianAffinityMatrixBuilder(Distance<? super O>, double)
+        +computeAffinityMatrix(Relation<T extends O>, double): AffinityMatrix
+        #buildDistanceMatrix(ArrayDBIDs, DistanceQuery<?>): double[]
+        {static} #computePij(double[], double, double): double[]
+        {static} #computeH(int, double[], double[], double): double
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>AffinityMatrixBuilder\n<size:10>elki.projection" as elki.projection.AffinityMatrixBuilder<O> [[AffinityMatrixBuilder.html]] {
+        {abstract} +computeAffinityMatrix(Relation<T extends O>, double): AffinityMatrix
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>GaussianAffinityMatrixBuilder.Par\n<size:10>elki.projection" as elki.projection.GaussianAffinityMatrixBuilder.Par<O> [[GaussianAffinityMatrixBuilder.Par.html]]
+
+    elki.projection.AffinityMatrixBuilder <|.. elki.projection.GaussianAffinityMatrixBuilder
+    elki.projection.GaussianAffinityMatrixBuilder +-- elki.projection.GaussianAffinityMatrixBuilder.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

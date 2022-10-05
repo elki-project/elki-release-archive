@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierSqrtScaling.Par\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierSqrtScaling.Par [[OutlierSqrtScaling.Par.html]] {
+        {static} +MIN_ID: OptionID
+        {static} +MAX_ID: OptionID
+        #min: double
+        #max: double
+        +configure(Parameterization): void
+        +make(): OutlierSqrtScaling
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>OutlierSqrtScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierSqrtScaling [[OutlierSqrtScaling.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.outlier.OutlierSqrtScaling.Par
+    elki.utilities.scaling.outlier.OutlierSqrtScaling +-- elki.utilities.scaling.outlier.OutlierSqrtScaling.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

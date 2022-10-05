@@ -1,0 +1,116 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.distance.timeseries {
+
+        class LCSSDistance [[LCSSDistance.html]] {
+            -pDelta: double
+            -pEpsilon: double
+            +LCSSDistance(double, double)
+            +distance(NumberVector, NumberVector): double
+            +getRange(NumberVector, int, NumberVector, int): double
+            +getInputTypeRestriction(): VectorTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.timeseries.LCSSDistance.Par [[LCSSDistance.Par.html]] {
+            {static} +PDELTA_ID: OptionID
+            {static} +PEPSILON_ID: OptionID
+            -pDelta: double
+            -pEpsilon: double
+            +configure(Parameterization): void
+            +make(): LCSSDistance
+        }
+
+        abstract class AbstractEditDistance [[AbstractEditDistance.html]] {
+            #bandSize: double
+            +AbstractEditDistance(double)
+            #effectiveBandSize(int, int): int
+            +getInputTypeRestriction(): VectorTypeInformation<? super NumberVector>
+        }
+
+        abstract class elki.distance.timeseries.AbstractEditDistance.Par [[AbstractEditDistance.Par.html]] {
+            {static} +BANDSIZE_ID: OptionID
+            #bandSize: double
+            +configure(Parameterization): void
+        }
+
+        class EDRDistance [[EDRDistance.html]] {
+            -delta: double
+            +EDRDistance(double, double)
+            +distance(NumberVector, NumberVector): double
+            #delta(double, double): double
+        }
+
+        class elki.distance.timeseries.EDRDistance.Par [[EDRDistance.Par.html]] {
+            {static} +DELTA_ID: OptionID
+            #delta: double
+            +configure(Parameterization): void
+            {static} +getParameterDelta(Parameterization): double
+            +make(): EDRDistance
+        }
+
+        class ERPDistance [[ERPDistance.html]] {
+            -g: double
+            +ERPDistance(double, double)
+            +distance(NumberVector, NumberVector): double
+            #firstRow(double[], int, NumberVector, NumberVector, int): void
+            #delta(double, double): double
+        }
+
+        class elki.distance.timeseries.ERPDistance.Par [[ERPDistance.Par.html]] {
+            {static} +G_ID: OptionID
+            #g: double
+            +configure(Parameterization): void
+            +make(): ERPDistance
+        }
+
+        class DerivativeDTWDistance [[DerivativeDTWDistance.html]] {
+            +DerivativeDTWDistance()
+            +DerivativeDTWDistance(double)
+            +distance(NumberVector, NumberVector): double
+            #firstRow(double[], int, NumberVector, NumberVector, int): void
+            #derivative(int, NumberVector): double
+        }
+
+        class DTWDistance [[DTWDistance.html]] {
+            +DTWDistance()
+            +DTWDistance(double)
+            +distance(NumberVector, NumberVector): double
+            #firstRow(double[], int, NumberVector, NumberVector, int): void
+            #delta(double, double): double
+        }
+
+        class elki.distance.timeseries.DTWDistance.Par [[DTWDistance.Par.html]] {
+            +make(): DTWDistance
+        }
+
+        elki.distance.AbstractNumberVectorDistance <|-- LCSSDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.timeseries.LCSSDistance.Par
+        LCSSDistance +-- elki.distance.timeseries.LCSSDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- AbstractEditDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.timeseries.AbstractEditDistance.Par
+        AbstractEditDistance +-- elki.distance.timeseries.AbstractEditDistance.Par
+        DTWDistance <|-- EDRDistance
+        elki.distance.timeseries.AbstractEditDistance.Par <|-- elki.distance.timeseries.EDRDistance.Par
+        EDRDistance +-- elki.distance.timeseries.EDRDistance.Par
+        DTWDistance <|-- ERPDistance
+        elki.distance.timeseries.AbstractEditDistance.Par <|-- elki.distance.timeseries.ERPDistance.Par
+        ERPDistance +-- elki.distance.timeseries.ERPDistance.Par
+        DTWDistance <|-- DerivativeDTWDistance
+        AbstractEditDistance <|-- DTWDistance
+        elki.distance.timeseries.AbstractEditDistance.Par <|-- elki.distance.timeseries.DTWDistance.Par
+        DTWDistance +-- elki.distance.timeseries.DTWDistance.Par
+    }
+
+    namespace elki.distance {
+        abstract class AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

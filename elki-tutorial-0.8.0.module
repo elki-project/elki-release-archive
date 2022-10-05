@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-tutorial",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-tutorial-0.8.0.jar",
+          "url": "elki-tutorial-0.8.0.jar",
+          "size": 82764,
+          "sha512": "d8952138968a8dfff7c5f70995c1a4744245ff0be8887d1959ac032b71102d9653577ef8397aca4a063ed1e7f4985efc84676b252b04c539f41155d17ecc578e",
+          "sha256": "fb3d93055844f0c61ee3795e2f7787b32c0fd8ad5e930faaf25a99d8691c9c54",
+          "sha1": "2197937121f263cb95e805ab77d7a85757a08505",
+          "md5": "414ec595f22ab27fcb675cb6a0e0cd75"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-tutorial-0.8.0.jar",
+          "url": "elki-tutorial-0.8.0.jar",
+          "size": 82764,
+          "sha512": "d8952138968a8dfff7c5f70995c1a4744245ff0be8887d1959ac032b71102d9653577ef8397aca4a063ed1e7f4985efc84676b252b04c539f41155d17ecc578e",
+          "sha256": "fb3d93055844f0c61ee3795e2f7787b32c0fd8ad5e930faaf25a99d8691c9c54",
+          "sha1": "2197937121f263cb95e805ab77d7a85757a08505",
+          "md5": "414ec595f22ab27fcb675cb6a0e0cd75"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-tutorial",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-tutorial-0.8.0-test-fixtures.jar",
+          "url": "elki-tutorial-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "0a2f82b9b601fbb39add23f248c6a8353ab51d6fb39c8e4e3a29424e5e349193014678759ccde407fd3282bb372f08ed8df3927cca98f85d0e8d69f637d8ed60",
+          "sha256": "67982aacf0a007f4d50c96331c328d53405ec13e7c6f05c4fac88f36eda85ddc",
+          "sha1": "7f22ab9ccb37dc71b71adbd7d3b5c867e1b0122e",
+          "md5": "475a8495a90dccbfae0caca7a1701c17"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-tutorial-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-tutorial",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-tutorial-0.8.0-test-fixtures.jar",
+          "url": "elki-tutorial-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "0a2f82b9b601fbb39add23f248c6a8353ab51d6fb39c8e4e3a29424e5e349193014678759ccde407fd3282bb372f08ed8df3927cca98f85d0e8d69f637d8ed60",
+          "sha256": "67982aacf0a007f4d50c96331c328d53405ec13e7c6f05c4fac88f36eda85ddc",
+          "sha1": "7f22ab9ccb37dc71b71adbd7d3b5c867e1b0122e",
+          "md5": "475a8495a90dccbfae0caca7a1701c17"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-tutorial-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

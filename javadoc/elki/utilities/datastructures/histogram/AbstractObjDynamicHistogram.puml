@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractObjDynamicHistogram\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.AbstractObjDynamicHistogram<T> [[AbstractObjDynamicHistogram.html]] {
+        -cacheposs: double[]
+        -cachevals: Object[]
+        -cachefill: int
+        -destsize: int
+        +AbstractObjDynamicHistogram(int)
+        ~materialize(): void
+        +get(double): T
+        +putData(double, T): void
+        #aggregateSpecial(T, int): void
+        -testResample(double): void
+        +iter(): Iter
+        +getNumBins(): int
+        +getBinsize(): double
+        +getCoverMinimum(): double
+        +getCoverMaximum(): double
+        {abstract} #downsample(Object[], int, int, int): T
+        {abstract} #aggregate(T, T): T
+        {abstract} #cloneForCache(T): T
+        {abstract} #makeObject(): T
+    }
+
+    class "<size:14>ObjHistogram\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.ObjHistogram<T> [[ObjHistogram.html]]
+
+    elki.utilities.datastructures.histogram.ObjHistogram <|-- elki.utilities.datastructures.histogram.AbstractObjDynamicHistogram
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

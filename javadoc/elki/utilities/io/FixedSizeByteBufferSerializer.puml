@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>FixedSizeByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.FixedSizeByteBufferSerializer<T> [[FixedSizeByteBufferSerializer.html]] {
+        {abstract} +getFixedByteSize(): int
+    }
+
+    interface "<size:14>ByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteBufferSerializer<T> [[ByteBufferSerializer.html]] {
+        {abstract} +fromByteBuffer(ByteBuffer): T
+        {abstract} +toByteBuffer(ByteBuffer, T): void
+        {abstract} +getByteSize(T): int
+    }
+
+    elki.utilities.io.ByteBufferSerializer <|-- elki.utilities.io.FixedSizeByteBufferSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

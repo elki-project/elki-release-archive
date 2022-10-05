@@ -1,0 +1,10 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    annotation "<size:14>References\n<size:10>elki.utilities.documentation" as elki.utilities.documentation.References [[References.html]]
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

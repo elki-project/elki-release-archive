@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="97px" preserveAspectRatio="none" style="width:495px;height:97px;background:#FFFFFF;" version="1.1" viewBox="0 0 495 97" width="495px" zoomAndPan="magnify"><defs/><g><!--MD5=[1c2a3e3f059a0c5fb93634bac16f9fbe]
+class elki.outlier.distance.AbstractDBOutlier--><a href="AbstractDBOutlier.html" target="_top" title="AbstractDBOutlier.html" xlink:actuate="onRequest" xlink:href="AbstractDBOutlier.html" xlink:show="new" xlink:title="AbstractDBOutlier.html" xlink:type="simple"><g id="elem_elki.outlier.distance.AbstractDBOutlier"><rect codeLine="16" fill="#F1F1F1" height="62.2344" id="elki.outlier.distance.AbstractDBOutlier" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="475" x="9" y="10"/><ellipse cx="173.25" cy="28.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M173.3594,24.3125 L172.2031,29.3906 L174.5313,29.3906 L173.3594,24.3125 Z M171.875,22.0781 L174.8594,22.0781 L178.2188,34.4688 L175.7656,34.4688 L175,31.4063 L171.7188,31.4063 L170.9688,34.4688 L168.5313,34.4688 L171.875,22.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="126" x="193.75" y="27.9951">AbstractDBOutlier</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="98" x="207.75" y="40.5791">elki.outlier.distance</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="477" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="478" y="19.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="483" y1="47.9375" y2="47.9375"/><polygon fill="#FFFF44" points="20,56.5859,24,60.5859,20,64.5859,16,60.5859" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="449" x="29" y="64.9326">computeOutlierScores(Relation&lt;O&gt;, double): DoubleDataStore</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="147.5" y="78.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="147.5" y="87.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[5db6af711dff2db00d0d8edf0d1a422d]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractDBOutlier.Par\n<size:10>elki.outlier.distance" as elki.outlier.distance.AbstractDBOutlier.Par<O> [[AbstractDBOutlier.Par.html]] {
+        {static} +D_ID: OptionID
+        #d: double
+        #distance: Distance<? super O>
+        +configure(Parameterization): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractDBOutlier\n<size:10>elki.outlier.distance" as elki.outlier.distance.AbstractDBOutlier<O> [[AbstractDBOutlier.html]] {
+        {abstract} #computeOutlierScores(Relation<O>, double): DoubleDataStore
+    }
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.AbstractDBOutlier.Par
+    elki.outlier.distance.AbstractDBOutlier +- - elki.outlier.distance.AbstractDBOutlier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

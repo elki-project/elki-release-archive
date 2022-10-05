@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SUBCLU\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.SUBCLU<V extends NumberVector> [[SUBCLU.html]] {
+        {static} -LOG: Logging
+        #distance: DimensionSelectingSubspaceDistance<V extends NumberVector>
+        #epsilon: double
+        #minpts: int
+        #mindim: int
+        +SUBCLU(DimensionSelectingSubspaceDistance<V extends NumberVector>, double, int, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V extends NumberVector>): Clustering<SubspaceModel>
+        -runDBSCAN(Relation<V extends NumberVector>, DBIDs, Subspace): List<Cluster<Model>>
+        -generateSubspaceCandidates(List<Subspace>): List<Subspace>
+        -checkLower(Subspace, List<Subspace>): boolean
+        -bestSubspace(List<Subspace>, Subspace, TreeMap<Subspace, List<Cluster<Model>>>): Subspace
+    }
+
+    interface "<size:14>SubspaceClusteringAlgorithm\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.SubspaceClusteringAlgorithm<SubspaceModel> [[SubspaceClusteringAlgorithm.html]]
+    class "<size:14>SUBCLU.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.SUBCLU.Par<V extends NumberVector> [[SUBCLU.Par.html]]
+
+    elki.clustering.subspace.SubspaceClusteringAlgorithm <|.. elki.clustering.subspace.SUBCLU
+    elki.clustering.subspace.SUBCLU +-- elki.clustering.subspace.SUBCLU.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

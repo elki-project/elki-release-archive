@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BetulaGMMWeighted\n<size:10>elki.clustering.em" as elki.clustering.em.BetulaGMMWeighted [[BetulaGMMWeighted.html]] {
+        +BetulaGMMWeighted(Factory<?>, double, int, int, boolean, BetulaClusterModelFactory<?>, double)
+        +assignProbabilitiesToInstances(ArrayList<? extends ClusterFeature>, List<? extends BetulaClusterModel>, Map<ClusterFeature, double[]>): double
+    }
+
+    class "<size:14>BetulaGMM\n<size:10>elki.clustering.em" as elki.clustering.em.BetulaGMM [[BetulaGMM.html]]
+    class "<size:14>BetulaGMMWeighted.Par\n<size:10>elki.clustering.em" as elki.clustering.em.BetulaGMMWeighted.Par [[BetulaGMMWeighted.Par.html]]
+
+    elki.clustering.em.BetulaGMM <|-- elki.clustering.em.BetulaGMMWeighted
+    elki.clustering.em.BetulaGMMWeighted +-- elki.clustering.em.BetulaGMMWeighted.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

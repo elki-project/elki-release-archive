@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KNNDD\n<size:10>elki.outlier.distance" as elki.outlier.distance.KNNDD<O> [[KNNDD.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super O>
+        #kplus: int
+        +KNNDD(Distance<? super O>, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>KNNDD.Par\n<size:10>elki.outlier.distance" as elki.outlier.distance.KNNDD.Par<O> [[KNNDD.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.distance.KNNDD
+    elki.outlier.distance.KNNDD +-- elki.outlier.distance.KNNDD.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

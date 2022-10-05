@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HistogramProjector\n<size:10>elki.visualization.projector" as elki.visualization.projector.HistogramProjector<V extends NumberVector> [[HistogramProjector.html]] {
+        ~rel: Relation<V extends NumberVector>
+        ~dmax: int
+        +HistogramProjector(Relation<V extends NumberVector>, int)
+        +arrange(VisualizerContext): Collection<PlotItem>
+        +getMenuName(): String
+        +getRelation(): Relation<V extends NumberVector>
+    }
+
+    interface "<size:14>Projector\n<size:10>elki.visualization.projector" as elki.visualization.projector.Projector [[Projector.html]] {
+        {abstract} +arrange(VisualizerContext): Collection<PlotItem>
+    }
+
+    elki.visualization.projector.Projector <|.. elki.visualization.projector.HistogramProjector
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

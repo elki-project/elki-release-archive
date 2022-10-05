@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMeansPlusPlus.MedoidsInstance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMeansPlusPlus.MedoidsInstance [[KMeansPlusPlus.MedoidsInstance.html]] {
+        ~distQ: DistanceQuery<?>
+        +MedoidsInstance(DBIDs, DistanceQuery<?>, RandomFactory)
+        +run(int): DBIDs
+        #distance(DBIDRef, DBIDRef): double
+        #chooseRemaining(int, ArrayModifiableDBIDs, double): void
+    }
+
+    abstract class "<size:14>KMeansPlusPlus.Instance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMeansPlusPlus.Instance<DBIDRef> [[KMeansPlusPlus.Instance.html]] {
+        {abstract} #distance(DBIDRef, DBIDRef): double
+    }
+    class "<size:14>KMeansPlusPlus\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMeansPlusPlus<O> [[KMeansPlusPlus.html]]
+
+    elki.clustering.kmeans.initialization.KMeansPlusPlus.Instance <|-- elki.clustering.kmeans.initialization.KMeansPlusPlus.MedoidsInstance
+    elki.clustering.kmeans.initialization.KMeansPlusPlus +-- elki.clustering.kmeans.initialization.KMeansPlusPlus.MedoidsInstance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

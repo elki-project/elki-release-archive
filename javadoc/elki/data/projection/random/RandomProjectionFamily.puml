@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>RandomProjectionFamily\n<size:10>elki.data.projection.random" as elki.data.projection.random.RandomProjectionFamily [[RandomProjectionFamily.html]] {
+        {abstract} +generateProjection(int, int): Projection
+    }
+    interface "<size:14>RandomProjectionFamily.Projection\n<size:10>elki.data.projection.random" as elki.data.projection.random.RandomProjectionFamily.Projection [[RandomProjectionFamily.Projection.html]]
+
+    elki.data.projection.random.RandomProjectionFamily +-- elki.data.projection.random.RandomProjectionFamily.Projection
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CLARANS.Par\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.CLARANS.Par<V> [[CLARANS.Par.html]] {
+        {static} +RESTARTS_ID: OptionID
+        {static} +NEIGHBORS_ID: OptionID
+        {static} +RANDOM_ID: OptionID
+        ~maxneighbor: double
+        ~numlocal: int
+        ~k: int
+        ~random: RandomFactory
+        #distance: Distance<? super V>
+        #defaultRate(): double
+        +configure(Parameterization): void
+        +make(): CLARANS<V>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>CLARANS\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.CLARANS<O> [[CLARANS.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmedoids.CLARANS.Par
+    elki.clustering.kmedoids.CLARANS +-- elki.clustering.kmedoids.CLARANS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

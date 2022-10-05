@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExpGammaExpMOMEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.ExpGammaExpMOMEstimator [[ExpGammaExpMOMEstimator.html]] {
+        {static} +STATIC: ExpGammaExpMOMEstimator
+        +estimate(A, NumberArrayAdapter<?, A>): ExpGammaDistribution
+        +estimateFromExpMeanVariance(MeanVariance): ExpGammaDistribution
+        +getDistributionClass(): Class<? super ExpGammaDistribution>
+    }
+
+    interface "<size:14>DistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.DistributionEstimator<ExpGammaDistribution> [[DistributionEstimator.html]] {
+        {abstract} +estimate(A, NumberArrayAdapter<?, A>): ExpGammaDistribution
+        {abstract} +getDistributionClass(): Class<? super Distribution>
+    }
+    class "<size:14>ExpGammaExpMOMEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.ExpGammaExpMOMEstimator.Par [[ExpGammaExpMOMEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.DistributionEstimator <|.. elki.math.statistics.distribution.estimator.ExpGammaExpMOMEstimator
+    elki.math.statistics.distribution.estimator.ExpGammaExpMOMEstimator +-- elki.math.statistics.distribution.estimator.ExpGammaExpMOMEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

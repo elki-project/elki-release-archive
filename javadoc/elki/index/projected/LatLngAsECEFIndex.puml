@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LatLngAsECEFIndex\n<size:10>elki.index.projected" as elki.index.projected.LatLngAsECEFIndex<O extends NumberVector> [[LatLngAsECEFIndex.html]] {
+        +LatLngAsECEFIndex(Relation<? extends NumberVector>, Projection<O extends NumberVector, O extends NumberVector>, Relation<O extends NumberVector>, Index, boolean)
+        +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+        +rangeByObject(DistanceQuery<O extends NumberVector>, double, int): RangeSearcher<O extends NumberVector>
+        +rkNNByObject(DistanceQuery<O extends NumberVector>, int, int): RKNNSearcher<O extends NumberVector>
+    }
+
+    class "<size:14>ProjectedIndex\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex<O extends NumberVector, O extends NumberVector> [[ProjectedIndex.html]]
+    class "<size:14>LatLngAsECEFIndex.Factory\n<size:10>elki.index.projected" as elki.index.projected.LatLngAsECEFIndex.Factory<O extends NumberVector> [[LatLngAsECEFIndex.Factory.html]]
+
+    elki.index.projected.ProjectedIndex <|-- elki.index.projected.LatLngAsECEFIndex
+    elki.index.projected.LatLngAsECEFIndex +-- elki.index.projected.LatLngAsECEFIndex.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="216px" preserveAspectRatio="none" style="width:372px;height:216px;background:#FFFFFF;" version="1.1" viewBox="0 0 372 216" width="372px" zoomAndPan="magnify"><defs/><g><!--MD5=[bc885717de71cac01630ede608c9978d]
+class elki.distance.external.DistanceParser.DistanceCacheWriter--><a href="DistanceParser.DistanceCacheWriter.html" target="_top" title="DistanceParser.DistanceCacheWriter.html" xlink:actuate="onRequest" xlink:href="DistanceParser.DistanceCacheWriter.html" xlink:show="new" xlink:title="DistanceParser.DistanceCacheWriter.html" xlink:type="simple"><g id="elem_elki.distance.external.DistanceParser.DistanceCacheWriter"><rect codeLine="6" fill="#F1F1F1" height="62.2344" id="elki.distance.external.DistanceParser.DistanceCacheWriter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="290" x="41" y="129"/><ellipse cx="56" cy="147.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M51.9219,143.7344 L51.9219,141.5781 L59.3125,141.5781 L59.3125,143.7344 L56.8438,143.7344 L56.8438,151.8125 L59.3125,151.8125 L59.3125,153.9688 L51.9219,153.9688 L51.9219,151.8125 L54.3906,151.8125 L54.3906,143.7344 L51.9219,143.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="258" x="70" y="146.9951">DistanceParser.DistanceCacheWriter</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="107" x="145.5" y="159.5791">elki.distance.external</text><line style="stroke:#181818;stroke-width:0.5;" x1="42" x2="330" y1="166.9375" y2="166.9375"/><ellipse cx="52" cy="180.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="173" x="61" y="183.9326">put(int, int, double): void</text></g></a><!--MD5=[247cde0db56978dce08729b096a654a1]
+class elki.distance.external.DistanceParser--><a href="DistanceParser.html" target="_top" title="DistanceParser.html" xlink:actuate="onRequest" xlink:href="DistanceParser.html" xlink:show="new" xlink:title="DistanceParser.html" xlink:type="simple"><g id="elem_elki.distance.external.DistanceParser"><rect codeLine="10" fill="#F1F1F1" height="62.2344" id="elki.distance.external.DistanceParser" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="358" x="7" y="7"/><ellipse cx="128.25" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M124.1719,21.7344 L124.1719,19.5781 L131.5625,19.5781 L131.5625,21.7344 L129.0938,21.7344 L129.0938,29.8125 L131.5625,29.8125 L131.5625,31.9688 L124.1719,31.9688 L124.1719,29.8125 L126.6406,29.8125 L126.6406,21.7344 L124.1719,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="105" x="149.75" y="24.9951">DistanceParser</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="107" x="148.75" y="37.5791">elki.distance.external</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="364" y1="44.9375" y2="44.9375"/><ellipse cx="18" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="332" x="27" y="61.9326">parse(InputStream, DistanceCacheWriter): void</text></g></a><!--MD5=[0b07abbe5f9283f8f66e8a82cf010b88]
+reverse link elki.distance.external.DistanceParser to elki.distance.external.DistanceParser.DistanceCacheWriter--><g id="link_elki.distance.external.DistanceParser_elki.distance.external.DistanceParser.DistanceCacheWriter"><path codeLine="14" d="M186,84.63 C186,99.38 186,115.37 186,128.73 " fill="none" id="elki.distance.external.DistanceParser-backto-elki.distance.external.DistanceParser.DistanceCacheWriter" style="stroke:#181818;stroke-width:1.0;"/><ellipse cx="186" cy="77.28" fill="#FFFFFF" rx="8" ry="8" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="186" x2="186" y1="85.28" y2="69.28"/><line style="stroke:#181818;stroke-width:1.0;" x1="178" x2="194" y1="77.28" y2="77.28"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="86" y="197.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="86" y="206.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[ff414b0322f6bfe5f1a6322340572395]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DistanceParser.DistanceCacheWriter\n<size:10>elki.distance.external" as elki.distance.external.DistanceParser.DistanceCacheWriter [[DistanceParser.DistanceCacheWriter.html]] {
+        {abstract} +put(int, int, double): void
+    }
+
+    interface "<size:14>DistanceParser\n<size:10>elki.distance.external" as elki.distance.external.DistanceParser [[DistanceParser.html]] {
+        {abstract} +parse(InputStream, DistanceCacheWriter): void
+    }
+
+    elki.distance.external.DistanceParser +- - elki.distance.external.DistanceParser.DistanceCacheWriter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

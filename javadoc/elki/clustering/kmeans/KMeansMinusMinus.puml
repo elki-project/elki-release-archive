@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMeansMinusMinus\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KMeansMinusMinus<V extends NumberVector> [[KMeansMinusMinus.html]] {
+        {static} -LOG: Logging
+        +rate: double
+        +noiseFlag: boolean
+        +KMeansMinusMinus(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization, double, boolean)
+        +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans<V extends NumberVector, KMeansModel> [[AbstractKMeans.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>KMeansMinusMinus.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KMeansMinusMinus.Instance [[KMeansMinusMinus.Instance.html]]
+    class "<size:14>KMeansMinusMinus.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KMeansMinusMinus.Par<V extends NumberVector> [[KMeansMinusMinus.Par.html]]
+
+    elki.clustering.kmeans.AbstractKMeans <|-- elki.clustering.kmeans.KMeansMinusMinus
+    elki.clustering.kmeans.KMeansMinusMinus +-- elki.clustering.kmeans.KMeansMinusMinus.Instance
+    elki.clustering.kmeans.KMeansMinusMinus +-- elki.clustering.kmeans.KMeansMinusMinus.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

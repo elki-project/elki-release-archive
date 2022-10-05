@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MaximumDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.MaximumDistance.Par [[MaximumDistance.Par.html]] {
+        +make(): MaximumDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>MaximumDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.MaximumDistance [[MaximumDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.MaximumDistance.Par
+    elki.distance.minkowski.MaximumDistance +-- elki.distance.minkowski.MaximumDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

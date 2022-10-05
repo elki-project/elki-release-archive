@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DropNaNFilter.Par\n<size:10>elki.datasource.filter.cleaning" as elki.datasource.filter.cleaning.DropNaNFilter.Par [[DropNaNFilter.Par.html]] {
+        +make(): DropNaNFilter
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>DropNaNFilter\n<size:10>elki.datasource.filter.cleaning" as elki.datasource.filter.cleaning.DropNaNFilter [[DropNaNFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.cleaning.DropNaNFilter.Par
+    elki.datasource.filter.cleaning.DropNaNFilter +-- elki.datasource.filter.cleaning.DropNaNFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

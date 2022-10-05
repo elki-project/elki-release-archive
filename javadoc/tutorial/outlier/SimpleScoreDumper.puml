@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleScoreDumper\n<size:10>tutorial.outlier" as tutorial.outlier.SimpleScoreDumper [[SimpleScoreDumper.html]] {
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>ResultHandler\n<size:10>elki.result" as elki.result.ResultHandler [[../../elki/result/ResultHandler.html]]
+
+    elki.result.ResultHandler <|.. tutorial.outlier.SimpleScoreDumper
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

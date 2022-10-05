@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>VisFactory\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.VisFactory [[VisFactory.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+        {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        +allowThumbnails(VisualizationTask): boolean
+        +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+    }
+
+    interface "<size:14>VisualizationProcessor\n<size:10>elki.visualization" as elki.visualization.VisualizationProcessor [[../VisualizationProcessor.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+    }
+
+    elki.visualization.VisualizationProcessor <|-- elki.visualization.visualizers.VisFactory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

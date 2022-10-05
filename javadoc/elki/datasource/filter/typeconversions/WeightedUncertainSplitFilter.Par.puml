@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WeightedUncertainSplitFilter.Par\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.WeightedUncertainSplitFilter.Par [[WeightedUncertainSplitFilter.Par.html]] {
+        {static} +DIM_ID: OptionID
+        {static} +PROBCOL_ID: OptionID
+        #dims: int
+        #probcol: int
+        +configure(Parameterization): void
+        +make(): WeightedUncertainSplitFilter
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>WeightedUncertainSplitFilter\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.WeightedUncertainSplitFilter [[WeightedUncertainSplitFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.typeconversions.WeightedUncertainSplitFilter.Par
+    elki.datasource.filter.typeconversions.WeightedUncertainSplitFilter +-- elki.datasource.filter.typeconversions.WeightedUncertainSplitFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

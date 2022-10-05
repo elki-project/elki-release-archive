@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NumberVectorRandomFeatureSelectionFilter.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.NumberVectorRandomFeatureSelectionFilter.Par [[NumberVectorRandomFeatureSelectionFilter.Par.html]] {
+        {static} +NUMBER_SELECTED_ATTRIBUTES_ID: OptionID
+        {static} +SEED_ID: OptionID
+        #k: int
+        #rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): NumberVectorRandomFeatureSelectionFilter<DoubleVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>NumberVectorRandomFeatureSelectionFilter\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.NumberVectorRandomFeatureSelectionFilter<V extends NumberVector> [[NumberVectorRandomFeatureSelectionFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.NumberVectorRandomFeatureSelectionFilter.Par
+    elki.datasource.filter.transform.NumberVectorRandomFeatureSelectionFilter +-- elki.datasource.filter.transform.NumberVectorRandomFeatureSelectionFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

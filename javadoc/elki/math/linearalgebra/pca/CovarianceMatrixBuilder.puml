@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>CovarianceMatrixBuilder\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.CovarianceMatrixBuilder [[CovarianceMatrixBuilder.html]] {
+        +processRelation(Relation<? extends NumberVector>): double[]
+        {abstract} +processIds(DBIDs, Relation<? extends NumberVector>): double[]
+        +processQueryResults(DoubleDBIDList, Relation<? extends NumberVector>, int): double[]
+        +processQueryResults(DoubleDBIDList, Relation<? extends NumberVector>): double[]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

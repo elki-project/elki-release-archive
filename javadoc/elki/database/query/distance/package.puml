@@ -1,0 +1,191 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.database.query.distance {
+
+        class DBIDRangeDistanceQuery [[DBIDRangeDistanceQuery.html]] {
+            #distanceFunction: DBIDRangeDistance
+            #range: DBIDRange
+            +DBIDRangeDistanceQuery(Relation<DBID>, DBIDRangeDistance)
+            +distance(DBIDRef, DBIDRef): double
+            +getDistance(): DBIDDistance
+        }
+
+        class DBIDDistanceQuery [[DBIDDistanceQuery.html]] {
+            #relation: Relation<DBID>
+            #distanceFunction: DBIDDistance
+            +DBIDDistanceQuery(Relation<DBID>, DBIDDistance)
+            +distance(DBIDRef, DBIDRef): double
+            +getRelation(): Relation<? extends DBID>
+            +getDistance(): DBIDDistance
+        }
+
+        abstract class LinearScanEuclideanPrioritySearcher<Q, O extends NumberVector> [[LinearScanEuclideanPrioritySearcher.html]] {
+            -iter: DBIDIter
+            -query: O extends NumberVector
+            -thresholdUp: double
+            -thresholdsq: double
+            -curdist: double
+            -curdistsq: double
+            {static} -SQUARED: SquaredEuclideanDistance
+            +LinearScanEuclideanPrioritySearcher(DistanceQuery<O extends NumberVector>)
+            +realSearch(O extends NumberVector): PrioritySearcher<Q>
+            +valid(): boolean
+            +advance(): PrioritySearcher<Q>
+            +internalGetIndex(): int
+            +decreaseCutoff(double): PrioritySearcher<Q>
+            +computeExactDistance(): double
+            +getSquaredDistance(): double
+            +getApproximateAccuracy(): double
+            +getApproximateDistance(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            +allLowerBound(): double
+        }
+
+        class elki.database.query.distance.LinearScanEuclideanPrioritySearcher.ByObject<O extends NumberVector> [[LinearScanEuclideanPrioritySearcher.ByObject.html]] {
+            +ByObject(DistanceQuery<O extends NumberVector>)
+            +search(O extends NumberVector): PrioritySearcher<O extends NumberVector>
+        }
+
+        class elki.database.query.distance.LinearScanEuclideanPrioritySearcher.ByDBID<O extends NumberVector> [[LinearScanEuclideanPrioritySearcher.ByDBID.html]] {
+            +ByDBID(DistanceQuery<O extends NumberVector>)
+            +search(DBIDRef): PrioritySearcher<DBIDRef>
+        }
+
+        interface DatabaseDistanceQuery<O> [[DatabaseDistanceQuery.html]] {
+            +distance(O, DBIDRef): double
+            +distance(DBIDRef, O): double
+            +distance(O, O): double
+        }
+
+        abstract class LinearScanPrioritySearcher<Q, O> [[LinearScanPrioritySearcher.html]] {
+            #iter: DBIDIter
+            #query: O
+            #curdist: double
+            +LinearScanPrioritySearcher(DistanceQuery<O>)
+            #realSearch(O): PrioritySearcher<Q>
+            +valid(): boolean
+            +advance(): PrioritySearcher<Q>
+            +internalGetIndex(): int
+            +decreaseCutoff(double): PrioritySearcher<Q>
+            +computeExactDistance(): double
+            +getApproximateAccuracy(): double
+            +getApproximateDistance(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            +allLowerBound(): double
+        }
+
+        class elki.database.query.distance.LinearScanPrioritySearcher.ByObject<O> [[LinearScanPrioritySearcher.ByObject.html]] {
+            +ByObject(DistanceQuery<O>)
+            +search(O): PrioritySearcher<O>
+        }
+
+        class elki.database.query.distance.LinearScanPrioritySearcher.ByDBID<O> [[LinearScanPrioritySearcher.ByDBID.html]] {
+            +ByDBID(DistanceQuery<O>)
+            +search(DBIDRef): PrioritySearcher<DBIDRef>
+        }
+
+        interface DistanceQuery<O> [[DistanceQuery.html]] {
+            {abstract} +distance(DBIDRef, DBIDRef): double
+            {abstract} +distance(O, DBIDRef): double
+            {abstract} +distance(DBIDRef, O): double
+            {abstract} +distance(O, O): double
+            {abstract} +getDistance(): Distance<? super O>
+            {abstract} +getRelation(): Relation<? extends O>
+        }
+
+        class PrimitiveDistanceSimilarityQuery<O> [[PrimitiveDistanceSimilarityQuery.html]] {
+            -similarityFunction: PrimitiveSimilarity<? super O>
+            +PrimitiveDistanceSimilarityQuery(Relation<? extends O>, PrimitiveDistance<? super O>, PrimitiveSimilarity<? super O>)
+            +similarity(DBIDRef, DBIDRef): double
+            +similarity(O, DBIDRef): double
+            +similarity(DBIDRef, O): double
+            +similarity(O, O): double
+            +getSimilarity(): PrimitiveSimilarity<? super O>
+        }
+
+        class PrimitiveDistanceQuery<O> [[PrimitiveDistanceQuery.html]] {
+            #relation: Relation<? extends O>
+            #distanceFunction: PrimitiveDistance<? super O>
+            +PrimitiveDistanceQuery(Relation<? extends O>, PrimitiveDistance<? super O>)
+            +distance(DBIDRef, DBIDRef): double
+            +distance(O, DBIDRef): double
+            +distance(DBIDRef, O): double
+            +distance(O, O): double
+            +getRelation(): Relation<? extends O>
+            +getDistance(): PrimitiveDistance<? super O>
+        }
+
+        interface SpatialDistanceQuery<V extends SpatialComparable> [[SpatialDistanceQuery.html]] {
+            {abstract} +minDist(SpatialComparable, V extends SpatialComparable): double
+            {abstract} +minDist(SpatialComparable, DBIDRef): double
+            {abstract} +getDistance(): SpatialPrimitiveDistance<? super SpatialComparable>
+        }
+
+        class SpatialPrimitiveDistanceSimilarityQuery<O extends SpatialComparable> [[SpatialPrimitiveDistanceSimilarityQuery.html]] {
+            -similarityFunction: PrimitiveSimilarity<? super SpatialComparable>
+            +SpatialPrimitiveDistanceSimilarityQuery(Relation<? extends SpatialComparable>, SpatialPrimitiveDistance<? super SpatialComparable>, PrimitiveSimilarity<? super SpatialComparable>)
+            +similarity(DBIDRef, DBIDRef): double
+            +similarity(O extends SpatialComparable, DBIDRef): double
+            +similarity(DBIDRef, O extends SpatialComparable): double
+            +similarity(O extends SpatialComparable, O extends SpatialComparable): double
+            +getSimilarity(): PrimitiveSimilarity<? super SpatialComparable>
+        }
+
+        class SpatialPrimitiveDistanceQuery<V extends SpatialComparable> [[SpatialPrimitiveDistanceQuery.html]] {
+            #distanceFunction: SpatialPrimitiveDistance<? super SpatialComparable>
+            +SpatialPrimitiveDistanceQuery(Relation<? extends SpatialComparable>, SpatialPrimitiveDistance<? super SpatialComparable>)
+            +minDist(SpatialComparable, V extends SpatialComparable): double
+            +minDist(SpatialComparable, DBIDRef): double
+            +getDistance(): SpatialPrimitiveDistance<? super SpatialComparable>
+        }
+
+        DBIDDistanceQuery <|-- DBIDRangeDistanceQuery
+        DatabaseDistanceQuery <|.. DBIDDistanceQuery
+        elki.database.query.PrioritySearcher <|.. LinearScanEuclideanPrioritySearcher
+        elki.database.query.LinearScanQuery <|.. LinearScanEuclideanPrioritySearcher
+        LinearScanEuclideanPrioritySearcher --> DistanceQuery: distanceQuery
+        LinearScanEuclideanPrioritySearcher <|-- elki.database.query.distance.LinearScanEuclideanPrioritySearcher.ByObject
+        LinearScanEuclideanPrioritySearcher +-- elki.database.query.distance.LinearScanEuclideanPrioritySearcher.ByObject
+        LinearScanEuclideanPrioritySearcher <|-- elki.database.query.distance.LinearScanEuclideanPrioritySearcher.ByDBID
+        LinearScanEuclideanPrioritySearcher +-- elki.database.query.distance.LinearScanEuclideanPrioritySearcher.ByDBID
+        DistanceQuery <|-- DatabaseDistanceQuery
+        elki.database.query.PrioritySearcher <|.. LinearScanPrioritySearcher
+        elki.database.query.LinearScanQuery <|.. LinearScanPrioritySearcher
+        LinearScanPrioritySearcher --> DistanceQuery: distanceQuery
+        LinearScanPrioritySearcher <|-- elki.database.query.distance.LinearScanPrioritySearcher.ByObject
+        LinearScanPrioritySearcher +-- elki.database.query.distance.LinearScanPrioritySearcher.ByObject
+        LinearScanPrioritySearcher <|-- elki.database.query.distance.LinearScanPrioritySearcher.ByDBID
+        LinearScanPrioritySearcher +-- elki.database.query.distance.LinearScanPrioritySearcher.ByDBID
+        PrimitiveDistanceQuery <|-- PrimitiveDistanceSimilarityQuery
+        elki.database.query.DistanceSimilarityQuery <|.. PrimitiveDistanceSimilarityQuery
+        DistanceQuery <|.. PrimitiveDistanceQuery
+        DistanceQuery <|-- SpatialDistanceQuery
+        SpatialPrimitiveDistanceQuery <|-- SpatialPrimitiveDistanceSimilarityQuery
+        elki.database.query.DistanceSimilarityQuery <|.. SpatialPrimitiveDistanceSimilarityQuery
+        PrimitiveDistanceQuery <|-- SpatialPrimitiveDistanceQuery
+        SpatialDistanceQuery <|.. SpatialPrimitiveDistanceQuery
+    }
+
+    namespace elki.database.query {
+        interface PrioritySearcher<O> [[../PrioritySearcher.html]] {
+            +search(O, double): PrioritySearcher<O>
+            {abstract} +search(O): PrioritySearcher<O>
+            +getKNN(O, int): KNNList
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+            {abstract} +computeExactDistance(): double
+            +getApproximateDistance(): double
+            +getApproximateAccuracy(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            {abstract} +allLowerBound(): double
+            {abstract} +advance(): PrioritySearcher<O>
+        }
+        interface LinearScanQuery [[../LinearScanQuery.html]]
+        interface DistanceSimilarityQuery<O> [[../DistanceSimilarityQuery.html]]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

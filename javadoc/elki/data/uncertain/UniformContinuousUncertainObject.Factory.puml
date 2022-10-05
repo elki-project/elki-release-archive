@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UniformContinuousUncertainObject.Factory\n<size:10>elki.data.uncertain" as elki.data.uncertain.UniformContinuousUncertainObject.Factory [[UniformContinuousUncertainObject.Factory.html]] {
+        +newFeatureVector(A, ArrayAdapter<? extends Number, A>): UniformContinuousUncertainObject
+        +getDefaultSerializer(): ByteBufferSerializer<UniformContinuousUncertainObject>
+        +getRestrictionClass(): Class<? super UniformContinuousUncertainObject>
+    }
+
+    interface "<size:14>FeatureVector.Factory\n<size:10>elki.data" as elki.data.FeatureVector.Factory<UniformContinuousUncertainObject, Number> [[../FeatureVector.Factory.html]] {
+        {abstract} +newFeatureVector(A, ArrayAdapter<? extends D, A>): UniformContinuousUncertainObject
+        {abstract} +getDefaultSerializer(): ByteBufferSerializer<V extends FeatureVector<? extends D>>
+        {abstract} +getRestrictionClass(): Class<? super FeatureVector<? extends D>>
+    }
+    class "<size:14>UniformContinuousUncertainObject\n<size:10>elki.data.uncertain" as elki.data.uncertain.UniformContinuousUncertainObject [[UniformContinuousUncertainObject.html]]
+
+    elki.data.FeatureVector.Factory <|.. elki.data.uncertain.UniformContinuousUncertainObject.Factory
+    elki.data.uncertain.UniformContinuousUncertainObject +-- elki.data.uncertain.UniformContinuousUncertainObject.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

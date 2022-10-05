@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierResult\n<size:10>elki.result.outlier" as elki.result.outlier.OutlierResult [[OutlierResult.html]] {
+        -meta: OutlierScoreMeta
+        -scores: DoubleRelation
+        -ordering: OrderingResult
+        +OutlierResult(OutlierScoreMeta, DoubleRelation)
+        +getOutlierMeta(): OutlierScoreMeta
+        +getScores(): DoubleRelation
+        +getOrdering(): OrderingResult
+        {static} +getOutlierResults(Object): List<OutlierResult>
+        ~evaluateBy(ScoreEvaluation): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

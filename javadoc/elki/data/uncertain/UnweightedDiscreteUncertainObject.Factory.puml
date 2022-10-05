@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UnweightedDiscreteUncertainObject.Factory\n<size:10>elki.data.uncertain" as elki.data.uncertain.UnweightedDiscreteUncertainObject.Factory [[UnweightedDiscreteUncertainObject.Factory.html]] {
+        +newFeatureVector(A, ArrayAdapter<? extends Number, A>): UnweightedDiscreteUncertainObject
+        +getDefaultSerializer(): ByteBufferSerializer<UnweightedDiscreteUncertainObject>
+        +getRestrictionClass(): Class<? super UnweightedDiscreteUncertainObject>
+    }
+
+    interface "<size:14>FeatureVector.Factory\n<size:10>elki.data" as elki.data.FeatureVector.Factory<UnweightedDiscreteUncertainObject, Number> [[../FeatureVector.Factory.html]] {
+        {abstract} +newFeatureVector(A, ArrayAdapter<? extends D, A>): UnweightedDiscreteUncertainObject
+        {abstract} +getDefaultSerializer(): ByteBufferSerializer<V extends FeatureVector<? extends D>>
+        {abstract} +getRestrictionClass(): Class<? super FeatureVector<? extends D>>
+    }
+    class "<size:14>UnweightedDiscreteUncertainObject\n<size:10>elki.data.uncertain" as elki.data.uncertain.UnweightedDiscreteUncertainObject [[UnweightedDiscreteUncertainObject.html]]
+
+    elki.data.FeatureVector.Factory <|.. elki.data.uncertain.UnweightedDiscreteUncertainObject.Factory
+    elki.data.uncertain.UnweightedDiscreteUncertainObject +-- elki.data.uncertain.UnweightedDiscreteUncertainObject.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

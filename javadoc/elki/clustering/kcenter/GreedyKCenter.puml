@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GreedyKCenter\n<size:10>elki.clustering.kcenter" as elki.clustering.kcenter.GreedyKCenter<O> [[GreedyKCenter.html]] {
+        {static} -LOG: Logging
+        ~distance: Distance<? super O>
+        ~k: int
+        ~rand: RandomFactory
+        +GreedyKCenter(int, Distance<? super O>, RandomFactory)
+        +run(Relation<O>): Clustering<SimplePrototypeModel<O>>
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<SimplePrototypeModel<O>>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>GreedyKCenter.Par\n<size:10>elki.clustering.kcenter" as elki.clustering.kcenter.GreedyKCenter.Par<O> [[GreedyKCenter.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.kcenter.GreedyKCenter
+    elki.clustering.kcenter.GreedyKCenter +-- elki.clustering.kcenter.GreedyKCenter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

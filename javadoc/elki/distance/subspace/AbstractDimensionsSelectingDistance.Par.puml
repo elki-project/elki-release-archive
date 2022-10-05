@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractDimensionsSelectingDistance.Par\n<size:10>elki.distance.subspace" as elki.distance.subspace.AbstractDimensionsSelectingDistance.Par [[AbstractDimensionsSelectingDistance.Par.html]] {
+        {static} +DIMS_ID: OptionID
+        #dimensions: long[]
+        +configure(Parameterization): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractDimensionsSelectingDistance\n<size:10>elki.distance.subspace" as elki.distance.subspace.AbstractDimensionsSelectingDistance<V extends FeatureVector<?>> [[AbstractDimensionsSelectingDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.subspace.AbstractDimensionsSelectingDistance.Par
+    elki.distance.subspace.AbstractDimensionsSelectingDistance +-- elki.distance.subspace.AbstractDimensionsSelectingDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

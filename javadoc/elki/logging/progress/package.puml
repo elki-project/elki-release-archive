@@ -1,0 +1,98 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.logging.progress {
+
+        class IndefiniteProgress [[IndefiniteProgress.html]] {
+            -completed: boolean
+            +IndefiniteProgress(String)
+            +IndefiniteProgress(String, Logging)
+            +appendToBuffer(StringBuilder): StringBuilder
+            +isComplete(): boolean
+            +setCompleted(Logging): void
+        }
+
+        interface Progress [[Progress.html]] {
+            {abstract} +appendToBuffer(StringBuilder): StringBuilder
+            {abstract} +isComplete(): boolean
+        }
+
+        abstract class AbstractProgress [[AbstractProgress.html]] {
+            -processed: AtomicInteger
+            -task: String
+            -lastLogged: long
+            -lastValue: int
+            #ratems: double
+            +AbstractProgress(String)
+            +getTask(): String
+            #setProcessed(int): void
+            +setProcessed(int, Logging): void
+            +getProcessed(): int
+            {abstract} +appendToBuffer(StringBuilder): StringBuilder
+            +incrementProcessed(Logging): void
+            #testLoggingRate(int): boolean
+        }
+
+        class MutableProgress [[MutableProgress.html]] {
+            -total: int
+            +MutableProgress(String, int, Logging)
+            +appendToBuffer(StringBuilder): StringBuilder
+            +isComplete(): boolean
+            +setTotal(int): void
+            +getTotal(): int
+        }
+
+        class ProgressTracker [[ProgressTracker.html]] {
+            -progresses: ArrayList<WeakReference<Progress>>
+            +addProgress(Progress): void
+            +removeCompleted(): Collection<Progress>
+        }
+
+        class ProgressLogRecord [[ProgressLogRecord.html]] {
+            {static} -serialVersionUID: long
+            +ProgressLogRecord(Level, Progress)
+        }
+
+        class StepProgress [[StepProgress.html]] {
+            ~stepTitle: String
+            +StepProgress(int)
+            +StepProgress(String, int)
+            +appendToBuffer(StringBuilder): StringBuilder
+            +beginStep(int, String, Logging): void
+            +setCompleted(Logging): void
+            #getStepTitle(): String
+        }
+
+        class FiniteProgress [[FiniteProgress.html]] {
+            -total: int
+            -totalLength: int
+            #FiniteProgress(String, int)
+            +FiniteProgress(String, int, Logging)
+            #setProcessed(int): void
+            +appendToBuffer(StringBuilder): StringBuilder
+            -numDigits(int): int
+            +isComplete(): boolean
+            +getTotal(): int
+            +ensureCompleted(Logging): void
+        }
+
+        AbstractProgress <|-- IndefiniteProgress
+        Progress <|.. AbstractProgress
+        AbstractProgress <|-- MutableProgress
+        ProgressTracker --> "*" Progress: progresses
+        elki.logging.ELKILogRecord <|-- ProgressLogRecord
+        ProgressLogRecord --> Progress: progress
+        FiniteProgress <|-- StepProgress
+        AbstractProgress <|-- FiniteProgress
+    }
+
+    namespace elki.logging {
+        class ELKILogRecord [[../ELKILogRecord.html]] {
+            {static} -serialVersionUID: long
+            -needToInferCaller: boolean
+            {static} +IGNORE_CLASSES: String[]
+            {static} -START_TRACE_AT: String
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

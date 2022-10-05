@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractDiscreteUncertainifier.Par\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.AbstractDiscreteUncertainifier.Par [[AbstractDiscreteUncertainifier.Par.html]] {
+        {static} +DEFAULT_SAMPLE_SIZE: int
+        {static} +INNER_ID: OptionID
+        {static} +MULT_MAX_ID: OptionID
+        {static} +MULT_MIN_ID: OptionID
+        #inner: Uncertainifier<?>
+        #minQuant: int
+        #maxQuant: int
+        +configure(Parameterization): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractDiscreteUncertainifier\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.AbstractDiscreteUncertainifier<UO extends UncertainObject> [[AbstractDiscreteUncertainifier.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.data.uncertain.uncertainifier.AbstractDiscreteUncertainifier.Par
+    elki.data.uncertain.uncertainifier.AbstractDiscreteUncertainifier +-- elki.data.uncertain.uncertainifier.AbstractDiscreteUncertainifier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

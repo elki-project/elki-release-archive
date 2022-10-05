@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BestOfMultipleKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.BestOfMultipleKMeans<V extends NumberVector, M extends MeanModel> [[BestOfMultipleKMeans.html]] {
+        {static} -LOG: Logging
+        -trials: int
+        -innerkMeans: KMeans<V extends NumberVector, M extends MeanModel>
+        -qualityMeasure: KMeansQualityMeasure<? super NumberVector>
+        +BestOfMultipleKMeans(int, KMeans<V extends NumberVector, M extends MeanModel>, KMeansQualityMeasure<? super NumberVector>)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V extends NumberVector>): Clustering<M extends MeanModel>
+        +getDistance(): NumberVectorDistance<? super NumberVector>
+        +setK(int): void
+        +setDistance(NumberVectorDistance<? super NumberVector>): void
+        +setInitializer(KMeansInitialization): void
+    }
+
+    interface "<size:14>KMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KMeans<V extends NumberVector, M extends MeanModel> [[KMeans.html]] {
+        {abstract} +run(Relation<V extends NumberVector>): Clustering<M extends Model>
+        {abstract} +setK(int): void
+        {abstract} +setDistance(NumberVectorDistance<? super NumberVector>): void
+        {abstract} +getDistance(): NumberVectorDistance<? super NumberVector>
+        {abstract} +setInitializer(KMeansInitialization): void
+    }
+    class "<size:14>BestOfMultipleKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.BestOfMultipleKMeans.Par<V extends NumberVector, M extends MeanModel>
+
+    elki.clustering.kmeans.KMeans <|.. elki.clustering.kmeans.BestOfMultipleKMeans
+    elki.clustering.kmeans.BestOfMultipleKMeans +-- elki.clustering.kmeans.BestOfMultipleKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

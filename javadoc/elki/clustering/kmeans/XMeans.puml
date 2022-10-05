@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>XMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.XMeans<V extends NumberVector, M extends MeanModel> [[XMeans.html]] {
+        {static} -LOG: Logging
+        #innerKMeans: KMeans<V extends NumberVector, M extends MeanModel>
+        -k_min: int
+        -k_max: int
+        ~splitInitializer: Predefined
+        ~informationCriterion: KMeansQualityMeasure<V extends NumberVector>
+        ~rnd: RandomFactory
+        +XMeans(NumberVectorDistance<? super NumberVector>, int, int, int, KMeans<V extends NumberVector, M extends MeanModel>, KMeansInitialization, KMeansQualityMeasure<V extends NumberVector>, RandomFactory)
+        +run(Relation<V extends NumberVector>): Clustering<M extends MeanModel>
+        #splitCluster(Cluster<M extends MeanModel>, Relation<V extends NumberVector>): List<Cluster<M extends MeanModel>>
+        #splitCentroid(Cluster<? extends MeanModel>, Relation<V extends NumberVector>): double[]
+        +getInputTypeRestriction(): TypeInformation[]
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans<V extends NumberVector, M extends MeanModel> [[AbstractKMeans.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>XMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.XMeans.Par<V extends NumberVector, M extends MeanModel>
+
+    elki.clustering.kmeans.AbstractKMeans <|-- elki.clustering.kmeans.XMeans
+    elki.clustering.kmeans.XMeans +-- elki.clustering.kmeans.XMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

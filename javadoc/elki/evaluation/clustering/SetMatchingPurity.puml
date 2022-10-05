@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SetMatchingPurity\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.SetMatchingPurity [[SetMatchingPurity.html]] {
+        #smPurity: double
+        #smInversePurity: double
+        #smFFirst: double
+        #smFSecond: double
+        #SetMatchingPurity(ClusterContingencyTable)
+        +purity(): double
+        +inversePurity(): double
+        +f1Measure(): double
+        +fMeasureFirst(): double
+        +fMeasureSecond(): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

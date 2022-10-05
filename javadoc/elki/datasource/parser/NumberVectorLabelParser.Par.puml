@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NumberVectorLabelParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.NumberVectorLabelParser.Par<V extends NumberVector> [[NumberVectorLabelParser.Par.html]] {
+        {static} +LABEL_INDICES_ID: OptionID
+        {static} +VECTOR_TYPE_ID: OptionID
+        #labelIndices: long[]
+        #factory: Factory<V extends NumberVector>
+        +configure(Parameterization): void
+        #getFactory(Parameterization): void
+        #getLabelIndices(Parameterization): void
+        +make(): NumberVectorLabelParser<V extends NumberVector>
+    }
+
+    abstract class "<size:14>AbstractStreamingParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.AbstractStreamingParser.Par [[AbstractStreamingParser.Par.html]] {
+        {abstract} +make(): AbstractStreamingParser
+    }
+    class "<size:14>NumberVectorLabelParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.NumberVectorLabelParser<V extends NumberVector> [[NumberVectorLabelParser.html]]
+
+    elki.datasource.parser.AbstractStreamingParser.Par <|-- elki.datasource.parser.NumberVectorLabelParser.Par
+    elki.datasource.parser.NumberVectorLabelParser +-- elki.datasource.parser.NumberVectorLabelParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

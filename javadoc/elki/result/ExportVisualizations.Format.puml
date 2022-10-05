@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>ExportVisualizations.Format\n<size:10>elki.result" as elki.result.ExportVisualizations.Format [[ExportVisualizations.Format.html]] {
+        {static} +SVG
+        {static} +PNG
+        {static} +PDF
+        {static} +PS
+        {static} +EPS
+        {static} +JPEG
+    }
+
+    class "<size:14>ExportVisualizations\n<size:10>elki.result" as elki.result.ExportVisualizations [[ExportVisualizations.html]]
+
+    elki.result.ExportVisualizations +-- elki.result.ExportVisualizations.Format
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

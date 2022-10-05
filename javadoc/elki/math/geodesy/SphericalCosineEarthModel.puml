@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SphericalCosineEarthModel\n<size:10>elki.math.geodesy" as elki.math.geodesy.SphericalCosineEarthModel [[SphericalCosineEarthModel.html]] {
+        {static} +STATIC: SphericalCosineEarthModel
+        {static} +EARTH_RADIUS: double
+        +latLngRadToECEF(double, double): double[]
+        +latLngRadToECEF(double, double, double): double[]
+        +ecefToLatRad(double, double, double): double
+        +distanceRad(double, double, double, double): double
+    }
+
+    abstract class "<size:14>AbstractEarthModel\n<size:10>elki.math.geodesy" as elki.math.geodesy.AbstractEarthModel [[AbstractEarthModel.html]]
+    class "<size:14>SphericalCosineEarthModel.Par\n<size:10>elki.math.geodesy" as elki.math.geodesy.SphericalCosineEarthModel.Par [[SphericalCosineEarthModel.Par.html]]
+
+    elki.math.geodesy.AbstractEarthModel <|-- elki.math.geodesy.SphericalCosineEarthModel
+    elki.math.geodesy.SphericalCosineEarthModel +-- elki.math.geodesy.SphericalCosineEarthModel.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

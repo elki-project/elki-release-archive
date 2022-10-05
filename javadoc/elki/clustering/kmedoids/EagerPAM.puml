@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EagerPAM\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.EagerPAM<O> [[EagerPAM.html]] {
+        {static} -LOG: Logging
+        {static} -KEY: String
+        +EagerPAM(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+        +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+        #getLogger(): Logging
+    }
+
+    class "<size:14>PAM\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.PAM<O> [[PAM.html]]
+    class "<size:14>EagerPAM.Instance\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.EagerPAM.Instance [[EagerPAM.Instance.html]]
+    class "<size:14>EagerPAM.Par\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.EagerPAM.Par<O> [[EagerPAM.Par.html]]
+
+    elki.clustering.kmedoids.PAM <|-- elki.clustering.kmedoids.EagerPAM
+    elki.clustering.kmedoids.EagerPAM +-- elki.clustering.kmedoids.EagerPAM.Instance
+    elki.clustering.kmedoids.EagerPAM +-- elki.clustering.kmedoids.EagerPAM.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

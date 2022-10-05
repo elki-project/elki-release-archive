@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DendrogramVisualization\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization [[DendrogramVisualization.html]] {
+        {static} -NAME: String
+        -style: DrawingStyle
+        -style2: PositionStyle
+        +DendrogramVisualization(DrawingStyle, PositionStyle)
+        +processNewResult(VisualizerContext, Object): void
+        +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+    }
+
+    interface "<size:14>VisFactory\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.VisFactory [[../VisFactory.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+        {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+    }
+    enum "<size:14>DendrogramVisualization.DrawingStyle\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization.DrawingStyle [[DendrogramVisualization.DrawingStyle.html]]
+    enum "<size:14>DendrogramVisualization.PositionStyle\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization.PositionStyle [[DendrogramVisualization.PositionStyle.html]]
+    class "<size:14>DendrogramVisualization.SwitchStyleAction\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization.SwitchStyleAction [[DendrogramVisualization.SwitchStyleAction.html]]
+    class "<size:14>DendrogramVisualization.Instance\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization.Instance [[DendrogramVisualization.Instance.html]]
+    interface "<size:14>DendrogramVisualization.Positions\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization.Positions [[DendrogramVisualization.Positions.html]]
+    class "<size:14>DendrogramVisualization.HalfPosPositions\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization.HalfPosPositions [[DendrogramVisualization.HalfPosPositions.html]]
+    class "<size:14>DendrogramVisualization.HalfWidthPositions\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization.HalfWidthPositions [[DendrogramVisualization.HalfWidthPositions.html]]
+    class "<size:14>DendrogramVisualization.Par\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization.Par [[DendrogramVisualization.Par.html]]
+
+    elki.visualization.visualizers.VisFactory <|.. elki.visualization.visualizers.visunproj.DendrogramVisualization
+    elki.visualization.visualizers.visunproj.DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.DrawingStyle
+    elki.visualization.visualizers.visunproj.DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.PositionStyle
+    elki.visualization.visualizers.visunproj.DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.SwitchStyleAction
+    elki.visualization.visualizers.visunproj.DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.Instance
+    elki.visualization.visualizers.visunproj.DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.Positions
+    elki.visualization.visualizers.visunproj.DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.HalfPosPositions
+    elki.visualization.visualizers.visunproj.DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.HalfWidthPositions
+    elki.visualization.visualizers.visunproj.DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

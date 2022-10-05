@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Log1PlusNormalization.Par\n<size:10>elki.datasource.filter.normalization.instancewise" as elki.datasource.filter.normalization.instancewise.Log1PlusNormalization.Par<V extends NumberVector> [[Log1PlusNormalization.Par.html]] {
+        {static} +BOOST_ID: OptionID
+        #boost: double
+        +configure(Parameterization): void
+        +make(): Log1PlusNormalization<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>Log1PlusNormalization\n<size:10>elki.datasource.filter.normalization.instancewise" as elki.datasource.filter.normalization.instancewise.Log1PlusNormalization<V extends NumberVector> [[Log1PlusNormalization.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.instancewise.Log1PlusNormalization.Par
+    elki.datasource.filter.normalization.instancewise.Log1PlusNormalization +-- elki.datasource.filter.normalization.instancewise.Log1PlusNormalization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

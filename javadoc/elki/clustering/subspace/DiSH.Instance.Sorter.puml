@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DiSH.Instance.Sorter\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH.Instance.Sorter [[DiSH.Instance.Sorter.html]] {
+        +compare(DBIDRef, DBIDRef): int
+    }
+
+    interface "<size:14>Comparator\n<size:10>java.util" as java.util.Comparator<DBIDRef> {
+        {abstract} +compare(DBIDRef, DBIDRef): int
+    }
+    class "<size:14>DiSH.Instance\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH.Instance [[DiSH.Instance.html]]
+
+    java.util.Comparator <|.. elki.clustering.subspace.DiSH.Instance.Sorter
+    elki.clustering.subspace.DiSH.Instance +-- elki.clustering.subspace.DiSH.Instance.Sorter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

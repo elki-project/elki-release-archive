@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.style.lines {
+
+        class DashedLineStyleLibrary [[DashedLineStyleLibrary.html]] {
+            -colors: ColorLibrary
+            -dashpatterns: double[]
+            -solidreplacement: double[]
+            -dotcolor: String
+            -graycolor: String
+            +DashedLineStyleLibrary(StyleLibrary)
+            +formatCSSClass(CSSClass, int, double, Object...): void
+        }
+
+        class SolidLineStyleLibrary [[SolidLineStyleLibrary.html]] {
+            -colors: ColorLibrary
+            -dotcolor: String
+            -graycolor: String
+            +SolidLineStyleLibrary(StyleLibrary)
+            +formatCSSClass(CSSClass, int, double, Object...): void
+        }
+
+        interface LineStyleLibrary [[LineStyleLibrary.html]] {
+            {static} +FLAG_STRONG: String
+            {static} +FLAG_WEAK: String
+            {static} +FLAG_INTERPOLATED: String
+            {abstract} +formatCSSClass(CSSClass, int, double, Object...): void
+        }
+
+        LineStyleLibrary <|.. DashedLineStyleLibrary
+        LineStyleLibrary <|.. SolidLineStyleLibrary
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

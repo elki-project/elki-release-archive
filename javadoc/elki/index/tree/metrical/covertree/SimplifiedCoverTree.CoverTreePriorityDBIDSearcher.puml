@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimplifiedCoverTree.CoverTreePriorityDBIDSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePriorityDBIDSearcher [[SimplifiedCoverTree.CoverTreePriorityDBIDSearcher.html]] {
+        -query: DBIDRef
+        +search(DBIDRef): PrioritySearcher<DBIDRef>
+        #queryDistance(DBIDRef): double
+    }
+
+    abstract class "<size:14>SimplifiedCoverTree.CoverTreePrioritySearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePrioritySearcher<DBIDRef> [[SimplifiedCoverTree.CoverTreePrioritySearcher.html]] {
+        {abstract} #queryDistance(DBIDRef): double
+    }
+    class "<size:14>SimplifiedCoverTree\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree<O> [[SimplifiedCoverTree.html]]
+
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePrioritySearcher <|-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePriorityDBIDSearcher
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePriorityDBIDSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

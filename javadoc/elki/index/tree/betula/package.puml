@@ -1,0 +1,127 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.betula {
+
+        class CFTree<L extends ClusterFeature> [[CFTree.html]] {
+            {static} +LOG: Logging
+            ~thresholdsq: double
+            ~capacity: int
+            ~leaves: int
+            ~maxleaves: int
+            ~rebuildstat: int
+            ~diststat: long
+            ~absstat: long
+            ~idmap: Map<ClusterFeature, ArrayModifiableDBIDs>
+            +CFTree(Factory<L extends ClusterFeature>, CFDistance, CFDistance, double, int, Threshold, int, boolean)
+            +insert(NumberVector, DBIDRef): void
+            #rebuildTree(): void
+            -estimateThreshold(CFNode<L extends ClusterFeature>, ArrayList<L extends ClusterFeature>, double[]): void
+            -insert(CFNode<L extends ClusterFeature>, NumberVector, DBIDRef): CFNode<L extends ClusterFeature>
+            +findLeaf(NumberVector): L extends ClusterFeature
+            -findLeaf(CFNode<L extends ClusterFeature>, NumberVector): L extends ClusterFeature
+            -split(CFNode<L extends ClusterFeature>, AsClusterFeature): CFNode<L extends ClusterFeature>
+            -insert(CFNode<L extends ClusterFeature>, AsClusterFeature): CFNode<L extends ClusterFeature>
+            +leafIterator(): LeafIterator<L extends ClusterFeature>
+            {static} #printDebug(StringBuilder, ClusterFeature, int): StringBuilder
+            -sqdistance(ClusterFeature, ClusterFeature): double
+            -sqdistance(NumberVector, ClusterFeature): double
+            -sqabsorption(ClusterFeature, ClusterFeature): double
+            -sqabsorption(NumberVector, ClusterFeature): double
+            +numLeaves(): int
+            +getCapacity(): int
+            +getDBIDs(ClusterFeature): DBIDs
+        }
+
+        enum elki.index.tree.betula.CFTree.Threshold [[CFTree.Threshold.html]] {
+            {static} +MEAN
+            {static} +MEDIAN
+        }
+
+        class elki.index.tree.betula.CFTree.LeafIterator<L extends ClusterFeature> [[CFTree.LeafIterator.html]] {
+            -queue: ArrayList<Object>
+            -LeafIterator(CFNode<L extends ClusterFeature>)
+            +valid(): boolean
+            +get(): L extends ClusterFeature
+            +advance(): Iter
+        }
+
+        class elki.index.tree.betula.CFTree.Factory<L extends ClusterFeature> [[CFTree.Factory.html]] {
+            ~threshold: double
+            ~branchingFactor: int
+            ~maxleaves: double
+            +Factory(Factory<L extends ClusterFeature>, CFDistance, CFDistance, double, int, double, Threshold)
+            +newTree(DBIDs, Relation<? extends NumberVector>, boolean): CFTree<L extends ClusterFeature>
+        }
+
+        class elki.index.tree.betula.CFTree.Factory.Par<L extends ClusterFeature> [[CFTree.Factory.Par.html]] {
+            {static} +FEATURES_ID: OptionID
+            {static} +DISTANCE_ID: OptionID
+            {static} +ABSORPTION_ID: OptionID
+            {static} +THRESHOLD_ID: OptionID
+            {static} +SPLIT_ID: OptionID
+            {static} +BRANCHING_ID: OptionID
+            {static} +MAXLEAVES_ID: OptionID
+            ~threshold: double
+            ~branchingFactor: int
+            ~maxleaves: double
+            +configure(Parameterization): void
+            +make(): Factory<L extends ClusterFeature>
+        }
+
+        class CFNode<L extends ClusterFeature> [[CFNode.html]] {
+            -children: Object[]
+            +CFNode(L extends ClusterFeature, int)
+            +getChild(int): AsClusterFeature
+            +add(AsClusterFeature): boolean
+            +add(int, AsClusterFeature): void
+            +capacity(): int
+        }
+
+        class CFDistanceMatrix [[CFDistanceMatrix.html]] {
+            ~size: int
+            ~matrix: double[]
+            +CFDistanceMatrix(ClusterFeature[])
+            {static} +triangleSize(int): int
+            +get(int, int): double
+        }
+
+        CFTree --> elki.index.tree.betula.features.ClusterFeature.Factory: factory
+        CFTree --> elki.index.tree.betula.distance.CFDistance: dist\nabs
+        CFTree --> elki.index.tree.betula.CFTree.Threshold: tCriterium
+        CFTree --> "*" elki.index.tree.betula.features.ClusterFeature: leaves
+        CFTree --> CFNode: root
+        CFTree +-- elki.index.tree.betula.CFTree.Threshold
+        elki.utilities.datastructures.iterator.Iter <|.. elki.index.tree.betula.CFTree.LeafIterator
+        CFTree +-- elki.index.tree.betula.CFTree.LeafIterator
+        elki.index.tree.betula.CFTree.LeafIterator --> elki.index.tree.betula.features.ClusterFeature: current
+        CFTree +-- elki.index.tree.betula.CFTree.Factory
+        elki.index.tree.betula.CFTree.Factory --> elki.index.tree.betula.features.ClusterFeature.Factory: factory
+        elki.index.tree.betula.CFTree.Factory --> elki.index.tree.betula.distance.CFDistance: dist\nabs
+        elki.index.tree.betula.CFTree.Factory --> elki.index.tree.betula.CFTree.Threshold: tCriterium
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.CFTree.Factory.Par
+        elki.index.tree.betula.CFTree.Factory +-- elki.index.tree.betula.CFTree.Factory.Par
+        elki.index.tree.betula.CFTree.Factory.Par --> elki.index.tree.betula.features.ClusterFeature.Factory: factory
+        elki.index.tree.betula.CFTree.Factory.Par --> elki.index.tree.betula.distance.CFDistance: dist\nabs
+        elki.index.tree.betula.CFTree.Factory.Par --> elki.index.tree.betula.CFTree.Threshold: tCriterium
+        elki.index.tree.betula.features.AsClusterFeature <|.. CFNode
+        CFNode --> elki.index.tree.betula.features.ClusterFeature: cf\ncF
+        CFNode --> elki.index.tree.betula.features.AsClusterFeature: child
+        CFDistanceMatrix --> "*" elki.index.tree.betula.features.ClusterFeature: cfs
+    }
+
+    namespace elki.utilities.datastructures.iterator {
+        interface Iter [[../../../utilities/datastructures/iterator/Iter.html]] {
+            {abstract} +valid(): boolean
+            {abstract} +advance(): Iter
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

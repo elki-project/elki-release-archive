@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DBIDVar\n<size:10>elki.database.ids" as elki.database.ids.DBIDVar [[DBIDVar.html]] {
+        {abstract} +set(DBIDRef): DBIDVar
+        {abstract} +from(DBIDDataStore, DBIDRef): DBIDVar
+        {abstract} +unset(): void
+        {abstract} +isSet(): boolean
+    }
+
+    interface "<size:14>DBIDRef\n<size:10>elki.database.ids" as elki.database.ids.DBIDRef [[DBIDRef.html]] {
+        {abstract} +internalGetIndex(): int
+    }
+    interface "<size:14>ArrayDBIDs\n<size:10>elki.database.ids" as elki.database.ids.ArrayDBIDs [[ArrayDBIDs.html]] {
+        {abstract} +--get--(int): DBID
+        {abstract} +assignVar(int, DBIDVar): DBIDVar
+        {abstract} +iter(): DBIDArrayIter
+        {abstract} +size(): int
+        {abstract} +binarySearch(DBIDRef): int
+        {abstract} +slice(int, int): ArrayDBIDs
+    }
+    interface "<size:14>SetDBIDs\n<size:10>elki.database.ids" as elki.database.ids.SetDBIDs [[SetDBIDs.html]]
+
+    elki.database.ids.DBIDRef <|-- elki.database.ids.DBIDVar
+    elki.database.ids.ArrayDBIDs <|-- elki.database.ids.DBIDVar
+    elki.database.ids.SetDBIDs <|-- elki.database.ids.DBIDVar
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

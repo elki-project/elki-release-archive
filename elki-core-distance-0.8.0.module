@@ -1,0 +1,166 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-core-distance",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-data",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-math",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-distance-0.8.0.jar",
+          "url": "elki-core-distance-0.8.0.jar",
+          "size": 215766,
+          "sha512": "147cbf3d341f40af71e7d159c47aff8e450957b2c9ea935ba991948dc3d18f7584014726234d66ea95f638713ce11a7055d7b5a814c0f410c84eea8625793563",
+          "sha256": "a04cc01b4bcc3a4b1caf969fd49bd7e810818353c5857f62f600bd3d7a0cc17a",
+          "sha1": "52000f2b259126268237fa3b67fcdbfff1b95762",
+          "md5": "5502ac0a2ed611dddaae83943b2a89d0"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-data",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-math",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-distance-0.8.0.jar",
+          "url": "elki-core-distance-0.8.0.jar",
+          "size": 215766,
+          "sha512": "147cbf3d341f40af71e7d159c47aff8e450957b2c9ea935ba991948dc3d18f7584014726234d66ea95f638713ce11a7055d7b5a814c0f410c84eea8625793563",
+          "sha256": "a04cc01b4bcc3a4b1caf969fd49bd7e810818353c5857f62f600bd3d7a0cc17a",
+          "sha1": "52000f2b259126268237fa3b67fcdbfff1b95762",
+          "md5": "5502ac0a2ed611dddaae83943b2a89d0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-distance",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-distance-0.8.0-test-fixtures.jar",
+          "url": "elki-core-distance-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "157fdd6146fb119cf7e2fb3c49f7589a7ee84dc1fdcf9b7ec67f547f6eb11cabf7408eaefa7fc842718468e5005a5f2b25990f5c444a22e29bd16729432efabe",
+          "sha256": "951bcbd6df44ef5c2036f49de57ae701336e77a27c9271c41b686e9d335bee7c",
+          "sha1": "efaad7a7aa0304468e96fabe09ed4b468b502a61",
+          "md5": "4742cce4aa888fd9a74708f9e341e10f"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-core-distance-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-distance",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-distance-0.8.0-test-fixtures.jar",
+          "url": "elki-core-distance-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "157fdd6146fb119cf7e2fb3c49f7589a7ee84dc1fdcf9b7ec67f547f6eb11cabf7408eaefa7fc842718468e5005a5f2b25990f5c444a22e29bd16729432efabe",
+          "sha256": "951bcbd6df44ef5c2036f49de57ae701336e77a27c9271c41b686e9d335bee7c",
+          "sha1": "efaad7a7aa0304468e96fabe09ed4b468b502a61",
+          "md5": "4742cce4aa888fd9a74708f9e341e10f"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-core-distance-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

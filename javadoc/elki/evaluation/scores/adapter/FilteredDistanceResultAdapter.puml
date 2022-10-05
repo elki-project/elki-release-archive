@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FilteredDistanceResultAdapter\n<size:10>elki.evaluation.scores.adapter" as elki.evaluation.scores.adapter.FilteredDistanceResultAdapter [[FilteredDistanceResultAdapter.html]] {
+        ~skip: DBIDRef
+        +FilteredDistanceResultAdapter(DBIDs, DoubleDBIDListIter, int, DBIDRef)
+        +advance(): DistanceResultAdapter
+    }
+
+    class "<size:14>DistanceResultAdapter\n<size:10>elki.evaluation.scores.adapter" as elki.evaluation.scores.adapter.DistanceResultAdapter [[DistanceResultAdapter.html]]
+
+    elki.evaluation.scores.adapter.DistanceResultAdapter <|-- elki.evaluation.scores.adapter.FilteredDistanceResultAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

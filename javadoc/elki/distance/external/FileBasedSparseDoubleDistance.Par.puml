@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FileBasedSparseDoubleDistance.Par\n<size:10>elki.distance.external" as elki.distance.external.FileBasedSparseDoubleDistance.Par [[FileBasedSparseDoubleDistance.Par.html]] {
+        {static} +MATRIX_ID: OptionID
+        {static} +PARSER_ID: OptionID
+        {static} +DEFAULTDIST_ID: OptionID
+        #matrixfile: URI
+        #parser: DistanceParser
+        #defaultDistance: double
+        +configure(Parameterization): void
+        +make(): FileBasedSparseDoubleDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>FileBasedSparseDoubleDistance\n<size:10>elki.distance.external" as elki.distance.external.FileBasedSparseDoubleDistance [[FileBasedSparseDoubleDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.external.FileBasedSparseDoubleDistance.Par
+    elki.distance.external.FileBasedSparseDoubleDistance +-- elki.distance.external.FileBasedSparseDoubleDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

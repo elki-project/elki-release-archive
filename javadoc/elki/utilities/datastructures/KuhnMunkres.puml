@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KuhnMunkres\n<size:10>elki.utilities.datastructures" as elki.utilities.datastructures.KuhnMunkres [[KuhnMunkres.html]] {
+        {static} -LOG: Logging
+        ~cost: double[]
+        ~selected: int
+        ~rsel: int[]
+        ~csel: int[]
+        ~rmark: int[]
+        ~cmark: int[]
+        ~minr: int
+        ~minc: int
+        +run(double[]): int[]
+        #initialize(double[]): void
+        #initialCover(): void
+        -findUncoveredMinimum(): double
+        -removeCost(double): void
+        -pivot(): boolean
+        -updateStars(): void
+        #debugLogMatrix(Level, long, String): void
+        #costOf(int, int): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

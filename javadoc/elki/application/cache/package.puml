@@ -1,0 +1,155 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.application.cache {
+
+        class PrecomputeDistancesAsciiApplication<O> [[PrecomputeDistancesAsciiApplication.html]] {
+            {static} -LOG: Logging
+            {static} +GZIP_POSTFIX: String
+            -debugExtraCheckSymmetry: boolean
+            -database: Database
+            -distance: Distance<? super O>
+            -out: Path
+            +PrecomputeDistancesAsciiApplication(Database, Distance<? super O>, Path)
+            +run(): void
+            {static} -openStream(Path): PrintStream
+            {static} +main(String[]): void
+        }
+
+        class elki.application.cache.PrecomputeDistancesAsciiApplication.Par<O> [[PrecomputeDistancesAsciiApplication.Par.html]] {
+            {static} +DISTANCE_ID: OptionID
+            -database: Database
+            -distance: Distance<? super O>
+            -out: Path
+            +configure(Parameterization): void
+            +make(): PrecomputeDistancesAsciiApplication<O>
+        }
+
+        class CacheDoubleDistanceRangeQueries<O> [[CacheDoubleDistanceRangeQueries.html]] {
+            {static} -LOG: Logging
+            -database: Database
+            -distance: Distance<? super O>
+            -radius: double
+            -out: Path
+            {static} +RANGE_CACHE_MAGIC: int
+            +CacheDoubleDistanceRangeQueries(Database, Distance<? super O>, double, Path)
+            +run(): void
+            {static} +main(String[]): void
+        }
+
+        class elki.application.cache.CacheDoubleDistanceRangeQueries.Par<O> [[CacheDoubleDistanceRangeQueries.Par.html]] {
+            {static} +CACHE_ID: OptionID
+            {static} +DISTANCE_ID: OptionID
+            {static} +RADIUS_ID: OptionID
+            -database: Database
+            -distance: Distance<? super O>
+            -radius: double
+            -out: Path
+            +configure(Parameterization): void
+            +make(): CacheDoubleDistanceRangeQueries<O>
+        }
+
+        class CacheFloatDistanceInOnDiskMatrix<O> [[CacheFloatDistanceInOnDiskMatrix.html]] {
+            {static} -LOG: Logging
+            {static} -debugExtraCheckSymmetry: boolean
+            -database: Database
+            -distance: Distance<? super O>
+            -out: Path
+            +CacheFloatDistanceInOnDiskMatrix(Database, Distance<? super O>, Path)
+            +run(): void
+            {static} +main(String[]): void
+        }
+
+        class elki.application.cache.CacheFloatDistanceInOnDiskMatrix.Par<O> [[CacheFloatDistanceInOnDiskMatrix.Par.html]] {
+            -database: Database
+            -distance: Distance<? super O>
+            -out: Path
+            +configure(Parameterization): void
+            +make(): CacheFloatDistanceInOnDiskMatrix<O>
+        }
+
+        class CacheDoubleDistanceKNNLists<O> [[CacheDoubleDistanceKNNLists.html]] {
+            {static} -LOG: Logging
+            -database: Database
+            -distance: Distance<? super O>
+            -k: int
+            -out: Path
+            {static} +KNN_CACHE_MAGIC: int
+            +CacheDoubleDistanceKNNLists(Database, Distance<? super O>, int, Path)
+            +run(): void
+            {static} +main(String[]): void
+        }
+
+        class elki.application.cache.CacheDoubleDistanceKNNLists.Par<O> [[CacheDoubleDistanceKNNLists.Par.html]] {
+            {static} +CACHE_ID: OptionID
+            {static} +DISTANCE_ID: OptionID
+            {static} +K_ID: OptionID
+            -database: Database
+            -distance: Distance<? super O>
+            -k: int
+            -out: Path
+            +configure(Parameterization): void
+            +make(): CacheDoubleDistanceKNNLists<O>
+        }
+
+        class CacheDoubleDistanceInOnDiskMatrix<O> [[CacheDoubleDistanceInOnDiskMatrix.html]] {
+            {static} -LOG: Logging
+            {static} -debugExtraCheckSymmetry: boolean
+            -database: Database
+            -distance: Distance<? super O>
+            -out: Path
+            +CacheDoubleDistanceInOnDiskMatrix(Database, Distance<? super O>, Path)
+            +run(): void
+            {static} +main(String[]): void
+        }
+
+        class elki.application.cache.CacheDoubleDistanceInOnDiskMatrix.Par<O> [[CacheDoubleDistanceInOnDiskMatrix.Par.html]] {
+            {static} +CACHE_ID: OptionID
+            {static} +DISTANCE_ID: OptionID
+            -database: Database
+            -distance: Distance<? super O>
+            -out: Path
+            +configure(Parameterization): void
+            +make(): CacheDoubleDistanceInOnDiskMatrix<O>
+        }
+
+        elki.application.AbstractApplication <|-- PrecomputeDistancesAsciiApplication
+        elki.application.AbstractApplication.Par <|-- elki.application.cache.PrecomputeDistancesAsciiApplication.Par
+        PrecomputeDistancesAsciiApplication +-- elki.application.cache.PrecomputeDistancesAsciiApplication.Par
+        elki.application.AbstractApplication <|-- CacheDoubleDistanceRangeQueries
+        elki.application.AbstractApplication.Par <|-- elki.application.cache.CacheDoubleDistanceRangeQueries.Par
+        CacheDoubleDistanceRangeQueries +-- elki.application.cache.CacheDoubleDistanceRangeQueries.Par
+        elki.application.AbstractApplication <|-- CacheFloatDistanceInOnDiskMatrix
+        elki.application.AbstractApplication.Par <|-- elki.application.cache.CacheFloatDistanceInOnDiskMatrix.Par
+        CacheFloatDistanceInOnDiskMatrix +-- elki.application.cache.CacheFloatDistanceInOnDiskMatrix.Par
+        elki.application.AbstractApplication <|-- CacheDoubleDistanceKNNLists
+        elki.application.AbstractApplication.Par <|-- elki.application.cache.CacheDoubleDistanceKNNLists.Par
+        CacheDoubleDistanceKNNLists +-- elki.application.cache.CacheDoubleDistanceKNNLists.Par
+        elki.application.AbstractApplication <|-- CacheDoubleDistanceInOnDiskMatrix
+        elki.application.AbstractApplication.Par <|-- elki.application.cache.CacheDoubleDistanceInOnDiskMatrix.Par
+        CacheDoubleDistanceInOnDiskMatrix +-- elki.application.cache.CacheDoubleDistanceInOnDiskMatrix.Par
+    }
+
+    namespace elki.application {
+        abstract class AbstractApplication [[../AbstractApplication.html]] {
+            {static} -LOG: Logging
+            {static} -NEWLINE: String
+            {static} +VERSION: String
+            {static} -REFERENCE_VERSION: String
+            {static} +REFERENCE: String
+            {abstract} +run(): void
+        }
+        abstract class elki.application.AbstractApplication.Par [[../AbstractApplication.Par.html]] {
+            {static} +OUTPUT_ID: OptionID
+            {static} +INPUT_ID: OptionID
+            {static} +DATABASE_ID: OptionID
+            {static} +HELP_ID: OptionID
+            {static} +HELP_LONG_ID: OptionID
+            {static} +DESCRIPTION_ID: OptionID
+            {static} +DEBUG_ID: OptionID
+            {static} +VERBOSE_ID: OptionID
+            {abstract} +make(): AbstractApplication
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

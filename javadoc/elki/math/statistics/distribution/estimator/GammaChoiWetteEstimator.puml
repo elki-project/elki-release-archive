@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GammaChoiWetteEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.GammaChoiWetteEstimator [[GammaChoiWetteEstimator.html]] {
+        {static} +STATIC: GammaChoiWetteEstimator
+        +estimate(A, NumberArrayAdapter<?, A>): GammaDistribution
+        +getDistributionClass(): Class<? super GammaDistribution>
+    }
+
+    interface "<size:14>DistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.DistributionEstimator<GammaDistribution> [[DistributionEstimator.html]] {
+        {abstract} +estimate(A, NumberArrayAdapter<?, A>): GammaDistribution
+        {abstract} +getDistributionClass(): Class<? super Distribution>
+    }
+    class "<size:14>GammaChoiWetteEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.GammaChoiWetteEstimator.Par [[GammaChoiWetteEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.DistributionEstimator <|.. elki.math.statistics.distribution.estimator.GammaChoiWetteEstimator
+    elki.math.statistics.distribution.estimator.GammaChoiWetteEstimator +-- elki.math.statistics.distribution.estimator.GammaChoiWetteEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParallelExecutor.BlockArrayRunner\n<size:10>elki.parallel" as elki.parallel.ParallelExecutor.BlockArrayRunner [[ParallelExecutor.BlockArrayRunner.html]] {
+        -ids: ArrayDBIDs
+        -start: int
+        -end: int
+        -procs: Processor[]
+        -variables: HashMap<SharedVariable<?>, Instance<?>>
+        #BlockArrayRunner(ArrayDBIDs, int, int, Processor[])
+        +call(): ArrayDBIDs
+        +getInstance(SharedVariable<I extends Instance<?>>): I extends Instance<?>
+    }
+
+    interface "<size:14>Callable\n<size:10>java.util.concurrent" as java.util.concurrent.Callable<ArrayDBIDs> {
+        {abstract} +call(): ArrayDBIDs
+    }
+    interface "<size:14>Executor\n<size:10>elki.parallel" as elki.parallel.Executor [[Executor.html]] {
+        {abstract} +getInstance(SharedVariable<I extends Instance<?>>): I extends Instance<?>
+    }
+    class "<size:14>ParallelExecutor\n<size:10>elki.parallel" as elki.parallel.ParallelExecutor [[ParallelExecutor.html]]
+
+    java.util.concurrent.Callable <|.. elki.parallel.ParallelExecutor.BlockArrayRunner
+    elki.parallel.Executor <|.. elki.parallel.ParallelExecutor.BlockArrayRunner
+    elki.parallel.ParallelExecutor +-- elki.parallel.ParallelExecutor.BlockArrayRunner
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

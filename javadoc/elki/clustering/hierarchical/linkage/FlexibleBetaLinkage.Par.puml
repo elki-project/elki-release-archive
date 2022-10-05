@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FlexibleBetaLinkage.Par\n<size:10>elki.clustering.hierarchical.linkage" as elki.clustering.hierarchical.linkage.FlexibleBetaLinkage.Par [[FlexibleBetaLinkage.Par.html]] {
+        {static} +BETA_ID: OptionID
+        ~beta: double
+        +configure(Parameterization): void
+        +make(): FlexibleBetaLinkage
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>FlexibleBetaLinkage\n<size:10>elki.clustering.hierarchical.linkage" as elki.clustering.hierarchical.linkage.FlexibleBetaLinkage [[FlexibleBetaLinkage.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.linkage.FlexibleBetaLinkage.Par
+    elki.clustering.hierarchical.linkage.FlexibleBetaLinkage +-- elki.clustering.hierarchical.linkage.FlexibleBetaLinkage.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

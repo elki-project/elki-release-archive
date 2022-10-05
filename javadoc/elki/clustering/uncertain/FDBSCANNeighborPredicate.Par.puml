@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FDBSCANNeighborPredicate.Par\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.FDBSCANNeighborPredicate.Par [[FDBSCANNeighborPredicate.Par.html]] {
+        {static} +SAMPLE_SIZE_ID: OptionID
+        {static} +THRESHOLD_ID: OptionID
+        {static} +SEED_ID: OptionID
+        #epsilon: double
+        #sampleSize: int
+        #threshold: double
+        #seed: RandomFactory
+        +configure(Parameterization): void
+        +make(): FDBSCANNeighborPredicate
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>FDBSCANNeighborPredicate\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.FDBSCANNeighborPredicate [[FDBSCANNeighborPredicate.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.uncertain.FDBSCANNeighborPredicate.Par
+    elki.clustering.uncertain.FDBSCANNeighborPredicate +-- elki.clustering.uncertain.FDBSCANNeighborPredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

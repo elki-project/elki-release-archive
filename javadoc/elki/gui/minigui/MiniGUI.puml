@@ -1,0 +1,52 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MiniGUI\n<size:10>elki.gui.minigui" as elki.gui.minigui.MiniGUI [[MiniGUI.html]] {
+        {static} +SAVED_SETTINGS_FILENAME: String
+        {static} -NEWLINE: String
+        {static} -LOG: Logging
+        {static} -ACTION_QUIT: String
+        ~frame: JFrame
+        ~panel: JPanel
+        #outputArea: LogPanel
+        #parameterTable: ParameterTable
+        #parameters: DynamicParameters
+        #store: SavedSettingsFile
+        #appCombo: JComboBox<String>
+        #savedCombo: JComboBox<String>
+        #savedSettingsModel: SettingsComboboxModel
+        #runButton: JButton
+        -maincls: Class<? extends AbstractApplication>
+        -commandLine: JTextField
+        -APP_PREFIX: String
+        -setupAppChooser(): void
+        -setupParameterTable(): void
+        -setupLoadSaveButtons(): void
+        -setupCommandLine(): void
+        -setupLoggingArea(): void
+        #updateParameterTable(): void
+        #doSetParameters(List<String>): void
+        -strip_prefix(String): String
+        -format(Object...): String
+        -formatTo(StringBuilder, List<?>): void
+        -formatTo(StringBuilder, String): void
+        #loadLatest(): void
+        #startTask(): void
+        #reportErrors(SerializedParameterization): void
+        +run(): void
+        {static} +main(String[]): void
+    }
+
+    abstract class "<size:14>AbstractApplication\n<size:10>elki.application" as elki.application.AbstractApplication [[../../application/AbstractApplication.html]] {
+        {abstract} +run(): void
+    }
+    class "<size:14>MiniGUI.SettingsComboboxModel\n<size:10>elki.gui.minigui" as elki.gui.minigui.MiniGUI.SettingsComboboxModel [[MiniGUI.SettingsComboboxModel.html]]
+
+    elki.application.AbstractApplication <|-- elki.gui.minigui.MiniGUI
+    elki.gui.minigui.MiniGUI +-- elki.gui.minigui.MiniGUI.SettingsComboboxModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LogPane\n<size:10>elki.gui.util" as elki.gui.util.LogPane [[LogPane.html]] {
+        {static} -serialVersionUID: long
+        #baseStyle: Style
+        #msgStyle: Style
+        #dbgStyle: Style
+        #errStyle: Style
+        -msgformat: Formatter
+        -debugformat: Formatter
+        -errformat: Formatter
+        -lastNewlinePos: int
+        +publish(String, Level): void
+        #publish(LogRecord): void
+        -tailingNonNewline(String, int, int): int
+        +clear(): void
+        +becomeDefaultLogger(): void
+    }
+
+    class "<size:14>JTextPane\n<size:10>javax.swing" as javax.swing.JTextPane
+    class "<size:14>LogPane.LogPaneHandler\n<size:10>elki.gui.util" as elki.gui.util.LogPane.LogPaneHandler [[LogPane.LogPaneHandler.html]]
+
+    javax.swing.JTextPane <|-- elki.gui.util.LogPane
+    elki.gui.util.LogPane +-- elki.gui.util.LogPane.LogPaneHandler
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="282px" preserveAspectRatio="none" style="width:379px;height:282px;background:#FFFFFF;" version="1.1" viewBox="0 0 379 282" width="379px" zoomAndPan="magnify"><defs/><g><!--MD5=[f69cdecbdb836cb52cfa8852adc949e3]
+class elki.svm.NuSVR--><a href="NuSVR.html" target="_top" title="NuSVR.html" xlink:actuate="onRequest" xlink:href="NuSVR.html" xlink:show="new" xlink:title="NuSVR.html" xlink:type="simple"><g id="elem_elki.svm.NuSVR"><rect codeLine="6" fill="#F1F1F1" height="151.7188" id="elki.svm.NuSVR" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="363" x="9" y="105"/><ellipse cx="162.75" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M165.7188,129.6094 Q165.1406,129.9063 164.5,130.0469 Q163.8594,130.2031 163.1563,130.2031 Q160.6563,130.2031 159.3281,128.5625 Q158.0156,126.9063 158.0156,123.7813 Q158.0156,120.6563 159.3281,119 Q160.6563,117.3438 163.1563,117.3438 Q163.8594,117.3438 164.5,117.5 Q165.1563,117.6563 165.7188,117.9531 L165.7188,120.6719 Q165.0938,120.0938 164.5,119.8281 Q163.9063,119.5469 163.2813,119.5469 Q161.9375,119.5469 161.25,120.625 Q160.5625,121.6875 160.5625,123.7813 Q160.5625,125.875 161.25,126.9531 Q161.9375,128.0156 163.2813,128.0156 Q163.9063,128.0156 164.5,127.75 Q165.0938,127.4688 165.7188,126.8906 L165.7188,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47" x="183.25" y="122.9951">NuSVR</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="39" x="187.25" y="135.5791">elki.svm</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="371" y1="142.9375" y2="142.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="153.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="29" y="159.9326">LOG: Logging</text><polygon fill="none" points="20,167.8828,24,171.8828,20,175.8828,16,171.8828" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="29" y="176.2295">nu: double</text><polygon fill="none" points="20,184.1797,24,188.1797,20,192.1797,16,188.1797" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="29" y="192.5264">C: double</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="371" y1="199.8281" y2="199.8281"/><ellipse cx="20" cy="213.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="337" x="29" y="216.8232">NuSVR(double, boolean, double, double, double)</text><polygon fill="#FFFF44" points="20,224.7734,24,228.7734,20,232.7734,16,228.7734" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="191" x="29" y="233.1201">solve(DataSet): SolutionInfo</text><polygon fill="#FFFF44" points="20,241.0703,24,245.0703,20,249.0703,16,245.0703" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="29" y="249.417">getLogger(): Logging</text></g></a><!--MD5=[3419ac6c189507031643e470f2a9c969]
+class elki.svm.AbstractSVR--><a href="AbstractSVR.html" target="_top" title="AbstractSVR.html" xlink:actuate="onRequest" xlink:href="AbstractSVR.html" xlink:show="new" xlink:title="AbstractSVR.html" xlink:type="simple"><g id="elem_elki.svm.AbstractSVR"><rect codeLine="15" fill="#F1F1F1" height="37.9375" id="elki.svm.AbstractSVR" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="119" x="131" y="7"/><ellipse cx="146" cy="25.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M146.1094,21.3125 L144.9531,26.3906 L147.2813,26.3906 L146.1094,21.3125 Z M144.625,19.0781 L147.6094,19.0781 L150.9688,31.4688 L148.5156,31.4688 L147.75,28.4063 L144.4688,28.4063 L143.7188,31.4688 L141.2813,31.4688 L144.625,19.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="87" x="160" y="24.9951">AbstractSVR</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="42" x="182.5" y="37.5791">elki.svm</text></g></a><!--MD5=[fcbd468ea95341dea0c40cf720288cd8]
+reverse link elki.svm.AbstractSVR to elki.svm.NuSVR--><g id="link_elki.svm.AbstractSVR_elki.svm.NuSVR"><path codeLine="17" d="M190.5,65.26 C190.5,77.35 190.5,91.17 190.5,104.93 " fill="none" id="elki.svm.AbstractSVR-backto-elki.svm.NuSVR" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="183.5,65.15,190.5,45.15,197.5,65.15,183.5,65.15" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="89.5" y="262.7188"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="89.5" y="272.001">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[0a2869aa34c9256b3e9cc3bf631ea172]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NuSVR\n<size:10>elki.svm" as elki.svm.NuSVR [[NuSVR.html]] {
+        {static} -LOG: Logging
+        #nu: double
+        #C: double
+        +NuSVR(double, boolean, double, double, double)
+        #solve(DataSet): SolutionInfo
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractSVR\n<size:10>elki.svm" as elki.svm.AbstractSVR [[AbstractSVR.html]]
+
+    elki.svm.AbstractSVR <|- - elki.svm.NuSVR
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

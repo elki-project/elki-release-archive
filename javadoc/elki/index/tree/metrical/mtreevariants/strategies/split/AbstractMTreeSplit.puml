@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractMTreeSplit\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> [[AbstractMTreeSplit.html]] {
+        #distributor: DistributionStrategy
+        +AbstractMTreeSplit(DistributionStrategy)
+        {static} #computeDistanceMatrix(AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, N extends AbstractMTreeNode<?, N extends AbstractMTreeNode<?,N,E>, E extends MTreeEntry>): double[]
+    }
+
+    interface "<size:14>MTreeSplit\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.MTreeSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> [[MTreeSplit.html]] {
+        {abstract} +split(AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>): Assignments<E extends MTreeEntry>
+    }
+    abstract class "<size:14>AbstractMTreeSplit.Par\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit.Par<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>>
+
+    elki.index.tree.metrical.mtreevariants.strategies.split.MTreeSplit <|.. elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit
+    elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit +-- elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

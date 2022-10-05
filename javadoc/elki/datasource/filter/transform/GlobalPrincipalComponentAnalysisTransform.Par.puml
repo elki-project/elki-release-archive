@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GlobalPrincipalComponentAnalysisTransform.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Par<O extends NumberVector> [[GlobalPrincipalComponentAnalysisTransform.Par.html]] {
+        {static} +FILTER_ID: OptionID
+        {static} +MODE_ID: OptionID
+        ~filter: EigenPairFilter
+        ~mode: Mode
+        +configure(Parameterization): void
+        +make(): GlobalPrincipalComponentAnalysisTransform<O extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>GlobalPrincipalComponentAnalysisTransform\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform<O extends NumberVector> [[GlobalPrincipalComponentAnalysisTransform.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Par
+    elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform +-- elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

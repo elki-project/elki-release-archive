@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FourC.Settings.Par\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.FourC.Settings.Par [[FourC.Settings.Par.html]] {
+        {static} +DEFAULT_DELTA: double
+        {static} +KAPPA_ID: OptionID
+        {static} +KAPPA_DEFAULT: double
+        {static} +LAMBDA_ID: OptionID
+        ~settings: Settings
+        +configure(Parameterization): void
+        +make(): Object
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>FourC.Settings\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.FourC.Settings [[FourC.Settings.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.correlation.FourC.Settings.Par
+    elki.clustering.correlation.FourC.Settings +-- elki.clustering.correlation.FourC.Settings.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

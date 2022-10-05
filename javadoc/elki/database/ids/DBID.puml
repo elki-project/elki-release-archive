@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DBID\n<size:10>elki.database.ids" as elki.database.ids.DBID [[DBID.html]] {
+        {abstract} +compareTo(DBIDRef): int
+    }
+
+    interface "<size:14>DBIDRef\n<size:10>elki.database.ids" as elki.database.ids.DBIDRef [[DBIDRef.html]] {
+        {abstract} +internalGetIndex(): int
+    }
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<DBIDRef> {
+        {abstract} +compareTo(DBIDRef): int
+    }
+    interface "<size:14>ArrayDBIDs\n<size:10>elki.database.ids" as elki.database.ids.ArrayDBIDs [[ArrayDBIDs.html]] {
+        {abstract} +--get--(int): DBID
+        {abstract} +assignVar(int, DBIDVar): DBIDVar
+        {abstract} +iter(): DBIDArrayIter
+        {abstract} +size(): int
+        {abstract} +binarySearch(DBIDRef): int
+        {abstract} +slice(int, int): ArrayDBIDs
+    }
+    interface "<size:14>SetDBIDs\n<size:10>elki.database.ids" as elki.database.ids.SetDBIDs [[SetDBIDs.html]]
+
+    elki.database.ids.DBIDRef <|-- elki.database.ids.DBID
+    java.lang.Comparable <|-- elki.database.ids.DBID
+    elki.database.ids.ArrayDBIDs <|-- elki.database.ids.DBID
+    elki.database.ids.SetDBIDs <|-- elki.database.ids.DBID
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

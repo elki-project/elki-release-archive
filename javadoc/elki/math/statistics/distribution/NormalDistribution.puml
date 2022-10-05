@@ -1,0 +1,49 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NormalDistribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.NormalDistribution [[NormalDistribution.html]] {
+        {static} ~P_LOW: double
+        {static} ~P_HIGH: double
+        {static} +PHIINV075: double
+        {static} +ONEBYPHIINV075: double
+        -mean: double
+        -stddev: double
+        {static} -ERF_COEFF1: double[]
+        {static} -ERF_COEFF2: double[]
+        +NormalDistribution(double, double)
+        +pdf(double): double
+        +logpdf(double): double
+        +cdf(double): double
+        +quantile(double): double
+        +nextRandom(Random): double
+        +getMean(): double
+        +getStddev(): double
+        {static} +erfc(double): double
+        {static} +erf(double): double
+        {static} +erfcinv(double): double
+        {static} +pdf(double, double, double): double
+        {static} +logpdf(double, double, double): double
+        {static} +standardNormalLogPDF(double): double
+        {static} +standardNormalPDF(double): double
+        {static} +cdf(double, double, double): double
+        {static} +standardNormalCDF(double): double
+        {static} +quantile(double, double, double): double
+        {static} +standardNormalQuantile(double): double
+    }
+
+    interface "<size:14>Distribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution [[Distribution.html]] {
+        {abstract} +pdf(double): double
+        {abstract} +logpdf(double): double
+        {abstract} +cdf(double): double
+        {abstract} +quantile(double): double
+    }
+    class "<size:14>NormalDistribution.Par\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.NormalDistribution.Par [[NormalDistribution.Par.html]]
+
+    elki.math.statistics.distribution.Distribution <|.. elki.math.statistics.distribution.NormalDistribution
+    elki.math.statistics.distribution.NormalDistribution +-- elki.math.statistics.distribution.NormalDistribution.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

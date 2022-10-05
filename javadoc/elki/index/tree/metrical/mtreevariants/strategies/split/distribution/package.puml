@@ -1,0 +1,56 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.metrical.mtreevariants.strategies.split.distribution {
+
+        class FarthestBalancedDistribution [[FarthestBalancedDistribution.html]] {
+            +distribute(AbstractNode<E extends MTreeEntry>, int, double[], int, double[]): Assignments<E extends MTreeEntry>
+        }
+
+        class DistanceEntry<E> [[DistanceEntry.html]] {
+            -entry: E
+            -distance: double
+            +DistanceEntry(E, double)
+            +getEntry(): E
+            +getDistance(): double
+            +compareTo(DistanceEntry<E>): int
+        }
+
+        class GeneralizedHyperplaneDistribution [[GeneralizedHyperplaneDistribution.html]] {
+            +distribute(AbstractNode<E extends MTreeEntry>, int, double[], int, double[]): Assignments<E extends MTreeEntry>
+        }
+
+        class Assignments<E extends MTreeEntry> [[Assignments.html]] {
+            -id1: DBID
+            -id2: DBID
+            +Assignments(DBID, DBID, int)
+            +addToFirst(E extends MTreeEntry, double): void
+            +computeFirstCover(boolean): double
+            +computeSecondCover(boolean): double
+            +addToSecond(E extends MTreeEntry, double): void
+            +getFirstRoutingObject(): DBID
+            +getSecondRoutingObject(): DBID
+        }
+
+        interface DistributionStrategy [[DistributionStrategy.html]] {
+            {abstract} +distribute(AbstractNode<E extends MTreeEntry>, int, double[], int, double[]): Assignments<E extends MTreeEntry>
+        }
+
+        class BalancedDistribution [[BalancedDistribution.html]] {
+            +distribute(AbstractNode<E extends MTreeEntry>, int, double[], int, double[]): Assignments<E extends MTreeEntry>
+        }
+
+        DistributionStrategy <|.. FarthestBalancedDistribution
+        java.lang.Comparable <|.. DistanceEntry
+        DistributionStrategy <|.. GeneralizedHyperplaneDistribution
+        Assignments --> "*" DistanceEntry: firstAssignments\nsecondAssignments
+        DistributionStrategy <|.. BalancedDistribution
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

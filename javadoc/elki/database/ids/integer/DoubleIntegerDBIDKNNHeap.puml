@@ -1,0 +1,45 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleIntegerDBIDKNNHeap\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDKNNHeap [[DoubleIntegerDBIDKNNHeap.html]] {
+        -k: int
+        -ties: int[]
+        -numties: int
+        -kdist: double
+        {static} -INITIAL_TIES_SIZE: int
+        #DoubleIntegerDBIDKNNHeap(int)
+        +getK(): int
+        +getKNNDistance(): double
+        +insert(double, DBIDRef): double
+        -addToTies(int): void
+        +poll(): void
+        +size(): int
+        +isEmpty(): boolean
+        +clear(): void
+        +toKNNList(): DoubleIntegerDBIDKNNList
+        +toKNNListSqrt(): DoubleIntegerDBIDKNNList
+        +peekKey(): double
+        +internalGetIndex(): int
+        +contains(DBIDRef): boolean
+        +unorderedIterator(): DoubleDBIDIter
+    }
+
+    class "<size:14>DoubleIntegerDBIDHeap\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDHeap [[DoubleIntegerDBIDHeap.html]]
+    interface "<size:14>KNNHeap\n<size:10>elki.database.ids" as elki.database.ids.KNNHeap [[../KNNHeap.html]] {
+        {abstract} +toKNNList(): KNNList
+        {abstract} +toKNNListSqrt(): KNNList
+        {abstract} +insert(double, DBIDRef): double
+        {abstract} +getK(): int
+        {abstract} +getKNNDistance(): double
+    }
+    class "<size:14>DoubleIntegerDBIDKNNHeap.UnorderedIter\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDKNNHeap.UnorderedIter [[DoubleIntegerDBIDKNNHeap.UnorderedIter.html]]
+
+    elki.database.ids.integer.DoubleIntegerDBIDHeap <|-- elki.database.ids.integer.DoubleIntegerDBIDKNNHeap
+    elki.database.ids.KNNHeap <|.. elki.database.ids.integer.DoubleIntegerDBIDKNNHeap
+    elki.database.ids.integer.DoubleIntegerDBIDKNNHeap +-- elki.database.ids.integer.DoubleIntegerDBIDKNNHeap.UnorderedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

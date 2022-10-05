@@ -1,0 +1,141 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.datasource.bundle {
+
+        interface BundleStreamSource [[BundleStreamSource.html]] {
+            {abstract} +getMeta(): BundleMeta
+            {abstract} +data(int): Object
+            {abstract} +hasDBIDs(): boolean
+            {abstract} +assignDBID(DBIDVar): boolean
+            {abstract} +nextEvent(): Event
+            {abstract} +asMultipleObjectsBundle(): MultipleObjectsBundle
+        }
+
+        enum elki.datasource.bundle.BundleStreamSource.Event [[BundleStreamSource.Event.html]] {
+            {static} +META_CHANGED
+            {static} +NEXT_OBJECT
+            {static} +END_OF_STREAM
+        }
+
+        class MultipleObjectsBundle [[MultipleObjectsBundle.html]] {
+            {static} -LOG: Logging
+            -meta: BundleMeta
+            -columns: List<List<?>>
+            -ids: ArrayDBIDs
+            +meta(): BundleMeta
+            +meta(int): SimpleTypeInformation<?>
+            +metaLength(): int
+            +data(int, int): Object
+            +assignDBID(int, DBIDVar): boolean
+            +dataLength(): int
+            +appendSimple(Object...): void
+            +appendColumn(SimpleTypeInformation<?>, List<?>): MultipleObjectsBundle
+            +setDBIDs(ArrayDBIDs): void
+            +getDBIDs(): ArrayDBIDs
+            +getColumn(int): List<?>
+            {static} +makeSimple(SimpleTypeInformation<? super V>, List<? extends V>): MultipleObjectsBundle
+            {static} +makeSimple(SimpleTypeInformation<? super V1>, List<? extends V1>, SimpleTypeInformation<? super V2>, List<? extends V2>): MultipleObjectsBundle
+            {static} +makeSimple(SimpleTypeInformation<? super V1>, List<? extends V1>, SimpleTypeInformation<? super V2>, List<? extends V2>, SimpleTypeInformation<? super V3>, List<? extends V3>): MultipleObjectsBundle
+            +asStream(): BundleStreamSource
+            {static} +fromStream(BundleStreamSource): MultipleObjectsBundle
+            +getRow(int): Object[]
+        }
+
+        class SingleObjectBundle [[SingleObjectBundle.html]] {
+            -meta: BundleMeta
+            -contents: List<Object>
+            -id: DBID
+            +SingleObjectBundle()
+            +SingleObjectBundle(BundleMeta, List<Object>)
+            +SingleObjectBundle(BundleMeta, DBID, List<Object>)
+            +meta(): BundleMeta
+            +meta(int): SimpleTypeInformation<?>
+            +metaLength(): int
+            +data(int): Object
+            +dataLength(): int
+            +data(int, int): Object
+            +assignDBID(int, DBIDVar): boolean
+            +append(SimpleTypeInformation<?>, Object): void
+        }
+
+        class BundleWriter [[BundleWriter.html]] {
+            {static} -LOG: Logging
+            {static} -INITIAL_BUFFER: int
+            {static} +MAGIC: int
+            +writeBundleStream(BundleStreamSource, WritableByteChannel): void
+            -flushBuffer(ByteBuffer, WritableByteChannel): void
+            -ensureBuffer(int, ByteBuffer, WritableByteChannel): ByteBuffer
+            -writeHeader(BundleStreamSource, ByteBuffer, WritableByteChannel): ByteBufferSerializer<?>[]
+        }
+
+        interface ObjectBundle [[ObjectBundle.html]] {
+            {abstract} +meta(): BundleMeta
+            {abstract} +meta(int): SimpleTypeInformation<?>
+            {abstract} +metaLength(): int
+            {abstract} +dataLength(): int
+            {abstract} +data(int, int): Object
+            {abstract} +assignDBID(int, DBIDVar): boolean
+        }
+
+        class BundleMeta [[BundleMeta.html]] {
+            {static} -serialVersionUID: long
+            +BundleMeta()
+            +BundleMeta(int)
+            +BundleMeta(SimpleTypeInformation<?>...)
+        }
+
+        class BundleReader [[BundleReader.html]] {
+            {static} +MAGIC: int
+            ~buffer: MappedByteBuffer
+            ~meta: BundleMeta
+            ~input: FileChannel
+            ~sers: ByteBufferSerializer<?>[]
+            ~data: Object[]
+            ~hasids: boolean
+            +BundleReader(MappedByteBuffer)
+            +BundleReader(FileChannel)
+            +getMeta(): BundleMeta
+            ~openBuffer(): void
+            ~readMeta(): void
+            ~readObject(): void
+            +nextEvent(): Event
+            +data(int): Object
+            +hasDBIDs(): boolean
+            +assignDBID(DBIDVar): boolean
+            +asMultipleObjectsBundle(): MultipleObjectsBundle
+        }
+
+        class StreamFromBundle [[StreamFromBundle.html]] {
+            ~onum: int
+            +StreamFromBundle(MultipleObjectsBundle)
+            +getMeta(): BundleMeta
+            +data(int): Object
+            +hasDBIDs(): boolean
+            +assignDBID(DBIDVar): boolean
+            +nextEvent(): Event
+            +asMultipleObjectsBundle(): MultipleObjectsBundle
+        }
+
+        BundleStreamSource +-- elki.datasource.bundle.BundleStreamSource.Event
+        ObjectBundle <|.. MultipleObjectsBundle
+        ObjectBundle <|.. SingleObjectBundle
+        java.util.ArrayList <|-- BundleMeta
+        BundleStreamSource <|.. BundleReader
+        BundleStreamSource <|.. StreamFromBundle
+        StreamFromBundle --> MultipleObjectsBundle: bundle
+    }
+
+    namespace java.util {
+        class ArrayList<E> {
+            {static} -serialVersionUID: long
+            {static} -DEFAULT_CAPACITY: int
+            {static} -EMPTY_ELEMENTDATA: Object[]
+            {static} -DEFAULTCAPACITY_EMPTY_ELEMENTDATA: Object[]
+            ~elementData: Object[]
+            -size: int
+            {static} -MAX_ARRAY_SIZE: int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FloatArrayAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.FloatArrayAdapter [[FloatArrayAdapter.html]] {
+        {static} +STATIC: FloatArrayAdapter
+        +size(float[]): int
+        +--get--(float[], int): Float
+        +getDouble(float[], int): double
+        +getFloat(float[], int): float
+        +getInteger(float[], int): int
+        +getShort(float[], int): short
+        +getLong(float[], int): long
+        +getByte(float[], int): byte
+    }
+
+    interface "<size:14>NumberArrayAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.NumberArrayAdapter<Float, float[]> [[NumberArrayAdapter.html]] {
+        {abstract} +size(float[]): int
+        {abstract} +get(float[], int): Float
+        {abstract} +getDouble(float[], int): double
+        {abstract} +getLong(float[], int): long
+    }
+
+    elki.utilities.datastructures.arraylike.NumberArrayAdapter <|.. elki.utilities.datastructures.arraylike.FloatArrayAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

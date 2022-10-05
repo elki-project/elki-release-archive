@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="120px" preserveAspectRatio="none" style="width:775px;height:120px;background:#FFFFFF;" version="1.1" viewBox="0 0 775 120" width="775px" zoomAndPan="magnify"><defs/><g><!--MD5=[cecbe970d5f040c0fe9a9f8059a38b51]
+class elki.clustering.em.models.EMClusterModelFactory--><a href="EMClusterModelFactory.html" target="_top" title="EMClusterModelFactory.html" xlink:actuate="onRequest" xlink:href="EMClusterModelFactory.html" xlink:show="new" xlink:title="EMClusterModelFactory.html" xlink:type="simple"><g id="elem_elki.clustering.em.models.EMClusterModelFactory"><rect codeLine="6" fill="#F1F1F1" height="86.5313" id="elki.clustering.em.models.EMClusterModelFactory" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="754" x="7" y="7"/><ellipse cx="237.25" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M233.1719,21.7344 L233.1719,19.5781 L240.5625,19.5781 L240.5625,21.7344 L238.0938,21.7344 L238.0938,29.8125 L240.5625,29.8125 L240.5625,31.9688 L233.1719,31.9688 L233.1719,29.8125 L235.6406,29.8125 L235.6406,21.7344 L233.1719,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="165" x="257.75" y="24.9951">EMClusterModelFactory</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="128" x="276.25" y="37.5791">elki.clustering.em.models</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="118" x="646" y="4"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="116" x="647" y="16.1387">O, M extends Model</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="760" y1="44.9375" y2="44.9375"/><ellipse cx="18" cy="58.5859" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="115" x="27" y="61.9326">INIT_ID: OptionID</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="760" y1="69.2344" y2="69.2344"/><ellipse cx="18" cy="82.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="728" x="27" y="86.2295">buildInitialModels(Relation&lt;? extends O&gt;, int): List&lt;? extends EMClusterModel&lt;O, M extends Model&gt;&gt;</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="290.5" y="100.5313"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="290.5" y="109.8135">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[cf8b73cbcd057fb62a42d65569662fab]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>EMClusterModelFactory\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.EMClusterModelFactory<O, M extends Model> [[EMClusterModelFactory.html]] {
+        {static} +INIT_ID: OptionID
+        {abstract} +buildInitialModels(Relation<? extends O>, int): List<? extends EMClusterModel<O, M extends Model>>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

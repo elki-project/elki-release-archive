@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FeatureBagging.Par\n<size:10>elki.outlier.meta" as elki.outlier.meta.FeatureBagging.Par [[FeatureBagging.Par.html]] {
+        {static} +NUM_ID: OptionID
+        {static} +BREADTH_ID: OptionID
+        {static} +SEED_ID: OptionID
+        #k: int
+        #num: int
+        #breadth: boolean
+        #rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): FeatureBagging
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>FeatureBagging\n<size:10>elki.outlier.meta" as elki.outlier.meta.FeatureBagging [[FeatureBagging.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.meta.FeatureBagging.Par
+    elki.outlier.meta.FeatureBagging +-- elki.outlier.meta.FeatureBagging.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

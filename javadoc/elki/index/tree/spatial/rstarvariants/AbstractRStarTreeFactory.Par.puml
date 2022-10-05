@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractRStarTreeFactory.Par\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par<O extends NumberVector, S extends RTreeSettings> {
+        {static} +INSERTION_STRATEGY_ID: OptionID
+        {static} +SPLIT_STRATEGY_ID: OptionID
+        {static} +BULK_SPLIT_ID: OptionID
+        {static} +MINIMUM_FILL_ID: OptionID
+        {static} +OVERFLOW_STRATEGY_ID: OptionID
+        #settings: S extends RTreeSettings
+        {abstract} #createSettings(): S extends RTreeSettings
+        +configure(Parameterization): void
+        #configBulkLoad(Parameterization): void
+        {abstract} +make(): AbstractRStarTreeFactory<O extends NumberVector, ?, ?, ?>
+    }
+
+    abstract class "<size:14>PagedIndexFactory.Par\n<size:10>elki.index" as elki.index.PagedIndexFactory.Par<O extends NumberVector> [[../../../PagedIndexFactory.Par.html]] {
+        {abstract} +make(): PagedIndexFactory<O>
+    }
+    abstract class "<size:14>AbstractRStarTreeFactory\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory<O extends NumberVector, N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[AbstractRStarTreeFactory.html]]
+
+    elki.index.PagedIndexFactory.Par <|-- elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par
+    elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory +-- elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

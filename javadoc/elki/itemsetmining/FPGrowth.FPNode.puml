@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FPGrowth.FPNode\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth.FPNode [[FPGrowth.FPNode.html]] {
+        ~parent: FPNode
+        ~sibling: FPNode
+        ~key: int
+        ~count: int
+        ~numchildren: int
+        ~children: FPNode[]
+        {static} ~EMPTY_CHILDREN: FPNode[]
+        ~INITIAL_SIZE: int
+        {static} -SPACES: char[]
+        +FPNode(FPNode, int)
+        +insert(FPTree, int[], int, int, int): void
+        -ensureSize(): void
+        +appendTo(StringBuilder, Translator): StringBuilder
+        -appendTo(StringBuilder, Translator, int): StringBuilder
+        +reduceMemory(): void
+    }
+
+    class "<size:14>FPGrowth\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth [[FPGrowth.html]]
+    interface "<size:14>FPGrowth.FPNode.Translator\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth.FPNode.Translator [[FPGrowth.FPNode.Translator.html]]
+
+    elki.itemsetmining.FPGrowth +-- elki.itemsetmining.FPGrowth.FPNode
+    elki.itemsetmining.FPGrowth.FPNode +-- elki.itemsetmining.FPGrowth.FPNode.Translator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

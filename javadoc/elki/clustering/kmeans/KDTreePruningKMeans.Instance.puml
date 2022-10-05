@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KDTreePruningKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KDTreePruningKMeans.Instance [[KDTreePruningKMeans.Instance.html]] {
+        #root: KDNode
+        #sorted: ArrayModifiableDBIDs
+        #iter: DBIDArrayMIter
+        #indices: int[]
+        #clusterSums: double[]
+        #clusterSizes: int[]
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+        +run(int): void
+        #buildTreeMidpoint(Relation<? extends NumberVector>, int, int): KDNode
+        #buildTreeBoundedMidpoint(Relation<? extends NumberVector>, int, int, SortDBIDsBySingleDimension): KDNode
+        #buildTreeMedian(Relation<? extends NumberVector>, int, int, SortDBIDsBySingleDimension): KDNode
+        #buildTreeSSQ(Relation<? extends NumberVector>, int, int, SortDBIDsBySingleDimension): KDNode
+        #iterate(int): int
+        #traversal(KDNode, int): int
+        #labelSubtree(double[], int, int, int): int
+        #pruning(KDNode, int): int
+        #getMinMaxDist(double[], double[], int): double
+        #mindist(double[], double[], double[]): double
+        #traverseLeaf(int, int, int): int
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Instance [[AbstractKMeans.Instance.html]] {
+        {abstract} #iterate(int): int
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>KDTreePruningKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KDTreePruningKMeans<V extends NumberVector> [[KDTreePruningKMeans.html]]
+
+    elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.KDTreePruningKMeans.Instance
+    elki.clustering.kmeans.KDTreePruningKMeans +-- elki.clustering.kmeans.KDTreePruningKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

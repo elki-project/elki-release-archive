@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Layout.Edge\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.Layout.Edge [[Layout.Edge.html]] {
+        +dim1: int
+        +dim2: int
+        +Edge(int, int)
+    }
+
+    class "<size:14>Layout\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.Layout [[Layout.html]]
+
+    elki.visualization.parallel3d.layout.Layout +-- elki.visualization.parallel3d.layout.Layout.Edge
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

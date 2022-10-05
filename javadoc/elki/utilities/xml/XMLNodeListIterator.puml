@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>XMLNodeListIterator\n<size:10>elki.utilities.xml" as elki.utilities.xml.XMLNodeListIterator [[XMLNodeListIterator.html]] {
+        -index: int
+        -nodelist: NodeList
+        +XMLNodeListIterator(NodeList)
+        +hasNext(): boolean
+        +next(): Node
+    }
+
+    interface "<size:14>Iterator\n<size:10>java.util" as java.util.Iterator<Node> {
+        {abstract} +hasNext(): boolean
+        {abstract} +next(): Node
+    }
+
+    java.util.Iterator <|.. elki.utilities.xml.XMLNodeListIterator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

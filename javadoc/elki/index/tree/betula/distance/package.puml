@@ -1,0 +1,153 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.betula.distance {
+
+        interface CFDistance [[CFDistance.html]] {
+            {abstract} +squaredDistance(NumberVector, ClusterFeature): double
+            {abstract} +squaredDistance(ClusterFeature, ClusterFeature): double
+            +matSelfInit(ClusterFeature): double
+        }
+
+        class AverageIntraclusterDistance [[AverageIntraclusterDistance.html]] {
+            +squaredDistance(NumberVector, ClusterFeature): double
+            +squaredDistance(ClusterFeature, ClusterFeature): double
+            +matSelfInit(ClusterFeature): double
+        }
+
+        class elki.index.tree.betula.distance.AverageIntraclusterDistance.Par [[AverageIntraclusterDistance.Par.html]] {
+            +make(): AverageIntraclusterDistance
+        }
+
+        class VarianceIncreaseDistance [[VarianceIncreaseDistance.html]] {
+            +squaredDistance(NumberVector, ClusterFeature): double
+            +squaredDistance(ClusterFeature, ClusterFeature): double
+        }
+
+        class elki.index.tree.betula.distance.VarianceIncreaseDistance.Par [[VarianceIncreaseDistance.Par.html]] {
+            +make(): VarianceIncreaseDistance
+        }
+
+        class RadiusDistance [[RadiusDistance.html]] {
+            +squaredDistance(NumberVector, ClusterFeature): double
+            +squaredDistance(ClusterFeature, ClusterFeature): double
+            +matSelfInit(ClusterFeature): double
+        }
+
+        class elki.index.tree.betula.distance.RadiusDistance.Par [[RadiusDistance.Par.html]] {
+            +make(): RadiusDistance
+        }
+
+        class BIRCHVarianceIncreaseDistance [[BIRCHVarianceIncreaseDistance.html]] {
+            +squaredDistance(NumberVector, ClusterFeature): double
+            +squaredDistance(ClusterFeature, ClusterFeature): double
+        }
+
+        class elki.index.tree.betula.distance.BIRCHVarianceIncreaseDistance.Par [[BIRCHVarianceIncreaseDistance.Par.html]] {
+            +make(): BIRCHVarianceIncreaseDistance
+        }
+
+        class CentroidEuclideanDistance [[CentroidEuclideanDistance.html]] {
+            +squaredDistance(NumberVector, ClusterFeature): double
+            +squaredDistance(ClusterFeature, ClusterFeature): double
+        }
+
+        class elki.index.tree.betula.distance.CentroidEuclideanDistance.Par [[CentroidEuclideanDistance.Par.html]] {
+            +make(): CentroidEuclideanDistance
+        }
+
+        class BIRCHAverageIntraclusterDistance [[BIRCHAverageIntraclusterDistance.html]] {
+            +squaredDistance(NumberVector, ClusterFeature): double
+            +squaredDistance(ClusterFeature, ClusterFeature): double
+        }
+
+        class elki.index.tree.betula.distance.BIRCHAverageIntraclusterDistance.Par [[BIRCHAverageIntraclusterDistance.Par.html]] {
+            +make(): BIRCHAverageIntraclusterDistance
+        }
+
+        class BIRCHAverageInterclusterDistance [[BIRCHAverageInterclusterDistance.html]] {
+            +squaredDistance(NumberVector, ClusterFeature): double
+            +squaredDistance(ClusterFeature, ClusterFeature): double
+        }
+
+        class elki.index.tree.betula.distance.BIRCHAverageInterclusterDistance.Par [[BIRCHAverageInterclusterDistance.Par.html]] {
+            +make(): BIRCHAverageInterclusterDistance
+        }
+
+        class CentroidManhattanDistance [[CentroidManhattanDistance.html]] {
+            +squaredDistance(NumberVector, ClusterFeature): double
+            +squaredDistance(ClusterFeature, ClusterFeature): double
+        }
+
+        class elki.index.tree.betula.distance.CentroidManhattanDistance.Par [[CentroidManhattanDistance.Par.html]] {
+            +make(): CentroidManhattanDistance
+        }
+
+        class BIRCHRadiusDistance [[BIRCHRadiusDistance.html]] {
+            +squaredDistance(NumberVector, ClusterFeature): double
+            +squaredDistance(ClusterFeature, ClusterFeature): double
+        }
+
+        class elki.index.tree.betula.distance.BIRCHRadiusDistance.Par [[BIRCHRadiusDistance.Par.html]] {
+            +make(): BIRCHRadiusDistance
+        }
+
+        class AverageInterclusterDistance [[AverageInterclusterDistance.html]] {
+            +squaredDistance(NumberVector, ClusterFeature): double
+            +squaredDistance(ClusterFeature, ClusterFeature): double
+        }
+
+        class elki.index.tree.betula.distance.AverageInterclusterDistance.Par [[AverageInterclusterDistance.Par.html]] {
+            +make(): AverageInterclusterDistance
+        }
+
+        CFDistance <|.. AverageIntraclusterDistance
+        AverageIntraclusterDistance --> AverageIntraclusterDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.distance.AverageIntraclusterDistance.Par
+        AverageIntraclusterDistance +-- elki.index.tree.betula.distance.AverageIntraclusterDistance.Par
+        CFDistance <|.. VarianceIncreaseDistance
+        VarianceIncreaseDistance --> VarianceIncreaseDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.distance.VarianceIncreaseDistance.Par
+        VarianceIncreaseDistance +-- elki.index.tree.betula.distance.VarianceIncreaseDistance.Par
+        CFDistance <|.. RadiusDistance
+        RadiusDistance --> RadiusDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.distance.RadiusDistance.Par
+        RadiusDistance +-- elki.index.tree.betula.distance.RadiusDistance.Par
+        CFDistance <|.. BIRCHVarianceIncreaseDistance
+        BIRCHVarianceIncreaseDistance --> BIRCHVarianceIncreaseDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.distance.BIRCHVarianceIncreaseDistance.Par
+        BIRCHVarianceIncreaseDistance +-- elki.index.tree.betula.distance.BIRCHVarianceIncreaseDistance.Par
+        CFDistance <|.. CentroidEuclideanDistance
+        CentroidEuclideanDistance --> CentroidEuclideanDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.distance.CentroidEuclideanDistance.Par
+        CentroidEuclideanDistance +-- elki.index.tree.betula.distance.CentroidEuclideanDistance.Par
+        CFDistance <|.. BIRCHAverageIntraclusterDistance
+        BIRCHAverageIntraclusterDistance --> BIRCHAverageIntraclusterDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.distance.BIRCHAverageIntraclusterDistance.Par
+        BIRCHAverageIntraclusterDistance +-- elki.index.tree.betula.distance.BIRCHAverageIntraclusterDistance.Par
+        CFDistance <|.. BIRCHAverageInterclusterDistance
+        BIRCHAverageInterclusterDistance --> BIRCHAverageInterclusterDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.distance.BIRCHAverageInterclusterDistance.Par
+        BIRCHAverageInterclusterDistance +-- elki.index.tree.betula.distance.BIRCHAverageInterclusterDistance.Par
+        CFDistance <|.. CentroidManhattanDistance
+        CentroidManhattanDistance --> CentroidManhattanDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.distance.CentroidManhattanDistance.Par
+        CentroidManhattanDistance +-- elki.index.tree.betula.distance.CentroidManhattanDistance.Par
+        CFDistance <|.. BIRCHRadiusDistance
+        BIRCHRadiusDistance --> BIRCHRadiusDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.distance.BIRCHRadiusDistance.Par
+        BIRCHRadiusDistance +-- elki.index.tree.betula.distance.BIRCHRadiusDistance.Par
+        CFDistance <|.. AverageInterclusterDistance
+        AverageInterclusterDistance --> AverageInterclusterDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.distance.AverageInterclusterDistance.Par
+        AverageInterclusterDistance +-- elki.index.tree.betula.distance.AverageInterclusterDistance.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

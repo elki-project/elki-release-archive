@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GeneratorXMLDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.GeneratorXMLDatabaseConnection.Par [[GeneratorXMLDatabaseConnection.Par.html]] {
+        {static} +CONFIGFILE_ID: OptionID
+        {static} +SIZE_SCALE_ID: OptionID
+        {static} +REASSIGN_ID: OptionID
+        {static} +REASSIGN_DISTANCE_ID: OptionID
+        {static} +RANDOMSEED_ID: OptionID
+        ~specfile: URI
+        ~sizescale: double
+        ~reassign: Pattern
+        ~reassignByDistance: boolean
+        ~clusterRandom: RandomFactory
+        +configure(Parameterization): void
+        +make(): GeneratorXMLDatabaseConnection
+    }
+
+    abstract class "<size:14>AbstractDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.AbstractDatabaseConnection.Par [[AbstractDatabaseConnection.Par.html]]
+    class "<size:14>GeneratorXMLDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.GeneratorXMLDatabaseConnection [[GeneratorXMLDatabaseConnection.html]]
+
+    elki.datasource.AbstractDatabaseConnection.Par <|-- elki.datasource.GeneratorXMLDatabaseConnection.Par
+    elki.datasource.GeneratorXMLDatabaseConnection +-- elki.datasource.GeneratorXMLDatabaseConnection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

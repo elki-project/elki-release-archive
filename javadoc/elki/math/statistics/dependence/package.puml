@@ -1,0 +1,247 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.statistics.dependence {
+
+        class JensenShannonEquiwidthDependence [[JensenShannonEquiwidthDependence.html]] {
+            +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+        }
+
+        class elki.math.statistics.dependence.JensenShannonEquiwidthDependence.Par [[JensenShannonEquiwidthDependence.Par.html]] {
+            +make(): JensenShannonEquiwidthDependence
+        }
+
+        class DCor [[DCor.html]] {
+            +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+            +dependence(NumberArrayAdapter<?, A>, List<? extends A>): double[]
+            {static} #computeDistances(NumberArrayAdapter<?, A>, A): double[]
+            {static} +doubleCenterMatrix(double[], int): double[]
+            #computeDCovar(double[], double[], int): double
+        }
+
+        class elki.math.statistics.dependence.DCor.Par [[DCor.Par.html]] {
+            +make(): DCor
+        }
+
+        class MutualInformationEquiwidthDependence [[MutualInformationEquiwidthDependence.html]] {
+            +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+        }
+
+        class elki.math.statistics.dependence.MutualInformationEquiwidthDependence.Par [[MutualInformationEquiwidthDependence.Par.html]] {
+            +make(): MutualInformationEquiwidthDependence
+        }
+
+        class PearsonCorrelationDependence [[PearsonCorrelationDependence.html]] {
+            {static} -LOG: Logging
+            +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+            +dependence(NumberArrayAdapter<?, A>, List<? extends A>): double[]
+        }
+
+        class elki.math.statistics.dependence.PearsonCorrelationDependence.Par [[PearsonCorrelationDependence.Par.html]] {
+            +make(): PearsonCorrelationDependence
+        }
+
+        class HiCSDependence [[HiCSDependence.html]] {
+            -m: int
+            -alphasqrt: double
+            -statTest: GoodnessOfFitTest
+            -rnd: RandomFactory
+            +HiCSDependence(GoodnessOfFitTest, int, double, RandomFactory)
+            +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+        }
+
+        class elki.math.statistics.dependence.HiCSDependence.Par [[HiCSDependence.Par.html]] {
+            {static} +M_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            {static} +TEST_ID: OptionID
+            {static} +SEED_ID: OptionID
+            -statTest: GoodnessOfFitTest
+            -m: int
+            -alpha: double
+            -rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): HiCSDependence
+        }
+
+        class SlopeInversionDependence [[SlopeInversionDependence.html]] {
+            +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+        }
+
+        class elki.math.statistics.dependence.SlopeInversionDependence.Par [[SlopeInversionDependence.Par.html]] {
+            +make(): SlopeInversionDependence
+        }
+
+        class HoeffdingsD [[HoeffdingsD.html]] {
+            {static} -TABVAL: double[]
+            {static} -TABPOS: double[]
+            +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+            {static} #computeBivariateRanks(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B, int): double[]
+            +toPValue(double, int): double
+        }
+
+        class elki.math.statistics.dependence.HoeffdingsD.Par [[HoeffdingsD.Par.html]] {
+            +make(): HoeffdingsD
+        }
+
+        interface Dependence [[Dependence.html]] {
+            {abstract} +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+            +dependence(NumberArrayAdapter<?, A>, A, A): double
+            +dependence(NumberArrayAdapter<?, A>, List<? extends A>): double[]
+            +dependence(double[], double[]): double
+        }
+
+        class elki.math.statistics.dependence.Dependence.Utils [[Dependence.Utils.html]] {
+            {static} +computeNormalizedRanks(NumberArrayAdapter<?, A>, A, int): double[]
+            {static} +ranks(NumberArrayAdapter<?, A>, A, int): double[]
+            {static} +ranks(NumberArrayAdapter<?, A>, A, int[]): double[]
+            {static} +size(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): int
+            {static} +size(NumberArrayAdapter<?, A>, Collection<? extends A>): int
+            {static} +sortedIndex(NumberArrayAdapter<?, A>, A, int): int[]
+        }
+
+        class SURFINGDependence [[SURFINGDependence.html]] {
+            +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+        }
+
+        class elki.math.statistics.dependence.SURFINGDependence.Par [[SURFINGDependence.Par.html]] {
+            +make(): SURFINGDependence
+        }
+
+        class MaximumConditionalEntropy [[MaximumConditionalEntropy.html]] {
+            {static} +TARGET: int
+            +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+            -buildPartitions(NumberArrayAdapter<?, A>, A, int, int): ArrayList<int[]>
+            -divide(int[], double[], ArrayList<int[]>, int, int, int): void
+            -intersectionMatrix(int[], ArrayList<int[]>, ArrayList<int[]>, int): void
+            -intersectionSize(int[], int[]): int
+            -getMCEntropy(int[], ArrayList<int[]>, ArrayList<int[]>, int, int, double): double
+        }
+
+        class elki.math.statistics.dependence.MaximumConditionalEntropy.Par [[MaximumConditionalEntropy.Par.html]] {
+            +make(): MaximumConditionalEntropy
+        }
+
+        class SpearmanCorrelationDependence [[SpearmanCorrelationDependence.html]] {
+            +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+        }
+
+        class elki.math.statistics.dependence.SpearmanCorrelationDependence.Par [[SpearmanCorrelationDependence.Par.html]] {
+            +make(): SpearmanCorrelationDependence
+        }
+
+        class SlopeDependence [[SlopeDependence.html]] {
+            {static} #PRECISION: int
+            {static} #LOG_PRECISION: double
+            {static} #RESCALE: double
+            +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+        }
+
+        class elki.math.statistics.dependence.SlopeDependence.Par [[SlopeDependence.Par.html]] {
+            +make(): SlopeDependence
+        }
+
+        class HoughSpaceMeasure [[HoughSpaceMeasure.html]] {
+            {static} -STEPS: int
+            -resolution: int
+            {static} -table: SinCosTable
+            +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+            -sumMatrix(int[]): long
+            -countAboveThreshold(int[], double): int
+            -houghTransformation(boolean[]): int[]
+            {static} -drawLine(int, int, int, int, boolean[]): void
+        }
+
+        class elki.math.statistics.dependence.HoughSpaceMeasure.Par [[HoughSpaceMeasure.Par.html]] {
+            +make(): HoughSpaceMeasure
+        }
+
+        class MCDEDependence [[MCDEDependence.html]] {
+            #m: int
+            #alpha: double
+            #beta: double
+            #rnd: RandomFactory
+            +MCDEDependence(int, double, double, RandomFactory, MCDETest<?>)
+            #randomSlice(Random, RankStruct): boolean[]
+            #randomSlice(Random, RankStruct[], int, int): boolean[]
+            +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+            +dependence(NumberArrayAdapter<?, A>, List<? extends A>): double[]
+            +higherOrderDependence(NumberArrayAdapter<?, A>, List<? extends A>): double
+        }
+
+        class elki.math.statistics.dependence.MCDEDependence.Par [[MCDEDependence.Par.html]] {
+            {static} +M_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            {static} +BETA_ID: OptionID
+            {static} +SEED_ID: OptionID
+            {static} +TEST_ID: OptionID
+            #m: int
+            #alpha: double
+            #beta: double
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): MCDEDependence
+        }
+
+        Dependence <|.. JensenShannonEquiwidthDependence
+        JensenShannonEquiwidthDependence --> JensenShannonEquiwidthDependence: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.JensenShannonEquiwidthDependence.Par
+        JensenShannonEquiwidthDependence +-- elki.math.statistics.dependence.JensenShannonEquiwidthDependence.Par
+        Dependence <|.. DCor
+        DCor --> DCor: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.DCor.Par
+        DCor +-- elki.math.statistics.dependence.DCor.Par
+        Dependence <|.. MutualInformationEquiwidthDependence
+        MutualInformationEquiwidthDependence --> MutualInformationEquiwidthDependence: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.MutualInformationEquiwidthDependence.Par
+        MutualInformationEquiwidthDependence +-- elki.math.statistics.dependence.MutualInformationEquiwidthDependence.Par
+        Dependence <|.. PearsonCorrelationDependence
+        PearsonCorrelationDependence --> PearsonCorrelationDependence: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.PearsonCorrelationDependence.Par
+        PearsonCorrelationDependence +-- elki.math.statistics.dependence.PearsonCorrelationDependence.Par
+        Dependence <|.. HiCSDependence
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.HiCSDependence.Par
+        HiCSDependence +-- elki.math.statistics.dependence.HiCSDependence.Par
+        SlopeDependence <|-- SlopeInversionDependence
+        SlopeInversionDependence --> SlopeInversionDependence: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.SlopeInversionDependence.Par
+        SlopeInversionDependence +-- elki.math.statistics.dependence.SlopeInversionDependence.Par
+        Dependence <|.. HoeffdingsD
+        HoeffdingsD --> HoeffdingsD: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.HoeffdingsD.Par
+        HoeffdingsD +-- elki.math.statistics.dependence.HoeffdingsD.Par
+        Dependence +-- elki.math.statistics.dependence.Dependence.Utils
+        Dependence <|.. SURFINGDependence
+        SURFINGDependence --> SURFINGDependence: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.SURFINGDependence.Par
+        SURFINGDependence +-- elki.math.statistics.dependence.SURFINGDependence.Par
+        Dependence <|.. MaximumConditionalEntropy
+        MaximumConditionalEntropy --> MaximumConditionalEntropy: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.MaximumConditionalEntropy.Par
+        MaximumConditionalEntropy +-- elki.math.statistics.dependence.MaximumConditionalEntropy.Par
+        Dependence <|.. SpearmanCorrelationDependence
+        SpearmanCorrelationDependence --> SpearmanCorrelationDependence: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.SpearmanCorrelationDependence.Par
+        SpearmanCorrelationDependence +-- elki.math.statistics.dependence.SpearmanCorrelationDependence.Par
+        Dependence <|.. SlopeDependence
+        SlopeDependence --> SlopeDependence: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.SlopeDependence.Par
+        SlopeDependence +-- elki.math.statistics.dependence.SlopeDependence.Par
+        Dependence <|.. HoughSpaceMeasure
+        HoughSpaceMeasure --> HoughSpaceMeasure: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.HoughSpaceMeasure.Par
+        HoughSpaceMeasure +-- elki.math.statistics.dependence.HoughSpaceMeasure.Par
+        Dependence <|.. MCDEDependence
+        MCDEDependence --> elki.math.statistics.dependence.mcde.MCDETest: mcdeTest
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.MCDEDependence.Par
+        MCDEDependence +-- elki.math.statistics.dependence.MCDEDependence.Par
+        elki.math.statistics.dependence.MCDEDependence.Par --> elki.math.statistics.dependence.mcde.MCDETest: mcdeTest
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

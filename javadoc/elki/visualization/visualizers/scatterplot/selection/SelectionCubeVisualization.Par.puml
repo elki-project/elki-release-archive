@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SelectionCubeVisualization.Par\n<size:10>elki.visualization.visualizers.scatterplot.selection" as elki.visualization.visualizers.scatterplot.selection.SelectionCubeVisualization.Par [[SelectionCubeVisualization.Par.html]] {
+        {static} +NOFILL_ID: OptionID
+        #nofill: boolean
+        +configure(Parameterization): void
+        +make(): SelectionCubeVisualization
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SelectionCubeVisualization\n<size:10>elki.visualization.visualizers.scatterplot.selection" as elki.visualization.visualizers.scatterplot.selection.SelectionCubeVisualization [[SelectionCubeVisualization.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.scatterplot.selection.SelectionCubeVisualization.Par
+    elki.visualization.visualizers.scatterplot.selection.SelectionCubeVisualization +-- elki.visualization.visualizers.scatterplot.selection.SelectionCubeVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

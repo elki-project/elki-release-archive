@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CosineHashFunctionFamily.Par\n<size:10>elki.index.lsh.hashfamilies" as elki.index.lsh.hashfamilies.CosineHashFunctionFamily.Par [[CosineHashFunctionFamily.Par.html]] {
+        {static} +RANDOM_ID: OptionID
+        {static} +NUMPROJ_ID: OptionID
+        ~random: RandomFactory
+        ~k: int
+        +configure(Parameterization): void
+        +make(): CosineHashFunctionFamily
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>CosineHashFunctionFamily\n<size:10>elki.index.lsh.hashfamilies" as elki.index.lsh.hashfamilies.CosineHashFunctionFamily [[CosineHashFunctionFamily.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.lsh.hashfamilies.CosineHashFunctionFamily.Par
+    elki.index.lsh.hashfamilies.CosineHashFunctionFamily +-- elki.index.lsh.hashfamilies.CosineHashFunctionFamily.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SpatialApproximationMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory [[SpatialApproximationMaterializeKNNPreprocessor.Factory.html]] {
+        +Factory(int, Distance<? super NumberVector>)
+        +instantiate(Relation<NumberVector>): SpatialApproximationMaterializeKNNPreprocessor<NumberVector>
+    }
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory<NumberVector> [[AbstractMaterializeKNNPreprocessor.Factory.html]] {
+        {abstract} +instantiate(Relation<O>): AbstractMaterializeKNNPreprocessor<O>
+    }
+    class "<size:14>SpatialApproximationMaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor<O extends NumberVector> [[SpatialApproximationMaterializeKNNPreprocessor.html]]
+    class "<size:14>SpatialApproximationMaterializeKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory.Par [[SpatialApproximationMaterializeKNNPreprocessor.Factory.Par.html]]
+
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

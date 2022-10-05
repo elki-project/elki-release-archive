@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierMinusLogScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierMinusLogScaling [[OutlierMinusLogScaling.html]] {
+        ~max: double
+        ~mlogmax: double
+        +getScaled(double): double
+        +getMin(): double
+        +getMax(): double
+        +prepare(OutlierResult): void
+        +prepare(A, NumberArrayAdapter<?, A>): void
+    }
+
+    interface "<size:14>OutlierScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierScaling [[OutlierScaling.html]] {
+        {abstract} +prepare(OutlierResult): void
+        {abstract} +prepare(A, NumberArrayAdapter<?, A>): void
+    }
+
+    elki.utilities.scaling.outlier.OutlierScaling <|.. elki.utilities.scaling.outlier.OutlierMinusLogScaling
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

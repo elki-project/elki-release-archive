@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FisherRaoDistance\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.FisherRaoDistance [[FisherRaoDistance.html]] {
+        {static} +STATIC: FisherRaoDistance
+        +distance(NumberVector, NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +isMetric(): boolean
+        +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[../SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    class "<size:14>FisherRaoDistance.Par\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.FisherRaoDistance.Par [[FisherRaoDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.probabilistic.FisherRaoDistance
+    elki.distance.SpatialPrimitiveDistance <|.. elki.distance.probabilistic.FisherRaoDistance
+    elki.distance.probabilistic.FisherRaoDistance +-- elki.distance.probabilistic.FisherRaoDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

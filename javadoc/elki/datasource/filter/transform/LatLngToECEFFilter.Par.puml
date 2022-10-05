@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LatLngToECEFFilter.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.LatLngToECEFFilter.Par<V extends NumberVector> {
+        -model: EarthModel
+        +configure(Parameterization): void
+        +make(): LatLngToECEFFilter<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LatLngToECEFFilter\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.LatLngToECEFFilter<V extends NumberVector> [[LatLngToECEFFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.LatLngToECEFFilter.Par
+    elki.datasource.filter.transform.LatLngToECEFFilter +-- elki.datasource.filter.transform.LatLngToECEFFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

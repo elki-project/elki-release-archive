@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FrequentItemsetsResult\n<size:10>elki.result" as elki.result.FrequentItemsetsResult [[FrequentItemsetsResult.html]] {
+        -itemsets: List<Itemset>
+        -meta: VectorFieldTypeInformation<BitVector>
+        -total: int
+        +FrequentItemsetsResult(List<Itemset>, VectorFieldTypeInformation<BitVector>, int)
+        +getItemsets(): List<Itemset>
+        +writeToText(TextWriterStream, String): void
+        +getMeta(): VectorFieldTypeInformation<BitVector>
+        +getTotal(): int
+    }
+
+    interface "<size:14>TextWriteable\n<size:10>elki.result.textwriter" as elki.result.textwriter.TextWriteable [[textwriter/TextWriteable.html]] {
+        {abstract} +writeToText(TextWriterStream, String): void
+    }
+
+    elki.result.textwriter.TextWriteable <|.. elki.result.FrequentItemsetsResult
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

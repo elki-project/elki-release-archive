@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RStarTreeRangeSearcher\n<size:10>elki.index.tree.spatial.rstarvariants.query" as elki.index.tree.spatial.rstarvariants.query.RStarTreeRangeSearcher<O extends SpatialComparable> [[RStarTreeRangeSearcher.html]] {
+        #tree: AbstractRStarTree<?, ?, ?>
+        #distance: SpatialPrimitiveDistance<? super SpatialComparable>
+        #relation: Relation<? extends SpatialComparable>
+        +RStarTreeRangeSearcher(AbstractRStarTree<?, ?, ?>, Relation<? extends SpatialComparable>, SpatialPrimitiveDistance<? super SpatialComparable>)
+        +getRange(O extends SpatialComparable, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+
+    interface "<size:14>RangeSearcher\n<size:10>elki.database.query.range" as elki.database.query.range.RangeSearcher<O extends SpatialComparable> [[../../../../../database/query/range/RangeSearcher.html]] {
+        {abstract} +getRange(O extends SpatialComparable, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+
+    elki.database.query.range.RangeSearcher <|.. elki.index.tree.spatial.rstarvariants.query.RStarTreeRangeSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

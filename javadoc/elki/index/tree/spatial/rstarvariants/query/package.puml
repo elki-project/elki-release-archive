@@ -1,0 +1,126 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.spatial.rstarvariants.query {
+
+        class RStarTreeRangeSearcher<O extends SpatialComparable> [[RStarTreeRangeSearcher.html]] {
+            #tree: AbstractRStarTree<?, ?, ?>
+            #distance: SpatialPrimitiveDistance<? super SpatialComparable>
+            #relation: Relation<? extends SpatialComparable>
+            +RStarTreeRangeSearcher(AbstractRStarTree<?, ?, ?>, Relation<? extends SpatialComparable>, SpatialPrimitiveDistance<? super SpatialComparable>)
+            +getRange(O extends SpatialComparable, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class RStarTreeDistancePrioritySearcher<O extends SpatialComparable> [[RStarTreeDistancePrioritySearcher.html]] {
+            #tree: AbstractRStarTree<?, ?, ?>
+            #distance: SpatialPrimitiveDistance<? super SpatialComparable>
+            #relation: Relation<? extends SpatialComparable>
+            ~query: O extends SpatialComparable
+            ~threshold: double
+            ~pq: DoubleIntegerMinHeap
+            ~node: AbstractRStarTreeNode<?, ?>
+            ~childnr: int
+            -mindist: double
+            +RStarTreeDistancePrioritySearcher(AbstractRStarTree<?, ?, ?>, Relation<? extends SpatialComparable>, SpatialPrimitiveDistance<? super SpatialComparable>)
+            +getKNN(O extends SpatialComparable, int): KNNList
+            +getRange(O extends SpatialComparable, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            +search(O extends SpatialComparable): RStarTreeDistancePrioritySearcher<O extends SpatialComparable>
+            +decreaseCutoff(double): RStarTreeDistancePrioritySearcher<O extends SpatialComparable>
+            +valid(): boolean
+            +advance(): RStarTreeDistancePrioritySearcher<O extends SpatialComparable>
+            #advanceQueue(): boolean
+            +getLowerBound(): double
+            +allLowerBound(): double
+            +computeExactDistance(): double
+            +internalGetIndex(): int
+        }
+
+        class EuclideanRStarTreeKNNQuery<O extends NumberVector> [[EuclideanRStarTreeKNNQuery.html]] {
+            {static} -SQUARED: SquaredEuclideanDistance
+            +EuclideanRStarTreeKNNQuery(AbstractRStarTree<?, ?, ?>, Relation<? extends NumberVector>)
+            +getKNN(O extends NumberVector, int): KNNList
+            -expandNode(O extends NumberVector, KNNHeap, DoubleIntegerMinHeap, double, int): double
+        }
+
+        class RStarTreeKNNSearcher<O extends SpatialComparable> [[RStarTreeKNNSearcher.html]] {
+            #tree: AbstractRStarTree<?, ?, ?>
+            #distance: SpatialPrimitiveDistance<? super SpatialComparable>
+            #relation: Relation<? extends SpatialComparable>
+            +RStarTreeKNNSearcher(AbstractRStarTree<?, ?, ?>, Relation<? extends SpatialComparable>, SpatialPrimitiveDistance<? super SpatialComparable>)
+            +getKNN(O extends SpatialComparable, int): KNNList
+            -expandNode(O extends SpatialComparable, KNNHeap, DoubleIntegerMinHeap, double, int): double
+        }
+
+        class EuclideanRStarTreeDistancePrioritySearcher<O extends SpatialComparable> [[EuclideanRStarTreeDistancePrioritySearcher.html]] {
+            #tree: AbstractRStarTree<?, ?, ?>
+            {static} -SQUARED: SquaredEuclideanDistance
+            #relation: Relation<? extends SpatialComparable>
+            ~query: O extends SpatialComparable
+            ~threshold: double
+            ~pq: DoubleIntegerMinHeap
+            ~node: AbstractRStarTreeNode<?, ?>
+            ~childnr: int
+            -mindist: double
+            +EuclideanRStarTreeDistancePrioritySearcher(AbstractRStarTree<?, ?, ?>, Relation<? extends SpatialComparable>)
+            +search(O extends SpatialComparable): EuclideanRStarTreeDistancePrioritySearcher<O extends SpatialComparable>
+            +decreaseCutoff(double): EuclideanRStarTreeDistancePrioritySearcher<O extends SpatialComparable>
+            +valid(): boolean
+            +advance(): EuclideanRStarTreeDistancePrioritySearcher<O extends SpatialComparable>
+            #advanceQueue(): boolean
+            +getLowerBound(): double
+            +allLowerBound(): double
+            +computeExactDistance(): double
+            +internalGetIndex(): int
+        }
+
+        class RStarTreeUtil [[RStarTreeUtil.html]] {
+            {static} +getRangeQuery(AbstractRStarTree<?, ?, ?>, SpatialDistanceQuery<O extends SpatialComparable>, Object...): RangeSearcher<O extends SpatialComparable>
+            {static} +getKNNQuery(AbstractRStarTree<?, ?, ?>, SpatialDistanceQuery<O extends SpatialComparable>, Object...): KNNSearcher<O extends SpatialComparable>
+            {static} +getDistancePrioritySearcher(AbstractRStarTree<?, ?, ?>, SpatialDistanceQuery<O extends SpatialComparable>, Object...): PrioritySearcher<O extends SpatialComparable>
+        }
+
+        class EuclideanRStarTreeRangeQuery<O extends NumberVector> [[EuclideanRStarTreeRangeQuery.html]] {
+            {static} -SQUARED: SquaredEuclideanDistance
+            +EuclideanRStarTreeRangeQuery(AbstractRStarTree<?, ?, ?>, Relation<? extends NumberVector>)
+            +getRange(O extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        elki.database.query.range.RangeSearcher <|.. RStarTreeRangeSearcher
+        elki.database.query.PrioritySearcher <|.. RStarTreeDistancePrioritySearcher
+        RStarTreeKNNSearcher <|-- EuclideanRStarTreeKNNQuery
+        elki.database.query.knn.KNNSearcher <|.. RStarTreeKNNSearcher
+        elki.database.query.PrioritySearcher <|.. EuclideanRStarTreeDistancePrioritySearcher
+        RStarTreeRangeSearcher <|-- EuclideanRStarTreeRangeQuery
+    }
+
+    namespace elki.database.query.range {
+        interface RangeSearcher<O> [[../../../../../database/query/range/RangeSearcher.html]] {
+            +getRange(O, double): DoubleDBIDList
+            {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+    }
+
+    namespace elki.database.query {
+        interface PrioritySearcher<O> [[../../../../../database/query/PrioritySearcher.html]] {
+            +search(O, double): PrioritySearcher<O>
+            {abstract} +search(O): PrioritySearcher<O>
+            +getKNN(O, int): KNNList
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+            {abstract} +computeExactDistance(): double
+            +getApproximateDistance(): double
+            +getApproximateAccuracy(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            {abstract} +allLowerBound(): double
+            {abstract} +advance(): PrioritySearcher<O>
+        }
+    }
+
+    namespace elki.database.query.knn {
+        interface KNNSearcher<O> [[../../../../../database/query/knn/KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

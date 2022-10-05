@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AggarwalYuEvolutionary.EvolutionarySearch\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.AggarwalYuEvolutionary.EvolutionarySearch [[AggarwalYuEvolutionary.EvolutionarySearch.html]] {
+        ~dbsize: int
+        ~dim: int
+        ~ranges: ArrayList<ArrayList<DBIDs>>
+        -random: Random
+        +EvolutionarySearch(Relation<? extends NumberVector>, ArrayList<ArrayList<DBIDs>>, Random)
+        +run(): UnorderedIter
+        -checkConvergence(Collection<Individuum>): boolean
+        -initialPopulation(int): ArrayList<Individuum>
+        -rouletteRankSelection(ArrayList<Individuum>): ArrayList<Individuum>
+        -mutation(ArrayList<Individuum>, double, double): ArrayList<Individuum>
+        -makeIndividuum(short[]): Individuum
+        -crossoverOptimized(ArrayList<Individuum>): ArrayList<Individuum>
+        -recombineOptimized(Individuum, Individuum): Pair<Individuum, Individuum>
+        -combineRecursive(IntArrayList, int, short[], Individuum, Individuum): Individuum
+    }
+
+    class "<size:14>AggarwalYuEvolutionary\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.AggarwalYuEvolutionary [[AggarwalYuEvolutionary.html]]
+
+    elki.outlier.subspace.AggarwalYuEvolutionary +-- elki.outlier.subspace.AggarwalYuEvolutionary.EvolutionarySearch
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

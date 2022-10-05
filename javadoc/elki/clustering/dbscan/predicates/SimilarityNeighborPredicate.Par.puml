@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimilarityNeighborPredicate.Par\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.SimilarityNeighborPredicate.Par<O> {
+        {static} +SIMILARITY_FUNCTION_ID: OptionID
+        {static} +EPSILON_ID: OptionID
+        #epsilon: double
+        #distfun: Similarity<O>
+        +configure(Parameterization): void
+        +make(): SimilarityNeighborPredicate<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SimilarityNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.SimilarityNeighborPredicate<O> [[SimilarityNeighborPredicate.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.SimilarityNeighborPredicate.Par
+    elki.clustering.dbscan.predicates.SimilarityNeighborPredicate +-- elki.clustering.dbscan.predicates.SimilarityNeighborPredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

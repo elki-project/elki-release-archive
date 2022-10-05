@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExtendedNeighborhood\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.ExtendedNeighborhood [[ExtendedNeighborhood.html]] {
+        {static} -LOG: Logging
+        +ExtendedNeighborhood(DataStore<DBIDs>)
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractPrecomputedNeighborhood\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood [[AbstractPrecomputedNeighborhood.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>ExtendedNeighborhood.Factory\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory<O> [[ExtendedNeighborhood.Factory.html]]
+
+    elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood <|-- elki.outlier.spatial.neighborhood.ExtendedNeighborhood
+    elki.outlier.spatial.neighborhood.ExtendedNeighborhood +-- elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

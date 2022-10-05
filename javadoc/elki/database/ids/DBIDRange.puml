@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DBIDRange\n<size:10>elki.database.ids" as elki.database.ids.DBIDRange [[DBIDRange.html]] {
+        {abstract} +getOffset(DBIDRef): int
+    }
+
+    interface "<size:14>ArrayStaticDBIDs\n<size:10>elki.database.ids" as elki.database.ids.ArrayStaticDBIDs [[ArrayStaticDBIDs.html]]
+    interface "<size:14>DataStoreIDMap\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreIDMap [[../datastore/DataStoreIDMap.html]] {
+        {abstract} +mapDBIDToOffset(DBIDRef): int
+    }
+
+    elki.database.ids.ArrayStaticDBIDs <|-- elki.database.ids.DBIDRange
+    elki.database.datastore.DataStoreIDMap <|-- elki.database.ids.DBIDRange
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

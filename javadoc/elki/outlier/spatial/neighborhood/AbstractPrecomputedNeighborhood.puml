@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractPrecomputedNeighborhood\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood [[AbstractPrecomputedNeighborhood.html]] {
+        #store: DataStore<DBIDs>
+        +AbstractPrecomputedNeighborhood(DataStore<DBIDs>)
+        +getNeighborDBIDs(DBIDRef): DBIDs
+        {abstract} #getLogger(): Logging
+    }
+
+    interface "<size:14>NeighborSetPredicate\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.NeighborSetPredicate [[NeighborSetPredicate.html]] {
+        {abstract} +getNeighborDBIDs(DBIDRef): DBIDs
+    }
+    abstract class "<size:14>AbstractPrecomputedNeighborhood.Factory\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory<O> [[AbstractPrecomputedNeighborhood.Factory.html]]
+
+    elki.outlier.spatial.neighborhood.NeighborSetPredicate <|.. elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood
+    elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood +-- elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

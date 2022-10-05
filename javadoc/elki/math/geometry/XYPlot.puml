@@ -1,0 +1,41 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>XYPlot\n<size:10>elki.math.geometry" as elki.math.geometry.XYPlot [[XYPlot.html]] {
+        {static} #THRESHOLD: double
+        #curves: ArrayList<Curve>
+        #labelx: String
+        #labely: String
+        #minx: double
+        #maxx: double
+        #miny: double
+        #maxy: double
+        +XYPlot(String, String)
+        +XYPlot()
+        +makeCurve(): Curve
+        +makeCurve(int): Curve
+        +makeCurve(int, int): Curve
+        +getLabelx(): String
+        +getLabely(): String
+        +getMinx(): double
+        +getMaxx(): double
+        +getMiny(): double
+        +getMaxy(): double
+        +iterator(): Iterator<Curve>
+        +getLongName(): String
+        +getShortName(): String
+    }
+
+    interface "<size:14>Iterable\n<size:10>java.lang" as java.lang.Iterable<Curve> {
+        {abstract} +iterator(): Iterator<T>
+    }
+    class "<size:14>XYPlot.Curve\n<size:10>elki.math.geometry" as elki.math.geometry.XYPlot.Curve [[XYPlot.Curve.html]]
+
+    java.lang.Iterable <|.. elki.math.geometry.XYPlot
+    elki.math.geometry.XYPlot +-- elki.math.geometry.XYPlot.Curve
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

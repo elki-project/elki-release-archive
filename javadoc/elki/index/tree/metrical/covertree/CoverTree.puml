@@ -1,0 +1,58 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CoverTree\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree<O> [[CoverTree.html]] {
+        {static} -LOG: Logging
+        -root: Node
+        +CoverTree(Relation<O>, Distance<? super O>, double, int)
+        +CoverTree(Relation<O>, Distance<? super O>, int)
+        +initialize(): void
+        +bulkLoad(DBIDs): void
+        #bulkConstruct(DBIDRef, int, double, ModifiableDoubleDBIDList): Node
+        -checkCoverTree(Node, int[], int): void
+        +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+        +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+        +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+        +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractCoverTree\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.AbstractCoverTree<O> [[AbstractCoverTree.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    interface "<size:14>DistancePriorityIndex\n<size:10>elki.index" as elki.index.DistancePriorityIndex<O> [[../../../DistancePriorityIndex.html]] {
+        {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+    }
+    class "<size:14>CoverTree.Node\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.Node [[CoverTree.Node.html]]
+    abstract class "<size:14>CoverTree.CoverTreeRangeSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeSearcher [[CoverTree.CoverTreeRangeSearcher.html]]
+    class "<size:14>CoverTree.CoverTreeRangeObjectSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeObjectSearcher [[CoverTree.CoverTreeRangeObjectSearcher.html]]
+    class "<size:14>CoverTree.CoverTreeRangeDBIDSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeDBIDSearcher [[CoverTree.CoverTreeRangeDBIDSearcher.html]]
+    abstract class "<size:14>CoverTree.CoverTreeKNNSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNSearcher [[CoverTree.CoverTreeKNNSearcher.html]]
+    class "<size:14>CoverTree.CoverTreeKNNObjectSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNObjectSearcher [[CoverTree.CoverTreeKNNObjectSearcher.html]]
+    class "<size:14>CoverTree.CoverTreeKNNDBIDSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNDBIDSearcher [[CoverTree.CoverTreeKNNDBIDSearcher.html]]
+    abstract class "<size:14>CoverTree.CoverTreePrioritySearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.CoverTreePrioritySearcher<Q> [[CoverTree.CoverTreePrioritySearcher.html]]
+    class "<size:14>CoverTree.CoverTreePriorityObjectSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.CoverTreePriorityObjectSearcher [[CoverTree.CoverTreePriorityObjectSearcher.html]]
+    class "<size:14>CoverTree.CoverTreePriorityDBIDSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.CoverTreePriorityDBIDSearcher [[CoverTree.CoverTreePriorityDBIDSearcher.html]]
+    class "<size:14>CoverTree.Factory\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.Factory<O> [[CoverTree.Factory.html]]
+
+    elki.index.tree.metrical.covertree.AbstractCoverTree <|-- elki.index.tree.metrical.covertree.CoverTree
+    elki.index.DistancePriorityIndex <|.. elki.index.tree.metrical.covertree.CoverTree
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.Node
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeSearcher
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeObjectSearcher
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeDBIDSearcher
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNSearcher
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNObjectSearcher
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNDBIDSearcher
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreePrioritySearcher
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreePriorityObjectSearcher
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreePriorityDBIDSearcher
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

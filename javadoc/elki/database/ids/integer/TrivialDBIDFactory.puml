@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TrivialDBIDFactory\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.TrivialDBIDFactory [[TrivialDBIDFactory.html]] {
+        ~next: AtomicInteger
+        +generateSingleDBID(): DBID
+        +deallocateSingleDBID(DBIDRef): void
+        +generateStaticDBIDRange(int): DBIDRange
+        +generateStaticDBIDRange(int, int): DBIDRange
+        +deallocateDBIDRange(DBIDRange): void
+    }
+
+    abstract class "<size:14>AbstractIntegerDBIDFactory\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.AbstractIntegerDBIDFactory [[AbstractIntegerDBIDFactory.html]]
+
+    elki.database.ids.integer.AbstractIntegerDBIDFactory <|-- elki.database.ids.integer.TrivialDBIDFactory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

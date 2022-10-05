@@ -1,0 +1,69 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.parallel.index {
+
+        class RTreeParallelVisualization [[RTreeParallelVisualization.html]] {
+            {static} +INDEX: String
+            {static} +NAME: String
+            +RTreeParallelVisualization(Par)
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.parallel.index.RTreeParallelVisualization.Instance<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry> [[RTreeParallelVisualization.Instance.html]] {
+            #tree: AbstractRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, ?>
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -addCSSClasses(SVGPlot): void
+            -visualizeRTreeEntry(SVGPlot, Element, ProjectionParallel, AbstractRStarTree<? extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, ?>, E extends SpatialEntry, int, int): void
+        }
+
+        class elki.visualization.visualizers.parallel.index.RTreeParallelVisualization.Par [[RTreeParallelVisualization.Par.html]] {
+            #fill: boolean
+            +configure(Parameterization): void
+            +make(): RTreeParallelVisualization
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. RTreeParallelVisualization
+        RTreeParallelVisualization --> elki.visualization.visualizers.parallel.index.RTreeParallelVisualization.Par: settings
+        elki.visualization.visualizers.parallel.AbstractParallelVisualization <|-- elki.visualization.visualizers.parallel.index.RTreeParallelVisualization.Instance
+        elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.parallel.index.RTreeParallelVisualization.Instance
+        RTreeParallelVisualization +-- elki.visualization.visualizers.parallel.index.RTreeParallelVisualization.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.parallel.index.RTreeParallelVisualization.Par
+        RTreeParallelVisualization +-- elki.visualization.visualizers.parallel.index.RTreeParallelVisualization.Par
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+    }
+
+    namespace elki.visualization.visualizers.parallel {
+        abstract class AbstractParallelVisualization<NV> [[../AbstractParallelVisualization.html]] {
+            #proj: ProjectionParallel
+            #relation: Relation<NV>
+            ~margins: double[]
+            #axsep: double
+            ~size: double[]
+        }
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreListener [[../../../../database/datastore/DataStoreListener.html]] {
+            {abstract} +contentChanged(DataStoreEvent): void
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

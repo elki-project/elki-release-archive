@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClustersWithNoiseExtraction.Par\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Par [[ClustersWithNoiseExtraction.Par.html]] {
+        {static} +K_ID: OptionID
+        {static} +MINCLUSTERSIZE_ID: OptionID
+        ~numCl: int
+        ~minClSize: int
+        ~algorithm: HierarchicalClusteringAlgorithm
+        +configure(Parameterization): void
+        +make(): ClustersWithNoiseExtraction
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ClustersWithNoiseExtraction\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction [[ClustersWithNoiseExtraction.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Par
+    elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction +-- elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

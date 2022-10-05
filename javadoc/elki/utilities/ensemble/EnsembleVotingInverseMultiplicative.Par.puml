@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EnsembleVotingInverseMultiplicative.Par\n<size:10>elki.utilities.ensemble" as elki.utilities.ensemble.EnsembleVotingInverseMultiplicative.Par [[EnsembleVotingInverseMultiplicative.Par.html]] {
+        +make(): EnsembleVotingInverseMultiplicative
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>EnsembleVotingInverseMultiplicative\n<size:10>elki.utilities.ensemble" as elki.utilities.ensemble.EnsembleVotingInverseMultiplicative [[EnsembleVotingInverseMultiplicative.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.ensemble.EnsembleVotingInverseMultiplicative.Par
+    elki.utilities.ensemble.EnsembleVotingInverseMultiplicative +-- elki.utilities.ensemble.EnsembleVotingInverseMultiplicative.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

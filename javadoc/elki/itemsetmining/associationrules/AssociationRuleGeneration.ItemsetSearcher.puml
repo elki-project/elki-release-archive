@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AssociationRuleGeneration.ItemsetSearcher\n<size:10>elki.itemsetmining.associationrules" as elki.itemsetmining.associationrules.AssociationRuleGeneration.ItemsetSearcher [[AssociationRuleGeneration.ItemsetSearcher.html]] {
+        ~itemsets: List<Itemset>
+        ~offsets: IntegerArray
+        +ItemsetSearcher(List<Itemset>)
+        +search(Itemset): Itemset
+        +maxLength(): int
+        +getOffset(int): int
+        -buildIndex(int, int): void
+    }
+
+    class "<size:14>AssociationRuleGeneration\n<size:10>elki.itemsetmining.associationrules" as elki.itemsetmining.associationrules.AssociationRuleGeneration [[AssociationRuleGeneration.html]]
+
+    elki.itemsetmining.associationrules.AssociationRuleGeneration +-- elki.itemsetmining.associationrules.AssociationRuleGeneration.ItemsetSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

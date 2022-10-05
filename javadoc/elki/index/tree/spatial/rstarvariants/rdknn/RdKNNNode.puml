@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RdKNNNode\n<size:10>elki.index.tree.spatial.rstarvariants.rdknn" as elki.index.tree.spatial.rstarvariants.rdknn.RdKNNNode [[RdKNNNode.html]] {
+        {static} -serialVersionUID: long
+        +RdKNNNode()
+        +RdKNNNode(int, boolean)
+        #kNNDistance(): double
+        +adjustEntry(RdKNNEntry): boolean
+        #integrityCheckParameters(RdKNNNode, int): void
+    }
+
+    abstract class "<size:14>AbstractRStarTreeNode\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTreeNode<RdKNNNode, RdKNNEntry> [[../AbstractRStarTreeNode.html]]
+
+    elki.index.tree.spatial.rstarvariants.AbstractRStarTreeNode <|-- elki.index.tree.spatial.rstarvariants.rdknn.RdKNNNode
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

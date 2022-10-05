@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VoronoiVisualization.SwitchModeAction\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.SwitchModeAction [[VoronoiVisualization.SwitchModeAction.html]] {
+        -task: VisualizationTask
+        -context: VisualizerContext
+        +SwitchModeAction(VisualizationTask, VisualizerContext)
+        +getMenuName(): String
+        +activate(): void
+    }
+
+    interface "<size:14>VisualizationMenuAction\n<size:10>elki.visualization" as elki.visualization.VisualizationMenuAction [[../../../VisualizationMenuAction.html]] {
+        {abstract} +activate(): void
+    }
+    class "<size:14>VoronoiVisualization\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization [[VoronoiVisualization.html]]
+
+    elki.visualization.VisualizationMenuAction <|.. elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.SwitchModeAction
+    elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization +-- elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.SwitchModeAction
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

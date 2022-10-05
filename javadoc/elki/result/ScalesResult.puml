@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ScalesResult\n<size:10>elki.result" as elki.result.ScalesResult [[ScalesResult.html]] {
+        -scales: LinearScale[]
+        +ScalesResult(Relation<? extends SpatialComparable>)
+        +ScalesResult(LinearScale[])
+        +getScale(int): LinearScale
+        +setScale(int, LinearScale): void
+        +getScales(): LinearScale[]
+        {static} +getScalesResult(Relation<? extends SpatialComparable>): ScalesResult
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

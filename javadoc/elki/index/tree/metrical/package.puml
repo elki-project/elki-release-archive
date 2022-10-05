@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.metrical {
+
+        abstract class MetricalIndexTree<O, N extends Node<E>, E> [[MetricalIndexTree.html]] {
+            +MetricalIndexTree(PageFile<N extends Node<E>>)
+            {abstract} +getDistance(): Distance<? super O>
+            {abstract} +getLeaves(): List<E>
+        }
+
+        elki.index.tree.IndexTree <|-- MetricalIndexTree
+    }
+
+    namespace elki.index.tree {
+        abstract class IndexTree<N extends Node<E>, E> [[../IndexTree.html]] {
+            -file: PageFile<N extends Node<E>>
+            #initialized: boolean
+            #dirCapacity: int
+            #leafCapacity: int
+            #dirMinimum: int
+            #leafMinimum: int
+            -rootEntry: E
+            {abstract} #getLogger(): Logging
+            {abstract} #initializeCapacities(E): void
+            {abstract} #createEmptyRoot(E): void
+            {abstract} #createRootEntry(): E
+            {abstract} #createNewLeafNode(): N extends Node<E>
+            {abstract} #createNewDirectoryNode(): N extends Node<E>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,47 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.svm.model {
+
+        class Model [[Model.html]] {
+            +nr_class: int
+            +l: int
+            +sv_coef: double[]
+            +rho: double[]
+            +sv_indices: int[]
+            +r_square: double
+        }
+
+        class ClassificationModel [[ClassificationModel.html]] {
+            +label: int[]
+            +nSV: int[]
+            +predict(DataSet, int, double[]): int
+            +predict(DataSet, int): int
+        }
+
+        class ProbabilisticRegressionModel [[ProbabilisticRegressionModel.html]] {
+            +probA: double[]
+            +ProbabilisticRegressionModel(double[])
+        }
+
+        class ProbabilisticClassificationModel [[ProbabilisticClassificationModel.html]] {
+            {static} -LOG: Logging
+            +probA: double[]
+            +probB: double[]
+            +predict_prob(DataSet, int, double[]): int
+            {static} -sigmoid_predict(double, double, double): double
+            {static} -multiclass_probability(int, double[], double[]): void
+        }
+
+        class RegressionModel [[RegressionModel.html]] {
+            +predict(DataSet, int, double[]): double
+            +predict(DataSet, int): double
+        }
+
+        Model <|-- ClassificationModel
+        RegressionModel <|-- ProbabilisticRegressionModel
+        ClassificationModel <|-- ProbabilisticClassificationModel
+        Model <|-- RegressionModel
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

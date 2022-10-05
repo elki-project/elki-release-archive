@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleObjPair\n<size:10>elki.utilities.pairs" as elki.utilities.pairs.DoubleObjPair<O> [[DoubleObjPair.html]] {
+        +first: double
+        +second: O
+        +DoubleObjPair(double, O)
+        +compareTo(DoubleObjPair<O>): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<DoubleObjPair<O>> {
+        {abstract} +compareTo(DoubleObjPair<O>): int
+    }
+
+    java.lang.Comparable <|.. elki.utilities.pairs.DoubleObjPair
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VarianceOfVolume\n<size:10>elki.outlier.lof" as elki.outlier.lof.VarianceOfVolume<O extends SpatialComparable> [[VarianceOfVolume.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super SpatialComparable>
+        #kplus: int
+        +VarianceOfVolume(int, Distance<? super SpatialComparable>)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O extends SpatialComparable>): OutlierResult
+        -computeVolumes(KNNSearcher<DBIDRef>, int, DBIDs, WritableDoubleDataStore): void
+        -computeVOVs(KNNSearcher<DBIDRef>, DBIDs, DoubleDataStore, WritableDoubleDataStore, DoubleMinMax): void
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>VarianceOfVolume.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.VarianceOfVolume.Par<O extends SpatialComparable>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.lof.VarianceOfVolume
+    elki.outlier.lof.VarianceOfVolume +-- elki.outlier.lof.VarianceOfVolume.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

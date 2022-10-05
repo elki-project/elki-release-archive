@@ -1,0 +1,197 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.database.query {
+
+        class QueryBuilder<O> [[QueryBuilder.html]] {
+            {static} -LOG: Logging
+            {static} +FLAG_LINEAR_ONLY: int
+            {static} +FLAG_OPTIMIZED_ONLY: int
+            {static} +FLAG_EXACT_ONLY: int
+            {static} +FLAG_CHEAP_ONLY: int
+            {static} +FLAG_NO_CACHE: int
+            {static} +FLAG_PRECOMPUTE: int
+            {static} +FLAGS_NO_OPTIMIZER: int
+            {static} +FLAGS_NO_INHERIT: int
+            -relation: Relation<O>
+            -distance: Distance<? super O>
+            -similarity: Similarity<? super O>
+            -flags: int
+            +QueryBuilder(Relation<O>, Distance<? super O>)
+            +QueryBuilder(DistanceQuery<? super O>)
+            +QueryBuilder(Relation<O>, Similarity<? super O>)
+            +QueryBuilder(SimilarityQuery<? super O>)
+            +linearOnly(): QueryBuilder<O>
+            +optimizedOnly(): QueryBuilder<O>
+            +exactOnly(): QueryBuilder<O>
+            +cheapOnly(): QueryBuilder<O>
+            +noCache(): QueryBuilder<O>
+            +precomputed(): QueryBuilder<O>
+            +distanceQuery(): DistanceQuery<O>
+            +similarityQuery(): SimilarityQuery<O>
+            +kNNByObject(): KNNSearcher<O>
+            +kNNByObject(int): KNNSearcher<O>
+            +kNNByDBID(): KNNSearcher<DBIDRef>
+            +kNNByDBID(int): KNNSearcher<DBIDRef>
+            +rangeByObject(): RangeSearcher<O>
+            +rangeByObject(double): RangeSearcher<O>
+            +rangeByDBID(): RangeSearcher<DBIDRef>
+            +rangeByDBID(double): RangeSearcher<DBIDRef>
+            +similarityRangeByObject(): RangeSearcher<O>
+            +similarityRangeByObject(double): RangeSearcher<O>
+            +similarityRangeByDBID(): RangeSearcher<DBIDRef>
+            +similarityRangeByDBID(double): RangeSearcher<DBIDRef>
+            +rKNNByObject(): RKNNSearcher<O>
+            +rKNNByObject(int): RKNNSearcher<O>
+            +rKNNByDBID(): RKNNSearcher<DBIDRef>
+            +rKNNByDBID(int): RKNNSearcher<DBIDRef>
+            +priorityByObject(): PrioritySearcher<O>
+            +priorityByObject(double): PrioritySearcher<O>
+            +priorityByDBID(): PrioritySearcher<DBIDRef>
+            +priorityByDBID(double): PrioritySearcher<DBIDRef>
+            -logUsing(Index, String, boolean): void
+            -logNotAccelerated(String): void
+            {static} -initStaticOptimizer(): QueryOptimizer
+        }
+
+        interface QueryOptimizer [[QueryOptimizer.html]] {
+            +getSimilarityQuery(Relation<? extends O>, Similarity<? super O>, int): SimilarityQuery<O>
+            +getDistanceQuery(Relation<? extends O>, Distance<? super O>, int): DistanceQuery<O>
+            +kNNByObject(Relation<? extends O>, DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(Relation<? extends O>, DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+            +rangeByObject(Relation<? extends O>, DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(Relation<? extends O>, DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+            +similarityRangeByObject(Relation<? extends O>, SimilarityQuery<O>, double, int): RangeSearcher<O>
+            +similarityRangeByDBID(Relation<? extends O>, SimilarityQuery<O>, double, int): RangeSearcher<DBIDRef>
+            +rkNNByObject(Relation<? extends O>, DistanceQuery<O>, int, int): RKNNSearcher<O>
+            +rkNNByDBID(Relation<? extends O>, DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+            +priorityByObject(Relation<? extends O>, DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(Relation<? extends O>, DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        }
+
+        class DisableQueryOptimizer [[DisableQueryOptimizer.html]]
+
+        class elki.database.query.DisableQueryOptimizer.Par [[DisableQueryOptimizer.Par.html]] {
+            +make(): DisableQueryOptimizer
+        }
+
+        class EmpiricalQueryOptimizer [[EmpiricalQueryOptimizer.html]] {
+            {static} -LOG: Logging
+            {static} -MEGA: long
+            -matrixIndex: Constructor<? extends Index>
+            -knnIndex: Constructor<? extends KNNIndex<?>>
+            -coverIndex: Constructor<? extends Index>
+            -vpIndex: Constructor<? extends Index>
+            -kdIndex: Constructor<? extends Index>
+            +getDistanceQuery(Relation<? extends O>, Distance<? super O>, int): DistanceQuery<O>
+            +kNNByObject(Relation<? extends O>, DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(Relation<? extends O>, DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+            +rangeByObject(Relation<? extends O>, DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(Relation<? extends O>, DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+            +priorityByObject(Relation<? extends O>, DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(Relation<? extends O>, DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+            -makeMatrixIndex(Relation<? extends O>, Distance<? super O>): DistancePriorityIndex<O>
+            -makeCoverTree(Relation<? extends O>, Distance<? super O>, int): DistancePriorityIndex<O>
+            -makeVPTree(Relation<? extends O>, Distance<? super O>, int): DistancePriorityIndex<O>
+            -makeKDTree(Relation<? extends O>, Distance<? super O>, int): DistancePriorityIndex<O>
+            -makeKnnPreprocessor(Relation<? extends O>, DistanceQuery<O>, int, int): KNNIndex<O>
+            {static} -getFreeMemory(): long
+            {static} -formatMemory(long): String
+        }
+
+        class ExactPrioritySearcher<O> [[ExactPrioritySearcher.html]] {
+            -threshold: double
+            -exact: DoubleDBIDHeap
+            +ExactPrioritySearcher(PrioritySearcher<O>)
+            +search(O): PrioritySearcher<O>
+            +decreaseCutoff(double): PrioritySearcher<O>
+            +getApproximateDistance(): double
+            +getApproximateAccuracy(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            +computeExactDistance(): double
+            +internalGetIndex(): int
+            +allLowerBound(): double
+            +valid(): boolean
+            +advance(): PrioritySearcher<O>
+        }
+
+        interface LinearScanQuery [[LinearScanQuery.html]]
+
+        class WrappedPrioritySearchDBIDByLookup<O> [[WrappedPrioritySearchDBIDByLookup.html]] {
+            -relation: Relation<? extends O>
+            -WrappedPrioritySearchDBIDByLookup(Relation<? extends O>, PrioritySearcher<O>)
+            +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            +getKNN(DBIDRef, int): KNNList
+            +search(DBIDRef): PrioritySearcher<DBIDRef>
+            +advance(): PrioritySearcher<DBIDRef>
+            +valid(): boolean
+            +decreaseCutoff(double): PrioritySearcher<DBIDRef>
+            +internalGetIndex(): int
+            +getApproximateDistance(): double
+            +getApproximateAccuracy(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            +computeExactDistance(): double
+            +allLowerBound(): double
+            {static} +wrap(Relation<? extends O>, PrioritySearcher<O>): PrioritySearcher<DBIDRef>
+        }
+
+        class elki.database.query.WrappedPrioritySearchDBIDByLookup.Linear<O> [[WrappedPrioritySearchDBIDByLookup.Linear.html]] {
+            -Linear(Relation<? extends O>, PrioritySearcher<O>)
+        }
+
+        interface PrioritySearcher<O> [[PrioritySearcher.html]] {
+            +search(O, double): PrioritySearcher<O>
+            {abstract} +search(O): PrioritySearcher<O>
+            +getKNN(O, int): KNNList
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+            {abstract} +computeExactDistance(): double
+            +getApproximateDistance(): double
+            +getApproximateAccuracy(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            {abstract} +allLowerBound(): double
+            {abstract} +advance(): PrioritySearcher<O>
+        }
+
+        interface DistanceSimilarityQuery<O> [[DistanceSimilarityQuery.html]]
+
+        QueryBuilder --> QueryOptimizer: OPTIMIZER
+        QueryBuilder --> elki.database.query.distance.DistanceQuery: distQuery
+        QueryBuilder --> elki.database.query.similarity.SimilarityQuery: simQuery
+        QueryOptimizer <|.. DisableQueryOptimizer
+        DisableQueryOptimizer --> DisableQueryOptimizer: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.database.query.DisableQueryOptimizer.Par
+        DisableQueryOptimizer +-- elki.database.query.DisableQueryOptimizer.Par
+        QueryOptimizer <|.. EmpiricalQueryOptimizer
+        PrioritySearcher <|.. ExactPrioritySearcher
+        ExactPrioritySearcher --> PrioritySearcher: inner
+        PrioritySearcher <|.. WrappedPrioritySearchDBIDByLookup
+        WrappedPrioritySearchDBIDByLookup --> PrioritySearcher: inner
+        WrappedPrioritySearchDBIDByLookup <|-- elki.database.query.WrappedPrioritySearchDBIDByLookup.Linear
+        LinearScanQuery <|.. elki.database.query.WrappedPrioritySearchDBIDByLookup.Linear
+        WrappedPrioritySearchDBIDByLookup +-- elki.database.query.WrappedPrioritySearchDBIDByLookup.Linear
+        elki.database.query.knn.KNNSearcher <|-- PrioritySearcher
+        elki.database.query.range.RangeSearcher <|-- PrioritySearcher
+        elki.database.ids.DBIDIter <|-- PrioritySearcher
+        elki.database.query.distance.DistanceQuery <|-- DistanceSimilarityQuery
+        elki.database.query.similarity.SimilarityQuery <|-- DistanceSimilarityQuery
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.database.ids {
+        interface DBIDIter [[../ids/DBIDIter.html]] {
+            {abstract} +advance(): DBIDIter
+            +addTo(T extends ModifiableDBIDs): T extends ModifiableDBIDs
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

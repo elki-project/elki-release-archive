@@ -1,0 +1,12 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Layouter3DPC\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.Layouter3DPC<V> [[Layouter3DPC.html]] {
+        {abstract} +layout(Relation<? extends V>): Layout
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VPTree.Factory.Par\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.Factory.Par<O extends NumberVector> [[VPTree.Factory.Par.html]] {
+        {static} +DISTANCE_FUNCTION_ID: OptionID
+        {static} +SAMPLE_SIZE_ID: OptionID
+        {static} +TRUNCATE_ID: OptionID
+        {static} +SEED_ID: OptionID
+        #distance: Distance<? super NumberVector>
+        #random: RandomFactory
+        #sampleSize: int
+        ~truncate: int
+        +configure(Parameterization): void
+        +make(): Factory<O extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>VPTree.Factory\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.Factory<O extends NumberVector> [[VPTree.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.metrical.vptree.VPTree.Factory.Par
+    elki.index.tree.metrical.vptree.VPTree.Factory +-- elki.index.tree.metrical.vptree.VPTree.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

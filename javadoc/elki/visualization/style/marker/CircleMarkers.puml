@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CircleMarkers\n<size:10>elki.visualization.style.marker" as elki.visualization.style.marker.CircleMarkers [[CircleMarkers.html]] {
+        -colors: ColorLibrary
+        -dotcolor: String
+        -greycolor: String
+        ~interpol: ColorInterpolation
+        +CircleMarkers(StyleLibrary)
+        +useMarker(SVGPlot, double, double, int, double, double): Element
+    }
+
+    interface "<size:14>MarkerLibrary\n<size:10>elki.visualization.style.marker" as elki.visualization.style.marker.MarkerLibrary [[MarkerLibrary.html]] {
+        {abstract} +useMarker(SVGPlot, double, double, int, double, double): Element
+    }
+
+    elki.visualization.style.marker.MarkerLibrary <|.. elki.visualization.style.marker.CircleMarkers
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CosineDistance.Par\n<size:10>elki.distance" as elki.distance.CosineDistance.Par [[CosineDistance.Par.html]] {
+        +make(): CosineDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>CosineDistance\n<size:10>elki.distance" as elki.distance.CosineDistance [[CosineDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.CosineDistance.Par
+    elki.distance.CosineDistance +-- elki.distance.CosineDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

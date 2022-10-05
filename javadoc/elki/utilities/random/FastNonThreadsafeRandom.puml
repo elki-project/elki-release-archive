@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastNonThreadsafeRandom\n<size:10>elki.utilities.random" as elki.utilities.random.FastNonThreadsafeRandom [[FastNonThreadsafeRandom.html]] {
+        {static} -serialVersionUID: long
+        {static} -multiplier: long
+        {static} -addend: long
+        {static} -mask: long
+        -seed: long
+        {static} #BADBOUND: String
+        +FastNonThreadsafeRandom()
+        +FastNonThreadsafeRandom(long)
+        +setSeed(long): void
+        #next(int): int
+        +nextInt(): int
+        +nextDouble(): double
+        +nextInt(int): int
+        +nextIntRefined(int): int
+    }
+
+    class "<size:14>Random\n<size:10>java.util" as java.util.Random
+
+    java.util.Random <|-- elki.utilities.random.FastNonThreadsafeRandom
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

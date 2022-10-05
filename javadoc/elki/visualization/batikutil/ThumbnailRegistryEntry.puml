@@ -1,0 +1,43 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ThumbnailRegistryEntry\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.ThumbnailRegistryEntry [[ThumbnailRegistryEntry.html]] {
+        {static} +INTERNAL_PROTOCOL: String
+        {static} +INTERNAL_PREFIX: String
+        {static} +INTERNAL_MIME_TYPE: String
+        {static} +PRIORITY: float
+        {static} -LOG: Logging
+        {static} -images: Int2ObjectOpenHashMap<SoftReference<RenderedImage>>
+        {static} -counter: int
+        {static} +registerImage(RenderedImage): int
+        +isCompatibleURL(ParsedURL): boolean
+        {static} +isCompatibleURLStatic(ParsedURL): boolean
+        +handleURL(ParsedURL, boolean): Filter
+        {static} +handleURL(ParsedURL): Filter
+        +parseURL(String): ParsedURLData
+        +parseURL(ParsedURL, String): ParsedURLData
+        +getProtocolHandled(): String
+    }
+
+    abstract class "<size:14>AbstractRegistryEntry\n<size:10>org.apache.batik.ext.awt.image.spi" as org.apache.batik.ext.awt.image.spi.AbstractRegistryEntry
+    interface "<size:14>URLRegistryEntry\n<size:10>org.apache.batik.ext.awt.image.spi" as org.apache.batik.ext.awt.image.spi.URLRegistryEntry {
+        {abstract} +isCompatibleURL(ParsedURL): boolean
+        {abstract} +handleURL(ParsedURL, boolean): Filter
+    }
+    interface "<size:14>ParsedURLProtocolHandler\n<size:10>org.apache.batik.util" as org.apache.batik.util.ParsedURLProtocolHandler {
+        {abstract} +getProtocolHandled(): String
+        {abstract} +parseURL(String): ParsedURLData
+        {abstract} +parseURL(ParsedURL, String): ParsedURLData
+    }
+    class "<size:14>ThumbnailRegistryEntry.InternalParsedURLData\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.ThumbnailRegistryEntry.InternalParsedURLData [[ThumbnailRegistryEntry.InternalParsedURLData.html]]
+
+    org.apache.batik.ext.awt.image.spi.AbstractRegistryEntry <|-- elki.visualization.batikutil.ThumbnailRegistryEntry
+    org.apache.batik.ext.awt.image.spi.URLRegistryEntry <|.. elki.visualization.batikutil.ThumbnailRegistryEntry
+    org.apache.batik.util.ParsedURLProtocolHandler <|.. elki.visualization.batikutil.ThumbnailRegistryEntry
+    elki.visualization.batikutil.ThumbnailRegistryEntry +-- elki.visualization.batikutil.ThumbnailRegistryEntry.InternalParsedURLData
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

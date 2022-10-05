@@ -1,0 +1,396 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.database.ids {
+
+        interface DoubleDBIDListMIter [[DoubleDBIDListMIter.html]] {
+            {abstract} +setDouble(double): void
+            {abstract} +seek(int): DoubleDBIDListMIter
+        }
+
+        interface DBIDArrayMIter [[DBIDArrayMIter.html]] {
+            {abstract} +setDBID(DBIDRef): void
+            {abstract} +seek(int): DBIDArrayMIter
+        }
+
+        interface HashSetDBIDs [[HashSetDBIDs.html]]
+
+        interface KNNHeap [[KNNHeap.html]] {
+            {abstract} +toKNNList(): KNNList
+            {abstract} +toKNNListSqrt(): KNNList
+            {abstract} +insert(double, DBIDRef): double
+            +--insert--(double, DBIDRef, int): double
+            {abstract} +getK(): int
+            {abstract} +getKNNDistance(): double
+        }
+
+        interface DBIDRange [[DBIDRange.html]] {
+            {abstract} +getOffset(DBIDRef): int
+        }
+
+        class QuickSelectDBIDs [[QuickSelectDBIDs.html]] {
+            {static} -SMALL: int
+            {static} -bestPivot(int, int, int, int, int, int): int
+            {static} +quickSelect(ArrayModifiableDBIDs, Comparator<? super DBIDRef>, int): void
+            {static} +median(ArrayModifiableDBIDs, Comparator<? super DBIDRef>): int
+            {static} +median(ArrayModifiableDBIDs, Comparator<? super DBIDRef>, int, int): int
+            {static} +quantile(ArrayModifiableDBIDs, Comparator<? super DBIDRef>, double): int
+            {static} +quantile(ArrayModifiableDBIDs, Comparator<? super DBIDRef>, int, int, double): int
+            {static} +quickSelect(ArrayModifiableDBIDs, Comparator<? super DBIDRef>, int, int, int): void
+            {static} -insertionSort(ArrayModifiableDBIDs, Comparator<? super DBIDRef>, int, int, DBIDArrayIter, DBIDArrayIter): void
+            {static} +quickSelect(ModifiableDoubleDBIDList, int): void
+            {static} +median(ModifiableDoubleDBIDList): int
+            {static} +median(ModifiableDoubleDBIDList, int, int): int
+            {static} +quantile(ModifiableDoubleDBIDList, double): int
+            {static} +quantile(ModifiableDoubleDBIDList, int, int, double): int
+            {static} +quickSelect(ModifiableDoubleDBIDList, int, int, int): void
+            {static} -insertionSort(ModifiableDoubleDBIDList, int, int, DoubleDBIDListIter, DoubleDBIDListIter): void
+        }
+
+        interface DoubleDBIDIter [[DoubleDBIDIter.html]] {
+            {abstract} +doubleValue(): double
+            {abstract} +advance(): DoubleDBIDIter
+        }
+
+        interface DBIDFactory [[DBIDFactory.html]] {
+            {abstract} +newVar(DBIDRef): DBIDVar
+            {abstract} +importInteger(int): DBID
+            {abstract} +assignVar(DBIDVar, int): DBIDVar
+            {abstract} +generateSingleDBID(): DBID
+            {abstract} +deallocateSingleDBID(DBIDRef): void
+            {abstract} +generateStaticDBIDRange(int): DBIDRange
+            {abstract} +generateStaticDBIDRange(int, int): DBIDRange
+            {abstract} +deallocateDBIDRange(DBIDRange): void
+            {abstract} +newPair(DBIDRef, DBIDRef): DBIDPair
+            {abstract} +newPair(double, DBIDRef): DoubleDBIDPair
+            {abstract} +newArray(): ArrayModifiableDBIDs
+            {abstract} +newHashSet(): HashSetModifiableDBIDs
+            {abstract} +newArray(int): ArrayModifiableDBIDs
+            {abstract} +newHashSet(int): HashSetModifiableDBIDs
+            {abstract} +newArray(DBIDs): ArrayModifiableDBIDs
+            {abstract} +newHashSet(DBIDs): HashSetModifiableDBIDs
+            {abstract} +newMinHeap(int): DoubleDBIDHeap
+            {abstract} +newMaxHeap(int): DoubleDBIDHeap
+            {abstract} +newHeap(int): KNNHeap
+            {abstract} +newHeap(KNNList): KNNHeap
+            {abstract} +getDBIDSerializer(): ByteBufferSerializer<DBID>
+            {abstract} +getDBIDSerializerStatic(): FixedSizeByteBufferSerializer<DBID>
+            {abstract} +getTypeRestriction(): Class<? extends DBID>
+            {abstract} +compare(DBIDRef, DBIDRef): int
+            {abstract} +equal(DBIDRef, DBIDRef): boolean
+            {abstract} +toString(DBIDRef): String
+            {abstract} +invalid(): DBIDRef
+            {abstract} +newDistanceDBIDList(int): ModifiableDoubleDBIDList
+            {abstract} +newDistanceDBIDList(): ModifiableDoubleDBIDList
+            {abstract} +makeUnmodifiable(DBIDs): StaticDBIDs
+        }
+
+        class EmptyDBIDs [[EmptyDBIDs.html]] {
+            +contains(DBIDRef): boolean
+            +size(): int
+            +isEmpty(): boolean
+            +get(int): DBID
+            +assignVar(int, DBIDVar): DBIDVar
+            +iter(): DBIDArrayMIter
+            +binarySearch(DBIDRef): int
+            +slice(int, int): ArrayDBIDs
+            +forEach(Consumer<? super DBIDRef>): void
+        }
+
+        class elki.database.ids.EmptyDBIDs.EmptyDBIDIterator [[EmptyDBIDs.EmptyDBIDIterator.html]] {
+            +valid(): boolean
+            +advance(): EmptyDBIDIterator
+            +internalGetIndex(): int
+            +remove(): void
+            +advance(int): EmptyDBIDIterator
+            +retract(): EmptyDBIDIterator
+            +seek(int): EmptyDBIDIterator
+            +getOffset(): int
+        }
+
+        interface DBIDArrayIter [[DBIDArrayIter.html]] {
+            {abstract} +advance(): DBIDArrayIter
+            {abstract} +advance(int): DBIDArrayIter
+            {abstract} +retract(): DBIDArrayIter
+            {abstract} +seek(int): DBIDArrayIter
+        }
+
+        interface DBIDMIter [[DBIDMIter.html]] {
+            {abstract} +remove(): void
+        }
+
+        interface ArrayDBIDs [[ArrayDBIDs.html]] {
+            {abstract} +--get--(int): DBID
+            {abstract} +assignVar(int, DBIDVar): DBIDVar
+            {abstract} +iter(): DBIDArrayIter
+            {abstract} +size(): int
+            {abstract} +binarySearch(DBIDRef): int
+            {abstract} +slice(int, int): ArrayDBIDs
+        }
+
+        interface DoubleDBIDList [[DoubleDBIDList.html]] {
+            {abstract} +size(): int
+            {abstract} +assignVar(int, DBIDVar): DBIDVar
+            {abstract} +doubleValue(int): double
+            {abstract} +iter(): DoubleDBIDListIter
+            {abstract} +slice(int, int): DoubleDBIDList
+            +forEachDouble(Consumer): void
+        }
+
+        interface elki.database.ids.DoubleDBIDList.Consumer [[DoubleDBIDList.Consumer.html]] {
+            {abstract} +accept(DBIDRef, double): void
+        }
+
+        interface DBID [[DBID.html]] {
+            {abstract} +compareTo(DBIDRef): int
+        }
+
+        interface DoubleDBIDListIter [[DoubleDBIDListIter.html]] {
+            {abstract} +advance(): DoubleDBIDListIter
+            {abstract} +advance(int): DoubleDBIDListIter
+            {abstract} +retract(): DoubleDBIDListIter
+            {abstract} +seek(int): DoubleDBIDListIter
+        }
+
+        interface ArrayStaticDBIDs [[ArrayStaticDBIDs.html]]
+
+        interface DoubleDBIDPair [[DoubleDBIDPair.html]] {
+            {abstract} +doubleValue(): double
+        }
+
+        class DBIDUtil [[DBIDUtil.html]] {
+            {static} +invalid(): DBIDRef
+            {static} +importInteger(int): DBID
+            {static} +asInteger(DBIDRef): int
+            {static} +compare(DBIDRef, DBIDRef): int
+            {static} +equal(DBIDRef, DBIDRef): boolean
+            {static} +deref(DBIDRef): DBID
+            {static} +toString(DBIDRef): String
+            {static} +toString(DBIDs): String
+            {static} +getDBIDSerializer(): ByteBufferSerializer<DBID>
+            {static} +getDBIDSerializerStatic(): ByteBufferSerializer<DBID>
+            {static} +generateSingleDBID(): DBID
+            {static} +deallocateSingleDBID(DBID): void
+            {static} +generateStaticDBIDRange(int): DBIDRange
+            {static} +deallocateDBIDRange(DBIDRange): void
+            {static} +newVar(DBIDRef): DBIDVar
+            {static} +newVar(): DBIDVar
+            {static} +newArray(): ArrayModifiableDBIDs
+            {static} +newHashSet(): HashSetModifiableDBIDs
+            {static} +newArray(int): ArrayModifiableDBIDs
+            {static} +newHashSet(int): HashSetModifiableDBIDs
+            {static} +newArray(DBIDs): ArrayModifiableDBIDs
+            {static} +newHashSet(DBIDs): HashSetModifiableDBIDs
+            {static} +intersection(DBIDs, DBIDs): ModifiableDBIDs
+            {static} -internalIntersection(DBIDs, DBIDs): ModifiableDBIDs
+            {static} +intersectionSize(DBIDs, DBIDs): int
+            {static} -internalIntersectionSize(DBIDs, DBIDs): int
+            {static} +symmetricIntersection(DBIDs, DBIDs, HashSetModifiableDBIDs, HashSetModifiableDBIDs, HashSetModifiableDBIDs): void
+            {static} +union(DBIDs, DBIDs): ModifiableDBIDs
+            {static} +difference(DBIDs, DBIDs): ModifiableDBIDs
+            {static} +makeUnmodifiable(DBIDs): StaticDBIDs
+            {static} +ensureArray(DBIDs): ArrayDBIDs
+            {static} +ensureSet(DBIDs): SetDBIDs
+            {static} +ensureModifiable(DBIDs): ModifiableDBIDs
+            {static} +newPair(DBIDRef, DBIDRef): DBIDPair
+            {static} +newPair(double, DBIDRef): DoubleDBIDPair
+            {static} +newMinHeap(int): DoubleDBIDHeap
+            {static} +newMaxHeap(int): DoubleDBIDHeap
+            {static} +newHeap(int): KNNHeap
+            {static} +newHeap(KNNList): KNNHeap
+            {static} +randomShuffle(ArrayModifiableDBIDs, RandomFactory): void
+            {static} +randomShuffle(ArrayModifiableDBIDs, Random): void
+            {static} +randomShuffle(ArrayModifiableDBIDs, Random, int): void
+            {static} +randomSample(DBIDs, int, int): ModifiableDBIDs
+            {static} +randomSample(DBIDs, int, Long): ModifiableDBIDs
+            {static} +randomSample(DBIDs, int, RandomFactory): ModifiableDBIDs
+            {static} +randomSampleExcept(DBIDs, DBIDRef, int, RandomFactory): ModifiableDBIDs
+            {static} +randomSample(DBIDs, int, Random): ModifiableDBIDs
+            {static} +randomSampleExcept(DBIDs, DBIDRef, int, Random): ModifiableDBIDs
+            {static} +randomSample(DBIDs, double, RandomFactory): DBIDs
+            {static} +randomSample(DBIDs, double, Random): DBIDs
+            {static} +randomSample(DBIDs, Random): DBIDVar
+            {static} +randomSample(DBIDs, RandomFactory): DBIDVar
+            {static} +randomSplit(DBIDs, int, RandomFactory): ArrayDBIDs[]
+            {static} +randomSplit(DBIDs, int, Random): ArrayDBIDs[]
+            {static} +newDistanceDBIDList(int): ModifiableDoubleDBIDList
+            {static} +newDistanceDBIDList(): ModifiableDoubleDBIDList
+            {static} +assertRange(DBIDs): DBIDRange
+        }
+
+        interface SetDBIDs [[SetDBIDs.html]]
+
+        interface DBIDPair [[DBIDPair.html]] {
+            {abstract} +--getFirst--(): DBID
+            {abstract} +--getSecond--(): DBID
+        }
+
+        interface ModifiableDoubleDBIDList [[ModifiableDoubleDBIDList.html]] {
+            {abstract} +add(double, DBIDRef): void
+            {abstract} +add(DoubleDBIDPair): void
+            {abstract} +clear(): ModifiableDoubleDBIDList
+            {abstract} +sort(): ModifiableDoubleDBIDList
+            {abstract} +sortDescending(): ModifiableDoubleDBIDList
+            {abstract} +swap(int, int): void
+            {abstract} +remove(int): void
+            {abstract} +removeSwap(int): void
+            {abstract} +iter(): DoubleDBIDListMIter
+        }
+
+        interface DBIDs [[DBIDs.html]] {
+            {abstract} +iter(): DBIDIter
+            {abstract} +size(): int
+            {abstract} +contains(DBIDRef): boolean
+            +isEmpty(): boolean
+            +forEach(Consumer<? super DBIDRef>): void
+        }
+
+        interface HashSetModifiableDBIDs [[HashSetModifiableDBIDs.html]] {
+            {abstract} +retainAll(DBIDs): boolean
+            {abstract} +clear(): HashSetModifiableDBIDs
+            {abstract} +iter(): DBIDMIter
+        }
+
+        interface DBIDVar [[DBIDVar.html]] {
+            {abstract} +set(DBIDRef): DBIDVar
+            {abstract} +from(DBIDDataStore, DBIDRef): DBIDVar
+            {abstract} +unset(): void
+            {abstract} +isSet(): boolean
+        }
+
+        interface DoubleDBIDHeap [[DoubleDBIDHeap.html]] {
+            {abstract} +peekKey(): double
+            {abstract} +poll(): void
+            {abstract} +insert(double, DBIDRef): double
+            {abstract} +insert(double, DBIDRef, int): double
+            {abstract} +size(): int
+            +isEmpty(): boolean
+            {abstract} +clear(): void
+            {abstract} +unorderedIterator(): DoubleDBIDIter
+            {abstract} +contains(DBIDRef): boolean
+        }
+
+        interface DBIDRef [[DBIDRef.html]] {
+            {abstract} +internalGetIndex(): int
+        }
+
+        interface KNNList [[KNNList.html]] {
+            {abstract} +getK(): int
+            {abstract} +getKNNDistance(): double
+            {abstract} +subList(int): KNNList
+            {abstract} +map(DoubleUnaryOperator): KNNList
+        }
+
+        interface StaticDBIDs [[StaticDBIDs.html]]
+
+        interface DBIDIter [[DBIDIter.html]] {
+            {abstract} +advance(): DBIDIter
+            +addTo(T extends ModifiableDBIDs): T extends ModifiableDBIDs
+        }
+
+        interface ModifiableDBIDs [[ModifiableDBIDs.html]] {
+            {abstract} +addDBIDs(DBIDs): boolean
+            {abstract} +removeDBIDs(DBIDs): boolean
+            {abstract} +add(DBIDRef): boolean
+            {abstract} +remove(DBIDRef): boolean
+            {abstract} +clear(): ModifiableDBIDs
+            {abstract} +iter(): DBIDMIter
+            {abstract} +pop(DBIDVar): DBIDVar
+        }
+
+        interface ArrayModifiableDBIDs [[ArrayModifiableDBIDs.html]] {
+            {abstract} +sort(): void
+            {abstract} +sort(Comparator<? super DBIDRef>): void
+            {abstract} +sort(int, int, Comparator<? super DBIDRef>): void
+            {abstract} +clear(): ArrayModifiableDBIDs
+            {abstract} +remove(int): void
+            {abstract} +removeSwap(int): void
+            {abstract} +set(int, DBIDRef): void
+            {abstract} +insert(int, DBIDRef): void
+            {abstract} +swap(int, int): void
+            {abstract} +iter(): DBIDArrayMIter
+        }
+
+        DoubleDBIDListIter <|-- DoubleDBIDListMIter
+        DBIDArrayMIter <|-- DoubleDBIDListMIter
+        DBIDArrayIter <|-- DBIDArrayMIter
+        DBIDMIter <|-- DBIDArrayMIter
+        SetDBIDs <|-- HashSetDBIDs
+        DoubleDBIDHeap <|-- KNNHeap
+        ArrayStaticDBIDs <|-- DBIDRange
+        elki.database.datastore.DataStoreIDMap <|-- DBIDRange
+        DBIDIter <|-- DoubleDBIDIter
+        DBIDFactory --> DBIDFactory: FACTORY
+        ArrayStaticDBIDs <|.. EmptyDBIDs
+        SetDBIDs <|.. EmptyDBIDs
+        EmptyDBIDs --> elki.database.ids.EmptyDBIDs.EmptyDBIDIterator: EMPTY_ITERATOR
+        DBIDArrayMIter <|.. elki.database.ids.EmptyDBIDs.EmptyDBIDIterator
+        EmptyDBIDs +-- elki.database.ids.EmptyDBIDs.EmptyDBIDIterator
+        elki.database.ids.EmptyDBIDs.EmptyDBIDIterator --> DBIDRef: dBID
+        DBIDIter <|-- DBIDArrayIter
+        elki.utilities.datastructures.iterator.ArrayIter <|-- DBIDArrayIter
+        DBIDIter <|-- DBIDMIter
+        elki.utilities.datastructures.iterator.MIter <|-- DBIDMIter
+        DBIDs <|-- ArrayDBIDs
+        DBIDs <|-- DoubleDBIDList
+        DoubleDBIDList +-- elki.database.ids.DoubleDBIDList.Consumer
+        DBIDRef <|-- DBID
+        java.lang.Comparable <|-- DBID
+        ArrayDBIDs <|-- DBID
+        SetDBIDs <|-- DBID
+        DoubleDBIDIter <|-- DoubleDBIDListIter
+        DBIDArrayIter <|-- DoubleDBIDListIter
+        DoubleDBIDListIter --> DoubleDBIDListIter: EMPTY
+        ArrayDBIDs <|-- ArrayStaticDBIDs
+        StaticDBIDs <|-- ArrayStaticDBIDs
+        DBIDRef <|-- DoubleDBIDPair
+        java.lang.Comparable <|-- DoubleDBIDPair
+        DBIDUtil --> EmptyDBIDs: EMPTYDBIDS
+        DBIDs <|-- SetDBIDs
+        ArrayDBIDs <|-- DBIDPair
+        DoubleDBIDList <|-- ModifiableDoubleDBIDList
+        HashSetDBIDs <|-- HashSetModifiableDBIDs
+        ModifiableDBIDs <|-- HashSetModifiableDBIDs
+        DBIDRef <|-- DBIDVar
+        ArrayDBIDs <|-- DBIDVar
+        SetDBIDs <|-- DBIDVar
+        DBIDRef <|-- DoubleDBIDHeap
+        DoubleDBIDList <|-- KNNList
+        DBIDs <|-- StaticDBIDs
+        DBIDRef <|-- DBIDIter
+        elki.utilities.datastructures.iterator.Iter <|-- DBIDIter
+        DBIDs <|-- ModifiableDBIDs
+        ModifiableDBIDs <|-- ArrayModifiableDBIDs
+        ArrayDBIDs <|-- ArrayModifiableDBIDs
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreIDMap [[../datastore/DataStoreIDMap.html]] {
+            {abstract} +mapDBIDToOffset(DBIDRef): int
+        }
+    }
+
+    namespace elki.utilities.datastructures.iterator {
+        interface ArrayIter [[../../utilities/datastructures/iterator/ArrayIter.html]] {
+            {abstract} +advance(): ArrayIter
+            {abstract} +advance(int): ArrayIter
+            {abstract} +retract(): ArrayIter
+            {abstract} +seek(int): ArrayIter
+            {abstract} +getOffset(): int
+        }
+        interface MIter [[../../utilities/datastructures/iterator/MIter.html]] {
+            {abstract} +remove(): void
+        }
+        interface Iter [[../../utilities/datastructures/iterator/Iter.html]] {
+            {abstract} +valid(): boolean
+            {abstract} +advance(): Iter
+        }
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

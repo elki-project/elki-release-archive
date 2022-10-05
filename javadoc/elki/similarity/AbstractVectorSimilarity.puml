@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractVectorSimilarity\n<size:10>elki.similarity" as elki.similarity.AbstractVectorSimilarity [[AbstractVectorSimilarity.html]] {
+        +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    interface "<size:14>PrimitiveSimilarity\n<size:10>elki.similarity" as elki.similarity.PrimitiveSimilarity<NumberVector> [[PrimitiveSimilarity.html]] {
+        {abstract} +similarity(NumberVector, NumberVector): double
+    }
+
+    elki.similarity.PrimitiveSimilarity <|.. elki.similarity.AbstractVectorSimilarity
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

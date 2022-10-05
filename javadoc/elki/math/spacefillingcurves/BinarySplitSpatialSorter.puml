@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BinarySplitSpatialSorter\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.BinarySplitSpatialSorter [[BinarySplitSpatialSorter.html]] {
+        {static} +STATIC: BinarySplitSpatialSorter
+        +sort(List<? extends SpatialComparable>, int, int, double[], int[]): void
+        -binarySplitSort(List<? extends SpatialComparable>, int, int, int, int, int[], Sorter): void
+    }
+
+    interface "<size:14>SpatialSorter\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.SpatialSorter [[SpatialSorter.html]] {
+        {abstract} +sort(List<? extends SpatialComparable>, int, int, double[], int[]): void
+    }
+    class "<size:14>BinarySplitSpatialSorter.Sorter\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.BinarySplitSpatialSorter.Sorter [[BinarySplitSpatialSorter.Sorter.html]]
+    class "<size:14>BinarySplitSpatialSorter.Par\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.BinarySplitSpatialSorter.Par [[BinarySplitSpatialSorter.Par.html]]
+
+    elki.math.spacefillingcurves.SpatialSorter <|.. elki.math.spacefillingcurves.BinarySplitSpatialSorter
+    elki.math.spacefillingcurves.BinarySplitSpatialSorter +-- elki.math.spacefillingcurves.BinarySplitSpatialSorter.Sorter
+    elki.math.spacefillingcurves.BinarySplitSpatialSorter +-- elki.math.spacefillingcurves.BinarySplitSpatialSorter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

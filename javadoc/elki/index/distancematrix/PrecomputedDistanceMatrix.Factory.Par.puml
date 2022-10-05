@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrecomputedDistanceMatrix.Factory.Par\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix.Factory.Par<O> {
+        {static} +DISTANCE_ID: OptionID
+        #distanceFunction: Distance<? super O>
+        +configure(Parameterization): void
+        +make(): Factory<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>PrecomputedDistanceMatrix.Factory\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix.Factory<O> [[PrecomputedDistanceMatrix.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.distancematrix.PrecomputedDistanceMatrix.Factory.Par
+    elki.index.distancematrix.PrecomputedDistanceMatrix.Factory +-- elki.index.distancematrix.PrecomputedDistanceMatrix.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

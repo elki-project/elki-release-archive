@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomizedCrossValidation\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.RandomizedCrossValidation [[RandomizedCrossValidation.html]] {
+        #nfold: int
+        #fold: int
+        +RandomizedCrossValidation(RandomFactory, int)
+        +initialize(MultipleObjectsBundle): void
+        +numberOfPartitions(): int
+        +nextPartitioning(): TrainingAndTestSet
+    }
+
+    abstract class "<size:14>RandomizedHoldout\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.RandomizedHoldout [[RandomizedHoldout.html]]
+    class "<size:14>RandomizedCrossValidation.Par\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.RandomizedCrossValidation.Par [[RandomizedCrossValidation.Par.html]]
+
+    elki.evaluation.classification.holdout.RandomizedHoldout <|-- elki.evaluation.classification.holdout.RandomizedCrossValidation
+    elki.evaluation.classification.holdout.RandomizedCrossValidation +-- elki.evaluation.classification.holdout.RandomizedCrossValidation.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

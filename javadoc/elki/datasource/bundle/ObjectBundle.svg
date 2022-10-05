@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="177px" preserveAspectRatio="none" style="width:318px;height:177px;background:#FFFFFF;" version="1.1" viewBox="0 0 318 177" width="318px" zoomAndPan="magnify"><defs/><g><!--MD5=[39825b7f4e76431850a85c1c971b0201]
+class elki.datasource.bundle.ObjectBundle--><a href="ObjectBundle.html" target="_top" title="ObjectBundle.html" xlink:actuate="onRequest" xlink:href="ObjectBundle.html" xlink:show="new" xlink:title="ObjectBundle.html" xlink:type="simple"><g id="elem_elki.datasource.bundle.ObjectBundle"><rect codeLine="6" fill="#F1F1F1" height="143.7188" id="elki.datasource.bundle.ObjectBundle" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="297" x="7" y="7"/><ellipse cx="95.25" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M91.1719,21.7344 L91.1719,19.5781 L98.5625,19.5781 L98.5625,21.7344 L96.0938,21.7344 L96.0938,29.8125 L98.5625,29.8125 L98.5625,31.9688 L91.1719,31.9688 L91.1719,29.8125 L93.6406,29.8125 L93.6406,21.7344 L91.1719,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="96" x="123.75" y="24.9951">ObjectBundle</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="112" x="115.75" y="37.5791">elki.datasource.bundle</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="303" y1="44.9375" y2="44.9375"/><ellipse cx="18" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="141" x="27" y="61.9326">meta(): BundleMeta</text><ellipse cx="18" cy="74.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="271" x="27" y="78.2295">meta(int): SimpleTypeInformation&lt;?&gt;</text><ellipse cx="18" cy="91.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="123" x="27" y="94.5264">metaLength(): int</text><ellipse cx="18" cy="107.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="118" x="27" y="110.8232">dataLength(): int</text><ellipse cx="18" cy="123.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="141" x="27" y="127.1201">data(int, int): Object</text><ellipse cx="18" cy="140.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="244" x="27" y="143.417">assignDBID(int, DBIDVar): boolean</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="62" y="157.7188"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="62" y="167.001">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[1293e99c3cffbc4aa51b4a7a9b90bfdf]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ObjectBundle\n<size:10>elki.datasource.bundle" as elki.datasource.bundle.ObjectBundle [[ObjectBundle.html]] {
+        {abstract} +meta(): BundleMeta
+        {abstract} +meta(int): SimpleTypeInformation<?>
+        {abstract} +metaLength(): int
+        {abstract} +dataLength(): int
+        {abstract} +data(int, int): Object
+        {abstract} +assignDBID(int, DBIDVar): boolean
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

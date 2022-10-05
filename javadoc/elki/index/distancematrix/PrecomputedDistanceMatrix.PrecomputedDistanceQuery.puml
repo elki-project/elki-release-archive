@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrecomputedDistanceMatrix.PrecomputedDistanceQuery\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistanceQuery [[PrecomputedDistanceMatrix.PrecomputedDistanceQuery.html]] {
+        +distance(DBIDRef, DBIDRef): double
+        +getDistance(): Distance<? super O>
+        +getRelation(): Relation<? extends O>
+    }
+
+    interface "<size:14>DatabaseDistanceQuery\n<size:10>elki.database.query.distance" as elki.database.query.distance.DatabaseDistanceQuery<O> [[../../database/query/distance/DatabaseDistanceQuery.html]]
+    class "<size:14>PrecomputedDistanceMatrix\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix<O> [[PrecomputedDistanceMatrix.html]]
+
+    elki.database.query.distance.DatabaseDistanceQuery <|.. elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistanceQuery
+    elki.index.distancematrix.PrecomputedDistanceMatrix +-- elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistanceQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

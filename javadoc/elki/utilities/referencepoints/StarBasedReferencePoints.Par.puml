@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>StarBasedReferencePoints.Par\n<size:10>elki.utilities.referencepoints" as elki.utilities.referencepoints.StarBasedReferencePoints.Par [[StarBasedReferencePoints.Par.html]] {
+        {static} +NOCENTER_ID: OptionID
+        {static} +SCALE_ID: OptionID
+        #nocenter: boolean
+        #scale: double
+        +configure(Parameterization): void
+        +make(): StarBasedReferencePoints
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>StarBasedReferencePoints\n<size:10>elki.utilities.referencepoints" as elki.utilities.referencepoints.StarBasedReferencePoints [[StarBasedReferencePoints.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.referencepoints.StarBasedReferencePoints.Par
+    elki.utilities.referencepoints.StarBasedReferencePoints +-- elki.utilities.referencepoints.StarBasedReferencePoints.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

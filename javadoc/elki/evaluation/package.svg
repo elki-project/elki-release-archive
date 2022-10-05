@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="458px" preserveAspectRatio="none" style="width:631px;height:458px;background:#FFFFFF;" version="1.1" viewBox="0 0 631 458" width="631px" zoomAndPan="magnify"><defs/><g><!--MD5=[a0bd951443118e890cc7a7fcdc33847d]
+cluster elki.evaluation--><g id="cluster_elki.evaluation"><path d="M9.5,145 L123.5,145 A3.75,3.75 0 0 1 126,147.5 L133,167.2969 L621.5,167.2969 A2.5,2.5 0 0 1 624,169.7969 L624,430.5 A2.5,2.5 0 0 1 621.5,433 L9.5,433 A2.5,2.5 0 0 1 7,430.5 L7,147.5 A2.5,2.5 0 0 1 9.5,145 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="7" x2="133" y1="167.2969" y2="167.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="113" x="11" y="159.9951">elki.evaluation</text></g><!--MD5=[7c9b328ed74721657035d2413dd73507]
+cluster elki.result--><g id="cluster_elki.result"><path d="M8.5,6 L87.5,6 A3.75,3.75 0 0 1 90,8.5 L97,28.2969 L285.5,28.2969 A2.5,2.5 0 0 1 288,30.7969 L288,118.5 A2.5,2.5 0 0 1 285.5,121 L8.5,121 A2.5,2.5 0 0 1 6,118.5 L6,8.5 A2.5,2.5 0 0 1 8.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="97" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="78" x="10" y="20.9951">elki.result</text></g><!--MD5=[fa8add7cb915d7c023addb4d5f473569]
+class elki.evaluation.NoAutomaticEvaluation--><a href="NoAutomaticEvaluation.html" target="_top" title="NoAutomaticEvaluation.html" xlink:actuate="onRequest" xlink:href="NoAutomaticEvaluation.html" xlink:show="new" xlink:title="NoAutomaticEvaluation.html" xlink:type="simple"><g id="elem_elki.evaluation.NoAutomaticEvaluation"><rect codeLine="4" fill="#F1F1F1" height="64.2969" id="elki.evaluation.NoAutomaticEvaluation" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="248" x="23" y="320.5"/><ellipse cx="64.1" cy="336.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M67.0688,342.1406 Q66.4906,342.4375 65.85,342.5781 Q65.2094,342.7344 64.5063,342.7344 Q62.0062,342.7344 60.6781,341.0938 Q59.3656,339.4375 59.3656,336.3125 Q59.3656,333.1875 60.6781,331.5313 Q62.0062,329.875 64.5063,329.875 Q65.2094,329.875 65.85,330.0313 Q66.5063,330.1875 67.0688,330.4844 L67.0688,333.2031 Q66.4438,332.625 65.85,332.3594 Q65.2563,332.0781 64.6313,332.0781 Q63.2875,332.0781 62.6,333.1563 Q61.9125,334.2188 61.9125,336.3125 Q61.9125,338.4063 62.6,339.4844 Q63.2875,340.5469 64.6313,340.5469 Q65.2563,340.5469 65.85,340.2813 Q66.4438,340 67.0688,339.4219 L67.0688,342.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="158" x="83.9" y="341.3467">NoAutomaticEvaluation</text><line style="stroke:#181818;stroke-width:0.5;" x1="24" x2="270" y1="352.5" y2="352.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="24" x2="270" y1="360.5" y2="360.5"/><ellipse cx="34" cy="374.1484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="222" x="43" y="377.4951">processNewResult(Object): void</text></g></a><!--MD5=[8753e7ba7ebfaf02896eaa7ed3391c00]
+class elki.evaluation.AutomaticEvaluation--><a href="AutomaticEvaluation.html" target="_top" title="AutomaticEvaluation.html" xlink:actuate="onRequest" xlink:href="AutomaticEvaluation.html" xlink:show="new" xlink:title="AutomaticEvaluation.html" xlink:type="simple"><g id="elem_elki.evaluation.AutomaticEvaluation"><rect codeLine="12" fill="#F1F1F1" height="129.4844" id="elki.evaluation.AutomaticEvaluation" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="302" x="306" y="288"/><ellipse cx="383.25" cy="304" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M386.2188,309.6406 Q385.6406,309.9375 385,310.0781 Q384.3594,310.2344 383.6563,310.2344 Q381.1563,310.2344 379.8281,308.5938 Q378.5156,306.9375 378.5156,303.8125 Q378.5156,300.6875 379.8281,299.0313 Q381.1563,297.375 383.6563,297.375 Q384.3594,297.375 385,297.5313 Q385.6563,297.6875 386.2188,297.9844 L386.2188,300.7031 Q385.5938,300.125 385,299.8594 Q384.4063,299.5781 383.7813,299.5781 Q382.4375,299.5781 381.75,300.6563 Q381.0625,301.7188 381.0625,303.8125 Q381.0625,305.9063 381.75,306.9844 Q382.4375,308.0469 383.7813,308.0469 Q384.4063,308.0469 385,307.7813 Q385.5938,307.5 386.2188,306.9219 L386.2188,309.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="139" x="403.75" y="308.8467">AutomaticEvaluation</text><line style="stroke:#181818;stroke-width:0.5;" x1="307" x2="607" y1="320" y2="320"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="314" y="330.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="326" y="336.9951">LOG: Logging</text><line style="stroke:#181818;stroke-width:0.5;" x1="307" x2="607" y1="344.2969" y2="344.2969"/><ellipse cx="317" cy="357.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="222" x="326" y="361.292">processNewResult(Object): void</text><polygon fill="#FFFF44" points="317,369.2422,321,373.2422,317,377.2422,313,373.2422" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="234" x="326" y="377.5889">autoEvaluateOutliers(Object): void</text><polygon fill="#FFFF44" points="317,385.5391,321,389.5391,317,393.5391,313,389.5391" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="259" x="326" y="393.8857">autoEvaluateClusterings(Object): void</text><ellipse cx="317" cy="406.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="276" x="326" y="410.1826">ensureClusteringResult(Database): void</text></g></a><!--MD5=[ab738d497caecbdd52763596d8334661]
+class elki.evaluation.Evaluator--><a href="Evaluator.html" target="_top" title="Evaluator.html" xlink:actuate="onRequest" xlink:href="Evaluator.html" xlink:show="new" xlink:title="Evaluator.html" xlink:type="simple"><g id="elem_elki.evaluation.Evaluator"><rect codeLine="24" fill="#F1F1F1" height="48" id="elki.evaluation.Evaluator" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="99" x="97.5" y="180"/><ellipse cx="112.5" cy="196" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M108.4219,191.7656 L108.4219,189.6094 L115.8125,189.6094 L115.8125,191.7656 L113.3438,191.7656 L113.3438,199.8438 L115.8125,199.8438 L115.8125,202 L108.4219,202 L108.4219,199.8438 L110.8906,199.8438 L110.8906,191.7656 L108.4219,191.7656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="67" x="126.5" y="200.8467">Evaluator</text><line style="stroke:#181818;stroke-width:0.5;" x1="98.5" x2="195.5" y1="212" y2="212"/><line style="stroke:#181818;stroke-width:0.5;" x1="98.5" x2="195.5" y1="220" y2="220"/></g></a><!--MD5=[a0d3928d65a39e8e724dc2c13a237861]
+class elki.result.ResultProcessor--><a href="../result/ResultProcessor.html" target="_top" title="../result/ResultProcessor.html" xlink:actuate="onRequest" xlink:href="../result/ResultProcessor.html" xlink:show="new" xlink:title="../result/ResultProcessor.html" xlink:type="simple"><g id="elem_elki.result.ResultProcessor"><rect codeLine="43" fill="#F1F1F1" height="64.2969" id="elki.result.ResultProcessor" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="250" x="22" y="41"/><ellipse cx="87.25" cy="57" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M83.1719,52.7656 L83.1719,50.6094 L90.5625,50.6094 L90.5625,52.7656 L88.0938,52.7656 L88.0938,60.8438 L90.5625,60.8438 L90.5625,63 L83.1719,63 L83.1719,60.8438 L85.6406,60.8438 L85.6406,52.7656 L83.1719,52.7656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="111" x="107.75" y="61.8467">ResultProcessor</text><line style="stroke:#181818;stroke-width:0.5;" x1="23" x2="271" y1="73" y2="73"/><line style="stroke:#181818;stroke-width:0.5;" x1="23" x2="271" y1="81" y2="81"/><ellipse cx="33" cy="94.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="224" x="42" y="97.9951">processNewResult(Object): void</text></g></a><!--MD5=[719606eb910ec85728e7b54d9231ecf0]
+reverse link elki.evaluation.Evaluator to elki.evaluation.NoAutomaticEvaluation--><g id="link_elki.evaluation.Evaluator_elki.evaluation.NoAutomaticEvaluation"><path codeLine="26" d="M147,248.55 C147,271.68 147,299.57 147,320.48 " fill="none" id="elki.evaluation.Evaluator-backto-elki.evaluation.NoAutomaticEvaluation" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="140,248.21,147,228.21,154,248.21,140,248.21" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[1cd0bcc0818389460178aad4592b474a]
+reverse link elki.evaluation.Evaluator to elki.evaluation.AutomaticEvaluation--><g id="link_elki.evaluation.Evaluator_elki.evaluation.AutomaticEvaluation"><path codeLine="29" d="M214.06,236.69 C245.85,251.71 285.01,270.22 322.54,287.96 " fill="none" id="elki.evaluation.Evaluator-backto-elki.evaluation.AutomaticEvaluation" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="210.87,242.93,195.78,228.05,216.85,230.27,210.87,242.93" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a33757c56d3e7d8df55e44d81544a1d6]
+reverse link elki.result.ResultProcessor to elki.evaluation.Evaluator--><g id="link_elki.result.ResultProcessor_elki.evaluation.Evaluator"><path codeLine="32" d="M147,125.44 C147,144.25 147,164.61 147,179.74 " fill="none" id="elki.result.ResultProcessor-backto-elki.evaluation.Evaluator" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="140,125.23,147,105.23,154,125.23,140,125.23" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="215.5" y="439"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="215.5" y="448.2822">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[22c83af4f583da30ac6abb82bad56df8]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.evaluation {
+
+        class NoAutomaticEvaluation [[NoAutomaticEvaluation.html]] {
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.NoAutomaticEvaluation.Par [[NoAutomaticEvaluation.Par.html]] {
+            +make(): NoAutomaticEvaluation
+        }
+
+        class AutomaticEvaluation [[AutomaticEvaluation.html]] {
+            {static} -LOG: Logging
+            +processNewResult(Object): void
+            #autoEvaluateOutliers(Object): void
+            #autoEvaluateClusterings(Object): void
+            {static} +ensureClusteringResult(Database): void
+        }
+
+        class elki.evaluation.AutomaticEvaluation.Par [[AutomaticEvaluation.Par.html]] {
+            +make(): AutomaticEvaluation
+        }
+
+        interface Evaluator [[Evaluator.html]]
+
+        Evaluator <|.. NoAutomaticEvaluation
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.NoAutomaticEvaluation.Par
+        NoAutomaticEvaluation +- - elki.evaluation.NoAutomaticEvaluation.Par
+        Evaluator <|.. AutomaticEvaluation
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.AutomaticEvaluation.Par
+        AutomaticEvaluation +- - elki.evaluation.AutomaticEvaluation.Par
+        elki.result.ResultProcessor <|- - Evaluator
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.result {
+        interface ResultProcessor [[../result/ResultProcessor.html]] {
+            {abstract} +processNewResult(Object): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

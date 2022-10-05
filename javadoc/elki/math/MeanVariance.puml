@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MeanVariance\n<size:10>elki.math" as elki.math.MeanVariance [[MeanVariance.html]] {
+        #m2: double
+        +MeanVariance()
+        +MeanVariance(MeanVariance)
+        +put(double): void
+        +put(double, double): void
+        +put(Mean): void
+        +put(double[]): MeanVariance
+        +put(double[], double[]): MeanVariance
+        +getPopulationVariance(): double
+        +getSampleVariance(): double
+        +getSumOfSquares(): double
+        +getPopulationStddev(): double
+        +getSampleStddev(): double
+        {static} +newArray(int): MeanVariance[]
+        +reset(): MeanVariance
+        {static} +of(Relation<? extends NumberVector>): MeanVariance[]
+    }
+
+    class "<size:14>Mean\n<size:10>elki.math" as elki.math.Mean [[Mean.html]]
+
+    elki.math.Mean <|-- elki.math.MeanVariance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

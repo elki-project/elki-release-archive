@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleVector\n<size:10>elki.data" as elki.data.DoubleVector [[DoubleVector.html]] {
+        {static} +FACTORY: Factory
+        {static} +BYTE_SERIALIZER: ByteBufferSerializer<DoubleVector>
+        {static} +SHORT_SERIALIZER: ByteBufferSerializer<DoubleVector>
+        {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<DoubleVector>
+        -values: double[]
+        -DoubleVector(double[], boolean)
+        +DoubleVector(double[])
+        +getDimensionality(): int
+        +doubleValue(int): double
+        +longValue(int): long
+        +toArray(): double[]
+        {static} +copy(double[]): DoubleVector
+        {static} +wrap(double[]): DoubleVector
+    }
+
+    interface "<size:14>NumberVector\n<size:10>elki.data" as elki.data.NumberVector [[NumberVector.html]] {
+        {abstract} +doubleValue(int): double
+        {abstract} +longValue(int): long
+        {abstract} +toArray(): double[]
+    }
+    class "<size:14>DoubleVector.Factory\n<size:10>elki.data" as elki.data.DoubleVector.Factory [[DoubleVector.Factory.html]]
+    class "<size:14>DoubleVector.SmallSerializer\n<size:10>elki.data" as elki.data.DoubleVector.SmallSerializer [[DoubleVector.SmallSerializer.html]]
+    class "<size:14>DoubleVector.ShortSerializer\n<size:10>elki.data" as elki.data.DoubleVector.ShortSerializer [[DoubleVector.ShortSerializer.html]]
+    class "<size:14>DoubleVector.VariableSerializer\n<size:10>elki.data" as elki.data.DoubleVector.VariableSerializer [[DoubleVector.VariableSerializer.html]]
+
+    elki.data.NumberVector <|.. elki.data.DoubleVector
+    elki.data.DoubleVector +-- elki.data.DoubleVector.Factory
+    elki.data.DoubleVector +-- elki.data.DoubleVector.SmallSerializer
+    elki.data.DoubleVector +-- elki.data.DoubleVector.ShortSerializer
+    elki.data.DoubleVector +-- elki.data.DoubleVector.VariableSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

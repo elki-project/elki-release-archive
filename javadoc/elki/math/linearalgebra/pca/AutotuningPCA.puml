@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AutotuningPCA\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.AutotuningPCA [[AutotuningPCA.html]] {
+        -filter: EigenPairFilter
+        +AutotuningPCA(CovarianceMatrixBuilder, EigenPairFilter)
+        +processIds(DBIDs, Relation<? extends NumberVector>): PCAResult
+        +processQueryResult(DoubleDBIDList, Relation<? extends NumberVector>): PCAResult
+        {static} -reversed(double[]): double[]
+        -computeExplainedVariance(double[], int): double
+        -assertSortedByDistance(DoubleDBIDList): void
+    }
+
+    class "<size:14>PCARunner\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.PCARunner [[PCARunner.html]]
+    class "<size:14>AutotuningPCA.Cand\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.AutotuningPCA.Cand [[AutotuningPCA.Cand.html]]
+    class "<size:14>AutotuningPCA.Par\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.AutotuningPCA.Par [[AutotuningPCA.Par.html]]
+
+    elki.math.linearalgebra.pca.PCARunner <|-- elki.math.linearalgebra.pca.AutotuningPCA
+    elki.math.linearalgebra.pca.AutotuningPCA +-- elki.math.linearalgebra.pca.AutotuningPCA.Cand
+    elki.math.linearalgebra.pca.AutotuningPCA +-- elki.math.linearalgebra.pca.AutotuningPCA.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

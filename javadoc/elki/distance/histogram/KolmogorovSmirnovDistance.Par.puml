@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KolmogorovSmirnovDistance.Par\n<size:10>elki.distance.histogram" as elki.distance.histogram.KolmogorovSmirnovDistance.Par [[KolmogorovSmirnovDistance.Par.html]] {
+        +make(): KolmogorovSmirnovDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>KolmogorovSmirnovDistance\n<size:10>elki.distance.histogram" as elki.distance.histogram.KolmogorovSmirnovDistance [[KolmogorovSmirnovDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.histogram.KolmogorovSmirnovDistance.Par
+    elki.distance.histogram.KolmogorovSmirnovDistance +-- elki.distance.histogram.KolmogorovSmirnovDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

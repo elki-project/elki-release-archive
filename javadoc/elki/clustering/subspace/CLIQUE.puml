@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CLIQUE\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.CLIQUE [[CLIQUE.html]] {
+        {static} -LOG: Logging
+        #xsi: int
+        #tau: double
+        #prune: boolean
+        +CLIQUE(int, double, boolean)
+        +run(Relation<? extends NumberVector>): Clustering<SubspaceModel>
+        -determineClusters(List<CLIQUESubspace>): List<Pair<Subspace, ModifiableDBIDs>>
+        -findOneDimensionalDenseSubspaces(Relation<? extends NumberVector>): List<CLIQUESubspace>
+        -findDenseSubspaces(Relation<? extends NumberVector>, List<CLIQUESubspace>): List<CLIQUESubspace>
+        -initOneDimensionalUnits(Relation<? extends NumberVector>): Collection<CLIQUEUnit>
+        -updateMinMax(NumberVector, double[], double[]): void
+        -findOneDimensionalDenseSubspaceCandidates(Relation<? extends NumberVector>): List<CLIQUESubspace>
+        -findDenseSubspaceCandidates(Relation<? extends NumberVector>, List<CLIQUESubspace>): List<CLIQUESubspace>
+        -pruneDenseSubspaces(List<CLIQUESubspace>): List<CLIQUESubspace>
+        -computeMeans(List<CLIQUESubspace>): int[]
+        -computeDiffs(List<CLIQUESubspace>, int[], int[]): double[]
+        {static} -log2OrZero(double): double
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>SubspaceClusteringAlgorithm\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.SubspaceClusteringAlgorithm<SubspaceModel> [[SubspaceClusteringAlgorithm.html]]
+    class "<size:14>CLIQUE.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.CLIQUE.Par [[CLIQUE.Par.html]]
+
+    elki.clustering.subspace.SubspaceClusteringAlgorithm <|.. elki.clustering.subspace.CLIQUE
+    elki.clustering.subspace.CLIQUE +-- elki.clustering.subspace.CLIQUE.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

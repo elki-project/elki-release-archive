@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UKMeans\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.UKMeans [[UKMeans.html]] {
+        {static} -LOG: Logging
+        {static} -KEY: String
+        #k: int
+        #maxiter: int
+        #rnd: RandomFactory
+        +UKMeans(int, int, RandomFactory)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<DiscreteUncertainObject>): Clustering<KMeansModel>
+        #assignToNearestCluster(Relation<DiscreteUncertainObject>, List<double[]>, List<? extends ModifiableDBIDs>, WritableIntegerDataStore, double[]): boolean
+        #updateAssignment(DBIDIter, List<? extends ModifiableDBIDs>, WritableIntegerDataStore, int): boolean
+        #getExpectedRepDistance(NumberVector, DiscreteUncertainObject): double
+        #means(List<? extends ModifiableDBIDs>, List<double[]>, Relation<DiscreteUncertainObject>): List<double[]>
+        #logVarstat(DoubleStatistic, double[]): void
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<KMeansModel>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>UKMeans.Par\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.UKMeans.Par [[UKMeans.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.uncertain.UKMeans
+    elki.clustering.uncertain.UKMeans +-- elki.clustering.uncertain.UKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

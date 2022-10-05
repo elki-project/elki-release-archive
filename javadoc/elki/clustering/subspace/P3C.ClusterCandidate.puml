@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>P3C.ClusterCandidate\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.P3C.ClusterCandidate [[P3C.ClusterCandidate.html]] {
+        +dimensions: long[]
+        +ids: ModifiableDBIDs
+        +ClusterCandidate(Signature)
+    }
+
+    class "<size:14>P3C\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.P3C [[P3C.html]]
+
+    elki.clustering.subspace.P3C +-- elki.clustering.subspace.P3C.ClusterCandidate
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,75 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MathUtil\n<size:10>elki.math" as elki.math.MathUtil [[MathUtil.html]] {
+        {static} +TWOPI: double
+        {static} +HALFPI: double
+        {static} +QUARTERPI: double
+        {static} +ONEHALFPI: double
+        {static} +PISQUARE: double
+        {static} +SQRTPI: double
+        {static} +SQRTTWOPI: double
+        {static} +SQRTHALFPI: double
+        {static} +SQRT2: double
+        {static} +SQRT3: double
+        {static} +SQRT5: double
+        {static} +SQRTHALF: double
+        {static} +ONE_BY_SQRTPI: double
+        {static} +ONE_BY_SQRTTWOPI: double
+        {static} +LOG_ONE_BY_SQRTTWOPI: double
+        {static} +ONE_BY_LOG2: double
+        {static} +ONE_THIRD: double
+        {static} +SQRTTHIRD: double
+        {static} +LOG2: double
+        {static} +LOG3: double
+        {static} +LOG10: double
+        {static} +LOGPI: double
+        {static} +LOGPIHALF: double
+        {static} +LOGTWOPI: double
+        {static} +LOGSQRTTWOPI: double
+        {static} +LOGLOG2: double
+        {static} +DEG2RAD: double
+        {static} +RAD2DEG: double
+        {static} +EULERMASCHERONI: double
+        {static} +EMPTY_INTS: int[]
+        {static} +log2(double): double
+        {static} +factorial(int): long
+        {static} +binomialCoefficient(long, long): long
+        {static} +approximateFactorial(int): double
+        {static} +approximateBinomialCoefficient(int, int): double
+        {static} +sumFirstIntegers(long): long
+        {static} +randomDoubleArray(int, Random): double[]
+        {static} +deg2rad(double): double
+        {static} +rad2deg(double): double
+        {static} +normAngle(double): double
+        {static} +nextPow2Int(int): int
+        {static} +nextPow2Long(long): long
+        {static} +nextAllOnesInt(int): int
+        {static} +nextAllOnesLong(long): long
+        {static} +floatToDoubleUpper(float): double
+        {static} +floatToDoubleLower(float): double
+        {static} +log1mexp(double): double
+        {static} +exp(double): double
+        {static} +powi(double, int): double
+        {static} +ipowi(int, int): int
+        {static} +sequence(int, int): int[]
+        {static} +max(double, double): double
+        {static} +max(double, double, double): double
+        {static} +max(double, double, double, double): double
+        {static} +max(int, int): int
+        {static} +max(int, int, int): int
+        {static} +max(int, int, int, int): int
+        {static} +min(double, double): double
+        {static} +min(double, double, double): double
+        {static} +min(double, double, double, double): double
+        {static} +min(int, int): int
+        {static} +min(int, int, int): int
+        {static} +min(int, int, int, int): int
+        {static} +clamp(double, double, double): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

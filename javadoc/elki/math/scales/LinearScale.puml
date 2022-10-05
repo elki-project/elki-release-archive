@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearScale\n<size:10>elki.math.scales" as elki.math.scales.LinearScale [[LinearScale.html]] {
+        {static} +MAXTICKS: int
+        -ZOOMFACTOR: double
+        -min: double
+        -max: double
+        -res: double
+        -log10res: int
+        -delta: double
+        +LinearScale(double, double)
+        +getMin(): double
+        +getMax(): double
+        +getRes(): double
+        +getLog10Res(): double
+        +getScaled(double): double
+        +getUnscaled(double): double
+        +getRelativeScaled(double): double
+        +getRelativeUnscaled(double): double
+        +getScaled(double, double, double): double
+        +getUnscaled(double, double, double): double
+        +getRelativeScaled(double, double, double): double
+        +getRelativeUnscaled(double, double, double): double
+        +formatValue(double): String
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

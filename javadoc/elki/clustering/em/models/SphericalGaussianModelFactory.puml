@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SphericalGaussianModelFactory\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.SphericalGaussianModelFactory [[SphericalGaussianModelFactory.html]] {
+        #initializer: KMeansInitialization
+        +SphericalGaussianModelFactory(KMeansInitialization)
+        +buildInitialModels(Relation<? extends NumberVector>, int): List<SphericalGaussianModel>
+    }
+
+    interface "<size:14>EMClusterModelFactory\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.EMClusterModelFactory<NumberVector, EMModel> [[EMClusterModelFactory.html]] {
+        {abstract} +buildInitialModels(Relation<? extends O>, int): List<? extends EMClusterModel<O, M extends Model>>
+    }
+    class "<size:14>SphericalGaussianModelFactory.Par\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.SphericalGaussianModelFactory.Par
+
+    elki.clustering.em.models.EMClusterModelFactory <|.. elki.clustering.em.models.SphericalGaussianModelFactory
+    elki.clustering.em.models.SphericalGaussianModelFactory +-- elki.clustering.em.models.SphericalGaussianModelFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

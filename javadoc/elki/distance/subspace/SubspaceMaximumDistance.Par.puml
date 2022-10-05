@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SubspaceMaximumDistance.Par\n<size:10>elki.distance.subspace" as elki.distance.subspace.SubspaceMaximumDistance.Par [[SubspaceMaximumDistance.Par.html]] {
+        +make(): SubspaceMaximumDistance
+    }
+
+    abstract class "<size:14>AbstractDimensionsSelectingDistance.Par\n<size:10>elki.distance.subspace" as elki.distance.subspace.AbstractDimensionsSelectingDistance.Par [[AbstractDimensionsSelectingDistance.Par.html]]
+    class "<size:14>SubspaceMaximumDistance\n<size:10>elki.distance.subspace" as elki.distance.subspace.SubspaceMaximumDistance [[SubspaceMaximumDistance.html]]
+
+    elki.distance.subspace.AbstractDimensionsSelectingDistance.Par <|-- elki.distance.subspace.SubspaceMaximumDistance.Par
+    elki.distance.subspace.SubspaceMaximumDistance +-- elki.distance.subspace.SubspaceMaximumDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

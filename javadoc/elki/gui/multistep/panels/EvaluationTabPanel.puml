@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluationTabPanel\n<size:10>elki.gui.multistep.panels" as elki.gui.multistep.panels.EvaluationTabPanel [[EvaluationTabPanel.html]] {
+        {static} -serialVersionUID: long
+        -evals: EvaluationStep
+        -basedOnResult: WeakReference<?>
+        -input: InputTabPanel
+        -algs: AlgorithmTabPanel
+        +EvaluationTabPanel(InputTabPanel, AlgorithmTabPanel)
+        #configureStep(Parameterization): void
+        #executeStep(): void
+        +getEvaluationStep(): EvaluationStep
+        #getStatus(): Status
+        +panelUpdated(ParameterTabPanel): void
+        -checkDependencies(): void
+    }
+
+    abstract class "<size:14>ParameterTabPanel\n<size:10>elki.gui.multistep.panels" as elki.gui.multistep.panels.ParameterTabPanel [[ParameterTabPanel.html]] {
+        {abstract} #configureStep(Parameterization): void
+        {abstract} #getStatus(): Status
+        {abstract} #executeStep(): void
+    }
+
+    elki.gui.multistep.panels.ParameterTabPanel <|-- elki.gui.multistep.panels.EvaluationTabPanel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

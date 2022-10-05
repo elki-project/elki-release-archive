@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GaussianFittingFunction\n<size:10>elki.math.linearalgebra.fitting" as elki.math.linearalgebra.fitting.GaussianFittingFunction [[GaussianFittingFunction.html]] {
+        {static} +STATIC: GaussianFittingFunction
+        +eval(double, double[]): FittingFunctionResult
+    }
+
+    interface "<size:14>FittingFunction\n<size:10>elki.math.linearalgebra.fitting" as elki.math.linearalgebra.fitting.FittingFunction [[FittingFunction.html]] {
+        {abstract} +eval(double, double[]): FittingFunctionResult
+    }
+
+    elki.math.linearalgebra.fitting.FittingFunction <|.. elki.math.linearalgebra.fitting.GaussianFittingFunction
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

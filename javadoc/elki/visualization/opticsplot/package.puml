@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.opticsplot {
+
+        class OPTICSCut [[OPTICSCut.html]] {
+            {static} +makeOPTICSCut(E extends ClusterOrder, double): Clustering<Model>
+        }
+
+        class OPTICSPlot [[OPTICSPlot.html]] {
+            {static} -LOG: Logging
+            {static} -MIN_HEIGHT: int
+            {static} -MAX_HEIGHT: int
+            ~scale: LinearScale
+            ~width: int
+            ~height: int
+            ~ratio: double
+            ~co: ClusterOrder
+            ~colors: StylingPolicy
+            #plot: RenderedImage
+            #plotnum: int
+            +OPTICSPlot(ClusterOrder, StylingPolicy)
+            +replot(): void
+            +scaleToPixel(double): int
+            +scaleFromPixel(double): double
+            #computeScale(ClusterOrder): LinearScale
+            +getScale(): LinearScale
+            +getWidth(): int
+            +getHeight(): int
+            +getRatio(): double
+            +getPlot(): RenderedImage
+            +forgetRenderedImage(): void
+            +getSVGPlotURI(): String
+            +getLongName(): String
+            +getShortName(): String
+            {static} +plotForClusterOrder(ClusterOrder, VisualizerContext): OPTICSPlot
+            +getClusterOrder(): ClusterOrder
+        }
+
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

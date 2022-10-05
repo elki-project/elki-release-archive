@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FarthestPointsSplit.Par\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.FarthestPointsSplit.Par<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> {
+        +make(): FarthestPointsSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>>
+    }
+
+    abstract class "<size:14>AbstractMTreeSplit.Par\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit.Par<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> {
+        {abstract} +make(): MTreeSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>>
+    }
+    class "<size:14>FarthestPointsSplit\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.FarthestPointsSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> [[FarthestPointsSplit.html]]
+
+    elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit.Par <|-- elki.index.tree.metrical.mtreevariants.strategies.split.FarthestPointsSplit.Par
+    elki.index.tree.metrical.mtreevariants.strategies.split.FarthestPointsSplit +-- elki.index.tree.metrical.mtreevariants.strategies.split.FarthestPointsSplit.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

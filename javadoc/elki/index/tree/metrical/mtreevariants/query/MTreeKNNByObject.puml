@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MTreeKNNByObject\n<size:10>elki.index.tree.metrical.mtreevariants.query" as elki.index.tree.metrical.mtreevariants.query.MTreeKNNByObject<O> [[MTreeKNNByObject.html]] {
+        #index: AbstractMTree<O, ?, ?, ?>
+        #distanceQuery: DistanceQuery<O>
+        +MTreeKNNByObject(AbstractMTree<O, ?, ?, ?>, DistanceQuery<O>)
+        +getKNN(O, int): KNNList
+    }
+
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<O> [[../../../../../database/query/knn/KNNSearcher.html]] {
+        {abstract} +getKNN(O, int): KNNList
+    }
+
+    elki.database.query.knn.KNNSearcher <|.. elki.index.tree.metrical.mtreevariants.query.MTreeKNNByObject
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

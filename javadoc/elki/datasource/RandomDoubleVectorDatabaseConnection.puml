@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomDoubleVectorDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.RandomDoubleVectorDatabaseConnection [[RandomDoubleVectorDatabaseConnection.html]] {
+        {static} -LOG: Logging
+        #dim: int
+        #size: int
+        #rnd: RandomFactory
+        +RandomDoubleVectorDatabaseConnection(int, int, RandomFactory, List<? extends ObjectFilter>)
+        +loadData(): MultipleObjectsBundle
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.AbstractDatabaseConnection [[AbstractDatabaseConnection.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>RandomDoubleVectorDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.RandomDoubleVectorDatabaseConnection.Par [[RandomDoubleVectorDatabaseConnection.Par.html]]
+
+    elki.datasource.AbstractDatabaseConnection <|-- elki.datasource.RandomDoubleVectorDatabaseConnection
+    elki.datasource.RandomDoubleVectorDatabaseConnection +-- elki.datasource.RandomDoubleVectorDatabaseConnection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

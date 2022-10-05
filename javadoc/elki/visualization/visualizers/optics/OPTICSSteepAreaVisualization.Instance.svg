@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="69px" preserveAspectRatio="none" style="width:520px;height:69px;background:#FFFFFF;" version="1.1" viewBox="0 0 520 69" width="520px" zoomAndPan="magnify"><defs/><g><!--MD5=[e4d6dc84764a2a4a4c6dbc08b5860b33]
+class elki.visualization.visualizers.optics.AbstractOPTICSVisualization--><a href="AbstractOPTICSVisualization.html" target="_top" title="AbstractOPTICSVisualization.html" xlink:actuate="onRequest" xlink:href="AbstractOPTICSVisualization.html" xlink:show="new" xlink:title="AbstractOPTICSVisualization.html" xlink:type="simple"><g id="elem_elki.visualization.visualizers.optics.AbstractOPTICSVisualization"><rect codeLine="15" fill="#F1F1F1" height="37.9375" id="elki.visualization.visualizers.optics.AbstractOPTICSVisualization" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="231" x="7" y="7"/><ellipse cx="22" cy="25.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M22.1094,21.3125 L20.9531,26.3906 L23.2813,26.3906 L22.1094,21.3125 Z M20.625,19.0781 L23.6094,19.0781 L26.9688,31.4688 L24.5156,31.4688 L23.75,28.4063 L20.4688,28.4063 L19.7188,31.4688 L17.2813,31.4688 L20.625,19.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="199" x="36" y="24.9951">AbstractOPTICSVisualization</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="171" x="50" y="37.5791">elki.visualization.visualizers.optics</text></g></a><!--MD5=[83922bd1476237ed1226a0aad99055d1]
+class elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization--><a href="OPTICSSteepAreaVisualization.html" target="_top" title="OPTICSSteepAreaVisualization.html" xlink:actuate="onRequest" xlink:href="OPTICSSteepAreaVisualization.html" xlink:show="new" xlink:title="OPTICSSteepAreaVisualization.html" xlink:type="simple"><g id="elem_elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization"><rect codeLine="16" fill="#F1F1F1" height="37.9375" id="elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="240" x="273.5" y="7"/><ellipse cx="288.5" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M291.4688,31.6094 Q290.8906,31.9063 290.25,32.0469 Q289.6094,32.2031 288.9063,32.2031 Q286.4063,32.2031 285.0781,30.5625 Q283.7656,28.9063 283.7656,25.7813 Q283.7656,22.6563 285.0781,21 Q286.4063,19.3438 288.9063,19.3438 Q289.6094,19.3438 290.25,19.5 Q290.9063,19.6563 291.4688,19.9531 L291.4688,22.6719 Q290.8438,22.0938 290.25,21.8281 Q289.6563,21.5469 289.0313,21.5469 Q287.6875,21.5469 287,22.625 Q286.3125,23.6875 286.3125,25.7813 Q286.3125,27.875 287,28.9531 Q287.6875,30.0156 289.0313,30.0156 Q289.6563,30.0156 290.25,29.75 Q290.8438,29.4688 291.4688,28.8906 L291.4688,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="208" x="302.5" y="24.9951">OPTICSSteepAreaVisualization</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="159" x="327" y="37.5791">elki.visualization.visualizers.optics</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="160.25" y="49.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="160.25" y="59.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[c589f4b996190dce8ad251493a656ed6]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSSteepAreaVisualization.Instance\n<size:10>elki.visualization.visualizers.optics" as elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization.Instance [[OPTICSSteepAreaVisualization.Instance.html]] {
+        {static} #CSS_STEEP_UP: String
+        {static} #CSS_STEEP_DOWN: String
+        ~areas: SteepAreaResult
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        -addCSSClasses(): void
+    }
+
+    abstract class "<size:14>AbstractOPTICSVisualization\n<size:10>elki.visualization.visualizers.optics" as elki.visualization.visualizers.optics.AbstractOPTICSVisualization [[AbstractOPTICSVisualization.html]]
+    class "<size:14>OPTICSSteepAreaVisualization\n<size:10>elki.visualization.visualizers.optics" as elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization [[OPTICSSteepAreaVisualization.html]]
+
+    elki.visualization.visualizers.optics.AbstractOPTICSVisualization <|- - elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization.Instance
+    elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization +- - elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DendrogramVisualization.Positions\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization.Positions [[DendrogramVisualization.Positions.html]] {
+        {abstract} +set(int, double, double): void
+        {abstract} +getX(int): double
+        {abstract} +getY(int): double
+        {abstract} +combine(int, int, double, int): double
+    }
+
+    class "<size:14>DendrogramVisualization\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization [[DendrogramVisualization.html]]
+
+    elki.visualization.visualizers.visunproj.DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.Positions
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

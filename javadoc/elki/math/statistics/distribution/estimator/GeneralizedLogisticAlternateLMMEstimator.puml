@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GeneralizedLogisticAlternateLMMEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.GeneralizedLogisticAlternateLMMEstimator [[GeneralizedLogisticAlternateLMMEstimator.html]] {
+        {static} +STATIC: GeneralizedLogisticAlternateLMMEstimator
+        +getNumMoments(): int
+        +estimateFromLMoments(double[]): GeneralizedLogisticAlternateDistribution
+        +getDistributionClass(): Class<? super GeneralizedLogisticAlternateDistribution>
+    }
+
+    interface "<size:14>LMMDistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LMMDistributionEstimator<GeneralizedLogisticAlternateDistribution> [[LMMDistributionEstimator.html]] {
+        {abstract} +estimateFromLMoments(double[]): GeneralizedLogisticAlternateDistribution
+        {abstract} +getNumMoments(): int
+    }
+    class "<size:14>GeneralizedLogisticAlternateLMMEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.GeneralizedLogisticAlternateLMMEstimator.Par [[GeneralizedLogisticAlternateLMMEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.LMMDistributionEstimator <|.. elki.math.statistics.distribution.estimator.GeneralizedLogisticAlternateLMMEstimator
+    elki.math.statistics.distribution.estimator.GeneralizedLogisticAlternateLMMEstimator +-- elki.math.statistics.distribution.estimator.GeneralizedLogisticAlternateLMMEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

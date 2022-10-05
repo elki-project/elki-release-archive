@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>COPOutlierScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.COPOutlierScaling [[COPOutlierScaling.html]] {
+        -phi: double
+        -dist: Distribution
+        -inverted: boolean
+        +COPOutlierScaling(double)
+        +getScaled(double): double
+        +getMin(): double
+        +getMax(): double
+        +prepare(OutlierResult): void
+        +prepare(A, NumberArrayAdapter<?, A>): void
+    }
+
+    interface "<size:14>OutlierScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierScaling [[OutlierScaling.html]] {
+        {abstract} +prepare(OutlierResult): void
+        {abstract} +prepare(A, NumberArrayAdapter<?, A>): void
+    }
+    class "<size:14>COPOutlierScaling.Par\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.COPOutlierScaling.Par [[COPOutlierScaling.Par.html]]
+
+    elki.utilities.scaling.outlier.OutlierScaling <|.. elki.utilities.scaling.outlier.COPOutlierScaling
+    elki.utilities.scaling.outlier.COPOutlierScaling +-- elki.utilities.scaling.outlier.COPOutlierScaling.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

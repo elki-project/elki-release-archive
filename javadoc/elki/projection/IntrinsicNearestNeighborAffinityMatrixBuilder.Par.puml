@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntrinsicNearestNeighborAffinityMatrixBuilder.Par\n<size:10>elki.projection" as elki.projection.IntrinsicNearestNeighborAffinityMatrixBuilder.Par<O> [[IntrinsicNearestNeighborAffinityMatrixBuilder.Par.html]] {
+        {static} +ESTIMATOR_ID: OptionID
+        ~estimator: DistanceBasedIntrinsicDimensionalityEstimator
+        +configure(Parameterization): void
+        +make(): IntrinsicNearestNeighborAffinityMatrixBuilder<O>
+    }
+
+    class "<size:14>NearestNeighborAffinityMatrixBuilder.Par\n<size:10>elki.projection" as elki.projection.NearestNeighborAffinityMatrixBuilder.Par<O> [[NearestNeighborAffinityMatrixBuilder.Par.html]]
+    class "<size:14>IntrinsicNearestNeighborAffinityMatrixBuilder\n<size:10>elki.projection" as elki.projection.IntrinsicNearestNeighborAffinityMatrixBuilder<O> [[IntrinsicNearestNeighborAffinityMatrixBuilder.html]]
+
+    elki.projection.NearestNeighborAffinityMatrixBuilder.Par <|-- elki.projection.IntrinsicNearestNeighborAffinityMatrixBuilder.Par
+    elki.projection.IntrinsicNearestNeighborAffinityMatrixBuilder +-- elki.projection.IntrinsicNearestNeighborAffinityMatrixBuilder.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

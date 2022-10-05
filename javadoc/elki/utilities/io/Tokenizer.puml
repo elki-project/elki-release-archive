@@ -1,0 +1,45 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Tokenizer\n<size:10>elki.utilities.io" as elki.utilities.io.Tokenizer [[Tokenizer.html]] {
+        {static} -LOG: Logging
+        {static} +QUOTE_CHAR: String
+        -quoteChars: char[]
+        -matcher: Matcher
+        -input: CharSequence
+        -send: int
+        -start: int
+        -end: int
+        -index: int
+        -quoted: boolean
+        +Tokenizer(Pattern, String)
+        +initialize(CharSequence, int, int): void
+        +valid(): boolean
+        +advance(): Tokenizer
+        +getSubstring(): String
+        +getStrippedSubstring(): String
+        +getDouble(): double
+        +getIntBase10(): int
+        +getLongBase10(): long
+        +isEmpty(): boolean
+        -isQuote(int): char
+        +isQuoted(): boolean
+        +getStart(): int
+        +getEnd(): int
+        +getLength(): int
+        +getChar(int): char
+        +cleanup(): void
+    }
+
+    interface "<size:14>Iter\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.Iter [[../datastructures/iterator/Iter.html]] {
+        {abstract} +valid(): boolean
+        {abstract} +advance(): Iter
+    }
+
+    elki.utilities.datastructures.iterator.Iter <|.. elki.utilities.io.Tokenizer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

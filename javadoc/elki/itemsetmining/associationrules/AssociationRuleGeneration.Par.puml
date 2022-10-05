@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AssociationRuleGeneration.Par\n<size:10>elki.itemsetmining.associationrules" as elki.itemsetmining.associationrules.AssociationRuleGeneration.Par [[AssociationRuleGeneration.Par.html]] {
+        {static} +FREQUENTITEMALGO_ID: OptionID
+        {static} +INTERESTMEASURE_ID: OptionID
+        {static} +MINMEASURE_ID: OptionID
+        {static} +MAXMEASURE_ID: OptionID
+        #frequentItemAlgo: AbstractFrequentItemsetAlgorithm
+        #interestMeasure: InterestingnessMeasure
+        #minmeasure: double
+        #maxmeasure: double
+        +configure(Parameterization): void
+        +make(): AssociationRuleGeneration
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AssociationRuleGeneration\n<size:10>elki.itemsetmining.associationrules" as elki.itemsetmining.associationrules.AssociationRuleGeneration [[AssociationRuleGeneration.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.itemsetmining.associationrules.AssociationRuleGeneration.Par
+    elki.itemsetmining.associationrules.AssociationRuleGeneration +-- elki.itemsetmining.associationrules.AssociationRuleGeneration.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

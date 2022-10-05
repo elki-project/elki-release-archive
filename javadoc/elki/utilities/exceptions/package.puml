@@ -1,0 +1,81 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.exceptions {
+
+        class APIViolationException [[APIViolationException.html]] {
+            {static} -serialVersionUID: long
+            +APIViolationException(String)
+            +APIViolationException(String, Throwable)
+        }
+
+        class MissingPrerequisitesException [[MissingPrerequisitesException.html]] {
+            {static} -serialVersionUID: long
+            +MissingPrerequisitesException(String)
+            +MissingPrerequisitesException(String, Throwable)
+        }
+
+        class IncompatibleDataException [[IncompatibleDataException.html]] {
+            {static} -serialVersionUID: long
+            +IncompatibleDataException(String)
+            +IncompatibleDataException(String, Throwable)
+        }
+
+        class TooManyRetriesException [[TooManyRetriesException.html]] {
+            {static} -serialVersionUID: long
+            +TooManyRetriesException(String)
+            +TooManyRetriesException(String, Throwable)
+        }
+
+        class AbortException [[AbortException.html]] {
+            {static} -serialVersionUID: long
+            +AbortException(String)
+            +AbortException(String, Throwable)
+        }
+
+        class EmptyDataException [[EmptyDataException.html]] {
+            {static} -serialVersionUID: long
+        }
+
+        class InconsistentDataException [[InconsistentDataException.html]] {
+            {static} -serialVersionUID: long
+            +InconsistentDataException(String)
+            +InconsistentDataException(String, Throwable)
+        }
+
+        class NotImplementedException [[NotImplementedException.html]] {
+            {static} -serialVersionUID: long
+            +NotImplementedException(String, Throwable)
+            +NotImplementedException(String)
+            +NotImplementedException()
+        }
+
+        class ClassInstantiationException [[ClassInstantiationException.html]] {
+            {static} -serialVersionUID: long
+            +ClassInstantiationException()
+            +ClassInstantiationException(String)
+            +ClassInstantiationException(Throwable)
+            +ClassInstantiationException(String, Throwable)
+        }
+
+        AbortException <|-- APIViolationException
+        AbortException <|-- MissingPrerequisitesException
+        AbortException <|-- IncompatibleDataException
+        AbortException <|-- TooManyRetriesException
+        java.lang.RuntimeException <|-- AbortException
+        AbortException <|-- EmptyDataException
+        java.lang.RuntimeException <|-- InconsistentDataException
+        AbortException <|-- NotImplementedException
+        java.lang.ReflectiveOperationException <|-- ClassInstantiationException
+    }
+
+    namespace java.lang {
+        class RuntimeException {
+            {static} ~serialVersionUID: long
+        }
+        class ReflectiveOperationException {
+            {static} ~serialVersionUID: long
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

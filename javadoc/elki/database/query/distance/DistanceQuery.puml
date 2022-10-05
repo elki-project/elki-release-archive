@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DistanceQuery\n<size:10>elki.database.query.distance" as elki.database.query.distance.DistanceQuery<O> [[DistanceQuery.html]] {
+        {abstract} +distance(DBIDRef, DBIDRef): double
+        {abstract} +distance(O, DBIDRef): double
+        {abstract} +distance(DBIDRef, O): double
+        {abstract} +distance(O, O): double
+        {abstract} +getDistance(): Distance<? super O>
+        {abstract} +getRelation(): Relation<? extends O>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

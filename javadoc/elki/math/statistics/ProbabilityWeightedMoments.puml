@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProbabilityWeightedMoments\n<size:10>elki.math.statistics" as elki.math.statistics.ProbabilityWeightedMoments [[ProbabilityWeightedMoments.html]] {
+        {static} +alphaPWM(A, NumberArrayAdapter<?, A>, int): double[]
+        {static} +betaPWM(A, NumberArrayAdapter<?, A>, int): double[]
+        {static} +alphaBetaPWM(A, NumberArrayAdapter<?, A>, int): double[]
+        {static} +samLMR(A, NumberArrayAdapter<?, A>, int): double[]
+        {static} -normalizeLMR(double[], int): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

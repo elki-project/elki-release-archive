@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ModifiableHierarchy\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.ModifiableHierarchy<O> [[ModifiableHierarchy.html]] {
+        {abstract} +add(O, O): boolean
+        {abstract} +add(O): boolean
+        {abstract} +remove(O, O): boolean
+        {abstract} +remove(O): boolean
+        {abstract} +removeSubtree(O): boolean
+    }
+
+    interface "<size:14>Hierarchy\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.Hierarchy<O> [[Hierarchy.html]] {
+        {abstract} +size(): int
+        {abstract} +contains(O): boolean
+        {abstract} +numChildren(O): int
+        {abstract} +iterChildren(O): It<O>
+        {abstract} +iterChildrenReverse(O): It<O>
+        {abstract} +iterDescendants(O): It<O>
+        {abstract} +iterDescendantsSelf(O): It<O>
+        {abstract} +numParents(O): int
+        {abstract} +iterParents(O): It<O>
+        {abstract} +iterParentsReverse(O): It<O>
+        {abstract} +iterAncestors(O): It<O>
+        {abstract} +iterAncestorsSelf(O): It<O>
+        {abstract} +iterAll(): It<O>
+    }
+
+    elki.utilities.datastructures.hierarchy.Hierarchy <|-- elki.utilities.datastructures.hierarchy.ModifiableHierarchy
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

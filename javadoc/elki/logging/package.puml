@@ -1,0 +1,236 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.logging {
+
+        class CLISmartHandler [[CLISmartHandler.html]] {
+            -out: Writer
+            -err: Writer
+            -msgformat: Formatter
+            -debugformat: Formatter
+            -errformat: Formatter
+            +CLISmartHandler(OutputStream, OutputStream)
+            +CLISmartHandler()
+            +close(): void
+            +flush(): void
+            +publish(LogRecord): void
+        }
+
+        class OutputStreamLogger [[OutputStreamLogger.html]] {
+            -charsSinceNewline: int
+            {static} #CARRIAGE_RETURN: char
+            {static} +UNIX_NEWLINE: char
+            {static} +NEWLINE: String
+            {static} +NEWLINEC: char[]
+            {static} +WHITESPACE: String
+            +OutputStreamLogger(OutputStream)
+            +OutputStreamLogger(OutputStream, String)
+            +OutputStreamLogger(OutputStream, Charset)
+            +OutputStreamLogger(OutputStream, CharsetEncoder)
+            +close(): void
+            -tailingNonNewline(char[], int, int): int
+            -tailingNonNewline(String, int, int): int
+            -countNonNewline(char[], int, int): int
+            -countNonNewline(String, int, int): int
+            +write(char[], int, int): void
+            +write(String, int, int): void
+        }
+
+        class ELKILogRecord [[ELKILogRecord.html]] {
+            {static} -serialVersionUID: long
+            -needToInferCaller: boolean
+            {static} +IGNORE_CLASSES: String[]
+            {static} -START_TRACE_AT: String
+            +ELKILogRecord(Level, CharSequence)
+            +getSourceClassName(): String
+            +setSourceClassName(String): void
+            +getSourceMethodName(): String
+            +setSourceMethodName(String): void
+            -inferCallerELKI(): void
+        }
+
+        class LoggingUtil [[LoggingUtil.html]] {
+            {static} +logExpensive(Level, String, Throwable): void
+            {static} +logExpensive(Level, String): void
+            {static} +exception(Throwable): void
+            {static} +exception(String, Throwable): void
+            {static} +warning(String): void
+            {static} +warning(String, Throwable): void
+            {static} +message(String): void
+            {static} +message(String, Throwable): void
+            {static} -inferCaller(): String[]
+        }
+
+        class LoggingConfiguration [[LoggingConfiguration.html]] {
+            {static} +DEBUG: boolean
+            {static} -LOGGING_PROPERTIES_FILE: String
+            {static} +TOPLEVEL_PACKAGE: String
+            {static} -LOGGER_GLOBAL_TOP: Logger
+            {static} -LOGGER_ELKI_TOP: Logger
+            {static} -LOGGER_TIME_TOP: Logger
+            {static} -confbase: String
+            -LoggingConfiguration(String, String)
+            {static} +reconfigureLogging(String, String): void
+            -privateReconfigureLogging(String, String): void
+            {static} -openSystemFile(String): InputStream
+            {static} +assertConfigured(): void
+            {static} +setVerbose(Level): void
+            {static} +setStatistics(): void
+            {static} +addHandler(Handler): void
+            {static} +replaceDefaultHandler(Handler): void
+            {static} +setLevelFor(String, String): void
+            {static} +setDefaultLevel(Level): void
+        }
+
+        class ErrorFormatter [[ErrorFormatter.html]] {
+            {static} +PRUNE: String[]
+            -NULLMSG: String
+            +format(LogRecord): String
+            -appendCauses(StringBuilder, Throwable): void
+        }
+
+        class MessageFormatter [[MessageFormatter.html]] {
+            +format(LogRecord): String
+        }
+
+        class Logging [[Logging.html]] {
+            {static} -loggers: HashMap<String, Logging>
+            -logger: Logger
+            +Logging(Logger)
+            {static} +getLogger(Class<?>): Logging
+            {static} +getLogger(String): Logging
+            +isLoggable(Level): boolean
+            +isStatistics(): boolean
+            +isVerbose(): boolean
+            +isInfo(): boolean
+            +isVeryVerbose(): boolean
+            +isDebugging(): boolean
+            +isDebuggingFine(): boolean
+            +isDebuggingFiner(): boolean
+            +isDebuggingFinest(): boolean
+            +log(Level, CharSequence): void
+            +log(Level, CharSequence, Throwable): void
+            +log(LogRecord): void
+            +error(CharSequence, Throwable): void
+            +error(CharSequence): void
+            +warning(CharSequence, Throwable): void
+            +warning(CharSequence): void
+            +statistics(CharSequence, Throwable): void
+            +statistics(CharSequence): void
+            +verbose(CharSequence, Throwable): void
+            +verbose(CharSequence): void
+            +info(CharSequence, Throwable): void
+            +info(CharSequence): void
+            +veryverbose(CharSequence, Throwable): void
+            +veryverbose(CharSequence): void
+            +debug(CharSequence, Throwable): void
+            +debug(CharSequence): void
+            +debugFine(CharSequence, Throwable): void
+            +debugFine(CharSequence): void
+            +fine(CharSequence, Throwable): void
+            +fine(CharSequence): void
+            +debugFiner(CharSequence, Throwable): void
+            +debugFiner(CharSequence): void
+            +finer(CharSequence, Throwable): void
+            +finer(CharSequence): void
+            +debugFinest(CharSequence, Throwable): void
+            +debugFinest(CharSequence): void
+            +finest(CharSequence, Throwable): void
+            +finest(CharSequence): void
+            +exception(CharSequence, Throwable): void
+            +exception(Throwable): void
+            +progress(Progress): void
+            +newCounter(String): Counter
+            +newDuration(String): Duration
+            +incrementProcessed(AbstractProgress): void
+            +ensureCompleted(FiniteProgress): void
+            +beginStep(StepProgress, int, String): void
+            +statistics(Statistic): void
+        }
+
+        class elki.logging.Logging.Level [[Logging.Level.html]] {
+            {static} +VERBOSE: Level
+            {static} -serialVersionUID: long
+            +Level(String, int)
+            {static} +parse(String): Level
+        }
+
+        java.util.logging.Handler <|-- CLISmartHandler
+        CLISmartHandler --> elki.logging.progress.ProgressTracker: ptrack
+        java.io.OutputStreamWriter <|-- OutputStreamLogger
+        java.util.logging.LogRecord <|-- ELKILogRecord
+        LoggingConfiguration --> LoggingConfiguration: config
+        java.util.logging.Formatter <|-- ErrorFormatter
+        java.util.logging.Formatter <|-- MessageFormatter
+        Logging --> elki.logging.progress.StepProgress: completed
+        Logging --> elki.logging.progress.IndefiniteProgress: completed
+        java.util.logging.Level <|-- elki.logging.Logging.Level
+        Logging +-- elki.logging.Logging.Level
+        elki.logging.Logging.Level --> elki.logging.Logging.Level: STATISTICS\nVERYVERBOSE
+    }
+
+    namespace java.util.logging {
+        abstract class Handler {
+            {static} -offValue: int
+            -manager: LogManager
+            -filter: Filter
+            -formatter: Formatter
+            -logLevel: Level
+            -errorManager: ErrorManager
+            -encoding: String
+            {abstract} +publish(LogRecord): void
+            {abstract} +flush(): void
+            {abstract} +close(): void
+        }
+        class LogRecord {
+            {static} -globalSequenceNumber: AtomicLong
+            {static} -MIN_SEQUENTIAL_THREAD_ID: int
+            {static} -nextThreadId: AtomicInteger
+            {static} -threadIds: ThreadLocal<Integer>
+            -level: Level
+            -sequenceNumber: long
+            -sourceClassName: String
+            -sourceMethodName: String
+            -message: String
+            -threadID: int
+            -thrown: Throwable
+            -loggerName: String
+            -resourceBundleName: String
+            -instant: Instant
+            {static} -serialPersistentFields: ObjectStreamField[]
+            -needToInferCaller: boolean
+            -parameters: Object[]
+            -resourceBundle: ResourceBundle
+            {static} -serialVersionUID: long
+        }
+        abstract class Formatter {
+            {abstract} +format(LogRecord): String
+        }
+        class Level {
+            {static} -defaultBundle: String
+            -name: String
+            -value: int
+            -resourceBundleName: String
+            -localizedLevelName: String
+            -cachedLocale: Locale
+            {static} +OFF: Level
+            {static} +SEVERE: Level
+            {static} +WARNING: Level
+            {static} +INFO: Level
+            {static} +CONFIG: Level
+            {static} +FINE: Level
+            {static} +FINER: Level
+            {static} +FINEST: Level
+            {static} +ALL: Level
+            {static} -standardLevels: Level[]
+            {static} -serialVersionUID: long
+        }
+    }
+
+    namespace java.io {
+        class OutputStreamWriter {
+            -se: StreamEncoder
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

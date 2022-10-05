@@ -1,0 +1,39 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PearsonCorrelation\n<size:10>elki.math" as elki.math.PearsonCorrelation [[PearsonCorrelation.html]] {
+        -sumXX: double
+        -sumYY: double
+        -sumXY: double
+        -sumX: double
+        -sumY: double
+        -sumWe: double
+        +put(double, double, double): void
+        +put(double, double): void
+        +getCorrelation(): double
+        +getCount(): double
+        +getMeanX(): double
+        +getMeanY(): double
+        +getNaiveCovariance(): double
+        +getSampleCovariance(): double
+        +getPopulationVarianceX(): double
+        +getSampleVarianceX(): double
+        +getPopulationStddevX(): double
+        +getSampleStddevX(): double
+        +getPopulationVarianceY(): double
+        +getSampleVarianceY(): double
+        +getPopulationStddevY(): double
+        +getSampleStddevY(): double
+        +reset(): void
+        {static} +coefficient(double[], double[]): double
+        {static} +coefficient(NumberVector, NumberVector): double
+        {static} +weightedCoefficient(double[], double[], double[]): double
+        {static} +weightedCoefficient(NumberVector, NumberVector, double[]): double
+        {static} +weightedCoefficient(NumberVector, NumberVector, NumberVector): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

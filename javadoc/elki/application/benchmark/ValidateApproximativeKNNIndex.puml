@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ValidateApproximativeKNNIndex\n<size:10>elki.application.benchmark" as elki.application.benchmark.ValidateApproximativeKNNIndex<O> [[ValidateApproximativeKNNIndex.html]] {
+        {static} -LOG: Logging
+        #k: int
+        #queries: DatabaseConnection
+        #sampling: double
+        #forcelinear: boolean
+        #random: RandomFactory
+        #pattern: Pattern
+        +ValidateApproximativeKNNIndex(InputStep, Distance<? super O>, int, DatabaseConnection, double, boolean, RandomFactory, Pattern)
+        +run(): void
+    }
+
+    abstract class "<size:14>AbstractDistanceBasedApplication\n<size:10>elki.application" as elki.application.AbstractDistanceBasedApplication<O> [[../AbstractDistanceBasedApplication.html]]
+    class "<size:14>ValidateApproximativeKNNIndex.Par\n<size:10>elki.application.benchmark" as elki.application.benchmark.ValidateApproximativeKNNIndex.Par<O>
+
+    elki.application.AbstractDistanceBasedApplication <|-- elki.application.benchmark.ValidateApproximativeKNNIndex
+    elki.application.benchmark.ValidateApproximativeKNNIndex +-- elki.application.benchmark.ValidateApproximativeKNNIndex.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

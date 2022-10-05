@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractUncertainObject\n<size:10>elki.data.uncertain" as elki.data.uncertain.AbstractUncertainObject [[AbstractUncertainObject.html]] {
+        {static} +DEFAULT_TRY_LIMIT: int
+        #bounds: SpatialComparable
+        {static} #computeBounds(NumberVector[]): HyperBoundingBox
+        {abstract} +drawSample(Random): DoubleVector
+        +getDimensionality(): int
+        +getMin(int): double
+        +getMax(int): double
+        +getValue(int): Double
+        {abstract} +getCenterOfMass(): DoubleVector
+    }
+
+    interface "<size:14>UncertainObject\n<size:10>elki.data.uncertain" as elki.data.uncertain.UncertainObject [[UncertainObject.html]] {
+        {abstract} +drawSample(Random): DoubleVector
+        {abstract} +getCenterOfMass(): DoubleVector
+    }
+
+    elki.data.uncertain.UncertainObject <|.. elki.data.uncertain.AbstractUncertainObject
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

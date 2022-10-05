@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DTWDistance.Par\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.DTWDistance.Par [[DTWDistance.Par.html]] {
+        +make(): DTWDistance
+    }
+
+    abstract class "<size:14>AbstractEditDistance.Par\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.AbstractEditDistance.Par [[AbstractEditDistance.Par.html]]
+    class "<size:14>DTWDistance\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.DTWDistance [[DTWDistance.html]]
+
+    elki.distance.timeseries.AbstractEditDistance.Par <|-- elki.distance.timeseries.DTWDistance.Par
+    elki.distance.timeseries.DTWDistance +-- elki.distance.timeseries.DTWDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

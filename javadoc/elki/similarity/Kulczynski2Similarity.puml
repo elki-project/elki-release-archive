@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Kulczynski2Similarity\n<size:10>elki.similarity" as elki.similarity.Kulczynski2Similarity [[Kulczynski2Similarity.html]] {
+        {static} +STATIC_CONTINUOUS: Kulczynski2Similarity
+        +similarity(NumberVector, NumberVector): double
+    }
+
+    abstract class "<size:14>AbstractVectorSimilarity\n<size:10>elki.similarity" as elki.similarity.AbstractVectorSimilarity [[AbstractVectorSimilarity.html]]
+    class "<size:14>Kulczynski2Similarity.Par\n<size:10>elki.similarity" as elki.similarity.Kulczynski2Similarity.Par [[Kulczynski2Similarity.Par.html]]
+
+    elki.similarity.AbstractVectorSimilarity <|-- elki.similarity.Kulczynski2Similarity
+    elki.similarity.Kulczynski2Similarity +-- elki.similarity.Kulczynski2Similarity.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

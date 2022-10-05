@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>StaticDBIDs\n<size:10>elki.database.ids" as elki.database.ids.StaticDBIDs [[StaticDBIDs.html]]
+
+    interface "<size:14>DBIDs\n<size:10>elki.database.ids" as elki.database.ids.DBIDs [[DBIDs.html]] {
+        {abstract} +iter(): DBIDIter
+        {abstract} +size(): int
+        {abstract} +contains(DBIDRef): boolean
+    }
+
+    elki.database.ids.DBIDs <|-- elki.database.ids.StaticDBIDs
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

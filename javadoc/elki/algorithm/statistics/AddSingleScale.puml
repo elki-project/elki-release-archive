@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AddSingleScale\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.AddSingleScale [[AddSingleScale.html]] {
+        ~minmax: double[]
+        +AddSingleScale(double[])
+        +run(Database): Void
+        -run(Relation<? extends NumberVector>): ScalesResult
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    class "<size:14>AddSingleScale.Par\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.AddSingleScale.Par [[AddSingleScale.Par.html]]
+
+    elki.Algorithm <|.. elki.algorithm.statistics.AddSingleScale
+    elki.algorithm.statistics.AddSingleScale +-- elki.algorithm.statistics.AddSingleScale.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

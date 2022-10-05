@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BetulaGMM\n<size:10>elki.clustering.em" as elki.clustering.em.BetulaGMM [[BetulaGMM.html]] {
+        {static} -LOG: Logging
+        ~cffactory: Factory<?>
+        ~k: int
+        -delta: double
+        ~maxiter: int
+        -prior: double
+        -soft: boolean
+        {static} #MIN_LOGLIKELIHOOD: double
+        {static} +SOFT_TYPE: SimpleTypeInformation<double[]>
+        ~initializer: BetulaClusterModelFactory<?>
+        +BetulaGMM(Factory<?>, double, int, int, boolean, BetulaClusterModelFactory<?>, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<NumberVector>): Clustering<EMModel>
+        -isSoft(): boolean
+        +assignProbabilitiesToInstances(ArrayList<? extends ClusterFeature>, List<? extends BetulaClusterModel>, Map<ClusterFeature, double[]>): double
+        +assignProbabilitiesToInstances(Relation<? extends NumberVector>, List<? extends BetulaClusterModel>, WritableDataStore<double[]>): double
+        +recomputeCovarianceMatrices(ArrayList<? extends ClusterFeature>, Map<ClusterFeature, double[]>, List<? extends BetulaClusterModel>, double, int): void
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<EMModel>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>BetulaGMM.Par\n<size:10>elki.clustering.em" as elki.clustering.em.BetulaGMM.Par [[BetulaGMM.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.em.BetulaGMM
+    elki.clustering.em.BetulaGMM +-- elki.clustering.em.BetulaGMM.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

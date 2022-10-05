@@ -1,0 +1,124 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.data.synthetic.bymodel {
+
+        class GeneratorSingleCluster [[GeneratorSingleCluster.html]] {
+            -axes: List<Distribution>
+            -rnds: List<Random>
+            -trans: AffineTransformation
+            -dim: int
+            -clipmin: double[]
+            -clipmax: double[]
+            -densitycorrection: double
+            -size: int
+            -name: String
+            -retries: int
+            -discarded: int
+            -random: Random
+            +GeneratorSingleCluster(String, int, double, Random)
+            +addGenerator(Distribution, Random): void
+            +addRotation(int, int, double): void
+            +addTranslation(double[]): void
+            +setClipping(double[], double[]): void
+            +getDim(): int
+            -testClipping(double[]): boolean
+            +generate(int): List<double[]>
+            +getDensity(double[]): double
+            +getTransformation(): AffineTransformation
+            +getClipmin(): double[]
+            +getClipmax(): double[]
+            +getSize(): int
+            +getName(): String
+            +getDiscarded(): int
+            +incrementDiscarded(): void
+            +getRetries(): int
+            +getDensityCorrection(): double
+            +setDensityCorrection(double): void
+            +getNewRandomGenerator(): Random
+            +makeModel(): Model
+            +getDistribution(int): Distribution
+            +computeMean(): double[]
+        }
+
+        class GeneratorStatic [[GeneratorStatic.html]] {
+            +name: String
+            +points: List<double[]>
+            +GeneratorStatic(String, List<double[]>)
+            +generate(int): List<double[]>
+            +getDensity(double[]): double
+            +getDim(): int
+            +getName(): String
+            +getSize(): int
+            +makeModel(): Model
+            +computeMean(): double[]
+        }
+
+        class GeneratorMain [[GeneratorMain.html]] {
+            {static} -LOG: Logging
+            #testAgainstModel: boolean
+            #relabelClusters: Pattern
+            #relabelDistance: boolean
+            +addCluster(GeneratorInterface): void
+            +generate(): MultipleObjectsBundle
+            -initLabelsAndModels(ArrayList<GeneratorInterface>, ClassLabel[], Model[], Pattern): void
+            +isTestAgainstModel(): boolean
+            +setTestAgainstModel(boolean): void
+            +setReassignPattern(Pattern): void
+            +setReassignByDistance(boolean): void
+        }
+
+        class elki.data.synthetic.bymodel.GeneratorMain.AssignPoint {
+            +getAssignment(int, double[]): int
+            +newCluster(int, GeneratorInterface): void
+        }
+
+        class elki.data.synthetic.bymodel.GeneratorMain.TestModel [[GeneratorMain.TestModel.html]] {
+            +getAssignment(int, double[]): int
+        }
+
+        class elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDensity [[GeneratorMain.AssignLabelsByDensity.html]] {
+            -labels: ClassLabel[]
+            +AssignLabelsByDensity(ClassLabel[])
+            +newCluster(int, GeneratorInterface): void
+            +getAssignment(int, double[]): int
+        }
+
+        class elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDistance [[GeneratorMain.AssignLabelsByDistance.html]] {
+            -centers: double[]
+            +AssignLabelsByDistance(ClassLabel[])
+            -clusterCenters(ArrayList<GeneratorInterface>, ClassLabel[]): double[]
+            +getAssignment(int, double[]): int
+        }
+
+        interface GeneratorInterface [[GeneratorInterface.html]] {
+            {abstract} +getSize(): int
+            {abstract} +getDim(): int
+            {abstract} +generate(int): List<double[]>
+            {abstract} +getDensity(double[]): double
+            {abstract} +getName(): String
+            {abstract} +makeModel(): Model
+            {abstract} +computeMean(): double[]
+        }
+
+        interface GeneratorInterfaceDynamic [[GeneratorInterfaceDynamic.html]] {
+            {abstract} +getDiscarded(): int
+            {abstract} +getRetries(): int
+            {abstract} +incrementDiscarded(): void
+        }
+
+        GeneratorInterfaceDynamic <|.. GeneratorSingleCluster
+        GeneratorInterface <|.. GeneratorStatic
+        GeneratorMain --> "*" GeneratorInterface: generators
+        GeneratorMain +-- elki.data.synthetic.bymodel.GeneratorMain.AssignPoint
+        elki.data.synthetic.bymodel.GeneratorMain.AssignPoint <|-- elki.data.synthetic.bymodel.GeneratorMain.TestModel
+        GeneratorMain +-- elki.data.synthetic.bymodel.GeneratorMain.TestModel
+        elki.data.synthetic.bymodel.GeneratorMain.AssignPoint <|-- elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDensity
+        GeneratorMain +-- elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDensity
+        elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDensity --> GeneratorInterface: curclus
+        elki.data.synthetic.bymodel.GeneratorMain.AssignPoint <|-- elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDistance
+        GeneratorMain +-- elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDistance
+        GeneratorInterface <|-- GeneratorInterfaceDynamic
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

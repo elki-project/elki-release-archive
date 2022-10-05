@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LaplaceMLEEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LaplaceMLEEstimator [[LaplaceMLEEstimator.html]] {
+        {static} +STATIC: LaplaceMLEEstimator
+        +estimate(A, NumberArrayAdapter<?, A>): LaplaceDistribution
+        +getDistributionClass(): Class<? super LaplaceDistribution>
+    }
+
+    interface "<size:14>DistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.DistributionEstimator<LaplaceDistribution> [[DistributionEstimator.html]] {
+        {abstract} +estimate(A, NumberArrayAdapter<?, A>): LaplaceDistribution
+        {abstract} +getDistributionClass(): Class<? super Distribution>
+    }
+    class "<size:14>LaplaceMLEEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LaplaceMLEEstimator.Par [[LaplaceMLEEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.DistributionEstimator <|.. elki.math.statistics.distribution.estimator.LaplaceMLEEstimator
+    elki.math.statistics.distribution.estimator.LaplaceMLEEstimator +-- elki.math.statistics.distribution.estimator.LaplaceMLEEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

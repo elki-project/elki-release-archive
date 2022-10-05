@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMLOutputHandler\n<size:10>elki.result" as elki.result.KMLOutputHandler [[KMLOutputHandler.html]] {
+        {static} -LOG: Logging
+        {static} -NUMSTYLES: int
+        ~filename: Path
+        ~scaling: OutlierScaling
+        -compat: boolean
+        -autoopen: boolean
+        +KMLOutputHandler(Path, OutlierScaling, boolean, boolean)
+        +processNewResult(Object): void
+        -writeOutlierResult(XMLStreamWriter, OutlierResult, Database): void
+        -writeClusteringResult(XMLStreamWriter, Clustering<Model>, Database): void
+        -buildHullsRecursively(Cluster<Model>, Hierarchy<Cluster<Model>>, Map<Object, DoubleObjPair<Polygon>>, Relation<? extends NumberVector>): DoubleObjPair<Polygon>
+        -makeDescription(Collection<Relation<?>>, DBIDRef): StringBuilder
+        -makeDescription(Cluster<?>): StringBuilder
+        -writeNewlineOnDebug(XMLStreamWriter): void
+        {static} +getColorForValue(double): Color
+    }
+
+    interface "<size:14>ResultHandler\n<size:10>elki.result" as elki.result.ResultHandler [[ResultHandler.html]]
+    class "<size:14>KMLOutputHandler.Par\n<size:10>elki.result" as elki.result.KMLOutputHandler.Par [[KMLOutputHandler.Par.html]]
+
+    elki.result.ResultHandler <|.. elki.result.KMLOutputHandler
+    elki.result.KMLOutputHandler +-- elki.result.KMLOutputHandler.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

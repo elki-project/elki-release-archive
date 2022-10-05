@@ -1,0 +1,335 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.persistent {
+
+        class LRUCachePageFileFactory<P extends Page> [[LRUCachePageFileFactory.html]] {
+            -cacheSize: int
+            +LRUCachePageFileFactory(PageFileFactory<P extends Page>, int)
+            +newPageFile(Class<P extends Page>): PageFile<P extends Page>
+            +getPageSize(): int
+        }
+
+        class elki.persistent.LRUCachePageFileFactory.Par [[LRUCachePageFileFactory.Par.html]] {
+            {static} +CACHE_SIZE_ID: OptionID
+            {static} +PAGEFILE_ID: OptionID
+            #cacheSize: int
+            +configure(Parameterization): void
+            +make(): LRUCachePageFileFactory<Page>
+        }
+
+        class OnDiskArrayPageFileFactory<P extends Page> [[OnDiskArrayPageFileFactory.html]] {
+            -fileName: Path
+            +OnDiskArrayPageFileFactory(int, Path)
+            +newPageFile(Class<P extends Page>): PageFile<P extends Page>
+        }
+
+        class elki.persistent.OnDiskArrayPageFileFactory.Par {
+            -fileName: Path
+            {static} +FILE_ID: OptionID
+            +configure(Parameterization): void
+            +make(): OnDiskArrayPageFileFactory<Page>
+        }
+
+        class PersistentPageFile<P extends ExternalizablePage> [[PersistentPageFile.html]] {
+            {static} -LOG: Logging
+            {static} -EMPTY_PAGE: int
+            {static} -FILLED_PAGE: int
+            -file: FileChannel
+            #pageclass: Class<P extends ExternalizablePage>
+            -existed: boolean
+            +PersistentPageFile(int, Path, Class<P extends ExternalizablePage>)
+            +readPage(int): P extends ExternalizablePage
+            +deletePage(int): void
+            +writePage(int, P extends ExternalizablePage): void
+            +close(): void
+            +clear(): void
+            -byteArrayToPage(byte[]): P extends ExternalizablePage
+            -pageToByteArray(P extends ExternalizablePage): byte[]
+            +getFile(): FileChannel
+            +setNextPageID(int): void
+            +initialize(PageHeader): boolean
+            #getLogger(): Logging
+        }
+
+        class OnDiskArrayPageFile<P extends Page> [[OnDiskArrayPageFile.html]] {
+            {static} -LOG: Logging
+            {static} -EMPTY_PAGE: int
+            {static} -FILLED_PAGE: int
+            -filename: Path
+            -existed: boolean
+            +OnDiskArrayPageFile(int, Path)
+            +readPage(int): P extends Page
+            +deletePage(int): void
+            +writePage(int, P extends Page): void
+            +close(): void
+            +clear(): void
+            -byteBufferToPage(ByteBuffer): P extends Page
+            -pageToByteArray(P extends Page): byte[]
+            +initialize(PageHeader): boolean
+            #getLogger(): Logging
+        }
+
+        class PersistentPageFileFactory<P extends ExternalizablePage> [[PersistentPageFileFactory.html]] {
+            -fileName: Path
+            +PersistentPageFileFactory(int, Path)
+            +newPageFile(Class<P extends ExternalizablePage>): PageFile<P extends ExternalizablePage>
+        }
+
+        class elki.persistent.PersistentPageFileFactory.Par {
+            -fileName: Path
+            {static} +FILE_ID: OptionID
+            +configure(Parameterization): void
+            +make(): PersistentPageFileFactory<ExternalizablePage>
+        }
+
+        class LRUCache<P extends Page> [[LRUCache.html]] {
+            {static} -LOG: Logging
+            #cacheSizeBytes: int
+            #cacheSize: int
+            -map: LinkedHashMap<Integer, P extends Page>
+            +LRUCache(int, PageFile<P extends Page>)
+            +readPage(int): P extends Page
+            +writePage(int, P extends Page): void
+            +deletePage(int): void
+            #expirePage(P extends Page): void
+            +getNextPageID(): int
+            +setNextPageID(int): void
+            +getPageSize(): int
+            +initialize(PageHeader): boolean
+            +close(): void
+            +flush(): void
+            +clear(): void
+            +setCacheSize(int): void
+            +logStatistics(): void
+            #getLogger(): Logging
+        }
+
+        abstract class AbstractExternalizablePage [[AbstractExternalizablePage.html]] {
+            {static} -serialVersionUID: long
+            -id: int
+            -dirty: boolean
+            +getPageID(): int
+            +setPageID(int): void
+            +isDirty(): boolean
+            +setDirty(boolean): void
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        class DefaultPageHeader [[DefaultPageHeader.html]] {
+            {static} -SIZE: int
+            {static} -FILE_VERSION: int
+            -pageSize: int
+            +DefaultPageHeader()
+            +DefaultPageHeader(int)
+            +size(): int
+            +readHeader(ByteBuffer): void
+            +writeHeader(ByteBuffer): void
+            +getPageSize(): int
+            +getReservedPages(): int
+        }
+
+        interface ExternalizablePage [[ExternalizablePage.html]]
+
+        interface PageHeader [[PageHeader.html]] {
+            {abstract} +size(): int
+            +readHeader(FileChannel): void
+            {abstract} +readHeader(ByteBuffer): void
+            +writeHeader(FileChannel): void
+            {abstract} +writeHeader(ByteBuffer): void
+            {abstract} +getPageSize(): int
+            {abstract} +getReservedPages(): int
+        }
+
+        interface PageFileFactory<P extends Page> [[PageFileFactory.html]] {
+            {abstract} +newPageFile(Class<P extends Page>): PageFile<P extends Page>
+            {abstract} +getPageSize(): int
+        }
+
+        abstract class AbstractStoringPageFile<P extends Page> [[AbstractStoringPageFile.html]] {
+            #emptyPages: IntegerArray
+            #nextPageID: int
+            #pageSize: int
+            #AbstractStoringPageFile(int)
+            +deletePage(int): void
+            -getNextEmptyPageID(): int
+            +getNextPageID(): int
+            +setNextPageID(int): void
+            +getPageSize(): int
+            +initialize(PageHeader): boolean
+            +logStatistics(): void
+        }
+
+        abstract class AbstractPageFileFactory<P extends Page> [[AbstractPageFileFactory.html]] {
+            #pageSize: int
+            +AbstractPageFileFactory(int)
+            +getPageSize(): int
+        }
+
+        abstract class elki.persistent.AbstractPageFileFactory.Par<P extends Page> {
+            {static} +PAGE_SIZE_ID: OptionID
+            #pageSize: int
+            +configure(Parameterization): void
+            {abstract} +make(): PageFileFactory<P extends Page>
+        }
+
+        class MemoryPageFile<P extends Page> [[MemoryPageFile.html]] {
+            {static} -LOG: Logging
+            -file: Int2ObjectOpenHashMap<P extends Page>
+            +MemoryPageFile(int)
+            +readPage(int): P extends Page
+            #writePage(int, P extends Page): void
+            +deletePage(int): void
+            +clear(): void
+            #getLogger(): Logging
+        }
+
+        class OnDiskArray [[OnDiskArray.html]] {
+            {static} -serialVersionUID: long
+            #magic: int
+            -headersize: int
+            -recordsize: int
+            -numrecs: int
+            -filename: Path
+            -file: FileChannel
+            -lock: FileLock
+            -writable: boolean
+            -map: MappedByteBuffer
+            {static} -INTERNAL_HEADER_SIZE: int
+            {static} -HEADER_POS_SIZE: int
+            +OnDiskArray(Path, int, int, int, int)
+            +OnDiskArray(Path, int, int, int, boolean)
+            +OnDiskArray(Path, int, int, boolean)
+            -mapArray(): void
+            -validateHeader(boolean): void
+            {static} +mixMagic(int, int): int
+            -indexToFileposition(long): long
+            +resizeFile(int): void
+            +getRecordBuffer(int): ByteBuffer
+            #getExtraHeaderSize(): int
+            +getExtraHeader(): ByteBuffer
+            #getRecordsize(): int
+            +getFilename(): Path
+            +isWritable(): boolean
+            +close(): void
+            +getNumRecords(): int
+            +ensureSize(int): void
+        }
+
+        abstract class AbstractPageFile<P extends Page> [[AbstractPageFile.html]] {
+            -readAccess: Counter
+            -writeAccess: Counter
+            {abstract} #getLogger(): Logging
+            +writePage(P extends Page): int
+            {abstract} #writePage(int, P extends Page): void
+            +close(): void
+            +logStatistics(): void
+            #countRead(): void
+            #countWrite(): void
+        }
+
+        class OnDiskUpperTriangleMatrix [[OnDiskUpperTriangleMatrix.html]] {
+            {static} -serialVersionUID: long
+            {static} -TRIANGLE_HEADER_SIZE: int
+            -matrixsize: int
+            +OnDiskUpperTriangleMatrix(Path, int, int, int, boolean)
+            +OnDiskUpperTriangleMatrix(Path, int, int, int, int)
+            +resizeMatrix(int): void
+            {static} -arraysize(int): int
+            -computeOffset(int, int): int
+            +getRecordBuffer(int, int): ByteBuffer
+            +close(): void
+            +getMatrixSize(): int
+        }
+
+        interface Page [[Page.html]] {
+            {abstract} +getPageID(): int
+            {abstract} +setPageID(int): void
+            {abstract} +isDirty(): boolean
+            {abstract} +setDirty(boolean): void
+        }
+
+        class MemoryPageFileFactory<P extends Page> [[MemoryPageFileFactory.html]] {
+            +MemoryPageFileFactory(int)
+            +newPageFile(Class<P extends Page>): PageFile<P extends Page>
+        }
+
+        class elki.persistent.MemoryPageFileFactory.Par [[MemoryPageFileFactory.Par.html]] {
+            +make(): MemoryPageFileFactory<Page>
+        }
+
+        interface PageFile<P extends Page> [[PageFile.html]] {
+            {abstract} +setPageID(P extends Page): int
+            {abstract} +writePage(P extends Page): int
+            {abstract} +readPage(int): P extends Page
+            {abstract} +deletePage(int): void
+            {abstract} +close(): void
+            {abstract} +clear(): void
+            {abstract} +getNextPageID(): int
+            {abstract} +setNextPageID(int): void
+            {abstract} +getPageSize(): int
+            {abstract} +initialize(PageHeader): boolean
+            {abstract} +logStatistics(): void
+        }
+
+        PageFileFactory <|.. LRUCachePageFileFactory
+        LRUCachePageFileFactory --> PageFileFactory: pageFileFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.persistent.LRUCachePageFileFactory.Par
+        LRUCachePageFileFactory +-- elki.persistent.LRUCachePageFileFactory.Par
+        elki.persistent.LRUCachePageFileFactory.Par --> PageFileFactory: pageFileFactory
+        AbstractPageFileFactory <|-- OnDiskArrayPageFileFactory
+        elki.persistent.AbstractPageFileFactory.Par <|-- elki.persistent.OnDiskArrayPageFileFactory.Par
+        OnDiskArrayPageFileFactory +-- elki.persistent.OnDiskArrayPageFileFactory.Par
+        AbstractStoringPageFile <|-- PersistentPageFile
+        PersistentPageFile --> PageHeader: header
+        AbstractStoringPageFile <|-- OnDiskArrayPageFile
+        OnDiskArrayPageFile --> OnDiskArray: file
+        OnDiskArrayPageFile --> PageHeader: header
+        AbstractPageFileFactory <|-- PersistentPageFileFactory
+        elki.persistent.AbstractPageFileFactory.Par <|-- elki.persistent.PersistentPageFileFactory.Par
+        PersistentPageFileFactory +-- elki.persistent.PersistentPageFileFactory.Par
+        AbstractPageFile <|-- LRUCache
+        LRUCache --> PageFile: file
+        LRUCache --> Page: pageID
+        java.io.Externalizable <|.. AbstractExternalizablePage
+        Page <|.. AbstractExternalizablePage
+        PageHeader <|.. DefaultPageHeader
+        Page <|-- ExternalizablePage
+        java.io.Externalizable <|-- ExternalizablePage
+        AbstractPageFile <|-- AbstractStoringPageFile
+        AbstractStoringPageFile --> Page: pageID
+        PageFileFactory <|.. AbstractPageFileFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.persistent.AbstractPageFileFactory.Par
+        AbstractPageFileFactory +-- elki.persistent.AbstractPageFileFactory.Par
+        AbstractStoringPageFile <|-- MemoryPageFile
+        java.lang.AutoCloseable <|.. OnDiskArray
+        PageFile <|.. AbstractPageFile
+        java.lang.AutoCloseable <|.. OnDiskUpperTriangleMatrix
+        OnDiskUpperTriangleMatrix --> OnDiskArray: array
+        AbstractPageFileFactory <|-- MemoryPageFileFactory
+        elki.persistent.AbstractPageFileFactory.Par <|-- elki.persistent.MemoryPageFileFactory.Par
+        MemoryPageFileFactory +-- elki.persistent.MemoryPageFileFactory.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace java.io {
+        interface Externalizable {
+            {abstract} +writeExternal(ObjectOutput): void
+            {abstract} +readExternal(ObjectInput): void
+        }
+    }
+
+    namespace java.lang {
+        interface AutoCloseable {
+            {abstract} +close(): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

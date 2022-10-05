@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SquaredUncenteredCorrelationDistance\n<size:10>elki.distance.correlation" as elki.distance.correlation.SquaredUncenteredCorrelationDistance [[SquaredUncenteredCorrelationDistance.html]] {
+        {static} +STATIC: SquaredUncenteredCorrelationDistance
+        +distance(NumberVector, NumberVector): double
+        +isSquared(): boolean
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    class "<size:14>SquaredUncenteredCorrelationDistance.Par\n<size:10>elki.distance.correlation" as elki.distance.correlation.SquaredUncenteredCorrelationDistance.Par [[SquaredUncenteredCorrelationDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.correlation.SquaredUncenteredCorrelationDistance
+    elki.distance.correlation.SquaredUncenteredCorrelationDistance +-- elki.distance.correlation.SquaredUncenteredCorrelationDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByteVector.ShortSerializer\n<size:10>elki.data" as elki.data.ByteVector.ShortSerializer [[ByteVector.ShortSerializer.html]] {
+        +fromByteBuffer(ByteBuffer): ByteVector
+        +toByteBuffer(ByteBuffer, ByteVector): void
+        +getByteSize(ByteVector): int
+    }
+
+    interface "<size:14>ByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteBufferSerializer<ByteVector> [[../utilities/io/ByteBufferSerializer.html]] {
+        {abstract} +fromByteBuffer(ByteBuffer): ByteVector
+        {abstract} +toByteBuffer(ByteBuffer, ByteVector): void
+        {abstract} +getByteSize(ByteVector): int
+    }
+    class "<size:14>ByteVector\n<size:10>elki.data" as elki.data.ByteVector [[ByteVector.html]]
+
+    elki.utilities.io.ByteBufferSerializer <|.. elki.data.ByteVector.ShortSerializer
+    elki.data.ByteVector +-- elki.data.ByteVector.ShortSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

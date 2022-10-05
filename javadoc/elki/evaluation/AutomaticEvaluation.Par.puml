@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AutomaticEvaluation.Par\n<size:10>elki.evaluation" as elki.evaluation.AutomaticEvaluation.Par [[AutomaticEvaluation.Par.html]] {
+        +make(): AutomaticEvaluation
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AutomaticEvaluation\n<size:10>elki.evaluation" as elki.evaluation.AutomaticEvaluation [[AutomaticEvaluation.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.AutomaticEvaluation.Par
+    elki.evaluation.AutomaticEvaluation +-- elki.evaluation.AutomaticEvaluation.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,143 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.gui.configurator {
+
+        class FileParameterConfigurator [[FileParameterConfigurator.html]] {
+            ~panel: JPanel
+            ~textfield: JTextField
+            ~button: JButton
+            +FileParameterConfigurator(FileParameter, JComponent)
+            +actionPerformed(ActionEvent): void
+            +getUserInput(): String
+        }
+
+        class ConfiguratorPanel [[ConfiguratorPanel.html]] {
+            {static} -serialVersionUID: long
+            -childconfig: Map<Object, ParameterConfigurator>
+            #listenerList: EventListenerList
+            +addParameter(Object, Parameter<?>, TrackParameters): void
+            -makeConfigurator(Parameter<?>): ParameterConfigurator
+            +stateChanged(ChangeEvent): void
+            +addChangeListener(ChangeListener): void
+            +removeChangeListener(ChangeListener): void
+            #fireValueChanged(): void
+            +appendParameters(ListParameterization): void
+            +clear(): void
+        }
+
+        class TextParameterConfigurator [[TextParameterConfigurator.html]] {
+            ~value: JTextField
+            +TextParameterConfigurator(Parameter<?>, JComponent)
+            +actionPerformed(ActionEvent): void
+            +getUserInput(): String
+        }
+
+        class ClassParameterConfigurator [[ClassParameterConfigurator.html]] {
+            ~panel: JPanel
+            ~textfield: JTextField
+            ~button: JButton
+            ~popup: TreePopup
+            +ClassParameterConfigurator(ClassParameter<?>, JComponent)
+            +addParameter(Object, Parameter<?>, TrackParameters): void
+            +actionPerformed(ActionEvent): void
+            +stateChanged(ChangeEvent): void
+            +getUserInput(): String
+            +appendParameters(ListParameterization): void
+        }
+
+        class FlagParameterConfigurator [[FlagParameterConfigurator.html]] {
+            ~value: JCheckBox
+            +FlagParameterConfigurator(Flag, JComponent)
+            +actionPerformed(ActionEvent): void
+            +getUserInput(): Boolean
+        }
+
+        abstract class AbstractParameterConfigurator<T extends Parameter<?>> [[AbstractParameterConfigurator.html]] {
+            ~param: T extends Parameter<?>
+            ~parent: JComponent
+            #listenerList: EventListenerList
+            +AbstractParameterConfigurator(T extends Parameter<?>, JComponent)
+            #finishGridRow(): void
+            +addParameter(Object, Parameter<?>, TrackParameters): void
+            +addChangeListener(ChangeListener): void
+            +removeChangeListener(ChangeListener): void
+            #fireValueChanged(): void
+            +appendParameters(ListParameterization): void
+            {abstract} +getUserInput(): Object
+        }
+
+        interface ParameterConfigurator [[ParameterConfigurator.html]] {
+            {abstract} +addParameter(Object, Parameter<?>, TrackParameters): void
+            {abstract} +addChangeListener(ChangeListener): void
+            {abstract} +removeChangeListener(ChangeListener): void
+            {abstract} +appendParameters(ListParameterization): void
+        }
+
+        abstract class AbstractSingleParameterConfigurator<T extends Parameter<?>> [[AbstractSingleParameterConfigurator.html]] {
+            ~label: JLabel
+            +AbstractSingleParameterConfigurator(T extends Parameter<?>, JComponent)
+        }
+
+        class ClassListParameterConfigurator [[ClassListParameterConfigurator.html]] {
+            ~panel: JPanel
+            ~textfield: JTextField
+            ~button: JButton
+            ~popup: TreePopup
+            +ClassListParameterConfigurator(ClassListParameter<?>, JComponent)
+            +addParameter(Object, Parameter<?>, TrackParameters): void
+            +actionPerformed(ActionEvent): void
+            +stateChanged(ChangeEvent): void
+            +getUserInput(): String
+            +appendParameters(ListParameterization): void
+        }
+
+        class EnumParameterConfigurator [[EnumParameterConfigurator.html]] {
+            ~value: JComboBox<String>
+            +EnumParameterConfigurator(EnumParameter<?>, JComponent)
+            +actionPerformed(ActionEvent): void
+            +getUserInput(): String
+        }
+
+        AbstractSingleParameterConfigurator <|-- FileParameterConfigurator
+        java.awt.event.ActionListener <|.. FileParameterConfigurator
+        javax.swing.JPanel <|-- ConfiguratorPanel
+        javax.swing.event.ChangeListener <|.. ConfiguratorPanel
+        ConfiguratorPanel --> "*" ParameterConfigurator: children
+        AbstractSingleParameterConfigurator <|-- TextParameterConfigurator
+        java.awt.event.ActionListener <|.. TextParameterConfigurator
+        AbstractSingleParameterConfigurator <|-- ClassParameterConfigurator
+        java.awt.event.ActionListener <|.. ClassParameterConfigurator
+        javax.swing.event.ChangeListener <|.. ClassParameterConfigurator
+        ClassParameterConfigurator --> ConfiguratorPanel: child
+        AbstractParameterConfigurator <|-- FlagParameterConfigurator
+        java.awt.event.ActionListener <|.. FlagParameterConfigurator
+        ParameterConfigurator <|.. AbstractParameterConfigurator
+        AbstractParameterConfigurator <|-- AbstractSingleParameterConfigurator
+        AbstractSingleParameterConfigurator <|-- ClassListParameterConfigurator
+        java.awt.event.ActionListener <|.. ClassListParameterConfigurator
+        javax.swing.event.ChangeListener <|.. ClassListParameterConfigurator
+        ClassListParameterConfigurator --> ConfiguratorPanel: child
+        AbstractSingleParameterConfigurator <|-- EnumParameterConfigurator
+        java.awt.event.ActionListener <|.. EnumParameterConfigurator
+    }
+
+    namespace java.awt.event {
+        interface ActionListener {
+            {abstract} +actionPerformed(ActionEvent): void
+        }
+    }
+
+    namespace javax.swing {
+        class JPanel {
+            {static} -uiClassID: String
+        }
+    }
+
+    namespace javax.swing.event {
+        interface ChangeListener {
+            {abstract} +stateChanged(ChangeEvent): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

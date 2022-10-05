@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OUTRES.KernelDensityEstimator\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.OUTRES.KernelDensityEstimator [[OUTRES.KernelDensityEstimator.html]] {
+        ~kernel: KernelDensityFunction
+        ~relation: Relation<? extends NumberVector>
+        ~epsilons: double[]
+        ~hopttwo: double
+        ~dim: int
+        +KernelDensityEstimator(Relation<? extends NumberVector>, double)
+        #subspaceDensity(long[], DoubleDBIDList): double
+        #optimalBandwidth(int): double
+        #adjustedEps(int): double
+    }
+
+    class "<size:14>OUTRES\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.OUTRES [[OUTRES.html]]
+
+    elki.outlier.subspace.OUTRES +-- elki.outlier.subspace.OUTRES.KernelDensityEstimator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

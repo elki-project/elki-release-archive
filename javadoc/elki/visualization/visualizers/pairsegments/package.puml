@@ -1,0 +1,134 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.pairsegments {
+
+        class SegmentsStylingPolicy [[SegmentsStylingPolicy.html]] {
+            #segments: Segments
+            #selectedSegments: ArrayList<Segment>
+            #indirectSelections: TreeMap<Segment, Segment>
+            #unselectedObjects: ModifiableDBIDs
+            ~colorset: ColorLibrary
+            +SegmentsStylingPolicy(Segments)
+            +setStyleLibrary(StyleLibrary): void
+            +isSelected(Segment): boolean
+            +getStyleForDBID(DBIDRef): int
+            +getColorForDBID(DBIDRef): int
+            +getMinStyle(): int
+            +getMaxStyle(): int
+            +iterateClass(int): DBIDIter
+            +classSize(int): int
+            +select(Segment, boolean): void
+            +deselectAllSegments(): void
+            #deselectSegment(Segment): void
+            #selectSegment(Segment): void
+            +indexOfSegment(Segment): int
+            +getMenuName(): String
+        }
+
+        class CircleSegmentsVisualizer [[CircleSegmentsVisualizer.html]] {
+            {static} -LOG: Logging
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance [[CircleSegmentsVisualizer.Instance.html]] {
+            {static} -SEGMENT_MIN_ANGLE: double
+            {static} -SEGMENT_MIN_SEP_ANGLE: double
+            {static} -RADIUS_INNER: double
+            {static} -RADIUS_DISTANCE: double
+            {static} -RADIUS_OUTER: double
+            {static} -RADIUS_SELECTION: double
+            {static} -CLR_CLUSTER_CLASS_PREFIX: String
+            {static} +CLR_BORDER_CLASS: String
+            {static} +CLR_UNPAIRED_CLASS: String
+            {static} +CLR_HOVER_CLASS: String
+            {static} +SEG_UNPAIRED_SELECTED_CLASS: String
+            {static} +STYLE: String
+            {static} +STYLE_BORDER: String
+            {static} +STYLE_HOVER: String
+            {static} +STYLE_GRADIENT_FIRST: String
+            {static} +STYLE_GRADIENT_SECOND: String
+            #segments: Segments
+            -visLayer: Element
+            -ctrlLayer: Element
+            +segmentToElements: Map<Segment, List<Element>>
+            ~showUnclusteredPairs: boolean
+            -noIncrementalRedraw: boolean
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double)
+            +toggleUnclusteredPairs(boolean): void
+            +resultChanged(Object): void
+            +incrementalRedraw(): void
+            +fullRedraw(): void
+            #addCSSClasses(int): void
+            -drawSegments(): void
+            -redrawSelection(): void
+            #makeGradient(int, String[]): String[]
+            #drawClusteringInfo(): Element
+            #segmentHover(Segment, int, boolean): void
+            #segmentClick(Segment, Event, boolean): void
+        }
+
+        class elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance.SegmentListenerProxy [[CircleSegmentsVisualizer.Instance.SegmentListenerProxy.html]] {
+            {static} +EVT_DBLCLICK_DELAY: int
+            -id: Segment
+            -ringid: int
+            -lastClick: long
+            +SegmentListenerProxy(Segment, int)
+            +handleEvent(Event): void
+        }
+
+        elki.visualization.style.ClassStylingPolicy <|.. SegmentsStylingPolicy
+        elki.visualization.visualizers.VisFactory <|.. CircleSegmentsVisualizer
+        elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance
+        elki.result.ResultListener <|.. elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance
+        CircleSegmentsVisualizer +-- elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance
+        elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance --> SegmentsStylingPolicy: policy
+        org.w3c.dom.events.EventListener <|.. elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance.SegmentListenerProxy
+        elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance +-- elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance.SegmentListenerProxy
+    }
+
+    namespace elki.visualization.style {
+        interface ClassStylingPolicy [[../../style/ClassStylingPolicy.html]] {
+            {abstract} +getStyleForDBID(DBIDRef): int
+            {abstract} +getMinStyle(): int
+            {abstract} +getMaxStyle(): int
+            {abstract} +iterateClass(int): DBIDIter
+            {abstract} +classSize(int): int
+        }
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+        abstract class AbstractVisualization [[../AbstractVisualization.html]] {
+            #task: VisualizationTask
+            #context: VisualizerContext
+            #svgp: VisualizationPlot
+            #layer: Element
+            -width: double
+            -height: double
+            {abstract} +fullRedraw(): void
+        }
+    }
+
+    namespace elki.result {
+        interface ResultListener [[../../../result/ResultListener.html]] {
+            +resultAdded(Object, Object): void
+            +resultChanged(Object): void
+            +resultRemoved(Object, Object): void
+        }
+    }
+
+    namespace org.w3c.dom.events {
+        interface EventListener {
+            {abstract} +handleEvent(Event): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>CoverTree.CoverTreeRangeSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeSearcher [[CoverTree.CoverTreeRangeSearcher.html]] {
+        -open: ArrayList<Node>
+        -tmp: DBIDVar
+        {abstract} #queryDistance(DBIDRef): double
+        #doSearch(double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+
+    class "<size:14>CoverTree\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree<O> [[CoverTree.html]]
+
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

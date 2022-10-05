@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierRankingEvaluation.Par\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierRankingEvaluation.Par [[OutlierRankingEvaluation.Par.html]] {
+        {static} +POSITIVE_CLASS_NAME_ID: OptionID
+        #positiveClassName: Pattern
+        +configure(Parameterization): void
+        +make(): OutlierRankingEvaluation
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>OutlierRankingEvaluation\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierRankingEvaluation [[OutlierRankingEvaluation.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.outlier.OutlierRankingEvaluation.Par
+    elki.evaluation.outlier.OutlierRankingEvaluation +-- elki.evaluation.outlier.OutlierRankingEvaluation.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

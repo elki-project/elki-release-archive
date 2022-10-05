@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PAMMEDSIL.Par\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.PAMMEDSIL.Par<O> [[PAMMEDSIL.Par.html]] {
+        +make(): PAMMEDSIL<O>
+    }
+
+    class "<size:14>PAMSIL.Par\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.PAMSIL.Par<O> [[PAMSIL.Par.html]]
+    class "<size:14>PAMMEDSIL\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.PAMMEDSIL<O> [[PAMMEDSIL.html]]
+
+    elki.clustering.silhouette.PAMSIL.Par <|-- elki.clustering.silhouette.PAMMEDSIL.Par
+    elki.clustering.silhouette.PAMMEDSIL +-- elki.clustering.silhouette.PAMMEDSIL.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

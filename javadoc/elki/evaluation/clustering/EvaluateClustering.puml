@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluateClustering\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.EvaluateClustering [[EvaluateClustering.html]] {
+        {static} -LOG: Logging
+        -referencealg: ClusteringAlgorithm<?>
+        -noiseSpecialHandling: boolean
+        -selfPairing: boolean
+        +EvaluateClustering(ClusteringAlgorithm<?>, boolean, boolean)
+        {static} +evaluateRanking(ScoreEvaluation, Cluster<?>, DoubleDBIDList): double
+        +processNewResult(Object): void
+        #evaluteResult(Database, Clustering<?>, Clustering<?>): void
+        -isReferenceResult(Clustering<?>): boolean
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../Evaluator.html]]
+    class "<size:14>EvaluateClustering.ScoreResult\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.EvaluateClustering.ScoreResult [[EvaluateClustering.ScoreResult.html]]
+    class "<size:14>EvaluateClustering.Par\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.EvaluateClustering.Par [[EvaluateClustering.Par.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.clustering.EvaluateClustering
+    elki.evaluation.clustering.EvaluateClustering +-- elki.evaluation.clustering.EvaluateClustering.ScoreResult
+    elki.evaluation.clustering.EvaluateClustering +-- elki.evaluation.clustering.EvaluateClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

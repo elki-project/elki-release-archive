@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DiskCacheBasedFloatDistance.Par\n<size:10>elki.distance.external" as elki.distance.external.DiskCacheBasedFloatDistance.Par [[DiskCacheBasedFloatDistance.Par.html]] {
+        {static} +MATRIX_ID: OptionID
+        #cache: OnDiskUpperTriangleMatrix
+        +configure(Parameterization): void
+        +make(): DiskCacheBasedFloatDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>DiskCacheBasedFloatDistance\n<size:10>elki.distance.external" as elki.distance.external.DiskCacheBasedFloatDistance [[DiskCacheBasedFloatDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.external.DiskCacheBasedFloatDistance.Par
+    elki.distance.external.DiskCacheBasedFloatDistance +-- elki.distance.external.DiskCacheBasedFloatDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

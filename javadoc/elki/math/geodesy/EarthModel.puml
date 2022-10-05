@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>EarthModel\n<size:10>elki.math.geodesy" as elki.math.geodesy.EarthModel [[EarthModel.html]] {
+        {static} +MODEL_ID: OptionID
+        {abstract} +latLngDegToECEF(double, double): double[]
+        {abstract} +latLngRadToECEF(double, double): double[]
+        {abstract} +latLngDegToECEF(double, double, double): double[]
+        {abstract} +latLngRadToECEF(double, double, double): double[]
+        {abstract} +ecefToLatDeg(double, double, double): double
+        {abstract} +ecefToLatRad(double, double, double): double
+        {abstract} +ecefToLngDeg(double, double): double
+        {abstract} +ecefToLngRad(double, double): double
+        {abstract} +ecefToLatLngDegHeight(double, double, double): double[]
+        {abstract} +ecefToLatLngRadHeight(double, double, double): double[]
+        {abstract} +distanceDeg(double, double, double, double): double
+        {abstract} +distanceRad(double, double, double, double): double
+        {abstract} +minDistDeg(double, double, double, double, double, double): double
+        {abstract} +minDistRad(double, double, double, double, double, double): double
+        {abstract} +getEquatorialRadius(): double
+        {abstract} +getPolarDistance(): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

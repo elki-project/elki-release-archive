@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RABIDEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.RABIDEstimator [[RABIDEstimator.html]] {
+        {static} +STATIC: RABIDEstimator
+        +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+        -cos2(double, double, double): double
+        +estimate(KNNSearcher<DBIDRef>, DistanceQuery<?>, DBIDRef, int): double
+        #computeABID(DistanceQuery<?>, KNNList, boolean): double
+    }
+
+    interface "<size:14>DistanceBasedIntrinsicDimensionalityEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.DistanceBasedIntrinsicDimensionalityEstimator [[DistanceBasedIntrinsicDimensionalityEstimator.html]] {
+        {abstract} +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+    }
+    class "<size:14>RABIDEstimator.Par\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.RABIDEstimator.Par [[RABIDEstimator.Par.html]]
+
+    elki.math.statistics.intrinsicdimensionality.DistanceBasedIntrinsicDimensionalityEstimator <|.. elki.math.statistics.intrinsicdimensionality.RABIDEstimator
+    elki.math.statistics.intrinsicdimensionality.RABIDEstimator +-- elki.math.statistics.intrinsicdimensionality.RABIDEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

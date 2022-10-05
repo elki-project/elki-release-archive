@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>PagedIndexFactory.Par\n<size:10>elki.index" as elki.index.PagedIndexFactory.Par<O> [[PagedIndexFactory.Par.html]] {
+        {static} +PAGEFILE_ID: OptionID
+        #pageFileFactory: PageFileFactory<?>
+        +configure(Parameterization): void
+        {abstract} +make(): PagedIndexFactory<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>PagedIndexFactory\n<size:10>elki.index" as elki.index.PagedIndexFactory<O> [[PagedIndexFactory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.PagedIndexFactory.Par
+    elki.index.PagedIndexFactory +-- elki.index.PagedIndexFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

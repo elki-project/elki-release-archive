@@ -1,0 +1,101 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.spatial.rstarvariants.strategies.split {
+
+        class RTreeQuadraticSplit [[RTreeQuadraticSplit.html]] {
+            +split(A, ArrayAdapter<E extends SpatialComparable, A>, int): long[]
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.split.RTreeQuadraticSplit.Par [[RTreeQuadraticSplit.Par.html]] {
+            +make(): RTreeQuadraticSplit
+        }
+
+        class RTreeLinearSplit [[RTreeLinearSplit.html]] {
+            +split(A, ArrayAdapter<E extends SpatialComparable, A>, int): long[]
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.split.RTreeLinearSplit.Par [[RTreeLinearSplit.Par.html]] {
+            +make(): RTreeLinearSplit
+        }
+
+        class AngTanLinearSplit [[AngTanLinearSplit.html]] {
+            {static} -LOG: Logging
+            +split(A, ArrayAdapter<E extends SpatialComparable, A>, int): long[]
+            #computeOverlap(A, ArrayAdapter<E extends SpatialComparable, A>, long[]): double
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.split.AngTanLinearSplit.Par [[AngTanLinearSplit.Par.html]] {
+            +make(): AngTanLinearSplit
+        }
+
+        interface SplitStrategy [[SplitStrategy.html]] {
+            {abstract} +split(A, ArrayAdapter<E extends SpatialComparable, A>, int): long[]
+        }
+
+        class TopologicalSplitter [[TopologicalSplitter.html]] {
+            +split(A, ArrayAdapter<E extends SpatialComparable, A>, int): long[]
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.split.TopologicalSplitter.Split<A, E extends SpatialComparable> [[TopologicalSplitter.Split.html]] {
+            ~splitPoint: int
+            ~bestSorting: DoubleIntPair[]
+            ~maxSorting: DoubleIntPair[]
+            ~minSorting: DoubleIntPair[]
+            -entries: A
+            -getter: ArrayAdapter<E extends SpatialComparable, A>
+            -size: int
+            -dimensionality: int
+            +Split(A, ArrayAdapter<E extends SpatialComparable, A>)
+            ~chooseSplitAxis(int): void
+            #initMinMaxArrays(): void
+            #fillAndSort(int): void
+            ~chooseSplitPoint(int): void
+            -get(int): E extends SpatialComparable
+            -get(DoubleIntPair): E extends SpatialComparable
+            -mbr(DoubleIntPair[], int, int): ModifiableHyperBoundingBox
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.split.TopologicalSplitter.Par [[TopologicalSplitter.Par.html]] {
+            +make(): TopologicalSplitter
+        }
+
+        class GreeneSplit [[GreeneSplit.html]] {
+            +split(A, ArrayAdapter<E extends SpatialComparable, A>, int): long[]
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.split.GreeneSplit.Par [[GreeneSplit.Par.html]] {
+            +make(): GreeneSplit
+        }
+
+        SplitStrategy <|.. RTreeQuadraticSplit
+        RTreeQuadraticSplit --> RTreeQuadraticSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.split.RTreeQuadraticSplit.Par
+        RTreeQuadraticSplit +-- elki.index.tree.spatial.rstarvariants.strategies.split.RTreeQuadraticSplit.Par
+        SplitStrategy <|.. RTreeLinearSplit
+        RTreeLinearSplit --> RTreeLinearSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.split.RTreeLinearSplit.Par
+        RTreeLinearSplit +-- elki.index.tree.spatial.rstarvariants.strategies.split.RTreeLinearSplit.Par
+        SplitStrategy <|.. AngTanLinearSplit
+        AngTanLinearSplit --> AngTanLinearSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.split.AngTanLinearSplit.Par
+        AngTanLinearSplit +-- elki.index.tree.spatial.rstarvariants.strategies.split.AngTanLinearSplit.Par
+        SplitStrategy <|.. TopologicalSplitter
+        TopologicalSplitter --> TopologicalSplitter: STATIC
+        TopologicalSplitter +-- elki.index.tree.spatial.rstarvariants.strategies.split.TopologicalSplitter.Split
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.split.TopologicalSplitter.Par
+        TopologicalSplitter +-- elki.index.tree.spatial.rstarvariants.strategies.split.TopologicalSplitter.Par
+        SplitStrategy <|.. GreeneSplit
+        GreeneSplit --> GreeneSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.split.GreeneSplit.Par
+        GreeneSplit +-- elki.index.tree.spatial.rstarvariants.strategies.split.GreeneSplit.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

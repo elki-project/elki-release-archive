@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>NumberVector.Factory\n<size:10>elki.data" as elki.data.NumberVector.Factory<V extends NumberVector> [[NumberVector.Factory.html]] {
+        +newNumberVector(double[]): V extends NumberVector
+        +newNumberVector(NumberVector): V extends NumberVector
+        {abstract} +newNumberVector(A, NumberArrayAdapter<?, ? super A>): V extends NumberVector
+    }
+
+    interface "<size:14>FeatureVector.Factory\n<size:10>elki.data" as elki.data.FeatureVector.Factory<V extends NumberVector, Number> [[FeatureVector.Factory.html]] {
+        {abstract} +newFeatureVector(A, ArrayAdapter<? extends D, A>): V extends NumberVector
+        {abstract} +getDefaultSerializer(): ByteBufferSerializer<V extends FeatureVector<? extends D>>
+        {abstract} +getRestrictionClass(): Class<? super FeatureVector<? extends D>>
+    }
+    interface "<size:14>NumberVector\n<size:10>elki.data" as elki.data.NumberVector [[NumberVector.html]] {
+        {abstract} +doubleValue(int): double
+        {abstract} +longValue(int): long
+        {abstract} +toArray(): double[]
+    }
+
+    elki.data.FeatureVector.Factory <|-- elki.data.NumberVector.Factory
+    elki.data.NumberVector +-- elki.data.NumberVector.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

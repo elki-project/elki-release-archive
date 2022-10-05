@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="209px" preserveAspectRatio="none" style="width:317px;height:209px;background:#FFFFFF;" version="1.1" viewBox="0 0 317 209" width="317px" zoomAndPan="magnify"><defs/><g><!--MD5=[a13b28035815034c86b6311cf6dc5b02]
+class elki.utilities.io.FileUtil--><a href="FileUtil.html" target="_top" title="FileUtil.html" xlink:actuate="onRequest" xlink:href="FileUtil.html" xlink:show="new" xlink:title="FileUtil.html" xlink:type="simple"><g id="elem_elki.utilities.io.FileUtil"><rect codeLine="6" fill="#F1F1F1" height="176.3125" id="elki.utilities.io.FileUtil" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="296" x="7" y="7"/><ellipse cx="119.75" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M122.7188,31.6094 Q122.1406,31.9063 121.5,32.0469 Q120.8594,32.2031 120.1563,32.2031 Q117.6563,32.2031 116.3281,30.5625 Q115.0156,28.9063 115.0156,25.7813 Q115.0156,22.6563 116.3281,21 Q117.6563,19.3438 120.1563,19.3438 Q120.8594,19.3438 121.5,19.5 Q122.1563,19.6563 122.7188,19.9531 L122.7188,22.6719 Q122.0938,22.0938 121.5,21.8281 Q120.9063,21.5469 120.2813,21.5469 Q118.9375,21.5469 118.25,22.625 Q117.5625,23.6875 117.5625,25.7813 Q117.5625,27.875 118.25,28.9531 Q118.9375,30.0156 120.2813,30.0156 Q120.9063,30.0156 121.5,29.75 Q122.0938,29.4688 122.7188,28.8906 L122.7188,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="44" x="149.25" y="24.9951">FileUtil</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="62" x="140.25" y="37.5791">elki.utilities.io</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="302" y1="44.9375" y2="44.9375"/><ellipse cx="18" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="243" x="27" y="61.9326">getFilenameExtension(Path): String</text><ellipse cx="18" cy="74.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="252" x="27" y="78.2295">getFilenameExtension(String): String</text><ellipse cx="18" cy="91.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="266" x="27" y="94.5264">open(URI, OpenOption...): InputStream</text><ellipse cx="18" cy="107.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="138" x="27" y="110.8232">exists(URI): boolean</text><ellipse cx="18" cy="123.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="253" x="27" y="127.1201">openSystemFile(String): InputStream</text><ellipse cx="18" cy="140.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="270" x="27" y="143.417">tryGzipInput(InputStream): InputStream</text><ellipse cx="18" cy="156.3672" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="195" x="27" y="159.7139">locateFile(String, String): File</text><ellipse cx="18" cy="172.6641" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="177" x="27" y="176.0107">slurp(InputStream): String</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="61.5" y="190.3125"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="61.5" y="199.5947">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[00650aa5cfcd90c8101277de408c77db]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FileUtil\n<size:10>elki.utilities.io" as elki.utilities.io.FileUtil [[FileUtil.html]] {
+        {static} +getFilenameExtension(Path): String
+        {static} +getFilenameExtension(String): String
+        {static} +open(URI, OpenOption...): InputStream
+        {static} +exists(URI): boolean
+        {static} +openSystemFile(String): InputStream
+        {static} +tryGzipInput(InputStream): InputStream
+        {static} +locateFile(String, String): File
+        {static} +slurp(InputStream): String
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

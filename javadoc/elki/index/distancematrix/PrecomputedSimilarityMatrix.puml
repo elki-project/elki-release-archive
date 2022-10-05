@@ -1,0 +1,43 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrecomputedSimilarityMatrix\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedSimilarityMatrix<O> [[PrecomputedSimilarityMatrix.html]] {
+        {static} -LOG: Logging
+        #relation: Relation<O>
+        #similarityFunction: Similarity<? super O>
+        #similarityQuery: SimilarityQuery<O>
+        -matrix: double[]
+        -ids: DBIDRange
+        -size: int
+        +PrecomputedSimilarityMatrix(Relation<O>, Similarity<? super O>)
+        +initialize(): void
+        {static} #triangleSize(int): int
+        -getOffset(int, int): int
+        +logStatistics(): void
+        +getSimilarityQuery(Similarity<? super O>): SimilarityQuery<O>
+        +similarityRangeByDBID(SimilarityQuery<O>, double, int): RangeSearcher<DBIDRef>
+        +similarityRangeByObject(SimilarityQuery<O>, double, int): RangeSearcher<O>
+    }
+
+    interface "<size:14>SimilarityIndex\n<size:10>elki.index" as elki.index.SimilarityIndex<O> [[../SimilarityIndex.html]] {
+        {abstract} +getSimilarityQuery(Similarity<? super O>): SimilarityQuery<O>
+    }
+    interface "<size:14>SimilarityRangeIndex\n<size:10>elki.index" as elki.index.SimilarityRangeIndex<O> [[../SimilarityRangeIndex.html]] {
+        {abstract} +similarityRangeByObject(SimilarityQuery<O>, double, int): RangeSearcher<O>
+        {abstract} +similarityRangeByDBID(SimilarityQuery<O>, double, int): RangeSearcher<DBIDRef>
+    }
+    class "<size:14>PrecomputedSimilarityMatrix.PrecomputedSimilarityQuery\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedSimilarityMatrix.PrecomputedSimilarityQuery [[PrecomputedSimilarityMatrix.PrecomputedSimilarityQuery.html]]
+    class "<size:14>PrecomputedSimilarityMatrix.PrecomputedSimilarityRangeQuery\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedSimilarityMatrix.PrecomputedSimilarityRangeQuery [[PrecomputedSimilarityMatrix.PrecomputedSimilarityRangeQuery.html]]
+    class "<size:14>PrecomputedSimilarityMatrix.Factory\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory<O> [[PrecomputedSimilarityMatrix.Factory.html]]
+
+    elki.index.SimilarityIndex <|.. elki.index.distancematrix.PrecomputedSimilarityMatrix
+    elki.index.SimilarityRangeIndex <|.. elki.index.distancematrix.PrecomputedSimilarityMatrix
+    elki.index.distancematrix.PrecomputedSimilarityMatrix +-- elki.index.distancematrix.PrecomputedSimilarityMatrix.PrecomputedSimilarityQuery
+    elki.index.distancematrix.PrecomputedSimilarityMatrix +-- elki.index.distancematrix.PrecomputedSimilarityMatrix.PrecomputedSimilarityRangeQuery
+    elki.index.distancematrix.PrecomputedSimilarityMatrix +-- elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

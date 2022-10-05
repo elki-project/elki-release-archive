@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSXi.SteepScanPosition\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi.SteepScanPosition [[OPTICSXi.SteepScanPosition.html]] {
+        ~co: ClusterOrder
+        ~index: int
+        -cur: DBIDArrayIter
+        -next: DBIDArrayIter
+        -prog: FiniteProgress
+        +SteepScanPosition(ClusterOrder)
+        +next(): void
+        +hasNext(): boolean
+        +steepUp(double): boolean
+        +steepDown(double): boolean
+        +getReachability(): double
+        +getNextReachability(): double
+    }
+
+    class "<size:14>OPTICSXi\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi [[OPTICSXi.html]]
+
+    elki.clustering.optics.OPTICSXi +-- elki.clustering.optics.OPTICSXi.SteepScanPosition
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

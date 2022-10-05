@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ScalingFunction\n<size:10>elki.utilities.scaling" as elki.utilities.scaling.ScalingFunction [[ScalingFunction.html]] {
+        {abstract} +getScaled(double): double
+        {abstract} +getMin(): double
+        {abstract} +getMax(): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

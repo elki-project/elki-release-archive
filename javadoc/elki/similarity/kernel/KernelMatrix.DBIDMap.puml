@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>KernelMatrix.DBIDMap\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.KernelMatrix.DBIDMap {
+        {abstract} +getOffset(DBIDRef): int
+        {abstract} +iter(): DBIDArrayIter
+    }
+
+    class "<size:14>KernelMatrix\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.KernelMatrix [[KernelMatrix.html]]
+
+    elki.similarity.kernel.KernelMatrix +-- elki.similarity.kernel.KernelMatrix.DBIDMap
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SigmoidOutlierScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.SigmoidOutlierScaling [[SigmoidOutlierScaling.html]] {
+        {static} -LOG: Logging
+        ~Afinal: double
+        ~Bfinal: double
+        +prepare(OutlierResult): void
+        +prepare(A, NumberArrayAdapter<?, A>): void
+        -MStepLevenbergMarquardt(double, double, ArrayDBIDs, long[], DoubleRelation): double[]
+        -MStepLevenbergMarquardt(double, double, long[], A, NumberArrayAdapter<?, A>): double[]
+        +getMax(): double
+        +getMin(): double
+        +getScaled(double): double
+    }
+
+    interface "<size:14>OutlierScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierScaling [[OutlierScaling.html]] {
+        {abstract} +prepare(OutlierResult): void
+        {abstract} +prepare(A, NumberArrayAdapter<?, A>): void
+    }
+
+    elki.utilities.scaling.outlier.OutlierScaling <|.. elki.utilities.scaling.outlier.SigmoidOutlierScaling
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

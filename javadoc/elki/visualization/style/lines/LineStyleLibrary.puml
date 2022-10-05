@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>LineStyleLibrary\n<size:10>elki.visualization.style.lines" as elki.visualization.style.lines.LineStyleLibrary [[LineStyleLibrary.html]] {
+        {static} +FLAG_STRONG: String
+        {static} +FLAG_WEAK: String
+        {static} +FLAG_INTERPOLATED: String
+        {abstract} +formatCSSClass(CSSClass, int, double, Object...): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

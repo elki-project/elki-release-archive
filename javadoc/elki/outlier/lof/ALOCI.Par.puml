@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ALOCI.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.ALOCI.Par<O extends NumberVector> [[ALOCI.Par.html]] {
+        {static} +NMIN_ID: OptionID
+        {static} +ALPHA_ID: OptionID
+        {static} +GRIDS_ID: OptionID
+        {static} +SEED_ID: OptionID
+        #nmin: int
+        #alpha: int
+        #g: int
+        #rnd: RandomFactory
+        #distance: NumberVectorDistance<? super NumberVector>
+        +configure(Parameterization): void
+        +make(): ALOCI<O extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ALOCI\n<size:10>elki.outlier.lof" as elki.outlier.lof.ALOCI<V extends NumberVector> [[ALOCI.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.ALOCI.Par
+    elki.outlier.lof.ALOCI +-- elki.outlier.lof.ALOCI.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

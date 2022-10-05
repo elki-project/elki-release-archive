@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CanopyPreClustering.Par\n<size:10>elki.clustering" as elki.clustering.CanopyPreClustering.Par<O> {
+        {static} +T1_ID: OptionID
+        {static} +T2_ID: OptionID
+        -t1: double
+        -t2: double
+        #distance: Distance<? super O>
+        +configure(Parameterization): void
+        +make(): CanopyPreClustering<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>CanopyPreClustering\n<size:10>elki.clustering" as elki.clustering.CanopyPreClustering<O> [[CanopyPreClustering.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.CanopyPreClustering.Par
+    elki.clustering.CanopyPreClustering +-- elki.clustering.CanopyPreClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

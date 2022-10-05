@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VPTree.Factory\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.Factory<O extends NumberVector> [[VPTree.Factory.html]] {
+        ~distance: Distance<? super NumberVector>
+        ~random: RandomFactory
+        ~sampleSize: int
+        ~truncate: int
+        +Factory(Distance<? super NumberVector>, RandomFactory, int, int)
+        +instantiate(Relation<O extends NumberVector>): VPTree<O extends NumberVector>
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<O extends NumberVector> [[../../../IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>VPTree\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree<O> [[VPTree.html]]
+    class "<size:14>VPTree.Factory.Par\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.Factory.Par<O extends NumberVector> [[VPTree.Factory.Par.html]]
+
+    elki.index.IndexFactory <|.. elki.index.tree.metrical.vptree.VPTree.Factory
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.Factory
+    elki.index.tree.metrical.vptree.VPTree.Factory +-- elki.index.tree.metrical.vptree.VPTree.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

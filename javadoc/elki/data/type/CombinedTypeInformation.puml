@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CombinedTypeInformation\n<size:10>elki.data.type" as elki.data.type.CombinedTypeInformation [[CombinedTypeInformation.html]] {
+        -restrictions: TypeInformation[]
+        +CombinedTypeInformation(TypeInformation...)
+        +isAssignableFromType(TypeInformation): boolean
+        +isAssignableFrom(Object): boolean
+    }
+
+    interface "<size:14>TypeInformation\n<size:10>elki.data.type" as elki.data.type.TypeInformation [[TypeInformation.html]] {
+        {abstract} +isAssignableFromType(TypeInformation): boolean
+        {abstract} +isAssignableFrom(Object): boolean
+    }
+
+    elki.data.type.TypeInformation <|.. elki.data.type.CombinedTypeInformation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

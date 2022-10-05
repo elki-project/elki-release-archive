@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NumericalFeatureSelection\n<size:10>elki.data.projection" as elki.data.projection.NumericalFeatureSelection<V extends NumberVector> [[NumericalFeatureSelection.html]] {
+        -mindim: int
+        -factory: Factory<V extends NumberVector>
+        -dims: int[]
+        +NumericalFeatureSelection(int[])
+        +NumericalFeatureSelection(long[])
+        +initialize(SimpleTypeInformation<? extends NumberVector>): void
+        +project(V extends NumberVector): V extends NumberVector
+        +getOutputDataTypeInformation(): SimpleTypeInformation<V extends NumberVector>
+        +getInputDataTypeInformation(): TypeInformation
+    }
+
+    interface "<size:14>Projection\n<size:10>elki.data.projection" as elki.data.projection.Projection<V extends NumberVector, V extends NumberVector> [[Projection.html]] {
+        {abstract} +initialize(SimpleTypeInformation<? extends IN>): void
+        {abstract} +project(V extends NumberVector): V extends NumberVector
+        {abstract} +getInputDataTypeInformation(): TypeInformation
+        {abstract} +getOutputDataTypeInformation(): SimpleTypeInformation<OUT>
+    }
+    class "<size:14>NumericalFeatureSelection.Par\n<size:10>elki.data.projection" as elki.data.projection.NumericalFeatureSelection.Par<V extends NumberVector> [[NumericalFeatureSelection.Par.html]]
+
+    elki.data.projection.Projection <|.. elki.data.projection.NumericalFeatureSelection
+    elki.data.projection.NumericalFeatureSelection +-- elki.data.projection.NumericalFeatureSelection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

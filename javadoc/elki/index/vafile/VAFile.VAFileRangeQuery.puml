@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VAFile.VAFileRangeQuery\n<size:10>elki.index.vafile" as elki.index.vafile.VAFile.VAFileRangeQuery [[VAFile.VAFileRangeQuery.html]] {
+        ~p: double
+        +VAFileRangeQuery(DistanceQuery<V extends NumberVector>, double)
+        +getRange(V extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+
+    abstract class "<size:14>AbstractRefiningIndex.AbstractRefiningQuery\n<size:10>elki.index" as elki.index.AbstractRefiningIndex.AbstractRefiningQuery [[../AbstractRefiningIndex.AbstractRefiningQuery.html]]
+    interface "<size:14>RangeSearcher\n<size:10>elki.database.query.range" as elki.database.query.range.RangeSearcher<V extends NumberVector> [[../../database/query/range/RangeSearcher.html]] {
+        {abstract} +getRange(V extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+    class "<size:14>VAFile\n<size:10>elki.index.vafile" as elki.index.vafile.VAFile<V extends NumberVector> [[VAFile.html]]
+
+    elki.index.AbstractRefiningIndex.AbstractRefiningQuery <|-- elki.index.vafile.VAFile.VAFileRangeQuery
+    elki.database.query.range.RangeSearcher <|.. elki.index.vafile.VAFile.VAFileRangeQuery
+    elki.index.vafile.VAFile +-- elki.index.vafile.VAFile.VAFileRangeQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

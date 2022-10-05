@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSList.Instance\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSList.Instance [[OPTICSList.Instance.html]] {
+        ~processedIDs: ModifiableDBIDs
+        ~candidates: ArrayModifiableDBIDs
+        ~predecessor: WritableDBIDDataStore
+        ~reachability: WritableDoubleDataStore
+        ~clusterOrder: ClusterOrder
+        ~ids: DBIDs
+        ~progress: FiniteProgress
+        ~rangeQuery: RangeSearcher<DBIDRef>
+        +Instance(Relation<O>)
+        +run(): ClusterOrder
+        #expandClusterOrder(DBIDRef): void
+        +findBest(ArrayModifiableDBIDs, DBIDArrayMIter, DBIDVar): void
+    }
+
+    class "<size:14>OPTICSList\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSList<O> [[OPTICSList.html]]
+
+    elki.clustering.optics.OPTICSList +-- elki.clustering.optics.OPTICSList.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TrackParameters\n<size:10>elki.utilities.optionhandling.parameterization" as elki.utilities.optionhandling.parameterization.TrackParameters [[TrackParameters.html]] {
+        ~inner: Parameterization
+        ~options: List<TrackedParameter>
+        ~parents: Map<Object, Object>
+        ~children: Map<Object, List<Object>>
+        ~owner: Object
+        +TrackParameters(Parameterization)
+        +TrackParameters(Parameterization, Object)
+        -TrackParameters(Parameterization, Object, List<TrackedParameter>, Map<Object, Object>, Map<Object, List<Object>>)
+        +getErrors(): Collection<ParameterException>
+        +grab(Parameter<?>): boolean
+        +hasUnusedParameters(): boolean
+        +reportError(ParameterException): void
+        +setValueForOption(Parameter<?>): boolean
+        +getAllParameters(): Collection<TrackedParameter>
+        +descend(Object): Parameterization
+        -registerChild(Object): void
+        +getParent(Object): Object
+    }
+
+    interface "<size:14>Parameterization\n<size:10>elki.utilities.optionhandling.parameterization" as elki.utilities.optionhandling.parameterization.Parameterization [[Parameterization.html]] {
+        {abstract} +setValueForOption(Parameter<?>): boolean
+        {abstract} +getErrors(): Collection<ParameterException>
+        {abstract} +reportError(ParameterException): void
+        {abstract} +hasUnusedParameters(): boolean
+    }
+
+    elki.utilities.optionhandling.parameterization.Parameterization <|.. elki.utilities.optionhandling.parameterization.TrackParameters
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SlopeInversionDependence.Par\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.SlopeInversionDependence.Par [[SlopeInversionDependence.Par.html]] {
+        +make(): SlopeInversionDependence
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SlopeInversionDependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.SlopeInversionDependence [[SlopeInversionDependence.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.SlopeInversionDependence.Par
+    elki.math.statistics.dependence.SlopeInversionDependence +-- elki.math.statistics.dependence.SlopeInversionDependence.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

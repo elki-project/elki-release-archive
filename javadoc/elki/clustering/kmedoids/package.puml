@@ -1,0 +1,426 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.kmedoids {
+
+        interface KMedoidsClustering<O> [[KMedoidsClustering.html]] {
+            {abstract} +run(Relation<O>): Clustering<MedoidModel>
+            {abstract} +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+        }
+
+        class EagerPAM<O> [[EagerPAM.html]] {
+            {static} -LOG: Logging
+            {static} -KEY: String
+            +EagerPAM(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmedoids.EagerPAM.Instance [[EagerPAM.Instance.html]] {
+            +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+            #run(ArrayModifiableDBIDs, int): double
+        }
+
+        class elki.clustering.kmedoids.EagerPAM.Par<O> [[EagerPAM.Par.html]] {
+            +make(): EagerPAM<O>
+        }
+
+        class FastPAM<O> [[FastPAM.html]] {
+            {static} -LOG: Logging
+            {static} -KEY: String
+            #fasttol: double
+            +FastPAM(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+            +FastPAM(Distance<? super O>, int, int, KMedoidsInitialization<O>, double)
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmedoids.FastPAM.Instance [[FastPAM.Instance.html]] {
+            #fastswap: double
+            +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore, double)
+            #run(ArrayModifiableDBIDs, int): double
+            #findBestSwaps(DBIDArrayIter, ArrayModifiableDBIDs, double[], double[], double[]): void
+            #computeReassignmentCost(DBIDRef, int): double
+        }
+
+        class elki.clustering.kmedoids.FastPAM.Par<V> [[FastPAM.Par.html]] {
+            {static} +FASTTOL_ID: OptionID
+            #fasttol: double
+            #defaultInitializer(): Class<? extends KMedoidsInitialization>
+            +configure(Parameterization): void
+            +make(): FastPAM<V>
+        }
+
+        class FastCLARA<V> [[FastCLARA.html]] {
+            {static} -LOG: Logging
+            ~sampling: double
+            ~numsamples: int
+            ~keepmed: boolean
+            ~random: RandomFactory
+            +FastCLARA(Distance<? super V>, int, int, KMedoidsInitialization<V>, double, int, double, boolean, RandomFactory)
+            +run(Relation<V>): Clustering<MedoidModel>
+            +run(Relation<V>, int, DistanceQuery<? super V>): Clustering<MedoidModel>
+        }
+
+        class elki.clustering.kmedoids.FastCLARA.Par<V> [[FastCLARA.Par.html]] {
+            {static} +NUMSAMPLES_ID: OptionID
+            {static} +SAMPLESIZE_ID: OptionID
+            {static} +NOKEEPMED_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            ~sampling: double
+            ~numsamples: int
+            ~keepmed: boolean
+            ~random: RandomFactory
+            +configure(Parameterization): void
+            +make(): FastCLARA<V>
+        }
+
+        class SingleAssignmentKMedoids<O> [[SingleAssignmentKMedoids.html]] {
+            {static} -LOG: Logging
+            +SingleAssignmentKMedoids(Distance<? super O>, int, KMedoidsInitialization<O>)
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmedoids.SingleAssignmentKMedoids.Instance [[SingleAssignmentKMedoids.Instance.html]] {
+            ~ids: DBIDs
+            ~distQ: DistanceQuery<?>
+            ~assignment: WritableIntegerDataStore
+            +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+            #run(ArrayModifiableDBIDs): double
+            #assignToNearestCluster(ArrayModifiableDBIDs): double
+        }
+
+        class elki.clustering.kmedoids.SingleAssignmentKMedoids.Par<O> [[SingleAssignmentKMedoids.Par.html]] {
+            +configure(Parameterization): void
+            +make(): SingleAssignmentKMedoids<O>
+        }
+
+        class CLARANS<O> [[CLARANS.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #k: int
+            #numlocal: int
+            #maxneighbor: double
+            #random: RandomFactory
+            +CLARANS(Distance<? super O>, int, int, double, RandomFactory)
+            +run(Relation<O>): Clustering<MedoidModel>
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.kmedoids.CLARANS.Assignment [[CLARANS.Assignment.html]] {
+            ~ids: DBIDs
+            ~distQ: DistanceQuery<?>
+            ~nearest: WritableDoubleDataStore
+            ~second: WritableDoubleDataStore
+            ~assignment: WritableIntegerDataStore
+            ~secondid: WritableIntegerDataStore
+            ~medoids: ArrayModifiableDBIDs
+            ~miter: DBIDArrayMIter
+            +Assignment(DistanceQuery<?>, DBIDs, int)
+            #computeCostDifferential(DBIDRef, int, Assignment): double
+            #recompute(DBIDRef, int, double, int, double): double
+            #assignToNearestCluster(): double
+        }
+
+        class elki.clustering.kmedoids.CLARANS.Par<V> [[CLARANS.Par.html]] {
+            {static} +RESTARTS_ID: OptionID
+            {static} +NEIGHBORS_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            ~maxneighbor: double
+            ~numlocal: int
+            ~k: int
+            ~random: RandomFactory
+            #distance: Distance<? super V>
+            #defaultRate(): double
+            +configure(Parameterization): void
+            +make(): CLARANS<V>
+        }
+
+        class PAM<O> [[PAM.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #k: int
+            #maxiter: int
+            +PAM(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+            +run(Relation<O>): Clustering<MedoidModel>
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+            #initialMedoids(DistanceQuery<? super O>, DBIDs, int): ArrayModifiableDBIDs
+            {static} #wrapResult(DBIDs, WritableIntegerDataStore, ArrayModifiableDBIDs, String): Clustering<MedoidModel>
+            +getInputTypeRestriction(): TypeInformation[]
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmedoids.PAM.Instance [[PAM.Instance.html]] {
+            ~ids: DBIDs
+            ~distQ: DistanceQuery<?>
+            ~nearest: WritableDoubleDataStore
+            ~second: WritableDoubleDataStore
+            ~assignment: WritableIntegerDataStore
+            +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+            #run(ArrayModifiableDBIDs, int): double
+            #computeReassignmentCost(DBIDRef, int): double
+            #assignToNearestCluster(ArrayDBIDs): double
+        }
+
+        class elki.clustering.kmedoids.PAM.Par<O> [[PAM.Par.html]] {
+            #k: int
+            #maxiter: int
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            #defaultInitializer(): Class<? extends KMedoidsInitialization>
+            +make(): PAM<O>
+        }
+
+        class CLARA<V> [[CLARA.html]] {
+            {static} -LOG: Logging
+            ~sampling: double
+            ~numsamples: int
+            ~keepmed: boolean
+            ~random: RandomFactory
+            +CLARA(Distance<? super V>, int, int, KMedoidsInitialization<V>, int, double, boolean, RandomFactory)
+            +run(Relation<V>): Clustering<MedoidModel>
+            +run(Relation<V>, int, DistanceQuery<? super V>): Clustering<MedoidModel>
+            {static} ~randomSample(DBIDs, int, Random, DBIDs): DBIDs
+            {static} #assignRemainingToNearestCluster(ArrayDBIDs, DBIDs, DBIDs, WritableIntegerDataStore, DistanceQuery<?>): double
+        }
+
+        class elki.clustering.kmedoids.CLARA.CachedDistanceQuery<V> [[CLARA.CachedDistanceQuery.html]] {
+            ~inner: DistanceQuery<V>
+            ~cache: Long2DoubleOpenHashMap
+            ~bad: int
+            +CachedDistanceQuery(DistanceQuery<V>, int)
+            +hasUncachedQueries(): boolean
+            +clear(): void
+            +distance(DBIDRef, DBIDRef): double
+            +distance(V, DBIDRef): double
+            +distance(DBIDRef, V): double
+            +distance(V, V): double
+            +getDistance(): Distance<? super V>
+            +getRelation(): Relation<? extends V>
+        }
+
+        class elki.clustering.kmedoids.CLARA.Par<V> [[CLARA.Par.html]] {
+            {static} +NUMSAMPLES_ID: OptionID
+            {static} +SAMPLESIZE_ID: OptionID
+            {static} +NOKEEPMED_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            ~sampling: double
+            ~numsamples: int
+            ~keepmed: boolean
+            ~random: RandomFactory
+            +configure(Parameterization): void
+            +make(): CLARA<V>
+        }
+
+        class FastCLARANS<V> [[FastCLARANS.html]] {
+            {static} -LOG: Logging
+            +FastCLARANS(Distance<? super V>, int, int, double, RandomFactory)
+            +run(Relation<V>): Clustering<MedoidModel>
+        }
+
+        class elki.clustering.kmedoids.FastCLARANS.Assignment [[FastCLARANS.Assignment.html]] {
+            ~loss: double[]
+            #lastbest: int
+            +Assignment(DistanceQuery<?>, DBIDs, int)
+            #computeRemovalCost(double[]): void
+            #computeCostDifferential(DBIDRef, double[]): double
+            #performLastSwap(DBIDRef): void
+        }
+
+        class elki.clustering.kmedoids.FastCLARANS.Par<V> [[FastCLARANS.Par.html]] {
+            #defaultRate(): double
+            +make(): FastCLARANS<V>
+        }
+
+        class FasterPAM<O> [[FasterPAM.html]] {
+            {static} -LOG: Logging
+            {static} -KEY: String
+            +FasterPAM(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmedoids.FasterPAM.Instance [[FasterPAM.Instance.html]] {
+            +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+            #run(ArrayModifiableDBIDs, int): double
+        }
+
+        class elki.clustering.kmedoids.FasterPAM.Par<O> [[FasterPAM.Par.html]] {
+            +make(): FasterPAM<O>
+        }
+
+        class FastPAM1<O> [[FastPAM1.html]] {
+            {static} -LOG: Logging
+            {static} -KEY: String
+            +FastPAM1(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmedoids.FastPAM1.Instance [[FastPAM1.Instance.html]] {
+            +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+            #run(ArrayModifiableDBIDs, int): double
+            #updatePriorCost(double[]): void
+            #assignToNearestCluster(ArrayDBIDs): double
+            #computeReassignmentCost(DBIDRef, double[]): double
+            #updateAssignment(ArrayModifiableDBIDs, DBIDArrayIter, DBIDRef, int): void
+            #updateSecondNearest(DBIDRef, DBIDArrayIter, int, double, int): int
+        }
+
+        class elki.clustering.kmedoids.FastPAM1.Par<V> [[FastPAM1.Par.html]] {
+            +make(): FastPAM1<V>
+        }
+
+        class ReynoldsPAM<O> [[ReynoldsPAM.html]] {
+            {static} -LOG: Logging
+            {static} -KEY: String
+            +ReynoldsPAM(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmedoids.ReynoldsPAM.Instance [[ReynoldsPAM.Instance.html]] {
+            +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+            #run(ArrayModifiableDBIDs, int): double
+            #computeRemovalCost(int, WritableDoubleDataStore): double
+            #computeReassignmentCost(DBIDRef, WritableDoubleDataStore): double
+        }
+
+        class elki.clustering.kmedoids.ReynoldsPAM.Par<V> [[ReynoldsPAM.Par.html]] {
+            +make(): ReynoldsPAM<V>
+        }
+
+        class AlternatingKMedoids<O> [[AlternatingKMedoids.html]] {
+            {static} -LOG: Logging
+            {static} -KEY: String
+            #distance: Distance<? super O>
+            #k: int
+            #maxiter: int
+            +AlternatingKMedoids(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): Clustering<MedoidModel>
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+        }
+
+        class elki.clustering.kmedoids.AlternatingKMedoids.Par<V> [[AlternatingKMedoids.Par.html]] {
+            #k: int
+            #maxiter: int
+            #distance: Distance<? super V>
+            +configure(Parameterization): void
+            +make(): AlternatingKMedoids<V>
+        }
+
+        class FasterCLARA<O> [[FasterCLARA.html]] {
+            {static} -LOG: Logging
+            ~sampling: double
+            ~numsamples: int
+            ~keepmed: boolean
+            ~random: RandomFactory
+            +FasterCLARA(Distance<? super O>, int, int, KMedoidsInitialization<O>, int, double, boolean, RandomFactory)
+            +run(Relation<O>): Clustering<MedoidModel>
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+        }
+
+        class elki.clustering.kmedoids.FasterCLARA.Par<V> [[FasterCLARA.Par.html]] {
+            {static} +NUMSAMPLES_ID: OptionID
+            {static} +SAMPLESIZE_ID: OptionID
+            {static} +NOKEEPMED_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            ~sampling: double
+            ~numsamples: int
+            ~keepmed: boolean
+            ~random: RandomFactory
+            +configure(Parameterization): void
+            +make(): FasterCLARA<V>
+        }
+
+        elki.clustering.ClusteringAlgorithm <|-- KMedoidsClustering
+        PAM <|-- EagerPAM
+        elki.clustering.kmedoids.PAM.Instance <|-- elki.clustering.kmedoids.EagerPAM.Instance
+        EagerPAM +-- elki.clustering.kmedoids.EagerPAM.Instance
+        elki.clustering.kmedoids.PAM.Par <|-- elki.clustering.kmedoids.EagerPAM.Par
+        EagerPAM +-- elki.clustering.kmedoids.EagerPAM.Par
+        FastPAM1 <|-- FastPAM
+        elki.clustering.kmedoids.FastPAM1.Instance <|-- elki.clustering.kmedoids.FastPAM.Instance
+        FastPAM +-- elki.clustering.kmedoids.FastPAM.Instance
+        elki.clustering.kmedoids.FastPAM1.Par <|-- elki.clustering.kmedoids.FastPAM.Par
+        FastPAM +-- elki.clustering.kmedoids.FastPAM.Par
+        FastPAM <|-- FastCLARA
+        elki.clustering.kmedoids.FastPAM.Par <|-- elki.clustering.kmedoids.FastCLARA.Par
+        FastCLARA +-- elki.clustering.kmedoids.FastCLARA.Par
+        PAM <|-- SingleAssignmentKMedoids
+        SingleAssignmentKMedoids +-- elki.clustering.kmedoids.SingleAssignmentKMedoids.Instance
+        elki.clustering.kmedoids.PAM.Par <|-- elki.clustering.kmedoids.SingleAssignmentKMedoids.Par
+        SingleAssignmentKMedoids +-- elki.clustering.kmedoids.SingleAssignmentKMedoids.Par
+        KMedoidsClustering <|.. CLARANS
+        CLARANS +-- elki.clustering.kmedoids.CLARANS.Assignment
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmedoids.CLARANS.Par
+        CLARANS +-- elki.clustering.kmedoids.CLARANS.Par
+        KMedoidsClustering <|.. PAM
+        PAM --> elki.clustering.kmedoids.initialization.KMedoidsInitialization: initializer
+        PAM +-- elki.clustering.kmedoids.PAM.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmedoids.PAM.Par
+        PAM +-- elki.clustering.kmedoids.PAM.Par
+        elki.clustering.kmedoids.PAM.Par --> elki.clustering.kmedoids.initialization.KMedoidsInitialization: initializer
+        PAM <|-- CLARA
+        elki.database.query.distance.DistanceQuery <|.. elki.clustering.kmedoids.CLARA.CachedDistanceQuery
+        CLARA +-- elki.clustering.kmedoids.CLARA.CachedDistanceQuery
+        elki.clustering.kmedoids.PAM.Par <|-- elki.clustering.kmedoids.CLARA.Par
+        CLARA +-- elki.clustering.kmedoids.CLARA.Par
+        CLARANS <|-- FastCLARANS
+        elki.clustering.kmedoids.CLARANS.Assignment <|-- elki.clustering.kmedoids.FastCLARANS.Assignment
+        FastCLARANS +-- elki.clustering.kmedoids.FastCLARANS.Assignment
+        elki.clustering.kmedoids.CLARANS.Par <|-- elki.clustering.kmedoids.FastCLARANS.Par
+        FastCLARANS +-- elki.clustering.kmedoids.FastCLARANS.Par
+        FastPAM <|-- FasterPAM
+        elki.clustering.kmedoids.FastPAM.Instance <|-- elki.clustering.kmedoids.FasterPAM.Instance
+        FasterPAM +-- elki.clustering.kmedoids.FasterPAM.Instance
+        elki.clustering.kmedoids.FastPAM.Par <|-- elki.clustering.kmedoids.FasterPAM.Par
+        FasterPAM +-- elki.clustering.kmedoids.FasterPAM.Par
+        PAM <|-- FastPAM1
+        elki.clustering.kmedoids.PAM.Instance <|-- elki.clustering.kmedoids.FastPAM1.Instance
+        FastPAM1 +-- elki.clustering.kmedoids.FastPAM1.Instance
+        elki.clustering.kmedoids.PAM.Par <|-- elki.clustering.kmedoids.FastPAM1.Par
+        FastPAM1 +-- elki.clustering.kmedoids.FastPAM1.Par
+        PAM <|-- ReynoldsPAM
+        elki.clustering.kmedoids.PAM.Instance <|-- elki.clustering.kmedoids.ReynoldsPAM.Instance
+        ReynoldsPAM +-- elki.clustering.kmedoids.ReynoldsPAM.Instance
+        elki.clustering.kmedoids.PAM.Par <|-- elki.clustering.kmedoids.ReynoldsPAM.Par
+        ReynoldsPAM +-- elki.clustering.kmedoids.ReynoldsPAM.Par
+        KMedoidsClustering <|.. AlternatingKMedoids
+        AlternatingKMedoids --> elki.clustering.kmedoids.initialization.KMedoidsInitialization: initializer
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmedoids.AlternatingKMedoids.Par
+        AlternatingKMedoids +-- elki.clustering.kmedoids.AlternatingKMedoids.Par
+        elki.clustering.kmedoids.AlternatingKMedoids.Par --> elki.clustering.kmedoids.initialization.KMedoidsInitialization: initializer
+        FasterPAM <|-- FasterCLARA
+        elki.clustering.kmedoids.FasterPAM.Par <|-- elki.clustering.kmedoids.FasterCLARA.Par
+        FasterCLARA +-- elki.clustering.kmedoids.FasterCLARA.Par
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.database.query.distance {
+        interface DistanceQuery<O> [[../../database/query/distance/DistanceQuery.html]] {
+            {abstract} +distance(DBIDRef, DBIDRef): double
+            {abstract} +distance(O, DBIDRef): double
+            {abstract} +distance(DBIDRef, O): double
+            {abstract} +distance(O, O): double
+            {abstract} +getDistance(): Distance<? super O>
+            {abstract} +getRelation(): Relation<? extends O>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

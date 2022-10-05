@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EpsilonNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.EpsilonNeighborPredicate<O> [[EpsilonNeighborPredicate.html]] {
+        #epsilon: double
+        #distance: Distance<? super O>
+        +EpsilonNeighborPredicate(double, Distance<? super O>)
+        +instantiate(Database): Instance
+        +getOutputType(): SimpleTypeInformation<DoubleDBIDList>
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>NeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.NeighborPredicate<DoubleDBIDList> [[NeighborPredicate.html]] {
+        {abstract} +instantiate(Database): Instance<T>
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +getOutputType(): SimpleTypeInformation<T>
+    }
+    class "<size:14>EpsilonNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.EpsilonNeighborPredicate.Instance [[EpsilonNeighborPredicate.Instance.html]]
+    class "<size:14>EpsilonNeighborPredicate.Par\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.EpsilonNeighborPredicate.Par<O>
+
+    elki.clustering.dbscan.predicates.NeighborPredicate <|.. elki.clustering.dbscan.predicates.EpsilonNeighborPredicate
+    elki.clustering.dbscan.predicates.EpsilonNeighborPredicate +-- elki.clustering.dbscan.predicates.EpsilonNeighborPredicate.Instance
+    elki.clustering.dbscan.predicates.EpsilonNeighborPredicate +-- elki.clustering.dbscan.predicates.EpsilonNeighborPredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

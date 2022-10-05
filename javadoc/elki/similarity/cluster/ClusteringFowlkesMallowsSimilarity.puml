@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusteringFowlkesMallowsSimilarity\n<size:10>elki.similarity.cluster" as elki.similarity.cluster.ClusteringFowlkesMallowsSimilarity [[ClusteringFowlkesMallowsSimilarity.html]] {
+        {static} +STATIC: ClusteringFowlkesMallowsSimilarity
+        +similarity(Clustering<?>, Clustering<?>): double
+        +distance(Clustering<?>, Clustering<?>): double
+        +isMetric(): boolean
+        +instantiate(Relation<T extends Clustering<?>>): DistanceSimilarityQuery<T extends Clustering<?>>
+        +getInputTypeRestriction(): SimpleTypeInformation<? super Clustering<?>>
+    }
+
+    interface "<size:14>ClusteringDistanceSimilarity\n<size:10>elki.similarity.cluster" as elki.similarity.cluster.ClusteringDistanceSimilarity [[ClusteringDistanceSimilarity.html]] {
+        {abstract} +instantiate(Relation<T extends Clustering<?>>): DistanceSimilarityQuery<T extends Clustering<?>>
+    }
+    interface "<size:14>NormalizedSimilarity\n<size:10>elki.similarity" as elki.similarity.NormalizedSimilarity<Clustering<?>> [[../NormalizedSimilarity.html]]
+    class "<size:14>ClusteringFowlkesMallowsSimilarity.Par\n<size:10>elki.similarity.cluster" as elki.similarity.cluster.ClusteringFowlkesMallowsSimilarity.Par [[ClusteringFowlkesMallowsSimilarity.Par.html]]
+
+    elki.similarity.cluster.ClusteringDistanceSimilarity <|.. elki.similarity.cluster.ClusteringFowlkesMallowsSimilarity
+    elki.similarity.NormalizedSimilarity <|.. elki.similarity.cluster.ClusteringFowlkesMallowsSimilarity
+    elki.similarity.cluster.ClusteringFowlkesMallowsSimilarity +-- elki.similarity.cluster.ClusteringFowlkesMallowsSimilarity.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

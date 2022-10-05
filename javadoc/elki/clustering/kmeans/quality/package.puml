@@ -1,0 +1,65 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.kmeans.quality {
+
+        class WithinClusterVariance [[WithinClusterVariance.html]] {
+            +quality(Clustering<? extends MeanModel>, NumberVectorDistance<? super NumberVector>, Relation<V extends NumberVector>): double
+            +isBetter(double, double): boolean
+        }
+
+        class AkaikeInformationCriterionXMeans [[AkaikeInformationCriterionXMeans.html]] {
+            +quality(Clustering<? extends MeanModel>, NumberVectorDistance<? super NumberVector>, Relation<V extends NumberVector>): double
+            +isBetter(double, double): boolean
+        }
+
+        class AkaikeInformationCriterion [[AkaikeInformationCriterion.html]] {
+            +quality(Clustering<? extends MeanModel>, NumberVectorDistance<? super NumberVector>, Relation<V extends NumberVector>): double
+            +isBetter(double, double): boolean
+        }
+
+        class BayesianInformationCriterionZhao [[BayesianInformationCriterionZhao.html]] {
+            +quality(Clustering<? extends MeanModel>, NumberVectorDistance<? super NumberVector>, Relation<V extends NumberVector>): double
+            {static} +logLikelihoodZhao(Relation<? extends NumberVector>, Clustering<? extends MeanModel>, NumberVectorDistance<?>): double
+            +isBetter(double, double): boolean
+        }
+
+        class BayesianInformationCriterionXMeans [[BayesianInformationCriterionXMeans.html]] {
+            +quality(Clustering<? extends MeanModel>, NumberVectorDistance<? super NumberVector>, Relation<V extends NumberVector>): double
+            {static} +logLikelihoodXMeans(Relation<? extends NumberVector>, Clustering<? extends MeanModel>, NumberVectorDistance<?>): double
+            +isBetter(double, double): boolean
+        }
+
+        interface KMeansQualityMeasure<O extends NumberVector> [[KMeansQualityMeasure.html]] {
+            {abstract} +quality(Clustering<? extends MeanModel>, NumberVectorDistance<? super NumberVector>, Relation<V extends NumberVector>): double
+            {abstract} +isBetter(double, double): boolean
+        }
+
+        abstract class AbstractKMeansQualityMeasure<O extends NumberVector> [[AbstractKMeansQualityMeasure.html]] {
+            {static} +numPoints(Clustering<? extends MeanModel>): int
+            {static} +varianceContributionOfCluster(Cluster<? extends MeanModel>, NumberVectorDistance<?>, Relation<? extends NumberVector>): double
+            {static} +logLikelihood(Relation<? extends NumberVector>, Clustering<? extends MeanModel>, NumberVectorDistance<?>): double
+            {static} +numberOfFreeParameters(Relation<? extends NumberVector>, Clustering<? extends MeanModel>): int
+        }
+
+        class WithinClusterMeanDistance [[WithinClusterMeanDistance.html]] {
+            +quality(Clustering<? extends MeanModel>, NumberVectorDistance<? super NumberVector>, Relation<V extends NumberVector>): double
+            +isBetter(double, double): boolean
+        }
+
+        class BayesianInformationCriterion [[BayesianInformationCriterion.html]] {
+            +quality(Clustering<? extends MeanModel>, NumberVectorDistance<? super NumberVector>, Relation<V extends NumberVector>): double
+            +isBetter(double, double): boolean
+        }
+
+        AbstractKMeansQualityMeasure <|-- WithinClusterVariance
+        AbstractKMeansQualityMeasure <|-- AkaikeInformationCriterionXMeans
+        AbstractKMeansQualityMeasure <|-- AkaikeInformationCriterion
+        AbstractKMeansQualityMeasure <|-- BayesianInformationCriterionZhao
+        AbstractKMeansQualityMeasure <|-- BayesianInformationCriterionXMeans
+        KMeansQualityMeasure <|.. AbstractKMeansQualityMeasure
+        KMeansQualityMeasure <|.. WithinClusterMeanDistance
+        AbstractKMeansQualityMeasure <|-- BayesianInformationCriterion
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

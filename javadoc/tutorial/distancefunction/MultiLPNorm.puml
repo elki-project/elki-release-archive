@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MultiLPNorm\n<size:10>tutorial.distancefunction" as tutorial.distancefunction.MultiLPNorm [[MultiLPNorm.html]] {
+        ~ps: double[]
+        ~pinv: double
+        +MultiLPNorm(double[])
+        +distance(NumberVector, NumberVector): double
+        +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../../elki/distance/AbstractNumberVectorDistance.html]]
+    class "<size:14>MultiLPNorm.Par\n<size:10>tutorial.distancefunction" as tutorial.distancefunction.MultiLPNorm.Par [[MultiLPNorm.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- tutorial.distancefunction.MultiLPNorm
+    tutorial.distancefunction.MultiLPNorm +-- tutorial.distancefunction.MultiLPNorm.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

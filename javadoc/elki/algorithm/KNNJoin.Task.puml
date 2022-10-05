@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KNNJoin.Task\n<size:10>elki.algorithm" as elki.algorithm.KNNJoin.Task [[KNNJoin.Task.html]] {
+        ~mindist: double
+        ~i: int
+        ~j: int
+        +Task(double, int, int)
+        +compareTo(Task): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<Task> {
+        {abstract} +compareTo(Task): int
+    }
+    class "<size:14>KNNJoin\n<size:10>elki.algorithm" as elki.algorithm.KNNJoin [[KNNJoin.html]]
+
+    java.lang.Comparable <|.. elki.algorithm.KNNJoin.Task
+    elki.algorithm.KNNJoin +-- elki.algorithm.KNNJoin.Task
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VPTree.Builder\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.Builder [[VPTree.Builder.html]] {
+        ~scratch: ModifiableDoubleDBIDList
+        ~scratchit: DoubleDBIDListMIter
+        ~rnd: Random
+        -buildTree(int, int): Node
+        -chooseVantagePoint(int, int): DBIDVar
+        -calcMoment(DBIDRef, DBIDs, int): double
+    }
+
+    class "<size:14>VPTree\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree<O> [[VPTree.html]]
+
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.Builder
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

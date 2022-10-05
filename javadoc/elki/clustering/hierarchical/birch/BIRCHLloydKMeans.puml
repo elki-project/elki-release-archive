@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BIRCHLloydKMeans\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.BIRCHLloydKMeans [[BIRCHLloydKMeans.html]] {
+        {static} -LOG: Logging
+        ~cffactory: Factory
+        ~k: int
+        ~maxiter: int
+        ~initialization: BIRCHKMeansPlusPlus
+        +BIRCHLloydKMeans(Factory, int, int, BIRCHKMeansPlusPlus)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<NumberVector>): Clustering<KMeansModel>
+        -kmeans(double[], ClusteringFeature[], int[], int[]): double[]
+        -means(int[], double[], ClusteringFeature[], int[]): double[]
+        -assignToNearestCluster(int[], double[], double[], ClusteringFeature[], int[]): int
+        #distance(NumberVector, double[]): double
+        #distance(double[], double[]): double
+        -calculateVariances(int[], double[], ClusteringFeature[], int[]): double[]
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<MeanModel>> [[../../ClusteringAlgorithm.html]]
+    class "<size:14>BIRCHLloydKMeans.Par\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.BIRCHLloydKMeans.Par [[BIRCHLloydKMeans.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.hierarchical.birch.BIRCHLloydKMeans
+    elki.clustering.hierarchical.birch.BIRCHLloydKMeans +-- elki.clustering.hierarchical.birch.BIRCHLloydKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

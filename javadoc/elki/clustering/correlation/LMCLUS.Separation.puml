@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LMCLUS.Separation\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.LMCLUS.Separation [[LMCLUS.Separation.html]] {
+        ~goodness: double
+        ~threshold: double
+        ~basis: double[]
+        ~originV: double[]
+    }
+
+    class "<size:14>LMCLUS\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.LMCLUS [[LMCLUS.html]]
+
+    elki.clustering.correlation.LMCLUS +-- elki.clustering.correlation.LMCLUS.Separation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

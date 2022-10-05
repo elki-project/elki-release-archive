@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterOrder\n<size:10>elki.clustering.optics" as elki.clustering.optics.ClusterOrder [[ClusterOrder.html]] {
+        ~ids: ArrayModifiableDBIDs
+        ~reachability: WritableDoubleDataStore
+        ~predecessor: WritableDBIDDataStore
+        +ClusterOrder(DBIDs)
+        +ClusterOrder(ArrayModifiableDBIDs, WritableDoubleDataStore, WritableDBIDDataStore)
+        +add(DBIDRef, double, DBIDRef): void
+        +getDBIDs(): ArrayDBIDs
+        +iter(): DBIDArrayIter
+        +order(DBIDs): ArrayModifiableDBIDs
+        +size(): int
+        +getReachability(DBIDRef): double
+        +getPredecessor(DBIDRef, DBIDVar): void
+    }
+
+    interface "<size:14>OrderingResult\n<size:10>elki.result" as elki.result.OrderingResult [[../../result/OrderingResult.html]] {
+        {abstract} +getDBIDs(): DBIDs
+        {abstract} +order(DBIDs): ArrayModifiableDBIDs
+    }
+
+    elki.result.OrderingResult <|.. elki.clustering.optics.ClusterOrder
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

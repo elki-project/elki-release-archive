@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DBSCAN.Instance\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.DBSCAN.Instance [[DBSCAN.Instance.html]] {
+        #resultList: List<ModifiableDBIDs>
+        #noise: ModifiableDBIDs
+        #processedIDs: ModifiableDBIDs
+        #ncounter: long
+        #objprog: FiniteProgress
+        #clusprog: IndefiniteProgress
+        #rangeQuery: RangeSearcher<DBIDRef>
+        #neighbors: ModifiableDoubleDBIDList
+        #run(Relation<O>, RangeSearcher<DBIDRef>): void
+        #expandCluster(DBIDRef, ArrayModifiableDBIDs): void
+        -processNeighbors(DoubleDBIDList, ModifiableDBIDs, ArrayModifiableDBIDs): void
+    }
+
+    class "<size:14>DBSCAN\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.DBSCAN<O> [[DBSCAN.html]]
+
+    elki.clustering.dbscan.DBSCAN +-- elki.clustering.dbscan.DBSCAN.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

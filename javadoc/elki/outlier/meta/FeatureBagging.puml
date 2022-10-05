@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FeatureBagging\n<size:10>elki.outlier.meta" as elki.outlier.meta.FeatureBagging [[FeatureBagging.html]] {
+        {static} -LOG: Logging
+        #num: int
+        #breadth: boolean
+        -rnd: RandomFactory
+        -k: int
+        +FeatureBagging(int, int, boolean, RandomFactory)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<NumberVector>): OutlierResult
+        -randomSubspace(int, int, int, Random): long[]
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>FeatureBagging.Par\n<size:10>elki.outlier.meta" as elki.outlier.meta.FeatureBagging.Par [[FeatureBagging.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.meta.FeatureBagging
+    elki.outlier.meta.FeatureBagging +-- elki.outlier.meta.FeatureBagging.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

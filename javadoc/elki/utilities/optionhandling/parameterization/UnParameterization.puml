@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UnParameterization\n<size:10>elki.utilities.optionhandling.parameterization" as elki.utilities.optionhandling.parameterization.UnParameterization [[UnParameterization.html]] {
+        ~errors: List<ParameterException>
+        +hasUnusedParameters(): boolean
+        +getErrors(): Collection<ParameterException>
+        +grab(Parameter<?>): boolean
+        +reportError(ParameterException): void
+        +setValueForOption(Parameter<?>): boolean
+    }
+
+    interface "<size:14>Parameterization\n<size:10>elki.utilities.optionhandling.parameterization" as elki.utilities.optionhandling.parameterization.Parameterization [[Parameterization.html]] {
+        {abstract} +setValueForOption(Parameter<?>): boolean
+        {abstract} +getErrors(): Collection<ParameterException>
+        {abstract} +reportError(ParameterException): void
+        {abstract} +hasUnusedParameters(): boolean
+    }
+
+    elki.utilities.optionhandling.parameterization.Parameterization <|.. elki.utilities.optionhandling.parameterization.UnParameterization
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

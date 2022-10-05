@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VarianceRatioCriterion.Par\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.VarianceRatioCriterion.Par [[VarianceRatioCriterion.Par.html]] {
+        {static} +NOISE_ID: OptionID
+        {static} +NO_PENALIZE_ID: OptionID
+        -noiseOption: NoiseHandling
+        -penalize: boolean
+        +configure(Parameterization): void
+        +make(): VarianceRatioCriterion
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>VarianceRatioCriterion\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.VarianceRatioCriterion [[VarianceRatioCriterion.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.internal.VarianceRatioCriterion.Par
+    elki.evaluation.clustering.internal.VarianceRatioCriterion +-- elki.evaluation.clustering.internal.VarianceRatioCriterion.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

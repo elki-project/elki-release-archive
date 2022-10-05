@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="69px" preserveAspectRatio="none" style="width:194px;height:69px;background:#FFFFFF;" version="1.1" viewBox="0 0 194 69" width="194px" zoomAndPan="magnify"><defs/><g><!--MD5=[3bb1438fe92229e33ef6361217e44a10]
+class elki.outlier.density.HySortOD--><a href="HySortOD.html" target="_top" title="HySortOD.html" xlink:actuate="onRequest" xlink:href="HySortOD.html" xlink:show="new" xlink:title="HySortOD.html" xlink:type="simple"><g id="elem_elki.outlier.density.HySortOD"><rect codeLine="18" fill="#F1F1F1" height="37.9375" id="elki.outlier.density.HySortOD" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="41" y="7"/><ellipse cx="56" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M58.9688,31.6094 Q58.3906,31.9063 57.75,32.0469 Q57.1094,32.2031 56.4063,32.2031 Q53.9063,32.2031 52.5781,30.5625 Q51.2656,28.9063 51.2656,25.7813 Q51.2656,22.6563 52.5781,21 Q53.9063,19.3438 56.4063,19.3438 Q57.1094,19.3438 57.75,19.5 Q58.4063,19.6563 58.9688,19.9531 L58.9688,22.6719 Q58.3438,22.0938 57.75,21.8281 Q57.1563,21.5469 56.5313,21.5469 Q55.1875,21.5469 54.5,22.625 Q53.8125,23.6875 53.8125,25.7813 Q53.8125,27.875 54.5,28.9531 Q55.1875,30.0156 56.5313,30.0156 Q57.1563,30.0156 57.75,29.75 Q58.3438,29.4688 58.9688,28.8906 L58.9688,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="79.5" y="24.9951">HySortOD</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="86" x="70" y="37.5791">elki.outlier.density</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="0" y="49.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="0" y="59.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[dfdaba777d7610c00b64f078570b739e]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HySortOD.Par\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD.Par {
+        {static} +B_ID: OptionID
+        {static} +MIN_SPLIT_ID: OptionID
+        #b: int
+        #minSplit: int
+        +configure(Parameterization): void
+        +make(): HySortOD
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>HySortOD\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD [[HySortOD.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.density.HySortOD.Par
+    elki.outlier.density.HySortOD +- - elki.outlier.density.HySortOD.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AssociationRule\n<size:10>elki.itemsetmining.associationrules" as elki.itemsetmining.associationrules.AssociationRule [[AssociationRule.html]] {
+        -consequent: Itemset
+        -antecedent: Itemset
+        -union: Itemset
+        -measure: double
+        +AssociationRule(Itemset, Itemset, Itemset, double)
+        +getConsequent(): Itemset
+        +getUnion(): Itemset
+        +getMeasure(): double
+        +getAntecedent(): Itemset
+        +compareTo(AssociationRule): int
+        +appendTo(StringBuilder, VectorFieldTypeInformation<BitVector>): StringBuilder
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<AssociationRule> {
+        {abstract} +compareTo(AssociationRule): int
+    }
+
+    java.lang.Comparable <|.. elki.itemsetmining.associationrules.AssociationRule
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

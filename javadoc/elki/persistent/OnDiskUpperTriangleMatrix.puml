@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OnDiskUpperTriangleMatrix\n<size:10>elki.persistent" as elki.persistent.OnDiskUpperTriangleMatrix [[OnDiskUpperTriangleMatrix.html]] {
+        {static} -serialVersionUID: long
+        {static} -TRIANGLE_HEADER_SIZE: int
+        -matrixsize: int
+        -array: OnDiskArray
+        +OnDiskUpperTriangleMatrix(Path, int, int, int, boolean)
+        +OnDiskUpperTriangleMatrix(Path, int, int, int, int)
+        +resizeMatrix(int): void
+        {static} -arraysize(int): int
+        -computeOffset(int, int): int
+        +getRecordBuffer(int, int): ByteBuffer
+        +close(): void
+        +getMatrixSize(): int
+    }
+
+    interface "<size:14>AutoCloseable\n<size:10>java.lang" as java.lang.AutoCloseable {
+        {abstract} +close(): void
+    }
+
+    java.lang.AutoCloseable <|.. elki.persistent.OnDiskUpperTriangleMatrix
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

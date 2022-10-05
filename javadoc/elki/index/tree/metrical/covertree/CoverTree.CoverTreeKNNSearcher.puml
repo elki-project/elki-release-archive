@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>CoverTree.CoverTreeKNNSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNSearcher [[CoverTree.CoverTreeKNNSearcher.html]] {
+        -pq: DoubleObjectMinHeap<Node>
+        -tmp: DBIDVar
+        #doSearch(int): KNNList
+        {abstract} #queryDistance(DBIDRef): double
+    }
+
+    class "<size:14>CoverTree\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree<O> [[CoverTree.html]]
+
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

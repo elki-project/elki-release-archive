@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Simple1D\n<size:10>elki.visualization.projections" as elki.visualization.projections.Simple1D [[Simple1D.html]] {
+        ~dnum: int
+        +Simple1D(Projector, LinearScale[], int)
+        +fastProjectDataToRenderSpace(double[]): double
+        +fastProjectDataToRenderSpace(NumberVector): double
+        +fastProjectScaledToRender(double[]): double
+        +fastProjectRelativeDataToRenderSpace(double[]): double
+        +fastProjectRelativeDataToRenderSpace(NumberVector): double
+        +fastProjectRelativeScaledToRender(double[]): double
+        #rearrange(double[]): double[]
+        #dearrange(double[]): double[]
+        +getMenuName(): String
+    }
+
+    abstract class "<size:14>AbstractSimpleProjection\n<size:10>elki.visualization.projections" as elki.visualization.projections.AbstractSimpleProjection [[AbstractSimpleProjection.html]] {
+        {abstract} #rearrange(double[]): double[]
+        {abstract} #dearrange(double[]): double[]
+    }
+    interface "<size:14>Projection1D\n<size:10>elki.visualization.projections" as elki.visualization.projections.Projection1D [[Projection1D.html]] {
+        {abstract} +fastProjectDataToRenderSpace(double[]): double
+        {abstract} +fastProjectDataToRenderSpace(NumberVector): double
+        {abstract} +fastProjectScaledToRender(double[]): double
+        {abstract} +fastProjectRelativeDataToRenderSpace(double[]): double
+        {abstract} +fastProjectRelativeDataToRenderSpace(NumberVector): double
+        {abstract} +fastProjectRelativeScaledToRender(double[]): double
+    }
+
+    elki.visualization.projections.AbstractSimpleProjection <|-- elki.visualization.projections.Simple1D
+    elki.visualization.projections.Projection1D <|.. elki.visualization.projections.Simple1D
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

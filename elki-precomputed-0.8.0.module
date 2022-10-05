@@ -1,0 +1,166 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-precomputed",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-preprocessed",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-persistent",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-precomputed-0.8.0.jar",
+          "url": "elki-precomputed-0.8.0.jar",
+          "size": 61430,
+          "sha512": "8876557e1e3a3c3ab049d0571b8cd7f7bea6678909cf6745a40ef01fa9c77500925e32a97552ebf045e1023b02ca9fc8d31d2257003c5e72216608b58ccbf2e5",
+          "sha256": "8db0980c6c2b9b14798dcd94082e61a4b626cc1fd66bd4eea1450db97cb90332",
+          "sha1": "2bcb7d631363dafaf47257cf3e3538ed36c42707",
+          "md5": "f3d9dd62a45cdb5a78b01aafcbaa2d4e"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-preprocessed",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-persistent",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-precomputed-0.8.0.jar",
+          "url": "elki-precomputed-0.8.0.jar",
+          "size": 61430,
+          "sha512": "8876557e1e3a3c3ab049d0571b8cd7f7bea6678909cf6745a40ef01fa9c77500925e32a97552ebf045e1023b02ca9fc8d31d2257003c5e72216608b58ccbf2e5",
+          "sha256": "8db0980c6c2b9b14798dcd94082e61a4b626cc1fd66bd4eea1450db97cb90332",
+          "sha1": "2bcb7d631363dafaf47257cf3e3538ed36c42707",
+          "md5": "f3d9dd62a45cdb5a78b01aafcbaa2d4e"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-precomputed",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-precomputed-0.8.0-test-fixtures.jar",
+          "url": "elki-precomputed-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "e02d73b6dd9f98ba75b26486e43642f677b393e607baf80c25ee1ec0ce5f2b12b71301930bb3f60dca6513134dfc10be49f870ef600402a77597265b08714971",
+          "sha256": "2420c396aaf092c4ea5cc3becbadb9f1b7ee547f8a2e458c5e85cbd1477aa7df",
+          "sha1": "b07e565784e914b34a0a6426946de3158b192e3a",
+          "md5": "4a7c27cedf6396e6e51705f0ae8c6869"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-precomputed-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-precomputed",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-precomputed-0.8.0-test-fixtures.jar",
+          "url": "elki-precomputed-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "e02d73b6dd9f98ba75b26486e43642f677b393e607baf80c25ee1ec0ce5f2b12b71301930bb3f60dca6513134dfc10be49f870ef600402a77597265b08714971",
+          "sha256": "2420c396aaf092c4ea5cc3becbadb9f1b7ee547f8a2e458c5e85cbd1477aa7df",
+          "sha1": "b07e565784e914b34a0a6426946de3158b192e3a",
+          "md5": "4a7c27cedf6396e6e51705f0ae8c6869"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-precomputed-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

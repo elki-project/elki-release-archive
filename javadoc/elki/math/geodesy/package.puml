@@ -1,0 +1,225 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.geodesy {
+
+        class Clarke1858SpheroidEarthModel [[Clarke1858SpheroidEarthModel.html]] {
+            {static} +CLARKE1858_RADIUS: double
+            {static} +CLARKE1858_INV_FLATTENING: double
+            {static} +CLARKE1858_FLATTENING: double
+        }
+
+        class elki.math.geodesy.Clarke1858SpheroidEarthModel.Par [[Clarke1858SpheroidEarthModel.Par.html]] {
+            +make(): Clarke1858SpheroidEarthModel
+        }
+
+        class SphericalCosineEarthModel [[SphericalCosineEarthModel.html]] {
+            {static} +EARTH_RADIUS: double
+            +latLngRadToECEF(double, double): double[]
+            +latLngRadToECEF(double, double, double): double[]
+            +ecefToLatRad(double, double, double): double
+            +distanceRad(double, double, double, double): double
+        }
+
+        class elki.math.geodesy.SphericalCosineEarthModel.Par [[SphericalCosineEarthModel.Par.html]] {
+            +make(): SphericalCosineEarthModel
+        }
+
+        class SphericalVincentyEarthModel [[SphericalVincentyEarthModel.html]] {
+            {static} +EARTH_RADIUS: double
+            +latLngRadToECEF(double, double): double[]
+            +latLngRadToECEF(double, double, double): double[]
+            +ecefToLatRad(double, double, double): double
+            +distanceRad(double, double, double, double): double
+        }
+
+        class elki.math.geodesy.SphericalVincentyEarthModel.Par [[SphericalVincentyEarthModel.Par.html]] {
+            +make(): SphericalVincentyEarthModel
+        }
+
+        class GRS80SpheroidEarthModel [[GRS80SpheroidEarthModel.html]] {
+            {static} +GRS80_RADIUS: double
+            {static} +GRS80_INV_FLATTENING: double
+            {static} +GRS80_FLATTENING: double
+        }
+
+        class elki.math.geodesy.GRS80SpheroidEarthModel.Par [[GRS80SpheroidEarthModel.Par.html]] {
+            +make(): GRS80SpheroidEarthModel
+        }
+
+        class SphericalHaversineEarthModel [[SphericalHaversineEarthModel.html]] {
+            {static} +EARTH_RADIUS: double
+            +latLngRadToECEF(double, double): double[]
+            +latLngRadToECEF(double, double, double): double[]
+            +ecefToLatRad(double, double, double): double
+            +distanceRad(double, double, double, double): double
+        }
+
+        class elki.math.geodesy.SphericalHaversineEarthModel.Par [[SphericalHaversineEarthModel.Par.html]] {
+            +make(): SphericalHaversineEarthModel
+        }
+
+        interface EarthModel [[EarthModel.html]] {
+            {static} +MODEL_ID: OptionID
+            {abstract} +latLngDegToECEF(double, double): double[]
+            {abstract} +latLngRadToECEF(double, double): double[]
+            {abstract} +latLngDegToECEF(double, double, double): double[]
+            {abstract} +latLngRadToECEF(double, double, double): double[]
+            {abstract} +ecefToLatDeg(double, double, double): double
+            {abstract} +ecefToLatRad(double, double, double): double
+            {abstract} +ecefToLngDeg(double, double): double
+            {abstract} +ecefToLngRad(double, double): double
+            {abstract} +ecefToLatLngDegHeight(double, double, double): double[]
+            {abstract} +ecefToLatLngRadHeight(double, double, double): double[]
+            {abstract} +distanceDeg(double, double, double, double): double
+            {abstract} +distanceRad(double, double, double, double): double
+            {abstract} +minDistDeg(double, double, double, double, double, double): double
+            {abstract} +minDistRad(double, double, double, double, double, double): double
+            {abstract} +getEquatorialRadius(): double
+            {abstract} +getPolarDistance(): double
+        }
+
+        class Clarke1880SpheroidEarthModel [[Clarke1880SpheroidEarthModel.html]] {
+            {static} +CLARKE1880_RADIUS: double
+            {static} +CLARKE1880_INV_FLATTENING: double
+            {static} +CLARKE1880_FLATTENING: double
+        }
+
+        class elki.math.geodesy.Clarke1880SpheroidEarthModel.Par [[Clarke1880SpheroidEarthModel.Par.html]] {
+            +make(): Clarke1880SpheroidEarthModel
+        }
+
+        class WGS84SpheroidEarthModel [[WGS84SpheroidEarthModel.html]] {
+            {static} +WGS84_RADIUS: double
+            {static} +WGS84_INV_FLATTENING: double
+            {static} +WGS84_FLATTENING: double
+        }
+
+        class elki.math.geodesy.WGS84SpheroidEarthModel.Par [[WGS84SpheroidEarthModel.Par.html]] {
+            +make(): WGS84SpheroidEarthModel
+        }
+
+        class WGS72SpheroidEarthModel [[WGS72SpheroidEarthModel.html]] {
+            {static} +WGS72_RADIUS: double
+            {static} +WGS72_INV_FLATTENING: double
+            {static} +WGS72_FLATTENING: double
+        }
+
+        class elki.math.geodesy.WGS72SpheroidEarthModel.Par [[WGS72SpheroidEarthModel.Par.html]] {
+            +make(): WGS72SpheroidEarthModel
+        }
+
+        abstract class AbstractEarthModel [[AbstractEarthModel.html]] {
+            {static} -MAX_ITER: int
+            {static} -PRECISION: double
+            ~a: double
+            ~b: double
+            ~f: double
+            ~invf: double
+            ~e: double
+            ~esq: double
+            +AbstractEarthModel(double, double, double, double)
+            +getEquatorialRadius(): double
+            +getPolarDistance(): double
+            +latLngDegToECEF(double, double): double[]
+            +latLngDegToECEF(double, double, double): double[]
+            +latLngRadToECEF(double, double): double[]
+            +latLngRadToECEF(double, double, double): double[]
+            +ecefToLatDeg(double, double, double): double
+            +ecefToLatRad(double, double, double): double
+            +ecefToLngDeg(double, double): double
+            +ecefToLngRad(double, double): double
+            +ecefToLatLngDegHeight(double, double, double): double[]
+            +ecefToLatLngRadHeight(double, double, double): double[]
+            +distanceDeg(double, double, double, double): double
+            +distanceRad(double, double, double, double): double
+            +minDistDeg(double, double, double, double, double, double): double
+            +minDistRad(double, double, double, double, double, double): double
+        }
+
+        class GRS67SpheroidEarthModel [[GRS67SpheroidEarthModel.html]] {
+            {static} +GRS67_RADIUS: double
+            {static} +GRS67_INV_FLATTENING: double
+            {static} +GRS67_FLATTENING: double
+        }
+
+        class elki.math.geodesy.GRS67SpheroidEarthModel.Par [[GRS67SpheroidEarthModel.Par.html]] {
+            +make(): GRS67SpheroidEarthModel
+        }
+
+        class SphereUtil [[SphereUtil.html]] {
+            {static} -MAX_ITER: int
+            {static} -PRECISION: double
+            {static} -ONE_SIXTH: double
+            {static} +cosineFormulaDeg(double, double, double, double): double
+            {static} +cosineFormulaRad(double, double, double, double): double
+            {static} +haversineFormulaDeg(double, double, double, double): double
+            {static} +haversineFormulaRad(double, double, double, double): double
+            {static} +cosineOrHaversineDeg(double, double, double, double): double
+            {static} +cosineOrHaversineRad(double, double, double, double): double
+            {static} +sphericalVincentyFormulaDeg(double, double, double, double): double
+            {static} +sphericalVincentyFormulaRad(double, double, double, double): double
+            {static} +ellipsoidVincentyFormulaDeg(double, double, double, double, double): double
+            {static} +ellipsoidVincentyFormulaRad(double, double, double, double, double): double
+            {static} +crossTrackDistanceDeg(double, double, double, double, double, double): double
+            {static} +crossTrackDistanceRad(double, double, double, double, double, double, double): double
+            {static} +crossTrackDistanceDeg(double, double, double, double, double, double, double): double
+            {static} +crossTrackDistanceRad(double, double, double, double, double, double): double
+            {static} +alongTrackDistanceDeg(double, double, double, double, double, double): double
+            {static} +alongTrackDistanceRad(double, double, double, double, double, double): double
+            {static} +alongTrackDistanceDeg(double, double, double, double, double, double, double, double): double
+            {static} +alongTrackDistanceRad(double, double, double, double, double, double, double, double): double
+            {static} +latlngMinDistDeg(double, double, double, double, double, double): double
+            {static} +latlngMinDistRad(double, double, double, double, double, double): double
+            {static} +latlngMinDistRadFull(double, double, double, double, double, double): double
+            {static} +bearingDegDeg(double, double, double, double): double
+            {static} +bearingRad(double, double, double, double): double
+        }
+
+        AbstractEarthModel <|-- Clarke1858SpheroidEarthModel
+        Clarke1858SpheroidEarthModel --> Clarke1858SpheroidEarthModel: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.geodesy.Clarke1858SpheroidEarthModel.Par
+        Clarke1858SpheroidEarthModel +-- elki.math.geodesy.Clarke1858SpheroidEarthModel.Par
+        AbstractEarthModel <|-- SphericalCosineEarthModel
+        SphericalCosineEarthModel --> SphericalCosineEarthModel: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.geodesy.SphericalCosineEarthModel.Par
+        SphericalCosineEarthModel +-- elki.math.geodesy.SphericalCosineEarthModel.Par
+        AbstractEarthModel <|-- SphericalVincentyEarthModel
+        SphericalVincentyEarthModel --> SphericalVincentyEarthModel: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.geodesy.SphericalVincentyEarthModel.Par
+        SphericalVincentyEarthModel +-- elki.math.geodesy.SphericalVincentyEarthModel.Par
+        AbstractEarthModel <|-- GRS80SpheroidEarthModel
+        GRS80SpheroidEarthModel --> GRS80SpheroidEarthModel: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.geodesy.GRS80SpheroidEarthModel.Par
+        GRS80SpheroidEarthModel +-- elki.math.geodesy.GRS80SpheroidEarthModel.Par
+        AbstractEarthModel <|-- SphericalHaversineEarthModel
+        SphericalHaversineEarthModel --> SphericalHaversineEarthModel: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.geodesy.SphericalHaversineEarthModel.Par
+        SphericalHaversineEarthModel +-- elki.math.geodesy.SphericalHaversineEarthModel.Par
+        AbstractEarthModel <|-- Clarke1880SpheroidEarthModel
+        Clarke1880SpheroidEarthModel --> Clarke1880SpheroidEarthModel: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.geodesy.Clarke1880SpheroidEarthModel.Par
+        Clarke1880SpheroidEarthModel +-- elki.math.geodesy.Clarke1880SpheroidEarthModel.Par
+        AbstractEarthModel <|-- WGS84SpheroidEarthModel
+        WGS84SpheroidEarthModel --> WGS84SpheroidEarthModel: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.geodesy.WGS84SpheroidEarthModel.Par
+        WGS84SpheroidEarthModel +-- elki.math.geodesy.WGS84SpheroidEarthModel.Par
+        AbstractEarthModel <|-- WGS72SpheroidEarthModel
+        WGS72SpheroidEarthModel --> WGS72SpheroidEarthModel: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.geodesy.WGS72SpheroidEarthModel.Par
+        WGS72SpheroidEarthModel +-- elki.math.geodesy.WGS72SpheroidEarthModel.Par
+        EarthModel <|.. AbstractEarthModel
+        AbstractEarthModel <|-- GRS67SpheroidEarthModel
+        GRS67SpheroidEarthModel --> GRS67SpheroidEarthModel: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.geodesy.GRS67SpheroidEarthModel.Par
+        GRS67SpheroidEarthModel +-- elki.math.geodesy.GRS67SpheroidEarthModel.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

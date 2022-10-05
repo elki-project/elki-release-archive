@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SLINK.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.SLINK.Par<O> [[SLINK.Par.html]] {
+        #distance: Distance<? super O>
+        +configure(Parameterization): void
+        +make(): SLINK<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SLINK\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.SLINK<O> [[SLINK.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.SLINK.Par
+    elki.clustering.hierarchical.SLINK +-- elki.clustering.hierarchical.SLINK.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

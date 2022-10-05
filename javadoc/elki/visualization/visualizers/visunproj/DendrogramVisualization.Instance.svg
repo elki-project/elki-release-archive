@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="94px" preserveAspectRatio="none" style="width:435px;height:94px;background:#FFFFFF;" version="1.1" viewBox="0 0 435 94" width="435px" zoomAndPan="magnify"><defs/><g><!--MD5=[7b03e77d9dd7e61ac1f6975aca4577d2]
+class elki.visualization.visualizers.AbstractVisualization--><a href="../AbstractVisualization.html" target="_top" title="../AbstractVisualization.html" xlink:actuate="onRequest" xlink:href="../AbstractVisualization.html" xlink:show="new" xlink:title="../AbstractVisualization.html" xlink:type="simple"><g id="elem_elki.visualization.visualizers.AbstractVisualization"><rect codeLine="15" fill="#F1F1F1" height="62.2344" id="elki.visualization.visualizers.AbstractVisualization" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="180" x="7" y="7"/><ellipse cx="22" cy="25.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M22.1094,21.3125 L20.9531,26.3906 L23.2813,26.3906 L22.1094,21.3125 Z M20.625,19.0781 L23.6094,19.0781 L26.9688,31.4688 L24.5156,31.4688 L23.75,28.4063 L20.4688,28.4063 L19.7188,31.4688 L17.2813,31.4688 L20.625,19.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="148" x="36" y="24.9951">AbstractVisualization</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="138" x="41" y="37.5791">elki.visualization.visualizers</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="186" y1="44.9375" y2="44.9375"/><ellipse cx="18" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="124" x="27" y="61.9326">fullRedraw(): void</text></g></a><!--MD5=[c487f412c92cb05e58dd868d978f9802]
+class elki.visualization.visualizers.visunproj.DendrogramVisualization--><a href="DendrogramVisualization.html" target="_top" title="DendrogramVisualization.html" xlink:actuate="onRequest" xlink:href="DendrogramVisualization.html" xlink:show="new" xlink:title="DendrogramVisualization.html" xlink:type="simple"><g id="elem_elki.visualization.visualizers.visunproj.DendrogramVisualization"><rect codeLine="18" fill="#F1F1F1" height="37.9375" id="elki.visualization.visualizers.visunproj.DendrogramVisualization" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="206" x="222" y="19"/><ellipse cx="237" cy="37.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M239.9688,43.6094 Q239.3906,43.9063 238.75,44.0469 Q238.1094,44.2031 237.4063,44.2031 Q234.9063,44.2031 233.5781,42.5625 Q232.2656,40.9063 232.2656,37.7813 Q232.2656,34.6563 233.5781,33 Q234.9063,31.3438 237.4063,31.3438 Q238.1094,31.3438 238.75,31.5 Q239.4063,31.6563 239.9688,31.9531 L239.9688,34.6719 Q239.3438,34.0938 238.75,33.8281 Q238.1563,33.5469 237.5313,33.5469 Q236.1875,33.5469 235.5,34.625 Q234.8125,35.6875 234.8125,37.7813 Q234.8125,39.875 235.5,40.9531 Q236.1875,42.0156 237.5313,42.0156 Q238.1563,42.0156 238.75,41.75 Q239.3438,41.4688 239.9688,40.8906 L239.9688,43.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="172" x="252" y="36.9951">DendrogramVisualization</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="174" x="251" y="49.5791">elki.visualization.visualizers.visunproj</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="117.5" y="75.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="117.5" y="84.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[df7beea42aafb1c22278381613ab1498]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DendrogramVisualization.Instance\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization.Instance [[DendrogramVisualization.Instance.html]] {
+        {static} -KEY_CAPTION: String
+        {static} -KEY_HIERLINE: String
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double)
+        +fullRedraw(): void
+        #setupCSS(SVGPlot, double): void
+        #setupCSS(SVGPlot, ClassStylingPolicy, double): void
+    }
+
+    abstract class "<size:14>AbstractVisualization\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.AbstractVisualization [[../AbstractVisualization.html]] {
+        {abstract} +fullRedraw(): void
+    }
+    class "<size:14>DendrogramVisualization\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization [[DendrogramVisualization.html]]
+
+    elki.visualization.visualizers.AbstractVisualization <|- - elki.visualization.visualizers.visunproj.DendrogramVisualization.Instance
+    elki.visualization.visualizers.visunproj.DendrogramVisualization +- - elki.visualization.visualizers.visunproj.DendrogramVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="249px" preserveAspectRatio="none" style="width:376px;height:249px;background:#FFFFFF;" version="1.1" viewBox="0 0 376 249" width="376px" zoomAndPan="magnify"><defs/><g><!--MD5=[1559332fefb726e5e4a9cd4232d8a103]
+class elki.distance.timeseries.EDRDistance--><a href="EDRDistance.html" target="_top" title="EDRDistance.html" xlink:actuate="onRequest" xlink:href="EDRDistance.html" xlink:show="new" xlink:title="EDRDistance.html" xlink:type="simple"><g id="elem_elki.distance.timeseries.EDRDistance"><rect codeLine="6" fill="#F1F1F1" height="119.125" id="elki.distance.timeseries.EDRDistance" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="360" x="9" y="105"/><ellipse cx="129.25" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M132.2188,129.6094 Q131.6406,129.9063 131,130.0469 Q130.3594,130.2031 129.6563,130.2031 Q127.1563,130.2031 125.8281,128.5625 Q124.5156,126.9063 124.5156,123.7813 Q124.5156,120.6563 125.8281,119 Q127.1563,117.3438 129.6563,117.3438 Q130.3594,117.3438 131,117.5 Q131.6563,117.6563 132.2188,117.9531 L132.2188,120.6719 Q131.5938,120.0938 131,119.8281 Q130.4063,119.5469 129.7813,119.5469 Q128.4375,119.5469 127.75,120.625 Q127.0625,121.6875 127.0625,123.7813 Q127.0625,125.875 127.75,126.9531 Q128.4375,128.0156 129.7813,128.0156 Q130.4063,128.0156 131,127.75 Q131.5938,127.4688 132.2188,126.8906 L132.2188,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="159.75" y="122.9951">EDRDistance</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="111" x="149.75" y="135.5791">elki.distance.timeseries</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="368" y1="142.9375" y2="142.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="153.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="29" y="159.9326">delta: double</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="368" y1="167.2344" y2="167.2344"/><ellipse cx="20" cy="180.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="205" x="29" y="184.2295">EDRDistance(double, double)</text><ellipse cx="20" cy="197.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="334" x="29" y="200.5264">distance(NumberVector, NumberVector): double</text><polygon fill="#FFFF44" points="20,208.4766,24,212.4766,20,216.4766,16,212.4766" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="205" x="29" y="216.8232">delta(double, double): double</text></g></a><!--MD5=[9a8ff9ebbecc39540666190f41b1c556]
+class elki.distance.timeseries.DTWDistance--><a href="DTWDistance.html" target="_top" title="DTWDistance.html" xlink:actuate="onRequest" xlink:href="DTWDistance.html" xlink:show="new" xlink:title="DTWDistance.html" xlink:type="simple"><g id="elem_elki.distance.timeseries.DTWDistance"><rect codeLine="13" fill="#F1F1F1" height="37.9375" id="elki.distance.timeseries.DTWDistance" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="143" x="117.5" y="7"/><ellipse cx="132.5" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M135.4688,31.6094 Q134.8906,31.9063 134.25,32.0469 Q133.6094,32.2031 132.9063,32.2031 Q130.4063,32.2031 129.0781,30.5625 Q127.7656,28.9063 127.7656,25.7813 Q127.7656,22.6563 129.0781,21 Q130.4063,19.3438 132.9063,19.3438 Q133.6094,19.3438 134.25,19.5 Q134.9063,19.6563 135.4688,19.9531 L135.4688,22.6719 Q134.8438,22.0938 134.25,21.8281 Q133.6563,21.5469 133.0313,21.5469 Q131.6875,21.5469 131,22.625 Q130.3125,23.6875 130.3125,25.7813 Q130.3125,27.875 131,28.9531 Q131.6875,30.0156 133.0313,30.0156 Q133.6563,30.0156 134.25,29.75 Q134.8438,29.4688 135.4688,28.8906 L135.4688,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="94" x="155" y="24.9951">DTWDistance</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="111" x="146.5" y="37.5791">elki.distance.timeseries</text></g></a><!--MD5=[1525cf843e75f02dbed840426006ec1f]
+reverse link elki.distance.timeseries.DTWDistance to elki.distance.timeseries.EDRDistance--><g id="link_elki.distance.timeseries.DTWDistance_elki.distance.timeseries.EDRDistance"><path codeLine="16" d="M189,65.5 C189,77.69 189,91.46 189,104.73 " fill="none" id="elki.distance.timeseries.DTWDistance-backto-elki.distance.timeseries.EDRDistance" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="182,65.13,189,45.13,196,65.13,182,65.13" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="88" y="230.125"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="88" y="239.4072">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[5dfa9270eebe57289d590220ce3eb212]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EDRDistance\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.EDRDistance [[EDRDistance.html]] {
+        -delta: double
+        +EDRDistance(double, double)
+        +distance(NumberVector, NumberVector): double
+        #delta(double, double): double
+    }
+
+    class "<size:14>DTWDistance\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.DTWDistance [[DTWDistance.html]]
+    class "<size:14>EDRDistance.Par\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.EDRDistance.Par [[EDRDistance.Par.html]]
+
+    elki.distance.timeseries.DTWDistance <|- - elki.distance.timeseries.EDRDistance
+    elki.distance.timeseries.EDRDistance +- - elki.distance.timeseries.EDRDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

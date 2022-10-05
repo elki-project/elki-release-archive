@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleWeightedDataSet\n<size:10>elki.svm.data" as elki.svm.data.DoubleWeightedDataSet [[DoubleWeightedDataSet.html]] {
+        ~inner: DataSet
+        ~idx: int[]
+        ~weight: double[]
+        ~size: int
+        +DoubleWeightedDataSet(DataSet, int)
+        +similarity(int, int): double
+        +size(): int
+        +value(int): double
+        +classnum(int): int
+        +swap(int, int): void
+        +add(int, double): void
+        +clear(): void
+    }
+
+    interface "<size:14>DataSet\n<size:10>elki.svm.data" as elki.svm.data.DataSet [[DataSet.html]] {
+        {abstract} +size(): int
+        {abstract} +similarity(int, int): double
+        {abstract} +value(int): double
+        {abstract} +classnum(int): int
+        {abstract} +swap(int, int): void
+    }
+
+    elki.svm.data.DataSet <|.. elki.svm.data.DoubleWeightedDataSet
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

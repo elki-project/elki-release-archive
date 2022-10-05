@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="322px" preserveAspectRatio="none" style="width:288px;height:322px;background:#FFFFFF;" version="1.1" viewBox="0 0 288 322" width="288px" zoomAndPan="magnify"><defs/><g><!--MD5=[877b46197c4989b90e92ae46481629e5]
+class elki.index.vafile.VectorApproximation--><a href="VectorApproximation.html" target="_top" title="VectorApproximation.html" xlink:actuate="onRequest" xlink:href="VectorApproximation.html" xlink:show="new" xlink:title="VectorApproximation.html" xlink:type="simple"><g id="elem_elki.index.vafile.VectorApproximation"><rect codeLine="6" fill="#F1F1F1" height="168.0156" id="elki.index.vafile.VectorApproximation" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="272" x="9" y="129"/><ellipse cx="69.25" cy="147.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M72.2188,153.6094 Q71.6406,153.9063 71,154.0469 Q70.3594,154.2031 69.6563,154.2031 Q67.1563,154.2031 65.8281,152.5625 Q64.5156,150.9063 64.5156,147.7813 Q64.5156,144.6563 65.8281,143 Q67.1563,141.3438 69.6563,141.3438 Q70.3594,141.3438 71,141.5 Q71.6563,141.6563 72.2188,141.9531 L72.2188,144.6719 Q71.5938,144.0938 71,143.8281 Q70.4063,143.5469 69.7813,143.5469 Q68.4375,143.5469 67.75,144.625 Q67.0625,145.6875 67.0625,147.7813 Q67.0625,149.875 67.75,150.9531 Q68.4375,152.0156 69.7813,152.0156 Q70.4063,152.0156 71,151.75 Q71.5938,151.4688 72.2188,150.8906 L72.2188,153.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="89.75" y="146.9951">VectorApproximation</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="73" x="124.75" y="159.5791">elki.index.vafile</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="280" y1="166.9375" y2="166.9375"/><polygon fill="none" points="20,176.5859,16,182.5859,24,182.5859" style="stroke:#1963A0;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="29" y="183.9326">approximation: int[]</text><polygon fill="none" points="20,192.8828,16,198.8828,24,198.8828" style="stroke:#1963A0;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="38" x="29" y="200.2295">id: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="280" y1="207.5313" y2="207.5313"/><ellipse cx="20" cy="221.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="246" x="29" y="224.5264">VectorApproximation(DBIDRef, int[])</text><ellipse cx="20" cy="237.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159" x="29" y="240.8232">getDimensionality(): int</text><ellipse cx="20" cy="253.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="174" x="29" y="257.1201">getApproximation(int): int</text><ellipse cx="20" cy="270.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="29" y="273.417">internalGetIndex(): int</text><ellipse cx="20" cy="286.3672" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="158" x="29" y="289.7139">byteOnDisk(int, int): int</text></g></a><!--MD5=[11fe6fbe3f81b6fccae4d321b8166948]
+class elki.database.ids.DBIDRef--><a href="../../database/ids/DBIDRef.html" target="_top" title="../../database/ids/DBIDRef.html" xlink:actuate="onRequest" xlink:href="../../database/ids/DBIDRef.html" xlink:show="new" xlink:title="../../database/ids/DBIDRef.html" xlink:type="simple"><g id="elem_elki.database.ids.DBIDRef"><rect codeLine="16" fill="#F1F1F1" height="62.2344" id="elki.database.ids.DBIDRef" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="181" x="54.5" y="7"/><ellipse cx="99.25" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M95.1719,21.7344 L95.1719,19.5781 L102.5625,19.5781 L102.5625,21.7344 L100.0938,21.7344 L100.0938,29.8125 L102.5625,29.8125 L102.5625,31.9688 L95.1719,31.9688 L95.1719,29.8125 L97.6406,29.8125 L97.6406,21.7344 L95.1719,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="60" x="131.25" y="24.9951">DBIDRef</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="83" x="119.75" y="37.5791">elki.database.ids</text><line style="stroke:#181818;stroke-width:0.5;" x1="55.5" x2="234.5" y1="44.9375" y2="44.9375"/><ellipse cx="65.5" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="155" x="74.5" y="61.9326">internalGetIndex(): int</text></g></a><!--MD5=[3441009faaca7d1e2f31495e26e68dea]
+reverse link elki.database.ids.DBIDRef to elki.index.vafile.VectorApproximation--><g id="link_elki.database.ids.DBIDRef_elki.index.vafile.VectorApproximation"><path codeLine="20" d="M145,89.22 C145,101.6 145,115.2 145,128.7 " fill="none" id="elki.database.ids.DBIDRef-backto-elki.index.vafile.VectorApproximation" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="138,89.13,145,69.13,152,89.13,138,89.13" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="44" y="303.0156"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="44" y="312.2979">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[a507426fe156d5af3e63559a7b536ae5]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VectorApproximation\n<size:10>elki.index.vafile" as elki.index.vafile.VectorApproximation [[VectorApproximation.html]] {
+        ~approximation: int[]
+        ~id: int
+        +VectorApproximation(DBIDRef, int[])
+        +getDimensionality(): int
+        +getApproximation(int): int
+        +internalGetIndex(): int
+        {static} +byteOnDisk(int, int): int
+    }
+
+    interface "<size:14>DBIDRef\n<size:10>elki.database.ids" as elki.database.ids.DBIDRef [[../../database/ids/DBIDRef.html]] {
+        {abstract} +internalGetIndex(): int
+    }
+
+    elki.database.ids.DBIDRef <|.. elki.index.vafile.VectorApproximation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

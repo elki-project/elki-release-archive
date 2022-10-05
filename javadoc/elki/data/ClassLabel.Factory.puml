@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>ClassLabel.Factory\n<size:10>elki.data" as elki.data.ClassLabel.Factory<L extends ClassLabel> [[ClassLabel.Factory.html]] {
+        #existing: HashMap<String, L extends ClassLabel>
+        {abstract} +makeFromString(String): L extends ClassLabel
+        {abstract} +getTypeInformation(): SimpleTypeInformation<? super ClassLabel>
+    }
+
+    abstract class "<size:14>ClassLabel\n<size:10>elki.data" as elki.data.ClassLabel [[ClassLabel.html]]
+
+    elki.data.ClassLabel +-- elki.data.ClassLabel.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

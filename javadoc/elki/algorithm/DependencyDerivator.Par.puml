@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DependencyDerivator.Par\n<size:10>elki.algorithm" as elki.algorithm.DependencyDerivator.Par<V extends NumberVector> [[DependencyDerivator.Par.html]] {
+        {static} +DEPENDENCY_DERIVATOR_RANDOM_SAMPLE_ID: OptionID
+        {static} +OUTPUT_ACCURACY_ID: OptionID
+        {static} +SAMPLE_SIZE_ID: OptionID
+        #distance: NumberVectorDistance<? super NumberVector>
+        #outputAccuracy: int
+        #sampleSize: int
+        #randomSample: boolean
+        #pca: PCARunner
+        #filter: EigenPairFilter
+        +configure(Parameterization): void
+        +make(): DependencyDerivator<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>DependencyDerivator\n<size:10>elki.algorithm" as elki.algorithm.DependencyDerivator<V extends NumberVector> [[DependencyDerivator.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.DependencyDerivator.Par
+    elki.algorithm.DependencyDerivator +-- elki.algorithm.DependencyDerivator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

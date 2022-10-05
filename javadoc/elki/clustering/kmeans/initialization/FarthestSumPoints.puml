@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FarthestSumPoints\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.FarthestSumPoints<O> [[FarthestSumPoints.html]] {
+        +FarthestSumPoints(RandomFactory, boolean)
+        +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+    }
+
+    class "<size:14>FarthestPoints\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.FarthestPoints<O> [[FarthestPoints.html]]
+    class "<size:14>FarthestSumPoints.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.FarthestSumPoints.Par<V> [[FarthestSumPoints.Par.html]]
+
+    elki.clustering.kmeans.initialization.FarthestPoints <|-- elki.clustering.kmeans.initialization.FarthestSumPoints
+    elki.clustering.kmeans.initialization.FarthestSumPoints +-- elki.clustering.kmeans.initialization.FarthestSumPoints.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

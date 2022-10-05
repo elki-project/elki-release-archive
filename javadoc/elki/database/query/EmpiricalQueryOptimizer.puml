@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EmpiricalQueryOptimizer\n<size:10>elki.database.query" as elki.database.query.EmpiricalQueryOptimizer [[EmpiricalQueryOptimizer.html]] {
+        {static} -LOG: Logging
+        {static} -MEGA: long
+        -matrixIndex: Constructor<? extends Index>
+        -knnIndex: Constructor<? extends KNNIndex<?>>
+        -coverIndex: Constructor<? extends Index>
+        -vpIndex: Constructor<? extends Index>
+        -kdIndex: Constructor<? extends Index>
+        +getDistanceQuery(Relation<? extends O>, Distance<? super O>, int): DistanceQuery<O>
+        +kNNByObject(Relation<? extends O>, DistanceQuery<O>, int, int): KNNSearcher<O>
+        +kNNByDBID(Relation<? extends O>, DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        +rangeByObject(Relation<? extends O>, DistanceQuery<O>, double, int): RangeSearcher<O>
+        +rangeByDBID(Relation<? extends O>, DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        +priorityByObject(Relation<? extends O>, DistanceQuery<O>, double, int): PrioritySearcher<O>
+        +priorityByDBID(Relation<? extends O>, DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        -makeMatrixIndex(Relation<? extends O>, Distance<? super O>): DistancePriorityIndex<O>
+        -makeCoverTree(Relation<? extends O>, Distance<? super O>, int): DistancePriorityIndex<O>
+        -makeVPTree(Relation<? extends O>, Distance<? super O>, int): DistancePriorityIndex<O>
+        -makeKDTree(Relation<? extends O>, Distance<? super O>, int): DistancePriorityIndex<O>
+        -makeKnnPreprocessor(Relation<? extends O>, DistanceQuery<O>, int, int): KNNIndex<O>
+        {static} -getFreeMemory(): long
+        {static} -formatMemory(long): String
+    }
+
+    interface "<size:14>QueryOptimizer\n<size:10>elki.database.query" as elki.database.query.QueryOptimizer [[QueryOptimizer.html]]
+
+    elki.database.query.QueryOptimizer <|.. elki.database.query.EmpiricalQueryOptimizer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

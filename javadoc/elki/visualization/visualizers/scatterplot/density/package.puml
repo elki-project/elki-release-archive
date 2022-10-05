@@ -1,0 +1,44 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.scatterplot.density {
+
+        class DensityEstimationOverlay [[DensityEstimationOverlay.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.density.DensityEstimationOverlay.Instance [[DensityEstimationOverlay.Instance.html]] {
+            -resolution: int
+            -img: BufferedImage
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -initializeBandwidth(double[]): double[]
+            -renderImage(): void
+            -unflip(int): int
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. DensityEstimationOverlay
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.density.DensityEstimationOverlay.Instance
+        DensityEstimationOverlay +-- elki.visualization.visualizers.scatterplot.density.DensityEstimationOverlay.Instance
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+    }
+
+    namespace elki.visualization.visualizers.scatterplot {
+        abstract class AbstractScatterplotVisualization [[../AbstractScatterplotVisualization.html]] {
+            #proj: Projection2D
+            #rel: Relation<? extends NumberVector>
+            #sample: SamplingResult
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

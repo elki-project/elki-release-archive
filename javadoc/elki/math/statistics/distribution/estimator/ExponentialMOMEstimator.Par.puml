@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExponentialMOMEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.ExponentialMOMEstimator.Par [[ExponentialMOMEstimator.Par.html]] {
+        +make(): ExponentialMOMEstimator
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ExponentialMOMEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.ExponentialMOMEstimator [[ExponentialMOMEstimator.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.ExponentialMOMEstimator.Par
+    elki.math.statistics.distribution.estimator.ExponentialMOMEstimator +-- elki.math.statistics.distribution.estimator.ExponentialMOMEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

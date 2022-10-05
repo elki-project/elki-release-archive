@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SVGButton\n<size:10>elki.visualization.svg" as elki.visualization.svg.SVGButton [[SVGButton.html]] {
+        {static} +DEFAULT_BUTTON_COLOR: String
+        {static} +DEFAULT_TEXT_COLOR: String
+        -x: double
+        -y: double
+        -w: double
+        -h: double
+        -r: double
+        -butcss: CSSClass
+        -title: String
+        -titlecss: CSSClass
+        +SVGButton(double, double, double, double, double)
+        +render(SVGPlot): Element
+        +setTitle(String, String): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

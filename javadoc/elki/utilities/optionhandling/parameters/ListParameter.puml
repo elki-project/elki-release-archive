@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>ListParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.ListParameter<P extends ListParameter<P, T>, T> [[ListParameter.html]] {
+        {static} +SPLIT: Pattern
+        {static} +LIST_SEP: String
+        {static} +VECTOR_SPLIT: Pattern
+        {static} +VECTOR_SEP: String
+        +ListParameter(OptionID, T)
+        +ListParameter(OptionID)
+        {abstract} +size(): int
+    }
+
+    abstract class "<size:14>AbstractParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.AbstractParameter<P extends ListParameter<P, T>, T> [[AbstractParameter.html]] {
+        {abstract} #parseValue(Object): T
+    }
+
+    elki.utilities.optionhandling.parameters.AbstractParameter <|-- elki.utilities.optionhandling.parameters.ListParameter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

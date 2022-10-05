@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkCoPTreeIndex\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkcop" as elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTreeIndex<O> [[MkCoPTreeIndex.html]] {
+        -relation: Relation<O>
+        +MkCoPTreeIndex(Relation<O>, PageFile<MkCoPTreeNode<O>>, MkTreeSettings<O, MkCoPTreeNode<O>, MkCoPEntry>)
+        #createNewLeafEntry(DBID, O, double): MkCoPEntry
+        +initialize(): void
+        +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+        +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+        +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+        +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+    }
+
+    abstract class "<size:14>MkCoPTree\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkcop" as elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTree<O> [[MkCoPTree.html]]
+    interface "<size:14>RangeIndex\n<size:10>elki.index" as elki.index.RangeIndex<O> [[../../../../../RangeIndex.html]] {
+        {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+    }
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<O> [[../../../../../KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    interface "<size:14>RKNNIndex\n<size:10>elki.index" as elki.index.RKNNIndex<O> [[../../../../../RKNNIndex.html]] {
+        {abstract} +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+        {abstract} +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+    }
+
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTree <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTreeIndex
+    elki.index.RangeIndex <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTreeIndex
+    elki.index.KNNIndex <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTreeIndex
+    elki.index.RKNNIndex <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTreeIndex
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

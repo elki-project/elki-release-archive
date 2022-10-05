@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OUTRES\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.OUTRES [[OUTRES.html]] {
+        {static} -LOG: Logging
+        -eps: double
+        {static} -K_S_CRITICAL001: double
+        +OUTRES(double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends NumberVector>): OutlierResult
+        +outresScore(int, long[], DBIDRef, KernelDensityEstimator, DBIDs): double
+        -initialRange(DBIDRef, DBIDs, PrimitiveDistance<? super NumberVector>, double, KernelDensityEstimator, ModifiableDoubleDBIDList): DoubleDBIDList
+        -subsetNeighborhoodQuery(DoubleDBIDList, DBIDRef, PrimitiveDistance<? super NumberVector>, double, KernelDensityEstimator, ModifiableDoubleDBIDList): DoubleDBIDList
+        #relevantSubspace(long[], DoubleDBIDList, KernelDensityEstimator): boolean
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>OUTRES.KernelDensityEstimator\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.OUTRES.KernelDensityEstimator [[OUTRES.KernelDensityEstimator.html]]
+    class "<size:14>OUTRES.Par\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.OUTRES.Par [[OUTRES.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.subspace.OUTRES
+    elki.outlier.subspace.OUTRES +-- elki.outlier.subspace.OUTRES.KernelDensityEstimator
+    elki.outlier.subspace.OUTRES +-- elki.outlier.subspace.OUTRES.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

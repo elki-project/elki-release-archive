@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TypeInformationSerializer.SimpleTypeSerializer\n<size:10>elki.data.type" as elki.data.type.TypeInformationSerializer.SimpleTypeSerializer [[TypeInformationSerializer.SimpleTypeSerializer.html]] {
+        +fromByteBuffer(ByteBuffer): SimpleTypeInformation<?>
+        +toByteBuffer(ByteBuffer, SimpleTypeInformation<?>): void
+        +getByteSize(SimpleTypeInformation<?>): int
+    }
+
+    interface "<size:14>ByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteBufferSerializer<SimpleTypeInformation<?>> [[../../utilities/io/ByteBufferSerializer.html]] {
+        {abstract} +fromByteBuffer(ByteBuffer): SimpleTypeInformation<?>
+        {abstract} +toByteBuffer(ByteBuffer, SimpleTypeInformation<?>): void
+        {abstract} +getByteSize(SimpleTypeInformation<?>): int
+    }
+    class "<size:14>TypeInformationSerializer\n<size:10>elki.data.type" as elki.data.type.TypeInformationSerializer [[TypeInformationSerializer.html]]
+
+    elki.utilities.io.ByteBufferSerializer <|.. elki.data.type.TypeInformationSerializer.SimpleTypeSerializer
+    elki.data.type.TypeInformationSerializer +-- elki.data.type.TypeInformationSerializer.SimpleTypeSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

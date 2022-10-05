@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkTabDirectoryEntry\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mktab" as elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabDirectoryEntry [[MkTabDirectoryEntry.html]] {
+        {static} -serialVersionUID: long
+        -knnDistances: double[]
+        +MkTabDirectoryEntry()
+        +MkTabDirectoryEntry(DBID, double, int, double, double[])
+        +getKnnDistances(): double[]
+        +setKnnDistances(double[]): void
+        +getKnnDistance(int): double
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+    }
+
+    class "<size:14>MTreeDirectoryEntry\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeDirectoryEntry [[../../MTreeDirectoryEntry.html]]
+    interface "<size:14>MkTabEntry\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mktab" as elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabEntry [[MkTabEntry.html]] {
+        {abstract} +getKnnDistances(): double[]
+        {abstract} +setKnnDistances(double[]): void
+        {abstract} +getKnnDistance(int): double
+    }
+
+    elki.index.tree.metrical.mtreevariants.MTreeDirectoryEntry <|-- elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabDirectoryEntry
+    elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabEntry <|.. elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabDirectoryEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

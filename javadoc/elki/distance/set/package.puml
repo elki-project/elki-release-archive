@@ -1,0 +1,70 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.distance.set {
+
+        abstract class AbstractSetDistance<O> [[AbstractSetDistance.html]] {
+            {static} +INTEGER_NULL: Integer
+            {static} +DOUBLE_NULL: Double
+            {static} +STRING_NULL: String
+            {static} #isNull(Object): boolean
+        }
+
+        class JaccardSimilarityDistance [[JaccardSimilarityDistance.html]] {
+            +similarity(FeatureVector<?>, FeatureVector<?>): double
+            {static} +similarityNumberVector(NumberVector, NumberVector): double
+            +distance(FeatureVector<?>, FeatureVector<?>): double
+            +distance(NumberVector, NumberVector): double
+            +isSymmetric(): boolean
+            +isMetric(): boolean
+            +getInputTypeRestriction(): SimpleTypeInformation<? super FeatureVector<?>>
+            +instantiate(Relation<T extends FeatureVector<?>>): DistanceSimilarityQuery<T extends FeatureVector<?>>
+        }
+
+        class HammingDistance [[HammingDistance.html]] {
+            +isMetric(): boolean
+            +distance(FeatureVector<?>, FeatureVector<?>): double
+            +distance(NumberVector, NumberVector): double
+            -hammingDistanceNumberVector(NumberVector, NumberVector): double
+            +getInputTypeRestriction(): SimpleTypeInformation<? super FeatureVector<?>>
+        }
+
+        class elki.distance.set.HammingDistance.Par [[HammingDistance.Par.html]] {
+            +make(): HammingDistance
+        }
+
+        elki.distance.PrimitiveDistance <|.. AbstractSetDistance
+        AbstractSetDistance <|-- JaccardSimilarityDistance
+        elki.similarity.NormalizedPrimitiveSimilarity <|.. JaccardSimilarityDistance
+        elki.distance.NumberVectorDistance <|.. JaccardSimilarityDistance
+        elki.distance.PrimitiveDistance <|.. JaccardSimilarityDistance
+        AbstractSetDistance <|-- HammingDistance
+        elki.distance.NumberVectorDistance <|.. HammingDistance
+        HammingDistance --> HammingDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.set.HammingDistance.Par
+        HammingDistance +-- elki.distance.set.HammingDistance.Par
+    }
+
+    namespace elki.distance {
+        interface PrimitiveDistance<O> [[../PrimitiveDistance.html]] {
+            {abstract} +distance(O, O): double
+            {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+            +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+        }
+        interface NumberVectorDistance<O> [[../NumberVectorDistance.html]] {
+            {abstract} +distance(NumberVector, NumberVector): double
+        }
+    }
+
+    namespace elki.similarity {
+        interface NormalizedPrimitiveSimilarity<O> [[../../similarity/NormalizedPrimitiveSimilarity.html]]
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

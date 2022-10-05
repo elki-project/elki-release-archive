@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntegerRankTieNormalization\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.IntegerRankTieNormalization [[IntegerRankTieNormalization.html]] {
+        +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+
+    interface "<size:14>ObjectFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.ObjectFilter [[../../ObjectFilter.html]] {
+        {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+    class "<size:14>IntegerRankTieNormalization.Sorter\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.IntegerRankTieNormalization.Sorter [[IntegerRankTieNormalization.Sorter.html]]
+
+    elki.datasource.filter.ObjectFilter <|.. elki.datasource.filter.normalization.columnwise.IntegerRankTieNormalization
+    elki.datasource.filter.normalization.columnwise.IntegerRankTieNormalization +-- elki.datasource.filter.normalization.columnwise.IntegerRankTieNormalization.Sorter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

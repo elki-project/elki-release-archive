@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HilbertSpatialSorter.HilbertRef\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.HilbertSpatialSorter.HilbertRef [[HilbertSpatialSorter.HilbertRef.html]] {
+        #vec: SpatialComparable
+        #bits: long[]
+        #HilbertRef(SpatialComparable, long[])
+        +compareTo(HilbertRef): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<HilbertRef> {
+        {abstract} +compareTo(HilbertRef): int
+    }
+    class "<size:14>HilbertSpatialSorter\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.HilbertSpatialSorter [[HilbertSpatialSorter.html]]
+
+    java.lang.Comparable <|.. elki.math.spacefillingcurves.HilbertSpatialSorter.HilbertRef
+    elki.math.spacefillingcurves.HilbertSpatialSorter +-- elki.math.spacefillingcurves.HilbertSpatialSorter.HilbertRef
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

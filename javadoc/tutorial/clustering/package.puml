@@ -1,0 +1,225 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace tutorial.clustering {
+
+        class SameSizeKMeans<V extends NumberVector> [[SameSizeKMeans.html]] {
+            {static} -LOG: Logging
+            +SameSizeKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+            +run(Relation<V extends NumberVector>): Clustering<MeanModel>
+            #initializeMeta(Relation<V extends NumberVector>, double[]): WritableDataStore<Meta>
+            #initialAssignment(List<ModifiableDBIDs>, WritableDataStore<Meta>, DBIDs): ArrayModifiableDBIDs
+            #updateDistances(Relation<V extends NumberVector>, double[], WritableDataStore<Meta>, NumberVectorDistance<? super NumberVector>): void
+            #refineResult(Relation<V extends NumberVector>, double[], List<ModifiableDBIDs>, WritableDataStore<Meta>, ArrayModifiableDBIDs): double[]
+            #transfer(WritableDataStore<Meta>, Meta, ModifiableDBIDs, ModifiableDBIDs, DBIDRef, int): void
+            #getLogger(): Logging
+        }
+
+        class tutorial.clustering.SameSizeKMeans.Meta [[SameSizeKMeans.Meta.html]] {
+            ~dists: double[]
+            ~primary: int
+            ~secondary: int
+            #Meta(int)
+            #priority(): double
+            #gain(int): double
+        }
+
+        class tutorial.clustering.SameSizeKMeans.PreferenceComparator [[SameSizeKMeans.PreferenceComparator.html]] {
+            +compare(int, int): int
+            +select(Meta): IntComparator
+        }
+
+        class tutorial.clustering.SameSizeKMeans.Par<V extends NumberVector> [[SameSizeKMeans.Par.html]] {
+            #k: int
+            #maxiter: int
+            #initializer: KMeansInitialization
+            #distance: NumberVectorDistance<? super NumberVector>
+            +configure(Parameterization): void
+            +make(): SameSizeKMeans<V extends NumberVector>
+        }
+
+        class NaiveAgglomerativeHierarchicalClustering1<O> [[NaiveAgglomerativeHierarchicalClustering1.html]] {
+            {static} -LOG: Logging
+            ~distance: Distance<? super O>
+            ~numclusters: int
+            +NaiveAgglomerativeHierarchicalClustering1(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): Clustering<Model>
+        }
+
+        class tutorial.clustering.NaiveAgglomerativeHierarchicalClustering1.Par<O> {
+            #distance: Distance<? super O>
+            #numclusters: int
+            +configure(Parameterization): void
+            +make(): NaiveAgglomerativeHierarchicalClustering1<O>
+        }
+
+        class CFSFDP<O> [[CFSFDP.html]] {
+            #distance: Distance<? super O>
+            #dc: double
+            #k: int
+            #CFSFDP(Distance<? super O>, double, int)
+            +run(Relation<O>): Clustering<SimplePrototypeModel<DBID>>
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class tutorial.clustering.CFSFDP.Par<O> [[CFSFDP.Par.html]] {
+            {static} +DC_ID: OptionID
+            {static} +K_ID: OptionID
+            #distance: Distance<? super O>
+            #dc: double
+            #k: int
+            +configure(Parameterization): void
+            +make(): CFSFDP<O>
+        }
+
+        class NaiveAgglomerativeHierarchicalClustering4<O> [[NaiveAgglomerativeHierarchicalClustering4.html]] {
+            {static} -LOG: Logging
+            ~distance: Distance<? super O>
+            +NaiveAgglomerativeHierarchicalClustering4(Distance<? super O>, Linkage)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): ClusterMergeHistory
+            {static} #triangleSize(int): int
+        }
+
+        enum tutorial.clustering.NaiveAgglomerativeHierarchicalClustering4.Linkage [[NaiveAgglomerativeHierarchicalClustering4.Linkage.html]] {
+            {static} +SINGLE
+            {static} +COMPLETE
+            {static} +GROUP_AVERAGE
+            {static} +WEIGHTED_AVERAGE
+            {static} +CENTROID
+            {static} +MEDIAN
+            {static} +WARD
+            {abstract} +combine(int, double, int, double, int, double): double
+        }
+
+        class tutorial.clustering.NaiveAgglomerativeHierarchicalClustering4.Par<O> {
+            {static} +LINKAGE_ID: OptionID
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): NaiveAgglomerativeHierarchicalClustering4<O>
+        }
+
+        class NaiveAgglomerativeHierarchicalClustering2<O> [[NaiveAgglomerativeHierarchicalClustering2.html]] {
+            {static} -LOG: Logging
+            ~distance: Distance<? super O>
+            ~numclusters: int
+            +NaiveAgglomerativeHierarchicalClustering2(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): Clustering<Model>
+            {static} #triangleSize(int): int
+        }
+
+        class tutorial.clustering.NaiveAgglomerativeHierarchicalClustering2.Par<O> {
+            #distance: Distance<? super O>
+            #numclusters: int
+            +configure(Parameterization): void
+            +make(): NaiveAgglomerativeHierarchicalClustering2<O>
+        }
+
+        class NaiveAgglomerativeHierarchicalClustering3<O> [[NaiveAgglomerativeHierarchicalClustering3.html]] {
+            {static} -LOG: Logging
+            ~distance: Distance<? super O>
+            ~numclusters: int
+            +NaiveAgglomerativeHierarchicalClustering3(Distance<? super O>, int, Linkage)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): Clustering<Model>
+            {static} #triangleSize(int): int
+        }
+
+        enum tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3.Linkage [[NaiveAgglomerativeHierarchicalClustering3.Linkage.html]] {
+            {static} +SINGLE
+            {static} +COMPLETE
+            {static} +GROUP_AVERAGE
+            {static} +WEIGHTED_AVERAGE
+            {static} +CENTROID
+            {static} +MEDIAN
+            {static} +WARD
+            {abstract} +combine(int, double, int, double, int, double): double
+        }
+
+        class tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3.Par<O> {
+            {static} +LINKAGE_ID: OptionID
+            #distance: Distance<? super O>
+            #numclusters: int
+            +configure(Parameterization): void
+            +make(): NaiveAgglomerativeHierarchicalClustering3<O>
+        }
+
+        elki.clustering.kmeans.AbstractKMeans <|-- SameSizeKMeans
+        SameSizeKMeans +-- tutorial.clustering.SameSizeKMeans.Meta
+        it.unimi.dsi.fastutil.ints.IntComparator <|.. tutorial.clustering.SameSizeKMeans.PreferenceComparator
+        SameSizeKMeans +-- tutorial.clustering.SameSizeKMeans.PreferenceComparator
+        tutorial.clustering.SameSizeKMeans.PreferenceComparator --> tutorial.clustering.SameSizeKMeans.Meta: c
+        elki.utilities.optionhandling.Parameterizer <|.. tutorial.clustering.SameSizeKMeans.Par
+        SameSizeKMeans +-- tutorial.clustering.SameSizeKMeans.Par
+        elki.Algorithm <|.. NaiveAgglomerativeHierarchicalClustering1
+        elki.utilities.optionhandling.Parameterizer <|.. tutorial.clustering.NaiveAgglomerativeHierarchicalClustering1.Par
+        NaiveAgglomerativeHierarchicalClustering1 +-- tutorial.clustering.NaiveAgglomerativeHierarchicalClustering1.Par
+        elki.clustering.ClusteringAlgorithm <|.. CFSFDP
+        elki.utilities.optionhandling.Parameterizer <|.. tutorial.clustering.CFSFDP.Par
+        CFSFDP +-- tutorial.clustering.CFSFDP.Par
+        elki.clustering.hierarchical.HierarchicalClusteringAlgorithm <|.. NaiveAgglomerativeHierarchicalClustering4
+        NaiveAgglomerativeHierarchicalClustering4 --> tutorial.clustering.NaiveAgglomerativeHierarchicalClustering4.Linkage: linkage
+        NaiveAgglomerativeHierarchicalClustering4 +-- tutorial.clustering.NaiveAgglomerativeHierarchicalClustering4.Linkage
+        elki.utilities.optionhandling.Parameterizer <|.. tutorial.clustering.NaiveAgglomerativeHierarchicalClustering4.Par
+        NaiveAgglomerativeHierarchicalClustering4 +-- tutorial.clustering.NaiveAgglomerativeHierarchicalClustering4.Par
+        tutorial.clustering.NaiveAgglomerativeHierarchicalClustering4.Par --> tutorial.clustering.NaiveAgglomerativeHierarchicalClustering4.Linkage: linkage
+        elki.Algorithm <|.. NaiveAgglomerativeHierarchicalClustering2
+        elki.utilities.optionhandling.Parameterizer <|.. tutorial.clustering.NaiveAgglomerativeHierarchicalClustering2.Par
+        NaiveAgglomerativeHierarchicalClustering2 +-- tutorial.clustering.NaiveAgglomerativeHierarchicalClustering2.Par
+        elki.Algorithm <|.. NaiveAgglomerativeHierarchicalClustering3
+        NaiveAgglomerativeHierarchicalClustering3 --> tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3.Linkage: linkage
+        NaiveAgglomerativeHierarchicalClustering3 +-- tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3.Linkage
+        elki.utilities.optionhandling.Parameterizer <|.. tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3.Par
+        NaiveAgglomerativeHierarchicalClustering3 +-- tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3.Par
+        tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3.Par --> tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3.Linkage: linkage
+    }
+
+    namespace elki.clustering.kmeans {
+        abstract class AbstractKMeans<V extends NumberVector, M extends Model> [[../../elki/clustering/kmeans/AbstractKMeans.html]] {
+            #distance: NumberVectorDistance<? super NumberVector>
+            #k: int
+            #maxiter: int
+            #initializer: KMeansInitialization
+            {abstract} #getLogger(): Logging
+        }
+    }
+
+    namespace it.unimi.dsi.fastutil.ints {
+        interface IntComparator {
+            {abstract} +compare(int, int): int
+            +reversed(): IntComparator
+            +--compare--(Integer, Integer): int
+            +thenComparing(IntComparator): IntComparator
+            +thenComparing(Comparator<? super Integer>): Comparator<Integer>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../elki/utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki {
+        interface Algorithm [[../../elki/Algorithm.html]] {
+            +autorun(Database): Object
+            {abstract} +getInputTypeRestriction(): TypeInformation[]
+        }
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../../elki/clustering/ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace elki.clustering.hierarchical {
+        interface HierarchicalClusteringAlgorithm [[../../elki/clustering/hierarchical/HierarchicalClusteringAlgorithm.html]] {
+            +autorun(Database): ClusterMergeHistory
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

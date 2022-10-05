@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EditDistance\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.EditDistance [[EditDistance.html]] {
+        ~editFirst: int
+        ~editSecond: int
+        ~editOperationsBaseline: int
+        #EditDistance(ClusterContingencyTable)
+        +editOperationsBaseline(): int
+        +editOperationsFirst(): int
+        +editOperationsSecond(): int
+        +editDistanceFirst(): double
+        +editDistanceSecond(): double
+        +f1Measure(): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

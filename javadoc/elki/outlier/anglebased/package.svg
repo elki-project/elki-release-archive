@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="745px" preserveAspectRatio="none" style="width:811px;height:745px;background:#FFFFFF;" version="1.1" viewBox="0 0 811 745" width="811px" zoomAndPan="magnify"><defs/><g><!--MD5=[19d3b1bcf3ffed19c88673d4b0e828dc]
+cluster elki.outlier.anglebased--><g id="cluster_elki.outlier.anglebased"><path d="M8.5,145 L188.5,145 A3.75,3.75 0 0 1 191,147.5 L198,167.2969 L801.5,167.2969 A2.5,2.5 0 0 1 804,169.7969 L804,717.5 A2.5,2.5 0 0 1 801.5,720 L8.5,720 A2.5,2.5 0 0 1 6,717.5 L6,147.5 A2.5,2.5 0 0 1 8.5,145 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="198" y1="167.2969" y2="167.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="179" x="10" y="159.9951">elki.outlier.anglebased</text></g><!--MD5=[f3ad7c6249ed4f07ffda096754b241b1]
+cluster elki.outlier--><g id="cluster_elki.outlier"><path d="M264.5,6 L348.5,6 A3.75,3.75 0 0 1 351,8.5 L358,28.2969 L545.5,28.2969 A2.5,2.5 0 0 1 548,30.7969 L548,118.5 A2.5,2.5 0 0 1 545.5,121 L264.5,121 A2.5,2.5 0 0 1 262,118.5 L262,8.5 A2.5,2.5 0 0 1 264.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="262" x2="358" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="83" x="266" y="20.9951">elki.outlier</text></g><!--MD5=[cbaa5e5bb94da9947b9be6ff40da4ebb]
+class elki.outlier.anglebased.FastABOD--><a href="FastABOD.html" target="_top" title="FastABOD.html" xlink:actuate="onRequest" xlink:href="FastABOD.html" xlink:show="new" xlink:title="FastABOD.html" xlink:type="simple"><g id="elem_elki.outlier.anglebased.FastABOD"><rect codeLine="4" fill="#F1F1F1" height="145.7813" id="elki.outlier.anglebased.FastABOD" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="765" x="22.5" y="369"/><ellipse cx="288.75" cy="385" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M291.7188,390.6406 Q291.1406,390.9375 290.5,391.0781 Q289.8594,391.2344 289.1563,391.2344 Q286.6563,391.2344 285.3281,389.5938 Q284.0156,387.9375 284.0156,384.8125 Q284.0156,381.6875 285.3281,380.0313 Q286.6563,378.375 289.1563,378.375 Q289.8594,378.375 290.5,378.5313 Q291.1563,378.6875 291.7188,378.9844 L291.7188,381.7031 Q291.0938,381.125 290.5,380.8594 Q289.9063,380.5781 289.2813,380.5781 Q287.9375,380.5781 287.25,381.6563 Q286.5625,382.7188 286.5625,384.8125 Q286.5625,386.9063 287.25,387.9844 Q287.9375,389.0469 289.2813,389.0469 Q289.9063,389.0469 290.5,388.7813 Q291.0938,388.5 291.7188,387.9219 L291.7188,390.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="309.25" y="389.8467">FastABOD</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="638.5" y="366"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="639.5" y="378.1387">V extends NumberVector</text><line style="stroke:#181818;stroke-width:0.5;" x1="23.5" x2="786.5" y1="401" y2="401"/><polygon fill="none" points="33.5,409.6484,37.5,413.6484,33.5,417.6484,29.5,413.6484" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="42.5" y="417.9951">k: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="23.5" x2="786.5" y1="425.2969" y2="425.2969"/><ellipse cx="33.5" cy="438.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="343" x="42.5" y="442.292">FastABOD(Similarity&lt;? super NumberVector&gt;, int)</text><ellipse cx="33.5" cy="455.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="384" x="42.5" y="458.5889">run(Relation&lt;V extends NumberVector&gt;): OutlierResult</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="30.5" y="468.5391"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="739" x="42.5" y="474.8857">kNNABOD(Relation&lt;V extends NumberVector&gt;, DBIDs, WritableDoubleDataStore, DoubleMinMax): boolean</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="30.5" y="484.8359"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="708" x="42.5" y="491.1826">fastABOD(Relation&lt;V extends NumberVector&gt;, DBIDs, WritableDoubleDataStore, DoubleMinMax): void</text><ellipse cx="33.5" cy="504.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="306" x="42.5" y="507.4795">getInputTypeRestriction(): TypeInformation[]</text></g></a><!--MD5=[daccfcbde8e8d55fd158476ab7210713]
+class elki.outlier.anglebased.ABOD--><a href="ABOD.html" target="_top" title="ABOD.html" xlink:actuate="onRequest" xlink:href="ABOD.html" xlink:show="new" xlink:title="ABOD.html" xlink:type="simple"><g id="elem_elki.outlier.anglebased.ABOD"><rect codeLine="20" fill="#F1F1F1" height="129.4844" id="elki.outlier.anglebased.ABOD" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="646" x="82" y="180"/><ellipse cx="303.25" cy="196" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M306.2188,201.6406 Q305.6406,201.9375 305,202.0781 Q304.3594,202.2344 303.6563,202.2344 Q301.1563,202.2344 299.8281,200.5938 Q298.5156,198.9375 298.5156,195.8125 Q298.5156,192.6875 299.8281,191.0313 Q301.1563,189.375 303.6563,189.375 Q304.3594,189.375 305,189.5313 Q305.6563,189.6875 306.2188,189.9844 L306.2188,192.7031 Q305.5938,192.125 305,191.8594 Q304.4063,191.5781 303.7813,191.5781 Q302.4375,191.5781 301.75,192.6563 Q301.0625,193.7188 301.0625,195.8125 Q301.0625,197.9063 301.75,198.9844 Q302.4375,200.0469 303.7813,200.0469 Q304.4063,200.0469 305,199.7813 Q305.5938,199.5 306.2188,198.9219 L306.2188,201.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="323.75" y="200.8467">ABOD</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="579" y="177"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="580" y="189.1387">V extends NumberVector</text><line style="stroke:#181818;stroke-width:0.5;" x1="83" x2="727" y1="212" y2="212"/><polygon fill="none" points="93,220.6484,97,224.6484,93,228.6484,89,224.6484" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="350" x="102" y="228.9951">kernelFunction: Similarity&lt;? super NumberVector&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="83" x2="727" y1="236.2969" y2="236.2969"/><ellipse cx="93" cy="249.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="289" x="102" y="253.292">ABOD(Similarity&lt;? super NumberVector&gt;)</text><ellipse cx="93" cy="266.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="384" x="102" y="269.5889">run(Relation&lt;V extends NumberVector&gt;): OutlierResult</text><polygon fill="#FFFF44" points="93,277.5391,97,281.5391,93,285.5391,89,281.5391" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="620" x="102" y="285.8857">computeABOF(KernelMatrix, DBIDRef, DBIDArrayIter, DBIDArrayIter, MeanVariance): double</text><ellipse cx="93" cy="298.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="306" x="102" y="302.1826">getInputTypeRestriction(): TypeInformation[]</text></g></a><!--MD5=[fe1b443161d8f933c7bdf2bdb0302261]
+class elki.outlier.anglebased.LBABOD--><a href="LBABOD.html" target="_top" title="LBABOD.html" xlink:actuate="onRequest" xlink:href="LBABOD.html" xlink:show="new" xlink:title="LBABOD.html" xlink:type="simple"><g id="elem_elki.outlier.anglebased.LBABOD"><rect codeLine="35" fill="#F1F1F1" height="129.4844" id="elki.outlier.anglebased.LBABOD" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="410" x="200" y="575"/><ellipse cx="294.75" cy="591" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M297.7188,596.6406 Q297.1406,596.9375 296.5,597.0781 Q295.8594,597.2344 295.1563,597.2344 Q292.6563,597.2344 291.3281,595.5938 Q290.0156,593.9375 290.0156,590.8125 Q290.0156,587.6875 291.3281,586.0313 Q292.6563,584.375 295.1563,584.375 Q295.8594,584.375 296.5,584.5313 Q297.1563,584.6875 297.7188,584.9844 L297.7188,587.7031 Q297.0938,587.125 296.5,586.8594 Q295.9063,586.5781 295.2813,586.5781 Q293.9375,586.5781 293.25,587.6563 Q292.5625,588.7188 292.5625,590.8125 Q292.5625,592.9063 293.25,593.9844 Q293.9375,595.0469 295.2813,595.0469 Q295.9063,595.0469 296.5,594.7813 Q297.0938,594.5 297.7188,593.9219 L297.7188,596.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="58" x="315.25" y="595.8467">LBABOD</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="152" x="461" y="572"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="150" x="462" y="584.1387">V extends NumberVector</text><line style="stroke:#181818;stroke-width:0.5;" x1="201" x2="609" y1="607" y2="607"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="208" y="617.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="220" y="623.9951">LOG: Logging</text><polygon fill="none" points="211,631.9453,215,635.9453,211,639.9453,207,635.9453" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="29" x="220" y="640.292">l: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="201" x2="609" y1="647.5938" y2="647.5938"/><ellipse cx="211" cy="661.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="356" x="220" y="664.5889">LBABOD(Similarity&lt;? super NumberVector&gt;, int, int)</text><ellipse cx="211" cy="677.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="384" x="220" y="680.8857">run(Relation&lt;V extends NumberVector&gt;): OutlierResult</text><ellipse cx="211" cy="693.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="306" x="220" y="697.1826">getInputTypeRestriction(): TypeInformation[]</text></g></a><!--MD5=[81019799438b1b9471ca37184b444d57]
+class elki.outlier.OutlierAlgorithm--><a href="../OutlierAlgorithm.html" target="_top" title="../OutlierAlgorithm.html" xlink:actuate="onRequest" xlink:href="../OutlierAlgorithm.html" xlink:show="new" xlink:title="../OutlierAlgorithm.html" xlink:type="simple"><g id="elem_elki.outlier.OutlierAlgorithm"><rect codeLine="62" fill="#F1F1F1" height="64.2969" id="elki.outlier.OutlierAlgorithm" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="254" x="278" y="41"/><ellipse cx="342.75" cy="57" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M338.6719,52.7656 L338.6719,50.6094 L346.0625,50.6094 L346.0625,52.7656 L343.5938,52.7656 L343.5938,60.8438 L346.0625,60.8438 L346.0625,63 L338.6719,63 L338.6719,60.8438 L341.1406,60.8438 L341.1406,52.7656 L338.6719,52.7656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="116" x="363.25" y="61.8467">OutlierAlgorithm</text><line style="stroke:#181818;stroke-width:0.5;" x1="279" x2="531" y1="73" y2="73"/><line style="stroke:#181818;stroke-width:0.5;" x1="279" x2="531" y1="81" y2="81"/><ellipse cx="289" cy="94.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="228" x="298" y="97.9951">autorun(Database): OutlierResult</text></g></a><!--MD5=[b10d78eecb4c1fb15ec6984c255dbb82]
+reverse link elki.outlier.anglebased.ABOD to elki.outlier.anglebased.FastABOD--><g id="link_elki.outlier.anglebased.ABOD_elki.outlier.anglebased.FastABOD"><path codeLine="50" d="M405,329.45 C405,342.58 405,356.04 405,368.87 " fill="none" id="elki.outlier.anglebased.ABOD-backto-elki.outlier.anglebased.FastABOD" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="398,329.24,405,309.24,412,329.24,398,329.24" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[cebb2720eb6d58106a85b7b52de6fd06]
+reverse link elki.outlier.OutlierAlgorithm to elki.outlier.anglebased.ABOD--><g id="link_elki.outlier.OutlierAlgorithm_elki.outlier.anglebased.ABOD"><path codeLine="53" d="M405,125.14 C405,142.39 405,161.87 405,179.96 " fill="none" id="elki.outlier.OutlierAlgorithm-backto-elki.outlier.anglebased.ABOD" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="398,125.09,405,105.09,412,125.09,398,125.09" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[51269930cc66c0e21a869d419a0f98ee]
+reverse link elki.outlier.anglebased.FastABOD to elki.outlier.anglebased.LBABOD--><g id="link_elki.outlier.anglebased.FastABOD_elki.outlier.anglebased.LBABOD"><path codeLine="56" d="M405,535.34 C405,548.74 405,562.27 405,574.93 " fill="none" id="elki.outlier.anglebased.FastABOD-backto-elki.outlier.anglebased.LBABOD" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="398,535.24,405,515.24,412,535.24,398,535.24" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="305.5" y="726"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="305.5" y="735.2822">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[9cc9808557a641b74fd6ced55b4a148e]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.anglebased {
+
+        class FastABOD<V extends NumberVector> [[FastABOD.html]] {
+            #k: int
+            +FastABOD(Similarity<? super NumberVector>, int)
+            +run(Relation<V extends NumberVector>): OutlierResult
+            -kNNABOD(Relation<V extends NumberVector>, DBIDs, WritableDoubleDataStore, DoubleMinMax): boolean
+            -fastABOD(Relation<V extends NumberVector>, DBIDs, WritableDoubleDataStore, DoubleMinMax): void
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.anglebased.FastABOD.Par<V extends NumberVector> [[FastABOD.Par.html]] {
+            {static} +K_ID: OptionID
+            #k: int
+            +configure(Parameterization): void
+            +make(): FastABOD<V extends NumberVector>
+        }
+
+        class ABOD<V extends NumberVector> [[ABOD.html]] {
+            #kernelFunction: Similarity<? super NumberVector>
+            +ABOD(Similarity<? super NumberVector>)
+            +run(Relation<V extends NumberVector>): OutlierResult
+            #computeABOF(KernelMatrix, DBIDRef, DBIDArrayIter, DBIDArrayIter, MeanVariance): double
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.anglebased.ABOD.Par<V extends NumberVector> [[ABOD.Par.html]] {
+            {static} +KERNEL_FUNCTION_ID: OptionID
+            #kernelFunction: Similarity<V extends NumberVector>
+            +configure(Parameterization): void
+            +make(): ABOD<V extends NumberVector>
+        }
+
+        class LBABOD<V extends NumberVector> [[LBABOD.html]] {
+            {static} -LOG: Logging
+            #l: int
+            +LBABOD(Similarity<? super NumberVector>, int, int)
+            +run(Relation<V extends NumberVector>): OutlierResult
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.anglebased.LBABOD.Par<V extends NumberVector> [[LBABOD.Par.html]] {
+            {static} +L_ID: OptionID
+            #l: int
+            +configure(Parameterization): void
+            +make(): LBABOD<V extends NumberVector>
+        }
+
+        ABOD <|- - FastABOD
+        elki.outlier.anglebased.ABOD.Par <|- - elki.outlier.anglebased.FastABOD.Par
+        FastABOD +- - elki.outlier.anglebased.FastABOD.Par
+        elki.outlier.OutlierAlgorithm <|.. ABOD
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.anglebased.ABOD.Par
+        ABOD +- - elki.outlier.anglebased.ABOD.Par
+        FastABOD <|- - LBABOD
+        elki.outlier.anglebased.FastABOD.Par <|- - elki.outlier.anglebased.LBABOD.Par
+        LBABOD +- - elki.outlier.anglebased.LBABOD.Par
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

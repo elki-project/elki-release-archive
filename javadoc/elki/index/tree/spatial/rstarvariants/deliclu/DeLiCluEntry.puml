@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DeLiCluEntry\n<size:10>elki.index.tree.spatial.rstarvariants.deliclu" as elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluEntry [[DeLiCluEntry.html]] {
+        {abstract} +hasHandled(): boolean
+        {abstract} +hasUnhandled(): boolean
+        {abstract} +setHasHandled(boolean): void
+        {abstract} +setHasUnhandled(boolean): void
+    }
+
+    interface "<size:14>SpatialEntry\n<size:10>elki.index.tree.spatial" as elki.index.tree.spatial.SpatialEntry [[../../SpatialEntry.html]]
+
+    elki.index.tree.spatial.SpatialEntry <|-- elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

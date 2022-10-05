@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Holdout\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.Holdout [[Holdout.html]] {
+        {abstract} +initialize(MultipleObjectsBundle): void
+        {abstract} +nextPartitioning(): TrainingAndTestSet
+        {abstract} +getLabels(): ArrayList<ClassLabel>
+        {abstract} +numberOfPartitions(): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

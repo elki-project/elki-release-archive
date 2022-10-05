@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterOutlineVisualization\n<size:10>elki.visualization.visualizers.parallel.cluster" as elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization [[ClusterOutlineVisualization.html]] {
+        {static} -NAME: String
+        ~settings: Par
+        +ClusterOutlineVisualization(Par)
+        +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        +processNewResult(VisualizerContext, Object): void
+        +allowThumbnails(VisualizationTask): boolean
+    }
+
+    interface "<size:14>VisFactory\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.VisFactory [[../../VisFactory.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+        {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+    }
+    class "<size:14>ClusterOutlineVisualization.Instance\n<size:10>elki.visualization.visualizers.parallel.cluster" as elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Instance [[ClusterOutlineVisualization.Instance.html]]
+    class "<size:14>ClusterOutlineVisualization.Par\n<size:10>elki.visualization.visualizers.parallel.cluster" as elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Par [[ClusterOutlineVisualization.Par.html]]
+
+    elki.visualization.visualizers.VisFactory <|.. elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization
+    elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization +-- elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Instance
+    elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization +-- elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

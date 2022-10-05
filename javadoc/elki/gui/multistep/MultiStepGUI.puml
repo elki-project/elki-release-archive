@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MultiStepGUI\n<size:10>elki.gui.multistep" as elki.gui.multistep.MultiStepGUI [[MultiStepGUI.html]] {
+        {static} -LOG: Logging
+        {static} -ACTION_QUIT: String
+        ~frame: JFrame
+        #outputArea: LogPanel
+        -inputTab: InputTabPanel
+        -algTab: AlgorithmTabPanel
+        -evalTab: EvaluationTabPanel
+        -outTab: OutputTabPanel
+        -logTab: LoggingTabPanel
+        -setTab: SavedSettingsTabPanel
+        -addPanels(JTabbedPane): void
+        +setParameters(Parameterization): void
+        +serializeParameters(): ArrayList<String>
+        +run(): void
+        {static} +main(String[]): void
+    }
+
+    abstract class "<size:14>AbstractApplication\n<size:10>elki.application" as elki.application.AbstractApplication [[../../application/AbstractApplication.html]] {
+        {abstract} +run(): void
+    }
+
+    elki.application.AbstractApplication <|-- elki.gui.multistep.MultiStepGUI
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

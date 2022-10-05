@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GaussianModel\n<size:10>elki.outlier" as elki.outlier.GaussianModel [[GaussianModel.html]] {
+        -invert: boolean
+        +GaussianModel(boolean)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends NumberVector>): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[OutlierAlgorithm.html]]
+    class "<size:14>GaussianModel.Par\n<size:10>elki.outlier" as elki.outlier.GaussianModel.Par [[GaussianModel.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.GaussianModel
+    elki.outlier.GaussianModel +-- elki.outlier.GaussianModel.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

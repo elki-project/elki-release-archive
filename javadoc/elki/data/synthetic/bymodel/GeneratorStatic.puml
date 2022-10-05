@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GeneratorStatic\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorStatic [[GeneratorStatic.html]] {
+        +name: String
+        +points: List<double[]>
+        +GeneratorStatic(String, List<double[]>)
+        +generate(int): List<double[]>
+        +getDensity(double[]): double
+        +getDim(): int
+        +getName(): String
+        +getSize(): int
+        +makeModel(): Model
+        +computeMean(): double[]
+    }
+
+    interface "<size:14>GeneratorInterface\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorInterface [[GeneratorInterface.html]] {
+        {abstract} +getSize(): int
+        {abstract} +getDim(): int
+        {abstract} +generate(int): List<double[]>
+        {abstract} +getDensity(double[]): double
+        {abstract} +getName(): String
+        {abstract} +makeModel(): Model
+        {abstract} +computeMean(): double[]
+    }
+
+    elki.data.synthetic.bymodel.GeneratorInterface <|.. elki.data.synthetic.bymodel.GeneratorStatic
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

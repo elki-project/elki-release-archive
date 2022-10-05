@@ -1,0 +1,213 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.datasource.filter.typeconversions {
+
+        class UncertainifyFilter<UO extends UncertainObject> [[UncertainifyFilter.html]] {
+            {static} -LOG: Logging
+            #generator: Uncertainifier<UO extends UncertainObject>
+            #keep: boolean
+            #rand: Random
+            +UncertainifyFilter(Uncertainifier<UO extends UncertainObject>, boolean, RandomFactory)
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        }
+
+        class elki.datasource.filter.typeconversions.UncertainifyFilter.Par<UO extends UncertainObject> [[UncertainifyFilter.Par.html]] {
+            {static} +UNCERTAINITY_MODEL_ID: OptionID
+            {static} +KEEP_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #generator: Uncertainifier<UO extends UncertainObject>
+            #keep: boolean
+            #rand: RandomFactory
+            +configure(Parameterization): void
+            +make(): UncertainifyFilter<UO extends UncertainObject>
+        }
+
+        class UncertainSplitFilter [[UncertainSplitFilter.html]] {
+            {static} -LOG: Logging
+            -dims: int
+            +UncertainSplitFilter(int)
+            #filterSingleObject(NumberVector): UnweightedDiscreteUncertainObject
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+            #convertedType(SimpleTypeInformation<NumberVector>): SimpleTypeInformation<UnweightedDiscreteUncertainObject>
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.filter.typeconversions.UncertainSplitFilter.Par [[UncertainSplitFilter.Par.html]] {
+            {static} +DIM_ID: OptionID
+            #dims: int
+            +configure(Parameterization): void
+            +make(): UncertainSplitFilter
+        }
+
+        class WeightedUncertainSplitFilter [[WeightedUncertainSplitFilter.html]] {
+            {static} -LOG: Logging
+            #dims: int
+            #mod: int
+            #probcol: int
+            +WeightedUncertainSplitFilter(int, int)
+            #filterSingleObject(NumberVector): WeightedDiscreteUncertainObject
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+            #convertedType(SimpleTypeInformation<NumberVector>): SimpleTypeInformation<WeightedDiscreteUncertainObject>
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.filter.typeconversions.WeightedUncertainSplitFilter.Par [[WeightedUncertainSplitFilter.Par.html]] {
+            {static} +DIM_ID: OptionID
+            {static} +PROBCOL_ID: OptionID
+            #dims: int
+            #probcol: int
+            +configure(Parameterization): void
+            +make(): WeightedUncertainSplitFilter
+        }
+
+        class MultivariateTimeSeriesFilter<V extends FeatureVector<?>> [[MultivariateTimeSeriesFilter.html]] {
+            ~variates: int
+            +MultivariateTimeSeriesFilter(int)
+            #filterSingleObject(V extends FeatureVector<?>): V extends FeatureVector<?>
+            #getInputTypeRestriction(): SimpleTypeInformation<? super FeatureVector<?>>
+            #convertedType(SimpleTypeInformation<V extends FeatureVector<?>>): SimpleTypeInformation<? super FeatureVector<?>>
+        }
+
+        class elki.datasource.filter.typeconversions.MultivariateTimeSeriesFilter.Par<V extends FeatureVector<?>> {
+            {static} +VARIATES_ID: OptionID
+            ~variates: int
+            +configure(Parameterization): void
+            +make(): MultivariateTimeSeriesFilter<V extends FeatureVector<?>>
+        }
+
+        class SparseVectorFieldFilter<V extends SparseNumberVector> [[SparseVectorFieldFilter.html]] {
+            {static} -LOG: Logging
+            ~maxdim: int
+            #prepareStart(SimpleTypeInformation<V extends SparseNumberVector>): boolean
+            #prepareProcessInstance(V extends SparseNumberVector): void
+            #filterSingleObject(V extends SparseNumberVector): V extends SparseNumberVector
+            #getInputTypeRestriction(): SimpleTypeInformation<? super SparseNumberVector>
+            #convertedType(SimpleTypeInformation<V extends SparseNumberVector>): SimpleTypeInformation<? super SparseNumberVector>
+            #getLogger(): Logging
+        }
+
+        class ClassLabelFromPatternFilter [[ClassLabelFromPatternFilter.html]] {
+            ~meta: BundleMeta
+            ~labelcols: IntArrayList
+            ~positive: SimpleClassLabel
+            ~negative: SimpleClassLabel
+            ~pattern: Pattern
+            +ClassLabelFromPatternFilter(Pattern, String, String)
+            +ClassLabelFromPatternFilter(Pattern, SimpleClassLabel, SimpleClassLabel)
+            +getMeta(): BundleMeta
+            +data(int): Object
+            +nextEvent(): Event
+        }
+
+        class elki.datasource.filter.typeconversions.ClassLabelFromPatternFilter.Par [[ClassLabelFromPatternFilter.Par.html]] {
+            {static} +PATTERN_ID: OptionID
+            {static} +POSITIVE_ID: OptionID
+            {static} +NEGATIVE_ID: OptionID
+            ~pattern: Pattern
+            ~positive: String
+            ~negative: String
+            +configure(Parameterization): void
+            +make(): ClassLabelFromPatternFilter
+        }
+
+        class SplitNumberVectorFilter<V extends NumberVector> [[SplitNumberVectorFilter.html]] {
+            ~dims: int[]
+            +SplitNumberVectorFilter(int[])
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+            -getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.datasource.filter.typeconversions.SplitNumberVectorFilter.Par<V extends NumberVector> [[SplitNumberVectorFilter.Par.html]] {
+            {static} +SELECTED_ATTRIBUTES_ID: OptionID
+            #dims: int[]
+            +configure(Parameterization): void
+            +make(): SplitNumberVectorFilter<V extends NumberVector>
+        }
+
+        class ExternalIDFilter [[ExternalIDFilter.html]] {
+            -externalIdIndex: int
+            +ExternalIDFilter(int)
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        }
+
+        class elki.datasource.filter.typeconversions.ExternalIDFilter.Par [[ExternalIDFilter.Par.html]] {
+            {static} +EXTERNALID_INDEX_ID: OptionID
+            ~externalIdIndex: int
+            +configure(Parameterization): void
+            +make(): ExternalIDFilter
+        }
+
+        class ClassLabelFilter [[ClassLabelFilter.html]] {
+            -classLabelIndex: int
+            -classLabelFactory: Factory<?>
+            +ClassLabelFilter(int, Factory<?>)
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        }
+
+        class elki.datasource.filter.typeconversions.ClassLabelFilter.Par [[ClassLabelFilter.Par.html]] {
+            {static} +CLASS_LABEL_INDEX_ID: OptionID
+            {static} +CLASS_LABEL_CLASS_ID: OptionID
+            #classLabelIndex: int
+            -classLabelFactory: Factory<?>
+            +configure(Parameterization): void
+            +make(): ClassLabelFilter
+        }
+
+        elki.datasource.filter.ObjectFilter <|.. UncertainifyFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.typeconversions.UncertainifyFilter.Par
+        UncertainifyFilter +-- elki.datasource.filter.typeconversions.UncertainifyFilter.Par
+        elki.datasource.filter.AbstractConversionFilter <|-- UncertainSplitFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.typeconversions.UncertainSplitFilter.Par
+        UncertainSplitFilter +-- elki.datasource.filter.typeconversions.UncertainSplitFilter.Par
+        elki.datasource.filter.AbstractConversionFilter <|-- WeightedUncertainSplitFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.typeconversions.WeightedUncertainSplitFilter.Par
+        WeightedUncertainSplitFilter +-- elki.datasource.filter.typeconversions.WeightedUncertainSplitFilter.Par
+        elki.datasource.filter.AbstractStreamConversionFilter <|-- MultivariateTimeSeriesFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.typeconversions.MultivariateTimeSeriesFilter.Par
+        MultivariateTimeSeriesFilter +-- elki.datasource.filter.typeconversions.MultivariateTimeSeriesFilter.Par
+        elki.datasource.filter.AbstractConversionFilter <|-- SparseVectorFieldFilter
+        elki.datasource.filter.AbstractStreamFilter <|-- ClassLabelFromPatternFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.typeconversions.ClassLabelFromPatternFilter.Par
+        ClassLabelFromPatternFilter +-- elki.datasource.filter.typeconversions.ClassLabelFromPatternFilter.Par
+        elki.datasource.filter.ObjectFilter <|.. SplitNumberVectorFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.typeconversions.SplitNumberVectorFilter.Par
+        SplitNumberVectorFilter +-- elki.datasource.filter.typeconversions.SplitNumberVectorFilter.Par
+        elki.datasource.filter.ObjectFilter <|.. ExternalIDFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.typeconversions.ExternalIDFilter.Par
+        ExternalIDFilter +-- elki.datasource.filter.typeconversions.ExternalIDFilter.Par
+        elki.datasource.filter.ObjectFilter <|.. ClassLabelFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.typeconversions.ClassLabelFilter.Par
+        ClassLabelFilter +-- elki.datasource.filter.typeconversions.ClassLabelFilter.Par
+    }
+
+    namespace elki.datasource.filter {
+        interface ObjectFilter [[../ObjectFilter.html]] {
+            {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        }
+        abstract class AbstractConversionFilter<I, O> [[../AbstractConversionFilter.html]] {
+            {abstract} #getLogger(): Logging
+            {abstract} #filterSingleObject(I): O
+            {abstract} #getInputTypeRestriction(): SimpleTypeInformation<? super I>
+            {abstract} #convertedType(SimpleTypeInformation<​I>): SimpleTypeInformation<? super O>
+        }
+        abstract class AbstractStreamConversionFilter<I, O> [[../AbstractStreamConversionFilter.html]] {
+            ~meta: BundleMeta
+            ~column: int
+            {abstract} #filterSingleObject(I): O
+            {abstract} #getInputTypeRestriction(): TypeInformation
+            {abstract} #convertedType(SimpleTypeInformation<​I>): SimpleTypeInformation<? super O>
+        }
+        abstract class AbstractStreamFilter [[../AbstractStreamFilter.html]] {
+            #source: BundleStreamSource
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

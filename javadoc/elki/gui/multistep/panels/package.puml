@@ -1,0 +1,151 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.gui.multistep.panels {
+
+        class InputTabPanel [[InputTabPanel.html]] {
+            {static} -serialVersionUID: long
+            -input: InputStep
+            -executed: boolean
+            #configureStep(Parameterization): void
+            #executeStep(): void
+            +getInputStep(): InputStep
+            #getStatus(): Status
+        }
+
+        abstract class ParameterTabPanel [[ParameterTabPanel.html]] {
+            {static} -serialVersionUID: long
+            {static} -LOG: Logging
+            -parameterTable: ConfiguratorPanel
+            -runButton: JButton
+            -statusText: JLabel
+            #updateParameterTable(): void
+            +setParameters(Parameterization): void
+            +appendParameters(ListParameterization): void
+            #reportErrors(Parameterization): void
+            #execute(): void
+            {abstract} #configureStep(Parameterization): void
+            {abstract} #getStatus(): Status
+            {abstract} #executeStep(): void
+            +canRun(): boolean
+            +isComplete(): boolean
+            #updateStatus(): void
+            #firePanelUpdated(): void
+            +addPanelListener(ParameterTabPanel): void
+            +removePanelListener(ParameterTabPanel): void
+            +stateChanged(ChangeEvent): void
+            ~panelUpdated(ParameterTabPanel): void
+        }
+
+        enum elki.gui.multistep.panels.ParameterTabPanel.Status [[ParameterTabPanel.Status.html]] {
+            {static} +STATUS_UNCONFIGURED
+            {static} +STATUS_CONFIGURED
+            {static} +STATUS_READY
+            {static} +STATUS_COMPLETE
+            {static} +STATUS_FAILED
+        }
+
+        class LoggingTabPanel [[LoggingTabPanel.html]] {
+            {static} -serialVersionUID: long
+            #configureStep(Parameterization): void
+            #executeStep(): void
+            #getStatus(): Status
+        }
+
+        class OutputTabPanel [[OutputTabPanel.html]] {
+            {static} -serialVersionUID: long
+            -outs: OutputStep
+            -basedOnResult: WeakReference<?>
+            +OutputTabPanel(InputTabPanel, EvaluationTabPanel)
+            #configureStep(Parameterization): void
+            #executeStep(): void
+            #getStatus(): Status
+            +panelUpdated(ParameterTabPanel): void
+            -checkDependencies(): void
+        }
+
+        class EvaluationTabPanel [[EvaluationTabPanel.html]] {
+            {static} -serialVersionUID: long
+            -evals: EvaluationStep
+            -basedOnResult: WeakReference<?>
+            +EvaluationTabPanel(InputTabPanel, AlgorithmTabPanel)
+            #configureStep(Parameterization): void
+            #executeStep(): void
+            +getEvaluationStep(): EvaluationStep
+            #getStatus(): Status
+            +panelUpdated(ParameterTabPanel): void
+            -checkDependencies(): void
+        }
+
+        class SavedSettingsTabPanel [[SavedSettingsTabPanel.html]] {
+            {static} -serialVersionUID: long
+            {static} -LOG: Logging
+            ~store: SavedSettingsFile
+            ~savedCombo: JComboBox<String>
+            -gui: MultiStepGUI
+            +SavedSettingsTabPanel(SavedSettingsFile, MultiStepGUI)
+        }
+
+        class elki.gui.multistep.panels.SavedSettingsTabPanel.SettingsComboboxModel [[SavedSettingsTabPanel.SettingsComboboxModel.html]] {
+            {static} -serialVersionUID: long
+            #selected: String
+            +getSelectedItem(): String
+            +setSelectedItem(Object): void
+            +getElementAt(int): String
+            +getSize(): int
+            +update(): void
+        }
+
+        class AlgorithmTabPanel [[AlgorithmTabPanel.html]] {
+            {static} -serialVersionUID: long
+            -algorithms: AlgorithmStep
+            -basedOnDatabase: WeakReference<?>
+            +AlgorithmTabPanel(InputTabPanel)
+            #configureStep(Parameterization): void
+            #executeStep(): void
+            #getStatus(): Status
+            +getAlgorithmStep(): AlgorithmStep
+            +panelUpdated(ParameterTabPanel): void
+            -checkDependencies(): void
+        }
+
+        ParameterTabPanel <|-- InputTabPanel
+        javax.swing.JPanel <|-- ParameterTabPanel
+        javax.swing.event.ChangeListener <|.. ParameterTabPanel
+        ParameterTabPanel +-- elki.gui.multistep.panels.ParameterTabPanel.Status
+        ParameterTabPanel <|-- LoggingTabPanel
+        ParameterTabPanel <|-- OutputTabPanel
+        OutputTabPanel --> InputTabPanel: input
+        OutputTabPanel --> EvaluationTabPanel: evals
+        ParameterTabPanel <|-- EvaluationTabPanel
+        EvaluationTabPanel --> InputTabPanel: input
+        EvaluationTabPanel --> AlgorithmTabPanel: algs
+        javax.swing.JPanel <|-- SavedSettingsTabPanel
+        SavedSettingsTabPanel --> elki.gui.multistep.panels.SavedSettingsTabPanel.SettingsComboboxModel: savedSettingsModel
+        javax.swing.AbstractListModel <|-- elki.gui.multistep.panels.SavedSettingsTabPanel.SettingsComboboxModel
+        javax.swing.ComboBoxModel <|.. elki.gui.multistep.panels.SavedSettingsTabPanel.SettingsComboboxModel
+        SavedSettingsTabPanel +-- elki.gui.multistep.panels.SavedSettingsTabPanel.SettingsComboboxModel
+        ParameterTabPanel <|-- AlgorithmTabPanel
+        AlgorithmTabPanel --> InputTabPanel: input
+    }
+
+    namespace javax.swing {
+        class JPanel {
+            {static} -uiClassID: String
+        }
+        abstract class AbstractListModel<E> {
+            #listenerList: EventListenerList
+        }
+        interface ComboBoxModel<E> {
+            {abstract} +setSelectedItem(Object): void
+            {abstract} +getSelectedItem(): Object
+        }
+    }
+
+    namespace javax.swing.event {
+        interface ChangeListener {
+            {abstract} +stateChanged(ChangeEvent): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

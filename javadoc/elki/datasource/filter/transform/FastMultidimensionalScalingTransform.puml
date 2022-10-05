@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastMultidimensionalScalingTransform\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.FastMultidimensionalScalingTransform<I, O extends NumberVector> [[FastMultidimensionalScalingTransform.html]] {
+        {static} -LOG: Logging
+        ~dist: PrimitiveDistance<? super I>
+        ~tdim: int
+        ~random: RandomFactory
+        ~factory: Factory<O extends NumberVector>
+        +FastMultidimensionalScalingTransform(int, PrimitiveDistance<? super I>, Factory<O extends NumberVector>, RandomFactory)
+        +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        #findEigenVectors(double[], double[], double[]): void
+        #randomInitialization(double[], Random): void
+        #multiply(double[], double[], double[]): double
+        #updateEigenvector(double[], double[], double): double
+        #estimateEigenvalue(double[], double[]): double
+        #updateMatrix(double[], double[], double): void
+    }
+
+    interface "<size:14>ObjectFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.ObjectFilter [[../ObjectFilter.html]] {
+        {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+    class "<size:14>FastMultidimensionalScalingTransform.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.FastMultidimensionalScalingTransform.Par<I, O extends NumberVector> [[FastMultidimensionalScalingTransform.Par.html]]
+
+    elki.datasource.filter.ObjectFilter <|.. elki.datasource.filter.transform.FastMultidimensionalScalingTransform
+    elki.datasource.filter.transform.FastMultidimensionalScalingTransform +-- elki.datasource.filter.transform.FastMultidimensionalScalingTransform.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimplePolygonParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.SimplePolygonParser [[SimplePolygonParser.html]] {
+        {static} -LOG: Logging
+        {static} +COORD: Pattern
+        {static} +POLYGON_SEPARATOR: String
+        ~nextevent: Event
+        #meta: BundleMeta
+        #haslabels: boolean
+        #curpoly: PolygonsObject
+        #curlbl: LabelList
+        #cureid: ExternalID
+        -coords: List<double[]>
+        -polys: List<Polygon>
+        -labels: ArrayList<String>
+        +SimplePolygonParser(CSVReaderFormat)
+        +nextEvent(): Event
+        #buildMeta(): void
+        +getMeta(): BundleMeta
+        +data(int): Object
+        -parseLine(): boolean
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractStreamingParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.AbstractStreamingParser [[AbstractStreamingParser.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>SimplePolygonParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.SimplePolygonParser.Par [[SimplePolygonParser.Par.html]]
+
+    elki.datasource.parser.AbstractStreamingParser <|-- elki.datasource.parser.SimplePolygonParser
+    elki.datasource.parser.SimplePolygonParser +-- elki.datasource.parser.SimplePolygonParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

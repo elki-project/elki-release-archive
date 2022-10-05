@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSXi.SteepDownArea\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi.SteepDownArea [[OPTICSXi.SteepDownArea.html]] {
+        ~mib: double
+        +SteepDownArea(int, int, double, double)
+    }
+
+    abstract class "<size:14>OPTICSXi.SteepArea\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi.SteepArea [[OPTICSXi.SteepArea.html]]
+    class "<size:14>OPTICSXi\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi [[OPTICSXi.html]]
+
+    elki.clustering.optics.OPTICSXi.SteepArea <|-- elki.clustering.optics.OPTICSXi.SteepDownArea
+    elki.clustering.optics.OPTICSXi +-- elki.clustering.optics.OPTICSXi.SteepDownArea
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,47 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Instance [[AbstractKMeans.Instance.html]] {
+        #means: double[]
+        #clusters: List<ModifiableDBIDs>
+        #assignment: WritableIntegerDataStore
+        #varsum: double[]
+        #relation: Relation<? extends NumberVector>
+        #diststat: long
+        -df: NumberVectorDistance<?>
+        #k: int
+        #isSquared: boolean
+        #key: String
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+        #distance(NumberVector, NumberVector): double
+        #distance(NumberVector, double[]): double
+        #distance(double[], double[]): double
+        #sqrtdistance(NumberVector, NumberVector): double
+        #sqrtdistance(NumberVector, double[]): double
+        #sqrtdistance(double[], double[]): double
+        +run(int): void
+        {abstract} #iterate(int): int
+        #meansFromSums(double[], double[], double[]): void
+        #copyMeans(double[], double[]): void
+        #assignToNearestCluster(): int
+        #recomputeSeperation(double[], double[]): void
+        #initialSeperation(double[]): void
+        #computeSquaredSeparation(double[]): void
+        #movedDistance(double[], double[], double[]): void
+        +buildResult(): Clustering<KMeansModel>
+        +buildResult(boolean, Relation<? extends NumberVector>): Clustering<KMeansModel>
+        #recomputeVariance(Relation<? extends NumberVector>): void
+        {abstract} #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans<V extends NumberVector, M extends Model> [[AbstractKMeans.html]] {
+        {abstract} #getLogger(): Logging
+    }
+
+    elki.clustering.kmeans.AbstractKMeans +-- elki.clustering.kmeans.AbstractKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

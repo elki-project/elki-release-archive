@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PreDeCon.Settings.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PreDeCon.Settings.Par [[PreDeCon.Settings.Par.html]] {
+        {static} +DELTA_ID: OptionID
+        {static} +KAPPA_ID: OptionID
+        {static} +KAPPA_DEFAULT: double
+        {static} +LAMBDA_ID: OptionID
+        ~settings: Settings
+        +configure(Parameterization): void
+        #configEpsilon(Parameterization): void
+        #configMinPts(Parameterization): void
+        #configDelta(Parameterization): void
+        #configKappa(Parameterization): void
+        #configLambda(Parameterization): void
+        +make(): Settings
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>PreDeCon.Settings\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PreDeCon.Settings [[PreDeCon.Settings.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.subspace.PreDeCon.Settings.Par
+    elki.clustering.subspace.PreDeCon.Settings +-- elki.clustering.subspace.PreDeCon.Settings.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>VoronoiVisualization.Mode\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Mode [[VoronoiVisualization.Mode.html]] {
+        {static} +VORONOI
+        {static} +DELAUNAY
+        {static} +V_AND_D
+    }
+
+    class "<size:14>VoronoiVisualization\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization [[VoronoiVisualization.html]]
+
+    elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization +-- elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Mode
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

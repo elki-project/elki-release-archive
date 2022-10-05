@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FeatureSelection.ProjectedNumberFeatureVectorAdapter\n<size:10>elki.data.projection" as elki.data.projection.FeatureSelection.ProjectedNumberFeatureVectorAdapter [[FeatureSelection.ProjectedNumberFeatureVectorAdapter.html]] {
+        +size(NumberVector): int
+        +get(NumberVector, int): Double
+        +getDouble(NumberVector, int): double
+        +getLong(NumberVector, int): long
+    }
+
+    interface "<size:14>NumberArrayAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.NumberArrayAdapter<Double, NumberVector> [[../../utilities/datastructures/arraylike/NumberArrayAdapter.html]] {
+        {abstract} +size(NumberVector): int
+        {abstract} +get(NumberVector, int): Double
+        {abstract} +getDouble(NumberVector, int): double
+        {abstract} +getLong(NumberVector, int): long
+    }
+    class "<size:14>FeatureSelection\n<size:10>elki.data.projection" as elki.data.projection.FeatureSelection<V extends FeatureVector<F>, F> [[FeatureSelection.html]]
+
+    elki.utilities.datastructures.arraylike.NumberArrayAdapter <|.. elki.data.projection.FeatureSelection.ProjectedNumberFeatureVectorAdapter
+    elki.data.projection.FeatureSelection +-- elki.data.projection.FeatureSelection.ProjectedNumberFeatureVectorAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

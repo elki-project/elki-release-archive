@@ -1,0 +1,86 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.distance.parallel {
+
+        class KNNWeightProcessor [[KNNWeightProcessor.html]] {
+            ~k: int
+            ~input: SharedObject<? extends KNNList>
+            +KNNWeightProcessor(int)
+            +connectKNNInput(SharedObject<? extends KNNList>): void
+            +instantiate(Executor): Instance
+        }
+
+        class elki.outlier.distance.parallel.KNNWeightProcessor.Instance [[KNNWeightProcessor.Instance.html]] {
+            ~k: int
+            ~input: Instance<? extends KNNList>
+            #Instance(int, Instance<? extends KNNList>, Instance)
+            +map(DBIDRef): void
+        }
+
+        class ParallelKNNWeightOutlier<O> [[ParallelKNNWeightOutlier.html]] {
+            #distance: Distance<? super O>
+            #kplus: int
+            +ParallelKNNWeightOutlier(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.distance.parallel.ParallelKNNWeightOutlier.Par<O> {
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): ParallelKNNWeightOutlier<O>
+        }
+
+        class ParallelKNNOutlier<O> [[ParallelKNNOutlier.html]] {
+            #distance: Distance<? super O>
+            #kplus: int
+            +ParallelKNNOutlier(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.distance.parallel.ParallelKNNOutlier.Par<O> {
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): ParallelKNNOutlier<O>
+        }
+
+        elki.parallel.processor.AbstractDoubleProcessor <|-- KNNWeightProcessor
+        elki.parallel.processor.AbstractDoubleProcessor.Instance <|-- elki.outlier.distance.parallel.KNNWeightProcessor.Instance
+        KNNWeightProcessor +-- elki.outlier.distance.parallel.KNNWeightProcessor.Instance
+        elki.outlier.OutlierAlgorithm <|.. ParallelKNNWeightOutlier
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.parallel.ParallelKNNWeightOutlier.Par
+        ParallelKNNWeightOutlier +-- elki.outlier.distance.parallel.ParallelKNNWeightOutlier.Par
+        elki.outlier.OutlierAlgorithm <|.. ParallelKNNOutlier
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.parallel.ParallelKNNOutlier.Par
+        ParallelKNNOutlier +-- elki.outlier.distance.parallel.ParallelKNNOutlier.Par
+    }
+
+    namespace elki.parallel.processor {
+        abstract class AbstractDoubleProcessor [[../../../parallel/processor/AbstractDoubleProcessor.html]] {
+            #output: SharedDouble
+            {abstract} +instantiate(Executor): Instance
+        }
+        abstract class elki.parallel.processor.AbstractDoubleProcessor.Instance [[../../../parallel/processor/AbstractDoubleProcessor.Instance.html]] {
+            #output: Instance
+            {abstract} +map(DBIDRef): void
+        }
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,166 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.statistics.kernelfunctions {
+
+        class UniformKernelDensityFunction [[UniformKernelDensityFunction.html]] {
+            {static} +CANONICAL_BANDWIDTH: double
+            {static} -STDDEV: double
+            {static} -R: double
+            +density(double): double
+            +canonicalBandwidth(): double
+            +standardDeviation(): double
+            +getR(): double
+        }
+
+        class elki.math.statistics.kernelfunctions.UniformKernelDensityFunction.Par [[UniformKernelDensityFunction.Par.html]] {
+            +make(): UniformKernelDensityFunction
+        }
+
+        class BiweightKernelDensityFunction [[BiweightKernelDensityFunction.html]] {
+            {static} +CANONICAL_BANDWIDTH: double
+            {static} +STDDEV: double
+            {static} +R: double
+            +density(double): double
+            +canonicalBandwidth(): double
+            +standardDeviation(): double
+            +getR(): double
+        }
+
+        class elki.math.statistics.kernelfunctions.BiweightKernelDensityFunction.Par [[BiweightKernelDensityFunction.Par.html]] {
+            +make(): BiweightKernelDensityFunction
+        }
+
+        class EpanechnikovKernelDensityFunction [[EpanechnikovKernelDensityFunction.html]] {
+            {static} +CANONICAL_BANDWIDTH: double
+            {static} +STDDEV: double
+            {static} +R: double
+            +density(double): double
+            +canonicalBandwidth(): double
+            +standardDeviation(): double
+            +getR(): double
+        }
+
+        class elki.math.statistics.kernelfunctions.EpanechnikovKernelDensityFunction.Par [[EpanechnikovKernelDensityFunction.Par.html]] {
+            +make(): EpanechnikovKernelDensityFunction
+        }
+
+        class CosineKernelDensityFunction [[CosineKernelDensityFunction.html]] {
+            {static} +CANONICAL_BANDWIDTH: double
+            {static} -STDDEV: double
+            {static} -R: double
+            +density(double): double
+            +canonicalBandwidth(): double
+            +standardDeviation(): double
+            +getR(): double
+        }
+
+        class elki.math.statistics.kernelfunctions.CosineKernelDensityFunction.Par [[CosineKernelDensityFunction.Par.html]] {
+            +make(): CosineKernelDensityFunction
+        }
+
+        class TriangularKernelDensityFunction [[TriangularKernelDensityFunction.html]] {
+            {static} +CANONICAL_BANDWIDTH: double
+            {static} -STDDEV: double
+            {static} -R: double
+            +density(double): double
+            +canonicalBandwidth(): double
+            +standardDeviation(): double
+            +getR(): double
+        }
+
+        class elki.math.statistics.kernelfunctions.TriangularKernelDensityFunction.Par [[TriangularKernelDensityFunction.Par.html]] {
+            +make(): TriangularKernelDensityFunction
+        }
+
+        interface KernelDensityFunction [[KernelDensityFunction.html]] {
+            {abstract} +density(double): double
+            {abstract} +canonicalBandwidth(): double
+            {abstract} +standardDeviation(): double
+            {abstract} +getR(): double
+        }
+
+        class TricubeKernelDensityFunction [[TricubeKernelDensityFunction.html]] {
+            {static} +CANONICAL_BANDWIDTH: double
+            {static} -STDDEV: double
+            {static} -R: double
+            -SCALE: double
+            +density(double): double
+            +canonicalBandwidth(): double
+            +standardDeviation(): double
+            +getR(): double
+        }
+
+        class elki.math.statistics.kernelfunctions.TricubeKernelDensityFunction.Par [[TricubeKernelDensityFunction.Par.html]] {
+            +make(): TricubeKernelDensityFunction
+        }
+
+        class TriweightKernelDensityFunction [[TriweightKernelDensityFunction.html]] {
+            {static} +CANONICAL_BANDWIDTH: double
+            {static} -STDDEV: double
+            {static} -R: double
+            +density(double): double
+            +canonicalBandwidth(): double
+            +standardDeviation(): double
+            +getR(): double
+        }
+
+        class elki.math.statistics.kernelfunctions.TriweightKernelDensityFunction.Par [[TriweightKernelDensityFunction.Par.html]] {
+            +make(): TriweightKernelDensityFunction
+        }
+
+        class GaussianKernelDensityFunction [[GaussianKernelDensityFunction.html]] {
+            {static} +CANONICAL_BANDWIDTH: double
+            {static} +R: double
+            +density(double): double
+            +canonicalBandwidth(): double
+            +standardDeviation(): double
+            +getR(): double
+        }
+
+        class elki.math.statistics.kernelfunctions.GaussianKernelDensityFunction.Par [[GaussianKernelDensityFunction.Par.html]] {
+            +make(): GaussianKernelDensityFunction
+        }
+
+        KernelDensityFunction <|.. UniformKernelDensityFunction
+        UniformKernelDensityFunction --> UniformKernelDensityFunction: KERNEL
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.kernelfunctions.UniformKernelDensityFunction.Par
+        UniformKernelDensityFunction +-- elki.math.statistics.kernelfunctions.UniformKernelDensityFunction.Par
+        KernelDensityFunction <|.. BiweightKernelDensityFunction
+        BiweightKernelDensityFunction --> BiweightKernelDensityFunction: KERNEL
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.kernelfunctions.BiweightKernelDensityFunction.Par
+        BiweightKernelDensityFunction +-- elki.math.statistics.kernelfunctions.BiweightKernelDensityFunction.Par
+        KernelDensityFunction <|.. EpanechnikovKernelDensityFunction
+        EpanechnikovKernelDensityFunction --> EpanechnikovKernelDensityFunction: KERNEL
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.kernelfunctions.EpanechnikovKernelDensityFunction.Par
+        EpanechnikovKernelDensityFunction +-- elki.math.statistics.kernelfunctions.EpanechnikovKernelDensityFunction.Par
+        KernelDensityFunction <|.. CosineKernelDensityFunction
+        CosineKernelDensityFunction --> CosineKernelDensityFunction: KERNEL
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.kernelfunctions.CosineKernelDensityFunction.Par
+        CosineKernelDensityFunction +-- elki.math.statistics.kernelfunctions.CosineKernelDensityFunction.Par
+        KernelDensityFunction <|.. TriangularKernelDensityFunction
+        TriangularKernelDensityFunction --> TriangularKernelDensityFunction: KERNEL
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.kernelfunctions.TriangularKernelDensityFunction.Par
+        TriangularKernelDensityFunction +-- elki.math.statistics.kernelfunctions.TriangularKernelDensityFunction.Par
+        KernelDensityFunction <|.. TricubeKernelDensityFunction
+        TricubeKernelDensityFunction --> TricubeKernelDensityFunction: KERNEL
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.kernelfunctions.TricubeKernelDensityFunction.Par
+        TricubeKernelDensityFunction +-- elki.math.statistics.kernelfunctions.TricubeKernelDensityFunction.Par
+        KernelDensityFunction <|.. TriweightKernelDensityFunction
+        TriweightKernelDensityFunction --> TriweightKernelDensityFunction: KERNEL
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.kernelfunctions.TriweightKernelDensityFunction.Par
+        TriweightKernelDensityFunction +-- elki.math.statistics.kernelfunctions.TriweightKernelDensityFunction.Par
+        KernelDensityFunction <|.. GaussianKernelDensityFunction
+        GaussianKernelDensityFunction --> GaussianKernelDensityFunction: KERNEL
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.kernelfunctions.GaussianKernelDensityFunction.Par
+        GaussianKernelDensityFunction +-- elki.math.statistics.kernelfunctions.GaussianKernelDensityFunction.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

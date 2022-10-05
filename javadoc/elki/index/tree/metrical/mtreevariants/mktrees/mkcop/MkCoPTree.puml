@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>MkCoPTree\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkcop" as elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTree<O> [[MkCoPTree.html]] {
+        {static} -LOG: Logging
+        -log_k: double[]
+        +MkCoPTree(Relation<O>, PageFile<MkCoPTreeNode<O>>, MkTreeSettings<O, MkCoPTreeNode<O>, MkCoPEntry>)
+        #preInsert(MkCoPEntry): void
+        +insert(MkCoPEntry, boolean): void
+        +insertAll(List<MkCoPEntry>): void
+        +reverseKNNQuery(DBIDRef, int): DoubleDBIDList
+        +getKmax(): int
+        #initializeCapacities(MkCoPEntry): void
+        -doReverseKNNQuery(int, DBIDRef, ModifiableDoubleDBIDList, ModifiableDBIDs): void
+        -adjustApproximatedKNNDistances(MkCoPEntry, Map<DBID, KNNList>): void
+        -ssqerr(int, int, double[], double[], double, double): double
+        -optimize(int, int, double, double, double, double, double, double): double
+        -approximateKnnDistances(MkCoPLeafEntry, KNNList): void
+        -approximateLowerHull(ConvexHull, double[], double, double, double[], double, double): ApproximationLine
+        -approximateUpperHull(ConvexHull, double[], double[]): ApproximationLine
+        -approximateUpperHullPaper(ConvexHull, double[], double, double, double[], double, double): ApproximationLine
+        -approximateUpperHullOld(ConvexHull, double[], double, double, double[], double, double): ApproximationLine
+        #createNewLeafNode(): MkCoPTreeNode<O>
+        #createNewDirectoryNode(): MkCoPTreeNode<O>
+        #createNewDirectoryEntry(MkCoPTreeNode<O>, DBID, double): MkCoPEntry
+        #createRootEntry(): MkCoPEntry
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractMkTree\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTree<O, MkCoPTreeNode<O>, MkCoPEntry, MkTreeSettings<O, MkCoPTreeNode<O>, MkCoPEntry>> [[../AbstractMkTree.html]] {
+        {abstract} +reverseKNNQuery(DBIDRef, int): DoubleDBIDList
+    }
+
+    elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTree <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

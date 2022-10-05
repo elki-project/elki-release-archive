@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AFKMC2\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AFKMC2 [[AFKMC2.html]] {
+        {static} -LOG: Logging
+        +AFKMC2(int, RandomFactory)
+        +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+    }
+
+    class "<size:14>KMC2\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMC2 [[KMC2.html]]
+    class "<size:14>AFKMC2.Instance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AFKMC2.Instance [[AFKMC2.Instance.html]]
+    class "<size:14>AFKMC2.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AFKMC2.Par [[AFKMC2.Par.html]]
+
+    elki.clustering.kmeans.initialization.KMC2 <|-- elki.clustering.kmeans.initialization.AFKMC2
+    elki.clustering.kmeans.initialization.AFKMC2 +-- elki.clustering.kmeans.initialization.AFKMC2.Instance
+    elki.clustering.kmeans.initialization.AFKMC2 +-- elki.clustering.kmeans.initialization.AFKMC2.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

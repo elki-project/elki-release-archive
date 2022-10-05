@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ConstantDistribution.Par\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.ConstantDistribution.Par [[ConstantDistribution.Par.html]] {
+        {static} +CONSTANT_ID: OptionID
+        ~constant: double
+        +configure(Parameterization): void
+        +make(): ConstantDistribution
+    }
+
+    interface "<size:14>Distribution.Parameterizer\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution.Parameterizer [[Distribution.Parameterizer.html]]
+    class "<size:14>ConstantDistribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.ConstantDistribution [[ConstantDistribution.html]]
+
+    elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.ConstantDistribution.Par
+    elki.math.statistics.distribution.ConstantDistribution +-- elki.math.statistics.distribution.ConstantDistribution.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

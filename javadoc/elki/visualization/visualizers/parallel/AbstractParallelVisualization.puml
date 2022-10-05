@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractParallelVisualization\n<size:10>elki.visualization.visualizers.parallel" as elki.visualization.visualizers.parallel.AbstractParallelVisualization<NV> [[AbstractParallelVisualization.html]] {
+        #proj: ProjectionParallel
+        #relation: Relation<NV>
+        ~margins: double[]
+        #axsep: double
+        ~size: double[]
+        +AbstractParallelVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        +setupCanvas(SVGPlot, ProjectionParallel, double, double): Element
+        #getSizeX(): double
+        #getSizeY(): double
+        #getMarginLeft(): double
+        #getMarginTop(): double
+        #getAxisSep(): double
+        -recalcAxisPositions(): void
+        #getVisibleAxisX(double): double
+        +visualizationChanged(VisualizationItem): void
+    }
+
+    abstract class "<size:14>AbstractVisualization\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.AbstractVisualization [[../AbstractVisualization.html]] {
+        {abstract} +fullRedraw(): void
+    }
+
+    elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.parallel.AbstractParallelVisualization
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

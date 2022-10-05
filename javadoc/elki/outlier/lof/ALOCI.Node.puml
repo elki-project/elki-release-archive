@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ALOCI.Node\n<size:10>elki.outlier.lof" as elki.outlier.lof.ALOCI.Node [[ALOCI.Node.html]] {
+        ~code: int
+        ~count: int
+        ~level: int
+        ~children: List<Node>
+        ~parent: Node
+        ~center: double[]
+        #Node(int, double[], int, int, List<Node>)
+        +getLevel(): int
+        +getCount(): int
+        +getSquareSum(int): long
+        +getCubicSum(int): long
+        +getDimensionality(): int
+        +doubleValue(int): double
+        +longValue(int): long
+        +toArray(): double[]
+    }
+
+    interface "<size:14>NumberVector\n<size:10>elki.data" as elki.data.NumberVector [[../../data/NumberVector.html]] {
+        {abstract} +doubleValue(int): double
+        {abstract} +longValue(int): long
+        {abstract} +toArray(): double[]
+    }
+    class "<size:14>ALOCI\n<size:10>elki.outlier.lof" as elki.outlier.lof.ALOCI<V extends NumberVector> [[ALOCI.html]]
+
+    elki.data.NumberVector <|.. elki.outlier.lof.ALOCI.Node
+    elki.outlier.lof.ALOCI +-- elki.outlier.lof.ALOCI.Node
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

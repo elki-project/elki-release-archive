@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KappaDistribution.Par\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.KappaDistribution.Par [[KappaDistribution.Par.html]] {
+        {static} +SHAPE1_ID: OptionID
+        {static} +SHAPE2_ID: OptionID
+        ~location: double
+        ~scale: double
+        ~shape1: double
+        ~shape2: double
+        +configure(Parameterization): void
+        +make(): KappaDistribution
+    }
+
+    interface "<size:14>Distribution.Parameterizer\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution.Parameterizer [[Distribution.Parameterizer.html]]
+    class "<size:14>KappaDistribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.KappaDistribution [[KappaDistribution.html]]
+
+    elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.KappaDistribution.Par
+    elki.math.statistics.distribution.KappaDistribution +-- elki.math.statistics.distribution.KappaDistribution.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

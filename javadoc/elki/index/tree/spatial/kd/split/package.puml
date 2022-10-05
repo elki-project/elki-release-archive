@@ -1,0 +1,119 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.spatial.kd.split {
+
+        class LeastSSQSplit [[LeastSSQSplit.html]] {
+            +findSplit(Relation<? extends NumberVector>, int, ArrayModifiableDBIDs, DBIDArrayMIter, int, int, SortDBIDsBySingleDimension): Info
+        }
+
+        class elki.index.tree.spatial.kd.split.LeastSSQSplit.Par [[LeastSSQSplit.Par.html]] {
+            +make(): LeastSSQSplit
+        }
+
+        class MeanVarianceSplit [[MeanVarianceSplit.html]] {
+            +findSplit(Relation<? extends NumberVector>, int, ArrayModifiableDBIDs, DBIDArrayMIter, int, int, SortDBIDsBySingleDimension): Info
+        }
+
+        class elki.index.tree.spatial.kd.split.MeanVarianceSplit.Par [[MeanVarianceSplit.Par.html]] {
+            +make(): MeanVarianceSplit
+        }
+
+        class LeastOneDimSSQSplit [[LeastOneDimSSQSplit.html]] {
+            +findSplit(Relation<? extends NumberVector>, int, ArrayModifiableDBIDs, DBIDArrayMIter, int, int, SortDBIDsBySingleDimension): Info
+        }
+
+        class elki.index.tree.spatial.kd.split.LeastOneDimSSQSplit.Par [[LeastOneDimSSQSplit.Par.html]] {
+            +make(): LeastOneDimSSQSplit
+        }
+
+        class BoundedMidpointSplit [[BoundedMidpointSplit.html]] {
+            +findSplit(Relation<? extends NumberVector>, int, ArrayModifiableDBIDs, DBIDArrayMIter, int, int, SortDBIDsBySingleDimension): Info
+        }
+
+        class elki.index.tree.spatial.kd.split.BoundedMidpointSplit.Par [[BoundedMidpointSplit.Par.html]] {
+            +make(): BoundedMidpointSplit
+        }
+
+        interface SplitStrategy [[SplitStrategy.html]] {
+            {abstract} +findSplit(Relation<? extends NumberVector>, int, ArrayModifiableDBIDs, DBIDArrayMIter, int, int, SortDBIDsBySingleDimension): Info
+        }
+
+        class elki.index.tree.spatial.kd.split.SplitStrategy.Info [[SplitStrategy.Info.html]] {
+            +val: double
+            +dim: int
+            +pos: int
+            +Info(int, int, double)
+        }
+
+        class elki.index.tree.spatial.kd.split.SplitStrategy.Util [[SplitStrategy.Util.html]] {
+            {static} ~minmaxRange(int, Relation<? extends NumberVector>, DBIDArrayIter, int, int): double[]
+            {static} ~sumvar(Relation<? extends NumberVector>, int, DBIDArrayMIter, int, int): double[]
+            {static} ~argmaxdiff(double[]): int
+            {static} ~pivot(Relation<? extends NumberVector>, ArrayModifiableDBIDs, DBIDArrayMIter, int, int, int, double): int
+        }
+
+        class MidpointSplit [[MidpointSplit.html]] {
+            +findSplit(Relation<? extends NumberVector>, int, ArrayModifiableDBIDs, DBIDArrayMIter, int, int, SortDBIDsBySingleDimension): Info
+        }
+
+        class elki.index.tree.spatial.kd.split.MidpointSplit.Par [[MidpointSplit.Par.html]] {
+            +make(): MidpointSplit
+        }
+
+        class MedianVarianceSplit [[MedianVarianceSplit.html]] {
+            +findSplit(Relation<? extends NumberVector>, int, ArrayModifiableDBIDs, DBIDArrayMIter, int, int, SortDBIDsBySingleDimension): Info
+        }
+
+        class elki.index.tree.spatial.kd.split.MedianVarianceSplit.Par [[MedianVarianceSplit.Par.html]] {
+            +make(): MedianVarianceSplit
+        }
+
+        class MedianSplit [[MedianSplit.html]] {
+            +findSplit(Relation<? extends NumberVector>, int, ArrayModifiableDBIDs, DBIDArrayMIter, int, int, SortDBIDsBySingleDimension): Info
+        }
+
+        class elki.index.tree.spatial.kd.split.MedianSplit.Par [[MedianSplit.Par.html]] {
+            +make(): MedianSplit
+        }
+
+        SplitStrategy <|.. LeastSSQSplit
+        LeastSSQSplit --> LeastSSQSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.kd.split.LeastSSQSplit.Par
+        LeastSSQSplit +-- elki.index.tree.spatial.kd.split.LeastSSQSplit.Par
+        SplitStrategy <|.. MeanVarianceSplit
+        MeanVarianceSplit --> MeanVarianceSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.kd.split.MeanVarianceSplit.Par
+        MeanVarianceSplit +-- elki.index.tree.spatial.kd.split.MeanVarianceSplit.Par
+        SplitStrategy <|.. LeastOneDimSSQSplit
+        LeastOneDimSSQSplit --> LeastOneDimSSQSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.kd.split.LeastOneDimSSQSplit.Par
+        LeastOneDimSSQSplit +-- elki.index.tree.spatial.kd.split.LeastOneDimSSQSplit.Par
+        SplitStrategy <|.. BoundedMidpointSplit
+        BoundedMidpointSplit --> BoundedMidpointSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.kd.split.BoundedMidpointSplit.Par
+        BoundedMidpointSplit +-- elki.index.tree.spatial.kd.split.BoundedMidpointSplit.Par
+        SplitStrategy +-- elki.index.tree.spatial.kd.split.SplitStrategy.Info
+        SplitStrategy +-- elki.index.tree.spatial.kd.split.SplitStrategy.Util
+        SplitStrategy <|.. MidpointSplit
+        MidpointSplit --> MidpointSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.kd.split.MidpointSplit.Par
+        MidpointSplit +-- elki.index.tree.spatial.kd.split.MidpointSplit.Par
+        SplitStrategy <|.. MedianVarianceSplit
+        MedianVarianceSplit --> MedianVarianceSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.kd.split.MedianVarianceSplit.Par
+        MedianVarianceSplit +-- elki.index.tree.spatial.kd.split.MedianVarianceSplit.Par
+        SplitStrategy <|.. MedianSplit
+        MedianSplit --> MedianSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.kd.split.MedianSplit.Par
+        MedianSplit +-- elki.index.tree.spatial.kd.split.MedianSplit.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

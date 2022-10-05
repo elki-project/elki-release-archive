@@ -1,0 +1,13 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>UpdateSynchronizer\n<size:10>elki.visualization.svg" as elki.visualization.svg.UpdateSynchronizer [[UpdateSynchronizer.html]] {
+        {abstract} +activate(): void
+        {abstract} +addUpdateRunner(UpdateRunner): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

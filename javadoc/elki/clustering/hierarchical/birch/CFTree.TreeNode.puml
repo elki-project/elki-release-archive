@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CFTree.TreeNode\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.CFTree.TreeNode {
+        ~children: ClusteringFeature[]
+        +TreeNode(int, int)
+    }
+
+    class "<size:14>ClusteringFeature\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.ClusteringFeature [[ClusteringFeature.html]]
+    class "<size:14>CFTree\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.CFTree [[CFTree.html]]
+
+    elki.clustering.hierarchical.birch.ClusteringFeature <|-- elki.clustering.hierarchical.birch.CFTree.TreeNode
+    elki.clustering.hierarchical.birch.CFTree +-- elki.clustering.hierarchical.birch.CFTree.TreeNode
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

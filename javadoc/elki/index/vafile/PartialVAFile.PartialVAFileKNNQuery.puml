@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PartialVAFile.PartialVAFileKNNQuery\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile.PartialVAFileKNNQuery [[PartialVAFile.PartialVAFileKNNQuery.html]] {
+        -p: double
+        -subspace: long[]
+        +PartialVAFileKNNQuery(DistanceQuery<V extends NumberVector>, double, long[])
+        +getKNN(V extends NumberVector, int): KNNList
+        -filter1(int, int, List<DAFile>, VectorApproximation, int, VALPNormDistance): LinkedList<PartialVACandidate>
+        -getIOCosts(int, int): int
+        -getIOCosts(DAFile, int): int
+        +getWorstCaseDistOrder(VALPNormDistance, long[]): List<DAFile>
+        #retrieveAccurateDistances(List<PartialVACandidate>, int, long[], V extends NumberVector): KNNList
+    }
+
+    abstract class "<size:14>AbstractRefiningIndex.AbstractRefiningQuery\n<size:10>elki.index" as elki.index.AbstractRefiningIndex.AbstractRefiningQuery [[../AbstractRefiningIndex.AbstractRefiningQuery.html]]
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<V extends NumberVector> [[../../database/query/knn/KNNSearcher.html]] {
+        {abstract} +getKNN(V extends NumberVector, int): KNNList
+    }
+    class "<size:14>PartialVAFile\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile<V extends NumberVector> [[PartialVAFile.html]]
+
+    elki.index.AbstractRefiningIndex.AbstractRefiningQuery <|-- elki.index.vafile.PartialVAFile.PartialVAFileKNNQuery
+    elki.database.query.knn.KNNSearcher <|.. elki.index.vafile.PartialVAFile.PartialVAFileKNNQuery
+    elki.index.vafile.PartialVAFile +-- elki.index.vafile.PartialVAFile.PartialVAFileKNNQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

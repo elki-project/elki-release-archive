@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="277px" preserveAspectRatio="none" style="width:642px;height:277px;background:#FFFFFF;" version="1.1" viewBox="0 0 642 277" width="642px" zoomAndPan="magnify"><defs/><g><!--MD5=[cf1ab380ca9f9c07ada24de740ba1221]
+class elki.index.PagedIndexFactory--><a href="PagedIndexFactory.html" target="_top" title="PagedIndexFactory.html" xlink:actuate="onRequest" xlink:href="PagedIndexFactory.html" xlink:show="new" xlink:title="PagedIndexFactory.html" xlink:type="simple"><g id="elem_elki.index.PagedIndexFactory"><rect codeLine="6" fill="#F1F1F1" height="102.8281" id="elki.index.PagedIndexFactory" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="622" x="9" y="149"/><ellipse cx="242.25" cy="167.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M242.3594,163.3125 L241.2031,168.3906 L243.5313,168.3906 L242.3594,163.3125 Z M240.875,161.0781 L243.8594,161.0781 L247.2188,173.4688 L244.7656,173.4688 L244,170.4063 L240.7188,170.4063 L239.9688,173.4688 L237.5313,173.4688 L240.875,161.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="135" x="262.75" y="166.9951">PagedIndexFactory</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="48" x="306.25" y="179.5791">elki.index</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="624" y="146"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="625" y="158.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="630" y1="186.9375" y2="186.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="197.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="256" x="29" y="203.9326">pageFileFactory: PageFileFactory&lt;?&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="630" y1="211.2344" y2="211.2344"/><ellipse cx="20" cy="224.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="280" x="29" y="228.2295">PagedIndexFactory(PageFileFactory&lt;?&gt;)</text><polygon fill="#FFFF44" points="20,236.1797,24,240.1797,20,244.1797,16,240.1797" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="596" x="29" y="244.5264">makePageFile(Class&lt;N extends Externalizable&gt;): PageFile&lt;N extends Externalizable&gt;</text></g></a><!--MD5=[afe293c28bbaabce0c4dc03698425862]
+class elki.index.IndexFactory--><a href="IndexFactory.html" target="_top" title="IndexFactory.html" xlink:actuate="onRequest" xlink:href="IndexFactory.html" xlink:show="new" xlink:title="IndexFactory.html" xlink:type="simple"><g id="elem_elki.index.IndexFactory"><rect codeLine="12" fill="#F1F1F1" height="78.5313" id="elki.index.IndexFactory" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="331" x="154.5" y="10"/><ellipse cx="264.25" cy="28.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M260.1719,24.7344 L260.1719,22.5781 L267.5625,22.5781 L267.5625,24.7344 L265.0938,24.7344 L265.0938,32.8125 L267.5625,32.8125 L267.5625,34.9688 L260.1719,34.9688 L260.1719,32.8125 L262.6406,32.8125 L262.6406,24.7344 L260.1719,24.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="91" x="284.75" y="27.9951">IndexFactory</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="48" x="306.25" y="40.5791">elki.index</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="478.5" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="479.5" y="19.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="155.5" x2="484.5" y1="47.9375" y2="47.9375"/><ellipse cx="165.5" cy="61.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="226" x="174.5" y="64.9326">instantiate(Relation&lt;V&gt;): Index</text><ellipse cx="165.5" cy="77.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="305" x="174.5" y="81.2295">getInputTypeRestriction(): TypeInformation</text></g></a><!--MD5=[723f61b698bc6e8c0cec9cca66e9148e]
+reverse link elki.index.IndexFactory to elki.index.PagedIndexFactory--><g id="link_elki.index.IndexFactory_elki.index.PagedIndexFactory"><path codeLine="18" d="M320,109.56 C320,122.56 320,136.22 320,148.86 " fill="none" id="elki.index.IndexFactory-backto-elki.index.PagedIndexFactory" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="313,109.26,320,89.26,327,109.26,313,109.26" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="221" y="257.8281"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="221" y="267.1104">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[6b463e38ad00e63b1925b220242e0531]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>PagedIndexFactory\n<size:10>elki.index" as elki.index.PagedIndexFactory<O> [[PagedIndexFactory.html]] {
+        -pageFileFactory: PageFileFactory<?>
+        +PagedIndexFactory(PageFileFactory<?>)
+        #makePageFile(Class<N extends Externalizable>): PageFile<N extends Externalizable>
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<O> [[IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    abstract class "<size:14>PagedIndexFactory.Par\n<size:10>elki.index" as elki.index.PagedIndexFactory.Par<O> [[PagedIndexFactory.Par.html]]
+
+    elki.index.IndexFactory <|.. elki.index.PagedIndexFactory
+    elki.index.PagedIndexFactory +- - elki.index.PagedIndexFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

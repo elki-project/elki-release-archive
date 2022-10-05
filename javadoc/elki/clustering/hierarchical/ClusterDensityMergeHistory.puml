@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterDensityMergeHistory\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.ClusterDensityMergeHistory [[ClusterDensityMergeHistory.html]] {
+        #coredists: DoubleDataStore
+        +ClusterDensityMergeHistory(ArrayDBIDs, int[], double[], int[], boolean, DoubleDataStore)
+        +getCoreDistanceStore(): DoubleDataStore
+    }
+
+    class "<size:14>ClusterMergeHistory\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.ClusterMergeHistory [[ClusterMergeHistory.html]]
+
+    elki.clustering.hierarchical.ClusterMergeHistory <|-- elki.clustering.hierarchical.ClusterDensityMergeHistory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

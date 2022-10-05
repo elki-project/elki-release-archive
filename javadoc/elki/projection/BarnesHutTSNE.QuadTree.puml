@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BarnesHutTSNE.QuadTree\n<size:10>elki.projection" as elki.projection.BarnesHutTSNE.QuadTree [[BarnesHutTSNE.QuadTree.html]] {
+        +center: double[]
+        +points: double[]
+        +squareSize: double
+        +weight: int
+        +children: QuadTree[]
+        -QuadTree(double[], QuadTree[], double[], int, double)
+        {static} +build(int, double[]): QuadTree
+        {static} -build(int, double[], int, int): QuadTree
+        {static} -splitRecursively(double[], int, int, int, int, double[], ArrayList<double[]>, ArrayList<QuadTree>): void
+        {static} -computeCenterofMass(int, double[], int, int): double[]
+        {static} -computeExtend(int, double[], int, int): double[]
+        {static} -computeSquareSize(double[]): double
+    }
+
+    class "<size:14>BarnesHutTSNE\n<size:10>elki.projection" as elki.projection.BarnesHutTSNE<O> [[BarnesHutTSNE.html]]
+
+    elki.projection.BarnesHutTSNE +-- elki.projection.BarnesHutTSNE.QuadTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

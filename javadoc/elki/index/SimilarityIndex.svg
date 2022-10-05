@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="216px" preserveAspectRatio="none" style="width:492px;height:216px;background:#FFFFFF;" version="1.1" viewBox="0 0 492 216" width="492px" zoomAndPan="magnify"><defs/><g><!--MD5=[a5ad551773eccb8aa186f75dcfbf4ef3]
+class elki.index.SimilarityIndex--><a href="SimilarityIndex.html" target="_top" title="SimilarityIndex.html" xlink:actuate="onRequest" xlink:href="SimilarityIndex.html" xlink:show="new" xlink:title="SimilarityIndex.html" xlink:type="simple"><g id="elem_elki.index.SimilarityIndex"><rect codeLine="6" fill="#F1F1F1" height="62.2344" id="elki.index.SimilarityIndex" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="474" x="7" y="129"/><ellipse cx="181.25" cy="147.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M177.1719,143.7344 L177.1719,141.5781 L184.5625,141.5781 L184.5625,143.7344 L182.0938,143.7344 L182.0938,151.8125 L184.5625,151.8125 L184.5625,153.9688 L177.1719,153.9688 L177.1719,151.8125 L179.6406,151.8125 L179.6406,143.7344 L177.1719,143.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="105" x="201.75" y="146.9951">SimilarityIndex</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="48" x="230.25" y="159.5791">elki.index</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="474" y="126"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="475" y="138.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="480" y1="166.9375" y2="166.9375"/><ellipse cx="18" cy="180.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="448" x="27" y="183.9326">getSimilarityQuery(Similarity&lt;? super O&gt;): SimilarityQuery&lt;O&gt;</text></g></a><!--MD5=[e637bef28e98dc3cd51247599213f56c]
+class elki.index.Index--><a href="Index.html" target="_top" title="Index.html" xlink:actuate="onRequest" xlink:href="Index.html" xlink:show="new" xlink:title="Index.html" xlink:type="simple"><g id="elem_elki.index.Index"><rect codeLine="10" fill="#F1F1F1" height="62.2344" id="elki.index.Index" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="134" x="177" y="7"/><ellipse cx="216.3" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M212.2219,21.7344 L212.2219,19.5781 L219.6125,19.5781 L219.6125,21.7344 L217.1438,21.7344 L217.1438,29.8125 L219.6125,29.8125 L219.6125,31.9688 L212.2219,31.9688 L212.2219,29.8125 L214.6906,29.8125 L214.6906,21.7344 L212.2219,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="39" x="240.2" y="24.9951">Index</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="48" x="235.7" y="37.5791">elki.index</text><line style="stroke:#181818;stroke-width:0.5;" x1="178" x2="310" y1="44.9375" y2="44.9375"/><ellipse cx="188" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="108" x="197" y="61.9326">initialize(): void</text></g></a><!--MD5=[fdd189efb10e7393d1a2ef6ff9a550fe]
+reverse link elki.index.Index to elki.index.SimilarityIndex--><g id="link_elki.index.Index_elki.index.SimilarityIndex"><path codeLine="14" d="M244,89.37 C244,102.75 244,116.79 244,128.73 " fill="none" id="elki.index.Index-backto-elki.index.SimilarityIndex" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="237,89.28,244,69.28,251,89.28,237,89.28" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="146" y="197.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="146" y="206.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[07a80e9a921ee034541f9f892dc00c99]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>SimilarityIndex\n<size:10>elki.index" as elki.index.SimilarityIndex<O> [[SimilarityIndex.html]] {
+        {abstract} +getSimilarityQuery(Similarity<? super O>): SimilarityQuery<O>
+    }
+
+    interface "<size:14>Index\n<size:10>elki.index" as elki.index.Index [[Index.html]] {
+        {abstract} +initialize(): void
+    }
+
+    elki.index.Index <|- - elki.index.SimilarityIndex
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

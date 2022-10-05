@@ -1,0 +1,46 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CASHInterval\n<size:10>elki.clustering.correlation.cash" as elki.clustering.correlation.cash.CASHInterval [[CASHInterval.html]] {
+        {static} -LOG: Logging
+        {static} -serialVersionUID: long
+        {static} -ID: int
+        -intervalID: int
+        -level: int
+        -d_min: double
+        -d_max: double
+        -ids: ModifiableDBIDs
+        -maxSplitDimension: int
+        -leftChild: CASHInterval
+        -rightChild: CASHInterval
+        -split: CASHIntervalSplit
+        +CASHInterval()
+        +CASHInterval(double[], double[], CASHIntervalSplit, ModifiableDBIDs, int, int, double, double)
+        +getIDs(): ModifiableDBIDs
+        +removeIDs(DBIDs): void
+        +numObjects(): int
+        +priority(): int
+        +getMaxSplitDimension(): int
+        +getLevel(): int
+        +getLeftChild(): CASHInterval
+        +getRightChild(): CASHInterval
+        +getD_min(): double
+        +getD_max(): double
+        +compareTo(CASHInterval): int
+        +hasChildren(): boolean
+        +split(): void
+    }
+
+    class "<size:14>HyperBoundingBox\n<size:10>elki.data" as elki.data.HyperBoundingBox [[../../../data/HyperBoundingBox.html]]
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<CASHInterval> {
+        {abstract} +compareTo(CASHInterval): int
+    }
+
+    elki.data.HyperBoundingBox <|-- elki.clustering.correlation.cash.CASHInterval
+    java.lang.Comparable <|.. elki.clustering.correlation.cash.CASHInterval
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluateRetrievalPerformance.RetrievalPerformanceResult\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.EvaluateRetrievalPerformance.RetrievalPerformanceResult [[EvaluateRetrievalPerformance.RetrievalPerformanceResult.html]] {
+        -samplesize: int
+        -map: double
+        -auroc: double
+        -knnperf: double[]
+        +RetrievalPerformanceResult(int, double, double, double[])
+        +getAUROC(): double
+        +getMAP(): double
+        +getLongName(): String
+        +getShortName(): String
+        +writeToText(TextWriterStream, String): void
+    }
+
+    interface "<size:14>TextWriteable\n<size:10>elki.result.textwriter" as elki.result.textwriter.TextWriteable [[../../result/textwriter/TextWriteable.html]] {
+        {abstract} +writeToText(TextWriterStream, String): void
+    }
+    class "<size:14>EvaluateRetrievalPerformance\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.EvaluateRetrievalPerformance<O> [[EvaluateRetrievalPerformance.html]]
+
+    elki.result.textwriter.TextWriteable <|.. elki.algorithm.statistics.EvaluateRetrievalPerformance.RetrievalPerformanceResult
+    elki.algorithm.statistics.EvaluateRetrievalPerformance +-- elki.algorithm.statistics.EvaluateRetrievalPerformance.RetrievalPerformanceResult
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

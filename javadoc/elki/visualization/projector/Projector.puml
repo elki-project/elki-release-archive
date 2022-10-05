@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Projector\n<size:10>elki.visualization.projector" as elki.visualization.projector.Projector [[Projector.html]] {
+        {abstract} +arrange(VisualizerContext): Collection<PlotItem>
+    }
+
+    interface "<size:14>VisualizationItem\n<size:10>elki.visualization" as elki.visualization.VisualizationItem [[../VisualizationItem.html]] {
+        {abstract} +getMenuName(): String
+    }
+
+    elki.visualization.VisualizationItem <|-- elki.visualization.projector.Projector
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

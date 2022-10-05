@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ABOD\n<size:10>elki.outlier.anglebased" as elki.outlier.anglebased.ABOD<V extends NumberVector> [[ABOD.html]] {
+        #kernelFunction: Similarity<? super NumberVector>
+        +ABOD(Similarity<? super NumberVector>)
+        +run(Relation<V extends NumberVector>): OutlierResult
+        #computeABOF(KernelMatrix, DBIDRef, DBIDArrayIter, DBIDArrayIter, MeanVariance): double
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>ABOD.Par\n<size:10>elki.outlier.anglebased" as elki.outlier.anglebased.ABOD.Par<V extends NumberVector> [[ABOD.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.anglebased.ABOD
+    elki.outlier.anglebased.ABOD +-- elki.outlier.anglebased.ABOD.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

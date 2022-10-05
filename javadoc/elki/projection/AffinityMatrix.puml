@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>AffinityMatrix\n<size:10>elki.projection" as elki.projection.AffinityMatrix [[AffinityMatrix.html]] {
+        {abstract} +scale(double): void
+        {abstract} +size(): int
+        {abstract} +get(int, int): double
+        {abstract} +iter(int): int
+        {abstract} +iterDim(int, int): int
+        {abstract} +iterValue(int, int): double
+        {abstract} +iterAdvance(int, int): int
+        {abstract} +iterValid(int, int): boolean
+        {abstract} +iterDBIDs(): DBIDArrayIter
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

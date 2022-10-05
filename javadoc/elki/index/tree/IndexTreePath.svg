@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="217px" preserveAspectRatio="none" style="width:332px;height:217px;background:#FFFFFF;" version="1.1" viewBox="0 0 332 217" width="332px" zoomAndPan="magnify"><defs/><g><!--MD5=[11531bdeaf99905bbcbf7554ae81f99e]
+class elki.index.tree.IndexTreePath--><a href="IndexTreePath.html" target="_top" title="IndexTreePath.html" xlink:actuate="onRequest" xlink:href="IndexTreePath.html" xlink:show="new" xlink:title="IndexTreePath.html" xlink:type="simple"><g id="elem_elki.index.tree.IndexTreePath"><rect codeLine="6" fill="#F1F1F1" height="184.3125" id="elki.index.tree.IndexTreePath" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="311" x="7" y="7"/><ellipse cx="102.25" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M105.2188,31.6094 Q104.6406,31.9063 104,32.0469 Q103.3594,32.2031 102.6563,32.2031 Q100.1563,32.2031 98.8281,30.5625 Q97.5156,28.9063 97.5156,25.7813 Q97.5156,22.6563 98.8281,21 Q100.1563,19.3438 102.6563,19.3438 Q103.3594,19.3438 104,19.5 Q104.6563,19.6563 105.2188,19.9531 L105.2188,22.6719 Q104.5938,22.0938 104,21.8281 Q103.4063,21.5469 102.7813,21.5469 Q101.4375,21.5469 100.75,22.625 Q100.0625,23.6875 100.0625,25.7813 Q100.0625,27.875 100.75,28.9531 Q101.4375,30.0156 102.7813,30.0156 Q103.4063,30.0156 104,29.75 Q104.5938,29.4688 105.2188,28.8906 L105.2188,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="122.75" y="24.9951">IndexTreePath</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="67" x="139.25" y="37.5791">elki.index.tree</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="311" y="4"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="312" y="16.1387">E</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="317" y1="44.9375" y2="44.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="55.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="218" x="27" y="61.9326">parentPath: IndexTreePath&lt;E&gt;</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="71.8828"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="53" x="27" y="78.2295">entry: E</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="88.1797"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="63" x="27" y="94.5264">index: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="317" y1="101.8281" y2="101.8281"/><ellipse cx="18" cy="115.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="285" x="27" y="118.8232">IndexTreePath(IndexTreePath&lt;E&gt;, E, int)</text><ellipse cx="18" cy="131.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="86" x="27" y="135.1201">getEntry(): E</text><ellipse cx="18" cy="148.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="27" y="151.417">getIndex(): int</text><ellipse cx="18" cy="164.3672" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="132" x="27" y="167.7139">getPathCount(): int</text><ellipse cx="18" cy="180.6641" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="251" x="27" y="184.0107">getParentPath(): IndexTreePath&lt;E&gt;</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="69" y="198.3125"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="69" y="207.5947">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[4c353eca053eade8cda5aaad0aff2bf2]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IndexTreePath\n<size:10>elki.index.tree" as elki.index.tree.IndexTreePath<E> [[IndexTreePath.html]] {
+        -parentPath: IndexTreePath<E>
+        -entry: E
+        -index: int
+        +IndexTreePath(IndexTreePath<E>, E, int)
+        +getEntry(): E
+        +getIndex(): int
+        +getPathCount(): int
+        +getParentPath(): IndexTreePath<E>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TrivialGeneratedOutlier.Par\n<size:10>elki.outlier.trivial" as elki.outlier.trivial.TrivialGeneratedOutlier.Par [[TrivialGeneratedOutlier.Par.html]] {
+        {static} +EXPECT_ID: OptionID
+        ~expect: double
+        +configure(Parameterization): void
+        +make(): TrivialGeneratedOutlier
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>TrivialGeneratedOutlier\n<size:10>elki.outlier.trivial" as elki.outlier.trivial.TrivialGeneratedOutlier [[TrivialGeneratedOutlier.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.trivial.TrivialGeneratedOutlier.Par
+    elki.outlier.trivial.TrivialGeneratedOutlier +-- elki.outlier.trivial.TrivialGeneratedOutlier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

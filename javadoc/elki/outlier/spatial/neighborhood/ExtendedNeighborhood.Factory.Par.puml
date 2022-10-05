@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExtendedNeighborhood.Factory.Par\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory.Par<O> [[ExtendedNeighborhood.Factory.Par.html]] {
+        {static} +NEIGHBORHOOD_ID: OptionID
+        {static} +STEPS_ID: OptionID
+        -steps: int
+        -inner: Factory<O>
+        +configure(Parameterization): void
+        +make(): Factory<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ExtendedNeighborhood.Factory\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory<O> [[ExtendedNeighborhood.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory.Par
+    elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory +-- elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

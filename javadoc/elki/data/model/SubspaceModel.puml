@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SubspaceModel\n<size:10>elki.data.model" as elki.data.model.SubspaceModel [[SubspaceModel.html]] {
+        -subspace: Subspace
+        +SubspaceModel(Subspace, double[])
+        +getSubspace(): Subspace
+        +getDimensions(): long[]
+        +writeToText(TextWriterStream, String): void
+    }
+
+    class "<size:14>MeanModel\n<size:10>elki.data.model" as elki.data.model.MeanModel [[MeanModel.html]]
+    interface "<size:14>TextWriteable\n<size:10>elki.result.textwriter" as elki.result.textwriter.TextWriteable [[../../result/textwriter/TextWriteable.html]] {
+        {abstract} +writeToText(TextWriterStream, String): void
+    }
+
+    elki.data.model.MeanModel <|-- elki.data.model.SubspaceModel
+    elki.result.textwriter.TextWriteable <|.. elki.data.model.SubspaceModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

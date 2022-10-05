@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>SubspaceClusteringAlgorithm\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.SubspaceClusteringAlgorithm<M extends SubspaceModel> [[SubspaceClusteringAlgorithm.html]]
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<M extends SubspaceModel>> [[../ClusteringAlgorithm.html]]
+
+    elki.clustering.ClusteringAlgorithm <|-- elki.clustering.subspace.SubspaceClusteringAlgorithm
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

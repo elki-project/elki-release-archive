@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ArcCosineUnitlengthDistance\n<size:10>elki.distance" as elki.distance.ArcCosineUnitlengthDistance [[ArcCosineUnitlengthDistance.html]] {
+        {static} +STATIC: ArcCosineUnitlengthDistance
+        +distance(NumberVector, NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    interface "<size:14>NumberVectorDistance\n<size:10>elki.distance" as elki.distance.NumberVectorDistance<NumberVector> [[NumberVectorDistance.html]] {
+        {abstract} +distance(NumberVector, NumberVector): double
+    }
+    class "<size:14>ArcCosineUnitlengthDistance.Par\n<size:10>elki.distance" as elki.distance.ArcCosineUnitlengthDistance.Par [[ArcCosineUnitlengthDistance.Par.html]]
+
+    elki.distance.SpatialPrimitiveDistance <|.. elki.distance.ArcCosineUnitlengthDistance
+    elki.distance.NumberVectorDistance <|.. elki.distance.ArcCosineUnitlengthDistance
+    elki.distance.ArcCosineUnitlengthDistance +-- elki.distance.ArcCosineUnitlengthDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

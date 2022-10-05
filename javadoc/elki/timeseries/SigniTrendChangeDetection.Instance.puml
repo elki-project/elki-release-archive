@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SigniTrendChangeDetection.Instance\n<size:10>elki.timeseries" as elki.timeseries.SigniTrendChangeDetection.Instance [[SigniTrendChangeDetection.Instance.html]] {
+        #ewma: double[]
+        #ewmv: double[]
+        #weight: double
+        +run(Relation<NumberVector>): ChangePoints
+        -processRow(DBIDRef, NumberVector, ChangePoints): double
+    }
+
+    class "<size:14>SigniTrendChangeDetection\n<size:10>elki.timeseries" as elki.timeseries.SigniTrendChangeDetection [[SigniTrendChangeDetection.html]]
+
+    elki.timeseries.SigniTrendChangeDetection +-- elki.timeseries.SigniTrendChangeDetection.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

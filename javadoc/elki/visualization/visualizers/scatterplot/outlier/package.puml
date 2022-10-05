@@ -1,0 +1,88 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.scatterplot.outlier {
+
+        class BubbleVisualization [[BubbleVisualization.html]] {
+            {static} +BUBBLE: String
+            {static} +NAME: String
+            +BubbleVisualization(Par)
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.outlier.BubbleVisualization.Instance [[BubbleVisualization.Instance.html]] {
+            #result: OutlierResult
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -setupCSS(SVGPlot, ClassStylingPolicy): void
+            #getScaledForId(DBIDRef): double
+        }
+
+        class elki.visualization.visualizers.scatterplot.outlier.BubbleVisualization.Par [[BubbleVisualization.Par.html]] {
+            {static} +FILL_ID: OptionID
+            {static} +SCALING_ID: OptionID
+            #fill: boolean
+            #scaling: ScalingFunction
+            +configure(Parameterization): void
+            +make(): BubbleVisualization
+        }
+
+        class COPVectorVisualization [[COPVectorVisualization.html]] {
+            {static} +NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization.Instance [[COPVectorVisualization.Instance.html]] {
+            {static} +VEC: String
+            #result: Relation<double[]>
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -setupCSS(SVGPlot): void
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. BubbleVisualization
+        BubbleVisualization --> elki.visualization.visualizers.scatterplot.outlier.BubbleVisualization.Par: settings
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.outlier.BubbleVisualization.Instance
+        elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.scatterplot.outlier.BubbleVisualization.Instance
+        BubbleVisualization +-- elki.visualization.visualizers.scatterplot.outlier.BubbleVisualization.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.scatterplot.outlier.BubbleVisualization.Par
+        BubbleVisualization +-- elki.visualization.visualizers.scatterplot.outlier.BubbleVisualization.Par
+        elki.visualization.visualizers.VisFactory <|.. COPVectorVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization.Instance
+        elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization.Instance
+        COPVectorVisualization +-- elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization.Instance
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+    }
+
+    namespace elki.visualization.visualizers.scatterplot {
+        abstract class AbstractScatterplotVisualization [[../AbstractScatterplotVisualization.html]] {
+            #proj: Projection2D
+            #rel: Relation<? extends NumberVector>
+            #sample: SamplingResult
+        }
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreListener [[../../../../database/datastore/DataStoreListener.html]] {
+            {abstract} +contentChanged(DataStoreEvent): void
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

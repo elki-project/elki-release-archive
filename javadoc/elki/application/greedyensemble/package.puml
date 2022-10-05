@@ -1,0 +1,194 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.application.greedyensemble {
+
+        class VisualizePairwiseGainMatrix [[VisualizePairwiseGainMatrix.html]] {
+            {static} -LOG: Logging
+            -inputstep: InputStep
+            -vispar: VisualizerParameterizer
+            -prescaling: ScalingFunction
+            -voting: EnsembleVoting
+            +VisualizePairwiseGainMatrix(InputStep, ScalingFunction, EnsembleVoting, VisualizerParameterizer)
+            +run(): void
+            -showVisualization(VisualizerContext, SimilarityMatrixVisualizer, VisualizationTask): void
+            {static} +main(String[]): void
+        }
+
+        class elki.application.greedyensemble.VisualizePairwiseGainMatrix.Par [[VisualizePairwiseGainMatrix.Par.html]] {
+            -inputstep: InputStep
+            -vispar: VisualizerParameterizer
+            -prescaling: ScalingFunction
+            -voting: EnsembleVoting
+            +configure(Parameterization): void
+            +make(): VisualizePairwiseGainMatrix
+        }
+
+        class GreedyEnsembleExperiment [[GreedyEnsembleExperiment.html]] {
+            {static} -LOG: Logging
+            -inputstep: InputStep
+            ~refine_truth: boolean
+            ~voting: EnsembleVoting
+            ~prescaling: ScalingFunction
+            ~scaling: ScalingFunction
+            ~rate: double
+            ~minvote: int
+            +GreedyEnsembleExperiment(InputStep, EnsembleVoting, Distance, ScalingFunction, ScalingFunction, double)
+            +run(): void
+            #singleEnsemble(double[], NumberVector): void
+            {static} +applyPrescaling(ScalingFunction, Relation<NumberVector>, DBIDs): Relation<NumberVector>
+            {static} -applyScaling(double[], ScalingFunction): void
+            #updateEstimations(int[], int, double[], double[]): void
+            -getDistance(double[]): PrimitiveDistance<NumberVector>
+            ~gain(double, double, double): double
+            {static} +main(String[]): void
+        }
+
+        enum elki.application.greedyensemble.GreedyEnsembleExperiment.Distance [[GreedyEnsembleExperiment.Distance.html]] {
+            {static} +PEARSON
+            {static} +SQEUCLIDEAN
+            {static} +EUCLIDEAN
+            {static} +MANHATTAN
+        }
+
+        class elki.application.greedyensemble.GreedyEnsembleExperiment.Par [[GreedyEnsembleExperiment.Par.html]] {
+            {static} +RATE_ID: OptionID
+            {static} +VOTING_ID: OptionID
+            {static} +PRESCALING_ID: OptionID
+            {static} +SCALING_ID: OptionID
+            {static} +DISTANCE_ID: OptionID
+            ~inputstep: InputStep
+            ~voting: EnsembleVoting
+            ~prescaling: ScalingFunction
+            ~scaling: ScalingFunction
+            ~rate: double
+            +configure(Parameterization): void
+            +make(): GreedyEnsembleExperiment
+        }
+
+        class ComputeKNNOutlierScores<O extends NumberVector> [[ComputeKNNOutlierScores.html]] {
+            {static} -LOG: Logging
+            ~krange: IntGenerator
+            ~outfile: Path
+            ~bylabel: ByLabelOutlier
+            ~scaling: ScalingFunction
+            ~disable: Pattern
+            ~ksquarestop: int
+            ~timelimit: long
+            +ComputeKNNOutlierScores(InputStep, Distance<? super NumberVector>, IntGenerator, ByLabelOutlier, Path, ScalingFunction, Pattern, int, long)
+            +run(): void
+            ~writeResult(Appendable, DBIDs, OutlierResult, ScalingFunction, String): void
+            -runForEachK(String, int, int, IntFunction<OutlierResult>, BiConsumer<String, OutlierResult>): void
+            #isDisabled(String): boolean
+            {static} +main(String[]): void
+        }
+
+        class elki.application.greedyensemble.ComputeKNNOutlierScores.TimeoutException [[ComputeKNNOutlierScores.TimeoutException.html]] {
+            {static} -serialVersionUID: long
+            +TimeoutException(String)
+        }
+
+        class elki.application.greedyensemble.ComputeKNNOutlierScores.Par<O extends NumberVector> [[ComputeKNNOutlierScores.Par.html]] {
+            {static} +KRANGE_ID: OptionID
+            {static} +SCALING_ID: OptionID
+            {static} +DISABLE_ID: OptionID
+            {static} +KSQUARE_ID: OptionID
+            {static} +TIMELIMIT_ID: OptionID
+            ~krange: IntGenerator
+            ~bylabel: ByLabelOutlier
+            ~scaling: ScalingFunction
+            ~outfile: Path
+            ~disable: Pattern
+            ~ksquarestop: int
+            ~timelimit: long
+            +configure(Parameterization): void
+            +make(): ComputeKNNOutlierScores<O extends NumberVector>
+        }
+
+        class EvaluatePrecomputedOutlierScores [[EvaluatePrecomputedOutlierScores.html]] {
+            {static} -LOG: Logging
+            {static} +KNOWN_REVERSED: String
+            ~infile: URI
+            ~parser: StreamingParser
+            ~reverse: Pattern
+            ~outfile: Path
+            ~name: String
+            ~positive: NumberVector
+            ~endcg: double
+            +EvaluatePrecomputedOutlierScores(URI, StreamingParser, Pattern, Path, String)
+            +run(): void
+            -writeHeader(PrintStream): void
+            -processRow(PrintStream, NumberVector, String): void
+            -checkForNaNs(NumberVector): boolean
+            {static} +main(String[]): void
+        }
+
+        class elki.application.greedyensemble.EvaluatePrecomputedOutlierScores.Par [[EvaluatePrecomputedOutlierScores.Par.html]] {
+            {static} +NAME_ID: OptionID
+            {static} +PARSER_ID: OptionID
+            {static} +REVERSED_ID: OptionID
+            ~infile: URI
+            ~parser: StreamingParser
+            ~reverse: Pattern
+            ~outfile: Path
+            ~name: String
+            +configure(Parameterization): void
+            +make(): EvaluatePrecomputedOutlierScores
+        }
+
+        elki.application.AbstractApplication <|-- VisualizePairwiseGainMatrix
+        elki.application.AbstractApplication.Par <|-- elki.application.greedyensemble.VisualizePairwiseGainMatrix.Par
+        VisualizePairwiseGainMatrix +-- elki.application.greedyensemble.VisualizePairwiseGainMatrix.Par
+        elki.application.AbstractApplication <|-- GreedyEnsembleExperiment
+        GreedyEnsembleExperiment --> elki.application.greedyensemble.GreedyEnsembleExperiment.Distance: distance
+        GreedyEnsembleExperiment +-- elki.application.greedyensemble.GreedyEnsembleExperiment.Distance
+        elki.application.AbstractApplication.Par <|-- elki.application.greedyensemble.GreedyEnsembleExperiment.Par
+        GreedyEnsembleExperiment +-- elki.application.greedyensemble.GreedyEnsembleExperiment.Par
+        elki.application.greedyensemble.GreedyEnsembleExperiment.Par --> elki.application.greedyensemble.GreedyEnsembleExperiment.Distance: distance
+        elki.application.AbstractDistanceBasedApplication <|-- ComputeKNNOutlierScores
+        java.lang.RuntimeException <|-- elki.application.greedyensemble.ComputeKNNOutlierScores.TimeoutException
+        ComputeKNNOutlierScores +-- elki.application.greedyensemble.ComputeKNNOutlierScores.TimeoutException
+        elki.application.AbstractDistanceBasedApplication.Par <|-- elki.application.greedyensemble.ComputeKNNOutlierScores.Par
+        ComputeKNNOutlierScores +-- elki.application.greedyensemble.ComputeKNNOutlierScores.Par
+        elki.application.AbstractApplication <|-- EvaluatePrecomputedOutlierScores
+        elki.application.AbstractApplication.Par <|-- elki.application.greedyensemble.EvaluatePrecomputedOutlierScores.Par
+        EvaluatePrecomputedOutlierScores +-- elki.application.greedyensemble.EvaluatePrecomputedOutlierScores.Par
+    }
+
+    namespace elki.application {
+        abstract class AbstractApplication [[../AbstractApplication.html]] {
+            {static} -LOG: Logging
+            {static} -NEWLINE: String
+            {static} +VERSION: String
+            {static} -REFERENCE_VERSION: String
+            {static} +REFERENCE: String
+            {abstract} +run(): void
+        }
+        abstract class elki.application.AbstractApplication.Par [[../AbstractApplication.Par.html]] {
+            {static} +OUTPUT_ID: OptionID
+            {static} +INPUT_ID: OptionID
+            {static} +DATABASE_ID: OptionID
+            {static} +HELP_ID: OptionID
+            {static} +HELP_LONG_ID: OptionID
+            {static} +DESCRIPTION_ID: OptionID
+            {static} +DEBUG_ID: OptionID
+            {static} +VERBOSE_ID: OptionID
+            {abstract} +make(): AbstractApplication
+        }
+        abstract class AbstractDistanceBasedApplication<O> [[../AbstractDistanceBasedApplication.html]] {
+            #distance: Distance<? super O>
+            #inputstep: InputStep
+        }
+        abstract class elki.application.AbstractDistanceBasedApplication.Par<O> {
+            #inputstep: InputStep
+            #distance: Distance<? super O>
+        }
+    }
+
+    namespace java.lang {
+        class RuntimeException {
+            {static} ~serialVersionUID: long
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BitVectorLabelParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.BitVectorLabelParser [[BitVectorLabelParser.html]] {
+        {static} -LOG: Logging
+        ~buf: LongArrayList
+        +BitVectorLabelParser(CSVReaderFormat)
+        #parseLineInternal(): boolean
+        #getLogger(): Logging
+    }
+
+    class "<size:14>NumberVectorLabelParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.NumberVectorLabelParser<BitVector> [[NumberVectorLabelParser.html]]
+    class "<size:14>BitVectorLabelParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.BitVectorLabelParser.Par [[BitVectorLabelParser.Par.html]]
+
+    elki.datasource.parser.NumberVectorLabelParser <|-- elki.datasource.parser.BitVectorLabelParser
+    elki.datasource.parser.BitVectorLabelParser +-- elki.datasource.parser.BitVectorLabelParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

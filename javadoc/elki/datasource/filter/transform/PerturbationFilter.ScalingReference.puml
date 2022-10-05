@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>PerturbationFilter.ScalingReference\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.PerturbationFilter.ScalingReference [[PerturbationFilter.ScalingReference.html]] {
+        {static} +UNITCUBE
+        {static} +STDDEV
+        {static} +MINMAX
+    }
+
+    class "<size:14>PerturbationFilter\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.PerturbationFilter<V extends NumberVector> [[PerturbationFilter.html]]
+
+    elki.datasource.filter.transform.PerturbationFilter +-- elki.datasource.filter.transform.PerturbationFilter.ScalingReference
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

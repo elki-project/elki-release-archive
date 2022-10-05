@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BetulaGMMWeighted.Par\n<size:10>elki.clustering.em" as elki.clustering.em.BetulaGMMWeighted.Par [[BetulaGMMWeighted.Par.html]] {
+        +make(): BetulaGMMWeighted
+    }
+
+    class "<size:14>BetulaGMM.Par\n<size:10>elki.clustering.em" as elki.clustering.em.BetulaGMM.Par [[BetulaGMM.Par.html]]
+    class "<size:14>BetulaGMMWeighted\n<size:10>elki.clustering.em" as elki.clustering.em.BetulaGMMWeighted [[BetulaGMMWeighted.html]]
+
+    elki.clustering.em.BetulaGMM.Par <|-- elki.clustering.em.BetulaGMMWeighted.Par
+    elki.clustering.em.BetulaGMMWeighted +-- elki.clustering.em.BetulaGMMWeighted.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

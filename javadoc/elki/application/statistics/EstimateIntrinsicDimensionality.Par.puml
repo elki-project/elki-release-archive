@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EstimateIntrinsicDimensionality.Par\n<size:10>elki.application.statistics" as elki.application.statistics.EstimateIntrinsicDimensionality.Par<O> {
+        {static} +ESTIMATOR_ID: OptionID
+        {static} +KRATE_ID: OptionID
+        {static} +SAMPLES_ID: OptionID
+        #estimator: IntrinsicDimensionalityEstimator<? super O>
+        #krate: double
+        #samples: double
+        +configure(Parameterization): void
+        +make(): EstimateIntrinsicDimensionality<O>
+    }
+
+    abstract class "<size:14>AbstractDistanceBasedApplication.Par\n<size:10>elki.application" as elki.application.AbstractDistanceBasedApplication.Par<O>
+    class "<size:14>EstimateIntrinsicDimensionality\n<size:10>elki.application.statistics" as elki.application.statistics.EstimateIntrinsicDimensionality<O> [[EstimateIntrinsicDimensionality.html]]
+
+    elki.application.AbstractDistanceBasedApplication.Par <|-- elki.application.statistics.EstimateIntrinsicDimensionality.Par
+    elki.application.statistics.EstimateIntrinsicDimensionality +-- elki.application.statistics.EstimateIntrinsicDimensionality.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

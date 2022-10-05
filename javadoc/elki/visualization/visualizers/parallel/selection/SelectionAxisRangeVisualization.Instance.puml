@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SelectionAxisRangeVisualization.Instance\n<size:10>elki.visualization.visualizers.parallel.selection" as elki.visualization.visualizers.parallel.selection.SelectionAxisRangeVisualization.Instance [[SelectionAxisRangeVisualization.Instance.html]] {
+        {static} +MARKER: String
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        -addCSSClasses(SVGPlot): void
+        +fullRedraw(): void
+    }
+
+    abstract class "<size:14>AbstractParallelVisualization\n<size:10>elki.visualization.visualizers.parallel" as elki.visualization.visualizers.parallel.AbstractParallelVisualization<NumberVector> [[../AbstractParallelVisualization.html]]
+    class "<size:14>SelectionAxisRangeVisualization\n<size:10>elki.visualization.visualizers.parallel.selection" as elki.visualization.visualizers.parallel.selection.SelectionAxisRangeVisualization [[SelectionAxisRangeVisualization.html]]
+
+    elki.visualization.visualizers.parallel.AbstractParallelVisualization <|-- elki.visualization.visualizers.parallel.selection.SelectionAxisRangeVisualization.Instance
+    elki.visualization.visualizers.parallel.selection.SelectionAxisRangeVisualization +-- elki.visualization.visualizers.parallel.selection.SelectionAxisRangeVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

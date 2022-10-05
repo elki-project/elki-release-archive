@@ -1,0 +1,164 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.parallel3d.layout {
+
+        class Layout [[Layout.html]] {
+            +getNode(int): Node
+        }
+
+        class elki.visualization.parallel3d.layout.Layout.Edge [[Layout.Edge.html]] {
+            +dim1: int
+            +dim2: int
+            +Edge(int, int)
+        }
+
+        interface elki.visualization.parallel3d.layout.Layout.Node [[Layout.Node.html]] {
+            {abstract} +getDim(): int
+            {abstract} +getX(): double
+            {abstract} +getY(): double
+            {abstract} +getChild(int): Node
+            {abstract} +numChildren(): int
+        }
+
+        interface Layouter3DPC<V> [[Layouter3DPC.html]] {
+            {abstract} +layout(Relation<? extends V>): Layout
+        }
+
+        class MultidimensionalScalingMSTLayout3DPC [[MultidimensionalScalingMSTLayout3DPC.html]] {
+            +MultidimensionalScalingMSTLayout3DPC(Dependence)
+            ~makeNode(int, List<Node>): Node
+            +layout(int, double[]): Layout
+        }
+
+        class elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC.Node [[MultidimensionalScalingMSTLayout3DPC.Node.html]] {
+            +Node(int, List<Node>)
+        }
+
+        class elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC.Par [[MultidimensionalScalingMSTLayout3DPC.Par.html]] {
+            +make(): MultidimensionalScalingMSTLayout3DPC
+        }
+
+        interface SimilarityBasedLayouter3DPC [[SimilarityBasedLayouter3DPC.html]] {
+            {static} +SIM_ID: OptionID
+            {abstract} +getSimilarity(): Dependence
+            {abstract} +layout(int, double[]): Layout
+        }
+
+        abstract class AbstractLayout3DPC<N extends Node> [[AbstractLayout3DPC.html]] {
+            ~sim: Dependence
+            +AbstractLayout3DPC(Dependence)
+            +getSimilarity(): Dependence
+            +layout(Relation<? extends NumberVector>): Layout
+            {static} +computeSimilarityMatrix(Dependence, Relation<? extends NumberVector>): double[]
+            {abstract} +layout(int, double[]): Layout
+            #buildSpanningTree(int, double[], Layout): N extends Node
+            {abstract} ~makeNode(int, List<N extends Node>): N extends Node
+            #buildTree(int[], int, int, ArrayList<N extends Node>): N extends Node
+            #maxDepth(Node): int
+            {static} +findOptimalRoot(int[]): int
+        }
+
+        class elki.visualization.parallel3d.layout.AbstractLayout3DPC.LowerTriangularAdapter [[AbstractLayout3DPC.LowerTriangularAdapter.html]] {
+            ~dim: int
+            +LowerTriangularAdapter(int)
+            +distance(double[], int, int): double
+            +size(double[]): int
+        }
+
+        class elki.visualization.parallel3d.layout.AbstractLayout3DPC.AbstractNode<N extends AbstractNode<N>> [[AbstractLayout3DPC.AbstractNode.html]] {
+            +dim: int
+            +x: double
+            +y: double
+            +AbstractNode(int, List<N extends AbstractNode<N>>)
+            +getDim(): int
+            +getX(): double
+            +getY(): double
+            +getChild(int): N extends AbstractNode<N extends AbstractNode<N>>
+            +numChildren(): int
+        }
+
+        abstract class elki.visualization.parallel3d.layout.AbstractLayout3DPC.Par [[AbstractLayout3DPC.Par.html]] {
+            ~sim: Dependence
+            +configure(Parameterization): void
+        }
+
+        class SimpleCircularMSTLayout3DPC [[SimpleCircularMSTLayout3DPC.html]] {
+            +SimpleCircularMSTLayout3DPC(Dependence)
+            +layout(int, double[]): Layout
+            -computeWeights(Node): void
+            {static} +computePositions(Node, int, double, double, int): void
+            ~makeNode(int, List<Node>): Node
+        }
+
+        class elki.visualization.parallel3d.layout.SimpleCircularMSTLayout3DPC.Node [[SimpleCircularMSTLayout3DPC.Node.html]] {
+            +weight: int
+            +Node(int, List<Node>)
+        }
+
+        class elki.visualization.parallel3d.layout.SimpleCircularMSTLayout3DPC.Par [[SimpleCircularMSTLayout3DPC.Par.html]] {
+            +make(): SimpleCircularMSTLayout3DPC
+        }
+
+        class CompactCircularMSTLayout3DPC [[CompactCircularMSTLayout3DPC.html]] {
+            +CompactCircularMSTLayout3DPC(Dependence)
+            +layout(int, double[]): Layout
+            -computeWeights(Node): void
+            {static} +computePositions(Node, int, double, double, double, double): void
+            ~makeNode(int, List<Node>): Node
+        }
+
+        class elki.visualization.parallel3d.layout.CompactCircularMSTLayout3DPC.Node [[CompactCircularMSTLayout3DPC.Node.html]] {
+            +weight: int
+            +Node(int, List<Node>)
+        }
+
+        class elki.visualization.parallel3d.layout.CompactCircularMSTLayout3DPC.Par [[CompactCircularMSTLayout3DPC.Par.html]] {
+            +make(): CompactCircularMSTLayout3DPC
+        }
+
+        Layout --> "*" elki.visualization.parallel3d.layout.Layout.Node: nodes
+        Layout --> "*" elki.visualization.parallel3d.layout.Layout.Edge: edges
+        Layout +-- elki.visualization.parallel3d.layout.Layout.Edge
+        Layout +-- elki.visualization.parallel3d.layout.Layout.Node
+        AbstractLayout3DPC <|-- MultidimensionalScalingMSTLayout3DPC
+        elki.visualization.parallel3d.layout.AbstractLayout3DPC.AbstractNode <|-- elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC.Node
+        MultidimensionalScalingMSTLayout3DPC +-- elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC.Node
+        elki.visualization.parallel3d.layout.AbstractLayout3DPC.Par <|-- elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC.Par
+        MultidimensionalScalingMSTLayout3DPC +-- elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC.Par
+        Layouter3DPC <|-- SimilarityBasedLayouter3DPC
+        SimilarityBasedLayouter3DPC <|.. AbstractLayout3DPC
+        elki.math.geometry.PrimsMinimumSpanningTree.Adapter <|.. elki.visualization.parallel3d.layout.AbstractLayout3DPC.LowerTriangularAdapter
+        AbstractLayout3DPC +-- elki.visualization.parallel3d.layout.AbstractLayout3DPC.LowerTriangularAdapter
+        elki.visualization.parallel3d.layout.Layout.Node <|.. elki.visualization.parallel3d.layout.AbstractLayout3DPC.AbstractNode
+        AbstractLayout3DPC +-- elki.visualization.parallel3d.layout.AbstractLayout3DPC.AbstractNode
+        elki.visualization.parallel3d.layout.AbstractLayout3DPC.AbstractNode --> "*" elki.visualization.parallel3d.layout.AbstractLayout3DPC.AbstractNode: children
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.parallel3d.layout.AbstractLayout3DPC.Par
+        AbstractLayout3DPC +-- elki.visualization.parallel3d.layout.AbstractLayout3DPC.Par
+        AbstractLayout3DPC <|-- SimpleCircularMSTLayout3DPC
+        elki.visualization.parallel3d.layout.AbstractLayout3DPC.AbstractNode <|-- elki.visualization.parallel3d.layout.SimpleCircularMSTLayout3DPC.Node
+        SimpleCircularMSTLayout3DPC +-- elki.visualization.parallel3d.layout.SimpleCircularMSTLayout3DPC.Node
+        elki.visualization.parallel3d.layout.AbstractLayout3DPC.Par <|-- elki.visualization.parallel3d.layout.SimpleCircularMSTLayout3DPC.Par
+        SimpleCircularMSTLayout3DPC +-- elki.visualization.parallel3d.layout.SimpleCircularMSTLayout3DPC.Par
+        AbstractLayout3DPC <|-- CompactCircularMSTLayout3DPC
+        elki.visualization.parallel3d.layout.AbstractLayout3DPC.AbstractNode <|-- elki.visualization.parallel3d.layout.CompactCircularMSTLayout3DPC.Node
+        CompactCircularMSTLayout3DPC +-- elki.visualization.parallel3d.layout.CompactCircularMSTLayout3DPC.Node
+        elki.visualization.parallel3d.layout.AbstractLayout3DPC.Par <|-- elki.visualization.parallel3d.layout.CompactCircularMSTLayout3DPC.Par
+        CompactCircularMSTLayout3DPC +-- elki.visualization.parallel3d.layout.CompactCircularMSTLayout3DPC.Par
+    }
+
+    namespace elki.math.geometry {
+        interface elki.math.geometry.PrimsMinimumSpanningTree.Adapter<T> [[../../../math/geometry/PrimsMinimumSpanningTree.Adapter.html]] {
+            {abstract} +distance(T, int, int): double
+            {abstract} +size(T): int
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

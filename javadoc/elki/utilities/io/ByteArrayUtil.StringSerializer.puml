@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByteArrayUtil.StringSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil.StringSerializer [[ByteArrayUtil.StringSerializer.html]] {
+        ~charset: Charset
+        ~encoder: CharsetEncoder
+        ~decoder: CharsetDecoder
+        +fromByteBuffer(ByteBuffer): String
+        +toByteBuffer(ByteBuffer, String): void
+        +getByteSize(String): int
+    }
+
+    interface "<size:14>ByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteBufferSerializer<String> [[ByteBufferSerializer.html]] {
+        {abstract} +fromByteBuffer(ByteBuffer): String
+        {abstract} +toByteBuffer(ByteBuffer, String): void
+        {abstract} +getByteSize(String): int
+    }
+    class "<size:14>ByteArrayUtil\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil [[ByteArrayUtil.html]]
+
+    elki.utilities.io.ByteBufferSerializer <|.. elki.utilities.io.ByteArrayUtil.StringSerializer
+    elki.utilities.io.ByteArrayUtil +-- elki.utilities.io.ByteArrayUtil.StringSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KNNWeightProcessor\n<size:10>elki.outlier.distance.parallel" as elki.outlier.distance.parallel.KNNWeightProcessor [[KNNWeightProcessor.html]] {
+        ~k: int
+        ~input: SharedObject<? extends KNNList>
+        +KNNWeightProcessor(int)
+        +connectKNNInput(SharedObject<? extends KNNList>): void
+        +instantiate(Executor): Instance
+    }
+
+    abstract class "<size:14>AbstractDoubleProcessor\n<size:10>elki.parallel.processor" as elki.parallel.processor.AbstractDoubleProcessor [[../../../parallel/processor/AbstractDoubleProcessor.html]] {
+        {abstract} +instantiate(Executor): Instance
+    }
+    class "<size:14>KNNWeightProcessor.Instance\n<size:10>elki.outlier.distance.parallel" as elki.outlier.distance.parallel.KNNWeightProcessor.Instance [[KNNWeightProcessor.Instance.html]]
+
+    elki.parallel.processor.AbstractDoubleProcessor <|-- elki.outlier.distance.parallel.KNNWeightProcessor
+    elki.outlier.distance.parallel.KNNWeightProcessor +-- elki.outlier.distance.parallel.KNNWeightProcessor.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

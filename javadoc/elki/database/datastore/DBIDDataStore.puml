@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DBIDDataStore\n<size:10>elki.database.datastore" as elki.database.datastore.DBIDDataStore [[DBIDDataStore.html]] {
+        {abstract} +--get--(DBIDRef): DBID
+        {abstract} +assignVar(DBIDRef, DBIDVar): DBIDVar
+    }
+
+    interface "<size:14>DataStore\n<size:10>elki.database.datastore" as elki.database.datastore.DataStore<DBID> [[DataStore.html]] {
+        {abstract} +get(DBIDRef): DBID
+    }
+
+    elki.database.datastore.DataStore <|-- elki.database.datastore.DBIDDataStore
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

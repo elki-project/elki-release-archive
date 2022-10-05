@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EMClusterVisualization.Instance\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.EMClusterVisualization.Instance [[EMClusterVisualization.Instance.html]] {
+        {static} +EMBORDER: String
+        {static} -KAPPA: double
+        {static} -MKAPPA: double
+        -opacStyle: int
+        -softBorder: int
+        -drawStyle: int
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        #drawSphere2D(String, double[], double[]): void
+        -equalsPlusTimes(double[], double[], double[], double): double[]
+        #drawHullLines(String, double[], Polygon): void
+        #makeHull(double[]): Polygon
+        #makeHullComplex(double[]): Polygon
+        #drawHullArc(String, double[], Polygon): void
+        -drawArc(SVGPath, double[], double[], double[], double[], double[], double): void
+    }
+
+    abstract class "<size:14>AbstractScatterplotVisualization\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization [[../AbstractScatterplotVisualization.html]]
+    class "<size:14>EMClusterVisualization\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.EMClusterVisualization [[EMClusterVisualization.html]]
+
+    elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.cluster.EMClusterVisualization.Instance
+    elki.visualization.visualizers.scatterplot.cluster.EMClusterVisualization +-- elki.visualization.visualizers.scatterplot.cluster.EMClusterVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,179 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier {
+
+        class OPTICSOF<O> [[OPTICSOF.html]] {
+            #distance: Distance<? super O>
+            #minpts: int
+            +OPTICSOF(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.OPTICSOF.Par<O> [[OPTICSOF.Par.html]] {
+            #distance: Distance<? super O>
+            #minpts: int
+            +configure(Parameterization): void
+            +make(): OPTICSOF<O>
+        }
+
+        class SimpleCOP<V extends NumberVector> [[SimpleCOP.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super NumberVector>
+            #kplus: int
+            #dependencyDerivator: DependencyDerivator<V extends NumberVector>
+            +SimpleCOP(Distance<? super NumberVector>, int, PCARunner, EigenPairFilter)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.SimpleCOP.Par<V extends NumberVector> [[SimpleCOP.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +PCARUNNER_ID: OptionID
+            #distance: Distance<? super NumberVector>
+            #k: int
+            #pca: PCARunner
+            #filter: EigenPairFilter
+            +configure(Parameterization): void
+            +make(): SimpleCOP<V extends NumberVector>
+        }
+
+        class GaussianUniformMixture [[GaussianUniformMixture.html]] {
+            {static} -MAX_ITER: int
+            -c: double
+            -logl: double
+            -logml: double
+            +GaussianUniformMixture(double, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): OutlierResult
+            -loglikelihoodAnomalous(DBIDs): double
+            -loglikelihoodNormal(DBIDs, SetDBIDs, CovarianceMatrix, Relation<? extends NumberVector>): double
+        }
+
+        class elki.outlier.GaussianUniformMixture.Par [[GaussianUniformMixture.Par.html]] {
+            {static} +L_ID: OptionID
+            {static} +C_ID: OptionID
+            #l: double
+            #c: double
+            +configure(Parameterization): void
+            +make(): GaussianUniformMixture
+        }
+
+        class COP<V extends NumberVector> [[COP.html]] {
+            {static} -LOG: Logging
+            {static} +COP_SCORES: String
+            {static} +COP_DIM: String
+            {static} +COP_ERRORVEC: String
+            {static} -SHORTENED_ARRAY: DoubleArrayAdapter
+            #distance: Distance<? super NumberVector>
+            #k: int
+            #pca: PCARunner
+            #expect: double
+            #models: boolean
+            +COP(Distance<? super NumberVector>, int, PCARunner, double, DistanceDist, boolean)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): OutlierResult
+            {static} -computeCentroid(double[], Relation<? extends NumberVector>, DBIDs): void
+        }
+
+        enum elki.outlier.COP.DistanceDist [[COP.DistanceDist.html]] {
+            {static} +CHISQUARED
+            {static} +GAMMA
+        }
+
+        class elki.outlier.COP.Par<V extends NumberVector> [[COP.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +DIST_ID: OptionID
+            {static} +PCARUNNER_ID: OptionID
+            {static} +EXPECT_ID: OptionID
+            {static} +MODELS_ID: OptionID
+            ~k: int
+            ~pca: PCARunner
+            ~expect: double
+            ~models: boolean
+            #distance: Distance<? super NumberVector>
+            +configure(Parameterization): void
+            +make(): COP<V extends NumberVector>
+        }
+
+        class DWOF<O> [[DWOF.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #kplus: int
+            #delta: double
+            +DWOF(Distance<? super O>, int, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+            -initializeRadii(DBIDs, KNNSearcher<DBIDRef>, DistanceQuery<O>, WritableDoubleDataStore): void
+            -clusterData(DBIDs, RangeSearcher<DBIDRef>, WritableDoubleDataStore, WritableDataStore<ModifiableDBIDs>): void
+            -updateSizes(DBIDs, WritableDataStore<ModifiableDBIDs>, WritableIntegerDataStore): int
+        }
+
+        class elki.outlier.DWOF.Par<O> {
+            {static} +K_ID: OptionID
+            {static} +DELTA_ID: OptionID
+            #k: int
+            #delta: double
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): DWOF<O>
+        }
+
+        interface OutlierAlgorithm [[OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+
+        class GaussianModel [[GaussianModel.html]] {
+            -invert: boolean
+            +GaussianModel(boolean)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.GaussianModel.Par [[GaussianModel.Par.html]] {
+            {static} +INVERT_ID: OptionID
+            #invert: boolean
+            +configure(Parameterization): void
+            +make(): GaussianModel
+        }
+
+        OutlierAlgorithm <|.. OPTICSOF
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.OPTICSOF.Par
+        OPTICSOF +-- elki.outlier.OPTICSOF.Par
+        OutlierAlgorithm <|.. SimpleCOP
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.SimpleCOP.Par
+        SimpleCOP +-- elki.outlier.SimpleCOP.Par
+        OutlierAlgorithm <|.. GaussianUniformMixture
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.GaussianUniformMixture.Par
+        GaussianUniformMixture +-- elki.outlier.GaussianUniformMixture.Par
+        OutlierAlgorithm <|.. COP
+        COP --> elki.outlier.COP.DistanceDist: dist
+        COP +-- elki.outlier.COP.DistanceDist
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.COP.Par
+        COP +-- elki.outlier.COP.Par
+        elki.outlier.COP.Par --> elki.outlier.COP.DistanceDist: dist
+        OutlierAlgorithm <|.. DWOF
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.DWOF.Par
+        DWOF +-- elki.outlier.DWOF.Par
+        elki.Algorithm <|-- OutlierAlgorithm
+        OutlierAlgorithm <|.. GaussianModel
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.GaussianModel.Par
+        GaussianModel +-- elki.outlier.GaussianModel.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki {
+        interface Algorithm [[../Algorithm.html]] {
+            +autorun(Database): Object
+            {abstract} +getInputTypeRestriction(): TypeInformation[]
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

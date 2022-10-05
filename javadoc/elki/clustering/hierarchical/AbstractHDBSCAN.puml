@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractHDBSCAN\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AbstractHDBSCAN<O> [[AbstractHDBSCAN.html]] {
+        #minPts: int
+        #distance: Distance<? super O>
+        +AbstractHDBSCAN(Distance<? super O>, int)
+        #computeCoreDists(DBIDs, KNNSearcher<DBIDRef>, int): WritableDoubleDataStore
+        #convertToMergeList(ArrayDBIDs, DoubleLongHeap, ClusterMergeHistoryBuilder): ClusterMergeHistoryBuilder
+        +getInputTypeRestriction(): TypeInformation[]
+        {abstract} #getLogger(): Logging
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    class "<size:14>AbstractHDBSCAN.HDBSCANAdapter\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AbstractHDBSCAN.HDBSCANAdapter [[AbstractHDBSCAN.HDBSCANAdapter.html]]
+    class "<size:14>AbstractHDBSCAN.HeapMSTCollector\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AbstractHDBSCAN.HeapMSTCollector [[AbstractHDBSCAN.HeapMSTCollector.html]]
+    abstract class "<size:14>AbstractHDBSCAN.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AbstractHDBSCAN.Par<O>
+
+    elki.Algorithm <|.. elki.clustering.hierarchical.AbstractHDBSCAN
+    elki.clustering.hierarchical.AbstractHDBSCAN +-- elki.clustering.hierarchical.AbstractHDBSCAN.HDBSCANAdapter
+    elki.clustering.hierarchical.AbstractHDBSCAN +-- elki.clustering.hierarchical.AbstractHDBSCAN.HeapMSTCollector
+    elki.clustering.hierarchical.AbstractHDBSCAN +-- elki.clustering.hierarchical.AbstractHDBSCAN.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

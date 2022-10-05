@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CauchyDistribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.CauchyDistribution [[CauchyDistribution.html]] {
+        ~location: double
+        ~shape: double
+        +CauchyDistribution(double, double)
+        +getLocation(): double
+        +getShape(): double
+        +pdf(double): double
+        +logpdf(double): double
+        +cdf(double): double
+        +quantile(double): double
+        +nextRandom(Random): double
+        {static} +pdf(double, double, double): double
+        {static} +logpdf(double, double, double): double
+        {static} +cdf(double, double, double): double
+        {static} +quantile(double, double, double): double
+    }
+
+    interface "<size:14>Distribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution [[Distribution.html]] {
+        {abstract} +pdf(double): double
+        {abstract} +logpdf(double): double
+        {abstract} +cdf(double): double
+        {abstract} +quantile(double): double
+    }
+    class "<size:14>CauchyDistribution.Par\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.CauchyDistribution.Par [[CauchyDistribution.Par.html]]
+
+    elki.math.statistics.distribution.Distribution <|.. elki.math.statistics.distribution.CauchyDistribution
+    elki.math.statistics.distribution.CauchyDistribution +-- elki.math.statistics.distribution.CauchyDistribution.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

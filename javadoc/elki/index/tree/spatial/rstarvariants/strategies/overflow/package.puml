@@ -1,0 +1,52 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.spatial.rstarvariants.strategies.overflow {
+
+        interface OverflowTreatment [[OverflowTreatment.html]] {
+            {abstract} +reinitialize(): void
+            {abstract} +handleOverflow(AbstractRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, ?>, N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, IndexTreePath<E extends SpatialEntry>): boolean
+        }
+
+        class LimitedReinsertOverflowTreatment [[LimitedReinsertOverflowTreatment.html]] {
+            -reinsertions: long[]
+            -reinsertStrategy: ReinsertStrategy
+            +LimitedReinsertOverflowTreatment(ReinsertStrategy)
+            +handleOverflow(AbstractRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, ?>, N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, IndexTreePath<E extends SpatialEntry>): boolean
+            +reinitialize(): void
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.overflow.LimitedReinsertOverflowTreatment.Par [[LimitedReinsertOverflowTreatment.Par.html]] {
+            {static} +REINSERT_STRATEGY_ID: OptionID
+            ~reinsertStrategy: ReinsertStrategy
+            +configure(Parameterization): void
+            +make(): LimitedReinsertOverflowTreatment
+        }
+
+        class SplitOnlyOverflowTreatment [[SplitOnlyOverflowTreatment.html]] {
+            +handleOverflow(AbstractRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, ?>, N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, IndexTreePath<E extends SpatialEntry>): boolean
+            +reinitialize(): void
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.overflow.SplitOnlyOverflowTreatment.Par [[SplitOnlyOverflowTreatment.Par.html]] {
+            +make(): SplitOnlyOverflowTreatment
+        }
+
+        OverflowTreatment <|.. LimitedReinsertOverflowTreatment
+        LimitedReinsertOverflowTreatment --> LimitedReinsertOverflowTreatment: RSTAR_OVERFLOW
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.overflow.LimitedReinsertOverflowTreatment.Par
+        LimitedReinsertOverflowTreatment +-- elki.index.tree.spatial.rstarvariants.strategies.overflow.LimitedReinsertOverflowTreatment.Par
+        OverflowTreatment <|.. SplitOnlyOverflowTreatment
+        SplitOnlyOverflowTreatment --> SplitOnlyOverflowTreatment: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.overflow.SplitOnlyOverflowTreatment.Par
+        SplitOnlyOverflowTreatment +-- elki.index.tree.spatial.rstarvariants.strategies.overflow.SplitOnlyOverflowTreatment.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

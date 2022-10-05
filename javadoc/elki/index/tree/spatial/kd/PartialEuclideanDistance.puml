@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PartialEuclideanDistance\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.PartialEuclideanDistance [[PartialEuclideanDistance.html]] {
+        {static} +STATIC: PartialEuclideanDistance
+        +combineRaw(double, double, double): double
+        +compareRawRegular(double, double): boolean
+        +distance(NumberVector, NumberVector): double
+        +transformOut(double): double
+    }
+
+    interface "<size:14>PartialDistance\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.PartialDistance<NumberVector> [[PartialDistance.html]] {
+        {abstract} +combineRaw(double, double, double): double
+        {abstract} +compareRawRegular(double, double): boolean
+        {abstract} +distance(NumberVector, NumberVector): double
+        {abstract} +transformOut(double): double
+    }
+
+    elki.index.tree.spatial.kd.PartialDistance <|.. elki.index.tree.spatial.kd.PartialEuclideanDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

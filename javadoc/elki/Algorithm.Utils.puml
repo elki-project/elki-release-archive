@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Algorithm.Utils\n<size:10>elki" as elki.Algorithm.Utils [[Algorithm.Utils.html]] {
+        {static} +ALGORITHM_ID: OptionID
+        {static} +DISTANCE_FUNCTION_ID: OptionID
+        {static} +autorun(Algorithm, Database): Object
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    elki.Algorithm +-- elki.Algorithm.Utils
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>GeneratorInterfaceDynamic\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorInterfaceDynamic [[GeneratorInterfaceDynamic.html]] {
+        {abstract} +getDiscarded(): int
+        {abstract} +getRetries(): int
+        {abstract} +incrementDiscarded(): void
+    }
+
+    interface "<size:14>GeneratorInterface\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorInterface [[GeneratorInterface.html]] {
+        {abstract} +getSize(): int
+        {abstract} +getDim(): int
+        {abstract} +generate(int): List<double[]>
+        {abstract} +getDensity(double[]): double
+        {abstract} +getName(): String
+        {abstract} +makeModel(): Model
+        {abstract} +computeMean(): double[]
+    }
+
+    elki.data.synthetic.bymodel.GeneratorInterface <|-- elki.data.synthetic.bymodel.GeneratorInterfaceDynamic
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

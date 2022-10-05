@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LOCI\n<size:10>elki.outlier.lof" as elki.outlier.lof.LOCI<O> [[LOCI.html]] {
+        {static} -LOG: Logging
+        -distance: Distance<? super O>
+        -rmax: double
+        -nmin: int
+        -alpha: double
+        +LOCI(Distance<? super O>, double, int, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+        #precomputeInterestingRadii(DBIDs, RangeSearcher<DBIDRef>, WritableDataStore<DoubleIntArrayList>): void
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>LOCI.DoubleIntArrayList\n<size:10>elki.outlier.lof" as elki.outlier.lof.LOCI.DoubleIntArrayList [[LOCI.DoubleIntArrayList.html]]
+    class "<size:14>LOCI.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.LOCI.Par<O>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.lof.LOCI
+    elki.outlier.lof.LOCI +-- elki.outlier.lof.LOCI.DoubleIntArrayList
+    elki.outlier.lof.LOCI +-- elki.outlier.lof.LOCI.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

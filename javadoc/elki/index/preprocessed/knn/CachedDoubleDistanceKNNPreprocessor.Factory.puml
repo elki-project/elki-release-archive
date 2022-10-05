@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CachedDoubleDistanceKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor.Factory<O> [[CachedDoubleDistanceKNNPreprocessor.Factory.html]] {
+        -filename: Path
+        +Factory(int, Distance<? super O>, Path)
+        +instantiate(Relation<O>): CachedDoubleDistanceKNNPreprocessor<O>
+    }
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory<O> [[AbstractMaterializeKNNPreprocessor.Factory.html]] {
+        {abstract} +instantiate(Relation<O>): AbstractMaterializeKNNPreprocessor<O>
+    }
+    class "<size:14>CachedDoubleDistanceKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor<O> [[CachedDoubleDistanceKNNPreprocessor.html]]
+    class "<size:14>CachedDoubleDistanceKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor.Factory.Par<O> [[CachedDoubleDistanceKNNPreprocessor.Factory.Par.html]]
+
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor +-- elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

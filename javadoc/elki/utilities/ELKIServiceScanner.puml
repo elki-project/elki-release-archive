@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ELKIServiceScanner\n<size:10>elki.utilities" as elki.utilities.ELKIServiceScanner [[ELKIServiceScanner.html]] {
+        {static} -LOG: Logging
+        {static} -CLASSLOADER: ClassLoader
+        {static} +FACTORY_POSTFIX: String
+        {static} -MASTER_CACHE: List<Class<?>>
+        {static} +SORT_BY_NAME: Comparator<Class<?>>
+        {static} +SORT_BY_PRIORITY: Comparator<Class<?>>
+        {static} +load(Class<?>): void
+        {static} +nonindexedClasses(): Iterator<Class<?>>
+        {static} -getMasterCache(): List<Class<?>>
+        {static} -initialize(): List<Class<?>>
+        {static} -comparePackageClass(Class<?>, Class<?>): int
+        {static} -classPriority(Class<?>): int
+    }
+    class "<size:14>ELKIServiceScanner.DirClassIterator\n<size:10>elki.utilities" as elki.utilities.ELKIServiceScanner.DirClassIterator [[ELKIServiceScanner.DirClassIterator.html]]
+
+    elki.utilities.ELKIServiceScanner +-- elki.utilities.ELKIServiceScanner.DirClassIterator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

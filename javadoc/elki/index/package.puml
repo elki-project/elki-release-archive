@@ -1,0 +1,111 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index {
+
+        abstract class AbstractRefiningIndex<O> [[AbstractRefiningIndex.html]] {
+            #relation: Relation<O>
+            -refinements: Counter
+            +AbstractRefiningIndex(Relation<O>)
+            {abstract} +getLogger(): Logging
+            #countRefinements(int): void
+            +logStatistics(): void
+            #refine(DBID): O
+        }
+
+        abstract class elki.index.AbstractRefiningIndex.AbstractRefiningQuery [[AbstractRefiningIndex.AbstractRefiningQuery.html]] {
+            #distanceQuery: DistanceQuery<O>
+            +AbstractRefiningQuery(DistanceQuery<O>)
+            #refine(DBIDRef, O): double
+            #incRefinements(int): void
+        }
+
+        abstract class PagedIndexFactory<O> [[PagedIndexFactory.html]] {
+            -pageFileFactory: PageFileFactory<?>
+            +PagedIndexFactory(PageFileFactory<?>)
+            #makePageFile(Class<N extends Externalizable>): PageFile<N extends Externalizable>
+        }
+
+        abstract class elki.index.PagedIndexFactory.Par<O> [[PagedIndexFactory.Par.html]] {
+            {static} +PAGEFILE_ID: OptionID
+            #pageFileFactory: PageFileFactory<?>
+            +configure(Parameterization): void
+            {abstract} +make(): PagedIndexFactory<O>
+        }
+
+        interface IndexFactory<V> [[IndexFactory.html]] {
+            {abstract} +instantiate(Relation<V>): Index
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+
+        interface RKNNIndex<O> [[RKNNIndex.html]] {
+            {abstract} +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+            {abstract} +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+        }
+
+        interface SimilarityRangeIndex<O> [[SimilarityRangeIndex.html]] {
+            {abstract} +similarityRangeByObject(SimilarityQuery<O>, double, int): RangeSearcher<O>
+            {abstract} +similarityRangeByDBID(SimilarityQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+
+        interface DynamicIndex [[DynamicIndex.html]] {
+            {abstract} +delete(DBIDRef): boolean
+            {abstract} +insert(DBIDRef): void
+            {abstract} +deleteAll(DBIDs): void
+            {abstract} +insertAll(DBIDs): void
+        }
+
+        interface Index [[Index.html]] {
+            {abstract} +initialize(): void
+            +logStatistics(): void
+        }
+
+        interface SimilarityIndex<O> [[SimilarityIndex.html]] {
+            {abstract} +getSimilarityQuery(Similarity<? super O>): SimilarityQuery<O>
+        }
+
+        interface KNNIndex<O> [[KNNIndex.html]] {
+            {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        }
+
+        interface DistanceIndex<O> [[DistanceIndex.html]] {
+            {abstract} +getDistanceQuery(Distance<? super O>): DistanceQuery<O>
+        }
+
+        interface RangeIndex<O> [[RangeIndex.html]] {
+            {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+
+        interface DistancePriorityIndex<O> [[DistancePriorityIndex.html]] {
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        }
+
+        Index <|.. AbstractRefiningIndex
+        AbstractRefiningIndex +-- elki.index.AbstractRefiningIndex.AbstractRefiningQuery
+        IndexFactory <|.. PagedIndexFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.PagedIndexFactory.Par
+        PagedIndexFactory +-- elki.index.PagedIndexFactory.Par
+        Index <|-- RKNNIndex
+        Index <|-- SimilarityRangeIndex
+        Index <|-- DynamicIndex
+        Index <|-- SimilarityIndex
+        Index <|-- KNNIndex
+        Index <|-- DistanceIndex
+        Index <|-- RangeIndex
+        KNNIndex <|-- DistancePriorityIndex
+        RangeIndex <|-- DistancePriorityIndex
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

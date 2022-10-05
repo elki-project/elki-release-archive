@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ArrayModifiableDBIDs\n<size:10>elki.database.ids" as elki.database.ids.ArrayModifiableDBIDs [[ArrayModifiableDBIDs.html]] {
+        {abstract} +sort(): void
+        {abstract} +sort(Comparator<? super DBIDRef>): void
+        {abstract} +sort(int, int, Comparator<? super DBIDRef>): void
+        {abstract} +clear(): ArrayModifiableDBIDs
+        {abstract} +remove(int): void
+        {abstract} +removeSwap(int): void
+        {abstract} +set(int, DBIDRef): void
+        {abstract} +insert(int, DBIDRef): void
+        {abstract} +swap(int, int): void
+        {abstract} +iter(): DBIDArrayMIter
+    }
+
+    interface "<size:14>ModifiableDBIDs\n<size:10>elki.database.ids" as elki.database.ids.ModifiableDBIDs [[ModifiableDBIDs.html]] {
+        {abstract} +addDBIDs(DBIDs): boolean
+        {abstract} +removeDBIDs(DBIDs): boolean
+        {abstract} +add(DBIDRef): boolean
+        {abstract} +remove(DBIDRef): boolean
+        {abstract} +clear(): ModifiableDBIDs
+        {abstract} +iter(): DBIDMIter
+        {abstract} +pop(DBIDVar): DBIDVar
+    }
+    interface "<size:14>ArrayDBIDs\n<size:10>elki.database.ids" as elki.database.ids.ArrayDBIDs [[ArrayDBIDs.html]] {
+        {abstract} +--get--(int): DBID
+        {abstract} +assignVar(int, DBIDVar): DBIDVar
+        {abstract} +iter(): DBIDArrayIter
+        {abstract} +size(): int
+        {abstract} +binarySearch(DBIDRef): int
+        {abstract} +slice(int, int): ArrayDBIDs
+    }
+
+    elki.database.ids.ModifiableDBIDs <|-- elki.database.ids.ArrayModifiableDBIDs
+    elki.database.ids.ArrayDBIDs <|-- elki.database.ids.ArrayModifiableDBIDs
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LPCAEstimator.Par\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.LPCAEstimator.Par [[LPCAEstimator.Par.html]] {
+        {static} +FILTER_ID: OptionID
+        -eigenPairFilter: EigenPairFilter
+        +configure(Parameterization): void
+        +make(): LPCAEstimator
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LPCAEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.LPCAEstimator [[LPCAEstimator.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.LPCAEstimator.Par
+    elki.math.statistics.intrinsicdimensionality.LPCAEstimator +-- elki.math.statistics.intrinsicdimensionality.LPCAEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

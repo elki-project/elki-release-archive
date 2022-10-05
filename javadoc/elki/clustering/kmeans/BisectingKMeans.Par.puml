@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BisectingKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.BisectingKMeans.Par<V extends NumberVector, M extends MeanModel> {
+        {static} +KMEANS_ID: OptionID
+        #kMeansVariant: KMeans<V extends NumberVector, M extends MeanModel>
+        #k: int
+        +configure(Parameterization): void
+        +make(): BisectingKMeans<V extends NumberVector, M extends MeanModel>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>BisectingKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.BisectingKMeans<V extends NumberVector, M extends MeanModel> [[BisectingKMeans.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmeans.BisectingKMeans.Par
+    elki.clustering.kmeans.BisectingKMeans +-- elki.clustering.kmeans.BisectingKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

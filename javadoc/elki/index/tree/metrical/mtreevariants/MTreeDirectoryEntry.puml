@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MTreeDirectoryEntry\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeDirectoryEntry [[MTreeDirectoryEntry.html]] {
+        {static} -serialVersionUID: long
+        -id: int
+        -routingObjectID: DBID
+        -parentDistance: double
+        -coveringRadius: double
+        +MTreeDirectoryEntry()
+        +MTreeDirectoryEntry(DBID, double, int, double)
+        +getPageID(): int
+        +getCoveringRadius(): double
+        +setCoveringRadius(double): boolean
+        +getRoutingObjectID(): DBID
+        +setRoutingObjectID(DBID): boolean
+        +getParentDistance(): double
+        +setParentDistance(double): boolean
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+    }
+
+    interface "<size:14>DirectoryEntry\n<size:10>elki.index.tree" as elki.index.tree.DirectoryEntry [[../../DirectoryEntry.html]] {
+        {abstract} +getPageID(): int
+    }
+    interface "<size:14>MTreeEntry\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeEntry [[MTreeEntry.html]] {
+        {abstract} +getRoutingObjectID(): DBID
+        {abstract} +setRoutingObjectID(DBID): boolean
+        {abstract} +getParentDistance(): double
+        {abstract} +setParentDistance(double): boolean
+        {abstract} +getCoveringRadius(): double
+        {abstract} +setCoveringRadius(double): boolean
+    }
+
+    elki.index.tree.DirectoryEntry <|.. elki.index.tree.metrical.mtreevariants.MTreeDirectoryEntry
+    elki.index.tree.metrical.mtreevariants.MTreeEntry <|.. elki.index.tree.metrical.mtreevariants.MTreeDirectoryEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

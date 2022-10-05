@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CoreObjectsModel\n<size:10>elki.data.model" as elki.data.model.CoreObjectsModel [[CoreObjectsModel.html]] {
+        ~core: DBIDs
+        +CoreObjectsModel(DBIDs)
+        +getCoreObjects(): DBIDs
+        +writeToText(TextWriterStream, String): void
+    }
+
+    interface "<size:14>Model\n<size:10>elki.data.model" as elki.data.model.Model [[Model.html]]
+    interface "<size:14>TextWriteable\n<size:10>elki.result.textwriter" as elki.result.textwriter.TextWriteable [[../../result/textwriter/TextWriteable.html]] {
+        {abstract} +writeToText(TextWriterStream, String): void
+    }
+
+    elki.data.model.Model <|.. elki.data.model.CoreObjectsModel
+    elki.result.textwriter.TextWriteable <|.. elki.data.model.CoreObjectsModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

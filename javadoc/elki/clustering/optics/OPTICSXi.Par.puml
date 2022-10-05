@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSXi.Par\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi.Par [[OPTICSXi.Par.html]] {
+        {static} +XIALG_ID: OptionID
+        {static} +XI_ID: OptionID
+        {static} +NOCORRECT_ID: OptionID
+        {static} +KEEPSTEEP_ID: OptionID
+        #optics: OPTICSTypeAlgorithm
+        #xi: double
+        #nocorrect: boolean
+        #keepsteep: boolean
+        +configure(Parameterization): void
+        +make(): OPTICSXi
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>OPTICSXi\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi [[OPTICSXi.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.optics.OPTICSXi.Par
+    elki.clustering.optics.OPTICSXi +-- elki.clustering.optics.OPTICSXi.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

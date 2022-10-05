@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HashMapHierarchy.ItrAnc\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrAnc [[HashMapHierarchy.ItrAnc.html]] {
+        ~parentiter: It<O>
+        ~subiter: It<O>
+        ~extra: O
+        ~ItrAnc(O)
+        ~ItrAnc(O, O)
+        +valid(): boolean
+        +advance(): It<O>
+        +get(): O
+    }
+
+    interface "<size:14>It\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.It<O> [[../iterator/It.html]] {
+        {abstract} +get(): O
+        {abstract} +advance(): It<O>
+    }
+    class "<size:14>HashMapHierarchy\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy<O> [[HashMapHierarchy.html]]
+
+    elki.utilities.datastructures.iterator.It <|.. elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrAnc
+    elki.utilities.datastructures.hierarchy.HashMapHierarchy +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrAnc
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

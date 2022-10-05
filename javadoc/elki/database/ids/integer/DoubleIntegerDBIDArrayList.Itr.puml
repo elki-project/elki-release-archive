@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleIntegerDBIDArrayList.Itr\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDArrayList.Itr [[DoubleIntegerDBIDArrayList.Itr.html]] {
+        ~pos: int
+        +valid(): boolean
+        +advance(): Itr
+        +getOffset(): int
+        +advance(int): Itr
+        +retract(): Itr
+        +seek(int): Itr
+        +internalGetIndex(): int
+        +doubleValue(): double
+        +remove(): void
+        +setDBID(DBIDRef): void
+        +setDouble(double): void
+    }
+
+    interface "<size:14>DoubleIntegerDBIDListMIter\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDListMIter [[DoubleIntegerDBIDListMIter.html]] {
+        {abstract} +seek(int): DoubleIntegerDBIDListMIter
+    }
+    class "<size:14>DoubleIntegerDBIDArrayList\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDArrayList [[DoubleIntegerDBIDArrayList.html]]
+
+    elki.database.ids.integer.DoubleIntegerDBIDListMIter <|.. elki.database.ids.integer.DoubleIntegerDBIDArrayList.Itr
+    elki.database.ids.integer.DoubleIntegerDBIDArrayList +-- elki.database.ids.integer.DoubleIntegerDBIDArrayList.Itr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LoggingConfiguration\n<size:10>elki.logging" as elki.logging.LoggingConfiguration [[LoggingConfiguration.html]] {
+        {static} +DEBUG: boolean
+        {static} -LOGGING_PROPERTIES_FILE: String
+        {static} +TOPLEVEL_PACKAGE: String
+        {static} -LOGGER_GLOBAL_TOP: Logger
+        {static} -LOGGER_ELKI_TOP: Logger
+        {static} -LOGGER_TIME_TOP: Logger
+        {static} -confbase: String
+        {static} #config: LoggingConfiguration
+        -LoggingConfiguration(String, String)
+        {static} +reconfigureLogging(String, String): void
+        -privateReconfigureLogging(String, String): void
+        {static} -openSystemFile(String): InputStream
+        {static} +assertConfigured(): void
+        {static} +setVerbose(Level): void
+        {static} +setStatistics(): void
+        {static} +addHandler(Handler): void
+        {static} +replaceDefaultHandler(Handler): void
+        {static} +setLevelFor(String, String): void
+        {static} +setDefaultLevel(Level): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

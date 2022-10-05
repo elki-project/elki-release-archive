@@ -1,0 +1,76 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.anglebased {
+
+        class FastABOD<V extends NumberVector> [[FastABOD.html]] {
+            #k: int
+            +FastABOD(Similarity<? super NumberVector>, int)
+            +run(Relation<V extends NumberVector>): OutlierResult
+            -kNNABOD(Relation<V extends NumberVector>, DBIDs, WritableDoubleDataStore, DoubleMinMax): boolean
+            -fastABOD(Relation<V extends NumberVector>, DBIDs, WritableDoubleDataStore, DoubleMinMax): void
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.anglebased.FastABOD.Par<V extends NumberVector> [[FastABOD.Par.html]] {
+            {static} +K_ID: OptionID
+            #k: int
+            +configure(Parameterization): void
+            +make(): FastABOD<V extends NumberVector>
+        }
+
+        class ABOD<V extends NumberVector> [[ABOD.html]] {
+            #kernelFunction: Similarity<? super NumberVector>
+            +ABOD(Similarity<? super NumberVector>)
+            +run(Relation<V extends NumberVector>): OutlierResult
+            #computeABOF(KernelMatrix, DBIDRef, DBIDArrayIter, DBIDArrayIter, MeanVariance): double
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.anglebased.ABOD.Par<V extends NumberVector> [[ABOD.Par.html]] {
+            {static} +KERNEL_FUNCTION_ID: OptionID
+            #kernelFunction: Similarity<V extends NumberVector>
+            +configure(Parameterization): void
+            +make(): ABOD<V extends NumberVector>
+        }
+
+        class LBABOD<V extends NumberVector> [[LBABOD.html]] {
+            {static} -LOG: Logging
+            #l: int
+            +LBABOD(Similarity<? super NumberVector>, int, int)
+            +run(Relation<V extends NumberVector>): OutlierResult
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.anglebased.LBABOD.Par<V extends NumberVector> [[LBABOD.Par.html]] {
+            {static} +L_ID: OptionID
+            #l: int
+            +configure(Parameterization): void
+            +make(): LBABOD<V extends NumberVector>
+        }
+
+        ABOD <|-- FastABOD
+        elki.outlier.anglebased.ABOD.Par <|-- elki.outlier.anglebased.FastABOD.Par
+        FastABOD +-- elki.outlier.anglebased.FastABOD.Par
+        elki.outlier.OutlierAlgorithm <|.. ABOD
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.anglebased.ABOD.Par
+        ABOD +-- elki.outlier.anglebased.ABOD.Par
+        FastABOD <|-- LBABOD
+        elki.outlier.anglebased.FastABOD.Par <|-- elki.outlier.anglebased.LBABOD.Par
+        LBABOD +-- elki.outlier.anglebased.LBABOD.Par
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

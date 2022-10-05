@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluationResult\n<size:10>elki.result" as elki.result.EvaluationResult [[EvaluationResult.html]] {
+        {static} +RANKING: String
+        ~groups: ArrayList<MeasurementGroup>
+        ~header: ArrayList<String>
+        +newGroup(String): MeasurementGroup
+        +findOrCreateGroup(String): MeasurementGroup
+        +writeToText(TextWriterStream, String): void
+        +addHeader(String): void
+        +getHeaderLines(): Iterable<String>
+        +iterator(): Iterator<MeasurementGroup>
+        +numLines(): int
+        {static} +findOrCreate(Object, String): EvaluationResult
+        +visualizeSingleton(): boolean
+    }
+
+    interface "<size:14>TextWriteable\n<size:10>elki.result.textwriter" as elki.result.textwriter.TextWriteable [[textwriter/TextWriteable.html]] {
+        {abstract} +writeToText(TextWriterStream, String): void
+    }
+    interface "<size:14>Iterable\n<size:10>java.lang" as java.lang.Iterable<MeasurementGroup> {
+        {abstract} +iterator(): Iterator<T>
+    }
+    class "<size:14>EvaluationResult.MeasurementGroup\n<size:10>elki.result" as elki.result.EvaluationResult.MeasurementGroup [[EvaluationResult.MeasurementGroup.html]]
+    class "<size:14>EvaluationResult.Measurement\n<size:10>elki.result" as elki.result.EvaluationResult.Measurement [[EvaluationResult.Measurement.html]]
+
+    elki.result.textwriter.TextWriteable <|.. elki.result.EvaluationResult
+    java.lang.Iterable <|.. elki.result.EvaluationResult
+    elki.result.EvaluationResult +-- elki.result.EvaluationResult.MeasurementGroup
+    elki.result.EvaluationResult +-- elki.result.EvaluationResult.Measurement
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

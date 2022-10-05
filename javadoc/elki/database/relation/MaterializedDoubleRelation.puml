@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MaterializedDoubleRelation\n<size:10>elki.database.relation" as elki.database.relation.MaterializedDoubleRelation [[MaterializedDoubleRelation.html]] {
+        -content: DoubleDataStore
+        -ids: StaticDBIDs
+        -name: String
+        +MaterializedDoubleRelation(String, DBIDs)
+        +MaterializedDoubleRelation(String, DBIDs, DoubleDataStore)
+        +doubleValue(DBIDRef): double
+        +set(DBIDRef, double): void
+        +--insert--(DBIDRef, Double): void
+        +delete(DBIDRef): void
+        +getDBIDs(): StaticDBIDs
+        +iterDBIDs(): DBIDIter
+        +size(): int
+        +getDataTypeInformation(): SimpleTypeInformation<Double>
+        +getLongName(): String
+    }
+
+    interface "<size:14>DoubleRelation\n<size:10>elki.database.relation" as elki.database.relation.DoubleRelation [[DoubleRelation.html]] {
+        {abstract} +doubleValue(DBIDRef): double
+        {abstract} +set(DBIDRef, double): void
+        {abstract} +--insert--(DBIDRef, Double): void
+    }
+
+    elki.database.relation.DoubleRelation <|.. elki.database.relation.MaterializedDoubleRelation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

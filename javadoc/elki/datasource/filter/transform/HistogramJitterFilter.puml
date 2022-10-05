@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HistogramJitterFilter\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.HistogramJitterFilter<V extends NumberVector> [[HistogramJitterFilter.html]] {
+        ~jitter: double
+        ~dist: Distribution
+        ~rnd: Random
+        +HistogramJitterFilter(double, RandomFactory)
+        #filterSingleObject(V extends NumberVector): V extends NumberVector
+        #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<V extends NumberVector>
+    }
+
+    abstract class "<size:14>AbstractVectorStreamConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractVectorStreamConversionFilter<V extends NumberVector, V extends NumberVector> [[../AbstractVectorStreamConversionFilter.html]]
+    class "<size:14>HistogramJitterFilter.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.HistogramJitterFilter.Par [[HistogramJitterFilter.Par.html]]
+
+    elki.datasource.filter.AbstractVectorStreamConversionFilter <|-- elki.datasource.filter.transform.HistogramJitterFilter
+    elki.datasource.filter.transform.HistogramJitterFilter +-- elki.datasource.filter.transform.HistogramJitterFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

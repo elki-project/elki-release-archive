@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CFTree.LeafIterator\n<size:10>elki.index.tree.betula" as elki.index.tree.betula.CFTree.LeafIterator<L extends ClusterFeature> [[CFTree.LeafIterator.html]] {
+        -queue: ArrayList<Object>
+        -current: L extends ClusterFeature
+        -LeafIterator(CFNode<L extends ClusterFeature>)
+        +valid(): boolean
+        +get(): L extends ClusterFeature
+        +advance(): Iter
+    }
+
+    interface "<size:14>Iter\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.Iter [[../../../utilities/datastructures/iterator/Iter.html]] {
+        {abstract} +valid(): boolean
+        {abstract} +advance(): Iter
+    }
+    class "<size:14>CFTree\n<size:10>elki.index.tree.betula" as elki.index.tree.betula.CFTree<L extends ClusterFeature> [[CFTree.html]]
+
+    elki.utilities.datastructures.iterator.Iter <|.. elki.index.tree.betula.CFTree.LeafIterator
+    elki.index.tree.betula.CFTree +-- elki.index.tree.betula.CFTree.LeafIterator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

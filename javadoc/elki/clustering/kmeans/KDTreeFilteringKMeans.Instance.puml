@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KDTreeFilteringKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KDTreeFilteringKMeans.Instance [[KDTreeFilteringKMeans.Instance.html]] {
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+        #pruning(KDNode, int): int
+        #getNearestCenter(double[], int): int
+        #isFarther(double[], double[], double[], double[]): boolean
+        #getLogger(): Logging
+    }
+
+    class "<size:14>KDTreePruningKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KDTreePruningKMeans.Instance [[KDTreePruningKMeans.Instance.html]]
+    class "<size:14>KDTreeFilteringKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KDTreeFilteringKMeans<V extends NumberVector> [[KDTreeFilteringKMeans.html]]
+
+    elki.clustering.kmeans.KDTreePruningKMeans.Instance <|-- elki.clustering.kmeans.KDTreeFilteringKMeans.Instance
+    elki.clustering.kmeans.KDTreeFilteringKMeans +-- elki.clustering.kmeans.KDTreeFilteringKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,194 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.distance.probabilistic {
+
+        class FisherRaoDistance [[FisherRaoDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isMetric(): boolean
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.probabilistic.FisherRaoDistance.Par [[FisherRaoDistance.Par.html]] {
+            +make(): FisherRaoDistance
+        }
+
+        class JeffreyDivergenceDistance [[JeffreyDivergenceDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isSquared(): boolean
+        }
+
+        class elki.distance.probabilistic.JeffreyDivergenceDistance.Par [[JeffreyDivergenceDistance.Par.html]] {
+            +make(): JeffreyDivergenceDistance
+        }
+
+        class TriangularDiscriminationDistance [[TriangularDiscriminationDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isSquared(): boolean
+        }
+
+        class elki.distance.probabilistic.TriangularDiscriminationDistance.Par [[TriangularDiscriminationDistance.Par.html]] {
+            +make(): TriangularDiscriminationDistance
+        }
+
+        class TriangularDistance [[TriangularDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isSquared(): boolean
+            +isMetric(): boolean
+        }
+
+        class elki.distance.probabilistic.TriangularDistance.Par [[TriangularDistance.Par.html]] {
+            +make(): TriangularDistance
+        }
+
+        class ChiDistance [[ChiDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isMetric(): boolean
+            +isSquared(): boolean
+        }
+
+        class elki.distance.probabilistic.ChiDistance.Par [[ChiDistance.Par.html]] {
+            +make(): ChiDistance
+        }
+
+        class SqrtJensenShannonDivergenceDistance [[SqrtJensenShannonDivergenceDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isMetric(): boolean
+            +isSquared(): boolean
+        }
+
+        class elki.distance.probabilistic.SqrtJensenShannonDivergenceDistance.Par [[SqrtJensenShannonDivergenceDistance.Par.html]] {
+            +make(): SqrtJensenShannonDivergenceDistance
+        }
+
+        class JensenShannonDivergenceDistance [[JensenShannonDivergenceDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+        }
+
+        class elki.distance.probabilistic.JensenShannonDivergenceDistance.Par [[JensenShannonDivergenceDistance.Par.html]] {
+            +make(): JensenShannonDivergenceDistance
+        }
+
+        class KullbackLeiblerDivergenceReverseAsymmetricDistance [[KullbackLeiblerDivergenceReverseAsymmetricDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +isSymmetric(): boolean
+        }
+
+        class elki.distance.probabilistic.KullbackLeiblerDivergenceReverseAsymmetricDistance.Par [[KullbackLeiblerDivergenceReverseAsymmetricDistance.Par.html]] {
+            +make(): KullbackLeiblerDivergenceReverseAsymmetricDistance
+        }
+
+        class KullbackLeiblerDivergenceAsymmetricDistance [[KullbackLeiblerDivergenceAsymmetricDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +isSymmetric(): boolean
+        }
+
+        class elki.distance.probabilistic.KullbackLeiblerDivergenceAsymmetricDistance.Par [[KullbackLeiblerDivergenceAsymmetricDistance.Par.html]] {
+            +make(): KullbackLeiblerDivergenceAsymmetricDistance
+        }
+
+        class ChiSquaredDistance [[ChiSquaredDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isSquared(): boolean
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.probabilistic.ChiSquaredDistance.Par [[ChiSquaredDistance.Par.html]] {
+            +make(): ChiSquaredDistance
+        }
+
+        class HellingerDistance [[HellingerDistance.html]] {
+            {static} -NON_NEGATIVE: String
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +similarity(NumberVector, NumberVector): double
+            +isSymmetric(): boolean
+            +isMetric(): boolean
+            +instantiate(Relation<T extends NumberVector>): SpatialPrimitiveDistanceSimilarityQuery<T extends NumberVector>
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.probabilistic.HellingerDistance.Par [[HellingerDistance.Par.html]] {
+            +make(): HellingerDistance
+        }
+
+        elki.distance.AbstractNumberVectorDistance <|-- FisherRaoDistance
+        elki.distance.SpatialPrimitiveDistance <|.. FisherRaoDistance
+        FisherRaoDistance --> FisherRaoDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.probabilistic.FisherRaoDistance.Par
+        FisherRaoDistance +-- elki.distance.probabilistic.FisherRaoDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- JeffreyDivergenceDistance
+        elki.distance.SpatialPrimitiveDistance <|.. JeffreyDivergenceDistance
+        JeffreyDivergenceDistance --> JeffreyDivergenceDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.probabilistic.JeffreyDivergenceDistance.Par
+        JeffreyDivergenceDistance +-- elki.distance.probabilistic.JeffreyDivergenceDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- TriangularDiscriminationDistance
+        elki.distance.SpatialPrimitiveDistance <|.. TriangularDiscriminationDistance
+        TriangularDiscriminationDistance --> TriangularDiscriminationDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.probabilistic.TriangularDiscriminationDistance.Par
+        TriangularDiscriminationDistance +-- elki.distance.probabilistic.TriangularDiscriminationDistance.Par
+        TriangularDiscriminationDistance <|-- TriangularDistance
+        TriangularDistance --> TriangularDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.probabilistic.TriangularDistance.Par
+        TriangularDistance +-- elki.distance.probabilistic.TriangularDistance.Par
+        ChiSquaredDistance <|-- ChiDistance
+        ChiDistance --> ChiDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.probabilistic.ChiDistance.Par
+        ChiDistance +-- elki.distance.probabilistic.ChiDistance.Par
+        JensenShannonDivergenceDistance <|-- SqrtJensenShannonDivergenceDistance
+        SqrtJensenShannonDivergenceDistance --> SqrtJensenShannonDivergenceDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.probabilistic.SqrtJensenShannonDivergenceDistance.Par
+        SqrtJensenShannonDivergenceDistance +-- elki.distance.probabilistic.SqrtJensenShannonDivergenceDistance.Par
+        JeffreyDivergenceDistance <|-- JensenShannonDivergenceDistance
+        JensenShannonDivergenceDistance --> JensenShannonDivergenceDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.probabilistic.JensenShannonDivergenceDistance.Par
+        JensenShannonDivergenceDistance +-- elki.distance.probabilistic.JensenShannonDivergenceDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- KullbackLeiblerDivergenceReverseAsymmetricDistance
+        KullbackLeiblerDivergenceReverseAsymmetricDistance --> KullbackLeiblerDivergenceReverseAsymmetricDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.probabilistic.KullbackLeiblerDivergenceReverseAsymmetricDistance.Par
+        KullbackLeiblerDivergenceReverseAsymmetricDistance +-- elki.distance.probabilistic.KullbackLeiblerDivergenceReverseAsymmetricDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- KullbackLeiblerDivergenceAsymmetricDistance
+        KullbackLeiblerDivergenceAsymmetricDistance --> KullbackLeiblerDivergenceAsymmetricDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.probabilistic.KullbackLeiblerDivergenceAsymmetricDistance.Par
+        KullbackLeiblerDivergenceAsymmetricDistance +-- elki.distance.probabilistic.KullbackLeiblerDivergenceAsymmetricDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- ChiSquaredDistance
+        elki.distance.SpatialPrimitiveDistance <|.. ChiSquaredDistance
+        ChiSquaredDistance --> ChiSquaredDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.probabilistic.ChiSquaredDistance.Par
+        ChiSquaredDistance +-- elki.distance.probabilistic.ChiSquaredDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- HellingerDistance
+        elki.distance.SpatialPrimitiveDistance <|.. HellingerDistance
+        elki.similarity.NormalizedPrimitiveSimilarity <|.. HellingerDistance
+        HellingerDistance --> HellingerDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.probabilistic.HellingerDistance.Par
+        HellingerDistance +-- elki.distance.probabilistic.HellingerDistance.Par
+    }
+
+    namespace elki.distance {
+        abstract class AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+        interface SpatialPrimitiveDistance<V extends SpatialComparable> [[../SpatialPrimitiveDistance.html]] {
+            {abstract} +minDist(SpatialComparable, SpatialComparable): double
+            +instantiate(Relation<T extends SpatialComparable>): SpatialPrimitiveDistanceQuery<T extends SpatialComparable>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.similarity {
+        interface NormalizedPrimitiveSimilarity<O> [[../../similarity/NormalizedPrimitiveSimilarity.html]]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,137 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.projector {
+
+        class ScatterPlotProjector<V extends SpatialComparable> [[ScatterPlotProjector.html]] {
+            ~rel: Relation<V extends SpatialComparable>
+            ~dmax: int
+            +ScatterPlotProjector(Relation<V extends SpatialComparable>, int)
+            +arrange(VisualizerContext): Collection<PlotItem>
+            +getMenuName(): String
+            +getRelation(): Relation<V extends SpatialComparable>
+        }
+
+        class ScatterPlotFactory [[ScatterPlotFactory.html]] {
+            {static} +MAX_DIMENSIONS_DEFAULT: int
+            -maxdim: int
+            +ScatterPlotFactory(int)
+            +processNewResult(VisualizerContext, Object): void
+            -dimensionality(Relation<?>): int
+        }
+
+        class elki.visualization.projector.ScatterPlotFactory.Par [[ScatterPlotFactory.Par.html]] {
+            {static} +MAXDIM_ID: OptionID
+            -maxdim: int
+            +configure(Parameterization): void
+            +make(): ScatterPlotFactory
+        }
+
+        class OPTICSProjectorFactory [[OPTICSProjectorFactory.html]] {
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class SilhouettePlotProjector [[SilhouettePlotProjector.html]] {
+            -clustering: Clustering<?>
+            -plot: SilhouettePlot
+            -values: DoubleDBIDList[]
+            +SilhouettePlotProjector(Clustering<?>, DoubleRelation)
+            {static} -sortSilhouette(Clustering<?>, DoubleRelation): DoubleDBIDList[]
+            +getMenuName(): String
+            +arrange(VisualizerContext): Collection<PlotItem>
+            +getSilhouettePlot(VisualizerContext): SilhouettePlot
+            +getResult(): Clustering<?>
+            +getValues(): DoubleDBIDList[]
+        }
+
+        class HistogramProjector<V extends NumberVector> [[HistogramProjector.html]] {
+            ~rel: Relation<V extends NumberVector>
+            ~dmax: int
+            +HistogramProjector(Relation<V extends NumberVector>, int)
+            +arrange(VisualizerContext): Collection<PlotItem>
+            +getMenuName(): String
+            +getRelation(): Relation<V extends NumberVector>
+        }
+
+        class HistogramFactory [[HistogramFactory.html]] {
+            -maxdim: int
+            +HistogramFactory(int)
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.projector.HistogramFactory.Par [[HistogramFactory.Par.html]] {
+            -maxdim: int
+            +configure(Parameterization): void
+            +make(): HistogramFactory
+        }
+
+        class OPTICSProjector [[OPTICSProjector.html]] {
+            -clusterOrder: ClusterOrder
+            -plot: OPTICSPlot
+            +OPTICSProjector(ClusterOrder)
+            +getMenuName(): String
+            +arrange(VisualizerContext): Collection<PlotItem>
+            +getResult(): ClusterOrder
+            +getOPTICSPlot(VisualizerContext): OPTICSPlot
+        }
+
+        class SilhouettePlotFactory [[SilhouettePlotFactory.html]] {
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class ParallelPlotProjector<V extends SpatialComparable> [[ParallelPlotProjector.html]] {
+            ~rel: Relation<V extends SpatialComparable>
+            +ParallelPlotProjector(Relation<V extends SpatialComparable>)
+            +arrange(VisualizerContext): Collection<PlotItem>
+            +getMenuName(): String
+            +getRelation(): Relation<V extends SpatialComparable>
+        }
+
+        class ParallelPlotFactory [[ParallelPlotFactory.html]] {
+            +processNewResult(VisualizerContext, Object): void
+            -dimensionality(Relation<?>): int
+        }
+
+        interface ProjectorFactory [[ProjectorFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+        }
+
+        interface Projector [[Projector.html]] {
+            {abstract} +arrange(VisualizerContext): Collection<PlotItem>
+        }
+
+        Projector <|.. ScatterPlotProjector
+        ProjectorFactory <|.. ScatterPlotFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.projector.ScatterPlotFactory.Par
+        ScatterPlotFactory +-- elki.visualization.projector.ScatterPlotFactory.Par
+        ProjectorFactory <|.. OPTICSProjectorFactory
+        Projector <|.. SilhouettePlotProjector
+        Projector <|.. HistogramProjector
+        ProjectorFactory <|.. HistogramFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.projector.HistogramFactory.Par
+        HistogramFactory +-- elki.visualization.projector.HistogramFactory.Par
+        Projector <|.. OPTICSProjector
+        ProjectorFactory <|.. SilhouettePlotFactory
+        Projector <|.. ParallelPlotProjector
+        ProjectorFactory <|.. ParallelPlotFactory
+        elki.visualization.VisualizationProcessor <|-- ProjectorFactory
+        elki.visualization.VisualizationItem <|-- Projector
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.visualization {
+        interface VisualizationProcessor [[../VisualizationProcessor.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+        }
+        interface VisualizationItem [[../VisualizationItem.html]] {
+            {abstract} +getMenuName(): String
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

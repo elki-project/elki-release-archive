@@ -1,0 +1,143 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.laesa {
+
+        class LAESA<O> [[LAESA.html]] {
+            {static} -LOG: Logging
+            ~distance: Distance<? super O>
+            ~distq: DistanceQuery<? super O>
+            ~m: int
+            ~k: int
+            ~rng: RandomFactory
+            ~relation: Relation<O>
+            ~refp: ArrayModifiableDBIDs
+            ~dists: DoubleDataStore[]
+            ~chosenRefP: HashSetDBIDs
+            +LAESA(Relation<O>, Distance<? super O>, int, int, RandomFactory)
+            +initialize(): void
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+
+        abstract class elki.index.laesa.LAESA.LAESAKNNSearcher<Q> [[LAESA.LAESAKNNSearcher.html]] {
+            ~maxnc: int
+            +LAESAKNNSearcher(int)
+            #laesaKNNSearch(KNNHeap): void
+            -processPoints(ModifiableDoubleDBIDList, DoubleDBIDListMIter, double, double, DoubleDataStore, int): int
+            -findInRef(DBIDRef, DBIDArrayIter): int
+            {abstract} #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.laesa.LAESA.LAESAKNNByObjectSearcher [[LAESA.LAESAKNNByObjectSearcher.html]] {
+            -query: O
+            +LAESAKNNByObjectSearcher(int)
+            +getKNN(O, int): KNNList
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.laesa.LAESA.LAESAKNNByDBIDSearcher [[LAESA.LAESAKNNByDBIDSearcher.html]] {
+            -query: DBIDRef
+            +LAESAKNNByDBIDSearcher(int)
+            +getKNN(DBIDRef, int): KNNList
+            #queryDistance(DBIDRef): double
+        }
+
+        abstract class elki.index.laesa.LAESA.LAESARangeSearcher<Q> [[LAESA.LAESARangeSearcher.html]] {
+            #laesaRangeSearch(double, ModifiableDoubleDBIDList): void
+            {abstract} #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.laesa.LAESA.LAESARangeByObjectSearcher [[LAESA.LAESARangeByObjectSearcher.html]] {
+            -query: O
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.laesa.LAESA.LAESARangeByDBIDSearcher [[LAESA.LAESARangeByDBIDSearcher.html]] {
+            -query: DBIDRef
+            +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.laesa.LAESA.Factory<O> [[LAESA.Factory.html]] {
+            ~distance: Distance<? super O>
+            ~m: int
+            ~k: int
+            ~rng: RandomFactory
+            +Factory(Distance<? super O>, int, int, RandomFactory)
+            +instantiate(Relation<O>): LAESA<O>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.laesa.LAESA.Factory.Par<O> [[LAESA.Factory.Par.html]] {
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            {static} +M_ID: OptionID
+            {static} +K_ID: OptionID
+            {static} +SEED_ID: OptionID
+            ~distance: Distance<? super O>
+            ~m: int
+            ~k: int
+            ~rng: RandomFactory
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        elki.index.RangeIndex <|.. LAESA
+        elki.index.KNNIndex <|.. LAESA
+        elki.database.query.knn.KNNSearcher <|.. elki.index.laesa.LAESA.LAESAKNNSearcher
+        LAESA +-- elki.index.laesa.LAESA.LAESAKNNSearcher
+        elki.index.laesa.LAESA.LAESAKNNSearcher <|-- elki.index.laesa.LAESA.LAESAKNNByObjectSearcher
+        LAESA +-- elki.index.laesa.LAESA.LAESAKNNByObjectSearcher
+        elki.index.laesa.LAESA.LAESAKNNSearcher <|-- elki.index.laesa.LAESA.LAESAKNNByDBIDSearcher
+        LAESA +-- elki.index.laesa.LAESA.LAESAKNNByDBIDSearcher
+        elki.database.query.range.RangeSearcher <|.. elki.index.laesa.LAESA.LAESARangeSearcher
+        LAESA +-- elki.index.laesa.LAESA.LAESARangeSearcher
+        elki.index.laesa.LAESA.LAESARangeSearcher <|-- elki.index.laesa.LAESA.LAESARangeByObjectSearcher
+        LAESA +-- elki.index.laesa.LAESA.LAESARangeByObjectSearcher
+        elki.index.laesa.LAESA.LAESARangeSearcher <|-- elki.index.laesa.LAESA.LAESARangeByDBIDSearcher
+        LAESA +-- elki.index.laesa.LAESA.LAESARangeByDBIDSearcher
+        elki.index.IndexFactory <|.. elki.index.laesa.LAESA.Factory
+        LAESA +-- elki.index.laesa.LAESA.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.laesa.LAESA.Factory.Par
+        elki.index.laesa.LAESA.Factory +-- elki.index.laesa.LAESA.Factory.Par
+    }
+
+    namespace elki.index {
+        interface RangeIndex<O> [[../RangeIndex.html]] {
+            {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+        interface KNNIndex<O> [[../KNNIndex.html]] {
+            {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        }
+        interface IndexFactory<V> [[../IndexFactory.html]] {
+            {abstract} +instantiate(Relation<V>): Index
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+    }
+
+    namespace elki.database.query.knn {
+        interface KNNSearcher<O> [[../../database/query/knn/KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+    }
+
+    namespace elki.database.query.range {
+        interface RangeSearcher<O> [[../../database/query/range/RangeSearcher.html]] {
+            +getRange(O, double): DoubleDBIDList
+            {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

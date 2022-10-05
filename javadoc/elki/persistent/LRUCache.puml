@@ -1,0 +1,39 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LRUCache\n<size:10>elki.persistent" as elki.persistent.LRUCache<P extends Page> [[LRUCache.html]] {
+        {static} -LOG: Logging
+        #cacheSizeBytes: int
+        #cacheSize: int
+        -map: LinkedHashMap<Integer, P extends Page>
+        #file: PageFile<P extends Page>
+        +LRUCache(int, PageFile<P extends Page>)
+        +readPage(int): P extends Page
+        +writePage(int, P extends Page): void
+        +deletePage(int): void
+        #expirePage(P extends Page): void
+        +setPageID(P extends Page): int
+        +getNextPageID(): int
+        +setNextPageID(int): void
+        +getPageSize(): int
+        +initialize(PageHeader): boolean
+        +close(): void
+        +flush(): void
+        +clear(): void
+        +setCacheSize(int): void
+        +logStatistics(): void
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractPageFile\n<size:10>elki.persistent" as elki.persistent.AbstractPageFile<P extends Page> [[AbstractPageFile.html]] {
+        {abstract} #getLogger(): Logging
+        {abstract} #writePage(int, P extends Page): void
+    }
+
+    elki.persistent.AbstractPageFile <|-- elki.persistent.LRUCache
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

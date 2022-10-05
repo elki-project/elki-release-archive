@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DoubleRelation.Consumer\n<size:10>elki.database.relation" as elki.database.relation.DoubleRelation.Consumer [[DoubleRelation.Consumer.html]] {
+        {abstract} +accept(DBIDRef, double): void
+    }
+
+    interface "<size:14>DoubleRelation\n<size:10>elki.database.relation" as elki.database.relation.DoubleRelation [[DoubleRelation.html]] {
+        {abstract} +doubleValue(DBIDRef): double
+        {abstract} +set(DBIDRef, double): void
+        {abstract} +--insert--(DBIDRef, Double): void
+    }
+
+    elki.database.relation.DoubleRelation +-- elki.database.relation.DoubleRelation.Consumer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

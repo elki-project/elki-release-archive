@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VPTree.VPTreeKNNDBIDSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreeKNNDBIDSearcher [[VPTree.VPTreeKNNDBIDSearcher.html]] {
+        -query: DBIDRef
+        +getKNN(DBIDRef, int): KNNList
+        #queryDistance(DBIDRef): double
+    }
+
+    abstract class "<size:14>VPTree.VPTreeKNNSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreeKNNSearcher [[VPTree.VPTreeKNNSearcher.html]] {
+        {abstract} #queryDistance(DBIDRef): double
+    }
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<DBIDRef> [[../../../../database/query/knn/KNNSearcher.html]] {
+        {abstract} +getKNN(DBIDRef, int): KNNList
+    }
+    class "<size:14>VPTree\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree<O> [[VPTree.html]]
+
+    elki.index.tree.metrical.vptree.VPTree.VPTreeKNNSearcher <|-- elki.index.tree.metrical.vptree.VPTree.VPTreeKNNDBIDSearcher
+    elki.database.query.knn.KNNSearcher <|.. elki.index.tree.metrical.vptree.VPTree.VPTreeKNNDBIDSearcher
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeKNNDBIDSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

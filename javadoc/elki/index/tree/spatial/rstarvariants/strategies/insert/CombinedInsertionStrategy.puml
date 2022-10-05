@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CombinedInsertionStrategy\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.insert" as elki.index.tree.spatial.rstarvariants.strategies.insert.CombinedInsertionStrategy [[CombinedInsertionStrategy.html]] {
+        ~dirStrategy: InsertionStrategy
+        ~leafStrategy: InsertionStrategy
+        +CombinedInsertionStrategy(InsertionStrategy, InsertionStrategy)
+        +choose(A, ArrayAdapter<? extends SpatialComparable, A>, SpatialComparable, int, int): int
+    }
+
+    interface "<size:14>InsertionStrategy\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.insert" as elki.index.tree.spatial.rstarvariants.strategies.insert.InsertionStrategy [[InsertionStrategy.html]] {
+        {abstract} +choose(A, ArrayAdapter<? extends SpatialComparable, A>, SpatialComparable, int, int): int
+    }
+    class "<size:14>CombinedInsertionStrategy.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.insert" as elki.index.tree.spatial.rstarvariants.strategies.insert.CombinedInsertionStrategy.Par [[CombinedInsertionStrategy.Par.html]]
+
+    elki.index.tree.spatial.rstarvariants.strategies.insert.InsertionStrategy <|.. elki.index.tree.spatial.rstarvariants.strategies.insert.CombinedInsertionStrategy
+    elki.index.tree.spatial.rstarvariants.strategies.insert.CombinedInsertionStrategy +-- elki.index.tree.spatial.rstarvariants.strategies.insert.CombinedInsertionStrategy.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

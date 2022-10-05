@@ -1,0 +1,41 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>P3C\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.P3C [[P3C.html]] {
+        {static} -LOG: Logging
+        #poissonThreshold: double
+        #maxEmIterations: int
+        #emDelta: double
+        #minClusterSize: int
+        #alpha: double
+        +P3C(double, double, int, double, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends NumberVector>): Clustering<SubspaceModel>
+        -constructOneSignatures(SetDBIDs[], long[]): ArrayList<Signature>
+        -mergeClusterCores(int, ArrayList<Signature>): ArrayList<Signature>
+        -pruneRedundantClusterCores(ArrayList<Signature>): ArrayList<Signature>
+        -partitionData(Relation<? extends NumberVector>, int): SetDBIDs[]
+        #unionDBIDs(DBIDs[], int, int): HashSetModifiableDBIDs
+        -chiSquaredUniformTest(SetDBIDs[], long[], int): int
+        -computeFuzzyMembership(Relation<? extends NumberVector>, ArrayList<Signature>, ModifiableDBIDs, WritableDataStore<double[]>, List<MultivariateGaussianModel>, int): void
+        -assignUnassigned(Relation<? extends NumberVector>, WritableDataStore<double[]>, List<MultivariateGaussianModel>, ModifiableDBIDs): void
+        -hardClustering(WritableDataStore<double[]>, List<Signature>, DBIDs): ArrayList<ClusterCandidate>
+        -findOutliers(Relation<? extends NumberVector>, List<MultivariateGaussianModel>, ArrayList<ClusterCandidate>, ModifiableDBIDs): void
+        #mergeSignatures(Signature, Signature, int): Signature
+    }
+
+    interface "<size:14>SubspaceClusteringAlgorithm\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.SubspaceClusteringAlgorithm<SubspaceModel> [[SubspaceClusteringAlgorithm.html]]
+    class "<size:14>P3C.Signature\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.P3C.Signature [[P3C.Signature.html]]
+    class "<size:14>P3C.ClusterCandidate\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.P3C.ClusterCandidate [[P3C.ClusterCandidate.html]]
+    class "<size:14>P3C.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.P3C.Par [[P3C.Par.html]]
+
+    elki.clustering.subspace.SubspaceClusteringAlgorithm <|.. elki.clustering.subspace.P3C
+    elki.clustering.subspace.P3C +-- elki.clustering.subspace.P3C.Signature
+    elki.clustering.subspace.P3C +-- elki.clustering.subspace.P3C.ClusterCandidate
+    elki.clustering.subspace.P3C +-- elki.clustering.subspace.P3C.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

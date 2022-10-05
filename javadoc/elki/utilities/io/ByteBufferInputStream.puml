@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByteBufferInputStream\n<size:10>elki.utilities.io" as elki.utilities.io.ByteBufferInputStream [[ByteBufferInputStream.html]] {
+        ~buffer: ByteBuffer
+        +ByteBufferInputStream(ByteBuffer)
+        +read(): int
+        +read(byte[], int, int): int
+    }
+
+    abstract class "<size:14>InputStream\n<size:10>java.io" as java.io.InputStream {
+        {abstract} +read(): int
+    }
+
+    java.io.InputStream <|-- elki.utilities.io.ByteBufferInputStream
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

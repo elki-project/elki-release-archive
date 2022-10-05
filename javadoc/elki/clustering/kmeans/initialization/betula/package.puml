@@ -1,0 +1,131 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.kmeans.initialization.betula {
+
+        interface CFInitWeight [[CFInitWeight.html]] {
+            {abstract} +squaredWeight(ClusterFeature, ClusterFeature): double
+        }
+
+        class CFKPlusPlusTree [[CFKPlusPlusTree.html]] {
+            ~firstUniform: boolean
+            ~maxdepth: int
+            +CFKPlusPlusTree(CFInitWeight, boolean, int, RandomFactory)
+            +chooseInitialMeans(CFTree<?>, List<? extends ClusterFeature>, int): double[]
+            -chooseNextNode(CFNode<?>, List<? extends ClusterFeature>, Random): AsClusterFeature
+        }
+
+        class elki.clustering.kmeans.initialization.betula.CFKPlusPlusTree.Par [[CFKPlusPlusTree.Par.html]] {
+            {static} +DEPTH_ID: OptionID
+            {static} +KMPP_DISTANCE_ID: OptionID
+            {static} +FIRST_UNIFORM_ID: OptionID
+            ~firstUniform: boolean
+            ~depth: int
+            +configure(Parameterization): void
+            +make(): CFKPlusPlusTree
+        }
+
+        class SquaredEuclideanWeight [[SquaredEuclideanWeight.html]] {
+            +squaredWeight(ClusterFeature, ClusterFeature): double
+        }
+
+        class CFKPlusPlusTrunk [[CFKPlusPlusTrunk.html]] {
+            +CFKPlusPlusTrunk(CFInitWeight, boolean, RandomFactory)
+            +chooseInitialMeans(CFTree<?>, List<? extends ClusterFeature>, int): double[]
+        }
+
+        class elki.clustering.kmeans.initialization.betula.CFKPlusPlusTrunk.Par [[CFKPlusPlusTrunk.Par.html]] {
+            +configure(Parameterization): void
+            +make(): CFKPlusPlusTrunk
+        }
+
+        class CFKPlusPlusLeaves [[CFKPlusPlusLeaves.html]] {
+            #firstUniform: boolean
+            +CFKPlusPlusLeaves(CFInitWeight, boolean, RandomFactory)
+            +chooseInitialMeans(CFTree<?>, List<? extends ClusterFeature>, int): double[]
+            +run(CFTree<?>, List<? extends ClusterFeature>, int): double[]
+            -sampleFirst(ClusterFeature, List<? extends AsClusterFeature>, Random): ClusterFeature
+            -initialWeights(ClusterFeature, List<? extends AsClusterFeature>, double[]): double
+            -updateWeights(ClusterFeature, List<? extends AsClusterFeature>, double[]): double
+        }
+
+        class elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves.Par [[CFKPlusPlusLeaves.Par.html]] {
+            {static} +KMPP_DISTANCE_ID: OptionID
+            {static} +FIRST_UNIFORM_ID: OptionID
+            ~firstUniform: boolean
+            +configure(Parameterization): void
+            +make(): CFKPlusPlusLeaves
+        }
+
+        class InterclusterWeight [[InterclusterWeight.html]] {
+            +squaredWeight(ClusterFeature, ClusterFeature): double
+        }
+
+        abstract class AbstractCFKMeansInitialization [[AbstractCFKMeansInitialization.html]] {
+            #rf: RandomFactory
+            +AbstractCFKMeansInitialization(RandomFactory)
+            {abstract} +chooseInitialMeans(CFTree<?>, List<? extends ClusterFeature>, int): double[]
+        }
+
+        abstract class elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization.Par [[AbstractCFKMeansInitialization.Par.html]] {
+            {static} +SEED_ID: OptionID
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+        }
+
+        class CFWeightedRandomlyChosen [[CFWeightedRandomlyChosen.html]] {
+            +CFWeightedRandomlyChosen(RandomFactory)
+            +chooseInitialMeans(CFTree<?>, List<? extends ClusterFeature>, int): double[]
+        }
+
+        class elki.clustering.kmeans.initialization.betula.CFWeightedRandomlyChosen.Par [[CFWeightedRandomlyChosen.Par.html]] {
+            +make(): CFWeightedRandomlyChosen
+        }
+
+        class CFRandomlyChosen [[CFRandomlyChosen.html]] {
+            +CFRandomlyChosen(RandomFactory)
+            +chooseInitialMeans(CFTree<?>, List<? extends ClusterFeature>, int): double[]
+        }
+
+        class elki.clustering.kmeans.initialization.betula.CFRandomlyChosen.Par [[CFRandomlyChosen.Par.html]] {
+            +make(): CFRandomlyChosen
+        }
+
+        class VarianceWeight [[VarianceWeight.html]] {
+            +squaredWeight(ClusterFeature, ClusterFeature): double
+        }
+
+        AbstractCFKMeansInitialization <|-- CFKPlusPlusTree
+        CFKPlusPlusTree --> CFInitWeight: dist
+        elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.betula.CFKPlusPlusTree.Par
+        CFKPlusPlusTree +-- elki.clustering.kmeans.initialization.betula.CFKPlusPlusTree.Par
+        elki.clustering.kmeans.initialization.betula.CFKPlusPlusTree.Par --> CFInitWeight: dist
+        CFInitWeight <|.. SquaredEuclideanWeight
+        CFKPlusPlusLeaves <|-- CFKPlusPlusTrunk
+        elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves.Par <|-- elki.clustering.kmeans.initialization.betula.CFKPlusPlusTrunk.Par
+        CFKPlusPlusTrunk +-- elki.clustering.kmeans.initialization.betula.CFKPlusPlusTrunk.Par
+        AbstractCFKMeansInitialization <|-- CFKPlusPlusLeaves
+        CFKPlusPlusLeaves --> CFInitWeight: distance
+        elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves.Par
+        CFKPlusPlusLeaves +-- elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves.Par
+        elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves.Par --> CFInitWeight: dist
+        CFInitWeight <|.. InterclusterWeight
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization.Par
+        AbstractCFKMeansInitialization +-- elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization.Par
+        AbstractCFKMeansInitialization <|-- CFWeightedRandomlyChosen
+        elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.betula.CFWeightedRandomlyChosen.Par
+        CFWeightedRandomlyChosen +-- elki.clustering.kmeans.initialization.betula.CFWeightedRandomlyChosen.Par
+        AbstractCFKMeansInitialization <|-- CFRandomlyChosen
+        elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.betula.CFRandomlyChosen.Par
+        CFRandomlyChosen +-- elki.clustering.kmeans.initialization.betula.CFRandomlyChosen.Par
+        CFInitWeight <|.. VarianceWeight
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

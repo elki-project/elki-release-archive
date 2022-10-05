@@ -1,0 +1,50 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AffineProjection\n<size:10>elki.visualization.projections" as elki.visualization.projections.AffineProjection [[AffineProjection.html]] {
+        -proj: AffineTransformation
+        -viewport: CanvasSize
+        +AffineProjection(Projector, LinearScale[], AffineTransformation)
+        +projectScaledToRender(double[]): double[]
+        +projectRenderToScaled(double[]): double[]
+        +projectRelativeScaledToRender(double[]): double[]
+        +projectRelativeRenderToScaled(double[]): double[]
+        +estimateViewport(): CanvasSize
+        {static} +axisProjection(int, int, int): AffineTransformation
+        +fastProjectDataToRenderSpace(double[]): double[]
+        +fastProjectDataToRenderSpace(NumberVector): double[]
+        +fastProjectDataToScaledSpace(double[]): double[]
+        +fastProjectDataToScaledSpace(NumberVector): double[]
+        +fastProjectScaledToRenderSpace(double[]): double[]
+        +fastProjectRelativeDataToRenderSpace(double[]): double[]
+        +fastProjectRelativeDataToRenderSpace(NumberVector): double[]
+        +fastProjectRelativeScaledToRenderSpace(double[]): double[]
+        +fastProjectRenderToDataSpace(double, double): double[]
+        +fastProjectRenderToScaledSpace(double, double): double[]
+        +getVisibleDimensions2D(): long[]
+    }
+
+    abstract class "<size:14>AbstractFullProjection\n<size:10>elki.visualization.projections" as elki.visualization.projections.AbstractFullProjection [[AbstractFullProjection.html]]
+    interface "<size:14>Projection2D\n<size:10>elki.visualization.projections" as elki.visualization.projections.Projection2D [[Projection2D.html]] {
+        {abstract} +fastProjectDataToRenderSpace(double[]): double[]
+        {abstract} +fastProjectDataToRenderSpace(NumberVector): double[]
+        {abstract} +fastProjectDataToScaledSpace(double[]): double[]
+        {abstract} +fastProjectDataToScaledSpace(NumberVector): double[]
+        {abstract} +fastProjectScaledToRenderSpace(double[]): double[]
+        {abstract} +fastProjectRenderToDataSpace(double, double): double[]
+        {abstract} +fastProjectRenderToScaledSpace(double, double): double[]
+        {abstract} +fastProjectRelativeDataToRenderSpace(double[]): double[]
+        {abstract} +fastProjectRelativeDataToRenderSpace(NumberVector): double[]
+        {abstract} +fastProjectRelativeScaledToRenderSpace(double[]): double[]
+        {abstract} +estimateViewport(): CanvasSize
+        {abstract} +getVisibleDimensions2D(): long[]
+    }
+
+    elki.visualization.projections.AbstractFullProjection <|-- elki.visualization.projections.AffineProjection
+    elki.visualization.projections.Projection2D <|.. elki.visualization.projections.AffineProjection
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

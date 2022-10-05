@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NNDescent.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.NNDescent.Factory.Par<O> {
+        {static} +SEED_ID: OptionID
+        {static} +DELTA_ID: OptionID
+        {static} +RHO_ID: OptionID
+        {static} +INITIAL_ID: OptionID
+        {static} +ITER_ID: OptionID
+        -rnd: RandomFactory
+        -delta: double
+        -rho: double
+        -noInitialNeighbors: boolean
+        -iterations: int
+        +configure(Parameterization): void
+        +make(): Factory<O>
+    }
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par<O> {
+        {abstract} +make(): Factory<O>
+    }
+    class "<size:14>NNDescent.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.NNDescent.Factory<O> [[NNDescent.Factory.html]]
+
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.NNDescent.Factory.Par
+    elki.index.preprocessed.knn.NNDescent.Factory +-- elki.index.preprocessed.knn.NNDescent.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

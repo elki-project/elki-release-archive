@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HiCSDependence.Par\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.HiCSDependence.Par [[HiCSDependence.Par.html]] {
+        {static} +M_ID: OptionID
+        {static} +ALPHA_ID: OptionID
+        {static} +TEST_ID: OptionID
+        {static} +SEED_ID: OptionID
+        -statTest: GoodnessOfFitTest
+        -m: int
+        -alpha: double
+        -rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): HiCSDependence
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>HiCSDependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.HiCSDependence [[HiCSDependence.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.HiCSDependence.Par
+    elki.math.statistics.dependence.HiCSDependence +-- elki.math.statistics.dependence.HiCSDependence.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

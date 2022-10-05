@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.evaluation.index {
+
+        class IndexPurity [[IndexPurity.html]] {
+            +processNewResult(Object): void
+        }
+
+        class IndexStatistics [[IndexStatistics.html]] {
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.index.IndexStatistics.IndexMetaResult [[IndexStatistics.IndexMetaResult.html]] {
+            +IndexMetaResult(Collection<Pair<String, String>>, Collection<String>)
+        }
+
+        elki.evaluation.Evaluator <|.. IndexPurity
+        elki.evaluation.Evaluator <|.. IndexStatistics
+        elki.result.CollectionResult <|-- elki.evaluation.index.IndexStatistics.IndexMetaResult
+        IndexStatistics +-- elki.evaluation.index.IndexStatistics.IndexMetaResult
+    }
+
+    namespace elki.evaluation {
+        interface Evaluator [[../Evaluator.html]]
+    }
+
+    namespace elki.result {
+        class CollectionResult<O> [[../../result/CollectionResult.html]] {
+            -col: Collection<O>
+            -header: Collection<String>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

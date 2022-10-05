@@ -1,0 +1,69 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleParallel\n<size:10>elki.visualization.projections" as elki.visualization.projections.SimpleParallel [[SimpleParallel.html]] {
+        ~visDims: int
+        ~flags: byte[]
+        ~dimOrder: int[]
+        -scales: LinearScale[]
+        -p: Projector
+        {static} ~FLAG_HIDDEN: byte
+        {static} ~FLAG_INVERTED: byte
+        +SimpleParallel(Projector, LinearScale[])
+        +getScale(int): LinearScale
+        +isAxisInverted(int): boolean
+        +setAxisInverted(int, boolean): void
+        +toggleAxisInverted(int): void
+        +isDimInverted(int): boolean
+        +setDimInverted(int, boolean): void
+        +toggleDimInverted(int): void
+        +getAxisScale(int): LinearScale
+        #isDimHidden(int): boolean
+        +isAxisVisible(int): boolean
+        +setAxisVisible(int, boolean): void
+        +toggleAxisVisible(int): void
+        +getVisibleDimensions(): int
+        +getDimForAxis(int): int
+        +getDimForVisibleAxis(int): int
+        +swapAxes(int, int): void
+        +moveAxis(int, int): void
+        +fastProjectDataToRenderSpace(NumberVector): double[]
+        +fastProjectDataToRenderSpace(double[]): double[]
+        +fastProjectRenderToDataSpace(double, int): double
+        +fastProjectDataToRenderSpace(double, int): double
+        +getAxisForDim(int): int
+        +getInputDimensionality(): int
+        +getMenuName(): String
+        +getProjector(): Projector
+    }
+
+    interface "<size:14>ProjectionParallel\n<size:10>elki.visualization.projections" as elki.visualization.projections.ProjectionParallel [[ProjectionParallel.html]] {
+        {abstract} +isAxisInverted(int): boolean
+        {abstract} +setAxisInverted(int, boolean): void
+        {abstract} +toggleAxisInverted(int): void
+        {abstract} +isDimInverted(int): boolean
+        {abstract} +setDimInverted(int, boolean): void
+        {abstract} +toggleDimInverted(int): void
+        {abstract} +getAxisScale(int): LinearScale
+        {abstract} +isAxisVisible(int): boolean
+        {abstract} +setAxisVisible(int, boolean): void
+        {abstract} +toggleAxisVisible(int): void
+        {abstract} +getVisibleDimensions(): int
+        {abstract} +swapAxes(int, int): void
+        {abstract} +moveAxis(int, int): void
+        {abstract} +getDimForAxis(int): int
+        {abstract} +getDimForVisibleAxis(int): int
+        {abstract} +fastProjectDataToRenderSpace(double[]): double[]
+        {abstract} +fastProjectDataToRenderSpace(NumberVector): double[]
+        {abstract} +fastProjectDataToRenderSpace(double, int): double
+        {abstract} +fastProjectRenderToDataSpace(double, int): double
+        {abstract} +getAxisForDim(int): int
+    }
+
+    elki.visualization.projections.ProjectionParallel <|.. elki.visualization.projections.SimpleParallel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrettyMarkers\n<size:10>elki.visualization.style.marker" as elki.visualization.style.marker.PrettyMarkers [[PrettyMarkers.html]] {
+        -colors: ColorLibrary
+        {static} -DEFAULT_PREFIX: String
+        -prefix: String
+        -dotcolor: String
+        -graycolor: String
+        ~interpol: ColorInterpolation
+        +PrettyMarkers(String, StyleLibrary)
+        +PrettyMarkers(StyleLibrary)
+        +plotMarker(SVGPlot, double, double, int, double, double): Element
+        #plotSimple(SVGPlot, double, double, double, String): Element
+        +useMarker(SVGPlot, double, double, int, double, double): Element
+    }
+
+    interface "<size:14>MarkerLibrary\n<size:10>elki.visualization.style.marker" as elki.visualization.style.marker.MarkerLibrary [[MarkerLibrary.html]] {
+        {abstract} +useMarker(SVGPlot, double, double, int, double, double): Element
+    }
+
+    elki.visualization.style.marker.MarkerLibrary <|.. elki.visualization.style.marker.PrettyMarkers
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

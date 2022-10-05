@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MaximumF1Evaluation.Par\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.MaximumF1Evaluation.Par [[MaximumF1Evaluation.Par.html]] {
+        +make(): MaximumF1Evaluation
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>MaximumF1Evaluation\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.MaximumF1Evaluation [[MaximumF1Evaluation.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.scores.MaximumF1Evaluation.Par
+    elki.evaluation.scores.MaximumF1Evaluation +-- elki.evaluation.scores.MaximumF1Evaluation.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

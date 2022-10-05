@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance<N, M> [[AbstractRangeQueryNeighborPredicate.Instance.html]] {
+        #ids: DBIDs
+        #storage: DataStore<M>
+        +Instance(DBIDs, DataStore<M>)
+        +getIDs(): DBIDs
+    }
+
+    interface "<size:14>NeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.NeighborPredicate.Instance<N> [[NeighborPredicate.Instance.html]] {
+        {abstract} +getNeighbors(DBIDRef): N
+        {abstract} +getIDs(): DBIDs
+        {abstract} +iterDBIDs(N): DBIDIter
+    }
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate<O, M, N> [[AbstractRangeQueryNeighborPredicate.html]] {
+        {abstract} #computeLocalModel(DBIDRef, DoubleDBIDList, Relation<? extends O>): M
+        {abstract} ~getLogger(): Logging
+    }
+
+    elki.clustering.dbscan.predicates.NeighborPredicate.Instance <|.. elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance
+    elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate +-- elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

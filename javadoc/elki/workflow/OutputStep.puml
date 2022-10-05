@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutputStep\n<size:10>elki.workflow" as elki.workflow.OutputStep [[OutputStep.html]] {
+        -resulthandlers: List<? extends ResultHandler>
+        {static} #defaultHandlers: ArrayList<Class<? extends ResultHandler>>
+        +OutputStep(List<? extends ResultHandler>)
+        +runResultHandlers(Database): void
+        {static} +setDefaultHandlerWriter(): void
+        {static} +setDefaultHandlerVisualizer(): void
+    }
+
+    interface "<size:14>WorkflowStep\n<size:10>elki.workflow" as elki.workflow.WorkflowStep [[WorkflowStep.html]]
+    class "<size:14>OutputStep.Par\n<size:10>elki.workflow" as elki.workflow.OutputStep.Par [[OutputStep.Par.html]]
+
+    elki.workflow.WorkflowStep <|.. elki.workflow.OutputStep
+    elki.workflow.OutputStep +-- elki.workflow.OutputStep.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

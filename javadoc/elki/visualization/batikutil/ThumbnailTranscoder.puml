@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ThumbnailTranscoder\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.ThumbnailTranscoder [[ThumbnailTranscoder.html]] {
+        -lastimg: BufferedImage
+        +createImage(int, int): BufferedImage
+        +writeImage(BufferedImage, TranscoderOutput): void
+        +getLastImage(): BufferedImage
+    }
+
+    abstract class "<size:14>ImageTranscoder\n<size:10>org.apache.batik.transcoder.image" as org.apache.batik.transcoder.image.ImageTranscoder {
+        {abstract} +createImage(int, int): BufferedImage
+        {abstract} +writeImage(BufferedImage, TranscoderOutput): void
+    }
+
+    org.apache.batik.transcoder.image.ImageTranscoder <|-- elki.visualization.batikutil.ThumbnailTranscoder
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

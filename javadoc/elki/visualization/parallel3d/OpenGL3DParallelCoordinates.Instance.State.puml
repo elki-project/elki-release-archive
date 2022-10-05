@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>OpenGL3DParallelCoordinates.Instance.State\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.State [[OpenGL3DParallelCoordinates.Instance.State.html]] {
+        {static} +PREPARATION
+        {static} +EXPLORE
+        {static} +MENU
+    }
+
+    class "<size:14>OpenGL3DParallelCoordinates.Instance\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance<O extends NumberVector> [[OpenGL3DParallelCoordinates.Instance.html]]
+
+    elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.State
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

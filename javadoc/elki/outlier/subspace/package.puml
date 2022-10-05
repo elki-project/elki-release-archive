@@ -1,0 +1,217 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.subspace {
+
+        class OutRankS1 [[OutRankS1.html]] {
+            #clusteralg: SubspaceClusteringAlgorithm<? extends SubspaceModel>
+            ~alpha: double
+            +OutRankS1(SubspaceClusteringAlgorithm<? extends SubspaceModel>, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +autorun(Database): OutlierResult
+        }
+
+        class elki.outlier.subspace.OutRankS1.Par [[OutRankS1.Par.html]] {
+            {static} +ALGORITHM_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            #algorithm: SubspaceClusteringAlgorithm<? extends SubspaceModel>
+            #alpha: double
+            +configure(Parameterization): void
+            +make(): OutRankS1
+        }
+
+        class AggarwalYuNaive [[AggarwalYuNaive.html]] {
+            {static} -LOG: Logging
+            +AggarwalYuNaive(int, int)
+            +run(Relation<? extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.subspace.AggarwalYuNaive.Par [[AggarwalYuNaive.Par.html]] {
+            +make(): AggarwalYuNaive
+        }
+
+        class AggarwalYuEvolutionary [[AggarwalYuEvolutionary.html]] {
+            {static} -LOG: Logging
+            {static} #MAX_ITERATIONS: int
+            {static} #CONVERGENCE: double
+            -m: int
+            -rnd: RandomFactory
+            +AggarwalYuEvolutionary(int, int, int, RandomFactory)
+            +run(Relation<? extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.subspace.AggarwalYuEvolutionary.EvolutionarySearch [[AggarwalYuEvolutionary.EvolutionarySearch.html]] {
+            ~dbsize: int
+            ~dim: int
+            ~ranges: ArrayList<ArrayList<DBIDs>>
+            -random: Random
+            +EvolutionarySearch(Relation<? extends NumberVector>, ArrayList<ArrayList<DBIDs>>, Random)
+            +run(): UnorderedIter
+            -checkConvergence(Collection<Individuum>): boolean
+            -initialPopulation(int): ArrayList<Individuum>
+            -rouletteRankSelection(ArrayList<Individuum>): ArrayList<Individuum>
+            -mutation(ArrayList<Individuum>, double, double): ArrayList<Individuum>
+            -makeIndividuum(short[]): Individuum
+            -crossoverOptimized(ArrayList<Individuum>): ArrayList<Individuum>
+            -recombineOptimized(Individuum, Individuum): Pair<Individuum, Individuum>
+            -combineRecursive(IntArrayList, int, short[], Individuum, Individuum): Individuum
+        }
+
+        class elki.outlier.subspace.AggarwalYuEvolutionary.Individuum [[AggarwalYuEvolutionary.Individuum.html]] {
+            ~fitness: double
+            ~gene: short[]
+            +Individuum(double, short[])
+            +getGene(): short[]
+            +getFitness(): double
+            {static} +nullIndividuum(int): Individuum
+            +compareTo(Individuum): int
+        }
+
+        class elki.outlier.subspace.AggarwalYuEvolutionary.Par [[AggarwalYuEvolutionary.Par.html]] {
+            {static} +M_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #m: int
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): AggarwalYuEvolutionary
+        }
+
+        abstract class AbstractAggarwalYuOutlier [[AbstractAggarwalYuOutlier.html]] {
+            {static} +DONT_CARE: short
+            {static} +GENE_OFFSET: short
+            #phi: int
+            #k: int
+            +AbstractAggarwalYuOutlier(int, int)
+            #buildRanges(Relation<? extends NumberVector>): ArrayList<ArrayList<DBIDs>>
+            {static} #sparsity(int, int, int, double): double
+            #computeSubspace(int[], ArrayList<ArrayList<DBIDs>>): DBIDs
+            #computeSubspaceForGene(short[], ArrayList<ArrayList<DBIDs>>): DBIDs
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        abstract class elki.outlier.subspace.AbstractAggarwalYuOutlier.Par [[AbstractAggarwalYuOutlier.Par.html]] {
+            {static} +PHI_ID: OptionID
+            {static} +K_ID: OptionID
+            #phi: int
+            #k: int
+            +configure(Parameterization): void
+        }
+
+        class SOD<V extends NumberVector> [[SOD.html]] {
+            {static} -LOG: Logging
+            -knn: int
+            -alpha: double
+            -similarityFunction: Similarity<V extends NumberVector>
+            -models: boolean
+            +SOD(int, double, Similarity<V extends NumberVector>, boolean)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): OutlierResult
+            -getNearestNeighbors(Relation<V extends NumberVector>, SimilarityQuery<V extends NumberVector>, DBIDRef): DBIDs
+            {static} -computePerDimensionVariances(Relation<? extends NumberVector>, double[], DBIDs): double[]
+            -subspaceOutlierDegree(V extends NumberVector, double[], long[]): double
+        }
+
+        class elki.outlier.subspace.SOD.SODModel [[SOD.SODModel.html]] {
+            -center: double[]
+            -weightVector: long[]
+            +SODModel(double[], long[])
+            +writeToText(TextWriterStream, String): void
+        }
+
+        class elki.outlier.subspace.SOD.Par<V extends NumberVector> [[SOD.Par.html]] {
+            {static} +KNN_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            {static} +SIM_ID: OptionID
+            {static} +MODELS_ID: OptionID
+            -knn: int
+            -alpha: double
+            -similarityFunction: Similarity<V extends NumberVector>
+            -models: boolean
+            +configure(Parameterization): void
+            +make(): SOD<V extends NumberVector>
+        }
+
+        class OUTRES [[OUTRES.html]] {
+            {static} -LOG: Logging
+            -eps: double
+            {static} -K_S_CRITICAL001: double
+            +OUTRES(double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): OutlierResult
+            +outresScore(int, long[], DBIDRef, KernelDensityEstimator, DBIDs): double
+            -initialRange(DBIDRef, DBIDs, PrimitiveDistance<? super NumberVector>, double, KernelDensityEstimator, ModifiableDoubleDBIDList): DoubleDBIDList
+            -subsetNeighborhoodQuery(DoubleDBIDList, DBIDRef, PrimitiveDistance<? super NumberVector>, double, KernelDensityEstimator, ModifiableDoubleDBIDList): DoubleDBIDList
+            #relevantSubspace(long[], DoubleDBIDList, KernelDensityEstimator): boolean
+        }
+
+        class elki.outlier.subspace.OUTRES.KernelDensityEstimator [[OUTRES.KernelDensityEstimator.html]] {
+            ~kernel: KernelDensityFunction
+            ~relation: Relation<? extends NumberVector>
+            ~epsilons: double[]
+            ~hopttwo: double
+            ~dim: int
+            +KernelDensityEstimator(Relation<? extends NumberVector>, double)
+            #subspaceDensity(long[], DoubleDBIDList): double
+            #optimalBandwidth(int): double
+            #adjustedEps(int): double
+        }
+
+        class elki.outlier.subspace.OUTRES.Par [[OUTRES.Par.html]] {
+            {static} +D_ID: OptionID
+            #eps: double
+            +configure(Parameterization): void
+            +make(): OUTRES
+        }
+
+        elki.outlier.OutlierAlgorithm <|.. OutRankS1
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.subspace.OutRankS1.Par
+        OutRankS1 +-- elki.outlier.subspace.OutRankS1.Par
+        AbstractAggarwalYuOutlier <|-- AggarwalYuNaive
+        elki.outlier.subspace.AbstractAggarwalYuOutlier.Par <|-- elki.outlier.subspace.AggarwalYuNaive.Par
+        AggarwalYuNaive +-- elki.outlier.subspace.AggarwalYuNaive.Par
+        AbstractAggarwalYuOutlier <|-- AggarwalYuEvolutionary
+        AggarwalYuEvolutionary +-- elki.outlier.subspace.AggarwalYuEvolutionary.EvolutionarySearch
+        java.lang.Comparable <|.. elki.outlier.subspace.AggarwalYuEvolutionary.Individuum
+        AggarwalYuEvolutionary +-- elki.outlier.subspace.AggarwalYuEvolutionary.Individuum
+        elki.outlier.subspace.AbstractAggarwalYuOutlier.Par <|-- elki.outlier.subspace.AggarwalYuEvolutionary.Par
+        AggarwalYuEvolutionary +-- elki.outlier.subspace.AggarwalYuEvolutionary.Par
+        elki.outlier.OutlierAlgorithm <|.. AbstractAggarwalYuOutlier
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.subspace.AbstractAggarwalYuOutlier.Par
+        AbstractAggarwalYuOutlier +-- elki.outlier.subspace.AbstractAggarwalYuOutlier.Par
+        elki.outlier.OutlierAlgorithm <|.. SOD
+        elki.result.textwriter.TextWriteable <|.. elki.outlier.subspace.SOD.SODModel
+        SOD +-- elki.outlier.subspace.SOD.SODModel
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.subspace.SOD.Par
+        SOD +-- elki.outlier.subspace.SOD.Par
+        elki.outlier.OutlierAlgorithm <|.. OUTRES
+        OUTRES +-- elki.outlier.subspace.OUTRES.KernelDensityEstimator
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.subspace.OUTRES.Par
+        OUTRES +-- elki.outlier.subspace.OUTRES.Par
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    namespace elki.result.textwriter {
+        interface TextWriteable [[../../result/textwriter/TextWriteable.html]] {
+            {abstract} +writeToText(TextWriterStream, String): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ComputeSimilarityMatrixImage.SimilarityMatrix\n<size:10>elki.evaluation.similaritymatrix" as elki.evaluation.similaritymatrix.ComputeSimilarityMatrixImage.SimilarityMatrix [[ComputeSimilarityMatrixImage.SimilarityMatrix.html]] {
+        {static} -IMGFILEPREFIX: String
+        ~relation: Relation<?>
+        ~ids: ArrayDBIDs
+        ~img: RenderedImage
+        ~imgfile: File
+        +SimilarityMatrix(RenderedImage, Relation<?>, ArrayDBIDs)
+        +getImage(): RenderedImage
+        +getAsFile(): File
+        +getRelation(): Relation<?>
+        +getIDs(): ArrayDBIDs
+        +getLongName(): String
+        +getShortName(): String
+    }
+
+    interface "<size:14>PixmapResult\n<size:10>elki.result" as elki.result.PixmapResult [[../../result/PixmapResult.html]] {
+        {abstract} +getImage(): RenderedImage
+        {abstract} +getAsFile(): File
+    }
+    class "<size:14>ComputeSimilarityMatrixImage\n<size:10>elki.evaluation.similaritymatrix" as elki.evaluation.similaritymatrix.ComputeSimilarityMatrixImage<O> [[ComputeSimilarityMatrixImage.html]]
+
+    elki.result.PixmapResult <|.. elki.evaluation.similaritymatrix.ComputeSimilarityMatrixImage.SimilarityMatrix
+    elki.evaluation.similaritymatrix.ComputeSimilarityMatrixImage +-- elki.evaluation.similaritymatrix.ComputeSimilarityMatrixImage.SimilarityMatrix
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

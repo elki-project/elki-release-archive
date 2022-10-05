@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LaplaceKernel.Par\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.LaplaceKernel.Par [[LaplaceKernel.Par.html]] {
+        {static} +SIGMA_ID: OptionID
+        #sigma: double
+        +configure(Parameterization): void
+        +make(): LaplaceKernel
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LaplaceKernel\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.LaplaceKernel [[LaplaceKernel.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.kernel.LaplaceKernel.Par
+    elki.similarity.kernel.LaplaceKernel +-- elki.similarity.kernel.LaplaceKernel.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

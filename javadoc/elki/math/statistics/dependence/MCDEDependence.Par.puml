@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MCDEDependence.Par\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.MCDEDependence.Par [[MCDEDependence.Par.html]] {
+        {static} +M_ID: OptionID
+        {static} +ALPHA_ID: OptionID
+        {static} +BETA_ID: OptionID
+        {static} +SEED_ID: OptionID
+        {static} +TEST_ID: OptionID
+        #m: int
+        #alpha: double
+        #beta: double
+        -mcdeTest: MCDETest<?>
+        #rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): MCDEDependence
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>MCDEDependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.MCDEDependence [[MCDEDependence.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.dependence.MCDEDependence.Par
+    elki.math.statistics.dependence.MCDEDependence +-- elki.math.statistics.dependence.MCDEDependence.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.IntParameter [[IntParameter.html]] {
+        +IntParameter(OptionID, int)
+        +IntParameter(OptionID)
+        +getValueAsString(): String
+        #parseValue(Object): Integer
+        +getSyntax(): String
+        +intValue(): int
+        +grab(Parameterization, IntConsumer): boolean
+    }
+
+    abstract class "<size:14>NumberParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.NumberParameter<IntParameter, Integer> [[NumberParameter.html]]
+
+    elki.utilities.optionhandling.parameters.NumberParameter <|-- elki.utilities.optionhandling.parameters.IntParameter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

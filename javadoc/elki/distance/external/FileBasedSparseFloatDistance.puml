@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FileBasedSparseFloatDistance\n<size:10>elki.distance.external" as elki.distance.external.FileBasedSparseFloatDistance [[FileBasedSparseFloatDistance.html]] {
+        {static} -LOG: Logging
+        -cache: Long2FloatOpenHashMap
+        -parser: DistanceParser
+        -matrixfile: URI
+        -min: int
+        -max: int
+        #defaultDistance: float
+        +FileBasedSparseFloatDistance(DistanceParser, URI, float)
+        +instantiate(Relation<O extends DBID>): DistanceQuery<O extends DBID>
+        +distance(int, int): double
+        #loadCache(int, InputStream): void
+        {static} #makeKey(int, int): long
+        +checkRange(DBIDRange): void
+    }
+
+    abstract class "<size:14>AbstractDBIDRangeDistance\n<size:10>elki.distance" as elki.distance.AbstractDBIDRangeDistance [[../AbstractDBIDRangeDistance.html]]
+    class "<size:14>FileBasedSparseFloatDistance.Par\n<size:10>elki.distance.external" as elki.distance.external.FileBasedSparseFloatDistance.Par [[FileBasedSparseFloatDistance.Par.html]]
+
+    elki.distance.AbstractDBIDRangeDistance <|-- elki.distance.external.FileBasedSparseFloatDistance
+    elki.distance.external.FileBasedSparseFloatDistance +-- elki.distance.external.FileBasedSparseFloatDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

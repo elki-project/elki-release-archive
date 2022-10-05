@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AlternateRefinement.Par\n<size:10>elki.clustering.kmedoids.initialization" as elki.clustering.kmedoids.initialization.AlternateRefinement.Par<O> [[AlternateRefinement.Par.html]] {
+        {static} +INIT_P: OptionID
+        {static} +MAXITER_P: OptionID
+        -inner: KMedoidsInitialization<O>
+        ~maxiter: int
+        +configure(Parameterization): void
+        +make(): AlternateRefinement<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AlternateRefinement\n<size:10>elki.clustering.kmedoids.initialization" as elki.clustering.kmedoids.initialization.AlternateRefinement<O> [[AlternateRefinement.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmedoids.initialization.AlternateRefinement.Par
+    elki.clustering.kmedoids.initialization.AlternateRefinement +-- elki.clustering.kmedoids.initialization.AlternateRefinement.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

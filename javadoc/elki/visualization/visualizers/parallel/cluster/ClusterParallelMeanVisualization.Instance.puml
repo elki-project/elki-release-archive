@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterParallelMeanVisualization.Instance\n<size:10>elki.visualization.visualizers.parallel.cluster" as elki.visualization.visualizers.parallel.cluster.ClusterParallelMeanVisualization.Instance [[ClusterParallelMeanVisualization.Instance.html]] {
+        {static} +CLUSTERMEAN: String
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+    }
+
+    abstract class "<size:14>AbstractParallelVisualization\n<size:10>elki.visualization.visualizers.parallel" as elki.visualization.visualizers.parallel.AbstractParallelVisualization<NumberVector> [[../AbstractParallelVisualization.html]]
+    interface "<size:14>DataStoreListener\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreListener [[../../../../database/datastore/DataStoreListener.html]] {
+        {abstract} +contentChanged(DataStoreEvent): void
+    }
+    class "<size:14>ClusterParallelMeanVisualization\n<size:10>elki.visualization.visualizers.parallel.cluster" as elki.visualization.visualizers.parallel.cluster.ClusterParallelMeanVisualization [[ClusterParallelMeanVisualization.html]]
+
+    elki.visualization.visualizers.parallel.AbstractParallelVisualization <|-- elki.visualization.visualizers.parallel.cluster.ClusterParallelMeanVisualization.Instance
+    elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.parallel.cluster.ClusterParallelMeanVisualization.Instance
+    elki.visualization.visualizers.parallel.cluster.ClusterParallelMeanVisualization +-- elki.visualization.visualizers.parallel.cluster.ClusterParallelMeanVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

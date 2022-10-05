@@ -1,0 +1,72 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractIntegerDBIDFactory\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.AbstractIntegerDBIDFactory [[AbstractIntegerDBIDFactory.html]] {
+        ~invalid: DBID
+        +importInteger(int): DBID
+        +assignVar(DBIDVar, int): DBIDVar
+        +compare(DBIDRef, DBIDRef): int
+        +equal(DBIDRef, DBIDRef): boolean
+        +toString(DBIDRef): String
+        +newVar(DBIDRef): DBIDVar
+        +newArray(): ArrayModifiableDBIDs
+        +newHashSet(): HashSetModifiableDBIDs
+        +newArray(int): ArrayModifiableDBIDs
+        +newHashSet(int): HashSetModifiableDBIDs
+        +newArray(DBIDs): ArrayModifiableDBIDs
+        +newHashSet(DBIDs): HashSetModifiableDBIDs
+        +newPair(DBIDRef, DBIDRef): DBIDPair
+        +newPair(double, DBIDRef): DoubleDBIDPair
+        +newMinHeap(int): DoubleDBIDHeap
+        +newMaxHeap(int): DoubleDBIDHeap
+        +newHeap(int): KNNHeap
+        +newHeap(KNNList): KNNHeap
+        +newDistanceDBIDList(int): ModifiableDoubleDBIDList
+        +newDistanceDBIDList(): ModifiableDoubleDBIDList
+        +makeUnmodifiable(DBIDs): StaticDBIDs
+        +getDBIDSerializer(): ByteBufferSerializer<DBID>
+        +getDBIDSerializerStatic(): FixedSizeByteBufferSerializer<DBID>
+        +getTypeRestriction(): Class<? extends DBID>
+        +invalid(): DBIDRef
+    }
+
+    interface "<size:14>DBIDFactory\n<size:10>elki.database.ids" as elki.database.ids.DBIDFactory [[../DBIDFactory.html]] {
+        {abstract} +newVar(DBIDRef): DBIDVar
+        {abstract} +importInteger(int): DBID
+        {abstract} +assignVar(DBIDVar, int): DBIDVar
+        {abstract} +generateSingleDBID(): DBID
+        {abstract} +deallocateSingleDBID(DBIDRef): void
+        {abstract} +generateStaticDBIDRange(int): DBIDRange
+        {abstract} +generateStaticDBIDRange(int, int): DBIDRange
+        {abstract} +deallocateDBIDRange(DBIDRange): void
+        {abstract} +newPair(DBIDRef, DBIDRef): DBIDPair
+        {abstract} +newPair(double, DBIDRef): DoubleDBIDPair
+        {abstract} +newArray(): ArrayModifiableDBIDs
+        {abstract} +newHashSet(): HashSetModifiableDBIDs
+        {abstract} +newArray(int): ArrayModifiableDBIDs
+        {abstract} +newHashSet(int): HashSetModifiableDBIDs
+        {abstract} +newArray(DBIDs): ArrayModifiableDBIDs
+        {abstract} +newHashSet(DBIDs): HashSetModifiableDBIDs
+        {abstract} +newMinHeap(int): DoubleDBIDHeap
+        {abstract} +newMaxHeap(int): DoubleDBIDHeap
+        {abstract} +newHeap(int): KNNHeap
+        {abstract} +newHeap(KNNList): KNNHeap
+        {abstract} +getDBIDSerializer(): ByteBufferSerializer<DBID>
+        {abstract} +getDBIDSerializerStatic(): FixedSizeByteBufferSerializer<DBID>
+        {abstract} +getTypeRestriction(): Class<? extends DBID>
+        {abstract} +compare(DBIDRef, DBIDRef): int
+        {abstract} +equal(DBIDRef, DBIDRef): boolean
+        {abstract} +toString(DBIDRef): String
+        {abstract} +invalid(): DBIDRef
+        {abstract} +newDistanceDBIDList(int): ModifiableDoubleDBIDList
+        {abstract} +newDistanceDBIDList(): ModifiableDoubleDBIDList
+        {abstract} +makeUnmodifiable(DBIDs): StaticDBIDs
+    }
+
+    elki.database.ids.DBIDFactory <|.. elki.database.ids.integer.AbstractIntegerDBIDFactory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ErrorFormatter\n<size:10>elki.logging" as elki.logging.ErrorFormatter [[ErrorFormatter.html]] {
+        {static} +PRUNE: String[]
+        -NULLMSG: String
+        +format(LogRecord): String
+        -appendCauses(StringBuilder, Throwable): void
+    }
+
+    abstract class "<size:14>Formatter\n<size:10>java.util.logging" as java.util.logging.Formatter {
+        {abstract} +format(LogRecord): String
+    }
+
+    java.util.logging.Formatter <|-- elki.logging.ErrorFormatter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

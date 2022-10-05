@@ -1,0 +1,44 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SVGUtil\n<size:10>elki.visualization.svg" as elki.visualization.svg.SVGUtil [[SVGUtil.html]] {
+        {static} +FMT: NumberFormat
+        {static} +HOURGLASS_PATH: String
+        {static} +HOURGLASS_STYLE: String
+        {static} +THROBBER_PATH: String
+        {static} +THROBBER_STYLE: String
+        {static} -SVG_COLOR_NAMES: Object2IntOpenHashMap<String>
+        {static} -NO_VALUE: int
+        {static} -colorLookupStylesheet: StyleSheet
+        {static} +fmt(double): String
+        {static} +svgElement(Document, String): Element
+        {static} +setAtt(Element, String, double): void
+        {static} +setAtt(Element, String, int): void
+        {static} +setAtt(Element, String, String): void
+        {static} +setStyle(Element, String): void
+        {static} +setCSSClass(Element, String): void
+        {static} +addCSSClass(Element, String): void
+        {static} +removeCSSClass(Element, String): void
+        {static} +makeStyleElement(Document): Element
+        {static} +svgRect(Document, double, double, double, double): Element
+        {static} +svgCircle(Document, double, double, double): Element
+        {static} +svgLine(Document, double, double, double, double): Element
+        {static} +svgText(Document, double, double, String): Element
+        {static} +svgWaitIcon(Document, double, double, double, double): Element
+        {static} +stringToColor(String): Color
+        {static} +colorToString(Color): String
+        {static} +colorToString(int): String
+        {static} +makeMarginTransform(double, double, double, double, double, double, double, double): String
+        {static} +makeMarginTransform(double, double, double, double, double, double): String
+        {static} +makeMarginTransform(double, double, double, double, double): String
+        {static} +elementCoordinatesFromEvent(Document, Element, Event): SVGPoint
+        {static} +removeLastChild(Element): void
+        {static} +removeFromParent(Element): void
+        {static} +svgCircleSegment(SVGPlot, double, double, double, double, double, double): Element
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

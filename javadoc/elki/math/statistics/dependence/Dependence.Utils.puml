@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Dependence.Utils\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.Dependence.Utils [[Dependence.Utils.html]] {
+        {static} +computeNormalizedRanks(NumberArrayAdapter<?, A>, A, int): double[]
+        {static} +ranks(NumberArrayAdapter<?, A>, A, int): double[]
+        {static} +ranks(NumberArrayAdapter<?, A>, A, int[]): double[]
+        {static} +size(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): int
+        {static} +size(NumberArrayAdapter<?, A>, Collection<? extends A>): int
+        {static} +sortedIndex(NumberArrayAdapter<?, A>, A, int): int[]
+    }
+
+    interface "<size:14>Dependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.Dependence [[Dependence.html]] {
+        {abstract} +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+    }
+
+    elki.math.statistics.dependence.Dependence +-- elki.math.statistics.dependence.Dependence.Utils
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

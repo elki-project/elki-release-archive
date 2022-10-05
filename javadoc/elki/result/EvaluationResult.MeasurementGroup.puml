@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluationResult.MeasurementGroup\n<size:10>elki.result" as elki.result.EvaluationResult.MeasurementGroup [[EvaluationResult.MeasurementGroup.html]] {
+        -groupname: String
+        -measurements: ArrayList<Measurement>
+        #MeasurementGroup(String)
+        +getName(): String
+        +addMeasure(String, double, double, double, boolean): MeasurementGroup
+        +addMeasure(String, double, double, double, double, boolean): MeasurementGroup
+        +hasMeasure(String): boolean
+        +getMeasure(String): Measurement
+        +iterator(): Iterator<Measurement>
+    }
+
+    interface "<size:14>Iterable\n<size:10>java.lang" as java.lang.Iterable<Measurement> {
+        {abstract} +iterator(): Iterator<T>
+    }
+    class "<size:14>EvaluationResult\n<size:10>elki.result" as elki.result.EvaluationResult [[EvaluationResult.html]]
+
+    java.lang.Iterable <|.. elki.result.EvaluationResult.MeasurementGroup
+    elki.result.EvaluationResult +-- elki.result.EvaluationResult.MeasurementGroup
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

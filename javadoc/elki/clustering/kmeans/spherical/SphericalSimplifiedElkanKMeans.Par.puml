@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SphericalSimplifiedElkanKMeans.Par\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Par<V extends NumberVector> [[SphericalSimplifiedElkanKMeans.Par.html]] {
+        +configure(Parameterization): void
+        +make(): SphericalSimplifiedElkanKMeans<V extends NumberVector>
+    }
+
+    class "<size:14>SphericalKMeans.Par\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.SphericalKMeans.Par<V extends NumberVector> [[SphericalKMeans.Par.html]]
+    class "<size:14>SphericalSimplifiedElkanKMeans\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans<V extends NumberVector> [[SphericalSimplifiedElkanKMeans.html]]
+
+    elki.clustering.kmeans.spherical.SphericalKMeans.Par <|-- elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Par
+    elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans +-- elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

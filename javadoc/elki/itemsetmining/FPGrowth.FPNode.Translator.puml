@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>FPGrowth.FPNode.Translator\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth.FPNode.Translator [[FPGrowth.FPNode.Translator.html]] {
+        {abstract} +appendTo(StringBuilder, int): StringBuilder
+    }
+
+    class "<size:14>FPGrowth.FPNode\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth.FPNode [[FPGrowth.FPNode.html]]
+
+    elki.itemsetmining.FPGrowth.FPNode +-- elki.itemsetmining.FPGrowth.FPNode.Translator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

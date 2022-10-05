@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RStarTreeKNNSearcher\n<size:10>elki.index.tree.spatial.rstarvariants.query" as elki.index.tree.spatial.rstarvariants.query.RStarTreeKNNSearcher<O extends SpatialComparable> [[RStarTreeKNNSearcher.html]] {
+        #tree: AbstractRStarTree<?, ?, ?>
+        #distance: SpatialPrimitiveDistance<? super SpatialComparable>
+        #relation: Relation<? extends SpatialComparable>
+        +RStarTreeKNNSearcher(AbstractRStarTree<?, ?, ?>, Relation<? extends SpatialComparable>, SpatialPrimitiveDistance<? super SpatialComparable>)
+        +getKNN(O extends SpatialComparable, int): KNNList
+        -expandNode(O extends SpatialComparable, KNNHeap, DoubleIntegerMinHeap, double, int): double
+    }
+
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<O extends SpatialComparable> [[../../../../../database/query/knn/KNNSearcher.html]] {
+        {abstract} +getKNN(O extends SpatialComparable, int): KNNList
+    }
+
+    elki.database.query.knn.KNNSearcher <|.. elki.index.tree.spatial.rstarvariants.query.RStarTreeKNNSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

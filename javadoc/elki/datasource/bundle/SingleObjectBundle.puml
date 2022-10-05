@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SingleObjectBundle\n<size:10>elki.datasource.bundle" as elki.datasource.bundle.SingleObjectBundle [[SingleObjectBundle.html]] {
+        -meta: BundleMeta
+        -contents: List<Object>
+        -id: DBID
+        +SingleObjectBundle()
+        +SingleObjectBundle(BundleMeta, List<Object>)
+        +SingleObjectBundle(BundleMeta, DBID, List<Object>)
+        +meta(): BundleMeta
+        +meta(int): SimpleTypeInformation<?>
+        +metaLength(): int
+        +data(int): Object
+        +dataLength(): int
+        +data(int, int): Object
+        +assignDBID(int, DBIDVar): boolean
+        +append(SimpleTypeInformation<?>, Object): void
+    }
+
+    interface "<size:14>ObjectBundle\n<size:10>elki.datasource.bundle" as elki.datasource.bundle.ObjectBundle [[ObjectBundle.html]] {
+        {abstract} +meta(): BundleMeta
+        {abstract} +meta(int): SimpleTypeInformation<?>
+        {abstract} +metaLength(): int
+        {abstract} +dataLength(): int
+        {abstract} +data(int, int): Object
+        {abstract} +assignDBID(int, DBIDVar): boolean
+    }
+
+    elki.datasource.bundle.ObjectBundle <|.. elki.datasource.bundle.SingleObjectBundle
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

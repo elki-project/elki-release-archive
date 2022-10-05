@@ -1,0 +1,62 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VPTree\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree<O> [[VPTree.html]] {
+        {static} -LOG: Logging
+        #relation: Relation<O>
+        ~distFunc: Distance<? super O>
+        -distQuery: DistanceQuery<O>
+        ~random: RandomFactory
+        ~sampleSize: int
+        ~truncate: int
+        ~distComputations: long
+        ~root: Node
+        +VPTree(Relation<O>, Distance<? super O>, int)
+        +VPTree(Relation<O>, Distance<? super O>, RandomFactory, int, int)
+        +initialize(): void
+        -distance(DBIDRef, DBIDRef): double
+        -distance(O, DBIDRef): double
+        +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+        +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+        +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+        +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        +logStatistics(): void
+    }
+
+    interface "<size:14>DistancePriorityIndex\n<size:10>elki.index" as elki.index.DistancePriorityIndex<O> [[../../../DistancePriorityIndex.html]] {
+        {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+    }
+    class "<size:14>VPTree.Builder\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.Builder [[VPTree.Builder.html]]
+    class "<size:14>VPTree.Node\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.Node [[VPTree.Node.html]]
+    abstract class "<size:14>VPTree.VPTreeKNNSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreeKNNSearcher [[VPTree.VPTreeKNNSearcher.html]]
+    class "<size:14>VPTree.VPTreeKNNObjectSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreeKNNObjectSearcher [[VPTree.VPTreeKNNObjectSearcher.html]]
+    class "<size:14>VPTree.VPTreeKNNDBIDSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreeKNNDBIDSearcher [[VPTree.VPTreeKNNDBIDSearcher.html]]
+    abstract class "<size:14>VPTree.VPTreeRangeSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreeRangeSearcher [[VPTree.VPTreeRangeSearcher.html]]
+    class "<size:14>VPTree.VPTreeRangeObjectSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreeRangeObjectSearcher [[VPTree.VPTreeRangeObjectSearcher.html]]
+    class "<size:14>VPTree.VPTreeRangeDBIDSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreeRangeDBIDSearcher [[VPTree.VPTreeRangeDBIDSearcher.html]]
+    abstract class "<size:14>VPTree.VPTreePrioritySearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreePrioritySearcher<Q> [[VPTree.VPTreePrioritySearcher.html]]
+    class "<size:14>VPTree.VPTreePriorityObjectSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreePriorityObjectSearcher [[VPTree.VPTreePriorityObjectSearcher.html]]
+    class "<size:14>VPTree.VPTreePriorityDBIDSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreePriorityDBIDSearcher [[VPTree.VPTreePriorityDBIDSearcher.html]]
+    class "<size:14>VPTree.Factory\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.Factory<O extends NumberVector> [[VPTree.Factory.html]]
+
+    elki.index.DistancePriorityIndex <|.. elki.index.tree.metrical.vptree.VPTree
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.Builder
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.Node
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeKNNSearcher
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeKNNObjectSearcher
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeKNNDBIDSearcher
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeRangeSearcher
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeRangeObjectSearcher
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreeRangeDBIDSearcher
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreePrioritySearcher
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreePriorityObjectSearcher
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreePriorityDBIDSearcher
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

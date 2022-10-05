@@ -1,0 +1,160 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.datastructures.arraylike {
+
+        class ArrayLikeUtil [[ArrayLikeUtil.html]] {
+            {static} +featureVectorAdapter(FeatureVector<F>): FeatureVectorAdapter<F>
+            {static} +getIndexOfMaximum(A, NumberArrayAdapter<?, A>): int
+            {static} +getIndexOfMaximum(double[]): int
+            {static} +toPrimitiveDoubleArray(A, NumberArrayAdapter<?, ? super A>): double[]
+            {static} +toPrimitiveDoubleArray(NumberVector): double[]
+            {static} +toPrimitiveFloatArray(A, NumberArrayAdapter<?, ? super A>): float[]
+            {static} +toPrimitiveFloatArray(NumberVector): float[]
+            {static} +toPrimitiveIntegerArray(A, NumberArrayAdapter<?, ? super A>): int[]
+            {static} +toPrimitiveIntegerArray(NumberVector): int[]
+        }
+
+        class NumberVectorAdapter [[NumberVectorAdapter.html]] {
+            +size(NumberVector): int
+            +--get--(NumberVector, int): Number
+            +getDouble(NumberVector, int): double
+            +getFloat(NumberVector, int): float
+            +getInteger(NumberVector, int): int
+            +getShort(NumberVector, int): short
+            +getLong(NumberVector, int): long
+            +getByte(NumberVector, int): byte
+        }
+
+        class FeatureVectorAdapter<F> [[FeatureVectorAdapter.html]] {
+            +size(FeatureVector<F>): int
+            +get(FeatureVector<F>, int): F
+        }
+
+        class IntegerArray [[IntegerArray.html]] {
+            {static} -MAX_ARRAY_SIZE: int
+            {static} -LAST_GROW_SIZE: int
+            +data: int[]
+            +size: int
+            +IntegerArray()
+            +IntegerArray(int)
+            +IntegerArray(IntegerArray)
+            +clear(): void
+            +add(int): void
+            -grow(): void
+            +get(int): int
+            +set(int, int): void
+            +swap(int, int): void
+            +remove(int, int): void
+            +insert(int, int): void
+            +size(): int
+            +isEmpty(): boolean
+            +sort(): void
+            +size(IntegerArray): int
+            +get(IntegerArray, int): Integer
+            +getDouble(IntegerArray, int): double
+            +getFloat(IntegerArray, int): float
+            +getInteger(IntegerArray, int): int
+            +getShort(IntegerArray, int): short
+            +getLong(IntegerArray, int): long
+            +getByte(IntegerArray, int): byte
+            +toArray(): int[]
+        }
+
+        class DoubleArray [[DoubleArray.html]] {
+            {static} -MAX_ARRAY_SIZE: int
+            {static} -LAST_GROW_SIZE: int
+            +data: double[]
+            +size: int
+            +DoubleArray()
+            +DoubleArray(int)
+            +DoubleArray(DoubleArray)
+            +clear(): void
+            +add(double): void
+            -grow(): void
+            +get(int): double
+            +set(int, double): void
+            +swap(int, int): void
+            +remove(int, int): void
+            +insert(int, double): void
+            +size(): int
+            +isEmpty(): boolean
+            +sort(): void
+            +size(DoubleArray): int
+            +get(DoubleArray, int): Double
+            +getDouble(DoubleArray, int): double
+            +getFloat(DoubleArray, int): float
+            +getInteger(DoubleArray, int): int
+            +getShort(DoubleArray, int): short
+            +getLong(DoubleArray, int): long
+            +getByte(DoubleArray, int): byte
+            +toArray(): double[]
+        }
+
+        class ExtendedArray<T> [[ExtendedArray.html]] {
+            ~array: Object
+            ~extra: T
+            ~size: int
+            #ExtendedArray(Object, ArrayAdapter<T, Object>, T)
+            +size(ExtendedArray<T>): int
+            +get(ExtendedArray<T>, int): T
+            {static} +extend(A, ArrayAdapter<T, A>, T): ExtendedArray<T>
+        }
+
+        class FloatArrayAdapter [[FloatArrayAdapter.html]] {
+            +size(float[]): int
+            +--get--(float[], int): Float
+            +getDouble(float[], int): double
+            +getFloat(float[], int): float
+            +getInteger(float[], int): int
+            +getShort(float[], int): short
+            +getLong(float[], int): long
+            +getByte(float[], int): byte
+        }
+
+        interface NumberArrayAdapter<N extends Number, A> [[NumberArrayAdapter.html]] {
+            {abstract} +size(A): int
+            {abstract} +get(A, int): N extends Number
+            {abstract} +getDouble(A, int): double
+            +getFloat(A, int): float
+            +getInteger(A, int): int
+            +getShort(A, int): short
+            {abstract} +getLong(A, int): long
+            +getByte(A, int): byte
+        }
+
+        class DoubleArrayAdapter [[DoubleArrayAdapter.html]] {
+            +size(double[]): int
+            +--get--(double[], int): Double
+            +getDouble(double[], int): double
+            +getFloat(double[], int): float
+            +getInteger(double[], int): int
+            +getShort(double[], int): short
+            +getLong(double[], int): long
+            +getByte(double[], int): byte
+        }
+
+        interface ArrayAdapter<T, A> [[ArrayAdapter.html]] {
+            {abstract} +size(A): int
+            {abstract} +get(A, int): T
+        }
+
+        ArrayLikeUtil --> FeatureVectorAdapter: FEATUREVECTORADAPTER
+        ArrayLikeUtil --> NumberVectorAdapter: NUMBERVECTORADAPTER
+        ArrayLikeUtil --> NumberArrayAdapter: DOUBLEARRAYADAPTER\nFLOATARRAYADAPTER
+        NumberArrayAdapter <|.. NumberVectorAdapter
+        NumberVectorAdapter --> NumberVectorAdapter: STATIC
+        ArrayAdapter <|.. FeatureVectorAdapter
+        FeatureVectorAdapter --> FeatureVectorAdapter: STATIC
+        NumberArrayAdapter <|.. IntegerArray
+        NumberArrayAdapter <|.. DoubleArray
+        ArrayAdapter <|.. ExtendedArray
+        ExtendedArray --> ArrayAdapter: getter
+        NumberArrayAdapter <|.. FloatArrayAdapter
+        FloatArrayAdapter --> FloatArrayAdapter: STATIC
+        ArrayAdapter <|-- NumberArrayAdapter
+        NumberArrayAdapter <|.. DoubleArrayAdapter
+        DoubleArrayAdapter --> DoubleArrayAdapter: STATIC
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

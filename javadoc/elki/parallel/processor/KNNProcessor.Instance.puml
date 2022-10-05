@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KNNProcessor.Instance\n<size:10>elki.parallel.processor" as elki.parallel.processor.KNNProcessor.Instance [[KNNProcessor.Instance.html]] {
+        ~k: int
+        ~knnq: KNNSearcher<DBIDRef>
+        ~out: Instance<KNNList>
+        #Instance(int, KNNSearcher<DBIDRef>, Instance<KNNList>)
+        +map(DBIDRef): void
+    }
+
+    interface "<size:14>Processor.Instance\n<size:10>elki.parallel.processor" as elki.parallel.processor.Processor.Instance [[Processor.Instance.html]] {
+        {abstract} +map(DBIDRef): void
+    }
+    class "<size:14>KNNProcessor\n<size:10>elki.parallel.processor" as elki.parallel.processor.KNNProcessor [[KNNProcessor.html]]
+
+    elki.parallel.processor.Processor.Instance <|.. elki.parallel.processor.KNNProcessor.Instance
+    elki.parallel.processor.KNNProcessor +-- elki.parallel.processor.KNNProcessor.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

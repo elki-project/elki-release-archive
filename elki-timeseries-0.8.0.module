@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-timeseries",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-outlier",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-timeseries-0.8.0.jar",
+          "url": "elki-timeseries-0.8.0.jar",
+          "size": 27618,
+          "sha512": "23262567db2630671b5743c7e68af7407dab360976f8ee5cb2a662c8dd7f491753e0e70e13e14c22376b0d75b4f242c2cbce67d12007c37574a8a517fb569c20",
+          "sha256": "546db306200c2de3fff53d42cab4d4b71fb6f99d30a5c37c2c09d319fe04c191",
+          "sha1": "27ef7693a2eec48cd1e7174f85d9f998c4d4f1d3",
+          "md5": "25ebf113b0031bcb65ef2751177b8f1d"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-outlier",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-timeseries-0.8.0.jar",
+          "url": "elki-timeseries-0.8.0.jar",
+          "size": 27618,
+          "sha512": "23262567db2630671b5743c7e68af7407dab360976f8ee5cb2a662c8dd7f491753e0e70e13e14c22376b0d75b4f242c2cbce67d12007c37574a8a517fb569c20",
+          "sha256": "546db306200c2de3fff53d42cab4d4b71fb6f99d30a5c37c2c09d319fe04c191",
+          "sha1": "27ef7693a2eec48cd1e7174f85d9f998c4d4f1d3",
+          "md5": "25ebf113b0031bcb65ef2751177b8f1d"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-timeseries",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-timeseries-0.8.0-test-fixtures.jar",
+          "url": "elki-timeseries-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "98eaa8872165a5da3ca8c613e4ee43ccba314fa41211ec86b822d391c817f0dd42dbb7aa4c021f3efceaa8b8b88668c924386862c68f9a36f64b74474421ed4e",
+          "sha256": "6f520fee2d55969ab9496cad07e3ff19f622875d725683a2ace47e4611f3e546",
+          "sha1": "67ff3f323b2c99972acc4cc5e9509de7a301813b",
+          "md5": "ab398e515b755f771ff789651bd34f3e"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-timeseries-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-timeseries",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-timeseries-0.8.0-test-fixtures.jar",
+          "url": "elki-timeseries-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "98eaa8872165a5da3ca8c613e4ee43ccba314fa41211ec86b822d391c817f0dd42dbb7aa4c021f3efceaa8b8b88668c924386862c68f9a36f64b74474421ed4e",
+          "sha256": "6f520fee2d55969ab9496cad07e3ff19f622875d725683a2ace47e4611f3e546",
+          "sha1": "67ff3f323b2c99972acc4cc5e9509de7a301813b",
+          "md5": "ab398e515b755f771ff789651bd34f3e"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-timeseries-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

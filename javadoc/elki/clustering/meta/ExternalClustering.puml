@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExternalClustering\n<size:10>elki.clustering.meta" as elki.clustering.meta.ExternalClustering [[ExternalClustering.html]] {
+        {static} -LOG: Logging
+        {static} +COMMENT: String
+        -file: URI
+        +ExternalClustering(URI)
+        +getInputTypeRestriction(): TypeInformation[]
+        +autorun(Database): Clustering<? extends Model>
+        -attachToRelation(Relation<?>, IntArrayList, ArrayList<String>): void
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<? extends Model>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>ExternalClustering.Par\n<size:10>elki.clustering.meta" as elki.clustering.meta.ExternalClustering.Par [[ExternalClustering.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.meta.ExternalClustering
+    elki.clustering.meta.ExternalClustering +-- elki.clustering.meta.ExternalClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

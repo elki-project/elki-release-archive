@@ -1,0 +1,71 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.datastructures.range {
+
+        class CombinedIntGenerator [[CombinedIntGenerator.html]] {
+            -min: int
+            -max: int
+            +CombinedIntGenerator(IntGenerator...)
+            +CombinedIntGenerator(Collection<IntGenerator>)
+            +getMin(): int
+            +getMax(): int
+            -updateMinMax(): void
+            +forEach(IntConsumer): void
+            +serializeTo(StringBuilder): StringBuilder
+        }
+
+        class StaticIntGenerator [[StaticIntGenerator.html]] {
+            -min: int
+            -max: int
+            -values: int[]
+            +StaticIntGenerator(int...)
+            +getMin(): int
+            +getMax(): int
+            -updateMinMax(): void
+            +forEach(IntConsumer): void
+            +serializeTo(StringBuilder): StringBuilder
+        }
+
+        class ExponentialIntGenerator [[ExponentialIntGenerator.html]] {
+            -start: int
+            -factor: int
+            -end: int
+            +ExponentialIntGenerator(int, int, int)
+            +getMin(): int
+            +getMax(): int
+            +forEach(IntConsumer): void
+            +serializeTo(StringBuilder): StringBuilder
+        }
+
+        class LinearIntGenerator [[LinearIntGenerator.html]] {
+            -start: int
+            -step: int
+            -stop: int
+            +LinearIntGenerator(int, int, int)
+            +getMin(): int
+            +getMax(): int
+            +forEach(IntConsumer): void
+            +serializeTo(StringBuilder): StringBuilder
+        }
+
+        interface IntGenerator [[IntGenerator.html]] {
+            {abstract} +getMin(): int
+            {abstract} +getMax(): int
+            {abstract} +forEach(IntConsumer): void
+            {abstract} +serializeTo(StringBuilder): StringBuilder
+        }
+
+        class ParseIntRanges [[ParseIntRanges.html]] {
+            {static} +parseIntRanges(String): IntGenerator
+            {static} -nextSep(String, int): int
+        }
+
+        IntGenerator <|.. CombinedIntGenerator
+        CombinedIntGenerator --> "*" IntGenerator: generators
+        IntGenerator <|.. StaticIntGenerator
+        IntGenerator <|.. ExponentialIntGenerator
+        IntGenerator <|.. LinearIntGenerator
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

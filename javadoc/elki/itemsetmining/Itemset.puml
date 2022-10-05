@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>Itemset\n<size:10>elki.itemsetmining" as elki.itemsetmining.Itemset [[Itemset.html]] {
+        ~support: int
+        +increaseSupport(): int
+        +getSupport(): int
+        +containedIn(SparseNumberVector): boolean
+        {abstract} +length(): int
+        {static} +toBitset(Itemset, long[]): long[]
+        {abstract} +iter(): int
+        {abstract} +iterAdvance(int): int
+        {abstract} +iterValid(int): boolean
+        {abstract} +iterDim(int): int
+        +compareTo(Itemset): int
+        {static} #compareLexicographical(Itemset, Itemset): int
+        +appendTo(StringBuilder, VectorFieldTypeInformation<BitVector>): StringBuilder
+        +appendItemsTo(StringBuilder, VectorFieldTypeInformation<BitVector>): StringBuilder
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<Itemset> {
+        {abstract} +compareTo(Itemset): int
+    }
+
+    java.lang.Comparable <|.. elki.itemsetmining.Itemset
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

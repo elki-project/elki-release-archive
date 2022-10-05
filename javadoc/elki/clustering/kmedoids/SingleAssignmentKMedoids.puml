@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SingleAssignmentKMedoids\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.SingleAssignmentKMedoids<O> [[SingleAssignmentKMedoids.html]] {
+        {static} -LOG: Logging
+        +SingleAssignmentKMedoids(Distance<? super O>, int, KMedoidsInitialization<O>)
+        +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+        #getLogger(): Logging
+    }
+
+    class "<size:14>PAM\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.PAM<O> [[PAM.html]]
+    class "<size:14>SingleAssignmentKMedoids.Instance\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.SingleAssignmentKMedoids.Instance [[SingleAssignmentKMedoids.Instance.html]]
+    class "<size:14>SingleAssignmentKMedoids.Par\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.SingleAssignmentKMedoids.Par<O> [[SingleAssignmentKMedoids.Par.html]]
+
+    elki.clustering.kmedoids.PAM <|-- elki.clustering.kmedoids.SingleAssignmentKMedoids
+    elki.clustering.kmedoids.SingleAssignmentKMedoids +-- elki.clustering.kmedoids.SingleAssignmentKMedoids.Instance
+    elki.clustering.kmedoids.SingleAssignmentKMedoids +-- elki.clustering.kmedoids.SingleAssignmentKMedoids.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

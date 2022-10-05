@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMeansProcessor.Instance\n<size:10>elki.clustering.kmeans.parallel" as elki.clustering.kmeans.parallel.KMeansProcessor.Instance<V extends NumberVector> [[KMeansProcessor.Instance.html]] {
+        -relation: Relation<V extends NumberVector>
+        -distance: NumberVectorDistance<? super NumberVector>
+        -assignment: WritableIntegerDataStore
+        -means: double[]
+        -centroids: double[]
+        -sizes: int[]
+        -varsum: double[]
+        -changed: boolean
+        +Instance(Relation<V extends NumberVector>, NumberVectorDistance<? super NumberVector>, WritableIntegerDataStore, double[])
+        +map(DBIDRef): void
+    }
+
+    interface "<size:14>Processor.Instance\n<size:10>elki.parallel.processor" as elki.parallel.processor.Processor.Instance [[../../../parallel/processor/Processor.Instance.html]] {
+        {abstract} +map(DBIDRef): void
+    }
+    class "<size:14>KMeansProcessor\n<size:10>elki.clustering.kmeans.parallel" as elki.clustering.kmeans.parallel.KMeansProcessor<V extends NumberVector> [[KMeansProcessor.html]]
+
+    elki.parallel.processor.Processor.Instance <|.. elki.clustering.kmeans.parallel.KMeansProcessor.Instance
+    elki.clustering.kmeans.parallel.KMeansProcessor +-- elki.clustering.kmeans.parallel.KMeansProcessor.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

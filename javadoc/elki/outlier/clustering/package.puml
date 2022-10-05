@@ -1,0 +1,194 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.clustering {
+
+        class KMeansMinusMinusOutlierDetection [[KMeansMinusMinusOutlierDetection.html]] {
+            +KMeansMinusMinusOutlierDetection(KMeansMinusMinus<?>)
+            +autorun(Database): OutlierResult
+        }
+
+        class elki.outlier.clustering.KMeansMinusMinusOutlierDetection.Par [[KMeansMinusMinusOutlierDetection.Par.html]] {
+            ~kmeansminusminus: KMeansMinusMinus<?>
+            +configure(Parameterization): void
+            +make(): KMeansMinusMinusOutlierDetection
+        }
+
+        class GLOSH [[GLOSH.html]] {
+            -hdbscanExtraction: HDBSCANHierarchyExtraction
+            +GLOSH(HDBSCANHierarchyExtraction)
+            +run(Database, Relation<? extends NumberVector>): OutlierResult
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.clustering.GLOSH.Par [[GLOSH.Par.html]] {
+            #hdbscanExtraction: HDBSCANHierarchyExtraction
+            +configure(Parameterization): void
+            +make(): GLOSH
+        }
+
+        class CBLOF<O extends NumberVector> [[CBLOF.html]] {
+            {static} -LOG: Logging
+            #distance: NumberVectorDistance<? super NumberVector>
+            #clusteringAlgorithm: ClusteringAlgorithm<Clustering<MeanModel>>
+            #alpha: double
+            #beta: double
+            +CBLOF(NumberVectorDistance<? super NumberVector>, ClusteringAlgorithm<Clustering<MeanModel>>, double, double)
+            +run(Database, Relation<O extends NumberVector>): OutlierResult
+            -getClusterBoundary(Relation<O extends NumberVector>, List<? extends Cluster<MeanModel>>): int
+            -computeCBLOFs(Relation<O extends NumberVector>, WritableDoubleDataStore, DoubleMinMax, List<? extends Cluster<MeanModel>>, List<? extends Cluster<MeanModel>>): void
+            -storeCBLOFScore(WritableDoubleDataStore, DoubleMinMax, double, DBIDIter): void
+            -computeSmallClusterCBLOF(O extends NumberVector, NumberVectorDistance<? super NumberVector>, List<NumberVector>, Cluster<MeanModel>): double
+            -computeLargeClusterCBLOF(O extends NumberVector, NumberVectorDistance<? super NumberVector>, NumberVector, Cluster<MeanModel>): double
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.clustering.CBLOF.Par<O extends NumberVector> {
+            {static} +CLUSTERING_ID: OptionID
+            {static} +ALPHPA_ID: OptionID
+            {static} +BETA_ID: OptionID
+            #clusteringAlgorithm: ClusteringAlgorithm<Clustering<MeanModel>>
+            #alpha: double
+            #beta: double
+            #distance: NumberVectorDistance<? super NumberVector>
+            +configure(Parameterization): void
+            +make(): CBLOF<O extends NumberVector>
+        }
+
+        class NoiseAsOutliers [[NoiseAsOutliers.html]] {
+            ~clustering: ClusteringAlgorithm<?>
+            +NoiseAsOutliers(ClusteringAlgorithm<?>)
+            +autorun(Database): OutlierResult
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.clustering.NoiseAsOutliers.Par [[NoiseAsOutliers.Par.html]] {
+            ~clustering: ClusteringAlgorithm<?>
+            +configure(Parameterization): void
+            +make(): NoiseAsOutliers
+        }
+
+        class KMeansOutlierDetection<O extends NumberVector> [[KMeansOutlierDetection.html]] {
+            {static} -LOG: Logging
+            ~clusterer: KMeans<O extends NumberVector, ?>
+            +KMeansOutlierDetection(KMeans<O extends NumberVector, ?>, Rule)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O extends NumberVector>): OutlierResult
+            -distanceScoring(Clustering<?>, Relation<O extends NumberVector>, NumberVectorDistance<? super NumberVector>, WritableDoubleDataStore, DoubleMinMax): void
+            -singletonsScoring(Clustering<?>, Relation<O extends NumberVector>, NumberVectorDistance<? super NumberVector>, WritableDoubleDataStore, DoubleMinMax): void
+            -varianceScoring(Clustering<?>, Relation<O extends NumberVector>, NumberVectorDistance<? super NumberVector>, WritableDoubleDataStore, DoubleMinMax): void
+        }
+
+        enum elki.outlier.clustering.KMeansOutlierDetection.Rule [[KMeansOutlierDetection.Rule.html]] {
+            {static} +DISTANCE
+            {static} +DISTANCE_SINGLETONS
+            {static} +VARIANCE
+        }
+
+        class elki.outlier.clustering.KMeansOutlierDetection.Par<O extends NumberVector> {
+            {static} +CLUSTERING_ID: OptionID
+            {static} +RULE_ID: OptionID
+            ~clusterer: KMeans<O extends NumberVector, ?>
+            +configure(Parameterization): void
+            +make(): KMeansOutlierDetection<O extends NumberVector>
+        }
+
+        class EMOutlier<V extends NumberVector> [[EMOutlier.html]] {
+            {static} -LOG: Logging
+            #k: int
+            #delta: double
+            #mfactory: EMClusterModelFactory<? super NumberVector, ?>
+            #miniter: int
+            #maxiter: int
+            #prior: double
+            {static} #MIN_LOGLIKELIHOOD: double
+            +EMOutlier(int, double, EMClusterModelFactory<? super NumberVector, ?>, int, int, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.clustering.EMOutlier.Par<V extends NumberVector> [[EMOutlier.Par.html]] {
+            #k: int
+            #delta: double
+            #mfactory: EMClusterModelFactory<V extends NumberVector, ?>
+            #miniter: int
+            #maxiter: int
+            ~prior: double
+            +configure(Parameterization): void
+            +make(): EMOutlier<V extends NumberVector>
+        }
+
+        class DBSCANOutlierDetection [[DBSCANOutlierDetection.html]] {
+            -clusterer: GeneralizedDBSCAN
+            +DBSCANOutlierDetection(GeneralizedDBSCAN)
+            +run(Database, Relation<? extends NumberVector>): OutlierResult
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.clustering.DBSCANOutlierDetection.Par [[DBSCANOutlierDetection.Par.html]] {
+            #clusterer: GeneralizedDBSCAN
+            +configure(Parameterization): void
+            +make(): DBSCANOutlierDetection
+        }
+
+        class SilhouetteOutlierDetection<O> [[SilhouetteOutlierDetection.html]] {
+            #distance: Distance<? super O>
+            #clusterer: ClusteringAlgorithm<?>
+            #noiseOption: NoiseHandling
+            +SilhouetteOutlierDetection(Distance<? super O>, ClusteringAlgorithm<?>, NoiseHandling)
+            +getInputTypeRestriction(): TypeInformation[]
+            +autorun(Database): OutlierResult
+        }
+
+        class elki.outlier.clustering.SilhouetteOutlierDetection.Par<O> {
+            {static} +CLUSTERING_ID: OptionID
+            #distance: Distance<? super O>
+            #clusterer: ClusteringAlgorithm<?>
+            #noiseOption: NoiseHandling
+            +configure(Parameterization): void
+            +make(): SilhouetteOutlierDetection<O>
+        }
+
+        NoiseAsOutliers <|-- KMeansMinusMinusOutlierDetection
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.clustering.KMeansMinusMinusOutlierDetection.Par
+        KMeansMinusMinusOutlierDetection +-- elki.outlier.clustering.KMeansMinusMinusOutlierDetection.Par
+        elki.outlier.OutlierAlgorithm <|.. GLOSH
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.clustering.GLOSH.Par
+        GLOSH +-- elki.outlier.clustering.GLOSH.Par
+        elki.outlier.OutlierAlgorithm <|.. CBLOF
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.clustering.CBLOF.Par
+        CBLOF +-- elki.outlier.clustering.CBLOF.Par
+        elki.outlier.OutlierAlgorithm <|.. NoiseAsOutliers
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.clustering.NoiseAsOutliers.Par
+        NoiseAsOutliers +-- elki.outlier.clustering.NoiseAsOutliers.Par
+        elki.outlier.OutlierAlgorithm <|.. KMeansOutlierDetection
+        KMeansOutlierDetection --> elki.outlier.clustering.KMeansOutlierDetection.Rule: rule
+        KMeansOutlierDetection +-- elki.outlier.clustering.KMeansOutlierDetection.Rule
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.clustering.KMeansOutlierDetection.Par
+        KMeansOutlierDetection +-- elki.outlier.clustering.KMeansOutlierDetection.Par
+        elki.outlier.clustering.KMeansOutlierDetection.Par --> elki.outlier.clustering.KMeansOutlierDetection.Rule: rule
+        elki.outlier.OutlierAlgorithm <|.. EMOutlier
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.clustering.EMOutlier.Par
+        EMOutlier +-- elki.outlier.clustering.EMOutlier.Par
+        elki.outlier.OutlierAlgorithm <|.. DBSCANOutlierDetection
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.clustering.DBSCANOutlierDetection.Par
+        DBSCANOutlierDetection +-- elki.outlier.clustering.DBSCANOutlierDetection.Par
+        elki.outlier.OutlierAlgorithm <|.. SilhouetteOutlierDetection
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.clustering.SilhouetteOutlierDetection.Par
+        SilhouetteOutlierDetection +-- elki.outlier.clustering.SilhouetteOutlierDetection.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

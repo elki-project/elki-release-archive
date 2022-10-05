@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InMemoryInvertedIndex.CosineRangeQuery\n<size:10>elki.index.invertedlist" as elki.index.invertedlist.InMemoryInvertedIndex.CosineRangeQuery [[InMemoryInvertedIndex.CosineRangeQuery.html]] {
+        +getRange(V extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+
+    interface "<size:14>RangeSearcher\n<size:10>elki.database.query.range" as elki.database.query.range.RangeSearcher<V extends NumberVector> [[../../database/query/range/RangeSearcher.html]] {
+        {abstract} +getRange(V extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+    class "<size:14>InMemoryInvertedIndex\n<size:10>elki.index.invertedlist" as elki.index.invertedlist.InMemoryInvertedIndex<V extends NumberVector> [[InMemoryInvertedIndex.html]]
+
+    elki.database.query.range.RangeSearcher <|.. elki.index.invertedlist.InMemoryInvertedIndex.CosineRangeQuery
+    elki.index.invertedlist.InMemoryInvertedIndex +-- elki.index.invertedlist.InMemoryInvertedIndex.CosineRangeQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

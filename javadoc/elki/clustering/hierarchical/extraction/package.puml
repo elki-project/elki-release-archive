@@ -1,0 +1,244 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.hierarchical.extraction {
+
+        class HDBSCANHierarchyExtraction [[HDBSCANHierarchyExtraction.html]] {
+            {static} -LOG: Logging
+            -minClSize: int
+            -algorithm: HierarchicalClusteringAlgorithm
+            -hierarchical: boolean
+            +HDBSCANHierarchyExtraction(HierarchicalClusteringAlgorithm, int, boolean)
+            +autorun(Database): Clustering<DendrogramModel>
+            +run(ClusterMergeHistory): Clustering<DendrogramModel>
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Instance [[HDBSCANHierarchyExtraction.Instance.html]] {
+            #merges: ClusterMergeHistory
+            #coredist: DoubleDataStore
+            +Instance(ClusterMergeHistory)
+            +run(): Clustering<DendrogramModel>
+            -isSpurious(TempCluster, boolean): boolean
+            -finalizeCluster(TempCluster, Clustering<DendrogramModel>, WritableDoubleDataStore, Cluster<DendrogramModel>, boolean): double
+            -collectChildren(TempCluster, Clustering<DendrogramModel>, WritableDoubleDataStore, TempCluster, Cluster<DendrogramModel>, boolean): double
+        }
+
+        class elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.TempCluster [[HDBSCANHierarchyExtraction.TempCluster.html]] {
+            #seq: int
+            #members: ModifiableDBIDs
+            #dist: double
+            #dmin: double
+            #aggregate: double
+            #childrenTotal: int
+            +TempCluster(int, double, DBIDRef)
+            +TempCluster(int, double, TempCluster, TempCluster)
+            +grow(int, double, TempCluster): TempCluster
+            +grow(int, double, DBIDRef): TempCluster
+            +resetAggregate(): TempCluster
+            +totalElements(): int
+            +excessOfMass(): double
+            +totalStability(): double
+            +isSpurious(int): boolean
+        }
+
+        class elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Par [[HDBSCANHierarchyExtraction.Par.html]] {
+            {static} +MINCLUSTERSIZE_ID: OptionID
+            {static} +HIERARCHICAL_ID: OptionID
+            ~minClSize: int
+            ~algorithm: HierarchicalClusteringAlgorithm
+            ~hierarchical: boolean
+            +configure(Parameterization): void
+            +make(): HDBSCANHierarchyExtraction
+        }
+
+        class ClustersWithNoiseExtraction [[ClustersWithNoiseExtraction.html]] {
+            {static} -LOG: Logging
+            -numCl: int
+            -minClSize: int
+            -algorithm: HierarchicalClusteringAlgorithm
+            +ClustersWithNoiseExtraction(HierarchicalClusteringAlgorithm, int, int)
+            +autorun(Database): Clustering<Model>
+            +run(ClusterMergeHistory): Clustering<Model>
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Instance [[ClustersWithNoiseExtraction.Instance.html]] {
+            #merges: ClusterMergeHistory
+            +Instance(ClusterMergeHistory)
+            +run(): Clustering<Model>
+        }
+
+        class elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Par [[ClustersWithNoiseExtraction.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +MINCLUSTERSIZE_ID: OptionID
+            ~numCl: int
+            ~minClSize: int
+            ~algorithm: HierarchicalClusteringAlgorithm
+            +configure(Parameterization): void
+            +make(): ClustersWithNoiseExtraction
+        }
+
+        class CutDendrogramByNumberOfClusters [[CutDendrogramByNumberOfClusters.html]] {
+            {static} ~LOG: Logging
+            -minclusters: int
+            +CutDendrogramByNumberOfClusters(HierarchicalClusteringAlgorithm, int, boolean)
+            +CutDendrogramByNumberOfClusters(HierarchicalClusteringAlgorithm, int, boolean, boolean)
+            +run(ClusterMergeHistory): Clustering<DendrogramModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters.Instance [[CutDendrogramByNumberOfClusters.Instance.html]] {
+            +Instance(ClusterMergeHistory)
+            #findSplit(): int
+        }
+
+        class elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters.Par [[CutDendrogramByNumberOfClusters.Par.html]] {
+            {static} +MINCLUSTERS_ID: OptionID
+            ~minclusters: int
+            +configure(Parameterization): void
+            +make(): CutDendrogramByNumberOfClusters
+        }
+
+        class SimplifiedHierarchyExtraction [[SimplifiedHierarchyExtraction.html]] {
+            {static} -LOG: Logging
+            -minClSize: int
+            -algorithm: HierarchicalClusteringAlgorithm
+            +SimplifiedHierarchyExtraction(HierarchicalClusteringAlgorithm, int)
+            +autorun(Database): Clustering<DendrogramModel>
+            +run(ClusterMergeHistory): Clustering<DendrogramModel>
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.Instance [[SimplifiedHierarchyExtraction.Instance.html]] {
+            #merges: ClusterMergeHistory
+            #coredist: DoubleDataStore
+            +Instance(ClusterMergeHistory)
+            +run(): Clustering<DendrogramModel>
+            -addSingleton(TempCluster, int, DBIDRef, double, boolean): void
+            #toCluster(TempCluster, Clustering<DendrogramModel>): Cluster<DendrogramModel>
+            #makeCluster(int, double, DBIDs): Cluster<DendrogramModel>
+        }
+
+        class elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.TempCluster [[SimplifiedHierarchyExtraction.TempCluster.html]] {
+            #seq: int
+            #newids: ModifiableDBIDs
+            #depth: double
+            #children: Collection<Cluster<DendrogramModel>>
+            +TempCluster(int, double)
+            +add(DBIDRef): void
+            +addDBIDs(DBIDs): void
+            +addChild(Cluster<DendrogramModel>): void
+            +isNotSpurious(int): boolean
+        }
+
+        class elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.Par [[SimplifiedHierarchyExtraction.Par.html]] {
+            {static} +MINCLUSTERSIZE_ID: OptionID
+            ~minClSize: int
+            ~algorithm: HierarchicalClusteringAlgorithm
+            +configure(Parameterization): void
+            +make(): SimplifiedHierarchyExtraction
+        }
+
+        abstract class AbstractCutDendrogram [[AbstractCutDendrogram.html]] {
+            #hierarchical: boolean
+            #algorithm: HierarchicalClusteringAlgorithm
+            #simplify: boolean
+            +AbstractCutDendrogram(HierarchicalClusteringAlgorithm, boolean, boolean)
+            +run(Database): Clustering<DendrogramModel>
+            {abstract} +run(ClusterMergeHistory): Clustering<DendrogramModel>
+            +getInputTypeRestriction(): TypeInformation[]
+            {abstract} #getLogger(): Logging
+        }
+
+        abstract class elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Instance [[AbstractCutDendrogram.Instance.html]] {
+            #merges: ClusterMergeHistory
+            #leafMap: Int2IntOpenHashMap
+            #leafTop: IntegerArray
+            #clusterMembers: ArrayList<ModifiableDBIDs>
+            +Instance(ClusterMergeHistory)
+            +extractClusters(): Clustering<DendrogramModel>
+            -buildLeafClusters(int, FiniteProgress): void
+            -buildFlat(int, FiniteProgress): Clustering<DendrogramModel>
+            -buildHierarchical(int, FiniteProgress): Clustering<DendrogramModel>
+            {abstract} #findSplit(): int
+            #makeCluster(int, DBIDs): Cluster<DendrogramModel>
+        }
+
+        abstract class elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Par [[AbstractCutDendrogram.Par.html]] {
+            {static} +HIERARCHICAL_ID: OptionID
+            {static} +NOSIMPLIFY_ID: OptionID
+            ~hierarchical: boolean
+            ~algorithm: HierarchicalClusteringAlgorithm
+            ~simplify: boolean
+            +configure(Parameterization): void
+        }
+
+        class CutDendrogramByHeight [[CutDendrogramByHeight.html]] {
+            {static} -LOG: Logging
+            -threshold: double
+            +CutDendrogramByHeight(HierarchicalClusteringAlgorithm, double, boolean)
+            +CutDendrogramByHeight(HierarchicalClusteringAlgorithm, double, boolean, boolean)
+            +run(ClusterMergeHistory): Clustering<DendrogramModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.hierarchical.extraction.CutDendrogramByHeight.Instance [[CutDendrogramByHeight.Instance.html]] {
+            +Instance(ClusterMergeHistory)
+            #findSplit(): int
+        }
+
+        class elki.clustering.hierarchical.extraction.CutDendrogramByHeight.Par [[CutDendrogramByHeight.Par.html]] {
+            {static} +THRESHOLD_ID: OptionID
+            ~threshold: double
+            +configure(Parameterization): void
+            +make(): CutDendrogramByHeight
+        }
+
+        elki.clustering.ClusteringAlgorithm <|.. HDBSCANHierarchyExtraction
+        HDBSCANHierarchyExtraction +-- elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Instance
+        HDBSCANHierarchyExtraction +-- elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.TempCluster
+        elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.TempCluster --> "*" elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.TempCluster: children
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Par
+        HDBSCANHierarchyExtraction +-- elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Par
+        elki.clustering.ClusteringAlgorithm <|.. ClustersWithNoiseExtraction
+        ClustersWithNoiseExtraction +-- elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Par
+        ClustersWithNoiseExtraction +-- elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Par
+        AbstractCutDendrogram <|-- CutDendrogramByNumberOfClusters
+        elki.clustering.ClusteringAlgorithm <|.. CutDendrogramByNumberOfClusters
+        elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Instance <|-- elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters.Instance
+        CutDendrogramByNumberOfClusters +-- elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters.Instance
+        elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Par <|-- elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters.Par
+        CutDendrogramByNumberOfClusters +-- elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters.Par
+        elki.clustering.ClusteringAlgorithm <|.. SimplifiedHierarchyExtraction
+        SimplifiedHierarchyExtraction +-- elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.Instance
+        SimplifiedHierarchyExtraction +-- elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.TempCluster
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.Par
+        SimplifiedHierarchyExtraction +-- elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.Par
+        elki.clustering.ClusteringAlgorithm <|.. AbstractCutDendrogram
+        AbstractCutDendrogram +-- elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Par
+        AbstractCutDendrogram +-- elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Par
+        AbstractCutDendrogram <|-- CutDendrogramByHeight
+        elki.clustering.ClusteringAlgorithm <|.. CutDendrogramByHeight
+        elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Instance <|-- elki.clustering.hierarchical.extraction.CutDendrogramByHeight.Instance
+        CutDendrogramByHeight +-- elki.clustering.hierarchical.extraction.CutDendrogramByHeight.Instance
+        elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Par <|-- elki.clustering.hierarchical.extraction.CutDendrogramByHeight.Par
+        CutDendrogramByHeight +-- elki.clustering.hierarchical.extraction.CutDendrogramByHeight.Par
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

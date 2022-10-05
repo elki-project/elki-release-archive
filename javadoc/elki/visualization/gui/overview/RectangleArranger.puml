@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RectangleArranger\n<size:10>elki.visualization.gui.overview" as elki.visualization.gui.overview.RectangleArranger<T> [[RectangleArranger.html]] {
+        {static} -LOG: Logging
+        -ratio: double
+        -twidth: double
+        -theight: double
+        -widths: DoubleArray
+        -heights: DoubleArray
+        -usage: ArrayList<ArrayList<Object>>
+        -map: Map<T, double[]>
+        +RectangleArranger(double)
+        +RectangleArranger(double, double)
+        +put(double, double, T): void
+        #computeIncreaseArea(double, double): double
+        #splitRow(int, double): void
+        #splitCol(int, double): void
+        -resize(double): void
+        +get(T): double[]
+        -assertConsistent(): boolean
+        #logSizes(): void
+        +relativeFill(): double
+        +getWidth(): double
+        +getHeight(): double
+        +entrySet(): Set<Entry<T, double[]>>
+        +keySet(): Set<T>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

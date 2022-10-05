@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DendrogramVisualization.SwitchStyleAction\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization.SwitchStyleAction [[DendrogramVisualization.SwitchStyleAction.html]] {
+        -task: VisualizationTask
+        -context: VisualizerContext
+        +SwitchStyleAction(VisualizationTask, VisualizerContext)
+        +getMenuName(): String
+        +activate(): void
+    }
+
+    interface "<size:14>VisualizationMenuAction\n<size:10>elki.visualization" as elki.visualization.VisualizationMenuAction [[../../VisualizationMenuAction.html]] {
+        {abstract} +activate(): void
+    }
+    class "<size:14>DendrogramVisualization\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization [[DendrogramVisualization.html]]
+
+    elki.visualization.VisualizationMenuAction <|.. elki.visualization.visualizers.visunproj.DendrogramVisualization.SwitchStyleAction
+    elki.visualization.visualizers.visunproj.DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.SwitchStyleAction
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

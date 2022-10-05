@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LAESA.LAESARangeByObjectSearcher\n<size:10>elki.index.laesa" as elki.index.laesa.LAESA.LAESARangeByObjectSearcher [[LAESA.LAESARangeByObjectSearcher.html]] {
+        -query: O
+        +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        #queryDistance(DBIDRef): double
+    }
+
+    abstract class "<size:14>LAESA.LAESARangeSearcher\n<size:10>elki.index.laesa" as elki.index.laesa.LAESA.LAESARangeSearcher<O> [[LAESA.LAESARangeSearcher.html]] {
+        {abstract} #queryDistance(DBIDRef): double
+    }
+    class "<size:14>LAESA\n<size:10>elki.index.laesa" as elki.index.laesa.LAESA<O> [[LAESA.html]]
+
+    elki.index.laesa.LAESA.LAESARangeSearcher <|-- elki.index.laesa.LAESA.LAESARangeByObjectSearcher
+    elki.index.laesa.LAESA +-- elki.index.laesa.LAESA.LAESARangeByObjectSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

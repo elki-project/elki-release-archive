@@ -1,0 +1,69 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.result.textwriter.writers {
+
+        class TextWriterConfusionMatrixResult [[TextWriterConfusionMatrixResult.html]] {
+            +write(TextWriterStream, String, ConfusionMatrixEvaluationResult): void
+        }
+
+        class TextWriterObjectArray<T> [[TextWriterObjectArray.html]] {
+            +write(TextWriterStream, String, T[]): void
+        }
+
+        class TextWriterIntArray [[TextWriterIntArray.html]] {
+            +write(TextWriterStream, String, int[]): void
+        }
+
+        class TextWriterXYCurve [[TextWriterXYCurve.html]] {
+            +write(TextWriterStream, String, XYCurve): void
+        }
+
+        class TextWriterDoubleDoublePair [[TextWriterDoubleDoublePair.html]] {
+            +write(TextWriterStream, String, DoubleDoublePair): void
+        }
+
+        class TextWriterPair [[TextWriterPair.html]] {
+            +write(TextWriterStream, String, Pair<?, ?>): void
+        }
+
+        class TextWriterObjectComment [[TextWriterObjectComment.html]] {
+            +write(TextWriterStream, String, Object): void
+        }
+
+        class TextWriterObjectInline [[TextWriterObjectInline.html]] {
+            +write(TextWriterStream, String, Object): void
+        }
+
+        class TextWriterTextWriteable [[TextWriterTextWriteable.html]] {
+            +write(TextWriterStream, String, TextWriteable): void
+        }
+
+        class TextWriterDoubleArray [[TextWriterDoubleArray.html]] {
+            +write(TextWriterStream, String, double[]): void
+        }
+
+        class TextWriterIgnore [[TextWriterIgnore.html]] {
+            +write(TextWriterStream, String, Object): void
+        }
+
+        elki.result.textwriter.TextWriterWriterInterface <|-- TextWriterConfusionMatrixResult
+        elki.result.textwriter.TextWriterWriterInterface <|-- TextWriterObjectArray
+        elki.result.textwriter.TextWriterWriterInterface <|-- TextWriterIntArray
+        elki.result.textwriter.TextWriterWriterInterface <|-- TextWriterXYCurve
+        elki.result.textwriter.TextWriterWriterInterface <|-- TextWriterDoubleDoublePair
+        elki.result.textwriter.TextWriterWriterInterface <|-- TextWriterPair
+        elki.result.textwriter.TextWriterWriterInterface <|-- TextWriterObjectComment
+        elki.result.textwriter.TextWriterWriterInterface <|-- TextWriterObjectInline
+        elki.result.textwriter.TextWriterWriterInterface <|-- TextWriterTextWriteable
+        elki.result.textwriter.TextWriterWriterInterface <|-- TextWriterDoubleArray
+        elki.result.textwriter.TextWriterWriterInterface <|-- TextWriterIgnore
+    }
+
+    namespace elki.result.textwriter {
+        abstract class TextWriterWriterInterface<O> [[../TextWriterWriterInterface.html]] {
+            {abstract} +write(TextWriterStream, String, O): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

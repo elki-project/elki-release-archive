@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SerializedParameterization\n<size:10>elki.utilities.optionhandling.parameterization" as elki.utilities.optionhandling.parameterization.SerializedParameterization [[SerializedParameterization.html]] {
+        {static} +OPTION_PREFIX: String
+        ~parameters: LinkedList<String>
+        +SerializedParameterization()
+        +SerializedParameterization(String...)
+        +SerializedParameterization(List<String>)
+        +getRemainingParameters(): List<String>
+        +hasUnusedParameters(): boolean
+        +logUnusedParameters(): void
+        +setValueForOption(Parameter<?>): boolean
+    }
+
+    abstract class "<size:14>AbstractParameterization\n<size:10>elki.utilities.optionhandling.parameterization" as elki.utilities.optionhandling.parameterization.AbstractParameterization [[AbstractParameterization.html]]
+
+    elki.utilities.optionhandling.parameterization.AbstractParameterization <|-- elki.utilities.optionhandling.parameterization.SerializedParameterization
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

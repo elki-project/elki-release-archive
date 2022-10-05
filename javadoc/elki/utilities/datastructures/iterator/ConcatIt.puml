@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ConcatIt\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.ConcatIt<O> [[ConcatIt.html]] {
+        -its: It<? extends O>[]
+        -it: int
+        +ConcatIt(It<? extends O>...)
+        +valid(): boolean
+        +get(): O
+        +advance(): It<O>
+    }
+
+    interface "<size:14>It\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.It<O> [[It.html]] {
+        {abstract} +get(): O
+        {abstract} +advance(): It<O>
+    }
+
+    elki.utilities.datastructures.iterator.It <|.. elki.utilities.datastructures.iterator.ConcatIt
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,344 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.kmeans.initialization {
+
+        class KMC2 [[KMC2.html]] {
+            {static} -LOG: Logging
+            #m: int
+            +KMC2(int, RandomFactory)
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        }
+
+        class elki.clustering.kmeans.initialization.KMC2.Instance [[KMC2.Instance.html]] {
+            #relation: Relation<? extends NumberVector>
+            #distance: NumberVectorDistance<?>
+            #weights: WritableDoubleDataStore
+            #diststat: long
+            #m: int
+            #random: Random
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, int, RandomFactory)
+            #initialWeights(NumberVector): double
+            +run(int): double[]
+            #distance(NumberVector, DBIDRef): double
+            #chooseRemaining(int, List<NumberVector>, double): void
+            #sample(double): DBIDRef
+            #distance(DBIDRef, List<NumberVector>): double
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.initialization.KMC2.Par [[KMC2.Par.html]] {
+            {static} +M_ID: OptionID
+            #m: int
+            +configure(Parameterization): void
+            +make(): KMC2
+        }
+
+        class KMeansPlusPlus<O> [[KMeansPlusPlus.html]] {
+            {static} -LOG: Logging
+            +KMeansPlusPlus(RandomFactory)
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+            +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+        }
+
+        abstract class elki.clustering.kmeans.initialization.KMeansPlusPlus.Instance<T> [[KMeansPlusPlus.Instance.html]] {
+            #ids: DBIDs
+            #weights: WritableDoubleDataStore
+            #diststat: long
+            #random: Random
+            +Instance(DBIDs, RandomFactory)
+            {abstract} #distance(T, DBIDRef): double
+            #initialWeights(T): double
+            #updateWeights(T): double
+            #nextDouble(double): double
+        }
+
+        class elki.clustering.kmeans.initialization.KMeansPlusPlus.NumberVectorInstance [[KMeansPlusPlus.NumberVectorInstance.html]] {
+            #distance: NumberVectorDistance<?>
+            #relation: Relation<? extends NumberVector>
+            +NumberVectorInstance(Relation<? extends NumberVector>, NumberVectorDistance<?>, RandomFactory)
+            +run(int): double[]
+            #distance(NumberVector, DBIDRef): double
+            #chooseRemaining(int, List<NumberVector>, double): void
+        }
+
+        class elki.clustering.kmeans.initialization.KMeansPlusPlus.MedoidsInstance [[KMeansPlusPlus.MedoidsInstance.html]] {
+            ~distQ: DistanceQuery<?>
+            +MedoidsInstance(DBIDs, DistanceQuery<?>, RandomFactory)
+            +run(int): DBIDs
+            #distance(DBIDRef, DBIDRef): double
+            #chooseRemaining(int, ArrayModifiableDBIDs, double): void
+        }
+
+        class elki.clustering.kmeans.initialization.KMeansPlusPlus.Par<V> [[KMeansPlusPlus.Par.html]] {
+            +make(): KMeansPlusPlus<V>
+        }
+
+        class FirstK<O> [[FirstK.html]] {
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+            +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+        }
+
+        class elki.clustering.kmeans.initialization.FirstK.Par<V extends NumberVector> [[FirstK.Par.html]] {
+            +make(): FirstK<V extends NumberVector>
+        }
+
+        class FarthestPoints<O> [[FarthestPoints.html]] {
+            ~dropfirst: boolean
+            +FarthestPoints(RandomFactory, boolean)
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+            +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+        }
+
+        class elki.clustering.kmeans.initialization.FarthestPoints.Par<O> [[FarthestPoints.Par.html]] {
+            {static} +KEEPFIRST_ID: OptionID
+            #keepfirst: boolean
+            +configure(Parameterization): void
+            +make(): FarthestPoints<O>
+        }
+
+        class Predefined [[Predefined.html]] {
+            ~initialMeans: double[]
+            +Predefined(double[])
+            +setInitialMeans(List<double[]>): void
+            +setInitialClusters(List<? extends Cluster<? extends MeanModel>>): void
+            +setInitialMeans(double[]): void
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        }
+
+        class elki.clustering.kmeans.initialization.Predefined.Par [[Predefined.Par.html]] {
+            {static} +INITIAL_MEANS: OptionID
+            #initialMeans: double[]
+            +configure(Parameterization): void
+            +make(): Predefined
+        }
+
+        interface KMeansInitialization [[KMeansInitialization.html]] {
+            {abstract} +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        }
+
+        class SampleKMeans<V extends NumberVector> [[SampleKMeans.html]] {
+            -innerkMeans: KMeans<V extends NumberVector, ?>
+            -rate: double
+            +SampleKMeans(RandomFactory, KMeans<V extends NumberVector, ?>, double)
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        }
+
+        class elki.clustering.kmeans.initialization.SampleKMeans.Par<V extends NumberVector> {
+            {static} +KMEANS_ID: OptionID
+            {static} +SAMPLE_ID: OptionID
+            #innerkMeans: KMeans<V extends NumberVector, ?>
+            #rate: double
+            +configure(Parameterization): void
+            +make(): SampleKMeans<V extends NumberVector>
+        }
+
+        class RandomNormalGenerated [[RandomNormalGenerated.html]] {
+            +RandomNormalGenerated(RandomFactory)
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        }
+
+        class elki.clustering.kmeans.initialization.RandomNormalGenerated.Par [[RandomNormalGenerated.Par.html]] {
+            +make(): RandomNormalGenerated
+        }
+
+        class FarthestSumPoints<O> [[FarthestSumPoints.html]] {
+            +FarthestSumPoints(RandomFactory, boolean)
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+            +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+        }
+
+        class elki.clustering.kmeans.initialization.FarthestSumPoints.Par<V> [[FarthestSumPoints.Par.html]] {
+            +make(): FarthestSumPoints<V>
+        }
+
+        class SphericalKMeansPlusPlus<O> [[SphericalKMeansPlusPlus.html]] {
+            {static} -LOG: Logging
+            #alpha: double
+            +SphericalKMeansPlusPlus(double, RandomFactory)
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        }
+
+        class elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus.Instance [[SphericalKMeansPlusPlus.Instance.html]] {
+            #alpha: double
+            #relation: Relation<? extends NumberVector>
+            #weights: WritableDoubleDataStore
+            #diststat: long
+            #random: Random
+            +Instance(Relation<? extends NumberVector>, double, RandomFactory)
+            +run(int): double[]
+            #similarity(NumberVector, DBIDRef): double
+            #chooseRemaining(int, List<NumberVector>, double): void
+            #initialWeights(NumberVector): double
+            #updateWeights(NumberVector): double
+            #nextDouble(double): double
+        }
+
+        class elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus.Par<V> [[SphericalKMeansPlusPlus.Par.html]] {
+            {static} +ALPHA_ID: OptionID
+            #alpha: double
+            +configure(Parameterization): void
+            +make(): SphericalKMeansPlusPlus<V>
+        }
+
+        class AFKMC2 [[AFKMC2.html]] {
+            {static} -LOG: Logging
+            +AFKMC2(int, RandomFactory)
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        }
+
+        class elki.clustering.kmeans.initialization.AFKMC2.Instance [[AFKMC2.Instance.html]] {
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, int, RandomFactory)
+            #sample(double): DBIDRef
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.initialization.AFKMC2.Par [[AFKMC2.Par.html]] {
+            +make(): AFKMC2
+        }
+
+        class SphericalAFKMC2 [[SphericalAFKMC2.html]] {
+            {static} -LOG: Logging
+            #alpha: double
+            +SphericalAFKMC2(int, double, RandomFactory)
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        }
+
+        class elki.clustering.kmeans.initialization.SphericalAFKMC2.Instance [[SphericalAFKMC2.Instance.html]] {
+            #alpha: double
+            +Instance(Relation<? extends NumberVector>, int, double, RandomFactory)
+            #initialWeights(NumberVector): double
+            #similarity(NumberVector, DBIDRef): double
+            #distance(DBIDRef, List<NumberVector>): double
+        }
+
+        class elki.clustering.kmeans.initialization.SphericalAFKMC2.Par [[SphericalAFKMC2.Par.html]] {
+            {static} +ALPHA_ID: OptionID
+            #alpha: double
+            +configure(Parameterization): void
+            +make(): SphericalAFKMC2
+        }
+
+        class RandomUniformGenerated [[RandomUniformGenerated.html]] {
+            +RandomUniformGenerated(RandomFactory)
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        }
+
+        class elki.clustering.kmeans.initialization.RandomUniformGenerated.Par [[RandomUniformGenerated.Par.html]] {
+            +make(): RandomUniformGenerated
+        }
+
+        abstract class AbstractKMeansInitialization [[AbstractKMeansInitialization.html]] {
+            #rnd: RandomFactory
+            +AbstractKMeansInitialization(RandomFactory)
+            {static} +unboxVectors(List<? extends NumberVector>): double[]
+        }
+
+        abstract class elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par [[AbstractKMeansInitialization.Par.html]] {
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+        }
+
+        class Ostrovsky [[Ostrovsky.html]] {
+            {static} -LOG: Logging
+            +Ostrovsky(RandomFactory)
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        }
+
+        class elki.clustering.kmeans.initialization.Ostrovsky.NumberVectorInstance [[Ostrovsky.NumberVectorInstance.html]] {
+            +NumberVectorInstance(Relation<? extends NumberVector>, NumberVectorDistance<?>, RandomFactory)
+            +run(Relation<? extends NumberVector>, int): double[]
+        }
+
+        class elki.clustering.kmeans.initialization.Ostrovsky.Par [[Ostrovsky.Par.html]] {
+            +make(): Ostrovsky
+        }
+
+        class RandomlyChosen<O> [[RandomlyChosen.html]] {
+            +RandomlyChosen(RandomFactory)
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+            +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+        }
+
+        class elki.clustering.kmeans.initialization.RandomlyChosen.Par<V> [[RandomlyChosen.Par.html]] {
+            +make(): RandomlyChosen<V>
+        }
+
+        AbstractKMeansInitialization <|-- KMC2
+        KMC2 +-- elki.clustering.kmeans.initialization.KMC2.Instance
+        elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.KMC2.Par
+        KMC2 +-- elki.clustering.kmeans.initialization.KMC2.Par
+        AbstractKMeansInitialization <|-- KMeansPlusPlus
+        elki.clustering.kmedoids.initialization.KMedoidsInitialization <|.. KMeansPlusPlus
+        KMeansPlusPlus +-- elki.clustering.kmeans.initialization.KMeansPlusPlus.Instance
+        elki.clustering.kmeans.initialization.KMeansPlusPlus.Instance <|-- elki.clustering.kmeans.initialization.KMeansPlusPlus.NumberVectorInstance
+        KMeansPlusPlus +-- elki.clustering.kmeans.initialization.KMeansPlusPlus.NumberVectorInstance
+        elki.clustering.kmeans.initialization.KMeansPlusPlus.Instance <|-- elki.clustering.kmeans.initialization.KMeansPlusPlus.MedoidsInstance
+        KMeansPlusPlus +-- elki.clustering.kmeans.initialization.KMeansPlusPlus.MedoidsInstance
+        elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.KMeansPlusPlus.Par
+        KMeansPlusPlus +-- elki.clustering.kmeans.initialization.KMeansPlusPlus.Par
+        KMeansInitialization <|.. FirstK
+        elki.clustering.kmedoids.initialization.KMedoidsInitialization <|.. FirstK
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmeans.initialization.FirstK.Par
+        FirstK +-- elki.clustering.kmeans.initialization.FirstK.Par
+        AbstractKMeansInitialization <|-- FarthestPoints
+        elki.clustering.kmedoids.initialization.KMedoidsInitialization <|.. FarthestPoints
+        elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.FarthestPoints.Par
+        FarthestPoints +-- elki.clustering.kmeans.initialization.FarthestPoints.Par
+        AbstractKMeansInitialization <|-- Predefined
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmeans.initialization.Predefined.Par
+        Predefined +-- elki.clustering.kmeans.initialization.Predefined.Par
+        AbstractKMeansInitialization <|-- SampleKMeans
+        elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.SampleKMeans.Par
+        SampleKMeans +-- elki.clustering.kmeans.initialization.SampleKMeans.Par
+        AbstractKMeansInitialization <|-- RandomNormalGenerated
+        elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.RandomNormalGenerated.Par
+        RandomNormalGenerated +-- elki.clustering.kmeans.initialization.RandomNormalGenerated.Par
+        FarthestPoints <|-- FarthestSumPoints
+        elki.clustering.kmeans.initialization.FarthestPoints.Par <|-- elki.clustering.kmeans.initialization.FarthestSumPoints.Par
+        FarthestSumPoints +-- elki.clustering.kmeans.initialization.FarthestSumPoints.Par
+        AbstractKMeansInitialization <|-- SphericalKMeansPlusPlus
+        SphericalKMeansPlusPlus +-- elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus.Instance
+        elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus.Par
+        SphericalKMeansPlusPlus +-- elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus.Par
+        KMC2 <|-- AFKMC2
+        elki.clustering.kmeans.initialization.KMC2.Instance <|-- elki.clustering.kmeans.initialization.AFKMC2.Instance
+        AFKMC2 +-- elki.clustering.kmeans.initialization.AFKMC2.Instance
+        elki.clustering.kmeans.initialization.KMC2.Par <|-- elki.clustering.kmeans.initialization.AFKMC2.Par
+        AFKMC2 +-- elki.clustering.kmeans.initialization.AFKMC2.Par
+        AFKMC2 <|-- SphericalAFKMC2
+        elki.clustering.kmeans.initialization.AFKMC2.Instance <|-- elki.clustering.kmeans.initialization.SphericalAFKMC2.Instance
+        SphericalAFKMC2 +-- elki.clustering.kmeans.initialization.SphericalAFKMC2.Instance
+        elki.clustering.kmeans.initialization.AFKMC2.Par <|-- elki.clustering.kmeans.initialization.SphericalAFKMC2.Par
+        SphericalAFKMC2 +-- elki.clustering.kmeans.initialization.SphericalAFKMC2.Par
+        AbstractKMeansInitialization <|-- RandomUniformGenerated
+        elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.RandomUniformGenerated.Par
+        RandomUniformGenerated +-- elki.clustering.kmeans.initialization.RandomUniformGenerated.Par
+        KMeansInitialization <|.. AbstractKMeansInitialization
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par
+        AbstractKMeansInitialization +-- elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par
+        AbstractKMeansInitialization <|-- Ostrovsky
+        elki.clustering.kmeans.initialization.KMeansPlusPlus.NumberVectorInstance <|-- elki.clustering.kmeans.initialization.Ostrovsky.NumberVectorInstance
+        Ostrovsky +-- elki.clustering.kmeans.initialization.Ostrovsky.NumberVectorInstance
+        elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.Ostrovsky.Par
+        Ostrovsky +-- elki.clustering.kmeans.initialization.Ostrovsky.Par
+        AbstractKMeansInitialization <|-- RandomlyChosen
+        elki.clustering.kmedoids.initialization.KMedoidsInitialization <|.. RandomlyChosen
+        elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.RandomlyChosen.Par
+        RandomlyChosen +-- elki.clustering.kmeans.initialization.RandomlyChosen.Par
+    }
+
+    namespace elki.clustering.kmedoids.initialization {
+        interface KMedoidsInitialization<O> [[../../kmedoids/initialization/KMedoidsInitialization.html]] {
+            {abstract} +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

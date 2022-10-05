@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractIndexBasedSimilarity\n<size:10>elki.similarity" as elki.similarity.AbstractIndexBasedSimilarity<O, F extends IndexFactory<O>> [[AbstractIndexBasedSimilarity.html]] {
+        #indexFactory: F extends IndexFactory<O>
+        +AbstractIndexBasedSimilarity(F extends IndexFactory<O>)
+        {abstract} +instantiate(Relation<T extends O>): Instance<T extends O, ?>
+        +isSymmetric(): boolean
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>IndexBasedSimilarity\n<size:10>elki.similarity" as elki.similarity.IndexBasedSimilarity<O> [[IndexBasedSimilarity.html]] {
+        {abstract} +instantiate(Relation<T extends O>): Instance<T extends O, ?>
+    }
+    abstract class "<size:14>AbstractIndexBasedSimilarity.Instance\n<size:10>elki.similarity" as elki.similarity.AbstractIndexBasedSimilarity.Instance<O, I extends Index> [[AbstractIndexBasedSimilarity.Instance.html]]
+    abstract class "<size:14>AbstractIndexBasedSimilarity.Par\n<size:10>elki.similarity" as elki.similarity.AbstractIndexBasedSimilarity.Par<F extends IndexFactory<?>> [[AbstractIndexBasedSimilarity.Par.html]]
+
+    elki.similarity.IndexBasedSimilarity <|.. elki.similarity.AbstractIndexBasedSimilarity
+    elki.similarity.AbstractIndexBasedSimilarity +-- elki.similarity.AbstractIndexBasedSimilarity.Instance
+    elki.similarity.AbstractIndexBasedSimilarity +-- elki.similarity.AbstractIndexBasedSimilarity.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

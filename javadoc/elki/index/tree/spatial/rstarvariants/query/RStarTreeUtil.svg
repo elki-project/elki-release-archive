@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="128px" preserveAspectRatio="none" style="width:1227px;height:128px;background:#FFFFFF;" version="1.1" viewBox="0 0 1227 128" width="1227px" zoomAndPan="magnify"><defs/><g><!--MD5=[08854aaf5026f7c52a2f1873d024f21b]
+class elki.index.tree.spatial.rstarvariants.query.RStarTreeUtil--><a href="RStarTreeUtil.html" target="_top" title="RStarTreeUtil.html" xlink:actuate="onRequest" xlink:href="RStarTreeUtil.html" xlink:show="new" xlink:title="RStarTreeUtil.html" xlink:type="simple"><g id="elem_elki.index.tree.spatial.rstarvariants.query.RStarTreeUtil"><rect codeLine="6" fill="#F1F1F1" height="94.8281" id="elki.index.tree.spatial.rstarvariants.query.RStarTreeUtil" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="1206" x="7" y="7"/><ellipse cx="507.25" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M510.2188,31.6094 Q509.6406,31.9063 509,32.0469 Q508.3594,32.2031 507.6563,32.2031 Q505.1563,32.2031 503.8281,30.5625 Q502.5156,28.9063 502.5156,25.7813 Q502.5156,22.6563 503.8281,21 Q505.1563,19.3438 507.6563,19.3438 Q508.3594,19.3438 509,19.5 Q509.6563,19.6563 510.2188,19.9531 L510.2188,22.6719 Q509.5938,22.0938 509,21.8281 Q508.4063,21.5469 507.7813,21.5469 Q506.4375,21.5469 505.75,22.625 Q505.0625,23.6875 505.0625,25.7813 Q505.0625,27.875 505.75,28.9531 Q506.4375,30.0156 507.7813,30.0156 Q508.4063,30.0156 509,29.75 Q509.5938,29.4688 510.2188,28.8906 L510.2188,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="90" x="581.25" y="24.9951">RStarTreeUtil</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="197" x="527.75" y="37.5791">elki.index.tree.spatial.rstarvariants.query</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="1212" y1="44.9375" y2="44.9375"/><ellipse cx="18" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="1096" x="27" y="61.9326">getRangeQuery(AbstractRStarTree&lt;?, ?, ?&gt;, SpatialDistanceQuery&lt;O extends SpatialComparable&gt;, Object...): RangeSearcher&lt;O extends SpatialComparable&gt;</text><ellipse cx="18" cy="74.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="1064" x="27" y="78.2295">getKNNQuery(AbstractRStarTree&lt;?, ?, ?&gt;, SpatialDistanceQuery&lt;O extends SpatialComparable&gt;, Object...): KNNSearcher&lt;O extends SpatialComparable&gt;</text><ellipse cx="18" cy="91.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="1180" x="27" y="94.5264">getDistancePrioritySearcher(AbstractRStarTree&lt;?, ?, ?&gt;, SpatialDistanceQuery&lt;O extends SpatialComparable&gt;, Object...): PrioritySearcher&lt;O extends SpatialComparable&gt;</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="516.5" y="108.8281"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="516.5" y="118.1104">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[991cfdabefaecd1097dc22f96e90b3ec]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RStarTreeUtil\n<size:10>elki.index.tree.spatial.rstarvariants.query" as elki.index.tree.spatial.rstarvariants.query.RStarTreeUtil [[RStarTreeUtil.html]] {
+        {static} +getRangeQuery(AbstractRStarTree<?, ?, ?>, SpatialDistanceQuery<O extends SpatialComparable>, Object...): RangeSearcher<O extends SpatialComparable>
+        {static} +getKNNQuery(AbstractRStarTree<?, ?, ?>, SpatialDistanceQuery<O extends SpatialComparable>, Object...): KNNSearcher<O extends SpatialComparable>
+        {static} +getDistancePrioritySearcher(AbstractRStarTree<?, ?, ?>, SpatialDistanceQuery<O extends SpatialComparable>, Object...): PrioritySearcher<O extends SpatialComparable>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

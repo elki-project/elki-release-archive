@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractExternalizablePage\n<size:10>elki.persistent" as elki.persistent.AbstractExternalizablePage [[AbstractExternalizablePage.html]] {
+        {static} -serialVersionUID: long
+        -id: int
+        -dirty: boolean
+        +getPageID(): int
+        +setPageID(int): void
+        +isDirty(): boolean
+        +setDirty(boolean): void
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+    }
+
+    interface "<size:14>Externalizable\n<size:10>java.io" as java.io.Externalizable {
+        {abstract} +writeExternal(ObjectOutput): void
+        {abstract} +readExternal(ObjectInput): void
+    }
+    interface "<size:14>Page\n<size:10>elki.persistent" as elki.persistent.Page [[Page.html]] {
+        {abstract} +getPageID(): int
+        {abstract} +setPageID(int): void
+        {abstract} +isDirty(): boolean
+        {abstract} +setDirty(boolean): void
+    }
+
+    java.io.Externalizable <|.. elki.persistent.AbstractExternalizablePage
+    elki.persistent.Page <|.. elki.persistent.AbstractExternalizablePage
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

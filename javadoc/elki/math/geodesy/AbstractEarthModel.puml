@@ -1,0 +1,57 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractEarthModel\n<size:10>elki.math.geodesy" as elki.math.geodesy.AbstractEarthModel [[AbstractEarthModel.html]] {
+        {static} -MAX_ITER: int
+        {static} -PRECISION: double
+        ~a: double
+        ~b: double
+        ~f: double
+        ~invf: double
+        ~e: double
+        ~esq: double
+        +AbstractEarthModel(double, double, double, double)
+        +getEquatorialRadius(): double
+        +getPolarDistance(): double
+        +latLngDegToECEF(double, double): double[]
+        +latLngDegToECEF(double, double, double): double[]
+        +latLngRadToECEF(double, double): double[]
+        +latLngRadToECEF(double, double, double): double[]
+        +ecefToLatDeg(double, double, double): double
+        +ecefToLatRad(double, double, double): double
+        +ecefToLngDeg(double, double): double
+        +ecefToLngRad(double, double): double
+        +ecefToLatLngDegHeight(double, double, double): double[]
+        +ecefToLatLngRadHeight(double, double, double): double[]
+        +distanceDeg(double, double, double, double): double
+        +distanceRad(double, double, double, double): double
+        +minDistDeg(double, double, double, double, double, double): double
+        +minDistRad(double, double, double, double, double, double): double
+    }
+
+    interface "<size:14>EarthModel\n<size:10>elki.math.geodesy" as elki.math.geodesy.EarthModel [[EarthModel.html]] {
+        {abstract} +latLngDegToECEF(double, double): double[]
+        {abstract} +latLngRadToECEF(double, double): double[]
+        {abstract} +latLngDegToECEF(double, double, double): double[]
+        {abstract} +latLngRadToECEF(double, double, double): double[]
+        {abstract} +ecefToLatDeg(double, double, double): double
+        {abstract} +ecefToLatRad(double, double, double): double
+        {abstract} +ecefToLngDeg(double, double): double
+        {abstract} +ecefToLngRad(double, double): double
+        {abstract} +ecefToLatLngDegHeight(double, double, double): double[]
+        {abstract} +ecefToLatLngRadHeight(double, double, double): double[]
+        {abstract} +distanceDeg(double, double, double, double): double
+        {abstract} +distanceRad(double, double, double, double): double
+        {abstract} +minDistDeg(double, double, double, double, double, double): double
+        {abstract} +minDistRad(double, double, double, double, double, double): double
+        {abstract} +getEquatorialRadius(): double
+        {abstract} +getPolarDistance(): double
+    }
+
+    elki.math.geodesy.EarthModel <|.. elki.math.geodesy.AbstractEarthModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

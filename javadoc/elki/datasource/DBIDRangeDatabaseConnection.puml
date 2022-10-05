@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DBIDRangeDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.DBIDRangeDatabaseConnection [[DBIDRangeDatabaseConnection.html]] {
+        ~start: int
+        ~count: int
+        +DBIDRangeDatabaseConnection(int, int)
+        +loadData(): MultipleObjectsBundle
+    }
+
+    interface "<size:14>DatabaseConnection\n<size:10>elki.datasource" as elki.datasource.DatabaseConnection [[DatabaseConnection.html]] {
+        {abstract} +loadData(): MultipleObjectsBundle
+    }
+    class "<size:14>DBIDRangeDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.DBIDRangeDatabaseConnection.Par [[DBIDRangeDatabaseConnection.Par.html]]
+
+    elki.datasource.DatabaseConnection <|.. elki.datasource.DBIDRangeDatabaseConnection
+    elki.datasource.DBIDRangeDatabaseConnection +-- elki.datasource.DBIDRangeDatabaseConnection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

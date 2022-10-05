@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="322px" preserveAspectRatio="none" style="width:396px;height:322px;background:#FFFFFF;" version="1.1" viewBox="0 0 396 322" width="396px" zoomAndPan="magnify"><defs/><g><!--MD5=[d3461c764a134024522cbe4e371bf92d]
+class elki.clustering.optics.AbstractOPTICS--><a href="AbstractOPTICS.html" target="_top" title="AbstractOPTICS.html" xlink:actuate="onRequest" xlink:href="AbstractOPTICS.html" xlink:show="new" xlink:title="AbstractOPTICS.html" xlink:type="simple"><g id="elem_elki.clustering.optics.AbstractOPTICS"><rect codeLine="6" fill="#F1F1F1" height="168.0156" id="elki.clustering.optics.AbstractOPTICS" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="376" x="9" y="129"/><ellipse cx="132.25" cy="147.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M132.3594,143.3125 L131.2031,148.3906 L133.5313,148.3906 L132.3594,143.3125 Z M130.875,141.0781 L133.8594,141.0781 L137.2188,153.4688 L134.7656,153.4688 L134,150.4063 L130.7188,150.4063 L129.9688,153.4688 L127.5313,153.4688 L130.875,141.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="109" x="152.75" y="146.9951">AbstractOPTICS</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="103" x="155.75" y="159.5791">elki.clustering.optics</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="378" y="126"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="379" y="138.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="384" y1="166.9375" y2="166.9375"/><polygon fill="none" points="20,175.5859,24,179.5859,20,183.5859,16,179.5859" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="219" x="29" y="183.9326">distance: Distance&lt;? super O&gt;</text><polygon fill="none" points="20,191.8828,24,195.8828,20,199.8828,16,195.8828" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="107" x="29" y="200.2295">epsilon: double</text><polygon fill="none" points="20,208.1797,24,212.1797,20,216.1797,16,212.1797" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="29" y="216.5264">minpts: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="384" y1="223.8281" y2="223.8281"/><ellipse cx="20" cy="237.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="350" x="29" y="240.8232">AbstractOPTICS(Distance&lt;? super O&gt;, double, int)</text><ellipse cx="20" cy="253.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="306" x="29" y="257.1201">getInputTypeRestriction(): TypeInformation[]</text><ellipse cx="20" cy="270.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="224" x="29" y="273.417">run(Relation&lt;O&gt;): ClusterOrder</text><ellipse cx="20" cy="286.3672" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105" x="29" y="289.7139">getMinPts(): int</text></g></a><!--MD5=[de674000aae797d71944b5531dbd56d4]
+class elki.clustering.optics.OPTICSTypeAlgorithm--><a href="OPTICSTypeAlgorithm.html" target="_top" title="OPTICSTypeAlgorithm.html" xlink:actuate="onRequest" xlink:href="OPTICSTypeAlgorithm.html" xlink:show="new" xlink:title="OPTICSTypeAlgorithm.html" xlink:type="simple"><g id="elem_elki.clustering.optics.OPTICSTypeAlgorithm"><rect codeLine="16" fill="#F1F1F1" height="62.2344" id="elki.clustering.optics.OPTICSTypeAlgorithm" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="187" x="103.5" y="7"/><ellipse cx="118.5" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M114.4219,21.7344 L114.4219,19.5781 L121.8125,19.5781 L121.8125,21.7344 L119.3438,21.7344 L119.3438,29.8125 L121.8125,29.8125 L121.8125,31.9688 L114.4219,31.9688 L114.4219,29.8125 L116.8906,29.8125 L116.8906,21.7344 L114.4219,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="155" x="132.5" y="24.9951">OPTICSTypeAlgorithm</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="103" x="158.5" y="37.5791">elki.clustering.optics</text><line style="stroke:#181818;stroke-width:0.5;" x1="104.5" x2="289.5" y1="44.9375" y2="44.9375"/><ellipse cx="114.5" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="105" x="123.5" y="61.9326">getMinPts(): int</text></g></a><!--MD5=[a26c2ddaaab2283095885fa37a1c0b6e]
+reverse link elki.clustering.optics.OPTICSTypeAlgorithm to elki.clustering.optics.AbstractOPTICS--><g id="link_elki.clustering.optics.OPTICSTypeAlgorithm_elki.clustering.optics.AbstractOPTICS"><path codeLine="21" d="M197,89.22 C197,101.6 197,115.2 197,128.7 " fill="none" id="elki.clustering.optics.OPTICSTypeAlgorithm-backto-elki.clustering.optics.AbstractOPTICS" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="190,89.13,197,69.13,204,89.13,190,89.13" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="98" y="303.0156"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="98" y="312.2979">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[e61a208d60538916ae84722d29f55cb5]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractOPTICS\n<size:10>elki.clustering.optics" as elki.clustering.optics.AbstractOPTICS<O> [[AbstractOPTICS.html]] {
+        #distance: Distance<? super O>
+        #epsilon: double
+        #minpts: int
+        +AbstractOPTICS(Distance<? super O>, double, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        {abstract} +run(Relation<O>): ClusterOrder
+        +getMinPts(): int
+    }
+
+    interface "<size:14>OPTICSTypeAlgorithm\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSTypeAlgorithm [[OPTICSTypeAlgorithm.html]] {
+        {abstract} +getMinPts(): int
+    }
+    abstract class "<size:14>AbstractOPTICS.Par\n<size:10>elki.clustering.optics" as elki.clustering.optics.AbstractOPTICS.Par<O>
+
+    elki.clustering.optics.OPTICSTypeAlgorithm <|.. elki.clustering.optics.AbstractOPTICS
+    elki.clustering.optics.AbstractOPTICS +- - elki.clustering.optics.AbstractOPTICS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

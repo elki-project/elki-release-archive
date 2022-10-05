@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CutDendrogramByHeight.Par\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.CutDendrogramByHeight.Par [[CutDendrogramByHeight.Par.html]] {
+        {static} +THRESHOLD_ID: OptionID
+        ~threshold: double
+        +configure(Parameterization): void
+        +make(): CutDendrogramByHeight
+    }
+
+    abstract class "<size:14>AbstractCutDendrogram.Par\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Par [[AbstractCutDendrogram.Par.html]]
+    class "<size:14>CutDendrogramByHeight\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.CutDendrogramByHeight [[CutDendrogramByHeight.html]]
+
+    elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Par <|-- elki.clustering.hierarchical.extraction.CutDendrogramByHeight.Par
+    elki.clustering.hierarchical.extraction.CutDendrogramByHeight +-- elki.clustering.hierarchical.extraction.CutDendrogramByHeight.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

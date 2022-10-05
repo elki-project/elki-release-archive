@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate.Par\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Par<O> {
+        ~epsilon: double
+        ~distfun: Distance<O>
+        +configure(Parameterization): void
+        #configDistance(Parameterization): void
+        #configEpsilon(Parameterization): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate<O, M, N> [[AbstractRangeQueryNeighborPredicate.html]] {
+        {abstract} #computeLocalModel(DBIDRef, DoubleDBIDList, Relation<? extends O>): M
+        {abstract} ~getLogger(): Logging
+    }
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Par
+    elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate +-- elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

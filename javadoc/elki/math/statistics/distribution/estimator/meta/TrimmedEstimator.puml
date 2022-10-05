@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TrimmedEstimator\n<size:10>elki.math.statistics.distribution.estimator.meta" as elki.math.statistics.distribution.estimator.meta.TrimmedEstimator<D extends Distribution> [[TrimmedEstimator.html]] {
+        -inner: DistributionEstimator<D extends Distribution>
+        -trim: double
+        +TrimmedEstimator(DistributionEstimator<D extends Distribution>, double)
+        +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+        {static} +toPrimitiveDoubleArray(A, NumberArrayAdapter<?, A>): double[]
+        +getDistributionClass(): Class<? super Distribution>
+    }
+
+    interface "<size:14>DistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.DistributionEstimator<D extends Distribution> [[../DistributionEstimator.html]] {
+        {abstract} +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+        {abstract} +getDistributionClass(): Class<? super Distribution>
+    }
+    class "<size:14>TrimmedEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator.meta" as elki.math.statistics.distribution.estimator.meta.TrimmedEstimator.Par<D extends Distribution>
+
+    elki.math.statistics.distribution.estimator.DistributionEstimator <|.. elki.math.statistics.distribution.estimator.meta.TrimmedEstimator
+    elki.math.statistics.distribution.estimator.meta.TrimmedEstimator +-- elki.math.statistics.distribution.estimator.meta.TrimmedEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

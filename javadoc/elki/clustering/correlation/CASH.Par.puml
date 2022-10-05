@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CASH.Par\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.CASH.Par [[CASH.Par.html]] {
+        {static} +MINPTS_ID: OptionID
+        {static} +MAXLEVEL_ID: OptionID
+        {static} +MINDIM_ID: OptionID
+        {static} +JITTER_ID: OptionID
+        {static} +ADJUST_ID: OptionID
+        #minPts: int
+        #maxLevel: int
+        #minDim: int
+        #jitter: double
+        #adjust: boolean
+        +configure(Parameterization): void
+        +make(): CASH
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>CASH\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.CASH [[CASH.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.correlation.CASH.Par
+    elki.clustering.correlation.CASH +-- elki.clustering.correlation.CASH.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

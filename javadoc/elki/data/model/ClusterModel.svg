@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="192px" preserveAspectRatio="none" style="width:204px;height:192px;background:#FFFFFF;" version="1.1" viewBox="0 0 204 192" width="204px" zoomAndPan="magnify"><defs/><g><!--MD5=[afb14a1473076add6bb703e805cbface]
+class elki.data.model.ClusterModel--><a href="ClusterModel.html" target="_top" title="ClusterModel.html" xlink:actuate="onRequest" xlink:href="ClusterModel.html" xlink:show="new" xlink:title="ClusterModel.html" xlink:type="simple"><g id="elem_elki.data.model.ClusterModel"><rect codeLine="6" fill="#F1F1F1" height="62.2344" id="elki.data.model.ClusterModel" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="190" x="7" y="105"/><ellipse cx="52.25" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M55.2188,129.6094 Q54.6406,129.9063 54,130.0469 Q53.3594,130.2031 52.6563,130.2031 Q50.1563,130.2031 48.8281,128.5625 Q47.5156,126.9063 47.5156,123.7813 Q47.5156,120.6563 48.8281,119 Q50.1563,117.3438 52.6563,117.3438 Q53.3594,117.3438 54,117.5 Q54.6563,117.6563 55.2188,117.9531 L55.2188,120.6719 Q54.5938,120.0938 54,119.8281 Q53.4063,119.5469 52.7813,119.5469 Q51.4375,119.5469 50.75,120.625 Q50.0625,121.6875 50.0625,123.7813 Q50.0625,125.875 50.75,126.9531 Q51.4375,128.0156 52.7813,128.0156 Q53.4063,128.0156 54,127.75 Q54.5938,127.4688 55.2188,126.8906 L55.2188,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="72.75" y="122.9951">ClusterModel</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="73" x="81.75" y="135.5791">elki.data.model</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="196" y1="142.9375" y2="142.9375"/><ellipse cx="18" cy="156.5859" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="164" x="27" y="159.9326">CLUSTER: ClusterModel</text></g></a><!--MD5=[17ab2ec4c837f52a2c497b9931f21e20]
+class elki.data.model.Model--><a href="Model.html" target="_top" title="Model.html" xlink:actuate="onRequest" xlink:href="Model.html" xlink:show="new" xlink:title="Model.html" xlink:type="simple"><g id="elem_elki.data.model.Model"><rect codeLine="10" fill="#F1F1F1" height="37.9375" id="elki.data.model.Model" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="109" x="47.5" y="7"/><ellipse cx="62.5" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M58.4219,21.7344 L58.4219,19.5781 L65.8125,19.5781 L65.8125,21.7344 L63.3438,21.7344 L63.3438,29.8125 L65.8125,29.8125 L65.8125,31.9688 L58.4219,31.9688 L58.4219,29.8125 L60.8906,29.8125 L60.8906,21.7344 L58.4219,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="43" x="93.5" y="24.9951">Model</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="77" x="76.5" y="37.5791">elki.data.model</text></g></a><!--MD5=[f7290d82387ecf377031b6472bf5cc28]
+reverse link elki.data.model.Model to elki.data.model.ClusterModel--><g id="link_elki.data.model.Model_elki.data.model.ClusterModel"><path codeLine="12" d="M102,65.74 C102,78.56 102,92.64 102,104.73 " fill="none" id="elki.data.model.Model-backto-elki.data.model.ClusterModel" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="95,65.32,102,45.32,109,65.32,95,65.32" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="2" y="173.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="2" y="182.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[15a9e87e66746d6f250fadfbb1f1ba72]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterModel\n<size:10>elki.data.model" as elki.data.model.ClusterModel [[ClusterModel.html]] {
+        {static} +CLUSTER: ClusterModel
+    }
+
+    interface "<size:14>Model\n<size:10>elki.data.model" as elki.data.model.Model [[Model.html]]
+
+    elki.data.model.Model <|.. elki.data.model.ClusterModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

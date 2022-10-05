@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HySortOD.Hypercube\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD.Hypercube [[HySortOD.Hypercube.html]] {
+        ~coords: int[]
+        ~instances: ArrayModifiableDBIDs
+        +Hypercube(NumberVector, double)
+        +compareTo(Hypercube): int
+        +getCoordAt(int): int
+        +getCoords(): int[]
+        +getNumDimensions(): int
+        +getInstances(): DBIDs
+        +add(DBIDRef): void
+        +getDensity(): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<Hypercube> {
+        {abstract} +compareTo(Hypercube): int
+    }
+    class "<size:14>HySortOD\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD [[HySortOD.html]]
+
+    java.lang.Comparable <|.. elki.outlier.density.HySortOD.Hypercube
+    elki.outlier.density.HySortOD +-- elki.outlier.density.HySortOD.Hypercube
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

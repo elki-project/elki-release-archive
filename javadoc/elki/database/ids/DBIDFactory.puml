@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DBIDFactory\n<size:10>elki.database.ids" as elki.database.ids.DBIDFactory [[DBIDFactory.html]] {
+        {static} +FACTORY: DBIDFactory
+        {abstract} +newVar(DBIDRef): DBIDVar
+        {abstract} +importInteger(int): DBID
+        {abstract} +assignVar(DBIDVar, int): DBIDVar
+        {abstract} +generateSingleDBID(): DBID
+        {abstract} +deallocateSingleDBID(DBIDRef): void
+        {abstract} +generateStaticDBIDRange(int): DBIDRange
+        {abstract} +generateStaticDBIDRange(int, int): DBIDRange
+        {abstract} +deallocateDBIDRange(DBIDRange): void
+        {abstract} +newPair(DBIDRef, DBIDRef): DBIDPair
+        {abstract} +newPair(double, DBIDRef): DoubleDBIDPair
+        {abstract} +newArray(): ArrayModifiableDBIDs
+        {abstract} +newHashSet(): HashSetModifiableDBIDs
+        {abstract} +newArray(int): ArrayModifiableDBIDs
+        {abstract} +newHashSet(int): HashSetModifiableDBIDs
+        {abstract} +newArray(DBIDs): ArrayModifiableDBIDs
+        {abstract} +newHashSet(DBIDs): HashSetModifiableDBIDs
+        {abstract} +newMinHeap(int): DoubleDBIDHeap
+        {abstract} +newMaxHeap(int): DoubleDBIDHeap
+        {abstract} +newHeap(int): KNNHeap
+        {abstract} +newHeap(KNNList): KNNHeap
+        {abstract} +getDBIDSerializer(): ByteBufferSerializer<DBID>
+        {abstract} +getDBIDSerializerStatic(): FixedSizeByteBufferSerializer<DBID>
+        {abstract} +getTypeRestriction(): Class<? extends DBID>
+        {abstract} +compare(DBIDRef, DBIDRef): int
+        {abstract} +equal(DBIDRef, DBIDRef): boolean
+        {abstract} +toString(DBIDRef): String
+        {abstract} +invalid(): DBIDRef
+        {abstract} +newDistanceDBIDList(int): ModifiableDoubleDBIDList
+        {abstract} +newDistanceDBIDList(): ModifiableDoubleDBIDList
+        {abstract} +makeUnmodifiable(DBIDs): StaticDBIDs
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

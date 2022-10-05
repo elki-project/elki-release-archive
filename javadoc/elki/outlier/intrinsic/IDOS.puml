@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IDOS\n<size:10>elki.outlier.intrinsic" as elki.outlier.intrinsic.IDOS<O> [[IDOS.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super O>
+        #k_c: int
+        #k_r: int
+        #estimator: IntrinsicDimensionalityEstimator<? super O>
+        +IDOS(Distance<? super O>, IntrinsicDimensionalityEstimator<? super O>, int, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+        #computeIDs(DBIDs, KNNSearcher<DBIDRef>, DistanceQuery<O>): DoubleDataStore
+        #computeIDOS(DBIDs, KNNSearcher<DBIDRef>, DoubleDataStore, DoubleMinMax): DoubleDataStore
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>IDOS.Par\n<size:10>elki.outlier.intrinsic" as elki.outlier.intrinsic.IDOS.Par<O> [[IDOS.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.intrinsic.IDOS
+    elki.outlier.intrinsic.IDOS +-- elki.outlier.intrinsic.IDOS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GNAT.PrioritySearchBranch\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.PrioritySearchBranch [[GNAT.PrioritySearchBranch.html]] {
+        ~mindist: double
+        ~vp: DBID
+        ~node: Node
+        +PrioritySearchBranch(double, Node, DBID)
+        +compareTo(PrioritySearchBranch): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<PrioritySearchBranch> {
+        {abstract} +compareTo(PrioritySearchBranch): int
+    }
+    class "<size:14>GNAT\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT<O> [[GNAT.html]]
+
+    java.lang.Comparable <|.. elki.index.tree.metrical.vptree.GNAT.PrioritySearchBranch
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.PrioritySearchBranch
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

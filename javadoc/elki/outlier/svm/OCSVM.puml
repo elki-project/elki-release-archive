@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OCSVM\n<size:10>elki.outlier.svm" as elki.outlier.svm.OCSVM<V> [[OCSVM.html]] {
+        {static} -LOG: Logging
+        ~kernel: PrimitiveSimilarity<? super V>
+        ~nu: double
+        +OCSVM(PrimitiveSimilarity<? super V>, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V>): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>OCSVM.Par\n<size:10>elki.outlier.svm" as elki.outlier.svm.OCSVM.Par<V>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.svm.OCSVM
+    elki.outlier.svm.OCSVM +-- elki.outlier.svm.OCSVM.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

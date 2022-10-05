@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClassLabelFromPatternFilter.Par\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.ClassLabelFromPatternFilter.Par [[ClassLabelFromPatternFilter.Par.html]] {
+        {static} +PATTERN_ID: OptionID
+        {static} +POSITIVE_ID: OptionID
+        {static} +NEGATIVE_ID: OptionID
+        ~pattern: Pattern
+        ~positive: String
+        ~negative: String
+        +configure(Parameterization): void
+        +make(): ClassLabelFromPatternFilter
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ClassLabelFromPatternFilter\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.ClassLabelFromPatternFilter [[ClassLabelFromPatternFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.typeconversions.ClassLabelFromPatternFilter.Par
+    elki.datasource.filter.typeconversions.ClassLabelFromPatternFilter +-- elki.datasource.filter.typeconversions.ClassLabelFromPatternFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

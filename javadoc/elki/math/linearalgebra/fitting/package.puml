@@ -1,0 +1,52 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.linearalgebra.fitting {
+
+        interface FittingFunction [[FittingFunction.html]] {
+            {abstract} +eval(double, double[]): FittingFunctionResult
+        }
+
+        class LevenbergMarquardtMethod [[LevenbergMarquardtMethod.html]] {
+            -x: double[]
+            -y: double[]
+            -s: double[]
+            -numparams: int
+            -params: double[]
+            -chisq: double
+            -numfit: int
+            -dofit: boolean[]
+            -covmat: double[]
+            -alpha: double[]
+            -lambda: double
+            -paramstry: double[]
+            -beta: double[]
+            -deltaparams: double[]
+            +maxruns: int
+            +maxsmall: int
+            +small: double
+            +LevenbergMarquardtMethod(FittingFunction, double[], boolean[], double[], double[], double[])
+            -simulateParameters(double[]): double
+            +iterate(): void
+            +getCovmat(): double[]
+            +getParams(): double[]
+            +getChiSq(): double
+            +run(): void
+        }
+
+        class FittingFunctionResult [[FittingFunctionResult.html]] {
+            +y: double
+            +gradients: double[]
+            +FittingFunctionResult(double, double[])
+        }
+
+        class GaussianFittingFunction [[GaussianFittingFunction.html]] {
+            +eval(double, double[]): FittingFunctionResult
+        }
+
+        LevenbergMarquardtMethod --> FittingFunction: func
+        FittingFunction <|.. GaussianFittingFunction
+        GaussianFittingFunction --> GaussianFittingFunction: STATIC
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

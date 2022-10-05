@@ -1,0 +1,70 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GeneratorXMLDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.GeneratorXMLDatabaseConnection [[GeneratorXMLDatabaseConnection.html]] {
+        {static} +TAG_DATASET: String
+        {static} +TAG_CLUSTER: String
+        {static} +TAG_UNIFORM: String
+        {static} +TAG_NORMAL: String
+        {static} +TAG_GAMMA: String
+        {static} +TAG_HALTON: String
+        {static} +TAG_ROTATE: String
+        {static} +TAG_TRANSLATE: String
+        {static} +TAG_CLIP: String
+        {static} +TAG_STATIC: String
+        {static} +TAG_POINT: String
+        {static} +ATTR_TEST: String
+        {static} +ATTR_SEED: String
+        {static} +ATTR_DENSITY: String
+        {static} +ATTR_NAME: String
+        {static} +ATTR_SIZE: String
+        {static} +ATTR_MIN: String
+        {static} +ATTR_MAX: String
+        {static} +ATTR_MEAN: String
+        {static} +ATTR_STDDEV: String
+        {static} +ATTR_K: String
+        {static} +ATTR_THETA: String
+        {static} +ATTR_VECTOR: String
+        {static} +ATTR_AXIS1: String
+        {static} +ATTR_AXIS2: String
+        {static} +ATTR_ANGLE: String
+        {static} -LOG: Logging
+        {static} +WHITESPACE_PATTERN: Pattern
+        {static} +GENERATOR_SCHEMA_FILE: String
+        ~specfile: URI
+        ~sizescale: double
+        ~reassign: Pattern
+        -clusterRandom: RandomFactory
+        -testAgainstModel: Boolean
+        -reassignByDistance: boolean
+        +GeneratorXMLDatabaseConnection(List<? extends ObjectFilter>, URI, double, Pattern, boolean, RandomFactory)
+        +loadData(): MultipleObjectsBundle
+        -loadXMLSpecification(): GeneratorMain
+        -processElementDataset(GeneratorMain, Node): void
+        -processElementCluster(GeneratorMain, Node): void
+        -processElementUniform(GeneratorSingleCluster, Node): void
+        -processElementNormal(GeneratorSingleCluster, Node): void
+        -processElementGamma(GeneratorSingleCluster, Node): void
+        -processElementHalton(GeneratorSingleCluster, Node): void
+        -processElementRotate(GeneratorSingleCluster, Node): void
+        -processElementTranslate(GeneratorSingleCluster, Node): void
+        -processElementClipping(GeneratorSingleCluster, Node): void
+        -processElementStatic(GeneratorMain, Node): void
+        -processElementPoint(List<double[]>, Node): void
+        -parseVector(String): double[]
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.AbstractDatabaseConnection [[AbstractDatabaseConnection.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>GeneratorXMLDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.GeneratorXMLDatabaseConnection.Par [[GeneratorXMLDatabaseConnection.Par.html]]
+
+    elki.datasource.AbstractDatabaseConnection <|-- elki.datasource.GeneratorXMLDatabaseConnection
+    elki.datasource.GeneratorXMLDatabaseConnection +-- elki.datasource.GeneratorXMLDatabaseConnection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSHeap.Instance\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSHeap.Instance [[OPTICSHeap.Instance.html]] {
+        -processedIDs: ModifiableDBIDs
+        ~heap: UpdatableHeap<OPTICSHeapEntry>
+        ~clusterOrder: ClusterOrder
+        -ids: DBIDs
+        ~progress: FiniteProgress
+        ~rangeQuery: RangeSearcher<DBIDRef>
+        +Instance(Relation<O>)
+        +run(): ClusterOrder
+        #expandClusterOrder(DBIDRef): void
+    }
+
+    class "<size:14>OPTICSHeap\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSHeap<O> [[OPTICSHeap.html]]
+
+    elki.clustering.optics.OPTICSHeap +-- elki.clustering.optics.OPTICSHeap.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

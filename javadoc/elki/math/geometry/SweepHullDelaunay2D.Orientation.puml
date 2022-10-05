@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>SweepHullDelaunay2D.Orientation\n<size:10>elki.math.geometry" as elki.math.geometry.SweepHullDelaunay2D.Orientation [[SweepHullDelaunay2D.Orientation.html]] {
+        {static} +ORIENT_AB_BA
+        {static} +ORIENT_AB_CB
+        {static} +ORIENT_AB_AC
+        {static} +ORIENT_BC_BA
+        {static} +ORIENT_BC_CB
+        {static} +ORIENT_BC_AC
+        {static} +ORIENT_CA_BA
+        {static} +ORIENT_CA_CB
+        {static} +ORIENT_CA_AC
+    }
+
+    class "<size:14>SweepHullDelaunay2D\n<size:10>elki.math.geometry" as elki.math.geometry.SweepHullDelaunay2D [[SweepHullDelaunay2D.html]]
+
+    elki.math.geometry.SweepHullDelaunay2D +-- elki.math.geometry.SweepHullDelaunay2D.Orientation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

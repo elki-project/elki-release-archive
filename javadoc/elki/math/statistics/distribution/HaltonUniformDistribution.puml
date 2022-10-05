@@ -1,0 +1,47 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HaltonUniformDistribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.HaltonUniformDistribution [[HaltonUniformDistribution.html]] {
+        -min: double
+        -max: double
+        -len: double
+        {static} -MAXFAST: int
+        {static} -ALMOST_ONE: double
+        ~base: short
+        ~invbase: double
+        ~logbase: double
+        ~maxi: int
+        ~counter: int
+        ~current: double
+        ~inverse: long
+        +HaltonUniformDistribution(double, double, int, double)
+        +HaltonUniformDistribution(double, double, Random)
+        {static} -choosePrime(Random): int
+        +pdf(double): double
+        +logpdf(double): double
+        +cdf(double): double
+        +quantile(double): double
+        -inverse(double): long
+        -radicalInverse(long): double
+        -nextRadicalInverse(): double
+        +nextRandom(Random): double
+        +getMin(): double
+        +getMax(): double
+    }
+
+    interface "<size:14>Distribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution [[Distribution.html]] {
+        {abstract} +pdf(double): double
+        {abstract} +logpdf(double): double
+        {abstract} +cdf(double): double
+        {abstract} +quantile(double): double
+    }
+    class "<size:14>HaltonUniformDistribution.Par\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.HaltonUniformDistribution.Par [[HaltonUniformDistribution.Par.html]]
+
+    elki.math.statistics.distribution.Distribution <|.. elki.math.statistics.distribution.HaltonUniformDistribution
+    elki.math.statistics.distribution.HaltonUniformDistribution +-- elki.math.statistics.distribution.HaltonUniformDistribution.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

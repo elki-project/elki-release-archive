@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MemoryKDTree.CountingRelation\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree.CountingRelation [[MemoryKDTree.CountingRelation.html]] {
+        +get(DBIDRef): O extends NumberVector
+        +getDataTypeInformation(): SimpleTypeInformation<O extends NumberVector>
+        +getDBIDs(): DBIDs
+        +iterDBIDs(): DBIDIter
+        +size(): int
+        +getLongName(): String
+    }
+
+    interface "<size:14>Relation\n<size:10>elki.database.relation" as elki.database.relation.Relation<O extends NumberVector> [[../../../../database/relation/Relation.html]] {
+        {abstract} +get(DBIDRef): O extends NumberVector
+        {abstract} +getDataTypeInformation(): SimpleTypeInformation<O>
+        {abstract} +getDBIDs(): DBIDs
+        {abstract} +iterDBIDs(): DBIDIter
+        {abstract} +size(): int
+        {abstract} +getLongName(): String
+    }
+    class "<size:14>MemoryKDTree\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree<O extends NumberVector> [[MemoryKDTree.html]]
+
+    elki.database.relation.Relation <|.. elki.index.tree.spatial.kd.MemoryKDTree.CountingRelation
+    elki.index.tree.spatial.kd.MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.CountingRelation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

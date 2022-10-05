@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>INFLO\n<size:10>elki.outlier.lof" as elki.outlier.lof.INFLO<O> [[INFLO.html]] {
+        {static} -LOG: Logging
+        -distance: Distance<? super O>
+        -m: double
+        -kplus: int
+        +INFLO(Distance<? super O>, double, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+        -computeNeighborhoods(Relation<O>, DataStore<SetDBIDs>, ModifiableDBIDs, WritableDataStore<ModifiableDBIDs>): void
+        #computeINFLO(Relation<O>, ModifiableDBIDs, KNNSearcher<DBIDRef>, WritableDataStore<ModifiableDBIDs>, WritableDoubleDataStore, DoubleMinMax): void
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>INFLO.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.INFLO.Par<O> [[INFLO.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.lof.INFLO
+    elki.outlier.lof.INFLO +-- elki.outlier.lof.INFLO.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

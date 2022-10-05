@@ -1,0 +1,59 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OverviewPlot\n<size:10>elki.visualization.gui.overview" as elki.visualization.gui.overview.OverviewPlot [[OverviewPlot.html]] {
+        {static} -LOG: Logging
+        {static} +OVERVIEW_REFRESHING: String
+        {static} +OVERVIEW_REFRESHED: String
+        {static} -DEBUG_LAYOUT: boolean
+        -context: VisualizerContext
+        -plot: VisualizationPlot
+        #plotmap: RectangleArranger<PlotItem>
+        -actionListeners: ArrayList<ActionListener>
+        -single: boolean
+        +screenwidth: int
+        +screenheight: int
+        -hoverer: EventListener
+        -vistoelem: LayerMap
+        -plotlayer: Element
+        -hoverlayer: Element
+        -selcss: CSSClass
+        -ratio: double
+        ~pendingRefresh: AtomicReference<Runnable>
+        -reinitOnRefresh: boolean
+        +OverviewPlot(VisualizerContext, boolean)
+        -arrangeVisualizations(double, double): RectangleArranger<PlotItem>
+        +initialize(double): void
+        -reinitialize(): void
+        -initializePlot(): void
+        -embedOrThumbnail(int, PlotItem, VisualizationTask, Element): Visualization
+        ~refresh(): void
+        #visibleInOverview(VisualizationTask): boolean
+        -recalcViewbox(): void
+        +makeDetailView(PlotItem): DetailView
+        +addActionListener(ActionListener): void
+        #triggerSubplotSelectEvent(PlotItem): void
+        +destroy(): void
+        +getPlot(): SVGPlot
+        +getRatio(): double
+        +setRatio(double): void
+        +lazyRefresh(): void
+        +resultAdded(Object, Object): void
+        +resultChanged(Object): void
+        +resultRemoved(Object, Object): void
+        +visualizationChanged(VisualizationItem): void
+    }
+
+    interface "<size:14>ResultListener\n<size:10>elki.result" as elki.result.ResultListener [[../../../result/ResultListener.html]]
+    interface "<size:14>VisualizationListener\n<size:10>elki.visualization" as elki.visualization.VisualizationListener [[../../VisualizationListener.html]] {
+        {abstract} +visualizationChanged(VisualizationItem): void
+    }
+
+    elki.result.ResultListener <|.. elki.visualization.gui.overview.OverviewPlot
+    elki.visualization.VisualizationListener <|.. elki.visualization.gui.overview.OverviewPlot
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

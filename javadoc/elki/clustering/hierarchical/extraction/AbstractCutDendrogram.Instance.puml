@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractCutDendrogram.Instance\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Instance [[AbstractCutDendrogram.Instance.html]] {
+        #merges: ClusterMergeHistory
+        #leafMap: Int2IntOpenHashMap
+        #leafTop: IntegerArray
+        #clusterMembers: ArrayList<ModifiableDBIDs>
+        +Instance(ClusterMergeHistory)
+        +extractClusters(): Clustering<DendrogramModel>
+        -buildLeafClusters(int, FiniteProgress): void
+        -buildFlat(int, FiniteProgress): Clustering<DendrogramModel>
+        -buildHierarchical(int, FiniteProgress): Clustering<DendrogramModel>
+        {abstract} #findSplit(): int
+        #makeCluster(int, DBIDs): Cluster<DendrogramModel>
+    }
+
+    abstract class "<size:14>AbstractCutDendrogram\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.AbstractCutDendrogram [[AbstractCutDendrogram.html]] {
+        {abstract} +run(ClusterMergeHistory): Clustering<DendrogramModel>
+        {abstract} #getLogger(): Logging
+    }
+
+    elki.clustering.hierarchical.extraction.AbstractCutDendrogram +-- elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

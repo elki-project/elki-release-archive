@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IsolationForest.ForestBuilder\n<size:10>elki.outlier.density" as elki.outlier.density.IsolationForest.ForestBuilder [[IsolationForest.ForestBuilder.html]] {
+        ~relation: Relation<? extends NumberVector>
+        ~ids: ArrayModifiableDBIDs
+        ~iter: DBIDArrayMIter
+        ~min: double[]
+        ~max: double[]
+        ~active: int[]
+        ~maxheight: int
+        ~rnd: Random
+        ~subsampleSize: int
+        #ForestBuilder(Relation<? extends NumberVector>, int, Random)
+        #newTree(): Node
+        #build(int, int, int): Node
+    }
+
+    class "<size:14>IsolationForest\n<size:10>elki.outlier.density" as elki.outlier.density.IsolationForest [[IsolationForest.html]]
+
+    elki.outlier.density.IsolationForest +-- elki.outlier.density.IsolationForest.ForestBuilder
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

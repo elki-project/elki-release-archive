@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DimensionSelectingLatLngDistance.Par\n<size:10>elki.distance.geo" as elki.distance.geo.DimensionSelectingLatLngDistance.Par [[DimensionSelectingLatLngDistance.Par.html]] {
+        {static} +LATDIM_ID: OptionID
+        {static} +LNGDIM_ID: OptionID
+        ~dimlat: int
+        ~dimlng: int
+        ~model: EarthModel
+        +configure(Parameterization): void
+        +make(): DimensionSelectingLatLngDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>DimensionSelectingLatLngDistance\n<size:10>elki.distance.geo" as elki.distance.geo.DimensionSelectingLatLngDistance [[DimensionSelectingLatLngDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.geo.DimensionSelectingLatLngDistance.Par
+    elki.distance.geo.DimensionSelectingLatLngDistance +-- elki.distance.geo.DimensionSelectingLatLngDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

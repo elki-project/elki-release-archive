@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractProjectedClustering\n<size:10>elki.clustering" as elki.clustering.AbstractProjectedClustering<R extends Clustering<?>> [[AbstractProjectedClustering.html]] {
+        #k: int
+        #k_i: int
+        #l: int
+        +AbstractProjectedClustering(int, int, int)
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<R extends Clustering<?>> [[ClusteringAlgorithm.html]]
+    abstract class "<size:14>AbstractProjectedClustering.Par\n<size:10>elki.clustering" as elki.clustering.AbstractProjectedClustering.Par [[AbstractProjectedClustering.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.AbstractProjectedClustering
+    elki.clustering.AbstractProjectedClustering +-- elki.clustering.AbstractProjectedClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

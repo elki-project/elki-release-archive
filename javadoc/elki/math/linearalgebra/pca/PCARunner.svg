@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="216px" preserveAspectRatio="none" style="width:641px;height:216px;background:#FFFFFF;" version="1.1" viewBox="0 0 641 216" width="641px" zoomAndPan="magnify"><defs/><g><!--MD5=[8e433b6342584b1083d58706a4515edf]
+class elki.math.linearalgebra.pca.PCARunner--><a href="PCARunner.html" target="_top" title="PCARunner.html" xlink:actuate="onRequest" xlink:href="PCARunner.html" xlink:show="new" xlink:title="PCARunner.html" xlink:type="simple"><g id="elem_elki.math.linearalgebra.pca.PCARunner"><rect codeLine="6" fill="#F1F1F1" height="184.3125" id="elki.math.linearalgebra.pca.PCARunner" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="625" x="9" y="7"/><ellipse cx="252.75" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M255.7188,31.6094 Q255.1406,31.9063 254.5,32.0469 Q253.8594,32.2031 253.1563,32.2031 Q250.6563,32.2031 249.3281,30.5625 Q248.0156,28.9063 248.0156,25.7813 Q248.0156,22.6563 249.3281,21 Q250.6563,19.3438 253.1563,19.3438 Q253.8594,19.3438 254.5,19.5 Q255.1563,19.6563 255.7188,19.9531 L255.7188,22.6719 Q255.0938,22.0938 254.5,21.8281 Q253.9063,21.5469 253.2813,21.5469 Q251.9375,21.5469 251.25,22.625 Q250.5625,23.6875 250.5625,25.7813 Q250.5625,27.875 251.25,28.9531 Q251.9375,30.0156 253.2813,30.0156 Q253.9063,30.0156 254.5,29.75 Q255.0938,29.4688 255.7188,28.8906 L255.7188,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="298.25" y="24.9951">PCARunner</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="129" x="273.25" y="37.5791">elki.math.linearalgebra.pca</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="633" y1="44.9375" y2="44.9375"/><polygon fill="none" points="20,53.5859,24,57.5859,20,61.5859,16,57.5859" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="335" x="29" y="61.9326">covarianceMatrixBuilder: CovarianceMatrixBuilder</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="633" y1="69.2344" y2="69.2344"/><ellipse cx="20" cy="82.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="253" x="29" y="86.2295">PCARunner(CovarianceMatrixBuilder)</text><ellipse cx="20" cy="99.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="469" x="29" y="102.5264">processIds(DBIDs, Relation&lt;? extends NumberVector&gt;): PCAResult</text><ellipse cx="20" cy="115.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="599" x="29" y="118.8232">processQueryResult(DoubleDBIDList, Relation&lt;? extends NumberVector&gt;): PCAResult</text><ellipse cx="20" cy="131.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="284" x="29" y="135.1201">processCovarMatrix(double[]): PCAResult</text><ellipse cx="20" cy="148.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="356" x="29" y="151.417">processEVD(EigenvalueDecomposition): PCAResult</text><ellipse cx="20" cy="164.3672" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="370" x="29" y="167.7139">getCovarianceMatrixBuilder(): CovarianceMatrixBuilder</text><ellipse cx="20" cy="180.6641" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="397" x="29" y="184.0107">setCovarianceMatrixBuilder(CovarianceMatrixBuilder): void</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="220.5" y="197.3125"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="220.5" y="206.5947">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[2ce96b655172b3dafc8adc53d60b21be]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PCARunner\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.PCARunner [[PCARunner.html]] {
+        #covarianceMatrixBuilder: CovarianceMatrixBuilder
+        +PCARunner(CovarianceMatrixBuilder)
+        +processIds(DBIDs, Relation<? extends NumberVector>): PCAResult
+        +processQueryResult(DoubleDBIDList, Relation<? extends NumberVector>): PCAResult
+        +processCovarMatrix(double[]): PCAResult
+        +processEVD(EigenvalueDecomposition): PCAResult
+        +getCovarianceMatrixBuilder(): CovarianceMatrixBuilder
+        +setCovarianceMatrixBuilder(CovarianceMatrixBuilder): void
+    }
+    class "<size:14>PCARunner.Par\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.PCARunner.Par [[PCARunner.Par.html]]
+
+    elki.math.linearalgebra.pca.PCARunner +- - elki.math.linearalgebra.pca.PCARunner.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

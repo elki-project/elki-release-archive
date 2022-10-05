@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NuSolver\n<size:10>elki.svm.solver" as elki.svm.solver.NuSolver [[NuSolver.html]] {
+        +r: double
+        ~select_working_set(int[]): boolean
+        -be_shrunk(int, double, double, double, double): boolean
+        ~do_shrinking(): void
+        ~calculate_rho(): double
+    }
+
+    class "<size:14>Solver\n<size:10>elki.svm.solver" as elki.svm.solver.Solver [[Solver.html]]
+
+    elki.svm.solver.Solver <|-- elki.svm.solver.NuSolver
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SVGSaveDialog\n<size:10>elki.visualization.savedialog" as elki.visualization.savedialog.SVGSaveDialog [[SVGSaveDialog.html]] {
+        {static} +DEFAULT_TITLE: String
+        {static} -LOG: Logging
+        {static} ~AUTOMAGIC_FORMAT: String
+        {static} ~FORMATS: String[]
+        {static} ~VISIBLE_FORMATS: String[]
+        {static} +showSaveDialog(SVGPlot, int, int): int
+        {static} +guessFormat(String): String
+        {static} +getFormats(): String[]
+        {static} +getVisibleFormats(): String[]
+        {static} -showError(Component, String, String): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

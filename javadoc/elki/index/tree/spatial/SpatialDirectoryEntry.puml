@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SpatialDirectoryEntry\n<size:10>elki.index.tree.spatial" as elki.index.tree.spatial.SpatialDirectoryEntry [[SpatialDirectoryEntry.html]] {
+        {static} -serialVersionUID: long
+        -id: int
+        -mbr: ModifiableHyperBoundingBox
+        +SpatialDirectoryEntry()
+        +SpatialDirectoryEntry(int, ModifiableHyperBoundingBox)
+        +getPageID(): int
+        +getDimensionality(): int
+        +getMin(int): double
+        +getMax(int): double
+        +hasMBR(): boolean
+        +setMBR(ModifiableHyperBoundingBox): void
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+        +extendMBR(SpatialComparable): boolean
+    }
+
+    interface "<size:14>DirectoryEntry\n<size:10>elki.index.tree" as elki.index.tree.DirectoryEntry [[../DirectoryEntry.html]] {
+        {abstract} +getPageID(): int
+    }
+    interface "<size:14>SpatialEntry\n<size:10>elki.index.tree.spatial" as elki.index.tree.spatial.SpatialEntry [[SpatialEntry.html]]
+
+    elki.index.tree.DirectoryEntry <|.. elki.index.tree.spatial.SpatialDirectoryEntry
+    elki.index.tree.spatial.SpatialEntry <|.. elki.index.tree.spatial.SpatialDirectoryEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

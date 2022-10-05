@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LogClusterSizes\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.LogClusterSizes [[LogClusterSizes.html]] {
+        {static} -LOG: Logging
+        {static} +PREFIX: String
+        {static} +logClusterSizes(Clustering<C extends Model>): void
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../Evaluator.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.clustering.LogClusterSizes
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

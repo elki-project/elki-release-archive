@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SUBCLU.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.SUBCLU.Par<V extends NumberVector> [[SUBCLU.Par.html]] {
+        {static} +DISTANCE_FUNCTION_ID: OptionID
+        {static} +EPSILON_ID: OptionID
+        {static} +MINPTS_ID: OptionID
+        {static} +MINDIM_ID: OptionID
+        #distance: DimensionSelectingSubspaceDistance<V extends NumberVector>
+        #epsilon: double
+        #minpts: int
+        #mindim: int
+        +configure(Parameterization): void
+        +make(): SUBCLU<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SUBCLU\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.SUBCLU<V extends NumberVector> [[SUBCLU.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.subspace.SUBCLU.Par
+    elki.clustering.subspace.SUBCLU +-- elki.clustering.subspace.SUBCLU.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

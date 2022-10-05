@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SameSizeKMeans.PreferenceComparator\n<size:10>tutorial.clustering" as tutorial.clustering.SameSizeKMeans.PreferenceComparator [[SameSizeKMeans.PreferenceComparator.html]] {
+        ~c: Meta
+        +compare(int, int): int
+        +select(Meta): IntComparator
+    }
+
+    interface "<size:14>IntComparator\n<size:10>it.unimi.dsi.fastutil.ints" as it.unimi.dsi.fastutil.ints.IntComparator {
+        {abstract} +compare(int, int): int
+    }
+    class "<size:14>SameSizeKMeans\n<size:10>tutorial.clustering" as tutorial.clustering.SameSizeKMeans<V extends NumberVector> [[SameSizeKMeans.html]]
+
+    it.unimi.dsi.fastutil.ints.IntComparator <|.. tutorial.clustering.SameSizeKMeans.PreferenceComparator
+    tutorial.clustering.SameSizeKMeans +-- tutorial.clustering.SameSizeKMeans.PreferenceComparator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

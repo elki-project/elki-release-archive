@@ -1,0 +1,175 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.gui {
+
+        class SimpleSVGViewer [[SimpleSVGViewer.html]] {
+            {static} -serialVersionUID: long
+            -svgCanvas: JSVGSynchronizedCanvas
+            +close(): void
+            +saveCurrentPlot(): void
+            +setPlot(SVGPlot): void
+        }
+
+        class VisualizationPlot [[VisualizationPlot.html]] {
+            #pendingRedraw: Runnable
+            #updateQueue: ConcurrentLinkedDeque<Visualization>
+            #synchronizedRedraw(): void
+            #redraw(): void
+            +requestRedraw(VisualizationTask, Visualization): void
+        }
+
+        class ResultWindow [[ResultWindow.html]] {
+            {static} -serialVersionUID: long
+            -svgCanvas: JSVGSynchronizedCanvas
+            #context: VisualizerContext
+            -single: boolean
+            +ResultWindow(String, VisualizerContext, boolean)
+            +dispose(): void
+            #close(): void
+            +showOverview(): void
+            #showSubplot(DetailViewSelectedEvent): void
+            -showPlot(SVGPlot): void
+            #saveCurrentPlot(): void
+            #invokeTextWriter(): void
+            #showTableView(): void
+            #update(): void
+            #handleResize(double): void
+            +resultAdded(Object, Object): void
+            +resultChanged(Object): void
+            +resultRemoved(Object, Object): void
+            +visualizationChanged(VisualizationItem): void
+            -updateVisualizerMenus(): void
+        }
+
+        class elki.visualization.gui.ResultWindow.DynamicMenu [[ResultWindow.DynamicMenu.html]] {
+            -menubar: JMenuBar
+            -filemenu: JMenu
+            -overviewItem: JMenuItem
+            -quitItem: JMenuItem
+            -exportItem: JMenuItem
+            -writeItem: JMenuItem
+            -visualizersMenu: JMenu
+            #simplify: boolean
+            #updateVisualizerMenus(): void
+            -recursiveBuildMenu(Collection<JMenuItem>, Object, Hierarchy<Object>, Projection): void
+            -makeMenuItemForVisualizer(Object): JMenuItem
+            +getMenuBar(): JMenuBar
+            +enableOverview(boolean): void
+            +enableExport(boolean): void
+            +enableWriter(boolean): void
+        }
+
+        class elki.visualization.gui.ResultWindow.TextWriterPanel [[ResultWindow.TextWriterPanel.html]] {
+            {static} -serialVersionUID: long
+            ~compress: JCheckBox
+            ~filterField: JTextField
+        }
+
+        class SelectionTableWindow [[SelectionTableWindow.html]] {
+            {static} -NAME: String
+            {static} -serialVersionUID: long
+            -table: JTable
+            -closeButton: JButton
+            -deleteButton: JButton
+            {static} -LOG: Logging
+            ~dbids: ArrayModifiableDBIDs
+            ~database: UpdatableDatabase
+            ~crep: ModifiableRelation<ClassLabel>
+            ~orep: ModifiableRelation<String>
+            #context: VisualizerContext
+            +SelectionTableWindow(VisualizerContext)
+            +dispose(): void
+            #updateFromSelection(): void
+            #handleDelete(): void
+            +contentChanged(DataStoreEvent): void
+            +resultChanged(Object): void
+        }
+
+        class elki.visualization.gui.SelectionTableWindow.DatabaseTableModel [[SelectionTableWindow.DatabaseTableModel.html]] {
+            {static} -serialVersionUID: long
+            +getColumnCount(): int
+            +getRowCount(): int
+            +getValueAt(int, int): Object
+            +getColumnName(int): String
+            +isCellEditable(int, int): boolean
+            +setValueAt(Object, int, int): void
+        }
+
+        javax.swing.JFrame <|-- SimpleSVGViewer
+        elki.visualization.svg.SVGPlot <|-- VisualizationPlot
+        javax.swing.JFrame <|-- ResultWindow
+        elki.result.ResultListener <|.. ResultWindow
+        elki.visualization.VisualizationListener <|.. ResultWindow
+        ResultWindow --> elki.visualization.gui.ResultWindow.DynamicMenu: menubar
+        ResultWindow --> elki.visualization.gui.overview.OverviewPlot: overview
+        ResultWindow --> elki.visualization.gui.detail.DetailView: currentSubplot
+        ResultWindow +-- elki.visualization.gui.ResultWindow.DynamicMenu
+        javax.swing.JPanel <|-- elki.visualization.gui.ResultWindow.TextWriterPanel
+        ResultWindow +-- elki.visualization.gui.ResultWindow.TextWriterPanel
+        javax.swing.JFrame <|-- SelectionTableWindow
+        elki.database.datastore.DataStoreListener <|.. SelectionTableWindow
+        elki.result.ResultListener <|.. SelectionTableWindow
+        SelectionTableWindow --> elki.visualization.gui.SelectionTableWindow.DatabaseTableModel: dotTableModel
+        javax.swing.table.AbstractTableModel <|-- elki.visualization.gui.SelectionTableWindow.DatabaseTableModel
+        SelectionTableWindow +-- elki.visualization.gui.SelectionTableWindow.DatabaseTableModel
+    }
+
+    namespace javax.swing {
+        class JFrame {
+            {static} -defaultLookAndFeelDecoratedKey: Object
+            -defaultCloseOperation: int
+            -transferHandler: TransferHandler
+            #rootPane: JRootPane
+            #rootPaneCheckingEnabled: boolean
+            #accessibleContext: AccessibleContext
+        }
+        class JPanel {
+            {static} -uiClassID: String
+        }
+    }
+
+    namespace elki.visualization.svg {
+        class SVGPlot [[../svg/SVGPlot.html]] {
+            {static} +DEFAULT_QUALITY: float
+            {static} +NO_EXPORT_ATTRIBUTE: String
+            {static} -BATIK_DOM: DOMImplementation
+            {static} -BATIK_DOMS: String[]
+            -document: SVGDocument
+            -root: Element
+            -defs: Element
+            -style: Element
+            -cssman: CSSClassManager
+            -objWithId: HashMap<String, WeakReference<Element>>
+            -runner: UpdateRunner
+            -disableInteractions: boolean
+        }
+    }
+
+    namespace elki.result {
+        interface ResultListener [[../../result/ResultListener.html]] {
+            +resultAdded(Object, Object): void
+            +resultChanged(Object): void
+            +resultRemoved(Object, Object): void
+        }
+    }
+
+    namespace elki.visualization {
+        interface VisualizationListener [[../VisualizationListener.html]] {
+            {abstract} +visualizationChanged(VisualizationItem): void
+        }
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreListener [[../../database/datastore/DataStoreListener.html]] {
+            {abstract} +contentChanged(DataStoreEvent): void
+        }
+    }
+
+    namespace javax.swing.table {
+        abstract class AbstractTableModel {
+            #listenerList: EventListenerList
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

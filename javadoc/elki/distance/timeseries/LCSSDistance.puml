@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LCSSDistance\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.LCSSDistance [[LCSSDistance.html]] {
+        -pDelta: double
+        -pEpsilon: double
+        +LCSSDistance(double, double)
+        +distance(NumberVector, NumberVector): double
+        +getRange(NumberVector, int, NumberVector, int): double
+        +getInputTypeRestriction(): VectorTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    class "<size:14>LCSSDistance.Par\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.LCSSDistance.Par [[LCSSDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.timeseries.LCSSDistance
+    elki.distance.timeseries.LCSSDistance +-- elki.distance.timeseries.LCSSDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

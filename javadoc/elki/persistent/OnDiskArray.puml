@@ -1,0 +1,46 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OnDiskArray\n<size:10>elki.persistent" as elki.persistent.OnDiskArray [[OnDiskArray.html]] {
+        {static} -serialVersionUID: long
+        #magic: int
+        -headersize: int
+        -recordsize: int
+        -numrecs: int
+        -filename: Path
+        -file: FileChannel
+        -lock: FileLock
+        -writable: boolean
+        -map: MappedByteBuffer
+        {static} -INTERNAL_HEADER_SIZE: int
+        {static} -HEADER_POS_SIZE: int
+        +OnDiskArray(Path, int, int, int, int)
+        +OnDiskArray(Path, int, int, int, boolean)
+        +OnDiskArray(Path, int, int, boolean)
+        -mapArray(): void
+        -validateHeader(boolean): void
+        {static} +mixMagic(int, int): int
+        -indexToFileposition(long): long
+        +resizeFile(int): void
+        +getRecordBuffer(int): ByteBuffer
+        #getExtraHeaderSize(): int
+        +getExtraHeader(): ByteBuffer
+        #getRecordsize(): int
+        +getFilename(): Path
+        +isWritable(): boolean
+        +close(): void
+        +getNumRecords(): int
+        +ensureSize(int): void
+    }
+
+    interface "<size:14>AutoCloseable\n<size:10>java.lang" as java.lang.AutoCloseable {
+        {abstract} +close(): void
+    }
+
+    java.lang.AutoCloseable <|.. elki.persistent.OnDiskArray
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

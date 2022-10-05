@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-index-various",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-index-various-0.8.0.jar",
+          "url": "elki-index-various-0.8.0.jar",
+          "size": 229026,
+          "sha512": "51ce48f614ea93ffd9c2237b7c72e4f5efcd902707ea77a94311a83ac54f9ddc3209e73cdcbeff71258d509a33b7daa3f43bfc136db1cc45631b6d395f5ebbc6",
+          "sha256": "82053b415f3f443ce47620f6bfc2a630760d3922e34a1c54c647379be20f9b32",
+          "sha1": "30420ae814207ba1f09bf0120cd3d5e9302c0abc",
+          "md5": "e4f76160f61c1917494de9e71305324c"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-index-various-0.8.0.jar",
+          "url": "elki-index-various-0.8.0.jar",
+          "size": 229026,
+          "sha512": "51ce48f614ea93ffd9c2237b7c72e4f5efcd902707ea77a94311a83ac54f9ddc3209e73cdcbeff71258d509a33b7daa3f43bfc136db1cc45631b6d395f5ebbc6",
+          "sha256": "82053b415f3f443ce47620f6bfc2a630760d3922e34a1c54c647379be20f9b32",
+          "sha1": "30420ae814207ba1f09bf0120cd3d5e9302c0abc",
+          "md5": "e4f76160f61c1917494de9e71305324c"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-various",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-index-various-0.8.0-test-fixtures.jar",
+          "url": "elki-index-various-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "a7b55000d26956c15e70709e5a43e051bfee22a890b783aee38fa44ae951f4793bb207d9dd7739015f6adc8e064242c8fc830152c4ed6f030c2bfb7b7c7a3b3a",
+          "sha256": "ed4b369d1de24dabed2534c62e1f82b452fcc9c2681ecf4aa4ec410a03f366ad",
+          "sha1": "ec86e86f93333019c7e4802a8af9c1a1ba813068",
+          "md5": "c4645fcbff7bd8f6835ac7dae1ff1bb9"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-index-various-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-various",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-index-various-0.8.0-test-fixtures.jar",
+          "url": "elki-index-various-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "a7b55000d26956c15e70709e5a43e051bfee22a890b783aee38fa44ae951f4793bb207d9dd7739015f6adc8e064242c8fc830152c4ed6f030c2bfb7b7c7a3b3a",
+          "sha256": "ed4b369d1de24dabed2534c62e1f82b452fcc9c2681ecf4aa4ec410a03f366ad",
+          "sha1": "ec86e86f93333019c7e4802a8af9c1a1ba813068",
+          "md5": "c4645fcbff7bd8f6835ac7dae1ff1bb9"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-index-various-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractEditDistance\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.AbstractEditDistance [[AbstractEditDistance.html]] {
+        #bandSize: double
+        +AbstractEditDistance(double)
+        #effectiveBandSize(int, int): int
+        +getInputTypeRestriction(): VectorTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    abstract class "<size:14>AbstractEditDistance.Par\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.AbstractEditDistance.Par [[AbstractEditDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.timeseries.AbstractEditDistance
+    elki.distance.timeseries.AbstractEditDistance +-- elki.distance.timeseries.AbstractEditDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

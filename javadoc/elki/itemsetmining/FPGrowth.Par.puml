@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FPGrowth.Par\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth.Par [[FPGrowth.Par.html]] {
+        +make(): FPGrowth
+    }
+
+    abstract class "<size:14>AbstractFrequentItemsetAlgorithm.Par\n<size:10>elki.itemsetmining" as elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par [[AbstractFrequentItemsetAlgorithm.Par.html]]
+    class "<size:14>FPGrowth\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth [[FPGrowth.html]]
+
+    elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par <|-- elki.itemsetmining.FPGrowth.Par
+    elki.itemsetmining.FPGrowth +-- elki.itemsetmining.FPGrowth.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

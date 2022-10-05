@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FlatRStarTreeNode\n<size:10>elki.index.tree.spatial.rstarvariants.flat" as elki.index.tree.spatial.rstarvariants.flat.FlatRStarTreeNode [[FlatRStarTreeNode.html]] {
+        {static} -serialVersionUID: long
+        +FlatRStarTreeNode()
+        +FlatRStarTreeNode(int, boolean)
+        +deleteEntry(int): boolean
+        +increaseEntries(int): void
+    }
+
+    abstract class "<size:14>AbstractRStarTreeNode\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTreeNode<FlatRStarTreeNode, SpatialEntry> [[../AbstractRStarTreeNode.html]]
+
+    elki.index.tree.spatial.rstarvariants.AbstractRStarTreeNode <|-- elki.index.tree.spatial.rstarvariants.flat.FlatRStarTreeNode
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

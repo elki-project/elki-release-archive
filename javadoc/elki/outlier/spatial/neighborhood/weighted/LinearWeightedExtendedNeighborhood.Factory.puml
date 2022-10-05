@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearWeightedExtendedNeighborhood.Factory\n<size:10>elki.outlier.spatial.neighborhood.weighted" as elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory<O> [[LinearWeightedExtendedNeighborhood.Factory.html]] {
+        -inner: Factory<O>
+        -steps: int
+        +Factory(Factory<O>, int)
+        +instantiate(Database, Relation<? extends O>): LinearWeightedExtendedNeighborhood
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>WeightedNeighborSetPredicate.Factory\n<size:10>elki.outlier.spatial.neighborhood.weighted" as elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate.Factory<O> [[WeightedNeighborSetPredicate.Factory.html]] {
+        {abstract} +instantiate(Database, Relation<? extends O>): WeightedNeighborSetPredicate
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>LinearWeightedExtendedNeighborhood\n<size:10>elki.outlier.spatial.neighborhood.weighted" as elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood [[LinearWeightedExtendedNeighborhood.html]]
+    class "<size:14>LinearWeightedExtendedNeighborhood.Factory.Par\n<size:10>elki.outlier.spatial.neighborhood.weighted" as elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory.Par<O> [[LinearWeightedExtendedNeighborhood.Factory.Par.html]]
+
+    elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate.Factory <|.. elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory
+    elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood +-- elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory
+    elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory +-- elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

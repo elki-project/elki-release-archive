@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleIntegerDBIDHeap.UnorderedIter\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDHeap.UnorderedIter [[DoubleIntegerDBIDHeap.UnorderedIter.html]] {
+        -it: UnsortedIter
+        +internalGetIndex(): int
+        +valid(): boolean
+        +doubleValue(): double
+        +advance(): DoubleDBIDIter
+    }
+
+    interface "<size:14>DoubleDBIDIter\n<size:10>elki.database.ids" as elki.database.ids.DoubleDBIDIter [[../DoubleDBIDIter.html]] {
+        {abstract} +doubleValue(): double
+        {abstract} +advance(): DoubleDBIDIter
+    }
+    class "<size:14>DoubleIntegerDBIDHeap\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDHeap [[DoubleIntegerDBIDHeap.html]]
+
+    elki.database.ids.DoubleDBIDIter <|.. elki.database.ids.integer.DoubleIntegerDBIDHeap.UnorderedIter
+    elki.database.ids.integer.DoubleIntegerDBIDHeap +-- elki.database.ids.integer.DoubleIntegerDBIDHeap.UnorderedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

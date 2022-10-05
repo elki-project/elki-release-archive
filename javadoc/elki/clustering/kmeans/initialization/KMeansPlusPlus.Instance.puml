@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>KMeansPlusPlus.Instance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMeansPlusPlus.Instance<T> [[KMeansPlusPlus.Instance.html]] {
+        #ids: DBIDs
+        #weights: WritableDoubleDataStore
+        #diststat: long
+        #random: Random
+        +Instance(DBIDs, RandomFactory)
+        {abstract} #distance(T, DBIDRef): double
+        #initialWeights(T): double
+        #updateWeights(T): double
+        #nextDouble(double): double
+    }
+
+    class "<size:14>KMeansPlusPlus\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMeansPlusPlus<O> [[KMeansPlusPlus.html]]
+
+    elki.clustering.kmeans.initialization.KMeansPlusPlus +-- elki.clustering.kmeans.initialization.KMeansPlusPlus.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

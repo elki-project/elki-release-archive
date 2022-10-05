@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractCoverTree.Factory\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.AbstractCoverTree.Factory<O> [[AbstractCoverTree.Factory.html]] {
+        #distance: Distance<? super O>
+        #expansion: double
+        #truncate: int
+        +Factory(Distance<? super O>, double, int)
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<O> [[../../../IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    abstract class "<size:14>AbstractCoverTree\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.AbstractCoverTree<O> [[AbstractCoverTree.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    abstract class "<size:14>AbstractCoverTree.Factory.Par\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.AbstractCoverTree.Factory.Par<O> [[AbstractCoverTree.Factory.Par.html]]
+
+    elki.index.IndexFactory <|.. elki.index.tree.metrical.covertree.AbstractCoverTree.Factory
+    elki.index.tree.metrical.covertree.AbstractCoverTree +-- elki.index.tree.metrical.covertree.AbstractCoverTree.Factory
+    elki.index.tree.metrical.covertree.AbstractCoverTree.Factory +-- elki.index.tree.metrical.covertree.AbstractCoverTree.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

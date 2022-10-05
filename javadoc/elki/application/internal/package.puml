@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.application.internal {
+
+        class CheckParameterizables [[CheckParameterizables.html]] {
+            {static} -LOG: Logging
+            -knownParameterizables: List<Class<?>>
+            +checkParameterizables(): void
+            -checkSupertypes(Class<?>): boolean
+            -checkV3Parameterization(Class<?>, State): State
+            -checkDefaultConstructor(Class<?>, State): State
+            -checkParameterizer(Class<?>, Class<? extends Parameterizer>): boolean
+            {static} +main(String[]): void
+        }
+
+        enum elki.application.internal.CheckParameterizables.State [[CheckParameterizables.State.html]] {
+            {static} +NO_CONSTRUCTOR
+            {static} +INSTANTIABLE
+            {static} +DEFAULT_INSTANTIABLE
+            {static} +ERROR
+        }
+
+        class CheckELKIServices [[CheckELKIServices.html]] {
+            {static} -LOG: Logging
+            {static} -STRIP: Pattern
+            {static} +main(String[]): void
+            +checkServices(String): void
+            -checkService(String, String): void
+            -checkAliases(Class<?>, String, String[]): void
+        }
+
+        CheckParameterizables +-- elki.application.internal.CheckParameterizables.State
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

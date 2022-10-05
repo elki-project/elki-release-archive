@@ -1,0 +1,46 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DiSH.Instance\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH.Instance [[DiSH.Instance.html]] {
+        -relation: Relation<? extends NumberVector>
+        -clusterOrder: ArrayModifiableDBIDs
+        -correlationValue: WritableIntegerDataStore
+        -commonPreferenceVectors: WritableDataStore<long[]>
+        -tmpIds: ArrayModifiableDBIDs
+        -tmpCorrelation: WritableIntegerDataStore
+        -tmpDistance: WritableDoubleDataStore
+        ~tmpcomp: Comparator<DBIDRef>
+        #preferenceVectors: WritableDataStore<long[]>
+        -tmpPreferenceVectors: WritableDataStore<long[]>
+        +Instance(Relation<? extends NumberVector>)
+        +run(): DiSHClusterOrder
+        -determinePreferenceVector(ModifiableDBIDs[], StringBuilder): long[]
+        -determinePreferenceVectorByApriori(ModifiableDBIDs[], StringBuilder): long[]
+        -determinePreferenceVectorByMaxIntersection(ModifiableDBIDs[], StringBuilder): long[]
+        -max(Map<Integer, ModifiableDBIDs>): int
+        -maxIntersection(Map<Integer, ModifiableDBIDs>, ModifiableDBIDs): int
+        #buildResult(): DiSHClusterOrder
+        #initialDBID(DBIDRef): void
+        #expandDBID(DBIDRef): void
+        +compare(DBIDRef, DBIDRef): int
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>GeneralizedOPTICS.Instance\n<size:10>elki.clustering.optics" as elki.clustering.optics.GeneralizedOPTICS.Instance<DiSHClusterOrder> [[../optics/GeneralizedOPTICS.Instance.html]] {
+        {abstract} #initialDBID(DBIDRef): void
+        {abstract} #expandDBID(DBIDRef): void
+        {abstract} #buildResult(): DiSHClusterOrder
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>DiSH\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH [[DiSH.html]]
+    class "<size:14>DiSH.Instance.Sorter\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH.Instance.Sorter [[DiSH.Instance.Sorter.html]]
+
+    elki.clustering.optics.GeneralizedOPTICS.Instance <|-- elki.clustering.subspace.DiSH.Instance
+    elki.clustering.subspace.DiSH +-- elki.clustering.subspace.DiSH.Instance
+    elki.clustering.subspace.DiSH.Instance +-- elki.clustering.subspace.DiSH.Instance.Sorter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

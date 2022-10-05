@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MultidimensionalScalingMSTLayout3DPC\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC [[MultidimensionalScalingMSTLayout3DPC.html]] {
+        +MultidimensionalScalingMSTLayout3DPC(Dependence)
+        ~makeNode(int, List<Node>): Node
+        +layout(int, double[]): Layout
+    }
+
+    abstract class "<size:14>AbstractLayout3DPC\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.AbstractLayout3DPC<Node> [[AbstractLayout3DPC.html]] {
+        {abstract} +layout(int, double[]): Layout
+        {abstract} ~makeNode(int, List<N extends Node>): Node
+    }
+    class "<size:14>MultidimensionalScalingMSTLayout3DPC.Node\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC.Node [[MultidimensionalScalingMSTLayout3DPC.Node.html]]
+    class "<size:14>MultidimensionalScalingMSTLayout3DPC.Par\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC.Par [[MultidimensionalScalingMSTLayout3DPC.Par.html]]
+
+    elki.visualization.parallel3d.layout.AbstractLayout3DPC <|-- elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC
+    elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC +-- elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC.Node
+    elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC +-- elki.visualization.parallel3d.layout.MultidimensionalScalingMSTLayout3DPC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

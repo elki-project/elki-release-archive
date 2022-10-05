@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FeatureSelection.Par\n<size:10>elki.data.projection" as elki.data.projection.FeatureSelection.Par<V extends FeatureVector<F>, F> [[FeatureSelection.Par.html]] {
+        {static} +SELECTED_ATTRIBUTES_ID: OptionID
+        ~dims: int[]
+        +configure(Parameterization): void
+        +make(): FeatureSelection<V extends FeatureVector<F>, F>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>FeatureSelection\n<size:10>elki.data.projection" as elki.data.projection.FeatureSelection<V extends FeatureVector<F>, F> [[FeatureSelection.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.data.projection.FeatureSelection.Par
+    elki.data.projection.FeatureSelection +-- elki.data.projection.FeatureSelection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

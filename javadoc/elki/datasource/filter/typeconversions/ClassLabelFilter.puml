@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClassLabelFilter\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.ClassLabelFilter [[ClassLabelFilter.html]] {
+        -classLabelIndex: int
+        -classLabelFactory: Factory<?>
+        +ClassLabelFilter(int, Factory<?>)
+        +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+
+    interface "<size:14>ObjectFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.ObjectFilter [[../ObjectFilter.html]] {
+        {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+    class "<size:14>ClassLabelFilter.Par\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.ClassLabelFilter.Par [[ClassLabelFilter.Par.html]]
+
+    elki.datasource.filter.ObjectFilter <|.. elki.datasource.filter.typeconversions.ClassLabelFilter
+    elki.datasource.filter.typeconversions.ClassLabelFilter +-- elki.datasource.filter.typeconversions.ClassLabelFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,261 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math {
+
+        class MathUtil [[MathUtil.html]] {
+            {static} +TWOPI: double
+            {static} +HALFPI: double
+            {static} +QUARTERPI: double
+            {static} +ONEHALFPI: double
+            {static} +PISQUARE: double
+            {static} +SQRTPI: double
+            {static} +SQRTTWOPI: double
+            {static} +SQRTHALFPI: double
+            {static} +SQRT2: double
+            {static} +SQRT3: double
+            {static} +SQRT5: double
+            {static} +SQRTHALF: double
+            {static} +ONE_BY_SQRTPI: double
+            {static} +ONE_BY_SQRTTWOPI: double
+            {static} +LOG_ONE_BY_SQRTTWOPI: double
+            {static} +ONE_BY_LOG2: double
+            {static} +ONE_THIRD: double
+            {static} +SQRTTHIRD: double
+            {static} +LOG2: double
+            {static} +LOG3: double
+            {static} +LOG10: double
+            {static} +LOGPI: double
+            {static} +LOGPIHALF: double
+            {static} +LOGTWOPI: double
+            {static} +LOGSQRTTWOPI: double
+            {static} +LOGLOG2: double
+            {static} +DEG2RAD: double
+            {static} +RAD2DEG: double
+            {static} +EULERMASCHERONI: double
+            {static} +EMPTY_INTS: int[]
+            {static} +log2(double): double
+            {static} +factorial(int): long
+            {static} +binomialCoefficient(long, long): long
+            {static} +approximateFactorial(int): double
+            {static} +approximateBinomialCoefficient(int, int): double
+            {static} +sumFirstIntegers(long): long
+            {static} +randomDoubleArray(int, Random): double[]
+            {static} +deg2rad(double): double
+            {static} +rad2deg(double): double
+            {static} +normAngle(double): double
+            {static} +nextPow2Int(int): int
+            {static} +nextPow2Long(long): long
+            {static} +nextAllOnesInt(int): int
+            {static} +nextAllOnesLong(long): long
+            {static} +floatToDoubleUpper(float): double
+            {static} +floatToDoubleLower(float): double
+            {static} +log1mexp(double): double
+            {static} +exp(double): double
+            {static} +powi(double, int): double
+            {static} +ipowi(int, int): int
+            {static} +sequence(int, int): int[]
+            {static} +max(double, double): double
+            {static} +max(double, double, double): double
+            {static} +max(double, double, double, double): double
+            {static} +max(int, int): int
+            {static} +max(int, int, int): int
+            {static} +max(int, int, int, int): int
+            {static} +min(double, double): double
+            {static} +min(double, double, double): double
+            {static} +min(double, double, double, double): double
+            {static} +min(int, int): int
+            {static} +min(int, int, int): int
+            {static} +min(int, int, int, int): int
+            {static} +clamp(double, double, double): double
+        }
+
+        class MeanVariance [[MeanVariance.html]] {
+            #m2: double
+            +MeanVariance()
+            +MeanVariance(MeanVariance)
+            +put(double): void
+            +put(double, double): void
+            +put(Mean): void
+            +put(double[]): MeanVariance
+            +put(double[], double[]): MeanVariance
+            +getPopulationVariance(): double
+            +getSampleVariance(): double
+            +getSumOfSquares(): double
+            +getPopulationStddev(): double
+            +getSampleStddev(): double
+            {static} +newArray(int): MeanVariance[]
+            +reset(): MeanVariance
+            {static} +of(Relation<? extends NumberVector>): MeanVariance[]
+        }
+
+        class MeanVarianceMinMax [[MeanVarianceMinMax.html]] {
+            ~min: double
+            ~max: double
+            +MeanVarianceMinMax()
+            +MeanVarianceMinMax(MeanVarianceMinMax)
+            +put(double): void
+            +put(double, double): void
+            +put(Mean): void
+            +put(double[]): MeanVarianceMinMax
+            +put(double[], double[]): MeanVariance
+            +getMin(): double
+            +getMax(): double
+            +getDiff(): double
+            {static} +newArray(int): MeanVarianceMinMax[]
+            +reset(): MeanVarianceMinMax
+        }
+
+        abstract class SinCosTable [[SinCosTable.html]] {
+            #steps: int
+            -SinCosTable(int)
+            {abstract} +cos(int): double
+            {abstract} +sin(int): double
+            {static} +make(int): SinCosTable
+        }
+
+        class elki.math.SinCosTable.FullTable [[SinCosTable.FullTable.html]] {
+            -costable: double[]
+            -sintable: double[]
+            +FullTable(int)
+            +cos(int): double
+            +sin(int): double
+        }
+
+        class elki.math.SinCosTable.HalfTable [[SinCosTable.HalfTable.html]] {
+            -halfsteps: int
+            -costable: double[]
+            -sintable: double[]
+            +HalfTable(int)
+            +cos(int): double
+            +sin(int): double
+        }
+
+        class elki.math.SinCosTable.QuarterTable [[SinCosTable.QuarterTable.html]] {
+            -quarsteps: int
+            -halfsteps: int
+            -costable: double[]
+            +QuarterTable(int)
+            +cos(int): double
+            +sin(int): double
+        }
+
+        class PearsonCorrelation [[PearsonCorrelation.html]] {
+            -sumXX: double
+            -sumYY: double
+            -sumXY: double
+            -sumX: double
+            -sumY: double
+            -sumWe: double
+            +put(double, double, double): void
+            +put(double, double): void
+            +getCorrelation(): double
+            +getCount(): double
+            +getMeanX(): double
+            +getMeanY(): double
+            +getNaiveCovariance(): double
+            +getSampleCovariance(): double
+            +getPopulationVarianceX(): double
+            +getSampleVarianceX(): double
+            +getPopulationStddevX(): double
+            +getSampleStddevX(): double
+            +getPopulationVarianceY(): double
+            +getSampleVarianceY(): double
+            +getPopulationStddevY(): double
+            +getSampleStddevY(): double
+            +reset(): void
+            {static} +coefficient(double[], double[]): double
+            {static} +coefficient(NumberVector, NumberVector): double
+            {static} +weightedCoefficient(double[], double[], double[]): double
+            {static} +weightedCoefficient(NumberVector, NumberVector, double[]): double
+            {static} +weightedCoefficient(NumberVector, NumberVector, NumberVector): double
+        }
+
+        class StatisticalMoments [[StatisticalMoments.html]] {
+            ~m3: double
+            ~m4: double
+            +StatisticalMoments()
+            +StatisticalMoments(StatisticalMoments)
+            +put(double): void
+            +put(double, double): void
+            +put(Mean): void
+            +put(double[]): StatisticalMoments
+            +put(double[], double[]): StatisticalMoments
+            +getSampleSkewness(): double
+            +getNaiveSkewness(): double
+            +getSampleKurtosis(): double
+            +getNaiveKurtosis(): double
+            +getSampleExcessKurtosis(): double
+            +getNaiveExcessKurtosis(): double
+            +reset(): StatisticalMoments
+        }
+
+        class Primes [[Primes.html]] {
+            {static} +FIRST_PRIMES: int[]
+        }
+
+        class IntegerMinMax [[IntegerMinMax.html]] {
+            -min: int
+            -max: int
+            +IntegerMinMax()
+            +IntegerMinMax(int, int)
+            +put(int): void
+            +put(int[]): void
+            +put(IntegerMinMax): void
+            +getMin(): int
+            +getMax(): int
+            +getDiff(): long
+            +isValid(): boolean
+            +asIntArray(): int[]
+            {static} +newArray(int): IntegerMinMax[]
+            +reset(): void
+        }
+
+        class Mean [[Mean.html]] {
+            #sum: double
+            #n: double
+            +Mean()
+            +Mean(Mean)
+            +put(double): void
+            +put(double, double): void
+            +put(Mean): void
+            +put(double[]): Mean
+            +put(double[], double[]): Mean
+            +getCount(): double
+            +getMean(): double
+            {static} +newArray(int): Mean[]
+            +reset(): Mean
+            {static} +of(double...): double
+            {static} +highPrecision(double...): double
+        }
+
+        class DoubleMinMax [[DoubleMinMax.html]] {
+            -min: double
+            -max: double
+            +DoubleMinMax()
+            +DoubleMinMax(double, double)
+            +put(double): void
+            +put(double[]): void
+            +put(DoubleMinMax): void
+            +getMin(): double
+            +getMax(): double
+            +getDiff(): double
+            +isValid(): boolean
+            +asDoubleArray(): double[]
+            {static} +newArray(int): DoubleMinMax[]
+            +reset(): void
+        }
+
+        Mean <|-- MeanVariance
+        MeanVariance <|-- MeanVarianceMinMax
+        MeanVarianceMinMax --> DoubleMinMax: doubleMinMax
+        SinCosTable <|-- elki.math.SinCosTable.FullTable
+        SinCosTable +-- elki.math.SinCosTable.FullTable
+        SinCosTable <|-- elki.math.SinCosTable.HalfTable
+        SinCosTable +-- elki.math.SinCosTable.HalfTable
+        SinCosTable <|-- elki.math.SinCosTable.QuarterTable
+        SinCosTable +-- elki.math.SinCosTable.QuarterTable
+        MeanVarianceMinMax <|-- StatisticalMoments
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="185px" preserveAspectRatio="none" style="width:359px;height:185px;background:#FFFFFF;" version="1.1" viewBox="0 0 359 185" width="359px" zoomAndPan="magnify"><defs/><g><!--MD5=[f132d52f252d42b3b8254552f805f0be]
+class elki.utilities.optionhandling.OptionID--><a href="OptionID.html" target="_top" title="OptionID.html" xlink:actuate="onRequest" xlink:href="OptionID.html" xlink:show="new" xlink:title="OptionID.html" xlink:type="simple"><g id="elem_elki.utilities.optionhandling.OptionID"><rect codeLine="6" fill="#F1F1F1" height="151.7188" id="elki.utilities.optionhandling.OptionID" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="338" x="7" y="7"/><ellipse cx="109.75" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M112.7188,31.6094 Q112.1406,31.9063 111.5,32.0469 Q110.8594,32.2031 110.1563,32.2031 Q107.6563,32.2031 106.3281,30.5625 Q105.0156,28.9063 105.0156,25.7813 Q105.0156,22.6563 106.3281,21 Q107.6563,19.3438 110.1563,19.3438 Q110.8594,19.3438 111.5,19.5 Q112.1563,19.6563 112.7188,19.9531 L112.7188,22.6719 Q112.0938,22.0938 111.5,21.8281 Q110.9063,21.5469 110.2813,21.5469 Q108.9375,21.5469 108.25,22.625 Q107.5625,23.6875 107.5625,25.7813 Q107.5625,27.875 108.25,28.9531 Q108.9375,30.0156 110.2813,30.0156 Q110.9063,30.0156 111.5,29.75 Q112.0938,29.4688 112.7188,28.8906 L112.7188,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60" x="162.25" y="24.9951">OptionID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="124" x="130.25" y="37.5791">elki.utilities.optionhandling</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="344" y1="44.9375" y2="44.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="55.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="27" y="61.9326">name: String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="71.8828"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="27" y="78.2295">description: String</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="344" y1="85.5313" y2="85.5313"/><ellipse cx="18" cy="99.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="158" x="27" y="102.5264">OptionID(String, String)</text><ellipse cx="18" cy="115.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="161" x="27" y="118.8232">getDescription(): String</text><ellipse cx="18" cy="131.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="312" x="27" y="135.1201">getOrCreateOptionID(String, String): OptionID</text><ellipse cx="18" cy="148.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="27" y="151.417">getName(): String</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="82.5" y="165.7188"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="82.5" y="175.001">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[888d358aa9652f81a4fea316785afa01]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OptionID\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.OptionID [[OptionID.html]] {
+        -name: String
+        -description: String
+        +OptionID(String, String)
+        +getDescription(): String
+        {static} +getOrCreateOptionID(String, String): OptionID
+        +getName(): String
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearScanRKNNByDBID\n<size:10>elki.database.query.rknn" as elki.database.query.rknn.LinearScanRKNNByDBID<O> [[LinearScanRKNNByDBID.html]] {
+        -distanceQuery: DistanceQuery<O>
+        -knnQuery: KNNSearcher<DBIDRef>
+        +LinearScanRKNNByDBID(DistanceQuery<O>, KNNSearcher<DBIDRef>)
+        +getRKNN(DBIDRef, int): DoubleDBIDList
+    }
+
+    interface "<size:14>RKNNSearcher\n<size:10>elki.database.query.rknn" as elki.database.query.rknn.RKNNSearcher<DBIDRef> [[RKNNSearcher.html]] {
+        {abstract} +getRKNN(DBIDRef, int): DoubleDBIDList
+    }
+    interface "<size:14>LinearScanQuery\n<size:10>elki.database.query" as elki.database.query.LinearScanQuery [[../LinearScanQuery.html]]
+
+    elki.database.query.rknn.RKNNSearcher <|.. elki.database.query.rknn.LinearScanRKNNByDBID
+    elki.database.query.LinearScanQuery <|.. elki.database.query.rknn.LinearScanRKNNByDBID
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

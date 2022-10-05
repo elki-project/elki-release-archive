@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AdaptiveSortTileRecursiveBulkSplit.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.bulk" as elki.index.tree.spatial.rstarvariants.strategies.bulk.AdaptiveSortTileRecursiveBulkSplit.Par [[AdaptiveSortTileRecursiveBulkSplit.Par.html]] {
+        +make(): AdaptiveSortTileRecursiveBulkSplit
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AdaptiveSortTileRecursiveBulkSplit\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.bulk" as elki.index.tree.spatial.rstarvariants.strategies.bulk.AdaptiveSortTileRecursiveBulkSplit [[AdaptiveSortTileRecursiveBulkSplit.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.bulk.AdaptiveSortTileRecursiveBulkSplit.Par
+    elki.index.tree.spatial.rstarvariants.strategies.bulk.AdaptiveSortTileRecursiveBulkSplit +-- elki.index.tree.spatial.rstarvariants.strategies.bulk.AdaptiveSortTileRecursiveBulkSplit.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractMTreeFactory.Par\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMTreeFactory.Par.html]] {
+        {static} +DISTANCE_FUNCTION_ID: OptionID
+        {static} +SPLIT_STRATEGY_ID: OptionID
+        {static} +INSERT_STRATEGY_ID: OptionID
+        #settings: S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+        +configure(Parameterization): void
+        {abstract} #makeSettings(): S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+        {abstract} +make(): AbstractMTreeFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>
+    }
+
+    abstract class "<size:14>PagedIndexFactory.Par\n<size:10>elki.index" as elki.index.PagedIndexFactory.Par<O> [[../../../PagedIndexFactory.Par.html]] {
+        {abstract} +make(): PagedIndexFactory<O>
+    }
+    abstract class "<size:14>AbstractMTreeFactory\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMTreeFactory.html]]
+
+    elki.index.PagedIndexFactory.Par <|-- elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par
+    elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory +-- elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

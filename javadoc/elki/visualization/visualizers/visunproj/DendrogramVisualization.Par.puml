@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DendrogramVisualization.Par\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization.Par [[DendrogramVisualization.Par.html]] {
+        {static} +STYLE_ID: OptionID
+        {static} +LAYOUT_ID: OptionID
+        -style: DrawingStyle
+        -style2: PositionStyle
+        +configure(Parameterization): void
+        +make(): DendrogramVisualization
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>DendrogramVisualization\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.DendrogramVisualization [[DendrogramVisualization.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.visunproj.DendrogramVisualization.Par
+    elki.visualization.visualizers.visunproj.DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

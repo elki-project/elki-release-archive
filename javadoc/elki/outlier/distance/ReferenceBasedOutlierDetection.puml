@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ReferenceBasedOutlierDetection\n<size:10>elki.outlier.distance" as elki.outlier.distance.ReferenceBasedOutlierDetection [[ReferenceBasedOutlierDetection.html]] {
+        #distance: NumberVectorDistance<? super NumberVector>
+        #k: int
+        #refp: ReferencePointsHeuristic
+        +ReferenceBasedOutlierDetection(int, NumberVectorDistance<? super NumberVector>, ReferencePointsHeuristic)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends NumberVector>): OutlierResult
+        #computeDistanceVector(NumberVector, Relation<? extends NumberVector>, PrimitiveDistanceQuery<? super NumberVector>): DoubleDBIDList
+        #updateDensities(WritableDoubleDataStore, DoubleDBIDList): void
+        #computeDensity(DoubleDBIDList, DoubleDBIDListIter, int): double
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>ReferenceBasedOutlierDetection.Par\n<size:10>elki.outlier.distance" as elki.outlier.distance.ReferenceBasedOutlierDetection.Par [[ReferenceBasedOutlierDetection.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.distance.ReferenceBasedOutlierDetection
+    elki.outlier.distance.ReferenceBasedOutlierDetection +-- elki.outlier.distance.ReferenceBasedOutlierDetection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

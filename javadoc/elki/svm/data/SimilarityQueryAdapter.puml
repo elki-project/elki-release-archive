@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimilarityQueryAdapter\n<size:10>elki.svm.data" as elki.svm.data.SimilarityQueryAdapter [[SimilarityQueryAdapter.html]] {
+        ~sim: SimilarityQuery<?>
+        ~ids: ArrayModifiableDBIDs
+        ~i1: DBIDArrayIter
+        ~i2: DBIDArrayIter
+        +SimilarityQueryAdapter(SimilarityQuery<?>, DBIDs)
+        +size(): int
+        +similarity(int, int): double
+        +value(int): double
+        +classnum(int): int
+        +swap(int, int): void
+        +iter(): DBIDArrayIter
+    }
+
+    interface "<size:14>DataSet\n<size:10>elki.svm.data" as elki.svm.data.DataSet [[DataSet.html]] {
+        {abstract} +size(): int
+        {abstract} +similarity(int, int): double
+        {abstract} +value(int): double
+        {abstract} +classnum(int): int
+        {abstract} +swap(int, int): void
+    }
+
+    elki.svm.data.DataSet <|.. elki.svm.data.SimilarityQueryAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

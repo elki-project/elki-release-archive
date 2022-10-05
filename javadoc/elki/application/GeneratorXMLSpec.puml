@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GeneratorXMLSpec\n<size:10>elki.application" as elki.application.GeneratorXMLSpec [[GeneratorXMLSpec.html]] {
+        {static} -LOG: Logging
+        {static} +LINE_SEPARATOR: String
+        -outputFile: Path
+        -generator: GeneratorXMLDatabaseConnection
+        +GeneratorXMLSpec(Path, GeneratorXMLDatabaseConnection)
+        +run(): void
+        +writeClusters(BufferedWriter, MultipleObjectsBundle): void
+        {static} +main(String[]): void
+    }
+
+    abstract class "<size:14>AbstractApplication\n<size:10>elki.application" as elki.application.AbstractApplication [[AbstractApplication.html]] {
+        {abstract} +run(): void
+    }
+    class "<size:14>GeneratorXMLSpec.Par\n<size:10>elki.application" as elki.application.GeneratorXMLSpec.Par [[GeneratorXMLSpec.Par.html]]
+
+    elki.application.AbstractApplication <|-- elki.application.GeneratorXMLSpec
+    elki.application.GeneratorXMLSpec +-- elki.application.GeneratorXMLSpec.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

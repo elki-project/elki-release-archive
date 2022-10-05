@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DatabaseEventManager\n<size:10>elki.database" as elki.database.DatabaseEventManager [[DatabaseEventManager.html]] {
+        -dataListenerList: List<DataStoreListener>
+        -resultListenerList: List<ResultListener>
+        -accumulateDataStoreEvents: boolean
+        -currentDataStoreEventType: Type
+        -dataStoreObjects: HashSetModifiableDBIDs
+        +accumulateDataStoreEvents(): void
+        +flushDataStoreEvents(): void
+        +addListener(DataStoreListener): void
+        +removeListener(DataStoreListener): void
+        +addListener(ResultListener): void
+        +removeListener(ResultListener): void
+        +fireObjectsInserted(DBIDs): void
+        +fireObjectInserted(DBIDRef): void
+        +fireObjectsUpdated(DBIDs): void
+        +fireObjectsUpdated(DBIDRef): void
+        #fireObjectsRemoved(DBIDs): void
+        #fireObjectRemoved(DBIDRef): void
+        -fireObjectsChanged(DBIDs, Type): void
+        -fireObjectChanged(DBIDRef, Type): void
+        +fireResultAdded(Object, Object): void
+        +fireResultRemoved(Object, Object): void
+    }
+    enum "<size:14>DatabaseEventManager.Type\n<size:10>elki.database" as elki.database.DatabaseEventManager.Type [[DatabaseEventManager.Type.html]]
+
+    elki.database.DatabaseEventManager +-- elki.database.DatabaseEventManager.Type
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

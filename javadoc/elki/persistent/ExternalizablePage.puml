@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ExternalizablePage\n<size:10>elki.persistent" as elki.persistent.ExternalizablePage [[ExternalizablePage.html]]
+
+    interface "<size:14>Page\n<size:10>elki.persistent" as elki.persistent.Page [[Page.html]] {
+        {abstract} +getPageID(): int
+        {abstract} +setPageID(int): void
+        {abstract} +isDirty(): boolean
+        {abstract} +setDirty(boolean): void
+    }
+    interface "<size:14>Externalizable\n<size:10>java.io" as java.io.Externalizable {
+        {abstract} +writeExternal(ObjectOutput): void
+        {abstract} +readExternal(ObjectInput): void
+    }
+
+    elki.persistent.Page <|-- elki.persistent.ExternalizablePage
+    java.io.Externalizable <|-- elki.persistent.ExternalizablePage
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="219px" preserveAspectRatio="none" style="width:200px;height:219px;background:#FFFFFF;" version="1.1" viewBox="0 0 200 219" width="200px" zoomAndPan="magnify"><defs/><g><!--MD5=[79884048c6c58ef652880f94ac12ae39]
+class elki.result.IterableResult--><a href="IterableResult.html" target="_top" title="IterableResult.html" xlink:actuate="onRequest" xlink:href="IterableResult.html" xlink:show="new" xlink:title="IterableResult.html" xlink:type="simple"><g id="elem_elki.result.IterableResult"><rect codeLine="6" fill="#F1F1F1" height="62.2344" id="elki.result.IterableResult" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="182" x="7" y="132"/><ellipse cx="40" cy="150.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M35.9219,146.7344 L35.9219,144.5781 L43.3125,144.5781 L43.3125,146.7344 L40.8438,146.7344 L40.8438,154.8125 L43.3125,154.8125 L43.3125,156.9688 L35.9219,156.9688 L35.9219,154.8125 L38.3906,154.8125 L38.3906,146.7344 L35.9219,146.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="58" y="149.9951">IterableResult</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="49" x="82.5" y="162.5791">elki.result</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="182" y="129"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="183" y="141.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="188" y1="169.9375" y2="169.9375"/><ellipse cx="18" cy="183.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="156" x="27" y="186.9326">iterator(): Iterator&lt;O&gt;</text></g></a><!--MD5=[f06cde10779025ee1fafe9aaebbf62cd]
+class java.lang.Iterable--><g id="elem_java.lang.Iterable"><rect codeLine="10" fill="#F1F1F1" height="62.2344" id="java.lang.Iterable" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="180" x="8" y="10"/><ellipse cx="60.75" cy="28.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M56.6719,24.7344 L56.6719,22.5781 L64.0625,22.5781 L64.0625,24.7344 L61.5938,24.7344 L61.5938,32.8125 L64.0625,32.8125 L64.0625,34.9688 L56.6719,34.9688 L56.6719,32.8125 L59.1406,32.8125 L59.1406,24.7344 L56.6719,24.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="54" x="81.25" y="27.9951">Iterable</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="45" x="85.75" y="40.5791">java.lang</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="181" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="182" y="19.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="9" x2="187" y1="47.9375" y2="47.9375"/><ellipse cx="19" cy="61.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="154" x="28" y="64.9326">iterator(): Iterator&lt;T&gt;</text></g><!--MD5=[01a7b642ace42a4a9ea02c2488e5cc7c]
+reverse link java.lang.Iterable to elki.result.IterableResult--><g id="link_java.lang.Iterable_elki.result.IterableResult"><path codeLine="14" d="M98,92.37 C98,105.75 98,119.79 98,131.73 " fill="none" id="java.lang.Iterable-backto-elki.result.IterableResult" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="91,92.28,98,72.28,105,92.28,91,92.28" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="0" y="200.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="0" y="209.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[aab9a324e807e3446bcd351d41ee383a]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>IterableResult\n<size:10>elki.result" as elki.result.IterableResult<O> [[IterableResult.html]] {
+        {abstract} +iterator(): Iterator<O>
+    }
+
+    interface "<size:14>Iterable\n<size:10>java.lang" as java.lang.Iterable<O> {
+        {abstract} +iterator(): Iterator<T>
+    }
+
+    java.lang.Iterable <|- - elki.result.IterableResult
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

@@ -1,0 +1,224 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.spatial {
+
+        class CTLuMedianMultipleAttributes<N, O extends NumberVector> [[CTLuMedianMultipleAttributes.html]] {
+            {static} -LOG: Logging
+            +CTLuMedianMultipleAttributes(Factory<N>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<N>, Relation<O extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.spatial.CTLuMedianMultipleAttributes.Par<N, O extends NumberVector> {
+            +make(): CTLuMedianMultipleAttributes<N, O extends NumberVector>
+        }
+
+        class CTLuZTestOutlier<N> [[CTLuZTestOutlier.html]] {
+            +CTLuZTestOutlier(Factory<N>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<N>, Relation<? extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.spatial.CTLuZTestOutlier.Par<N> {
+            +make(): CTLuZTestOutlier<N>
+        }
+
+        class TrimmedMeanApproach<N> [[TrimmedMeanApproach.html]] {
+            {static} -LOG: Logging
+            -p: double
+            +TrimmedMeanApproach(Factory<N>, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<N>, Relation<? extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.spatial.TrimmedMeanApproach.Par<N> {
+            {static} +P_ID: OptionID
+            #p: double
+            +configure(Parameterization): void
+            +make(): TrimmedMeanApproach<N>
+        }
+
+        class CTLuMedianAlgorithm<N> [[CTLuMedianAlgorithm.html]] {
+            +CTLuMedianAlgorithm(Factory<N>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<N>, Relation<? extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.spatial.CTLuMedianAlgorithm.Par<N> {
+            +make(): CTLuMedianAlgorithm<N>
+        }
+
+        class CTLuScatterplotOutlier<N> [[CTLuScatterplotOutlier.html]] {
+            +CTLuScatterplotOutlier(Factory<N>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<N>, Relation<? extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.spatial.CTLuScatterplotOutlier.Par<N> {
+            +make(): CTLuScatterplotOutlier<N>
+        }
+
+        class CTLuMeanMultipleAttributes<N, O extends NumberVector> [[CTLuMeanMultipleAttributes.html]] {
+            {static} -LOG: Logging
+            +CTLuMeanMultipleAttributes(Factory<N>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<N>, Relation<O extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.spatial.CTLuMeanMultipleAttributes.Par<N, O extends NumberVector> {
+            +make(): CTLuMeanMultipleAttributes<N, O extends NumberVector>
+        }
+
+        class SLOM<N, O> [[SLOM.html]] {
+            +SLOM(Factory<N>, PrimitiveDistance<O>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<N>, Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.spatial.SLOM.Par<N, O> {
+            +make(): SLOM<N, O>
+        }
+
+        abstract class AbstractDistanceBasedSpatialOutlier<N, O> [[AbstractDistanceBasedSpatialOutlier.html]] {
+            -nonSpatialDistance: Distance<O>
+            +AbstractDistanceBasedSpatialOutlier(Factory<N>, Distance<O>)
+            #getNonSpatialDistance(): Distance<O>
+        }
+
+        abstract class elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier.Par<N, O> {
+            {static} +NON_SPATIAL_DISTANCE_FUNCTION_ID: OptionID
+            #distance: PrimitiveDistance<O>
+            +configure(Parameterization): void
+        }
+
+        abstract class AbstractNeighborhoodOutlier<O> [[AbstractNeighborhoodOutlier.html]] {
+            {static} +NEIGHBORHOOD_ID: OptionID
+            +AbstractNeighborhoodOutlier(Factory<O>)
+            #getNeighborSetPredicateFactory(): Factory<O>
+        }
+
+        abstract class elki.outlier.spatial.AbstractNeighborhoodOutlier.Par<O> {
+            +configure(Parameterization): void
+        }
+
+        class CTLuGLSBackwardSearchAlgorithm<V extends NumberVector> [[CTLuGLSBackwardSearchAlgorithm.html]] {
+            #distance: Distance<? super NumberVector>
+            #alpha: double
+            #k: int
+            +CTLuGLSBackwardSearchAlgorithm(Distance<? super NumberVector>, int, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>, Relation<? extends NumberVector>): OutlierResult
+            -singleIteration(Relation<V extends NumberVector>, Relation<? extends NumberVector>): Pair<DBIDVar, Double>
+        }
+
+        class elki.outlier.spatial.CTLuGLSBackwardSearchAlgorithm.Par<V extends NumberVector> {
+            {static} +ALPHA_ID: OptionID
+            {static} +K_ID: OptionID
+            -alpha: double
+            -k: int
+            #distance: Distance<? super NumberVector>
+            +configure(Parameterization): void
+            +make(): CTLuGLSBackwardSearchAlgorithm<V extends NumberVector>
+        }
+
+        class CTLuRandomWalkEC<O> [[CTLuRandomWalkEC.html]] {
+            {static} -LOG: Logging
+            -distance: Distance<? super O>
+            -alpha: double
+            -c: double
+            -k: int
+            +CTLuRandomWalkEC(Distance<? super O>, double, double, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>, Relation<? extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.spatial.CTLuRandomWalkEC.Par<O> {
+            {static} +K_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            {static} +C_ID: OptionID
+            ~alpha: double
+            ~c: double
+            ~k: int
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): CTLuRandomWalkEC<O>
+        }
+
+        class SOF<N, O> [[SOF.html]] {
+            +SOF(Factory<N>, PrimitiveDistance<O>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<N>, Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.spatial.SOF.Par<N, O> {
+            +make(): SOF<N, O>
+        }
+
+        class CTLuMoranScatterplotOutlier<N> [[CTLuMoranScatterplotOutlier.html]] {
+            +CTLuMoranScatterplotOutlier(Factory<N>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<N>, Relation<? extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.spatial.CTLuMoranScatterplotOutlier.Par<N> {
+            +make(): CTLuMoranScatterplotOutlier<N>
+        }
+
+        AbstractNeighborhoodOutlier <|-- CTLuMedianMultipleAttributes
+        elki.outlier.spatial.AbstractNeighborhoodOutlier.Par <|-- elki.outlier.spatial.CTLuMedianMultipleAttributes.Par
+        CTLuMedianMultipleAttributes +-- elki.outlier.spatial.CTLuMedianMultipleAttributes.Par
+        AbstractNeighborhoodOutlier <|-- CTLuZTestOutlier
+        elki.outlier.spatial.AbstractNeighborhoodOutlier.Par <|-- elki.outlier.spatial.CTLuZTestOutlier.Par
+        CTLuZTestOutlier +-- elki.outlier.spatial.CTLuZTestOutlier.Par
+        AbstractNeighborhoodOutlier <|-- TrimmedMeanApproach
+        elki.outlier.spatial.AbstractNeighborhoodOutlier.Par <|-- elki.outlier.spatial.TrimmedMeanApproach.Par
+        TrimmedMeanApproach +-- elki.outlier.spatial.TrimmedMeanApproach.Par
+        AbstractNeighborhoodOutlier <|-- CTLuMedianAlgorithm
+        elki.outlier.spatial.AbstractNeighborhoodOutlier.Par <|-- elki.outlier.spatial.CTLuMedianAlgorithm.Par
+        CTLuMedianAlgorithm +-- elki.outlier.spatial.CTLuMedianAlgorithm.Par
+        AbstractNeighborhoodOutlier <|-- CTLuScatterplotOutlier
+        elki.outlier.spatial.AbstractNeighborhoodOutlier.Par <|-- elki.outlier.spatial.CTLuScatterplotOutlier.Par
+        CTLuScatterplotOutlier +-- elki.outlier.spatial.CTLuScatterplotOutlier.Par
+        AbstractNeighborhoodOutlier <|-- CTLuMeanMultipleAttributes
+        elki.outlier.spatial.AbstractNeighborhoodOutlier.Par <|-- elki.outlier.spatial.CTLuMeanMultipleAttributes.Par
+        CTLuMeanMultipleAttributes +-- elki.outlier.spatial.CTLuMeanMultipleAttributes.Par
+        AbstractDistanceBasedSpatialOutlier <|-- SLOM
+        elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier.Par <|-- elki.outlier.spatial.SLOM.Par
+        SLOM +-- elki.outlier.spatial.SLOM.Par
+        AbstractNeighborhoodOutlier <|-- AbstractDistanceBasedSpatialOutlier
+        elki.outlier.spatial.AbstractNeighborhoodOutlier.Par <|-- elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier.Par
+        AbstractDistanceBasedSpatialOutlier +-- elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier.Par
+        elki.outlier.OutlierAlgorithm <|.. AbstractNeighborhoodOutlier
+        AbstractNeighborhoodOutlier --> elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory: npredf
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.spatial.AbstractNeighborhoodOutlier.Par
+        AbstractNeighborhoodOutlier +-- elki.outlier.spatial.AbstractNeighborhoodOutlier.Par
+        elki.outlier.spatial.AbstractNeighborhoodOutlier.Par --> elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory: npredf
+        elki.outlier.OutlierAlgorithm <|.. CTLuGLSBackwardSearchAlgorithm
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.spatial.CTLuGLSBackwardSearchAlgorithm.Par
+        CTLuGLSBackwardSearchAlgorithm +-- elki.outlier.spatial.CTLuGLSBackwardSearchAlgorithm.Par
+        elki.outlier.OutlierAlgorithm <|.. CTLuRandomWalkEC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.spatial.CTLuRandomWalkEC.Par
+        CTLuRandomWalkEC +-- elki.outlier.spatial.CTLuRandomWalkEC.Par
+        AbstractDistanceBasedSpatialOutlier <|-- SOF
+        elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier.Par <|-- elki.outlier.spatial.SOF.Par
+        SOF +-- elki.outlier.spatial.SOF.Par
+        AbstractNeighborhoodOutlier <|-- CTLuMoranScatterplotOutlier
+        elki.outlier.spatial.AbstractNeighborhoodOutlier.Par <|-- elki.outlier.spatial.CTLuMoranScatterplotOutlier.Par
+        CTLuMoranScatterplotOutlier +-- elki.outlier.spatial.CTLuMoranScatterplotOutlier.Par
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

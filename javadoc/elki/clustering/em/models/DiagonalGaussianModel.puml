@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DiagonalGaussianModel\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.DiagonalGaussianModel [[DiagonalGaussianModel.html]] {
+        {static} -SINGULARITY_CHEAT: double
+        ~mean: double[]
+        ~variances: double[]
+        ~nmea: double[]
+        ~logNorm: double
+        ~logNormDet: double
+        ~weight: double
+        ~wsum: double
+        ~priordiag: double[]
+        +DiagonalGaussianModel(double, double[])
+        +DiagonalGaussianModel(double, double[], double[])
+        +beginEStep(): void
+        +updateE(NumberVector, double): void
+        +finalizeEStep(double, double): void
+        +mahalanobisDistance(double[]): double
+        +mahalanobisDistance(NumberVector): double
+        +estimateLogDensity(NumberVector): double
+        +getWeight(): double
+        +setWeight(double): void
+        +finalizeCluster(): EMModel
+        +estimateLogDensity(ClusterFeature): double
+        +updateE(ClusterFeature, double): void
+    }
+
+    interface "<size:14>BetulaClusterModel\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.BetulaClusterModel [[BetulaClusterModel.html]] {
+        {abstract} +estimateLogDensity(ClusterFeature): double
+        {abstract} +updateE(ClusterFeature, double): void
+    }
+
+    elki.clustering.em.models.BetulaClusterModel <|.. elki.clustering.em.models.DiagonalGaussianModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

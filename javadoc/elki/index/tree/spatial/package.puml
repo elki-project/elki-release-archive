@@ -1,0 +1,94 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.spatial {
+
+        interface SpatialEntry [[SpatialEntry.html]]
+
+        class SpatialPointLeafEntry [[SpatialPointLeafEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: DBID
+            -values: double[]
+            +SpatialPointLeafEntry()
+            +SpatialPointLeafEntry(DBID, double[])
+            +SpatialPointLeafEntry(DBID, NumberVector)
+            +getDBID(): DBID
+            +getDimensionality(): int
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+            +doubleValue(int): double
+            +longValue(int): long
+            +toArray(): double[]
+        }
+
+        class SpatialDirectoryEntry [[SpatialDirectoryEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: int
+            -mbr: ModifiableHyperBoundingBox
+            +SpatialDirectoryEntry()
+            +SpatialDirectoryEntry(int, ModifiableHyperBoundingBox)
+            +getPageID(): int
+            +getDimensionality(): int
+            +getMin(int): double
+            +getMax(int): double
+            +hasMBR(): boolean
+            +setMBR(ModifiableHyperBoundingBox): void
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+            +extendMBR(SpatialComparable): boolean
+        }
+
+        java.io.Externalizable <|-- SpatialEntry
+        elki.data.spatial.SpatialComparable <|-- SpatialEntry
+        elki.index.tree.LeafEntry <|.. SpatialPointLeafEntry
+        SpatialEntry <|.. SpatialPointLeafEntry
+        elki.data.NumberVector <|.. SpatialPointLeafEntry
+        elki.index.tree.DirectoryEntry <|.. SpatialDirectoryEntry
+        SpatialEntry <|.. SpatialDirectoryEntry
+    }
+
+    namespace java.io {
+        interface Externalizable {
+            {abstract} +writeExternal(ObjectOutput): void
+            {abstract} +readExternal(ObjectInput): void
+        }
+    }
+
+    namespace elki.data.spatial {
+        interface SpatialComparable [[../../../data/spatial/SpatialComparable.html]] {
+            {abstract} +getDimensionality(): int
+            {abstract} +getMin(int): double
+            {abstract} +getMax(int): double
+        }
+    }
+
+    namespace elki.index.tree {
+        interface LeafEntry [[../LeafEntry.html]] {
+            {abstract} +getDBID(): DBID
+        }
+        interface DirectoryEntry [[../DirectoryEntry.html]] {
+            {abstract} +getPageID(): int
+        }
+    }
+
+    namespace elki.data {
+        interface NumberVector [[../../../data/NumberVector.html]] {
+            {static} +ATTRIBUTE_SEPARATOR: String
+            {static} +VARIABLE_LENGTH: VectorTypeInformation<NumberVector>
+            {static} +FIELD: VectorFieldTypeInformation<NumberVector>
+            {static} +FIELD_1D: VectorFieldTypeInformation<NumberVector>
+            {static} +FIELD_2D: VectorFieldTypeInformation<NumberVector>
+            +--getValue--(int): Number
+            +getMin(int): double
+            +getMax(int): double
+            {abstract} +doubleValue(int): double
+            +floatValue(int): float
+            +intValue(int): int
+            {abstract} +longValue(int): long
+            +shortValue(int): short
+            +byteValue(int): byte
+            {abstract} +toArray(): double[]
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

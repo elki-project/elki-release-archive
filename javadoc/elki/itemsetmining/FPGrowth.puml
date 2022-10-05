@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FPGrowth\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth [[FPGrowth.html]] {
+        {static} -LOG: Logging
+        {static} -STAT: String
+        +FPGrowth(double, int, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<BitVector>): FrequentItemsetsResult
+        -countItemSupport(Relation<BitVector>, int): int[]
+        -buildFPTree(Relation<BitVector>, int[], int): FPTree
+        -buildIndex(int[], int[], int): int[]
+    }
+
+    abstract class "<size:14>AbstractFrequentItemsetAlgorithm\n<size:10>elki.itemsetmining" as elki.itemsetmining.AbstractFrequentItemsetAlgorithm [[AbstractFrequentItemsetAlgorithm.html]]
+    class "<size:14>FPGrowth.FPTree\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth.FPTree [[FPGrowth.FPTree.html]]
+    class "<size:14>FPGrowth.FPNode\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth.FPNode [[FPGrowth.FPNode.html]]
+    class "<size:14>FPGrowth.Par\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth.Par [[FPGrowth.Par.html]]
+
+    elki.itemsetmining.AbstractFrequentItemsetAlgorithm <|-- elki.itemsetmining.FPGrowth
+    elki.itemsetmining.FPGrowth +-- elki.itemsetmining.FPGrowth.FPTree
+    elki.itemsetmining.FPGrowth +-- elki.itemsetmining.FPGrowth.FPNode
+    elki.itemsetmining.FPGrowth +-- elki.itemsetmining.FPGrowth.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

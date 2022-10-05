@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleIntegerDBIDKNNList\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDKNNList [[DoubleIntegerDBIDKNNList.html]] {
+        ~k: int
+        +DoubleIntegerDBIDKNNList()
+        +DoubleIntegerDBIDKNNList(int, int)
+        +getK(): int
+        +getKNNDistance(): double
+        +subList(int): KNNList
+        +map(DoubleUnaryOperator): KNNList
+    }
+
+    class "<size:14>DoubleIntegerDBIDArrayList\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDArrayList [[DoubleIntegerDBIDArrayList.html]]
+    interface "<size:14>KNNList\n<size:10>elki.database.ids" as elki.database.ids.KNNList [[../KNNList.html]] {
+        {abstract} +getK(): int
+        {abstract} +getKNNDistance(): double
+        {abstract} +subList(int): KNNList
+        {abstract} +map(DoubleUnaryOperator): KNNList
+    }
+    interface "<size:14>DoubleIntegerDBIDList\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDList [[DoubleIntegerDBIDList.html]] {
+        {abstract} +iter(): DoubleIntegerDBIDListIter
+    }
+
+    elki.database.ids.integer.DoubleIntegerDBIDArrayList <|-- elki.database.ids.integer.DoubleIntegerDBIDKNNList
+    elki.database.ids.KNNList <|.. elki.database.ids.integer.DoubleIntegerDBIDKNNList
+    elki.database.ids.integer.DoubleIntegerDBIDList <|.. elki.database.ids.integer.DoubleIntegerDBIDKNNList
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

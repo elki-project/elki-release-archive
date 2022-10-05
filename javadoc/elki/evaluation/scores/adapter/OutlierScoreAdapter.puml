@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierScoreAdapter\n<size:10>elki.evaluation.scores.adapter" as elki.evaluation.scores.adapter.OutlierScoreAdapter [[OutlierScoreAdapter.html]] {
+        -set: DBIDs
+        -iter: DBIDIter
+        -scores: DoubleRelation
+        -prev: double
+        +OutlierScoreAdapter(DBIDs, OutlierResult)
+        +valid(): boolean
+        +advance(): OutlierScoreAdapter
+        +tiedToPrevious(): boolean
+        +test(): boolean
+        +numPositive(): int
+        +numTotal(): int
+    }
+
+    interface "<size:14>ScoreEvaluation.Adapter\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.ScoreEvaluation.Adapter [[../ScoreEvaluation.Adapter.html]] {
+        {abstract} +test(): boolean
+        {abstract} +tiedToPrevious(): boolean
+        {abstract} +numPositive(): int
+        {abstract} +numTotal(): int
+    }
+
+    elki.evaluation.scores.ScoreEvaluation.Adapter <|.. elki.evaluation.scores.adapter.OutlierScoreAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractScatterplotVisualization\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization [[AbstractScatterplotVisualization.html]] {
+        #proj: Projection2D
+        #rel: Relation<? extends NumberVector>
+        #sample: SamplingResult
+        +AbstractScatterplotVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        #setupCanvas(): Element
+        {static} +setupCanvas(SVGPlot, Projection2D, double, double, double): Element
+        +visualizationChanged(VisualizationItem): void
+    }
+
+    abstract class "<size:14>AbstractVisualization\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.AbstractVisualization [[../AbstractVisualization.html]] {
+        {abstract} +fullRedraw(): void
+    }
+
+    elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

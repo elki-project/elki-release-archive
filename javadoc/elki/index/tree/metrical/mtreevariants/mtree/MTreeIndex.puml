@@ -1,0 +1,45 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MTreeIndex\n<size:10>elki.index.tree.metrical.mtreevariants.mtree" as elki.index.tree.metrical.mtreevariants.mtree.MTreeIndex<O> [[MTreeIndex.html]] {
+        -relation: Relation<O>
+        #distanceQuery: DistanceQuery<O>
+        +MTreeIndex(Relation<O>, PageFile<MTreeNode<O>>, MTreeSettings<O, MTreeNode<O>, MTreeEntry>)
+        +distance(DBIDRef, DBIDRef): double
+        #initializeCapacities(MTreeEntry): void
+        #createNewLeafEntry(DBID, O, double): MTreeEntry
+        +initialize(): void
+        +insert(DBIDRef): void
+        +insertAll(DBIDs): void
+        +delete(DBIDRef): boolean
+        +deleteAll(DBIDs): void
+        +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+        +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+        +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+    }
+
+    abstract class "<size:14>MTree\n<size:10>elki.index.tree.metrical.mtreevariants.mtree" as elki.index.tree.metrical.mtreevariants.mtree.MTree<O> [[MTree.html]]
+    interface "<size:14>RangeIndex\n<size:10>elki.index" as elki.index.RangeIndex<O> [[../../../../RangeIndex.html]] {
+        {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+    }
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<O> [[../../../../KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    interface "<size:14>DynamicIndex\n<size:10>elki.index" as elki.index.DynamicIndex [[../../../../DynamicIndex.html]] {
+        {abstract} +delete(DBIDRef): boolean
+        {abstract} +insert(DBIDRef): void
+        {abstract} +deleteAll(DBIDs): void
+        {abstract} +insertAll(DBIDs): void
+    }
+
+    elki.index.tree.metrical.mtreevariants.mtree.MTree <|-- elki.index.tree.metrical.mtreevariants.mtree.MTreeIndex
+    elki.index.RangeIndex <|.. elki.index.tree.metrical.mtreevariants.mtree.MTreeIndex
+    elki.index.KNNIndex <|.. elki.index.tree.metrical.mtreevariants.mtree.MTreeIndex
+    elki.index.DynamicIndex <|.. elki.index.tree.metrical.mtreevariants.mtree.MTreeIndex
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

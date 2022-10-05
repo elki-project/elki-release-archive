@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="314px" preserveAspectRatio="none" style="width:490px;height:314px;background:#FFFFFF;" version="1.1" viewBox="0 0 490 314" width="490px" zoomAndPan="magnify"><defs/><g><!--MD5=[54ef629a61d1a6b06e80da5b33060846]
+class elki.clustering.subspace.HiSC--><a href="HiSC.html" target="_top" title="HiSC.html" xlink:actuate="onRequest" xlink:href="HiSC.html" xlink:show="new" xlink:title="HiSC.html" xlink:type="simple"><g id="elem_elki.clustering.subspace.HiSC"><rect codeLine="6" fill="#F1F1F1" height="184.3125" id="elki.clustering.subspace.HiSC" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="474" x="9" y="105"/><ellipse cx="185.75" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M188.7188,129.6094 Q188.1406,129.9063 187.5,130.0469 Q186.8594,130.2031 186.1563,130.2031 Q183.6563,130.2031 182.3281,128.5625 Q181.0156,126.9063 181.0156,123.7813 Q181.0156,120.6563 182.3281,119 Q183.6563,117.3438 186.1563,117.3438 Q186.8594,117.3438 187.5,117.5 Q188.1563,117.6563 188.7188,117.9531 L188.7188,120.6719 Q188.0938,120.0938 187.5,119.8281 Q186.9063,119.5469 186.2813,119.5469 Q184.9375,119.5469 184.25,120.625 Q183.5625,121.6875 183.5625,123.7813 Q183.5625,125.875 184.25,126.9531 Q184.9375,128.0156 186.2813,128.0156 Q186.9063,128.0156 187.5,127.75 Q188.0938,127.4688 188.7188,126.8906 L188.7188,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="246.25" y="122.9951">HiSC</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="112" x="206.25" y="135.5791">elki.clustering.subspace</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="482" y1="142.9375" y2="142.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="153.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="29" y="159.9326">LOG: Logging</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="169.8828"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="94" x="29" y="176.2295">alpha: double</text><polygon fill="none" points="20,184.1797,24,188.1797,20,192.1797,16,188.1797" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="29" y="192.5264">k: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="482" y1="199.8281" y2="199.8281"/><ellipse cx="20" cy="213.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="29" y="216.8232">HiSC(double, int)</text><ellipse cx="20" cy="229.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="306" x="29" y="233.1201">getInputTypeRestriction(): TypeInformation[]</text><ellipse cx="20" cy="246.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="381" x="29" y="249.417">run(Relation&lt;? extends NumberVector&gt;): ClusterOrder</text><ellipse cx="20" cy="262.3672" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="448" x="29" y="265.7139">weightedDistance(NumberVector, NumberVector, long[]): double</text><ellipse cx="20" cy="278.6641" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105" x="29" y="282.0107">getMinPts(): int</text></g></a><!--MD5=[87a0541892a526bb32710a1bfb53930f]
+class elki.clustering.optics.GeneralizedOPTICS--><a href="../optics/GeneralizedOPTICS.html" target="_top" title="../optics/GeneralizedOPTICS.html" xlink:actuate="onRequest" xlink:href="../optics/GeneralizedOPTICS.html" xlink:show="new" xlink:title="../optics/GeneralizedOPTICS.html" xlink:type="simple"><g id="elem_elki.clustering.optics.GeneralizedOPTICS"><rect codeLine="17" fill="#F1F1F1" height="37.9375" id="elki.clustering.optics.GeneralizedOPTICS" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="168" x="162" y="7"/><ellipse cx="177" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M172.9219,21.7344 L172.9219,19.5781 L180.3125,19.5781 L180.3125,21.7344 L177.8438,21.7344 L177.8438,29.8125 L180.3125,29.8125 L180.3125,31.9688 L172.9219,31.9688 L172.9219,29.8125 L175.3906,29.8125 L175.3906,21.7344 L172.9219,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="136" x="191" y="24.9951">GeneralizedOPTICS</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="103" x="207.5" y="37.5791">elki.clustering.optics</text></g></a><!--MD5=[d92569e35ead59f61c739818bab2e1f6]
+reverse link elki.clustering.optics.GeneralizedOPTICS to elki.clustering.subspace.HiSC--><g id="link_elki.clustering.optics.GeneralizedOPTICS_elki.clustering.subspace.HiSC"><path codeLine="21" d="M246,65.42 C246,77.33 246,90.99 246,104.9 " fill="none" id="elki.clustering.optics.GeneralizedOPTICS-backto-elki.clustering.subspace.HiSC" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="239,65.09,246,45.09,253,65.09,239,65.09" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="145" y="295.3125"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="145" y="304.5947">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[70f541f4aaa79164eb1ac7468afef589]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HiSC\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.HiSC [[HiSC.html]] {
+        {static} -LOG: Logging
+        -alpha: double
+        #k: int
+        +HiSC(double, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends NumberVector>): ClusterOrder
+        +weightedDistance(NumberVector, NumberVector, long[]): double
+        +getMinPts(): int
+    }
+
+    interface "<size:14>GeneralizedOPTICS\n<size:10>elki.clustering.optics" as elki.clustering.optics.GeneralizedOPTICS [[../optics/GeneralizedOPTICS.html]]
+    class "<size:14>HiSC.Instance\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.HiSC.Instance [[HiSC.Instance.html]]
+    class "<size:14>HiSC.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.HiSC.Par [[HiSC.Par.html]]
+
+    elki.clustering.optics.GeneralizedOPTICS <|.. elki.clustering.subspace.HiSC
+    elki.clustering.subspace.HiSC +- - elki.clustering.subspace.HiSC.Instance
+    elki.clustering.subspace.HiSC +- - elki.clustering.subspace.HiSC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

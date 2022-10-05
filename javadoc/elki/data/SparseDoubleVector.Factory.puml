@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseDoubleVector.Factory\n<size:10>elki.data" as elki.data.SparseDoubleVector.Factory [[SparseDoubleVector.Factory.html]] {
+        +newFeatureVector(A, ArrayAdapter<? extends Number, A>): SparseDoubleVector
+        +newNumberVector(A, NumberArrayAdapter<?, ? super A>): SparseDoubleVector
+        +newNumberVector(Int2DoubleOpenHashMap, int): SparseDoubleVector
+        +getDefaultSerializer(): ByteBufferSerializer<SparseDoubleVector>
+        +getRestrictionClass(): Class<? super SparseDoubleVector>
+    }
+
+    interface "<size:14>SparseNumberVector.Factory\n<size:10>elki.data" as elki.data.SparseNumberVector.Factory<SparseDoubleVector> [[SparseNumberVector.Factory.html]] {
+        {abstract} +newNumberVector(Int2DoubleOpenHashMap, int): SparseDoubleVector
+    }
+    class "<size:14>SparseDoubleVector\n<size:10>elki.data" as elki.data.SparseDoubleVector [[SparseDoubleVector.html]]
+    class "<size:14>SparseDoubleVector.Factory.Par\n<size:10>elki.data" as elki.data.SparseDoubleVector.Factory.Par [[SparseDoubleVector.Factory.Par.html]]
+
+    elki.data.SparseNumberVector.Factory <|.. elki.data.SparseDoubleVector.Factory
+    elki.data.SparseDoubleVector +-- elki.data.SparseDoubleVector.Factory
+    elki.data.SparseDoubleVector.Factory +-- elki.data.SparseDoubleVector.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

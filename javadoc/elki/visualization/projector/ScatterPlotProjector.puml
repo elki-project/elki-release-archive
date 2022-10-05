@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ScatterPlotProjector\n<size:10>elki.visualization.projector" as elki.visualization.projector.ScatterPlotProjector<V extends SpatialComparable> [[ScatterPlotProjector.html]] {
+        ~rel: Relation<V extends SpatialComparable>
+        ~dmax: int
+        +ScatterPlotProjector(Relation<V extends SpatialComparable>, int)
+        +arrange(VisualizerContext): Collection<PlotItem>
+        +getMenuName(): String
+        +getRelation(): Relation<V extends SpatialComparable>
+    }
+
+    interface "<size:14>Projector\n<size:10>elki.visualization.projector" as elki.visualization.projector.Projector [[Projector.html]] {
+        {abstract} +arrange(VisualizerContext): Collection<PlotItem>
+    }
+
+    elki.visualization.projector.Projector <|.. elki.visualization.projector.ScatterPlotProjector
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

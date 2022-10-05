@@ -1,0 +1,166 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.optics {
+
+        class OPTICSPlotVisualizer [[OPTICSPlotVisualizer.html]] {
+            {static} -NAME: String
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class elki.visualization.visualizers.optics.OPTICSPlotVisualizer.Instance [[OPTICSPlotVisualizer.Instance.html]] {
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+        }
+
+        class OPTICSClusterVisualization [[OPTICSClusterVisualization.html]] {
+            {static} -LOG: Logging
+            {static} -NAME: String
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class elki.visualization.visualizers.optics.OPTICSClusterVisualization.Instance [[OPTICSClusterVisualization.Instance.html]] {
+            {static} #CSS_BRACKET: String
+            ~clus: Clustering<OPTICSModel>
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -drawClusters(Clustering<OPTICSModel>, It<Cluster<OPTICSModel>>, int, Map<Cluster<?>, String>): void
+            -addCSSClasses(): void
+        }
+
+        class OPTICSSteepAreaVisualization [[OPTICSSteepAreaVisualization.html]] {
+            {static} -NAME: String
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization.Instance [[OPTICSSteepAreaVisualization.Instance.html]] {
+            {static} #CSS_STEEP_UP: String
+            {static} #CSS_STEEP_DOWN: String
+            ~areas: SteepAreaResult
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -addCSSClasses(): void
+        }
+
+        class OPTICSPlotSelectionVisualization [[OPTICSPlotSelectionVisualization.html]] {
+            {static} -LOG: Logging
+            {static} -NAME: String
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        enum elki.visualization.visualizers.optics.OPTICSPlotSelectionVisualization.Mode [[OPTICSPlotSelectionVisualization.Mode.html]] {
+            {static} +REPLACE
+            {static} +ADD
+            {static} +INVERT
+        }
+
+        class elki.visualization.visualizers.optics.OPTICSPlotSelectionVisualization.Instance [[OPTICSPlotSelectionVisualization.Instance.html]] {
+            {static} #CSS_MARKER: String
+            {static} #CSS_RANGEMARKER: String
+            -mtag: Element
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            +addMarker(): void
+            +addMarkerRect(double, double): Element
+            +startDrag(SVGPoint, Event): boolean
+            +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            -getInputMode(Event): Mode
+            -getSelectedIndex(ClusterOrder, SVGPoint): int
+            #updateSelection(Mode, int, int): void
+            -addCSSClasses(): void
+        }
+
+        abstract class AbstractOPTICSVisualization [[AbstractOPTICSVisualization.html]] {
+            #optics: OPTICSProjection
+            #plotwidth: double
+            #plotheight: double
+            +AbstractOPTICSVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            #makeLayerElement(): void
+            #getClusterOrder(): ClusterOrder
+        }
+
+        class OPTICSPlotCutVisualization [[OPTICSPlotCutVisualization.html]] {
+            {static} -NAME: String
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class elki.visualization.visualizers.optics.OPTICSPlotCutVisualization.Instance [[OPTICSPlotCutVisualization.Instance.html]] {
+            {static} #CSS_LINE: String
+            {static} #CSS_EPSILON: String
+            -epsilon: double
+            -eventarea: DragableArea
+            -elemText: Element
+            -elementLine: Element
+            -elementPoint: Element
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            +incrementalRedraw(): void
+            +destroy(): void
+            #getEpsilonFromY(double): double
+            #getYFromEpsilon(double): double
+            +startDrag(SVGPoint, Event): boolean
+            +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            +unsetEpsilon(): void
+            -addCSSClasses(): void
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. OPTICSPlotVisualizer
+        AbstractOPTICSVisualization <|-- elki.visualization.visualizers.optics.OPTICSPlotVisualizer.Instance
+        OPTICSPlotVisualizer +-- elki.visualization.visualizers.optics.OPTICSPlotVisualizer.Instance
+        elki.visualization.visualizers.VisFactory <|.. OPTICSClusterVisualization
+        AbstractOPTICSVisualization <|-- elki.visualization.visualizers.optics.OPTICSClusterVisualization.Instance
+        OPTICSClusterVisualization +-- elki.visualization.visualizers.optics.OPTICSClusterVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. OPTICSSteepAreaVisualization
+        AbstractOPTICSVisualization <|-- elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization.Instance
+        OPTICSSteepAreaVisualization +-- elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. OPTICSPlotSelectionVisualization
+        OPTICSPlotSelectionVisualization +-- elki.visualization.visualizers.optics.OPTICSPlotSelectionVisualization.Mode
+        AbstractOPTICSVisualization <|-- elki.visualization.visualizers.optics.OPTICSPlotSelectionVisualization.Instance
+        elki.visualization.batikutil.DragableArea.DragListener <|.. elki.visualization.visualizers.optics.OPTICSPlotSelectionVisualization.Instance
+        OPTICSPlotSelectionVisualization +-- elki.visualization.visualizers.optics.OPTICSPlotSelectionVisualization.Instance
+        elki.visualization.visualizers.AbstractVisualization <|-- AbstractOPTICSVisualization
+        elki.visualization.visualizers.VisFactory <|.. OPTICSPlotCutVisualization
+        AbstractOPTICSVisualization <|-- elki.visualization.visualizers.optics.OPTICSPlotCutVisualization.Instance
+        elki.visualization.batikutil.DragableArea.DragListener <|.. elki.visualization.visualizers.optics.OPTICSPlotCutVisualization.Instance
+        OPTICSPlotCutVisualization +-- elki.visualization.visualizers.optics.OPTICSPlotCutVisualization.Instance
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+        abstract class AbstractVisualization [[../AbstractVisualization.html]] {
+            #task: VisualizationTask
+            #context: VisualizerContext
+            #svgp: VisualizationPlot
+            #layer: Element
+            -width: double
+            -height: double
+            {abstract} +fullRedraw(): void
+        }
+    }
+
+    namespace elki.visualization.batikutil {
+        interface elki.visualization.batikutil.DragableArea.DragListener [[../../batikutil/DragableArea.DragListener.html]] {
+            {abstract} +startDrag(SVGPoint, Event): boolean
+            {abstract} +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            {abstract} +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

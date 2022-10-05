@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor<O> [[AbstractMaterializeKNNPreprocessor.html]] {
+        #relation: Relation<O>
+        #k: int
+        #distance: Distance<? super O>
+        #distanceQuery: DistanceQuery<O>
+        #storage: WritableDataStore<KNNList>
+        +AbstractMaterializeKNNPreprocessor(Relation<O>, Distance<? super O>, int)
+        +AbstractMaterializeKNNPreprocessor(Relation<O>, DistanceQuery<O>, int)
+        +getDistanceQuery(): DistanceQuery<O>
+        +getK(): int
+        {abstract} #preprocess(): void
+        +get(DBIDRef): KNNList
+        ~createStorage(): void
+        +initialize(): void
+        +--kNNByObject--(DistanceQuery<O>, int, int): KNNSearcher<O>
+        +kNNByDBID(DistanceQuery<O>, int, int): PreprocessorKNNQuery
+        {abstract} #getLogger(): Logging
+    }
+
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<O> [[../../KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory<O> [[AbstractMaterializeKNNPreprocessor.Factory.html]]
+
+    elki.index.KNNIndex <|.. elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

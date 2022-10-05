@@ -1,0 +1,275 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.algorithm.statistics {
+
+        class HopkinsStatisticClusteringTendency [[HopkinsStatisticClusteringTendency.html]] {
+            {static} -LOG: Logging
+            #sampleSize: int
+            #rep: int
+            #k: int
+            #random: RandomFactory
+            -maxima: double[]
+            -minima: double[]
+            #distance: NumberVectorDistance<? super NumberVector>
+            +HopkinsStatisticClusteringTendency(NumberVectorDistance<? super NumberVector>, int, RandomFactory, int, int, double[], double[])
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<NumberVector>): Double
+            #computeNNForRealData(KNNSearcher<DBIDRef>, Relation<NumberVector>, int): double
+            #computeNNForUniformData(KNNSearcher<NumberVector>, double[], double[]): double
+            #initializeDataExtends(Relation<NumberVector>, int, double[], double[]): void
+        }
+
+        class elki.algorithm.statistics.HopkinsStatisticClusteringTendency.Par [[HopkinsStatisticClusteringTendency.Par.html]] {
+            {static} +SAMPLESIZE_ID: OptionID
+            {static} +REP_ID: OptionID
+            {static} +SEED_ID: OptionID
+            {static} +MINIMA_ID: OptionID
+            {static} +MAXIMA_ID: OptionID
+            {static} +K_ID: OptionID
+            #distance: NumberVectorDistance<? super NumberVector>
+            #sampleSize: int
+            #rep: int
+            #k: int
+            #random: RandomFactory
+            #maxima: double[]
+            #minima: double[]
+            +configure(Parameterization): void
+            +make(): HopkinsStatisticClusteringTendency
+        }
+
+        class DistanceStatisticsWithClasses<O> [[DistanceStatisticsWithClasses.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #numbin: int
+            #sampling: boolean
+            #exact: boolean
+            +DistanceStatisticsWithClasses(Distance<? super O>, int, boolean, boolean)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<O>): HistogramResult
+            -sampleMinMax(Relation<O>, DistanceQuery<O>): DoubleMinMax
+            -exactMinMax(Relation<O>, DistanceQuery<O>): DoubleMinMax
+            {static} -shrinkHeap(TreeSet<DoubleDBIDPair>, int): void
+        }
+
+        class elki.algorithm.statistics.DistanceStatisticsWithClasses.Par<O> {
+            {static} +EXACT_ID: OptionID
+            {static} +SAMPLING_ID: OptionID
+            {static} +HISTOGRAM_BINS_ID: OptionID
+            #distance: Distance<? super O>
+            #numbin: int
+            #sampling: boolean
+            #exact: boolean
+            +configure(Parameterization): void
+            +make(): DistanceStatisticsWithClasses<O>
+        }
+
+        class EvaluateRetrievalPerformance<O> [[EvaluateRetrievalPerformance.html]] {
+            {static} -LOG: Logging
+            -PREFIX: String
+            #distance: Distance<? super O>
+            #sampling: double
+            #random: RandomFactory
+            #includeSelf: boolean
+            #maxk: int
+            +EvaluateRetrievalPerformance(Distance<? super O>, double, RandomFactory, boolean, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>, Relation<?>): RetrievalPerformanceResult
+            {static} #match(Object, Object): boolean
+            -findMatches(ModifiableDBIDs, Relation<?>, Object): void
+            -computeDistances(ModifiableDoubleDBIDList, DBIDIter, DistanceQuery<O>, Relation<O>): void
+        }
+
+        class elki.algorithm.statistics.EvaluateRetrievalPerformance.KNNEvaluator [[EvaluateRetrievalPerformance.KNNEvaluator.html]] {
+            +evaluateKNN(double[], ModifiableDoubleDBIDList, Relation<?>, Object2IntOpenHashMap<Object>, Object): void
+            +countkNN(Object2IntOpenHashMap<Object>, Object): int
+        }
+
+        class elki.algorithm.statistics.EvaluateRetrievalPerformance.RetrievalPerformanceResult [[EvaluateRetrievalPerformance.RetrievalPerformanceResult.html]] {
+            -samplesize: int
+            -map: double
+            -auroc: double
+            -knnperf: double[]
+            +RetrievalPerformanceResult(int, double, double, double[])
+            +getAUROC(): double
+            +getMAP(): double
+            +getLongName(): String
+            +getShortName(): String
+            +writeToText(TextWriterStream, String): void
+        }
+
+        class elki.algorithm.statistics.EvaluateRetrievalPerformance.Par<O> {
+            {static} +SAMPLING_ID: OptionID
+            {static} +SEED_ID: OptionID
+            {static} +INCLUDESELF_ID: OptionID
+            {static} +MAXK_ID: OptionID
+            #distance: Distance<? super O>
+            #sampling: double
+            #seed: RandomFactory
+            #includeSelf: boolean
+            #maxk: int
+            +configure(Parameterization): void
+            +make(): EvaluateRetrievalPerformance<O>
+        }
+
+        class AveragePrecisionAtK<O> [[AveragePrecisionAtK.html]] {
+            {static} -LOG: Logging
+            -distance: Distance<? super O>
+            -k: int
+            -sampling: double
+            -random: RandomFactory
+            -includeSelf: boolean
+            +AveragePrecisionAtK(Distance<? super O>, int, double, RandomFactory, boolean)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>, Relation<?>): CollectionResult<double[]>
+            {static} #match(Object, Object): boolean
+        }
+
+        class elki.algorithm.statistics.AveragePrecisionAtK.Par<O> {
+            {static} -K_ID: OptionID
+            {static} +SAMPLING_ID: OptionID
+            {static} +SEED_ID: OptionID
+            {static} +INCLUDESELF_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            #sampling: double
+            #seed: RandomFactory
+            #includeSelf: boolean
+            +configure(Parameterization): void
+            +make(): AveragePrecisionAtK<O>
+        }
+
+        class DistanceQuantileSampler<O> [[DistanceQuantileSampler.html]] {
+            {static} -LOG: Logging
+            {static} -PREFIX: String
+            -distance: Distance<? super O>
+            -quantile: double
+            -sampling: double
+            -nozeros: boolean
+            -rand: RandomFactory
+            +DistanceQuantileSampler(Distance<? super O>, double, double, boolean, RandomFactory)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): CollectionResult<double[]>
+        }
+
+        class elki.algorithm.statistics.DistanceQuantileSampler.Par<O> [[DistanceQuantileSampler.Par.html]] {
+            {static} +QUANTILE_ID: OptionID
+            {static} +SAMPLING_ID: OptionID
+            {static} +NOZEROS_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #distance: Distance<? super O>
+            #quantile: double
+            #sampling: double
+            #nozeros: boolean
+            #rand: RandomFactory
+            +configure(Parameterization): void
+            +make(): DistanceQuantileSampler<O>
+        }
+
+        class AddUniformScale [[AddUniformScale.html]] {
+            +run(Database): Void
+            -run(Relation<? extends NumberVector>): ScalesResult
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class EvaluateRankingQuality<V extends NumberVector> [[EvaluateRankingQuality.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super NumberVector>
+            #numbins: int
+            +EvaluateRankingQuality(Distance<? super NumberVector>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<V extends NumberVector>): HistogramResult
+        }
+
+        class elki.algorithm.statistics.EvaluateRankingQuality.Par<V extends NumberVector> {
+            {static} +HISTOGRAM_BINS_ID: OptionID
+            #distance: Distance<? super NumberVector>
+            #numbins: int
+            +configure(Parameterization): void
+            +make(): EvaluateRankingQuality<V extends NumberVector>
+        }
+
+        class AddSingleScale [[AddSingleScale.html]] {
+            ~minmax: double[]
+            +AddSingleScale(double[])
+            +run(Database): Void
+            -run(Relation<? extends NumberVector>): ScalesResult
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.algorithm.statistics.AddSingleScale.Par [[AddSingleScale.Par.html]] {
+            {static} +MINMAX_ID: OptionID
+            ~minmax: double[]
+            +configure(Parameterization): void
+            +make(): AddSingleScale
+        }
+
+        class RankingQualityHistogram<O> [[RankingQualityHistogram.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #numbins: int
+            +RankingQualityHistogram(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<O>): HistogramResult
+        }
+
+        class elki.algorithm.statistics.RankingQualityHistogram.Par<O> {
+            {static} +HISTOGRAM_BINS_ID: OptionID
+            #distance: Distance<? super O>
+            #numbins: int
+            +configure(Parameterization): void
+            +make(): RankingQualityHistogram<O>
+        }
+
+        elki.Algorithm <|.. HopkinsStatisticClusteringTendency
+        elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.statistics.HopkinsStatisticClusteringTendency.Par
+        HopkinsStatisticClusteringTendency +-- elki.algorithm.statistics.HopkinsStatisticClusteringTendency.Par
+        elki.Algorithm <|.. DistanceStatisticsWithClasses
+        elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.statistics.DistanceStatisticsWithClasses.Par
+        DistanceStatisticsWithClasses +-- elki.algorithm.statistics.DistanceStatisticsWithClasses.Par
+        elki.Algorithm <|.. EvaluateRetrievalPerformance
+        EvaluateRetrievalPerformance +-- elki.algorithm.statistics.EvaluateRetrievalPerformance.KNNEvaluator
+        elki.algorithm.statistics.EvaluateRetrievalPerformance.KNNEvaluator --> elki.algorithm.statistics.EvaluateRetrievalPerformance.KNNEvaluator: STATIC
+        elki.result.textwriter.TextWriteable <|.. elki.algorithm.statistics.EvaluateRetrievalPerformance.RetrievalPerformanceResult
+        EvaluateRetrievalPerformance +-- elki.algorithm.statistics.EvaluateRetrievalPerformance.RetrievalPerformanceResult
+        elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.statistics.EvaluateRetrievalPerformance.Par
+        EvaluateRetrievalPerformance +-- elki.algorithm.statistics.EvaluateRetrievalPerformance.Par
+        elki.Algorithm <|.. AveragePrecisionAtK
+        elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.statistics.AveragePrecisionAtK.Par
+        AveragePrecisionAtK +-- elki.algorithm.statistics.AveragePrecisionAtK.Par
+        elki.Algorithm <|.. DistanceQuantileSampler
+        elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.statistics.DistanceQuantileSampler.Par
+        DistanceQuantileSampler +-- elki.algorithm.statistics.DistanceQuantileSampler.Par
+        elki.Algorithm <|.. AddUniformScale
+        elki.Algorithm <|.. EvaluateRankingQuality
+        elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.statistics.EvaluateRankingQuality.Par
+        EvaluateRankingQuality +-- elki.algorithm.statistics.EvaluateRankingQuality.Par
+        elki.Algorithm <|.. AddSingleScale
+        elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.statistics.AddSingleScale.Par
+        AddSingleScale +-- elki.algorithm.statistics.AddSingleScale.Par
+        elki.Algorithm <|.. RankingQualityHistogram
+        elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.statistics.RankingQualityHistogram.Par
+        RankingQualityHistogram +-- elki.algorithm.statistics.RankingQualityHistogram.Par
+    }
+
+    namespace elki {
+        interface Algorithm [[../../Algorithm.html]] {
+            +autorun(Database): Object
+            {abstract} +getInputTypeRestriction(): TypeInformation[]
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.result.textwriter {
+        interface TextWriteable [[../../result/textwriter/TextWriteable.html]] {
+            {abstract} +writeToText(TextWriterStream, String): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

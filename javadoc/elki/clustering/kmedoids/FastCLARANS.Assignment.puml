@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastCLARANS.Assignment\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastCLARANS.Assignment [[FastCLARANS.Assignment.html]] {
+        ~loss: double[]
+        #lastbest: int
+        +Assignment(DistanceQuery<?>, DBIDs, int)
+        #computeRemovalCost(double[]): void
+        #computeCostDifferential(DBIDRef, double[]): double
+        #performLastSwap(DBIDRef): void
+    }
+
+    class "<size:14>CLARANS.Assignment\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.CLARANS.Assignment [[CLARANS.Assignment.html]]
+    class "<size:14>FastCLARANS\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastCLARANS<V> [[FastCLARANS.html]]
+
+    elki.clustering.kmedoids.CLARANS.Assignment <|-- elki.clustering.kmedoids.FastCLARANS.Assignment
+    elki.clustering.kmedoids.FastCLARANS +-- elki.clustering.kmedoids.FastCLARANS.Assignment
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

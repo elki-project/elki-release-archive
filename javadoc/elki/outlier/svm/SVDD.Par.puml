@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SVDD.Par\n<size:10>elki.outlier.svm" as elki.outlier.svm.SVDD.Par<V> {
+        {static} +KERNEL_ID: OptionID
+        {static} +C_ID: OptionID
+        #kernel: PrimitiveSimilarity<? super V>
+        #C: double
+        +configure(Parameterization): void
+        +make(): SVDD<V>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SVDD\n<size:10>elki.outlier.svm" as elki.outlier.svm.SVDD<V> [[SVDD.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.svm.SVDD.Par
+    elki.outlier.svm.SVDD +-- elki.outlier.svm.SVDD.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

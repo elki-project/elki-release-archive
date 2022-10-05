@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ERiCNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Instance [[ERiCNeighborPredicate.Instance.html]] {
+        -relation: Relation<? extends NumberVector>
+        +Instance(DBIDs, DataStore<PCAFilteredResult>, Relation<? extends NumberVector>)
+        +getNeighbors(DBIDRef): DBIDs
+        +iterDBIDs(DBIDs): DBIDIter
+        +strongNeighbors(NumberVector, NumberVector, PCAFilteredResult, PCAFilteredResult): boolean
+        +weakNeighbors(double[], double[], PCAFilteredResult, PCAFilteredResult): boolean
+        #approximatelyLinearDependent(PCAFilteredResult, PCAFilteredResult): boolean
+        +dimensionality(DBIDRef): int
+    }
+
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance<DBIDs, PCAFilteredResult> [[AbstractRangeQueryNeighborPredicate.Instance.html]]
+    class "<size:14>ERiCNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.ERiCNeighborPredicate [[ERiCNeighborPredicate.html]]
+
+    elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance <|-- elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Instance
+    elki.clustering.dbscan.predicates.ERiCNeighborPredicate +-- elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

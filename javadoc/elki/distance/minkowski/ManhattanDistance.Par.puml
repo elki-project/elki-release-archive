@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ManhattanDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.ManhattanDistance.Par [[ManhattanDistance.Par.html]] {
+        +make(): ManhattanDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ManhattanDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.ManhattanDistance [[ManhattanDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.ManhattanDistance.Par
+    elki.distance.minkowski.ManhattanDistance +-- elki.distance.minkowski.ManhattanDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

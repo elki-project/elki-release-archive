@@ -1,0 +1,78 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.linearalgebra.pca.weightfunctions {
+
+        class GaussStddevWeight [[GaussStddevWeight.html]] {
+            +getWeight(double, double, double): double
+        }
+
+        interface WeightFunction [[WeightFunction.html]] {
+            {abstract} +getWeight(double, double, double): double
+        }
+
+        class InverseProportionalWeight [[InverseProportionalWeight.html]] {
+            +getWeight(double, double, double): double
+        }
+
+        class QuadraticStddevWeight [[QuadraticStddevWeight.html]] {
+            {static} -scaling: double
+            +getWeight(double, double, double): double
+        }
+
+        class ErfcWeight [[ErfcWeight.html]] {
+            +getWeight(double, double, double): double
+        }
+
+        class ExponentialStddevWeight [[ExponentialStddevWeight.html]] {
+            +getWeight(double, double, double): double
+        }
+
+        class InverseProportionalStddevWeight [[InverseProportionalStddevWeight.html]] {
+            +getWeight(double, double, double): double
+        }
+
+        class ConstantWeight [[ConstantWeight.html]] {
+            +getWeight(double, double, double): double
+        }
+
+        class QuadraticWeight [[QuadraticWeight.html]] {
+            +getWeight(double, double, double): double
+        }
+
+        class ExponentialWeight [[ExponentialWeight.html]] {
+            +getWeight(double, double, double): double
+        }
+
+        class LinearWeight [[LinearWeight.html]] {
+            +getWeight(double, double, double): double
+        }
+
+        class ErfcStddevWeight [[ErfcStddevWeight.html]] {
+            +getWeight(double, double, double): double
+        }
+
+        class InverseLinearWeight [[InverseLinearWeight.html]] {
+            +getWeight(double, double, double): double
+        }
+
+        class GaussWeight [[GaussWeight.html]] {
+            +getWeight(double, double, double): double
+        }
+
+        WeightFunction <|.. GaussStddevWeight
+        WeightFunction <|.. InverseProportionalWeight
+        WeightFunction <|.. QuadraticStddevWeight
+        WeightFunction <|.. ErfcWeight
+        WeightFunction <|.. ExponentialStddevWeight
+        WeightFunction <|.. InverseProportionalStddevWeight
+        WeightFunction <|.. ConstantWeight
+        WeightFunction <|.. QuadraticWeight
+        WeightFunction <|.. ExponentialWeight
+        WeightFunction <|.. LinearWeight
+        WeightFunction <|.. ErfcStddevWeight
+        WeightFunction <|.. InverseLinearWeight
+        WeightFunction <|.. GaussWeight
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

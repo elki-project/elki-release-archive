@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WrappedKNNDBIDByLookup\n<size:10>elki.database.query.knn" as elki.database.query.knn.WrappedKNNDBIDByLookup<O> [[WrappedKNNDBIDByLookup.html]] {
+        -relation: Relation<? extends O>
+        -inner: KNNSearcher<O>
+        -WrappedKNNDBIDByLookup(Relation<? extends O>, KNNSearcher<O>)
+        +getKNN(DBIDRef, int): KNNList
+        {static} +wrap(Relation<? extends O>, KNNSearcher<O>): KNNSearcher<DBIDRef>
+    }
+
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<DBIDRef> [[KNNSearcher.html]] {
+        {abstract} +getKNN(DBIDRef, int): KNNList
+    }
+    class "<size:14>WrappedKNNDBIDByLookup.Linear\n<size:10>elki.database.query.knn" as elki.database.query.knn.WrappedKNNDBIDByLookup.Linear<O> [[WrappedKNNDBIDByLookup.Linear.html]]
+
+    elki.database.query.knn.KNNSearcher <|.. elki.database.query.knn.WrappedKNNDBIDByLookup
+    elki.database.query.knn.WrappedKNNDBIDByLookup +-- elki.database.query.knn.WrappedKNNDBIDByLookup.Linear
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UnweightedDiscreteUncertainifier.Par\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.UnweightedDiscreteUncertainifier.Par [[UnweightedDiscreteUncertainifier.Par.html]] {
+        +make(): UnweightedDiscreteUncertainifier
+    }
+
+    abstract class "<size:14>AbstractDiscreteUncertainifier.Par\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.AbstractDiscreteUncertainifier.Par [[AbstractDiscreteUncertainifier.Par.html]]
+    class "<size:14>UnweightedDiscreteUncertainifier\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.UnweightedDiscreteUncertainifier [[UnweightedDiscreteUncertainifier.html]]
+
+    elki.data.uncertain.uncertainifier.AbstractDiscreteUncertainifier.Par <|-- elki.data.uncertain.uncertainifier.UnweightedDiscreteUncertainifier.Par
+    elki.data.uncertain.uncertainifier.UnweightedDiscreteUncertainifier +-- elki.data.uncertain.uncertainifier.UnweightedDiscreteUncertainifier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

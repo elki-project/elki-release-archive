@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParallelSimplifiedLOF\n<size:10>elki.outlier.lof.parallel" as elki.outlier.lof.parallel.ParallelSimplifiedLOF<O> [[ParallelSimplifiedLOF.html]] {
+        #distance: Distance<? super O>
+        #kplus: int
+        +ParallelSimplifiedLOF(Distance<? super O>, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../../OutlierAlgorithm.html]]
+    class "<size:14>ParallelSimplifiedLOF.Par\n<size:10>elki.outlier.lof.parallel" as elki.outlier.lof.parallel.ParallelSimplifiedLOF.Par<O>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.lof.parallel.ParallelSimplifiedLOF
+    elki.outlier.lof.parallel.ParallelSimplifiedLOF +-- elki.outlier.lof.parallel.ParallelSimplifiedLOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

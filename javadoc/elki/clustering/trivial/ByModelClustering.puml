@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByModelClustering\n<size:10>elki.clustering.trivial" as elki.clustering.trivial.ByModelClustering [[ByModelClustering.html]] {
+        -noisepattern: Pattern
+        +ByModelClustering(Pattern)
+        +ByModelClustering()
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<Model>): Clustering<Model>
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<Model>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>ByModelClustering.Par\n<size:10>elki.clustering.trivial" as elki.clustering.trivial.ByModelClustering.Par [[ByModelClustering.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.trivial.ByModelClustering
+    elki.clustering.trivial.ByModelClustering +-- elki.clustering.trivial.ByModelClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

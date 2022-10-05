@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KDEOS\n<size:10>elki.outlier.lof" as elki.outlier.lof.KDEOS<O> [[KDEOS.html]] {
+        {static} -LOG: Logging
+        {static} -CUTOFF: double
+        #distance: Distance<? super O>
+        #kernel: KernelDensityFunction
+        #kmin: int
+        #kmax: int
+        #scale: double
+        #minBandwidth: double
+        #idim: int
+        +KDEOS(Distance<? super O>, int, int, KernelDensityFunction, double, double, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+        #estimateDensities(Relation<O>, KNNSearcher<DBIDRef>, DBIDs, WritableDataStore<double[]>): void
+        -dimensionality(Relation<O>): int
+        #computeOutlierScores(KNNSearcher<DBIDRef>, DBIDs, WritableDataStore<double[]>, WritableDoubleDataStore, DoubleMinMax): void
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>KDEOS.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.KDEOS.Par<O>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.lof.KDEOS
+    elki.outlier.lof.KDEOS +-- elki.outlier.lof.KDEOS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

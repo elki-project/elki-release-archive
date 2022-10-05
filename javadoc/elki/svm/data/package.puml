@@ -1,0 +1,63 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.svm.data {
+
+        class SimilarityQueryAdapter [[SimilarityQueryAdapter.html]] {
+            ~sim: SimilarityQuery<?>
+            ~ids: ArrayModifiableDBIDs
+            ~i1: DBIDArrayIter
+            ~i2: DBIDArrayIter
+            +SimilarityQueryAdapter(SimilarityQuery<?>, DBIDs)
+            +size(): int
+            +similarity(int, int): double
+            +value(int): double
+            +classnum(int): int
+            +swap(int, int): void
+            +iter(): DBIDArrayIter
+        }
+
+        interface DataSet [[DataSet.html]] {
+            {abstract} +size(): int
+            {abstract} +similarity(int, int): double
+            {abstract} +value(int): double
+            {abstract} +classnum(int): int
+            {abstract} +swap(int, int): void
+        }
+
+        class ByteWeightedArrayDataSet [[ByteWeightedArrayDataSet.html]] {
+            ~idx: int[]
+            ~weight: byte[]
+            ~size: int
+            +ByteWeightedArrayDataSet(DataSet, int)
+            +similarity(int, int): double
+            +size(): int
+            +value(int): double
+            +classnum(int): int
+            +swap(int, int): void
+            +add(int, byte): void
+            +clear(): void
+        }
+
+        class DoubleWeightedDataSet [[DoubleWeightedDataSet.html]] {
+            ~idx: int[]
+            ~weight: double[]
+            ~size: int
+            +DoubleWeightedDataSet(DataSet, int)
+            +similarity(int, int): double
+            +size(): int
+            +value(int): double
+            +classnum(int): int
+            +swap(int, int): void
+            +add(int, double): void
+            +clear(): void
+        }
+
+        DataSet <|.. SimilarityQueryAdapter
+        DataSet <|.. ByteWeightedArrayDataSet
+        ByteWeightedArrayDataSet --> DataSet: inner
+        DataSet <|.. DoubleWeightedDataSet
+        DoubleWeightedDataSet --> DataSet: inner
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

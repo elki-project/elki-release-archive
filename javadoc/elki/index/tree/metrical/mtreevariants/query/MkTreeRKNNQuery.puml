@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkTreeRKNNQuery\n<size:10>elki.index.tree.metrical.mtreevariants.query" as elki.index.tree.metrical.mtreevariants.query.MkTreeRKNNQuery<O> [[MkTreeRKNNQuery.html]] {
+        #distanceQuery: DistanceQuery<O>
+        #index: AbstractMkTree<O, ?, ?, ?>
+        +MkTreeRKNNQuery(AbstractMkTree<O, ?, ?, ?>, DistanceQuery<O>)
+        +getRKNN(DBIDRef, int): DoubleDBIDList
+    }
+
+    interface "<size:14>RKNNSearcher\n<size:10>elki.database.query.rknn" as elki.database.query.rknn.RKNNSearcher<DBIDRef> [[../../../../../database/query/rknn/RKNNSearcher.html]] {
+        {abstract} +getRKNN(DBIDRef, int): DoubleDBIDList
+    }
+
+    elki.database.query.rknn.RKNNSearcher <|.. elki.index.tree.metrical.mtreevariants.query.MkTreeRKNNQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

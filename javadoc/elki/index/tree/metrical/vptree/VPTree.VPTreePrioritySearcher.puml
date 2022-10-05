@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>VPTree.VPTreePrioritySearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree.VPTreePrioritySearcher<Q> [[VPTree.VPTreePrioritySearcher.html]] {
+        -heap: DoubleObjectMinHeap<Node>
+        -threshold: double
+        -cur: Node
+        -candidates: DoubleDBIDListIter
+        -curdist: double
+        -vpdist: double
+        +doSearch(): void
+        +advance(): PrioritySearcher<Q>
+        #advanceQueue(): boolean
+        {abstract} #queryDistance(DBIDRef): double
+        +internalGetIndex(): int
+        +valid(): boolean
+        +decreaseCutoff(double): PrioritySearcher<Q>
+        +computeExactDistance(): double
+        +getApproximateDistance(): double
+        +getApproximateAccuracy(): double
+        +getLowerBound(): double
+        +getUpperBound(): double
+        +allLowerBound(): double
+    }
+
+    interface "<size:14>PrioritySearcher\n<size:10>elki.database.query" as elki.database.query.PrioritySearcher<Q> [[../../../../database/query/PrioritySearcher.html]] {
+        {abstract} +search(Q): PrioritySearcher<O>
+        {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+        {abstract} +computeExactDistance(): double
+        {abstract} +allLowerBound(): double
+        {abstract} +advance(): PrioritySearcher<O>
+    }
+    class "<size:14>VPTree\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.VPTree<O> [[VPTree.html]]
+
+    elki.database.query.PrioritySearcher <|.. elki.index.tree.metrical.vptree.VPTree.VPTreePrioritySearcher
+    elki.index.tree.metrical.vptree.VPTree +-- elki.index.tree.metrical.vptree.VPTree.VPTreePrioritySearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

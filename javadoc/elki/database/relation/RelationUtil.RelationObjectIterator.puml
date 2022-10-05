@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RelationUtil.RelationObjectIterator\n<size:10>elki.database.relation" as elki.database.relation.RelationUtil.RelationObjectIterator<O> [[RelationUtil.RelationObjectIterator.html]] {
+        ~iter: DBIDIter
+        ~database: Relation<? extends O>
+        +RelationObjectIterator(DBIDIter, Relation<? extends O>)
+        +RelationObjectIterator(Relation<? extends O>)
+        +hasNext(): boolean
+        +next(): O
+    }
+
+    interface "<size:14>Iterator\n<size:10>java.util" as java.util.Iterator<O> {
+        {abstract} +hasNext(): boolean
+        {abstract} +next(): O
+    }
+    class "<size:14>RelationUtil\n<size:10>elki.database.relation" as elki.database.relation.RelationUtil [[RelationUtil.html]]
+
+    java.util.Iterator <|.. elki.database.relation.RelationUtil.RelationObjectIterator
+    elki.database.relation.RelationUtil +-- elki.database.relation.RelationUtil.RelationObjectIterator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

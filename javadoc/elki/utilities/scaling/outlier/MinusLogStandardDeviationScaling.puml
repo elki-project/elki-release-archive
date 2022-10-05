@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MinusLogStandardDeviationScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.MinusLogStandardDeviationScaling [[MinusLogStandardDeviationScaling.html]] {
+        +MinusLogStandardDeviationScaling(double, double)
+        +getScaled(double): double
+        +prepare(OutlierResult): void
+    }
+
+    class "<size:14>StandardDeviationScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.StandardDeviationScaling [[StandardDeviationScaling.html]]
+    class "<size:14>MinusLogStandardDeviationScaling.Par\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.MinusLogStandardDeviationScaling.Par [[MinusLogStandardDeviationScaling.Par.html]]
+
+    elki.utilities.scaling.outlier.StandardDeviationScaling <|-- elki.utilities.scaling.outlier.MinusLogStandardDeviationScaling
+    elki.utilities.scaling.outlier.MinusLogStandardDeviationScaling +-- elki.utilities.scaling.outlier.MinusLogStandardDeviationScaling.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

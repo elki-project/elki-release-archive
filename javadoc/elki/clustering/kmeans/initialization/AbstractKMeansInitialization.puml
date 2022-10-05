@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractKMeansInitialization\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AbstractKMeansInitialization [[AbstractKMeansInitialization.html]] {
+        #rnd: RandomFactory
+        +AbstractKMeansInitialization(RandomFactory)
+        {static} +unboxVectors(List<? extends NumberVector>): double[]
+    }
+
+    interface "<size:14>KMeansInitialization\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMeansInitialization [[KMeansInitialization.html]] {
+        {abstract} +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+    }
+    abstract class "<size:14>AbstractKMeansInitialization.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par [[AbstractKMeansInitialization.Par.html]]
+
+    elki.clustering.kmeans.initialization.KMeansInitialization <|.. elki.clustering.kmeans.initialization.AbstractKMeansInitialization
+    elki.clustering.kmeans.initialization.AbstractKMeansInitialization +-- elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

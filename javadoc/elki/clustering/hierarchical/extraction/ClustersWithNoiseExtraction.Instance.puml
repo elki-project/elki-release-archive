@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClustersWithNoiseExtraction.Instance\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Instance [[ClustersWithNoiseExtraction.Instance.html]] {
+        #merges: ClusterMergeHistory
+        +Instance(ClusterMergeHistory)
+        +run(): Clustering<Model>
+    }
+
+    class "<size:14>ClustersWithNoiseExtraction\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction [[ClustersWithNoiseExtraction.html]]
+
+    elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction +-- elki.clustering.hierarchical.extraction.ClustersWithNoiseExtraction.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

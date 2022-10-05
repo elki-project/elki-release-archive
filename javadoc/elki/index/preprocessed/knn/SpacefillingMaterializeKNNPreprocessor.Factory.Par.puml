@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SpacefillingMaterializeKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory.Par<V extends NumberVector> {
+        {static} +CURVES_ID: OptionID
+        {static} +WINDOW_ID: OptionID
+        {static} +VARIANTS_ID: OptionID
+        {static} +RANDOM_ID: OptionID
+        ~curvegen: List<? extends SpatialSorter>
+        ~window: double
+        ~variants: int
+        ~random: RandomFactory
+        +configure(Parameterization): void
+        +make(): Factory<V extends NumberVector>
+    }
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par<V extends NumberVector> {
+        {abstract} +make(): Factory<O>
+    }
+    class "<size:14>SpacefillingMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory<V extends NumberVector> [[SpacefillingMaterializeKNNPreprocessor.Factory.html]]
+
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory.Par
+    elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CoverTree.Factory\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.Factory<O> [[CoverTree.Factory.html]] {
+        +Factory(Distance<? super O>, double, int)
+        +instantiate(Relation<O>): CoverTree<O>
+    }
+
+    abstract class "<size:14>AbstractCoverTree.Factory\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.AbstractCoverTree.Factory<O> [[AbstractCoverTree.Factory.html]]
+    class "<size:14>CoverTree\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree<O> [[CoverTree.html]]
+    class "<size:14>CoverTree.Factory.Par\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.CoverTree.Factory.Par<O> [[CoverTree.Factory.Par.html]]
+
+    elki.index.tree.metrical.covertree.AbstractCoverTree.Factory <|-- elki.index.tree.metrical.covertree.CoverTree.Factory
+    elki.index.tree.metrical.covertree.CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.Factory
+    elki.index.tree.metrical.covertree.CoverTree.Factory +-- elki.index.tree.metrical.covertree.CoverTree.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

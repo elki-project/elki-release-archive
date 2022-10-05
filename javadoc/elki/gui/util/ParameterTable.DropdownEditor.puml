@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParameterTable.DropdownEditor\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable.DropdownEditor [[ParameterTable.DropdownEditor.html]] {
+        {static} -serialVersionUID: long
+        ~panel: JPanel
+        -comboBox: JComboBox<String>
+        +DropdownEditor(JComboBox<String>)
+        +keyTyped(KeyEvent): void
+        +keyPressed(KeyEvent): void
+        +keyReleased(KeyEvent): void
+        +getTableCellEditorComponent(JTable, Object, boolean, int, int): Component
+    }
+
+    class "<size:14>DefaultCellEditor\n<size:10>javax.swing" as javax.swing.DefaultCellEditor
+    interface "<size:14>KeyListener\n<size:10>java.awt.event" as java.awt.event.KeyListener {
+        {abstract} +keyTyped(KeyEvent): void
+        {abstract} +keyPressed(KeyEvent): void
+        {abstract} +keyReleased(KeyEvent): void
+    }
+    class "<size:14>ParameterTable\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable [[ParameterTable.html]]
+
+    javax.swing.DefaultCellEditor <|-- elki.gui.util.ParameterTable.DropdownEditor
+    java.awt.event.KeyListener <|.. elki.gui.util.ParameterTable.DropdownEditor
+    elki.gui.util.ParameterTable +-- elki.gui.util.ParameterTable.DropdownEditor
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

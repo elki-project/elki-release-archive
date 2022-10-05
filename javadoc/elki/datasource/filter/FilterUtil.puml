@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FilterUtil\n<size:10>elki.datasource.filter" as elki.datasource.filter.FilterUtil [[FilterUtil.html]] {
+        {static} +guessFactory(SimpleTypeInformation<V extends NumberVector>): Factory<V extends NumberVector>
+        {static} +findLabelColumn(MultipleObjectsBundle): int
+        {static} +findLabelColumn(BundleMeta): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

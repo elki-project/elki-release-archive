@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CollectionResult\n<size:10>elki.result" as elki.result.CollectionResult<O> [[CollectionResult.html]] {
+        -col: Collection<O>
+        -header: Collection<String>
+        +CollectionResult(Collection<O>, Collection<String>)
+        +CollectionResult(Collection<O>)
+        +addHeader(String): void
+        +getHeader(): Collection<String>
+        +iterator(): Iterator<O>
+        +size(): int
+    }
+
+    interface "<size:14>IterableResult\n<size:10>elki.result" as elki.result.IterableResult<O> [[IterableResult.html]] {
+        {abstract} +iterator(): Iterator<O>
+    }
+
+    elki.result.IterableResult <|.. elki.result.CollectionResult
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

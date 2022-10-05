@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HoughSpaceMeasure\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.HoughSpaceMeasure [[HoughSpaceMeasure.html]] {
+        {static} +STATIC: HoughSpaceMeasure
+        {static} -STEPS: int
+        -resolution: int
+        {static} -table: SinCosTable
+        +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+        -sumMatrix(int[]): long
+        -countAboveThreshold(int[], double): int
+        -houghTransformation(boolean[]): int[]
+        {static} -drawLine(int, int, int, int, boolean[]): void
+    }
+
+    interface "<size:14>Dependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.Dependence [[Dependence.html]] {
+        {abstract} +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+    }
+    class "<size:14>HoughSpaceMeasure.Par\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.HoughSpaceMeasure.Par [[HoughSpaceMeasure.Par.html]]
+
+    elki.math.statistics.dependence.Dependence <|.. elki.math.statistics.dependence.HoughSpaceMeasure
+    elki.math.statistics.dependence.HoughSpaceMeasure +-- elki.math.statistics.dependence.HoughSpaceMeasure.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

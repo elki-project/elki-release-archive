@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExponentialMOMEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.ExponentialMOMEstimator [[ExponentialMOMEstimator.html]] {
+        {static} +STATIC: ExponentialMOMEstimator
+        +estimateFromMeanVariance(MeanVariance): ExponentialDistribution
+        +getDistributionClass(): Class<? super ExponentialDistribution>
+    }
+
+    interface "<size:14>MeanVarianceDistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.MeanVarianceDistributionEstimator<ExponentialDistribution> [[MeanVarianceDistributionEstimator.html]] {
+        {abstract} +estimateFromMeanVariance(MeanVariance): ExponentialDistribution
+    }
+    class "<size:14>ExponentialMOMEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.ExponentialMOMEstimator.Par [[ExponentialMOMEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.MeanVarianceDistributionEstimator <|.. elki.math.statistics.distribution.estimator.ExponentialMOMEstimator
+    elki.math.statistics.distribution.estimator.ExponentialMOMEstimator +-- elki.math.statistics.distribution.estimator.ExponentialMOMEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

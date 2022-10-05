@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMeansModel\n<size:10>elki.data.model" as elki.data.model.KMeansModel [[KMeansModel.html]] {
+        ~varsum: double
+        +KMeansModel(double[], double)
+        +getVarianceContribution(): double
+    }
+
+    class "<size:14>MeanModel\n<size:10>elki.data.model" as elki.data.model.MeanModel [[MeanModel.html]]
+
+    elki.data.model.MeanModel <|-- elki.data.model.KMeansModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

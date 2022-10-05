@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BasicOutlierScoreMeta\n<size:10>elki.result.outlier" as elki.result.outlier.BasicOutlierScoreMeta [[BasicOutlierScoreMeta.html]] {
+        ~actualMinimum: double
+        ~actualMaximum: double
+        ~theoreticalMinimum: double
+        ~theoreticalMaximum: double
+        ~theoreticalBaseline: double
+        +BasicOutlierScoreMeta(double, double)
+        +BasicOutlierScoreMeta(double, double, double, double)
+        +BasicOutlierScoreMeta(double, double, double, double, double)
+        +getActualMaximum(): double
+        +getActualMinimum(): double
+        +getTheoreticalBaseline(): double
+        +getTheoreticalMaximum(): double
+        +getTheoreticalMinimum(): double
+        +normalizeScore(double): double
+        +setActualMinimum(double): void
+        +setActualMaximum(double): void
+        +getLongName(): String
+        +getShortName(): String
+    }
+
+    interface "<size:14>OutlierScoreMeta\n<size:10>elki.result.outlier" as elki.result.outlier.OutlierScoreMeta [[OutlierScoreMeta.html]] {
+        {abstract} +getActualMinimum(): double
+        {abstract} +getActualMaximum(): double
+        {abstract} +getTheoreticalMinimum(): double
+        {abstract} +getTheoreticalMaximum(): double
+        {abstract} +getTheoreticalBaseline(): double
+        {abstract} +normalizeScore(double): double
+    }
+
+    elki.result.outlier.OutlierScoreMeta <|.. elki.result.outlier.BasicOutlierScoreMeta
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

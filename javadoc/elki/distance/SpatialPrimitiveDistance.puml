@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<V extends SpatialComparable> [[SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+        +instantiate(Relation<T extends SpatialComparable>): SpatialPrimitiveDistanceQuery<T extends SpatialComparable>
+    }
+
+    interface "<size:14>PrimitiveDistance\n<size:10>elki.distance" as elki.distance.PrimitiveDistance<V extends SpatialComparable> [[PrimitiveDistance.html]] {
+        {abstract} +distance(V extends SpatialComparable, V extends SpatialComparable): double
+        {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+    }
+
+    elki.distance.PrimitiveDistance <|-- elki.distance.SpatialPrimitiveDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TreeIndexHeader\n<size:10>elki.index.tree" as elki.index.tree.TreeIndexHeader [[TreeIndexHeader.html]] {
+        {static} -SIZE: int
+        ~dirCapacity: int
+        ~leafCapacity: int
+        ~dirMinimum: int
+        ~leafMinimum: int
+        -emptyPagesSize: int
+        -largestPageID: int
+        +TreeIndexHeader()
+        +TreeIndexHeader(int, int, int, int, int)
+        +readHeader(ByteBuffer): void
+        +writeHeader(ByteBuffer): void
+        +getDirCapacity(): int
+        +getLeafCapacity(): int
+        +getDirMinimum(): int
+        +getLeafMinimum(): int
+        +getEmptyPagesSize(): int
+        +setEmptyPagesSize(int): void
+        +getLargestPageID(): int
+        +setLargestPageID(int): void
+        +size(): int
+        +writeEmptyPages(IntegerArray, FileChannel): void
+        +readEmptyPages(FileChannel): IntegerArray
+    }
+
+    class "<size:14>DefaultPageHeader\n<size:10>elki.persistent" as elki.persistent.DefaultPageHeader [[../../persistent/DefaultPageHeader.html]]
+
+    elki.persistent.DefaultPageHeader <|-- elki.index.tree.TreeIndexHeader
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

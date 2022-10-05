@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PreDeCon\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PreDeCon [[PreDeCon.html]] {
+        +PreDeCon(Settings)
+    }
+
+    class "<size:14>GeneralizedDBSCAN\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.GeneralizedDBSCAN [[../dbscan/GeneralizedDBSCAN.html]]
+    class "<size:14>PreDeCon.Settings\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PreDeCon.Settings [[PreDeCon.Settings.html]]
+    class "<size:14>PreDeCon.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PreDeCon.Par [[PreDeCon.Par.html]]
+
+    elki.clustering.dbscan.GeneralizedDBSCAN <|-- elki.clustering.subspace.PreDeCon
+    elki.clustering.subspace.PreDeCon +-- elki.clustering.subspace.PreDeCon.Settings
+    elki.clustering.subspace.PreDeCon +-- elki.clustering.subspace.PreDeCon.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AttributeWiseMeanNormalization\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseMeanNormalization<V extends NumberVector> [[AttributeWiseMeanNormalization.html]] {
+        {static} -LOG: Logging
+        -mean: double[]
+        ~sums: double[]
+        ~c: int
+        +AttributeWiseMeanNormalization(double[])
+        +AttributeWiseMeanNormalization()
+        #prepareStart(SimpleTypeInformation<V extends NumberVector>): boolean
+        #prepareProcessInstance(V extends NumberVector): void
+        #prepareComplete(): void
+        #filterSingleObject(V extends NumberVector): V extends NumberVector
+        +restore(V extends NumberVector): V extends NumberVector
+        -normalize(int, double): double
+        -restore(int, double): double
+        +transform(LinearEquationSystem): LinearEquationSystem
+        #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+        #getLogger(): Logging
+        #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractVectorConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractVectorConversionFilter<V extends NumberVector, V extends NumberVector> [[../../AbstractVectorConversionFilter.html]]
+    interface "<size:14>Normalization\n<size:10>elki.datasource.filter.normalization" as elki.datasource.filter.normalization.Normalization<V extends NumberVector> [[../Normalization.html]]
+
+    elki.datasource.filter.AbstractVectorConversionFilter <|-- elki.datasource.filter.normalization.columnwise.AttributeWiseMeanNormalization
+    elki.datasource.filter.normalization.Normalization <|.. elki.datasource.filter.normalization.columnwise.AttributeWiseMeanNormalization
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

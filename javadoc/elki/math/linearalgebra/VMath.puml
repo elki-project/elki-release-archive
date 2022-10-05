@@ -1,0 +1,125 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VMath\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.VMath [[VMath.html]] {
+        {static} -DELTA: double
+        {static} #ERR_VEC_DIMENSIONS: String
+        {static} #ERR_MATRIX_DIMENSIONS: String
+        {static} #ERR_MATRIX_INNERDIM: String
+        {static} #ERR_DIMENSIONS: String
+        {static} #ERR_INVALID_RANGE: String
+        {static} #ERR_MATRIX_NONSQUARE: String
+        {static} #ERR_SINGULAR: String
+        {static} #ERR_MATRIX_NOT_SPD: String
+        {static} #ERR_MATRIX_RANK_DEFICIENT: String
+        {static} +unitVector(int, int): double[]
+        {static} +copy(double[]): double[]
+        {static} +transpose(double[]): double[]
+        {static} +plus(double[], double[]): double[]
+        {static} +plusTimes(double[], double[], double): double[]
+        {static} +timesPlus(double[], double, double[]): double[]
+        {static} +timesPlusTimes(double[], double, double[], double): double[]
+        {static} +plusEquals(double[], double[]): double[]
+        {static} +plusTimesEquals(double[], double[], double): double[]
+        {static} +timesPlusEquals(double[], double, double[]): double[]
+        {static} +timesPlusTimesEquals(double[], double, double[], double): double[]
+        {static} +plus(double[], double): double[]
+        {static} +plusEquals(double[], double): double[]
+        {static} +minus(double[], double[]): double[]
+        {static} +minusTimes(double[], double[], double): double[]
+        {static} +timesMinus(double[], double, double[]): double[]
+        {static} +timesMinusTimes(double[], double, double[], double): double[]
+        {static} +minusEquals(double[], double[]): double[]
+        {static} +minusTimesEquals(double[], double[], double): double[]
+        {static} +timesMinusEquals(double[], double, double[]): double[]
+        {static} +timesMinusTimesEquals(double[], double, double[], double): double[]
+        {static} +minus(double[], double): double[]
+        {static} +minusEquals(double[], double): double[]
+        {static} +times(double[], double): double[]
+        {static} +timesEquals(double[], double): double[]
+        {static} +overwriteTimes(double[], double[], double): double[]
+        {static} +--times--(double[], double[]): double[]
+        {static} +transposeTimes(double[], double[]): double[]
+        {static} +transposeTimes(double[], double[]): double
+        {static} +--timesTranspose--(double[], double[]): double[]
+        {static} +timesTranspose(double[], double[]): double[]
+        {static} +scalarProduct(double[], double[]): double
+        {static} +dot(double[], double[]): double
+        {static} +sum(double[]): double
+        {static} +squareSum(double[]): double
+        {static} +euclideanLength(double[]): double
+        {static} +argmax(double[]): int
+        {static} +argmax(double[], int, int): int
+        {static} +argmin(double[]): int
+        {static} +argmin(double[], int, int): int
+        {static} +normalize(double[]): double[]
+        {static} +normalizeEquals(double[]): double[]
+        {static} +hashCode(double[]): int
+        {static} +equals(double[], double[]): boolean
+        {static} +clear(double[]): void
+        {static} +clear(double[]): void
+        {static} +rotate90Equals(double[]): double[]
+        {static} +unitMatrix(int): double[]
+        {static} +zeroMatrix(int): double[]
+        {static} +identity(int, int): double[]
+        {static} +diagonal(double[]): double[]
+        {static} +copy(double[]): double[]
+        {static} +rowPackedCopy(double[]): double[]
+        {static} +columnPackedCopy(double[]): double[]
+        {static} +getMatrix(double[], int, int, int, int): double[]
+        {static} +getMatrix(double[], int[], int[]): double[]
+        {static} +getMatrix(double[], int[], int, int): double[]
+        {static} +getMatrix(double[], int, int, int[]): double[]
+        {static} +setMatrix(double[], int, int, int, int, double[]): void
+        {static} +setMatrix(double[], int[], int[], double[]): void
+        {static} +setMatrix(double[], int[], int, int, double[]): void
+        {static} +setMatrix(double[], int, int, int[], double[]): void
+        {static} +getRow(double[], int): double[]
+        {static} +setRow(double[], int, double[]): void
+        {static} +getCol(double[], int): double[]
+        {static} +setCol(double[], int, double[]): void
+        {static} +transpose(double[]): double[]
+        {static} +plus(double[], double[]): double[]
+        {static} +plusTimes(double[], double[], double): double[]
+        {static} +plusEquals(double[], double[]): double[]
+        {static} +plusTimesEquals(double[], double[], double): double[]
+        {static} +minus(double[], double[]): double[]
+        {static} +minusTimes(double[], double[], double): double[]
+        {static} +minusEquals(double[], double[]): double[]
+        {static} +minusTimesEquals(double[], double[], double): double[]
+        {static} +times(double[], double): double[]
+        {static} +timesEquals(double[], double): double[]
+        {static} +times(double[], double[]): double[]
+        {static} +times(double[], double[]): double[]
+        {static} +transposeTimes(double[], double[]): double[]
+        {static} +transposeTimes(double[], double[]): double[]
+        {static} +transposeTimesTimes(double[], double[], double[]): double
+        {static} +timesTranspose(double[], double[]): double[]
+        {static} +transposeTimesTranspose(double[], double[]): double[]
+        {static} +transposeDiagonalTimes(double[], double[], double[]): double[]
+        {static} +mahalanobisDistance(double[], double[], double[]): double
+        {static} +getDiagonal(double[]): double[]
+        {static} +normalizeColumns(double[]): void
+        {static} +appendColumns(double[], double[]): double[]
+        {static} +orthonormalize(double[]): double[]
+        {static} +solve(double[], double[]): double[]
+        {static} +solve(double[], double[]): double[]
+        {static} +inverse(double[]): double[]
+        {static} +normF(double[]): double
+        {static} +hashCode(double[]): int
+        {static} +equals(double[], double[]): boolean
+        {static} +almostEquals(double[], double[], double): boolean
+        {static} +almostEquals(double[], double[]): boolean
+        {static} +almostEquals(double[], double[], double): boolean
+        {static} +almostEquals(double[], double[]): boolean
+        {static} +getRowDimensionality(double[]): int
+        {static} +getColumnDimensionality(double[]): int
+        {static} +angle(double[], double[]): double
+        {static} +angle(double[], double[], double[]): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

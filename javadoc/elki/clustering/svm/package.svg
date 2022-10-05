@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="448px" preserveAspectRatio="none" style="width:1143px;height:448px;background:#FFFFFF;" version="1.1" viewBox="0 0 1143 448" width="1143px" zoomAndPan="magnify"><defs/><g><!--MD5=[4adc3d1d05fe390f69b15d4e6cdac239]
+cluster elki.clustering.svm--><g id="cluster_elki.clustering.svm"><path d="M8.5,145 L157.5,145 A3.75,3.75 0 0 1 160,147.5 L167,167.2969 L1133.5,167.2969 A2.5,2.5 0 0 1 1136,169.7969 L1136,420.5 A2.5,2.5 0 0 1 1133.5,423 L8.5,423 A2.5,2.5 0 0 1 6,420.5 L6,147.5 A2.5,2.5 0 0 1 8.5,145 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="167" y1="167.2969" y2="167.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="148" x="10" y="159.9951">elki.clustering.svm</text></g><!--MD5=[5a16a86ac2d7d394fc35a681d34e2667]
+cluster elki.clustering--><g id="cluster_elki.clustering"><path d="M334.5,6 L446.5,6 A3.75,3.75 0 0 1 449,8.5 L456,28.2969 L807.5,28.2969 A2.5,2.5 0 0 1 810,30.7969 L810,118.5 A2.5,2.5 0 0 1 807.5,121 L334.5,121 A2.5,2.5 0 0 1 332,118.5 L332,8.5 A2.5,2.5 0 0 1 334.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="332" x2="456" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="111" x="336" y="20.9951">elki.clustering</text></g><!--MD5=[28665e7733d655c60b2c215f6c76edc6]
+class elki.clustering.svm.SupportVectorClustering--><a href="SupportVectorClustering.html" target="_top" title="SupportVectorClustering.html" xlink:actuate="onRequest" xlink:href="SupportVectorClustering.html" xlink:show="new" xlink:title="SupportVectorClustering.html" xlink:type="simple"><g id="elem_elki.clustering.svm.SupportVectorClustering"><rect codeLine="4" fill="#F1F1F1" height="227.2656" id="elki.clustering.svm.SupportVectorClustering" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="1097" x="22.5" y="180"/><ellipse cx="481.75" cy="196" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M484.7188,201.6406 Q484.1406,201.9375 483.5,202.0781 Q482.8594,202.2344 482.1563,202.2344 Q479.6563,202.2344 478.3281,200.5938 Q477.0156,198.9375 477.0156,195.8125 Q477.0156,192.6875 478.3281,191.0313 Q479.6563,189.375 482.1563,189.375 Q482.8594,189.375 483.5,189.5313 Q484.1563,189.6875 484.7188,189.9844 L484.7188,192.7031 Q484.0938,192.125 483.5,191.8594 Q482.9063,191.5781 482.2813,191.5781 Q480.9375,191.5781 480.25,192.6563 Q479.5625,193.7188 479.5625,195.8125 Q479.5625,197.9063 480.25,198.9844 Q480.9375,200.0469 482.2813,200.0469 Q482.9063,200.0469 483.5,199.7813 Q484.0938,199.5 484.7188,198.9219 L484.7188,201.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="170" x="502.25" y="200.8467">SupportVectorClustering</text><line style="stroke:#181818;stroke-width:0.5;" x1="23.5" x2="1118.5" y1="212" y2="212"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="30.5" y="222.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="42.5" y="228.9951">LOG: Logging</text><polygon fill="none" points="33.5,237.9453,29.5,243.9453,37.5,243.9453" style="stroke:#1963A0;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="347" x="42.5" y="245.292">kernel: PrimitiveSimilarity&lt;? super NumberVector&gt;</text><polygon fill="none" points="33.5,254.2422,29.5,260.2422,37.5,260.2422" style="stroke:#1963A0;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="42.5" y="261.5889">C: double</text><polygon fill="none" points="33.5,270.5391,29.5,276.5391,37.5,276.5391" style="stroke:#1963A0;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45" x="42.5" y="277.8857">lsz: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="23.5" x2="1118.5" y1="285.1875" y2="285.1875"/><ellipse cx="33.5" cy="298.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="531" x="42.5" y="302.1826">SupportVectorClustering(PrimitiveSimilarity&lt;? super NumberVector&gt;, double)</text><ellipse cx="33.5" cy="315.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="358" x="42.5" y="318.4795">run(Relation&lt;NumberVector&gt;): Clustering&lt;Model&gt;</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="30.5" y="328.4297"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="1071" x="42.5" y="334.7764">checkConnectivity(Relation&lt;NumberVector&gt;, double[], DBIDRef, RegressionModel, double, ArrayDBIDs, SimilarityQuery&lt;NumberVector&gt;, double): boolean</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="30.5" y="344.7266"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="780" x="42.5" y="351.0732">accept(NumberVector, RegressionModel, double, ArrayDBIDs, SimilarityQuery&lt;NumberVector&gt;, double): boolean</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="30.5" y="361.0234"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="591" x="42.5" y="367.3701">calcfixedpart(RegressionModel, ArrayDBIDs, SimilarityQuery&lt;NumberVector&gt;): double</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="30.5" y="377.3203"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="506" x="42.5" y="383.667">collectClusters(StaticDBIDs, UnionFind): ArrayList&lt;ArrayModifiableDBIDs&gt;</text><ellipse cx="33.5" cy="396.6172" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="306" x="42.5" y="399.9639">getInputTypeRestriction(): TypeInformation[]</text></g></a><!--MD5=[4fc33484231348e70db2dde04bb5858c]
+class elki.clustering.ClusteringAlgorithm--><a href="../ClusteringAlgorithm.html" target="_top" title="../ClusteringAlgorithm.html" xlink:actuate="onRequest" xlink:href="../ClusteringAlgorithm.html" xlink:show="new" xlink:title="../ClusteringAlgorithm.html" xlink:type="simple"><g id="elem_elki.clustering.ClusteringAlgorithm"><rect codeLine="33" fill="#F1F1F1" height="64.2969" id="elki.clustering.ClusteringAlgorithm" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="446" x="348" y="41"/><ellipse cx="376.95" cy="57" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M372.8719,52.7656 L372.8719,50.6094 L380.2625,50.6094 L380.2625,52.7656 L377.7938,52.7656 L377.7938,60.8438 L380.2625,60.8438 L380.2625,63 L372.8719,63 L372.8719,60.8438 L375.3406,60.8438 L375.3406,52.7656 L372.8719,52.7656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="140" x="394.05" y="61.8467">ClusteringAlgorithm</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="241" x="556" y="38"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="239" x="557" y="50.1387">C extends Clustering&lt;? extends Model&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="349" x2="793" y1="73" y2="73"/><line style="stroke:#181818;stroke-width:0.5;" x1="349" x2="793" y1="81" y2="81"/><ellipse cx="359" cy="94.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="420" x="368" y="97.9951">autorun(Database): C extends Clustering&lt;? extends Model&gt;</text></g></a><!--MD5=[295ad8945cfe7dfd49fa68902a62a8e6]
+reverse link elki.clustering.ClusteringAlgorithm to elki.clustering.svm.SupportVectorClustering--><g id="link_elki.clustering.ClusteringAlgorithm_elki.clustering.svm.SupportVectorClustering"><path codeLine="27" d="M571,125.35 C571,141.83 571,160.79 571,179.88 " fill="none" id="elki.clustering.ClusteringAlgorithm-backto-elki.clustering.svm.SupportVectorClustering" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="564,125.31,571,105.31,578,125.31,564,125.31" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="471.5" y="429"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="471.5" y="438.2822">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[d99cfe3849be36f6cbcbe80d14b17b10]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.svm {
+
+        class SupportVectorClustering [[SupportVectorClustering.html]] {
+            {static} -LOG: Logging
+            ~kernel: PrimitiveSimilarity<? super NumberVector>
+            ~C: double
+            ~lsz: int
+            +SupportVectorClustering(PrimitiveSimilarity<? super NumberVector>, double)
+            +run(Relation<NumberVector>): Clustering<Model>
+            -checkConnectivity(Relation<NumberVector>, double[], DBIDRef, RegressionModel, double, ArrayDBIDs, SimilarityQuery<NumberVector>, double): boolean
+            -accept(NumberVector, RegressionModel, double, ArrayDBIDs, SimilarityQuery<NumberVector>, double): boolean
+            -calcfixedpart(RegressionModel, ArrayDBIDs, SimilarityQuery<NumberVector>): double
+            -collectClusters(StaticDBIDs, UnionFind): ArrayList<ArrayModifiableDBIDs>
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.svm.SupportVectorClustering.Par {
+            {static} +KERNEL_ID: OptionID
+            {static} +C_ID: OptionID
+            #kernel: PrimitiveSimilarity<? super NumberVector>
+            #C: double
+            +configure(Parameterization): void
+            +make(): SupportVectorClustering
+        }
+
+        elki.clustering.ClusteringAlgorithm <|.. SupportVectorClustering
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.svm.SupportVectorClustering.Par
+        SupportVectorClustering +- - elki.clustering.svm.SupportVectorClustering.Par
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

@@ -1,0 +1,913 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.statistics.distribution {
+
+        class RayleighDistribution [[RayleighDistribution.html]] {
+            ~mu: double
+            ~sigma: double
+            +RayleighDistribution(double)
+            +RayleighDistribution(double, double)
+            +getMu(): double
+            +getSigma(): double
+            +pdf(double): double
+            {static} +pdf(double, double): double
+            +logpdf(double): double
+            {static} +logpdf(double, double): double
+            +cdf(double): double
+            {static} +cdf(double, double): double
+            +quantile(double): double
+            {static} +quantile(double, double): double
+            +nextRandom(Random): double
+        }
+
+        class elki.math.statistics.distribution.RayleighDistribution.Par [[RayleighDistribution.Par.html]] {
+            ~mean: double
+            ~scale: double
+            +configure(Parameterization): void
+            +make(): RayleighDistribution
+        }
+
+        class GeneralizedLogisticDistribution [[GeneralizedLogisticDistribution.html]] {
+            ~location: double
+            ~scale: double
+            ~shape: double
+            +GeneralizedLogisticDistribution(double, double, double)
+            +pdf(double): double
+            {static} +pdf(double, double, double, double): double
+            +logpdf(double): double
+            {static} +logpdf(double, double, double, double): double
+            +cdf(double): double
+            {static} +cdf(double, double, double, double): double
+            {static} +logcdf(double, double, double, double): double
+            {static} +quantile(double, double, double, double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+        }
+
+        class elki.math.statistics.distribution.GeneralizedLogisticDistribution.Par [[GeneralizedLogisticDistribution.Par.html]] {
+            ~location: double
+            ~scale: double
+            ~shape: double
+            +configure(Parameterization): void
+            +make(): GeneralizedLogisticDistribution
+        }
+
+        class GeneralizedParetoDistribution [[GeneralizedParetoDistribution.html]] {
+            ~mu: double
+            ~sigma: double
+            ~xi: double
+            +GeneralizedParetoDistribution(double, double, double)
+            +getMu(): double
+            +getSigma(): double
+            +getXi(): double
+            {static} +pdf(double, double, double, double): double
+            +pdf(double): double
+            {static} +logpdf(double, double, double, double): double
+            +logpdf(double): double
+            {static} +cdf(double, double, double, double): double
+            +cdf(double): double
+            {static} +quantile(double, double, double, double): double
+            +quantile(double): double
+        }
+
+        class elki.math.statistics.distribution.GeneralizedParetoDistribution.Par [[GeneralizedParetoDistribution.Par.html]] {
+            ~mu: double
+            ~sigma: double
+            ~xi: double
+            +configure(Parameterization): void
+            +make(): GeneralizedParetoDistribution
+        }
+
+        class HaltonUniformDistribution [[HaltonUniformDistribution.html]] {
+            -min: double
+            -max: double
+            -len: double
+            {static} -MAXFAST: int
+            {static} -ALMOST_ONE: double
+            ~base: short
+            ~invbase: double
+            ~logbase: double
+            ~maxi: int
+            ~counter: int
+            ~current: double
+            ~inverse: long
+            +HaltonUniformDistribution(double, double, int, double)
+            +HaltonUniformDistribution(double, double, Random)
+            {static} -choosePrime(Random): int
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +quantile(double): double
+            -inverse(double): long
+            -radicalInverse(long): double
+            -nextRadicalInverse(): double
+            +nextRandom(Random): double
+            +getMin(): double
+            +getMax(): double
+        }
+
+        class elki.math.statistics.distribution.HaltonUniformDistribution.Par [[HaltonUniformDistribution.Par.html]] {
+            {static} +RANDOM_ID: OptionID
+            ~min: double
+            ~max: double
+            ~rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): HaltonUniformDistribution
+        }
+
+        class LogLogisticDistribution [[LogLogisticDistribution.html]] {
+            ~scale: double
+            ~location: double
+            ~shape: double
+            +LogLogisticDistribution(double, double, double)
+            +getShape(): double
+            +getLocation(): double
+            +getScale(): double
+            +pdf(double): double
+            {static} +pdf(double, double, double, double): double
+            +logpdf(double): double
+            {static} +logpdf(double, double, double, double): double
+            +cdf(double): double
+            {static} +cdf(double, double, double, double): double
+            +quantile(double): double
+            {static} +quantile(double, double, double, double): double
+            +nextRandom(Random): double
+        }
+
+        class elki.math.statistics.distribution.LogLogisticDistribution.Par [[LogLogisticDistribution.Par.html]] {
+            ~shape: double
+            ~location: double
+            ~scale: double
+            +configure(Parameterization): void
+            +make(): LogLogisticDistribution
+        }
+
+        class StudentsTDistribution [[StudentsTDistribution.html]] {
+            -v: int
+            +StudentsTDistribution(int)
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+            {static} +pdf(double, int): double
+            {static} +logpdf(double, int): double
+            {static} +cdf(double, int): double
+        }
+
+        class elki.math.statistics.distribution.StudentsTDistribution.Par [[StudentsTDistribution.Par.html]] {
+            {static} +NU_ID: OptionID
+            ~nu: int
+            +configure(Parameterization): void
+            +make(): StudentsTDistribution
+        }
+
+        class GammaDistribution [[GammaDistribution.html]] {
+            {static} +EULERS_CONST: double
+            {static} ~LANCZOS: double[]
+            {static} ~NUM_PRECISION: double
+            {static} ~MAX_ITERATIONS: int
+            {static} ~LOGGAMMA_G: double
+            {static} ~FPMIN: double
+            -k: double
+            -theta: double
+            +GammaDistribution(double, double)
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+            +getK(): double
+            +getTheta(): double
+            {static} +cdf(double, double, double): double
+            {static} +logcdf(double, double, double): double
+            {static} +pdf(double, double, double): double
+            {static} +logpdf(double, double, double): double
+            {static} +logGamma(double): double
+            {static} +gamma(double): double
+            {static} +regularizedGammaP(double, double): double
+            {static} +logregularizedGammaP(double, double): double
+            {static} +regularizedGammaQ(double, double): double
+            {static} +nextRandom(double, double, Random): double
+            {static} #chisquaredProbitApproximation(double, double, double): double
+            {static} +quantile(double, double, double): double
+            {static} #gammaQuantileNewtonRefinement(double, double, double, int, double): double
+            {static} +digamma(double): double
+            {static} +trigamma(double): double
+        }
+
+        class elki.math.statistics.distribution.GammaDistribution.Par [[GammaDistribution.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +THETA_ID: OptionID
+            ~k: double
+            ~theta: double
+            +configure(Parameterization): void
+            +make(): GammaDistribution
+        }
+
+        class GumbelDistribution [[GumbelDistribution.html]] {
+            ~mu: double
+            ~beta: double
+            +GumbelDistribution(double, double)
+            +getMu(): double
+            +getBeta(): double
+            {static} +pdf(double, double, double): double
+            +pdf(double): double
+            {static} +logpdf(double, double, double): double
+            +logpdf(double): double
+            {static} +cdf(double, double, double): double
+            +cdf(double): double
+            {static} +quantile(double, double, double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+        }
+
+        class elki.math.statistics.distribution.GumbelDistribution.Par [[GumbelDistribution.Par.html]] {
+            ~mean: double
+            ~shape: double
+            +configure(Parameterization): void
+            +make(): GumbelDistribution
+        }
+
+        class GeneralizedExtremeValueDistribution [[GeneralizedExtremeValueDistribution.html]] {
+            ~mu: double
+            ~sigma: double
+            ~k: double
+            +GeneralizedExtremeValueDistribution(double, double, double)
+            +getMu(): double
+            +getSigma(): double
+            +getK(): double
+            +pdf(double): double
+            {static} +pdf(double, double, double, double): double
+            +logpdf(double): double
+            {static} +logpdf(double, double, double, double): double
+            +cdf(double): double
+            {static} +cdf(double, double, double, double): double
+            +quantile(double): double
+            {static} +quantile(double, double, double, double): double
+        }
+
+        class elki.math.statistics.distribution.GeneralizedExtremeValueDistribution.Par [[GeneralizedExtremeValueDistribution.Par.html]] {
+            ~mu: double
+            ~sigma: double
+            ~k: double
+            +configure(Parameterization): void
+            +make(): GeneralizedExtremeValueDistribution
+        }
+
+        class LaplaceDistribution [[LaplaceDistribution.html]] {
+            ~rate: double
+            ~location: double
+            +LaplaceDistribution(double)
+            +LaplaceDistribution(double, double)
+            +getRate(): double
+            +getLocation(): double
+            +pdf(double): double
+            {static} +pdf(double, double): double
+            +logpdf(double): double
+            {static} +logpdf(double, double): double
+            +cdf(double): double
+            {static} +cdf(double, double): double
+            +quantile(double): double
+            {static} +quantile(double, double, double): double
+            +nextRandom(Random): double
+        }
+
+        class elki.math.statistics.distribution.LaplaceDistribution.Par [[LaplaceDistribution.Par.html]] {
+            {static} +RATE_ID: OptionID
+            ~location: double
+            ~rate: double
+            +configure(Parameterization): void
+            +make(): LaplaceDistribution
+        }
+
+        class SkewGeneralizedNormalDistribution [[SkewGeneralizedNormalDistribution.html]] {
+            -loc: double
+            -scale: double
+            -skew: double
+            +SkewGeneralizedNormalDistribution(double, double, double)
+            +getLocation(): double
+            +getScale(): double
+            +getSkew(): double
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+            {static} +pdf(double, double, double, double): double
+            {static} +logpdf(double, double, double, double): double
+            {static} +cdf(double, double, double, double): double
+            {static} +quantile(double, double, double, double): double
+        }
+
+        class elki.math.statistics.distribution.SkewGeneralizedNormalDistribution.Par [[SkewGeneralizedNormalDistribution.Par.html]] {
+            {static} +SKEW_ID: OptionID
+            ~mean: double
+            ~sigma: double
+            ~skew: double
+            +configure(Parameterization): void
+            +make(): SkewGeneralizedNormalDistribution
+        }
+
+        class ExponentialDistribution [[ExponentialDistribution.html]] {
+            ~rate: double
+            ~location: double
+            +ExponentialDistribution(double)
+            +ExponentialDistribution(double, double)
+            +getRate(): double
+            +getLocation(): double
+            +pdf(double): double
+            +logpdf(double): double
+            {static} +pdf(double, double): double
+            {static} +logpdf(double, double): double
+            +cdf(double): double
+            {static} +cdf(double, double): double
+            +quantile(double): double
+            {static} +quantile(double, double): double
+            +nextRandom(Random): double
+        }
+
+        class elki.math.statistics.distribution.ExponentialDistribution.Par [[ExponentialDistribution.Par.html]] {
+            {static} +RATE_ID: OptionID
+            ~location: double
+            ~rate: double
+            +configure(Parameterization): void
+            +make(): ExponentialDistribution
+        }
+
+        class KappaDistribution [[KappaDistribution.html]] {
+            ~location: double
+            ~scale: double
+            ~shape1: double
+            ~shape2: double
+            +KappaDistribution(double, double, double, double)
+            {static} +pdf(double, double, double, double, double): double
+            +pdf(double): double
+            {static} +logpdf(double, double, double, double, double): double
+            +logpdf(double): double
+            {static} +cdf(double, double, double, double, double): double
+            {static} +logcdf(double, double, double, double, double): double
+            {static} +logcdf(double, double, double): double
+            +cdf(double): double
+            {static} +quantile(double, double, double, double, double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+        }
+
+        class elki.math.statistics.distribution.KappaDistribution.Par [[KappaDistribution.Par.html]] {
+            {static} +SHAPE1_ID: OptionID
+            {static} +SHAPE2_ID: OptionID
+            ~location: double
+            ~scale: double
+            ~shape1: double
+            ~shape2: double
+            +configure(Parameterization): void
+            +make(): KappaDistribution
+        }
+
+        class ConstantDistribution [[ConstantDistribution.html]] {
+            ~c: double
+            +ConstantDistribution(double)
+            +nextRandom(Random): double
+            +pmf(double): double
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +quantile(double): double
+        }
+
+        class elki.math.statistics.distribution.ConstantDistribution.Par [[ConstantDistribution.Par.html]] {
+            {static} +CONSTANT_ID: OptionID
+            ~constant: double
+            +configure(Parameterization): void
+            +make(): ConstantDistribution
+        }
+
+        class LogisticDistribution [[LogisticDistribution.html]] {
+            ~location: double
+            ~scale: double
+            +LogisticDistribution(double, double)
+            +getLocation(): double
+            +getScale(): double
+            +pdf(double): double
+            {static} +pdf(double, double, double): double
+            +logpdf(double): double
+            {static} +logpdf(double, double, double): double
+            +cdf(double): double
+            {static} +cdf(double, double, double): double
+            {static} +logcdf(double, double, double): double
+            {static} +quantile(double, double, double): double
+            {static} +logquantile(double, double, double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+        }
+
+        class elki.math.statistics.distribution.LogisticDistribution.Par [[LogisticDistribution.Par.html]] {
+            ~location: double
+            ~scale: double
+            +configure(Parameterization): void
+            +make(): LogisticDistribution
+        }
+
+        class NormalDistribution [[NormalDistribution.html]] {
+            {static} ~P_LOW: double
+            {static} ~P_HIGH: double
+            {static} +PHIINV075: double
+            {static} +ONEBYPHIINV075: double
+            -mean: double
+            -stddev: double
+            {static} -ERF_COEFF1: double[]
+            {static} -ERF_COEFF2: double[]
+            +NormalDistribution(double, double)
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+            +getMean(): double
+            +getStddev(): double
+            {static} +erfc(double): double
+            {static} +erf(double): double
+            {static} +erfcinv(double): double
+            {static} +pdf(double, double, double): double
+            {static} +logpdf(double, double, double): double
+            {static} +standardNormalLogPDF(double): double
+            {static} +standardNormalPDF(double): double
+            {static} +cdf(double, double, double): double
+            {static} +standardNormalCDF(double): double
+            {static} +quantile(double, double, double): double
+            {static} +standardNormalQuantile(double): double
+        }
+
+        class elki.math.statistics.distribution.NormalDistribution.Par [[NormalDistribution.Par.html]] {
+            ~mu: double
+            ~sigma: double
+            +configure(Parameterization): void
+            +make(): NormalDistribution
+        }
+
+        class BetaDistribution [[BetaDistribution.html]] {
+            {static} ~NUM_PRECISION: double
+            {static} ~SWITCH: double
+            {static} ~GAUSSLEGENDRE_Y: double[]
+            {static} ~GAUSSLEGENDRE_W: double[]
+            -alpha: double
+            -beta: double
+            -logbab: double
+            +BetaDistribution(double, double)
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+            {static} +cdf(double, double, double): double
+            {static} +pdf(double, double, double): double
+            {static} +logpdf(double, double, double): double
+            {static} +logBeta(double, double): double
+            {static} +regularizedIncBeta(double, double, double): double
+            {static} #regularizedIncBeta(double, double, double, double): double
+            {static} #regularizedIncBetaCF(double, double, double): double
+            {static} #regularizedIncBetaQuadrature(double, double, double): double
+            {static} +quantile(double, double, double): double
+            {static} #rawQuantile(double, double, double, double): double
+        }
+
+        class elki.math.statistics.distribution.BetaDistribution.Par [[BetaDistribution.Par.html]] {
+            {static} +ALPHA_ID: OptionID
+            {static} +BETA_ID: OptionID
+            ~alpha: double
+            ~beta: double
+            +configure(Parameterization): void
+            +make(): BetaDistribution
+        }
+
+        class ChiDistribution [[ChiDistribution.html]] {
+            -dof: double
+            +ChiDistribution(double)
+            +nextRandom(Random): double
+            +pdf(double): double
+            {static} +pdf(double, double): double
+            +logpdf(double): double
+            {static} +logpdf(double, double): double
+            +cdf(double): double
+            {static} +cdf(double, double): double
+            +quantile(double): double
+        }
+
+        class elki.math.statistics.distribution.ChiDistribution.Par [[ChiDistribution.Par.html]] {
+            {static} +DOF_ID: OptionID
+            ~dof: double
+            +configure(Parameterization): void
+            +make(): ChiDistribution
+        }
+
+        class GeneralizedLogisticAlternateDistribution [[GeneralizedLogisticAlternateDistribution.html]] {
+            ~location: double
+            ~scale: double
+            ~shape: double
+            +GeneralizedLogisticAlternateDistribution(double, double, double)
+            +getScale(): double
+            +getShape(): double
+            +getLocation(): double
+            {static} +pdf(double, double, double, double): double
+            +pdf(double): double
+            {static} +logpdf(double, double, double, double): double
+            +logpdf(double): double
+            {static} +cdf(double, double, double, double): double
+            +cdf(double): double
+            {static} +quantile(double, double, double, double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+        }
+
+        class elki.math.statistics.distribution.GeneralizedLogisticAlternateDistribution.Par [[GeneralizedLogisticAlternateDistribution.Par.html]] {
+            ~location: double
+            ~scale: double
+            ~shape: double
+            +configure(Parameterization): void
+            +make(): GeneralizedLogisticAlternateDistribution
+        }
+
+        class ChiSquaredDistribution [[ChiSquaredDistribution.html]] {
+            +ChiSquaredDistribution(double)
+            {static} +cdf(double, double): double
+            {static} +pdf(double, double): double
+            {static} +logpdf(double, double): double
+            {static} +quantile(double, double): double
+        }
+
+        class elki.math.statistics.distribution.ChiSquaredDistribution.Par [[ChiSquaredDistribution.Par.html]] {
+            {static} +DOF_ID: OptionID
+            ~dof: double
+            +configure(Parameterization): void
+            +make(): ChiSquaredDistribution
+        }
+
+        class UniformDistribution [[UniformDistribution.html]] {
+            -min: double
+            -max: double
+            -len: double
+            +UniformDistribution(double, double)
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+            +getMin(): double
+            +getMax(): double
+        }
+
+        class elki.math.statistics.distribution.UniformDistribution.Par [[UniformDistribution.Par.html]] {
+            {static} +MIN_ID: OptionID
+            {static} +MAX_ID: OptionID
+            ~min: double
+            ~max: double
+            +configure(Parameterization): void
+            +make(): UniformDistribution
+        }
+
+        class CauchyDistribution [[CauchyDistribution.html]] {
+            ~location: double
+            ~shape: double
+            +CauchyDistribution(double, double)
+            +getLocation(): double
+            +getShape(): double
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+            {static} +pdf(double, double, double): double
+            {static} +logpdf(double, double, double): double
+            {static} +cdf(double, double, double): double
+            {static} +quantile(double, double, double): double
+        }
+
+        class elki.math.statistics.distribution.CauchyDistribution.Par [[CauchyDistribution.Par.html]] {
+            {static} +SHAPE_ID: OptionID
+            ~location: double
+            ~shape: double
+            +configure(Parameterization): void
+            +make(): CauchyDistribution
+        }
+
+        class LogNormalDistribution [[LogNormalDistribution.html]] {
+            -logmean: double
+            -logstddev: double
+            -shift: double
+            +LogNormalDistribution(double, double, double)
+            +getLogMean(): double
+            +getLogStddev(): double
+            +getShift(): double
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +quantile(double): double
+            {static} +pdf(double, double, double): double
+            {static} +logpdf(double, double, double): double
+            {static} +cdf(double, double, double): double
+            {static} +quantile(double, double, double): double
+            +nextRandom(Random): double
+        }
+
+        class elki.math.statistics.distribution.LogNormalDistribution.Par [[LogNormalDistribution.Par.html]] {
+            {static} +LOGMEAN_ID: OptionID
+            {static} +LOGSTDDEV_ID: OptionID
+            {static} +SHIFT_ID: OptionID
+            ~shift: double
+            ~logmean: double
+            ~logsigma: double
+            +configure(Parameterization): void
+            +make(): LogNormalDistribution
+        }
+
+        class InverseGaussianDistribution [[InverseGaussianDistribution.html]] {
+            -mean: double
+            -shape: double
+            +InverseGaussianDistribution(double, double)
+            +getMean(): double
+            +getShape(): double
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +--quantile--(double): double
+            +nextRandom(Random): double
+            {static} +pdf(double, double, double): double
+            {static} +logpdf(double, double, double): double
+            {static} +cdf(double, double, double): double
+            {static} +--quantile--(double, double, double): double
+        }
+
+        class elki.math.statistics.distribution.InverseGaussianDistribution.Par [[InverseGaussianDistribution.Par.html]] {
+            ~mean: double
+            ~shape: double
+            +configure(Parameterization): void
+            +make(): InverseGaussianDistribution
+        }
+
+        class WeibullDistribution [[WeibullDistribution.html]] {
+            ~theta: double
+            ~k: double
+            ~lambda: double
+            +WeibullDistribution(double, double)
+            +WeibullDistribution(double, double, double)
+            +getK(): double
+            +getLambda(): double
+            +getTheta(): double
+            +pdf(double): double
+            +logpdf(double): double
+            {static} +pdf(double, double, double, double): double
+            {static} +logpdf(double, double, double, double): double
+            {static} +cdf(double, double, double, double): double
+            +cdf(double): double
+            {static} +quantile(double, double, double, double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+        }
+
+        class elki.math.statistics.distribution.WeibullDistribution.Par [[WeibullDistribution.Par.html]] {
+            ~theta: double
+            ~k: double
+            ~lambda: double
+            +configure(Parameterization): void
+            +make(): WeibullDistribution
+        }
+
+        class ExpGammaDistribution [[ExpGammaDistribution.html]] {
+            -k: double
+            -theta: double
+            -shift: double
+            +ExpGammaDistribution(double, double, double)
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+            +getK(): double
+            +getTheta(): double
+            {static} +cdf(double, double, double, double): double
+            {static} +logcdf(double, double, double, double): double
+            {static} +pdf(double, double, double, double): double
+            {static} +logpdf(double, double, double, double): double
+            {static} +quantile(double, double, double, double): double
+        }
+
+        class elki.math.statistics.distribution.ExpGammaDistribution.Par [[ExpGammaDistribution.Par.html]] {
+            {static} +THETA_ID: OptionID
+            {static} +K_ID: OptionID
+            {static} +SHIFT_ID: OptionID
+            ~k: double
+            ~theta: double
+            ~shift: double
+            +configure(Parameterization): void
+            +make(): ExpGammaDistribution
+        }
+
+        class LogGammaDistribution [[LogGammaDistribution.html]] {
+            -k: double
+            -theta: double
+            -shift: double
+            +LogGammaDistribution(double, double)
+            +LogGammaDistribution(double, double, double)
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+            +getK(): double
+            +getTheta(): double
+            {static} +cdf(double, double, double, double): double
+            {static} +logcdf(double, double, double, double): double
+            {static} +pdf(double, double, double, double): double
+            {static} +logpdf(double, double, double, double): double
+            {static} +quantile(double, double, double, double): double
+        }
+
+        class elki.math.statistics.distribution.LogGammaDistribution.Par [[LogGammaDistribution.Par.html]] {
+            {static} +SHIFT_ID: OptionID
+            ~k: double
+            ~theta: double
+            ~shift: double
+            +configure(Parameterization): void
+            +make(): LogGammaDistribution
+        }
+
+        interface Distribution [[Distribution.html]] {
+            {abstract} +pdf(double): double
+            {abstract} +logpdf(double): double
+            {abstract} +cdf(double): double
+            {abstract} +quantile(double): double
+            +nextRandom(Random): double
+        }
+
+        interface elki.math.statistics.distribution.Distribution.Parameterizer [[Distribution.Parameterizer.html]] {
+            {static} +LOCATION_ID: OptionID
+            {static} +SCALE_ID: OptionID
+            {static} +SHAPE_ID: OptionID
+        }
+
+        class ExponentiallyModifiedGaussianDistribution [[ExponentiallyModifiedGaussianDistribution.html]] {
+            -mean: double
+            -stddev: double
+            -lambda: double
+            +ExponentiallyModifiedGaussianDistribution(double, double, double)
+            +pdf(double): double
+            +logpdf(double): double
+            +cdf(double): double
+            +--quantile--(double): double
+            +nextRandom(Random): double
+            +getMean(): double
+            +getStddev(): double
+            +getLambda(): double
+            {static} +pdf(double, double, double, double): double
+            {static} +logpdf(double, double, double, double): double
+            {static} +cdf(double, double, double, double): double
+            {static} +--quantile--(double, double, double, double): double
+        }
+
+        class elki.math.statistics.distribution.ExponentiallyModifiedGaussianDistribution.Par [[ExponentiallyModifiedGaussianDistribution.Par.html]] {
+            {static} +RATE_ID: OptionID
+            ~mean: double
+            ~stddev: double
+            ~lambda: double
+            +configure(Parameterization): void
+            +make(): ExponentiallyModifiedGaussianDistribution
+        }
+
+        class PoissonDistribution [[PoissonDistribution.html]] {
+            -n: int
+            -p: double
+            {static} -S0: double
+            {static} -S1: double
+            {static} -S2: double
+            {static} -S3: double
+            {static} -S4: double
+            {static} -STIRLING_EXACT_ERROR: double[]
+            +PoissonDistribution(int, double)
+            +pmf(int): double
+            +pdf(double): double
+            +logpdf(double): double
+            {static} +pmf(double, int, double): double
+            {static} +logpmf(double, int, double): double
+            +cdf(double): double
+            +quantile(double): double
+            +nextRandom(Random): double
+            {static} +poissonPDFm1(double, double): double
+            {static} +logpoissonPDFm1(double, double): double
+            {static} -stirlingError(int): double
+            {static} -stirlingError(double): double
+            {static} -devianceTerm(double, double): double
+            {static} +rawProbability(double, double): double
+            {static} +rawLogProbability(double, double): double
+        }
+
+        class elki.math.statistics.distribution.PoissonDistribution.Par [[PoissonDistribution.Par.html]] {
+            {static} +N_ID: OptionID
+            {static} +PROB_ID: OptionID
+            ~n: int
+            ~p: double
+            +configure(Parameterization): void
+            +make(): PoissonDistribution
+        }
+
+        Distribution <|.. RayleighDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.RayleighDistribution.Par
+        RayleighDistribution +-- elki.math.statistics.distribution.RayleighDistribution.Par
+        Distribution <|.. GeneralizedLogisticDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.GeneralizedLogisticDistribution.Par
+        GeneralizedLogisticDistribution +-- elki.math.statistics.distribution.GeneralizedLogisticDistribution.Par
+        Distribution <|.. GeneralizedParetoDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.GeneralizedParetoDistribution.Par
+        GeneralizedParetoDistribution +-- elki.math.statistics.distribution.GeneralizedParetoDistribution.Par
+        Distribution <|.. HaltonUniformDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.HaltonUniformDistribution.Par
+        HaltonUniformDistribution +-- elki.math.statistics.distribution.HaltonUniformDistribution.Par
+        Distribution <|.. LogLogisticDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.LogLogisticDistribution.Par
+        LogLogisticDistribution +-- elki.math.statistics.distribution.LogLogisticDistribution.Par
+        Distribution <|.. StudentsTDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.StudentsTDistribution.Par
+        StudentsTDistribution +-- elki.math.statistics.distribution.StudentsTDistribution.Par
+        Distribution <|.. GammaDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.GammaDistribution.Par
+        GammaDistribution +-- elki.math.statistics.distribution.GammaDistribution.Par
+        Distribution <|.. GumbelDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.GumbelDistribution.Par
+        GumbelDistribution +-- elki.math.statistics.distribution.GumbelDistribution.Par
+        Distribution <|.. GeneralizedExtremeValueDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.GeneralizedExtremeValueDistribution.Par
+        GeneralizedExtremeValueDistribution +-- elki.math.statistics.distribution.GeneralizedExtremeValueDistribution.Par
+        Distribution <|.. LaplaceDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.LaplaceDistribution.Par
+        LaplaceDistribution +-- elki.math.statistics.distribution.LaplaceDistribution.Par
+        Distribution <|.. SkewGeneralizedNormalDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.SkewGeneralizedNormalDistribution.Par
+        SkewGeneralizedNormalDistribution +-- elki.math.statistics.distribution.SkewGeneralizedNormalDistribution.Par
+        Distribution <|.. ExponentialDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.ExponentialDistribution.Par
+        ExponentialDistribution +-- elki.math.statistics.distribution.ExponentialDistribution.Par
+        Distribution <|.. KappaDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.KappaDistribution.Par
+        KappaDistribution +-- elki.math.statistics.distribution.KappaDistribution.Par
+        Distribution <|.. ConstantDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.ConstantDistribution.Par
+        ConstantDistribution +-- elki.math.statistics.distribution.ConstantDistribution.Par
+        Distribution <|.. LogisticDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.LogisticDistribution.Par
+        LogisticDistribution +-- elki.math.statistics.distribution.LogisticDistribution.Par
+        Distribution <|.. NormalDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.NormalDistribution.Par
+        NormalDistribution +-- elki.math.statistics.distribution.NormalDistribution.Par
+        Distribution <|.. BetaDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.BetaDistribution.Par
+        BetaDistribution +-- elki.math.statistics.distribution.BetaDistribution.Par
+        Distribution <|.. ChiDistribution
+        ChiDistribution --> ChiSquaredDistribution: chisq
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.ChiDistribution.Par
+        ChiDistribution +-- elki.math.statistics.distribution.ChiDistribution.Par
+        Distribution <|.. GeneralizedLogisticAlternateDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.GeneralizedLogisticAlternateDistribution.Par
+        GeneralizedLogisticAlternateDistribution +-- elki.math.statistics.distribution.GeneralizedLogisticAlternateDistribution.Par
+        GammaDistribution <|-- ChiSquaredDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.ChiSquaredDistribution.Par
+        ChiSquaredDistribution +-- elki.math.statistics.distribution.ChiSquaredDistribution.Par
+        Distribution <|.. UniformDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.UniformDistribution.Par
+        UniformDistribution +-- elki.math.statistics.distribution.UniformDistribution.Par
+        Distribution <|.. CauchyDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.CauchyDistribution.Par
+        CauchyDistribution +-- elki.math.statistics.distribution.CauchyDistribution.Par
+        Distribution <|.. LogNormalDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.LogNormalDistribution.Par
+        LogNormalDistribution +-- elki.math.statistics.distribution.LogNormalDistribution.Par
+        Distribution <|.. InverseGaussianDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.InverseGaussianDistribution.Par
+        InverseGaussianDistribution +-- elki.math.statistics.distribution.InverseGaussianDistribution.Par
+        Distribution <|.. WeibullDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.WeibullDistribution.Par
+        WeibullDistribution +-- elki.math.statistics.distribution.WeibullDistribution.Par
+        Distribution <|.. ExpGammaDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.ExpGammaDistribution.Par
+        ExpGammaDistribution +-- elki.math.statistics.distribution.ExpGammaDistribution.Par
+        Distribution <|.. LogGammaDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.LogGammaDistribution.Par
+        LogGammaDistribution +-- elki.math.statistics.distribution.LogGammaDistribution.Par
+        elki.utilities.optionhandling.Parameterizer <|-- elki.math.statistics.distribution.Distribution.Parameterizer
+        Distribution +-- elki.math.statistics.distribution.Distribution.Parameterizer
+        Distribution <|.. ExponentiallyModifiedGaussianDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.ExponentiallyModifiedGaussianDistribution.Par
+        ExponentiallyModifiedGaussianDistribution +-- elki.math.statistics.distribution.ExponentiallyModifiedGaussianDistribution.Par
+        Distribution <|.. PoissonDistribution
+        elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.PoissonDistribution.Par
+        PoissonDistribution +-- elki.math.statistics.distribution.PoissonDistribution.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

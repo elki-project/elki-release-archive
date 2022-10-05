@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimplifiedHierarchyExtraction.Instance\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.Instance [[SimplifiedHierarchyExtraction.Instance.html]] {
+        #merges: ClusterMergeHistory
+        #coredist: DoubleDataStore
+        +Instance(ClusterMergeHistory)
+        +run(): Clustering<DendrogramModel>
+        -addSingleton(TempCluster, int, DBIDRef, double, boolean): void
+        #toCluster(TempCluster, Clustering<DendrogramModel>): Cluster<DendrogramModel>
+        #makeCluster(int, double, DBIDs): Cluster<DendrogramModel>
+    }
+
+    class "<size:14>SimplifiedHierarchyExtraction\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction [[SimplifiedHierarchyExtraction.html]]
+
+    elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction +-- elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

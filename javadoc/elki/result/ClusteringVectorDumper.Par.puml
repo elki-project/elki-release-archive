@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusteringVectorDumper.Par\n<size:10>elki.result" as elki.result.ClusteringVectorDumper.Par [[ClusteringVectorDumper.Par.html]] {
+        {static} +OUT_ID: OptionID
+        {static} +APPEND_ID: OptionID
+        {static} +FORCE_LABEL_ID: OptionID
+        -outputFile: Path
+        -forceLabel: String
+        -append: boolean
+        +configure(Parameterization): void
+        +make(): ClusteringVectorDumper
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ClusteringVectorDumper\n<size:10>elki.result" as elki.result.ClusteringVectorDumper [[ClusteringVectorDumper.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.result.ClusteringVectorDumper.Par
+    elki.result.ClusteringVectorDumper +-- elki.result.ClusteringVectorDumper.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

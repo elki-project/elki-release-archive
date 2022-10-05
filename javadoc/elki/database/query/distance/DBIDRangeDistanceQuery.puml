@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DBIDRangeDistanceQuery\n<size:10>elki.database.query.distance" as elki.database.query.distance.DBIDRangeDistanceQuery [[DBIDRangeDistanceQuery.html]] {
+        #distanceFunction: DBIDRangeDistance
+        #range: DBIDRange
+        +DBIDRangeDistanceQuery(Relation<DBID>, DBIDRangeDistance)
+        +distance(DBIDRef, DBIDRef): double
+        +getDistance(): DBIDDistance
+    }
+
+    class "<size:14>DBIDDistanceQuery\n<size:10>elki.database.query.distance" as elki.database.query.distance.DBIDDistanceQuery [[DBIDDistanceQuery.html]]
+
+    elki.database.query.distance.DBIDDistanceQuery <|-- elki.database.query.distance.DBIDRangeDistanceQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

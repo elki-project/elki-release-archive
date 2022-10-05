@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DistanceBasedIntrinsicDimensionalityEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.DistanceBasedIntrinsicDimensionalityEstimator [[DistanceBasedIntrinsicDimensionalityEstimator.html]] {
+        {abstract} +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+        +estimate(double[]): double
+        +estimate(double[], int): double
+        +estimate(A, NumberArrayAdapter<?, ? super A>): double
+        +estimate(KNNSearcher<DBIDRef>, DistanceQuery<? extends Object>, DBIDRef, int): double
+        +estimate(RangeSearcher<DBIDRef>, DistanceQuery<? extends Object>, DBIDRef, double): double
+        {static} +countLeadingZeros(A, NumberArrayAdapter<?, ? super A>, int): int
+    }
+
+    interface "<size:14>IntrinsicDimensionalityEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.IntrinsicDimensionalityEstimator<Object> [[IntrinsicDimensionalityEstimator.html]] {
+        {abstract} +estimate(KNNSearcher<DBIDRef>, DistanceQuery<? extends O>, DBIDRef, int): double
+        {abstract} +estimate(RangeSearcher<DBIDRef>, DistanceQuery<? extends O>, DBIDRef, double): double
+    }
+
+    elki.math.statistics.intrinsicdimensionality.IntrinsicDimensionalityEstimator <|-- elki.math.statistics.intrinsicdimensionality.DistanceBasedIntrinsicDimensionalityEstimator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

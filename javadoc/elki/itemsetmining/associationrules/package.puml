@@ -1,0 +1,118 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.itemsetmining.associationrules {
+
+        class AssociationRule [[AssociationRule.html]] {
+            -consequent: Itemset
+            -antecedent: Itemset
+            -union: Itemset
+            -measure: double
+            +AssociationRule(Itemset, Itemset, Itemset, double)
+            +getConsequent(): Itemset
+            +getUnion(): Itemset
+            +getMeasure(): double
+            +getAntecedent(): Itemset
+            +compareTo(AssociationRule): int
+            +appendTo(StringBuilder, VectorFieldTypeInformation<BitVector>): StringBuilder
+        }
+
+        class AssociationRuleGeneration [[AssociationRuleGeneration.html]] {
+            {static} -LOG: Logging
+            #frequentItemAlgo: AbstractFrequentItemsetAlgorithm
+            #minmeasure: double
+            #maxmeasure: double
+            +AssociationRuleGeneration(AbstractFrequentItemsetAlgorithm, InterestingnessMeasure, double, double)
+            +AssociationRuleGeneration(AbstractFrequentItemsetAlgorithm, InterestingnessMeasure, double)
+            +autorun(Database): AssociationRuleResult
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.itemsetmining.associationrules.AssociationRuleGeneration.Instance [[AssociationRuleGeneration.Instance.html]] {
+            -totalTransactions: int
+            -meta: VectorFieldTypeInformation<BitVector>
+            +run(FrequentItemsetsResult): AssociationRuleResult
+            -processSubsets(Itemset, int, int): void
+        }
+
+        class elki.itemsetmining.associationrules.AssociationRuleGeneration.PartialItemset [[AssociationRuleGeneration.PartialItemset.html]] {
+            +len: int
+            +begin: int
+            +indices: int[]
+            +PartialItemset(int[])
+            +length(): int
+            +iter(): int
+            +iterValid(int): boolean
+            +iterAdvance(int): int
+            +iterDim(int): int
+        }
+
+        class elki.itemsetmining.associationrules.AssociationRuleGeneration.ItemsetSearcher [[AssociationRuleGeneration.ItemsetSearcher.html]] {
+            ~itemsets: List<Itemset>
+            ~offsets: IntegerArray
+            +ItemsetSearcher(List<Itemset>)
+            +search(Itemset): Itemset
+            +maxLength(): int
+            +getOffset(int): int
+            -buildIndex(int, int): void
+        }
+
+        class elki.itemsetmining.associationrules.AssociationRuleGeneration.Par [[AssociationRuleGeneration.Par.html]] {
+            {static} +FREQUENTITEMALGO_ID: OptionID
+            {static} +INTERESTMEASURE_ID: OptionID
+            {static} +MINMEASURE_ID: OptionID
+            {static} +MAXMEASURE_ID: OptionID
+            #frequentItemAlgo: AbstractFrequentItemsetAlgorithm
+            #minmeasure: double
+            #maxmeasure: double
+            +configure(Parameterization): void
+            +make(): AssociationRuleGeneration
+        }
+
+        java.lang.Comparable <|.. AssociationRule
+        elki.Algorithm <|.. AssociationRuleGeneration
+        AssociationRuleGeneration --> elki.itemsetmining.associationrules.interest.InterestingnessMeasure: interestingness
+        AssociationRuleGeneration +-- elki.itemsetmining.associationrules.AssociationRuleGeneration.Instance
+        elki.itemsetmining.associationrules.AssociationRuleGeneration.Instance --> elki.itemsetmining.associationrules.AssociationRuleGeneration.PartialItemset: scratch1\nscratch2
+        elki.itemsetmining.associationrules.AssociationRuleGeneration.Instance --> "*" AssociationRule: rules
+        elki.itemsetmining.associationrules.AssociationRuleGeneration.Instance --> elki.itemsetmining.associationrules.AssociationRuleGeneration.ItemsetSearcher: searcher
+        elki.itemsetmining.Itemset <|-- elki.itemsetmining.associationrules.AssociationRuleGeneration.PartialItemset
+        AssociationRuleGeneration +-- elki.itemsetmining.associationrules.AssociationRuleGeneration.PartialItemset
+        AssociationRuleGeneration +-- elki.itemsetmining.associationrules.AssociationRuleGeneration.ItemsetSearcher
+        elki.utilities.optionhandling.Parameterizer <|.. elki.itemsetmining.associationrules.AssociationRuleGeneration.Par
+        AssociationRuleGeneration +-- elki.itemsetmining.associationrules.AssociationRuleGeneration.Par
+        elki.itemsetmining.associationrules.AssociationRuleGeneration.Par --> elki.itemsetmining.associationrules.interest.InterestingnessMeasure: interestMeasure
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    namespace elki {
+        interface Algorithm [[../../Algorithm.html]] {
+            +autorun(Database): Object
+            {abstract} +getInputTypeRestriction(): TypeInformation[]
+        }
+    }
+
+    namespace elki.itemsetmining {
+        abstract class Itemset [[../Itemset.html]] {
+            ~support: int
+            {abstract} +length(): int
+            {abstract} +iter(): int
+            {abstract} +iterAdvance(int): int
+            {abstract} +iterValid(int): boolean
+            {abstract} +iterDim(int): int
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

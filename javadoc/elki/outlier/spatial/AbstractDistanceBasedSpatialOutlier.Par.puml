@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractDistanceBasedSpatialOutlier.Par\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier.Par<N, O> {
+        {static} +NON_SPATIAL_DISTANCE_FUNCTION_ID: OptionID
+        #distance: PrimitiveDistance<O>
+        +configure(Parameterization): void
+    }
+
+    abstract class "<size:14>AbstractNeighborhoodOutlier.Par\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.AbstractNeighborhoodOutlier.Par<N>
+    abstract class "<size:14>AbstractDistanceBasedSpatialOutlier\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier<N, O> [[AbstractDistanceBasedSpatialOutlier.html]]
+
+    elki.outlier.spatial.AbstractNeighborhoodOutlier.Par <|-- elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier.Par
+    elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier +-- elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

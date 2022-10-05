@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UncertainifyFilter.Par\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.UncertainifyFilter.Par<UO extends UncertainObject> [[UncertainifyFilter.Par.html]] {
+        {static} +UNCERTAINITY_MODEL_ID: OptionID
+        {static} +KEEP_ID: OptionID
+        {static} +SEED_ID: OptionID
+        #generator: Uncertainifier<UO extends UncertainObject>
+        #keep: boolean
+        #rand: RandomFactory
+        +configure(Parameterization): void
+        +make(): UncertainifyFilter<UO extends UncertainObject>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>UncertainifyFilter\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.UncertainifyFilter<UO extends UncertainObject> [[UncertainifyFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.typeconversions.UncertainifyFilter.Par
+    elki.datasource.filter.typeconversions.UncertainifyFilter +-- elki.datasource.filter.typeconversions.UncertainifyFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

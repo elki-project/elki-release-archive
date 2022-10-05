@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BestFitEstimator\n<size:10>elki.math.statistics.distribution.estimator.meta" as elki.math.statistics.distribution.estimator.meta.BestFitEstimator [[BestFitEstimator.html]] {
+        {static} -LOG: Logging
+        {static} +STATIC: BestFitEstimator
+        #momests: Collection<MOMDistributionEstimator<?>>
+        #madests: Collection<MADDistributionEstimator<?>>
+        #lmmests: Collection<LMMDistributionEstimator<?>>
+        #logmomests: Collection<LogMOMDistributionEstimator<?>>
+        #logmadests: Collection<LogMADDistributionEstimator<?>>
+        +estimate(A, NumberArrayAdapter<?, A>): Distribution
+        -warnIfDebugging(ArithmeticException, DistributionEstimator<?>): void
+        +getDistributionClass(): Class<? super Distribution>
+    }
+
+    interface "<size:14>DistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.DistributionEstimator<Distribution> [[../DistributionEstimator.html]] {
+        {abstract} +estimate(A, NumberArrayAdapter<?, A>): Distribution
+        {abstract} +getDistributionClass(): Class<? super Distribution>
+    }
+    class "<size:14>BestFitEstimator.BestFit\n<size:10>elki.math.statistics.distribution.estimator.meta" as elki.math.statistics.distribution.estimator.meta.BestFitEstimator.BestFit
+    class "<size:14>BestFitEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator.meta" as elki.math.statistics.distribution.estimator.meta.BestFitEstimator.Par [[BestFitEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.DistributionEstimator <|.. elki.math.statistics.distribution.estimator.meta.BestFitEstimator
+    elki.math.statistics.distribution.estimator.meta.BestFitEstimator +-- elki.math.statistics.distribution.estimator.meta.BestFitEstimator.BestFit
+    elki.math.statistics.distribution.estimator.meta.BestFitEstimator +-- elki.math.statistics.distribution.estimator.meta.BestFitEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

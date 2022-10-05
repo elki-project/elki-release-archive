@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SameSizeKMeans\n<size:10>tutorial.clustering" as tutorial.clustering.SameSizeKMeans<V extends NumberVector> [[SameSizeKMeans.html]] {
+        {static} -LOG: Logging
+        +SameSizeKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+        +run(Relation<V extends NumberVector>): Clustering<MeanModel>
+        #initializeMeta(Relation<V extends NumberVector>, double[]): WritableDataStore<Meta>
+        #initialAssignment(List<ModifiableDBIDs>, WritableDataStore<Meta>, DBIDs): ArrayModifiableDBIDs
+        #updateDistances(Relation<V extends NumberVector>, double[], WritableDataStore<Meta>, NumberVectorDistance<? super NumberVector>): void
+        #refineResult(Relation<V extends NumberVector>, double[], List<ModifiableDBIDs>, WritableDataStore<Meta>, ArrayModifiableDBIDs): double[]
+        #transfer(WritableDataStore<Meta>, Meta, ModifiableDBIDs, ModifiableDBIDs, DBIDRef, int): void
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans<V extends NumberVector, MeanModel> [[../../elki/clustering/kmeans/AbstractKMeans.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>SameSizeKMeans.Meta\n<size:10>tutorial.clustering" as tutorial.clustering.SameSizeKMeans.Meta [[SameSizeKMeans.Meta.html]]
+    class "<size:14>SameSizeKMeans.PreferenceComparator\n<size:10>tutorial.clustering" as tutorial.clustering.SameSizeKMeans.PreferenceComparator [[SameSizeKMeans.PreferenceComparator.html]]
+    class "<size:14>SameSizeKMeans.Par\n<size:10>tutorial.clustering" as tutorial.clustering.SameSizeKMeans.Par<V extends NumberVector> [[SameSizeKMeans.Par.html]]
+
+    elki.clustering.kmeans.AbstractKMeans <|-- tutorial.clustering.SameSizeKMeans
+    tutorial.clustering.SameSizeKMeans +-- tutorial.clustering.SameSizeKMeans.Meta
+    tutorial.clustering.SameSizeKMeans +-- tutorial.clustering.SameSizeKMeans.PreferenceComparator
+    tutorial.clustering.SameSizeKMeans +-- tutorial.clustering.SameSizeKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

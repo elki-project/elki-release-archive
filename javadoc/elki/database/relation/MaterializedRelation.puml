@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MaterializedRelation\n<size:10>elki.database.relation" as elki.database.relation.MaterializedRelation<O> [[MaterializedRelation.html]] {
+        -type: SimpleTypeInformation<O>
+        -content: DataStore<O>
+        -ids: StaticDBIDs
+        -name: String
+        +MaterializedRelation(SimpleTypeInformation<O>, DBIDs)
+        +MaterializedRelation(String, SimpleTypeInformation<O>, DBIDs)
+        +MaterializedRelation(String, SimpleTypeInformation<O>, DBIDs, DataStore<O>)
+        +get(DBIDRef): O
+        +insert(DBIDRef, O): void
+        +delete(DBIDRef): void
+        +getDBIDs(): StaticDBIDs
+        +iterDBIDs(): DBIDIter
+        +size(): int
+        +getDataTypeInformation(): SimpleTypeInformation<O>
+        +getLongName(): String
+    }
+
+    interface "<size:14>ModifiableRelation\n<size:10>elki.database.relation" as elki.database.relation.ModifiableRelation<O> [[ModifiableRelation.html]] {
+        {abstract} +insert(DBIDRef, O): void
+        {abstract} +delete(DBIDRef): void
+    }
+
+    elki.database.relation.ModifiableRelation <|.. elki.database.relation.MaterializedRelation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

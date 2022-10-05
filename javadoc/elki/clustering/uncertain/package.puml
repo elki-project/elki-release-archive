@@ -1,0 +1,214 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.uncertain {
+
+        class RepresentativeUncertainClustering [[RepresentativeUncertainClustering.html]] {
+            {static} -LOG: Logging
+            #distance: ClusteringDistanceSimilarity
+            #metaAlgorithm: ClusteringAlgorithm<?>
+            #samplesAlgorithm: ClusteringAlgorithm<?>
+            #numsamples: int
+            #random: RandomFactory
+            #alpha: double
+            #keep: boolean
+            +RepresentativeUncertainClustering(ClusteringDistanceSimilarity, ClusteringAlgorithm<?>, ClusteringAlgorithm<?>, int, RandomFactory, double, boolean)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<? extends UncertainObject>): Clustering<?>
+            -computeConfidence(int, int): double
+            #runClusteringAlgorithm(Object, DBIDs, DataStore<DoubleVector>, int, String): Clustering<?>
+        }
+
+        class elki.clustering.uncertain.RepresentativeUncertainClustering.RepresentativenessEvaluation [[RepresentativeUncertainClustering.RepresentativenessEvaluation.html]] {
+            +RepresentativenessEvaluation(double, double, double)
+            +visualizeSingleton(): boolean
+        }
+
+        class elki.clustering.uncertain.RepresentativeUncertainClustering.Par [[RepresentativeUncertainClustering.Par.html]] {
+            {static} +DEFAULT_ENSEMBLE_DEPTH: int
+            {static} +CLUSTERDISTANCE_ID: OptionID
+            {static} +META_ALGORITHM_ID: OptionID
+            {static} +ALGORITHM_ID: OptionID
+            {static} +SAMPLES_ID: OptionID
+            {static} +KEEP_SAMPLES_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            #distance: ClusteringDistanceSimilarity
+            #metaAlgorithm: ClusteringAlgorithm<?>
+            #samplesAlgorithm: ClusteringAlgorithm<?>
+            #numsamples: int
+            #random: RandomFactory
+            #alpha: double
+            #keep: boolean
+            +configure(Parameterization): void
+            +make(): RepresentativeUncertainClustering
+        }
+
+        class CenterOfMassMetaClustering<C extends Clustering<?>> [[CenterOfMassMetaClustering.html]] {
+            #inner: ClusteringAlgorithm<C extends Clustering<?>>
+            +CenterOfMassMetaClustering(ClusteringAlgorithm<C extends Clustering<?>>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends UncertainObject>): C extends Clustering<?>
+            #runClusteringAlgorithm(Object, DBIDs, DataStore<DoubleVector>, int, String): C extends Clustering<?>
+        }
+
+        class elki.clustering.uncertain.CenterOfMassMetaClustering.Par<C extends Clustering<?>> [[CenterOfMassMetaClustering.Par.html]] {
+            #inner: ClusteringAlgorithm<C extends Clustering<?>>
+            +configure(Parameterization): void
+            +make(): CenterOfMassMetaClustering<C extends Clustering<?>>
+        }
+
+        class UKMeans [[UKMeans.html]] {
+            {static} -LOG: Logging
+            {static} -KEY: String
+            #k: int
+            #maxiter: int
+            #rnd: RandomFactory
+            +UKMeans(int, int, RandomFactory)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<DiscreteUncertainObject>): Clustering<KMeansModel>
+            #assignToNearestCluster(Relation<DiscreteUncertainObject>, List<double[]>, List<? extends ModifiableDBIDs>, WritableIntegerDataStore, double[]): boolean
+            #updateAssignment(DBIDIter, List<? extends ModifiableDBIDs>, WritableIntegerDataStore, int): boolean
+            #getExpectedRepDistance(NumberVector, DiscreteUncertainObject): double
+            #means(List<? extends ModifiableDBIDs>, List<double[]>, Relation<DiscreteUncertainObject>): List<double[]>
+            #logVarstat(DoubleStatistic, double[]): void
+        }
+
+        class elki.clustering.uncertain.UKMeans.Par [[UKMeans.Par.html]] {
+            #k: int
+            #maxiter: int
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): UKMeans
+        }
+
+        class FDBSCANNeighborPredicate [[FDBSCANNeighborPredicate.html]] {
+            #epsilon: double
+            #sampleSize: int
+            #threshold: double
+            #rand: RandomFactory
+            +FDBSCANNeighborPredicate(double, int, double, RandomFactory)
+            +instantiate(Database): Instance
+            +getInputTypeRestriction(): TypeInformation
+            +getOutputType(): SimpleTypeInformation<DBIDs>
+        }
+
+        class elki.clustering.uncertain.FDBSCANNeighborPredicate.Instance [[FDBSCANNeighborPredicate.Instance.html]] {
+            -epsilon: double
+            -epsilonsq: double
+            -sampleSize: int
+            -threshold: double
+            -relation: Relation<? extends UncertainObject>
+            -rand: Random
+            +Instance(double, int, double, Relation<? extends UncertainObject>, RandomFactory)
+            +getNeighbors(DBIDRef): DBIDs
+            -checkSamples(UncertainObject, UncertainObject): boolean
+            +getIDs(): DBIDs
+            +iterDBIDs(DBIDs): DBIDIter
+        }
+
+        class elki.clustering.uncertain.FDBSCANNeighborPredicate.Par [[FDBSCANNeighborPredicate.Par.html]] {
+            {static} +SAMPLE_SIZE_ID: OptionID
+            {static} +THRESHOLD_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #epsilon: double
+            #sampleSize: int
+            #threshold: double
+            #seed: RandomFactory
+            +configure(Parameterization): void
+            +make(): FDBSCANNeighborPredicate
+        }
+
+        class CKMeans [[CKMeans.html]] {
+            +CKMeans(KMeans<?, KMeansModel>)
+            +CKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+        }
+
+        class elki.clustering.uncertain.CKMeans.Par [[CKMeans.Par.html]] {
+            -kmeans: KMeans<?, KMeansModel>
+            +configure(Parameterization): void
+            +make(): CKMeans
+        }
+
+        class FDBSCAN [[FDBSCAN.html]] {
+            +FDBSCAN(double, int, double, RandomFactory, int)
+        }
+
+        class elki.clustering.uncertain.FDBSCAN.Par [[FDBSCAN.Par.html]] {
+            #epsilon: double
+            #sampleSize: int
+            #threshold: double
+            #seed: RandomFactory
+            #minPts: int
+            +configure(Parameterization): void
+            +make(): FDBSCAN
+        }
+
+        elki.clustering.ClusteringAlgorithm <|.. RepresentativeUncertainClustering
+        elki.result.EvaluationResult <|-- elki.clustering.uncertain.RepresentativeUncertainClustering.RepresentativenessEvaluation
+        RepresentativeUncertainClustering +-- elki.clustering.uncertain.RepresentativeUncertainClustering.RepresentativenessEvaluation
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.uncertain.RepresentativeUncertainClustering.Par
+        RepresentativeUncertainClustering +-- elki.clustering.uncertain.RepresentativeUncertainClustering.Par
+        elki.clustering.ClusteringAlgorithm <|.. CenterOfMassMetaClustering
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.uncertain.CenterOfMassMetaClustering.Par
+        CenterOfMassMetaClustering +-- elki.clustering.uncertain.CenterOfMassMetaClustering.Par
+        elki.clustering.ClusteringAlgorithm <|.. UKMeans
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.uncertain.UKMeans.Par
+        UKMeans +-- elki.clustering.uncertain.UKMeans.Par
+        elki.clustering.dbscan.predicates.NeighborPredicate <|.. FDBSCANNeighborPredicate
+        elki.clustering.dbscan.predicates.NeighborPredicate.Instance <|.. elki.clustering.uncertain.FDBSCANNeighborPredicate.Instance
+        FDBSCANNeighborPredicate +-- elki.clustering.uncertain.FDBSCANNeighborPredicate.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.uncertain.FDBSCANNeighborPredicate.Par
+        FDBSCANNeighborPredicate +-- elki.clustering.uncertain.FDBSCANNeighborPredicate.Par
+        CenterOfMassMetaClustering <|-- CKMeans
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.uncertain.CKMeans.Par
+        CKMeans +-- elki.clustering.uncertain.CKMeans.Par
+        elki.clustering.dbscan.GeneralizedDBSCAN <|-- FDBSCAN
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.uncertain.FDBSCAN.Par
+        FDBSCAN +-- elki.clustering.uncertain.FDBSCAN.Par
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace elki.result {
+        class EvaluationResult [[../../result/EvaluationResult.html]] {
+            {static} +RANKING: String
+            ~groups: ArrayList<MeasurementGroup>
+            ~header: ArrayList<String>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.clustering.dbscan.predicates {
+        interface NeighborPredicate<T> [[../dbscan/predicates/NeighborPredicate.html]] {
+            {abstract} +instantiate(Database): Instance<T>
+            {abstract} +getInputTypeRestriction(): TypeInformation
+            {abstract} +getOutputType(): SimpleTypeInformation<T>
+        }
+        interface elki.clustering.dbscan.predicates.NeighborPredicate.Instance<T> [[../dbscan/predicates/NeighborPredicate.Instance.html]] {
+            {abstract} +getNeighbors(DBIDRef): T
+            {abstract} +getIDs(): DBIDs
+            {abstract} +iterDBIDs(T): DBIDIter
+        }
+    }
+
+    namespace elki.clustering.dbscan {
+        class GeneralizedDBSCAN [[../dbscan/GeneralizedDBSCAN.html]] {
+            {static} -LOG: Logging
+            #npred: NeighborPredicate<?>
+            #corepred: CorePredicate<?>
+            #coremodel: boolean
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

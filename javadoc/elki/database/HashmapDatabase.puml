@@ -1,0 +1,39 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HashmapDatabase\n<size:10>elki.database" as elki.database.HashmapDatabase [[HashmapDatabase.html]] {
+        {static} -LOG: Logging
+        -ids: HashSetModifiableDBIDs
+        -idrep: DBIDView
+        #databaseConnection: DatabaseConnection
+        +HashmapDatabase(DatabaseConnection, Collection<? extends IndexFactory<?>>)
+        +HashmapDatabase()
+        +initialize(): void
+        +insert(ObjectBundle): DBIDs
+        #alignColumns(ObjectBundle): Relation<?>[]
+        -addNewRelation(SimpleTypeInformation<?>): Relation<?>
+        +delete(DBIDs): MultipleObjectsBundle
+        +delete(DBIDRef): SingleObjectBundle
+        -doDelete(DBIDRef): void
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractDatabase\n<size:10>elki.database" as elki.database.AbstractDatabase [[AbstractDatabase.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    interface "<size:14>UpdatableDatabase\n<size:10>elki.database" as elki.database.UpdatableDatabase [[UpdatableDatabase.html]] {
+        {abstract} +insert(ObjectBundle): DBIDs
+        {abstract} +delete(DBIDs): ObjectBundle
+        {abstract} +delete(DBIDRef): SingleObjectBundle
+    }
+    class "<size:14>HashmapDatabase.Par\n<size:10>elki.database" as elki.database.HashmapDatabase.Par [[HashmapDatabase.Par.html]]
+
+    elki.database.AbstractDatabase <|-- elki.database.HashmapDatabase
+    elki.database.UpdatableDatabase <|.. elki.database.HashmapDatabase
+    elki.database.HashmapDatabase +-- elki.database.HashmapDatabase.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

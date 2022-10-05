@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WeibullLMMEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.WeibullLMMEstimator [[WeibullLMMEstimator.html]] {
+        {static} +STATIC: WeibullLMMEstimator
+        {static} -A0: double
+        {static} -A1: double
+        {static} -A2: double
+        {static} -A3: double
+        {static} -A4: double
+        {static} -B1: double
+        {static} -B2: double
+        {static} -B3: double
+        {static} -C1: double
+        {static} -C2: double
+        {static} -C3: double
+        {static} -D1: double
+        {static} -D2: double
+        {static} ~MAXIT: int
+        +getNumMoments(): int
+        +estimateFromLMoments(double[]): WeibullDistribution
+        +getDistributionClass(): Class<? super WeibullDistribution>
+    }
+
+    interface "<size:14>LMMDistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LMMDistributionEstimator<WeibullDistribution> [[LMMDistributionEstimator.html]] {
+        {abstract} +estimateFromLMoments(double[]): WeibullDistribution
+        {abstract} +getNumMoments(): int
+    }
+    class "<size:14>WeibullLMMEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.WeibullLMMEstimator.Par [[WeibullLMMEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.LMMDistributionEstimator <|.. elki.math.statistics.distribution.estimator.WeibullLMMEstimator
+    elki.math.statistics.distribution.estimator.WeibullLMMEstimator +-- elki.math.statistics.distribution.estimator.WeibullLMMEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

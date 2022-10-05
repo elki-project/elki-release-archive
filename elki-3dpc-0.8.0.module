@@ -1,0 +1,187 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-3dpc",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-batik-visualization",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "org.jogamp.jogl",
+          "module": "jogl-all-main",
+          "version": {
+            "requires": "2.1.5-01"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-3dpc-0.8.0.jar",
+          "url": "elki-3dpc-0.8.0.jar",
+          "size": 82792,
+          "sha512": "ce9678faa05cab135e58da1eb2a35e8bda502a7cc285e2db74bb7dbb750ce85ad08fe325c04c0c0cf5971f2f76a409388921beaa2fb53e28ec00e6e5329959f6",
+          "sha256": "14924c08a83c72258e7d0a2dc5c618f16944d7f33ed36846e393d1f655d913cc",
+          "sha1": "6c30e479504e8df8af00ee7c091bf6353e4d9d5e",
+          "md5": "ed568638ca72fbb8e7bc41d15136fac1"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.jogamp.gluegen",
+          "module": "gluegen-rt-main",
+          "version": {
+            "requires": "2.1.5-01"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-batik-visualization",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "org.jogamp.jogl",
+          "module": "jogl-all-main",
+          "version": {
+            "requires": "2.1.5-01"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-3dpc-0.8.0.jar",
+          "url": "elki-3dpc-0.8.0.jar",
+          "size": 82792,
+          "sha512": "ce9678faa05cab135e58da1eb2a35e8bda502a7cc285e2db74bb7dbb750ce85ad08fe325c04c0c0cf5971f2f76a409388921beaa2fb53e28ec00e6e5329959f6",
+          "sha256": "14924c08a83c72258e7d0a2dc5c618f16944d7f33ed36846e393d1f655d913cc",
+          "sha1": "6c30e479504e8df8af00ee7c091bf6353e4d9d5e",
+          "md5": "ed568638ca72fbb8e7bc41d15136fac1"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-3dpc",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-3dpc-0.8.0-test-fixtures.jar",
+          "url": "elki-3dpc-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "b9ac9421337e62323fed218c3019d2894e238b75e909fed1eab0181119a63f239d156a2fd6de0285d2d69d3ac149ea90670287e04c1ebdddac7d184ed0cabf09",
+          "sha256": "3160ab0cab9233af85399974146b3b041fdaac4bf1f475f19485de6bb3e83b49",
+          "sha1": "7aa12e158f73eeed1869d83da96bd0b0c08b7f54",
+          "md5": "c54d53a0205e58c0f6d2112cedf4f862"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-3dpc-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-3dpc",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-3dpc-0.8.0-test-fixtures.jar",
+          "url": "elki-3dpc-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "b9ac9421337e62323fed218c3019d2894e238b75e909fed1eab0181119a63f239d156a2fd6de0285d2d69d3ac149ea90670287e04c1ebdddac7d184ed0cabf09",
+          "sha256": "3160ab0cab9233af85399974146b3b041fdaac4bf1f475f19485de6bb3e83b49",
+          "sha1": "7aa12e158f73eeed1869d83da96bd0b0c08b7f54",
+          "md5": "c54d53a0205e58c0f6d2112cedf4f862"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-3dpc-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

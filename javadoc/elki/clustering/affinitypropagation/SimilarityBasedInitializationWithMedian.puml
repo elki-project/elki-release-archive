@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimilarityBasedInitializationWithMedian\n<size:10>elki.clustering.affinitypropagation" as elki.clustering.affinitypropagation.SimilarityBasedInitializationWithMedian<O> [[SimilarityBasedInitializationWithMedian.html]] {
+        ~similarity: Similarity<? super O>
+        ~quantile: double
+        +SimilarityBasedInitializationWithMedian(Similarity<? super O>, double)
+        +getSimilarityMatrix(Relation<O>, ArrayDBIDs): double[]
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>AffinityPropagationInitialization\n<size:10>elki.clustering.affinitypropagation" as elki.clustering.affinitypropagation.AffinityPropagationInitialization<O> [[AffinityPropagationInitialization.html]] {
+        {abstract} +getSimilarityMatrix(Relation<O>, ArrayDBIDs): double[]
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>SimilarityBasedInitializationWithMedian.Par\n<size:10>elki.clustering.affinitypropagation" as elki.clustering.affinitypropagation.SimilarityBasedInitializationWithMedian.Par<O>
+
+    elki.clustering.affinitypropagation.AffinityPropagationInitialization <|.. elki.clustering.affinitypropagation.SimilarityBasedInitializationWithMedian
+    elki.clustering.affinitypropagation.SimilarityBasedInitializationWithMedian +-- elki.clustering.affinitypropagation.SimilarityBasedInitializationWithMedian.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

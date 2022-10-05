@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Ostrovsky.NumberVectorInstance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.Ostrovsky.NumberVectorInstance [[Ostrovsky.NumberVectorInstance.html]] {
+        +NumberVectorInstance(Relation<? extends NumberVector>, NumberVectorDistance<?>, RandomFactory)
+        +run(Relation<? extends NumberVector>, int): double[]
+    }
+
+    class "<size:14>KMeansPlusPlus.NumberVectorInstance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMeansPlusPlus.NumberVectorInstance [[KMeansPlusPlus.NumberVectorInstance.html]]
+    class "<size:14>Ostrovsky\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.Ostrovsky [[Ostrovsky.html]]
+
+    elki.clustering.kmeans.initialization.KMeansPlusPlus.NumberVectorInstance <|-- elki.clustering.kmeans.initialization.Ostrovsky.NumberVectorInstance
+    elki.clustering.kmeans.initialization.Ostrovsky +-- elki.clustering.kmeans.initialization.Ostrovsky.NumberVectorInstance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

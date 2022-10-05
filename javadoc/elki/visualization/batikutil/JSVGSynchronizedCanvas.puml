@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>JSVGSynchronizedCanvas\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.JSVGSynchronizedCanvas [[JSVGSynchronizedCanvas.html]] {
+        {static} -serialVersionUID: long
+        -synchronizer: JSVGUpdateSynchronizer
+        -plot: SVGPlot
+        -latest: AtomicReference<Runnable>
+        +getPlot(): SVGPlot
+        +--setDocument--(Document): void
+        +setPlot(SVGPlot): void
+        -scheduleSetPlot(SVGPlot, SVGPlot): void
+        -attachPlot(SVGPlot): void
+        -detachPlot(SVGPlot): void
+    }
+
+    class "<size:14>JSVGCanvas\n<size:10>org.apache.batik.swing" as org.apache.batik.swing.JSVGCanvas
+
+    org.apache.batik.swing.JSVGCanvas <|-- elki.visualization.batikutil.JSVGSynchronizedCanvas
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

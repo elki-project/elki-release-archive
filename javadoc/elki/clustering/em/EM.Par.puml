@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EM.Par\n<size:10>elki.clustering.em" as elki.clustering.em.EM.Par<O, M extends MeanModel> [[EM.Par.html]] {
+        {static} +K_ID: OptionID
+        {static} +DELTA_ID: OptionID
+        {static} +MODEL_ID: OptionID
+        {static} +MINITER_ID: OptionID
+        {static} +MAXITER_ID: OptionID
+        {static} +PRIOR_ID: OptionID
+        {static} +SOFT_ID: OptionID
+        #k: int
+        #delta: double
+        #mfactory: EMClusterModelFactory<O, M extends MeanModel>
+        #miniter: int
+        #maxiter: int
+        ~prior: double
+        ~soft: boolean
+        +configure(Parameterization): void
+        +make(): EM<O, M extends MeanModel>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>EM\n<size:10>elki.clustering.em" as elki.clustering.em.EM<O, M extends MeanModel> [[EM.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.EM.Par
+    elki.clustering.em.EM +-- elki.clustering.em.EM.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

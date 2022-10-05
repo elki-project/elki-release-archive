@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VectorTypeInformation\n<size:10>elki.data.type" as elki.data.type.VectorTypeInformation<V extends FeatureVector<?>> [[VectorTypeInformation.html]] {
+        -factory: Factory<V extends FeatureVector<?>, ?>
+        #mindim: int
+        #maxdim: int
+        +VectorTypeInformation(Class<? super FeatureVector<?>>, int, int)
+        +VectorTypeInformation(Factory<V extends FeatureVector<?>, ?>, ByteBufferSerializer<? super FeatureVector<?>>, int, int)
+        {static} +typeRequest(Class<? super FeatureVector<?>>): VectorTypeInformation<V extends FeatureVector<?>>
+        {static} +typeRequest(Class<? super FeatureVector<?>>, int, int): VectorTypeInformation<V extends FeatureVector<?>>
+        +isAssignableFromType(TypeInformation): boolean
+        +isAssignableFrom(Object): boolean
+        +getFactory(): Factory<V extends FeatureVector<?>, ?>
+        +mindim(): int
+        +maxdim(): int
+        +getMultiplicity(): int
+    }
+
+    class "<size:14>SimpleTypeInformation\n<size:10>elki.data.type" as elki.data.type.SimpleTypeInformation<V extends FeatureVector<?>> [[SimpleTypeInformation.html]]
+
+    elki.data.type.SimpleTypeInformation <|-- elki.data.type.VectorTypeInformation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

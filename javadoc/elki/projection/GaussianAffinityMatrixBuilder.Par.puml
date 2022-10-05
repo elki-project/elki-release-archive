@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GaussianAffinityMatrixBuilder.Par\n<size:10>elki.projection" as elki.projection.GaussianAffinityMatrixBuilder.Par<O> [[GaussianAffinityMatrixBuilder.Par.html]] {
+        {static} +SIGMA_ID: OptionID
+        #sigma: double
+        #distance: Distance<? super O>
+        +configure(Parameterization): void
+        +make(): GaussianAffinityMatrixBuilder<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>GaussianAffinityMatrixBuilder\n<size:10>elki.projection" as elki.projection.GaussianAffinityMatrixBuilder<O> [[GaussianAffinityMatrixBuilder.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.projection.GaussianAffinityMatrixBuilder.Par
+    elki.projection.GaussianAffinityMatrixBuilder +-- elki.projection.GaussianAffinityMatrixBuilder.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

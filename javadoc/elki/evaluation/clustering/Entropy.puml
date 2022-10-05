@@ -1,0 +1,49 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Entropy\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.Entropy [[Entropy.html]] {
+        #entropyFirst: double
+        #entropySecond: double
+        #entropyJoint: double
+        #mutualInformation: double
+        #variationOfInformation: double
+        #expectedMutualInformation: double
+        #vibound: double
+        #Entropy(ClusterContingencyTable)
+        -computeMILarge(int[], int, int, double, double): void
+        -computeMIFull(int[], int, int, int, int, double, double, double[]): void
+        {static} -log(int, double[]): double
+        {static} -lfac(int, double[]): double
+        {static} -maxClusterSize(int[], int, int): int
+        {static} -computeEntropyFirst(int[], int, int, double, double, double[]): double
+        {static} -computeEntropySecond(int[], int, int, double, double, double[]): double
+        +entropyFirst(): double
+        +entropySecond(): double
+        +entropyJoint(): double
+        +conditionalEntropyFirst(): double
+        +conditionalEntropySecond(): double
+        +entropyPowers(): double
+        +mutualInformation(): double
+        +upperBoundMI(): double
+        +jointNMI(): double
+        +minNMI(): double
+        +maxNMI(): double
+        +arithmeticNMI(): double
+        +geometricNMI(): double
+        +variationOfInformation(): double
+        +upperBoundVI(): double
+        +normalizedVariationOfInformation(): double
+        +normalizedInformationDistance(): double
+        +expectedMutualInformation(): double
+        +adjustedJointMI(): double
+        +adjustedArithmeticMI(): double
+        +adjustedGeometricMI(): double
+        +adjustedMinMI(): double
+        +adjustedMaxMI(): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

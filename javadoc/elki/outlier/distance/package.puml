@@ -1,0 +1,333 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.distance {
+
+        class KNNDD<O> [[KNNDD.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #kplus: int
+            +KNNDD(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.distance.KNNDD.Par<O> [[KNNDD.Par.html]] {
+            {static} +K_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): KNNDD<O>
+        }
+
+        class KNNSOS<O> [[KNNSOS.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #k: int
+            #phi: double
+            +KNNSOS(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.distance.KNNSOS.Par<O> {
+            {static} +KNN_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): KNNSOS<O>
+        }
+
+        class HilOut<O extends NumberVector> [[HilOut.html]] {
+            {static} -LOG: Logging
+            -distance: Distance<? super NumberVector>
+            -k: int
+            -n: int
+            -h: int
+            -t: double
+            -tn: Enum<ScoreType>
+            -distq: DistanceQuery<O extends NumberVector>
+            -capital_n: int
+            -n_star: int
+            -capital_n_star: int
+            -d: int
+            -omega_star: double
+            +HilOut(LPNormDistance, int, int, int, Enum<ScoreType>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O extends NumberVector>): OutlierResult
+            -scan(HilbertFeatures, int): void
+            -innerScan(HilbertFeatures, int, int): void
+            -trueOutliers(HilbertFeatures): void
+        }
+
+        enum elki.outlier.distance.HilOut.ScoreType [[HilOut.ScoreType.html]] {
+            {static} +ALL
+            {static} +TOPN
+        }
+
+        class elki.outlier.distance.HilOut.HilbertFeatures [[HilOut.HilbertFeatures.html]] {
+            ~relation: Relation<O extends NumberVector>
+            ~min: double[]
+            ~diameter: double
+            ~shift: double
+            -out: ObjectHeap<HilFeature>
+            -wlb: ObjectHeap<HilFeature>
+            +HilbertFeatures(Relation<O extends NumberVector>, double[], double)
+            -initialize(double): void
+            -updateOUT(int): void
+            -updateWLB(int): void
+            -fastUpperBound(int): double
+            -minDistLevel(DBID, int): double
+            -maxDistLevel(DBID, int): double
+            -numberSharedLevels(long[], long[]): int
+            -minRegLevel(int, int): int
+            -maxRegLevel(int, int): int
+            -boxRadius(int, int, int): double
+            -getDimForObject(NumberVector, int): double
+        }
+
+        class elki.outlier.distance.HilOut.HilFeature [[HilOut.HilFeature.html]] {
+            +id: DBID
+            +hilbert: long[]
+            +level: int
+            +ubound: double
+            +lbound: double
+            +nn: ObjectHeap<DoubleDBIDPair>
+            +nn_keys: HashSetModifiableDBIDs
+            +sum_nn: double
+            +HilFeature(DBID, ObjectHeap<DoubleDBIDPair>)
+            +compareTo(HilFeature): int
+            #insert(DBID, double, int): void
+        }
+
+        class elki.outlier.distance.HilOut.Par<O extends NumberVector> {
+            {static} +K_ID: OptionID
+            {static} +N_ID: OptionID
+            {static} +H_ID: OptionID
+            {static} +T_ID: OptionID
+            {static} +TN_ID: OptionID
+            #k: int
+            #n: int
+            #h: int
+            #distfunc: LPNormDistance
+            #tn: Enum<ScoreType>
+            +configure(Parameterization): void
+            +make(): HilOut<O extends NumberVector>
+        }
+
+        class SOS<O> [[SOS.html]] {
+            {static} -LOG: Logging
+            {static} #PERPLEXITY_ERROR: double
+            {static} #PERPLEXITY_MAXITER: int
+            #distance: Distance<? super O>
+            #perplexity: double
+            +SOS(Distance<? super O>, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+            {static} +sumOfProbabilities(DBIDIter, DBIDArrayIter, double[]): double
+            {static} +nominateNeighbors(DBIDIter, DBIDArrayIter, double[], double, WritableDoubleDataStore): void
+            {static} +computePi(DBIDRef, DoubleDBIDListIter, double[], double, double): double
+            {static} #estimateInitialBeta(DBIDRef, DoubleDBIDListIter, double): double
+            {static} #computeH(DBIDRef, DoubleDBIDListIter, double[], double): double
+        }
+
+        class elki.outlier.distance.SOS.Par<O> {
+            {static} +PERPLEXITY_ID: OptionID
+            #distance: Distance<? super O>
+            #perplexity: double
+            +configure(Parameterization): void
+            +make(): SOS<O>
+        }
+
+        class ReferenceBasedOutlierDetection [[ReferenceBasedOutlierDetection.html]] {
+            #distance: NumberVectorDistance<? super NumberVector>
+            #k: int
+            #refp: ReferencePointsHeuristic
+            +ReferenceBasedOutlierDetection(int, NumberVectorDistance<? super NumberVector>, ReferencePointsHeuristic)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): OutlierResult
+            #computeDistanceVector(NumberVector, Relation<? extends NumberVector>, PrimitiveDistanceQuery<? super NumberVector>): DoubleDBIDList
+            #updateDensities(WritableDoubleDataStore, DoubleDBIDList): void
+            #computeDensity(DoubleDBIDList, DoubleDBIDListIter, int): double
+        }
+
+        class elki.outlier.distance.ReferenceBasedOutlierDetection.Par [[ReferenceBasedOutlierDetection.Par.html]] {
+            {static} +REFP_ID: OptionID
+            {static} +K_ID: OptionID
+            #distance: NumberVectorDistance<? super NumberVector>
+            -k: int
+            -refp: ReferencePointsHeuristic
+            +configure(Parameterization): void
+            +make(): ReferenceBasedOutlierDetection
+        }
+
+        class DBOutlierScore<O> [[DBOutlierScore.html]] {
+            {static} -LOG: Logging
+            +DBOutlierScore(Distance<? super O>, double)
+            #computeOutlierScores(Relation<O>, double): DoubleDataStore
+        }
+
+        class elki.outlier.distance.DBOutlierScore.Par<O> [[DBOutlierScore.Par.html]] {
+            +make(): DBOutlierScore<O>
+        }
+
+        class ODIN<O> [[ODIN.html]] {
+            #distance: Distance<? super O>
+            #kplus: int
+            +ODIN(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.distance.ODIN.Par<O> {
+            {static} +K_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): ODIN<O>
+        }
+
+        class KNNOutlier<O> [[KNNOutlier.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #kplus: int
+            +KNNOutlier(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.distance.KNNOutlier.Par<O> [[KNNOutlier.Par.html]] {
+            {static} +K_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): KNNOutlier<O>
+        }
+
+        abstract class AbstractDBOutlier<O> [[AbstractDBOutlier.html]] {
+            #distance: Distance<? super O>
+            #d: double
+            +AbstractDBOutlier(Distance<? super O>, double)
+            +run(Relation<O>): OutlierResult
+            {abstract} #computeOutlierScores(Relation<O>, double): DoubleDataStore
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        abstract class elki.outlier.distance.AbstractDBOutlier.Par<O> [[AbstractDBOutlier.Par.html]] {
+            {static} +D_ID: OptionID
+            #d: double
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+        }
+
+        class LocalIsolationCoefficient<O> [[LocalIsolationCoefficient.html]] {
+            {static} -LOG: Logging
+            -kplus: int
+            #distance: Distance<? super O>
+            +LocalIsolationCoefficient(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.distance.LocalIsolationCoefficient.Par<O> [[LocalIsolationCoefficient.Par.html]] {
+            {static} +K_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): LocalIsolationCoefficient<O>
+        }
+
+        class KNNWeightOutlier<O> [[KNNWeightOutlier.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #kplus: int
+            +KNNWeightOutlier(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.distance.KNNWeightOutlier.Par<O> [[KNNWeightOutlier.Par.html]] {
+            {static} +K_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): KNNWeightOutlier<O>
+        }
+
+        class DBOutlierDetection<O> [[DBOutlierDetection.html]] {
+            {static} -LOG: Logging
+            -p: double
+            +DBOutlierDetection(Distance<? super O>, double, double)
+            #computeOutlierScores(Relation<O>, double): DoubleDataStore
+        }
+
+        class elki.outlier.distance.DBOutlierDetection.Par<O> [[DBOutlierDetection.Par.html]] {
+            {static} +P_ID: OptionID
+            #p: double
+            +configure(Parameterization): void
+            +make(): DBOutlierDetection<O>
+        }
+
+        elki.outlier.OutlierAlgorithm <|.. KNNDD
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.KNNDD.Par
+        KNNDD +-- elki.outlier.distance.KNNDD.Par
+        elki.outlier.OutlierAlgorithm <|.. KNNSOS
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.KNNSOS.Par
+        KNNSOS +-- elki.outlier.distance.KNNSOS.Par
+        elki.outlier.OutlierAlgorithm <|.. HilOut
+        HilOut +-- elki.outlier.distance.HilOut.ScoreType
+        HilOut +-- elki.outlier.distance.HilOut.HilbertFeatures
+        elki.outlier.distance.HilOut.HilbertFeatures --> "*" elki.outlier.distance.HilOut.HilFeature: pf\ntop
+        java.lang.Comparable <|.. elki.outlier.distance.HilOut.HilFeature
+        HilOut +-- elki.outlier.distance.HilOut.HilFeature
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.HilOut.Par
+        HilOut +-- elki.outlier.distance.HilOut.Par
+        elki.outlier.OutlierAlgorithm <|.. SOS
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.SOS.Par
+        SOS +-- elki.outlier.distance.SOS.Par
+        elki.outlier.OutlierAlgorithm <|.. ReferenceBasedOutlierDetection
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.ReferenceBasedOutlierDetection.Par
+        ReferenceBasedOutlierDetection +-- elki.outlier.distance.ReferenceBasedOutlierDetection.Par
+        AbstractDBOutlier <|-- DBOutlierScore
+        elki.outlier.distance.AbstractDBOutlier.Par <|-- elki.outlier.distance.DBOutlierScore.Par
+        DBOutlierScore +-- elki.outlier.distance.DBOutlierScore.Par
+        elki.outlier.OutlierAlgorithm <|.. ODIN
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.ODIN.Par
+        ODIN +-- elki.outlier.distance.ODIN.Par
+        elki.outlier.OutlierAlgorithm <|.. KNNOutlier
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.KNNOutlier.Par
+        KNNOutlier +-- elki.outlier.distance.KNNOutlier.Par
+        elki.outlier.OutlierAlgorithm <|.. AbstractDBOutlier
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.AbstractDBOutlier.Par
+        AbstractDBOutlier +-- elki.outlier.distance.AbstractDBOutlier.Par
+        elki.outlier.OutlierAlgorithm <|.. LocalIsolationCoefficient
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.LocalIsolationCoefficient.Par
+        LocalIsolationCoefficient +-- elki.outlier.distance.LocalIsolationCoefficient.Par
+        elki.outlier.OutlierAlgorithm <|.. KNNWeightOutlier
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.KNNWeightOutlier.Par
+        KNNWeightOutlier +-- elki.outlier.distance.KNNWeightOutlier.Par
+        AbstractDBOutlier <|-- DBOutlierDetection
+        elki.outlier.distance.AbstractDBOutlier.Par <|-- elki.outlier.distance.DBOutlierDetection.Par
+        DBOutlierDetection +-- elki.outlier.distance.DBOutlierDetection.Par
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

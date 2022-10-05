@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ShuffleObjectsFilter\n<size:10>elki.datasource.filter.selection" as elki.datasource.filter.selection.ShuffleObjectsFilter [[ShuffleObjectsFilter.html]] {
+        {static} -LOG: Logging
+        ~rnd: RandomFactory
+        +ShuffleObjectsFilter(RandomFactory)
+        +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+
+    interface "<size:14>ObjectFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.ObjectFilter [[../ObjectFilter.html]] {
+        {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+    class "<size:14>ShuffleObjectsFilter.Par\n<size:10>elki.datasource.filter.selection" as elki.datasource.filter.selection.ShuffleObjectsFilter.Par [[ShuffleObjectsFilter.Par.html]]
+
+    elki.datasource.filter.ObjectFilter <|.. elki.datasource.filter.selection.ShuffleObjectsFilter
+    elki.datasource.filter.selection.ShuffleObjectsFilter +-- elki.datasource.filter.selection.ShuffleObjectsFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>MTree\n<size:10>elki.index.tree.metrical.mtreevariants.mtree" as elki.index.tree.metrical.mtreevariants.mtree.MTree<O> [[MTree.html]] {
+        {static} -LOG: Logging
+        +MTree(PageFile<MTreeNode<O>>, MTreeSettings<O, MTreeNode<O>, MTreeEntry>)
+        #preInsert(MTreeEntry): void
+        #createNewDirectoryEntry(MTreeNode<O>, DBID, double): MTreeEntry
+        #createRootEntry(): MTreeEntry
+        #createNewLeafNode(): MTreeNode<O>
+        #createNewDirectoryNode(): MTreeNode<O>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractMTree\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.AbstractMTree<O, MTreeNode<O>, MTreeEntry, MTreeSettings<O, MTreeNode<O>, MTreeEntry>> [[../AbstractMTree.html]] {
+        {abstract} +distance(DBIDRef, DBIDRef): double
+        {abstract} #createNewDirectoryEntry(MTreeNode<O>, DBID, double): MTreeEntry
+    }
+
+    elki.index.tree.metrical.mtreevariants.AbstractMTree <|-- elki.index.tree.metrical.mtreevariants.mtree.MTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

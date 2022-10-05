@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SVR_Q\n<size:10>elki.svm.qmatrix" as elki.svm.qmatrix.SVR_Q [[SVR_Q.html]] {
+        -l: int
+        -sign: byte[]
+        -index: int[]
+        -inner: CachedQMatrix
+        -QD: double[]
+        +SVR_Q(DataSet, double)
+        +initialize(): void
+        +get_QD(): double[]
+        +swap_index(int, int): void
+        +get_Q(int, int, float[]): void
+        +similarity(int, int): double
+    }
+
+    interface "<size:14>QMatrix\n<size:10>elki.svm.qmatrix" as elki.svm.qmatrix.QMatrix [[QMatrix.html]] {
+        {abstract} +get_QD(): double[]
+        {abstract} +swap_index(int, int): void
+        {abstract} +similarity(int, int): double
+        {abstract} +initialize(): void
+    }
+
+    elki.svm.qmatrix.QMatrix <|.. elki.svm.qmatrix.SVR_Q
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>GeneralizedOPTICS.Instance\n<size:10>elki.clustering.optics" as elki.clustering.optics.GeneralizedOPTICS.Instance<R> [[GeneralizedOPTICS.Instance.html]] {
+        #processedIDs: ModifiableDBIDs
+        #candidates: ArrayModifiableDBIDs
+        #predecessor: WritableDBIDDataStore
+        #reachability: WritableDoubleDataStore
+        ~ids: DBIDs
+        ~progress: FiniteProgress
+        +Instance(DBIDs)
+        +compare(DBIDRef, DBIDRef): int
+        +run(): R
+        {abstract} #initialDBID(DBIDRef): void
+        {abstract} #expandDBID(DBIDRef): void
+        {abstract} #buildResult(): R
+        {abstract} #getLogger(): Logging
+    }
+
+    interface "<size:14>Comparator\n<size:10>java.util" as java.util.Comparator<DBIDRef> {
+        {abstract} +compare(DBIDRef, DBIDRef): int
+    }
+    interface "<size:14>GeneralizedOPTICS\n<size:10>elki.clustering.optics" as elki.clustering.optics.GeneralizedOPTICS [[GeneralizedOPTICS.html]]
+
+    java.util.Comparator <|.. elki.clustering.optics.GeneralizedOPTICS.Instance
+    elki.clustering.optics.GeneralizedOPTICS +-- elki.clustering.optics.GeneralizedOPTICS.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

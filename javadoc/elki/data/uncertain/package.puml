@@ -1,0 +1,134 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.data.uncertain {
+
+        interface UncertainObject [[UncertainObject.html]] {
+            {static} +UNCERTAIN_OBJECT_FIELD: VectorFieldTypeInformation<UncertainObject>
+            {static} +DISCRETE_UNCERTAIN_OBJECT: VectorFieldTypeInformation<DiscreteUncertainObject>
+            {abstract} +drawSample(Random): DoubleVector
+            {abstract} +getCenterOfMass(): DoubleVector
+        }
+
+        class UniformContinuousUncertainObject [[UniformContinuousUncertainObject.html]] {
+            {static} +FACTORY: Factory<UniformContinuousUncertainObject, ?>
+            +UniformContinuousUncertainObject(SpatialComparable)
+            +getCenterOfMass(): DoubleVector
+            +drawSample(Random): DoubleVector
+        }
+
+        class elki.data.uncertain.UniformContinuousUncertainObject.Factory [[UniformContinuousUncertainObject.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): UniformContinuousUncertainObject
+            +getDefaultSerializer(): ByteBufferSerializer<UniformContinuousUncertainObject>
+            +getRestrictionClass(): Class<? super UniformContinuousUncertainObject>
+        }
+
+        class UnweightedDiscreteUncertainObject [[UnweightedDiscreteUncertainObject.html]] {
+            {static} +FACTORY: Factory<UnweightedDiscreteUncertainObject, ?>
+            -samples: DoubleVector[]
+            +UnweightedDiscreteUncertainObject(DoubleVector[])
+            +drawSample(Random): DoubleVector
+            +getCenterOfMass(): DoubleVector
+            +getNumberSamples(): int
+            +getSample(int): DoubleVector
+            +getWeight(int): double
+        }
+
+        class elki.data.uncertain.UnweightedDiscreteUncertainObject.Factory [[UnweightedDiscreteUncertainObject.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): UnweightedDiscreteUncertainObject
+            +getDefaultSerializer(): ByteBufferSerializer<UnweightedDiscreteUncertainObject>
+            +getRestrictionClass(): Class<? super UnweightedDiscreteUncertainObject>
+        }
+
+        interface DiscreteUncertainObject [[DiscreteUncertainObject.html]] {
+            {abstract} +getNumberSamples(): int
+            {abstract} +getSample(int): DoubleVector
+            {abstract} +getWeight(int): double
+        }
+
+        abstract class AbstractUncertainObject [[AbstractUncertainObject.html]] {
+            {static} +DEFAULT_TRY_LIMIT: int
+            #bounds: SpatialComparable
+            {static} #computeBounds(NumberVector[]): HyperBoundingBox
+            {abstract} +drawSample(Random): DoubleVector
+            +getDimensionality(): int
+            +getMin(int): double
+            +getMax(int): double
+            +getValue(int): Double
+            {abstract} +getCenterOfMass(): DoubleVector
+        }
+
+        class WeightedDiscreteUncertainObject [[WeightedDiscreteUncertainObject.html]] {
+            {static} +FACTORY: Factory<WeightedDiscreteUncertainObject, ?>
+            -samples: DoubleVector[]
+            -weights: double[]
+            +WeightedDiscreteUncertainObject(DoubleVector[], double[])
+            +drawSample(Random): DoubleVector
+            +getCenterOfMass(): DoubleVector
+            +getNumberSamples(): int
+            +getSample(int): DoubleVector
+            +getWeight(int): double
+        }
+
+        class elki.data.uncertain.WeightedDiscreteUncertainObject.Factory [[WeightedDiscreteUncertainObject.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): WeightedDiscreteUncertainObject
+            +getDefaultSerializer(): ByteBufferSerializer<WeightedDiscreteUncertainObject>
+            +getRestrictionClass(): Class<? super WeightedDiscreteUncertainObject>
+        }
+
+        class SimpleGaussianContinuousUncertainObject [[SimpleGaussianContinuousUncertainObject.html]] {
+            {static} +FACTORY: Factory<SimpleGaussianContinuousUncertainObject, ?>
+            {static} -DIV: double
+            +SimpleGaussianContinuousUncertainObject(SpatialComparable)
+            +getCenterOfMass(): DoubleVector
+            +drawSample(Random): DoubleVector
+        }
+
+        class elki.data.uncertain.SimpleGaussianContinuousUncertainObject.Factory [[SimpleGaussianContinuousUncertainObject.Factory.html]] {
+            +newFeatureVector(A, ArrayAdapter<? extends Number, A>): SimpleGaussianContinuousUncertainObject
+            +getDefaultSerializer(): ByteBufferSerializer<SimpleGaussianContinuousUncertainObject>
+            +getRestrictionClass(): Class<? super SimpleGaussianContinuousUncertainObject>
+        }
+
+        elki.data.spatial.SpatialComparable <|-- UncertainObject
+        elki.data.FeatureVector <|-- UncertainObject
+        AbstractUncertainObject <|-- UniformContinuousUncertainObject
+        elki.data.FeatureVector.Factory <|.. elki.data.uncertain.UniformContinuousUncertainObject.Factory
+        UniformContinuousUncertainObject +-- elki.data.uncertain.UniformContinuousUncertainObject.Factory
+        AbstractUncertainObject <|-- UnweightedDiscreteUncertainObject
+        DiscreteUncertainObject <|.. UnweightedDiscreteUncertainObject
+        elki.data.FeatureVector.Factory <|.. elki.data.uncertain.UnweightedDiscreteUncertainObject.Factory
+        UnweightedDiscreteUncertainObject +-- elki.data.uncertain.UnweightedDiscreteUncertainObject.Factory
+        UncertainObject <|-- DiscreteUncertainObject
+        UncertainObject <|.. AbstractUncertainObject
+        AbstractUncertainObject <|-- WeightedDiscreteUncertainObject
+        DiscreteUncertainObject <|.. WeightedDiscreteUncertainObject
+        elki.data.FeatureVector.Factory <|.. elki.data.uncertain.WeightedDiscreteUncertainObject.Factory
+        WeightedDiscreteUncertainObject +-- elki.data.uncertain.WeightedDiscreteUncertainObject.Factory
+        AbstractUncertainObject <|-- SimpleGaussianContinuousUncertainObject
+        elki.data.FeatureVector.Factory <|.. elki.data.uncertain.SimpleGaussianContinuousUncertainObject.Factory
+        SimpleGaussianContinuousUncertainObject +-- elki.data.uncertain.SimpleGaussianContinuousUncertainObject.Factory
+    }
+
+    namespace elki.data.spatial {
+        interface SpatialComparable [[../spatial/SpatialComparable.html]] {
+            {abstract} +getDimensionality(): int
+            {abstract} +getMin(int): double
+            {abstract} +getMax(int): double
+        }
+    }
+
+    namespace elki.data {
+        interface FeatureVector<D> [[../FeatureVector.html]] {
+            {static} +TYPE: VectorTypeInformation<FeatureVector<?>>
+            {abstract} +getDimensionality(): int
+            {abstract} +getValue(int): D
+        }
+        interface elki.data.FeatureVector.Factory<V extends FeatureVector<? extends D>, D> [[../FeatureVector.Factory.html]] {
+            {abstract} +newFeatureVector(A, ArrayAdapter<? extends D, A>): V extends FeatureVector<? extends D>
+            {abstract} +getDefaultSerializer(): ByteBufferSerializer<V extends FeatureVector<? extends D>>
+            {abstract} +getRestrictionClass(): Class<? super FeatureVector<? extends D>>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

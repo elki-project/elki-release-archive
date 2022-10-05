@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseLPNormDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.SparseLPNormDistance [[SparseLPNormDistance.html]] {
+        -p: double
+        -invp: double
+        +SparseLPNormDistance(double)
+        +distance(SparseNumberVector, SparseNumberVector): double
+        +norm(SparseNumberVector): double
+        +getInputTypeRestriction(): SimpleTypeInformation<? super SparseNumberVector>
+        +isMetric(): boolean
+    }
+
+    interface "<size:14>PrimitiveDistance\n<size:10>elki.distance" as elki.distance.PrimitiveDistance<SparseNumberVector> [[../PrimitiveDistance.html]] {
+        {abstract} +distance(SparseNumberVector, SparseNumberVector): double
+        {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+    }
+    interface "<size:14>Norm\n<size:10>elki.distance" as elki.distance.Norm<SparseNumberVector> [[../Norm.html]] {
+        {abstract} +norm(SparseNumberVector): double
+    }
+    class "<size:14>SparseLPNormDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.SparseLPNormDistance.Par [[SparseLPNormDistance.Par.html]]
+
+    elki.distance.PrimitiveDistance <|.. elki.distance.minkowski.SparseLPNormDistance
+    elki.distance.Norm <|.. elki.distance.minkowski.SparseLPNormDistance
+    elki.distance.minkowski.SparseLPNormDistance +-- elki.distance.minkowski.SparseLPNormDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

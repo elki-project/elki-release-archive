@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleMessageOverlay\n<size:10>elki.visualization.parallel3d.util" as elki.visualization.parallel3d.util.SimpleMessageOverlay [[SimpleMessageOverlay.html]] {
+        ~renderer: TextRenderer
+        -message: String
+        ~fontsize: int
+        ~renderContents(GL2): void
+        +getMessage(): String
+        +setMessage(String): void
+    }
+
+    abstract class "<size:14>AbstractSimpleOverlay\n<size:10>elki.visualization.parallel3d.util" as elki.visualization.parallel3d.util.AbstractSimpleOverlay [[AbstractSimpleOverlay.html]] {
+        {abstract} ~renderContents(GL2): void
+    }
+
+    elki.visualization.parallel3d.util.AbstractSimpleOverlay <|-- elki.visualization.parallel3d.util.SimpleMessageOverlay
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

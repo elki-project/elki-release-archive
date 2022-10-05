@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Layout.Node\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.Layout.Node [[Layout.Node.html]] {
+        {abstract} +getDim(): int
+        {abstract} +getX(): double
+        {abstract} +getY(): double
+        {abstract} +getChild(int): Node
+        {abstract} +numChildren(): int
+    }
+
+    class "<size:14>Layout\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.Layout [[Layout.html]]
+
+    elki.visualization.parallel3d.layout.Layout +-- elki.visualization.parallel3d.layout.Layout.Node
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

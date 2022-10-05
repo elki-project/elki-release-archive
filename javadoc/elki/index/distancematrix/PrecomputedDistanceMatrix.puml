@@ -1,0 +1,56 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrecomputedDistanceMatrix\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix<O> [[PrecomputedDistanceMatrix.html]] {
+        {static} -LOG: Logging
+        #refrelation: WeakReference<Relation<O>>
+        #distance: Distance<? super O>
+        -matrix: double[]
+        -ids: DBIDRange
+        +PrecomputedDistanceMatrix(Relation<O>, DBIDRange, Distance<? super O>)
+        +initialize(): void
+        {static} #triangleSize(int): int
+        -getOffset(int, int): int
+        +logStatistics(): void
+        +getDistanceQuery(Distance<? super O>): DistanceQuery<O>
+        +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+        +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+        +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+        +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+    }
+
+    interface "<size:14>DistanceIndex\n<size:10>elki.index" as elki.index.DistanceIndex<O> [[../DistanceIndex.html]] {
+        {abstract} +getDistanceQuery(Distance<? super O>): DistanceQuery<O>
+    }
+    interface "<size:14>RangeIndex\n<size:10>elki.index" as elki.index.RangeIndex<O> [[../RangeIndex.html]] {
+        {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+    }
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<O> [[../KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    interface "<size:14>DistancePriorityIndex\n<size:10>elki.index" as elki.index.DistancePriorityIndex<O> [[../DistancePriorityIndex.html]] {
+        {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+    }
+    class "<size:14>PrecomputedDistanceMatrix.PrecomputedDistanceQuery\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistanceQuery [[PrecomputedDistanceMatrix.PrecomputedDistanceQuery.html]]
+    class "<size:14>PrecomputedDistanceMatrix.PrecomputedRangeQuery\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedRangeQuery [[PrecomputedDistanceMatrix.PrecomputedRangeQuery.html]]
+    class "<size:14>PrecomputedDistanceMatrix.PrecomputedKNNQuery\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedKNNQuery [[PrecomputedDistanceMatrix.PrecomputedKNNQuery.html]]
+    class "<size:14>PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher [[PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher.html]]
+    class "<size:14>PrecomputedDistanceMatrix.Factory\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedDistanceMatrix.Factory<O> [[PrecomputedDistanceMatrix.Factory.html]]
+
+    elki.index.DistanceIndex <|.. elki.index.distancematrix.PrecomputedDistanceMatrix
+    elki.index.RangeIndex <|.. elki.index.distancematrix.PrecomputedDistanceMatrix
+    elki.index.KNNIndex <|.. elki.index.distancematrix.PrecomputedDistanceMatrix
+    elki.index.DistancePriorityIndex <|.. elki.index.distancematrix.PrecomputedDistanceMatrix
+    elki.index.distancematrix.PrecomputedDistanceMatrix +-- elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistanceQuery
+    elki.index.distancematrix.PrecomputedDistanceMatrix +-- elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedRangeQuery
+    elki.index.distancematrix.PrecomputedDistanceMatrix +-- elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedKNNQuery
+    elki.index.distancematrix.PrecomputedDistanceMatrix +-- elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher
+    elki.index.distancematrix.PrecomputedDistanceMatrix +-- elki.index.distancematrix.PrecomputedDistanceMatrix.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

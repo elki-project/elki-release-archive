@@ -1,0 +1,330 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.scaling.outlier {
+
+        class OutlierLinearScaling [[OutlierLinearScaling.html]] {
+            #min: Double
+            #max: Double
+            ~factor: double
+            ~usemean: boolean
+            ~nozeros: boolean
+            +OutlierLinearScaling()
+            +OutlierLinearScaling(Double, Double, boolean, boolean)
+            +getScaled(double): double
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+            +getMin(): double
+            +getMax(): double
+        }
+
+        class elki.utilities.scaling.outlier.OutlierLinearScaling.Par [[OutlierLinearScaling.Par.html]] {
+            {static} +MIN_ID: OptionID
+            {static} +MAX_ID: OptionID
+            {static} +MEAN_ID: OptionID
+            {static} +NOZEROS_ID: OptionID
+            #min: Double
+            #max: Double
+            ~usemean: boolean
+            ~nozeros: boolean
+            +configure(Parameterization): void
+            +make(): OutlierLinearScaling
+        }
+
+        class OutlierSqrtScaling [[OutlierSqrtScaling.html]] {
+            #min: double
+            #max: double
+            #pmin: Double
+            #pmax: Double
+            #factor: double
+            +OutlierSqrtScaling(Double, Double)
+            +getScaled(double): double
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+            +getMin(): double
+            +getMax(): double
+        }
+
+        class elki.utilities.scaling.outlier.OutlierSqrtScaling.Par [[OutlierSqrtScaling.Par.html]] {
+            {static} +MIN_ID: OptionID
+            {static} +MAX_ID: OptionID
+            #min: double
+            #max: double
+            +configure(Parameterization): void
+            +make(): OutlierSqrtScaling
+        }
+
+        class RankingPseudoOutlierScaling [[RankingPseudoOutlierScaling.html]] {
+            -scores: double[]
+            -inverted: boolean
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+            +getMax(): double
+            +getMin(): double
+            +getScaled(double): double
+        }
+
+        class LogRankingPseudoOutlierScaling [[LogRankingPseudoOutlierScaling.html]] {
+            -scores: double[]
+            -inverted: boolean
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+            +getMax(): double
+            +getMin(): double
+            +getScaled(double): double
+        }
+
+        class MinusLogStandardDeviationScaling [[MinusLogStandardDeviationScaling.html]] {
+            +MinusLogStandardDeviationScaling(double, double)
+            +getScaled(double): double
+            +prepare(OutlierResult): void
+        }
+
+        class elki.utilities.scaling.outlier.MinusLogStandardDeviationScaling.Par [[MinusLogStandardDeviationScaling.Par.html]] {
+            +make(): MinusLogStandardDeviationScaling
+        }
+
+        class MixtureModelOutlierScaling [[MixtureModelOutlierScaling.html]] {
+            {static} -LOG: Logging
+            #mu: double
+            #sigma: double
+            #lambda: double
+            #alpha: double
+            {static} +ONEBYSQRT2PI: double
+            {static} -DELTA: double
+            {static} #calcP_i(double, double, double): double
+            {static} #calcQ_i(double, double): double
+            {static} #calcPosterior(double, double, double, double, double): double
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+            +getMax(): double
+            +getMin(): double
+            +getScaled(double): double
+        }
+
+        interface OutlierScaling [[OutlierScaling.html]] {
+            {abstract} +prepare(OutlierResult): void
+            {abstract} +prepare(A, NumberArrayAdapter<?, A>): void
+        }
+
+        class OutlierMinusLogScaling [[OutlierMinusLogScaling.html]] {
+            ~max: double
+            ~mlogmax: double
+            +getScaled(double): double
+            +getMin(): double
+            +getMax(): double
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+        }
+
+        class OutlierGammaScaling [[OutlierGammaScaling.html]] {
+            ~k: double
+            ~theta: double
+            ~atmean: double
+            ~normalize: boolean
+            ~meta: OutlierScoreMeta
+            +OutlierGammaScaling(boolean)
+            +getScaled(double): double
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+            #preScale(double): double
+            +getMin(): double
+            +getMax(): double
+        }
+
+        class elki.utilities.scaling.outlier.OutlierGammaScaling.Par [[OutlierGammaScaling.Par.html]] {
+            {static} +NORMALIZE_ID: OptionID
+            #normalize: boolean
+            +configure(Parameterization): void
+            +make(): OutlierGammaScaling
+        }
+
+        class StandardDeviationScaling [[StandardDeviationScaling.html]] {
+            #fixedmean: double
+            #lambda: double
+            ~mean: double
+            ~factor: double
+            +StandardDeviationScaling(double, double)
+            +StandardDeviationScaling()
+            +getScaled(double): double
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+            +getMin(): double
+            +getMax(): double
+        }
+
+        class elki.utilities.scaling.outlier.StandardDeviationScaling.Par [[StandardDeviationScaling.Par.html]] {
+            {static} +MEAN_ID: OptionID
+            {static} +LAMBDA_ID: OptionID
+            #fixedmean: double
+            #lambda: double
+            +configure(Parameterization): void
+            +make(): StandardDeviationScaling
+        }
+
+        class SigmoidOutlierScaling [[SigmoidOutlierScaling.html]] {
+            {static} -LOG: Logging
+            ~Afinal: double
+            ~Bfinal: double
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+            -MStepLevenbergMarquardt(double, double, ArrayDBIDs, long[], DoubleRelation): double[]
+            -MStepLevenbergMarquardt(double, double, long[], A, NumberArrayAdapter<?, A>): double[]
+            +getMax(): double
+            +getMin(): double
+            +getScaled(double): double
+        }
+
+        class MultiplicativeInverseScaling [[MultiplicativeInverseScaling.html]] {
+            ~scaleval: double
+            +getScaled(double): double
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+            +getMin(): double
+            +getMax(): double
+        }
+
+        class HeDESNormalizationOutlierScaling [[HeDESNormalizationOutlierScaling.html]] {
+            ~mean: double
+            ~stddev: double
+            ~scaledmin: double
+            ~scaledmax: double
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+            +getMax(): double
+            +getMin(): double
+            +getScaled(double): double
+        }
+
+        class COPOutlierScaling [[COPOutlierScaling.html]] {
+            -phi: double
+            -dist: Distribution
+            -inverted: boolean
+            +COPOutlierScaling(double)
+            +getScaled(double): double
+            +getMin(): double
+            +getMax(): double
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+        }
+
+        class elki.utilities.scaling.outlier.COPOutlierScaling.Par [[COPOutlierScaling.Par.html]] {
+            {static} +PHI_ID: OptionID
+            -phi: double
+            +configure(Parameterization): void
+            +make(): COPOutlierScaling
+        }
+
+        class MinusLogGammaScaling [[MinusLogGammaScaling.html]] {
+            ~max: double
+            ~mlogmax: double
+            #preScale(double): double
+            +prepare(OutlierResult): void
+        }
+
+        class elki.utilities.scaling.outlier.MinusLogGammaScaling.Par [[MinusLogGammaScaling.Par.html]] {
+            +make(): MinusLogGammaScaling
+        }
+
+        class SqrtStandardDeviationScaling [[SqrtStandardDeviationScaling.html]] {
+            ~min: double
+            ~mean: double
+            ~factor: double
+            ~pmin: double
+            ~pmean: double
+            ~plambda: double
+            +SqrtStandardDeviationScaling(double, double, double)
+            +getScaled(double): double
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+            +getMin(): double
+            +getMax(): double
+        }
+
+        class elki.utilities.scaling.outlier.SqrtStandardDeviationScaling.Par [[SqrtStandardDeviationScaling.Par.html]] {
+            {static} +MIN_ID: OptionID
+            {static} +MEAN_ID: OptionID
+            {static} +LAMBDA_ID: OptionID
+            ~min: double
+            ~mean: double
+            #lambda: double
+            +configure(Parameterization): void
+            +make(): SqrtStandardDeviationScaling
+        }
+
+        class TopKOutlierScaling [[TopKOutlierScaling.html]] {
+            -k: int
+            -binary: boolean
+            -cutoff: double
+            -ground: double
+            -max: double
+            +TopKOutlierScaling(int, boolean)
+            +prepare(OutlierResult): void
+            +prepare(A, NumberArrayAdapter<?, A>): void
+            +getMax(): double
+            +getMin(): double
+            +getScaled(double): double
+        }
+
+        class elki.utilities.scaling.outlier.TopKOutlierScaling.Par [[TopKOutlierScaling.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +BINARY_ID: OptionID
+            -k: int
+            -binary: boolean
+            +configure(Parameterization): void
+            +make(): TopKOutlierScaling
+        }
+
+        OutlierScaling <|.. OutlierLinearScaling
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.outlier.OutlierLinearScaling.Par
+        OutlierLinearScaling +-- elki.utilities.scaling.outlier.OutlierLinearScaling.Par
+        OutlierScaling <|.. OutlierSqrtScaling
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.outlier.OutlierSqrtScaling.Par
+        OutlierSqrtScaling +-- elki.utilities.scaling.outlier.OutlierSqrtScaling.Par
+        OutlierScaling <|.. RankingPseudoOutlierScaling
+        OutlierScaling <|.. LogRankingPseudoOutlierScaling
+        StandardDeviationScaling <|-- MinusLogStandardDeviationScaling
+        elki.utilities.scaling.outlier.StandardDeviationScaling.Par <|-- elki.utilities.scaling.outlier.MinusLogStandardDeviationScaling.Par
+        MinusLogStandardDeviationScaling +-- elki.utilities.scaling.outlier.MinusLogStandardDeviationScaling.Par
+        OutlierScaling <|.. MixtureModelOutlierScaling
+        elki.utilities.scaling.ScalingFunction <|-- OutlierScaling
+        OutlierScaling <|.. OutlierMinusLogScaling
+        OutlierScaling <|.. OutlierGammaScaling
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.outlier.OutlierGammaScaling.Par
+        OutlierGammaScaling +-- elki.utilities.scaling.outlier.OutlierGammaScaling.Par
+        OutlierScaling <|.. StandardDeviationScaling
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.outlier.StandardDeviationScaling.Par
+        StandardDeviationScaling +-- elki.utilities.scaling.outlier.StandardDeviationScaling.Par
+        OutlierScaling <|.. SigmoidOutlierScaling
+        OutlierScaling <|.. MultiplicativeInverseScaling
+        OutlierScaling <|.. HeDESNormalizationOutlierScaling
+        OutlierScaling <|.. COPOutlierScaling
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.outlier.COPOutlierScaling.Par
+        COPOutlierScaling +-- elki.utilities.scaling.outlier.COPOutlierScaling.Par
+        OutlierGammaScaling <|-- MinusLogGammaScaling
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.outlier.MinusLogGammaScaling.Par
+        MinusLogGammaScaling +-- elki.utilities.scaling.outlier.MinusLogGammaScaling.Par
+        OutlierScaling <|.. SqrtStandardDeviationScaling
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.outlier.SqrtStandardDeviationScaling.Par
+        SqrtStandardDeviationScaling +-- elki.utilities.scaling.outlier.SqrtStandardDeviationScaling.Par
+        OutlierScaling <|.. TopKOutlierScaling
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.outlier.TopKOutlierScaling.Par
+        TopKOutlierScaling +-- elki.utilities.scaling.outlier.TopKOutlierScaling.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.utilities.scaling {
+        interface ScalingFunction [[../ScalingFunction.html]] {
+            {abstract} +getScaled(double): double
+            {abstract} +getMin(): double
+            {abstract} +getMax(): double
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

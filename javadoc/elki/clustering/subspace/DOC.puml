@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DOC\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DOC [[DOC.html]] {
+        {static} -LOG: Logging
+        #alpha: double
+        #beta: double
+        #w: double
+        #rnd: RandomFactory
+        +DOC(double, double, double, RandomFactory)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends NumberVector>): Clustering<SubspaceModel>
+        #runDOC(Relation<? extends NumberVector>, ArrayModifiableDBIDs, int, int, int, int, int): Cluster<SubspaceModel>
+        #findNeighbors(DBIDRef, long[], ArrayModifiableDBIDs, Relation<? extends NumberVector>): DBIDs
+        #dimensionIsRelevant(int, Relation<? extends NumberVector>, DBIDs): boolean
+        #makeCluster(Relation<? extends NumberVector>, DBIDs, long[]): Cluster<SubspaceModel>
+        #computeClusterQuality(int, int): double
+    }
+
+    interface "<size:14>SubspaceClusteringAlgorithm\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.SubspaceClusteringAlgorithm<SubspaceModel> [[SubspaceClusteringAlgorithm.html]]
+    class "<size:14>DOC.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DOC.Par [[DOC.Par.html]]
+
+    elki.clustering.subspace.SubspaceClusteringAlgorithm <|.. elki.clustering.subspace.DOC
+    elki.clustering.subspace.DOC +-- elki.clustering.subspace.DOC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

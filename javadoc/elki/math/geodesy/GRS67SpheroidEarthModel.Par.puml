@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GRS67SpheroidEarthModel.Par\n<size:10>elki.math.geodesy" as elki.math.geodesy.GRS67SpheroidEarthModel.Par [[GRS67SpheroidEarthModel.Par.html]] {
+        +make(): GRS67SpheroidEarthModel
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>GRS67SpheroidEarthModel\n<size:10>elki.math.geodesy" as elki.math.geodesy.GRS67SpheroidEarthModel [[GRS67SpheroidEarthModel.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.geodesy.GRS67SpheroidEarthModel.Par
+    elki.math.geodesy.GRS67SpheroidEarthModel +-- elki.math.geodesy.GRS67SpheroidEarthModel.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

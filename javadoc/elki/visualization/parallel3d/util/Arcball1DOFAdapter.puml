@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Arcball1DOFAdapter\n<size:10>elki.visualization.parallel3d.util" as elki.visualization.parallel3d.util.Arcball1DOFAdapter [[Arcball1DOFAdapter.html]] {
+        {static} -DEBUG: boolean
+        -camera: Simple1DOFCamera
+        -startvec: double[]
+        -endvec: double[]
+        -near: double[]
+        -far: double[]
+        ~startangle: double
+        -startcamera: Simple1DOFCamera
+        +Arcball1DOFAdapter(Simple1DOFCamera)
+        +mouseWheelMoved(MouseWheelEvent): void
+        +mousePressed(MouseEvent): void
+        -mapMouseToPlane(Simple1DOFCamera, Point, double[]): void
+        +mouseDragged(MouseEvent): void
+        +debugRender(GL2): void
+    }
+
+    abstract class "<size:14>MouseInputAdapter\n<size:10>javax.swing.event" as javax.swing.event.MouseInputAdapter
+
+    javax.swing.event.MouseInputAdapter <|-- elki.visualization.parallel3d.util.Arcball1DOFAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SpatialUtil\n<size:10>elki.data.spatial" as elki.data.spatial.SpatialUtil [[SpatialUtil.html]] {
+        {static} +assertSameDimensionality(SpatialComparable, SpatialComparable): int
+        {static} +getMin(SpatialComparable): double[]
+        {static} +getMax(SpatialComparable): double[]
+        {static} +intersects(SpatialComparable, SpatialComparable): boolean
+        {static} +contains(SpatialComparable, SpatialComparable): boolean
+        {static} +contains(SpatialComparable, double[]): boolean
+        {static} +volume(SpatialComparable): double
+        {static} +volumeUnion(SpatialComparable, SpatialComparable): double
+        {static} +volumeScaled(SpatialComparable, double): double
+        {static} +volumeUnionScaled(SpatialComparable, SpatialComparable, double): double
+        {static} +enlargement(SpatialComparable, SpatialComparable): double
+        {static} +perimeter(SpatialComparable): double
+        {static} +overlap(SpatialComparable, SpatialComparable): double
+        {static} +relativeOverlap(SpatialComparable, SpatialComparable): double
+        {static} +union(SpatialComparable, SpatialComparable): ModifiableHyperBoundingBox
+        {static} +unionTolerant(SpatialComparable, SpatialComparable): ModifiableHyperBoundingBox
+        {static} +intersection(SpatialComparable, SpatialComparable): ModifiableHyperBoundingBox
+        {static} +centroid(SpatialComparable): double[]
+        {static} +equals(SpatialComparable, SpatialComparable): boolean
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

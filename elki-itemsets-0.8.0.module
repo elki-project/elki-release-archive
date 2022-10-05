@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-itemsets",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-itemsets-0.8.0.jar",
+          "url": "elki-itemsets-0.8.0.jar",
+          "size": 79335,
+          "sha512": "1900475f5bf776d17cd813ce44e096ed7aacce893235e3fbffa2fea433de5e9a882bb546583f683a238ae0cde8cc404af6cd2057f2a473669785fcec1ea5e9e1",
+          "sha256": "dc964f019f1bf438cf46f9e7c9761bf3ec179472613ff5f402e90546436c9adb",
+          "sha1": "392590399dd1cafe26f88d6ff8e3373b87e56f70",
+          "md5": "a1d43b73415cdbfa88796bcdde94a319"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-itemsets-0.8.0.jar",
+          "url": "elki-itemsets-0.8.0.jar",
+          "size": 79335,
+          "sha512": "1900475f5bf776d17cd813ce44e096ed7aacce893235e3fbffa2fea433de5e9a882bb546583f683a238ae0cde8cc404af6cd2057f2a473669785fcec1ea5e9e1",
+          "sha256": "dc964f019f1bf438cf46f9e7c9761bf3ec179472613ff5f402e90546436c9adb",
+          "sha1": "392590399dd1cafe26f88d6ff8e3373b87e56f70",
+          "md5": "a1d43b73415cdbfa88796bcdde94a319"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-itemsets",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-itemsets-0.8.0-test-fixtures.jar",
+          "url": "elki-itemsets-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "5957add878076a1e76d8a65139a493e52f65dbed46ef43d328b48c4e812395462d7ef751cd75ec9b8efea7b191ead53cacb70332114114d86dc822a17eae65ec",
+          "sha256": "b523ccaeb6461b7f6f4a636e20dfdd91bd0186b52865726fe3486a645656bae9",
+          "sha1": "a0fa2bce71fbbc8505d7919e6a660e0b86497d57",
+          "md5": "fe8927da05ef596fe1f2e46d9936b607"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-itemsets-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-itemsets",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-itemsets-0.8.0-test-fixtures.jar",
+          "url": "elki-itemsets-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "5957add878076a1e76d8a65139a493e52f65dbed46ef43d328b48c4e812395462d7ef751cd75ec9b8efea7b191ead53cacb70332114114d86dc822a17eae65ec",
+          "sha256": "b523ccaeb6461b7f6f4a636e20dfdd91bd0186b52865726fe3486a645656bae9",
+          "sha1": "a0fa2bce71fbbc8505d7919e6a660e0b86497d57",
+          "md5": "fe8927da05ef596fe1f2e46d9936b607"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-itemsets-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

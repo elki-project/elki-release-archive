@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PlotItem\n<size:10>elki.visualization.gui.overview" as elki.visualization.gui.overview.PlotItem [[PlotItem.html]] {
+        +x: double
+        +y: double
+        +w: double
+        +h: double
+        +proj: Projection
+        +tasks: List<VisualizationTask>
+        +subitems: Collection<PlotItem>
+        +PlotItem(double, double, Projection)
+        +PlotItem(double, double, double, double, Projection)
+        +PlotItem(PlotItem)
+        +sort(): void
+        +add(VisualizationTask): void
+        +taskSize(): int
+        +itemIterator(): Iterator<PlotItem>
+    }
+    class "<size:14>PlotItem.ItmItr\n<size:10>elki.visualization.gui.overview" as elki.visualization.gui.overview.PlotItem.ItmItr [[PlotItem.ItmItr.html]]
+
+    elki.visualization.gui.overview.PlotItem +-- elki.visualization.gui.overview.PlotItem.ItmItr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

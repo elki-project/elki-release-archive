@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AggarwalYuEvolutionary.Individuum\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.AggarwalYuEvolutionary.Individuum [[AggarwalYuEvolutionary.Individuum.html]] {
+        ~fitness: double
+        ~gene: short[]
+        +Individuum(double, short[])
+        +getGene(): short[]
+        +getFitness(): double
+        {static} +nullIndividuum(int): Individuum
+        +compareTo(Individuum): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<Individuum> {
+        {abstract} +compareTo(Individuum): int
+    }
+    class "<size:14>AggarwalYuEvolutionary\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.AggarwalYuEvolutionary [[AggarwalYuEvolutionary.html]]
+
+    java.lang.Comparable <|.. elki.outlier.subspace.AggarwalYuEvolutionary.Individuum
+    elki.outlier.subspace.AggarwalYuEvolutionary +-- elki.outlier.subspace.AggarwalYuEvolutionary.Individuum
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

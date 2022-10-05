@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MultipleLinearRegression\n<size:10>elki.math.statistics" as elki.math.statistics.MultipleLinearRegression [[MultipleLinearRegression.html]] {
+        -y: double[]
+        -y_mean: double
+        -x: double[]
+        -b: double[]
+        -e: double[]
+        -variance: double
+        -xx_inverse: double[]
+        -ssr: double
+        -sst: double
+        +MultipleLinearRegression(double[], double[])
+        +getSumOfSquaresTotal(): double
+        +getSumOfSquareResiduals(): double
+        +getEstimatedCoefficients(): double[]
+        +getEstimatedResiduals(): double[]
+        +coefficientOfDetermination(): double
+        +estimateY(double[]): double
+        +getVariance(): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

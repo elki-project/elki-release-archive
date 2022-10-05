@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomSubsetProjectionFamily\n<size:10>elki.data.projection.random" as elki.data.projection.random.RandomSubsetProjectionFamily [[RandomSubsetProjectionFamily.html]] {
+        +RandomSubsetProjectionFamily(RandomFactory)
+        +generateProjection(int, int): Projection
+        {static} +randomPermutation(int[], Random): int[]
+        {static} -sequence(int): int[]
+    }
+
+    abstract class "<size:14>AbstractRandomProjectionFamily\n<size:10>elki.data.projection.random" as elki.data.projection.random.AbstractRandomProjectionFamily [[AbstractRandomProjectionFamily.html]]
+    class "<size:14>RandomSubsetProjectionFamily.SubsetProjection\n<size:10>elki.data.projection.random" as elki.data.projection.random.RandomSubsetProjectionFamily.SubsetProjection [[RandomSubsetProjectionFamily.SubsetProjection.html]]
+    class "<size:14>RandomSubsetProjectionFamily.Par\n<size:10>elki.data.projection.random" as elki.data.projection.random.RandomSubsetProjectionFamily.Par [[RandomSubsetProjectionFamily.Par.html]]
+
+    elki.data.projection.random.AbstractRandomProjectionFamily <|-- elki.data.projection.random.RandomSubsetProjectionFamily
+    elki.data.projection.random.RandomSubsetProjectionFamily +-- elki.data.projection.random.RandomSubsetProjectionFamily.SubsetProjection
+    elki.data.projection.random.RandomSubsetProjectionFamily +-- elki.data.projection.random.RandomSubsetProjectionFamily.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

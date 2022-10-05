@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SingleThreadedExecutor.SingleThreadedRunner\n<size:10>elki.parallel" as elki.parallel.SingleThreadedExecutor.SingleThreadedRunner [[SingleThreadedExecutor.SingleThreadedRunner.html]] {
+        -ids: DBIDs
+        -procs: Processor[]
+        -variables: HashMap<SharedVariable<?>, Instance<?>>
+        #SingleThreadedRunner(DBIDs, Processor[])
+        +run(): void
+        +getInstance(SharedVariable<I extends Instance<?>>): I extends Instance<?>
+    }
+
+    interface "<size:14>Executor\n<size:10>elki.parallel" as elki.parallel.Executor [[Executor.html]] {
+        {abstract} +getInstance(SharedVariable<I extends Instance<?>>): I extends Instance<?>
+    }
+    class "<size:14>SingleThreadedExecutor\n<size:10>elki.parallel" as elki.parallel.SingleThreadedExecutor [[SingleThreadedExecutor.html]]
+
+    elki.parallel.Executor <|.. elki.parallel.SingleThreadedExecutor.SingleThreadedRunner
+    elki.parallel.SingleThreadedExecutor +-- elki.parallel.SingleThreadedExecutor.SingleThreadedRunner
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,487 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.subspace {
+
+        class DiSH [[DiSH.html]] {
+            {static} -LOG: Logging
+            -epsilon: double
+            -minpts: int
+            +DiSH(double, int, Strategy)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): Clustering<SubspaceModel>
+            -computeClusters(Relation<? extends NumberVector>, DiSHClusterOrder): Clustering<SubspaceModel>
+            -logClusterSizes(String, int, Object2ObjectOpenCustomHashMap<long[], List<ArrayModifiableDBIDs>>): void
+            -extractClusters(Relation<? extends NumberVector>, DiSHClusterOrder): Object2ObjectOpenCustomHashMap<long[], List<ArrayModifiableDBIDs>>
+            -sortClusters(Relation<? extends NumberVector>, Object2ObjectMap<long[], List<ArrayModifiableDBIDs>>): List<Cluster<SubspaceModel>>
+            -checkClusters(Relation<? extends NumberVector>, Object2ObjectMap<long[], List<ArrayModifiableDBIDs>>): void
+            -findParent(Relation<? extends NumberVector>, Pair<long[], ArrayModifiableDBIDs>, Object2ObjectMap<long[], List<ArrayModifiableDBIDs>>): Pair<long[], ArrayModifiableDBIDs>
+            -buildHierarchy(Relation<? extends NumberVector>, Clustering<SubspaceModel>, List<Cluster<SubspaceModel>>, int): void
+            -isParent(Relation<? extends NumberVector>, Cluster<SubspaceModel>, It<Cluster<SubspaceModel>>, int): boolean
+            -subspaceDimensionality(NumberVector, NumberVector, long[], long[], long[]): int
+            {static} #weightedDistance(NumberVector, NumberVector, long[]): double
+        }
+
+        enum elki.clustering.subspace.DiSH.Strategy [[DiSH.Strategy.html]] {
+            {static} +APRIORI
+            {static} +MAX_INTERSECTION
+        }
+
+        class elki.clustering.subspace.DiSH.Instance [[DiSH.Instance.html]] {
+            -relation: Relation<? extends NumberVector>
+            -clusterOrder: ArrayModifiableDBIDs
+            -correlationValue: WritableIntegerDataStore
+            -commonPreferenceVectors: WritableDataStore<long[]>
+            -tmpIds: ArrayModifiableDBIDs
+            -tmpCorrelation: WritableIntegerDataStore
+            -tmpDistance: WritableDoubleDataStore
+            ~tmpcomp: Comparator<DBIDRef>
+            #preferenceVectors: WritableDataStore<long[]>
+            -tmpPreferenceVectors: WritableDataStore<long[]>
+            +Instance(Relation<? extends NumberVector>)
+            +run(): DiSHClusterOrder
+            -determinePreferenceVector(ModifiableDBIDs[], StringBuilder): long[]
+            -determinePreferenceVectorByApriori(ModifiableDBIDs[], StringBuilder): long[]
+            -determinePreferenceVectorByMaxIntersection(ModifiableDBIDs[], StringBuilder): long[]
+            -max(Map<Integer, ModifiableDBIDs>): int
+            -maxIntersection(Map<Integer, ModifiableDBIDs>, ModifiableDBIDs): int
+            #buildResult(): DiSHClusterOrder
+            #initialDBID(DBIDRef): void
+            #expandDBID(DBIDRef): void
+            +compare(DBIDRef, DBIDRef): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.subspace.DiSH.Instance.Sorter [[DiSH.Instance.Sorter.html]] {
+            +compare(DBIDRef, DBIDRef): int
+        }
+
+        class elki.clustering.subspace.DiSH.DiSHClusterOrder [[DiSH.DiSHClusterOrder.html]] {
+            -commonPreferenceVectors: WritableDataStore<long[]>
+            +DiSHClusterOrder(ArrayModifiableDBIDs, WritableDoubleDataStore, WritableDBIDDataStore, WritableIntegerDataStore, WritableDataStore<long[]>)
+            +getCommonPreferenceVector(DBIDRef): long[]
+        }
+
+        class elki.clustering.subspace.DiSH.Par [[DiSH.Par.html]] {
+            {static} +DEFAULT_EPSILON: double
+            {static} +EPSILON_ID: OptionID
+            {static} +MINPTS_ID: OptionID
+            {static} +STRATEGY_ID: OptionID
+            {static} +MU_ID: OptionID
+            #epsilon: double
+            #minpts: int
+            +configure(Parameterization): void
+            +make(): DiSH
+        }
+
+        class P3C [[P3C.html]] {
+            {static} -LOG: Logging
+            #poissonThreshold: double
+            #maxEmIterations: int
+            #emDelta: double
+            #minClusterSize: int
+            #alpha: double
+            +P3C(double, double, int, double, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): Clustering<SubspaceModel>
+            -constructOneSignatures(SetDBIDs[], long[]): ArrayList<Signature>
+            -mergeClusterCores(int, ArrayList<Signature>): ArrayList<Signature>
+            -pruneRedundantClusterCores(ArrayList<Signature>): ArrayList<Signature>
+            -partitionData(Relation<? extends NumberVector>, int): SetDBIDs[]
+            #unionDBIDs(DBIDs[], int, int): HashSetModifiableDBIDs
+            -chiSquaredUniformTest(SetDBIDs[], long[], int): int
+            -computeFuzzyMembership(Relation<? extends NumberVector>, ArrayList<Signature>, ModifiableDBIDs, WritableDataStore<double[]>, List<MultivariateGaussianModel>, int): void
+            -assignUnassigned(Relation<? extends NumberVector>, WritableDataStore<double[]>, List<MultivariateGaussianModel>, ModifiableDBIDs): void
+            -hardClustering(WritableDataStore<double[]>, List<Signature>, DBIDs): ArrayList<ClusterCandidate>
+            -findOutliers(Relation<? extends NumberVector>, List<MultivariateGaussianModel>, ArrayList<ClusterCandidate>, ModifiableDBIDs): void
+            #mergeSignatures(Signature, Signature, int): Signature
+        }
+
+        class elki.clustering.subspace.P3C.Signature [[P3C.Signature.html]] {
+            ~spec: int[]
+            ~ids: DBIDs
+            ~prune: boolean
+            -Signature(int[], DBIDs)
+            +isSuperset(Signature): boolean
+            +getFirstDim(): int
+        }
+
+        class elki.clustering.subspace.P3C.ClusterCandidate [[P3C.ClusterCandidate.html]] {
+            +dimensions: long[]
+            +ids: ModifiableDBIDs
+            +ClusterCandidate(Signature)
+        }
+
+        class elki.clustering.subspace.P3C.Par [[P3C.Par.html]] {
+            {static} +ALPHA_THRESHOLD_ID: OptionID
+            {static} +POISSON_THRESHOLD_ID: OptionID
+            {static} +MAX_EM_ITERATIONS_ID: OptionID
+            {static} +EM_DELTA_ID: OptionID
+            {static} +MIN_CLUSTER_SIZE_ID: OptionID
+            #alpha: double
+            #poissonThreshold: double
+            #maxEmIterations: int
+            #emDelta: double
+            #minClusterSize: int
+            +configure(Parameterization): void
+            +make(): P3C
+        }
+
+        class PreDeCon [[PreDeCon.html]] {
+            +PreDeCon(Settings)
+        }
+
+        class elki.clustering.subspace.PreDeCon.Settings [[PreDeCon.Settings.html]] {
+            +epsilon: double
+            +delta: double
+            +kappa: double
+            +minpts: int
+            +lambda: int
+        }
+
+        class elki.clustering.subspace.PreDeCon.Settings.Par [[PreDeCon.Settings.Par.html]] {
+            {static} +DELTA_ID: OptionID
+            {static} +KAPPA_ID: OptionID
+            {static} +KAPPA_DEFAULT: double
+            {static} +LAMBDA_ID: OptionID
+            +configure(Parameterization): void
+            #configEpsilon(Parameterization): void
+            #configMinPts(Parameterization): void
+            #configDelta(Parameterization): void
+            #configKappa(Parameterization): void
+            #configLambda(Parameterization): void
+            +make(): Settings
+        }
+
+        class elki.clustering.subspace.PreDeCon.Par [[PreDeCon.Par.html]] {
+            +configure(Parameterization): void
+            +make(): PreDeCon
+        }
+
+        class HiSC [[HiSC.html]] {
+            {static} -LOG: Logging
+            -alpha: double
+            #k: int
+            +HiSC(double, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): ClusterOrder
+            +weightedDistance(NumberVector, NumberVector, long[]): double
+            +getMinPts(): int
+        }
+
+        class elki.clustering.subspace.HiSC.Instance [[HiSC.Instance.html]] {
+            #preferenceVectors: WritableDataStore<long[]>
+            -clusterOrder: ArrayModifiableDBIDs
+            -relation: Relation<? extends NumberVector>
+            -correlationValue: WritableIntegerDataStore
+            -commonPreferenceVectors: WritableDataStore<long[]>
+            +Instance(Relation<? extends NumberVector>)
+            +run(): CorrelationClusterOrder
+            -determinePreferenceVector(DBIDRef, DBIDs): long[]
+            #buildResult(): CorrelationClusterOrder
+            #initialDBID(DBIDRef): void
+            #expandDBID(DBIDRef): void
+            +compare(DBIDRef, DBIDRef): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.subspace.HiSC.Par [[HiSC.Par.html]] {
+            {static} +EPSILON_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            {static} +DEFAULT_ALPHA: double
+            {static} +K_ID: OptionID
+            #alpha: double
+            #k: int
+            +configure(Parameterization): void
+            +make(): HiSC
+        }
+
+        class FastDOC [[FastDOC.html]] {
+            {static} -LOG: Logging
+            -d_zero: int
+            +FastDOC(double, double, double, int, RandomFactory)
+            #runDOC(Relation<? extends NumberVector>, ArrayModifiableDBIDs, int, int, int, int, int): Cluster<SubspaceModel>
+        }
+
+        class elki.clustering.subspace.FastDOC.Par [[FastDOC.Par.html]] {
+            {static} +D_ZERO_ID: OptionID
+            #d_zero: int
+            +configure(Parameterization): void
+            +make(): FastDOC
+        }
+
+        interface SubspaceClusteringAlgorithm<M extends SubspaceModel> [[SubspaceClusteringAlgorithm.html]]
+
+        class PROCLUS [[PROCLUS.html]] {
+            {static} -LOG: Logging
+            -m_i: int
+            -rnd: RandomFactory
+            +PROCLUS(int, int, int, int, RandomFactory)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): Clustering<SubspaceModel>
+            -greedy(DistanceQuery<? extends NumberVector>, DBIDs, int, Random): ArrayDBIDs
+            -initialSet(DBIDs, int, Random): ArrayDBIDs
+            -computeM_current(DBIDs, DBIDs, DBIDs, Random): ArrayDBIDs
+            -getLocalities(DBIDs, DistanceQuery<? extends NumberVector>, RangeSearcher<DBIDRef>): DataStore<DBIDs>
+            -findDimensions(ArrayDBIDs, Relation<? extends NumberVector>, DistanceQuery<? extends NumberVector>, RangeSearcher<DBIDRef>): long[]
+            -findDimensions(ArrayList<PROCLUSCluster>, Relation<? extends NumberVector>): List<Pair<double[], long[]>>
+            -computeZijs(double[], int): List<DoubleIntInt>
+            -computeDimensionMap(List<DoubleIntInt>, int, int): long[]
+            -assignPoints(ArrayDBIDs, long[], Relation<? extends NumberVector>): ArrayList<PROCLUSCluster>
+            -finalAssignment(List<Pair<double[], long[]>>, Relation<? extends NumberVector>): List<PROCLUSCluster>
+            -manhattanSegmentalDistance(NumberVector, NumberVector, long[]): double
+            -manhattanSegmentalDistance(NumberVector, double[], long[]): double
+            -evaluateClusters(ArrayList<PROCLUSCluster>, long[], Relation<? extends NumberVector>): double
+            -avgDistance(double[], DBIDs, Relation<? extends NumberVector>, int): double
+            -computeBadMedoids(ArrayDBIDs, ArrayList<PROCLUSCluster>, int): DBIDs
+        }
+
+        class elki.clustering.subspace.PROCLUS.DoubleIntInt [[PROCLUS.DoubleIntInt.html]] {
+            #first: double
+            #dimi: int
+            #dimj: int
+            +DoubleIntInt(double, int, int)
+            +compareTo(DoubleIntInt): int
+        }
+
+        class elki.clustering.subspace.PROCLUS.PROCLUSCluster [[PROCLUS.PROCLUSCluster.html]] {
+            ~objectIDs: ModifiableDBIDs
+            ~dimensions: long[]
+            ~centroid: double[]
+            +PROCLUSCluster(ModifiableDBIDs, long[], double[])
+            +getDimensions(): long[]
+        }
+
+        class elki.clustering.subspace.PROCLUS.Par [[PROCLUS.Par.html]] {
+            {static} +M_I_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #m_i: int
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): PROCLUS
+        }
+
+        class DOC [[DOC.html]] {
+            {static} -LOG: Logging
+            #alpha: double
+            #beta: double
+            #w: double
+            #rnd: RandomFactory
+            +DOC(double, double, double, RandomFactory)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): Clustering<SubspaceModel>
+            #runDOC(Relation<? extends NumberVector>, ArrayModifiableDBIDs, int, int, int, int, int): Cluster<SubspaceModel>
+            #findNeighbors(DBIDRef, long[], ArrayModifiableDBIDs, Relation<? extends NumberVector>): DBIDs
+            #dimensionIsRelevant(int, Relation<? extends NumberVector>, DBIDs): boolean
+            #makeCluster(Relation<? extends NumberVector>, DBIDs, long[]): Cluster<SubspaceModel>
+            #computeClusterQuality(int, int): double
+        }
+
+        class elki.clustering.subspace.DOC.Par [[DOC.Par.html]] {
+            {static} +ALPHA_ID: OptionID
+            {static} +BETA_ID: OptionID
+            {static} +W_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            #alpha: double
+            #beta: double
+            #w: double
+            #random: RandomFactory
+            +configure(Parameterization): void
+            +make(): DOC
+        }
+
+        class SUBCLU<V extends NumberVector> [[SUBCLU.html]] {
+            {static} -LOG: Logging
+            #distance: DimensionSelectingSubspaceDistance<V extends NumberVector>
+            #epsilon: double
+            #minpts: int
+            #mindim: int
+            +SUBCLU(DimensionSelectingSubspaceDistance<V extends NumberVector>, double, int, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): Clustering<SubspaceModel>
+            -runDBSCAN(Relation<V extends NumberVector>, DBIDs, Subspace): List<Cluster<Model>>
+            -generateSubspaceCandidates(List<Subspace>): List<Subspace>
+            -checkLower(Subspace, List<Subspace>): boolean
+            -bestSubspace(List<Subspace>, Subspace, TreeMap<Subspace, List<Cluster<Model>>>): Subspace
+        }
+
+        class elki.clustering.subspace.SUBCLU.Par<V extends NumberVector> [[SUBCLU.Par.html]] {
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            {static} +EPSILON_ID: OptionID
+            {static} +MINPTS_ID: OptionID
+            {static} +MINDIM_ID: OptionID
+            #distance: DimensionSelectingSubspaceDistance<V extends NumberVector>
+            #epsilon: double
+            #minpts: int
+            #mindim: int
+            +configure(Parameterization): void
+            +make(): SUBCLU<V extends NumberVector>
+        }
+
+        class CLIQUE [[CLIQUE.html]] {
+            {static} -LOG: Logging
+            #xsi: int
+            #tau: double
+            #prune: boolean
+            +CLIQUE(int, double, boolean)
+            +run(Relation<? extends NumberVector>): Clustering<SubspaceModel>
+            -determineClusters(List<CLIQUESubspace>): List<Pair<Subspace, ModifiableDBIDs>>
+            -findOneDimensionalDenseSubspaces(Relation<? extends NumberVector>): List<CLIQUESubspace>
+            -findDenseSubspaces(Relation<? extends NumberVector>, List<CLIQUESubspace>): List<CLIQUESubspace>
+            -initOneDimensionalUnits(Relation<? extends NumberVector>): Collection<CLIQUEUnit>
+            -updateMinMax(NumberVector, double[], double[]): void
+            -findOneDimensionalDenseSubspaceCandidates(Relation<? extends NumberVector>): List<CLIQUESubspace>
+            -findDenseSubspaceCandidates(Relation<? extends NumberVector>, List<CLIQUESubspace>): List<CLIQUESubspace>
+            -pruneDenseSubspaces(List<CLIQUESubspace>): List<CLIQUESubspace>
+            -computeMeans(List<CLIQUESubspace>): int[]
+            -computeDiffs(List<CLIQUESubspace>, int[], int[]): double[]
+            {static} -log2OrZero(double): double
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.subspace.CLIQUE.Par [[CLIQUE.Par.html]] {
+            {static} +XSI_ID: OptionID
+            {static} +TAU_ID: OptionID
+            {static} +PRUNE_ID: OptionID
+            #xsi: int
+            #tau: double
+            #prune: boolean
+            +configure(Parameterization): void
+            +make(): CLIQUE
+        }
+
+        SubspaceClusteringAlgorithm <|.. DiSH
+        DiSH --> elki.clustering.subspace.DiSH.Strategy: strategy
+        DiSH +-- elki.clustering.subspace.DiSH.Strategy
+        elki.clustering.optics.GeneralizedOPTICS.Instance <|-- elki.clustering.subspace.DiSH.Instance
+        DiSH +-- elki.clustering.subspace.DiSH.Instance
+        java.util.Comparator <|.. elki.clustering.subspace.DiSH.Instance.Sorter
+        elki.clustering.subspace.DiSH.Instance +-- elki.clustering.subspace.DiSH.Instance.Sorter
+        elki.clustering.optics.CorrelationClusterOrder <|-- elki.clustering.subspace.DiSH.DiSHClusterOrder
+        DiSH +-- elki.clustering.subspace.DiSH.DiSHClusterOrder
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.subspace.DiSH.Par
+        DiSH +-- elki.clustering.subspace.DiSH.Par
+        elki.clustering.subspace.DiSH.Par --> elki.clustering.subspace.DiSH.Strategy: DEFAULT_STRATEGY\nstrategy
+        SubspaceClusteringAlgorithm <|.. P3C
+        P3C +-- elki.clustering.subspace.P3C.Signature
+        P3C +-- elki.clustering.subspace.P3C.ClusterCandidate
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.subspace.P3C.Par
+        P3C +-- elki.clustering.subspace.P3C.Par
+        elki.clustering.dbscan.GeneralizedDBSCAN <|-- PreDeCon
+        PreDeCon +-- elki.clustering.subspace.PreDeCon.Settings
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.subspace.PreDeCon.Settings.Par
+        elki.clustering.subspace.PreDeCon.Settings +-- elki.clustering.subspace.PreDeCon.Settings.Par
+        elki.clustering.subspace.PreDeCon.Settings.Par --> elki.clustering.subspace.PreDeCon.Settings: settings
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.subspace.PreDeCon.Par
+        PreDeCon +-- elki.clustering.subspace.PreDeCon.Par
+        elki.clustering.subspace.PreDeCon.Par --> elki.clustering.subspace.PreDeCon.Settings: settings
+        elki.clustering.optics.GeneralizedOPTICS <|.. HiSC
+        elki.clustering.optics.GeneralizedOPTICS.Instance <|-- elki.clustering.subspace.HiSC.Instance
+        HiSC +-- elki.clustering.subspace.HiSC.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.subspace.HiSC.Par
+        HiSC +-- elki.clustering.subspace.HiSC.Par
+        DOC <|-- FastDOC
+        elki.clustering.subspace.DOC.Par <|-- elki.clustering.subspace.FastDOC.Par
+        FastDOC +-- elki.clustering.subspace.FastDOC.Par
+        elki.clustering.ClusteringAlgorithm <|-- SubspaceClusteringAlgorithm
+        elki.clustering.AbstractProjectedClustering <|-- PROCLUS
+        SubspaceClusteringAlgorithm <|.. PROCLUS
+        java.lang.Comparable <|.. elki.clustering.subspace.PROCLUS.DoubleIntInt
+        PROCLUS +-- elki.clustering.subspace.PROCLUS.DoubleIntInt
+        PROCLUS +-- elki.clustering.subspace.PROCLUS.PROCLUSCluster
+        elki.clustering.AbstractProjectedClustering.Par <|-- elki.clustering.subspace.PROCLUS.Par
+        PROCLUS +-- elki.clustering.subspace.PROCLUS.Par
+        SubspaceClusteringAlgorithm <|.. DOC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.subspace.DOC.Par
+        DOC +-- elki.clustering.subspace.DOC.Par
+        SubspaceClusteringAlgorithm <|.. SUBCLU
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.subspace.SUBCLU.Par
+        SUBCLU +-- elki.clustering.subspace.SUBCLU.Par
+        SubspaceClusteringAlgorithm <|.. CLIQUE
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.subspace.CLIQUE.Par
+        CLIQUE +-- elki.clustering.subspace.CLIQUE.Par
+    }
+
+    namespace elki.clustering.optics {
+        abstract class elki.clustering.optics.GeneralizedOPTICS.Instance<R> [[../optics/GeneralizedOPTICS.Instance.html]] {
+            #processedIDs: ModifiableDBIDs
+            #candidates: ArrayModifiableDBIDs
+            #predecessor: WritableDBIDDataStore
+            #reachability: WritableDoubleDataStore
+            ~ids: DBIDs
+            ~progress: FiniteProgress
+            {abstract} #initialDBID(DBIDRef): void
+            {abstract} #expandDBID(DBIDRef): void
+            {abstract} #buildResult(): R
+            {abstract} #getLogger(): Logging
+        }
+        class CorrelationClusterOrder [[../optics/CorrelationClusterOrder.html]] {
+            #correlationValue: WritableIntegerDataStore
+        }
+        interface GeneralizedOPTICS [[../optics/GeneralizedOPTICS.html]]
+    }
+
+    namespace java.util {
+        interface Comparator<T> {
+            {abstract} +compare(T, T): int
+            +reversed(): Comparator<T>
+            +thenComparing(Comparator<? super T>): Comparator<T>
+            +thenComparing(Function<? super T, ? extends U>, Comparator<? super U>): Comparator<T>
+            +thenComparing(Function<? super T, ? extends Comparable<? super U>>): Comparator<T>
+            +thenComparingInt(ToIntFunction<? super T>): Comparator<T>
+            +thenComparingLong(ToLongFunction<? super T>): Comparator<T>
+            +thenComparingDouble(ToDoubleFunction<? super T>): Comparator<T>
+            {static} +reverseOrder(): Comparator<T extends Comparable<? super T>>
+            {static} +naturalOrder(): Comparator<T extends Comparable<? super T>>
+            {static} +nullsFirst(Comparator<? super T>): Comparator<T>
+            {static} +nullsLast(Comparator<? super T>): Comparator<T>
+            {static} +comparing(Function<? super T, ? extends U>, Comparator<? super U>): Comparator<T>
+            {static} +comparing(Function<? super T, ? extends Comparable<? super U>>): Comparator<T>
+            {static} +comparingInt(ToIntFunction<? super T>): Comparator<T>
+            {static} +comparingLong(ToLongFunction<? super T>): Comparator<T>
+            {static} +comparingDouble(ToDoubleFunction<? super T>): Comparator<T>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.clustering.dbscan {
+        class GeneralizedDBSCAN [[../dbscan/GeneralizedDBSCAN.html]] {
+            {static} -LOG: Logging
+            #npred: NeighborPredicate<?>
+            #corepred: CorePredicate<?>
+            #coremodel: boolean
+        }
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+        abstract class AbstractProjectedClustering<R extends Clustering<?>> [[../AbstractProjectedClustering.html]] {
+            #k: int
+            #k_i: int
+            #l: int
+        }
+        abstract class elki.clustering.AbstractProjectedClustering.Par [[../AbstractProjectedClustering.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +K_I_ID: OptionID
+            {static} +L_ID: OptionID
+            #k: int
+            #k_i: int
+            #l: int
+        }
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

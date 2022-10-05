@@ -1,0 +1,188 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering {
+
+        class NaiveMeanShiftClustering<V extends NumberVector> [[NaiveMeanShiftClustering.html]] {
+            {static} -LOG: Logging
+            #distance: NumberVectorDistance<? super NumberVector>
+            #kernel: KernelDensityFunction
+            #bandwidth: double
+            {static} #MAXITER: int
+            +NaiveMeanShiftClustering(NumberVectorDistance<? super NumberVector>, KernelDensityFunction, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): Clustering<MeanModel>
+        }
+
+        class elki.clustering.NaiveMeanShiftClustering.Par<V extends NumberVector> {
+            {static} +KERNEL_ID: OptionID
+            {static} +RANGE_ID: OptionID
+            ~kernel: KernelDensityFunction
+            ~range: double
+            #distance: NumberVectorDistance<? super NumberVector>
+            +configure(Parameterization): void
+            +make(): NaiveMeanShiftClustering<V extends NumberVector>
+        }
+
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+
+        class SNNClustering<O> [[SNNClustering.html]] {
+            {static} -LOG: Logging
+            -epsilon: int
+            -minpts: int
+            #resultList: List<ModifiableDBIDs>
+            #noise: ModifiableDBIDs
+            #processedIDs: ModifiableDBIDs
+            -similarityFunction: SharedNearestNeighborSimilarity<O>
+            +SNNClustering(SharedNearestNeighborSimilarity<O>, int, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): Clustering<Model>
+            #findSNNNeighbors(SimilarityQuery<O>, DBIDRef): ArrayModifiableDBIDs
+            #expandCluster(SimilarityQuery<O>, DBIDRef, FiniteProgress, IndefiniteProgress): void
+        }
+
+        class elki.clustering.SNNClustering.Par<O> {
+            {static} +EPSILON_ID: OptionID
+            {static} +MINPTS_ID: OptionID
+            #epsilon: int
+            #minpts: int
+            -similarityFunction: SharedNearestNeighborSimilarity<O>
+            +configure(Parameterization): void
+            +make(): SNNClustering<O>
+        }
+
+        class CFSFDP<O> [[CFSFDP.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #dc: double
+            #k: int
+            #CFSFDP(Distance<? super O>, double, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): Clustering<SimplePrototypeModel<DBID>>
+        }
+
+        class elki.clustering.CFSFDP.Par<O> [[CFSFDP.Par.html]] {
+            {static} +DC_ID: OptionID
+            {static} +K_ID: OptionID
+            #distance: Distance<? super O>
+            #dc: double
+            #k: int
+            +configure(Parameterization): void
+            +make(): CFSFDP<O>
+        }
+
+        class Leader<O> [[Leader.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #threshold: double
+            +Leader(Distance<? super O>, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): Clustering<PrototypeModel<O>>
+        }
+
+        class elki.clustering.Leader.Par<O> {
+            {static} +THRESHOLD_ID: OptionID
+            -threshold: double
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): Leader<O>
+        }
+
+        abstract class AbstractProjectedClustering<R extends Clustering<?>> [[AbstractProjectedClustering.html]] {
+            #k: int
+            #k_i: int
+            #l: int
+            +AbstractProjectedClustering(int, int, int)
+        }
+
+        abstract class elki.clustering.AbstractProjectedClustering.Par [[AbstractProjectedClustering.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +K_I_ID: OptionID
+            {static} +L_ID: OptionID
+            #k: int
+            #k_i: int
+            #l: int
+        }
+
+        class ClusteringAlgorithmUtil [[ClusteringAlgorithmUtil.html]] {
+            {static} +partitionsFromIntegerLabels(DBIDs, IntegerDataStore, int): ArrayModifiableDBIDs[]
+        }
+
+        class CanopyPreClustering<O> [[CanopyPreClustering.html]] {
+            {static} -LOG: Logging
+            -distance: Distance<? super O>
+            -t1: double
+            -t2: double
+            +CanopyPreClustering(Distance<? super O>, double, double)
+            +run(Relation<O>): Clustering<PrototypeModel<O>>
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.CanopyPreClustering.Par<O> {
+            {static} +T1_ID: OptionID
+            {static} +T2_ID: OptionID
+            -t1: double
+            -t2: double
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): CanopyPreClustering<O>
+        }
+
+        class BetulaLeafPreClustering [[BetulaLeafPreClustering.html]] {
+            {static} -LOG: Logging
+            ~cffactory: Factory<?>
+            ~storeIds: boolean
+            +BetulaLeafPreClustering(Factory<?>, boolean)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<NumberVector>): Clustering<MeanModel>
+        }
+
+        class elki.clustering.BetulaLeafPreClustering.Par [[BetulaLeafPreClustering.Par.html]] {
+            {static} +STORE_IDS_ID: OptionID
+            ~cffactory: Factory<?>
+            ~storeIds: boolean
+            +configure(Parameterization): void
+            +make(): BetulaLeafPreClustering
+        }
+
+        ClusteringAlgorithm <|.. NaiveMeanShiftClustering
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.NaiveMeanShiftClustering.Par
+        NaiveMeanShiftClustering +-- elki.clustering.NaiveMeanShiftClustering.Par
+        elki.Algorithm <|-- ClusteringAlgorithm
+        ClusteringAlgorithm <|.. SNNClustering
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.SNNClustering.Par
+        SNNClustering +-- elki.clustering.SNNClustering.Par
+        ClusteringAlgorithm <|.. CFSFDP
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.CFSFDP.Par
+        CFSFDP +-- elki.clustering.CFSFDP.Par
+        ClusteringAlgorithm <|.. Leader
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.Leader.Par
+        Leader +-- elki.clustering.Leader.Par
+        ClusteringAlgorithm <|.. AbstractProjectedClustering
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.AbstractProjectedClustering.Par
+        AbstractProjectedClustering +-- elki.clustering.AbstractProjectedClustering.Par
+        ClusteringAlgorithm <|.. CanopyPreClustering
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.CanopyPreClustering.Par
+        CanopyPreClustering +-- elki.clustering.CanopyPreClustering.Par
+        ClusteringAlgorithm <|.. BetulaLeafPreClustering
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.BetulaLeafPreClustering.Par
+        BetulaLeafPreClustering +-- elki.clustering.BetulaLeafPreClustering.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki {
+        interface Algorithm [[../Algorithm.html]] {
+            +autorun(Database): Object
+            {abstract} +getInputTypeRestriction(): TypeInformation[]
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

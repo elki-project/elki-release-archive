@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SOD\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.SOD<V extends NumberVector> [[SOD.html]] {
+        {static} -LOG: Logging
+        -knn: int
+        -alpha: double
+        -similarityFunction: Similarity<V extends NumberVector>
+        -models: boolean
+        +SOD(int, double, Similarity<V extends NumberVector>, boolean)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V extends NumberVector>): OutlierResult
+        -getNearestNeighbors(Relation<V extends NumberVector>, SimilarityQuery<V extends NumberVector>, DBIDRef): DBIDs
+        {static} -computePerDimensionVariances(Relation<? extends NumberVector>, double[], DBIDs): double[]
+        -subspaceOutlierDegree(V extends NumberVector, double[], long[]): double
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>SOD.SODModel\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.SOD.SODModel [[SOD.SODModel.html]]
+    class "<size:14>SOD.Par\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.SOD.Par<V extends NumberVector> [[SOD.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.subspace.SOD
+    elki.outlier.subspace.SOD +-- elki.outlier.subspace.SOD.SODModel
+    elki.outlier.subspace.SOD +-- elki.outlier.subspace.SOD.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ManhattanDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.ManhattanDistance [[ManhattanDistance.html]] {
+        {static} +STATIC: ManhattanDistance
+        -preDistance(NumberVector, NumberVector, int, int): double
+        -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+        -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+        -preNorm(NumberVector, int, int): double
+        -preNormMBR(SpatialComparable, int, int): double
+        +distance(NumberVector, NumberVector): double
+        +norm(NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +isMetric(): boolean
+    }
+
+    class "<size:14>LPIntegerNormDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.LPIntegerNormDistance [[LPIntegerNormDistance.html]]
+    class "<size:14>ManhattanDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.ManhattanDistance.Par [[ManhattanDistance.Par.html]]
+
+    elki.distance.minkowski.LPIntegerNormDistance <|-- elki.distance.minkowski.ManhattanDistance
+    elki.distance.minkowski.ManhattanDistance +-- elki.distance.minkowski.ManhattanDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

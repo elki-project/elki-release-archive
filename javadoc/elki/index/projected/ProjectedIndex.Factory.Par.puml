@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProjectedIndex.Factory.Par\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.Factory.Par<O, I> {
+        {static} +PROJ_ID: OptionID
+        {static} +INDEX_ID: OptionID
+        {static} +MATERIALIZE_FLAG: OptionID
+        {static} +DISABLE_REFINE_FLAG: OptionID
+        {static} +K_MULTIPLIER_ID: OptionID
+        ~proj: Projection<O, I>
+        ~inner: IndexFactory<​I>
+        ~materialize: boolean
+        ~norefine: boolean
+        ~kmulti: double
+        +configure(Parameterization): void
+        +make(): Factory<O, I>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ProjectedIndex.Factory\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.Factory<O, I> [[ProjectedIndex.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.projected.ProjectedIndex.Factory.Par
+    elki.index.projected.ProjectedIndex.Factory +-- elki.index.projected.ProjectedIndex.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SqrtJensenShannonDivergenceDistance.Par\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.SqrtJensenShannonDivergenceDistance.Par [[SqrtJensenShannonDivergenceDistance.Par.html]] {
+        +make(): SqrtJensenShannonDivergenceDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SqrtJensenShannonDivergenceDistance\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.SqrtJensenShannonDivergenceDistance [[SqrtJensenShannonDivergenceDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.probabilistic.SqrtJensenShannonDivergenceDistance.Par
+    elki.distance.probabilistic.SqrtJensenShannonDivergenceDistance +-- elki.distance.probabilistic.SqrtJensenShannonDivergenceDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

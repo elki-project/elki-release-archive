@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OpenGL3DParallelCoordinates.Settings\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Settings<O> [[OpenGL3DParallelCoordinates.Settings.html]] {
+        +sim: Dependence
+        +layout: Layouter3DPC<? super O>
+        +linewidth: float
+        +texwidth: int
+        +texheight: int
+        +mipmaps: int
+    }
+
+    class "<size:14>OpenGL3DParallelCoordinates\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates<O extends NumberVector> [[OpenGL3DParallelCoordinates.html]]
+
+    elki.visualization.parallel3d.OpenGL3DParallelCoordinates +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Settings
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrecomputedSimilarityMatrix.Factory\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory<O> [[PrecomputedSimilarityMatrix.Factory.html]] {
+        #similarityFunction: Similarity<? super O>
+        +Factory(Similarity<? super O>)
+        +instantiate(Relation<O>): PrecomputedSimilarityMatrix<O>
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<O> [[../IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>PrecomputedSimilarityMatrix\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedSimilarityMatrix<O> [[PrecomputedSimilarityMatrix.html]]
+    class "<size:14>PrecomputedSimilarityMatrix.Factory.Par\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory.Par<O>
+
+    elki.index.IndexFactory <|.. elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory
+    elki.index.distancematrix.PrecomputedSimilarityMatrix +-- elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory
+    elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory +-- elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

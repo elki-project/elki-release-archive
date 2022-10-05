@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>FieldTypeInformation\n<size:10>elki.data.type" as elki.data.type.FieldTypeInformation [[FieldTypeInformation.html]] {
+        {abstract} +getDimensionality(): int
+    }
+
+    interface "<size:14>TypeInformation\n<size:10>elki.data.type" as elki.data.type.TypeInformation [[TypeInformation.html]] {
+        {abstract} +isAssignableFromType(TypeInformation): boolean
+        {abstract} +isAssignableFrom(Object): boolean
+    }
+
+    elki.data.type.TypeInformation <|-- elki.data.type.FieldTypeInformation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RTreeLinearSplit.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.split" as elki.index.tree.spatial.rstarvariants.strategies.split.RTreeLinearSplit.Par [[RTreeLinearSplit.Par.html]] {
+        +make(): RTreeLinearSplit
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>RTreeLinearSplit\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.split" as elki.index.tree.spatial.rstarvariants.strategies.split.RTreeLinearSplit [[RTreeLinearSplit.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.split.RTreeLinearSplit.Par
+    elki.index.tree.spatial.rstarvariants.strategies.split.RTreeLinearSplit +-- elki.index.tree.spatial.rstarvariants.strategies.split.RTreeLinearSplit.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NNChain\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.NNChain<O> [[NNChain.html]] {
+        {static} -LOG: Logging
+        +NNChain(Distance<? super O>, Linkage)
+        +run(Relation<O>): ClusterMergeHistory
+    }
+
+    class "<size:14>AGNES\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AGNES<O> [[AGNES.html]]
+    class "<size:14>NNChain.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.NNChain.Instance [[NNChain.Instance.html]]
+    class "<size:14>NNChain.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.NNChain.Par<O>
+
+    elki.clustering.hierarchical.AGNES <|-- elki.clustering.hierarchical.NNChain
+    elki.clustering.hierarchical.NNChain +-- elki.clustering.hierarchical.NNChain.Instance
+    elki.clustering.hierarchical.NNChain +-- elki.clustering.hierarchical.NNChain.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>PartialDistance\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.PartialDistance<O> [[PartialDistance.html]] {
+        {abstract} +combineRaw(double, double, double): double
+        {abstract} +compareRawRegular(double, double): boolean
+        {abstract} +distance(O, O): double
+        {abstract} +transformOut(double): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

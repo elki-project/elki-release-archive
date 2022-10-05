@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AbstractHDBSCAN.HDBSCANAdapter\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AbstractHDBSCAN.HDBSCANAdapter [[AbstractHDBSCAN.HDBSCANAdapter.html]] {
+        -ids: ArrayDBIDs
+        -q: DBIDArrayIter
+        -p: DBIDArrayIter
+        -coredists: DoubleDataStore
+        -distq: DistanceQuery<?>
+        +HDBSCANAdapter(ArrayDBIDs, DoubleDataStore, DistanceQuery<?>)
+        +distance(ArrayDBIDs, int, int): double
+        +size(ArrayDBIDs): int
+    }
+
+    interface "<size:14>PrimsMinimumSpanningTree.Adapter\n<size:10>elki.math.geometry" as elki.math.geometry.PrimsMinimumSpanningTree.Adapter<ArrayDBIDs> [[../../math/geometry/PrimsMinimumSpanningTree.Adapter.html]] {
+        {abstract} +distance(ArrayDBIDs, int, int): double
+        {abstract} +size(ArrayDBIDs): int
+    }
+    abstract class "<size:14>AbstractHDBSCAN\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AbstractHDBSCAN<O> [[AbstractHDBSCAN.html]] {
+        {abstract} #getLogger(): Logging
+    }
+
+    elki.math.geometry.PrimsMinimumSpanningTree.Adapter <|.. elki.clustering.hierarchical.AbstractHDBSCAN.HDBSCANAdapter
+    elki.clustering.hierarchical.AbstractHDBSCAN +-- elki.clustering.hierarchical.AbstractHDBSCAN.HDBSCANAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

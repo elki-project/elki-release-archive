@@ -1,0 +1,47 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseIntegerVector\n<size:10>elki.data" as elki.data.SparseIntegerVector [[SparseIntegerVector.html]] {
+        {static} +FACTORY: Factory
+        {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<SparseIntegerVector>
+        {static} -INT0: int
+        -indexes: int[]
+        -values: int[]
+        -dimensionality: int
+        +SparseIntegerVector(int[], int[], int)
+        +SparseIntegerVector(Int2DoubleOpenHashMap, int)
+        +SparseIntegerVector(int[])
+        -getMaxDim(): int
+        +getDimensionality(): int
+        +setDimensionality(int): void
+        +--getValue--(int): Integer
+        +--doubleValue--(int): double
+        +--longValue--(int): long
+        +--intValue--(int): int
+        +toArray(): double[]
+        +iterDim(int): int
+        +iterValid(int): boolean
+        +iterDoubleValue(int): double
+        +iterIntValue(int): int
+        +iterLongValue(int): long
+    }
+
+    interface "<size:14>SparseNumberVector\n<size:10>elki.data" as elki.data.SparseNumberVector [[SparseNumberVector.html]] {
+        {abstract} +setDimensionality(int): void
+        {abstract} +iterDoubleValue(int): double
+        {abstract} +iterLongValue(int): long
+        {abstract} +--doubleValue--(int): double
+        {abstract} +--longValue--(int): long
+    }
+    class "<size:14>SparseIntegerVector.Factory\n<size:10>elki.data" as elki.data.SparseIntegerVector.Factory [[SparseIntegerVector.Factory.html]]
+    class "<size:14>SparseIntegerVector.VariableSerializer\n<size:10>elki.data" as elki.data.SparseIntegerVector.VariableSerializer [[SparseIntegerVector.VariableSerializer.html]]
+
+    elki.data.SparseNumberVector <|.. elki.data.SparseIntegerVector
+    elki.data.SparseIntegerVector +-- elki.data.SparseIntegerVector.Factory
+    elki.data.SparseIntegerVector +-- elki.data.SparseIntegerVector.VariableSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

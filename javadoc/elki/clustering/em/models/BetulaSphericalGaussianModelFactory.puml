@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BetulaSphericalGaussianModelFactory\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.BetulaSphericalGaussianModelFactory [[BetulaSphericalGaussianModelFactory.html]] {
+        #initializer: AbstractCFKMeansInitialization
+        +BetulaSphericalGaussianModelFactory(AbstractCFKMeansInitialization)
+        +buildInitialModels(List<? extends ClusterFeature>, int, CFTree<?>): List<SphericalGaussianModel>
+    }
+
+    interface "<size:14>BetulaClusterModelFactory\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.BetulaClusterModelFactory<SphericalGaussianModel> [[BetulaClusterModelFactory.html]] {
+        {abstract} +buildInitialModels(List<? extends ClusterFeature>, int, CFTree<?>): List<M extends BetulaClusterModel>
+    }
+    class "<size:14>BetulaSphericalGaussianModelFactory.Par\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.BetulaSphericalGaussianModelFactory.Par [[BetulaSphericalGaussianModelFactory.Par.html]]
+
+    elki.clustering.em.models.BetulaClusterModelFactory <|.. elki.clustering.em.models.BetulaSphericalGaussianModelFactory
+    elki.clustering.em.models.BetulaSphericalGaussianModelFactory +-- elki.clustering.em.models.BetulaSphericalGaussianModelFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

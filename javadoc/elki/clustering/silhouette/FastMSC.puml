@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastMSC\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.FastMSC<O> [[FastMSC.html]] {
+        {static} -LOG: Logging
+        +FastMSC(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+        +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+        {static} #loss(double, double): double
+        #getLogger(): Logging
+    }
+
+    class "<size:14>PAMMEDSIL\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.PAMMEDSIL<O> [[PAMMEDSIL.html]]
+    class "<size:14>FastMSC.Instance2\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.FastMSC.Instance2 [[FastMSC.Instance2.html]]
+    class "<size:14>FastMSC.Record\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.FastMSC.Record [[FastMSC.Record.html]]
+    class "<size:14>FastMSC.Instance\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.FastMSC.Instance [[FastMSC.Instance.html]]
+    class "<size:14>FastMSC.Par\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.FastMSC.Par<O> [[FastMSC.Par.html]]
+
+    elki.clustering.silhouette.PAMMEDSIL <|-- elki.clustering.silhouette.FastMSC
+    elki.clustering.silhouette.FastMSC +-- elki.clustering.silhouette.FastMSC.Instance2
+    elki.clustering.silhouette.FastMSC +-- elki.clustering.silhouette.FastMSC.Record
+    elki.clustering.silhouette.FastMSC +-- elki.clustering.silhouette.FastMSC.Instance
+    elki.clustering.silhouette.FastMSC +-- elki.clustering.silhouette.FastMSC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

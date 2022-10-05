@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FileBasedSparseFloatDistance.Par\n<size:10>elki.distance.external" as elki.distance.external.FileBasedSparseFloatDistance.Par [[FileBasedSparseFloatDistance.Par.html]] {
+        {static} +MATRIX_ID: OptionID
+        {static} +PARSER_ID: OptionID
+        {static} +DEFAULTDIST_ID: OptionID
+        #matrixfile: URI
+        #parser: DistanceParser
+        #defaultDistance: float
+        +configure(Parameterization): void
+        +make(): FileBasedSparseFloatDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>FileBasedSparseFloatDistance\n<size:10>elki.distance.external" as elki.distance.external.FileBasedSparseFloatDistance [[FileBasedSparseFloatDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.external.FileBasedSparseFloatDistance.Par
+    elki.distance.external.FileBasedSparseFloatDistance +-- elki.distance.external.FileBasedSparseFloatDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

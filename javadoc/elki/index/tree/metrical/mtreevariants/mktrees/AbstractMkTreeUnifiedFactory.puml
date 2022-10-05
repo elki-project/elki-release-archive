@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractMkTreeUnifiedFactory\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMkTreeUnifiedFactory.html]] {
+        +AbstractMkTreeUnifiedFactory(PageFileFactory<?>, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>)
+    }
+
+    abstract class "<size:14>AbstractMTreeFactory\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMTreeFactory.html]]
+    abstract class "<size:14>AbstractMkTreeUnifiedFactory.Par\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMkTreeUnifiedFactory.Par.html]]
+
+    elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory <|-- elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory
+    elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory +-- elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

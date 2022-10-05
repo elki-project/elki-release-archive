@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractVectorStreamConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractVectorStreamConversionFilter<I, O extends NumberVector> [[AbstractVectorStreamConversionFilter.html]] {
+        #factory: Factory<O extends NumberVector>
+        #initializeOutputType(SimpleTypeInformation<O extends NumberVector>): void
+    }
+
+    abstract class "<size:14>AbstractStreamConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractStreamConversionFilter<I, O extends NumberVector> [[AbstractStreamConversionFilter.html]] {
+        {abstract} #filterSingleObject(I): O extends NumberVector
+        {abstract} #getInputTypeRestriction(): TypeInformation
+        {abstract} #convertedType(SimpleTypeInformation<​I>): SimpleTypeInformation<? super O>
+    }
+
+    elki.datasource.filter.AbstractStreamConversionFilter <|-- elki.datasource.filter.AbstractVectorStreamConversionFilter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PreDeConNeighborPredicate.PreDeConModel\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.PreDeConModel [[PreDeConNeighborPredicate.PreDeConModel.html]] {
+        ~pdim: int
+        ~ids: SetDBIDs
+        +PreDeConModel(int, SetDBIDs)
+    }
+
+    class "<size:14>PreDeConNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.PreDeConNeighborPredicate [[PreDeConNeighborPredicate.html]]
+
+    elki.clustering.dbscan.predicates.PreDeConNeighborPredicate +-- elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.PreDeConModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

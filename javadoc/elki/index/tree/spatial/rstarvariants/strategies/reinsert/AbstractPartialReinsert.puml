@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractPartialReinsert\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.reinsert" as elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert [[AbstractPartialReinsert.html]] {
+        #reinsertAmount: double
+        ~distance: SpatialPrimitiveDistance<?>
+        +AbstractPartialReinsert(double, SpatialPrimitiveDistance<?>)
+    }
+
+    interface "<size:14>ReinsertStrategy\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.reinsert" as elki.index.tree.spatial.rstarvariants.strategies.reinsert.ReinsertStrategy [[ReinsertStrategy.html]] {
+        {abstract} +computeReinserts(A, ArrayAdapter<? extends SpatialComparable, ? super A>, SpatialComparable): int[]
+    }
+    abstract class "<size:14>AbstractPartialReinsert.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.reinsert" as elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert.Par [[AbstractPartialReinsert.Par.html]]
+
+    elki.index.tree.spatial.rstarvariants.strategies.reinsert.ReinsertStrategy <|.. elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert
+    elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert +-- elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

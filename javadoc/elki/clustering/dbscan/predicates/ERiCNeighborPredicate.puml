@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ERiCNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.ERiCNeighborPredicate [[ERiCNeighborPredicate.html]] {
+        {static} -LOG: Logging
+        #settings: Settings
+        -deltasq: double
+        +ERiCNeighborPredicate(Settings)
+        +instantiate(Database): Instance
+        +instantiate(Relation<? extends NumberVector>): Instance
+        +getInputTypeRestriction(): TypeInformation
+        +getOutputType(): SimpleTypeInformation<DBIDs>
+    }
+
+    interface "<size:14>NeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.NeighborPredicate<DBIDs> [[NeighborPredicate.html]] {
+        {abstract} +instantiate(Database): Instance<T>
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +getOutputType(): SimpleTypeInformation<T>
+    }
+    class "<size:14>ERiCNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Instance [[ERiCNeighborPredicate.Instance.html]]
+    class "<size:14>ERiCNeighborPredicate.Par\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Par [[ERiCNeighborPredicate.Par.html]]
+
+    elki.clustering.dbscan.predicates.NeighborPredicate <|.. elki.clustering.dbscan.predicates.ERiCNeighborPredicate
+    elki.clustering.dbscan.predicates.ERiCNeighborPredicate +-- elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Instance
+    elki.clustering.dbscan.predicates.ERiCNeighborPredicate +-- elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

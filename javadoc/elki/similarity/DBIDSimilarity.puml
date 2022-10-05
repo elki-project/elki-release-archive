@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DBIDSimilarity\n<size:10>elki.similarity" as elki.similarity.DBIDSimilarity [[DBIDSimilarity.html]]
+
+    interface "<size:14>PrimitiveSimilarity\n<size:10>elki.similarity" as elki.similarity.PrimitiveSimilarity<DBID> [[PrimitiveSimilarity.html]] {
+        {abstract} +similarity(DBID, DBID): double
+    }
+
+    elki.similarity.PrimitiveSimilarity <|-- elki.similarity.DBIDSimilarity
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

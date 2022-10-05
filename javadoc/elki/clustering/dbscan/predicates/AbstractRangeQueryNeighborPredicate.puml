@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate<O, M, N> [[AbstractRangeQueryNeighborPredicate.html]] {
+        #epsilon: double
+        #distance: Distance<? super O>
+        +AbstractRangeQueryNeighborPredicate(double, Distance<? super O>)
+        +getInputTypeRestriction(): TypeInformation
+        +preprocess(Class<? super M>, Relation<? extends O>, RangeSearcher<DBIDRef>): DataStore<M>
+        {abstract} #computeLocalModel(DBIDRef, DoubleDBIDList, Relation<? extends O>): M
+        {abstract} ~getLogger(): Logging
+    }
+
+    interface "<size:14>NeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.NeighborPredicate<N> [[NeighborPredicate.html]] {
+        {abstract} +instantiate(Database): Instance<T>
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +getOutputType(): SimpleTypeInformation<T>
+    }
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance<N, M> [[AbstractRangeQueryNeighborPredicate.Instance.html]]
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate.Par\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Par<O>
+
+    elki.clustering.dbscan.predicates.NeighborPredicate <|.. elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate
+    elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate +-- elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance
+    elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate +-- elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AttributeModifier\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.AttributeModifier [[AttributeModifier.html]] {
+        -e: Element
+        -attribute: String
+        -newValue: String
+        +AttributeModifier(Element, String, String)
+        +run(): void
+    }
+
+    interface "<size:14>Runnable\n<size:10>java.lang" as java.lang.Runnable {
+        {abstract} +run(): void
+    }
+
+    java.lang.Runnable <|.. elki.visualization.batikutil.AttributeModifier
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

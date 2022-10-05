@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ModifiableRelation\n<size:10>elki.database.relation" as elki.database.relation.ModifiableRelation<O> [[ModifiableRelation.html]] {
+        {abstract} +insert(DBIDRef, O): void
+        {abstract} +delete(DBIDRef): void
+    }
+
+    interface "<size:14>Relation\n<size:10>elki.database.relation" as elki.database.relation.Relation<O> [[Relation.html]] {
+        {abstract} +get(DBIDRef): O
+        {abstract} +getDataTypeInformation(): SimpleTypeInformation<O>
+        {abstract} +getDBIDs(): DBIDs
+        {abstract} +iterDBIDs(): DBIDIter
+        {abstract} +size(): int
+        {abstract} +getLongName(): String
+    }
+
+    elki.database.relation.Relation <|-- elki.database.relation.ModifiableRelation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

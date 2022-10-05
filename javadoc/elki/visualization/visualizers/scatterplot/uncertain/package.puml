@@ -1,0 +1,79 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.scatterplot.uncertain {
+
+        class UncertainInstancesVisualization [[UncertainInstancesVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.uncertain.UncertainInstancesVisualization.Instance [[UncertainInstancesVisualization.Instance.html]] {
+            {static} +CSS_CLASS: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+        }
+
+        class UncertainBoundingBoxVisualization [[UncertainBoundingBoxVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.uncertain.UncertainBoundingBoxVisualization.Instance [[UncertainBoundingBoxVisualization.Instance.html]] {
+            {static} +CSS_CLASS: String
+            #rel: Relation<? extends UncertainObject>
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+        }
+
+        class UncertainSamplesVisualization [[UncertainSamplesVisualization.html]] {
+            {static} -NAME: String
+            #samples: int
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.uncertain.UncertainSamplesVisualization.Instance [[UncertainSamplesVisualization.Instance.html]] {
+            {static} +CSS_CLASS: String
+            #rel: Relation<? extends UncertainObject>
+            #random: RandomFactory
+            {static} -FILL: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -drawDiscete(DiscreteUncertainObject, MarkerLibrary, int, double): void
+            -drawContinuous(UncertainObject, MarkerLibrary, int, double, Random): void
+            -drawDiscreteDefault(DiscreteUncertainObject, int, double): void
+            -drawContinuousDefault(UncertainObject, int, double, Random): void
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. UncertainInstancesVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.uncertain.UncertainInstancesVisualization.Instance
+        UncertainInstancesVisualization +-- elki.visualization.visualizers.scatterplot.uncertain.UncertainInstancesVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. UncertainBoundingBoxVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.uncertain.UncertainBoundingBoxVisualization.Instance
+        UncertainBoundingBoxVisualization +-- elki.visualization.visualizers.scatterplot.uncertain.UncertainBoundingBoxVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. UncertainSamplesVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.uncertain.UncertainSamplesVisualization.Instance
+        UncertainSamplesVisualization +-- elki.visualization.visualizers.scatterplot.uncertain.UncertainSamplesVisualization.Instance
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+    }
+
+    namespace elki.visualization.visualizers.scatterplot {
+        abstract class AbstractScatterplotVisualization [[../AbstractScatterplotVisualization.html]] {
+            #proj: Projection2D
+            #rel: Relation<? extends NumberVector>
+            #sample: SamplingResult
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

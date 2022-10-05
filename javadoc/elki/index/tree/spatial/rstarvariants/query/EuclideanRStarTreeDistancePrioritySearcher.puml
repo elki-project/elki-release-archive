@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EuclideanRStarTreeDistancePrioritySearcher\n<size:10>elki.index.tree.spatial.rstarvariants.query" as elki.index.tree.spatial.rstarvariants.query.EuclideanRStarTreeDistancePrioritySearcher<O extends SpatialComparable> [[EuclideanRStarTreeDistancePrioritySearcher.html]] {
+        #tree: AbstractRStarTree<?, ?, ?>
+        {static} -SQUARED: SquaredEuclideanDistance
+        #relation: Relation<? extends SpatialComparable>
+        ~query: O extends SpatialComparable
+        ~threshold: double
+        ~pq: DoubleIntegerMinHeap
+        ~node: AbstractRStarTreeNode<?, ?>
+        ~childnr: int
+        -mindist: double
+        +EuclideanRStarTreeDistancePrioritySearcher(AbstractRStarTree<?, ?, ?>, Relation<? extends SpatialComparable>)
+        +search(O extends SpatialComparable): EuclideanRStarTreeDistancePrioritySearcher<O extends SpatialComparable>
+        +decreaseCutoff(double): EuclideanRStarTreeDistancePrioritySearcher<O extends SpatialComparable>
+        +valid(): boolean
+        +advance(): EuclideanRStarTreeDistancePrioritySearcher<O extends SpatialComparable>
+        #advanceQueue(): boolean
+        +getLowerBound(): double
+        +allLowerBound(): double
+        +computeExactDistance(): double
+        +internalGetIndex(): int
+    }
+
+    interface "<size:14>PrioritySearcher\n<size:10>elki.database.query" as elki.database.query.PrioritySearcher<O extends SpatialComparable> [[../../../../../database/query/PrioritySearcher.html]] {
+        {abstract} +search(O extends SpatialComparable): PrioritySearcher<O>
+        {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+        {abstract} +computeExactDistance(): double
+        {abstract} +allLowerBound(): double
+        {abstract} +advance(): PrioritySearcher<O>
+    }
+
+    elki.database.query.PrioritySearcher <|.. elki.index.tree.spatial.rstarvariants.query.EuclideanRStarTreeDistancePrioritySearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

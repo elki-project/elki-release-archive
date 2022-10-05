@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ReferenceBasedOutlierDetection.Par\n<size:10>elki.outlier.distance" as elki.outlier.distance.ReferenceBasedOutlierDetection.Par [[ReferenceBasedOutlierDetection.Par.html]] {
+        {static} +REFP_ID: OptionID
+        {static} +K_ID: OptionID
+        #distance: NumberVectorDistance<? super NumberVector>
+        -k: int
+        -refp: ReferencePointsHeuristic
+        +configure(Parameterization): void
+        +make(): ReferenceBasedOutlierDetection
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ReferenceBasedOutlierDetection\n<size:10>elki.outlier.distance" as elki.outlier.distance.ReferenceBasedOutlierDetection [[ReferenceBasedOutlierDetection.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.distance.ReferenceBasedOutlierDetection.Par
+    elki.outlier.distance.ReferenceBasedOutlierDetection +-- elki.outlier.distance.ReferenceBasedOutlierDetection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractSupervisedProjectionVectorFilter.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter.Par<V extends NumberVector> {
+        {static} +P_ID: OptionID
+        #tdim: int
+        +configure(Parameterization): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractSupervisedProjectionVectorFilter\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter<V extends NumberVector> [[AbstractSupervisedProjectionVectorFilter.html]] {
+        {abstract} #getLogger(): Logging
+        {abstract} #computeProjectionMatrix(List<V extends NumberVector>, List<? extends ClassLabel>, int): double[]
+    }
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter.Par
+    elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter +-- elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

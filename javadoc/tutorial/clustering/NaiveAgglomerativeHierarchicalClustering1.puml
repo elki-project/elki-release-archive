@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NaiveAgglomerativeHierarchicalClustering1\n<size:10>tutorial.clustering" as tutorial.clustering.NaiveAgglomerativeHierarchicalClustering1<O> [[NaiveAgglomerativeHierarchicalClustering1.html]] {
+        {static} -LOG: Logging
+        ~distance: Distance<? super O>
+        ~numclusters: int
+        +NaiveAgglomerativeHierarchicalClustering1(Distance<? super O>, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): Clustering<Model>
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../../elki/Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    class "<size:14>NaiveAgglomerativeHierarchicalClustering1.Par\n<size:10>tutorial.clustering" as tutorial.clustering.NaiveAgglomerativeHierarchicalClustering1.Par<O>
+
+    elki.Algorithm <|.. tutorial.clustering.NaiveAgglomerativeHierarchicalClustering1
+    tutorial.clustering.NaiveAgglomerativeHierarchicalClustering1 +-- tutorial.clustering.NaiveAgglomerativeHierarchicalClustering1.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

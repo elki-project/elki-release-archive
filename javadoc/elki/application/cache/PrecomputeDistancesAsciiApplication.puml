@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrecomputeDistancesAsciiApplication\n<size:10>elki.application.cache" as elki.application.cache.PrecomputeDistancesAsciiApplication<O> [[PrecomputeDistancesAsciiApplication.html]] {
+        {static} -LOG: Logging
+        {static} +GZIP_POSTFIX: String
+        -debugExtraCheckSymmetry: boolean
+        -database: Database
+        -distance: Distance<? super O>
+        -out: Path
+        +PrecomputeDistancesAsciiApplication(Database, Distance<? super O>, Path)
+        +run(): void
+        {static} -openStream(Path): PrintStream
+        {static} +main(String[]): void
+    }
+
+    abstract class "<size:14>AbstractApplication\n<size:10>elki.application" as elki.application.AbstractApplication [[../AbstractApplication.html]] {
+        {abstract} +run(): void
+    }
+    class "<size:14>PrecomputeDistancesAsciiApplication.Par\n<size:10>elki.application.cache" as elki.application.cache.PrecomputeDistancesAsciiApplication.Par<O> [[PrecomputeDistancesAsciiApplication.Par.html]]
+
+    elki.application.AbstractApplication <|-- elki.application.cache.PrecomputeDistancesAsciiApplication
+    elki.application.cache.PrecomputeDistancesAsciiApplication +-- elki.application.cache.PrecomputeDistancesAsciiApplication.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

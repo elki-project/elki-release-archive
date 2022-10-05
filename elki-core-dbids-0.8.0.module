@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-core-dbids",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-util",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-dbids-0.8.0.jar",
+          "url": "elki-core-dbids-0.8.0.jar",
+          "size": 73462,
+          "sha512": "9ff751833a05dbc80c77ff1dc6051c7bc4f8d1be89c64ef71ecb197d81fa02bbd2d671c48e9ca22378024ad3e3cb3bca53e2a40158cbba441c09a83836e2d453",
+          "sha256": "af4b8635fcf9dfe91a992f77aaa2787992b68f143506e47a0b234a30776fbdf8",
+          "sha1": "da378f7c09807b03eae71c96748b540f306a1c11",
+          "md5": "063f85fbb53bacb6872e65a5c8bd919c"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-util",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-dbids-0.8.0.jar",
+          "url": "elki-core-dbids-0.8.0.jar",
+          "size": 73462,
+          "sha512": "9ff751833a05dbc80c77ff1dc6051c7bc4f8d1be89c64ef71ecb197d81fa02bbd2d671c48e9ca22378024ad3e3cb3bca53e2a40158cbba441c09a83836e2d453",
+          "sha256": "af4b8635fcf9dfe91a992f77aaa2787992b68f143506e47a0b234a30776fbdf8",
+          "sha1": "da378f7c09807b03eae71c96748b540f306a1c11",
+          "md5": "063f85fbb53bacb6872e65a5c8bd919c"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-dbids",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-dbids-0.8.0-test-fixtures.jar",
+          "url": "elki-core-dbids-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "bdfa7dcc53c2af87a07794916a01239d54ee761f4d1f3b913b4aaf233b3896f34c28128ec7ccb457ca545344e50159508766900736226a8b683beb1b6437b259",
+          "sha256": "e548edb323ecb91be2eb1e554d539bbff4829f981c28d4ed35c730e7b72f2c9d",
+          "sha1": "e81169619531f0808f10ba8abf7d1bb2a14078a4",
+          "md5": "071f05df299d7f5f08a3255a74eb44f7"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-core-dbids-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-dbids",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-dbids-0.8.0-test-fixtures.jar",
+          "url": "elki-core-dbids-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "bdfa7dcc53c2af87a07794916a01239d54ee761f4d1f3b913b4aaf233b3896f34c28128ec7ccb457ca545344e50159508766900736226a8b683beb1b6437b259",
+          "sha256": "e548edb323ecb91be2eb1e554d539bbff4829f981c28d4ed35c730e7b72f2c9d",
+          "sha1": "e81169619531f0808f10ba8abf7d1bb2a14078a4",
+          "md5": "071f05df299d7f5f08a3255a74eb44f7"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-core-dbids-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

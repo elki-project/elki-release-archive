@@ -1,0 +1,487 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.lof {
+
+        class INFLO<O> [[INFLO.html]] {
+            {static} -LOG: Logging
+            -distance: Distance<? super O>
+            -m: double
+            -kplus: int
+            +INFLO(Distance<? super O>, double, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+            -computeNeighborhoods(Relation<O>, DataStore<SetDBIDs>, ModifiableDBIDs, WritableDataStore<ModifiableDBIDs>): void
+            #computeINFLO(Relation<O>, ModifiableDBIDs, KNNSearcher<DBIDRef>, WritableDataStore<ModifiableDBIDs>, WritableDoubleDataStore, DoubleMinMax): void
+        }
+
+        class elki.outlier.lof.INFLO.Par<O> [[INFLO.Par.html]] {
+            {static} +M_ID: OptionID
+            {static} +K_ID: OptionID
+            #distance: Distance<? super O>
+            #m: double
+            #k: int
+            +configure(Parameterization): void
+            +make(): INFLO<O>
+        }
+
+        class OnlineLOF<O> [[OnlineLOF.html]] {
+            {static} -LOG: Logging
+            +OnlineLOF(int, int, Distance<? super O>, Distance<? super O>)
+            +run(Relation<O>): OutlierResult
+            -getKNNAndRkNNQueries(Relation<O>, StepProgress): Pair<Pair<KNNSearcher<DBIDRef>, KNNSearcher<DBIDRef>>, Pair<RKNNSearcher<DBIDRef>, RKNNSearcher<DBIDRef>>>
+        }
+
+        class elki.outlier.lof.OnlineLOF.LOFKNNListener [[OnlineLOF.LOFKNNListener.html]] {
+            -firstEventReceived: KNNChangeEvent
+            +LOFKNNListener(LOFResult<O>)
+            +kNNsChanged(KNNChangeEvent): void
+            -kNNsChanged(KNNChangeEvent, KNNChangeEvent): void
+            -kNNsInserted(DBIDs, DBIDs, DBIDs, LOFResult<O>): void
+            -kNNsRemoved(DBIDs, DBIDs, DBIDs, LOFResult<O>): void
+            -recomputeLOFs(DBIDs, LOFResult<O>): void
+        }
+
+        class elki.outlier.lof.OnlineLOF.Par<O> [[OnlineLOF.Par.html]] {
+            +make(): OnlineLOF<O>
+        }
+
+        class LOCI<O> [[LOCI.html]] {
+            {static} -LOG: Logging
+            -distance: Distance<? super O>
+            -rmax: double
+            -nmin: int
+            -alpha: double
+            +LOCI(Distance<? super O>, double, int, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+            #precomputeInterestingRadii(DBIDs, RangeSearcher<DBIDRef>, WritableDataStore<DoubleIntArrayList>): void
+        }
+
+        class elki.outlier.lof.LOCI.DoubleIntArrayList [[LOCI.DoubleIntArrayList.html]] {
+            ~keys: double[]
+            ~vals: int[]
+            ~size: int
+            +DoubleIntArrayList(int)
+            +size(): int
+            +getDouble(int): double
+            +getInt(int): int
+            +setValue(int, int): void
+            +append(double, int): void
+            +find(double): int
+            +sort(): void
+        }
+
+        class elki.outlier.lof.LOCI.Par<O> {
+            {static} +RMAX_ID: OptionID
+            {static} +NMIN_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            #distance: Distance<? super O>
+            #rmax: double
+            #nmin: int
+            #alpha: double
+            +configure(Parameterization): void
+            +make(): LOCI<O>
+        }
+
+        class SimpleKernelDensityLOF<O extends NumberVector> [[SimpleKernelDensityLOF.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super NumberVector>
+            #kplus: int
+            #kernel: KernelDensityFunction
+            +SimpleKernelDensityLOF(int, Distance<? super NumberVector>, KernelDensityFunction)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.lof.SimpleKernelDensityLOF.Par<O extends NumberVector> {
+            {static} +KERNEL_ID: OptionID
+            #distance: Distance<? super NumberVector>
+            #k: int
+            #kernel: KernelDensityFunction
+            +configure(Parameterization): void
+            +make(): SimpleKernelDensityLOF<O extends NumberVector>
+        }
+
+        class KDEOS<O> [[KDEOS.html]] {
+            {static} -LOG: Logging
+            {static} -CUTOFF: double
+            #distance: Distance<? super O>
+            #kernel: KernelDensityFunction
+            #kmin: int
+            #kmax: int
+            #scale: double
+            #minBandwidth: double
+            #idim: int
+            +KDEOS(Distance<? super O>, int, int, KernelDensityFunction, double, double, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+            #estimateDensities(Relation<O>, KNNSearcher<DBIDRef>, DBIDs, WritableDataStore<double[]>): void
+            -dimensionality(Relation<O>): int
+            #computeOutlierScores(KNNSearcher<DBIDRef>, DBIDs, WritableDataStore<double[]>, WritableDoubleDataStore, DoubleMinMax): void
+        }
+
+        class elki.outlier.lof.KDEOS.Par<O> {
+            {static} +KERNEL_ID: OptionID
+            {static} +KERNEL_MIN_ID: OptionID
+            {static} +KERNEL_SCALE_ID: OptionID
+            {static} +KMIN_ID: OptionID
+            {static} +KMAX_ID: OptionID
+            {static} +IDIM_ID: OptionID
+            #distance: Distance<? super O>
+            #kernel: KernelDensityFunction
+            #kmin: int
+            #kmax: int
+            #scale: double
+            #minBandwidth: double
+            #idim: int
+            +configure(Parameterization): void
+            +make(): KDEOS<O>
+        }
+
+        class LDF<O extends NumberVector> [[LDF.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super NumberVector>
+            #kplus: int
+            #h: double
+            #c: double
+            #kernel: KernelDensityFunction
+            +LDF(int, Distance<? super NumberVector>, KernelDensityFunction, double, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O extends NumberVector>): OutlierResult
+        }
+
+        class elki.outlier.lof.LDF.Par<O extends NumberVector> {
+            {static} +KERNEL_ID: OptionID
+            {static} +K_ID: OptionID
+            {static} +H_ID: OptionID
+            {static} +C_ID: OptionID
+            #distance: Distance<? super NumberVector>
+            #k: int
+            #kernel: KernelDensityFunction
+            #h: double
+            #c: double
+            +configure(Parameterization): void
+            +make(): LDF<O extends NumberVector>
+        }
+
+        class LoOP<O> [[LoOP.html]] {
+            {static} -LOG: Logging
+            ~kreach: int
+            ~kcomp: int
+            ~lambda: double
+            #reachabilityDistance: Distance<? super O>
+            #comparisonDistance: Distance<? super O>
+            +LoOP(int, int, Distance<? super O>, Distance<? super O>, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+            #computePDists(Relation<O>, KNNSearcher<DBIDRef>, WritableDoubleDataStore): void
+            #computePLOFs(Relation<O>, KNNSearcher<DBIDRef>, WritableDoubleDataStore, WritableDoubleDataStore): double
+        }
+
+        class elki.outlier.lof.LoOP.Par<O> {
+            {static} +REACHABILITY_DISTANCE_FUNCTION_ID: OptionID
+            {static} +COMPARISON_DISTANCE_FUNCTION_ID: OptionID
+            {static} +KREACH_ID: OptionID
+            {static} +KCOMP_ID: OptionID
+            {static} +LAMBDA_ID: OptionID
+            ~kreach: int
+            ~kcomp: int
+            ~lambda: double
+            #reachabilityDistance: Distance<O>
+            #comparisonDistance: Distance<O>
+            +configure(Parameterization): void
+            +make(): LoOP<O>
+        }
+
+        class FlexibleLOF<O> [[FlexibleLOF.html]] {
+            {static} -LOG: Logging
+            #krefer: int
+            #kreach: int
+            #referenceDistance: Distance<? super O>
+            #reachabilityDistance: Distance<? super O>
+            +FlexibleLOF(int, int, Distance<? super O>, Distance<? super O>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+            #doRunInTime(DBIDs, KNNSearcher<DBIDRef>, KNNSearcher<DBIDRef>, StepProgress): LOFResult<O>
+            #computeLRDs(KNNSearcher<DBIDRef>, DBIDs, WritableDoubleDataStore): void
+            #computeLOFs(KNNSearcher<DBIDRef>, DBIDs, DoubleDataStore, WritableDoubleDataStore, DoubleMinMax): void
+        }
+
+        class elki.outlier.lof.FlexibleLOF.LOFResult<O> [[FlexibleLOF.LOFResult.html]] {
+            -result: OutlierResult
+            -kNNRefer: KNNSearcher<DBIDRef>
+            -kNNReach: KNNSearcher<DBIDRef>
+            -rkNNRefer: RKNNSearcher<DBIDRef>
+            -rkNNReach: RKNNSearcher<DBIDRef>
+            -lrds: WritableDoubleDataStore
+            -lofs: WritableDoubleDataStore
+            +LOFResult(OutlierResult, KNNSearcher<DBIDRef>, KNNSearcher<DBIDRef>, WritableDoubleDataStore, WritableDoubleDataStore)
+            +getKNNRefer(): KNNSearcher<DBIDRef>
+            +getKNNReach(): KNNSearcher<DBIDRef>
+            +getLrds(): WritableDoubleDataStore
+            +getLofs(): WritableDoubleDataStore
+            +getResult(): OutlierResult
+            +setRkNNRefer(RKNNSearcher<DBIDRef>): void
+            +getRkNNRefer(): RKNNSearcher<DBIDRef>
+            +getRkNNReach(): RKNNSearcher<DBIDRef>
+            +setRkNNReach(RKNNSearcher<DBIDRef>): void
+        }
+
+        class elki.outlier.lof.FlexibleLOF.Par<O> [[FlexibleLOF.Par.html]] {
+            {static} +REACHABILITY_DISTANCE_FUNCTION_ID: OptionID
+            {static} +KREF_ID: OptionID
+            {static} +KREACH_ID: OptionID
+            #krefer: int
+            #kreach: int
+            #distance: Distance<? super O>
+            #reachabilityDistance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): FlexibleLOF<O>
+        }
+
+        class LDOF<O> [[LDOF.html]] {
+            {static} -LOG: Logging
+            {static} -LDOF_BASELINE: double
+            #distance: Distance<? super O>
+            #kplus: int
+            +LDOF(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.lof.LDOF.Par<O> [[LDOF.Par.html]] {
+            {static} +K_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): LDOF<O>
+        }
+
+        class SimplifiedLOF<O> [[SimplifiedLOF.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #kplus: int
+            +SimplifiedLOF(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+            -computeSimplifiedLRDs(DBIDs, KNNSearcher<DBIDRef>, WritableDoubleDataStore): void
+            -computeSimplifiedLOFs(DBIDs, KNNSearcher<DBIDRef>, WritableDoubleDataStore, WritableDoubleDataStore, DoubleMinMax): void
+        }
+
+        class elki.outlier.lof.SimplifiedLOF.Par<O> {
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): SimplifiedLOF<O>
+        }
+
+        class VarianceOfVolume<O extends SpatialComparable> [[VarianceOfVolume.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super SpatialComparable>
+            #kplus: int
+            +VarianceOfVolume(int, Distance<? super SpatialComparable>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O extends SpatialComparable>): OutlierResult
+            -computeVolumes(KNNSearcher<DBIDRef>, int, DBIDs, WritableDoubleDataStore): void
+            -computeVOVs(KNNSearcher<DBIDRef>, DBIDs, DoubleDataStore, WritableDoubleDataStore, DoubleMinMax): void
+        }
+
+        class elki.outlier.lof.VarianceOfVolume.Par<O extends SpatialComparable> {
+            {static} +K_ID: OptionID
+            #distance: Distance<? super SpatialComparable>
+            #k: int
+            +configure(Parameterization): void
+            +make(): VarianceOfVolume<O extends SpatialComparable>
+        }
+
+        class LOF<O> [[LOF.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #kplus: int
+            +LOF(int, Distance<? super O>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+            -computeLRDs(KNNSearcher<DBIDRef>, DBIDs, WritableDoubleDataStore): void
+            #computeLRD(KNNSearcher<DBIDRef>, DBIDIter): double
+            -computeLOFScores(KNNSearcher<DBIDRef>, DBIDs, DoubleDataStore, WritableDoubleDataStore, DoubleMinMax): void
+            #computeLOFScore(KNNSearcher<DBIDRef>, DBIDRef, DoubleDataStore): double
+        }
+
+        class elki.outlier.lof.LOF.Par<O> {
+            {static} +K_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): LOF<O>
+        }
+
+        class COF<O> [[COF.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #k: int
+            +COF(Distance<? super O>, int)
+            +run(Relation<O>): OutlierResult
+            #computeAverageChainingDistances(KNNSearcher<DBIDRef>, DistanceQuery<O>, DBIDs, WritableDoubleDataStore): void
+            -computeCOFScores(KNNSearcher<DBIDRef>, DBIDs, DoubleDataStore, WritableDoubleDataStore, DoubleMinMax): void
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.lof.COF.Par<O> {
+            {static} +K_ID: OptionID
+            #k: int
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): COF<O>
+        }
+
+        class ALOCI<V extends NumberVector> [[ALOCI.html]] {
+            {static} -LOG: Logging
+            -distance: NumberVectorDistance<? super NumberVector>
+            -nmin: int
+            -alpha: int
+            -g: int
+            -rnd: RandomFactory
+            +ALOCI(NumberVectorDistance<? super NumberVector>, int, int, int, RandomFactory)
+            +run(Relation<V extends NumberVector>): OutlierResult
+            {static} -calculate_MDEF_norm(Node, Node): double
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.lof.ALOCI.ALOCIQuadTree [[ALOCI.ALOCIQuadTree.html]] {
+            -shift: double[]
+            -min: double[]
+            -width: double[]
+            -nmin: int
+            -relation: Relation<? extends NumberVector>
+            +ALOCIQuadTree(double[], double[], double[], int, Relation<? extends NumberVector>)
+            -bulkLoad(double[], double[], List<Node>, ArrayModifiableDBIDs, int, int, int, int, int): void
+            -getShiftedDim(NumberVector, int, int): double
+            +findClosestNode(NumberVector, int): Node
+        }
+
+        class elki.outlier.lof.ALOCI.Node [[ALOCI.Node.html]] {
+            ~code: int
+            ~count: int
+            ~level: int
+            ~center: double[]
+            #Node(int, double[], int, int, List<Node>)
+            +getLevel(): int
+            +getCount(): int
+            +getSquareSum(int): long
+            +getCubicSum(int): long
+            +getDimensionality(): int
+            +doubleValue(int): double
+            +longValue(int): long
+            +toArray(): double[]
+        }
+
+        class elki.outlier.lof.ALOCI.Par<O extends NumberVector> [[ALOCI.Par.html]] {
+            {static} +NMIN_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            {static} +GRIDS_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #nmin: int
+            #alpha: int
+            #g: int
+            #rnd: RandomFactory
+            #distance: NumberVectorDistance<? super NumberVector>
+            +configure(Parameterization): void
+            +make(): ALOCI<O extends NumberVector>
+        }
+
+        elki.outlier.OutlierAlgorithm <|.. INFLO
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.INFLO.Par
+        INFLO +-- elki.outlier.lof.INFLO.Par
+        FlexibleLOF <|-- OnlineLOF
+        elki.index.preprocessed.knn.KNNListener <|.. elki.outlier.lof.OnlineLOF.LOFKNNListener
+        OnlineLOF +-- elki.outlier.lof.OnlineLOF.LOFKNNListener
+        elki.outlier.lof.OnlineLOF.LOFKNNListener --> elki.outlier.lof.FlexibleLOF.LOFResult: lofResult
+        elki.outlier.lof.FlexibleLOF.Par <|-- elki.outlier.lof.OnlineLOF.Par
+        OnlineLOF +-- elki.outlier.lof.OnlineLOF.Par
+        elki.outlier.OutlierAlgorithm <|.. LOCI
+        LOCI +-- elki.outlier.lof.LOCI.DoubleIntArrayList
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.LOCI.Par
+        LOCI +-- elki.outlier.lof.LOCI.Par
+        elki.outlier.OutlierAlgorithm <|.. SimpleKernelDensityLOF
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.SimpleKernelDensityLOF.Par
+        SimpleKernelDensityLOF +-- elki.outlier.lof.SimpleKernelDensityLOF.Par
+        elki.outlier.OutlierAlgorithm <|.. KDEOS
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.KDEOS.Par
+        KDEOS +-- elki.outlier.lof.KDEOS.Par
+        elki.outlier.OutlierAlgorithm <|.. LDF
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.LDF.Par
+        LDF +-- elki.outlier.lof.LDF.Par
+        elki.outlier.OutlierAlgorithm <|.. LoOP
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.LoOP.Par
+        LoOP +-- elki.outlier.lof.LoOP.Par
+        elki.outlier.OutlierAlgorithm <|.. FlexibleLOF
+        FlexibleLOF +-- elki.outlier.lof.FlexibleLOF.LOFResult
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.FlexibleLOF.Par
+        FlexibleLOF +-- elki.outlier.lof.FlexibleLOF.Par
+        elki.outlier.OutlierAlgorithm <|.. LDOF
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.LDOF.Par
+        LDOF +-- elki.outlier.lof.LDOF.Par
+        elki.outlier.OutlierAlgorithm <|.. SimplifiedLOF
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.SimplifiedLOF.Par
+        SimplifiedLOF +-- elki.outlier.lof.SimplifiedLOF.Par
+        elki.outlier.OutlierAlgorithm <|.. VarianceOfVolume
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.VarianceOfVolume.Par
+        VarianceOfVolume +-- elki.outlier.lof.VarianceOfVolume.Par
+        elki.outlier.OutlierAlgorithm <|.. LOF
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.LOF.Par
+        LOF +-- elki.outlier.lof.LOF.Par
+        elki.outlier.OutlierAlgorithm <|.. COF
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.COF.Par
+        COF +-- elki.outlier.lof.COF.Par
+        elki.outlier.OutlierAlgorithm <|.. ALOCI
+        ALOCI +-- elki.outlier.lof.ALOCI.ALOCIQuadTree
+        elki.outlier.lof.ALOCI.ALOCIQuadTree --> elki.outlier.lof.ALOCI.Node: root
+        elki.data.NumberVector <|.. elki.outlier.lof.ALOCI.Node
+        ALOCI +-- elki.outlier.lof.ALOCI.Node
+        elki.outlier.lof.ALOCI.Node --> "*" elki.outlier.lof.ALOCI.Node: children
+        elki.outlier.lof.ALOCI.Node --> elki.outlier.lof.ALOCI.Node: parent
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.ALOCI.Par
+        ALOCI +-- elki.outlier.lof.ALOCI.Par
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.index.preprocessed.knn {
+        interface KNNListener [[../../index/preprocessed/knn/KNNListener.html]] {
+            {abstract} +kNNsChanged(KNNChangeEvent): void
+        }
+    }
+
+    namespace elki.data {
+        interface NumberVector [[../../data/NumberVector.html]] {
+            {static} +ATTRIBUTE_SEPARATOR: String
+            {static} +VARIABLE_LENGTH: VectorTypeInformation<NumberVector>
+            {static} +FIELD: VectorFieldTypeInformation<NumberVector>
+            {static} +FIELD_1D: VectorFieldTypeInformation<NumberVector>
+            {static} +FIELD_2D: VectorFieldTypeInformation<NumberVector>
+            +--getValue--(int): Number
+            +getMin(int): double
+            +getMax(int): double
+            {abstract} +doubleValue(int): double
+            +floatValue(int): float
+            +intValue(int): int
+            {abstract} +longValue(int): long
+            +shortValue(int): short
+            +byteValue(int): byte
+            {abstract} +toArray(): double[]
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

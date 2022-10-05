@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClassInstantiationException\n<size:10>elki.utilities.exceptions" as elki.utilities.exceptions.ClassInstantiationException [[ClassInstantiationException.html]] {
+        {static} -serialVersionUID: long
+        +ClassInstantiationException()
+        +ClassInstantiationException(String)
+        +ClassInstantiationException(Throwable)
+        +ClassInstantiationException(String, Throwable)
+    }
+
+    class "<size:14>ReflectiveOperationException\n<size:10>java.lang" as java.lang.ReflectiveOperationException
+
+    java.lang.ReflectiveOperationException <|-- elki.utilities.exceptions.ClassInstantiationException
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

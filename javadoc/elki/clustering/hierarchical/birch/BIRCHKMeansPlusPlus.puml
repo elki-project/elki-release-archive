@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BIRCHKMeansPlusPlus\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.BIRCHKMeansPlusPlus [[BIRCHKMeansPlusPlus.html]] {
+        #random: RandomFactory
+        #weights: double[]
+        +BIRCHKMeansPlusPlus(RandomFactory)
+        +run(double[], int): double[]
+        -initialWeights(double[], double[]): double
+        -distance(double[], double[]): double
+        -updateWeights(double[], double[]): double
+    }
+    class "<size:14>BIRCHKMeansPlusPlus.Par\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.BIRCHKMeansPlusPlus.Par [[BIRCHKMeansPlusPlus.Par.html]]
+
+    elki.clustering.hierarchical.birch.BIRCHKMeansPlusPlus +-- elki.clustering.hierarchical.birch.BIRCHKMeansPlusPlus.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParallelGeneralizedDBSCAN.Instance.Mapper\n<size:10>elki.clustering.dbscan.parallel" as elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance.Mapper [[ParallelGeneralizedDBSCAN.Instance.Mapper.html]] {
+        ~predicate: Instance<? extends T>
+        +Mapper(Instance<? extends T>)
+        +map(DBIDRef): void
+    }
+
+    interface "<size:14>Processor.Instance\n<size:10>elki.parallel.processor" as elki.parallel.processor.Processor.Instance [[../../../parallel/processor/Processor.Instance.html]] {
+        {abstract} +map(DBIDRef): void
+    }
+    class "<size:14>ParallelGeneralizedDBSCAN.Instance\n<size:10>elki.clustering.dbscan.parallel" as elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance<T> [[ParallelGeneralizedDBSCAN.Instance.html]]
+
+    elki.parallel.processor.Processor.Instance <|.. elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance.Mapper
+    elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance +-- elki.clustering.dbscan.parallel.ParallelGeneralizedDBSCAN.Instance.Mapper
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

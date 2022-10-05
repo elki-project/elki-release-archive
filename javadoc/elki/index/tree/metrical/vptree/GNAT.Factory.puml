@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GNAT.Factory\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.Factory<O extends NumberVector> [[GNAT.Factory.html]] {
+        ~distance: Distance<? super NumberVector>
+        ~random: RandomFactory
+        ~numbervps: int
+        +Factory(Distance<? super NumberVector>, RandomFactory, int)
+        +instantiate(Relation<O extends NumberVector>): GNAT<O extends NumberVector>
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<O extends NumberVector> [[../../../IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>GNAT\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT<O> [[GNAT.html]]
+    class "<size:14>GNAT.Factory.Par\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.Factory.Par<O extends NumberVector> [[GNAT.Factory.Par.html]]
+
+    elki.index.IndexFactory <|.. elki.index.tree.metrical.vptree.GNAT.Factory
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.Factory
+    elki.index.tree.metrical.vptree.GNAT.Factory +-- elki.index.tree.metrical.vptree.GNAT.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

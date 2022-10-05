@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SavedSettingsTabPanel\n<size:10>elki.gui.multistep.panels" as elki.gui.multistep.panels.SavedSettingsTabPanel [[SavedSettingsTabPanel.html]] {
+        {static} -serialVersionUID: long
+        {static} -LOG: Logging
+        ~store: SavedSettingsFile
+        ~savedSettingsModel: SettingsComboboxModel
+        ~savedCombo: JComboBox<String>
+        -gui: MultiStepGUI
+        +SavedSettingsTabPanel(SavedSettingsFile, MultiStepGUI)
+    }
+
+    class "<size:14>JPanel\n<size:10>javax.swing" as javax.swing.JPanel
+    class "<size:14>SavedSettingsTabPanel.SettingsComboboxModel\n<size:10>elki.gui.multistep.panels" as elki.gui.multistep.panels.SavedSettingsTabPanel.SettingsComboboxModel [[SavedSettingsTabPanel.SettingsComboboxModel.html]]
+
+    javax.swing.JPanel <|-- elki.gui.multistep.panels.SavedSettingsTabPanel
+    elki.gui.multistep.panels.SavedSettingsTabPanel +-- elki.gui.multistep.panels.SavedSettingsTabPanel.SettingsComboboxModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

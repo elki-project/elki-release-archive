@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LAB\n<size:10>elki.clustering.kmedoids.initialization" as elki.clustering.kmedoids.initialization.LAB<O> [[LAB.html]] {
+        {static} -LOG: Logging
+        -rnd: RandomFactory
+        +LAB(RandomFactory)
+        +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+        {static} #getMinDist(DBIDArrayIter, DistanceQuery<?>, DBIDArrayIter, WritableDoubleDataStore): double
+        {static} -shuffle(ArrayModifiableDBIDs, int, int, Random): void
+    }
+
+    interface "<size:14>KMeansInitialization\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMeansInitialization [[../../kmeans/initialization/KMeansInitialization.html]] {
+        {abstract} +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+    }
+    interface "<size:14>KMedoidsInitialization\n<size:10>elki.clustering.kmedoids.initialization" as elki.clustering.kmedoids.initialization.KMedoidsInitialization<O> [[KMedoidsInitialization.html]] {
+        {abstract} +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+    }
+    class "<size:14>LAB.Par\n<size:10>elki.clustering.kmedoids.initialization" as elki.clustering.kmedoids.initialization.LAB.Par<V> [[LAB.Par.html]]
+
+    elki.clustering.kmeans.initialization.KMeansInitialization <|.. elki.clustering.kmedoids.initialization.LAB
+    elki.clustering.kmedoids.initialization.KMedoidsInitialization <|.. elki.clustering.kmedoids.initialization.LAB
+    elki.clustering.kmedoids.initialization.LAB +-- elki.clustering.kmedoids.initialization.LAB.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

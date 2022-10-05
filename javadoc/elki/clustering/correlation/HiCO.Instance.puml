@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HiCO.Instance\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.HiCO.Instance [[HiCO.Instance.html]] {
+        -relation: Relation<? extends NumberVector>
+        #localPCAs: WritableDataStore<PCAFilteredResult>
+        -clusterOrder: ArrayModifiableDBIDs
+        -correlationValue: WritableIntegerDataStore
+        -tmpCorrelation: WritableIntegerDataStore
+        -tmpDistance: WritableDoubleDataStore
+        -tmpIds: ArrayModifiableDBIDs
+        ~tmpcomp: Comparator<DBIDRef>
+        +Instance(Relation<? extends NumberVector>)
+        +run(): CorrelationClusterOrder
+        #buildResult(): CorrelationClusterOrder
+        #initialDBID(DBIDRef): void
+        #expandDBID(DBIDRef): void
+        +compare(DBIDRef, DBIDRef): int
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>GeneralizedOPTICS.Instance\n<size:10>elki.clustering.optics" as elki.clustering.optics.GeneralizedOPTICS.Instance<CorrelationClusterOrder> [[../optics/GeneralizedOPTICS.Instance.html]] {
+        {abstract} #initialDBID(DBIDRef): void
+        {abstract} #expandDBID(DBIDRef): void
+        {abstract} #buildResult(): CorrelationClusterOrder
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>HiCO\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.HiCO [[HiCO.html]]
+
+    elki.clustering.optics.GeneralizedOPTICS.Instance <|-- elki.clustering.correlation.HiCO.Instance
+    elki.clustering.correlation.HiCO +-- elki.clustering.correlation.HiCO.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

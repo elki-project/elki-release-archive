@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClassificationModel\n<size:10>elki.svm.model" as elki.svm.model.ClassificationModel [[ClassificationModel.html]] {
+        +label: int[]
+        +nSV: int[]
+        +predict(DataSet, int, double[]): int
+        +predict(DataSet, int): int
+    }
+
+    class "<size:14>Model\n<size:10>elki.svm.model" as elki.svm.model.Model [[Model.html]]
+
+    elki.svm.model.Model <|-- elki.svm.model.ClassificationModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

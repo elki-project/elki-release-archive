@@ -1,0 +1,39 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SubspaceLPNormDistance\n<size:10>elki.distance.subspace" as elki.distance.subspace.SubspaceLPNormDistance [[SubspaceLPNormDistance.html]] {
+        -p: double
+        +SubspaceLPNormDistance(double, long[])
+        +getP(): double
+        +distance(NumberVector, NumberVector): double
+        #minDistObject(SpatialComparable, NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +norm(NumberVector): double
+        +instantiate(Relation<T extends NumberVector>): SpatialPrimitiveDistanceQuery<T extends NumberVector>
+        +getInputTypeRestriction(): VectorFieldTypeInformation<? super NumberVector>
+        +isMetric(): boolean
+    }
+
+    abstract class "<size:14>AbstractDimensionsSelectingDistance\n<size:10>elki.distance.subspace" as elki.distance.subspace.AbstractDimensionsSelectingDistance<NumberVector> [[AbstractDimensionsSelectingDistance.html]]
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[../SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    interface "<size:14>Norm\n<size:10>elki.distance" as elki.distance.Norm<NumberVector> [[../Norm.html]] {
+        {abstract} +norm(NumberVector): double
+    }
+    interface "<size:14>NumberVectorDistance\n<size:10>elki.distance" as elki.distance.NumberVectorDistance<NumberVector> [[../NumberVectorDistance.html]] {
+        {abstract} +distance(NumberVector, NumberVector): double
+    }
+    class "<size:14>SubspaceLPNormDistance.Par\n<size:10>elki.distance.subspace" as elki.distance.subspace.SubspaceLPNormDistance.Par [[SubspaceLPNormDistance.Par.html]]
+
+    elki.distance.subspace.AbstractDimensionsSelectingDistance <|-- elki.distance.subspace.SubspaceLPNormDistance
+    elki.distance.SpatialPrimitiveDistance <|.. elki.distance.subspace.SubspaceLPNormDistance
+    elki.distance.Norm <|.. elki.distance.subspace.SubspaceLPNormDistance
+    elki.distance.NumberVectorDistance <|.. elki.distance.subspace.SubspaceLPNormDistance
+    elki.distance.subspace.SubspaceLPNormDistance +-- elki.distance.subspace.SubspaceLPNormDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParameterTable.DispatchingPanel\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable.DispatchingPanel [[ParameterTable.DispatchingPanel.html]] {
+        {static} -serialVersionUID: long
+        #component: JComponent
+        +DispatchingPanel(JComponent)
+        +addNotify(): void
+        #processKeyBinding(KeyStroke, KeyEvent, int, boolean): boolean
+    }
+
+    class "<size:14>JPanel\n<size:10>javax.swing" as javax.swing.JPanel
+    class "<size:14>ParameterTable\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable [[ParameterTable.html]]
+
+    javax.swing.JPanel <|-- elki.gui.util.ParameterTable.DispatchingPanel
+    elki.gui.util.ParameterTable +-- elki.gui.util.ParameterTable.DispatchingPanel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

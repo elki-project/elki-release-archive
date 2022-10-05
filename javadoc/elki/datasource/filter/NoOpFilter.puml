@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NoOpFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.NoOpFilter [[NoOpFilter.html]] {
+        +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        +getMeta(): BundleMeta
+        +data(int): Object
+        +nextEvent(): Event
+    }
+
+    abstract class "<size:14>AbstractStreamFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractStreamFilter [[AbstractStreamFilter.html]]
+
+    elki.datasource.filter.AbstractStreamFilter <|-- elki.datasource.filter.NoOpFilter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

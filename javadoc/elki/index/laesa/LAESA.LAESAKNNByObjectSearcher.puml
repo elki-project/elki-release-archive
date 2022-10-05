@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LAESA.LAESAKNNByObjectSearcher\n<size:10>elki.index.laesa" as elki.index.laesa.LAESA.LAESAKNNByObjectSearcher [[LAESA.LAESAKNNByObjectSearcher.html]] {
+        -query: O
+        +LAESAKNNByObjectSearcher(int)
+        +getKNN(O, int): KNNList
+        #queryDistance(DBIDRef): double
+    }
+
+    abstract class "<size:14>LAESA.LAESAKNNSearcher\n<size:10>elki.index.laesa" as elki.index.laesa.LAESA.LAESAKNNSearcher<O> [[LAESA.LAESAKNNSearcher.html]] {
+        {abstract} #queryDistance(DBIDRef): double
+    }
+    class "<size:14>LAESA\n<size:10>elki.index.laesa" as elki.index.laesa.LAESA<O> [[LAESA.html]]
+
+    elki.index.laesa.LAESA.LAESAKNNSearcher <|-- elki.index.laesa.LAESA.LAESAKNNByObjectSearcher
+    elki.index.laesa.LAESA +-- elki.index.laesa.LAESA.LAESAKNNByObjectSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

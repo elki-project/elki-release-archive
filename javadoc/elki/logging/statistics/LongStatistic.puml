@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LongStatistic\n<size:10>elki.logging.statistics" as elki.logging.statistics.LongStatistic [[LongStatistic.html]] {
+        ~value: long
+        +LongStatistic(String)
+        +LongStatistic(String, long)
+        +setLong(long): LongStatistic
+        +increment(long): LongStatistic
+        +formatValue(): String
+    }
+
+    abstract class "<size:14>AbstractStatistic\n<size:10>elki.logging.statistics" as elki.logging.statistics.AbstractStatistic [[AbstractStatistic.html]]
+
+    elki.logging.statistics.AbstractStatistic <|-- elki.logging.statistics.LongStatistic
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ABOD.Par\n<size:10>elki.outlier.anglebased" as elki.outlier.anglebased.ABOD.Par<V extends NumberVector> [[ABOD.Par.html]] {
+        {static} +KERNEL_FUNCTION_ID: OptionID
+        #kernelFunction: Similarity<V extends NumberVector>
+        +configure(Parameterization): void
+        +make(): ABOD<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ABOD\n<size:10>elki.outlier.anglebased" as elki.outlier.anglebased.ABOD<V extends NumberVector> [[ABOD.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.anglebased.ABOD.Par
+    elki.outlier.anglebased.ABOD +-- elki.outlier.anglebased.ABOD.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

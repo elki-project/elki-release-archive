@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.datasource.filter.normalization {
+
+        class NonNumericFeaturesException [[NonNumericFeaturesException.html]] {
+            {static} -serialVersionUID: long
+            +NonNumericFeaturesException()
+            +NonNumericFeaturesException(String)
+            +NonNumericFeaturesException(Throwable)
+            +NonNumericFeaturesException(String, Throwable)
+        }
+
+        interface Normalization<O> [[Normalization.html]] {
+            +restore(O): O
+            +transform(LinearEquationSystem): LinearEquationSystem
+        }
+
+        java.lang.Exception <|-- NonNumericFeaturesException
+        elki.datasource.filter.ObjectFilter <|-- Normalization
+    }
+
+    namespace java.lang {
+        class Exception {
+            {static} ~serialVersionUID: long
+        }
+    }
+
+    namespace elki.datasource.filter {
+        interface ObjectFilter [[../ObjectFilter.html]] {
+            {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

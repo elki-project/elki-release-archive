@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WriteDataStoreProcessor\n<size:10>elki.parallel.processor" as elki.parallel.processor.WriteDataStoreProcessor<T> [[WriteDataStoreProcessor.html]] {
+        ~store: WritableDataStore<T>
+        ~input: SharedObject<T>
+        +WriteDataStoreProcessor(WritableDataStore<T>)
+        +connectInput(SharedObject<T>): void
+        +instantiate(Executor): Instance
+        +cleanup(Instance): void
+    }
+
+    interface "<size:14>Processor\n<size:10>elki.parallel.processor" as elki.parallel.processor.Processor [[Processor.html]] {
+        {abstract} +instantiate(Executor): Instance
+        {abstract} +cleanup(Instance): void
+    }
+    class "<size:14>WriteDataStoreProcessor.Instance\n<size:10>elki.parallel.processor" as elki.parallel.processor.WriteDataStoreProcessor.Instance [[WriteDataStoreProcessor.Instance.html]]
+
+    elki.parallel.processor.Processor <|.. elki.parallel.processor.WriteDataStoreProcessor
+    elki.parallel.processor.WriteDataStoreProcessor +-- elki.parallel.processor.WriteDataStoreProcessor.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

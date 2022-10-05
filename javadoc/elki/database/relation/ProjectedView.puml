@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProjectedView\n<size:10>elki.database.relation" as elki.database.relation.ProjectedView<IN, OUT> [[ProjectedView.html]] {
+        -inner: Relation<? extends IN>
+        -projection: Projection<IN, OUT>
+        +ProjectedView(Relation<? extends IN>, Projection<IN, OUT>)
+        +getLongName(): String
+        +get(DBIDRef): OUT
+        +getDataTypeInformation(): SimpleTypeInformation<OUT>
+        +getDBIDs(): DBIDs
+        +iterDBIDs(): DBIDIter
+        +size(): int
+    }
+
+    interface "<size:14>Relation\n<size:10>elki.database.relation" as elki.database.relation.Relation<OUT> [[Relation.html]] {
+        {abstract} +get(DBIDRef): OUT
+        {abstract} +getDataTypeInformation(): SimpleTypeInformation<O>
+        {abstract} +getDBIDs(): DBIDs
+        {abstract} +iterDBIDs(): DBIDIter
+        {abstract} +size(): int
+        {abstract} +getLongName(): String
+    }
+
+    elki.database.relation.Relation <|.. elki.database.relation.ProjectedView
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

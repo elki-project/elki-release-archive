@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="97px" preserveAspectRatio="none" style="width:488px;height:97px;background:#FFFFFF;" version="1.1" viewBox="0 0 488 97" width="488px" zoomAndPan="magnify"><defs/><g><!--MD5=[4ea1caca91acf0fb4f8ac69b33a44bc9]
+class elki.similarity.AbstractIndexBasedSimilarity--><a href="AbstractIndexBasedSimilarity.html" target="_top" title="AbstractIndexBasedSimilarity.html" xlink:actuate="onRequest" xlink:href="AbstractIndexBasedSimilarity.html" xlink:show="new" xlink:title="AbstractIndexBasedSimilarity.html" xlink:type="simple"><g id="elem_elki.similarity.AbstractIndexBasedSimilarity"><rect codeLine="17" fill="#F1F1F1" height="62.2344" id="elki.similarity.AbstractIndexBasedSimilarity" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="470" x="7" y="10"/><ellipse cx="41.35" cy="28.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M41.4594,24.3125 L40.3031,29.3906 L42.6313,29.3906 L41.4594,24.3125 Z M39.975,22.0781 L42.9594,22.0781 L46.3188,34.4688 L43.8656,34.4688 L43.1,31.4063 L39.8188,31.4063 L39.0688,34.4688 L36.6313,34.4688 L39.975,22.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="207" x="59.65" y="27.9951">AbstractIndexBasedSimilarity</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="68" x="129.15" y="40.5791">elki.similarity</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="186" x="294" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="184" x="295" y="19.1387">O, F extends IndexFactory&lt;O&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="476" y1="47.9375" y2="47.9375"/><ellipse cx="18" cy="61.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="444" x="27" y="64.9326">instantiate(Relation&lt;T extends O&gt;): Instance&lt;T extends O, ?&gt;</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="144" y="78.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="144" y="87.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[829c4476233c6807d5ab03f173147715]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractIndexBasedSimilarity.Instance\n<size:10>elki.similarity" as elki.similarity.AbstractIndexBasedSimilarity.Instance<O, I extends Index> [[AbstractIndexBasedSimilarity.Instance.html]] {
+        #relation: Relation<O>
+        #index: I extends Index
+        +Instance(Relation<O>, I extends Index)
+        +getRelation(): Relation<? extends O>
+        +getIndex(): I extends Index
+    }
+
+    interface "<size:14>IndexBasedSimilarity.Instance\n<size:10>elki.similarity" as elki.similarity.IndexBasedSimilarity.Instance<O, I extends Index> [[IndexBasedSimilarity.Instance.html]] {
+        {abstract} +getIndex(): I extends Index
+    }
+    abstract class "<size:14>AbstractIndexBasedSimilarity\n<size:10>elki.similarity" as elki.similarity.AbstractIndexBasedSimilarity<O, F extends IndexFactory<O>> [[AbstractIndexBasedSimilarity.html]] {
+        {abstract} +instantiate(Relation<T extends O>): Instance<T extends O, ?>
+    }
+
+    elki.similarity.IndexBasedSimilarity.Instance <|.. elki.similarity.AbstractIndexBasedSimilarity.Instance
+    elki.similarity.AbstractIndexBasedSimilarity +- - elki.similarity.AbstractIndexBasedSimilarity.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

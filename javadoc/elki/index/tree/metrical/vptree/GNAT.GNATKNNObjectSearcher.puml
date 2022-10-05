@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GNAT.GNATKNNObjectSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATKNNObjectSearcher [[GNAT.GNATKNNObjectSearcher.html]] {
+        -query: O
+        +getKNN(O, int): KNNList
+        #queryDistance(DBIDRef): double
+    }
+
+    abstract class "<size:14>GNAT.GNATKNNSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATKNNSearcher [[GNAT.GNATKNNSearcher.html]] {
+        {abstract} #queryDistance(DBIDRef): double
+    }
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<O> [[../../../../database/query/knn/KNNSearcher.html]] {
+        {abstract} +getKNN(O, int): KNNList
+    }
+    class "<size:14>GNAT\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT<O> [[GNAT.html]]
+
+    elki.index.tree.metrical.vptree.GNAT.GNATKNNSearcher <|-- elki.index.tree.metrical.vptree.GNAT.GNATKNNObjectSearcher
+    elki.database.query.knn.KNNSearcher <|.. elki.index.tree.metrical.vptree.GNAT.GNATKNNObjectSearcher
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATKNNObjectSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

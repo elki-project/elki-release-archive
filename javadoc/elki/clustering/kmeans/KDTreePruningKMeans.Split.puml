@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>KDTreePruningKMeans.Split\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KDTreePruningKMeans.Split [[KDTreePruningKMeans.Split.html]] {
+        {static} +MIDPOINT
+        {static} +BOUNDED_MIDPOINT
+        {static} +MEDIAN
+        {static} +SSQ
+    }
+
+    class "<size:14>KDTreePruningKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KDTreePruningKMeans<V extends NumberVector> [[KDTreePruningKMeans.html]]
+
+    elki.clustering.kmeans.KDTreePruningKMeans +-- elki.clustering.kmeans.KDTreePruningKMeans.Split
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

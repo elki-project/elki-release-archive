@@ -1,0 +1,39 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GeneralizedExtremeValueLMMEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.GeneralizedExtremeValueLMMEstimator [[GeneralizedExtremeValueLMMEstimator.html]] {
+        {static} +STATIC: GeneralizedExtremeValueLMMEstimator
+        {static} #A0: double
+        {static} #A1: double
+        {static} #A2: double
+        {static} #A3: double
+        {static} #A4: double
+        {static} #B1: double
+        {static} #B2: double
+        {static} #B3: double
+        {static} #C1: double
+        {static} #C2: double
+        {static} #C3: double
+        {static} #D1: double
+        {static} #D2: double
+        {static} #EU: double
+        {static} ~MAXIT: int
+        +getNumMoments(): int
+        +estimateFromLMoments(double[]): GeneralizedExtremeValueDistribution
+        +getDistributionClass(): Class<? super GeneralizedExtremeValueDistribution>
+    }
+
+    interface "<size:14>LMMDistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LMMDistributionEstimator<GeneralizedExtremeValueDistribution> [[LMMDistributionEstimator.html]] {
+        {abstract} +estimateFromLMoments(double[]): GeneralizedExtremeValueDistribution
+        {abstract} +getNumMoments(): int
+    }
+    class "<size:14>GeneralizedExtremeValueLMMEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.GeneralizedExtremeValueLMMEstimator.Par [[GeneralizedExtremeValueLMMEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.LMMDistributionEstimator <|.. elki.math.statistics.distribution.estimator.GeneralizedExtremeValueLMMEstimator
+    elki.math.statistics.distribution.estimator.GeneralizedExtremeValueLMMEstimator +-- elki.math.statistics.distribution.estimator.GeneralizedExtremeValueLMMEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

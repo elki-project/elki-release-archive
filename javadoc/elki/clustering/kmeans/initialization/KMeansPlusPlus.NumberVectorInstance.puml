@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMeansPlusPlus.NumberVectorInstance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMeansPlusPlus.NumberVectorInstance [[KMeansPlusPlus.NumberVectorInstance.html]] {
+        #distance: NumberVectorDistance<?>
+        #relation: Relation<? extends NumberVector>
+        +NumberVectorInstance(Relation<? extends NumberVector>, NumberVectorDistance<?>, RandomFactory)
+        +run(int): double[]
+        #distance(NumberVector, DBIDRef): double
+        #chooseRemaining(int, List<NumberVector>, double): void
+    }
+
+    abstract class "<size:14>KMeansPlusPlus.Instance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMeansPlusPlus.Instance<NumberVector> [[KMeansPlusPlus.Instance.html]] {
+        {abstract} #distance(NumberVector, DBIDRef): double
+    }
+    class "<size:14>KMeansPlusPlus\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMeansPlusPlus<O> [[KMeansPlusPlus.html]]
+
+    elki.clustering.kmeans.initialization.KMeansPlusPlus.Instance <|-- elki.clustering.kmeans.initialization.KMeansPlusPlus.NumberVectorInstance
+    elki.clustering.kmeans.initialization.KMeansPlusPlus +-- elki.clustering.kmeans.initialization.KMeansPlusPlus.NumberVectorInstance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

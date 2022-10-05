@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierPrecisionAtKCurve\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierPrecisionAtKCurve [[OutlierPrecisionAtKCurve.html]] {
+        {static} -LOG: Logging
+        -positiveClassName: Pattern
+        -maxk: int
+        +OutlierPrecisionAtKCurve(Pattern, int)
+        +processNewResult(Object): void
+        -computePrecisionResult(int, SetDBIDs, DBIDs): XYCurve
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../Evaluator.html]]
+    class "<size:14>OutlierPrecisionAtKCurve.PrecisionAtKCurve\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierPrecisionAtKCurve.PrecisionAtKCurve [[OutlierPrecisionAtKCurve.PrecisionAtKCurve.html]]
+    class "<size:14>OutlierPrecisionAtKCurve.Par\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierPrecisionAtKCurve.Par [[OutlierPrecisionAtKCurve.Par.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.outlier.OutlierPrecisionAtKCurve
+    elki.evaluation.outlier.OutlierPrecisionAtKCurve +-- elki.evaluation.outlier.OutlierPrecisionAtKCurve.PrecisionAtKCurve
+    elki.evaluation.outlier.OutlierPrecisionAtKCurve +-- elki.evaluation.outlier.OutlierPrecisionAtKCurve.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

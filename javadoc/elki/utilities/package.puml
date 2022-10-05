@@ -1,0 +1,128 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities {
+
+        class HandlerList<H> [[HandlerList.html]] {
+            +insertHandler(Class<?>, H): void
+            +getHandler(Object): H
+        }
+
+        class Util [[Util.html]] {
+            {static} -HASHPRIME: long
+            {static} +mixHashCodes(int, int): int
+            {static} +mixHashCodes(int, int, int): int
+            {static} +mixHashCodes(int...): int
+        }
+
+        annotation Alias [[Alias.html]]
+
+        annotation Priority [[Priority.html]]
+
+        class ClassGenericsUtil [[ClassGenericsUtil.html]] {
+            {static} -LOG: Logging
+            {static} ~CLASSLOADER: ClassLoader
+            {static} +FACTORY_METHOD_NAME: String
+            {static} +getParameterizer(Class<?>): Parameterizer
+            {static} +tryInstantiate(Class<C>, Class<?>, Parameterization): C
+            {static} +make(Parameterizer, Parameterization): Object
+            {static} +parameterizeOrAbort(Class<?>, Parameterization): C
+            {static} +uglyCastIntoSubclass(Class<D>): Class<T extends D>
+            {static} +instantiateLowlevel(Class<? extends T>): T
+            {static} +loadDefault(Class<T>, String): T
+        }
+
+        class ELKIServiceRegistry [[ELKIServiceRegistry.html]] {
+            {static} -LOG: Logging
+            {static} -CLASSLOADER: ClassLoader
+            {static} +FACTORY_POSTFIX: String
+            {static} -data: Map<Class<?>, Entry>
+            {static} -FAILED_LOAD: Class<?>
+            {static} #register(Class<?>, String): void
+            {static} #register(Class<?>, Class<?>): void
+            {static} #registerAlias(Class<?>, String, String): void
+            {static} -tryLoadClass(String): Class<?>
+            {static} #contains(Class<?>): boolean
+            {static} +findAllImplementations(Class<?>): List<Class<?>>
+            {static} +findAllImplementations(Class<?>, boolean): List<Class<?>>
+            {static} +findImplementation(Class<? super C>, String): Class<? extends C>
+            {static} -tryAlternateNames(Class<? super C>, String, Entry): Class<?>
+        }
+
+        class elki.utilities.ELKIServiceRegistry.Entry [[ELKIServiceRegistry.Entry.html]] {
+            {static} -EMPTY_ALIASES: String[]
+            -names: String[]
+            -clazzes: Class<?>[]
+            -len: int
+            -aliases: String[]
+            -aliaslen: int
+            -addName(String): void
+            -addHit(String, Class<?>): void
+            -addAlias(String, String): void
+        }
+
+        class ELKIBuilder<T> [[ELKIBuilder.html]] {
+            {static} -LOG: Logging
+            -clazz: Class<? super T>
+            +ELKIBuilder(Class<? super T>)
+            +with(OptionID, Object): ELKIBuilder<T>
+            +with(OptionID): ELKIBuilder<T>
+            +with(String, Object): ELKIBuilder<T>
+            +with(String): ELKIBuilder<T>
+            +build(): C extends T
+        }
+
+        class ELKIServiceLoader [[ELKIServiceLoader.html]] {
+            {static} +RESOURCE_PREFIX: String
+            {static} +FILENAME_PREFIX: String
+            {static} +COMMENT_CHAR: char
+            {static} +load(Class<?>): void
+            {static} +load(Class<?>, ClassLoader): void
+            {static} -parseLine(Class<?>, char[], int, int): void
+        }
+
+        class ELKIServiceScanner [[ELKIServiceScanner.html]] {
+            {static} -LOG: Logging
+            {static} -CLASSLOADER: ClassLoader
+            {static} +FACTORY_POSTFIX: String
+            {static} -MASTER_CACHE: List<Class<?>>
+            {static} +SORT_BY_NAME: Comparator<Class<?>>
+            {static} +SORT_BY_PRIORITY: Comparator<Class<?>>
+            {static} +load(Class<?>): void
+            {static} +nonindexedClasses(): Iterator<Class<?>>
+            {static} -getMasterCache(): List<Class<?>>
+            {static} -initialize(): List<Class<?>>
+            {static} -comparePackageClass(Class<?>, Class<?>): int
+            {static} -classPriority(Class<?>): int
+        }
+
+        class elki.utilities.ELKIServiceScanner.DirClassIterator [[ELKIServiceScanner.DirClassIterator.html]] {
+            {static} -CLASS_EXT: String
+            {static} -FACTORY_FILE_EXT: String
+            {static} -CLASS_EXT_LENGTH: int
+            -prefix: String
+            -files: ArrayList<String>
+            -folders: ArrayList<File>
+            +DirClassIterator(File)
+            +hasNext(): boolean
+            -findNext(): void
+            +next(): String
+        }
+
+        HandlerList --> "*" elki.utilities.pairs.Pair: handlers
+        ELKIServiceRegistry +-- elki.utilities.ELKIServiceRegistry.Entry
+        ELKIBuilder --> elki.utilities.optionhandling.parameterization.ListParameterization: p
+        java.util.Iterator <|.. elki.utilities.ELKIServiceScanner.DirClassIterator
+        ELKIServiceScanner +-- elki.utilities.ELKIServiceScanner.DirClassIterator
+    }
+
+    namespace java.util {
+        interface Iterator<E> {
+            {abstract} +hasNext(): boolean
+            {abstract} +next(): E
+            +remove(): void
+            +forEachRemaining(Consumer<? super E>): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

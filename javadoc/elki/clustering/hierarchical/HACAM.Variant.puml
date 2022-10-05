@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>HACAM.Variant\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HACAM.Variant [[HACAM.Variant.html]] {
+        {static} +MINIMUM_SUM
+        {static} +MINIMUM_SUM_INCREASE
+    }
+
+    class "<size:14>HACAM\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HACAM<O> [[HACAM.html]]
+
+    elki.clustering.hierarchical.HACAM +-- elki.clustering.hierarchical.HACAM.Variant
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

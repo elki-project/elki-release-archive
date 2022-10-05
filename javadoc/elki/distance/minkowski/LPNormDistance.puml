@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LPNormDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.LPNormDistance [[LPNormDistance.html]] {
+        #p: double
+        #invp: double
+        +LPNormDistance(double)
+        -preDistance(NumberVector, NumberVector, int, int): double
+        -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+        -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+        -preNorm(NumberVector, int, int): double
+        -preNormMBR(SpatialComparable, int, int): double
+        +distance(NumberVector, NumberVector): double
+        +norm(NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +isMetric(): boolean
+        +getP(): double
+        +getInvP(): double
+        +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[../SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    interface "<size:14>NumberVectorDistance\n<size:10>elki.distance" as elki.distance.NumberVectorDistance<NumberVector> [[../NumberVectorDistance.html]] {
+        {abstract} +distance(NumberVector, NumberVector): double
+    }
+    interface "<size:14>Norm\n<size:10>elki.distance" as elki.distance.Norm<NumberVector> [[../Norm.html]] {
+        {abstract} +norm(NumberVector): double
+    }
+    class "<size:14>LPNormDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.LPNormDistance.Par [[LPNormDistance.Par.html]]
+
+    elki.distance.SpatialPrimitiveDistance <|.. elki.distance.minkowski.LPNormDistance
+    elki.distance.NumberVectorDistance <|.. elki.distance.minkowski.LPNormDistance
+    elki.distance.Norm <|.. elki.distance.minkowski.LPNormDistance
+    elki.distance.minkowski.LPNormDistance +-- elki.distance.minkowski.LPNormDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

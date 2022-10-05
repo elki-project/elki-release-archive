@@ -1,0 +1,106 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BitsUtil\n<size:10>elki.utilities.datastructures" as elki.utilities.datastructures.BitsUtil [[BitsUtil.html]] {
+        {static} -LONG_LOG2_SIZE: int
+        {static} -LONG_LOG2_MASK: int
+        {static} -LONG_ALL_BITS: long
+        {static} -LONG_63_BITS: long
+        {static} -LONG_32_BITS: long
+        {static} -POW5_INT: int[]
+        {static} +FASTUTIL_HASH_STRATEGY: Strategy<long[]>
+        {static} +zero(int): long[]
+        {static} +make(int, long): long[]
+        {static} +of(int...): long[]
+        {static} +ones(int): long[]
+        {static} +random(int, int, Random): long[]
+        {static} +copy(long[]): long[]
+        {static} +copy(long[], int): long[]
+        {static} +copy(long[], int, int): long[]
+        {static} +grayC(long): long
+        {static} +grayI(long[]): long[]
+        {static} +invgrayC(long): long
+        {static} +invgrayI(long[]): long[]
+        {static} +isZero(long[]): boolean
+        {static} +cardinality(long): int
+        {static} +cardinality(long[]): int
+        {static} +flipC(long, int): long
+        {static} +flipI(long[], int): long[]
+        {static} +setC(long, int): long
+        {static} +setI(long[], int): long[]
+        {static} +setI(long[], long[]): long[]
+        {static} +clearC(long, int): long
+        {static} +clearI(long[], int): long[]
+        {static} +get(long, int): boolean
+        {static} +get(long[], int): boolean
+        {static} +onesI(long[], int): void
+        {static} +zeroI(long[]): long[]
+        {static} +xorI(long[], long[]): long[]
+        {static} +xorI(long[], long[], int): long[]
+        {static} +orI(long[], long[]): long[]
+        {static} +orI(long[], long[], int): long[]
+        {static} +andI(long[], long[]): long[]
+        {static} +andI(long[], long[], int): long[]
+        {static} +andCMin(long[], long[]): long[]
+        {static} +nandI(long[], long[]): long[]
+        {static} +invertI(long[]): long[]
+        {static} +shiftRightI(long[], int): long[]
+        {static} +shiftLeftI(long[], int): long[]
+        {static} +cycleRightC(long, int, int): long
+        {static} +cycleRightI(long[], int, int): long[]
+        {static} +truncateI(long[], int): long[]
+        {static} +cycleLeftC(long, int, int): long
+        {static} +cycleLeftI(long[], int, int): long[]
+        {static} +toString(long[]): String
+        {static} +toString(long[], int): String
+        {static} +toString(long): String
+        {static} +toStringLow(long[]): String
+        {static} +toStringLow(long[], int): String
+        {static} +toStringLow(long): String
+        {static} +toString(long[], String, int): String
+        {static} +numberOfTrailingZerosSigned(long[]): int
+        {static} +numberOfTrailingZeros(long[]): int
+        {static} +numberOfTrailingZerosSigned(long): int
+        {static} +numberOfTrailingZeros(long): int
+        {static} +numberOfTrailingZeros(int): int
+        {static} +numberOfLeadingZerosSigned(long[]): int
+        {static} +numberOfLeadingZeros(long[]): int
+        {static} +numberOfLeadingZerosSigned(long): int
+        {static} +numberOfLeadingZerosSigned(int): int
+        {static} +numberOfLeadingZeros(long): int
+        {static} +numberOfLeadingZeros(int): int
+        {static} +previousSetBit(long, int): int
+        {static} +previousSetBit(long[], int): int
+        {static} +previousClearBit(long, int): int
+        {static} +previousClearBit(long[], int): int
+        {static} +nextSetBit(long, int): int
+        {static} +nextSetBit(long[], int): int
+        {static} +nextClearBit(long, int): int
+        {static} +nextClearBit(long[], int): int
+        {static} +magnitude(long[]): int
+        {static} +magnitude(long): int
+        {static} +magnitude(int): int
+        {static} +intersect(long, long): boolean
+        {static} +intersect(long[], long[]): boolean
+        {static} +intersectionSize(long, long): int
+        {static} +intersectionSize(long[], long[]): int
+        {static} +unionSize(long, long): int
+        {static} +unionSize(long[], long[]): int
+        {static} +hammingDistance(long, long): int
+        {static} +hammingDistance(long[], long[]): int
+        {static} +capacity(long[]): int
+        {static} +equal(long, long): boolean
+        {static} +equal(long[], long[]): boolean
+        {static} +compare(long, long): int
+        {static} +compare(long[], long[]): int
+        {static} +hashCode(long): int
+        {static} +hashCode(long[]): int
+        {static} +lpow2(long, int): double
+        {static} +lpow10(long, int): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SphericalKMeans.Instance\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.SphericalKMeans.Instance [[SphericalKMeans.Instance.html]] {
+        +Instance(Relation<? extends NumberVector>, double[])
+        +iterate(int): int
+        #assignToNearestCluster(): int
+        #similarity(NumberVector, double[]): double
+        #similarity(double[], double[]): double
+        #distance(double[], double[]): double
+        #distance(NumberVector, double[]): double
+        #distance(NumberVector, NumberVector): double
+        #sqrtdistance(NumberVector, double[]): double
+        #sqrtdistance(NumberVector, NumberVector): double
+        #initialSeparation(double[]): void
+        #movedSimilarity(double[], double[], double[]): void
+        #meansFromSums(double[], double[], double[]): void
+        #recomputeVariance(Relation<? extends NumberVector>): void
+        #getLogger(): Logging
+        {static} #means(List<? extends DBIDs>, double[], Relation<? extends NumberVector>): double[]
+    }
+
+    abstract class "<size:14>AbstractKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Instance [[../AbstractKMeans.Instance.html]] {
+        {abstract} #iterate(int): int
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>SphericalKMeans\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.SphericalKMeans<V extends NumberVector> [[SphericalKMeans.html]]
+
+    elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.spherical.SphericalKMeans.Instance
+    elki.clustering.kmeans.spherical.SphericalKMeans +-- elki.clustering.kmeans.spherical.SphericalKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

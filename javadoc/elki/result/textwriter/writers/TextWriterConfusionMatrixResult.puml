@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TextWriterConfusionMatrixResult\n<size:10>elki.result.textwriter.writers" as elki.result.textwriter.writers.TextWriterConfusionMatrixResult [[TextWriterConfusionMatrixResult.html]] {
+        +write(TextWriterStream, String, ConfusionMatrixEvaluationResult): void
+    }
+
+    abstract class "<size:14>TextWriterWriterInterface\n<size:10>elki.result.textwriter" as elki.result.textwriter.TextWriterWriterInterface<ConfusionMatrixEvaluationResult> [[../TextWriterWriterInterface.html]] {
+        {abstract} +write(TextWriterStream, String, ConfusionMatrixEvaluationResult): void
+    }
+
+    elki.result.textwriter.TextWriterWriterInterface <|-- elki.result.textwriter.writers.TextWriterConfusionMatrixResult
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

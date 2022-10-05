@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-persistent",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-util",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-persistent-0.8.0.jar",
+          "url": "elki-persistent-0.8.0.jar",
+          "size": 27369,
+          "sha512": "b27473f03ae7a1ed95bbb6f1373d57a6a6f33a20ccb6a8f01ef582cd4cbde2048f9e444a95c33f656331dc7d8bf5dbcb66f9d912a9a1cb0c2a8a9be7adfacc4d",
+          "sha256": "5ae39d40ceb1bf429d0bfade9d914a9aed2d3b1860cc7787c86b2a1948ae8184",
+          "sha1": "fd0aeeb5d4e96b4f1fb30cffca0a47e3a0f4fc70",
+          "md5": "382e4df72351dcf28056db7d34253d26"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-util",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-persistent-0.8.0.jar",
+          "url": "elki-persistent-0.8.0.jar",
+          "size": 27369,
+          "sha512": "b27473f03ae7a1ed95bbb6f1373d57a6a6f33a20ccb6a8f01ef582cd4cbde2048f9e444a95c33f656331dc7d8bf5dbcb66f9d912a9a1cb0c2a8a9be7adfacc4d",
+          "sha256": "5ae39d40ceb1bf429d0bfade9d914a9aed2d3b1860cc7787c86b2a1948ae8184",
+          "sha1": "fd0aeeb5d4e96b4f1fb30cffca0a47e3a0f4fc70",
+          "md5": "382e4df72351dcf28056db7d34253d26"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-persistent",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-persistent-0.8.0-test-fixtures.jar",
+          "url": "elki-persistent-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "9142480179b896a309cf9cbbdd2c2406a98ba5fb5cfaaac43fa4e5929c0710af58206ff2b821253f300b343991f505300fab89adafb33b6f2261e3375f5979c8",
+          "sha256": "23b162d2874c79f3b85c6b9b5b4e9fc2b2524428cb7c53cd258fc698f59f00d0",
+          "sha1": "84dc4b9432a990b49e277c828831fcf418274dd2",
+          "md5": "5c36b287942ffc4a2fb12296857e4f82"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-persistent-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-persistent",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-persistent-0.8.0-test-fixtures.jar",
+          "url": "elki-persistent-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "9142480179b896a309cf9cbbdd2c2406a98ba5fb5cfaaac43fa4e5929c0710af58206ff2b821253f300b343991f505300fab89adafb33b6f2261e3375f5979c8",
+          "sha256": "23b162d2874c79f3b85c6b9b5b4e9fc2b2524428cb7c53cd258fc698f59f00d0",
+          "sha1": "84dc4b9432a990b49e277c828831fcf418274dd2",
+          "md5": "5c36b287942ffc4a2fb12296857e4f82"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-persistent-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByteArrayUtil.DoubleSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil.DoubleSerializer [[ByteArrayUtil.DoubleSerializer.html]] {
+        +--fromByteBuffer--(ByteBuffer): Double
+        +--toByteBuffer--(ByteBuffer, Double): void
+        +--getByteSize--(Double): int
+        +getFixedByteSize(): int
+    }
+
+    interface "<size:14>FixedSizeByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.FixedSizeByteBufferSerializer<Double> [[FixedSizeByteBufferSerializer.html]] {
+        {abstract} +getFixedByteSize(): int
+    }
+    class "<size:14>ByteArrayUtil\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil [[ByteArrayUtil.html]]
+
+    elki.utilities.io.FixedSizeByteBufferSerializer <|.. elki.utilities.io.ByteArrayUtil.DoubleSerializer
+    elki.utilities.io.ByteArrayUtil +-- elki.utilities.io.ByteArrayUtil.DoubleSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

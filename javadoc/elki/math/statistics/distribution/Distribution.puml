@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Distribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution [[Distribution.html]] {
+        {abstract} +pdf(double): double
+        {abstract} +logpdf(double): double
+        {abstract} +cdf(double): double
+        {abstract} +quantile(double): double
+        +nextRandom(Random): double
+    }
+    interface "<size:14>Distribution.Parameterizer\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution.Parameterizer [[Distribution.Parameterizer.html]]
+
+    elki.math.statistics.distribution.Distribution +-- elki.math.statistics.distribution.Distribution.Parameterizer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

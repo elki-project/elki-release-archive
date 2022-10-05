@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AbstractMTree.Statistics\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.AbstractMTree.Statistics [[AbstractMTree.Statistics.html]] {
+        #distanceCalcs: Counter
+        #knnQueries: Counter
+        #rangeQueries: Counter
+        +countDistanceCalculation(): void
+        +countKNNQuery(): void
+        +countRangeQuery(): void
+        +logStatistics(): void
+    }
+
+    abstract class "<size:14>AbstractMTree\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.AbstractMTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMTree.html]] {
+        {abstract} +distance(DBIDRef, DBIDRef): double
+        {abstract} #createNewDirectoryEntry(N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, DBID, double): E extends MTreeEntry
+    }
+
+    elki.index.tree.metrical.mtreevariants.AbstractMTree +-- elki.index.tree.metrical.mtreevariants.AbstractMTree.Statistics
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

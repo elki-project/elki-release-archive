@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ConvexHull\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkcop" as elki.index.tree.metrical.mtreevariants.mktrees.mkcop.ConvexHull [[ConvexHull.html]] {
+        -lowerHull: int[]
+        -upperHull: int[]
+        -l: int
+        -u: int
+        +ConvexHull(double[], double[])
+        +getLowerHull(): int[]
+        +getUpperHull(): int[]
+        +getNumberOfPointsInLowerHull(): int
+        +getNumberOfPointsInUpperHull(): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

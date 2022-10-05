@@ -1,0 +1,166 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-libsvm",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-outlier",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "tw.edu.ntu.csie",
+          "module": "libsvm",
+          "version": {
+            "requires": "3.17"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-libsvm-0.8.0.jar",
+          "url": "elki-libsvm-0.8.0.jar",
+          "size": 22986,
+          "sha512": "6ec1ceccaaf4a64a1c6291ffe28921e93a70cc8056203d08bedaab081039d245e43796b80bd1cb66f97ffbe6d04c4d189ef701b773dbf23eb76de6896cb3c1b0",
+          "sha256": "0ffbb2783ef70c77c2c959a7698270246331f996414eab63d3c6d37e4d296c01",
+          "sha1": "cebfa5b7aa75ec080725c66f54cfb98f459cd2b2",
+          "md5": "11b71eadc3dbc12fbf35340ef5876f86"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-outlier",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "tw.edu.ntu.csie",
+          "module": "libsvm",
+          "version": {
+            "requires": "3.17"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-libsvm-0.8.0.jar",
+          "url": "elki-libsvm-0.8.0.jar",
+          "size": 22986,
+          "sha512": "6ec1ceccaaf4a64a1c6291ffe28921e93a70cc8056203d08bedaab081039d245e43796b80bd1cb66f97ffbe6d04c4d189ef701b773dbf23eb76de6896cb3c1b0",
+          "sha256": "0ffbb2783ef70c77c2c959a7698270246331f996414eab63d3c6d37e4d296c01",
+          "sha1": "cebfa5b7aa75ec080725c66f54cfb98f459cd2b2",
+          "md5": "11b71eadc3dbc12fbf35340ef5876f86"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-libsvm",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-libsvm-0.8.0-test-fixtures.jar",
+          "url": "elki-libsvm-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "14852116f98384ed611c9efd165b10811a11738248752cbfe58a068edef58446c5630b713a49ef0f00d6d3bea0f5172a03b5a66f97c802b4292b4da5380ef51f",
+          "sha256": "0fbfd320d83debfc897f17b67204230d8da9fd94f97517fd9c1e43f41be166a7",
+          "sha1": "790f6a78335b88f2c91114ce880123e190c70ff5",
+          "md5": "ab2892dd8477e888287e71059f07d59b"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-libsvm-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-libsvm",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-libsvm-0.8.0-test-fixtures.jar",
+          "url": "elki-libsvm-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "14852116f98384ed611c9efd165b10811a11738248752cbfe58a068edef58446c5630b713a49ef0f00d6d3bea0f5172a03b5a66f97c802b4292b4da5380ef51f",
+          "sha256": "0fbfd320d83debfc897f17b67204230d8da9fd94f97517fd9c1e43f41be166a7",
+          "sha1": "790f6a78335b88f2c91114ce880123e190c70ff5",
+          "md5": "ab2892dd8477e888287e71059f07d59b"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-libsvm-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

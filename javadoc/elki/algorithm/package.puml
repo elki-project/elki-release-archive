@@ -1,0 +1,151 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.algorithm {
+
+        class DependencyDerivator<V extends NumberVector> [[DependencyDerivator.html]] {
+            {static} -LOG: Logging
+            -distance: NumberVectorDistance<? super NumberVector>
+            -sampleSize: int
+            -pca: PCARunner
+            -filter: EigenPairFilter
+            -nf: NumberFormat
+            -randomsample: boolean
+            +DependencyDerivator(NumberVectorDistance<? super NumberVector>, NumberFormat, PCARunner, EigenPairFilter, int, boolean)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): CorrelationAnalysisSolution
+            +generateModel(Relation<V extends NumberVector>, DBIDs): CorrelationAnalysisSolution
+            +generateModel(Relation<V extends NumberVector>, DBIDs, double[]): CorrelationAnalysisSolution
+        }
+
+        class elki.algorithm.DependencyDerivator.Par<V extends NumberVector> [[DependencyDerivator.Par.html]] {
+            {static} +DEPENDENCY_DERIVATOR_RANDOM_SAMPLE_ID: OptionID
+            {static} +OUTPUT_ACCURACY_ID: OptionID
+            {static} +SAMPLE_SIZE_ID: OptionID
+            #distance: NumberVectorDistance<? super NumberVector>
+            #outputAccuracy: int
+            #sampleSize: int
+            #randomSample: boolean
+            #pca: PCARunner
+            #filter: EigenPairFilter
+            +configure(Parameterization): void
+            +make(): DependencyDerivator<V extends NumberVector>
+        }
+
+        class KNNDistancesSampler<O> [[KNNDistancesSampler.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #k: int
+            #sample: double
+            #rnd: RandomFactory
+            +KNNDistancesSampler(Distance<? super O>, int, double, RandomFactory)
+            +run(Relation<O>): KNNDistanceOrderResult
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.algorithm.KNNDistancesSampler.KNNDistanceOrderResult [[KNNDistancesSampler.KNNDistanceOrderResult.html]] {
+            +KNNDistanceOrderResult(double[], int)
+        }
+
+        class elki.algorithm.KNNDistancesSampler.Par<O> [[KNNDistancesSampler.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +SAMPLING_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            #percentage: double
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): KNNDistancesSampler<O>
+        }
+
+        class NullAlgorithm [[NullAlgorithm.html]] {
+            +autorun(Database): Void
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class KNNJoin [[KNNJoin.html]] {
+            {static} -LOG: Logging
+            #distance: SpatialPrimitiveDistance<?>
+            #k: int
+            +KNNJoin(SpatialPrimitiveDistance<?>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +autorun(Database): Relation<KNNList>
+            +run(Relation<? extends SpatialComparable>): Relation<KNNList>
+            +run(Relation<? extends SpatialComparable>, DBIDs): WritableDataStore<KNNList>
+            +run(AbstractRStarTree<?, ?, ?>, DBIDs): WritableDataStore<KNNList>
+            -initHeaps(SpatialPrimitiveDistance<?>, AbstractRStarTreeNode<?, ?>): List<KNNHeap>
+            -processDataPages(SpatialPrimitiveDistance<?>, List<KNNHeap>, List<KNNHeap>, AbstractRStarTreeNode<?, ?>, AbstractRStarTreeNode<?, ?>): void
+            -computeStopDistance(List<KNNHeap>): double
+        }
+
+        class elki.algorithm.KNNJoin.Task [[KNNJoin.Task.html]] {
+            ~mindist: double
+            ~i: int
+            ~j: int
+            +Task(double, int, int)
+            +compareTo(Task): int
+        }
+
+        class elki.algorithm.KNNJoin.Par [[KNNJoin.Par.html]] {
+            {static} +K_ID: OptionID
+            #k: int
+            #distance: SpatialPrimitiveDistance<?>
+            +configure(Parameterization): void
+            +make(): KNNJoin
+        }
+
+        elki.Algorithm <|.. DependencyDerivator
+        elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.DependencyDerivator.Par
+        DependencyDerivator +-- elki.algorithm.DependencyDerivator.Par
+        elki.Algorithm <|.. KNNDistancesSampler
+        elki.math.geometry.XYCurve <|-- elki.algorithm.KNNDistancesSampler.KNNDistanceOrderResult
+        KNNDistancesSampler +-- elki.algorithm.KNNDistancesSampler.KNNDistanceOrderResult
+        elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.KNNDistancesSampler.Par
+        KNNDistancesSampler +-- elki.algorithm.KNNDistancesSampler.Par
+        elki.Algorithm <|.. NullAlgorithm
+        elki.Algorithm <|.. KNNJoin
+        java.lang.Comparable <|.. elki.algorithm.KNNJoin.Task
+        KNNJoin +-- elki.algorithm.KNNJoin.Task
+        elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.KNNJoin.Par
+        KNNJoin +-- elki.algorithm.KNNJoin.Par
+    }
+
+    namespace elki {
+        interface Algorithm [[../Algorithm.html]] {
+            +autorun(Database): Object
+            {abstract} +getInputTypeRestriction(): TypeInformation[]
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.math.geometry {
+        class XYCurve [[../math/geometry/XYCurve.html]] {
+            {static} #THRESHOLD: double
+            #data: DoubleArray
+            #labelx: String
+            #labely: String
+            #minx: double
+            #maxx: double
+            #miny: double
+            #maxy: double
+            #mindx: double
+            #maxdx: double
+            #mindy: double
+            #maxdy: double
+        }
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

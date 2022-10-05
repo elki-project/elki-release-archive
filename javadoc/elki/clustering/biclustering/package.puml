@@ -1,0 +1,112 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.biclustering {
+
+        class ChengAndChurch [[ChengAndChurch.html]] {
+            {static} -LOG: Logging
+            {static} -MIN_COLUMN_REMOVE_THRESHOLD: int
+            {static} -MIN_ROW_REMOVE_THRESHOLD: int
+            -delta: double
+            -alpha: double
+            -n: int
+            -useinverted: boolean
+            -dist: Distribution
+            -rnd: RandomFactory
+            +ChengAndChurch(double, double, int, Distribution, RandomFactory)
+            +biclustering(): Clustering<BiclusterWithInversionsModel>
+            -singleNodeDeletion(double[], BiclusterCandidate): void
+            -multipleNodeDeletion(double[], BiclusterCandidate): void
+            -nodeAddition(double[], BiclusterCandidate): void
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        interface elki.clustering.biclustering.ChengAndChurch.CellVisitor [[ChengAndChurch.CellVisitor.html]] {
+            {static} +ALL: int
+            {static} +SELECTED: int
+            {static} +NOT_SELECTED: int
+            {abstract} +visit(double, int, int, boolean, boolean): boolean
+        }
+
+        class elki.clustering.biclustering.ChengAndChurch.BiclusterCandidate [[ChengAndChurch.BiclusterCandidate.html]] {
+            ~rowcard: int
+            ~colcard: int
+            ~rowM: double[]
+            ~colM: double[]
+            ~rows: long[]
+            ~irow: long[]
+            ~cols: long[]
+            ~allM: double
+            ~residue: double
+            #BiclusterCandidate(int, int)
+            #reset(): void
+            #visitAll(double[], int, CellVisitor): void
+            #visitColumn(double[], int, int, CellVisitor): void
+            #visitRow(double[], int, int, CellVisitor): void
+            #updateRowAndColumnMeans(double[], boolean): double
+            #computeMeanSquaredDeviation(double[]): double
+            #computeRowResidue(double[], int, boolean): double
+            #computeColResidue(double[], int): double
+            #maskMatrix(double[], Distribution, Random): void
+            #selectColumn(int, boolean): void
+            #selectRow(int, boolean): void
+            #invertRow(int, boolean): void
+        }
+
+        class elki.clustering.biclustering.ChengAndChurch.Par {
+            {static} +DIST_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            {static} +DELTA_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            {static} +N_ID: OptionID
+            -delta: double
+            -alpha: double
+            -n: int
+            -dist: Distribution
+            -rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): ChengAndChurch
+        }
+
+        abstract class AbstractBiclustering<M extends BiclusterModel> [[AbstractBiclustering.html]] {
+            #relation: Relation<? extends NumberVector>
+            -iter: DBIDArrayIter
+            #rowIDs: ArrayDBIDs
+            -colDim: int
+            +run(Relation<? extends NumberVector>): Clustering<M extends BiclusterModel>
+            {abstract} #biclustering(): Clustering<M extends BiclusterModel>
+            #colsBitsetToIDs(BitSet): int[]
+            #rowsBitsetToIDs(BitSet): ArrayDBIDs
+            #defineBicluster(BitSet, BitSet): Cluster<BiclusterModel>
+            #defineBicluster(long[], long[]): Cluster<BiclusterModel>
+            #valueAt(int, int): double
+            #--getRowDBID--(int): DBID
+            #colsBitsetToIDs(long[]): int[]
+            #rowsBitsetToIDs(long[]): ArrayDBIDs
+            #getRowDim(): int
+            #getColDim(): int
+        }
+
+        AbstractBiclustering <|-- ChengAndChurch
+        ChengAndChurch +-- elki.clustering.biclustering.ChengAndChurch.CellVisitor
+        ChengAndChurch +-- elki.clustering.biclustering.ChengAndChurch.BiclusterCandidate
+        elki.clustering.biclustering.ChengAndChurch.BiclusterCandidate --> elki.clustering.biclustering.ChengAndChurch.CellVisitor: MEANVISITOR
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.biclustering.ChengAndChurch.Par
+        ChengAndChurch +-- elki.clustering.biclustering.ChengAndChurch.Par
+        elki.clustering.ClusteringAlgorithm <|.. AbstractBiclustering
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

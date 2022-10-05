@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ModifiableDBIDs\n<size:10>elki.database.ids" as elki.database.ids.ModifiableDBIDs [[ModifiableDBIDs.html]] {
+        {abstract} +addDBIDs(DBIDs): boolean
+        {abstract} +removeDBIDs(DBIDs): boolean
+        {abstract} +add(DBIDRef): boolean
+        {abstract} +remove(DBIDRef): boolean
+        {abstract} +clear(): ModifiableDBIDs
+        {abstract} +iter(): DBIDMIter
+        {abstract} +pop(DBIDVar): DBIDVar
+    }
+
+    interface "<size:14>DBIDs\n<size:10>elki.database.ids" as elki.database.ids.DBIDs [[DBIDs.html]] {
+        {abstract} +iter(): DBIDIter
+        {abstract} +size(): int
+        {abstract} +contains(DBIDRef): boolean
+    }
+
+    elki.database.ids.DBIDs <|-- elki.database.ids.ModifiableDBIDs
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RangeQueryBenchmark.Par\n<size:10>elki.application.benchmark" as elki.application.benchmark.RangeQueryBenchmark.Par<O extends NumberVector> {
+        {static} +RADIUS_ID: OptionID
+        {static} +QUERY_ID: OptionID
+        {static} +SAMPLING_ID: OptionID
+        {static} +RANDOM_ID: OptionID
+        #queries: DatabaseConnection
+        #sampling: double
+        #radius: double
+        #random: RandomFactory
+        +configure(Parameterization): void
+        +make(): RangeQueryBenchmark<O extends NumberVector>
+    }
+
+    abstract class "<size:14>AbstractDistanceBasedApplication.Par\n<size:10>elki.application" as elki.application.AbstractDistanceBasedApplication.Par<O extends NumberVector>
+    class "<size:14>RangeQueryBenchmark\n<size:10>elki.application.benchmark" as elki.application.benchmark.RangeQueryBenchmark<O extends NumberVector> [[RangeQueryBenchmark.html]]
+
+    elki.application.AbstractDistanceBasedApplication.Par <|-- elki.application.benchmark.RangeQueryBenchmark.Par
+    elki.application.benchmark.RangeQueryBenchmark +-- elki.application.benchmark.RangeQueryBenchmark.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

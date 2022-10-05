@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierGammaScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierGammaScaling [[OutlierGammaScaling.html]] {
+        ~k: double
+        ~theta: double
+        ~atmean: double
+        ~normalize: boolean
+        ~meta: OutlierScoreMeta
+        +OutlierGammaScaling(boolean)
+        +getScaled(double): double
+        +prepare(OutlierResult): void
+        +prepare(A, NumberArrayAdapter<?, A>): void
+        #preScale(double): double
+        +getMin(): double
+        +getMax(): double
+    }
+
+    interface "<size:14>OutlierScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierScaling [[OutlierScaling.html]] {
+        {abstract} +prepare(OutlierResult): void
+        {abstract} +prepare(A, NumberArrayAdapter<?, A>): void
+    }
+    class "<size:14>OutlierGammaScaling.Par\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierGammaScaling.Par [[OutlierGammaScaling.Par.html]]
+
+    elki.utilities.scaling.outlier.OutlierScaling <|.. elki.utilities.scaling.outlier.OutlierGammaScaling
+    elki.utilities.scaling.outlier.OutlierGammaScaling +-- elki.utilities.scaling.outlier.OutlierGammaScaling.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

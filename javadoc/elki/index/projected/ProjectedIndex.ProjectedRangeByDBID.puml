@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProjectedIndex.ProjectedRangeByDBID\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.ProjectedRangeByDBID [[ProjectedIndex.ProjectedRangeByDBID.html]] {
+        #distanceQuery: DistanceQuery<O>
+        ~inner: RangeSearcher<​I>
+        +ProjectedRangeByDBID(DistanceQuery<O>, RangeSearcher<​I>)
+        +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+
+    interface "<size:14>RangeSearcher\n<size:10>elki.database.query.range" as elki.database.query.range.RangeSearcher<DBIDRef> [[../../database/query/range/RangeSearcher.html]] {
+        {abstract} +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+    class "<size:14>ProjectedIndex\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex<O, I> [[ProjectedIndex.html]]
+
+    elki.database.query.range.RangeSearcher <|.. elki.index.projected.ProjectedIndex.ProjectedRangeByDBID
+    elki.index.projected.ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedRangeByDBID
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

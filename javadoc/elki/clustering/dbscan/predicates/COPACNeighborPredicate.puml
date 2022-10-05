@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>COPACNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.COPACNeighborPredicate [[COPACNeighborPredicate.html]] {
+        {static} -LOG: Logging
+        #settings: Settings
+        #epsilonsq: double
+        +COPACNeighborPredicate(Settings)
+        +instantiate(Database): Instance<COPACModel>
+        +instantiate(Relation<? extends NumberVector>): Instance
+        #computeLocalModel(DBIDRef, DoubleDBIDList, Relation<? extends NumberVector>): COPACModel
+        +getInputTypeRestriction(): TypeInformation
+        +getOutputType(): SimpleTypeInformation<COPACModel>
+    }
+
+    interface "<size:14>NeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.NeighborPredicate<COPACModel> [[NeighborPredicate.html]] {
+        {abstract} +instantiate(Database): Instance<T>
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +getOutputType(): SimpleTypeInformation<T>
+    }
+    class "<size:14>COPACNeighborPredicate.COPACModel\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.COPACNeighborPredicate.COPACModel [[COPACNeighborPredicate.COPACModel.html]]
+    class "<size:14>COPACNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.COPACNeighborPredicate.Instance [[COPACNeighborPredicate.Instance.html]]
+    class "<size:14>COPACNeighborPredicate.Par\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.COPACNeighborPredicate.Par [[COPACNeighborPredicate.Par.html]]
+
+    elki.clustering.dbscan.predicates.NeighborPredicate <|.. elki.clustering.dbscan.predicates.COPACNeighborPredicate
+    elki.clustering.dbscan.predicates.COPACNeighborPredicate +-- elki.clustering.dbscan.predicates.COPACNeighborPredicate.COPACModel
+    elki.clustering.dbscan.predicates.COPACNeighborPredicate +-- elki.clustering.dbscan.predicates.COPACNeighborPredicate.Instance
+    elki.clustering.dbscan.predicates.COPACNeighborPredicate +-- elki.clustering.dbscan.predicates.COPACNeighborPredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

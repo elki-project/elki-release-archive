@@ -1,0 +1,44 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TypeUtil\n<size:10>elki.data.type" as elki.data.type.TypeUtil [[TypeUtil.html]] {
+        {static} +ANY: SimpleTypeInformation<Object>
+        {static} +DBID: SimpleTypeInformation<DBID>
+        {static} +DBIDS: SimpleTypeInformation<DBIDs>
+        {static} +STRING: SimpleTypeInformation<String>
+        {static} +CLASSLABEL: SimpleTypeInformation<ClassLabel>
+        {static} +SIMPLE_CLASSLABEL: SimpleTypeInformation<SimpleClassLabel>
+        {static} +LABELLIST: SimpleTypeInformation<LabelList>
+        {static} +NEIGHBORLIST: SimpleTypeInformation<DoubleDBIDList>
+        {static} +GUESSED_LABEL: TypeInformation
+        {static} +NUMBER_VECTOR_VARIABLE_LENGTH: VectorTypeInformation<NumberVector>
+        {static} +NUMBER_VECTOR_FIELD: VectorFieldTypeInformation<NumberVector>
+        {static} +NUMBER_VECTOR_FIELD_1D: VectorFieldTypeInformation<? super NumberVector>
+        {static} +NUMBER_VECTOR_FIELD_2D: VectorFieldTypeInformation<? super NumberVector>
+        {static} +MULTIVARIATE_SERIES: MultivariateSeriesTypeInformation<NumberVector>
+        {static} +DOUBLE_VECTOR_FIELD: VectorFieldTypeInformation<DoubleVector>
+        {static} +FLOAT_VECTOR_FIELD: VectorFieldTypeInformation<FloatVector>
+        {static} +BIT_VECTOR: VectorTypeInformation<BitVector>
+        {static} +BIT_VECTOR_FIELD: VectorFieldTypeInformation<BitVector>
+        {static} +SPARSE_VECTOR_VARIABLE_LENGTH: VectorTypeInformation<SparseNumberVector>
+        {static} +SPARSE_VECTOR_FIELD: VectorFieldTypeInformation<SparseNumberVector>
+        {static} +SPARSE_FLOAT_FIELD: VectorFieldTypeInformation<SparseFloatVector>
+        {static} +SPARSE_DOUBLE_FIELD: VectorFieldTypeInformation<SparseDoubleVector>
+        {static} +EXTERNALID: SimpleTypeInformation<ExternalID>
+        {static} +POLYGON_TYPE: SimpleTypeInformation<PolygonsObject>
+        {static} +DOUBLE: SimpleTypeInformation<Double>
+        {static} +INTEGER: SimpleTypeInformation<Integer>
+        {static} +DOUBLE_ARRAY: SimpleTypeInformation<double[]>
+        {static} +INTEGER_ARRAY: SimpleTypeInformation<int[]>
+        {static} +MATRIX: SimpleTypeInformation<double[]>
+        {static} +FEATURE_VECTORS: VectorTypeInformation<FeatureVector<?>>
+        {static} +SPATIAL_OBJECT: SimpleTypeInformation<SpatialComparable>
+        {static} +KNNLIST: SimpleTypeInformation<KNNList>
+        {static} +array(TypeInformation...): TypeInformation[]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSSteepAreaVisualization.Instance\n<size:10>elki.visualization.visualizers.optics" as elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization.Instance [[OPTICSSteepAreaVisualization.Instance.html]] {
+        {static} #CSS_STEEP_UP: String
+        {static} #CSS_STEEP_DOWN: String
+        ~areas: SteepAreaResult
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        -addCSSClasses(): void
+    }
+
+    abstract class "<size:14>AbstractOPTICSVisualization\n<size:10>elki.visualization.visualizers.optics" as elki.visualization.visualizers.optics.AbstractOPTICSVisualization [[AbstractOPTICSVisualization.html]]
+    class "<size:14>OPTICSSteepAreaVisualization\n<size:10>elki.visualization.visualizers.optics" as elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization [[OPTICSSteepAreaVisualization.html]]
+
+    elki.visualization.visualizers.optics.AbstractOPTICSVisualization <|-- elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization.Instance
+    elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization +-- elki.visualization.visualizers.optics.OPTICSSteepAreaVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractDBIDRangeDistance\n<size:10>elki.distance" as elki.distance.AbstractDBIDRangeDistance [[AbstractDBIDRangeDistance.html]] {
+        +distance(DBIDRef, DBIDRef): double
+        +getInputTypeRestriction(): SimpleTypeInformation<DBID>
+        +instantiate(Relation<O extends DBID>): DistanceQuery<O extends DBID>
+    }
+
+    abstract class "<size:14>AbstractDatabaseDistance\n<size:10>elki.distance" as elki.distance.AbstractDatabaseDistance<DBID> [[AbstractDatabaseDistance.html]]
+    interface "<size:14>DBIDRangeDistance\n<size:10>elki.distance" as elki.distance.DBIDRangeDistance [[DBIDRangeDistance.html]] {
+        {abstract} +distance(int, int): double
+        {abstract} +checkRange(DBIDRange): void
+    }
+
+    elki.distance.AbstractDatabaseDistance <|-- elki.distance.AbstractDBIDRangeDistance
+    elki.distance.DBIDRangeDistance <|.. elki.distance.AbstractDBIDRangeDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

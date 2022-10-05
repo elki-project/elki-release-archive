@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CompleteLinkage\n<size:10>elki.clustering.hierarchical.linkage" as elki.clustering.hierarchical.linkage.CompleteLinkage [[CompleteLinkage.html]] {
+        {static} +STATIC: CompleteLinkage
+        +combine(int, double, int, double, int, double): double
+    }
+
+    interface "<size:14>Linkage\n<size:10>elki.clustering.hierarchical.linkage" as elki.clustering.hierarchical.linkage.Linkage [[Linkage.html]] {
+        {abstract} +combine(int, double, int, double, int, double): double
+    }
+    class "<size:14>CompleteLinkage.Par\n<size:10>elki.clustering.hierarchical.linkage" as elki.clustering.hierarchical.linkage.CompleteLinkage.Par [[CompleteLinkage.Par.html]]
+
+    elki.clustering.hierarchical.linkage.Linkage <|.. elki.clustering.hierarchical.linkage.CompleteLinkage
+    elki.clustering.hierarchical.linkage.CompleteLinkage +-- elki.clustering.hierarchical.linkage.CompleteLinkage.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

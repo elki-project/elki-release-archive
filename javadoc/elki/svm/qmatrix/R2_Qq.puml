@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>R2_Qq\n<size:10>elki.svm.qmatrix" as elki.svm.qmatrix.R2_Qq [[R2_Qq.html]] {
+        ~invC: double
+        +R2_Qq(DataSet, double)
+        +similarity(int, int): double
+    }
+
+    class "<size:14>Kernel\n<size:10>elki.svm.qmatrix" as elki.svm.qmatrix.Kernel [[Kernel.html]]
+
+    elki.svm.qmatrix.Kernel <|-- elki.svm.qmatrix.R2_Qq
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

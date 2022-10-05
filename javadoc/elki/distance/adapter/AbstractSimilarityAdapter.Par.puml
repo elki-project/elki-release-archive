@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractSimilarityAdapter.Par\n<size:10>elki.distance.adapter" as elki.distance.adapter.AbstractSimilarityAdapter.Par<O, S extends Similarity<? super O>> [[AbstractSimilarityAdapter.Par.html]] {
+        {static} +SIMILARITY_FUNCTION_ID: OptionID
+        #similarityFunction: S extends Similarity<? super O>
+        #ARBITRARY_SIMILARITY: Class<Similarity<? super O>>
+        #NORMALIZED_SIMILARITY: Class<NormalizedSimilarity<? super O>>
+        +configure(Parameterization): void
+        {abstract} #getSimilarityRestriction(): Class<? extends Similarity<? super O>>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractSimilarityAdapter\n<size:10>elki.distance.adapter" as elki.distance.adapter.AbstractSimilarityAdapter<O> [[AbstractSimilarityAdapter.html]] {
+        {abstract} +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+    }
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.adapter.AbstractSimilarityAdapter.Par
+    elki.distance.adapter.AbstractSimilarityAdapter +-- elki.distance.adapter.AbstractSimilarityAdapter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

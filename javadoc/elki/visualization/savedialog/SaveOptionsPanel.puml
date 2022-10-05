@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SaveOptionsPanel\n<size:10>elki.visualization.savedialog" as elki.visualization.savedialog.SaveOptionsPanel [[SaveOptionsPanel.html]] {
+        {static} -STR_CHOOSE_FORMAT: String
+        {static} -STR_IMAGE_WIDTH: String
+        {static} -STR_IMAGE_HEIGHT: String
+        {static} -STR_LOCK_ASPECT_RATIO: String
+        {static} -STR_JPEG_QUALITY: String
+        {static} -serialVersionUID: long
+        ~ratio: double
+        #spinnerWidth: JSpinner
+        #spinnerHeight: JSpinner
+        #spinnerQual: JSpinner
+        #modelWidth: SpinnerNumberModel
+        #modelHeight: SpinnerNumberModel
+        #modelQual: SpinnerNumberModel
+        #checkAspectRatio: JCheckBox
+        #resetSizeButton: JButton
+        #formatSelector: JComboBox<String>
+        -labelWidth: JLabel
+        -labelHeight: JLabel
+        -labelQual: JLabel
+        +SaveOptionsPanel(JFileChooser, int, int)
+        #setFormat(String): void
+        +getSelectedFormat(): String
+        +getSelectedWidth(): int
+        +getSelectedHeight(): int
+        +getJPEGQuality(): float
+    }
+
+    class "<size:14>JPanel\n<size:10>javax.swing" as javax.swing.JPanel
+
+    javax.swing.JPanel <|-- elki.visualization.savedialog.SaveOptionsPanel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

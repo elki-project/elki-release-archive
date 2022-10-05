@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Heap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.Heap<E> [[Heap.html]] {
+        #queue: Object[]
+        #size: int
+        #comparator: Comparator<Object>
+        -modCount: int
+        {static} -DEFAULT_INITIAL_CAPACITY: int
+        +Heap()
+        +Heap(int)
+        +Heap(Comparator<? super E>)
+        +Heap(int, Comparator<? super E>)
+        +add(E): void
+        +add(E, int): void
+        +peek(): E
+        +poll(): E
+        #heapifyUp(int, E): void
+        #heapifyDown(int, Object): boolean
+        +size(): int
+        +isEmpty(): boolean
+        +clear(): void
+        #heapModified(): void
+        +unorderedIter(): UnorderedIter
+        #checkHeap(): String
+    }
+    class "<size:14>Heap.UnorderedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.Heap.UnorderedIter [[Heap.UnorderedIter.html]]
+
+    elki.utilities.datastructures.heap.Heap +-- elki.utilities.datastructures.heap.Heap.UnorderedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

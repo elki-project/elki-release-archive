@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ELKIServiceRegistry\n<size:10>elki.utilities" as elki.utilities.ELKIServiceRegistry [[ELKIServiceRegistry.html]] {
+        {static} -LOG: Logging
+        {static} -CLASSLOADER: ClassLoader
+        {static} +FACTORY_POSTFIX: String
+        {static} -data: Map<Class<?>, Entry>
+        {static} -FAILED_LOAD: Class<?>
+        {static} #register(Class<?>, String): void
+        {static} #register(Class<?>, Class<?>): void
+        {static} #registerAlias(Class<?>, String, String): void
+        {static} -tryLoadClass(String): Class<?>
+        {static} #contains(Class<?>): boolean
+        {static} +findAllImplementations(Class<?>): List<Class<?>>
+        {static} +findAllImplementations(Class<?>, boolean): List<Class<?>>
+        {static} +findImplementation(Class<? super C>, String): Class<? extends C>
+        {static} -tryAlternateNames(Class<? super C>, String, Entry): Class<?>
+    }
+    class "<size:14>ELKIServiceRegistry.Entry\n<size:10>elki.utilities" as elki.utilities.ELKIServiceRegistry.Entry [[ELKIServiceRegistry.Entry.html]]
+
+    elki.utilities.ELKIServiceRegistry +-- elki.utilities.ELKIServiceRegistry.Entry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

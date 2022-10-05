@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FirstK.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.FirstK.Par<V extends NumberVector> [[FirstK.Par.html]] {
+        +make(): FirstK<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>FirstK\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.FirstK<O> [[FirstK.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmeans.initialization.FirstK.Par
+    elki.clustering.kmeans.initialization.FirstK +-- elki.clustering.kmeans.initialization.FirstK.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

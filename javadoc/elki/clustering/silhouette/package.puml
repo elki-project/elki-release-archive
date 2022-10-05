@@ -1,0 +1,162 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.silhouette {
+
+        class FastMSC<O> [[FastMSC.html]] {
+            {static} -LOG: Logging
+            +FastMSC(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+            {static} #loss(double, double): double
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.silhouette.FastMSC.Instance2 [[FastMSC.Instance2.html]] {
+            #ids: DBIDs
+            #distQ: DistanceQuery<?>
+            #dm0: WritableDoubleDataStore
+            #dm1: WritableDoubleDataStore
+            #assignment: WritableIntegerDataStore
+            +Instance2(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+            #run(ArrayModifiableDBIDs, int): double
+            #assignToNearestCluster(ArrayDBIDs): double
+            #findBestSwap(DBIDRef, double[]): void
+            #doSwap(ArrayDBIDs, int, DBIDRef): double
+            +silhouetteScores(): DoubleDataStore
+        }
+
+        class elki.clustering.silhouette.FastMSC.Record [[FastMSC.Record.html]] {
+            ~m1: int
+            ~m2: int
+            ~m3: int
+            ~d1: double
+            ~d2: double
+            ~d3: double
+        }
+
+        class elki.clustering.silhouette.FastMSC.Instance [[FastMSC.Instance.html]] {
+            #ids: DBIDs
+            #distQ: DistanceQuery<?>
+            #assignment: WritableDataStore<Record>
+            #output: WritableIntegerDataStore
+            +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+            #run(ArrayModifiableDBIDs, int): double
+            #assignToNearestCluster(ArrayDBIDs): double
+            #findBestSwap(DBIDRef, double[]): double
+            #doSwap(ArrayDBIDs, int, DBIDRef): double
+            #updateThirdNearest(DBIDRef, Record, int, double, DBIDArrayIter): void
+            #updateRemovalLoss(double[]): void
+            +silhouetteScores(): DoubleDataStore
+        }
+
+        class elki.clustering.silhouette.FastMSC.Par<O> [[FastMSC.Par.html]] {
+            #defaultInitializer(): Class<? extends KMedoidsInitialization>
+            +make(): FastMSC<O>
+        }
+
+        class FasterMSC<O> [[FasterMSC.html]] {
+            {static} -LOG: Logging
+            +FasterMSC(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.silhouette.FasterMSC.Instance2 [[FasterMSC.Instance2.html]] {
+            +Instance2(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+            #run(ArrayModifiableDBIDs, int): double
+        }
+
+        class elki.clustering.silhouette.FasterMSC.Instance [[FasterMSC.Instance.html]] {
+            +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+            #run(ArrayModifiableDBIDs, int): double
+        }
+
+        class elki.clustering.silhouette.FasterMSC.Par<O> [[FasterMSC.Par.html]] {
+            +make(): FasterMSC<O>
+        }
+
+        class PAMMEDSIL<O> [[PAMMEDSIL.html]] {
+            {static} -LOG: Logging
+            +PAMMEDSIL(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.silhouette.PAMMEDSIL.Instance [[PAMMEDSIL.Instance.html]] {
+            +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+            #run(ArrayModifiableDBIDs, int): double
+            #medoidsilhouette(IntegerDataStore, DBIDArrayIter): double
+            #medoidsilhouette(IntegerDataStore, DBIDArrayIter, int, DBIDRef): double
+        }
+
+        class elki.clustering.silhouette.PAMMEDSIL.Par<O> [[PAMMEDSIL.Par.html]] {
+            +make(): PAMMEDSIL<O>
+        }
+
+        class PAMSIL<O> [[PAMSIL.html]] {
+            {static} -LOG: Logging
+            +PAMSIL(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+            +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.silhouette.PAMSIL.Instance [[PAMSIL.Instance.html]] {
+            ~ids: DBIDs
+            ~distQ: DistanceQuery<?>
+            ~assignment: WritableIntegerDataStore
+            ~scratch: WritableIntegerDataStore
+            ~silhouettes: WritableDoubleDataStore
+            +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+            #run(ArrayModifiableDBIDs, int): double
+            #assignToNearestCluster(ArrayDBIDs): void
+            #silhouette(IntegerDataStore, int): double
+            #reassignToNearestCluster(IntegerDataStore, WritableIntegerDataStore, ArrayDBIDs, int, DBIDRef): void
+            +silhouetteScores(): DoubleDataStore
+        }
+
+        class elki.clustering.silhouette.PAMSIL.Par<O> [[PAMSIL.Par.html]] {
+            #defaultInitializer(): Class<? extends KMedoidsInitialization>
+            +make(): PAMSIL<O>
+        }
+
+        PAMMEDSIL <|-- FastMSC
+        FastMSC +-- elki.clustering.silhouette.FastMSC.Instance2
+        FastMSC +-- elki.clustering.silhouette.FastMSC.Record
+        FastMSC +-- elki.clustering.silhouette.FastMSC.Instance
+        elki.clustering.silhouette.PAMMEDSIL.Par <|-- elki.clustering.silhouette.FastMSC.Par
+        FastMSC +-- elki.clustering.silhouette.FastMSC.Par
+        FastMSC <|-- FasterMSC
+        elki.clustering.silhouette.FastMSC.Instance2 <|-- elki.clustering.silhouette.FasterMSC.Instance2
+        FasterMSC +-- elki.clustering.silhouette.FasterMSC.Instance2
+        elki.clustering.silhouette.FastMSC.Instance <|-- elki.clustering.silhouette.FasterMSC.Instance
+        FasterMSC +-- elki.clustering.silhouette.FasterMSC.Instance
+        elki.clustering.silhouette.FastMSC.Par <|-- elki.clustering.silhouette.FasterMSC.Par
+        FasterMSC +-- elki.clustering.silhouette.FasterMSC.Par
+        PAMSIL <|-- PAMMEDSIL
+        elki.clustering.silhouette.PAMSIL.Instance <|-- elki.clustering.silhouette.PAMMEDSIL.Instance
+        PAMMEDSIL +-- elki.clustering.silhouette.PAMMEDSIL.Instance
+        elki.clustering.silhouette.PAMSIL.Par <|-- elki.clustering.silhouette.PAMMEDSIL.Par
+        PAMMEDSIL +-- elki.clustering.silhouette.PAMMEDSIL.Par
+        elki.clustering.kmedoids.PAM <|-- PAMSIL
+        PAMSIL +-- elki.clustering.silhouette.PAMSIL.Instance
+        elki.clustering.kmedoids.PAM.Par <|-- elki.clustering.silhouette.PAMSIL.Par
+        PAMSIL +-- elki.clustering.silhouette.PAMSIL.Par
+    }
+
+    namespace elki.clustering.kmedoids {
+        class PAM<O> [[../kmedoids/PAM.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #k: int
+            #maxiter: int
+            #initializer: KMedoidsInitialization<O>
+        }
+        class elki.clustering.kmedoids.PAM.Par<O> [[../kmedoids/PAM.Par.html]] {
+            #k: int
+            #maxiter: int
+            #initializer: KMedoidsInitialization<O>
+            #distance: Distance<? super O>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

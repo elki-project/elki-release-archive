@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CircleSegmentsVisualizer.Instance.SegmentListenerProxy\n<size:10>elki.visualization.visualizers.pairsegments" as elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance.SegmentListenerProxy [[CircleSegmentsVisualizer.Instance.SegmentListenerProxy.html]] {
+        {static} +EVT_DBLCLICK_DELAY: int
+        -id: Segment
+        -ringid: int
+        -lastClick: long
+        +SegmentListenerProxy(Segment, int)
+        +handleEvent(Event): void
+    }
+
+    interface "<size:14>EventListener\n<size:10>org.w3c.dom.events" as org.w3c.dom.events.EventListener {
+        {abstract} +handleEvent(Event): void
+    }
+    class "<size:14>CircleSegmentsVisualizer.Instance\n<size:10>elki.visualization.visualizers.pairsegments" as elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance [[CircleSegmentsVisualizer.Instance.html]]
+
+    org.w3c.dom.events.EventListener <|.. elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance.SegmentListenerProxy
+    elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance +-- elki.visualization.visualizers.pairsegments.CircleSegmentsVisualizer.Instance.SegmentListenerProxy
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ThumbnailRegistryEntry.InternalParsedURLData\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.ThumbnailRegistryEntry.InternalParsedURLData [[ThumbnailRegistryEntry.InternalParsedURLData.html]] {
+        +InternalParsedURLData(String)
+        +getContentType(String): String
+        +complete(): boolean
+        +openStream(String, Iterator): InputStream
+    }
+
+    class "<size:14>ParsedURLData\n<size:10>org.apache.batik.util" as org.apache.batik.util.ParsedURLData
+    class "<size:14>ThumbnailRegistryEntry\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.ThumbnailRegistryEntry [[ThumbnailRegistryEntry.html]]
+
+    org.apache.batik.util.ParsedURLData <|-- elki.visualization.batikutil.ThumbnailRegistryEntry.InternalParsedURLData
+    elki.visualization.batikutil.ThumbnailRegistryEntry +-- elki.visualization.batikutil.ThumbnailRegistryEntry.InternalParsedURLData
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

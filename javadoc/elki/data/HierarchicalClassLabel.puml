@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HierarchicalClassLabel\n<size:10>elki.data" as elki.data.HierarchicalClassLabel [[HierarchicalClassLabel.html]] {
+        {static} +DEFAULT_SEPARATOR: Pattern
+        {static} +DEFAULT_SEPARATOR_STRING: String
+        {static} +TYPE: SimpleTypeInformation<HierarchicalClassLabel>
+        -separatorPattern: Pattern
+        -separatorString: String
+        -levelwiseNames: Comparable<?>[]
+        +HierarchicalClassLabel(String, Pattern, String)
+        +HierarchicalClassLabel(String)
+        +compareTo(ClassLabel): int
+        +depth(): int
+        +getNameAt(int): String
+        +toString(int): String
+    }
+
+    abstract class "<size:14>ClassLabel\n<size:10>elki.data" as elki.data.ClassLabel [[ClassLabel.html]]
+    class "<size:14>HierarchicalClassLabel.Factory\n<size:10>elki.data" as elki.data.HierarchicalClassLabel.Factory [[HierarchicalClassLabel.Factory.html]]
+
+    elki.data.ClassLabel <|-- elki.data.HierarchicalClassLabel
+    elki.data.HierarchicalClassLabel +-- elki.data.HierarchicalClassLabel.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

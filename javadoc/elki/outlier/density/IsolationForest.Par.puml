@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IsolationForest.Par\n<size:10>elki.outlier.density" as elki.outlier.density.IsolationForest.Par [[IsolationForest.Par.html]] {
+        {static} +NUM_TREES_ID: OptionID
+        {static} +SUBSAMPLE_SIZE_ID: OptionID
+        {static} +SEED_ID: OptionID
+        #numTrees: int
+        #subsampleSize: int
+        #rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): IsolationForest
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>IsolationForest\n<size:10>elki.outlier.density" as elki.outlier.density.IsolationForest [[IsolationForest.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.density.IsolationForest.Par
+    elki.outlier.density.IsolationForest +-- elki.outlier.density.IsolationForest.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

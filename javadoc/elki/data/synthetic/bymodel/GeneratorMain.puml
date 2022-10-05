@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GeneratorMain\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorMain [[GeneratorMain.html]] {
+        {static} -LOG: Logging
+        #generators: ArrayList<GeneratorInterface>
+        #testAgainstModel: boolean
+        #relabelClusters: Pattern
+        #relabelDistance: boolean
+        +addCluster(GeneratorInterface): void
+        +generate(): MultipleObjectsBundle
+        -initLabelsAndModels(ArrayList<GeneratorInterface>, ClassLabel[], Model[], Pattern): void
+        +isTestAgainstModel(): boolean
+        +setTestAgainstModel(boolean): void
+        +getGenerators(): List<GeneratorInterface>
+        +setReassignPattern(Pattern): void
+        +setReassignByDistance(boolean): void
+    }
+    class "<size:14>GeneratorMain.AssignPoint\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorMain.AssignPoint
+    class "<size:14>GeneratorMain.TestModel\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorMain.TestModel [[GeneratorMain.TestModel.html]]
+    class "<size:14>GeneratorMain.AssignLabelsByDensity\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDensity [[GeneratorMain.AssignLabelsByDensity.html]]
+    class "<size:14>GeneratorMain.AssignLabelsByDistance\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDistance [[GeneratorMain.AssignLabelsByDistance.html]]
+
+    elki.data.synthetic.bymodel.GeneratorMain +-- elki.data.synthetic.bymodel.GeneratorMain.AssignPoint
+    elki.data.synthetic.bymodel.GeneratorMain +-- elki.data.synthetic.bymodel.GeneratorMain.TestModel
+    elki.data.synthetic.bymodel.GeneratorMain +-- elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDensity
+    elki.data.synthetic.bymodel.GeneratorMain +-- elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

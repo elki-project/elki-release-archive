@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MinimalisticMemoryKDTree.Factory\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory<O extends NumberVector> [[MinimalisticMemoryKDTree.Factory.html]] {
+        ~leafsize: int
+        +Factory()
+        +Factory(int)
+        +instantiate(Relation<O extends NumberVector>): MinimalisticMemoryKDTree<O extends NumberVector>
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<O extends NumberVector> [[../../../IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>MinimalisticMemoryKDTree\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree<O extends NumberVector> [[MinimalisticMemoryKDTree.html]]
+    class "<size:14>MinimalisticMemoryKDTree.Factory.Par\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory.Par<O extends NumberVector> [[MinimalisticMemoryKDTree.Factory.Par.html]]
+
+    elki.index.IndexFactory <|.. elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory
+    elki.index.tree.spatial.kd.MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory
+    elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

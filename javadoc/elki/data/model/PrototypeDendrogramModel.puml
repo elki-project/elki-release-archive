@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrototypeDendrogramModel\n<size:10>elki.data.model" as elki.data.model.PrototypeDendrogramModel [[PrototypeDendrogramModel.html]] {
+        #prototype: DBID
+        +PrototypeDendrogramModel(double, DBID)
+        +getPrototype(): DBID
+        +writeToText(TextWriterStream, String): void
+        +getPrototypeType(): String
+    }
+
+    class "<size:14>DendrogramModel\n<size:10>elki.data.model" as elki.data.model.DendrogramModel [[DendrogramModel.html]]
+    interface "<size:14>PrototypeModel\n<size:10>elki.data.model" as elki.data.model.PrototypeModel<DBID> [[PrototypeModel.html]] {
+        {abstract} +getPrototype(): DBID
+        {abstract} +getPrototypeType(): String
+    }
+
+    elki.data.model.DendrogramModel <|-- elki.data.model.PrototypeDendrogramModel
+    elki.data.model.PrototypeModel <|.. elki.data.model.PrototypeDendrogramModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

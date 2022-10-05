@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ArrayAdapterDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.ArrayAdapterDatabaseConnection [[ArrayAdapterDatabaseConnection.html]] {
+        {static} -LOG: Logging
+        ~data: double[]
+        ~labels: String[]
+        ~startid: Integer
+        +ArrayAdapterDatabaseConnection(double[])
+        +ArrayAdapterDatabaseConnection(double[], List<ObjectFilter>)
+        +ArrayAdapterDatabaseConnection(double[], String[])
+        +ArrayAdapterDatabaseConnection(double[], String[], List<ObjectFilter>)
+        +ArrayAdapterDatabaseConnection(double[], String[], Integer)
+        +ArrayAdapterDatabaseConnection(double[], String[], Integer, List<ObjectFilter>)
+        +loadData(): MultipleObjectsBundle
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.AbstractDatabaseConnection [[AbstractDatabaseConnection.html]] {
+        {abstract} #getLogger(): Logging
+    }
+
+    elki.datasource.AbstractDatabaseConnection <|-- elki.datasource.ArrayAdapterDatabaseConnection
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

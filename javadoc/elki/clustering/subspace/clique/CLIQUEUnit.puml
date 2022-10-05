@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CLIQUEUnit\n<size:10>elki.clustering.subspace.clique" as elki.clustering.subspace.clique.CLIQUEUnit [[CLIQUEUnit.html]] {
+        -dims: int[]
+        -bounds: double[]
+        -ids: ModifiableDBIDs
+        -assigned: boolean
+        -CLIQUEUnit(CLIQUEUnit, int, double, double, ModifiableDBIDs)
+        +CLIQUEUnit(int, double, double)
+        +dimensionality(): int
+        +getDimension(int): int
+        +contains(NumberVector): boolean
+        +addFeatureVector(DBIDRef, NumberVector): boolean
+        +numberOfFeatureVectors(): int
+        +selectivity(double): double
+        #containsLeftNeighbor(CLIQUEUnit, int): boolean
+        #containsRightNeighbor(CLIQUEUnit, int): boolean
+        +isAssigned(): boolean
+        +markAsAssigned(): void
+        +getIds(): DBIDs
+        #join(CLIQUEUnit, double, double): CLIQUEUnit
+        -checkDimensions(CLIQUEUnit, int): boolean
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

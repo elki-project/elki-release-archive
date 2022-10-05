@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SphericalKMeansPlusPlus\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus<O> [[SphericalKMeansPlusPlus.html]] {
+        {static} -LOG: Logging
+        #alpha: double
+        +SphericalKMeansPlusPlus(double, RandomFactory)
+        +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+    }
+
+    abstract class "<size:14>AbstractKMeansInitialization\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AbstractKMeansInitialization [[AbstractKMeansInitialization.html]]
+    class "<size:14>SphericalKMeansPlusPlus.Instance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus.Instance [[SphericalKMeansPlusPlus.Instance.html]]
+    class "<size:14>SphericalKMeansPlusPlus.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus.Par<V> [[SphericalKMeansPlusPlus.Par.html]]
+
+    elki.clustering.kmeans.initialization.AbstractKMeansInitialization <|-- elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus
+    elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus +-- elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus.Instance
+    elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus +-- elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

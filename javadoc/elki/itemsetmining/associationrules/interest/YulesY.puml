@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>YulesY\n<size:10>elki.itemsetmining.associationrules.interest" as elki.itemsetmining.associationrules.interest.YulesY [[YulesY.html]] {
+        +measure(int, int, int, int): double
+    }
+
+    class "<size:14>OddsRatio\n<size:10>elki.itemsetmining.associationrules.interest" as elki.itemsetmining.associationrules.interest.OddsRatio [[OddsRatio.html]]
+
+    elki.itemsetmining.associationrules.interest.OddsRatio <|-- elki.itemsetmining.associationrules.interest.YulesY
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

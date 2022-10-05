@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastMSC.Record\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.FastMSC.Record [[FastMSC.Record.html]] {
+        ~m1: int
+        ~m2: int
+        ~m3: int
+        ~d1: double
+        ~d2: double
+        ~d3: double
+    }
+
+    class "<size:14>FastMSC\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.FastMSC<O> [[FastMSC.html]]
+
+    elki.clustering.silhouette.FastMSC +-- elki.clustering.silhouette.FastMSC.Record
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

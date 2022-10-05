@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkTreeHeader\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.MkTreeHeader [[MkTreeHeader.html]] {
+        {static} -SIZE: int
+        -k_max: int
+        +MkTreeHeader()
+        +MkTreeHeader(int, int, int, int)
+        +readHeader(ByteBuffer): void
+        +writeHeader(ByteBuffer): void
+        +getK_max(): int
+        +size(): int
+    }
+
+    class "<size:14>TreeIndexHeader\n<size:10>elki.index.tree" as elki.index.tree.TreeIndexHeader [[../../../TreeIndexHeader.html]]
+
+    elki.index.tree.TreeIndexHeader <|-- elki.index.tree.metrical.mtreevariants.mktrees.MkTreeHeader
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

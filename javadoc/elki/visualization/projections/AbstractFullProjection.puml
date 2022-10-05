@@ -1,0 +1,47 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractFullProjection\n<size:10>elki.visualization.projections" as elki.visualization.projections.AbstractFullProjection [[AbstractFullProjection.html]] {
+        +AbstractFullProjection(Projector, LinearScale[])
+        +projectDataToScaledSpace(NumberVector): double[]
+        +projectDataToScaledSpace(double[]): double[]
+        +projectRelativeDataToScaledSpace(NumberVector): double[]
+        +projectRelativeDataToScaledSpace(double[]): double[]
+        +projectDataToRenderSpace(NumberVector): double[]
+        +projectDataToRenderSpace(double[]): double[]
+        +projectRelativeDataToRenderSpace(NumberVector): double[]
+        +projectRelativeDataToRenderSpace(double[]): double[]
+        +projectScaledToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+        +projectRenderToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+        +projectRelativeScaledToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+        +projectRelativeRenderToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+    }
+
+    abstract class "<size:14>AbstractProjection\n<size:10>elki.visualization.projections" as elki.visualization.projections.AbstractProjection [[AbstractProjection.html]]
+    interface "<size:14>FullProjection\n<size:10>elki.visualization.projections" as elki.visualization.projections.FullProjection [[FullProjection.html]] {
+        {abstract} +projectScaledToRender(double[]): double[]
+        {abstract} +projectRenderToScaled(double[]): double[]
+        {abstract} +projectRelativeScaledToRender(double[]): double[]
+        {abstract} +projectRelativeRenderToScaled(double[]): double[]
+        {abstract} +projectDataToScaledSpace(NumberVector): double[]
+        {abstract} +projectDataToScaledSpace(double[]): double[]
+        {abstract} +projectRelativeDataToScaledSpace(NumberVector): double[]
+        {abstract} +projectRelativeDataToScaledSpace(double[]): double[]
+        {abstract} +projectDataToRenderSpace(NumberVector): double[]
+        {abstract} +projectDataToRenderSpace(double[]): double[]
+        {abstract} +projectScaledToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+        {abstract} +projectRenderToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+        {abstract} +projectRelativeDataToRenderSpace(NumberVector): double[]
+        {abstract} +projectRelativeDataToRenderSpace(double[]): double[]
+        {abstract} +projectRelativeScaledToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+        {abstract} +projectRelativeRenderToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+    }
+
+    elki.visualization.projections.AbstractProjection <|-- elki.visualization.projections.AbstractFullProjection
+    elki.visualization.projections.FullProjection <|.. elki.visualization.projections.AbstractFullProjection
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

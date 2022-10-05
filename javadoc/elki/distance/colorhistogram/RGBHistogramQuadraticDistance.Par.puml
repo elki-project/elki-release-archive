@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RGBHistogramQuadraticDistance.Par\n<size:10>elki.distance.colorhistogram" as elki.distance.colorhistogram.RGBHistogramQuadraticDistance.Par [[RGBHistogramQuadraticDistance.Par.html]] {
+        {static} +BPP_ID: OptionID
+        ~bpp: int
+        +configure(Parameterization): void
+        +make(): RGBHistogramQuadraticDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>RGBHistogramQuadraticDistance\n<size:10>elki.distance.colorhistogram" as elki.distance.colorhistogram.RGBHistogramQuadraticDistance [[RGBHistogramQuadraticDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.colorhistogram.RGBHistogramQuadraticDistance.Par
+    elki.distance.colorhistogram.RGBHistogramQuadraticDistance +-- elki.distance.colorhistogram.RGBHistogramQuadraticDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

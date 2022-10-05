@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IndexStatistics.IndexMetaResult\n<size:10>elki.evaluation.index" as elki.evaluation.index.IndexStatistics.IndexMetaResult [[IndexStatistics.IndexMetaResult.html]] {
+        +IndexMetaResult(Collection<Pair<String, String>>, Collection<String>)
+    }
+
+    class "<size:14>CollectionResult\n<size:10>elki.result" as elki.result.CollectionResult<Pair<String, String>> [[../../result/CollectionResult.html]]
+    class "<size:14>IndexStatistics\n<size:10>elki.evaluation.index" as elki.evaluation.index.IndexStatistics [[IndexStatistics.html]]
+
+    elki.result.CollectionResult <|-- elki.evaluation.index.IndexStatistics.IndexMetaResult
+    elki.evaluation.index.IndexStatistics +-- elki.evaluation.index.IndexStatistics.IndexMetaResult
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

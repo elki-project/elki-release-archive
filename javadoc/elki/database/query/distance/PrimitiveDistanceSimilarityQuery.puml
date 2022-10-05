@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrimitiveDistanceSimilarityQuery\n<size:10>elki.database.query.distance" as elki.database.query.distance.PrimitiveDistanceSimilarityQuery<O> [[PrimitiveDistanceSimilarityQuery.html]] {
+        -similarityFunction: PrimitiveSimilarity<? super O>
+        +PrimitiveDistanceSimilarityQuery(Relation<? extends O>, PrimitiveDistance<? super O>, PrimitiveSimilarity<? super O>)
+        +similarity(DBIDRef, DBIDRef): double
+        +similarity(O, DBIDRef): double
+        +similarity(DBIDRef, O): double
+        +similarity(O, O): double
+        +getSimilarity(): PrimitiveSimilarity<? super O>
+    }
+
+    class "<size:14>PrimitiveDistanceQuery\n<size:10>elki.database.query.distance" as elki.database.query.distance.PrimitiveDistanceQuery<O> [[PrimitiveDistanceQuery.html]]
+    interface "<size:14>DistanceSimilarityQuery\n<size:10>elki.database.query" as elki.database.query.DistanceSimilarityQuery<O> [[../DistanceSimilarityQuery.html]]
+
+    elki.database.query.distance.PrimitiveDistanceQuery <|-- elki.database.query.distance.PrimitiveDistanceSimilarityQuery
+    elki.database.query.DistanceSimilarityQuery <|.. elki.database.query.distance.PrimitiveDistanceSimilarityQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

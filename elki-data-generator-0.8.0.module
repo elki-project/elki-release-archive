@@ -1,0 +1,166 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-data-generator",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-clustering",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-outlier",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-data-generator-0.8.0.jar",
+          "url": "elki-data-generator-0.8.0.jar",
+          "size": 52199,
+          "sha512": "488a1f3a48a0f3e9feaed5e23d0fac3549fcbd2aa71269a23e2768ca8e63d2e12a98bf2c65bc2d1c65ad00d36f37a873fa9f25613174f41517764841a282eced",
+          "sha256": "b21da0323a6b07f6618b57288a409f38fcaeefe0db43690f3e3f894305814743",
+          "sha1": "c1659dc435d55b3e754b4fb37eb47fe677dcf577",
+          "md5": "41e50d160604e494e0af50b2c9a03977"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-clustering",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-outlier",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-data-generator-0.8.0.jar",
+          "url": "elki-data-generator-0.8.0.jar",
+          "size": 52199,
+          "sha512": "488a1f3a48a0f3e9feaed5e23d0fac3549fcbd2aa71269a23e2768ca8e63d2e12a98bf2c65bc2d1c65ad00d36f37a873fa9f25613174f41517764841a282eced",
+          "sha256": "b21da0323a6b07f6618b57288a409f38fcaeefe0db43690f3e3f894305814743",
+          "sha1": "c1659dc435d55b3e754b4fb37eb47fe677dcf577",
+          "md5": "41e50d160604e494e0af50b2c9a03977"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-data-generator",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-data-generator-0.8.0-test-fixtures.jar",
+          "url": "elki-data-generator-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "ff456da9516d84bf92fa81abd3b7702721b20a7fa67b31f33fa34585e3deed589e644c9cb99bf45e25876cf537769de5bbaae6376918281d7af0d01a03bf31f0",
+          "sha256": "51e0c20f4d8e91cb0f67ac3468df0af7e3221cda1a97e1ad2e9ab391a33e0176",
+          "sha1": "94a414a56decf5692426324235a3c7d11c26c961",
+          "md5": "9e6ab7a505c6d8a5071f0df6f348a440"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-data-generator-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-data-generator",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-data-generator-0.8.0-test-fixtures.jar",
+          "url": "elki-data-generator-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "ff456da9516d84bf92fa81abd3b7702721b20a7fa67b31f33fa34585e3deed589e644c9cb99bf45e25876cf537769de5bbaae6376918281d7af0d01a03bf31f0",
+          "sha256": "51e0c20f4d8e91cb0f67ac3468df0af7e3221cda1a97e1ad2e9ab391a33e0176",
+          "sha1": "94a414a56decf5692426324235a3c7d11c26c961",
+          "md5": "9e6ab7a505c6d8a5071f0df6f348a440"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-data-generator-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

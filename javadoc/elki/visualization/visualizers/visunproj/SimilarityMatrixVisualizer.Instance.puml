@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimilarityMatrixVisualizer.Instance\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.SimilarityMatrixVisualizer.Instance [[SimilarityMatrixVisualizer.Instance.html]] {
+        -result: SimilarityMatrix
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double)
+        +fullRedraw(): void
+    }
+
+    abstract class "<size:14>AbstractVisualization\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.AbstractVisualization [[../AbstractVisualization.html]] {
+        {abstract} +fullRedraw(): void
+    }
+    class "<size:14>SimilarityMatrixVisualizer\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.SimilarityMatrixVisualizer [[SimilarityMatrixVisualizer.html]]
+
+    elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.visunproj.SimilarityMatrixVisualizer.Instance
+    elki.visualization.visualizers.visunproj.SimilarityMatrixVisualizer +-- elki.visualization.visualizers.visunproj.SimilarityMatrixVisualizer.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

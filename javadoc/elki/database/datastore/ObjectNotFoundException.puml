@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ObjectNotFoundException\n<size:10>elki.database.datastore" as elki.database.datastore.ObjectNotFoundException [[ObjectNotFoundException.html]] {
+        {static} -serialVersionUID: long
+        +ObjectNotFoundException(DBIDRef)
+    }
+
+    class "<size:14>RuntimeException\n<size:10>java.lang" as java.lang.RuntimeException
+
+    java.lang.RuntimeException <|-- elki.database.datastore.ObjectNotFoundException
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

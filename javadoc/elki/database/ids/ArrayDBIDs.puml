@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ArrayDBIDs\n<size:10>elki.database.ids" as elki.database.ids.ArrayDBIDs [[ArrayDBIDs.html]] {
+        {abstract} +--get--(int): DBID
+        {abstract} +assignVar(int, DBIDVar): DBIDVar
+        {abstract} +iter(): DBIDArrayIter
+        {abstract} +size(): int
+        {abstract} +binarySearch(DBIDRef): int
+        {abstract} +slice(int, int): ArrayDBIDs
+    }
+
+    interface "<size:14>DBIDs\n<size:10>elki.database.ids" as elki.database.ids.DBIDs [[DBIDs.html]] {
+        {abstract} +iter(): DBIDIter
+        {abstract} +size(): int
+        {abstract} +contains(DBIDRef): boolean
+    }
+
+    elki.database.ids.DBIDs <|-- elki.database.ids.ArrayDBIDs
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

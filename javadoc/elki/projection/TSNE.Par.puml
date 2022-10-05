@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TSNE.Par\n<size:10>elki.projection" as elki.projection.TSNE.Par<O> {
+        {static} +AFFINITY_ID: OptionID
+        {static} +DIM_ID: OptionID
+        {static} +MOMENTUM_ID: OptionID
+        {static} +LEARNING_RATE_ID: OptionID
+        {static} +ITER_ID: OptionID
+        {static} +RANDOM_ID: OptionID
+        #affinity: AffinityMatrixBuilder<? super O>
+        #dim: int
+        #learningRate: double
+        #finalMomentum: double
+        #iterations: int
+        #random: RandomFactory
+        #keep: boolean
+        +configure(Parameterization): void
+        #getDefaultAffinity(): Class<?>
+        +make(): TSNE<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>TSNE\n<size:10>elki.projection" as elki.projection.TSNE<O> [[TSNE.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.projection.TSNE.Par
+    elki.projection.TSNE +-- elki.projection.TSNE.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

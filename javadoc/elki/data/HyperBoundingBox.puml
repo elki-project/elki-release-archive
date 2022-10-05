@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HyperBoundingBox\n<size:10>elki.data" as elki.data.HyperBoundingBox [[HyperBoundingBox.html]] {
+        {static} -serialVersionUID: long
+        ~min: double[]
+        ~max: double[]
+        +HyperBoundingBox()
+        +HyperBoundingBox(double[], double[])
+        +HyperBoundingBox(SpatialComparable)
+        +getMin(int): double
+        +getMax(int): double
+        +getDimensionality(): int
+        +toString(String, NumberFormat): String
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+    }
+
+    interface "<size:14>SpatialComparable\n<size:10>elki.data.spatial" as elki.data.spatial.SpatialComparable [[spatial/SpatialComparable.html]] {
+        {abstract} +getDimensionality(): int
+        {abstract} +getMin(int): double
+        {abstract} +getMax(int): double
+    }
+    interface "<size:14>Externalizable\n<size:10>java.io" as java.io.Externalizable {
+        {abstract} +writeExternal(ObjectOutput): void
+        {abstract} +readExternal(ObjectInput): void
+    }
+
+    elki.data.spatial.SpatialComparable <|.. elki.data.HyperBoundingBox
+    java.io.Externalizable <|.. elki.data.HyperBoundingBox
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

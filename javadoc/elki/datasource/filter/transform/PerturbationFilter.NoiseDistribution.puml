@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>PerturbationFilter.NoiseDistribution\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.PerturbationFilter.NoiseDistribution [[PerturbationFilter.NoiseDistribution.html]] {
+        {static} +GAUSSIAN
+        {static} +UNIFORM
+    }
+
+    class "<size:14>PerturbationFilter\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.PerturbationFilter<V extends NumberVector> [[PerturbationFilter.html]]
+
+    elki.datasource.filter.transform.PerturbationFilter +-- elki.datasource.filter.transform.PerturbationFilter.NoiseDistribution
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

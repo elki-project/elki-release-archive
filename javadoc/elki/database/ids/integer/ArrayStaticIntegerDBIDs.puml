@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ArrayStaticIntegerDBIDs\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.ArrayStaticIntegerDBIDs [[ArrayStaticIntegerDBIDs.html]] {
+        #store: int[]
+        #ArrayStaticIntegerDBIDs(int...)
+        +size(): int
+        +contains(DBIDRef): boolean
+        +get(int): DBID
+        +assignVar(int, DBIDVar): DBIDVar
+        +binarySearch(DBIDRef): int
+        +iter(): Itr
+        +slice(int, int): Slice
+    }
+
+    interface "<size:14>IntegerArrayStaticDBIDs\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerArrayStaticDBIDs [[IntegerArrayStaticDBIDs.html]] {
+        {abstract} +iter(): IntegerDBIDArrayIter
+    }
+    class "<size:14>ArrayStaticIntegerDBIDs.Itr\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.ArrayStaticIntegerDBIDs.Itr [[ArrayStaticIntegerDBIDs.Itr.html]]
+    class "<size:14>ArrayStaticIntegerDBIDs.Slice\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.ArrayStaticIntegerDBIDs.Slice [[ArrayStaticIntegerDBIDs.Slice.html]]
+
+    elki.database.ids.integer.IntegerArrayStaticDBIDs <|.. elki.database.ids.integer.ArrayStaticIntegerDBIDs
+    elki.database.ids.integer.ArrayStaticIntegerDBIDs +-- elki.database.ids.integer.ArrayStaticIntegerDBIDs.Itr
+    elki.database.ids.integer.ArrayStaticIntegerDBIDs +-- elki.database.ids.integer.ArrayStaticIntegerDBIDs.Slice
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

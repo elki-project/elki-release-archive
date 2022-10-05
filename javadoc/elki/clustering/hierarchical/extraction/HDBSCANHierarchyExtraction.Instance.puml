@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HDBSCANHierarchyExtraction.Instance\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Instance [[HDBSCANHierarchyExtraction.Instance.html]] {
+        #merges: ClusterMergeHistory
+        #coredist: DoubleDataStore
+        +Instance(ClusterMergeHistory)
+        +run(): Clustering<DendrogramModel>
+        -isSpurious(TempCluster, boolean): boolean
+        -finalizeCluster(TempCluster, Clustering<DendrogramModel>, WritableDoubleDataStore, Cluster<DendrogramModel>, boolean): double
+        -collectChildren(TempCluster, Clustering<DendrogramModel>, WritableDoubleDataStore, TempCluster, Cluster<DendrogramModel>, boolean): double
+    }
+
+    class "<size:14>HDBSCANHierarchyExtraction\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction [[HDBSCANHierarchyExtraction.html]]
+
+    elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction +-- elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

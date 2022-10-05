@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SigmoidKernel.Par\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.SigmoidKernel.Par [[SigmoidKernel.Par.html]] {
+        {static} +C_ID: OptionID
+        {static} +THETA_ID: OptionID
+        #c: double
+        #theta: double
+        +configure(Parameterization): void
+        +make(): SigmoidKernel
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SigmoidKernel\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.SigmoidKernel [[SigmoidKernel.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.kernel.SigmoidKernel.Par
+    elki.similarity.kernel.SigmoidKernel +-- elki.similarity.kernel.SigmoidKernel.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,65 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.optionhandling {
+
+        class ParameterException [[ParameterException.html]] {
+            {static} -serialVersionUID: long
+            +ParameterException(Parameter<?>, String)
+            +ParameterException(Parameter<?>, String, Throwable)
+            +ParameterException(String)
+            +ParameterException(String, Throwable)
+            {static} +prefixParameterToMessage(Parameter<?>, String): String
+            {static} +prefixParametersToMessage(Parameter<?>, String, Parameter<?>, String): String
+        }
+
+        class WrongParameterValueException [[WrongParameterValueException.html]] {
+            {static} -serialVersionUID: long
+            +WrongParameterValueException(Parameter<?>, String, String, Throwable)
+            +WrongParameterValueException(Parameter<?>, String, String)
+            +WrongParameterValueException(Parameter<?>, String, Parameter<?>, String)
+            +WrongParameterValueException(String)
+            {static} -formatRead(String): String
+            {static} -formatCause(Throwable): String
+        }
+
+        class UnspecifiedParameterException [[UnspecifiedParameterException.html]] {
+            {static} -serialVersionUID: long
+            -parameter: String
+            +UnspecifiedParameterException(Parameter<?>)
+            +getParameterName(): String
+        }
+
+        interface Parameterizer [[Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+
+        class OptionID [[OptionID.html]] {
+            -name: String
+            -description: String
+            +OptionID(String, String)
+            +getDescription(): String
+            {static} +getOrCreateOptionID(String, String): OptionID
+            +getName(): String
+        }
+
+        class OptionUtil [[OptionUtil.html]] {
+            {static} +formatForConsole(StringBuilder, int, Collection<TrackedParameter>): void
+            {static} +getFullDescription(Parameter<?>): String
+            {static} -println(StringBuilder, int, String): void
+            {static} +describeParameterizable(StringBuilder, Class<?>, int): StringBuilder
+        }
+
+        java.lang.Exception <|-- ParameterException
+        ParameterException <|-- WrongParameterValueException
+        WrongParameterValueException <|-- UnspecifiedParameterException
+    }
+
+    namespace java.lang {
+        class Exception {
+            {static} ~serialVersionUID: long
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

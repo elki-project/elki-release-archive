@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NearestNeighborAffinityMatrixBuilder.Par\n<size:10>elki.projection" as elki.projection.NearestNeighborAffinityMatrixBuilder.Par<O> [[NearestNeighborAffinityMatrixBuilder.Par.html]] {
+        +make(): NearestNeighborAffinityMatrixBuilder<O>
+    }
+
+    class "<size:14>PerplexityAffinityMatrixBuilder.Par\n<size:10>elki.projection" as elki.projection.PerplexityAffinityMatrixBuilder.Par<O> [[PerplexityAffinityMatrixBuilder.Par.html]]
+    class "<size:14>NearestNeighborAffinityMatrixBuilder\n<size:10>elki.projection" as elki.projection.NearestNeighborAffinityMatrixBuilder<O> [[NearestNeighborAffinityMatrixBuilder.html]]
+
+    elki.projection.PerplexityAffinityMatrixBuilder.Par <|-- elki.projection.NearestNeighborAffinityMatrixBuilder.Par
+    elki.projection.NearestNeighborAffinityMatrixBuilder +-- elki.projection.NearestNeighborAffinityMatrixBuilder.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

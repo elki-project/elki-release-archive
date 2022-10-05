@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KDTreePruningKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KDTreePruningKMeans<V extends NumberVector> [[KDTreePruningKMeans.html]] {
+        {static} -LOG: Logging
+        #split: Split
+        #leafsize: int
+        +KDTreePruningKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization, Split, int)
+        +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans<V extends NumberVector, KMeansModel> [[AbstractKMeans.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    enum "<size:14>KDTreePruningKMeans.Split\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KDTreePruningKMeans.Split [[KDTreePruningKMeans.Split.html]]
+    class "<size:14>KDTreePruningKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KDTreePruningKMeans.Instance [[KDTreePruningKMeans.Instance.html]]
+    class "<size:14>KDTreePruningKMeans.KDNode\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KDTreePruningKMeans.KDNode [[KDTreePruningKMeans.KDNode.html]]
+    class "<size:14>KDTreePruningKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KDTreePruningKMeans.Par<V extends NumberVector> [[KDTreePruningKMeans.Par.html]]
+
+    elki.clustering.kmeans.AbstractKMeans <|-- elki.clustering.kmeans.KDTreePruningKMeans
+    elki.clustering.kmeans.KDTreePruningKMeans +-- elki.clustering.kmeans.KDTreePruningKMeans.Split
+    elki.clustering.kmeans.KDTreePruningKMeans +-- elki.clustering.kmeans.KDTreePruningKMeans.Instance
+    elki.clustering.kmeans.KDTreePruningKMeans +-- elki.clustering.kmeans.KDTreePruningKMeans.KDNode
+    elki.clustering.kmeans.KDTreePruningKMeans +-- elki.clustering.kmeans.KDTreePruningKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

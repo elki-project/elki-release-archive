@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Assignments\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split.distribution" as elki.index.tree.metrical.mtreevariants.strategies.split.distribution.Assignments<E extends MTreeEntry> [[Assignments.html]] {
+        -id1: DBID
+        -id2: DBID
+        -firstAssignments: List<DistanceEntry<E extends MTreeEntry>>
+        -secondAssignments: List<DistanceEntry<E extends MTreeEntry>>
+        +Assignments(DBID, DBID, int)
+        +addToFirst(E extends MTreeEntry, double): void
+        +computeFirstCover(boolean): double
+        +computeSecondCover(boolean): double
+        +addToSecond(E extends MTreeEntry, double): void
+        +getFirstRoutingObject(): DBID
+        +getSecondRoutingObject(): DBID
+        +getFirstAssignments(): List<DistanceEntry<E extends MTreeEntry>>
+        +getSecondAssignments(): List<DistanceEntry<E extends MTreeEntry>>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

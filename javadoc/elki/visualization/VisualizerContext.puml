@@ -1,0 +1,50 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VisualizerContext\n<size:10>elki.visualization" as elki.visualization.VisualizerContext [[VisualizerContext.html]] {
+        {static} -LOG: Logging
+        -vistree: VisualizationTree
+        -listenerList: ArrayList<DataStoreListener>
+        -factories: Collection<VisualizationProcessor>
+        -selection: SelectionResult
+        ~stylepolicy: StylingPolicy
+        ~stylelibrary: StyleLibrary
+        -baseResult: Object
+        +VisualizerContext(Object, StyleLibrary, Collection<VisualizationProcessor>)
+        #makeStyleResult(StyleLibrary): void
+        +getStylingPolicy(): StylingPolicy
+        +setStylingPolicy(StylingPolicy): void
+        +getStyleLibrary(): StyleLibrary
+        +setStyleLibrary(StyleLibrary): void
+        -generateDefaultClustering(): Clustering<Model>
+        +getSelectionResult(): SelectionResult
+        +getSelection(): DBIDSelection
+        +setSelection(DBIDSelection): void
+        +addDataStoreListener(DataStoreListener): void
+        +removeDataStoreListener(DataStoreListener): void
+        +contentChanged(DataStoreEvent): void
+        +addResultListener(ResultListener): void
+        +removeResultListener(ResultListener): void
+        +addVisualizationListener(VisualizationListener): void
+        +removeVisualizationListener(VisualizationListener): void
+        +getLongName(): String
+        +getShortName(): String
+        +getBaseResult(): Object
+        +addVis(Object, VisualizationItem): void
+        +visChanged(VisualizationItem): void
+        -notifyFactories(Object): void
+        +getVisTasks(VisualizationItem): List<VisualizationTask>
+        +getVisHierarchy(): VisualizationTree
+    }
+
+    interface "<size:14>DataStoreListener\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreListener [[../database/datastore/DataStoreListener.html]] {
+        {abstract} +contentChanged(DataStoreEvent): void
+    }
+
+    elki.database.datastore.DataStoreListener <|.. elki.visualization.VisualizerContext
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

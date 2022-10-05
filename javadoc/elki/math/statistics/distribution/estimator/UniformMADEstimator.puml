@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UniformMADEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.UniformMADEstimator [[UniformMADEstimator.html]] {
+        {static} +STATIC: UniformMADEstimator
+        +estimateFromMedianMAD(double, double): UniformDistribution
+        +getDistributionClass(): Class<? super UniformDistribution>
+    }
+
+    interface "<size:14>MADDistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.MADDistributionEstimator<UniformDistribution> [[MADDistributionEstimator.html]] {
+        {abstract} +estimateFromMedianMAD(double, double): UniformDistribution
+    }
+    class "<size:14>UniformMADEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.UniformMADEstimator.Par [[UniformMADEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.MADDistributionEstimator <|.. elki.math.statistics.distribution.estimator.UniformMADEstimator
+    elki.math.statistics.distribution.estimator.UniformMADEstimator +-- elki.math.statistics.distribution.estimator.UniformMADEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

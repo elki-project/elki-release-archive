@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EnumParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.EnumParameter<E extends Enum<E>> [[EnumParameter.html]] {
+        #enumClass: Class<E extends Enum<E>>
+        +EnumParameter(OptionID, Class<E extends Enum<E>>, E extends Enum<E extends Enum<E>>)
+        +EnumParameter(OptionID, Class<E extends Enum<E>>)
+        +getSyntax(): String
+        #parseValue(Object): E extends Enum<E extends Enum<E>>
+        +getValueAsString(): String
+        +describeValues(StringBuilder): StringBuilder
+        +getPossibleValues(): Collection<String>
+        -joinEnumNames(String): String
+        +grab(Parameterization, Consumer<E extends Enum<E>>): boolean
+    }
+
+    abstract class "<size:14>AbstractParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.AbstractParameter<EnumParameter<E extends Enum<E>>, E extends Enum<E>> [[AbstractParameter.html]] {
+        {abstract} #parseValue(Object): E extends Enum<E>
+    }
+
+    elki.utilities.optionhandling.parameters.AbstractParameter <|-- elki.utilities.optionhandling.parameters.EnumParameter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

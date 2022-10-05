@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CacheDoubleDistanceInOnDiskMatrix.Par\n<size:10>elki.application.cache" as elki.application.cache.CacheDoubleDistanceInOnDiskMatrix.Par<O> [[CacheDoubleDistanceInOnDiskMatrix.Par.html]] {
+        {static} +CACHE_ID: OptionID
+        {static} +DISTANCE_ID: OptionID
+        -database: Database
+        -distance: Distance<? super O>
+        -out: Path
+        +configure(Parameterization): void
+        +make(): CacheDoubleDistanceInOnDiskMatrix<O>
+    }
+
+    abstract class "<size:14>AbstractApplication.Par\n<size:10>elki.application" as elki.application.AbstractApplication.Par [[../AbstractApplication.Par.html]] {
+        {abstract} +make(): AbstractApplication
+    }
+    class "<size:14>CacheDoubleDistanceInOnDiskMatrix\n<size:10>elki.application.cache" as elki.application.cache.CacheDoubleDistanceInOnDiskMatrix<O> [[CacheDoubleDistanceInOnDiskMatrix.html]]
+
+    elki.application.AbstractApplication.Par <|-- elki.application.cache.CacheDoubleDistanceInOnDiskMatrix.Par
+    elki.application.cache.CacheDoubleDistanceInOnDiskMatrix +-- elki.application.cache.CacheDoubleDistanceInOnDiskMatrix.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

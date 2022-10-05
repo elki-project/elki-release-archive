@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractCoverTree.Factory.Par\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.AbstractCoverTree.Factory.Par<O> [[AbstractCoverTree.Factory.Par.html]] {
+        {static} +DISTANCE_FUNCTION_ID: OptionID
+        {static} +TRUNCATE_ID: OptionID
+        {static} +EXPANSION_ID: OptionID
+        #distance: Distance<? super O>
+        #truncate: int
+        #expansion: double
+        +configure(Parameterization): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractCoverTree.Factory\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.AbstractCoverTree.Factory<O> [[AbstractCoverTree.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.metrical.covertree.AbstractCoverTree.Factory.Par
+    elki.index.tree.metrical.covertree.AbstractCoverTree.Factory +-- elki.index.tree.metrical.covertree.AbstractCoverTree.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

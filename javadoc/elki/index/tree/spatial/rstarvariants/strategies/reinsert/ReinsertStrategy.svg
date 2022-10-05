@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="95px" preserveAspectRatio="none" style="width:780px;height:95px;background:#FFFFFF;" version="1.1" viewBox="0 0 780 95" width="780px" zoomAndPan="magnify"><defs/><g><!--MD5=[5b9f8a79b12517741109e5e2613af04b]
+class elki.index.tree.spatial.rstarvariants.strategies.reinsert.ReinsertStrategy--><a href="ReinsertStrategy.html" target="_top" title="ReinsertStrategy.html" xlink:actuate="onRequest" xlink:href="ReinsertStrategy.html" xlink:show="new" xlink:title="ReinsertStrategy.html" xlink:type="simple"><g id="elem_elki.index.tree.spatial.rstarvariants.strategies.reinsert.ReinsertStrategy"><rect codeLine="6" fill="#F1F1F1" height="62.2344" id="elki.index.tree.spatial.rstarvariants.strategies.reinsert.ReinsertStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="759" x="7" y="7"/><ellipse cx="249.25" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M245.1719,21.7344 L245.1719,19.5781 L252.5625,19.5781 L252.5625,21.7344 L250.0938,21.7344 L250.0938,29.8125 L252.5625,29.8125 L252.5625,31.9688 L245.1719,31.9688 L245.1719,29.8125 L247.6406,29.8125 L247.6406,21.7344 L245.1719,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="117" x="344.25" y="24.9951">ReinsertStrategy</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="266" x="269.75" y="37.5791">elki.index.tree.spatial.rstarvariants.strategies.reinsert</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="765" y1="44.9375" y2="44.9375"/><ellipse cx="18" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="733" x="27" y="61.9326">computeReinserts(A, ArrayAdapter&lt;? extends SpatialComparable, ? super A&gt;, SpatialComparable): int[]</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="293" y="76.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="293" y="85.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[d8e8d27c4c55571cb8571058648cbbd8]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ReinsertStrategy\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.reinsert" as elki.index.tree.spatial.rstarvariants.strategies.reinsert.ReinsertStrategy [[ReinsertStrategy.html]] {
+        {abstract} +computeReinserts(A, ArrayAdapter<? extends SpatialComparable, ? super A>, SpatialComparable): int[]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

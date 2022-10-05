@@ -1,0 +1,54 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.subspace.clique {
+
+        class CLIQUEUnit [[CLIQUEUnit.html]] {
+            -dims: int[]
+            -bounds: double[]
+            -ids: ModifiableDBIDs
+            -assigned: boolean
+            -CLIQUEUnit(CLIQUEUnit, int, double, double, ModifiableDBIDs)
+            +CLIQUEUnit(int, double, double)
+            +dimensionality(): int
+            +getDimension(int): int
+            +contains(NumberVector): boolean
+            +addFeatureVector(DBIDRef, NumberVector): boolean
+            +numberOfFeatureVectors(): int
+            +selectivity(double): double
+            #containsLeftNeighbor(CLIQUEUnit, int): boolean
+            #containsRightNeighbor(CLIQUEUnit, int): boolean
+            +isAssigned(): boolean
+            +markAsAssigned(): void
+            +getIds(): DBIDs
+            #join(CLIQUEUnit, double, double): CLIQUEUnit
+            -checkDimensions(CLIQUEUnit, int): boolean
+        }
+
+        class CLIQUESubspace [[CLIQUESubspace.html]] {
+            -coverage: int
+            {static} +BY_COVERAGE: Comparator<CLIQUESubspace>
+            +CLIQUESubspace(int)
+            +CLIQUESubspace(long[])
+            +addDenseUnit(CLIQUEUnit): void
+            +determineClusters(): List<Pair<Subspace, ModifiableDBIDs>>
+            +dfs(CLIQUEUnit, ModifiableDBIDs, CLIQUESubspace): void
+            #leftNeighbor(CLIQUEUnit, int): CLIQUEUnit
+            #rightNeighbor(CLIQUEUnit, int): CLIQUEUnit
+            +getCoverage(): int
+            +join(CLIQUESubspace, double, double): CLIQUESubspace
+        }
+
+        elki.data.Subspace <|-- CLIQUESubspace
+        CLIQUESubspace --> "*" CLIQUEUnit: denseUnits
+    }
+
+    namespace elki.data {
+        class Subspace [[../../../data/Subspace.html]] {
+            -dimensions: long[]
+            -dimensionality: int
+            {static} +DIMENSION_COMPARATOR: Comparator<Subspace>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

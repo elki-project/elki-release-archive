@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FourCCorePredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.FourCCorePredicate [[FourCCorePredicate.html]] {
+        #settings: Settings
+        +FourCCorePredicate(Settings)
+        +instantiate(Database): Instance
+        +acceptsType(SimpleTypeInformation<? extends PreDeConModel>): boolean
+    }
+
+    interface "<size:14>CorePredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.CorePredicate<PreDeConModel> [[CorePredicate.html]] {
+        {abstract} +instantiate(Database): Instance<T>
+        {abstract} +acceptsType(SimpleTypeInformation<? extends T>): boolean
+    }
+    class "<size:14>FourCCorePredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.FourCCorePredicate.Instance [[FourCCorePredicate.Instance.html]]
+    class "<size:14>FourCCorePredicate.Par\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.FourCCorePredicate.Par [[FourCCorePredicate.Par.html]]
+
+    elki.clustering.dbscan.predicates.CorePredicate <|.. elki.clustering.dbscan.predicates.FourCCorePredicate
+    elki.clustering.dbscan.predicates.FourCCorePredicate +-- elki.clustering.dbscan.predicates.FourCCorePredicate.Instance
+    elki.clustering.dbscan.predicates.FourCCorePredicate +-- elki.clustering.dbscan.predicates.FourCCorePredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

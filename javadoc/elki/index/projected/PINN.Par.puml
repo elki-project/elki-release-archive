@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PINN.Par\n<size:10>elki.index.projected" as elki.index.projected.PINN.Par<O extends NumberVector> {
+        {static} +T_ID: OptionID
+        {static} +S_ID: OptionID
+        {static} +H_ID: OptionID
+        {static} +RANDOM_ID: OptionID
+        ~inner: IndexFactory<O extends NumberVector>
+        ~t: int
+        ~s: double
+        ~h: double
+        ~random: RandomFactory
+        +configure(Parameterization): void
+        +make(): PINN<O extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>PINN\n<size:10>elki.index.projected" as elki.index.projected.PINN<O extends NumberVector> [[PINN.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.projected.PINN.Par
+    elki.index.projected.PINN +-- elki.index.projected.PINN.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

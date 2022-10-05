@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MWPTest\n<size:10>elki.math.statistics.dependence.mcde" as elki.math.statistics.dependence.mcde.MWPTest [[MWPTest.html]] {
+        {static} +STATIC: MWPTest
+        #rnd: RandomFactory
+        +correctedRanks(NumberArrayAdapter<?, A>, A, int): MWPRanking
+        +statisticalTest(int, int, boolean[], MWPRanking): double
+        #getSafeCut(int, double[]): int
+    }
+
+    interface "<size:14>MCDETest\n<size:10>elki.math.statistics.dependence.mcde" as elki.math.statistics.dependence.mcde.MCDETest<MWPRanking> [[MCDETest.html]] {
+        {abstract} +correctedRanks(NumberArrayAdapter<?, A>, A, int): MWPRanking
+        {abstract} +statisticalTest(int, int, boolean[], MWPRanking): double
+    }
+    class "<size:14>MWPTest.MWPRanking\n<size:10>elki.math.statistics.dependence.mcde" as elki.math.statistics.dependence.mcde.MWPTest.MWPRanking [[MWPTest.MWPRanking.html]]
+    class "<size:14>MWPTest.Par\n<size:10>elki.math.statistics.dependence.mcde" as elki.math.statistics.dependence.mcde.MWPTest.Par [[MWPTest.Par.html]]
+
+    elki.math.statistics.dependence.mcde.MCDETest <|.. elki.math.statistics.dependence.mcde.MWPTest
+    elki.math.statistics.dependence.mcde.MWPTest +-- elki.math.statistics.dependence.mcde.MWPTest.MWPRanking
+    elki.math.statistics.dependence.mcde.MWPTest +-- elki.math.statistics.dependence.mcde.MWPTest.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

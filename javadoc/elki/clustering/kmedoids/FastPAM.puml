@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastPAM\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastPAM<O> [[FastPAM.html]] {
+        {static} -LOG: Logging
+        {static} -KEY: String
+        #fasttol: double
+        +FastPAM(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+        +FastPAM(Distance<? super O>, int, int, KMedoidsInitialization<O>, double)
+        +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+        #getLogger(): Logging
+    }
+
+    class "<size:14>FastPAM1\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastPAM1<O> [[FastPAM1.html]]
+    class "<size:14>FastPAM.Instance\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastPAM.Instance [[FastPAM.Instance.html]]
+    class "<size:14>FastPAM.Par\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastPAM.Par<V> [[FastPAM.Par.html]]
+
+    elki.clustering.kmedoids.FastPAM1 <|-- elki.clustering.kmedoids.FastPAM
+    elki.clustering.kmedoids.FastPAM +-- elki.clustering.kmedoids.FastPAM.Instance
+    elki.clustering.kmedoids.FastPAM +-- elki.clustering.kmedoids.FastPAM.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

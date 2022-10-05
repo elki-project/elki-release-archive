@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BundleWriter\n<size:10>elki.datasource.bundle" as elki.datasource.bundle.BundleWriter [[BundleWriter.html]] {
+        {static} -LOG: Logging
+        {static} -INITIAL_BUFFER: int
+        {static} +MAGIC: int
+        +writeBundleStream(BundleStreamSource, WritableByteChannel): void
+        -flushBuffer(ByteBuffer, WritableByteChannel): void
+        -ensureBuffer(int, ByteBuffer, WritableByteChannel): ByteBuffer
+        -writeHeader(BundleStreamSource, ByteBuffer, WritableByteChannel): ByteBufferSerializer<?>[]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

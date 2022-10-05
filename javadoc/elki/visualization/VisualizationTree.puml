@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VisualizationTree\n<size:10>elki.visualization" as elki.visualization.VisualizationTree [[VisualizationTree.html]] {
+        -vlistenerList: ArrayList<VisualizationListener>
+        +addVisualizationListener(VisualizationListener): void
+        +removeVisualizationListener(VisualizationListener): void
+        +visChanged(VisualizationItem): void
+        {static} +findVis(VisualizerContext): It<Object>
+        {static} +findVis(VisualizerContext, Object): It<Object>
+        {static} +findNewResults(VisualizerContext, Object): It<Object>
+        {static} +findNewSiblings(VisualizerContext, Object, Class<? super A>, Class<? super VisualizationItem>, BiConsumer<A, B extends VisualizationItem>): void
+        {static} +findNewResultVis(VisualizerContext, Object, Class<? super A>, Class<? super VisualizationItem>, BiConsumer<A, B extends VisualizationItem>): void
+        {static} +setVisible(VisualizerContext, VisualizationTask, boolean): void
+    }
+
+    class "<size:14>HashMapHierarchy\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy<Object> [[../utilities/datastructures/hierarchy/HashMapHierarchy.html]]
+
+    elki.utilities.datastructures.hierarchy.HashMapHierarchy <|-- elki.visualization.VisualizationTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

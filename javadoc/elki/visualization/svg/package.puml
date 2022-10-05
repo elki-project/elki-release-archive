@@ -1,0 +1,311 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.svg {
+
+        class VoronoiDraw [[VoronoiDraw.html]] {
+            {static} +drawDelaunay(Projection2D, List<Triangle>, List<double[]>): SVGPath
+            {static} +drawVoronoi(Projection2D, List<Triangle>, List<double[]>): SVGPath
+            {static} +drawFakeVoronoi(Projection2D, List<double[]>): SVGPath
+        }
+
+        class UpdateRunner [[UpdateRunner.html]] {
+            -sync: Object
+            -queue: ConcurrentLinkedQueue<Runnable>
+            #UpdateRunner(Object)
+            +invokeLater(Runnable): void
+            +runQueue(): void
+            +clear(): void
+            +isEmpty(): boolean
+            +synchronizeWith(UpdateSynchronizer): void
+            +unsynchronizeWith(UpdateSynchronizer): void
+        }
+
+        class SVGCloneVisible [[SVGCloneVisible.html]] {
+            +cloneNode(Document, Node): Node
+        }
+
+        class SVGPath [[SVGPath.html]] {
+            -buf: StringBuilder
+            -lastaction: char
+            {static} +PATH_CLOSE: char
+            {static} +PATH_LINE_TO: char
+            {static} +PATH_LINE_TO_RELATIVE: char
+            {static} +PATH_MOVE: char
+            {static} +PATH_MOVE_RELATIVE: char
+            {static} +PATH_HORIZONTAL_LINE_TO: char
+            {static} +PATH_HORIZONTAL_LINE_TO_RELATIVE: char
+            {static} +PATH_VERTICAL_LINE_TO: char
+            {static} +PATH_VERTICAL_LINE_TO_RELATIVE: char
+            {static} +PATH_CUBIC_TO: char
+            {static} +PATH_CUBIC_TO_RELATIVE: char
+            {static} +PATH_SMOOTH_CUBIC_TO: char
+            {static} +PATH_SMOOTH_CUBIC_TO_RELATIVE: char
+            {static} +PATH_QUAD_TO: char
+            {static} +PATH_QUAD_TO_RELATIVE: char
+            {static} +PATH_SMOOTH_QUAD_TO: char
+            {static} +PATH_SMOOTH_QUAD_TO_RELATIVE: char
+            {static} +PATH_ARC: char
+            {static} +PATH_ARC_RELATIVE: char
+            +SVGPath()
+            +SVGPath(double, double)
+            +SVGPath(double[])
+            +SVGPath(Polygon)
+            +drawTo(double, double): SVGPath
+            +drawTo(double[]): SVGPath
+            +isStarted(): boolean
+            +lineTo(double, double): SVGPath
+            +lineTo(double[]): SVGPath
+            +relativeLineTo(double, double): SVGPath
+            +relativeLineTo(double[]): SVGPath
+            +horizontalLineTo(double): SVGPath
+            +relativeHorizontalLineTo(double): SVGPath
+            +verticalLineTo(double): SVGPath
+            +relativeVerticalLineTo(double): SVGPath
+            +moveTo(double, double): SVGPath
+            +moveTo(double[]): SVGPath
+            +relativeMoveTo(double, double): SVGPath
+            +relativeMoveTo(double[]): SVGPath
+            +cubicTo(double, double, double, double, double, double): SVGPath
+            +cubicTo(double[], double[], double[]): SVGPath
+            +relativeCubicTo(double, double, double, double, double, double): SVGPath
+            +relativeCubicTo(double[], double[], double[]): SVGPath
+            +smoothCubicTo(double, double, double, double): SVGPath
+            +smoothCubicTo(double[], double[]): SVGPath
+            +relativeSmoothCubicTo(double, double, double, double): SVGPath
+            +relativeSmoothCubicTo(double[], double[]): SVGPath
+            +quadTo(double, double, double, double): SVGPath
+            +quadTo(double[], double[]): SVGPath
+            +relativeQuadTo(double, double, double, double): SVGPath
+            +relativeQuadTo(double[], double[]): SVGPath
+            +smoothQuadTo(double, double): SVGPath
+            +smoothQuadTo(double[]): SVGPath
+            +relativeSmoothQuadTo(double, double): SVGPath
+            +relativeSmoothQuadTo(double[]): SVGPath
+            +ellipticalArc(double, double, double, double, double, double, double): SVGPath
+            +ellipticalArc(double, double, double, double, double, double[]): SVGPath
+            +ellipticalArc(double[], double, double, double, double[]): SVGPath
+            +relativeEllipticalArc(double, double, double, double, double, double, double): SVGPath
+            +relativeEllipticalArc(double, double, double, double, double, double[]): SVGPath
+            +relativeEllipticalArc(double[], double, double, double, double[]): SVGPath
+            -append(char): SVGPath
+            -append(double): SVGPath
+            +close(): SVGPath
+            +makeElement(SVGPlot): Element
+            +makeElement(SVGPlot, String): Element
+        }
+
+        class SVGSimpleLinearAxis [[SVGSimpleLinearAxis.html]] {
+            {static} -CSS_AXIS: String
+            {static} -CSS_AXIS_TICK: String
+            {static} -CSS_AXIS_LABEL: String
+            {static} -setupCSSClasses(Object, CSSClassManager, StyleLibrary): void
+            {static} +drawAxis(SVGPlot, Element, LinearScale, double, double, double, double, LabelStyle, StyleLibrary): void
+        }
+
+        enum elki.visualization.svg.SVGSimpleLinearAxis.Alignment [[SVGSimpleLinearAxis.Alignment.html]] {
+            {static} +LL
+            {static} +RL
+            {static} +LC
+            {static} +RC
+            {static} +LR
+            {static} +RR
+        }
+
+        enum elki.visualization.svg.SVGSimpleLinearAxis.LabelStyle [[SVGSimpleLinearAxis.LabelStyle.html]] {
+            {static} +LEFTHAND
+            {static} +RIGHTHAND
+            {static} +NOLABELS
+            {static} +NOTHING
+            {static} +ENDLABEL
+        }
+
+        class SVGArrow [[SVGArrow.html]] {
+            {static} +makeArrow(SVGPlot, Direction, double, double, double): Element
+        }
+
+        enum elki.visualization.svg.SVGArrow.Direction [[SVGArrow.Direction.html]] {
+            {static} +LEFT
+            {static} +DOWN
+            {static} +RIGHT
+            {static} +UP
+        }
+
+        class SVGHyperSphere [[SVGHyperSphere.html]] {
+            {static} +EUCLIDEAN_KAPPA: double
+            {static} +drawManhattan(SVGPlot, Projection2D, NumberVector, double): Element
+            {static} +drawEuclidean(SVGPlot, Projection2D, NumberVector, double): Element
+            {static} +drawLp(SVGPlot, Projection2D, NumberVector, double, double): Element
+            {static} +drawCross(SVGPlot, Projection2D, NumberVector, double): Element
+        }
+
+        class SVGUtil [[SVGUtil.html]] {
+            {static} +FMT: NumberFormat
+            {static} +HOURGLASS_PATH: String
+            {static} +HOURGLASS_STYLE: String
+            {static} +THROBBER_PATH: String
+            {static} +THROBBER_STYLE: String
+            {static} -SVG_COLOR_NAMES: Object2IntOpenHashMap<String>
+            {static} -NO_VALUE: int
+            {static} -colorLookupStylesheet: StyleSheet
+            {static} +fmt(double): String
+            {static} +svgElement(Document, String): Element
+            {static} +setAtt(Element, String, double): void
+            {static} +setAtt(Element, String, int): void
+            {static} +setAtt(Element, String, String): void
+            {static} +setStyle(Element, String): void
+            {static} +setCSSClass(Element, String): void
+            {static} +addCSSClass(Element, String): void
+            {static} +removeCSSClass(Element, String): void
+            {static} +makeStyleElement(Document): Element
+            {static} +svgRect(Document, double, double, double, double): Element
+            {static} +svgCircle(Document, double, double, double): Element
+            {static} +svgLine(Document, double, double, double, double): Element
+            {static} +svgText(Document, double, double, String): Element
+            {static} +svgWaitIcon(Document, double, double, double, double): Element
+            {static} +stringToColor(String): Color
+            {static} +colorToString(Color): String
+            {static} +colorToString(int): String
+            {static} +makeMarginTransform(double, double, double, double, double, double, double, double): String
+            {static} +makeMarginTransform(double, double, double, double, double, double): String
+            {static} +makeMarginTransform(double, double, double, double, double): String
+            {static} +elementCoordinatesFromEvent(Document, Element, Event): SVGPoint
+            {static} +removeLastChild(Element): void
+            {static} +removeFromParent(Element): void
+            {static} +svgCircleSegment(SVGPlot, double, double, double, double, double, double): Element
+        }
+
+        class SVGScoreBar [[SVGScoreBar.html]] {
+            #val: double
+            #min: double
+            #max: double
+            #reversed: boolean
+            #label: String
+            -format: NumberFormat
+            +setFill(double, double, double): void
+            +setReversed(boolean): void
+            +addLabel(String): void
+            +showValues(NumberFormat): void
+            +build(SVGPlot, double, double, double, double): Element
+        }
+
+        class SVGEffects [[SVGEffects.html]] {
+            {static} +SHADOW_ID: String
+            {static} +LIGHT_GRADIENT_ID: String
+            {static} +SVG_CHECKMARK_PATH: String
+            {static} +addShadowFilter(SVGPlot): void
+            {static} +addLightGradient(SVGPlot): void
+            {static} +makeCheckmark(SVGPlot): Element
+        }
+
+        interface UpdateSynchronizer [[UpdateSynchronizer.html]] {
+            {abstract} +activate(): void
+            {abstract} +addUpdateRunner(UpdateRunner): void
+        }
+
+        class SVGPlot [[SVGPlot.html]] {
+            {static} +DEFAULT_QUALITY: float
+            {static} +NO_EXPORT_ATTRIBUTE: String
+            {static} -BATIK_DOM: DOMImplementation
+            {static} -BATIK_DOMS: String[]
+            -document: SVGDocument
+            -root: Element
+            -defs: Element
+            -style: Element
+            -cssman: CSSClassManager
+            -objWithId: HashMap<String, WeakReference<Element>>
+            -disableInteractions: boolean
+            {static} +getDomImpl(): DOMImplementation
+            +dispose(): void
+            +svgElement(String): Element
+            +svgElement(String, String): Element
+            +svgRect(double, double, double, double): Element
+            +svgCircle(double, double, double): Element
+            +svgLine(double, double, double, double): Element
+            +svgText(double, double, String): Element
+            +elementCoordinatesFromEvent(Element, Event): SVGPoint
+            +getDocument(): SVGDocument
+            +getRoot(): Element
+            +getDefs(): Element
+            +getCSSClassManager(): CSSClassManager
+            +addCSSClassOrLogError(CSSClass): void
+            +updateStyleElement(): void
+            +saveAsSVG(Path): void
+            #transcode(Path, Transcoder): void
+            #cloneDocument(): SVGDocument
+            +saveAsPDF(Path): void
+            +saveAsPS(Path): void
+            +saveAsEPS(Path): void
+            +saveAsPNG(Path, int, int): void
+            +saveAsJPEG(Path, int, int, float): void
+            +saveAsJPEG(Path, int, int): void
+            +saveAsANY(Path, int, int, float): void
+            +makeAWTImage(int, int): BufferedImage
+            +dumpDebugFile(): void
+            +putIdElement(String, Element): void
+            +getIdElement(String): Element
+            #getAllIds(): Collection<String>
+            +scheduleUpdate(Runnable): void
+            +synchronizeWith(UpdateSynchronizer): void
+            +unsynchronizeWith(UpdateSynchronizer): void
+            +getDisableInteractions(): boolean
+            +setDisableInteractions(boolean): void
+        }
+
+        class SVGCheckbox [[SVGCheckbox.html]] {
+            #checked: boolean
+            #listenerList: EventListenerList
+            #label: String
+            +SVGCheckbox(boolean)
+            +SVGCheckbox(boolean, String)
+            +renderCheckBox(SVGPlot, double, double, double): Element
+            +addCheckBoxListener(ChangeListener): void
+            +removeCheckBoxListener(ChangeListener): void
+            +isChecked(): boolean
+            #fireSwitchEvent(ChangeEvent): void
+        }
+
+        class SVGHyperCube [[SVGHyperCube.html]] {
+            {static} +drawFrame(SVGPlot, Projection2D, double[], double[]): Element
+            {static} +drawFrame(SVGPlot, Projection2D, NumberVector, NumberVector): Element
+            {static} +drawFrame(SVGPlot, Projection2D, SpatialComparable): Element
+            {static} +drawFilled(SVGPlot, String, Projection2D, double[], double[]): Element
+            {static} +drawFilled(SVGPlot, String, Projection2D, NumberVector, NumberVector): Element
+            {static} +drawFilled(SVGPlot, String, Projection2D, SpatialComparable): Element
+            {static} -getVisibleEdges(Projection2D, double[], double[]): ArrayList<double[]>
+            {static} -getVisibleEdges(Projection2D, NumberVector, NumberVector): ArrayList<double[]>
+            {static} -getVisibleEdges(Projection2D, SpatialComparable): ArrayList<double[]>
+            {static} -recDrawEdges(SVGPath, double, double, List<double[]>, long[]): void
+            {static} -recDrawSides(SVGPlot, Element, String, double, double, List<double[]>, long[]): void
+            {static} -isFinite(double): boolean
+        }
+
+        class SVGButton [[SVGButton.html]] {
+            {static} +DEFAULT_BUTTON_COLOR: String
+            {static} +DEFAULT_TEXT_COLOR: String
+            -x: double
+            -y: double
+            -w: double
+            -h: double
+            -r: double
+            -butcss: CSSClass
+            -title: String
+            -titlecss: CSSClass
+            +SVGButton(double, double, double, double, double)
+            +render(SVGPlot): Element
+            +setTitle(String, String): void
+        }
+
+        UpdateRunner --> UpdateSynchronizer: synchronizer
+        elki.utilities.xml.DOMCloner <|-- SVGCloneVisible
+        SVGSimpleLinearAxis +-- elki.visualization.svg.SVGSimpleLinearAxis.Alignment
+        SVGSimpleLinearAxis +-- elki.visualization.svg.SVGSimpleLinearAxis.LabelStyle
+        SVGArrow +-- elki.visualization.svg.SVGArrow.Direction
+        SVGPlot --> UpdateRunner: runner
+    }
+
+    namespace elki.utilities.xml {
+        class DOMCloner [[../../utilities/xml/DOMCloner.html]]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

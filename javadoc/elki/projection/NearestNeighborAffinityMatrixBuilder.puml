@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NearestNeighborAffinityMatrixBuilder\n<size:10>elki.projection" as elki.projection.NearestNeighborAffinityMatrixBuilder<O> [[NearestNeighborAffinityMatrixBuilder.html]] {
+        {static} -LOG: Logging
+        #numberOfNeighbours: int
+        +NearestNeighborAffinityMatrixBuilder(Distance<? super O>, double)
+        +NearestNeighborAffinityMatrixBuilder(Distance<? super O>, double, int)
+        +computeAffinityMatrix(Relation<T extends O>, double): AffinityMatrix
+        #computePij(DBIDRange, KNNSearcher<DBIDRef>, boolean, int, double[], int[], double): void
+        #convertNeighbors(DBIDRange, DBIDRef, boolean, KNNList, DoubleArray, IntegerArray): void
+        {static} #computeSigma(int, DoubleArray, double, double, double[]): double
+        {static} #computeH(DoubleArray, double[], double): double
+        {static} #containsIndex(int[], int): int
+    }
+
+    class "<size:14>PerplexityAffinityMatrixBuilder\n<size:10>elki.projection" as elki.projection.PerplexityAffinityMatrixBuilder<O> [[PerplexityAffinityMatrixBuilder.html]]
+    class "<size:14>NearestNeighborAffinityMatrixBuilder.Par\n<size:10>elki.projection" as elki.projection.NearestNeighborAffinityMatrixBuilder.Par<O> [[NearestNeighborAffinityMatrixBuilder.Par.html]]
+
+    elki.projection.PerplexityAffinityMatrixBuilder <|-- elki.projection.NearestNeighborAffinityMatrixBuilder
+    elki.projection.NearestNeighborAffinityMatrixBuilder +-- elki.projection.NearestNeighborAffinityMatrixBuilder.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

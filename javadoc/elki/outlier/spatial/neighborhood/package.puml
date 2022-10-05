@@ -1,0 +1,120 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.spatial.neighborhood {
+
+        interface NeighborSetPredicate [[NeighborSetPredicate.html]] {
+            {abstract} +getNeighborDBIDs(DBIDRef): DBIDs
+        }
+
+        interface elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory<O> [[NeighborSetPredicate.Factory.html]] {
+            {abstract} +instantiate(Database, Relation<? extends O>): NeighborSetPredicate
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+
+        class ExternalNeighborhood [[ExternalNeighborhood.html]] {
+            {static} -LOG: Logging
+            +ExternalNeighborhood(DataStore<DBIDs>)
+            #getLogger(): Logging
+        }
+
+        class elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory [[ExternalNeighborhood.Factory.html]] {
+            -file: URI
+            +Factory(URI)
+            +instantiate(Database, Relation<?>): NeighborSetPredicate
+            +getInputTypeRestriction(): TypeInformation
+            -loadNeighbors(Database, Relation<?>): DataStore<DBIDs>
+        }
+
+        class elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory.Par [[ExternalNeighborhood.Factory.Par.html]] {
+            {static} +NEIGHBORHOOD_FILE_ID: OptionID
+            ~file: URI
+            +configure(Parameterization): void
+            +make(): Factory
+        }
+
+        class PrecomputedKNearestNeighborNeighborhood [[PrecomputedKNearestNeighborNeighborhood.html]] {
+            {static} -LOG: Logging
+            +PrecomputedKNearestNeighborNeighborhood(DataStore<DBIDs>)
+            #getLogger(): Logging
+        }
+
+        class elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory<O> [[PrecomputedKNearestNeighborNeighborhood.Factory.html]] {
+            -k: int
+            -distance: Distance<? super O>
+            +Factory(int, Distance<? super O>)
+            +instantiate(Database, Relation<? extends O>): NeighborSetPredicate
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory.Par<O> {
+            {static} +K_ID: OptionID
+            {static} +DISTANCEFUNCTION_ID: OptionID
+            ~k: int
+            ~distFunc: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        abstract class AbstractPrecomputedNeighborhood [[AbstractPrecomputedNeighborhood.html]] {
+            #store: DataStore<DBIDs>
+            +AbstractPrecomputedNeighborhood(DataStore<DBIDs>)
+            +getNeighborDBIDs(DBIDRef): DBIDs
+            {abstract} #getLogger(): Logging
+        }
+
+        abstract class elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory<O> [[AbstractPrecomputedNeighborhood.Factory.html]]
+
+        class ExtendedNeighborhood [[ExtendedNeighborhood.html]] {
+            {static} -LOG: Logging
+            +ExtendedNeighborhood(DataStore<DBIDs>)
+            #getLogger(): Logging
+        }
+
+        class elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory<O> [[ExtendedNeighborhood.Factory.html]] {
+            -steps: int
+            +Factory(Factory<O>, int)
+            +instantiate(Database, Relation<? extends O>): NeighborSetPredicate
+            +getInputTypeRestriction(): TypeInformation
+            -extendNeighborhood(Database, Relation<? extends O>): DataStore<DBIDs>
+        }
+
+        class elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory.Par<O> [[ExtendedNeighborhood.Factory.Par.html]] {
+            {static} +NEIGHBORHOOD_ID: OptionID
+            {static} +STEPS_ID: OptionID
+            -steps: int
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        NeighborSetPredicate +-- elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory
+        AbstractPrecomputedNeighborhood <|-- ExternalNeighborhood
+        elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory <|-- elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory
+        ExternalNeighborhood +-- elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory.Par
+        elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory +-- elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory.Par
+        AbstractPrecomputedNeighborhood <|-- PrecomputedKNearestNeighborNeighborhood
+        elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory <|.. elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory
+        PrecomputedKNearestNeighborNeighborhood +-- elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory.Par
+        elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory +-- elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory.Par
+        NeighborSetPredicate <|.. AbstractPrecomputedNeighborhood
+        elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory <|.. elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory
+        AbstractPrecomputedNeighborhood +-- elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory
+        AbstractPrecomputedNeighborhood <|-- ExtendedNeighborhood
+        elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory <|-- elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory
+        ExtendedNeighborhood +-- elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory
+        elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory --> elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory: inner
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory.Par
+        elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory +-- elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory.Par
+        elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory.Par --> elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory: inner
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

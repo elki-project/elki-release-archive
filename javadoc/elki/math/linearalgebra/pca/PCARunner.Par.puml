@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PCARunner.Par\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.PCARunner.Par [[PCARunner.Par.html]] {
+        {static} +PCARUNNER_ID: OptionID
+        {static} +PCA_COVARIANCE_MATRIX: OptionID
+        #covarianceMatrixBuilder: CovarianceMatrixBuilder
+        +configure(Parameterization): void
+        +make(): PCARunner
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>PCARunner\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.PCARunner [[PCARunner.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.PCARunner.Par
+    elki.math.linearalgebra.pca.PCARunner +-- elki.math.linearalgebra.pca.PCARunner.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

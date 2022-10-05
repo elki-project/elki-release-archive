@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LogNormalBilkovaLMMEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LogNormalBilkovaLMMEstimator [[LogNormalBilkovaLMMEstimator.html]] {
+        {static} +STATIC: LogNormalBilkovaLMMEstimator
+        {static} -SQRT8_3: double
+        +getNumMoments(): int
+        +estimateFromLMoments(double[]): LogNormalDistribution
+        +getDistributionClass(): Class<? super LogNormalDistribution>
+    }
+
+    interface "<size:14>LMMDistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LMMDistributionEstimator<LogNormalDistribution> [[LMMDistributionEstimator.html]] {
+        {abstract} +estimateFromLMoments(double[]): LogNormalDistribution
+        {abstract} +getNumMoments(): int
+    }
+    class "<size:14>LogNormalBilkovaLMMEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LogNormalBilkovaLMMEstimator.Par [[LogNormalBilkovaLMMEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.LMMDistributionEstimator <|.. elki.math.statistics.distribution.estimator.LogNormalBilkovaLMMEstimator
+    elki.math.statistics.distribution.estimator.LogNormalBilkovaLMMEstimator +-- elki.math.statistics.distribution.estimator.LogNormalBilkovaLMMEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

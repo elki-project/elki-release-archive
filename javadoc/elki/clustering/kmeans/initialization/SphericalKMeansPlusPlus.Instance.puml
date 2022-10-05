@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SphericalKMeansPlusPlus.Instance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus.Instance [[SphericalKMeansPlusPlus.Instance.html]] {
+        #alpha: double
+        #relation: Relation<? extends NumberVector>
+        #weights: WritableDoubleDataStore
+        #diststat: long
+        #random: Random
+        +Instance(Relation<? extends NumberVector>, double, RandomFactory)
+        +run(int): double[]
+        #similarity(NumberVector, DBIDRef): double
+        #chooseRemaining(int, List<NumberVector>, double): void
+        #initialWeights(NumberVector): double
+        #updateWeights(NumberVector): double
+        #nextDouble(double): double
+    }
+
+    class "<size:14>SphericalKMeansPlusPlus\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus<O> [[SphericalKMeansPlusPlus.html]]
+
+    elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus +-- elki.clustering.kmeans.initialization.SphericalKMeansPlusPlus.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

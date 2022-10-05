@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="331px" preserveAspectRatio="none" style="width:465px;height:331px;background:#FFFFFF;" version="1.1" viewBox="0 0 465 331" width="465px" zoomAndPan="magnify"><defs/><g><!--MD5=[ab0625febb581ceed573632dd09599fb]
+class elki.index.tree.Node--><a href="Node.html" target="_top" title="Node.html" xlink:actuate="onRequest" xlink:href="Node.html" xlink:show="new" xlink:title="Node.html" xlink:type="simple"><g id="elem_elki.index.tree.Node"><rect codeLine="6" fill="#F1F1F1" height="127.4219" id="elki.index.tree.Node" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="447" x="7" y="178"/><ellipse cx="184.75" cy="196.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M180.6719,192.7344 L180.6719,190.5781 L188.0625,190.5781 L188.0625,192.7344 L185.5938,192.7344 L185.5938,200.8125 L188.0625,200.8125 L188.0625,202.9688 L180.6719,202.9688 L180.6719,200.8125 L183.1406,200.8125 L183.1406,192.7344 L180.6719,192.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="38" x="221.75" y="195.9951">Node</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="71" x="205.25" y="208.5791">elki.index.tree</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="447" y="175"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="448" y="187.1387">E</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="453" y1="215.9375" y2="215.9375"/><ellipse cx="18" cy="229.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="421" x="27" y="232.9326">children(IndexTreePath&lt;E&gt;): Iterator&lt;IndexTreePath&lt;E&gt;&gt;</text><ellipse cx="18" cy="245.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="142" x="27" y="249.2295">getNumEntries(): int</text><ellipse cx="18" cy="262.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="119" x="27" y="265.5264">isLeaf(): boolean</text><ellipse cx="18" cy="278.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="105" x="27" y="281.8232">getEntry(int): E</text><ellipse cx="18" cy="294.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="109" x="27" y="298.1201">addEntry(E): int</text></g></a><!--MD5=[353ee4dc59e74504c0723a0d2db45e2b]
+class elki.persistent.Page--><a href="../../persistent/Page.html" target="_top" title="../../persistent/Page.html" xlink:actuate="onRequest" xlink:href="../../persistent/Page.html" xlink:show="new" xlink:title="../../persistent/Page.html" xlink:type="simple"><g id="elem_elki.persistent.Page"><rect codeLine="14" fill="#F1F1F1" height="111.125" id="elki.persistent.Page" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="187" x="137" y="7"/><ellipse cx="191.25" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M187.1719,21.7344 L187.1719,19.5781 L194.5625,19.5781 L194.5625,21.7344 L192.0938,21.7344 L192.0938,29.8125 L194.5625,29.8125 L194.5625,31.9688 L187.1719,31.9688 L187.1719,29.8125 L189.6406,29.8125 L189.6406,21.7344 L187.1719,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="35" x="229.25" y="24.9951">Page</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="70" x="211.75" y="37.5791">elki.persistent</text><line style="stroke:#181818;stroke-width:0.5;" x1="138" x2="323" y1="44.9375" y2="44.9375"/><ellipse cx="148" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="110" x="157" y="61.9326">getPageID(): int</text><ellipse cx="148" cy="74.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="138" x="157" y="78.2295">setPageID(int): void</text><ellipse cx="148" cy="91.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="121" x="157" y="94.5264">isDirty(): boolean</text><ellipse cx="148" cy="107.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="161" x="157" y="110.8232">setDirty(boolean): void</text></g></a><!--MD5=[94c35ab3edbc81231ca65a2a56d6754d]
+reverse link elki.persistent.Page to elki.index.tree.Node--><g id="link_elki.persistent.Page_elki.index.tree.Node"><path codeLine="21" d="M230.5,138.22 C230.5,151.39 230.5,164.97 230.5,177.77 " fill="none" id="elki.persistent.Page-backto-elki.index.tree.Node" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="223.5,138.05,230.5,118.05,237.5,138.05,223.5,138.05" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="132.5" y="311.4219"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="132.5" y="320.7041">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[eedf1e76344e3b3a1f2aa109e8c1e612]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Node\n<size:10>elki.index.tree" as elki.index.tree.Node<E> [[Node.html]] {
+        {abstract} +children(IndexTreePath<E>): Iterator<IndexTreePath<E>>
+        {abstract} +getNumEntries(): int
+        {abstract} +isLeaf(): boolean
+        {abstract} +getEntry(int): E
+        {abstract} +addEntry(E): int
+    }
+
+    interface "<size:14>Page\n<size:10>elki.persistent" as elki.persistent.Page [[../../persistent/Page.html]] {
+        {abstract} +getPageID(): int
+        {abstract} +setPageID(int): void
+        {abstract} +isDirty(): boolean
+        {abstract} +setDirty(boolean): void
+    }
+
+    elki.persistent.Page <|- - elki.index.tree.Node
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

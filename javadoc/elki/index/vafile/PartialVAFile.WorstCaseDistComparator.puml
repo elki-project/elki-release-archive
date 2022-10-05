@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PartialVAFile.WorstCaseDistComparator\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile.WorstCaseDistComparator [[PartialVAFile.WorstCaseDistComparator.html]] {
+        -dist: VALPNormDistance
+        +WorstCaseDistComparator(VALPNormDistance)
+        +compare(DAFile, DAFile): int
+    }
+
+    interface "<size:14>Comparator\n<size:10>java.util" as java.util.Comparator<DAFile> {
+        {abstract} +compare(DAFile, DAFile): int
+    }
+    class "<size:14>PartialVAFile\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile<V extends NumberVector> [[PartialVAFile.html]]
+
+    java.util.Comparator <|.. elki.index.vafile.PartialVAFile.WorstCaseDistComparator
+    elki.index.vafile.PartialVAFile +-- elki.index.vafile.PartialVAFile.WorstCaseDistComparator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ALOCI\n<size:10>elki.outlier.lof" as elki.outlier.lof.ALOCI<V extends NumberVector> [[ALOCI.html]] {
+        {static} -LOG: Logging
+        -distance: NumberVectorDistance<? super NumberVector>
+        -nmin: int
+        -alpha: int
+        -g: int
+        -rnd: RandomFactory
+        +ALOCI(NumberVectorDistance<? super NumberVector>, int, int, int, RandomFactory)
+        +run(Relation<V extends NumberVector>): OutlierResult
+        {static} -calculate_MDEF_norm(Node, Node): double
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>ALOCI.ALOCIQuadTree\n<size:10>elki.outlier.lof" as elki.outlier.lof.ALOCI.ALOCIQuadTree [[ALOCI.ALOCIQuadTree.html]]
+    class "<size:14>ALOCI.Node\n<size:10>elki.outlier.lof" as elki.outlier.lof.ALOCI.Node [[ALOCI.Node.html]]
+    class "<size:14>ALOCI.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.ALOCI.Par<O extends NumberVector> [[ALOCI.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.lof.ALOCI
+    elki.outlier.lof.ALOCI +-- elki.outlier.lof.ALOCI.ALOCIQuadTree
+    elki.outlier.lof.ALOCI +-- elki.outlier.lof.ALOCI.Node
+    elki.outlier.lof.ALOCI +-- elki.outlier.lof.ALOCI.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

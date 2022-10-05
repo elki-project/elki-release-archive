@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>SimpleMenuOverlay\n<size:10>elki.visualization.parallel3d.util" as elki.visualization.parallel3d.util.SimpleMenuOverlay [[SimpleMenuOverlay.html]] {
+        ~renderer: TextRenderer
+        -options: ArrayList<String>
+        ~fontsize: int
+        ~renderContents(GL2): void
+        +mouseClicked(MouseEvent): void
+        {abstract} +menuItemClicked(int): void
+        +mousePressed(MouseEvent): void
+        +mouseReleased(MouseEvent): void
+        +mouseEntered(MouseEvent): void
+        +mouseExited(MouseEvent): void
+        +getOptions(): ArrayList<String>
+        +setOptions(ArrayList<String>): void
+    }
+
+    abstract class "<size:14>AbstractSimpleOverlay\n<size:10>elki.visualization.parallel3d.util" as elki.visualization.parallel3d.util.AbstractSimpleOverlay [[AbstractSimpleOverlay.html]] {
+        {abstract} ~renderContents(GL2): void
+    }
+    interface "<size:14>MouseListener\n<size:10>java.awt.event" as java.awt.event.MouseListener {
+        {abstract} +mouseClicked(MouseEvent): void
+        {abstract} +mousePressed(MouseEvent): void
+        {abstract} +mouseReleased(MouseEvent): void
+        {abstract} +mouseEntered(MouseEvent): void
+        {abstract} +mouseExited(MouseEvent): void
+    }
+
+    elki.visualization.parallel3d.util.AbstractSimpleOverlay <|-- elki.visualization.parallel3d.util.SimpleMenuOverlay
+    java.awt.event.MouseListener <|.. elki.visualization.parallel3d.util.SimpleMenuOverlay
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

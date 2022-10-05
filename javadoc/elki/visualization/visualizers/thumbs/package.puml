@@ -1,0 +1,109 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.thumbs {
+
+        class ThumbnailVisualization [[ThumbnailVisualization.html]] {
+            #visFactory: VisFactory
+            #thumbid: int
+            #tresolution: int
+            -thumb: BufferedImage
+            -plot: SVGPlot
+            -proj: Projection
+            +ThumbnailVisualization(VisualizerContext, VisFactory, VisualizationTask, VisualizationPlot, double, double, Projection, int)
+            +destroy(): void
+            +getLayer(): Element
+            +fullRedraw(): void
+            +doThumbnail(): void
+            -refreshThumbnail(): void
+            +resultChanged(Object): void
+            +visualizationChanged(VisualizationItem): void
+        }
+
+        class ThumbnailThread [[ThumbnailThread.html]] {
+            -shutdown: boolean
+            {static} +queue(Listener): Task
+            {static} +unqueue(Task): void
+            -generateThumbnail(Task): void
+            +run(): void
+        }
+
+        class elki.visualization.visualizers.thumbs.ThumbnailThread.Task [[ThumbnailThread.Task.html]] {
+            +Task(Listener)
+        }
+
+        interface elki.visualization.visualizers.thumbs.ThumbnailThread.Listener [[ThumbnailThread.Listener.html]] {
+            {abstract} +doThumbnail(): void
+        }
+
+        elki.visualization.visualizers.AbstractVisualization <|-- ThumbnailVisualization
+        elki.visualization.visualizers.thumbs.ThumbnailThread.Listener <|.. ThumbnailVisualization
+        elki.database.datastore.DataStoreListener <|.. ThumbnailVisualization
+        elki.visualization.VisualizationListener <|.. ThumbnailVisualization
+        ThumbnailVisualization --> elki.visualization.visualizers.thumbs.ThumbnailThread.Task: pendingThumbnail
+        java.lang.Thread <|-- ThumbnailThread
+        ThumbnailThread --> "*" elki.visualization.visualizers.thumbs.ThumbnailThread.Task: queue
+        ThumbnailThread --> ThumbnailThread: THREAD
+        ThumbnailThread +-- elki.visualization.visualizers.thumbs.ThumbnailThread.Task
+        elki.visualization.visualizers.thumbs.ThumbnailThread.Task --> elki.visualization.visualizers.thumbs.ThumbnailThread.Listener: callback
+        ThumbnailThread +-- elki.visualization.visualizers.thumbs.ThumbnailThread.Listener
+    }
+
+    namespace elki.visualization.visualizers {
+        abstract class AbstractVisualization [[../AbstractVisualization.html]] {
+            #task: VisualizationTask
+            #context: VisualizerContext
+            #svgp: VisualizationPlot
+            #layer: Element
+            -width: double
+            -height: double
+            {abstract} +fullRedraw(): void
+        }
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreListener [[../../../database/datastore/DataStoreListener.html]] {
+            {abstract} +contentChanged(DataStoreEvent): void
+        }
+    }
+
+    namespace elki.visualization {
+        interface VisualizationListener [[../../VisualizationListener.html]] {
+            {abstract} +visualizationChanged(VisualizationItem): void
+        }
+    }
+
+    namespace java.lang {
+        class Thread {
+            -name: String
+            -priority: int
+            -daemon: boolean
+            -stillborn: boolean
+            -eetop: long
+            -target: Runnable
+            -group: ThreadGroup
+            -contextClassLoader: ClassLoader
+            -inheritedAccessControlContext: AccessControlContext
+            {static} -threadInitNumber: int
+            ~threadLocals: ThreadLocalMap
+            ~inheritableThreadLocals: ThreadLocalMap
+            -stackSize: long
+            -tid: long
+            {static} -threadSeqNumber: long
+            -threadStatus: int
+            ~parkBlocker: Object
+            -blocker: Interruptible
+            -blockerLock: Object
+            {static} +MIN_PRIORITY: int
+            {static} +NORM_PRIORITY: int
+            {static} +MAX_PRIORITY: int
+            {static} -EMPTY_STACK_TRACE: StackTraceElement[]
+            -uncaughtExceptionHandler: UncaughtExceptionHandler
+            {static} -defaultUncaughtExceptionHandler: UncaughtExceptionHandler
+            ~threadLocalRandomSeed: long
+            ~threadLocalRandomProbe: int
+            ~threadLocalRandomSecondarySeed: int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

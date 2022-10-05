@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractLayout3DPC\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.AbstractLayout3DPC<N extends Node> [[AbstractLayout3DPC.html]] {
+        ~sim: Dependence
+        +AbstractLayout3DPC(Dependence)
+        +getSimilarity(): Dependence
+        +layout(Relation<? extends NumberVector>): Layout
+        {static} +computeSimilarityMatrix(Dependence, Relation<? extends NumberVector>): double[]
+        {abstract} +layout(int, double[]): Layout
+        #buildSpanningTree(int, double[], Layout): N extends Node
+        {abstract} ~makeNode(int, List<N extends Node>): N extends Node
+        #buildTree(int[], int, int, ArrayList<N extends Node>): N extends Node
+        #maxDepth(Node): int
+        {static} +findOptimalRoot(int[]): int
+    }
+
+    interface "<size:14>SimilarityBasedLayouter3DPC\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.SimilarityBasedLayouter3DPC [[SimilarityBasedLayouter3DPC.html]] {
+        {abstract} +getSimilarity(): Dependence
+        {abstract} +layout(int, double[]): Layout
+    }
+    class "<size:14>AbstractLayout3DPC.LowerTriangularAdapter\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.AbstractLayout3DPC.LowerTriangularAdapter [[AbstractLayout3DPC.LowerTriangularAdapter.html]]
+    class "<size:14>AbstractLayout3DPC.AbstractNode\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.AbstractLayout3DPC.AbstractNode<N extends AbstractNode<N>> [[AbstractLayout3DPC.AbstractNode.html]]
+    abstract class "<size:14>AbstractLayout3DPC.Par\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.AbstractLayout3DPC.Par [[AbstractLayout3DPC.Par.html]]
+
+    elki.visualization.parallel3d.layout.SimilarityBasedLayouter3DPC <|.. elki.visualization.parallel3d.layout.AbstractLayout3DPC
+    elki.visualization.parallel3d.layout.AbstractLayout3DPC +-- elki.visualization.parallel3d.layout.AbstractLayout3DPC.LowerTriangularAdapter
+    elki.visualization.parallel3d.layout.AbstractLayout3DPC +-- elki.visualization.parallel3d.layout.AbstractLayout3DPC.AbstractNode
+    elki.visualization.parallel3d.layout.AbstractLayout3DPC +-- elki.visualization.parallel3d.layout.AbstractLayout3DPC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

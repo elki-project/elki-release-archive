@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>SelectionToolLineVisualization.Mode\n<size:10>elki.visualization.visualizers.parallel.selection" as elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization.Mode [[SelectionToolLineVisualization.Mode.html]] {
+        {static} +REPLACE
+        {static} +ADD
+        {static} +INVERT
+    }
+
+    class "<size:14>SelectionToolLineVisualization\n<size:10>elki.visualization.visualizers.parallel.selection" as elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization [[SelectionToolLineVisualization.html]]
+
+    elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization +-- elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization.Mode
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

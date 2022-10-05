@@ -1,0 +1,125 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.kmedoids.initialization {
+
+        class BUILD<O> [[BUILD.html]] {
+            {static} -LOG: Logging
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+            +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+        }
+
+        class elki.clustering.kmedoids.initialization.BUILD.Par<V> [[BUILD.Par.html]] {
+            +make(): BUILD<V>
+        }
+
+        class KMedoidsKMedoidsInitialization<O> [[KMedoidsKMedoidsInitialization.html]] {
+            -inner: KMedoidsClustering<O>
+            +KMedoidsKMedoidsInitialization(KMedoidsClustering<O>)
+            +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+        }
+
+        class elki.clustering.kmedoids.initialization.KMedoidsKMedoidsInitialization.Par<O> [[KMedoidsKMedoidsInitialization.Par.html]] {
+            {static} +INNER_ID: OptionID
+            -inner: KMedoidsClustering<O>
+            +configure(Parameterization): void
+            +make(): KMedoidsKMedoidsInitialization<O>
+        }
+
+        class LAB<O> [[LAB.html]] {
+            {static} -LOG: Logging
+            -rnd: RandomFactory
+            +LAB(RandomFactory)
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+            +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+            {static} #getMinDist(DBIDArrayIter, DistanceQuery<?>, DBIDArrayIter, WritableDoubleDataStore): double
+            {static} -shuffle(ArrayModifiableDBIDs, int, int, Random): void
+        }
+
+        class elki.clustering.kmedoids.initialization.LAB.Par<V> [[LAB.Par.html]] {
+            +make(): LAB<V>
+        }
+
+        interface KMedoidsInitialization<O> [[KMedoidsInitialization.html]] {
+            {abstract} +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+        }
+
+        class AlternateRefinement<O> [[AlternateRefinement.html]] {
+            {static} -LOG: Logging
+            ~maxiter: int
+            +AlternateRefinement(KMedoidsInitialization<O>, int)
+            +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+            {static} +findMedoid(DBIDs, DistanceQuery<?>, IntegerDataStore, int, DBIDArrayMIter, double[]): boolean
+            {static} +assignToNearestCluster(DBIDArrayIter, DBIDs, DistanceQuery<?>, WritableIntegerDataStore, double[]): double
+        }
+
+        class elki.clustering.kmedoids.initialization.AlternateRefinement.Par<O> [[AlternateRefinement.Par.html]] {
+            {static} +INIT_P: OptionID
+            {static} +MAXITER_P: OptionID
+            ~maxiter: int
+            +configure(Parameterization): void
+            +make(): AlternateRefinement<O>
+        }
+
+        class ParkJun<O> [[ParkJun.html]] {
+            {static} -LOG: Logging
+            +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+            +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+        }
+
+        class elki.clustering.kmedoids.initialization.ParkJun.Par<V> [[ParkJun.Par.html]] {
+            +make(): ParkJun<V>
+        }
+
+        class GreedyG<O> [[GreedyG.html]] {
+            {static} -LOG: Logging
+            +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+            {static} +findMedoid(DBIDs, DistanceQuery<?>, int, DBIDArrayMIter, double, WritableDoubleDataStore, WritableDoubleDataStore, WritableDoubleDataStore): double
+        }
+
+        class elki.clustering.kmedoids.initialization.GreedyG.Par<V> [[GreedyG.Par.html]] {
+            +make(): GreedyG<V>
+        }
+
+        elki.clustering.kmeans.initialization.KMeansInitialization <|.. BUILD
+        KMedoidsInitialization <|.. BUILD
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmedoids.initialization.BUILD.Par
+        BUILD +-- elki.clustering.kmedoids.initialization.BUILD.Par
+        KMedoidsInitialization <|.. KMedoidsKMedoidsInitialization
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmedoids.initialization.KMedoidsKMedoidsInitialization.Par
+        KMedoidsKMedoidsInitialization +-- elki.clustering.kmedoids.initialization.KMedoidsKMedoidsInitialization.Par
+        elki.clustering.kmeans.initialization.KMeansInitialization <|.. LAB
+        KMedoidsInitialization <|.. LAB
+        elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par <|-- elki.clustering.kmedoids.initialization.LAB.Par
+        LAB +-- elki.clustering.kmedoids.initialization.LAB.Par
+        KMedoidsInitialization <|.. AlternateRefinement
+        AlternateRefinement --> KMedoidsInitialization: inner
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmedoids.initialization.AlternateRefinement.Par
+        AlternateRefinement +-- elki.clustering.kmedoids.initialization.AlternateRefinement.Par
+        elki.clustering.kmedoids.initialization.AlternateRefinement.Par --> KMedoidsInitialization: inner
+        elki.clustering.kmeans.initialization.KMeansInitialization <|.. ParkJun
+        KMedoidsInitialization <|.. ParkJun
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmedoids.initialization.ParkJun.Par
+        ParkJun +-- elki.clustering.kmedoids.initialization.ParkJun.Par
+        KMedoidsInitialization <|.. GreedyG
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmedoids.initialization.GreedyG.Par
+        GreedyG +-- elki.clustering.kmedoids.initialization.GreedyG.Par
+    }
+
+    namespace elki.clustering.kmeans.initialization {
+        interface KMeansInitialization [[../../kmeans/initialization/KMeansInitialization.html]] {
+            {abstract} +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        }
+        abstract class elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par [[../../kmeans/initialization/AbstractKMeansInitialization.Par.html]] {
+            #rnd: RandomFactory
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

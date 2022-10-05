@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMedoidsKMedoidsInitialization.Par\n<size:10>elki.clustering.kmedoids.initialization" as elki.clustering.kmedoids.initialization.KMedoidsKMedoidsInitialization.Par<O> [[KMedoidsKMedoidsInitialization.Par.html]] {
+        {static} +INNER_ID: OptionID
+        -inner: KMedoidsClustering<O>
+        +configure(Parameterization): void
+        +make(): KMedoidsKMedoidsInitialization<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>KMedoidsKMedoidsInitialization\n<size:10>elki.clustering.kmedoids.initialization" as elki.clustering.kmedoids.initialization.KMedoidsKMedoidsInitialization<O> [[KMedoidsKMedoidsInitialization.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmedoids.initialization.KMedoidsKMedoidsInitialization.Par
+    elki.clustering.kmedoids.initialization.KMedoidsKMedoidsInitialization +-- elki.clustering.kmedoids.initialization.KMedoidsKMedoidsInitialization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

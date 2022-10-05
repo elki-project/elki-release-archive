@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GNAT.GNATRangeObjectSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATRangeObjectSearcher [[GNAT.GNATRangeObjectSearcher.html]] {
+        -query: O
+        +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        #queryDistance(DBIDRef): double
+    }
+
+    abstract class "<size:14>GNAT.GNATRangeSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATRangeSearcher [[GNAT.GNATRangeSearcher.html]] {
+        {abstract} #queryDistance(DBIDRef): double
+    }
+    interface "<size:14>RangeSearcher\n<size:10>elki.database.query.range" as elki.database.query.range.RangeSearcher<O> [[../../../../database/query/range/RangeSearcher.html]] {
+        {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+    class "<size:14>GNAT\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT<O> [[GNAT.html]]
+
+    elki.index.tree.metrical.vptree.GNAT.GNATRangeSearcher <|-- elki.index.tree.metrical.vptree.GNAT.GNATRangeObjectSearcher
+    elki.database.query.range.RangeSearcher <|.. elki.index.tree.metrical.vptree.GNAT.GNATRangeObjectSearcher
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATRangeObjectSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

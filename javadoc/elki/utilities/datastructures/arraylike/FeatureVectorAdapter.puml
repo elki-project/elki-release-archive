@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FeatureVectorAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.FeatureVectorAdapter<F> [[FeatureVectorAdapter.html]] {
+        {static} +STATIC: FeatureVectorAdapter<?>
+        +size(FeatureVector<F>): int
+        +get(FeatureVector<F>, int): F
+    }
+
+    interface "<size:14>ArrayAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.ArrayAdapter<F, FeatureVector<F>> [[ArrayAdapter.html]] {
+        {abstract} +size(FeatureVector<F>): int
+        {abstract} +get(FeatureVector<F>, int): F
+    }
+
+    elki.utilities.datastructures.arraylike.ArrayAdapter <|.. elki.utilities.datastructures.arraylike.FeatureVectorAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

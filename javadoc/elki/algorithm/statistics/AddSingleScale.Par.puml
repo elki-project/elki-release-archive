@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AddSingleScale.Par\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.AddSingleScale.Par [[AddSingleScale.Par.html]] {
+        {static} +MINMAX_ID: OptionID
+        ~minmax: double[]
+        +configure(Parameterization): void
+        +make(): AddSingleScale
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AddSingleScale\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.AddSingleScale [[AddSingleScale.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.statistics.AddSingleScale.Par
+    elki.algorithm.statistics.AddSingleScale +-- elki.algorithm.statistics.AddSingleScale.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

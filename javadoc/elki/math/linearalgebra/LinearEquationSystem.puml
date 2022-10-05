@@ -1,0 +1,52 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearEquationSystem\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.LinearEquationSystem [[LinearEquationSystem.html]] {
+        {static} -LOG: Logging
+        {static} -DELTA: double
+        {static} -TRIVAL_PIVOT_SEARCH: int
+        {static} -TOTAL_PIVOT_SEARCH: int
+        -solvable: boolean
+        -solved: boolean
+        -rank: int
+        -coeff: double[]
+        -rhs: double[]
+        -row: int[]
+        -col: int[]
+        -x_0: double[]
+        -u: double[]
+        -reducedRowEchelonForm: boolean
+        +LinearEquationSystem(double[], double[])
+        +LinearEquationSystem(double[], double[], int[], int[])
+        +getCoefficents(): double[]
+        +getRHS(): double[]
+        +getRowPermutations(): int[]
+        +getColumnPermutations(): int[]
+        +isSolved(): boolean
+        +solveByTotalPivotSearch(): void
+        +solveByTrivialPivotSearch(): void
+        +isSolvable(): boolean
+        +equationsToString(String, int): String
+        +equationsToString(String, NumberFormat): String
+        +equationsToString(NumberFormat): String
+        +equationsToString(int): String
+        +solutionToString(int): String
+        -reducedRowEchelonForm(int): void
+        -totalPivotSearch(int, int[]): void
+        -nonZeroPivotSearch(int, int[]): void
+        -permutePivot(int, int, int, int): void
+        -pivotOperation(int): void
+        -solve(int): void
+        -isSolvable(int): boolean
+        -maxIntegerDigits(double[]): int[]
+        -maxIntegerDigits(double[]): int
+        -integerDigits(double): int
+        -format(NumberFormat, StringBuilder, double, int): StringBuilder
+        +subspacedim(): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

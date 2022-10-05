@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimplifiedHierarchyExtraction.TempCluster\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.TempCluster [[SimplifiedHierarchyExtraction.TempCluster.html]] {
+        #seq: int
+        #newids: ModifiableDBIDs
+        #depth: double
+        #children: Collection<Cluster<DendrogramModel>>
+        +TempCluster(int, double)
+        +add(DBIDRef): void
+        +addDBIDs(DBIDs): void
+        +addChild(Cluster<DendrogramModel>): void
+        +isNotSpurious(int): boolean
+    }
+
+    class "<size:14>SimplifiedHierarchyExtraction\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction [[SimplifiedHierarchyExtraction.html]]
+
+    elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction +-- elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.TempCluster
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

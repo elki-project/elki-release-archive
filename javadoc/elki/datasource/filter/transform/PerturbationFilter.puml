@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PerturbationFilter\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.PerturbationFilter<V extends NumberVector> [[PerturbationFilter.html]] {
+        {static} -LOG: Logging
+        -scalingreference: ScalingReference
+        -noisedistribution: NoiseDistribution
+        -RANDOM: Random
+        -percentage: double
+        -mvs: MeanVarianceMinMax[]
+        -scalingreferencevalues: double[]
+        -randomPerAttribute: Random[]
+        -maxima: double[]
+        -minima: double[]
+        -dimensionality: int
+        +PerturbationFilter(Long, double, ScalingReference, double[], double[], NoiseDistribution)
+        #prepareStart(SimpleTypeInformation<V extends NumberVector>): boolean
+        #prepareProcessInstance(V extends NumberVector): void
+        #prepareComplete(): void
+        #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        #filterSingleObject(V extends NumberVector): V extends NumberVector
+        #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractVectorConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractVectorConversionFilter<V extends NumberVector, V extends NumberVector> [[../AbstractVectorConversionFilter.html]]
+    enum "<size:14>PerturbationFilter.ScalingReference\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.PerturbationFilter.ScalingReference [[PerturbationFilter.ScalingReference.html]]
+    enum "<size:14>PerturbationFilter.NoiseDistribution\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.PerturbationFilter.NoiseDistribution [[PerturbationFilter.NoiseDistribution.html]]
+    class "<size:14>PerturbationFilter.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.PerturbationFilter.Par<V extends NumberVector> [[PerturbationFilter.Par.html]]
+
+    elki.datasource.filter.AbstractVectorConversionFilter <|-- elki.datasource.filter.transform.PerturbationFilter
+    elki.datasource.filter.transform.PerturbationFilter +-- elki.datasource.filter.transform.PerturbationFilter.ScalingReference
+    elki.datasource.filter.transform.PerturbationFilter +-- elki.datasource.filter.transform.PerturbationFilter.NoiseDistribution
+    elki.datasource.filter.transform.PerturbationFilter +-- elki.datasource.filter.transform.PerturbationFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

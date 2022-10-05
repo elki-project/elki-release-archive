@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RelationUtil\n<size:10>elki.database.relation" as elki.database.relation.RelationUtil [[RelationUtil.html]] {
+        {static} +assumeVectorField(Relation<V extends FeatureVector<?>>): VectorFieldTypeInformation<V extends FeatureVector<?>>
+        {static} +getNumberVectorFactory(Relation<V extends NumberVector>): Factory<V extends NumberVector>
+        {static} +dimensionality(Relation<? extends SpatialComparable>): int
+        {static} +maxDimensionality(Relation<? extends SpatialComparable>): int
+        {static} +computeMinMax(Relation<? extends NumberVector>): double[]
+        {static} +relationAsMatrix(Relation<? extends NumberVector>, ArrayDBIDs): double[]
+        {static} +getColumnLabel(Relation<? extends SpatialComparable>, int): String
+        {static} +relationUglyVectorCast(Relation<T extends NumberVector>): Relation<V extends NumberVector>
+    }
+    class "<size:14>RelationUtil.RelationObjectIterator\n<size:10>elki.database.relation" as elki.database.relation.RelationUtil.RelationObjectIterator<O> [[RelationUtil.RelationObjectIterator.html]]
+    class "<size:14>RelationUtil.CollectionFromRelation\n<size:10>elki.database.relation" as elki.database.relation.RelationUtil.CollectionFromRelation<O> [[RelationUtil.CollectionFromRelation.html]]
+    class "<size:14>RelationUtil.AscendingByDoubleRelation\n<size:10>elki.database.relation" as elki.database.relation.RelationUtil.AscendingByDoubleRelation [[RelationUtil.AscendingByDoubleRelation.html]]
+    class "<size:14>RelationUtil.DescendingByDoubleRelation\n<size:10>elki.database.relation" as elki.database.relation.RelationUtil.DescendingByDoubleRelation [[RelationUtil.DescendingByDoubleRelation.html]]
+
+    elki.database.relation.RelationUtil +-- elki.database.relation.RelationUtil.RelationObjectIterator
+    elki.database.relation.RelationUtil +-- elki.database.relation.RelationUtil.CollectionFromRelation
+    elki.database.relation.RelationUtil +-- elki.database.relation.RelationUtil.AscendingByDoubleRelation
+    elki.database.relation.RelationUtil +-- elki.database.relation.RelationUtil.DescendingByDoubleRelation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

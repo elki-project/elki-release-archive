@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="138px" preserveAspectRatio="none" style="width:398px;height:138px;background:#FFFFFF;" version="1.1" viewBox="0 0 398 138" width="398px" zoomAndPan="magnify"><defs/><g><!--MD5=[f73b1d894c0ae1823c38b0c7c2e3d513]
+class elki.data.FeatureVector--><a href="FeatureVector.html" target="_top" title="FeatureVector.html" xlink:actuate="onRequest" xlink:href="FeatureVector.html" xlink:show="new" xlink:title="FeatureVector.html" xlink:type="simple"><g id="elem_elki.data.FeatureVector"><rect codeLine="6" fill="#F1F1F1" height="102.8281" id="elki.data.FeatureVector" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="380" x="7" y="10"/><ellipse cx="136.25" cy="28.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M132.1719,24.7344 L132.1719,22.5781 L139.5625,22.5781 L139.5625,24.7344 L137.0938,24.7344 L137.0938,32.8125 L139.5625,32.8125 L139.5625,34.9688 L132.1719,34.9688 L132.1719,32.8125 L134.6406,32.8125 L134.6406,24.7344 L132.1719,24.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="100" x="156.75" y="27.9951">FeatureVector</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="43" x="185.25" y="40.5791">elki.data</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="11" x="379" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="9" x="380" y="19.1387">D</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="386" y1="47.9375" y2="47.9375"/><ellipse cx="18" cy="61.5859" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="354" x="27" y="64.9326">TYPE: VectorTypeInformation&lt;FeatureVector&lt;?&gt;&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="386" y1="72.2344" y2="72.2344"/><ellipse cx="18" cy="85.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="166" x="27" y="89.2295">getDimensionality(): int</text><ellipse cx="18" cy="102.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="112" x="27" y="105.5264">getValue(int): D</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="99" y="118.8281"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="99" y="128.1104">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[03a4ba1edeb5da5bd7912c272fe634d5]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>FeatureVector\n<size:10>elki.data" as elki.data.FeatureVector<D> [[FeatureVector.html]] {
+        {static} +TYPE: VectorTypeInformation<FeatureVector<?>>
+        {abstract} +getDimensionality(): int
+        {abstract} +getValue(int): D
+    }
+    interface "<size:14>FeatureVector.Factory\n<size:10>elki.data" as elki.data.FeatureVector.Factory<V extends FeatureVector<? extends D>, D> [[FeatureVector.Factory.html]]
+
+    elki.data.FeatureVector +- - elki.data.FeatureVector.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CIndex\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.CIndex<O> [[CIndex.html]] {
+        {static} -LOG: Logging
+        -noiseOption: NoiseHandling
+        -distance: Distance<? super O>
+        -key: String
+        +CIndex(Distance<? super O>, NoiseHandling)
+        +evaluateClustering(Relation<? extends O>, DistanceQuery<O>, Clustering<?>): double
+        #processCluster(Cluster<?>, List<? extends Cluster<?>>, int, DistanceQuery<O>, DoubleHeap, DoubleHeap, int): double
+        #processSingleton(Cluster<?>, Relation<? extends O>, DistanceQuery<O>, DoubleHeap, DoubleHeap, int): void
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../../Evaluator.html]]
+    class "<size:14>CIndex.Par\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.CIndex.Par<O> [[CIndex.Par.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.clustering.internal.CIndex
+    elki.evaluation.clustering.internal.CIndex +-- elki.evaluation.clustering.internal.CIndex.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

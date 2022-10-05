@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrecisionAtKEvaluation\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.PrecisionAtKEvaluation [[PrecisionAtKEvaluation.html]] {
+        {static} +RPRECISION: PrecisionAtKEvaluation
+        ~k: int
+        +PrecisionAtKEvaluation(int)
+        +evaluate(Adapter): double
+        +expected(int, int): double
+    }
+
+    interface "<size:14>ScoreEvaluation\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.ScoreEvaluation [[ScoreEvaluation.html]] {
+        {abstract} +evaluate(Adapter): double
+        {abstract} +expected(int, int): double
+    }
+    class "<size:14>PrecisionAtKEvaluation.Par\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.PrecisionAtKEvaluation.Par [[PrecisionAtKEvaluation.Par.html]]
+
+    elki.evaluation.scores.ScoreEvaluation <|.. elki.evaluation.scores.PrecisionAtKEvaluation
+    elki.evaluation.scores.PrecisionAtKEvaluation +-- elki.evaluation.scores.PrecisionAtKEvaluation.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

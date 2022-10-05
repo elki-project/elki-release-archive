@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NodeArrayAdapter\n<size:10>elki.index.tree.spatial.rstarvariants.util" as elki.index.tree.spatial.rstarvariants.util.NodeArrayAdapter [[NodeArrayAdapter.html]] {
+        {static} +STATIC: NodeArrayAdapter
+        +size(AbstractNode<? extends SpatialEntry>): int
+        +get(AbstractNode<? extends SpatialEntry>, int): SpatialEntry
+    }
+
+    interface "<size:14>ArrayAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.ArrayAdapter<SpatialEntry, AbstractNode<? extends SpatialEntry>> [[../../../../../utilities/datastructures/arraylike/ArrayAdapter.html]] {
+        {abstract} +size(AbstractNode<? extends SpatialEntry>): int
+        {abstract} +get(AbstractNode<? extends SpatialEntry>, int): SpatialEntry
+    }
+
+    elki.utilities.datastructures.arraylike.ArrayAdapter <|.. elki.index.tree.spatial.rstarvariants.util.NodeArrayAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

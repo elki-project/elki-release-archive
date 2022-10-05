@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LAESA.Factory\n<size:10>elki.index.laesa" as elki.index.laesa.LAESA.Factory<O> [[LAESA.Factory.html]] {
+        ~distance: Distance<? super O>
+        ~m: int
+        ~k: int
+        ~rng: RandomFactory
+        +Factory(Distance<? super O>, int, int, RandomFactory)
+        +instantiate(Relation<O>): LAESA<O>
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<O> [[../IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>LAESA\n<size:10>elki.index.laesa" as elki.index.laesa.LAESA<O> [[LAESA.html]]
+    class "<size:14>LAESA.Factory.Par\n<size:10>elki.index.laesa" as elki.index.laesa.LAESA.Factory.Par<O> [[LAESA.Factory.Par.html]]
+
+    elki.index.IndexFactory <|.. elki.index.laesa.LAESA.Factory
+    elki.index.laesa.LAESA +-- elki.index.laesa.LAESA.Factory
+    elki.index.laesa.LAESA.Factory +-- elki.index.laesa.LAESA.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

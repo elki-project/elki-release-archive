@@ -1,0 +1,115 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.silhouette {
+
+        class SilhouettePlotVisualizer [[SilhouettePlotVisualizer.html]] {
+            {static} -NAME: String
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class elki.visualization.visualizers.silhouette.SilhouettePlotVisualizer.Instance [[SilhouettePlotVisualizer.Instance.html]] {
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+        }
+
+        class SilhouettePlotSelectionToolVisualization [[SilhouettePlotSelectionToolVisualization.html]] {
+            {static} -LOG: Logging
+            {static} -NAME: String
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        enum elki.visualization.visualizers.silhouette.SilhouettePlotSelectionToolVisualization.Mode [[SilhouettePlotSelectionToolVisualization.Mode.html]] {
+            {static} +REPLACE
+            {static} +ADD
+            {static} +INVERT
+        }
+
+        class elki.visualization.visualizers.silhouette.SilhouettePlotSelectionToolVisualization.Instance [[SilhouettePlotSelectionToolVisualization.Instance.html]] {
+            {static} #CSS_MARKER: String
+            {static} #CSS_RANGEMARKER: String
+            -mtag: Element
+            -plotSize: int
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            +addMarkerRect(double, double): Element
+            +startDrag(SVGPoint, Event): boolean
+            +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            -getInputMode(Event): Mode
+            -getSelectedIndex(SVGPoint): int
+            #updateSelection(Mode, int, int): void
+            -addCSSClasses(): void
+        }
+
+        abstract class AbstractSilhouetteVisualization [[AbstractSilhouetteVisualization.html]] {
+            #silhouette: SilhouetteProjection
+            #plotwidth: double
+            #plotheight: double
+            +AbstractSilhouetteVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            #makeLayerElement(): void
+        }
+
+        class SilhouettePlotSelectionVisualization [[SilhouettePlotSelectionVisualization.html]] {
+            {static} -NAME: String
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        }
+
+        class elki.visualization.visualizers.silhouette.SilhouettePlotSelectionVisualization.Instance [[SilhouettePlotSelectionVisualization.Instance.html]] {
+            {static} #CSS_MARKER: String
+            {static} #CSS_RANGEMARKER: String
+            -mtag: Element
+            -plotSize: int
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            +addMarker(): void
+            -addMarkerRect(double, double): Element
+            -addCSSClasses(): void
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. SilhouettePlotVisualizer
+        AbstractSilhouetteVisualization <|-- elki.visualization.visualizers.silhouette.SilhouettePlotVisualizer.Instance
+        SilhouettePlotVisualizer +-- elki.visualization.visualizers.silhouette.SilhouettePlotVisualizer.Instance
+        elki.visualization.visualizers.VisFactory <|.. SilhouettePlotSelectionToolVisualization
+        SilhouettePlotSelectionToolVisualization +-- elki.visualization.visualizers.silhouette.SilhouettePlotSelectionToolVisualization.Mode
+        AbstractSilhouetteVisualization <|-- elki.visualization.visualizers.silhouette.SilhouettePlotSelectionToolVisualization.Instance
+        elki.visualization.batikutil.DragableArea.DragListener <|.. elki.visualization.visualizers.silhouette.SilhouettePlotSelectionToolVisualization.Instance
+        SilhouettePlotSelectionToolVisualization +-- elki.visualization.visualizers.silhouette.SilhouettePlotSelectionToolVisualization.Instance
+        elki.visualization.visualizers.AbstractVisualization <|-- AbstractSilhouetteVisualization
+        elki.visualization.visualizers.VisFactory <|.. SilhouettePlotSelectionVisualization
+        AbstractSilhouetteVisualization <|-- elki.visualization.visualizers.silhouette.SilhouettePlotSelectionVisualization.Instance
+        SilhouettePlotSelectionVisualization +-- elki.visualization.visualizers.silhouette.SilhouettePlotSelectionVisualization.Instance
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+        abstract class AbstractVisualization [[../AbstractVisualization.html]] {
+            #task: VisualizationTask
+            #context: VisualizerContext
+            #svgp: VisualizationPlot
+            #layer: Element
+            -width: double
+            -height: double
+            {abstract} +fullRedraw(): void
+        }
+    }
+
+    namespace elki.visualization.batikutil {
+        interface elki.visualization.batikutil.DragableArea.DragListener [[../../batikutil/DragableArea.DragListener.html]] {
+            {abstract} +startDrag(SVGPoint, Event): boolean
+            {abstract} +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            {abstract} +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

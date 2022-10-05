@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DimensionSelectingSubspaceDistance\n<size:10>elki.distance.subspace" as elki.distance.subspace.DimensionSelectingSubspaceDistance<O> [[DimensionSelectingSubspaceDistance.html]] {
+        {abstract} +getSelectedDimensions(): long[]
+        {abstract} +setSelectedDimensions(long[]): void
+    }
+
+    interface "<size:14>Distance\n<size:10>elki.distance" as elki.distance.Distance<O> [[../Distance.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+    }
+
+    elki.distance.Distance <|-- elki.distance.subspace.DimensionSelectingSubspaceDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

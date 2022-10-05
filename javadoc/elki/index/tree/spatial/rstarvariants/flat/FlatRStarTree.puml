@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>FlatRStarTree\n<size:10>elki.index.tree.spatial.rstarvariants.flat" as elki.index.tree.spatial.rstarvariants.flat.FlatRStarTree [[FlatRStarTree.html]] {
+        {static} -LOG: Logging
+        -root: FlatRStarTreeNode
+        +FlatRStarTree(PageFile<FlatRStarTreeNode>, RTreeSettings)
+        +initializeFromFile(TreeIndexHeader, PageFile<FlatRStarTreeNode>): void
+        +getNode(int): FlatRStarTreeNode
+        #computeHeight(): int
+        #bulkLoad(List<SpatialEntry>): void
+        #createEmptyRoot(SpatialEntry): void
+        #hasOverflow(FlatRStarTreeNode): boolean
+        #hasUnderflow(FlatRStarTreeNode): boolean
+        #createNewLeafNode(): FlatRStarTreeNode
+        #createNewDirectoryNode(): FlatRStarTreeNode
+        #createNewDirectoryEntry(FlatRStarTreeNode): SpatialEntry
+        #createRootEntry(): SpatialEntry
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractRStarTree\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTree<FlatRStarTreeNode, SpatialEntry, RTreeSettings> [[../AbstractRStarTree.html]] {
+        {abstract} #bulkLoad(List<E extends SpatialEntry>): void
+        {abstract} #computeHeight(): int
+        {abstract} #hasOverflow(FlatRStarTreeNode): boolean
+        {abstract} #hasUnderflow(FlatRStarTreeNode): boolean
+        {abstract} #createNewDirectoryEntry(FlatRStarTreeNode): SpatialEntry
+    }
+
+    elki.index.tree.spatial.rstarvariants.AbstractRStarTree <|-- elki.index.tree.spatial.rstarvariants.flat.FlatRStarTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

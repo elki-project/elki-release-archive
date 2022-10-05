@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="128px" preserveAspectRatio="none" style="width:281px;height:128px;background:#FFFFFF;" version="1.1" viewBox="0 0 281 128" width="281px" zoomAndPan="magnify"><defs/><g><!--MD5=[650ab0f9fd0dfe2f1aeee3f21eef4a3a]
+class elki.index.lsh.hashfunctions.LocalitySensitiveHashFunction--><a href="LocalitySensitiveHashFunction.html" target="_top" title="LocalitySensitiveHashFunction.html" xlink:actuate="onRequest" xlink:href="LocalitySensitiveHashFunction.html" xlink:show="new" xlink:title="LocalitySensitiveHashFunction.html" xlink:type="simple"><g id="elem_elki.index.lsh.hashfunctions.LocalitySensitiveHashFunction"><rect codeLine="6" fill="#F1F1F1" height="94.8281" id="elki.index.lsh.hashfunctions.LocalitySensitiveHashFunction" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="260" x="7" y="7"/><ellipse cx="22" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M17.9219,21.7344 L17.9219,19.5781 L25.3125,19.5781 L25.3125,21.7344 L22.8438,21.7344 L22.8438,29.8125 L25.3125,29.8125 L25.3125,31.9688 L17.9219,31.9688 L17.9219,29.8125 L20.3906,29.8125 L20.3906,21.7344 L17.9219,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="216" x="36" y="24.9951">LocalitySensitiveHashFunction</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="137" x="75.5" y="37.5791">elki.index.lsh.hashfunctions</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="260" y="4"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="261" y="16.1387">V</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="266" y1="44.9375" y2="44.9375"/><ellipse cx="18" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="127" x="27" y="61.9326">hashObject(V): int</text><ellipse cx="18" cy="74.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="194" x="27" y="78.2295">hashObject(V, double[]): int</text><ellipse cx="18" cy="91.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="210" x="27" y="94.5264">getNumberOfProjections(): int</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="43.5" y="108.8281"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="43.5" y="118.1104">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[c3176a7a734a0fadf7e163ea18b418bb]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>LocalitySensitiveHashFunction\n<size:10>elki.index.lsh.hashfunctions" as elki.index.lsh.hashfunctions.LocalitySensitiveHashFunction<V> [[LocalitySensitiveHashFunction.html]] {
+        {abstract} +hashObject(V): int
+        {abstract} +hashObject(V, double[]): int
+        {abstract} +getNumberOfProjections(): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PAMSIL\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.PAMSIL<O> [[PAMSIL.html]] {
+        {static} -LOG: Logging
+        +PAMSIL(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+        +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+        #getLogger(): Logging
+    }
+
+    class "<size:14>PAM\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.PAM<O> [[../kmedoids/PAM.html]]
+    class "<size:14>PAMSIL.Instance\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.PAMSIL.Instance [[PAMSIL.Instance.html]]
+    class "<size:14>PAMSIL.Par\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.PAMSIL.Par<O> [[PAMSIL.Par.html]]
+
+    elki.clustering.kmedoids.PAM <|-- elki.clustering.silhouette.PAMSIL
+    elki.clustering.silhouette.PAMSIL +-- elki.clustering.silhouette.PAMSIL.Instance
+    elki.clustering.silhouette.PAMSIL +-- elki.clustering.silhouette.PAMSIL.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

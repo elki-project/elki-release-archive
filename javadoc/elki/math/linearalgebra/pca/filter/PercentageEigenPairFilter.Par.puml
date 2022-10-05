@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PercentageEigenPairFilter.Par\n<size:10>elki.math.linearalgebra.pca.filter" as elki.math.linearalgebra.pca.filter.PercentageEigenPairFilter.Par [[PercentageEigenPairFilter.Par.html]] {
+        {static} +ALPHA_ID: OptionID
+        -alpha: double
+        +configure(Parameterization): void
+        +make(): PercentageEigenPairFilter
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>PercentageEigenPairFilter\n<size:10>elki.math.linearalgebra.pca.filter" as elki.math.linearalgebra.pca.filter.PercentageEigenPairFilter [[PercentageEigenPairFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.linearalgebra.pca.filter.PercentageEigenPairFilter.Par
+    elki.math.linearalgebra.pca.filter.PercentageEigenPairFilter +-- elki.math.linearalgebra.pca.filter.PercentageEigenPairFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

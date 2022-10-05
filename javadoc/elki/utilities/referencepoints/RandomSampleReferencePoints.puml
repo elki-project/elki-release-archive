@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomSampleReferencePoints\n<size:10>elki.utilities.referencepoints" as elki.utilities.referencepoints.RandomSampleReferencePoints [[RandomSampleReferencePoints.html]] {
+        #samplesize: int
+        #rnd: RandomFactory
+        +RandomSampleReferencePoints(int, RandomFactory)
+        +getReferencePoints(Relation<? extends NumberVector>): Collection<? extends NumberVector>
+    }
+
+    interface "<size:14>ReferencePointsHeuristic\n<size:10>elki.utilities.referencepoints" as elki.utilities.referencepoints.ReferencePointsHeuristic [[ReferencePointsHeuristic.html]] {
+        {abstract} +getReferencePoints(Relation<? extends NumberVector>): Collection<? extends NumberVector>
+    }
+    class "<size:14>RandomSampleReferencePoints.Par\n<size:10>elki.utilities.referencepoints" as elki.utilities.referencepoints.RandomSampleReferencePoints.Par [[RandomSampleReferencePoints.Par.html]]
+
+    elki.utilities.referencepoints.ReferencePointsHeuristic <|.. elki.utilities.referencepoints.RandomSampleReferencePoints
+    elki.utilities.referencepoints.RandomSampleReferencePoints +-- elki.utilities.referencepoints.RandomSampleReferencePoints.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

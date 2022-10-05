@@ -1,0 +1,63 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.statistics {
+
+        class LinearRegression [[LinearRegression.html]] {
+            -t: double
+            -m: double
+            +LinearRegression(List<DoubleDoublePair>)
+            +getM(): double
+            +getT(): double
+        }
+
+        class KernelDensityEstimator [[KernelDensityEstimator.html]] {
+            -dens: double[]
+            -var: double[]
+            +KernelDensityEstimator(double[], double, double, KernelDensityFunction, int, double)
+            +KernelDensityEstimator(double[], KernelDensityFunction, double)
+            -process(double[], double, double, KernelDensityFunction, int, double): void
+            +getDensity(): double[]
+            +getVariance(): double[]
+        }
+
+        class MultipleLinearRegression [[MultipleLinearRegression.html]] {
+            -y: double[]
+            -y_mean: double
+            -x: double[]
+            -b: double[]
+            -e: double[]
+            -variance: double
+            -xx_inverse: double[]
+            -ssr: double
+            -sst: double
+            +MultipleLinearRegression(double[], double[])
+            +getSumOfSquaresTotal(): double
+            +getSumOfSquareResiduals(): double
+            +getEstimatedCoefficients(): double[]
+            +getEstimatedResiduals(): double[]
+            +coefficientOfDetermination(): double
+            +estimateY(double[]): double
+            +getVariance(): double
+        }
+
+        class PolynomialRegression [[PolynomialRegression.html]] {
+            +p: int
+            +PolynomialRegression(double[], double[], int)
+            {static} -xMatrix(double[], int): double[]
+            +adaptedCoefficientOfDetermination(): double
+            +estimateY(double): double
+        }
+
+        class ProbabilityWeightedMoments [[ProbabilityWeightedMoments.html]] {
+            {static} +alphaPWM(A, NumberArrayAdapter<?, A>, int): double[]
+            {static} +betaPWM(A, NumberArrayAdapter<?, A>, int): double[]
+            {static} +alphaBetaPWM(A, NumberArrayAdapter<?, A>, int): double[]
+            {static} +samLMR(A, NumberArrayAdapter<?, A>, int): double[]
+            {static} -normalizeLMR(double[], int): void
+        }
+
+        MultipleLinearRegression <|-- PolynomialRegression
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

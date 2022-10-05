@@ -1,0 +1,154 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.application.experiments {
+
+        class EvaluateIntrinsicDimensionalityEstimators [[EvaluateIntrinsicDimensionalityEstimators.html]] {
+            ~startk: int
+            ~maxk: int
+            ~samples: int
+            ~dim: int
+            ~rnd: RandomFactory
+            +EvaluateIntrinsicDimensionalityEstimators(int, int, int, int, Aggregate, OutputFormat, RandomFactory)
+            +run(): void
+            #makeSample(int): double[]
+            {static} +main(String[]): void
+        }
+
+        enum elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.OutputFormat [[EvaluateIntrinsicDimensionalityEstimators.OutputFormat.html]] {
+            {static} +TABULAR
+            {static} +TSV
+        }
+
+        enum elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Aggregate [[EvaluateIntrinsicDimensionalityEstimators.Aggregate.html]] {
+            {static} +MEAN
+            {static} +MEAN_STDDEV
+            {static} +MEAN_STDDEV_MIN_MAX
+            {static} +HMEAN
+            {static} +MEDIAN
+            {static} +MED_MAD
+            {static} +MED_MAD_MIN_MAX
+            {static} +QUANTILES
+            {abstract} ~aggregate(double[]): double[]
+            {abstract} ~description(): String[]
+        }
+
+        class elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Par [[EvaluateIntrinsicDimensionalityEstimators.Par.html]] {
+            {static} +STARTK_ID: OptionID
+            {static} +MAXK_ID: OptionID
+            {static} +SAMPLE_ID: OptionID
+            {static} +DIM_ID: OptionID
+            {static} +SEED_ID: OptionID
+            {static} +AGGREGATE_ID: OptionID
+            {static} +FORMAT_ID: OptionID
+            ~startk: int
+            ~maxk: int
+            ~samples: int
+            ~dim: int
+            ~rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): EvaluateIntrinsicDimensionalityEstimators
+        }
+
+        class ORLibBenchmark [[ORLibBenchmark.html]] {
+            {static} -LOG: Logging
+            -file: URI
+            -alg: Class<? extends ClusteringAlgorithm<?>>
+            -init: KMedoidsInitialization<DBID>
+            -k: int
+            -rnd: RandomFactory
+            +ORLibBenchmark(URI, Class<? extends ClusteringAlgorithm<?>>, KMedoidsInitialization<DBID>, int, RandomFactory)
+            +run(): void
+            {static} -readEdges(int, TokenizedReader, Tokenizer): double[]
+            {static} -allShortestPaths(int, double[]): void
+            -randomShuffle(int, double[]): double[]
+            {static} -computeOffset(int, int): int
+            {static} +main(String[]): void
+        }
+
+        class elki.application.experiments.ORLibBenchmark.Par<O> [[ORLibBenchmark.Par.html]] {
+            {static} +FILE_ID: OptionID
+            {static} +SHUFFLE_ID: OptionID
+            -file: URI
+            -alg: Class<? extends ClusteringAlgorithm<?>>
+            -init: KMedoidsInitialization<DBID>
+            ~k: int
+            ~rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): ORLibBenchmark
+        }
+
+        class VisualizeGeodesicDistances [[VisualizeGeodesicDistances.html]] {
+            {static} -LOG: Logging
+            -out: Path
+            #width: int
+            #height: int
+            #steps: int
+            #model: EarthModel
+            +VisualizeGeodesicDistances(Path, int, int, Mode, EarthModel)
+            +run(): void
+            -colorMultiply(int, double, boolean): int
+            {static} +main(String[]): void
+        }
+
+        enum elki.application.experiments.VisualizeGeodesicDistances.Mode [[VisualizeGeodesicDistances.Mode.html]] {
+            {static} +XTD
+            {static} +ATD
+            {static} +MINDIST
+        }
+
+        class elki.application.experiments.VisualizeGeodesicDistances.Par [[VisualizeGeodesicDistances.Par.html]] {
+            {static} +STEPS_ID: OptionID
+            {static} +RESOLUTION_ID: OptionID
+            {static} +MODE_ID: OptionID
+            #out: Path
+            #steps: int
+            #resolution: int
+            #model: EarthModel
+            +configure(Parameterization): void
+            +make(): VisualizeGeodesicDistances
+        }
+
+        elki.application.AbstractApplication <|-- EvaluateIntrinsicDimensionalityEstimators
+        EvaluateIntrinsicDimensionalityEstimators --> elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Aggregate: agg
+        EvaluateIntrinsicDimensionalityEstimators --> elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.OutputFormat: format
+        EvaluateIntrinsicDimensionalityEstimators +-- elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.OutputFormat
+        EvaluateIntrinsicDimensionalityEstimators +-- elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Aggregate
+        elki.application.AbstractApplication.Par <|-- elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Par
+        EvaluateIntrinsicDimensionalityEstimators +-- elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Par
+        elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Par --> elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Aggregate: agg
+        elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Par --> elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.OutputFormat: format
+        elki.application.AbstractApplication <|-- ORLibBenchmark
+        elki.application.AbstractApplication.Par <|-- elki.application.experiments.ORLibBenchmark.Par
+        ORLibBenchmark +-- elki.application.experiments.ORLibBenchmark.Par
+        elki.application.AbstractApplication <|-- VisualizeGeodesicDistances
+        VisualizeGeodesicDistances --> elki.application.experiments.VisualizeGeodesicDistances.Mode: mode
+        VisualizeGeodesicDistances +-- elki.application.experiments.VisualizeGeodesicDistances.Mode
+        elki.application.AbstractApplication.Par <|-- elki.application.experiments.VisualizeGeodesicDistances.Par
+        VisualizeGeodesicDistances +-- elki.application.experiments.VisualizeGeodesicDistances.Par
+        elki.application.experiments.VisualizeGeodesicDistances.Par --> elki.application.experiments.VisualizeGeodesicDistances.Mode: mode
+    }
+
+    namespace elki.application {
+        abstract class AbstractApplication [[../AbstractApplication.html]] {
+            {static} -LOG: Logging
+            {static} -NEWLINE: String
+            {static} +VERSION: String
+            {static} -REFERENCE_VERSION: String
+            {static} +REFERENCE: String
+            {abstract} +run(): void
+        }
+        abstract class elki.application.AbstractApplication.Par [[../AbstractApplication.Par.html]] {
+            {static} +OUTPUT_ID: OptionID
+            {static} +INPUT_ID: OptionID
+            {static} +DATABASE_ID: OptionID
+            {static} +HELP_ID: OptionID
+            {static} +HELP_LONG_ID: OptionID
+            {static} +DESCRIPTION_ID: OptionID
+            {static} +DEBUG_ID: OptionID
+            {static} +VERBOSE_ID: OptionID
+            {abstract} +make(): AbstractApplication
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

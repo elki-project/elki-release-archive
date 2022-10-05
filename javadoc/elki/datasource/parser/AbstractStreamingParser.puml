@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractStreamingParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.AbstractStreamingParser [[AbstractStreamingParser.html]] {
+        #reader: TokenizedReader
+        #tokenizer: Tokenizer
+        +AbstractStreamingParser(CSVReaderFormat)
+        +parse(InputStream): MultipleObjectsBundle
+        +initStream(InputStream): void
+        +hasDBIDs(): boolean
+        +assignDBID(DBIDVar): boolean
+        +asMultipleObjectsBundle(): MultipleObjectsBundle
+        +cleanup(): void
+        {abstract} #getLogger(): Logging
+    }
+
+    interface "<size:14>StreamingParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.StreamingParser [[StreamingParser.html]] {
+        {abstract} +initStream(InputStream): void
+    }
+    abstract class "<size:14>AbstractStreamingParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.AbstractStreamingParser.Par [[AbstractStreamingParser.Par.html]]
+
+    elki.datasource.parser.StreamingParser <|.. elki.datasource.parser.AbstractStreamingParser
+    elki.datasource.parser.AbstractStreamingParser +-- elki.datasource.parser.AbstractStreamingParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

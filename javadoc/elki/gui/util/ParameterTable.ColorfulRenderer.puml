@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParameterTable.ColorfulRenderer\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable.ColorfulRenderer [[ParameterTable.ColorfulRenderer.html]] {
+        {static} -serialVersionUID: long
+        +setValue(Object): void
+        +getTableCellRendererComponent(JTable, Object, boolean, boolean, int, int): Component
+    }
+
+    class "<size:14>DefaultTableCellRenderer\n<size:10>javax.swing.table" as javax.swing.table.DefaultTableCellRenderer
+    class "<size:14>ParameterTable\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable [[ParameterTable.html]]
+
+    javax.swing.table.DefaultTableCellRenderer <|-- elki.gui.util.ParameterTable.ColorfulRenderer
+    elki.gui.util.ParameterTable +-- elki.gui.util.ParameterTable.ColorfulRenderer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

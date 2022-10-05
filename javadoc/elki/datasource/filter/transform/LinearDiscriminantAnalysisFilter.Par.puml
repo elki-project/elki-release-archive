@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearDiscriminantAnalysisFilter.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.LinearDiscriminantAnalysisFilter.Par<V extends NumberVector> [[LinearDiscriminantAnalysisFilter.Par.html]] {
+        +make(): LinearDiscriminantAnalysisFilter<V extends NumberVector>
+    }
+
+    abstract class "<size:14>AbstractSupervisedProjectionVectorFilter.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter.Par<V extends NumberVector>
+    class "<size:14>LinearDiscriminantAnalysisFilter\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.LinearDiscriminantAnalysisFilter<V extends NumberVector> [[LinearDiscriminantAnalysisFilter.html]]
+
+    elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter.Par <|-- elki.datasource.filter.transform.LinearDiscriminantAnalysisFilter.Par
+    elki.datasource.filter.transform.LinearDiscriminantAnalysisFilter +-- elki.datasource.filter.transform.LinearDiscriminantAnalysisFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

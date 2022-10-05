@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SigmoidKernel\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.SigmoidKernel [[SigmoidKernel.html]] {
+        -c: double
+        -theta: double
+        +SigmoidKernel(double, double)
+        +similarity(NumberVector, NumberVector): double
+    }
+
+    abstract class "<size:14>AbstractVectorSimilarity\n<size:10>elki.similarity" as elki.similarity.AbstractVectorSimilarity [[../AbstractVectorSimilarity.html]]
+    class "<size:14>SigmoidKernel.Par\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.SigmoidKernel.Par [[SigmoidKernel.Par.html]]
+
+    elki.similarity.AbstractVectorSimilarity <|-- elki.similarity.kernel.SigmoidKernel
+    elki.similarity.kernel.SigmoidKernel +-- elki.similarity.kernel.SigmoidKernel.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GUIUtil\n<size:10>elki.gui" as elki.gui.GUIUtil [[GUIUtil.html]] {
+        {static} +PREFER_GTK: boolean
+        {static} +setLookAndFeel(): void
+        {static} +logUncaughtExceptions(Logging): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

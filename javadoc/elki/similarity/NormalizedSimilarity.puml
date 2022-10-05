@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>NormalizedSimilarity\n<size:10>elki.similarity" as elki.similarity.NormalizedSimilarity<O> [[NormalizedSimilarity.html]]
+
+    interface "<size:14>Similarity\n<size:10>elki.similarity" as elki.similarity.Similarity<O> [[Similarity.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +instantiate(Relation<T extends O>): SimilarityQuery<T extends O>
+    }
+
+    elki.similarity.Similarity <|-- elki.similarity.NormalizedSimilarity
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

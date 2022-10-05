@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MRadSplit.Par\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.MRadSplit.Par<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> {
+        +make(): MRadSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>>
+    }
+
+    abstract class "<size:14>AbstractMTreeSplit.Par\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit.Par<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> {
+        {abstract} +make(): MTreeSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>>
+    }
+    class "<size:14>MRadSplit\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.MRadSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> [[MRadSplit.html]]
+
+    elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit.Par <|-- elki.index.tree.metrical.mtreevariants.strategies.split.MRadSplit.Par
+    elki.index.tree.metrical.mtreevariants.strategies.split.MRadSplit +-- elki.index.tree.metrical.mtreevariants.strategies.split.MRadSplit.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LOCI.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.LOCI.Par<O> {
+        {static} +RMAX_ID: OptionID
+        {static} +NMIN_ID: OptionID
+        {static} +ALPHA_ID: OptionID
+        #distance: Distance<? super O>
+        #rmax: double
+        #nmin: int
+        #alpha: double
+        +configure(Parameterization): void
+        +make(): LOCI<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LOCI\n<size:10>elki.outlier.lof" as elki.outlier.lof.LOCI<O> [[LOCI.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.LOCI.Par
+    elki.outlier.lof.LOCI +-- elki.outlier.lof.LOCI.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

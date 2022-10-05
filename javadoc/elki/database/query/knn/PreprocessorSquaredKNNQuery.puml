@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PreprocessorSquaredKNNQuery\n<size:10>elki.database.query.knn" as elki.database.query.knn.PreprocessorSquaredKNNQuery [[PreprocessorSquaredKNNQuery.html]] {
+        {static} -LOG: Logging
+        +PreprocessorSquaredKNNQuery(Relation<?>, AbstractMaterializeKNNPreprocessor<?>)
+        +getKNN(DBIDRef, int): KNNList
+        #getLogger(): Logging
+    }
+
+    class "<size:14>PreprocessorKNNQuery\n<size:10>elki.database.query.knn" as elki.database.query.knn.PreprocessorKNNQuery [[PreprocessorKNNQuery.html]]
+
+    elki.database.query.knn.PreprocessorKNNQuery <|-- elki.database.query.knn.PreprocessorSquaredKNNQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

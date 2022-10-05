@@ -1,0 +1,88 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.spatial.rstarvariants.strategies.insert {
+
+        class LeastEnlargementWithAreaInsertionStrategy [[LeastEnlargementWithAreaInsertionStrategy.html]] {
+            +choose(A, ArrayAdapter<? extends SpatialComparable, A>, SpatialComparable, int, int): int
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.insert.LeastEnlargementWithAreaInsertionStrategy.Par [[LeastEnlargementWithAreaInsertionStrategy.Par.html]] {
+            +make(): LeastEnlargementWithAreaInsertionStrategy
+        }
+
+        class LeastEnlargementInsertionStrategy [[LeastEnlargementInsertionStrategy.html]] {
+            +choose(A, ArrayAdapter<? extends SpatialComparable, A>, SpatialComparable, int, int): int
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.insert.LeastEnlargementInsertionStrategy.Par [[LeastEnlargementInsertionStrategy.Par.html]] {
+            +make(): LeastEnlargementInsertionStrategy
+        }
+
+        class LeastOverlapInsertionStrategy [[LeastOverlapInsertionStrategy.html]] {
+            +choose(A, ArrayAdapter<? extends SpatialComparable, A>, SpatialComparable, int, int): int
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.insert.LeastOverlapInsertionStrategy.Par [[LeastOverlapInsertionStrategy.Par.html]] {
+            +make(): LeastOverlapInsertionStrategy
+        }
+
+        class ApproximativeLeastOverlapInsertionStrategy [[ApproximativeLeastOverlapInsertionStrategy.html]] {
+            -numCandidates: int
+            +ApproximativeLeastOverlapInsertionStrategy(int)
+            +choose(A, ArrayAdapter<? extends SpatialComparable, A>, SpatialComparable, int, int): int
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.insert.ApproximativeLeastOverlapInsertionStrategy.Par [[ApproximativeLeastOverlapInsertionStrategy.Par.html]] {
+            {static} +INSERTION_CANDIDATES_ID: OptionID
+            ~numCandidates: int
+            +configure(Parameterization): void
+            +make(): ApproximativeLeastOverlapInsertionStrategy
+        }
+
+        class CombinedInsertionStrategy [[CombinedInsertionStrategy.html]] {
+            +CombinedInsertionStrategy(InsertionStrategy, InsertionStrategy)
+            +choose(A, ArrayAdapter<? extends SpatialComparable, A>, SpatialComparable, int, int): int
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.insert.CombinedInsertionStrategy.Par [[CombinedInsertionStrategy.Par.html]] {
+            {static} +DIR_STRATEGY_ID: OptionID
+            {static} +LEAF_STRATEGY_ID: OptionID
+            +configure(Parameterization): void
+            +make(): CombinedInsertionStrategy
+        }
+
+        interface InsertionStrategy [[InsertionStrategy.html]] {
+            {abstract} +choose(A, ArrayAdapter<? extends SpatialComparable, A>, SpatialComparable, int, int): int
+        }
+
+        InsertionStrategy <|.. LeastEnlargementWithAreaInsertionStrategy
+        LeastEnlargementWithAreaInsertionStrategy --> LeastEnlargementWithAreaInsertionStrategy: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.insert.LeastEnlargementWithAreaInsertionStrategy.Par
+        LeastEnlargementWithAreaInsertionStrategy +-- elki.index.tree.spatial.rstarvariants.strategies.insert.LeastEnlargementWithAreaInsertionStrategy.Par
+        InsertionStrategy <|.. LeastEnlargementInsertionStrategy
+        LeastEnlargementInsertionStrategy --> LeastEnlargementInsertionStrategy: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.insert.LeastEnlargementInsertionStrategy.Par
+        LeastEnlargementInsertionStrategy +-- elki.index.tree.spatial.rstarvariants.strategies.insert.LeastEnlargementInsertionStrategy.Par
+        InsertionStrategy <|.. LeastOverlapInsertionStrategy
+        LeastOverlapInsertionStrategy --> LeastOverlapInsertionStrategy: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.insert.LeastOverlapInsertionStrategy.Par
+        LeastOverlapInsertionStrategy +-- elki.index.tree.spatial.rstarvariants.strategies.insert.LeastOverlapInsertionStrategy.Par
+        LeastOverlapInsertionStrategy <|-- ApproximativeLeastOverlapInsertionStrategy
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.insert.ApproximativeLeastOverlapInsertionStrategy.Par
+        ApproximativeLeastOverlapInsertionStrategy +-- elki.index.tree.spatial.rstarvariants.strategies.insert.ApproximativeLeastOverlapInsertionStrategy.Par
+        InsertionStrategy <|.. CombinedInsertionStrategy
+        CombinedInsertionStrategy --> InsertionStrategy: dirStrategy\nleafStrategy
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.insert.CombinedInsertionStrategy.Par
+        CombinedInsertionStrategy +-- elki.index.tree.spatial.rstarvariants.strategies.insert.CombinedInsertionStrategy.Par
+        elki.index.tree.spatial.rstarvariants.strategies.insert.CombinedInsertionStrategy.Par --> InsertionStrategy: dirStrategy\nleafStrategy
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

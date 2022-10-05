@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>LazyCanvasResizer\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.LazyCanvasResizer [[LazyCanvasResizer.html]] {
+        {static} +DEFAULT_THRESHOLD: double
+        ~threshold: double
+        ~activeRatio: double
+        ~component: Component
+        +LazyCanvasResizer(Component, double)
+        +LazyCanvasResizer(Component)
+        +componentResized(ComponentEvent): void
+        +getCurrentRatio(): double
+        {abstract} +executeResize(double): void
+        +getActiveRatio(): double
+    }
+
+    abstract class "<size:14>ComponentAdapter\n<size:10>java.awt.event" as java.awt.event.ComponentAdapter
+
+    java.awt.event.ComponentAdapter <|-- elki.visualization.batikutil.LazyCanvasResizer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

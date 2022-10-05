@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ChengAndChurch\n<size:10>elki.clustering.biclustering" as elki.clustering.biclustering.ChengAndChurch [[ChengAndChurch.html]] {
+        {static} -LOG: Logging
+        {static} -MIN_COLUMN_REMOVE_THRESHOLD: int
+        {static} -MIN_ROW_REMOVE_THRESHOLD: int
+        -delta: double
+        -alpha: double
+        -n: int
+        -useinverted: boolean
+        -dist: Distribution
+        -rnd: RandomFactory
+        +ChengAndChurch(double, double, int, Distribution, RandomFactory)
+        +biclustering(): Clustering<BiclusterWithInversionsModel>
+        -singleNodeDeletion(double[], BiclusterCandidate): void
+        -multipleNodeDeletion(double[], BiclusterCandidate): void
+        -nodeAddition(double[], BiclusterCandidate): void
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    abstract class "<size:14>AbstractBiclustering\n<size:10>elki.clustering.biclustering" as elki.clustering.biclustering.AbstractBiclustering<BiclusterWithInversionsModel> [[AbstractBiclustering.html]] {
+        {abstract} #biclustering(): Clustering<M extends BiclusterModel>
+    }
+    interface "<size:14>ChengAndChurch.CellVisitor\n<size:10>elki.clustering.biclustering" as elki.clustering.biclustering.ChengAndChurch.CellVisitor [[ChengAndChurch.CellVisitor.html]]
+    class "<size:14>ChengAndChurch.BiclusterCandidate\n<size:10>elki.clustering.biclustering" as elki.clustering.biclustering.ChengAndChurch.BiclusterCandidate [[ChengAndChurch.BiclusterCandidate.html]]
+    class "<size:14>ChengAndChurch.Par\n<size:10>elki.clustering.biclustering" as elki.clustering.biclustering.ChengAndChurch.Par
+
+    elki.clustering.biclustering.AbstractBiclustering <|-- elki.clustering.biclustering.ChengAndChurch
+    elki.clustering.biclustering.ChengAndChurch +-- elki.clustering.biclustering.ChengAndChurch.CellVisitor
+    elki.clustering.biclustering.ChengAndChurch +-- elki.clustering.biclustering.ChengAndChurch.BiclusterCandidate
+    elki.clustering.biclustering.ChengAndChurch +-- elki.clustering.biclustering.ChengAndChurch.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

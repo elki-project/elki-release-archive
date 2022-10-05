@@ -1,0 +1,45 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractVectorIter\n<size:10>elki.evaluation.scores.adapter" as elki.evaluation.scores.adapter.AbstractVectorIter [[AbstractVectorIter.html]] {
+        #sort: int[]
+        #positive: NumberVector
+        #vec: NumberVector
+        #pos: int
+        #numPositive: int
+        +AbstractVectorIter(NumberVector, NumberVector)
+        +dim(): int
+        +valid(): boolean
+        +advance(): AbstractVectorIter
+        +tiedToPrevious(): boolean
+        +getOffset(): int
+        +advance(int): AbstractVectorIter
+        +retract(): AbstractVectorIter
+        +seek(int): AbstractVectorIter
+        +test(): boolean
+        +numPositive(): int
+        +numTotal(): int
+    }
+
+    interface "<size:14>ScoreEvaluation.Adapter\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.ScoreEvaluation.Adapter [[../ScoreEvaluation.Adapter.html]] {
+        {abstract} +test(): boolean
+        {abstract} +tiedToPrevious(): boolean
+        {abstract} +numPositive(): int
+        {abstract} +numTotal(): int
+    }
+    interface "<size:14>ArrayIter\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.ArrayIter [[../../../utilities/datastructures/iterator/ArrayIter.html]] {
+        {abstract} +advance(): ArrayIter
+        {abstract} +advance(int): ArrayIter
+        {abstract} +retract(): ArrayIter
+        {abstract} +seek(int): ArrayIter
+        {abstract} +getOffset(): int
+    }
+
+    elki.evaluation.scores.ScoreEvaluation.Adapter <|.. elki.evaluation.scores.adapter.AbstractVectorIter
+    elki.utilities.datastructures.iterator.ArrayIter <|.. elki.evaluation.scores.adapter.AbstractVectorIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

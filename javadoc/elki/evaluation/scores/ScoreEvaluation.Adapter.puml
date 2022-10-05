@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ScoreEvaluation.Adapter\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.ScoreEvaluation.Adapter [[ScoreEvaluation.Adapter.html]] {
+        {abstract} +test(): boolean
+        {abstract} +tiedToPrevious(): boolean
+        {abstract} +numPositive(): int
+        {abstract} +numTotal(): int
+    }
+
+    interface "<size:14>Iter\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.Iter [[../../utilities/datastructures/iterator/Iter.html]] {
+        {abstract} +valid(): boolean
+        {abstract} +advance(): Iter
+    }
+    interface "<size:14>ScoreEvaluation\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.ScoreEvaluation [[ScoreEvaluation.html]] {
+        {abstract} +evaluate(Adapter): double
+        {abstract} +expected(int, int): double
+    }
+
+    elki.utilities.datastructures.iterator.Iter <|-- elki.evaluation.scores.ScoreEvaluation.Adapter
+    elki.evaluation.scores.ScoreEvaluation +-- elki.evaluation.scores.ScoreEvaluation.Adapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

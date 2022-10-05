@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MCDETest.RankStruct\n<size:10>elki.math.statistics.dependence.mcde" as elki.math.statistics.dependence.mcde.MCDETest.RankStruct [[MCDETest.RankStruct.html]] {
+        +index: int[]
+        +RankStruct(int[])
+    }
+
+    interface "<size:14>MCDETest\n<size:10>elki.math.statistics.dependence.mcde" as elki.math.statistics.dependence.mcde.MCDETest<R extends RankStruct> [[MCDETest.html]] {
+        {abstract} +correctedRanks(NumberArrayAdapter<?, A>, A, int): R extends RankStruct
+        {abstract} +statisticalTest(int, int, boolean[], R extends RankStruct): double
+    }
+
+    elki.math.statistics.dependence.mcde.MCDETest +-- elki.math.statistics.dependence.mcde.MCDETest.RankStruct
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

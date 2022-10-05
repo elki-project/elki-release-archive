@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GriDBSCAN\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.GriDBSCAN<V extends NumberVector> [[GriDBSCAN.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super NumberVector>
+        #epsilon: double
+        #minpts: int
+        #gridwidth: double
+        +GriDBSCAN(Distance<? super NumberVector>, double, int, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V extends NumberVector>): Clustering<Model>
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<Model>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>GriDBSCAN.Instance\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.GriDBSCAN.Instance<V extends NumberVector> [[GriDBSCAN.Instance.html]]
+    class "<size:14>GriDBSCAN.Par\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.GriDBSCAN.Par<O extends NumberVector>
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.dbscan.GriDBSCAN
+    elki.clustering.dbscan.GriDBSCAN +-- elki.clustering.dbscan.GriDBSCAN.Instance
+    elki.clustering.dbscan.GriDBSCAN +-- elki.clustering.dbscan.GriDBSCAN.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

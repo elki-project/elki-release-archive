@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NaiveAgglomerativeHierarchicalClustering3\n<size:10>tutorial.clustering" as tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3<O> [[NaiveAgglomerativeHierarchicalClustering3.html]] {
+        {static} -LOG: Logging
+        ~distance: Distance<? super O>
+        ~numclusters: int
+        ~linkage: Linkage
+        +NaiveAgglomerativeHierarchicalClustering3(Distance<? super O>, int, Linkage)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): Clustering<Model>
+        {static} #triangleSize(int): int
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../../elki/Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    enum "<size:14>NaiveAgglomerativeHierarchicalClustering3.Linkage\n<size:10>tutorial.clustering" as tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3.Linkage [[NaiveAgglomerativeHierarchicalClustering3.Linkage.html]]
+    class "<size:14>NaiveAgglomerativeHierarchicalClustering3.Par\n<size:10>tutorial.clustering" as tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3.Par<O>
+
+    elki.Algorithm <|.. tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3
+    tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3 +-- tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3.Linkage
+    tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3 +-- tutorial.clustering.NaiveAgglomerativeHierarchicalClustering3.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,107 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.lsh {
+
+        class InMemoryLSHIndex<V> [[InMemoryLSHIndex.html]] {
+            {static} -LOG: Logging
+            ~l: int
+            ~numberOfBuckets: int
+            +InMemoryLSHIndex(LocalitySensitiveHashFunctionFamily<? super V>, int, int)
+            +instantiate(Relation<V>): Instance
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.lsh.InMemoryLSHIndex.Instance [[InMemoryLSHIndex.Instance.html]] {
+            ~hashtables: ArrayList<Int2ObjectOpenHashMap<DBIDs>>
+            -numberOfBuckets: int
+            +Instance(Relation<V>, ArrayList<? extends LocalitySensitiveHashFunction<? super V>>, int)
+            +initialize(): void
+            +getLogger(): Logging
+            +kNNByObject(DistanceQuery<V>, int, int): KNNSearcher<V>
+            +rangeByObject(DistanceQuery<V>, double, int): RangeSearcher<V>
+            #getCandidates(V): DBIDs
+        }
+
+        class elki.index.lsh.InMemoryLSHIndex.Instance.LSHKNNQuery [[InMemoryLSHIndex.Instance.LSHKNNQuery.html]] {
+            +LSHKNNQuery(DistanceQuery<V>)
+            +getKNN(V, int): KNNList
+        }
+
+        class elki.index.lsh.InMemoryLSHIndex.Instance.LSHRangeQuery [[InMemoryLSHIndex.Instance.LSHRangeQuery.html]] {
+            +LSHRangeQuery(DistanceQuery<V>)
+            +getRange(V, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class elki.index.lsh.InMemoryLSHIndex.Par<V> [[InMemoryLSHIndex.Par.html]] {
+            {static} +FAMILY_ID: OptionID
+            {static} +L_ID: OptionID
+            {static} +BUCKETS_ID: OptionID
+            ~l: int
+            ~numberOfBuckets: int
+            +configure(Parameterization): void
+            +make(): InMemoryLSHIndex<V>
+        }
+
+        elki.index.IndexFactory <|.. InMemoryLSHIndex
+        InMemoryLSHIndex --> elki.index.lsh.hashfamilies.LocalitySensitiveHashFunctionFamily: family
+        elki.index.AbstractRefiningIndex <|-- elki.index.lsh.InMemoryLSHIndex.Instance
+        elki.index.KNNIndex <|.. elki.index.lsh.InMemoryLSHIndex.Instance
+        elki.index.RangeIndex <|.. elki.index.lsh.InMemoryLSHIndex.Instance
+        InMemoryLSHIndex +-- elki.index.lsh.InMemoryLSHIndex.Instance
+        elki.index.lsh.InMemoryLSHIndex.Instance --> "*" elki.index.lsh.hashfunctions.LocalitySensitiveHashFunction: hashfunctions
+        elki.index.AbstractRefiningIndex.AbstractRefiningQuery <|-- elki.index.lsh.InMemoryLSHIndex.Instance.LSHKNNQuery
+        elki.database.query.knn.KNNSearcher <|.. elki.index.lsh.InMemoryLSHIndex.Instance.LSHKNNQuery
+        elki.index.lsh.InMemoryLSHIndex.Instance +-- elki.index.lsh.InMemoryLSHIndex.Instance.LSHKNNQuery
+        elki.index.AbstractRefiningIndex.AbstractRefiningQuery <|-- elki.index.lsh.InMemoryLSHIndex.Instance.LSHRangeQuery
+        elki.database.query.range.RangeSearcher <|.. elki.index.lsh.InMemoryLSHIndex.Instance.LSHRangeQuery
+        elki.index.lsh.InMemoryLSHIndex.Instance +-- elki.index.lsh.InMemoryLSHIndex.Instance.LSHRangeQuery
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.lsh.InMemoryLSHIndex.Par
+        InMemoryLSHIndex +-- elki.index.lsh.InMemoryLSHIndex.Par
+        elki.index.lsh.InMemoryLSHIndex.Par --> elki.index.lsh.hashfamilies.LocalitySensitiveHashFunctionFamily: family
+    }
+
+    namespace elki.index {
+        interface IndexFactory<V> [[../IndexFactory.html]] {
+            {abstract} +instantiate(Relation<V>): Index
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+        abstract class AbstractRefiningIndex<O> [[../AbstractRefiningIndex.html]] {
+            #relation: Relation<O>
+            -refinements: Counter
+            {abstract} +getLogger(): Logging
+        }
+        interface KNNIndex<O> [[../KNNIndex.html]] {
+            {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        }
+        interface RangeIndex<O> [[../RangeIndex.html]] {
+            {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+        abstract class elki.index.AbstractRefiningIndex.AbstractRefiningQuery [[../AbstractRefiningIndex.AbstractRefiningQuery.html]] {
+            #distanceQuery: DistanceQuery<O>
+        }
+    }
+
+    namespace elki.database.query.knn {
+        interface KNNSearcher<O> [[../../database/query/knn/KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+    }
+
+    namespace elki.database.query.range {
+        interface RangeSearcher<O> [[../../database/query/range/RangeSearcher.html]] {
+            +getRange(O, double): DoubleDBIDList
+            {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LibSVMOneClassOutlierDetection.Par\n<size:10>elki.outlier.svm" as elki.outlier.svm.LibSVMOneClassOutlierDetection.Par<V extends NumberVector> {
+        {static} +KERNEL_ID: OptionID
+        {static} +NU_ID: OptionID
+        {static} +GAMMA_ID: OptionID
+        #kernel: SVMKernel
+        #nu: double
+        ~gamma: double
+        +configure(Parameterization): void
+        +make(): LibSVMOneClassOutlierDetection<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LibSVMOneClassOutlierDetection\n<size:10>elki.outlier.svm" as elki.outlier.svm.LibSVMOneClassOutlierDetection<V extends NumberVector> [[LibSVMOneClassOutlierDetection.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.svm.LibSVMOneClassOutlierDetection.Par
+    elki.outlier.svm.LibSVMOneClassOutlierDetection +-- elki.outlier.svm.LibSVMOneClassOutlierDetection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

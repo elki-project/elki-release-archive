@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PartialVAFile.PartialVACandidate\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile.PartialVACandidate [[PartialVAFile.PartialVACandidate.html]] {
+        #maxDistP: double
+        #minDistP: double
+        -approx: VectorApproximation
+        +PartialVACandidate(VectorApproximation)
+        +getApproximation(int): int
+        +getApprox(): DBIDRef
+        +compareTo(PartialVACandidate): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<PartialVACandidate> {
+        {abstract} +compareTo(PartialVACandidate): int
+    }
+    class "<size:14>PartialVAFile\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile<V extends NumberVector> [[PartialVAFile.html]]
+
+    java.lang.Comparable <|.. elki.index.vafile.PartialVAFile.PartialVACandidate
+    elki.index.vafile.PartialVAFile +-- elki.index.vafile.PartialVAFile.PartialVACandidate
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AxisBasedReferencePoints.Par\n<size:10>elki.utilities.referencepoints" as elki.utilities.referencepoints.AxisBasedReferencePoints.Par [[AxisBasedReferencePoints.Par.html]] {
+        {static} +SPACE_SCALE_ID: OptionID
+        #spacescale: double
+        +configure(Parameterization): void
+        +make(): AxisBasedReferencePoints
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AxisBasedReferencePoints\n<size:10>elki.utilities.referencepoints" as elki.utilities.referencepoints.AxisBasedReferencePoints [[AxisBasedReferencePoints.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.referencepoints.AxisBasedReferencePoints.Par
+    elki.utilities.referencepoints.AxisBasedReferencePoints +-- elki.utilities.referencepoints.AxisBasedReferencePoints.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TreePopup\n<size:10>elki.gui.util" as elki.gui.util.TreePopup [[TreePopup.html]] {
+        {static} -serialVersionUID: long
+        {static} +ACTION_SELECTED: String
+        {static} +ACTION_CANCELED: String
+        #tree: JTree
+        #scroller: JScrollPane
+        -model: TreeModel
+        -handler: Handler
+        {static} -TREE_BORDER: Border
+        +TreePopup()
+        +TreePopup(TreeModel)
+        #createTree(): JTree
+        #configurePopup(): void
+        #createScroller(): JScrollPane
+        +getTree(): JTree
+        +show(Component): void
+        #computePopupBounds(Component, int, int, int, int): Rectangle
+        +addActionListener(ActionListener): void
+        +removeActionListener(ActionListener): void
+        #fireActionPerformed(ActionEvent): void
+    }
+
+    class "<size:14>JPopupMenu\n<size:10>javax.swing" as javax.swing.JPopupMenu
+    class "<size:14>TreePopup.Renderer\n<size:10>elki.gui.util" as elki.gui.util.TreePopup.Renderer [[TreePopup.Renderer.html]]
+    class "<size:14>TreePopup.Handler\n<size:10>elki.gui.util" as elki.gui.util.TreePopup.Handler [[TreePopup.Handler.html]]
+
+    javax.swing.JPopupMenu <|-- elki.gui.util.TreePopup
+    elki.gui.util.TreePopup +-- elki.gui.util.TreePopup.Renderer
+    elki.gui.util.TreePopup +-- elki.gui.util.TreePopup.Handler
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

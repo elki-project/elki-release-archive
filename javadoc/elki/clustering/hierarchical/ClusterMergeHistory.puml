@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterMergeHistory\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.ClusterMergeHistory [[ClusterMergeHistory.html]] {
+        #ids: ArrayDBIDs
+        #distances: double[]
+        #sizes: int[]
+        #merges: int[]
+        #positions: int[]
+        ~isSquared: boolean
+        +ClusterMergeHistory(ArrayDBIDs, int[], double[], int[], boolean)
+        +assignVar(int, DBIDVar): DBIDVar
+        +getMergeA(int): int
+        +getMergeB(int): int
+        +getMergeHeight(int): double
+        +getSize(int): int
+        +size(): int
+        +numMerges(): int
+        +isSquared(): boolean
+        +getDBIDs(): ArrayDBIDs
+        +getPositions(): int[]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

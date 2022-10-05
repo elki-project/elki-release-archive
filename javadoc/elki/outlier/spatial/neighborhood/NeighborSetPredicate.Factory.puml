@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>NeighborSetPredicate.Factory\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory<O> [[NeighborSetPredicate.Factory.html]] {
+        {abstract} +instantiate(Database, Relation<? extends O>): NeighborSetPredicate
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>NeighborSetPredicate\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.NeighborSetPredicate [[NeighborSetPredicate.html]] {
+        {abstract} +getNeighborDBIDs(DBIDRef): DBIDs
+    }
+
+    elki.outlier.spatial.neighborhood.NeighborSetPredicate +-- elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

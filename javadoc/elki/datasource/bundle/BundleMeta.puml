@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BundleMeta\n<size:10>elki.datasource.bundle" as elki.datasource.bundle.BundleMeta [[BundleMeta.html]] {
+        {static} -serialVersionUID: long
+        +BundleMeta()
+        +BundleMeta(int)
+        +BundleMeta(SimpleTypeInformation<?>...)
+    }
+
+    class "<size:14>ArrayList\n<size:10>java.util" as java.util.ArrayList<SimpleTypeInformation<?>>
+
+    java.util.ArrayList <|-- elki.datasource.bundle.BundleMeta
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

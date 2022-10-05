@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Silhouette.Par\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.Silhouette.Par<O> [[Silhouette.Par.html]] {
+        {static} +DISTANCE_ID: OptionID
+        {static} +NOISE_ID: OptionID
+        {static} +NO_PENALIZE_ID: OptionID
+        -distance: Distance<? super O>
+        -noiseOption: NoiseHandling
+        -penalize: boolean
+        +configure(Parameterization): void
+        +make(): Silhouette<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>Silhouette\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.Silhouette<O> [[Silhouette.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.internal.Silhouette.Par
+    elki.evaluation.clustering.internal.Silhouette +-- elki.evaluation.clustering.internal.Silhouette.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

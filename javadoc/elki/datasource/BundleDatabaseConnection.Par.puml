@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BundleDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.BundleDatabaseConnection.Par [[BundleDatabaseConnection.Par.html]] {
+        {static} -BUNDLE_ID: OptionID
+        -infile: Path
+        +configure(Parameterization): void
+        +make(): BundleDatabaseConnection
+    }
+
+    abstract class "<size:14>AbstractDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.AbstractDatabaseConnection.Par [[AbstractDatabaseConnection.Par.html]]
+    class "<size:14>BundleDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.BundleDatabaseConnection [[BundleDatabaseConnection.html]]
+
+    elki.datasource.AbstractDatabaseConnection.Par <|-- elki.datasource.BundleDatabaseConnection.Par
+    elki.datasource.BundleDatabaseConnection +-- elki.datasource.BundleDatabaseConnection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

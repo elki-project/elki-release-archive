@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PixmapVisualizer.Instance\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.PixmapVisualizer.Instance [[PixmapVisualizer.Instance.html]] {
+        -result: PixmapResult
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double)
+        +fullRedraw(): void
+    }
+
+    abstract class "<size:14>AbstractVisualization\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.AbstractVisualization [[../AbstractVisualization.html]] {
+        {abstract} +fullRedraw(): void
+    }
+    class "<size:14>PixmapVisualizer\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.PixmapVisualizer [[PixmapVisualizer.html]]
+
+    elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.visunproj.PixmapVisualizer.Instance
+    elki.visualization.visualizers.visunproj.PixmapVisualizer +-- elki.visualization.visualizers.visunproj.PixmapVisualizer.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

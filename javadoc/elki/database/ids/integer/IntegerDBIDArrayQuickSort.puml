@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntegerDBIDArrayQuickSort\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDArrayQuickSort [[IntegerDBIDArrayQuickSort.html]] {
+        {static} -INSERTION_THRESHOLD: int
+        {static} +sort(int[], Comparator<? super DBIDRef>): void
+        {static} +sort(int[], int, int, Comparator<? super DBIDRef>): void
+        {static} -quickSort(int[], int, int, Comparator<? super DBIDRef>, IntegerDBIDVar, IntegerDBIDVar, IntegerDBIDVar): void
+        {static} -compare(IntegerDBIDVar, int, IntegerDBIDVar, int, Comparator<? super DBIDRef>): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

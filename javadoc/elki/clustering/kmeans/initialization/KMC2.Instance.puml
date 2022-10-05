@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMC2.Instance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMC2.Instance [[KMC2.Instance.html]] {
+        #relation: Relation<? extends NumberVector>
+        #distance: NumberVectorDistance<?>
+        #weights: WritableDoubleDataStore
+        #diststat: long
+        #m: int
+        #random: Random
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, int, RandomFactory)
+        #initialWeights(NumberVector): double
+        +run(int): double[]
+        #distance(NumberVector, DBIDRef): double
+        #chooseRemaining(int, List<NumberVector>, double): void
+        #sample(double): DBIDRef
+        #distance(DBIDRef, List<NumberVector>): double
+        #getLogger(): Logging
+    }
+
+    class "<size:14>KMC2\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.KMC2 [[KMC2.html]]
+
+    elki.clustering.kmeans.initialization.KMC2 +-- elki.clustering.kmeans.initialization.KMC2.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

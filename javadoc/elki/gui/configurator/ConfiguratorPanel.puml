@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ConfiguratorPanel\n<size:10>elki.gui.configurator" as elki.gui.configurator.ConfiguratorPanel [[ConfiguratorPanel.html]] {
+        {static} -serialVersionUID: long
+        -childconfig: Map<Object, ParameterConfigurator>
+        -children: ArrayList<ParameterConfigurator>
+        #listenerList: EventListenerList
+        +addParameter(Object, Parameter<?>, TrackParameters): void
+        -makeConfigurator(Parameter<?>): ParameterConfigurator
+        +stateChanged(ChangeEvent): void
+        +addChangeListener(ChangeListener): void
+        +removeChangeListener(ChangeListener): void
+        #fireValueChanged(): void
+        +appendParameters(ListParameterization): void
+        +clear(): void
+    }
+
+    class "<size:14>JPanel\n<size:10>javax.swing" as javax.swing.JPanel
+    interface "<size:14>ChangeListener\n<size:10>javax.swing.event" as javax.swing.event.ChangeListener {
+        {abstract} +stateChanged(ChangeEvent): void
+    }
+
+    javax.swing.JPanel <|-- elki.gui.configurator.ConfiguratorPanel
+    javax.swing.event.ChangeListener <|.. elki.gui.configurator.ConfiguratorPanel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

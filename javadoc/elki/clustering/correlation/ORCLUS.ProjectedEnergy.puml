@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ORCLUS.ProjectedEnergy\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ORCLUS.ProjectedEnergy [[ORCLUS.ProjectedEnergy.html]] {
+        ~i: int
+        ~j: int
+        ~cluster: ORCLUSCluster
+        ~projectedEnergy: double
+        ~ProjectedEnergy(int, int, ORCLUSCluster, double)
+        +compareTo(ProjectedEnergy): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<ProjectedEnergy> {
+        {abstract} +compareTo(ProjectedEnergy): int
+    }
+    class "<size:14>ORCLUS\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ORCLUS [[ORCLUS.html]]
+
+    java.lang.Comparable <|.. elki.clustering.correlation.ORCLUS.ProjectedEnergy
+    elki.clustering.correlation.ORCLUS +-- elki.clustering.correlation.ORCLUS.ProjectedEnergy
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PatternParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.PatternParameter [[PatternParameter.html]] {
+        +PatternParameter(OptionID, Pattern)
+        +PatternParameter(OptionID, String)
+        +PatternParameter(OptionID)
+        +getValueAsString(): String
+        #parseValue(Object): Pattern
+        +getSyntax(): String
+        +grab(Parameterization, Consumer<Pattern>): boolean
+    }
+
+    abstract class "<size:14>AbstractParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.AbstractParameter<PatternParameter, Pattern> [[AbstractParameter.html]] {
+        {abstract} #parseValue(Object): Pattern
+    }
+
+    elki.utilities.optionhandling.parameters.AbstractParameter <|-- elki.utilities.optionhandling.parameters.PatternParameter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

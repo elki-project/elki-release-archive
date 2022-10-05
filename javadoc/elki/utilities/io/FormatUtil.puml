@@ -1,0 +1,77 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FormatUtil\n<size:10>elki.utilities.io" as elki.utilities.io.FormatUtil [[FormatUtil.html]] {
+        {static} +NF: NumberFormat
+        {static} +NF0: NumberFormat
+        {static} +NF2: NumberFormat
+        {static} +NF3: NumberFormat
+        {static} +NF4: NumberFormat
+        {static} +NF6: NumberFormat
+        {static} +NF8: NumberFormat
+        {static} +NF16: NumberFormat
+        {static} -WHITESPACE_BUFFER: String
+        {static} -WHITESPACE_BUFFER_LENGTH: int
+        {static} +NEWLINE: String
+        {static} +NONBREAKING_SPACE: char
+        {static} -TIME_UNIT_SIZES: long[]
+        {static} -TIME_UNIT_NAMES: String[]
+        {static} -TIME_UNIT_DIGITS: int[]
+        {static} -width: int
+        {static} -ZEROPADDING: char[]
+        {static} -SPACEPADDING: char[]
+        {static} +makeNumberFormat(int): NumberFormat
+        {static} +format(double[]): String
+        {static} +format(double[], String): String
+        {static} +format(double[], NumberFormat): String
+        {static} +format(double[], String, NumberFormat): String
+        {static} +format(double[], int, int): String
+        {static} +formatTo(StringBuilder, double[], String): StringBuilder
+        {static} +formatTo(StringBuilder, double[], String, NumberFormat): StringBuilder
+        {static} +formatTo(StringBuilder, float[], String): StringBuilder
+        {static} +formatTo(StringBuilder, float[], String, NumberFormat): StringBuilder
+        {static} +formatTo(StringBuilder, int[], String): StringBuilder
+        {static} +formatTo(StringBuilder, long[], String): StringBuilder
+        {static} +formatTo(StringBuilder, short[], String): StringBuilder
+        {static} +formatTo(StringBuilder, byte[], String): StringBuilder
+        {static} +formatTo(StringBuilder, boolean[], String): StringBuilder
+        {static} +formatTo(StringBuilder, boolean): StringBuilder
+        {static} +formatBit(StringBuilder, boolean): StringBuilder
+        {static} +format(float[], String, NumberFormat): String
+        {static} +format(float[], String): String
+        {static} +format(float[]): String
+        {static} +format(int[], String): String
+        {static} +format(int[]): String
+        {static} +format(long[]): String
+        {static} +format(byte[]): String
+        {static} +format(boolean[], String): String
+        {static} +format(boolean): String
+        {static} +formatTo(StringBuilder, double[], String, String, String, NumberFormat): StringBuilder
+        {static} +format(double[]): String
+        {static} +format(double[], String, String, String, NumberFormat): String
+        {static} +format(double[], int, int, String, String, String): String
+        {static} +format(double[], String): String
+        {static} +format(double[], NumberFormat): String
+        {static} +format(Collection<String>, String): String
+        {static} +format(String[], String): String
+        {static} +findSplitpoint(String, int): int
+        {static} -nextPosition(int, int): int
+        {static} +splitAtLastBlank(String, int): List<String>
+        {static} +whitespace(int): String
+        {static} +whitespace(StringBuilder, int): StringBuilder
+        {static} +pad(String, int): String
+        {static} +padRightAligned(String, int): String
+        {static} +getConsoleWidth(): int
+        {static} +formatTimeDelta(long, CharSequence): String
+        {static} +appendZeros(StringBuilder, int): StringBuilder
+        {static} +appendSpace(StringBuilder, int): StringBuilder
+        {static} +stringSize(int): int
+        {static} +stringSize(long): int
+        {static} +endsWith(CharSequence, CharSequence): boolean
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

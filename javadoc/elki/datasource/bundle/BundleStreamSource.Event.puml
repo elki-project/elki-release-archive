@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>BundleStreamSource.Event\n<size:10>elki.datasource.bundle" as elki.datasource.bundle.BundleStreamSource.Event [[BundleStreamSource.Event.html]] {
+        {static} +META_CHANGED
+        {static} +NEXT_OBJECT
+        {static} +END_OF_STREAM
+    }
+
+    interface "<size:14>BundleStreamSource\n<size:10>elki.datasource.bundle" as elki.datasource.bundle.BundleStreamSource [[BundleStreamSource.html]] {
+        {abstract} +getMeta(): BundleMeta
+        {abstract} +data(int): Object
+        {abstract} +hasDBIDs(): boolean
+        {abstract} +assignDBID(DBIDVar): boolean
+        {abstract} +nextEvent(): Event
+        {abstract} +asMultipleObjectsBundle(): MultipleObjectsBundle
+    }
+
+    elki.datasource.bundle.BundleStreamSource +-- elki.datasource.bundle.BundleStreamSource.Event
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

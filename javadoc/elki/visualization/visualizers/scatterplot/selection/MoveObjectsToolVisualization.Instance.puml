@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MoveObjectsToolVisualization.Instance\n<size:10>elki.visualization.visualizers.scatterplot.selection" as elki.visualization.visualizers.scatterplot.selection.MoveObjectsToolVisualization.Instance [[MoveObjectsToolVisualization.Instance.html]] {
+        {static} #CSS_ARROW: String
+        -rtag: Element
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        -updateDB(DBIDs, double[]): void
+        -deleteChildren(Element): void
+        -addCSSClasses(SVGPlot): void
+        +startDrag(SVGPoint, Event): boolean
+        +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+        +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+    }
+
+    abstract class "<size:14>AbstractScatterplotVisualization\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization [[../AbstractScatterplotVisualization.html]]
+    interface "<size:14>DragableArea.DragListener\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.DragableArea.DragListener [[../../../batikutil/DragableArea.DragListener.html]] {
+        {abstract} +startDrag(SVGPoint, Event): boolean
+        {abstract} +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+        {abstract} +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+    }
+    class "<size:14>MoveObjectsToolVisualization\n<size:10>elki.visualization.visualizers.scatterplot.selection" as elki.visualization.visualizers.scatterplot.selection.MoveObjectsToolVisualization [[MoveObjectsToolVisualization.html]]
+
+    elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.selection.MoveObjectsToolVisualization.Instance
+    elki.visualization.batikutil.DragableArea.DragListener <|.. elki.visualization.visualizers.scatterplot.selection.MoveObjectsToolVisualization.Instance
+    elki.visualization.visualizers.scatterplot.selection.MoveObjectsToolVisualization +-- elki.visualization.visualizers.scatterplot.selection.MoveObjectsToolVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

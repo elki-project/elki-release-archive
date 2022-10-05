@@ -1,0 +1,83 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.svm.qmatrix {
+
+        class R2_Qq [[R2_Qq.html]] {
+            ~invC: double
+            +R2_Qq(DataSet, double)
+            +similarity(int, int): double
+        }
+
+        class SVR_Q [[SVR_Q.html]] {
+            -l: int
+            -sign: byte[]
+            -index: int[]
+            -QD: double[]
+            +SVR_Q(DataSet, double)
+            +initialize(): void
+            +get_QD(): double[]
+            +swap_index(int, int): void
+            +get_Q(int, int, float[]): void
+            +similarity(int, int): double
+        }
+
+        class CachedQMatrix [[CachedQMatrix.html]] {
+            {static} -MEGABYTES: long
+            -size: long
+            -data: float[]
+            -len: int[]
+            -lru: int
+            -chain: int[]
+            +CachedQMatrix(int, double, QMatrix)
+            +CachedQMatrix(int, long, QMatrix)
+            +initialize(): void
+            -next(int): int
+            -prev(int): int
+            -link(int, int): void
+            -selflink(int): void
+            -lru_insert(int): void
+            -lru_delete(int): void
+            -discard(int): void
+            ~get_data(int, int): float[]
+            +swap_index(int, int): void
+            +get_Q(int, int, float[]): void
+            +get_QD(): double[]
+            +similarity(int, int): double
+        }
+
+        class SVC_Q [[SVC_Q.html]] {
+            -y: byte[]
+            +SVC_Q(DataSet, byte[])
+            +similarity(int, int): double
+            +swap_index(int, int): void
+        }
+
+        interface QMatrix [[QMatrix.html]] {
+            +get_Q(int, int, float[]): void
+            {abstract} +get_QD(): double[]
+            {abstract} +swap_index(int, int): void
+            {abstract} +similarity(int, int): double
+            {abstract} +initialize(): void
+        }
+
+        class Kernel [[Kernel.html]] {
+            #x: DataSet
+            -QD: double[]
+            +Kernel(DataSet)
+            +initialize(): void
+            +similarity(int, int): double
+            +swap_index(int, int): void
+            +get_QD(): double[]
+        }
+
+        Kernel <|-- R2_Qq
+        QMatrix <|.. SVR_Q
+        SVR_Q --> CachedQMatrix: inner
+        QMatrix <|.. CachedQMatrix
+        CachedQMatrix --> QMatrix: inner
+        Kernel <|-- SVC_Q
+        QMatrix <|.. Kernel
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,52 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CFTree\n<size:10>elki.index.tree.betula" as elki.index.tree.betula.CFTree<L extends ClusterFeature> [[CFTree.html]] {
+        {static} +LOG: Logging
+        ~factory: Factory<L extends ClusterFeature>
+        ~dist: CFDistance
+        ~abs: CFDistance
+        ~tCriterium: Threshold
+        ~thresholdsq: double
+        ~capacity: int
+        ~root: CFNode<L extends ClusterFeature>
+        ~leaves: int
+        ~maxleaves: int
+        ~rebuildstat: int
+        ~diststat: long
+        ~absstat: long
+        ~idmap: Map<ClusterFeature, ArrayModifiableDBIDs>
+        +CFTree(Factory<L extends ClusterFeature>, CFDistance, CFDistance, double, int, Threshold, int, boolean)
+        +insert(NumberVector, DBIDRef): void
+        #rebuildTree(): void
+        -estimateThreshold(CFNode<L extends ClusterFeature>, ArrayList<L extends ClusterFeature>, double[]): void
+        -insert(CFNode<L extends ClusterFeature>, NumberVector, DBIDRef): CFNode<L extends ClusterFeature>
+        +findLeaf(NumberVector): L extends ClusterFeature
+        -findLeaf(CFNode<L extends ClusterFeature>, NumberVector): L extends ClusterFeature
+        -split(CFNode<L extends ClusterFeature>, AsClusterFeature): CFNode<L extends ClusterFeature>
+        -insert(CFNode<L extends ClusterFeature>, AsClusterFeature): CFNode<L extends ClusterFeature>
+        +leafIterator(): LeafIterator<L extends ClusterFeature>
+        +getLeaves(): ArrayList<L extends ClusterFeature>
+        {static} #printDebug(StringBuilder, ClusterFeature, int): StringBuilder
+        -sqdistance(ClusterFeature, ClusterFeature): double
+        -sqdistance(NumberVector, ClusterFeature): double
+        -sqabsorption(ClusterFeature, ClusterFeature): double
+        -sqabsorption(NumberVector, ClusterFeature): double
+        +numLeaves(): int
+        +getRoot(): CFNode<L extends ClusterFeature>
+        +getCapacity(): int
+        +getDBIDs(ClusterFeature): DBIDs
+    }
+    enum "<size:14>CFTree.Threshold\n<size:10>elki.index.tree.betula" as elki.index.tree.betula.CFTree.Threshold [[CFTree.Threshold.html]]
+    class "<size:14>CFTree.LeafIterator\n<size:10>elki.index.tree.betula" as elki.index.tree.betula.CFTree.LeafIterator<L extends ClusterFeature> [[CFTree.LeafIterator.html]]
+    class "<size:14>CFTree.Factory\n<size:10>elki.index.tree.betula" as elki.index.tree.betula.CFTree.Factory<L extends ClusterFeature> [[CFTree.Factory.html]]
+
+    elki.index.tree.betula.CFTree +-- elki.index.tree.betula.CFTree.Threshold
+    elki.index.tree.betula.CFTree +-- elki.index.tree.betula.CFTree.LeafIterator
+    elki.index.tree.betula.CFTree +-- elki.index.tree.betula.CFTree.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

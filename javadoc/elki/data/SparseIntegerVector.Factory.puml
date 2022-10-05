@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseIntegerVector.Factory\n<size:10>elki.data" as elki.data.SparseIntegerVector.Factory [[SparseIntegerVector.Factory.html]] {
+        +newFeatureVector(A, ArrayAdapter<? extends Number, A>): SparseIntegerVector
+        +newNumberVector(A, NumberArrayAdapter<?, ? super A>): SparseIntegerVector
+        +newNumberVector(Int2DoubleOpenHashMap, int): SparseIntegerVector
+        +getDefaultSerializer(): ByteBufferSerializer<SparseIntegerVector>
+        +getRestrictionClass(): Class<? super SparseIntegerVector>
+    }
+
+    interface "<size:14>SparseNumberVector.Factory\n<size:10>elki.data" as elki.data.SparseNumberVector.Factory<SparseIntegerVector> [[SparseNumberVector.Factory.html]] {
+        {abstract} +newNumberVector(Int2DoubleOpenHashMap, int): SparseIntegerVector
+    }
+    class "<size:14>SparseIntegerVector\n<size:10>elki.data" as elki.data.SparseIntegerVector [[SparseIntegerVector.html]]
+    class "<size:14>SparseIntegerVector.Factory.Par\n<size:10>elki.data" as elki.data.SparseIntegerVector.Factory.Par [[SparseIntegerVector.Factory.Par.html]]
+
+    elki.data.SparseNumberVector.Factory <|.. elki.data.SparseIntegerVector.Factory
+    elki.data.SparseIntegerVector +-- elki.data.SparseIntegerVector.Factory
+    elki.data.SparseIntegerVector.Factory +-- elki.data.SparseIntegerVector.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SharedNearestNeighborPreprocessor\n<size:10>elki.index.preprocessed.snn" as elki.index.preprocessed.snn.SharedNearestNeighborPreprocessor<O> [[SharedNearestNeighborPreprocessor.html]] {
+        {static} -LOG: Logging
+        #numberOfNeighbors: int
+        #distance: Distance<O>
+        #storage: WritableDataStore<ArrayDBIDs>
+        #relation: Relation<O>
+        +SharedNearestNeighborPreprocessor(Relation<O>, int, Distance<O>)
+        +initialize(): void
+        +getNearestNeighborSet(DBIDRef): ArrayDBIDs
+        +getNumberOfNeighbors(): int
+    }
+
+    interface "<size:14>SharedNearestNeighborIndex\n<size:10>elki.index.preprocessed.snn" as elki.index.preprocessed.snn.SharedNearestNeighborIndex<O> [[SharedNearestNeighborIndex.html]] {
+        {abstract} +getNearestNeighborSet(DBIDRef): ArrayDBIDs
+        {abstract} +getNumberOfNeighbors(): int
+    }
+    class "<size:14>SharedNearestNeighborPreprocessor.Factory\n<size:10>elki.index.preprocessed.snn" as elki.index.preprocessed.snn.SharedNearestNeighborPreprocessor.Factory<O> [[SharedNearestNeighborPreprocessor.Factory.html]]
+
+    elki.index.preprocessed.snn.SharedNearestNeighborIndex <|.. elki.index.preprocessed.snn.SharedNearestNeighborPreprocessor
+    elki.index.preprocessed.snn.SharedNearestNeighborPreprocessor +-- elki.index.preprocessed.snn.SharedNearestNeighborPreprocessor.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

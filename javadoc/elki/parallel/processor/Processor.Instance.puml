@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Processor.Instance\n<size:10>elki.parallel.processor" as elki.parallel.processor.Processor.Instance [[Processor.Instance.html]] {
+        {abstract} +map(DBIDRef): void
+    }
+
+    interface "<size:14>Processor\n<size:10>elki.parallel.processor" as elki.parallel.processor.Processor [[Processor.html]] {
+        {abstract} +instantiate(Executor): Instance
+        {abstract} +cleanup(Instance): void
+    }
+
+    elki.parallel.processor.Processor +-- elki.parallel.processor.Processor.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PartialVAFile.Statistics\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile.Statistics [[PartialVAFile.Statistics.html]] {
+        -scannedBytes: Counter
+        -queryTime: Counter
+        -issuedQueries: Counter
+        -refinements: Counter
+        #Statistics(String)
+        +logStatistics(): void
+        #incrementScannedBytes(long): void
+        #incrementQueryTime(long): void
+        #incrementIssuedQueries(): void
+        #incrementRefinements(): void
+    }
+
+    class "<size:14>PartialVAFile\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile<V extends NumberVector> [[PartialVAFile.html]]
+
+    elki.index.vafile.PartialVAFile +-- elki.index.vafile.PartialVAFile.Statistics
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

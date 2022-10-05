@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PCAResult\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.PCAResult [[PCAResult.html]] {
+        -eigenPairs: EigenPair[]
+        -eigenvalues: double[]
+        -eigenvectors: double[]
+        +PCAResult(EigenPair[])
+        +PCAResult(EigenvalueDecomposition)
+        {static} -processDecomposition(EigenvalueDecomposition): EigenPair[]
+        +getEigenvectors(): double[]
+        +getEigenvalues(): double[]
+        +getEigenPairs(): EigenPair[]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

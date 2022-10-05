@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HashMapHierarchy.Rec\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec<O> {
+        ~nump: int
+        ~numc: int
+        ~parents: Object[]
+        ~children: Object[]
+        {static} -EMPTY: Object[]
+        ~addParent(O): boolean
+        ~addChild(O): boolean
+        ~removeParent(O): boolean
+        ~removeChild(O): boolean
+        +iterParents(): It<O>
+        +iterParentsReverse(): It<O>
+        +iterChildren(): It<O>
+        +iterChildrenReverse(): It<O>
+    }
+
+    class "<size:14>HashMapHierarchy\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy<O> [[HashMapHierarchy.html]]
+    class "<size:14>HashMapHierarchy.Rec.ItrParents\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrParents [[HashMapHierarchy.Rec.ItrParents.html]]
+    class "<size:14>HashMapHierarchy.Rec.ItrParentsReverse\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrParentsReverse [[HashMapHierarchy.Rec.ItrParentsReverse.html]]
+    class "<size:14>HashMapHierarchy.Rec.ItrChildren\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrChildren [[HashMapHierarchy.Rec.ItrChildren.html]]
+    class "<size:14>HashMapHierarchy.Rec.ItrChildrenReverse\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrChildrenReverse [[HashMapHierarchy.Rec.ItrChildrenReverse.html]]
+
+    elki.utilities.datastructures.hierarchy.HashMapHierarchy +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec
+    elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrParents
+    elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrParentsReverse
+    elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrChildren
+    elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrChildrenReverse
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

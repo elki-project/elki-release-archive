@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleTransactionParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.SimpleTransactionParser.Par [[SimpleTransactionParser.Par.html]] {
+        +make(): SimpleTransactionParser
+    }
+
+    abstract class "<size:14>AbstractStreamingParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.AbstractStreamingParser.Par [[AbstractStreamingParser.Par.html]] {
+        {abstract} +make(): AbstractStreamingParser
+    }
+    class "<size:14>SimpleTransactionParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.SimpleTransactionParser [[SimpleTransactionParser.html]]
+
+    elki.datasource.parser.AbstractStreamingParser.Par <|-- elki.datasource.parser.SimpleTransactionParser.Par
+    elki.datasource.parser.SimpleTransactionParser +-- elki.datasource.parser.SimpleTransactionParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

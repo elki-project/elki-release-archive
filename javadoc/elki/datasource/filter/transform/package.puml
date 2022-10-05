@@ -1,0 +1,334 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.datasource.filter.transform {
+
+        class LatLngToECEFFilter<V extends NumberVector> [[LatLngToECEFFilter.html]] {
+            -factory: Factory<V extends NumberVector>
+            -model: EarthModel
+            +LatLngToECEFFilter(EarthModel)
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.datasource.filter.transform.LatLngToECEFFilter.Par<V extends NumberVector> {
+            -model: EarthModel
+            +configure(Parameterization): void
+            +make(): LatLngToECEFFilter<V extends NumberVector>
+        }
+
+        class LngLatToECEFFilter<V extends NumberVector> [[LngLatToECEFFilter.html]] {
+            -factory: Factory<V extends NumberVector>
+            -model: EarthModel
+            +LngLatToECEFFilter(EarthModel)
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.datasource.filter.transform.LngLatToECEFFilter.Par<V extends NumberVector> {
+            -model: EarthModel
+            +configure(Parameterization): void
+            +make(): LngLatToECEFFilter<V extends NumberVector>
+        }
+
+        class ProjectionFilter<I, O> [[ProjectionFilter.html]] {
+            ~projection: Projection<I, O>
+            +ProjectionFilter(Projection<I, O>)
+            #filterSingleObject(I): O
+            #getInputTypeRestriction(): TypeInformation
+            #convertedType(SimpleTypeInformation<​I>): SimpleTypeInformation<? super O>
+        }
+
+        class elki.datasource.filter.transform.ProjectionFilter.Par<I, O> {
+            {static} +PROJ_ID: OptionID
+            ~projection: Projection<I, O>
+            +configure(Parameterization): void
+            +make(): ProjectionFilter<I, O>
+        }
+
+        abstract class AbstractSupervisedProjectionVectorFilter<V extends NumberVector> [[AbstractSupervisedProjectionVectorFilter.html]] {
+            #tdim: int
+            +AbstractSupervisedProjectionVectorFilter(int)
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+            #convertedType(SimpleTypeInformation<?>, Factory<V extends NumberVector>): SimpleTypeInformation<?>
+            {abstract} #getLogger(): Logging
+            {abstract} #computeProjectionMatrix(List<V extends NumberVector>, List<? extends ClassLabel>, int): double[]
+            #partition(List<? extends O>): Map<O, IntList>
+        }
+
+        abstract class elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter.Par<V extends NumberVector> {
+            {static} +P_ID: OptionID
+            #tdim: int
+            +configure(Parameterization): void
+        }
+
+        class NumberVectorRandomFeatureSelectionFilter<V extends NumberVector> [[NumberVectorRandomFeatureSelectionFilter.html]] {
+            #selectedAttributes: long[]
+            #k: int
+            #rnd: RandomFactory
+            +NumberVectorRandomFeatureSelectionFilter(int, RandomFactory)
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            ~initializeRandomAttributes(SimpleTypeInformation<V extends NumberVector>): void
+        }
+
+        class elki.datasource.filter.transform.NumberVectorRandomFeatureSelectionFilter.Par [[NumberVectorRandomFeatureSelectionFilter.Par.html]] {
+            {static} +NUMBER_SELECTED_ATTRIBUTES_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #k: int
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): NumberVectorRandomFeatureSelectionFilter<DoubleVector>
+        }
+
+        class ClassicMultidimensionalScalingTransform<I, O extends NumberVector> [[ClassicMultidimensionalScalingTransform.html]] {
+            {static} -LOG: Logging
+            ~dist: PrimitiveDistance<? super I>
+            ~tdim: int
+            ~factory: Factory<O extends NumberVector>
+            +ClassicMultidimensionalScalingTransform(int, PrimitiveDistance<? super I>, Factory<O extends NumberVector>)
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+            {static} #computeSquaredDistanceMatrix(List<​I>, PrimitiveDistance<? super I>): double[]
+            {static} +doubleCenterSymmetric(double[]): void
+        }
+
+        class elki.datasource.filter.transform.ClassicMultidimensionalScalingTransform.Par<I, O extends NumberVector> {
+            {static} +DIM_ID: OptionID
+            {static} +DISTANCE_ID: OptionID
+            {static} +VECTOR_TYPE_ID: OptionID
+            ~tdim: int
+            ~dist: PrimitiveDistance<? super I>
+            ~factory: Factory<O extends NumberVector>
+            +configure(Parameterization): void
+            +make(): ClassicMultidimensionalScalingTransform<I, O extends NumberVector>
+        }
+
+        class NumberVectorFeatureSelectionFilter<V extends NumberVector> [[NumberVectorFeatureSelectionFilter.html]] {
+            -selectedAttributes: long[]
+            +NumberVectorFeatureSelectionFilter(long[])
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            +setSelectedAttributes(long[]): void
+            +getSelectedAttributes(): long[]
+            +getDimensionality(): int
+        }
+
+        class elki.datasource.filter.transform.NumberVectorFeatureSelectionFilter.Par [[NumberVectorFeatureSelectionFilter.Par.html]] {
+            {static} +SELECTED_ATTRIBUTES_ID: OptionID
+            #selectedAttributes: long[]
+            +configure(Parameterization): void
+            +make(): NumberVectorFeatureSelectionFilter<DoubleVector>
+        }
+
+        class FastMultidimensionalScalingTransform<I, O extends NumberVector> [[FastMultidimensionalScalingTransform.html]] {
+            {static} -LOG: Logging
+            ~dist: PrimitiveDistance<? super I>
+            ~tdim: int
+            ~random: RandomFactory
+            ~factory: Factory<O extends NumberVector>
+            +FastMultidimensionalScalingTransform(int, PrimitiveDistance<? super I>, Factory<O extends NumberVector>, RandomFactory)
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+            #findEigenVectors(double[], double[], double[]): void
+            #randomInitialization(double[], Random): void
+            #multiply(double[], double[], double[]): double
+            #updateEigenvector(double[], double[], double): double
+            #estimateEigenvalue(double[], double[]): double
+            #updateMatrix(double[], double[], double): void
+        }
+
+        class elki.datasource.filter.transform.FastMultidimensionalScalingTransform.Par<I, O extends NumberVector> [[FastMultidimensionalScalingTransform.Par.html]] {
+            {static} +RANDOM_ID: OptionID
+            ~tdim: int
+            ~dist: PrimitiveDistance<? super I>
+            ~random: RandomFactory
+            ~factory: Factory<O extends NumberVector>
+            +configure(Parameterization): void
+            +make(): FastMultidimensionalScalingTransform<I, O extends NumberVector>
+        }
+
+        class LinearDiscriminantAnalysisFilter<V extends NumberVector> [[LinearDiscriminantAnalysisFilter.html]] {
+            {static} -LOG: Logging
+            +LinearDiscriminantAnalysisFilter(int)
+            #computeProjectionMatrix(List<V extends NumberVector>, List<? extends ClassLabel>, int): double[]
+            #computeCentroids(int, List<V extends NumberVector>, List<ClassLabel>, Map<ClassLabel, IntList>): List<Centroid>
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.filter.transform.LinearDiscriminantAnalysisFilter.Par<V extends NumberVector> [[LinearDiscriminantAnalysisFilter.Par.html]] {
+            +make(): LinearDiscriminantAnalysisFilter<V extends NumberVector>
+        }
+
+        class GlobalPrincipalComponentAnalysisTransform<O extends NumberVector> [[GlobalPrincipalComponentAnalysisTransform.html]] {
+            {static} -LOG: Logging
+            ~filter: EigenPairFilter
+            ~covmat: CovarianceMatrix
+            ~proj: double[]
+            ~buf: double[]
+            ~mean: double[]
+            +GlobalPrincipalComponentAnalysisTransform(EigenPairFilter)
+            +GlobalPrincipalComponentAnalysisTransform(EigenPairFilter, Mode)
+            #prepareStart(SimpleTypeInformation<O extends NumberVector>): boolean
+            #prepareProcessInstance(O extends NumberVector): void
+            #prepareComplete(): void
+            #filterSingleObject(O extends NumberVector): O extends NumberVector
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+            #convertedType(SimpleTypeInformation<O extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            #getLogger(): Logging
+        }
+
+        enum elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Mode [[GlobalPrincipalComponentAnalysisTransform.Mode.html]] {
+            {static} +FULL
+            {static} +CENTER_ROTATE
+        }
+
+        class elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Par<O extends NumberVector> [[GlobalPrincipalComponentAnalysisTransform.Par.html]] {
+            {static} +FILTER_ID: OptionID
+            {static} +MODE_ID: OptionID
+            ~filter: EigenPairFilter
+            +configure(Parameterization): void
+            +make(): GlobalPrincipalComponentAnalysisTransform<O extends NumberVector>
+        }
+
+        class PerturbationFilter<V extends NumberVector> [[PerturbationFilter.html]] {
+            {static} -LOG: Logging
+            -RANDOM: Random
+            -percentage: double
+            -mvs: MeanVarianceMinMax[]
+            -scalingreferencevalues: double[]
+            -randomPerAttribute: Random[]
+            -maxima: double[]
+            -minima: double[]
+            -dimensionality: int
+            +PerturbationFilter(Long, double, ScalingReference, double[], double[], NoiseDistribution)
+            #prepareStart(SimpleTypeInformation<V extends NumberVector>): boolean
+            #prepareProcessInstance(V extends NumberVector): void
+            #prepareComplete(): void
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            #getLogger(): Logging
+        }
+
+        enum elki.datasource.filter.transform.PerturbationFilter.ScalingReference [[PerturbationFilter.ScalingReference.html]] {
+            {static} +UNITCUBE
+            {static} +STDDEV
+            {static} +MINMAX
+        }
+
+        enum elki.datasource.filter.transform.PerturbationFilter.NoiseDistribution [[PerturbationFilter.NoiseDistribution.html]] {
+            {static} +GAUSSIAN
+            {static} +UNIFORM
+        }
+
+        class elki.datasource.filter.transform.PerturbationFilter.Par<V extends NumberVector> [[PerturbationFilter.Par.html]] {
+            {static} +MINIMA_ID: OptionID
+            {static} +MAXIMA_ID: OptionID
+            -maxima: double[]
+            -minima: double[]
+            {static} +SEED_ID: OptionID
+            #seed: Long
+            {static} +PERCENTAGE_ID: OptionID
+            {static} +SCALINGREFERENCE_ID: OptionID
+            {static} +NOISEDISTRIBUTION_ID: OptionID
+            #percentage: double
+            +configure(Parameterization): void
+            +make(): PerturbationFilter<V extends NumberVector>
+        }
+
+        class HistogramJitterFilter<V extends NumberVector> [[HistogramJitterFilter.html]] {
+            ~jitter: double
+            ~dist: Distribution
+            ~rnd: Random
+            +HistogramJitterFilter(double, RandomFactory)
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<V extends NumberVector>
+        }
+
+        class elki.datasource.filter.transform.HistogramJitterFilter.Par [[HistogramJitterFilter.Par.html]] {
+            {static} +JITTER_ID: OptionID
+            {static} +SEED_ID: OptionID
+            ~jitter: double
+            ~rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): HistogramJitterFilter<DoubleVector>
+        }
+
+        elki.datasource.filter.AbstractStreamConversionFilter <|-- LatLngToECEFFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.LatLngToECEFFilter.Par
+        LatLngToECEFFilter +-- elki.datasource.filter.transform.LatLngToECEFFilter.Par
+        elki.datasource.filter.AbstractStreamConversionFilter <|-- LngLatToECEFFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.LngLatToECEFFilter.Par
+        LngLatToECEFFilter +-- elki.datasource.filter.transform.LngLatToECEFFilter.Par
+        elki.datasource.filter.AbstractStreamConversionFilter <|-- ProjectionFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.ProjectionFilter.Par
+        ProjectionFilter +-- elki.datasource.filter.transform.ProjectionFilter.Par
+        elki.datasource.filter.ObjectFilter <|.. AbstractSupervisedProjectionVectorFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter.Par
+        AbstractSupervisedProjectionVectorFilter +-- elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter.Par
+        elki.datasource.filter.AbstractVectorStreamConversionFilter <|-- NumberVectorRandomFeatureSelectionFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.NumberVectorRandomFeatureSelectionFilter.Par
+        NumberVectorRandomFeatureSelectionFilter +-- elki.datasource.filter.transform.NumberVectorRandomFeatureSelectionFilter.Par
+        elki.datasource.filter.ObjectFilter <|.. ClassicMultidimensionalScalingTransform
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.ClassicMultidimensionalScalingTransform.Par
+        ClassicMultidimensionalScalingTransform +-- elki.datasource.filter.transform.ClassicMultidimensionalScalingTransform.Par
+        elki.datasource.filter.AbstractVectorStreamConversionFilter <|-- NumberVectorFeatureSelectionFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.NumberVectorFeatureSelectionFilter.Par
+        NumberVectorFeatureSelectionFilter +-- elki.datasource.filter.transform.NumberVectorFeatureSelectionFilter.Par
+        elki.datasource.filter.ObjectFilter <|.. FastMultidimensionalScalingTransform
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.FastMultidimensionalScalingTransform.Par
+        FastMultidimensionalScalingTransform +-- elki.datasource.filter.transform.FastMultidimensionalScalingTransform.Par
+        AbstractSupervisedProjectionVectorFilter <|-- LinearDiscriminantAnalysisFilter
+        elki.datasource.filter.transform.AbstractSupervisedProjectionVectorFilter.Par <|-- elki.datasource.filter.transform.LinearDiscriminantAnalysisFilter.Par
+        LinearDiscriminantAnalysisFilter +-- elki.datasource.filter.transform.LinearDiscriminantAnalysisFilter.Par
+        elki.datasource.filter.AbstractVectorConversionFilter <|-- GlobalPrincipalComponentAnalysisTransform
+        GlobalPrincipalComponentAnalysisTransform --> elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Mode: mode
+        GlobalPrincipalComponentAnalysisTransform +-- elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Mode
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Par
+        GlobalPrincipalComponentAnalysisTransform +-- elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Par
+        elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Par --> elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Mode: mode
+        elki.datasource.filter.AbstractVectorConversionFilter <|-- PerturbationFilter
+        PerturbationFilter --> elki.datasource.filter.transform.PerturbationFilter.ScalingReference: scalingreference
+        PerturbationFilter --> elki.datasource.filter.transform.PerturbationFilter.NoiseDistribution: noisedistribution
+        PerturbationFilter +-- elki.datasource.filter.transform.PerturbationFilter.ScalingReference
+        PerturbationFilter +-- elki.datasource.filter.transform.PerturbationFilter.NoiseDistribution
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.PerturbationFilter.Par
+        PerturbationFilter +-- elki.datasource.filter.transform.PerturbationFilter.Par
+        elki.datasource.filter.transform.PerturbationFilter.Par --> elki.datasource.filter.transform.PerturbationFilter.ScalingReference: scalingreference
+        elki.datasource.filter.transform.PerturbationFilter.Par --> elki.datasource.filter.transform.PerturbationFilter.NoiseDistribution: noisedistribution
+        elki.datasource.filter.AbstractVectorStreamConversionFilter <|-- HistogramJitterFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.HistogramJitterFilter.Par
+        HistogramJitterFilter +-- elki.datasource.filter.transform.HistogramJitterFilter.Par
+    }
+
+    namespace elki.datasource.filter {
+        abstract class AbstractStreamConversionFilter<I, O> [[../AbstractStreamConversionFilter.html]] {
+            ~meta: BundleMeta
+            ~column: int
+            {abstract} #filterSingleObject(I): O
+            {abstract} #getInputTypeRestriction(): TypeInformation
+            {abstract} #convertedType(SimpleTypeInformation<​I>): SimpleTypeInformation<? super O>
+        }
+        interface ObjectFilter [[../ObjectFilter.html]] {
+            {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        }
+        abstract class AbstractVectorStreamConversionFilter<I, O extends NumberVector> [[../AbstractVectorStreamConversionFilter.html]] {
+            #factory: Factory<O extends NumberVector>
+        }
+        abstract class AbstractVectorConversionFilter<I, O extends NumberVector> [[../AbstractVectorConversionFilter.html]] {
+            #factory: Factory<O extends NumberVector>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

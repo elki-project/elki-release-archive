@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ChengAndChurch.BiclusterCandidate\n<size:10>elki.clustering.biclustering" as elki.clustering.biclustering.ChengAndChurch.BiclusterCandidate [[ChengAndChurch.BiclusterCandidate.html]] {
+        ~rowcard: int
+        ~colcard: int
+        ~rowM: double[]
+        ~colM: double[]
+        ~rows: long[]
+        ~irow: long[]
+        ~cols: long[]
+        ~allM: double
+        ~residue: double
+        -MEANVISITOR: CellVisitor
+        #BiclusterCandidate(int, int)
+        #reset(): void
+        #visitAll(double[], int, CellVisitor): void
+        #visitColumn(double[], int, int, CellVisitor): void
+        #visitRow(double[], int, int, CellVisitor): void
+        #updateRowAndColumnMeans(double[], boolean): double
+        #computeMeanSquaredDeviation(double[]): double
+        #computeRowResidue(double[], int, boolean): double
+        #computeColResidue(double[], int): double
+        #maskMatrix(double[], Distribution, Random): void
+        #selectColumn(int, boolean): void
+        #selectRow(int, boolean): void
+        #invertRow(int, boolean): void
+    }
+
+    class "<size:14>ChengAndChurch\n<size:10>elki.clustering.biclustering" as elki.clustering.biclustering.ChengAndChurch [[ChengAndChurch.html]]
+
+    elki.clustering.biclustering.ChengAndChurch +-- elki.clustering.biclustering.ChengAndChurch.BiclusterCandidate
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Logging.Level\n<size:10>elki.logging" as elki.logging.Logging.Level [[Logging.Level.html]] {
+        {static} +STATISTICS: Level
+        {static} +VERBOSE: Level
+        {static} +VERYVERBOSE: Level
+        {static} -serialVersionUID: long
+        +Level(String, int)
+        {static} +parse(String): Level
+    }
+
+    class "<size:14>Level\n<size:10>java.util.logging" as java.util.logging.Level
+    class "<size:14>Logging\n<size:10>elki.logging" as elki.logging.Logging [[Logging.html]]
+
+    java.util.logging.Level <|-- elki.logging.Logging.Level
+    elki.logging.Logging +-- elki.logging.Logging.Level
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

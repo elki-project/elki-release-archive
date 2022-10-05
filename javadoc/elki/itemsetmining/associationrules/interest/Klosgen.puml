@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Klosgen\n<size:10>elki.itemsetmining.associationrules.interest" as elki.itemsetmining.associationrules.interest.Klosgen [[Klosgen.html]] {
+        +measure(int, int, int, int): double
+    }
+
+    interface "<size:14>InterestingnessMeasure\n<size:10>elki.itemsetmining.associationrules.interest" as elki.itemsetmining.associationrules.interest.InterestingnessMeasure [[InterestingnessMeasure.html]] {
+        {abstract} +measure(int, int, int, int): double
+    }
+
+    elki.itemsetmining.associationrules.interest.InterestingnessMeasure <|.. elki.itemsetmining.associationrules.interest.Klosgen
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

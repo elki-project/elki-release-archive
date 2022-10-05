@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="234px" preserveAspectRatio="none" style="width:481px;height:234px;background:#FFFFFF;" version="1.1" viewBox="0 0 481 234" width="481px" zoomAndPan="magnify"><defs/><g><!--MD5=[b4891291f217c7644174768e69b6fcc0]
+class elki.math.linearalgebra.pca.PCAResult--><a href="PCAResult.html" target="_top" title="PCAResult.html" xlink:actuate="onRequest" xlink:href="PCAResult.html" xlink:show="new" xlink:title="PCAResult.html" xlink:type="simple"><g id="elem_elki.math.linearalgebra.pca.PCAResult"><rect codeLine="6" fill="#F1F1F1" height="200.6094" id="elki.math.linearalgebra.pca.PCAResult" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="460" x="7" y="7"/><ellipse cx="168.25" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M171.2188,31.6094 Q170.6406,31.9063 170,32.0469 Q169.3594,32.2031 168.6563,32.2031 Q166.1563,32.2031 164.8281,30.5625 Q163.5156,28.9063 163.5156,25.7813 Q163.5156,22.6563 164.8281,21 Q166.1563,19.3438 168.6563,19.3438 Q169.3594,19.3438 170,19.5 Q170.6563,19.6563 171.2188,19.9531 L171.2188,22.6719 Q170.5938,22.0938 170,21.8281 Q169.4063,21.5469 168.7813,21.5469 Q167.4375,21.5469 166.75,22.625 Q166.0625,23.6875 166.0625,25.7813 Q166.0625,27.875 166.75,28.9531 Q167.4375,30.0156 168.7813,30.0156 Q169.4063,30.0156 170,29.75 Q170.5938,29.4688 171.2188,28.8906 L171.2188,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="217.25" y="24.9951">PCAResult</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="129" x="188.75" y="37.5791">elki.math.linearalgebra.pca</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="466" y1="44.9375" y2="44.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="55.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="155" x="27" y="61.9326">eigenPairs: EigenPair[]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="71.8828"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="150" x="27" y="78.2295">eigenvalues: double[]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="88.1797"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="157" x="27" y="94.5264">eigenvectors: double[]</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="466" y1="101.8281" y2="101.8281"/><ellipse cx="18" cy="115.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="156" x="27" y="118.8232">PCAResult(EigenPair[])</text><ellipse cx="18" cy="131.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="262" x="27" y="135.1201">PCAResult(EigenvalueDecomposition)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="145.0703"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="434" x="27" y="151.417">processDecomposition(EigenvalueDecomposition): EigenPair[]</text><ellipse cx="18" cy="164.3672" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="190" x="27" y="167.7139">getEigenvectors(): double[]</text><ellipse cx="18" cy="180.6641" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="183" x="27" y="184.0107">getEigenvalues(): double[]</text><ellipse cx="18" cy="196.9609" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="188" x="27" y="200.3076">getEigenPairs(): EigenPair[]</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="143.5" y="214.6094"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="143.5" y="223.8916">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[53947cba26a5610539d8b3cf3656f8d1]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PCAResult\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.PCAResult [[PCAResult.html]] {
+        -eigenPairs: EigenPair[]
+        -eigenvalues: double[]
+        -eigenvectors: double[]
+        +PCAResult(EigenPair[])
+        +PCAResult(EigenvalueDecomposition)
+        {static} -processDecomposition(EigenvalueDecomposition): EigenPair[]
+        +getEigenvectors(): double[]
+        +getEigenvalues(): double[]
+        +getEigenPairs(): EigenPair[]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

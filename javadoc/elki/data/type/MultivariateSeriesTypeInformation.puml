@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MultivariateSeriesTypeInformation\n<size:10>elki.data.type" as elki.data.type.MultivariateSeriesTypeInformation<V extends FeatureVector<?>> [[MultivariateSeriesTypeInformation.html]] {
+        #multiplicity: int
+        +MultivariateSeriesTypeInformation(Class<? super FeatureVector<?>>, int, int, int)
+        +MultivariateSeriesTypeInformation(Factory<V extends FeatureVector<?>, ?>, ByteBufferSerializer<? super FeatureVector<?>>, int, int, int)
+        {static} +typeRequest(Class<? super FeatureVector<?>>): MultivariateSeriesTypeInformation<V extends FeatureVector<?>>
+        +getMultiplicity(): int
+    }
+
+    class "<size:14>VectorTypeInformation\n<size:10>elki.data.type" as elki.data.type.VectorTypeInformation<V extends FeatureVector<?>> [[VectorTypeInformation.html]]
+
+    elki.data.type.VectorTypeInformation <|-- elki.data.type.MultivariateSeriesTypeInformation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

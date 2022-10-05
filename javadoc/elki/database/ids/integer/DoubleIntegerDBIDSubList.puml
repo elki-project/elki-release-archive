@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleIntegerDBIDSubList\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDSubList [[DoubleIntegerDBIDSubList.html]] {
+        -begin: int
+        -end: int
+        -inner: DoubleIntegerDBIDList
+        +DoubleIntegerDBIDSubList(DoubleIntegerDBIDList, int, int)
+        +assignVar(int, DBIDVar): DBIDVar
+        +doubleValue(int): double
+        +iter(): Itr
+        +contains(DBIDRef): boolean
+        +isEmpty(): boolean
+        +size(): int
+        +slice(int, int): DoubleIntegerDBIDList
+    }
+
+    interface "<size:14>DoubleIntegerDBIDList\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDList [[DoubleIntegerDBIDList.html]] {
+        {abstract} +iter(): DoubleIntegerDBIDListIter
+    }
+    class "<size:14>DoubleIntegerDBIDSubList.Itr\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDSubList.Itr [[DoubleIntegerDBIDSubList.Itr.html]]
+
+    elki.database.ids.integer.DoubleIntegerDBIDList <|.. elki.database.ids.integer.DoubleIntegerDBIDSubList
+    elki.database.ids.integer.DoubleIntegerDBIDSubList +-- elki.database.ids.integer.DoubleIntegerDBIDSubList.Itr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

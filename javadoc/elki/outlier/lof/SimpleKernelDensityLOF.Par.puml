@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleKernelDensityLOF.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.SimpleKernelDensityLOF.Par<O extends NumberVector> {
+        {static} +KERNEL_ID: OptionID
+        #distance: Distance<? super NumberVector>
+        #k: int
+        #kernel: KernelDensityFunction
+        +configure(Parameterization): void
+        +make(): SimpleKernelDensityLOF<O extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SimpleKernelDensityLOF\n<size:10>elki.outlier.lof" as elki.outlier.lof.SimpleKernelDensityLOF<O extends NumberVector> [[SimpleKernelDensityLOF.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.SimpleKernelDensityLOF.Par
+    elki.outlier.lof.SimpleKernelDensityLOF +-- elki.outlier.lof.SimpleKernelDensityLOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

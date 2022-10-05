@@ -1,0 +1,12 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSCut\n<size:10>elki.visualization.opticsplot" as elki.visualization.opticsplot.OPTICSCut [[OPTICSCut.html]] {
+        {static} +makeOPTICSCut(E extends ClusterOrder, double): Clustering<Model>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

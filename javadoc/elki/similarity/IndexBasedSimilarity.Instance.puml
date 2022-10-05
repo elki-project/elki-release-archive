@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>IndexBasedSimilarity.Instance\n<size:10>elki.similarity" as elki.similarity.IndexBasedSimilarity.Instance<T, I extends Index> [[IndexBasedSimilarity.Instance.html]] {
+        {abstract} +getIndex(): I extends Index
+    }
+
+    interface "<size:14>DatabaseSimilarityQuery\n<size:10>elki.database.query.similarity" as elki.database.query.similarity.DatabaseSimilarityQuery<T> [[../database/query/similarity/DatabaseSimilarityQuery.html]]
+    interface "<size:14>IndexBasedSimilarity\n<size:10>elki.similarity" as elki.similarity.IndexBasedSimilarity<O> [[IndexBasedSimilarity.html]] {
+        {abstract} +instantiate(Relation<T extends O>): Instance<T extends O, ?>
+    }
+
+    elki.database.query.similarity.DatabaseSimilarityQuery <|-- elki.similarity.IndexBasedSimilarity.Instance
+    elki.similarity.IndexBasedSimilarity +-- elki.similarity.IndexBasedSimilarity.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

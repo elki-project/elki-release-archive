@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DBIDView\n<size:10>elki.database.relation" as elki.database.relation.DBIDView [[DBIDView.html]] {
+        -ids: DBIDs
+        +DBIDView(DBIDs)
+        +get(DBIDRef): DBID
+        +getDataTypeInformation(): SimpleTypeInformation<DBID>
+        +getDBIDs(): DBIDs
+        +iterDBIDs(): DBIDIter
+        +setDBIDs(DBIDs): void
+        +size(): int
+        +getLongName(): String
+    }
+
+    interface "<size:14>Relation\n<size:10>elki.database.relation" as elki.database.relation.Relation<DBID> [[Relation.html]] {
+        {abstract} +get(DBIDRef): DBID
+        {abstract} +getDataTypeInformation(): SimpleTypeInformation<O>
+        {abstract} +getDBIDs(): DBIDs
+        {abstract} +iterDBIDs(): DBIDIter
+        {abstract} +size(): int
+        {abstract} +getLongName(): String
+    }
+
+    elki.database.relation.Relation <|.. elki.database.relation.DBIDView
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

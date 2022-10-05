@@ -1,0 +1,85 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.metrical.mtreevariants.query {
+
+        class MTreeKNNByDBID<O> [[MTreeKNNByDBID.html]] {
+            #index: AbstractMTree<O, ?, ?, ?>
+            #distanceQuery: DistanceQuery<O>
+            +MTreeKNNByDBID(AbstractMTree<O, ?, ?, ?>, DistanceQuery<O>)
+            +getKNN(DBIDRef, int): KNNList
+        }
+
+        class MTreeRangeByDBID<O> [[MTreeRangeByDBID.html]] {
+            #index: AbstractMTree<O, ?, ?, ?>
+            #distanceQuery: DistanceQuery<O>
+            +MTreeRangeByDBID(AbstractMTree<O, ?, ?, ?>, DistanceQuery<O>)
+            -doRangeQuery(DBID, AbstractMTreeNode<O, ?, ?>, DBIDRef, double, ModifiableDoubleDBIDList): void
+            +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class MkTreeRKNNQuery<O> [[MkTreeRKNNQuery.html]] {
+            #distanceQuery: DistanceQuery<O>
+            #index: AbstractMkTree<O, ?, ?, ?>
+            +MkTreeRKNNQuery(AbstractMkTree<O, ?, ?, ?>, DistanceQuery<O>)
+            +getRKNN(DBIDRef, int): DoubleDBIDList
+        }
+
+        class MTreeSearchCandidate [[MTreeSearchCandidate.html]] {
+            +mindist: double
+            +nodeID: int
+            +routingObjectID: DBID
+            +routingDistance: double
+            +MTreeSearchCandidate(double, int, DBID, double)
+            +compareTo(MTreeSearchCandidate): int
+        }
+
+        class MTreeRangeByObject<O> [[MTreeRangeByObject.html]] {
+            #index: AbstractMTree<O, ?, ?, ?>
+            #distanceQuery: DistanceQuery<O>
+            +MTreeRangeByObject(AbstractMTree<O, ?, ?, ?>, DistanceQuery<O>)
+            -doRangeQuery(DBID, AbstractMTreeNode<O, ?, ?>, O, double, ModifiableDoubleDBIDList): void
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class MTreeKNNByObject<O> [[MTreeKNNByObject.html]] {
+            #index: AbstractMTree<O, ?, ?, ?>
+            #distanceQuery: DistanceQuery<O>
+            +MTreeKNNByObject(AbstractMTree<O, ?, ?, ?>, DistanceQuery<O>)
+            +getKNN(O, int): KNNList
+        }
+
+        elki.database.query.knn.KNNSearcher <|.. MTreeKNNByDBID
+        elki.database.query.range.RangeSearcher <|.. MTreeRangeByDBID
+        elki.database.query.rknn.RKNNSearcher <|.. MkTreeRKNNQuery
+        java.lang.Comparable <|.. MTreeSearchCandidate
+        elki.database.query.range.RangeSearcher <|.. MTreeRangeByObject
+        elki.database.query.knn.KNNSearcher <|.. MTreeKNNByObject
+    }
+
+    namespace elki.database.query.knn {
+        interface KNNSearcher<O> [[../../../../../database/query/knn/KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+    }
+
+    namespace elki.database.query.range {
+        interface RangeSearcher<O> [[../../../../../database/query/range/RangeSearcher.html]] {
+            +getRange(O, double): DoubleDBIDList
+            {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+    }
+
+    namespace elki.database.query.rknn {
+        interface RKNNSearcher<O> [[../../../../../database/query/rknn/RKNNSearcher.html]] {
+            {abstract} +getRKNN(O, int): DoubleDBIDList
+        }
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

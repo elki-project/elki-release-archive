@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HDBSCANHierarchyExtraction.Par\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Par [[HDBSCANHierarchyExtraction.Par.html]] {
+        {static} +MINCLUSTERSIZE_ID: OptionID
+        {static} +HIERARCHICAL_ID: OptionID
+        ~minClSize: int
+        ~algorithm: HierarchicalClusteringAlgorithm
+        ~hierarchical: boolean
+        +configure(Parameterization): void
+        +make(): HDBSCANHierarchyExtraction
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>HDBSCANHierarchyExtraction\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction [[HDBSCANHierarchyExtraction.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Par
+    elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction +-- elki.clustering.hierarchical.extraction.HDBSCANHierarchyExtraction.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

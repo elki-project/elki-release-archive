@@ -1,0 +1,48 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ResultWindow\n<size:10>elki.visualization.gui" as elki.visualization.gui.ResultWindow [[ResultWindow.html]] {
+        {static} -serialVersionUID: long
+        -menubar: DynamicMenu
+        -svgCanvas: JSVGSynchronizedCanvas
+        -overview: OverviewPlot
+        #context: VisualizerContext
+        -currentSubplot: DetailView
+        -single: boolean
+        +ResultWindow(String, VisualizerContext, boolean)
+        +dispose(): void
+        #close(): void
+        +showOverview(): void
+        #showSubplot(DetailViewSelectedEvent): void
+        -showPlot(SVGPlot): void
+        #saveCurrentPlot(): void
+        #invokeTextWriter(): void
+        #showTableView(): void
+        #update(): void
+        #handleResize(double): void
+        +resultAdded(Object, Object): void
+        +resultChanged(Object): void
+        +resultRemoved(Object, Object): void
+        +visualizationChanged(VisualizationItem): void
+        -updateVisualizerMenus(): void
+    }
+
+    class "<size:14>JFrame\n<size:10>javax.swing" as javax.swing.JFrame
+    interface "<size:14>ResultListener\n<size:10>elki.result" as elki.result.ResultListener [[../../result/ResultListener.html]]
+    interface "<size:14>VisualizationListener\n<size:10>elki.visualization" as elki.visualization.VisualizationListener [[../VisualizationListener.html]] {
+        {abstract} +visualizationChanged(VisualizationItem): void
+    }
+    class "<size:14>ResultWindow.DynamicMenu\n<size:10>elki.visualization.gui" as elki.visualization.gui.ResultWindow.DynamicMenu [[ResultWindow.DynamicMenu.html]]
+    class "<size:14>ResultWindow.TextWriterPanel\n<size:10>elki.visualization.gui" as elki.visualization.gui.ResultWindow.TextWriterPanel [[ResultWindow.TextWriterPanel.html]]
+
+    javax.swing.JFrame <|-- elki.visualization.gui.ResultWindow
+    elki.result.ResultListener <|.. elki.visualization.gui.ResultWindow
+    elki.visualization.VisualizationListener <|.. elki.visualization.gui.ResultWindow
+    elki.visualization.gui.ResultWindow +-- elki.visualization.gui.ResultWindow.DynamicMenu
+    elki.visualization.gui.ResultWindow +-- elki.visualization.gui.ResultWindow.TextWriterPanel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

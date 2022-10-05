@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HistogramIntersectionDistance.Par\n<size:10>elki.distance.colorhistogram" as elki.distance.colorhistogram.HistogramIntersectionDistance.Par [[HistogramIntersectionDistance.Par.html]] {
+        +make(): HistogramIntersectionDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>HistogramIntersectionDistance\n<size:10>elki.distance.colorhistogram" as elki.distance.colorhistogram.HistogramIntersectionDistance [[HistogramIntersectionDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.colorhistogram.HistogramIntersectionDistance.Par
+    elki.distance.colorhistogram.HistogramIntersectionDistance +-- elki.distance.colorhistogram.HistogramIntersectionDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

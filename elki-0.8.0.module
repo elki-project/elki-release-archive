@@ -1,0 +1,320 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-clustering",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-outlier",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-itemsets",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-classification",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-timeseries",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-data-generator",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-rtree",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-mtree",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-lsh",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-various",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-precomputed",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-geo",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-dbids-int",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-0.8.0.jar",
+          "url": "elki-0.8.0.jar",
+          "size": 477937,
+          "sha512": "3544824b73370ed895011c9d5a753701f0dc15d3672f7f722584895204f3abe7ce7ddaab41b1c00cdcc766387ad3821236555192b636e3c4d384debfbe29dc1b",
+          "sha256": "4ef54bd781398879a7de147e0eb3a82bfb012798b782296462f3d168d3ac07eb",
+          "sha1": "919f8c74f8c3bf025e9e3db286023b99ad738ea6",
+          "md5": "9da97e0e524a32b398a93ea249c460f3"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-clustering",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-outlier",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-itemsets",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-classification",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-timeseries",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-data-generator",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-rtree",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-mtree",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-lsh",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-various",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-precomputed",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-geo",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-dbids-int",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-0.8.0.jar",
+          "url": "elki-0.8.0.jar",
+          "size": 477937,
+          "sha512": "3544824b73370ed895011c9d5a753701f0dc15d3672f7f722584895204f3abe7ce7ddaab41b1c00cdcc766387ad3821236555192b636e3c4d384debfbe29dc1b",
+          "sha256": "4ef54bd781398879a7de147e0eb3a82bfb012798b782296462f3d168d3ac07eb",
+          "sha1": "919f8c74f8c3bf025e9e3db286023b99ad738ea6",
+          "md5": "9da97e0e524a32b398a93ea249c460f3"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-0.8.0-test-fixtures.jar",
+          "url": "elki-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "cb295e8557f54ce212846b8c1157519d3e7280ac05c49d9a3e9bdc9777e8f2260912ee03ad3dba924cac95ccb23eca381c2927c89896880d6c0de58e6967497d",
+          "sha256": "80afced80c6c33f4d90a3f6b46b02796db96e0bbafaa228c72eea6ab9ac15d87",
+          "sha1": "65b9d08d65fd8fc3dcea2828e18c124b582d3306",
+          "md5": "e306e101382db11885344b9f3c45f8b9"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-0.8.0-test-fixtures.jar",
+          "url": "elki-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "cb295e8557f54ce212846b8c1157519d3e7280ac05c49d9a3e9bdc9777e8f2260912ee03ad3dba924cac95ccb23eca381c2927c89896880d6c0de58e6967497d",
+          "sha256": "80afced80c6c33f4d90a3f6b46b02796db96e0bbafaa228c72eea6ab9ac15d87",
+          "sha1": "65b9d08d65fd8fc3dcea2828e18c124b582d3306",
+          "md5": "e306e101382db11885344b9f3c45f8b9"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

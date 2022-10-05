@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HySortOD.TreeStrategy\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD.TreeStrategy [[HySortOD.TreeStrategy.html]] {
+        ~root: Node
+        ~minSplit: int
+        +TreeStrategy(int)
+        ~buildIndex(List<Hypercube>): DensityStrategy
+        -buildIndex(Node, int): void
+        ~getDensities(): int[]
+        -density(int, Node, int): int
+    }
+
+    abstract class "<size:14>HySortOD.DensityStrategy\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD.DensityStrategy [[HySortOD.DensityStrategy.html]] {
+        {abstract} ~buildIndex(List<Hypercube>): DensityStrategy
+        {abstract} ~getDensities(): int[]
+    }
+    class "<size:14>HySortOD\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD [[HySortOD.html]]
+    class "<size:14>HySortOD.TreeStrategy.Node\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD.TreeStrategy.Node [[HySortOD.TreeStrategy.Node.html]]
+
+    elki.outlier.density.HySortOD.DensityStrategy <|-- elki.outlier.density.HySortOD.TreeStrategy
+    elki.outlier.density.HySortOD +-- elki.outlier.density.HySortOD.TreeStrategy
+    elki.outlier.density.HySortOD.TreeStrategy +-- elki.outlier.density.HySortOD.TreeStrategy.Node
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

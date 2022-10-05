@@ -1,0 +1,51 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Simple2D\n<size:10>elki.visualization.projections" as elki.visualization.projections.Simple2D [[Simple2D.html]] {
+        -dim1: int
+        -dim2: int
+        +Simple2D(Projector, LinearScale[], int, int)
+        +fastProjectDataToRenderSpace(double[]): double[]
+        +fastProjectDataToRenderSpace(NumberVector): double[]
+        +fastProjectDataToScaledSpace(double[]): double[]
+        +fastProjectDataToScaledSpace(NumberVector): double[]
+        +fastProjectScaledToRenderSpace(double[]): double[]
+        +fastProjectRenderToDataSpace(double, double): double[]
+        +fastProjectRenderToScaledSpace(double, double): double[]
+        +fastProjectRelativeDataToRenderSpace(double[]): double[]
+        +fastProjectRelativeDataToRenderSpace(NumberVector): double[]
+        +fastProjectRelativeScaledToRenderSpace(double[]): double[]
+        +getVisibleDimensions2D(): long[]
+        +estimateViewport(): CanvasSize
+        #rearrange(double[]): double[]
+        #dearrange(double[]): double[]
+        +getMenuName(): String
+    }
+
+    abstract class "<size:14>AbstractSimpleProjection\n<size:10>elki.visualization.projections" as elki.visualization.projections.AbstractSimpleProjection [[AbstractSimpleProjection.html]] {
+        {abstract} #rearrange(double[]): double[]
+        {abstract} #dearrange(double[]): double[]
+    }
+    interface "<size:14>Projection2D\n<size:10>elki.visualization.projections" as elki.visualization.projections.Projection2D [[Projection2D.html]] {
+        {abstract} +fastProjectDataToRenderSpace(double[]): double[]
+        {abstract} +fastProjectDataToRenderSpace(NumberVector): double[]
+        {abstract} +fastProjectDataToScaledSpace(double[]): double[]
+        {abstract} +fastProjectDataToScaledSpace(NumberVector): double[]
+        {abstract} +fastProjectScaledToRenderSpace(double[]): double[]
+        {abstract} +fastProjectRenderToDataSpace(double, double): double[]
+        {abstract} +fastProjectRenderToScaledSpace(double, double): double[]
+        {abstract} +fastProjectRelativeDataToRenderSpace(double[]): double[]
+        {abstract} +fastProjectRelativeDataToRenderSpace(NumberVector): double[]
+        {abstract} +fastProjectRelativeScaledToRenderSpace(double[]): double[]
+        {abstract} +estimateViewport(): CanvasSize
+        {abstract} +getVisibleDimensions2D(): long[]
+    }
+
+    elki.visualization.projections.AbstractSimpleProjection <|-- elki.visualization.projections.Simple2D
+    elki.visualization.projections.Projection2D <|.. elki.visualization.projections.Simple2D
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

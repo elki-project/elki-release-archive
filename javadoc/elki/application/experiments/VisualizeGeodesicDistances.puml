@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VisualizeGeodesicDistances\n<size:10>elki.application.experiments" as elki.application.experiments.VisualizeGeodesicDistances [[VisualizeGeodesicDistances.html]] {
+        {static} -LOG: Logging
+        -out: Path
+        #width: int
+        #height: int
+        #steps: int
+        #mode: Mode
+        #model: EarthModel
+        +VisualizeGeodesicDistances(Path, int, int, Mode, EarthModel)
+        +run(): void
+        -colorMultiply(int, double, boolean): int
+        {static} +main(String[]): void
+    }
+
+    abstract class "<size:14>AbstractApplication\n<size:10>elki.application" as elki.application.AbstractApplication [[../AbstractApplication.html]] {
+        {abstract} +run(): void
+    }
+    enum "<size:14>VisualizeGeodesicDistances.Mode\n<size:10>elki.application.experiments" as elki.application.experiments.VisualizeGeodesicDistances.Mode [[VisualizeGeodesicDistances.Mode.html]]
+    class "<size:14>VisualizeGeodesicDistances.Par\n<size:10>elki.application.experiments" as elki.application.experiments.VisualizeGeodesicDistances.Par [[VisualizeGeodesicDistances.Par.html]]
+
+    elki.application.AbstractApplication <|-- elki.application.experiments.VisualizeGeodesicDistances
+    elki.application.experiments.VisualizeGeodesicDistances +-- elki.application.experiments.VisualizeGeodesicDistances.Mode
+    elki.application.experiments.VisualizeGeodesicDistances +-- elki.application.experiments.VisualizeGeodesicDistances.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

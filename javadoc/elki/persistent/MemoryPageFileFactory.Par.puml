@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MemoryPageFileFactory.Par\n<size:10>elki.persistent" as elki.persistent.MemoryPageFileFactory.Par [[MemoryPageFileFactory.Par.html]] {
+        +make(): MemoryPageFileFactory<Page>
+    }
+
+    abstract class "<size:14>AbstractPageFileFactory.Par\n<size:10>elki.persistent" as elki.persistent.AbstractPageFileFactory.Par<Page> {
+        {abstract} +make(): PageFileFactory<P extends Page>
+    }
+    class "<size:14>MemoryPageFileFactory\n<size:10>elki.persistent" as elki.persistent.MemoryPageFileFactory<P extends Page> [[MemoryPageFileFactory.html]]
+
+    elki.persistent.AbstractPageFileFactory.Par <|-- elki.persistent.MemoryPageFileFactory.Par
+    elki.persistent.MemoryPageFileFactory +-- elki.persistent.MemoryPageFileFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

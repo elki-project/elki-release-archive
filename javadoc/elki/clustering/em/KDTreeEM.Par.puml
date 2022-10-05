@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KDTreeEM.Par\n<size:10>elki.clustering.em" as elki.clustering.em.KDTreeEM.Par [[KDTreeEM.Par.html]] {
+        {static} +K_ID: OptionID
+        {static} +DELTA_ID: OptionID
+        {static} +MBW_ID: OptionID
+        {static} +TAU_ID: OptionID
+        {static} +TAU_CLASS_ID: OptionID
+        {static} +MINITER_ID: OptionID
+        {static} +MAXITER_ID: OptionID
+        {static} +SOFT_ID: OptionID
+        {static} +EXACT_ASSIGN_ID: OptionID
+        #k: int
+        #mbw: double
+        #tau: double
+        #tauclass: double
+        #delta: double
+        #mfactory: TextbookMultivariateGaussianModelFactory
+        #miniter: int
+        #maxiter: int
+        ~soft: boolean
+        ~exactAssign: boolean
+        +configure(Parameterization): void
+        +make(): KDTreeEM
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>KDTreeEM\n<size:10>elki.clustering.em" as elki.clustering.em.KDTreeEM [[KDTreeEM.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.KDTreeEM.Par
+    elki.clustering.em.KDTreeEM +-- elki.clustering.em.KDTreeEM.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

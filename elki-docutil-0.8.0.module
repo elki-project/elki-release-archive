@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-docutil",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-util",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-docutil-0.8.0.jar",
+          "url": "elki-docutil-0.8.0.jar",
+          "size": 49662,
+          "sha512": "d8b4ae992e25c8ffbede858857d9074ca9954c91f7053866cd88a6644927bc8d6063c245d4939f4b25c0c12bbc9d30ee934baeb416d569696cf08b12ae79772e",
+          "sha256": "16a30ba28001b7470c15e2d6ccf48c1c987304c7c185bdda024929f2ccc286d3",
+          "sha1": "59f0d66f02251c39bdcc29e85db7f75369dce7cd",
+          "md5": "fb8a409804d26ec36577a00540132fa0"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-util",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-docutil-0.8.0.jar",
+          "url": "elki-docutil-0.8.0.jar",
+          "size": 49662,
+          "sha512": "d8b4ae992e25c8ffbede858857d9074ca9954c91f7053866cd88a6644927bc8d6063c245d4939f4b25c0c12bbc9d30ee934baeb416d569696cf08b12ae79772e",
+          "sha256": "16a30ba28001b7470c15e2d6ccf48c1c987304c7c185bdda024929f2ccc286d3",
+          "sha1": "59f0d66f02251c39bdcc29e85db7f75369dce7cd",
+          "md5": "fb8a409804d26ec36577a00540132fa0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-docutil",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-docutil-0.8.0-test-fixtures.jar",
+          "url": "elki-docutil-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "3c15f63d9dfc49f5ae30ff7b493148ebdd14152d6fe21606dfa59b1ef0b09954ab4f38cc125476f11c468d7782aac4af11345f5f2e54849230b19d8308229359",
+          "sha256": "bcf79f4943112bb2e645df54b178e47207b00f6c9fdefa913ab7e2f376e3e5f9",
+          "sha1": "e4c85f0bb17a960f3118bf4c20a76631ab32d510",
+          "md5": "af32ffe9a23bf6088ac7bdadfeaffa2a"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-docutil-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-docutil",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-docutil-0.8.0-test-fixtures.jar",
+          "url": "elki-docutil-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "3c15f63d9dfc49f5ae30ff7b493148ebdd14152d6fe21606dfa59b1ef0b09954ab4f38cc125476f11c468d7782aac4af11345f5f2e54849230b19d8308229359",
+          "sha256": "bcf79f4943112bb2e645df54b178e47207b00f6c9fdefa913ab7e2f376e3e5f9",
+          "sha1": "e4c85f0bb17a960f3118bf4c20a76631ab32d510",
+          "md5": "af32ffe9a23bf6088ac7bdadfeaffa2a"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-docutil-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

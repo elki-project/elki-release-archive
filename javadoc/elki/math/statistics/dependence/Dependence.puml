@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Dependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.Dependence [[Dependence.html]] {
+        {abstract} +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+        +dependence(NumberArrayAdapter<?, A>, A, A): double
+        +dependence(NumberArrayAdapter<?, A>, List<? extends A>): double[]
+        +dependence(double[], double[]): double
+    }
+    class "<size:14>Dependence.Utils\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.Dependence.Utils [[Dependence.Utils.html]]
+
+    elki.math.statistics.dependence.Dependence +-- elki.math.statistics.dependence.Dependence.Utils
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

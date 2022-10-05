@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LabelList\n<size:10>elki.data" as elki.data.LabelList [[LabelList.html]] {
+        {static} +SERIALIZER: ByteBufferSerializer<LabelList>
+        -labels: String[]
+        {static} +EMPTY_LABELS: LabelList
+        -LabelList(int)
+        #LabelList(String[])
+        {static} +make(Collection<String>): LabelList
+        +size(): int
+        +get(int): String
+    }
+    class "<size:14>LabelList.Serializer\n<size:10>elki.data" as elki.data.LabelList.Serializer [[LabelList.Serializer.html]]
+
+    elki.data.LabelList +-- elki.data.LabelList.Serializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

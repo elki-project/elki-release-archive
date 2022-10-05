@@ -1,0 +1,50 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.distance.histogram {
+
+        class HistogramMatchDistance [[HistogramMatchDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +isMetric(): boolean
+        }
+
+        class elki.distance.histogram.HistogramMatchDistance.Par [[HistogramMatchDistance.Par.html]] {
+            +make(): HistogramMatchDistance
+        }
+
+        class KolmogorovSmirnovDistance [[KolmogorovSmirnovDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+        }
+
+        class elki.distance.histogram.KolmogorovSmirnovDistance.Par [[KolmogorovSmirnovDistance.Par.html]] {
+            +make(): KolmogorovSmirnovDistance
+        }
+
+        elki.distance.AbstractNumberVectorDistance <|-- HistogramMatchDistance
+        elki.distance.SpatialPrimitiveDistance <|.. HistogramMatchDistance
+        HistogramMatchDistance --> HistogramMatchDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.histogram.HistogramMatchDistance.Par
+        HistogramMatchDistance +-- elki.distance.histogram.HistogramMatchDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- KolmogorovSmirnovDistance
+        KolmogorovSmirnovDistance --> KolmogorovSmirnovDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.histogram.KolmogorovSmirnovDistance.Par
+        KolmogorovSmirnovDistance +-- elki.distance.histogram.KolmogorovSmirnovDistance.Par
+    }
+
+    namespace elki.distance {
+        abstract class AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+        interface SpatialPrimitiveDistance<V extends SpatialComparable> [[../SpatialPrimitiveDistance.html]] {
+            {abstract} +minDist(SpatialComparable, SpatialComparable): double
+            +instantiate(Relation<T extends SpatialComparable>): SpatialPrimitiveDistanceQuery<T extends SpatialComparable>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

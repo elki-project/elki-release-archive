@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KullbackLeiblerDivergenceReverseAsymmetricDistance\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.KullbackLeiblerDivergenceReverseAsymmetricDistance [[KullbackLeiblerDivergenceReverseAsymmetricDistance.html]] {
+        {static} +STATIC: KullbackLeiblerDivergenceReverseAsymmetricDistance
+        +distance(NumberVector, NumberVector): double
+        +isSymmetric(): boolean
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    class "<size:14>KullbackLeiblerDivergenceReverseAsymmetricDistance.Par\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.KullbackLeiblerDivergenceReverseAsymmetricDistance.Par [[KullbackLeiblerDivergenceReverseAsymmetricDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.probabilistic.KullbackLeiblerDivergenceReverseAsymmetricDistance
+    elki.distance.probabilistic.KullbackLeiblerDivergenceReverseAsymmetricDistance +-- elki.distance.probabilistic.KullbackLeiblerDivergenceReverseAsymmetricDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

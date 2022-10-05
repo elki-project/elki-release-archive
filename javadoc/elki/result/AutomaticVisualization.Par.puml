@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AutomaticVisualization.Par\n<size:10>elki.result" as elki.result.AutomaticVisualization.Par [[AutomaticVisualization.Par.html]] {
+        {static} +WINDOW_TITLE_ID: OptionID
+        {static} +SINGLE_ID: OptionID
+        ~title: String
+        ~manager: VisualizerParameterizer
+        ~single: boolean
+        +configure(Parameterization): void
+        +make(): AutomaticVisualization
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AutomaticVisualization\n<size:10>elki.result" as elki.result.AutomaticVisualization [[AutomaticVisualization.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.result.AutomaticVisualization.Par
+    elki.result.AutomaticVisualization +-- elki.result.AutomaticVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

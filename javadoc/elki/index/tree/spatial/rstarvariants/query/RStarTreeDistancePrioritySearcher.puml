@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RStarTreeDistancePrioritySearcher\n<size:10>elki.index.tree.spatial.rstarvariants.query" as elki.index.tree.spatial.rstarvariants.query.RStarTreeDistancePrioritySearcher<O extends SpatialComparable> [[RStarTreeDistancePrioritySearcher.html]] {
+        #tree: AbstractRStarTree<?, ?, ?>
+        #distance: SpatialPrimitiveDistance<? super SpatialComparable>
+        #relation: Relation<? extends SpatialComparable>
+        ~query: O extends SpatialComparable
+        ~threshold: double
+        ~pq: DoubleIntegerMinHeap
+        ~node: AbstractRStarTreeNode<?, ?>
+        ~childnr: int
+        -mindist: double
+        +RStarTreeDistancePrioritySearcher(AbstractRStarTree<?, ?, ?>, Relation<? extends SpatialComparable>, SpatialPrimitiveDistance<? super SpatialComparable>)
+        +getKNN(O extends SpatialComparable, int): KNNList
+        +getRange(O extends SpatialComparable, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        +search(O extends SpatialComparable): RStarTreeDistancePrioritySearcher<O extends SpatialComparable>
+        +decreaseCutoff(double): RStarTreeDistancePrioritySearcher<O extends SpatialComparable>
+        +valid(): boolean
+        +advance(): RStarTreeDistancePrioritySearcher<O extends SpatialComparable>
+        #advanceQueue(): boolean
+        +getLowerBound(): double
+        +allLowerBound(): double
+        +computeExactDistance(): double
+        +internalGetIndex(): int
+    }
+
+    interface "<size:14>PrioritySearcher\n<size:10>elki.database.query" as elki.database.query.PrioritySearcher<O extends SpatialComparable> [[../../../../../database/query/PrioritySearcher.html]] {
+        {abstract} +search(O extends SpatialComparable): PrioritySearcher<O>
+        {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+        {abstract} +computeExactDistance(): double
+        {abstract} +allLowerBound(): double
+        {abstract} +advance(): PrioritySearcher<O>
+    }
+
+    elki.database.query.PrioritySearcher <|.. elki.index.tree.spatial.rstarvariants.query.RStarTreeDistancePrioritySearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

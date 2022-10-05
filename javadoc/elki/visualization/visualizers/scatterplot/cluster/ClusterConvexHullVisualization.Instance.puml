@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterConvexHullVisualization.Instance\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.ClusterConvexHullVisualization.Instance [[ClusterConvexHullVisualization.Instance.html]] {
+        {static} +CLUSTERHULL: String
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        -buildHullsRecursively(Cluster<Model>, Hierarchy<Cluster<Model>>, Map<Object, DoubleObjPair<Polygon>>): DoubleObjPair<Polygon>
+        -addCSSClasses(SVGPlot, int, double): void
+    }
+
+    abstract class "<size:14>AbstractScatterplotVisualization\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization [[../AbstractScatterplotVisualization.html]]
+    class "<size:14>ClusterConvexHullVisualization\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.ClusterConvexHullVisualization [[ClusterConvexHullVisualization.html]]
+
+    elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.cluster.ClusterConvexHullVisualization.Instance
+    elki.visualization.visualizers.scatterplot.cluster.ClusterConvexHullVisualization +-- elki.visualization.visualizers.scatterplot.cluster.ClusterConvexHullVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

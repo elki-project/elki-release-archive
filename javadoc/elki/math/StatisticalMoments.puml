@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>StatisticalMoments\n<size:10>elki.math" as elki.math.StatisticalMoments [[StatisticalMoments.html]] {
+        ~m3: double
+        ~m4: double
+        +StatisticalMoments()
+        +StatisticalMoments(StatisticalMoments)
+        +put(double): void
+        +put(double, double): void
+        +put(Mean): void
+        +put(double[]): StatisticalMoments
+        +put(double[], double[]): StatisticalMoments
+        +getSampleSkewness(): double
+        +getNaiveSkewness(): double
+        +getSampleKurtosis(): double
+        +getNaiveKurtosis(): double
+        +getSampleExcessKurtosis(): double
+        +getNaiveExcessKurtosis(): double
+        +reset(): StatisticalMoments
+    }
+
+    class "<size:14>MeanVarianceMinMax\n<size:10>elki.math" as elki.math.MeanVarianceMinMax [[MeanVarianceMinMax.html]]
+
+    elki.math.MeanVarianceMinMax <|-- elki.math.StatisticalMoments
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

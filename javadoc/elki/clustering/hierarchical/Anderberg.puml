@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Anderberg\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.Anderberg<O> [[Anderberg.html]] {
+        {static} -LOG: Logging
+        +Anderberg(Distance<? super O>, Linkage)
+        +run(Relation<O>): ClusterMergeHistory
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    class "<size:14>AGNES\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AGNES<O> [[AGNES.html]]
+    class "<size:14>Anderberg.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.Anderberg.Instance [[Anderberg.Instance.html]]
+    class "<size:14>Anderberg.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.Anderberg.Par<O>
+
+    elki.clustering.hierarchical.AGNES <|-- elki.clustering.hierarchical.Anderberg
+    elki.clustering.hierarchical.Anderberg +-- elki.clustering.hierarchical.Anderberg.Instance
+    elki.clustering.hierarchical.Anderberg +-- elki.clustering.hierarchical.Anderberg.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

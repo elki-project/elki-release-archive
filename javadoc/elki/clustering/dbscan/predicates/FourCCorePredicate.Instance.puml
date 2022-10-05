@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FourCCorePredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.FourCCorePredicate.Instance [[FourCCorePredicate.Instance.html]] {
+        #settings: Settings
+        +Instance(Settings)
+        +isCorePoint(DBIDRef, PreDeConModel): boolean
+    }
+
+    interface "<size:14>CorePredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.CorePredicate.Instance<PreDeConModel> [[CorePredicate.Instance.html]] {
+        {abstract} +isCorePoint(DBIDRef, PreDeConModel): boolean
+    }
+    class "<size:14>FourCCorePredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.FourCCorePredicate [[FourCCorePredicate.html]]
+
+    elki.clustering.dbscan.predicates.CorePredicate.Instance <|.. elki.clustering.dbscan.predicates.FourCCorePredicate.Instance
+    elki.clustering.dbscan.predicates.FourCCorePredicate +-- elki.clustering.dbscan.predicates.FourCCorePredicate.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

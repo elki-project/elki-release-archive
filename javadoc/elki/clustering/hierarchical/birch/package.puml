@@ -1,0 +1,288 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.hierarchical.birch {
+
+        class CFTree [[CFTree.html]] {
+            {static} +LOG: Logging
+            ~thresholdsq: double
+            ~capacity: int
+            ~leaves: int
+            +CFTree(BIRCHDistance, BIRCHAbsorptionCriterion, double, int)
+            +insert(NumberVector): void
+            #rebuildTree(): void
+            -estimateThreshold(TreeNode): double
+            -insert(TreeNode, NumberVector): TreeNode
+            +findLeaf(NumberVector): ClusteringFeature
+            -findLeaf(TreeNode, NumberVector): ClusteringFeature
+            -split(TreeNode, ClusteringFeature): TreeNode
+            -insert(TreeNode, ClusteringFeature): TreeNode
+            -add(ClusteringFeature[], ClusteringFeature): boolean
+            +leafIterator(): LeafIterator
+            #printDebug(StringBuilder, ClusteringFeature, int): StringBuilder
+        }
+
+        class elki.clustering.hierarchical.birch.CFTree.LeafIterator [[CFTree.LeafIterator.html]] {
+            -LeafIterator(TreeNode)
+            +valid(): boolean
+            +get(): ClusteringFeature
+            +advance(): Iter
+        }
+
+        class elki.clustering.hierarchical.birch.CFTree.TreeNode {
+            +TreeNode(int, int)
+        }
+
+        class elki.clustering.hierarchical.birch.CFTree.Factory [[CFTree.Factory.html]] {
+            ~threshold: double
+            ~branchingFactor: int
+            ~maxleaves: double
+            +Factory(BIRCHDistance, BIRCHAbsorptionCriterion, double, int, double)
+            +newTree(DBIDs, Relation<? extends NumberVector>): CFTree
+        }
+
+        class elki.clustering.hierarchical.birch.CFTree.Factory.Par [[CFTree.Factory.Par.html]] {
+            {static} +DISTANCE_ID: OptionID
+            {static} +ABSORPTION_ID: OptionID
+            {static} +THRESHOLD_ID: OptionID
+            {static} +BRANCHING_ID: OptionID
+            {static} +MAXLEAVES_ID: OptionID
+            ~threshold: double
+            ~branchingFactor: int
+            ~maxleaves: double
+            +configure(Parameterization): void
+            +make(): Factory
+        }
+
+        class EuclideanDistanceCriterion [[EuclideanDistanceCriterion.html]] {
+            +squaredCriterion(ClusteringFeature, NumberVector): double
+            +squaredCriterion(ClusteringFeature, ClusteringFeature): double
+        }
+
+        class elki.clustering.hierarchical.birch.EuclideanDistanceCriterion.Par {
+            +make(): EuclideanDistanceCriterion
+        }
+
+        interface BIRCHDistance [[BIRCHDistance.html]] {
+            {abstract} +squaredDistance(NumberVector, ClusteringFeature): double
+            {abstract} +squaredDistance(ClusteringFeature, ClusteringFeature): double
+        }
+
+        class BIRCHLloydKMeans [[BIRCHLloydKMeans.html]] {
+            {static} -LOG: Logging
+            ~k: int
+            ~maxiter: int
+            +BIRCHLloydKMeans(Factory, int, int, BIRCHKMeansPlusPlus)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<NumberVector>): Clustering<KMeansModel>
+            -kmeans(double[], ClusteringFeature[], int[], int[]): double[]
+            -means(int[], double[], ClusteringFeature[], int[]): double[]
+            -assignToNearestCluster(int[], double[], double[], ClusteringFeature[], int[]): int
+            #distance(NumberVector, double[]): double
+            #distance(double[], double[]): double
+            -calculateVariances(int[], double[], ClusteringFeature[], int[]): double[]
+        }
+
+        class elki.clustering.hierarchical.birch.BIRCHLloydKMeans.Par [[BIRCHLloydKMeans.Par.html]] {
+            #k: int
+            #maxiter: int
+            +configure(Parameterization): void
+            +make(): BIRCHLloydKMeans
+        }
+
+        class RadiusCriterion [[RadiusCriterion.html]] {
+            +squaredCriterion(ClusteringFeature, NumberVector): double
+            +squaredCriterion(ClusteringFeature, ClusteringFeature): double
+        }
+
+        class elki.clustering.hierarchical.birch.RadiusCriterion.Par [[RadiusCriterion.Par.html]] {
+            +make(): RadiusCriterion
+        }
+
+        class AverageIntraclusterDistance [[AverageIntraclusterDistance.html]] {
+            +squaredDistance(NumberVector, ClusteringFeature): double
+            +squaredDistance(ClusteringFeature, ClusteringFeature): double
+        }
+
+        class elki.clustering.hierarchical.birch.AverageIntraclusterDistance.Par [[AverageIntraclusterDistance.Par.html]] {
+            +make(): AverageIntraclusterDistance
+        }
+
+        class VarianceIncreaseDistance [[VarianceIncreaseDistance.html]] {
+            +squaredDistance(NumberVector, ClusteringFeature): double
+            +squaredDistance(ClusteringFeature, ClusteringFeature): double
+        }
+
+        class elki.clustering.hierarchical.birch.VarianceIncreaseDistance.Par [[VarianceIncreaseDistance.Par.html]] {
+            +make(): VarianceIncreaseDistance
+        }
+
+        interface BIRCHAbsorptionCriterion [[BIRCHAbsorptionCriterion.html]] {
+            {abstract} +squaredCriterion(ClusteringFeature, NumberVector): double
+            {abstract} +squaredCriterion(ClusteringFeature, ClusteringFeature): double
+        }
+
+        class CentroidEuclideanDistance [[CentroidEuclideanDistance.html]] {
+            +squaredDistance(NumberVector, ClusteringFeature): double
+            +squaredDistance(ClusteringFeature, ClusteringFeature): double
+        }
+
+        class elki.clustering.hierarchical.birch.CentroidEuclideanDistance.Par [[CentroidEuclideanDistance.Par.html]] {
+            +make(): CentroidEuclideanDistance
+        }
+
+        class BIRCHLeafClustering [[BIRCHLeafClustering.html]] {
+            +BIRCHLeafClustering(Factory)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<NumberVector>): Clustering<MeanModel>
+        }
+
+        class elki.clustering.hierarchical.birch.BIRCHLeafClustering.Par [[BIRCHLeafClustering.Par.html]] {
+            +configure(Parameterization): void
+            +make(): BIRCHLeafClustering
+        }
+
+        class CentroidManhattanDistance [[CentroidManhattanDistance.html]] {
+            +squaredDistance(NumberVector, ClusteringFeature): double
+            +squaredDistance(ClusteringFeature, ClusteringFeature): double
+        }
+
+        class elki.clustering.hierarchical.birch.CentroidManhattanDistance.Par [[CentroidManhattanDistance.Par.html]] {
+            +make(): CentroidManhattanDistance
+        }
+
+        class DiameterCriterion [[DiameterCriterion.html]] {
+            +squaredCriterion(ClusteringFeature, NumberVector): double
+            +squaredCriterion(ClusteringFeature, ClusteringFeature): double
+        }
+
+        class elki.clustering.hierarchical.birch.DiameterCriterion.Par [[DiameterCriterion.Par.html]] {
+            +make(): DiameterCriterion
+        }
+
+        class ClusteringFeature [[ClusteringFeature.html]] {
+            ~n: int
+            ~ls: double[]
+            ~ss: double
+            +ClusteringFeature(int)
+            #addToStatistics(NumberVector): void
+            #addToStatistics(ClusteringFeature): void
+            #resetStatistics(): void
+            +centroid(int): double
+            +sumOfSumOfSquares(): double
+            +sumOfSquaresOfSums(): double
+            +getDimensionality(): int
+            {static} +sumOfSquares(NumberVector): double
+        }
+
+        class BIRCHKMeansPlusPlus [[BIRCHKMeansPlusPlus.html]] {
+            #random: RandomFactory
+            #weights: double[]
+            +BIRCHKMeansPlusPlus(RandomFactory)
+            +run(double[], int): double[]
+            -initialWeights(double[], double[]): double
+            -distance(double[], double[]): double
+            -updateWeights(double[], double[]): double
+        }
+
+        class elki.clustering.hierarchical.birch.BIRCHKMeansPlusPlus.Par [[BIRCHKMeansPlusPlus.Par.html]] {
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): BIRCHKMeansPlusPlus
+        }
+
+        class AverageInterclusterDistance [[AverageInterclusterDistance.html]] {
+            +squaredDistance(NumberVector, ClusteringFeature): double
+            +squaredDistance(ClusteringFeature, ClusteringFeature): double
+        }
+
+        class elki.clustering.hierarchical.birch.AverageInterclusterDistance.Par [[AverageInterclusterDistance.Par.html]] {
+            +make(): AverageInterclusterDistance
+        }
+
+        CFTree --> BIRCHDistance: distance
+        CFTree --> BIRCHAbsorptionCriterion: absorption
+        CFTree --> elki.clustering.hierarchical.birch.CFTree.TreeNode: root
+        elki.utilities.datastructures.iterator.Iter <|.. elki.clustering.hierarchical.birch.CFTree.LeafIterator
+        CFTree +-- elki.clustering.hierarchical.birch.CFTree.LeafIterator
+        elki.clustering.hierarchical.birch.CFTree.LeafIterator --> "*" ClusteringFeature: queue
+        elki.clustering.hierarchical.birch.CFTree.LeafIterator --> ClusteringFeature: current
+        ClusteringFeature <|-- elki.clustering.hierarchical.birch.CFTree.TreeNode
+        CFTree +-- elki.clustering.hierarchical.birch.CFTree.TreeNode
+        elki.clustering.hierarchical.birch.CFTree.TreeNode --> "*" ClusteringFeature: children
+        CFTree +-- elki.clustering.hierarchical.birch.CFTree.Factory
+        elki.clustering.hierarchical.birch.CFTree.Factory --> BIRCHDistance: distance
+        elki.clustering.hierarchical.birch.CFTree.Factory --> BIRCHAbsorptionCriterion: absorption
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.birch.CFTree.Factory.Par
+        elki.clustering.hierarchical.birch.CFTree.Factory +-- elki.clustering.hierarchical.birch.CFTree.Factory.Par
+        elki.clustering.hierarchical.birch.CFTree.Factory.Par --> BIRCHDistance: distance
+        elki.clustering.hierarchical.birch.CFTree.Factory.Par --> BIRCHAbsorptionCriterion: absorption
+        BIRCHAbsorptionCriterion <|.. EuclideanDistanceCriterion
+        EuclideanDistanceCriterion --> EuclideanDistanceCriterion: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.birch.EuclideanDistanceCriterion.Par
+        EuclideanDistanceCriterion +-- elki.clustering.hierarchical.birch.EuclideanDistanceCriterion.Par
+        elki.clustering.ClusteringAlgorithm <|.. BIRCHLloydKMeans
+        BIRCHLloydKMeans --> elki.clustering.hierarchical.birch.CFTree.Factory: cffactory
+        BIRCHLloydKMeans --> BIRCHKMeansPlusPlus: initialization
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.birch.BIRCHLloydKMeans.Par
+        BIRCHLloydKMeans +-- elki.clustering.hierarchical.birch.BIRCHLloydKMeans.Par
+        elki.clustering.hierarchical.birch.BIRCHLloydKMeans.Par --> elki.clustering.hierarchical.birch.CFTree.Factory: cffactory
+        elki.clustering.hierarchical.birch.BIRCHLloydKMeans.Par --> BIRCHKMeansPlusPlus: initialization
+        BIRCHAbsorptionCriterion <|.. RadiusCriterion
+        RadiusCriterion --> RadiusCriterion: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.birch.RadiusCriterion.Par
+        RadiusCriterion +-- elki.clustering.hierarchical.birch.RadiusCriterion.Par
+        BIRCHDistance <|.. AverageIntraclusterDistance
+        AverageIntraclusterDistance --> AverageIntraclusterDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.birch.AverageIntraclusterDistance.Par
+        AverageIntraclusterDistance +-- elki.clustering.hierarchical.birch.AverageIntraclusterDistance.Par
+        BIRCHDistance <|.. VarianceIncreaseDistance
+        VarianceIncreaseDistance --> VarianceIncreaseDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.birch.VarianceIncreaseDistance.Par
+        VarianceIncreaseDistance +-- elki.clustering.hierarchical.birch.VarianceIncreaseDistance.Par
+        BIRCHDistance <|.. CentroidEuclideanDistance
+        CentroidEuclideanDistance --> CentroidEuclideanDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.birch.CentroidEuclideanDistance.Par
+        CentroidEuclideanDistance +-- elki.clustering.hierarchical.birch.CentroidEuclideanDistance.Par
+        elki.clustering.ClusteringAlgorithm <|.. BIRCHLeafClustering
+        BIRCHLeafClustering --> elki.clustering.hierarchical.birch.CFTree.Factory: cffactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.birch.BIRCHLeafClustering.Par
+        BIRCHLeafClustering +-- elki.clustering.hierarchical.birch.BIRCHLeafClustering.Par
+        elki.clustering.hierarchical.birch.BIRCHLeafClustering.Par --> elki.clustering.hierarchical.birch.CFTree.Factory: cffactory
+        BIRCHDistance <|.. CentroidManhattanDistance
+        CentroidManhattanDistance --> CentroidManhattanDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.birch.CentroidManhattanDistance.Par
+        CentroidManhattanDistance +-- elki.clustering.hierarchical.birch.CentroidManhattanDistance.Par
+        BIRCHAbsorptionCriterion <|.. DiameterCriterion
+        DiameterCriterion --> DiameterCriterion: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.birch.DiameterCriterion.Par
+        DiameterCriterion +-- elki.clustering.hierarchical.birch.DiameterCriterion.Par
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.birch.BIRCHKMeansPlusPlus.Par
+        BIRCHKMeansPlusPlus +-- elki.clustering.hierarchical.birch.BIRCHKMeansPlusPlus.Par
+        BIRCHDistance <|.. AverageInterclusterDistance
+        AverageInterclusterDistance --> AverageInterclusterDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.birch.AverageInterclusterDistance.Par
+        AverageInterclusterDistance +-- elki.clustering.hierarchical.birch.AverageInterclusterDistance.Par
+    }
+
+    namespace elki.utilities.datastructures.iterator {
+        interface Iter [[../../../utilities/datastructures/iterator/Iter.html]] {
+            {abstract} +valid(): boolean
+            {abstract} +advance(): Iter
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

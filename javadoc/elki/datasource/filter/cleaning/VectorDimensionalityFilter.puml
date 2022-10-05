@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VectorDimensionalityFilter\n<size:10>elki.datasource.filter.cleaning" as elki.datasource.filter.cleaning.VectorDimensionalityFilter<V extends NumberVector> [[VectorDimensionalityFilter.html]] {
+        {static} -LOG: Logging
+        ~meta: BundleMeta
+        ~column: int
+        ~dim: int
+        +VectorDimensionalityFilter(int)
+        +getMeta(): BundleMeta
+        +data(int): Object
+        +nextEvent(): Event
+        -updateMeta(): void
+    }
+
+    abstract class "<size:14>AbstractStreamFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractStreamFilter [[../AbstractStreamFilter.html]]
+    class "<size:14>VectorDimensionalityFilter.Par\n<size:10>elki.datasource.filter.cleaning" as elki.datasource.filter.cleaning.VectorDimensionalityFilter.Par<V extends NumberVector>
+
+    elki.datasource.filter.AbstractStreamFilter <|-- elki.datasource.filter.cleaning.VectorDimensionalityFilter
+    elki.datasource.filter.cleaning.VectorDimensionalityFilter +-- elki.datasource.filter.cleaning.VectorDimensionalityFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

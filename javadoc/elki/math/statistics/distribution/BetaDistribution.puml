@@ -1,0 +1,45 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BetaDistribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.BetaDistribution [[BetaDistribution.html]] {
+        {static} ~NUM_PRECISION: double
+        {static} ~SWITCH: double
+        {static} ~GAUSSLEGENDRE_Y: double[]
+        {static} ~GAUSSLEGENDRE_W: double[]
+        -alpha: double
+        -beta: double
+        -logbab: double
+        +BetaDistribution(double, double)
+        +pdf(double): double
+        +logpdf(double): double
+        +cdf(double): double
+        +quantile(double): double
+        +nextRandom(Random): double
+        {static} +cdf(double, double, double): double
+        {static} +pdf(double, double, double): double
+        {static} +logpdf(double, double, double): double
+        {static} +logBeta(double, double): double
+        {static} +regularizedIncBeta(double, double, double): double
+        {static} #regularizedIncBeta(double, double, double, double): double
+        {static} #regularizedIncBetaCF(double, double, double): double
+        {static} #regularizedIncBetaQuadrature(double, double, double): double
+        {static} +quantile(double, double, double): double
+        {static} #rawQuantile(double, double, double, double): double
+    }
+
+    interface "<size:14>Distribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution [[Distribution.html]] {
+        {abstract} +pdf(double): double
+        {abstract} +logpdf(double): double
+        {abstract} +cdf(double): double
+        {abstract} +quantile(double): double
+    }
+    class "<size:14>BetaDistribution.Par\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.BetaDistribution.Par [[BetaDistribution.Par.html]]
+
+    elki.math.statistics.distribution.Distribution <|.. elki.math.statistics.distribution.BetaDistribution
+    elki.math.statistics.distribution.BetaDistribution +-- elki.math.statistics.distribution.BetaDistribution.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,48 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>LinearScanEuclideanPrioritySearcher\n<size:10>elki.database.query.distance" as elki.database.query.distance.LinearScanEuclideanPrioritySearcher<Q, O extends NumberVector> [[LinearScanEuclideanPrioritySearcher.html]] {
+        #distanceQuery: DistanceQuery<O extends NumberVector>
+        -iter: DBIDIter
+        -query: O extends NumberVector
+        -thresholdUp: double
+        -thresholdsq: double
+        -curdist: double
+        -curdistsq: double
+        {static} -SQUARED: SquaredEuclideanDistance
+        +LinearScanEuclideanPrioritySearcher(DistanceQuery<O extends NumberVector>)
+        +realSearch(O extends NumberVector): PrioritySearcher<Q>
+        +valid(): boolean
+        +advance(): PrioritySearcher<Q>
+        +internalGetIndex(): int
+        +decreaseCutoff(double): PrioritySearcher<Q>
+        +computeExactDistance(): double
+        +getSquaredDistance(): double
+        +getApproximateAccuracy(): double
+        +getApproximateDistance(): double
+        +getLowerBound(): double
+        +getUpperBound(): double
+        +allLowerBound(): double
+    }
+
+    interface "<size:14>PrioritySearcher\n<size:10>elki.database.query" as elki.database.query.PrioritySearcher<Q> [[../PrioritySearcher.html]] {
+        {abstract} +search(Q): PrioritySearcher<O>
+        {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+        {abstract} +computeExactDistance(): double
+        {abstract} +allLowerBound(): double
+        {abstract} +advance(): PrioritySearcher<O>
+    }
+    interface "<size:14>LinearScanQuery\n<size:10>elki.database.query" as elki.database.query.LinearScanQuery [[../LinearScanQuery.html]]
+    class "<size:14>LinearScanEuclideanPrioritySearcher.ByObject\n<size:10>elki.database.query.distance" as elki.database.query.distance.LinearScanEuclideanPrioritySearcher.ByObject<O extends NumberVector> [[LinearScanEuclideanPrioritySearcher.ByObject.html]]
+    class "<size:14>LinearScanEuclideanPrioritySearcher.ByDBID\n<size:10>elki.database.query.distance" as elki.database.query.distance.LinearScanEuclideanPrioritySearcher.ByDBID<O extends NumberVector> [[LinearScanEuclideanPrioritySearcher.ByDBID.html]]
+
+    elki.database.query.PrioritySearcher <|.. elki.database.query.distance.LinearScanEuclideanPrioritySearcher
+    elki.database.query.LinearScanQuery <|.. elki.database.query.distance.LinearScanEuclideanPrioritySearcher
+    elki.database.query.distance.LinearScanEuclideanPrioritySearcher +-- elki.database.query.distance.LinearScanEuclideanPrioritySearcher.ByObject
+    elki.database.query.distance.LinearScanEuclideanPrioritySearcher +-- elki.database.query.distance.LinearScanEuclideanPrioritySearcher.ByDBID
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

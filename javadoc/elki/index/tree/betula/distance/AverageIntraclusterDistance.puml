@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AverageIntraclusterDistance\n<size:10>elki.index.tree.betula.distance" as elki.index.tree.betula.distance.AverageIntraclusterDistance [[AverageIntraclusterDistance.html]] {
+        {static} +STATIC: AverageIntraclusterDistance
+        +squaredDistance(NumberVector, ClusterFeature): double
+        +squaredDistance(ClusterFeature, ClusterFeature): double
+        +matSelfInit(ClusterFeature): double
+    }
+
+    interface "<size:14>CFDistance\n<size:10>elki.index.tree.betula.distance" as elki.index.tree.betula.distance.CFDistance [[CFDistance.html]] {
+        {abstract} +squaredDistance(NumberVector, ClusterFeature): double
+        {abstract} +squaredDistance(ClusterFeature, ClusterFeature): double
+    }
+    class "<size:14>AverageIntraclusterDistance.Par\n<size:10>elki.index.tree.betula.distance" as elki.index.tree.betula.distance.AverageIntraclusterDistance.Par [[AverageIntraclusterDistance.Par.html]]
+
+    elki.index.tree.betula.distance.CFDistance <|.. elki.index.tree.betula.distance.AverageIntraclusterDistance
+    elki.index.tree.betula.distance.AverageIntraclusterDistance +-- elki.index.tree.betula.distance.AverageIntraclusterDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

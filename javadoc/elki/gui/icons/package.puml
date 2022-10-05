@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.gui.icons {
+
+        class StockIcon [[StockIcon.html]] {
+            {static} +DIALOG_ERROR: String
+            {static} +DIALOG_INFORMATION: String
+            {static} +DIALOG_WARNING: String
+            {static} +DOCUMENT_OPEN: String
+            {static} +DOCUMENT_PROPERTIES: String
+            {static} +DOCUMENT_SAVE: String
+            {static} +EDIT_CLEAR: String
+            {static} +EDIT_REDO: String
+            {static} +EDIT_UNDO: String
+            {static} +EDIT_FIND: String
+            {static} +EMBLEM_IMPORTANT: String
+            {static} +GO_BOTTOM: String
+            {static} +GO_DOWN: String
+            {static} +GO_FIRST: String
+            {static} +GO_HOME: String
+            {static} +GO_JUMP: String
+            {static} +GO_LAST: String
+            {static} +GO_NEXT: String
+            {static} +GO_PREVIOUS: String
+            {static} +GO_TOP: String
+            {static} +GO_UP: String
+            {static} +HELP_BROWSER: String
+            {static} +LIST_ADD: String
+            {static} +LIST_REMOVE: String
+            {static} +PACKAGE: String
+            {static} +PROCESS_STOP: String
+            {static} +SYSTEM_SEARCH: String
+            {static} -iconcache: Map<String, SoftReference<Icon>>
+            {static} +getStockIcon(String): Icon
+        }
+
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

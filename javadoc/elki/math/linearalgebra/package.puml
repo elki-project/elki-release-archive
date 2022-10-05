@@ -1,0 +1,418 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.linearalgebra {
+
+        class CholeskyDecomposition [[CholeskyDecomposition.html]] {
+            -L: double[]
+            -isspd: boolean
+            +CholeskyDecomposition(double[])
+            +isSPD(): boolean
+            +getL(): double[]
+            +solve(double[]): double[]
+            -solveL(double[]): double[]
+            -solveLtransposed(double[]): double[]
+            +solve(double[]): double[]
+            +solveLInplace(double[]): double[]
+            +solveLtransposed(double[]): double[]
+        }
+
+        class ProjectedCentroid [[ProjectedCentroid.html]] {
+            -dims: long[]
+            +ProjectedCentroid(long[], int)
+            +put(double[]): void
+            +put(double[], double): void
+            +put(NumberVector): void
+            +put(NumberVector, double): void
+            {static} +make(long[], Relation<? extends NumberVector>): ProjectedCentroid
+            {static} +make(long[], Relation<? extends NumberVector>, DBIDs): ProjectedCentroid
+        }
+
+        class LinearEquationSystem [[LinearEquationSystem.html]] {
+            {static} -LOG: Logging
+            {static} -DELTA: double
+            {static} -TRIVAL_PIVOT_SEARCH: int
+            {static} -TOTAL_PIVOT_SEARCH: int
+            -solvable: boolean
+            -solved: boolean
+            -rank: int
+            -coeff: double[]
+            -rhs: double[]
+            -row: int[]
+            -col: int[]
+            -x_0: double[]
+            -u: double[]
+            -reducedRowEchelonForm: boolean
+            +LinearEquationSystem(double[], double[])
+            +LinearEquationSystem(double[], double[], int[], int[])
+            +getCoefficents(): double[]
+            +getRHS(): double[]
+            +getRowPermutations(): int[]
+            +getColumnPermutations(): int[]
+            +isSolved(): boolean
+            +solveByTotalPivotSearch(): void
+            +solveByTrivialPivotSearch(): void
+            +isSolvable(): boolean
+            +equationsToString(String, int): String
+            +equationsToString(String, NumberFormat): String
+            +equationsToString(NumberFormat): String
+            +equationsToString(int): String
+            +solutionToString(int): String
+            -reducedRowEchelonForm(int): void
+            -totalPivotSearch(int, int[]): void
+            -nonZeroPivotSearch(int, int[]): void
+            -permutePivot(int, int, int, int): void
+            -pivotOperation(int): void
+            -solve(int): void
+            -isSolvable(int): boolean
+            -maxIntegerDigits(double[]): int[]
+            -maxIntegerDigits(double[]): int
+            -integerDigits(double): int
+            -format(NumberFormat, StringBuilder, double, int): StringBuilder
+            +subspacedim(): int
+        }
+
+        class Centroid [[Centroid.html]] {
+            #wsum: double
+            #elements: double[]
+            +Centroid(int)
+            +put(double[]): void
+            +put(double[], double): void
+            +put(NumberVector): void
+            +put(NumberVector, double): void
+            +doubleValue(int): double
+            +longValue(int): long
+            +getDimensionality(): int
+            +toArray(): double[]
+            {static} +make(Relation<? extends NumberVector>, DBIDs): Centroid
+            +getArrayRef(): double[]
+        }
+
+        class ConstrainedQuadraticProblemSolver [[ConstrainedQuadraticProblemSolver.html]] {
+            +ConstrainedQuadraticProblemSolver(int)
+            +solve(double[], double[], double, double[], double[], double[]): double
+            -findLimitedDimensionWithDerivative(double[], double[], double[], double[]): int
+            -calculateLinearDerivativeLimits(double[], double[], double[], double[], int, double[]): void
+            -computeMaximumPossibleFuncValue(double[], double[], double, double[], double[]): double
+            -evaluateConstrainedQuadraticFunction(double[], double[], double, double[], double[], DimensionState[], boolean, double[], double): double
+            -evaluateConstrainedQuadraticFunction1D(double, double, double, double, double, double[], double): double
+            -startReducedProblem(double[], double[], double, double[], double[], DimensionState[], int, DimensionState, double[], double): double
+            -expandNewSolution(double[], double[], int, double): void
+            -reduceSolution(double[], int): double[]
+            {static} -reduceConstraints(double[], double[], double[], double[], DimensionState[], DimensionState[], int): void
+            {static} -reduceEquation(double[], double[], double, double[], double[], int, double): double
+            -findMaximumWithFunctionValue(double[], double[]): double[]
+            {static} -evaluateQuadraticFormula(double[], double[], double, double[]): double
+            {static} -contains(double[], double[], double[]): boolean
+        }
+
+        enum elki.math.linearalgebra.ConstrainedQuadraticProblemSolver.DimensionState [[ConstrainedQuadraticProblemSolver.DimensionState.html]] {
+            {static} +LOLIM
+            {static} +UPLIM
+            {static} +UNCONSTR
+            {static} +CONSTR
+        }
+
+        class elki.math.linearalgebra.ConstrainedQuadraticProblemSolver.ProblemData [[ConstrainedQuadraticProblemSolver.ProblemData.html]] {
+            ~a: double[]
+            ~b: double[]
+            ~result: double[]
+            ~min: double[]
+            ~max: double[]
+            +ProblemData(int)
+        }
+
+        class EigenvalueDecomposition [[EigenvalueDecomposition.html]] {
+            -n: int
+            -d: double[]
+            -e: double[]
+            -V: double[]
+            -H: double[]
+            -ort: double[]
+            +EigenvalueDecomposition(double[])
+            -tred2(): void
+            -tred2AccumulateTransformations(): void
+            -tql2(): void
+            -tql2ComputeImplicitShift(int): double
+            -tql2ImplicitQL(int, int, double): void
+            -sortEigen(): void
+            -orthes(): void
+            {static} -cdiv(double, double, double, double, double[], int): void
+            -hqr2(): void
+            {static} -modifyQP(double[], int, double, double): void
+            {static} -modifyQR(double[], int, boolean, double, double, double, double, double): void
+            -hqr2BacksubstituteReal(int, double, double): void
+            -hqr2BacksubstituteComplex(int, double, double, double): void
+            -hqr2BackTransformation(int, int, int): void
+            +getV(): double[]
+            +getRealEigenvalues(): double[]
+            +getImagEigenvalues(): double[]
+            +getD(): double[]
+        }
+
+        class CovarianceMatrix [[CovarianceMatrix.html]] {
+            {static} +ERR_TOO_LITTLE_WEIGHT: String
+            ~mean: double[]
+            ~elements: double[]
+            ~nmea: double[]
+            #wsum: double
+            +CovarianceMatrix(int)
+            +getDimensionality(): int
+            +put(double[]): void
+            +put(double[], double): void
+            +put(NumberVector): void
+            +put(NumberVector, double): void
+            +getWeight(): double
+            +getMeanVector(): double[]
+            +getMeanVector(Relation<? extends NumberVector>): F extends NumberVector
+            +makeSampleMatrix(): double[]
+            +makePopulationMatrix(): double[]
+            +destroyToSampleMatrix(): double[]
+            +destroyToPopulationMatrix(): double[]
+            +reset(): void
+            {static} +make(Relation<? extends NumberVector>): CovarianceMatrix
+            {static} +make(Relation<? extends NumberVector>, DBIDs): CovarianceMatrix
+        }
+
+        class QRDecomposition [[QRDecomposition.html]] {
+            {static} #ERR_MATRIX_RANK_DEFICIENT: String
+            {static} -serialVersionUID: long
+            -QR: double[]
+            -m: int
+            -n: int
+            -Rdiag: double[]
+            +QRDecomposition(double[])
+            +QRDecomposition(double[], int, int)
+            +isFullRank(): boolean
+            +rank(double): int
+            +getH(): double[]
+            +getR(): double[]
+            +getQ(): double[]
+            +solve(double[]): double[]
+            -solveInplace(double[]): double[]
+            +solve(double[]): double[]
+            +solveInplace(double[]): double[]
+            +inverse(): double[]
+        }
+
+        class SingularValueDecomposition [[SingularValueDecomposition.html]] {
+            -U: double[]
+            -V: double[]
+            -s: double[]
+            -m: int
+            -n: int
+            +SingularValueDecomposition(double[])
+            -generateU(int, int): void
+            -generateV(int, double[], int): void
+            -deflate(double[], int, int, boolean): void
+            -split(double[], int, int, boolean): void
+            -qrStep(double[], int, int, boolean, boolean): void
+            -convergence(int, int, boolean, boolean): int
+            +getU(): double[]
+            +getV(): double[]
+            +getSingularValues(): double[]
+            +getS(): double[]
+            +norm2(): double
+            +cond(): double
+            +rank(): int
+        }
+
+        class AffineTransformation [[AffineTransformation.html]] {
+            -dim: int
+            -trans: double[]
+            -inv: double[]
+            +AffineTransformation(int)
+            +AffineTransformation(int, double[], double[])
+            {static} +reorderAxesTransformation(int, int...): AffineTransformation
+            +getDimensionality(): int
+            +addTranslation(double[]): void
+            +addMatrix(double[]): void
+            +addRotation(int, int, double): void
+            +addAxisReflection(int): void
+            +addScaling(double): void
+            +getTransformation(): double[]
+            +getInverse(): double[]
+            -updateInverse(): void
+            +homogeneVector(double[]): double[]
+            +homogeneRelativeVector(double[]): double[]
+            +unhomogeneVector(double[]): double[]
+            +unhomogeneRelativeVector(double[]): double[]
+            +apply(double[]): double[]
+            +applyInverse(double[]): double[]
+            +applyRelative(double[]): double[]
+            +applyRelativeInverse(double[]): double[]
+        }
+
+        class VMath [[VMath.html]] {
+            {static} -DELTA: double
+            {static} #ERR_VEC_DIMENSIONS: String
+            {static} #ERR_MATRIX_DIMENSIONS: String
+            {static} #ERR_MATRIX_INNERDIM: String
+            {static} #ERR_DIMENSIONS: String
+            {static} #ERR_INVALID_RANGE: String
+            {static} #ERR_MATRIX_NONSQUARE: String
+            {static} #ERR_SINGULAR: String
+            {static} #ERR_MATRIX_NOT_SPD: String
+            {static} #ERR_MATRIX_RANK_DEFICIENT: String
+            {static} +unitVector(int, int): double[]
+            {static} +copy(double[]): double[]
+            {static} +transpose(double[]): double[]
+            {static} +plus(double[], double[]): double[]
+            {static} +plusTimes(double[], double[], double): double[]
+            {static} +timesPlus(double[], double, double[]): double[]
+            {static} +timesPlusTimes(double[], double, double[], double): double[]
+            {static} +plusEquals(double[], double[]): double[]
+            {static} +plusTimesEquals(double[], double[], double): double[]
+            {static} +timesPlusEquals(double[], double, double[]): double[]
+            {static} +timesPlusTimesEquals(double[], double, double[], double): double[]
+            {static} +plus(double[], double): double[]
+            {static} +plusEquals(double[], double): double[]
+            {static} +minus(double[], double[]): double[]
+            {static} +minusTimes(double[], double[], double): double[]
+            {static} +timesMinus(double[], double, double[]): double[]
+            {static} +timesMinusTimes(double[], double, double[], double): double[]
+            {static} +minusEquals(double[], double[]): double[]
+            {static} +minusTimesEquals(double[], double[], double): double[]
+            {static} +timesMinusEquals(double[], double, double[]): double[]
+            {static} +timesMinusTimesEquals(double[], double, double[], double): double[]
+            {static} +minus(double[], double): double[]
+            {static} +minusEquals(double[], double): double[]
+            {static} +times(double[], double): double[]
+            {static} +timesEquals(double[], double): double[]
+            {static} +overwriteTimes(double[], double[], double): double[]
+            {static} +--times--(double[], double[]): double[]
+            {static} +transposeTimes(double[], double[]): double[]
+            {static} +transposeTimes(double[], double[]): double
+            {static} +--timesTranspose--(double[], double[]): double[]
+            {static} +timesTranspose(double[], double[]): double[]
+            {static} +scalarProduct(double[], double[]): double
+            {static} +dot(double[], double[]): double
+            {static} +sum(double[]): double
+            {static} +squareSum(double[]): double
+            {static} +euclideanLength(double[]): double
+            {static} +argmax(double[]): int
+            {static} +argmax(double[], int, int): int
+            {static} +argmin(double[]): int
+            {static} +argmin(double[], int, int): int
+            {static} +normalize(double[]): double[]
+            {static} +normalizeEquals(double[]): double[]
+            {static} +hashCode(double[]): int
+            {static} +equals(double[], double[]): boolean
+            {static} +clear(double[]): void
+            {static} +clear(double[]): void
+            {static} +rotate90Equals(double[]): double[]
+            {static} +unitMatrix(int): double[]
+            {static} +zeroMatrix(int): double[]
+            {static} +identity(int, int): double[]
+            {static} +diagonal(double[]): double[]
+            {static} +copy(double[]): double[]
+            {static} +rowPackedCopy(double[]): double[]
+            {static} +columnPackedCopy(double[]): double[]
+            {static} +getMatrix(double[], int, int, int, int): double[]
+            {static} +getMatrix(double[], int[], int[]): double[]
+            {static} +getMatrix(double[], int[], int, int): double[]
+            {static} +getMatrix(double[], int, int, int[]): double[]
+            {static} +setMatrix(double[], int, int, int, int, double[]): void
+            {static} +setMatrix(double[], int[], int[], double[]): void
+            {static} +setMatrix(double[], int[], int, int, double[]): void
+            {static} +setMatrix(double[], int, int, int[], double[]): void
+            {static} +getRow(double[], int): double[]
+            {static} +setRow(double[], int, double[]): void
+            {static} +getCol(double[], int): double[]
+            {static} +setCol(double[], int, double[]): void
+            {static} +transpose(double[]): double[]
+            {static} +plus(double[], double[]): double[]
+            {static} +plusTimes(double[], double[], double): double[]
+            {static} +plusEquals(double[], double[]): double[]
+            {static} +plusTimesEquals(double[], double[], double): double[]
+            {static} +minus(double[], double[]): double[]
+            {static} +minusTimes(double[], double[], double): double[]
+            {static} +minusEquals(double[], double[]): double[]
+            {static} +minusTimesEquals(double[], double[], double): double[]
+            {static} +times(double[], double): double[]
+            {static} +timesEquals(double[], double): double[]
+            {static} +times(double[], double[]): double[]
+            {static} +times(double[], double[]): double[]
+            {static} +transposeTimes(double[], double[]): double[]
+            {static} +transposeTimes(double[], double[]): double[]
+            {static} +transposeTimesTimes(double[], double[], double[]): double
+            {static} +timesTranspose(double[], double[]): double[]
+            {static} +transposeTimesTranspose(double[], double[]): double[]
+            {static} +transposeDiagonalTimes(double[], double[], double[]): double[]
+            {static} +mahalanobisDistance(double[], double[], double[]): double
+            {static} +getDiagonal(double[]): double[]
+            {static} +normalizeColumns(double[]): void
+            {static} +appendColumns(double[], double[]): double[]
+            {static} +orthonormalize(double[]): double[]
+            {static} +solve(double[], double[]): double[]
+            {static} +solve(double[], double[]): double[]
+            {static} +inverse(double[]): double[]
+            {static} +normF(double[]): double
+            {static} +hashCode(double[]): int
+            {static} +equals(double[], double[]): boolean
+            {static} +almostEquals(double[], double[], double): boolean
+            {static} +almostEquals(double[], double[]): boolean
+            {static} +almostEquals(double[], double[], double): boolean
+            {static} +almostEquals(double[], double[]): boolean
+            {static} +getRowDimensionality(double[]): int
+            {static} +getColumnDimensionality(double[]): int
+            {static} +angle(double[], double[]): double
+            {static} +angle(double[], double[], double[]): double
+        }
+
+        class LUDecomposition [[LUDecomposition.html]] {
+            {static} -serialVersionUID: long
+            -LU: double[]
+            -m: int
+            -n: int
+            -pivsign: int
+            -piv: int[]
+            +LUDecomposition(double[])
+            +LUDecomposition(double[], int, int)
+            +isNonsingular(): boolean
+            +getL(): double[]
+            +getU(): double[]
+            +getPivot(): int[]
+            +det(): double
+            +solve(double[]): double[]
+            -solveInplace(double[]): double[]
+            +solve(double[]): double[]
+            +solveInplace(double[]): double[]
+            +inverse(): double[]
+        }
+
+        Centroid <|-- ProjectedCentroid
+        elki.data.NumberVector <|.. Centroid
+        ConstrainedQuadraticProblemSolver --> "*" elki.math.linearalgebra.ConstrainedQuadraticProblemSolver.ProblemData: cache
+        ConstrainedQuadraticProblemSolver +-- elki.math.linearalgebra.ConstrainedQuadraticProblemSolver.DimensionState
+        ConstrainedQuadraticProblemSolver +-- elki.math.linearalgebra.ConstrainedQuadraticProblemSolver.ProblemData
+        elki.math.linearalgebra.ConstrainedQuadraticProblemSolver.ProblemData --> "*" elki.math.linearalgebra.ConstrainedQuadraticProblemSolver.DimensionState: dimStates
+        java.io.Serializable <|.. QRDecomposition
+        java.io.Serializable <|.. LUDecomposition
+    }
+
+    namespace elki.data {
+        interface NumberVector [[../../data/NumberVector.html]] {
+            {static} +ATTRIBUTE_SEPARATOR: String
+            {static} +VARIABLE_LENGTH: VectorTypeInformation<NumberVector>
+            {static} +FIELD: VectorFieldTypeInformation<NumberVector>
+            {static} +FIELD_1D: VectorFieldTypeInformation<NumberVector>
+            {static} +FIELD_2D: VectorFieldTypeInformation<NumberVector>
+            +--getValue--(int): Number
+            +getMin(int): double
+            +getMax(int): double
+            {abstract} +doubleValue(int): double
+            +floatValue(int): float
+            +intValue(int): int
+            {abstract} +longValue(int): long
+            +shortValue(int): short
+            +byteValue(int): byte
+            {abstract} +toArray(): double[]
+        }
+    }
+
+    namespace java.io {
+        interface Serializable
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

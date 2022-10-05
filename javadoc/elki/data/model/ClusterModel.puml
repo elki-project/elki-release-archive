@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterModel\n<size:10>elki.data.model" as elki.data.model.ClusterModel [[ClusterModel.html]] {
+        {static} +CLUSTER: ClusterModel
+    }
+
+    interface "<size:14>Model\n<size:10>elki.data.model" as elki.data.model.Model [[Model.html]]
+
+    elki.data.model.Model <|.. elki.data.model.ClusterModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EigenPair\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.EigenPair [[EigenPair.html]] {
+        -eigenvector: double[]
+        -eigenvalue: double
+        +EigenPair(double[], double)
+        +compareTo(EigenPair): int
+        +getEigenvector(): double[]
+        +getEigenvalue(): double
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<EigenPair> {
+        {abstract} +compareTo(EigenPair): int
+    }
+
+    java.lang.Comparable <|.. elki.math.linearalgebra.pca.EigenPair
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

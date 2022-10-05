@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>KNNHeap\n<size:10>elki.database.ids" as elki.database.ids.KNNHeap [[KNNHeap.html]] {
+        {abstract} +toKNNList(): KNNList
+        {abstract} +toKNNListSqrt(): KNNList
+        {abstract} +insert(double, DBIDRef): double
+        +--insert--(double, DBIDRef, int): double
+        {abstract} +getK(): int
+        {abstract} +getKNNDistance(): double
+    }
+
+    interface "<size:14>DoubleDBIDHeap\n<size:10>elki.database.ids" as elki.database.ids.DoubleDBIDHeap [[DoubleDBIDHeap.html]] {
+        {abstract} +peekKey(): double
+        {abstract} +poll(): void
+        {abstract} +insert(double, DBIDRef): double
+        {abstract} +insert(double, DBIDRef, int): double
+        {abstract} +size(): int
+        {abstract} +clear(): void
+        {abstract} +unorderedIterator(): DoubleDBIDIter
+        {abstract} +contains(DBIDRef): boolean
+    }
+
+    elki.database.ids.DoubleDBIDHeap <|-- elki.database.ids.KNNHeap
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

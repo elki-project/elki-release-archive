@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NanoDuration\n<size:10>elki.logging.statistics" as elki.logging.statistics.NanoDuration [[NanoDuration.html]] {
+        ~begin: long
+        ~end: long
+        +NanoDuration(String)
+        +begin(): NanoDuration
+        +end(): NanoDuration
+        +getBegin(): long
+        +getEnd(): long
+        +getDuration(): long
+        +formatValue(): String
+    }
+
+    abstract class "<size:14>AbstractStatistic\n<size:10>elki.logging.statistics" as elki.logging.statistics.AbstractStatistic [[AbstractStatistic.html]]
+    interface "<size:14>Duration\n<size:10>elki.logging.statistics" as elki.logging.statistics.Duration [[Duration.html]] {
+        {abstract} +begin(): Duration
+        {abstract} +end(): Duration
+        {abstract} +getBegin(): long
+        {abstract} +getEnd(): long
+        {abstract} +getDuration(): long
+    }
+
+    elki.logging.statistics.AbstractStatistic <|-- elki.logging.statistics.NanoDuration
+    elki.logging.statistics.Duration <|.. elki.logging.statistics.NanoDuration
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

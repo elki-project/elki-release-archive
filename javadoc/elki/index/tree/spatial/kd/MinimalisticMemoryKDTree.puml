@@ -1,0 +1,46 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MinimalisticMemoryKDTree\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree<O extends NumberVector> [[MinimalisticMemoryKDTree.html]] {
+        {static} -LOG: Logging
+        #relation: Relation<O extends NumberVector>
+        #sorted: ArrayModifiableDBIDs
+        #dims: int
+        #leafsize: int
+        #objaccess: Counter
+        #distcalc: Counter
+        +MinimalisticMemoryKDTree(Relation<O extends NumberVector>, int)
+        +initialize(): void
+        -buildTree(int, int, int, SortDBIDsBySingleDimension): void
+        -next(int): int
+        +logStatistics(): void
+        #countObjectAccess(): void
+        #countDistanceComputation(): void
+        +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+        +rangeByObject(DistanceQuery<O extends NumberVector>, double, int): RangeSearcher<O extends NumberVector>
+        +priorityByObject(DistanceQuery<O extends NumberVector>, double, int): PrioritySearcher<O extends NumberVector>
+    }
+
+    interface "<size:14>DistancePriorityIndex\n<size:10>elki.index" as elki.index.DistancePriorityIndex<O extends NumberVector> [[../../../DistancePriorityIndex.html]] {
+        {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+    }
+    class "<size:14>MinimalisticMemoryKDTree.CountSortAccesses\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.CountSortAccesses [[MinimalisticMemoryKDTree.CountSortAccesses.html]]
+    class "<size:14>MinimalisticMemoryKDTree.KDTreeKNNSearcher\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreeKNNSearcher [[MinimalisticMemoryKDTree.KDTreeKNNSearcher.html]]
+    class "<size:14>MinimalisticMemoryKDTree.KDTreeRangeSearcher\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreeRangeSearcher [[MinimalisticMemoryKDTree.KDTreeRangeSearcher.html]]
+    class "<size:14>MinimalisticMemoryKDTree.PrioritySearchBranch\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.PrioritySearchBranch [[MinimalisticMemoryKDTree.PrioritySearchBranch.html]]
+    class "<size:14>MinimalisticMemoryKDTree.KDTreePrioritySearcher\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreePrioritySearcher [[MinimalisticMemoryKDTree.KDTreePrioritySearcher.html]]
+    class "<size:14>MinimalisticMemoryKDTree.Factory\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory<O extends NumberVector> [[MinimalisticMemoryKDTree.Factory.html]]
+
+    elki.index.DistancePriorityIndex <|.. elki.index.tree.spatial.kd.MinimalisticMemoryKDTree
+    elki.index.tree.spatial.kd.MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.CountSortAccesses
+    elki.index.tree.spatial.kd.MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreeKNNSearcher
+    elki.index.tree.spatial.kd.MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreeRangeSearcher
+    elki.index.tree.spatial.kd.MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.PrioritySearchBranch
+    elki.index.tree.spatial.kd.MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreePrioritySearcher
+    elki.index.tree.spatial.kd.MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

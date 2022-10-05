@@ -1,0 +1,172 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.meta {
+
+        class ExternalDoubleOutlierScore [[ExternalDoubleOutlierScore.html]] {
+            {static} -LOG: Logging
+            {static} +COMMENT: String
+            {static} +ID_PATTERN_DEFAULT: String
+            -file: URI
+            -idpattern: Pattern
+            -scorepattern: Pattern
+            -scaling: ScalingFunction
+            -inverted: boolean
+            +ExternalDoubleOutlierScore(URI, Pattern, Pattern, boolean, ScalingFunction)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<?>): OutlierResult
+        }
+
+        class elki.outlier.meta.ExternalDoubleOutlierScore.Par [[ExternalDoubleOutlierScore.Par.html]] {
+            {static} +FILE_ID: OptionID
+            {static} +ID_ID: OptionID
+            {static} +SCORE_ID: OptionID
+            {static} +SCALING_ID: OptionID
+            {static} +INVERTED_ID: OptionID
+            -file: URI
+            -idpattern: Pattern
+            -scorepattern: Pattern
+            -scaling: ScalingFunction
+            -inverted: boolean
+            +configure(Parameterization): void
+            +make(): ExternalDoubleOutlierScore
+        }
+
+        class HiCS [[HiCS.html]] {
+            {static} -LOG: Logging
+            {static} -MAX_RETRIES: int
+            -m: int
+            -alpha: double
+            -outlierAlgorithm: OutlierAlgorithm
+            -statTest: GoodnessOfFitTest
+            -cutoff: int
+            -rnd: RandomFactory
+            +HiCS(int, double, OutlierAlgorithm, GoodnessOfFitTest, int, RandomFactory)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): OutlierResult
+            -buildOneDimIndexes(Relation<? extends NumberVector>): ArrayList<ArrayDBIDs>
+            -calculateSubspaces(Relation<? extends NumberVector>, ArrayList<ArrayDBIDs>, Random): Set<HiCSSubspace>
+            -calculateContrast(Relation<? extends NumberVector>, HiCSSubspace, ArrayList<ArrayDBIDs>, Random): void
+        }
+
+        class elki.outlier.meta.HiCS.HiCSSubspace [[HiCS.HiCSSubspace.html]] {
+            #bits: long[]
+            #contrast: double
+            {static} +SORT_BY_CONTRAST_ASC: Comparator<HiCSSubspace>
+            {static} +SORT_BY_CONTRAST_DESC: Comparator<HiCSSubspace>
+            {static} +SORT_BY_SUBSPACE: Comparator<HiCSSubspace>
+            #HiCSSubspace(int)
+            #HiCSSubspace(HiCSSubspace)
+            +dimensionality(): int
+            #set(int): HiCSSubspace
+            #or(HiCSSubspace): HiCSSubspace
+            +nextSetBit(int): int
+        }
+
+        class elki.outlier.meta.HiCS.Par {
+            {static} +M_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            {static} +ALGO_ID: OptionID
+            {static} +TEST_ID: OptionID
+            {static} +LIMIT_ID: OptionID
+            {static} +SEED_ID: OptionID
+            -m: int
+            -alpha: double
+            -outlierAlgorithm: OutlierAlgorithm
+            -statTest: GoodnessOfFitTest
+            -cutoff: int
+            -rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): HiCS
+        }
+
+        class FeatureBagging [[FeatureBagging.html]] {
+            {static} -LOG: Logging
+            #num: int
+            #breadth: boolean
+            -rnd: RandomFactory
+            -k: int
+            +FeatureBagging(int, int, boolean, RandomFactory)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<NumberVector>): OutlierResult
+            -randomSubspace(int, int, int, Random): long[]
+        }
+
+        class elki.outlier.meta.FeatureBagging.Par [[FeatureBagging.Par.html]] {
+            {static} +NUM_ID: OptionID
+            {static} +BREADTH_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #k: int
+            #num: int
+            #breadth: boolean
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): FeatureBagging
+        }
+
+        class RescaleMetaOutlierAlgorithm [[RescaleMetaOutlierAlgorithm.html]] {
+            -algorithm: Algorithm
+            -scaling: ScalingFunction
+            +RescaleMetaOutlierAlgorithm(Algorithm, ScalingFunction)
+            +autorun(Database): OutlierResult
+            -getOutlierResult(Object): OutlierResult
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.meta.RescaleMetaOutlierAlgorithm.Par [[RescaleMetaOutlierAlgorithm.Par.html]] {
+            {static} +SCALING_ID: OptionID
+            -algorithm: Algorithm
+            -scaling: ScalingFunction
+            +configure(Parameterization): void
+            +make(): RescaleMetaOutlierAlgorithm
+        }
+
+        class SimpleOutlierEnsemble [[SimpleOutlierEnsemble.html]] {
+            {static} -LOG: Logging
+            -algorithms: List<? extends OutlierAlgorithm>
+            -voting: EnsembleVoting
+            +SimpleOutlierEnsemble(List<? extends OutlierAlgorithm>, EnsembleVoting)
+            +getInputTypeRestriction(): TypeInformation[]
+            +autorun(Database): OutlierResult
+        }
+
+        class elki.outlier.meta.SimpleOutlierEnsemble.Par [[SimpleOutlierEnsemble.Par.html]] {
+            {static} +VOTING_ID: OptionID
+            -algorithms: List<? extends OutlierAlgorithm>
+            -voting: EnsembleVoting
+            +configure(Parameterization): void
+            +make(): SimpleOutlierEnsemble
+        }
+
+        elki.outlier.OutlierAlgorithm <|.. ExternalDoubleOutlierScore
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.meta.ExternalDoubleOutlierScore.Par
+        ExternalDoubleOutlierScore +-- elki.outlier.meta.ExternalDoubleOutlierScore.Par
+        elki.outlier.OutlierAlgorithm <|.. HiCS
+        HiCS +-- elki.outlier.meta.HiCS.HiCSSubspace
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.meta.HiCS.Par
+        HiCS +-- elki.outlier.meta.HiCS.Par
+        elki.outlier.OutlierAlgorithm <|.. FeatureBagging
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.meta.FeatureBagging.Par
+        FeatureBagging +-- elki.outlier.meta.FeatureBagging.Par
+        elki.outlier.OutlierAlgorithm <|.. RescaleMetaOutlierAlgorithm
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.meta.RescaleMetaOutlierAlgorithm.Par
+        RescaleMetaOutlierAlgorithm +-- elki.outlier.meta.RescaleMetaOutlierAlgorithm.Par
+        elki.outlier.OutlierAlgorithm <|.. SimpleOutlierEnsemble
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.meta.SimpleOutlierEnsemble.Par
+        SimpleOutlierEnsemble +-- elki.outlier.meta.SimpleOutlierEnsemble.Par
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

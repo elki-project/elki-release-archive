@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InMemoryLSHIndex.Instance\n<size:10>elki.index.lsh" as elki.index.lsh.InMemoryLSHIndex.Instance [[InMemoryLSHIndex.Instance.html]] {
+        ~hashfunctions: ArrayList<? extends LocalitySensitiveHashFunction<? super V>>
+        ~hashtables: ArrayList<Int2ObjectOpenHashMap<DBIDs>>
+        -numberOfBuckets: int
+        +Instance(Relation<V>, ArrayList<? extends LocalitySensitiveHashFunction<? super V>>, int)
+        +initialize(): void
+        +getLogger(): Logging
+        +kNNByObject(DistanceQuery<V>, int, int): KNNSearcher<V>
+        +rangeByObject(DistanceQuery<V>, double, int): RangeSearcher<V>
+        #getCandidates(V): DBIDs
+    }
+
+    abstract class "<size:14>AbstractRefiningIndex\n<size:10>elki.index" as elki.index.AbstractRefiningIndex<V> [[../AbstractRefiningIndex.html]] {
+        {abstract} +getLogger(): Logging
+    }
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<V> [[../KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    interface "<size:14>RangeIndex\n<size:10>elki.index" as elki.index.RangeIndex<V> [[../RangeIndex.html]] {
+        {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+    }
+    class "<size:14>InMemoryLSHIndex\n<size:10>elki.index.lsh" as elki.index.lsh.InMemoryLSHIndex<V> [[InMemoryLSHIndex.html]]
+    class "<size:14>InMemoryLSHIndex.Instance.LSHKNNQuery\n<size:10>elki.index.lsh" as elki.index.lsh.InMemoryLSHIndex.Instance.LSHKNNQuery [[InMemoryLSHIndex.Instance.LSHKNNQuery.html]]
+    class "<size:14>InMemoryLSHIndex.Instance.LSHRangeQuery\n<size:10>elki.index.lsh" as elki.index.lsh.InMemoryLSHIndex.Instance.LSHRangeQuery [[InMemoryLSHIndex.Instance.LSHRangeQuery.html]]
+
+    elki.index.AbstractRefiningIndex <|-- elki.index.lsh.InMemoryLSHIndex.Instance
+    elki.index.KNNIndex <|.. elki.index.lsh.InMemoryLSHIndex.Instance
+    elki.index.RangeIndex <|.. elki.index.lsh.InMemoryLSHIndex.Instance
+    elki.index.lsh.InMemoryLSHIndex +-- elki.index.lsh.InMemoryLSHIndex.Instance
+    elki.index.lsh.InMemoryLSHIndex.Instance +-- elki.index.lsh.InMemoryLSHIndex.Instance.LSHKNNQuery
+    elki.index.lsh.InMemoryLSHIndex.Instance +-- elki.index.lsh.InMemoryLSHIndex.Instance.LSHRangeQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

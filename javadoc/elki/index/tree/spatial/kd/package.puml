@@ -1,0 +1,420 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.spatial.kd {
+
+        interface PartialDistance<O> [[PartialDistance.html]] {
+            {abstract} +combineRaw(double, double, double): double
+            {abstract} +compareRawRegular(double, double): boolean
+            {abstract} +distance(O, O): double
+            {abstract} +transformOut(double): double
+        }
+
+        class PartialSquaredEuclideanDistance [[PartialSquaredEuclideanDistance.html]] {
+            +combineRaw(double, double, double): double
+            +compareRawRegular(double, double): boolean
+            +distance(NumberVector, NumberVector): double
+            +transformOut(double): double
+        }
+
+        class SmallMemoryKDTree<O extends NumberVector> [[SmallMemoryKDTree.html]] {
+            {static} -LOG: Logging
+            #relation: Relation<O extends NumberVector>
+            #sorted: ModifiableDoubleDBIDList
+            #dims: int
+            #leafsize: int
+            #objaccess: Counter
+            #distcalc: Counter
+            +SmallMemoryKDTree(Relation<O extends NumberVector>, int)
+            +initialize(): void
+            -buildTree(int, int, int, DoubleDBIDListMIter): void
+            -next(int): int
+            +logStatistics(): void
+            #countObjectAccess(): void
+            #countDistanceComputation(): void
+            +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+            +rangeByObject(DistanceQuery<O extends NumberVector>, double, int): RangeSearcher<O extends NumberVector>
+            +priorityByObject(DistanceQuery<O extends NumberVector>, double, int): PrioritySearcher<O extends NumberVector>
+        }
+
+        class elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreeKNNSearcher [[SmallMemoryKDTree.KDTreeKNNSearcher.html]] {
+            +KDTreeKNNSearcher(PartialDistance<? super NumberVector>)
+            +getKNN(O extends NumberVector, int): KNNList
+            -kdKNNSearch(int, int, int, O extends NumberVector, KNNHeap, DoubleDBIDListIter, double[], double, double): double
+        }
+
+        class elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreeRangeSearcher [[SmallMemoryKDTree.KDTreeRangeSearcher.html]] {
+            +KDTreeRangeSearcher(PartialDistance<? super NumberVector>)
+            +getRange(O extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            -kdRangeSearch(int, int, int, O extends NumberVector, ModifiableDoubleDBIDList, DoubleDBIDListIter, double[], double, double): void
+        }
+
+        class elki.index.tree.spatial.kd.SmallMemoryKDTree.PrioritySearchBranch [[SmallMemoryKDTree.PrioritySearchBranch.html]] {
+            ~mindist: double
+            ~left: int
+            ~right: int
+            ~axis: int
+            +PrioritySearchBranch(double, int, int, int)
+            +compareTo(PrioritySearchBranch): int
+        }
+
+        class elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreePrioritySearcher [[SmallMemoryKDTree.KDTreePrioritySearcher.html]] {
+            -distance: PrimitiveDistance<? super NumberVector>
+            -heap: ComparableMinHeap<PrioritySearchBranch>
+            -iter: DoubleDBIDListIter
+            -query: O extends NumberVector
+            -threshold: double
+            -pos: int
+            +KDTreePrioritySearcher(PrimitiveDistance<? super NumberVector>)
+            +search(O extends NumberVector): PrioritySearcher<O extends NumberVector>
+            +advance(): PrioritySearcher<O extends NumberVector>
+            +valid(): boolean
+            +getLowerBound(): double
+            +allLowerBound(): double
+            +computeExactDistance(): double
+            +internalGetIndex(): int
+            +decreaseCutoff(double): PrioritySearcher<O extends NumberVector>
+        }
+
+        class elki.index.tree.spatial.kd.SmallMemoryKDTree.Factory<O extends NumberVector> [[SmallMemoryKDTree.Factory.html]] {
+            ~leafsize: int
+            +Factory()
+            +Factory(int)
+            +instantiate(Relation<O extends NumberVector>): SmallMemoryKDTree<O extends NumberVector>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.tree.spatial.kd.SmallMemoryKDTree.Factory.Par<O extends NumberVector> [[SmallMemoryKDTree.Factory.Par.html]] {
+            {static} +LEAFSIZE_P: OptionID
+            ~leafsize: int
+            +configure(Parameterization): void
+            +make(): Factory<O extends NumberVector>
+        }
+
+        class PartialManhattanDistance [[PartialManhattanDistance.html]] {
+            +combineRaw(double, double, double): double
+            +compareRawRegular(double, double): boolean
+            +distance(NumberVector, NumberVector): double
+            +transformOut(double): double
+        }
+
+        class PartialLPNormDistance [[PartialLPNormDistance.html]] {
+            -dist: LPNormDistance
+            +PartialLPNormDistance(LPNormDistance)
+            +combineRaw(double, double, double): double
+            +compareRawRegular(double, double): boolean
+            +distance(NumberVector, NumberVector): double
+            +transformOut(double): double
+        }
+
+        class MinimalisticMemoryKDTree<O extends NumberVector> [[MinimalisticMemoryKDTree.html]] {
+            {static} -LOG: Logging
+            #relation: Relation<O extends NumberVector>
+            #sorted: ArrayModifiableDBIDs
+            #dims: int
+            #leafsize: int
+            #objaccess: Counter
+            #distcalc: Counter
+            +MinimalisticMemoryKDTree(Relation<O extends NumberVector>, int)
+            +initialize(): void
+            -buildTree(int, int, int, SortDBIDsBySingleDimension): void
+            -next(int): int
+            +logStatistics(): void
+            #countObjectAccess(): void
+            #countDistanceComputation(): void
+            +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+            +rangeByObject(DistanceQuery<O extends NumberVector>, double, int): RangeSearcher<O extends NumberVector>
+            +priorityByObject(DistanceQuery<O extends NumberVector>, double, int): PrioritySearcher<O extends NumberVector>
+        }
+
+        class elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.CountSortAccesses [[MinimalisticMemoryKDTree.CountSortAccesses.html]] {
+            ~objaccess: Counter
+            +CountSortAccesses(Counter, Relation<? extends NumberVector>)
+            +compare(DBIDRef, DBIDRef): int
+        }
+
+        class elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreeKNNSearcher [[MinimalisticMemoryKDTree.KDTreeKNNSearcher.html]] {
+            +KDTreeKNNSearcher(PartialDistance<? super NumberVector>)
+            +getKNN(O extends NumberVector, int): KNNList
+            -kdKNNSearch(int, int, int, O extends NumberVector, KNNHeap, DBIDArrayIter, double[], double, double): double
+        }
+
+        class elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreeRangeSearcher [[MinimalisticMemoryKDTree.KDTreeRangeSearcher.html]] {
+            +KDTreeRangeSearcher(PartialDistance<? super NumberVector>)
+            +getRange(O extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            -kdRangeSearch(int, int, int, O extends NumberVector, ModifiableDoubleDBIDList, DBIDArrayIter, double[], double, double): void
+        }
+
+        class elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.PrioritySearchBranch [[MinimalisticMemoryKDTree.PrioritySearchBranch.html]] {
+            ~mindist: double
+            ~left: int
+            ~right: int
+            ~axis: int
+            +PrioritySearchBranch(double, int, int, int)
+            +compareTo(PrioritySearchBranch): int
+        }
+
+        class elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreePrioritySearcher [[MinimalisticMemoryKDTree.KDTreePrioritySearcher.html]] {
+            -distance: PrimitiveDistance<? super NumberVector>
+            -heap: ComparableMinHeap<PrioritySearchBranch>
+            -iter: DBIDArrayIter
+            -query: O extends NumberVector
+            -threshold: double
+            -pos: int
+            +KDTreePrioritySearcher(PrimitiveDistance<? super NumberVector>)
+            +search(O extends NumberVector): PrioritySearcher<O extends NumberVector>
+            +advance(): PrioritySearcher<O extends NumberVector>
+            +valid(): boolean
+            +getLowerBound(): double
+            +allLowerBound(): double
+            +computeExactDistance(): double
+            +internalGetIndex(): int
+            +decreaseCutoff(double): PrioritySearcher<O extends NumberVector>
+        }
+
+        class elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory<O extends NumberVector> [[MinimalisticMemoryKDTree.Factory.html]] {
+            ~leafsize: int
+            +Factory()
+            +Factory(int)
+            +instantiate(Relation<O extends NumberVector>): MinimalisticMemoryKDTree<O extends NumberVector>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory.Par<O extends NumberVector> [[MinimalisticMemoryKDTree.Factory.Par.html]] {
+            {static} +LEAFSIZE_P: OptionID
+            ~leafsize: int
+            +configure(Parameterization): void
+            +make(): Factory<O extends NumberVector>
+        }
+
+        class PartialEuclideanDistance [[PartialEuclideanDistance.html]] {
+            +combineRaw(double, double, double): double
+            +compareRawRegular(double, double): boolean
+            +distance(NumberVector, NumberVector): double
+            +transformOut(double): double
+        }
+
+        class MemoryKDTree<O extends NumberVector> [[MemoryKDTree.html]] {
+            {static} -LOG: Logging
+            #relation: Relation<O extends NumberVector>
+            #leafsize: int
+            #sorted: ArrayDBIDs
+            #root: Object
+            #dims: int
+            #objaccess: Counter
+            #distcalc: Counter
+            +MemoryKDTree(Relation<O extends NumberVector>, int)
+            +MemoryKDTree(Relation<O extends NumberVector>, SplitStrategy, int)
+            +initialize(): void
+            +buildTree(Relation<? extends NumberVector>, int, int, ArrayModifiableDBIDs, DBIDArrayMIter, SortDBIDsBySingleDimension): Object
+            -assertSplitConsistent(int, int, int, int, double, DBIDArrayMIter): boolean
+            +logStatistics(): void
+            #countObjectAccess(): void
+            #countDistanceComputation(): void
+            +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+            +rangeByObject(DistanceQuery<O extends NumberVector>, double, int): RangeSearcher<O extends NumberVector>
+            +priorityByObject(DistanceQuery<O extends NumberVector>, double, int): PrioritySearcher<O extends NumberVector>
+        }
+
+        class elki.index.tree.spatial.kd.MemoryKDTree.CountingRelation [[MemoryKDTree.CountingRelation.html]] {
+            +get(DBIDRef): O extends NumberVector
+            +getDataTypeInformation(): SimpleTypeInformation<O extends NumberVector>
+            +getDBIDs(): DBIDs
+            +iterDBIDs(): DBIDIter
+            +size(): int
+            +getLongName(): String
+        }
+
+        class elki.index.tree.spatial.kd.MemoryKDTree.KDNode [[MemoryKDTree.KDNode.html]] {
+            ~split: double
+            ~dim: int
+            ~leftChild: Object
+            ~rightChild: Object
+            +KDNode(int, double, Object, Object)
+        }
+
+        class elki.index.tree.spatial.kd.MemoryKDTree.KDTreeKNNSearcher [[MemoryKDTree.KDTreeKNNSearcher.html]] {
+            +KDTreeKNNSearcher(PartialDistance<? super NumberVector>)
+            +getKNN(O extends NumberVector, int): KNNList
+            -kdKNNSearch(Object, O extends NumberVector, KNNHeap, DBIDArrayIter, double[], double, double): double
+        }
+
+        class elki.index.tree.spatial.kd.MemoryKDTree.KDTreeRangeSearcher [[MemoryKDTree.KDTreeRangeSearcher.html]] {
+            +KDTreeRangeSearcher(PartialDistance<? super NumberVector>)
+            +getRange(O extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            -kdRangeSearch(Object, O extends NumberVector, ModifiableDoubleDBIDList, DBIDArrayIter, double[], double, double): void
+        }
+
+        class elki.index.tree.spatial.kd.MemoryKDTree.PrioritySearchBranch [[MemoryKDTree.PrioritySearchBranch.html]] {
+            ~rawdist: double
+            ~bounds: double[]
+            ~node: Object
+            +PrioritySearchBranch(double, double[], Object)
+            +compareTo(PrioritySearchBranch): int
+        }
+
+        class elki.index.tree.spatial.kd.MemoryKDTree.KDTreePrioritySearcher [[MemoryKDTree.KDTreePrioritySearcher.html]] {
+            -heap: ComparableMinHeap<PrioritySearchBranch>
+            -iter: DBIDArrayIter
+            -query: O extends NumberVector
+            -threshold: double
+            -pos: int
+            +KDTreePrioritySearcher(PartialDistance<? super NumberVector>)
+            +search(O extends NumberVector): PrioritySearcher<O extends NumberVector>
+            +advance(): PrioritySearcher<O extends NumberVector>
+            +valid(): boolean
+            +getLowerBound(): double
+            +allLowerBound(): double
+            +computeExactDistance(): double
+            +internalGetIndex(): int
+            +decreaseCutoff(double): PrioritySearcher<O extends NumberVector>
+        }
+
+        class elki.index.tree.spatial.kd.MemoryKDTree.Factory<O extends NumberVector> [[MemoryKDTree.Factory.html]] {
+            ~leafsize: int
+            +Factory(SplitStrategy, int)
+            +instantiate(Relation<O extends NumberVector>): MemoryKDTree<O extends NumberVector>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.tree.spatial.kd.MemoryKDTree.Factory.Par<O extends NumberVector> [[MemoryKDTree.Factory.Par.html]] {
+            {static} +SPLIT_P: OptionID
+            {static} +LEAFSIZE_P: OptionID
+            ~leafsize: int
+            +configure(Parameterization): void
+            +make(): Factory<O extends NumberVector>
+        }
+
+        PartialDistance <|.. PartialSquaredEuclideanDistance
+        PartialSquaredEuclideanDistance --> PartialSquaredEuclideanDistance: STATIC
+        elki.index.DistancePriorityIndex <|.. SmallMemoryKDTree
+        elki.database.query.knn.KNNSearcher <|.. elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreeKNNSearcher
+        SmallMemoryKDTree +-- elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreeKNNSearcher
+        elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreeKNNSearcher --> PartialDistance: distance
+        elki.database.query.range.RangeSearcher <|.. elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreeRangeSearcher
+        SmallMemoryKDTree +-- elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreeRangeSearcher
+        elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreeRangeSearcher --> PartialDistance: distance
+        SmallMemoryKDTree +-- elki.index.tree.spatial.kd.SmallMemoryKDTree.PrioritySearchBranch
+        elki.database.query.PrioritySearcher <|.. elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreePrioritySearcher
+        SmallMemoryKDTree +-- elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreePrioritySearcher
+        elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreePrioritySearcher --> elki.index.tree.spatial.kd.SmallMemoryKDTree.PrioritySearchBranch: cur
+        elki.index.IndexFactory <|.. elki.index.tree.spatial.kd.SmallMemoryKDTree.Factory
+        SmallMemoryKDTree +-- elki.index.tree.spatial.kd.SmallMemoryKDTree.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.kd.SmallMemoryKDTree.Factory.Par
+        elki.index.tree.spatial.kd.SmallMemoryKDTree.Factory +-- elki.index.tree.spatial.kd.SmallMemoryKDTree.Factory.Par
+        PartialDistance <|.. PartialManhattanDistance
+        PartialManhattanDistance --> PartialManhattanDistance: STATIC
+        PartialDistance <|.. PartialLPNormDistance
+        elki.index.DistancePriorityIndex <|.. MinimalisticMemoryKDTree
+        elki.data.VectorUtil.SortDBIDsBySingleDimension <|-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.CountSortAccesses
+        MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.CountSortAccesses
+        elki.database.query.knn.KNNSearcher <|.. elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreeKNNSearcher
+        MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreeKNNSearcher
+        elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreeKNNSearcher --> PartialDistance: distance
+        elki.database.query.range.RangeSearcher <|.. elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreeRangeSearcher
+        MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreeRangeSearcher
+        elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreeRangeSearcher --> PartialDistance: distance
+        MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.PrioritySearchBranch
+        elki.database.query.PrioritySearcher <|.. elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreePrioritySearcher
+        MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreePrioritySearcher
+        elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.KDTreePrioritySearcher --> elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.PrioritySearchBranch: cur
+        elki.index.IndexFactory <|.. elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory
+        MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory.Par
+        elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.Factory.Par
+        PartialDistance <|.. PartialEuclideanDistance
+        PartialEuclideanDistance --> PartialEuclideanDistance: STATIC
+        elki.index.DistancePriorityIndex <|.. MemoryKDTree
+        MemoryKDTree --> elki.index.tree.spatial.kd.split.SplitStrategy: split
+        elki.database.relation.Relation <|.. elki.index.tree.spatial.kd.MemoryKDTree.CountingRelation
+        MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.CountingRelation
+        MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.KDNode
+        elki.database.query.knn.KNNSearcher <|.. elki.index.tree.spatial.kd.MemoryKDTree.KDTreeKNNSearcher
+        MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.KDTreeKNNSearcher
+        elki.index.tree.spatial.kd.MemoryKDTree.KDTreeKNNSearcher --> PartialDistance: distance
+        elki.database.query.range.RangeSearcher <|.. elki.index.tree.spatial.kd.MemoryKDTree.KDTreeRangeSearcher
+        MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.KDTreeRangeSearcher
+        elki.index.tree.spatial.kd.MemoryKDTree.KDTreeRangeSearcher --> PartialDistance: distance
+        MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.PrioritySearchBranch
+        elki.database.query.PrioritySearcher <|.. elki.index.tree.spatial.kd.MemoryKDTree.KDTreePrioritySearcher
+        MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.KDTreePrioritySearcher
+        elki.index.tree.spatial.kd.MemoryKDTree.KDTreePrioritySearcher --> PartialDistance: distance
+        elki.index.tree.spatial.kd.MemoryKDTree.KDTreePrioritySearcher --> elki.index.tree.spatial.kd.MemoryKDTree.PrioritySearchBranch: cur
+        elki.index.IndexFactory <|.. elki.index.tree.spatial.kd.MemoryKDTree.Factory
+        MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.Factory
+        elki.index.tree.spatial.kd.MemoryKDTree.Factory --> elki.index.tree.spatial.kd.split.SplitStrategy: split
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.kd.MemoryKDTree.Factory.Par
+        elki.index.tree.spatial.kd.MemoryKDTree.Factory +-- elki.index.tree.spatial.kd.MemoryKDTree.Factory.Par
+        elki.index.tree.spatial.kd.MemoryKDTree.Factory.Par --> elki.index.tree.spatial.kd.split.SplitStrategy: split
+    }
+
+    namespace elki.index {
+        interface DistancePriorityIndex<O> [[../../../DistancePriorityIndex.html]] {
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        }
+        interface IndexFactory<V> [[../../../IndexFactory.html]] {
+            {abstract} +instantiate(Relation<V>): Index
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+    }
+
+    namespace elki.database.query.knn {
+        interface KNNSearcher<O> [[../../../../database/query/knn/KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+    }
+
+    namespace elki.database.query.range {
+        interface RangeSearcher<O> [[../../../../database/query/range/RangeSearcher.html]] {
+            +getRange(O, double): DoubleDBIDList
+            {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+    }
+
+    namespace elki.database.query {
+        interface PrioritySearcher<O> [[../../../../database/query/PrioritySearcher.html]] {
+            +search(O, double): PrioritySearcher<O>
+            {abstract} +search(O): PrioritySearcher<O>
+            +getKNN(O, int): KNNList
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+            {abstract} +computeExactDistance(): double
+            +getApproximateDistance(): double
+            +getApproximateAccuracy(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            {abstract} +allLowerBound(): double
+            {abstract} +advance(): PrioritySearcher<O>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.data {
+        class elki.data.VectorUtil.SortDBIDsBySingleDimension [[../../../../data/VectorUtil.SortDBIDsBySingleDimension.html]] {
+            -d: int
+            -data: Relation<? extends NumberVector>
+        }
+    }
+
+    namespace elki.database.relation {
+        interface Relation<O> [[../../../../database/relation/Relation.html]] {
+            {abstract} +get(DBIDRef): O
+            {abstract} +getDataTypeInformation(): SimpleTypeInformation<O>
+            {abstract} +getDBIDs(): DBIDs
+            {abstract} +iterDBIDs(): DBIDIter
+            {abstract} +size(): int
+            {abstract} +getLongName(): String
+            +forEach(BiConsumer<? super DBIDRef, ? super O>): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ApproximationLine\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkcop" as elki.index.tree.metrical.mtreevariants.mktrees.mkcop.ApproximationLine [[ApproximationLine.html]] {
+        {static} -serialVersionUID: long
+        -m: double
+        -t: double
+        -k_0: int
+        +ApproximationLine()
+        +ApproximationLine(int, double, double)
+        +getM(): double
+        +getT(): double
+        +getK_0(): int
+        +getValueAt(int): double
+        +getApproximatedKnnDistance(int): double
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+    }
+
+    interface "<size:14>Externalizable\n<size:10>java.io" as java.io.Externalizable {
+        {abstract} +writeExternal(ObjectOutput): void
+        {abstract} +readExternal(ObjectInput): void
+    }
+
+    java.io.Externalizable <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkcop.ApproximationLine
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

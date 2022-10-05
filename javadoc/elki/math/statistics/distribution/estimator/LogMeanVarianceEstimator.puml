@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>LogMeanVarianceEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LogMeanVarianceEstimator<D extends Distribution> [[LogMeanVarianceEstimator.html]] {
+        {abstract} +estimateFromLogMeanVariance(MeanVariance, double): D extends Distribution
+        +estimateFromLogStatisticalMoments(StatisticalMoments, double): D extends Distribution
+        +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+    }
+
+    interface "<size:14>LogMOMDistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LogMOMDistributionEstimator<D extends Distribution> [[LogMOMDistributionEstimator.html]] {
+        {abstract} +estimateFromLogStatisticalMoments(StatisticalMoments, double): D extends Distribution
+    }
+
+    elki.math.statistics.distribution.estimator.LogMOMDistributionEstimator <|-- elki.math.statistics.distribution.estimator.LogMeanVarianceEstimator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

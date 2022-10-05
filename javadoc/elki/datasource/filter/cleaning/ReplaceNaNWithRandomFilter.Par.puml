@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ReplaceNaNWithRandomFilter.Par\n<size:10>elki.datasource.filter.cleaning" as elki.datasource.filter.cleaning.ReplaceNaNWithRandomFilter.Par [[ReplaceNaNWithRandomFilter.Par.html]] {
+        {static} +REPLACEMENT_DISTRIBUTION: OptionID
+        {static} +RANDOM_ID: OptionID
+        -dist: Distribution
+        -rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): ReplaceNaNWithRandomFilter
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ReplaceNaNWithRandomFilter\n<size:10>elki.datasource.filter.cleaning" as elki.datasource.filter.cleaning.ReplaceNaNWithRandomFilter [[ReplaceNaNWithRandomFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.cleaning.ReplaceNaNWithRandomFilter.Par
+    elki.datasource.filter.cleaning.ReplaceNaNWithRandomFilter +-- elki.datasource.filter.cleaning.ReplaceNaNWithRandomFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,100 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.intrinsic {
+
+        class IDOS<O> [[IDOS.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #k_c: int
+            #k_r: int
+            #estimator: IntrinsicDimensionalityEstimator<? super O>
+            +IDOS(Distance<? super O>, IntrinsicDimensionalityEstimator<? super O>, int, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+            #computeIDs(DBIDs, KNNSearcher<DBIDRef>, DistanceQuery<O>): DoubleDataStore
+            #computeIDOS(DBIDs, KNNSearcher<DBIDRef>, DoubleDataStore, DoubleMinMax): DoubleDataStore
+        }
+
+        class elki.outlier.intrinsic.IDOS.Par<O> [[IDOS.Par.html]] {
+            {static} +ESTIMATOR_ID: OptionID
+            {static} +KR_ID: OptionID
+            {static} +KC_ID: OptionID
+            #distance: Distance<? super O>
+            #estimator: IntrinsicDimensionalityEstimator<? super O>
+            #k_c: int
+            #k_r: int
+            +configure(Parameterization): void
+            +make(): IDOS<O>
+        }
+
+        class LID<O> [[LID.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #kplus: int
+            #estimator: IntrinsicDimensionalityEstimator<? super O>
+            +LID(Distance<? super O>, int, IntrinsicDimensionalityEstimator<? super O>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+        }
+
+        class elki.outlier.intrinsic.LID.Par<O> [[LID.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +ESTIMATOR_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            #estimator: IntrinsicDimensionalityEstimator<? super O>
+            +configure(Parameterization): void
+            +make(): LID<O>
+        }
+
+        class ISOS<O> [[ISOS.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #k: int
+            #estimator: DistanceBasedIntrinsicDimensionalityEstimator
+            #phi: double
+            +ISOS(Distance<? super O>, int, DistanceBasedIntrinsicDimensionalityEstimator)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): OutlierResult
+            {static} #adjustDistances(DBIDRef, DoubleDBIDListIter, double, double, ModifiableDoubleDBIDList): void
+            #estimateID(DBIDRef, DoubleDBIDListIter, double[]): double
+            {static} +nominateNeighbors(DBIDIter, DBIDArrayIter, double[], double, WritableDoubleDataStore): void
+            {static} +transformScores(WritableDoubleDataStore, DBIDs, double, double): DoubleMinMax
+        }
+
+        class elki.outlier.intrinsic.ISOS.Par<O> {
+            {static} +KNN_ID: OptionID
+            {static} +ESTIMATOR_ID: OptionID
+            #distance: Distance<? super O>
+            #k: int
+            #estimator: DistanceBasedIntrinsicDimensionalityEstimator
+            +configure(Parameterization): void
+            +make(): ISOS<O>
+        }
+
+        elki.outlier.OutlierAlgorithm <|.. IDOS
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.intrinsic.IDOS.Par
+        IDOS +-- elki.outlier.intrinsic.IDOS.Par
+        elki.outlier.OutlierAlgorithm <|.. LID
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.intrinsic.LID.Par
+        LID +-- elki.outlier.intrinsic.LID.Par
+        elki.outlier.OutlierAlgorithm <|.. ISOS
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.intrinsic.ISOS.Par
+        ISOS +-- elki.outlier.intrinsic.ISOS.Par
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

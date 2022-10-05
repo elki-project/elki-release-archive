@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ArrayModifiableIntegerDBIDs.Itr\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Itr [[ArrayModifiableIntegerDBIDs.Itr.html]] {
+        ~pos: int
+        +internalGetIndex(): int
+        +valid(): boolean
+        +advance(): Itr
+        +getOffset(): int
+        +advance(int): Itr
+        +retract(): Itr
+        +seek(int): Itr
+        +setDBID(DBIDRef): void
+        +remove(): void
+    }
+
+    interface "<size:14>IntegerDBIDArrayMIter\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDArrayMIter [[IntegerDBIDArrayMIter.html]]
+    class "<size:14>ArrayModifiableIntegerDBIDs\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.ArrayModifiableIntegerDBIDs [[ArrayModifiableIntegerDBIDs.html]]
+
+    elki.database.ids.integer.IntegerDBIDArrayMIter <|.. elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Itr
+    elki.database.ids.integer.ArrayModifiableIntegerDBIDs +-- elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Itr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,336 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.em.models {
+
+        interface EMClusterModelFactory<O, M extends Model> [[EMClusterModelFactory.html]] {
+            {static} +INIT_ID: OptionID
+            {abstract} +buildInitialModels(Relation<? extends O>, int): List<? extends EMClusterModel<O, M extends Model>>
+        }
+
+        interface BetulaClusterModel [[BetulaClusterModel.html]] {
+            {abstract} +estimateLogDensity(ClusterFeature): double
+            {abstract} +updateE(ClusterFeature, double): void
+        }
+
+        class TextbookSphericalGaussianModelFactory [[TextbookSphericalGaussianModelFactory.html]] {
+            #initializer: KMeansInitialization
+            +TextbookSphericalGaussianModelFactory(KMeansInitialization)
+            +buildInitialModels(Relation<? extends NumberVector>, int): List<TextbookSphericalGaussianModel>
+        }
+
+        class elki.clustering.em.models.TextbookSphericalGaussianModelFactory.Par {
+            #initializer: KMeansInitialization
+            +configure(Parameterization): void
+            +make(): TextbookSphericalGaussianModelFactory
+        }
+
+        class BetulaDiagonalGaussianModelFactory [[BetulaDiagonalGaussianModelFactory.html]] {
+            #initializer: AbstractCFKMeansInitialization
+            +BetulaDiagonalGaussianModelFactory(AbstractCFKMeansInitialization)
+            +buildInitialModels(List<? extends ClusterFeature>, int, CFTree<?>): List<DiagonalGaussianModel>
+        }
+
+        class elki.clustering.em.models.BetulaDiagonalGaussianModelFactory.Par [[BetulaDiagonalGaussianModelFactory.Par.html]] {
+            #initializer: AbstractCFKMeansInitialization
+            +configure(Parameterization): void
+            +make(): BetulaDiagonalGaussianModelFactory
+        }
+
+        class MultivariateGaussianModelFactory [[MultivariateGaussianModelFactory.html]] {
+            #initializer: KMeansInitialization
+            +MultivariateGaussianModelFactory(KMeansInitialization)
+            +buildInitialModels(Relation<? extends NumberVector>, int): List<MultivariateGaussianModel>
+        }
+
+        class elki.clustering.em.models.MultivariateGaussianModelFactory.Par {
+            #initializer: KMeansInitialization
+            +configure(Parameterization): void
+            +make(): MultivariateGaussianModelFactory
+        }
+
+        class TwoPassMultivariateGaussianModel [[TwoPassMultivariateGaussianModel.html]] {
+            ~mean: double[]
+            ~covariance: double[]
+            ~chol: CholeskyDecomposition
+            ~tmp: double[]
+            ~logNorm: double
+            ~logNormDet: double
+            ~weight: double
+            ~wsum: double
+            ~priormatrix: double[]
+            +TwoPassMultivariateGaussianModel(double, double[])
+            +TwoPassMultivariateGaussianModel(double, double[], double[])
+            +beginEStep(): void
+            +needsTwoPass(): boolean
+            +firstPassE(NumberVector, double): void
+            +finalizeFirstPassE(): void
+            +updateE(NumberVector, double): void
+            +finalizeEStep(double, double): void
+            +mahalanobisDistance(NumberVector): double
+            +estimateLogDensity(NumberVector): double
+            +getWeight(): double
+            +setWeight(double): void
+            +finalizeCluster(): EMModel
+        }
+
+        class DiagonalGaussianModel [[DiagonalGaussianModel.html]] {
+            {static} -SINGULARITY_CHEAT: double
+            ~mean: double[]
+            ~variances: double[]
+            ~nmea: double[]
+            ~logNorm: double
+            ~logNormDet: double
+            ~weight: double
+            ~wsum: double
+            ~priordiag: double[]
+            +DiagonalGaussianModel(double, double[])
+            +DiagonalGaussianModel(double, double[], double[])
+            +beginEStep(): void
+            +updateE(NumberVector, double): void
+            +finalizeEStep(double, double): void
+            +mahalanobisDistance(double[]): double
+            +mahalanobisDistance(NumberVector): double
+            +estimateLogDensity(NumberVector): double
+            +getWeight(): double
+            +setWeight(double): void
+            +finalizeCluster(): EMModel
+            +estimateLogDensity(ClusterFeature): double
+            +updateE(ClusterFeature, double): void
+        }
+
+        interface BetulaClusterModelFactory<M extends BetulaClusterModel> [[BetulaClusterModelFactory.html]] {
+            {static} +INIT_ID: OptionID
+            {abstract} +buildInitialModels(List<? extends ClusterFeature>, int, CFTree<?>): List<M extends BetulaClusterModel>
+        }
+
+        class SphericalGaussianModelFactory [[SphericalGaussianModelFactory.html]] {
+            #initializer: KMeansInitialization
+            +SphericalGaussianModelFactory(KMeansInitialization)
+            +buildInitialModels(Relation<? extends NumberVector>, int): List<SphericalGaussianModel>
+        }
+
+        class elki.clustering.em.models.SphericalGaussianModelFactory.Par {
+            #initializer: KMeansInitialization
+            +configure(Parameterization): void
+            +make(): SphericalGaussianModelFactory
+        }
+
+        class BetulaSphericalGaussianModelFactory [[BetulaSphericalGaussianModelFactory.html]] {
+            #initializer: AbstractCFKMeansInitialization
+            +BetulaSphericalGaussianModelFactory(AbstractCFKMeansInitialization)
+            +buildInitialModels(List<? extends ClusterFeature>, int, CFTree<?>): List<SphericalGaussianModel>
+        }
+
+        class elki.clustering.em.models.BetulaSphericalGaussianModelFactory.Par [[BetulaSphericalGaussianModelFactory.Par.html]] {
+            #initializer: AbstractCFKMeansInitialization
+            +configure(Parameterization): void
+            +make(): BetulaSphericalGaussianModelFactory
+        }
+
+        class MultivariateGaussianModel [[MultivariateGaussianModel.html]] {
+            {static} -LOG: Logging
+            {static} -SINGULARITY_CHEAT: double
+            ~mean: double[]
+            ~covariance: double[]
+            ~chol: CholeskyDecomposition
+            ~nmea: double[]
+            ~logNorm: double
+            ~logNormDet: double
+            ~weight: double
+            ~wsum: double
+            ~priormatrix: double[]
+            +MultivariateGaussianModel(double, double[])
+            +MultivariateGaussianModel(double, double[], double[])
+            +beginEStep(): void
+            +updateE(NumberVector, double): void
+            +finalizeEStep(double, double): void
+            {static} #updateCholesky(double[], CholeskyDecomposition): CholeskyDecomposition
+            {static} #getHalfLogDeterminant(CholeskyDecomposition): double
+            +mahalanobisDistance(double[]): double
+            +mahalanobisDistance(NumberVector): double
+            +estimateLogDensity(NumberVector): double
+            +getWeight(): double
+            +setWeight(double): void
+            +finalizeCluster(): EMModel
+            +estimateLogDensity(ClusterFeature): double
+            +updateE(ClusterFeature, double): void
+        }
+
+        class TextbookMultivariateGaussianModel [[TextbookMultivariateGaussianModel.html]] {
+            ~mean: double[]
+            ~covariance: double[]
+            ~chol: CholeskyDecomposition
+            ~tmp: double[]
+            ~logNorm: double
+            ~logNormDet: double
+            ~weight: double
+            ~wsum: double
+            ~priormatrix: double[]
+            +TextbookMultivariateGaussianModel(double, double[])
+            +TextbookMultivariateGaussianModel(double, double[], double[])
+            +beginEStep(): void
+            +updateE(NumberVector, double): void
+            +updateE(double[], double[], double, double): void
+            +finalizeEStep(double, double): void
+            +mahalanobisDistance(NumberVector): double
+            +estimateLogDensity(NumberVector): double
+            +getWeight(): double
+            +setWeight(double): void
+            +finalizeCluster(): EMModel
+            +clone(TextbookMultivariateGaussianModel): void
+            +calculateModelLimits(double[], double[], ConstrainedQuadraticProblemSolver, double, double[], double[], double[]): void
+        }
+
+        class TextbookMultivariateGaussianModelFactory [[TextbookMultivariateGaussianModelFactory.html]] {
+            #initializer: KMeansInitialization
+            +TextbookMultivariateGaussianModelFactory(KMeansInitialization)
+            +buildInitialModels(Relation<? extends NumberVector>, int): List<TextbookMultivariateGaussianModel>
+        }
+
+        class elki.clustering.em.models.TextbookMultivariateGaussianModelFactory.Par {
+            #initializer: KMeansInitialization
+            +configure(Parameterization): void
+            +make(): TextbookMultivariateGaussianModelFactory
+        }
+
+        interface EMClusterModel<O, M extends Model> [[EMClusterModel.html]] {
+            {abstract} +beginEStep(): void
+            +needsTwoPass(): boolean
+            +firstPassE(O, double): void
+            +finalizeFirstPassE(): void
+            {abstract} +updateE(O, double): void
+            {abstract} +finalizeEStep(double, double): void
+            {abstract} +estimateLogDensity(O): double
+            {abstract} +finalizeCluster(): M extends Model
+            {abstract} +getWeight(): double
+            {abstract} +setWeight(double): void
+        }
+
+        class TwoPassMultivariateGaussianModelFactory [[TwoPassMultivariateGaussianModelFactory.html]] {
+            #initializer: KMeansInitialization
+            +TwoPassMultivariateGaussianModelFactory(KMeansInitialization)
+            +buildInitialModels(Relation<? extends NumberVector>, int): List<TwoPassMultivariateGaussianModel>
+        }
+
+        class elki.clustering.em.models.TwoPassMultivariateGaussianModelFactory.Par {
+            #initializer: KMeansInitialization
+            +configure(Parameterization): void
+            +make(): TwoPassMultivariateGaussianModelFactory
+        }
+
+        class TextbookSphericalGaussianModel [[TextbookSphericalGaussianModel.html]] {
+            ~mean: double[]
+            ~variance: double
+            ~nmea: double[]
+            ~logNorm: double
+            ~logNormDet: double
+            ~weight: double
+            ~wsum: double
+            ~priorvar: double
+            +TextbookSphericalGaussianModel(double, double[])
+            +TextbookSphericalGaussianModel(double, double[], double)
+            +beginEStep(): void
+            +updateE(NumberVector, double): void
+            +finalizeEStep(double, double): void
+            +mahalanobisDistance(double[]): double
+            +mahalanobisDistance(NumberVector): double
+            +estimateLogDensity(NumberVector): double
+            +getWeight(): double
+            +setWeight(double): void
+            +finalizeCluster(): EMModel
+        }
+
+        class BetulaMultivariateGaussianModelFactory [[BetulaMultivariateGaussianModelFactory.html]] {
+            #initializer: AbstractCFKMeansInitialization
+            +BetulaMultivariateGaussianModelFactory(AbstractCFKMeansInitialization)
+            +buildInitialModels(List<? extends ClusterFeature>, int, CFTree<?>): List<MultivariateGaussianModel>
+        }
+
+        class elki.clustering.em.models.BetulaMultivariateGaussianModelFactory.Par [[BetulaMultivariateGaussianModelFactory.Par.html]] {
+            #initializer: AbstractCFKMeansInitialization
+            +configure(Parameterization): void
+            +make(): BetulaMultivariateGaussianModelFactory
+        }
+
+        class DiagonalGaussianModelFactory [[DiagonalGaussianModelFactory.html]] {
+            #initializer: KMeansInitialization
+            +DiagonalGaussianModelFactory(KMeansInitialization)
+            +buildInitialModels(Relation<? extends NumberVector>, int): List<DiagonalGaussianModel>
+        }
+
+        class elki.clustering.em.models.DiagonalGaussianModelFactory.Par {
+            #initializer: KMeansInitialization
+            +configure(Parameterization): void
+            +make(): DiagonalGaussianModelFactory
+        }
+
+        class SphericalGaussianModel [[SphericalGaussianModel.html]] {
+            {static} -SINGULARITY_CHEAT: double
+            ~mean: double[]
+            ~variance: double
+            ~nmea: double[]
+            ~logNorm: double
+            ~logNormDet: double
+            ~weight: double
+            ~wsum: double
+            ~priorvar: double
+            +SphericalGaussianModel(double, double[])
+            +SphericalGaussianModel(double, double[], double)
+            +beginEStep(): void
+            +updateE(NumberVector, double): void
+            +finalizeEStep(double, double): void
+            +mahalanobisDistance(double[]): double
+            +mahalanobisDistance(NumberVector): double
+            +estimateLogDensity(NumberVector): double
+            +getWeight(): double
+            +setWeight(double): void
+            +finalizeCluster(): EMModel
+            +estimateLogDensity(ClusterFeature): double
+            +updateE(ClusterFeature, double): void
+        }
+
+        EMClusterModel <|-- BetulaClusterModel
+        EMClusterModelFactory <|.. TextbookSphericalGaussianModelFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.models.TextbookSphericalGaussianModelFactory.Par
+        TextbookSphericalGaussianModelFactory +-- elki.clustering.em.models.TextbookSphericalGaussianModelFactory.Par
+        BetulaClusterModelFactory <|.. BetulaDiagonalGaussianModelFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.models.BetulaDiagonalGaussianModelFactory.Par
+        BetulaDiagonalGaussianModelFactory +-- elki.clustering.em.models.BetulaDiagonalGaussianModelFactory.Par
+        EMClusterModelFactory <|.. MultivariateGaussianModelFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.models.MultivariateGaussianModelFactory.Par
+        MultivariateGaussianModelFactory +-- elki.clustering.em.models.MultivariateGaussianModelFactory.Par
+        EMClusterModel <|.. TwoPassMultivariateGaussianModel
+        BetulaClusterModel <|.. DiagonalGaussianModel
+        EMClusterModelFactory <|.. SphericalGaussianModelFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.models.SphericalGaussianModelFactory.Par
+        SphericalGaussianModelFactory +-- elki.clustering.em.models.SphericalGaussianModelFactory.Par
+        BetulaClusterModelFactory <|.. BetulaSphericalGaussianModelFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.models.BetulaSphericalGaussianModelFactory.Par
+        BetulaSphericalGaussianModelFactory +-- elki.clustering.em.models.BetulaSphericalGaussianModelFactory.Par
+        BetulaClusterModel <|.. MultivariateGaussianModel
+        EMClusterModel <|.. TextbookMultivariateGaussianModel
+        EMClusterModelFactory <|.. TextbookMultivariateGaussianModelFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.models.TextbookMultivariateGaussianModelFactory.Par
+        TextbookMultivariateGaussianModelFactory +-- elki.clustering.em.models.TextbookMultivariateGaussianModelFactory.Par
+        EMClusterModelFactory <|.. TwoPassMultivariateGaussianModelFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.models.TwoPassMultivariateGaussianModelFactory.Par
+        TwoPassMultivariateGaussianModelFactory +-- elki.clustering.em.models.TwoPassMultivariateGaussianModelFactory.Par
+        EMClusterModel <|.. TextbookSphericalGaussianModel
+        BetulaClusterModelFactory <|.. BetulaMultivariateGaussianModelFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.models.BetulaMultivariateGaussianModelFactory.Par
+        BetulaMultivariateGaussianModelFactory +-- elki.clustering.em.models.BetulaMultivariateGaussianModelFactory.Par
+        EMClusterModelFactory <|.. DiagonalGaussianModelFactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.models.DiagonalGaussianModelFactory.Par
+        DiagonalGaussianModelFactory +-- elki.clustering.em.models.DiagonalGaussianModelFactory.Par
+        BetulaClusterModel <|.. SphericalGaussianModel
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

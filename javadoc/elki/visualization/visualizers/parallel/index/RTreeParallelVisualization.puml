@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RTreeParallelVisualization\n<size:10>elki.visualization.visualizers.parallel.index" as elki.visualization.visualizers.parallel.index.RTreeParallelVisualization [[RTreeParallelVisualization.html]] {
+        {static} +INDEX: String
+        {static} +NAME: String
+        #settings: Par
+        +RTreeParallelVisualization(Par)
+        +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        +processNewResult(VisualizerContext, Object): void
+    }
+
+    interface "<size:14>VisFactory\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.VisFactory [[../../VisFactory.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+        {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+    }
+    class "<size:14>RTreeParallelVisualization.Instance\n<size:10>elki.visualization.visualizers.parallel.index" as elki.visualization.visualizers.parallel.index.RTreeParallelVisualization.Instance<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry> [[RTreeParallelVisualization.Instance.html]]
+    class "<size:14>RTreeParallelVisualization.Par\n<size:10>elki.visualization.visualizers.parallel.index" as elki.visualization.visualizers.parallel.index.RTreeParallelVisualization.Par [[RTreeParallelVisualization.Par.html]]
+
+    elki.visualization.visualizers.VisFactory <|.. elki.visualization.visualizers.parallel.index.RTreeParallelVisualization
+    elki.visualization.visualizers.parallel.index.RTreeParallelVisualization +-- elki.visualization.visualizers.parallel.index.RTreeParallelVisualization.Instance
+    elki.visualization.visualizers.parallel.index.RTreeParallelVisualization +-- elki.visualization.visualizers.parallel.index.RTreeParallelVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

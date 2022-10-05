@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CloseReinsert\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.reinsert" as elki.index.tree.spatial.rstarvariants.strategies.reinsert.CloseReinsert [[CloseReinsert.html]] {
+        +CloseReinsert(double, SpatialPrimitiveDistance<?>)
+        +computeReinserts(A, ArrayAdapter<? extends SpatialComparable, ? super A>, SpatialComparable): int[]
+    }
+
+    abstract class "<size:14>AbstractPartialReinsert\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.reinsert" as elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert [[AbstractPartialReinsert.html]]
+    class "<size:14>CloseReinsert.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.reinsert" as elki.index.tree.spatial.rstarvariants.strategies.reinsert.CloseReinsert.Par [[CloseReinsert.Par.html]]
+
+    elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert <|-- elki.index.tree.spatial.rstarvariants.strategies.reinsert.CloseReinsert
+    elki.index.tree.spatial.rstarvariants.strategies.reinsert.CloseReinsert +-- elki.index.tree.spatial.rstarvariants.strategies.reinsert.CloseReinsert.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

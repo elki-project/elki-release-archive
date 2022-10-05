@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractNeighborhoodOutlier\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.AbstractNeighborhoodOutlier<O> [[AbstractNeighborhoodOutlier.html]] {
+        {static} +NEIGHBORHOOD_ID: OptionID
+        -npredf: Factory<O>
+        +AbstractNeighborhoodOutlier(Factory<O>)
+        #getNeighborSetPredicateFactory(): Factory<O>
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    abstract class "<size:14>AbstractNeighborhoodOutlier.Par\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.AbstractNeighborhoodOutlier.Par<O>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.spatial.AbstractNeighborhoodOutlier
+    elki.outlier.spatial.AbstractNeighborhoodOutlier +-- elki.outlier.spatial.AbstractNeighborhoodOutlier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

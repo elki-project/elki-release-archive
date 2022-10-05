@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractBulkSplit\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.bulk" as elki.index.tree.spatial.rstarvariants.strategies.bulk.AbstractBulkSplit [[AbstractBulkSplit.html]] {
+        #chooseBulkSplitPoint(int, int, int): int
+        #trivialPartition(List<T>, int, int): List<List<T>>
+    }
+
+    interface "<size:14>BulkSplit\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.bulk" as elki.index.tree.spatial.rstarvariants.strategies.bulk.BulkSplit [[BulkSplit.html]] {
+        {abstract} +partition(List<T extends SpatialComparable>, int, int): List<List<T extends SpatialComparable>>
+    }
+
+    elki.index.tree.spatial.rstarvariants.strategies.bulk.BulkSplit <|.. elki.index.tree.spatial.rstarvariants.strategies.bulk.AbstractBulkSplit
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

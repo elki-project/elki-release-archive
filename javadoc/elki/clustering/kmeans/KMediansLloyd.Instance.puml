@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMediansLloyd.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KMediansLloyd.Instance [[KMediansLloyd.Instance.html]] {
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+        #iterate(int): int
+        #buildMediansResult(): Clustering<MeanModel>
+        #medians(List<? extends DBIDs>, double[], Relation<? extends NumberVector>): double[]
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Instance [[AbstractKMeans.Instance.html]] {
+        {abstract} #iterate(int): int
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>KMediansLloyd\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KMediansLloyd<V extends NumberVector> [[KMediansLloyd.html]]
+
+    elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.KMediansLloyd.Instance
+    elki.clustering.kmeans.KMediansLloyd +-- elki.clustering.kmeans.KMediansLloyd.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

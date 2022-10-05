@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LRUCachePageFileFactory\n<size:10>elki.persistent" as elki.persistent.LRUCachePageFileFactory<P extends Page> [[LRUCachePageFileFactory.html]] {
+        -pageFileFactory: PageFileFactory<P extends Page>
+        -cacheSize: int
+        +LRUCachePageFileFactory(PageFileFactory<P extends Page>, int)
+        +newPageFile(Class<P extends Page>): PageFile<P extends Page>
+        +getPageSize(): int
+    }
+
+    interface "<size:14>PageFileFactory\n<size:10>elki.persistent" as elki.persistent.PageFileFactory<P extends Page> [[PageFileFactory.html]] {
+        {abstract} +newPageFile(Class<P extends Page>): PageFile<P extends Page>
+        {abstract} +getPageSize(): int
+    }
+    class "<size:14>LRUCachePageFileFactory.Par\n<size:10>elki.persistent" as elki.persistent.LRUCachePageFileFactory.Par [[LRUCachePageFileFactory.Par.html]]
+
+    elki.persistent.PageFileFactory <|.. elki.persistent.LRUCachePageFileFactory
+    elki.persistent.LRUCachePageFileFactory +-- elki.persistent.LRUCachePageFileFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

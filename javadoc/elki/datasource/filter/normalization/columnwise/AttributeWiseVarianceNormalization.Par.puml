@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AttributeWiseVarianceNormalization.Par\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseVarianceNormalization.Par<V extends NumberVector> [[AttributeWiseVarianceNormalization.Par.html]] {
+        {static} +MEAN_ID: OptionID
+        {static} +STDDEV_ID: OptionID
+        -mean: double[]
+        -stddev: double[]
+        +configure(Parameterization): void
+        +make(): AttributeWiseVarianceNormalization<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AttributeWiseVarianceNormalization\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseVarianceNormalization<V extends NumberVector> [[AttributeWiseVarianceNormalization.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.columnwise.AttributeWiseVarianceNormalization.Par
+    elki.datasource.filter.normalization.columnwise.AttributeWiseVarianceNormalization +-- elki.datasource.filter.normalization.columnwise.AttributeWiseVarianceNormalization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- This module was also published with a richer model, Gradle metadata,  -->
+  <!-- which should be used instead. Do not delete the following line which  -->
+  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
+  <!-- that they should prefer consuming it instead. -->
+  <!-- do_not_remove: published-with-gradle-metadata -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.github.elki-project</groupId>
+  <artifactId>elki-test-core</artifactId>
+  <version>0.8.0</version>
+  <dependencies>
+    <dependency>
+      <groupId>io.github.elki-project</groupId>
+      <artifactId>elki-database</artifactId>
+      <version>0.8.0</version>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>[4.8,)</version>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.github.elki-project</groupId>
+      <artifactId>elki-core-dbids-int</artifactId>
+      <version>0.8.0</version>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+  <name>ELKI - Unit Test Core</name>
+  <description>ELKI - Unit Test Core – Open-Source Data-Mining Framework with Index Acceleration</description>
+  <url>https://elki-project.github.io/</url>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/elki-project/elki/issues</url>
+  </issueManagement>
+  <licenses>
+    <license>
+      <name>GNU Affero General Public License (AGPL) version 3.0</name>
+      <url>http://www.gnu.org/licenses/agpl-3.0.txt</url>
+    </license>
+  </licenses>
+  <scm>
+    <url>https://github.com/elki-project/elki</url>
+    <connection>scm:git:git://github.com/elki-project/elki.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/elki-project/elki.git</developerConnection>
+  </scm>
+  <organization>
+    <name>ELKI Development Team</name>
+    <url>https://elki-project.github.io/team</url>
+  </organization>
+  <developers>
+    <developer>
+      <name>Erich Schubert</name>
+    </developer>
+    <developer>
+      <name>Arthur Zimek</name>
+    </developer>
+  </developers>
+</project>

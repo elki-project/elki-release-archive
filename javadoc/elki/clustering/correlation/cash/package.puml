@@ -1,0 +1,90 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.correlation.cash {
+
+        class CASHIntervalSplit [[CASHIntervalSplit.html]] {
+            {static} -LOG: Logging
+            -database: Relation<ParameterizationFunction>
+            -f_minima: Map<HyperBoundingBox, WritableDoubleDataStore>
+            -f_maxima: Map<HyperBoundingBox, WritableDoubleDataStore>
+            -minPts: int
+            +CASHIntervalSplit(Relation<ParameterizationFunction>, int)
+            +determineIDs(DBIDs, HyperBoundingBox, double, double): ModifiableDBIDs
+        }
+
+        class ParameterizationFunction [[ParameterizationFunction.html]] {
+            {static} +DELTA: double
+            -alphaExtremum: double[]
+            -vec: NumberVector
+            +ParameterizationFunction(NumberVector)
+            +function(double[]): double
+            +determineAlphaMinMax(HyperBoundingBox): HyperBoundingBox
+            -extremumType(int, double[], HyperBoundingBox): ExtremumType
+            -determineAlphaMin(int, double[], HyperBoundingBox): double
+            -determineAlphaMax(int, double[], HyperBoundingBox): double
+            +getGlobalAlphaExtremum(): double[]
+            +getGlobalExtremum(): double
+            +toString(int): String
+            {static} +sinusProduct(int, int, double[]): double
+            -determineGlobalExtremum(): void
+            -determineGlobalExtremumType(): void
+            -extremum_alpha_n(int, double[]): double
+            +getColumnVector(): double[]
+            +getDimensionality(): int
+        }
+
+        enum elki.clustering.correlation.cash.ParameterizationFunction.ExtremumType [[ParameterizationFunction.ExtremumType.html]] {
+            {static} +MINIMUM
+            {static} +MAXIMUM
+            {static} +CONSTANT
+        }
+
+        class CASHInterval [[CASHInterval.html]] {
+            {static} -LOG: Logging
+            {static} -serialVersionUID: long
+            {static} -ID: int
+            -intervalID: int
+            -level: int
+            -d_min: double
+            -d_max: double
+            -ids: ModifiableDBIDs
+            -maxSplitDimension: int
+            +CASHInterval()
+            +CASHInterval(double[], double[], CASHIntervalSplit, ModifiableDBIDs, int, int, double, double)
+            +getIDs(): ModifiableDBIDs
+            +removeIDs(DBIDs): void
+            +numObjects(): int
+            +priority(): int
+            +getMaxSplitDimension(): int
+            +getLevel(): int
+            +getD_min(): double
+            +getD_max(): double
+            +compareTo(CASHInterval): int
+            +hasChildren(): boolean
+            +split(): void
+        }
+
+        ParameterizationFunction --> elki.clustering.correlation.cash.ParameterizationFunction.ExtremumType: extremumType\nglobalExtremumType
+        ParameterizationFunction +-- elki.clustering.correlation.cash.ParameterizationFunction.ExtremumType
+        elki.data.HyperBoundingBox <|-- CASHInterval
+        java.lang.Comparable <|.. CASHInterval
+        CASHInterval --> CASHIntervalSplit: split
+        CASHInterval --> CASHInterval: leftChild\nrightChild
+    }
+
+    namespace elki.data {
+        class HyperBoundingBox [[../../../data/HyperBoundingBox.html]] {
+            {static} -serialVersionUID: long
+            ~min: double[]
+            ~max: double[]
+        }
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

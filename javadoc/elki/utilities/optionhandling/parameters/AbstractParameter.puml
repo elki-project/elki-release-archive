@@ -1,0 +1,62 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.AbstractParameter<P extends AbstractParameter<P, T>, T> [[AbstractParameter.html]] {
+        #optionid: OptionID
+        #defaultValue: T
+        -defaultValueTaken: boolean
+        #optionalParameter: boolean
+        #constraints: List<ParameterConstraint<? super T>>
+        #givenValue: T
+        -value: T
+        +AbstractParameter(OptionID, T)
+        +AbstractParameter(OptionID)
+        +setDefaultValue(T): P extends AbstractParameter<P extends AbstractParameter<P,T>, T>
+        +hasDefaultValue(): boolean
+        +tryDefaultValue(): boolean
+        +setOptional(boolean): P extends AbstractParameter<P extends AbstractParameter<P,T>, T>
+        +isOptional(): boolean
+        +tookDefaultValue(): boolean
+        +isDefined(): boolean
+        +getDefaultValue(): T
+        +describeValues(StringBuilder): StringBuilder
+        #validate(T): boolean
+        +getOptionID(): OptionID
+        +setValue(Object): void
+        #setValueInternal(T): void
+        +getValue(): T
+        +isValid(Object): boolean
+        {abstract} #parseValue(Object): T
+        +getDefaultValueAsString(): String
+        +addConstraint(ParameterConstraint<? super T>): P extends AbstractParameter<P extends AbstractParameter<P,T>, T>
+        +getConstraints(): List<ParameterConstraint<? super T>>
+    }
+
+    interface "<size:14>Parameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.Parameter<T> [[Parameter.html]] {
+        {abstract} +setDefaultValue(T): Parameter<T>
+        {abstract} +hasDefaultValue(): boolean
+        {abstract} +tryDefaultValue(): boolean
+        {abstract} +setOptional(boolean): Parameter<T>
+        {abstract} +isOptional(): boolean
+        {abstract} +tookDefaultValue(): boolean
+        {abstract} +isDefined(): boolean
+        {abstract} +getDefaultValue(): T
+        {abstract} +getOptionID(): OptionID
+        {abstract} +setValue(Object): void
+        {abstract} +getValue(): T
+        {abstract} +isValid(Object): boolean
+        {abstract} +getSyntax(): String
+        {abstract} +getValueAsString(): String
+        {abstract} +getDefaultValueAsString(): String
+        {abstract} +describeValues(StringBuilder): StringBuilder
+        {abstract} +addConstraint(ParameterConstraint<? super T>): Parameter<T>
+        {abstract} +getConstraints(): List<ParameterConstraint<? super T>>
+    }
+
+    elki.utilities.optionhandling.parameters.Parameter <|.. elki.utilities.optionhandling.parameters.AbstractParameter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

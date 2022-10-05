@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TreeSphereVisualization.Instance\n<size:10>elki.visualization.visualizers.scatterplot.index" as elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Instance<N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry> [[TreeSphereVisualization.Instance.html]] {
+        #p: double
+        #dist: Mode
+        #tree: AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        -visualizeMTreeEntry(SVGPlot, Element, Projection2D, AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, E extends MTreeEntry, int): void
+        +destroy(): void
+    }
+
+    abstract class "<size:14>AbstractScatterplotVisualization\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization [[../AbstractScatterplotVisualization.html]]
+    interface "<size:14>DataStoreListener\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreListener [[../../../../database/datastore/DataStoreListener.html]] {
+        {abstract} +contentChanged(DataStoreEvent): void
+    }
+    class "<size:14>TreeSphereVisualization\n<size:10>elki.visualization.visualizers.scatterplot.index" as elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization [[TreeSphereVisualization.html]]
+
+    elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Instance
+    elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Instance
+    elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization +-- elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

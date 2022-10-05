@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SplitStrategy.Info\n<size:10>elki.index.tree.spatial.kd.split" as elki.index.tree.spatial.kd.split.SplitStrategy.Info [[SplitStrategy.Info.html]] {
+        +val: double
+        +dim: int
+        +pos: int
+        +Info(int, int, double)
+    }
+
+    interface "<size:14>SplitStrategy\n<size:10>elki.index.tree.spatial.kd.split" as elki.index.tree.spatial.kd.split.SplitStrategy [[SplitStrategy.html]] {
+        {abstract} +findSplit(Relation<? extends NumberVector>, int, ArrayModifiableDBIDs, DBIDArrayMIter, int, int, SortDBIDsBySingleDimension): Info
+    }
+
+    elki.index.tree.spatial.kd.split.SplitStrategy +-- elki.index.tree.spatial.kd.split.SplitStrategy.Info
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

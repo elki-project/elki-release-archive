@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LRUCachePageFileFactory.Par\n<size:10>elki.persistent" as elki.persistent.LRUCachePageFileFactory.Par [[LRUCachePageFileFactory.Par.html]] {
+        {static} +CACHE_SIZE_ID: OptionID
+        {static} +PAGEFILE_ID: OptionID
+        ~pageFileFactory: PageFileFactory<Page>
+        #cacheSize: int
+        +configure(Parameterization): void
+        +make(): LRUCachePageFileFactory<Page>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LRUCachePageFileFactory\n<size:10>elki.persistent" as elki.persistent.LRUCachePageFileFactory<P extends Page> [[LRUCachePageFileFactory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.persistent.LRUCachePageFileFactory.Par
+    elki.persistent.LRUCachePageFileFactory +-- elki.persistent.LRUCachePageFileFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

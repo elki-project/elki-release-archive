@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TriweightKernelDensityFunction.Par\n<size:10>elki.math.statistics.kernelfunctions" as elki.math.statistics.kernelfunctions.TriweightKernelDensityFunction.Par [[TriweightKernelDensityFunction.Par.html]] {
+        +make(): TriweightKernelDensityFunction
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>TriweightKernelDensityFunction\n<size:10>elki.math.statistics.kernelfunctions" as elki.math.statistics.kernelfunctions.TriweightKernelDensityFunction [[TriweightKernelDensityFunction.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.kernelfunctions.TriweightKernelDensityFunction.Par
+    elki.math.statistics.kernelfunctions.TriweightKernelDensityFunction +-- elki.math.statistics.kernelfunctions.TriweightKernelDensityFunction.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

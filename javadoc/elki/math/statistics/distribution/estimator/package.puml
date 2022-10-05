@@ -1,0 +1,700 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.statistics.distribution.estimator {
+
+        class ExpGammaExpMOMEstimator [[ExpGammaExpMOMEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, A>): ExpGammaDistribution
+            +estimateFromExpMeanVariance(MeanVariance): ExpGammaDistribution
+            +getDistributionClass(): Class<? super ExpGammaDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.ExpGammaExpMOMEstimator.Par [[ExpGammaExpMOMEstimator.Par.html]] {
+            +make(): ExpGammaExpMOMEstimator
+        }
+
+        class LogGammaLogMOMEstimator [[LogGammaLogMOMEstimator.html]] {
+            +estimateFromLogStatisticalMoments(StatisticalMoments, double): LogGammaDistribution
+            +getDistributionClass(): Class<? super LogGammaDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.LogGammaLogMOMEstimator.Par [[LogGammaLogMOMEstimator.Par.html]] {
+            +make(): LogGammaLogMOMEstimator
+        }
+
+        class RayleighLMMEstimator [[RayleighLMMEstimator.html]] {
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): RayleighDistribution
+            +getDistributionClass(): Class<? super RayleighDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.RayleighLMMEstimator.Par [[RayleighLMMEstimator.Par.html]] {
+            +make(): RayleighLMMEstimator
+        }
+
+        interface LMMDistributionEstimator<D extends Distribution> [[LMMDistributionEstimator.html]] {
+            {abstract} +estimateFromLMoments(double[]): D extends Distribution
+            {abstract} +getNumMoments(): int
+            +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+        }
+
+        class RayleighMLEEstimator [[RayleighMLEEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, A>): RayleighDistribution
+            +getDistributionClass(): Class<? super RayleighDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.RayleighMLEEstimator.Par [[RayleighMLEEstimator.Par.html]] {
+            +make(): RayleighMLEEstimator
+        }
+
+        class GeneralizedLogisticAlternateLMMEstimator [[GeneralizedLogisticAlternateLMMEstimator.html]] {
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): GeneralizedLogisticAlternateDistribution
+            +getDistributionClass(): Class<? super GeneralizedLogisticAlternateDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.GeneralizedLogisticAlternateLMMEstimator.Par [[GeneralizedLogisticAlternateLMMEstimator.Par.html]] {
+            +make(): GeneralizedLogisticAlternateLMMEstimator
+        }
+
+        class WeibullLMMEstimator [[WeibullLMMEstimator.html]] {
+            {static} -A0: double
+            {static} -A1: double
+            {static} -A2: double
+            {static} -A3: double
+            {static} -A4: double
+            {static} -B1: double
+            {static} -B2: double
+            {static} -B3: double
+            {static} -C1: double
+            {static} -C2: double
+            {static} -C3: double
+            {static} -D1: double
+            {static} -D2: double
+            {static} ~MAXIT: int
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): WeibullDistribution
+            +getDistributionClass(): Class<? super WeibullDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.WeibullLMMEstimator.Par [[WeibullLMMEstimator.Par.html]] {
+            +make(): WeibullLMMEstimator
+        }
+
+        interface MADDistributionEstimator<D extends Distribution> [[MADDistributionEstimator.html]] {
+            {abstract} +estimateFromMedianMAD(double, double): D extends Distribution
+            +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+            {static} +computeMAD(double[], int, double, double[]): double
+            {static} +computeMAD(double[], int, double): double
+        }
+
+        class LogLogisticMADEstimator [[LogLogisticMADEstimator.html]] {
+            +estimateFromLogMedianMAD(double, double, double): LogLogisticDistribution
+            +getDistributionClass(): Class<? super LogLogisticDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.LogLogisticMADEstimator.Par [[LogLogisticMADEstimator.Par.html]] {
+            +make(): LogLogisticMADEstimator
+        }
+
+        class GammaMOMEstimator [[GammaMOMEstimator.html]] {
+            +estimateFromMeanVariance(MeanVariance): GammaDistribution
+            +getDistributionClass(): Class<? super GammaDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.GammaMOMEstimator.Par [[GammaMOMEstimator.Par.html]] {
+            +make(): GammaMOMEstimator
+        }
+
+        class NormalMADEstimator [[NormalMADEstimator.html]] {
+            +estimateFromMedianMAD(double, double): NormalDistribution
+            +getDistributionClass(): Class<? super NormalDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.NormalMADEstimator.Par [[NormalMADEstimator.Par.html]] {
+            +make(): NormalMADEstimator
+        }
+
+        interface LogMOMDistributionEstimator<D extends Distribution> [[LogMOMDistributionEstimator.html]] {
+            {abstract} +estimateFromLogStatisticalMoments(StatisticalMoments, double): D extends Distribution
+            +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+            {static} +min(A, NumberArrayAdapter<?, A>, double, double): double
+        }
+
+        class EMGOlivierNorbergEstimator [[EMGOlivierNorbergEstimator.html]] {
+            +estimateFromStatisticalMoments(StatisticalMoments): ExponentiallyModifiedGaussianDistribution
+            +getDistributionClass(): Class<? super ExponentiallyModifiedGaussianDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.EMGOlivierNorbergEstimator.Par [[EMGOlivierNorbergEstimator.Par.html]] {
+            +make(): EMGOlivierNorbergEstimator
+        }
+
+        class GammaLMMEstimator [[GammaLMMEstimator.html]] {
+            {static} -A1: double
+            {static} -A2: double
+            {static} -A3: double
+            {static} -B1: double
+            {static} -B2: double
+            {static} -B3: double
+            {static} -B4: double
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): GammaDistribution
+            +getDistributionClass(): Class<? super GammaDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.GammaLMMEstimator.Par [[GammaLMMEstimator.Par.html]] {
+            +make(): GammaLMMEstimator
+        }
+
+        class UniformMinMaxEstimator [[UniformMinMaxEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, A>): UniformDistribution
+            +estimate(DoubleMinMax): UniformDistribution
+            +estimate(double, double): Distribution
+            +getDistributionClass(): Class<? super UniformDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.UniformMinMaxEstimator.Par [[UniformMinMaxEstimator.Par.html]] {
+            +make(): UniformMinMaxEstimator
+        }
+
+        class LaplaceMLEEstimator [[LaplaceMLEEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, A>): LaplaceDistribution
+            +getDistributionClass(): Class<? super LaplaceDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.LaplaceMLEEstimator.Par [[LaplaceMLEEstimator.Par.html]] {
+            +make(): LaplaceMLEEstimator
+        }
+
+        class InverseGaussianMLEstimator [[InverseGaussianMLEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, A>): InverseGaussianDistribution
+            +getDistributionClass(): Class<? super InverseGaussianDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.InverseGaussianMLEstimator.Par [[InverseGaussianMLEstimator.Par.html]] {
+            +make(): InverseGaussianMLEstimator
+        }
+
+        class InverseGaussianMOMEstimator [[InverseGaussianMOMEstimator.html]] {
+            +estimateFromMeanVariance(MeanVariance): InverseGaussianDistribution
+            +getDistributionClass(): Class<? super InverseGaussianDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.InverseGaussianMOMEstimator.Par [[InverseGaussianMOMEstimator.Par.html]] {
+            +make(): InverseGaussianMOMEstimator
+        }
+
+        class RayleighMADEstimator [[RayleighMADEstimator.html]] {
+            {static} -F1: double
+            {static} -F2: double
+            +estimateFromMedianMAD(double, double): RayleighDistribution
+            +getDistributionClass(): Class<? super RayleighDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.RayleighMADEstimator.Par [[RayleighMADEstimator.Par.html]] {
+            +make(): RayleighMADEstimator
+        }
+
+        class ExponentialLMMEstimator [[ExponentialLMMEstimator.html]] {
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): ExponentialDistribution
+            +getDistributionClass(): Class<? super ExponentialDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.ExponentialLMMEstimator.Par [[ExponentialLMMEstimator.Par.html]] {
+            +make(): ExponentialLMMEstimator
+        }
+
+        class GeneralizedExtremeValueLMMEstimator [[GeneralizedExtremeValueLMMEstimator.html]] {
+            {static} #A0: double
+            {static} #A1: double
+            {static} #A2: double
+            {static} #A3: double
+            {static} #A4: double
+            {static} #B1: double
+            {static} #B2: double
+            {static} #B3: double
+            {static} #C1: double
+            {static} #C2: double
+            {static} #C3: double
+            {static} #D1: double
+            {static} #D2: double
+            {static} #EU: double
+            {static} ~MAXIT: int
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): GeneralizedExtremeValueDistribution
+            +getDistributionClass(): Class<? super GeneralizedExtremeValueDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.GeneralizedExtremeValueLMMEstimator.Par [[GeneralizedExtremeValueLMMEstimator.Par.html]] {
+            +make(): GeneralizedExtremeValueLMMEstimator
+        }
+
+        class LogNormalLevenbergMarquardtKDEEstimator [[LogNormalLevenbergMarquardtKDEEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, A>): LogNormalDistribution
+            +getDistributionClass(): Class<? super LogNormalDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.LogNormalLevenbergMarquardtKDEEstimator.Par [[LogNormalLevenbergMarquardtKDEEstimator.Par.html]] {
+            +make(): LogNormalLevenbergMarquardtKDEEstimator
+        }
+
+        class ExponentialMedianEstimator [[ExponentialMedianEstimator.html]] {
+            +estimateFromMedianMAD(double, double): ExponentialDistribution
+            +getDistributionClass(): Class<? super ExponentialDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.ExponentialMedianEstimator.Par [[ExponentialMedianEstimator.Par.html]] {
+            +make(): ExponentialMedianEstimator
+        }
+
+        class LogNormalLMMEstimator [[LogNormalLMMEstimator.html]] {
+            {static} -A0: double
+            {static} -A1: double
+            {static} -A2: double
+            {static} -A3: double
+            {static} -B1: double
+            {static} -B2: double
+            {static} -B3: double
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): LogNormalDistribution
+            +getDistributionClass(): Class<? super LogNormalDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.LogNormalLMMEstimator.Par [[LogNormalLMMEstimator.Par.html]] {
+            +make(): LogNormalLMMEstimator
+        }
+
+        interface LogMADDistributionEstimator<D extends Distribution> [[LogMADDistributionEstimator.html]] {
+            {abstract} +estimateFromLogMedianMAD(double, double, double): D extends Distribution
+            +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+        }
+
+        interface MeanVarianceDistributionEstimator<D extends Distribution> [[MeanVarianceDistributionEstimator.html]] {
+            {abstract} +estimateFromMeanVariance(MeanVariance): D extends Distribution
+            +estimateFromStatisticalMoments(StatisticalMoments): D extends Distribution
+            +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+        }
+
+        class NormalLevenbergMarquardtKDEEstimator [[NormalLevenbergMarquardtKDEEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, A>): NormalDistribution
+            +getDistributionClass(): Class<? super NormalDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.NormalLevenbergMarquardtKDEEstimator.Par [[NormalLevenbergMarquardtKDEEstimator.Par.html]] {
+            +make(): NormalLevenbergMarquardtKDEEstimator
+        }
+
+        class ExponentialMADEstimator [[ExponentialMADEstimator.html]] {
+            +estimateFromMedianMAD(double, double): ExponentialDistribution
+            +getDistributionClass(): Class<? super ExponentialDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.ExponentialMADEstimator.Par [[ExponentialMADEstimator.Par.html]] {
+            +make(): ExponentialMADEstimator
+        }
+
+        class NormalMOMEstimator [[NormalMOMEstimator.html]] {
+            +estimateFromMeanVariance(MeanVariance): NormalDistribution
+            +getDistributionClass(): Class<? super NormalDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.NormalMOMEstimator.Par [[NormalMOMEstimator.Par.html]] {
+            +make(): NormalMOMEstimator
+        }
+
+        class GeneralizedParetoLMMEstimator [[GeneralizedParetoLMMEstimator.html]] {
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): GeneralizedParetoDistribution
+            +getDistributionClass(): Class<? super GeneralizedParetoDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.GeneralizedParetoLMMEstimator.Par [[GeneralizedParetoLMMEstimator.Par.html]] {
+            +make(): GeneralizedParetoLMMEstimator
+        }
+
+        class LogisticLMMEstimator [[LogisticLMMEstimator.html]] {
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): LogisticDistribution
+            +getDistributionClass(): Class<? super LogisticDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.LogisticLMMEstimator.Par [[LogisticLMMEstimator.Par.html]] {
+            +make(): LogisticLMMEstimator
+        }
+
+        interface DistributionEstimator<D extends Distribution> [[DistributionEstimator.html]] {
+            {abstract} +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+            +estimate(double[]): D extends Distribution
+            {abstract} +getDistributionClass(): Class<? super Distribution>
+        }
+
+        class UniformMADEstimator [[UniformMADEstimator.html]] {
+            +estimateFromMedianMAD(double, double): UniformDistribution
+            +getDistributionClass(): Class<? super UniformDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.UniformMADEstimator.Par [[UniformMADEstimator.Par.html]] {
+            +make(): UniformMADEstimator
+        }
+
+        class GumbelMADEstimator [[GumbelMADEstimator.html]] {
+            +estimateFromMedianMAD(double, double): GumbelDistribution
+            +getDistributionClass(): Class<? super GumbelDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.GumbelMADEstimator.Par [[GumbelMADEstimator.Par.html]] {
+            +make(): GumbelMADEstimator
+        }
+
+        class LogNormalBilkovaLMMEstimator [[LogNormalBilkovaLMMEstimator.html]] {
+            {static} -SQRT8_3: double
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): LogNormalDistribution
+            +getDistributionClass(): Class<? super LogNormalDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.LogNormalBilkovaLMMEstimator.Par [[LogNormalBilkovaLMMEstimator.Par.html]] {
+            +make(): LogNormalBilkovaLMMEstimator
+        }
+
+        class SkewGNormalLMMEstimator [[SkewGNormalLMMEstimator.html]] {
+            {static} -A0: double
+            {static} -A1: double
+            {static} -A2: double
+            {static} -A3: double
+            {static} -B1: double
+            {static} -B2: double
+            {static} -B3: double
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): SkewGeneralizedNormalDistribution
+            +getDistributionClass(): Class<? super SkewGeneralizedNormalDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.SkewGNormalLMMEstimator.Par [[SkewGNormalLMMEstimator.Par.html]] {
+            +make(): SkewGNormalLMMEstimator
+        }
+
+        interface LogMeanVarianceEstimator<D extends Distribution> [[LogMeanVarianceEstimator.html]] {
+            {abstract} +estimateFromLogMeanVariance(MeanVariance, double): D extends Distribution
+            +estimateFromLogStatisticalMoments(StatisticalMoments, double): D extends Distribution
+            +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+        }
+
+        class UniformLMMEstimator [[UniformLMMEstimator.html]] {
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): UniformDistribution
+            +getDistributionClass(): Class<? super UniformDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.UniformLMMEstimator.Par [[UniformLMMEstimator.Par.html]] {
+            +make(): UniformLMMEstimator
+        }
+
+        class GumbelLMMEstimator [[GumbelLMMEstimator.html]] {
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): GumbelDistribution
+            +getDistributionClass(): Class<? super GumbelDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.GumbelLMMEstimator.Par [[GumbelLMMEstimator.Par.html]] {
+            +make(): GumbelLMMEstimator
+        }
+
+        class LogNormalLogMOMEstimator [[LogNormalLogMOMEstimator.html]] {
+            +estimateFromLogMeanVariance(MeanVariance, double): LogNormalDistribution
+            +getDistributionClass(): Class<? super LogNormalDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.LogNormalLogMOMEstimator.Par [[LogNormalLogMOMEstimator.Par.html]] {
+            +make(): LogNormalLogMOMEstimator
+        }
+
+        class GammaChoiWetteEstimator [[GammaChoiWetteEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, A>): GammaDistribution
+            +getDistributionClass(): Class<? super GammaDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.GammaChoiWetteEstimator.Par [[GammaChoiWetteEstimator.Par.html]] {
+            +make(): GammaChoiWetteEstimator
+        }
+
+        class LaplaceMADEstimator [[LaplaceMADEstimator.html]] {
+            +estimateFromMedianMAD(double, double): LaplaceDistribution
+            +getDistributionClass(): Class<? super LaplaceDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.LaplaceMADEstimator.Par [[LaplaceMADEstimator.Par.html]] {
+            +make(): LaplaceMADEstimator
+        }
+
+        interface MOMDistributionEstimator<D extends Distribution> [[MOMDistributionEstimator.html]] {
+            {abstract} +estimateFromStatisticalMoments(StatisticalMoments): D extends Distribution
+            +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+        }
+
+        class CauchyMADEstimator [[CauchyMADEstimator.html]] {
+            +estimateFromMedianMAD(double, double): CauchyDistribution
+            +getDistributionClass(): Class<? super CauchyDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.CauchyMADEstimator.Par [[CauchyMADEstimator.Par.html]] {
+            +make(): CauchyMADEstimator
+        }
+
+        class NormalLMMEstimator [[NormalLMMEstimator.html]] {
+            +getNumMoments(): int
+            +estimateFromLMoments(double[]): NormalDistribution
+            +getDistributionClass(): Class<? super NormalDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.NormalLMMEstimator.Par [[NormalLMMEstimator.Par.html]] {
+            +make(): NormalLMMEstimator
+        }
+
+        class UniformEnhancedMinMaxEstimator [[UniformEnhancedMinMaxEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, A>): UniformDistribution
+            +estimate(double, double, int): UniformDistribution
+            +getDistributionClass(): Class<? super UniformDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.UniformEnhancedMinMaxEstimator.Par [[UniformEnhancedMinMaxEstimator.Par.html]] {
+            +make(): UniformEnhancedMinMaxEstimator
+        }
+
+        class LaplaceLMMEstimator [[LaplaceLMMEstimator.html]] {
+            +estimateFromLMoments(double[]): LaplaceDistribution
+            +getNumMoments(): int
+            +getDistributionClass(): Class<? super LaplaceDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.LaplaceLMMEstimator.Par [[LaplaceLMMEstimator.Par.html]] {
+            +make(): LaplaceLMMEstimator
+        }
+
+        class ExponentialMOMEstimator [[ExponentialMOMEstimator.html]] {
+            +estimateFromMeanVariance(MeanVariance): ExponentialDistribution
+            +getDistributionClass(): Class<? super ExponentialDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.ExponentialMOMEstimator.Par [[ExponentialMOMEstimator.Par.html]] {
+            +make(): ExponentialMOMEstimator
+        }
+
+        class WeibullLogMADEstimator [[WeibullLogMADEstimator.html]] {
+            +estimateFromLogMedianMAD(double, double, double): WeibullDistribution
+            +getDistributionClass(): Class<? super WeibullDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.WeibullLogMADEstimator.Par [[WeibullLogMADEstimator.Par.html]] {
+            +make(): WeibullLogMADEstimator
+        }
+
+        class LogNormalLogMADEstimator [[LogNormalLogMADEstimator.html]] {
+            +estimateFromLogMedianMAD(double, double, double): LogNormalDistribution
+            +getDistributionClass(): Class<? super LogNormalDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.LogNormalLogMADEstimator.Par [[LogNormalLogMADEstimator.Par.html]] {
+            +make(): LogNormalLogMADEstimator
+        }
+
+        class LogisticMADEstimator [[LogisticMADEstimator.html]] {
+            +estimateFromMedianMAD(double, double): LogisticDistribution
+            +getDistributionClass(): Class<? super LogisticDistribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.LogisticMADEstimator.Par [[LogisticMADEstimator.Par.html]] {
+            +make(): LogisticMADEstimator
+        }
+
+        DistributionEstimator <|.. ExpGammaExpMOMEstimator
+        ExpGammaExpMOMEstimator --> ExpGammaExpMOMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.ExpGammaExpMOMEstimator.Par
+        ExpGammaExpMOMEstimator +-- elki.math.statistics.distribution.estimator.ExpGammaExpMOMEstimator.Par
+        LogMOMDistributionEstimator <|.. LogGammaLogMOMEstimator
+        LogGammaLogMOMEstimator --> LogGammaLogMOMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.LogGammaLogMOMEstimator.Par
+        LogGammaLogMOMEstimator +-- elki.math.statistics.distribution.estimator.LogGammaLogMOMEstimator.Par
+        LMMDistributionEstimator <|.. RayleighLMMEstimator
+        RayleighLMMEstimator --> RayleighLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.RayleighLMMEstimator.Par
+        RayleighLMMEstimator +-- elki.math.statistics.distribution.estimator.RayleighLMMEstimator.Par
+        DistributionEstimator <|-- LMMDistributionEstimator
+        DistributionEstimator <|.. RayleighMLEEstimator
+        RayleighMLEEstimator --> RayleighMLEEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.RayleighMLEEstimator.Par
+        RayleighMLEEstimator +-- elki.math.statistics.distribution.estimator.RayleighMLEEstimator.Par
+        LMMDistributionEstimator <|.. GeneralizedLogisticAlternateLMMEstimator
+        GeneralizedLogisticAlternateLMMEstimator --> GeneralizedLogisticAlternateLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.GeneralizedLogisticAlternateLMMEstimator.Par
+        GeneralizedLogisticAlternateLMMEstimator +-- elki.math.statistics.distribution.estimator.GeneralizedLogisticAlternateLMMEstimator.Par
+        LMMDistributionEstimator <|.. WeibullLMMEstimator
+        WeibullLMMEstimator --> WeibullLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.WeibullLMMEstimator.Par
+        WeibullLMMEstimator +-- elki.math.statistics.distribution.estimator.WeibullLMMEstimator.Par
+        DistributionEstimator <|-- MADDistributionEstimator
+        LogMADDistributionEstimator <|.. LogLogisticMADEstimator
+        LogLogisticMADEstimator --> LogLogisticMADEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.LogLogisticMADEstimator.Par
+        LogLogisticMADEstimator +-- elki.math.statistics.distribution.estimator.LogLogisticMADEstimator.Par
+        MeanVarianceDistributionEstimator <|.. GammaMOMEstimator
+        GammaMOMEstimator --> GammaMOMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.GammaMOMEstimator.Par
+        GammaMOMEstimator +-- elki.math.statistics.distribution.estimator.GammaMOMEstimator.Par
+        MADDistributionEstimator <|.. NormalMADEstimator
+        NormalMADEstimator --> NormalMADEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.NormalMADEstimator.Par
+        NormalMADEstimator +-- elki.math.statistics.distribution.estimator.NormalMADEstimator.Par
+        DistributionEstimator <|-- LogMOMDistributionEstimator
+        MOMDistributionEstimator <|.. EMGOlivierNorbergEstimator
+        EMGOlivierNorbergEstimator --> EMGOlivierNorbergEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.EMGOlivierNorbergEstimator.Par
+        EMGOlivierNorbergEstimator +-- elki.math.statistics.distribution.estimator.EMGOlivierNorbergEstimator.Par
+        LMMDistributionEstimator <|.. GammaLMMEstimator
+        GammaLMMEstimator --> GammaLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.GammaLMMEstimator.Par
+        GammaLMMEstimator +-- elki.math.statistics.distribution.estimator.GammaLMMEstimator.Par
+        DistributionEstimator <|.. UniformMinMaxEstimator
+        UniformMinMaxEstimator --> UniformMinMaxEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.UniformMinMaxEstimator.Par
+        UniformMinMaxEstimator +-- elki.math.statistics.distribution.estimator.UniformMinMaxEstimator.Par
+        DistributionEstimator <|.. LaplaceMLEEstimator
+        LaplaceMLEEstimator --> LaplaceMLEEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.LaplaceMLEEstimator.Par
+        LaplaceMLEEstimator +-- elki.math.statistics.distribution.estimator.LaplaceMLEEstimator.Par
+        DistributionEstimator <|.. InverseGaussianMLEstimator
+        InverseGaussianMLEstimator --> InverseGaussianMLEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.InverseGaussianMLEstimator.Par
+        InverseGaussianMLEstimator +-- elki.math.statistics.distribution.estimator.InverseGaussianMLEstimator.Par
+        MeanVarianceDistributionEstimator <|.. InverseGaussianMOMEstimator
+        InverseGaussianMOMEstimator --> InverseGaussianMOMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.InverseGaussianMOMEstimator.Par
+        InverseGaussianMOMEstimator +-- elki.math.statistics.distribution.estimator.InverseGaussianMOMEstimator.Par
+        MADDistributionEstimator <|.. RayleighMADEstimator
+        RayleighMADEstimator --> RayleighMADEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.RayleighMADEstimator.Par
+        RayleighMADEstimator +-- elki.math.statistics.distribution.estimator.RayleighMADEstimator.Par
+        LMMDistributionEstimator <|.. ExponentialLMMEstimator
+        ExponentialLMMEstimator --> ExponentialLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.ExponentialLMMEstimator.Par
+        ExponentialLMMEstimator +-- elki.math.statistics.distribution.estimator.ExponentialLMMEstimator.Par
+        LMMDistributionEstimator <|.. GeneralizedExtremeValueLMMEstimator
+        GeneralizedExtremeValueLMMEstimator --> GeneralizedExtremeValueLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.GeneralizedExtremeValueLMMEstimator.Par
+        GeneralizedExtremeValueLMMEstimator +-- elki.math.statistics.distribution.estimator.GeneralizedExtremeValueLMMEstimator.Par
+        DistributionEstimator <|.. LogNormalLevenbergMarquardtKDEEstimator
+        LogNormalLevenbergMarquardtKDEEstimator --> LogNormalLevenbergMarquardtKDEEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.LogNormalLevenbergMarquardtKDEEstimator.Par
+        LogNormalLevenbergMarquardtKDEEstimator +-- elki.math.statistics.distribution.estimator.LogNormalLevenbergMarquardtKDEEstimator.Par
+        MADDistributionEstimator <|.. ExponentialMedianEstimator
+        ExponentialMedianEstimator --> ExponentialMedianEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.ExponentialMedianEstimator.Par
+        ExponentialMedianEstimator +-- elki.math.statistics.distribution.estimator.ExponentialMedianEstimator.Par
+        LMMDistributionEstimator <|.. LogNormalLMMEstimator
+        LogNormalLMMEstimator --> LogNormalLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.LogNormalLMMEstimator.Par
+        LogNormalLMMEstimator +-- elki.math.statistics.distribution.estimator.LogNormalLMMEstimator.Par
+        DistributionEstimator <|-- LogMADDistributionEstimator
+        MOMDistributionEstimator <|-- MeanVarianceDistributionEstimator
+        DistributionEstimator <|.. NormalLevenbergMarquardtKDEEstimator
+        NormalLevenbergMarquardtKDEEstimator --> NormalLevenbergMarquardtKDEEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.NormalLevenbergMarquardtKDEEstimator.Par
+        NormalLevenbergMarquardtKDEEstimator +-- elki.math.statistics.distribution.estimator.NormalLevenbergMarquardtKDEEstimator.Par
+        MADDistributionEstimator <|.. ExponentialMADEstimator
+        ExponentialMADEstimator --> ExponentialMADEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.ExponentialMADEstimator.Par
+        ExponentialMADEstimator +-- elki.math.statistics.distribution.estimator.ExponentialMADEstimator.Par
+        MeanVarianceDistributionEstimator <|.. NormalMOMEstimator
+        NormalMOMEstimator --> NormalMOMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.NormalMOMEstimator.Par
+        NormalMOMEstimator +-- elki.math.statistics.distribution.estimator.NormalMOMEstimator.Par
+        LMMDistributionEstimator <|.. GeneralizedParetoLMMEstimator
+        GeneralizedParetoLMMEstimator --> GeneralizedParetoLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.GeneralizedParetoLMMEstimator.Par
+        GeneralizedParetoLMMEstimator +-- elki.math.statistics.distribution.estimator.GeneralizedParetoLMMEstimator.Par
+        LMMDistributionEstimator <|.. LogisticLMMEstimator
+        LogisticLMMEstimator --> LogisticLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.LogisticLMMEstimator.Par
+        LogisticLMMEstimator +-- elki.math.statistics.distribution.estimator.LogisticLMMEstimator.Par
+        MADDistributionEstimator <|.. UniformMADEstimator
+        UniformMADEstimator --> UniformMADEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.UniformMADEstimator.Par
+        UniformMADEstimator +-- elki.math.statistics.distribution.estimator.UniformMADEstimator.Par
+        MADDistributionEstimator <|.. GumbelMADEstimator
+        GumbelMADEstimator --> GumbelMADEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.GumbelMADEstimator.Par
+        GumbelMADEstimator +-- elki.math.statistics.distribution.estimator.GumbelMADEstimator.Par
+        LMMDistributionEstimator <|.. LogNormalBilkovaLMMEstimator
+        LogNormalBilkovaLMMEstimator --> LogNormalBilkovaLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.LogNormalBilkovaLMMEstimator.Par
+        LogNormalBilkovaLMMEstimator +-- elki.math.statistics.distribution.estimator.LogNormalBilkovaLMMEstimator.Par
+        LMMDistributionEstimator <|.. SkewGNormalLMMEstimator
+        SkewGNormalLMMEstimator --> SkewGNormalLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.SkewGNormalLMMEstimator.Par
+        SkewGNormalLMMEstimator +-- elki.math.statistics.distribution.estimator.SkewGNormalLMMEstimator.Par
+        LogMOMDistributionEstimator <|-- LogMeanVarianceEstimator
+        LMMDistributionEstimator <|.. UniformLMMEstimator
+        UniformLMMEstimator --> UniformLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.UniformLMMEstimator.Par
+        UniformLMMEstimator +-- elki.math.statistics.distribution.estimator.UniformLMMEstimator.Par
+        LMMDistributionEstimator <|.. GumbelLMMEstimator
+        GumbelLMMEstimator --> GumbelLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.GumbelLMMEstimator.Par
+        GumbelLMMEstimator +-- elki.math.statistics.distribution.estimator.GumbelLMMEstimator.Par
+        LogMeanVarianceEstimator <|.. LogNormalLogMOMEstimator
+        LogNormalLogMOMEstimator --> LogNormalLogMOMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.LogNormalLogMOMEstimator.Par
+        LogNormalLogMOMEstimator +-- elki.math.statistics.distribution.estimator.LogNormalLogMOMEstimator.Par
+        DistributionEstimator <|.. GammaChoiWetteEstimator
+        GammaChoiWetteEstimator --> GammaChoiWetteEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.GammaChoiWetteEstimator.Par
+        GammaChoiWetteEstimator +-- elki.math.statistics.distribution.estimator.GammaChoiWetteEstimator.Par
+        MADDistributionEstimator <|.. LaplaceMADEstimator
+        LaplaceMADEstimator --> LaplaceMADEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.LaplaceMADEstimator.Par
+        LaplaceMADEstimator +-- elki.math.statistics.distribution.estimator.LaplaceMADEstimator.Par
+        DistributionEstimator <|-- MOMDistributionEstimator
+        MADDistributionEstimator <|.. CauchyMADEstimator
+        CauchyMADEstimator --> CauchyMADEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.CauchyMADEstimator.Par
+        CauchyMADEstimator +-- elki.math.statistics.distribution.estimator.CauchyMADEstimator.Par
+        LMMDistributionEstimator <|.. NormalLMMEstimator
+        NormalLMMEstimator --> NormalLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.NormalLMMEstimator.Par
+        NormalLMMEstimator +-- elki.math.statistics.distribution.estimator.NormalLMMEstimator.Par
+        DistributionEstimator <|.. UniformEnhancedMinMaxEstimator
+        UniformEnhancedMinMaxEstimator --> UniformEnhancedMinMaxEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.UniformEnhancedMinMaxEstimator.Par
+        UniformEnhancedMinMaxEstimator +-- elki.math.statistics.distribution.estimator.UniformEnhancedMinMaxEstimator.Par
+        LMMDistributionEstimator <|.. LaplaceLMMEstimator
+        LaplaceLMMEstimator --> LaplaceLMMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.LaplaceLMMEstimator.Par
+        LaplaceLMMEstimator +-- elki.math.statistics.distribution.estimator.LaplaceLMMEstimator.Par
+        MeanVarianceDistributionEstimator <|.. ExponentialMOMEstimator
+        ExponentialMOMEstimator --> ExponentialMOMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.ExponentialMOMEstimator.Par
+        ExponentialMOMEstimator +-- elki.math.statistics.distribution.estimator.ExponentialMOMEstimator.Par
+        LogMADDistributionEstimator <|.. WeibullLogMADEstimator
+        WeibullLogMADEstimator --> WeibullLogMADEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.WeibullLogMADEstimator.Par
+        WeibullLogMADEstimator +-- elki.math.statistics.distribution.estimator.WeibullLogMADEstimator.Par
+        LogMADDistributionEstimator <|.. LogNormalLogMADEstimator
+        LogNormalLogMADEstimator --> LogNormalLogMADEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.LogNormalLogMADEstimator.Par
+        LogNormalLogMADEstimator +-- elki.math.statistics.distribution.estimator.LogNormalLogMADEstimator.Par
+        MADDistributionEstimator <|.. LogisticMADEstimator
+        LogisticMADEstimator --> LogisticMADEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.LogisticMADEstimator.Par
+        LogisticMADEstimator +-- elki.math.statistics.distribution.estimator.LogisticMADEstimator.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

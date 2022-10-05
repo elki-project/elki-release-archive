@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DendrogramModel\n<size:10>elki.data.model" as elki.data.model.DendrogramModel [[DendrogramModel.html]] {
+        -height: double
+        +DendrogramModel(double)
+        +getDistance(): double
+        +writeToText(TextWriterStream, String): void
+    }
+
+    interface "<size:14>Model\n<size:10>elki.data.model" as elki.data.model.Model [[Model.html]]
+
+    elki.data.model.Model <|.. elki.data.model.DendrogramModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

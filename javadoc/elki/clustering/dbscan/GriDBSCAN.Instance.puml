@@ -1,0 +1,43 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GriDBSCAN.Instance\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.GriDBSCAN.Instance<V extends NumberVector> [[GriDBSCAN.Instance.html]] {
+        {static} #UNPROCESSED: int
+        {static} #NOISE: int
+        #distance: Distance<? super NumberVector>
+        #epsilon: double
+        #minpts: int
+        #gridwidth: double
+        #domain: double[]
+        #dim: int
+        #offset: double[]
+        #cells: int[]
+        ~grid: Long2ObjectOpenHashMap<ModifiableDBIDs>
+        -cores: Core[]
+        -borders: Border[]
+        -clusterids: WritableDataStore<Assignment>
+        -temporary: WritableIntegerDataStore
+        -overflown: boolean
+        +Instance(Distance<? super NumberVector>, double, int, double)
+        +run(Relation<V extends NumberVector>): Clustering<Model>
+        -runDBSCANOnCell(DBIDs, Relation<V extends NumberVector>, ModifiableDoubleDBIDList, ArrayModifiableDBIDs, int): int
+        -updateCoreBorderObjects(int): void
+        -computeGridBaseOffsets(int): long
+        #buildGrid(Relation<V extends NumberVector>, int, double[]): void
+        -insertIntoGrid(DBIDRef, V extends NumberVector, int, int): void
+        #checkGridCellSizes(int, long): int
+        #expandCluster(DBIDRef, int, WritableIntegerDataStore, ModifiableDoubleDBIDList, ArrayModifiableDBIDs, RangeSearcher<DBIDRef>, FiniteProgress): int
+        #processCorePoint(DBIDRef, DoubleDBIDList, int, WritableIntegerDataStore, ArrayModifiableDBIDs): int
+        #mergeClusterInformation(ModifiableDBIDs, WritableIntegerDataStore, WritableDataStore<Assignment>): void
+        #buildResult(DBIDs, int): Clustering<Model>
+    }
+
+    class "<size:14>GriDBSCAN\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.GriDBSCAN<V extends NumberVector> [[GriDBSCAN.html]]
+
+    elki.clustering.dbscan.GriDBSCAN +-- elki.clustering.dbscan.GriDBSCAN.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

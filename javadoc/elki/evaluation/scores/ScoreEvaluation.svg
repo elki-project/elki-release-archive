@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="224px" preserveAspectRatio="none" style="width:324px;height:224px;background:#FFFFFF;" version="1.1" viewBox="0 0 324 224" width="324px" zoomAndPan="magnify"><defs/><g><!--MD5=[062d44885328f22760ada81c8ea6dc64]
+class elki.evaluation.scores.ScoreEvaluation--><a href="ScoreEvaluation.html" target="_top" title="ScoreEvaluation.html" xlink:actuate="onRequest" xlink:href="ScoreEvaluation.html" xlink:show="new" xlink:title="ScoreEvaluation.html" xlink:type="simple"><g id="elem_elki.evaluation.scores.ScoreEvaluation"><rect codeLine="6" fill="#F1F1F1" height="94.8281" id="elki.evaluation.scores.ScoreEvaluation" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="310" x="7" y="7"/><ellipse cx="100.25" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M96.1719,21.7344 L96.1719,19.5781 L103.5625,19.5781 L103.5625,21.7344 L101.0938,21.7344 L101.0938,29.8125 L103.5625,29.8125 L103.5625,31.9688 L96.1719,31.9688 L96.1719,29.8125 L98.6406,29.8125 L98.6406,21.7344 L96.1719,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="115" x="120.75" y="24.9951">ScoreEvaluation</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="108" x="124.25" y="37.5791">elki.evaluation.scores</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="316" y1="44.9375" y2="44.9375"/><ellipse cx="18" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="186" x="27" y="61.9326">evaluate(Adapter): double</text><ellipse cx="18" cy="74.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="284" x="27" y="78.2295">evaluate(DBIDs, DoubleDBIDList): double</text><ellipse cx="18" cy="91.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="178" x="27" y="94.5264">expected(int, int): double</text></g></a><!--MD5=[c520997bbf6b5b16e710d6dbc03279d1]
+class elki.evaluation.scores.ScoreEvaluation.Adapter--><a href="ScoreEvaluation.Adapter.html" target="_top" title="ScoreEvaluation.Adapter.html" xlink:actuate="onRequest" xlink:href="ScoreEvaluation.Adapter.html" xlink:show="new" xlink:title="ScoreEvaluation.Adapter.html" xlink:type="simple"><g id="elem_elki.evaluation.scores.ScoreEvaluation.Adapter"><rect codeLine="11" fill="#F1F1F1" height="37.9375" id="elki.evaluation.scores.ScoreEvaluation.Adapter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="207" x="58.5" y="162"/><ellipse cx="73.5" cy="180.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M69.4219,176.7344 L69.4219,174.5781 L76.8125,174.5781 L76.8125,176.7344 L74.3438,176.7344 L74.3438,184.8125 L76.8125,184.8125 L76.8125,186.9688 L69.4219,186.9688 L69.4219,184.8125 L71.8906,184.8125 L71.8906,176.7344 L69.4219,176.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="175" x="87.5" y="179.9951">ScoreEvaluation.Adapter</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="108" x="121" y="192.5791">elki.evaluation.scores</text></g></a><!--MD5=[aab0057554f3eaa5b7024edfa5734a22]
+reverse link elki.evaluation.scores.ScoreEvaluation to elki.evaluation.scores.ScoreEvaluation.Adapter--><g id="link_elki.evaluation.scores.ScoreEvaluation_elki.evaluation.scores.ScoreEvaluation.Adapter"><path codeLine="13" d="M162,117.39 C162,133.73 162,150.09 162,161.99 " fill="none" id="elki.evaluation.scores.ScoreEvaluation-backto-elki.evaluation.scores.ScoreEvaluation.Adapter" style="stroke:#181818;stroke-width:1.0;"/><ellipse cx="162" cy="110.21" fill="#FFFFFF" rx="8" ry="8" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="162" x2="162" y1="118.21" y2="102.21"/><line style="stroke:#181818;stroke-width:1.0;" x1="154" x2="170" y1="110.21" y2="110.21"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="62" y="204.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="62" y="214.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[ea81ed77c7ff1db203cc8a602a14951a]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ScoreEvaluation\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.ScoreEvaluation [[ScoreEvaluation.html]] {
+        {abstract} +evaluate(Adapter): double
+        +evaluate(DBIDs, DoubleDBIDList): double
+        {abstract} +expected(int, int): double
+    }
+    interface "<size:14>ScoreEvaluation.Adapter\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.ScoreEvaluation.Adapter [[ScoreEvaluation.Adapter.html]]
+
+    elki.evaluation.scores.ScoreEvaluation +- - elki.evaluation.scores.ScoreEvaluation.Adapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

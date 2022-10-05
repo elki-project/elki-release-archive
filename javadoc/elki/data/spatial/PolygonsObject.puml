@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PolygonsObject\n<size:10>elki.data.spatial" as elki.data.spatial.PolygonsObject [[PolygonsObject.html]] {
+        {static} +PROTOTYPE: PolygonsObject
+        -polygons: Collection<Polygon>
+        +PolygonsObject(Collection<Polygon>)
+        +getPolygons(): Collection<Polygon>
+        +appendToBuffer(StringBuilder): void
+        +getDimensionality(): int
+        +getMin(int): double
+        +getMax(int): double
+    }
+
+    interface "<size:14>SpatialComparable\n<size:10>elki.data.spatial" as elki.data.spatial.SpatialComparable [[SpatialComparable.html]] {
+        {abstract} +getDimensionality(): int
+        {abstract} +getMin(int): double
+        {abstract} +getMax(int): double
+    }
+
+    elki.data.spatial.SpatialComparable <|.. elki.data.spatial.PolygonsObject
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EMModel\n<size:10>elki.data.model" as elki.data.model.EMModel [[EMModel.html]] {
+        -covarianceMatrix: double[]
+        +EMModel(double[], double[])
+        +writeToText(TextWriterStream, String): void
+        +getCovarianceMatrix(): double[]
+        +setCovarianceMatrix(double[]): void
+    }
+
+    class "<size:14>MeanModel\n<size:10>elki.data.model" as elki.data.model.MeanModel [[MeanModel.html]]
+
+    elki.data.model.MeanModel <|-- elki.data.model.EMModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

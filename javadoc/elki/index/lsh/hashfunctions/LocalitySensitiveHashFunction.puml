@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>LocalitySensitiveHashFunction\n<size:10>elki.index.lsh.hashfunctions" as elki.index.lsh.hashfunctions.LocalitySensitiveHashFunction<V> [[LocalitySensitiveHashFunction.html]] {
+        {abstract} +hashObject(V): int
+        {abstract} +hashObject(V, double[]): int
+        {abstract} +getNumberOfProjections(): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

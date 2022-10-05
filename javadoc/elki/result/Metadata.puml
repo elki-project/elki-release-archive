@@ -1,0 +1,46 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Metadata\n<size:10>elki.result" as elki.result.Metadata [[Metadata.html]] {
+        {static} -LOG: Logging
+        {static} -queue: ReferenceQueue<? super Object>
+        {static} -CLEANER: CleanerThread
+        {static} -global: Map<Object, Metadata>
+        -hierarchy: Hierarchy
+        -listeners: ArrayList<ResultListener>
+        -name: String
+        {static} -EMPTY_CHILDREN: Object[]
+        {static} -EMPTY_PARENTS: Metadata[]
+        -Metadata(Object)
+        {static} +of(Object): Metadata
+        {static} +get(Object): Metadata
+        {static} +hierarchyOf(Object): Hierarchy
+        {static} +expungeStaleEntries(): void
+        -cleanup(): void
+        +hierarchy(): Hierarchy
+        +setLongName(String): void
+        +getLongName(): String
+        {static} -deref(Object): Object
+        +addResultListener(ResultListener): void
+        +removeResultListener(ResultListener): void
+        -notifyChildAdded(Object): void
+        +notifyChanged(): void
+        -notifyChildRemoved(Object): void
+        -doNotify(Consumer<ResultListener>): void
+    }
+
+    class "<size:14>WeakReference\n<size:10>java.lang.ref" as java.lang.ref.WeakReference<Object>
+    class "<size:14>Metadata.CleanerThread\n<size:10>elki.result" as elki.result.Metadata.CleanerThread [[Metadata.CleanerThread.html]]
+    class "<size:14>Metadata.Hierarchy\n<size:10>elki.result" as elki.result.Metadata.Hierarchy [[Metadata.Hierarchy.html]]
+    abstract class "<size:14>Metadata.EagerIt\n<size:10>elki.result" as elki.result.Metadata.EagerIt<O> [[Metadata.EagerIt.html]]
+
+    java.lang.ref.WeakReference <|-- elki.result.Metadata
+    elki.result.Metadata +-- elki.result.Metadata.CleanerThread
+    elki.result.Metadata +-- elki.result.Metadata.Hierarchy
+    elki.result.Metadata +-- elki.result.Metadata.EagerIt
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

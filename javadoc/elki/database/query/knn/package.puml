@@ -1,0 +1,91 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.database.query.knn {
+
+        class PreprocessorSqrtKNNQuery [[PreprocessorSqrtKNNQuery.html]] {
+            {static} -LOG: Logging
+            +PreprocessorSqrtKNNQuery(Relation<?>, AbstractMaterializeKNNPreprocessor<?>)
+            +getKNN(DBIDRef, int): KNNList
+            #getLogger(): Logging
+        }
+
+        class PreprocessorKNNQuery [[PreprocessorKNNQuery.html]] {
+            {static} -LOG: Logging
+            #relation: Relation<?>
+            -preprocessor: AbstractMaterializeKNNPreprocessor<?>
+            -warned: boolean
+            +PreprocessorKNNQuery(Relation<?>, AbstractMaterializeKNNPreprocessor<?>)
+            +getKNN(DBIDRef, int): KNNList
+            +getPreprocessor(): AbstractMaterializeKNNPreprocessor<?>
+            #getLogger(): Logging
+        }
+
+        class PreprocessorSquaredKNNQuery [[PreprocessorSquaredKNNQuery.html]] {
+            {static} -LOG: Logging
+            +PreprocessorSquaredKNNQuery(Relation<?>, AbstractMaterializeKNNPreprocessor<?>)
+            +getKNN(DBIDRef, int): KNNList
+            #getLogger(): Logging
+        }
+
+        class LinearScanPrimitiveKNNByObject<O> [[LinearScanPrimitiveKNNByObject.html]] {
+            -rawdist: PrimitiveDistance<? super O>
+            #relation: Relation<? extends O>
+            +LinearScanPrimitiveKNNByObject(PrimitiveDistanceQuery<O>)
+            +getKNN(O, int): KNNList
+        }
+
+        class LinearScanKNNByDBID<O> [[LinearScanKNNByDBID.html]] {
+            -distanceQuery: DistanceQuery<O>
+            +LinearScanKNNByDBID(DistanceQuery<O>)
+            +getKNN(DBIDRef, int): KNNList
+        }
+
+        class LinearScanKNNByObject<O> [[LinearScanKNNByObject.html]] {
+            -distanceQuery: DistanceQuery<O>
+            +LinearScanKNNByObject(DistanceQuery<O>)
+            +getKNN(O, int): KNNList
+        }
+
+        class LinearScanEuclideanKNNByObject<O extends NumberVector> [[LinearScanEuclideanKNNByObject.html]] {
+            +LinearScanEuclideanKNNByObject(PrimitiveDistanceQuery<O extends NumberVector>)
+            +getKNN(O extends NumberVector, int): KNNList
+        }
+
+        interface KNNSearcher<O> [[KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+
+        class WrappedKNNDBIDByLookup<O> [[WrappedKNNDBIDByLookup.html]] {
+            -relation: Relation<? extends O>
+            -WrappedKNNDBIDByLookup(Relation<? extends O>, KNNSearcher<O>)
+            +getKNN(DBIDRef, int): KNNList
+            {static} +wrap(Relation<? extends O>, KNNSearcher<O>): KNNSearcher<DBIDRef>
+        }
+
+        class elki.database.query.knn.WrappedKNNDBIDByLookup.Linear<O> [[WrappedKNNDBIDByLookup.Linear.html]] {
+            -Linear(Relation<? extends O>, KNNSearcher<O>)
+        }
+
+        PreprocessorKNNQuery <|-- PreprocessorSqrtKNNQuery
+        KNNSearcher <|.. PreprocessorKNNQuery
+        PreprocessorKNNQuery <|-- PreprocessorSquaredKNNQuery
+        KNNSearcher <|.. LinearScanPrimitiveKNNByObject
+        elki.database.query.LinearScanQuery <|.. LinearScanPrimitiveKNNByObject
+        KNNSearcher <|.. LinearScanKNNByDBID
+        elki.database.query.LinearScanQuery <|.. LinearScanKNNByDBID
+        KNNSearcher <|.. LinearScanKNNByObject
+        elki.database.query.LinearScanQuery <|.. LinearScanKNNByObject
+        LinearScanPrimitiveKNNByObject <|-- LinearScanEuclideanKNNByObject
+        KNNSearcher <|.. WrappedKNNDBIDByLookup
+        WrappedKNNDBIDByLookup --> KNNSearcher: inner
+        WrappedKNNDBIDByLookup <|-- elki.database.query.knn.WrappedKNNDBIDByLookup.Linear
+        elki.database.query.LinearScanQuery <|.. elki.database.query.knn.WrappedKNNDBIDByLookup.Linear
+        WrappedKNNDBIDByLookup +-- elki.database.query.knn.WrappedKNNDBIDByLookup.Linear
+    }
+
+    namespace elki.database.query {
+        interface LinearScanQuery [[../LinearScanQuery.html]]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

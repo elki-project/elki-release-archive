@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>NumberParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.NumberParameter<P extends NumberParameter<P, T extends Number>, T extends Number> [[NumberParameter.html]] {
+        +NumberParameter(OptionID, T extends Number)
+        +NumberParameter(OptionID)
+    }
+
+    abstract class "<size:14>AbstractParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.AbstractParameter<P extends NumberParameter<P, T extends Number>, T extends Number> [[AbstractParameter.html]] {
+        {abstract} #parseValue(Object): T extends Number
+    }
+
+    elki.utilities.optionhandling.parameters.AbstractParameter <|-- elki.utilities.optionhandling.parameters.NumberParameter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

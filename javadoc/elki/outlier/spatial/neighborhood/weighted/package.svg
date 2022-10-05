@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="335px" preserveAspectRatio="none" style="width:1030px;height:335px;background:#FFFFFF;" version="1.1" viewBox="0 0 1030 335" width="1030px" zoomAndPan="magnify"><defs/><g><!--MD5=[72477808441e8174d5cd41797f870734]
+cluster elki.outlier.spatial.neighborhood.weighted--><g id="cluster_elki.outlier.spatial.neighborhood.weighted"><path d="M8.5,6 L343.5,6 A3.75,3.75 0 0 1 346,8.5 L353,28.2969 L1020.5,28.2969 A2.5,2.5 0 0 1 1023,30.7969 L1023,307.5 A2.5,2.5 0 0 1 1020.5,310 L8.5,310 A2.5,2.5 0 0 1 6,307.5 L6,8.5 A2.5,2.5 0 0 1 8.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="353" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="334" x="10" y="20.9951">elki.outlier.spatial.neighborhood.weighted</text></g><!--MD5=[d1f6f994a1d96f1b32cfa18e0c10b965]
+class elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter--><a href="UnweightedNeighborhoodAdapter.html" target="_top" title="UnweightedNeighborhoodAdapter.html" xlink:actuate="onRequest" xlink:href="UnweightedNeighborhoodAdapter.html" xlink:show="new" xlink:title="UnweightedNeighborhoodAdapter.html" xlink:type="simple"><g id="elem_elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter"><rect codeLine="4" fill="#F1F1F1" height="96.8906" id="elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="465" x="22.5" y="181"/><ellipse cx="132.75" cy="197" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M135.7188,202.6406 Q135.1406,202.9375 134.5,203.0781 Q133.8594,203.2344 133.1563,203.2344 Q130.6563,203.2344 129.3281,201.5938 Q128.0156,199.9375 128.0156,196.8125 Q128.0156,193.6875 129.3281,192.0313 Q130.6563,190.375 133.1563,190.375 Q133.8594,190.375 134.5,190.5313 Q135.1563,190.6875 135.7188,190.9844 L135.7188,193.7031 Q135.0938,193.125 134.5,192.8594 Q133.9063,192.5781 133.2813,192.5781 Q131.9375,192.5781 131.25,193.6563 Q130.5625,194.7188 130.5625,196.8125 Q130.5625,198.9063 131.25,199.9844 Q131.9375,201.0469 133.2813,201.0469 Q133.9063,201.0469 134.5,200.7813 Q135.0938,200.5 135.7188,199.9219 L135.7188,202.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="236" x="153.25" y="201.8467">UnweightedNeighborhoodAdapter</text><line style="stroke:#181818;stroke-width:0.5;" x1="23.5" x2="486.5" y1="213" y2="213"/><polygon fill="none" points="33.5,222.6484,29.5,228.6484,37.5,228.6484" style="stroke:#1963A0;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="195" x="42.5" y="229.9951">inner: NeighborSetPredicate</text><line style="stroke:#181818;stroke-width:0.5;" x1="23.5" x2="486.5" y1="237.2969" y2="237.2969"/><ellipse cx="33.5" cy="250.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="397" x="42.5" y="254.292">UnweightedNeighborhoodAdapter(NeighborSetPredicate)</text><ellipse cx="33.5" cy="267.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="439" x="42.5" y="270.5889">getWeightedNeighbors(DBIDRef): Collection&lt;DoubleDBIDPair&gt;</text></g></a><!--MD5=[a58e30d8325b5827526cf91db3e1b302]
+class elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood--><a href="LinearWeightedExtendedNeighborhood.html" target="_top" title="LinearWeightedExtendedNeighborhood.html" xlink:actuate="onRequest" xlink:href="LinearWeightedExtendedNeighborhood.html" xlink:show="new" xlink:title="LinearWeightedExtendedNeighborhood.html" xlink:type="simple"><g id="elem_elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood"><rect codeLine="24" fill="#F1F1F1" height="129.4844" id="elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="484" x="523" y="165"/><ellipse cx="624.75" cy="181" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M627.7188,186.6406 Q627.1406,186.9375 626.5,187.0781 Q625.8594,187.2344 625.1563,187.2344 Q622.6563,187.2344 621.3281,185.5938 Q620.0156,183.9375 620.0156,180.8125 Q620.0156,177.6875 621.3281,176.0313 Q622.6563,174.375 625.1563,174.375 Q625.8594,174.375 626.5,174.5313 Q627.1563,174.6875 627.7188,174.9844 L627.7188,177.7031 Q627.0938,177.125 626.5,176.8594 Q625.9063,176.5781 625.2813,176.5781 Q623.9375,176.5781 623.25,177.6563 Q622.5625,178.7188 622.5625,180.8125 Q622.5625,182.9063 623.25,183.9844 Q623.9375,185.0469 625.2813,185.0469 Q625.9063,185.0469 626.5,184.7813 Q627.0938,184.5 627.7188,183.9219 L627.7188,186.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="272" x="645.25" y="185.8467">LinearWeightedExtendedNeighborhood</text><line style="stroke:#181818;stroke-width:0.5;" x1="524" x2="1006" y1="197" y2="197"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="531" y="207.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="195" x="543" y="213.9951">inner: NeighborSetPredicate</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="531" y="223.9453"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="543" y="230.292">steps: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="524" x2="1006" y1="237.5938" y2="237.5938"/><ellipse cx="534" cy="251.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="458" x="543" y="254.5889">LinearWeightedExtendedNeighborhood(NeighborSetPredicate, int)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="531" y="264.5391"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="194" x="543" y="270.8857">computeWeight(int): double</text><ellipse cx="534" cy="283.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="439" x="543" y="287.1826">getWeightedNeighbors(DBIDRef): Collection&lt;DoubleDBIDPair&gt;</text></g></a><!--MD5=[d14801cd8199ad814e27bbeecac6567e]
+class elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate--><a href="WeightedNeighborSetPredicate.html" target="_top" title="WeightedNeighborSetPredicate.html" xlink:actuate="onRequest" xlink:href="WeightedNeighborSetPredicate.html" xlink:show="new" xlink:title="WeightedNeighborSetPredicate.html" xlink:type="simple"><g id="elem_elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate"><rect codeLine="49" fill="#F1F1F1" height="64.2969" id="elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="476" x="274" y="41"/><ellipse cx="396.75" cy="57" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M392.6719,52.7656 L392.6719,50.6094 L400.0625,50.6094 L400.0625,52.7656 L397.5938,52.7656 L397.5938,60.8438 L400.0625,60.8438 L400.0625,63 L392.6719,63 L392.6719,60.8438 L395.1406,60.8438 L395.1406,52.7656 L392.6719,52.7656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="222" x="417.25" y="61.8467">WeightedNeighborSetPredicate</text><line style="stroke:#181818;stroke-width:0.5;" x1="275" x2="749" y1="73" y2="73"/><line style="stroke:#181818;stroke-width:0.5;" x1="275" x2="749" y1="81" y2="81"/><ellipse cx="285" cy="94.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="450" x="294" y="97.9951">getWeightedNeighbors(DBIDRef): Collection&lt;DoubleDBIDPair&gt;</text></g></a><!--MD5=[59ed992e40a0437a1c997d17cf925c7f]
+reverse link elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate to elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter--><g id="link_elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate_elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter"><path codeLine="58" d="M443.01,115.48 C409.56,135.59 369.2,159.85 334.46,180.73 " fill="none" id="elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate-backto-elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="439.55,109.38,460.3,105.08,446.77,121.38,439.55,109.38" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[4276d5851e5907c89b11a6530d4f14c1]
+reverse link elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate to elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood--><g id="link_elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate_elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood"><path codeLine="63" d="M580.21,115.65 C605.02,130.8 633.66,148.29 660.87,164.91 " fill="none" id="elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate-backto-elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="576.31,121.48,562.89,105.08,583.61,109.53,576.31,121.48" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="415" y="316"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="415" y="325.2822">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[1ded2378563940a6df6f7ad1227eb46e]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.spatial.neighborhood.weighted {
+
+        class UnweightedNeighborhoodAdapter [[UnweightedNeighborhoodAdapter.html]] {
+            ~inner: NeighborSetPredicate
+            +UnweightedNeighborhoodAdapter(NeighborSetPredicate)
+            +getWeightedNeighbors(DBIDRef): Collection<DoubleDBIDPair>
+        }
+
+        class elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter.Factory<O> [[UnweightedNeighborhoodAdapter.Factory.html]] {
+            ~inner: Factory<O>
+            +Factory(Factory<O>)
+            +instantiate(Database, Relation<? extends O>): UnweightedNeighborhoodAdapter
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter.Factory.Par<O> {
+            {static} +INNER_ID: OptionID
+            ~inner: Factory<O>
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        class LinearWeightedExtendedNeighborhood [[LinearWeightedExtendedNeighborhood.html]] {
+            -inner: NeighborSetPredicate
+            -steps: int
+            +LinearWeightedExtendedNeighborhood(NeighborSetPredicate, int)
+            -computeWeight(int): double
+            +getWeightedNeighbors(DBIDRef): Collection<DoubleDBIDPair>
+        }
+
+        class elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory<O> [[LinearWeightedExtendedNeighborhood.Factory.html]] {
+            -inner: Factory<O>
+            -steps: int
+            +Factory(Factory<O>, int)
+            +instantiate(Database, Relation<? extends O>): LinearWeightedExtendedNeighborhood
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory.Par<O> [[LinearWeightedExtendedNeighborhood.Factory.Par.html]] {
+            {static} +NEIGHBORHOOD_ID: OptionID
+            {static} +STEPS_ID: OptionID
+            -steps: int
+            -inner: Factory<O>
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        interface WeightedNeighborSetPredicate [[WeightedNeighborSetPredicate.html]] {
+            {abstract} +getWeightedNeighbors(DBIDRef): Collection<DoubleDBIDPair>
+        }
+
+        interface elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate.Factory<O> [[WeightedNeighborSetPredicate.Factory.html]] {
+            {abstract} +instantiate(Database, Relation<? extends O>): WeightedNeighborSetPredicate
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+
+        WeightedNeighborSetPredicate <|.. UnweightedNeighborhoodAdapter
+        elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate.Factory <|.. elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter.Factory
+        UnweightedNeighborhoodAdapter +- - elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter.Factory.Par
+        elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter.Factory +- - elki.outlier.spatial.neighborhood.weighted.UnweightedNeighborhoodAdapter.Factory.Par
+        WeightedNeighborSetPredicate <|.. LinearWeightedExtendedNeighborhood
+        elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate.Factory <|.. elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory
+        LinearWeightedExtendedNeighborhood +- - elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory.Par
+        elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory +- - elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory.Par
+        WeightedNeighborSetPredicate +- - elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate.Factory
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

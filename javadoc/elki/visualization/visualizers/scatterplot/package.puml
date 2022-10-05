@@ -1,0 +1,181 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.scatterplot {
+
+        class AxisVisualization [[AxisVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class elki.visualization.visualizers.scatterplot.AxisVisualization.Instance [[AxisVisualization.Instance.html]] {
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+        }
+
+        abstract class AbstractScatterplotVisualization [[AbstractScatterplotVisualization.html]] {
+            #proj: Projection2D
+            #rel: Relation<? extends NumberVector>
+            #sample: SamplingResult
+            +AbstractScatterplotVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            #setupCanvas(): Element
+            {static} +setupCanvas(SVGPlot, Projection2D, double, double, double): Element
+            +visualizationChanged(VisualizationItem): void
+        }
+
+        abstract class AbstractTooltipVisualization [[AbstractTooltipVisualization.html]] {
+            {static} +TOOLTIP_HIDDEN: String
+            {static} +TOOLTIP_VISIBLE: String
+            {static} +TOOLTIP_STICKY: String
+            {static} +TOOLTIP_AREA: String
+            ~hoverer: EventListener
+            +AbstractTooltipVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            {abstract} #makeTooltip(DBIDRef, double, double, double): Element
+            #handleHoverEvent(Event): void
+            #toggleTooltip(Element, String): void
+            {abstract} #setupCSS(SVGPlot): void
+        }
+
+        class TooltipStringVisualization [[TooltipStringVisualization.html]] {
+            {static} +NAME_ID: String
+            {static} +NAME_LABEL: String
+            {static} +NAME_CLASS: String
+            {static} +NAME_EID: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+            -addTooltips(String, Relation<?>, VisualizerContext, Relation<?>, ScatterPlotProjector<?>): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.TooltipStringVisualization.Instance [[TooltipStringVisualization.Instance.html]] {
+            -result: Relation<?>
+            -fontsize: double
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            #makeTooltip(DBIDRef, double, double, double): Element
+            #setupCSS(SVGPlot): void
+        }
+
+        class PolygonVisualization [[PolygonVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.PolygonVisualization.Instance [[PolygonVisualization.Instance.html]] {
+            {static} +POLYS: String
+            #rep: Relation<PolygonsObject>
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+        }
+
+        class TooltipScoreVisualization [[TooltipScoreVisualization.html]] {
+            {static} +NAME: String
+            {static} +NAME_GEN: String
+            +TooltipScoreVisualization(Par)
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+            -addTooltips(String, Relation<?>, VisualizerContext, ScatterPlotProjector<?>, Relation<?>): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Instance [[TooltipScoreVisualization.Instance.html]] {
+            -result: Relation<? extends Number>
+            -fontsize: double
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            #makeTooltip(DBIDRef, double, double, double): Element
+            #setupCSS(SVGPlot): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Par [[TooltipScoreVisualization.Par.html]] {
+            ~nf: NumberFormat
+            {static} +DIGITS_ID: OptionID
+            +configure(Parameterization): void
+            +make(): TooltipScoreVisualization
+        }
+
+        class ReferencePointsVisualization [[ReferencePointsVisualization.html]] {
+            {static} -NAME: String
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        }
+
+        class elki.visualization.visualizers.scatterplot.ReferencePointsVisualization.Instance [[ReferencePointsVisualization.Instance.html]] {
+            {static} +REFPOINT: String
+            #result: ReferencePointsResult<? extends NumberVector>
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -setupCSS(SVGPlot): void
+        }
+
+        class MarkerVisualization [[MarkerVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.MarkerVisualization.Instance [[MarkerVisualization.Instance.html]] {
+            {static} +DOTMARKER: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. AxisVisualization
+        AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.AxisVisualization.Instance
+        AxisVisualization +-- elki.visualization.visualizers.scatterplot.AxisVisualization.Instance
+        elki.visualization.visualizers.AbstractVisualization <|-- AbstractScatterplotVisualization
+        AbstractScatterplotVisualization <|-- AbstractTooltipVisualization
+        elki.database.datastore.DataStoreListener <|.. AbstractTooltipVisualization
+        elki.visualization.visualizers.VisFactory <|.. TooltipStringVisualization
+        AbstractTooltipVisualization <|-- elki.visualization.visualizers.scatterplot.TooltipStringVisualization.Instance
+        TooltipStringVisualization +-- elki.visualization.visualizers.scatterplot.TooltipStringVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. PolygonVisualization
+        AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.PolygonVisualization.Instance
+        elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.scatterplot.PolygonVisualization.Instance
+        PolygonVisualization +-- elki.visualization.visualizers.scatterplot.PolygonVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. TooltipScoreVisualization
+        TooltipScoreVisualization --> elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Par: settings
+        AbstractTooltipVisualization <|-- elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Instance
+        TooltipScoreVisualization +-- elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Par
+        TooltipScoreVisualization +-- elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Par
+        elki.visualization.visualizers.VisFactory <|.. ReferencePointsVisualization
+        AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.ReferencePointsVisualization.Instance
+        ReferencePointsVisualization +-- elki.visualization.visualizers.scatterplot.ReferencePointsVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. MarkerVisualization
+        AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.MarkerVisualization.Instance
+        MarkerVisualization +-- elki.visualization.visualizers.scatterplot.MarkerVisualization.Instance
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+        abstract class AbstractVisualization [[../AbstractVisualization.html]] {
+            #task: VisualizationTask
+            #context: VisualizerContext
+            #svgp: VisualizationPlot
+            #layer: Element
+            -width: double
+            -height: double
+            {abstract} +fullRedraw(): void
+        }
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreListener [[../../../database/datastore/DataStoreListener.html]] {
+            {abstract} +contentChanged(DataStoreEvent): void
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

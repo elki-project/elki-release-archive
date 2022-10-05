@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LPIntegerNormDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.LPIntegerNormDistance [[LPIntegerNormDistance.html]] {
+        ~intp: int
+        +LPIntegerNormDistance(int)
+        -preDistance(NumberVector, NumberVector, int, int): double
+        -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+        -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+        -preNorm(NumberVector, int, int): double
+        -preNormMBR(SpatialComparable, int, int): double
+        +distance(NumberVector, NumberVector): double
+        +norm(NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+    }
+
+    class "<size:14>LPNormDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.LPNormDistance [[LPNormDistance.html]]
+    class "<size:14>LPIntegerNormDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.LPIntegerNormDistance.Par [[LPIntegerNormDistance.Par.html]]
+
+    elki.distance.minkowski.LPNormDistance <|-- elki.distance.minkowski.LPIntegerNormDistance
+    elki.distance.minkowski.LPIntegerNormDistance +-- elki.distance.minkowski.LPIntegerNormDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

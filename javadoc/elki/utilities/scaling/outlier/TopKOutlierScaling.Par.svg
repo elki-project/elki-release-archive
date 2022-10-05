@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="69px" preserveAspectRatio="none" style="width:194px;height:69px;background:#FFFFFF;" version="1.1" viewBox="0 0 194 69" width="194px" zoomAndPan="magnify"><defs/><g><!--MD5=[3e1e341e99e02d89faea9df34d753f70]
+class elki.utilities.scaling.outlier.TopKOutlierScaling--><a href="TopKOutlierScaling.html" target="_top" title="TopKOutlierScaling.html" xlink:actuate="onRequest" xlink:href="TopKOutlierScaling.html" xlink:show="new" xlink:title="TopKOutlierScaling.html" xlink:type="simple"><g id="elem_elki.utilities.scaling.outlier.TopKOutlierScaling"><rect codeLine="18" fill="#F1F1F1" height="37.9375" id="elki.utilities.scaling.outlier.TopKOutlierScaling" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="162" x="19" y="7"/><ellipse cx="34" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M36.9688,31.6094 Q36.3906,31.9063 35.75,32.0469 Q35.1094,32.2031 34.4063,32.2031 Q31.9063,32.2031 30.5781,30.5625 Q29.2656,28.9063 29.2656,25.7813 Q29.2656,22.6563 30.5781,21 Q31.9063,19.3438 34.4063,19.3438 Q35.1094,19.3438 35.75,19.5 Q36.4063,19.6563 36.9688,19.9531 L36.9688,22.6719 Q36.3438,22.0938 35.75,21.8281 Q35.1563,21.5469 34.5313,21.5469 Q33.1875,21.5469 32.5,22.625 Q31.8125,23.6875 31.8125,25.7813 Q31.8125,27.875 32.5,28.9531 Q33.1875,30.0156 34.5313,30.0156 Q35.1563,30.0156 35.75,29.75 Q36.3438,29.4688 36.9688,28.8906 L36.9688,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="48" y="24.9951">TopKOutlierScaling</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="119" x="53.5" y="37.5791">elki.utilities.scaling.outlier</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="0" y="49.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="0" y="59.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[56e60d2b27a9d3c50ca4fbcfe3657f43]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TopKOutlierScaling.Par\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.TopKOutlierScaling.Par [[TopKOutlierScaling.Par.html]] {
+        {static} +K_ID: OptionID
+        {static} +BINARY_ID: OptionID
+        -k: int
+        -binary: boolean
+        +configure(Parameterization): void
+        +make(): TopKOutlierScaling
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>TopKOutlierScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.TopKOutlierScaling [[TopKOutlierScaling.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.outlier.TopKOutlierScaling.Par
+    elki.utilities.scaling.outlier.TopKOutlierScaling +- - elki.utilities.scaling.outlier.TopKOutlierScaling.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

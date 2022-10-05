@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BiweightKernelDensityFunction\n<size:10>elki.math.statistics.kernelfunctions" as elki.math.statistics.kernelfunctions.BiweightKernelDensityFunction [[BiweightKernelDensityFunction.html]] {
+        {static} +KERNEL: BiweightKernelDensityFunction
+        {static} +CANONICAL_BANDWIDTH: double
+        {static} +STDDEV: double
+        {static} +R: double
+        +density(double): double
+        +canonicalBandwidth(): double
+        +standardDeviation(): double
+        +getR(): double
+    }
+
+    interface "<size:14>KernelDensityFunction\n<size:10>elki.math.statistics.kernelfunctions" as elki.math.statistics.kernelfunctions.KernelDensityFunction [[KernelDensityFunction.html]] {
+        {abstract} +density(double): double
+        {abstract} +canonicalBandwidth(): double
+        {abstract} +standardDeviation(): double
+        {abstract} +getR(): double
+    }
+    class "<size:14>BiweightKernelDensityFunction.Par\n<size:10>elki.math.statistics.kernelfunctions" as elki.math.statistics.kernelfunctions.BiweightKernelDensityFunction.Par [[BiweightKernelDensityFunction.Par.html]]
+
+    elki.math.statistics.kernelfunctions.KernelDensityFunction <|.. elki.math.statistics.kernelfunctions.BiweightKernelDensityFunction
+    elki.math.statistics.kernelfunctions.BiweightKernelDensityFunction +-- elki.math.statistics.kernelfunctions.BiweightKernelDensityFunction.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

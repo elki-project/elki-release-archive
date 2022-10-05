@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="249px" preserveAspectRatio="none" style="width:496px;height:249px;background:#FFFFFF;" version="1.1" viewBox="0 0 496 249" width="496px" zoomAndPan="magnify"><defs/><g><!--MD5=[cca6c9564033d13dea150028a622737b]
+class elki.outlier.clustering.DBSCANOutlierDetection--><a href="DBSCANOutlierDetection.html" target="_top" title="DBSCANOutlierDetection.html" xlink:actuate="onRequest" xlink:href="DBSCANOutlierDetection.html" xlink:show="new" xlink:title="DBSCANOutlierDetection.html" xlink:type="simple"><g id="elem_elki.outlier.clustering.DBSCANOutlierDetection"><rect codeLine="6" fill="#F1F1F1" height="119.125" id="elki.outlier.clustering.DBSCANOutlierDetection" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="482" x="7" y="105"/><ellipse cx="157.75" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M160.7188,129.6094 Q160.1406,129.9063 159.5,130.0469 Q158.8594,130.2031 158.1563,130.2031 Q155.6563,130.2031 154.3281,128.5625 Q153.0156,126.9063 153.0156,123.7813 Q153.0156,120.6563 154.3281,119 Q155.6563,117.3438 158.1563,117.3438 Q158.8594,117.3438 159.5,117.5 Q160.1563,117.6563 160.7188,117.9531 L160.7188,120.6719 Q160.0938,120.0938 159.5,119.8281 Q158.9063,119.5469 158.2813,119.5469 Q156.9375,119.5469 156.25,120.625 Q155.5625,121.6875 155.5625,123.7813 Q155.5625,125.875 156.25,126.9531 Q156.9375,128.0156 158.2813,128.0156 Q158.9063,128.0156 159.5,127.75 Q160.0938,127.4688 160.7188,126.8906 L160.7188,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="172" x="178.25" y="122.9951">DBSCANOutlierDetection</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="97" x="215.75" y="135.5791">elki.outlier.clustering</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="488" y1="142.9375" y2="142.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="153.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="212" x="27" y="159.9326">clusterer: GeneralizedDBSCAN</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="488" y1="167.2344" y2="167.2344"/><ellipse cx="18" cy="180.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="324" x="27" y="184.2295">DBSCANOutlierDetection(GeneralizedDBSCAN)</text><ellipse cx="18" cy="197.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="456" x="27" y="200.5264">run(Database, Relation&lt;? extends NumberVector&gt;): OutlierResult</text><ellipse cx="18" cy="213.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="306" x="27" y="216.8232">getInputTypeRestriction(): TypeInformation[]</text></g></a><!--MD5=[81019799438b1b9471ca37184b444d57]
+class elki.outlier.OutlierAlgorithm--><a href="../OutlierAlgorithm.html" target="_top" title="../OutlierAlgorithm.html" xlink:actuate="onRequest" xlink:href="../OutlierAlgorithm.html" xlink:show="new" xlink:title="../OutlierAlgorithm.html" xlink:type="simple"><g id="elem_elki.outlier.OutlierAlgorithm"><rect codeLine="13" fill="#F1F1F1" height="37.9375" id="elki.outlier.OutlierAlgorithm" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="148" x="174" y="7"/><ellipse cx="189" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M184.9219,21.7344 L184.9219,19.5781 L192.3125,19.5781 L192.3125,21.7344 L189.8438,21.7344 L189.8438,29.8125 L192.3125,29.8125 L192.3125,31.9688 L184.9219,31.9688 L184.9219,29.8125 L187.3906,29.8125 L187.3906,21.7344 L184.9219,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="116" x="203" y="24.9951">OutlierAlgorithm</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="53" x="234.5" y="37.5791">elki.outlier</text></g></a><!--MD5=[b084ea4ca534dab91e8a396da393e4de]
+reverse link elki.outlier.OutlierAlgorithm to elki.outlier.clustering.DBSCANOutlierDetection--><g id="link_elki.outlier.OutlierAlgorithm_elki.outlier.clustering.DBSCANOutlierDetection"><path codeLine="16" d="M248,65.5 C248,77.69 248,91.46 248,104.73 " fill="none" id="elki.outlier.OutlierAlgorithm-backto-elki.outlier.clustering.DBSCANOutlierDetection" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="241,65.13,248,45.13,255,65.13,241,65.13" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="148" y="230.125"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="148" y="239.4072">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[ac20dfa81a9248288d43eb23b982d844]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DBSCANOutlierDetection\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.DBSCANOutlierDetection [[DBSCANOutlierDetection.html]] {
+        -clusterer: GeneralizedDBSCAN
+        +DBSCANOutlierDetection(GeneralizedDBSCAN)
+        +run(Database, Relation<? extends NumberVector>): OutlierResult
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>DBSCANOutlierDetection.Par\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.DBSCANOutlierDetection.Par [[DBSCANOutlierDetection.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.clustering.DBSCANOutlierDetection
+    elki.outlier.clustering.DBSCANOutlierDetection +- - elki.outlier.clustering.DBSCANOutlierDetection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

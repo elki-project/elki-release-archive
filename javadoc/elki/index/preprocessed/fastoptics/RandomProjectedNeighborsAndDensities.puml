@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomProjectedNeighborsAndDensities\n<size:10>elki.index.preprocessed.fastoptics" as elki.index.preprocessed.fastoptics.RandomProjectedNeighborsAndDensities [[RandomProjectedNeighborsAndDensities.html]] {
+        {static} -LOG: Logging
+        {static} -PREFIX: String
+        {static} -logOProjectionConst: int
+        {static} -sizeTolerance: float
+        ~minSplitSize: int
+        ~points: Relation<? extends NumberVector>
+        ~splitsets: ArrayList<ArrayDBIDs>
+        ~projectedPoints: DoubleDataStore[]
+        ~rnd: RandomFactory
+        ~distanceComputations: long
+        +RandomProjectedNeighborsAndDensities(RandomFactory)
+        +computeSetsBounds(Relation<? extends NumberVector>, int, DBIDs): void
+        +splitupNoSort(ArrayModifiableDBIDs, int, int, int, Random): void
+        +splitRandomly(ArrayModifiableDBIDs, int, int, DoubleDataStore, Random): int
+        +splitByDistance(ArrayModifiableDBIDs, int, int, DoubleDataStore, Random): int
+        +getNeighs(): DataStore<DBIDs>
+        +computeAverageDistInSet(): DoubleDataStore
+        +logStatistics(): void
+    }
+    class "<size:14>RandomProjectedNeighborsAndDensities.Par\n<size:10>elki.index.preprocessed.fastoptics" as elki.index.preprocessed.fastoptics.RandomProjectedNeighborsAndDensities.Par [[RandomProjectedNeighborsAndDensities.Par.html]]
+
+    elki.index.preprocessed.fastoptics.RandomProjectedNeighborsAndDensities +-- elki.index.preprocessed.fastoptics.RandomProjectedNeighborsAndDensities.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

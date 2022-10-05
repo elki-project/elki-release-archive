@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByLabelOrAllInOneClustering\n<size:10>elki.clustering.trivial" as elki.clustering.trivial.ByLabelOrAllInOneClustering [[ByLabelOrAllInOneClustering.html]] {
+        +autorun(Database): Clustering<Model>
+    }
+
+    class "<size:14>ByLabelClustering\n<size:10>elki.clustering.trivial" as elki.clustering.trivial.ByLabelClustering [[ByLabelClustering.html]]
+
+    elki.clustering.trivial.ByLabelClustering <|-- elki.clustering.trivial.ByLabelOrAllInOneClustering
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WriteIntegerDataStoreProcessor.Instance\n<size:10>elki.parallel.processor" as elki.parallel.processor.WriteIntegerDataStoreProcessor.Instance [[WriteIntegerDataStoreProcessor.Instance.html]] {
+        ~input: Instance
+        +Instance(Instance)
+        +map(DBIDRef): void
+    }
+
+    interface "<size:14>Processor.Instance\n<size:10>elki.parallel.processor" as elki.parallel.processor.Processor.Instance [[Processor.Instance.html]] {
+        {abstract} +map(DBIDRef): void
+    }
+    class "<size:14>WriteIntegerDataStoreProcessor\n<size:10>elki.parallel.processor" as elki.parallel.processor.WriteIntegerDataStoreProcessor [[WriteIntegerDataStoreProcessor.html]]
+
+    elki.parallel.processor.Processor.Instance <|.. elki.parallel.processor.WriteIntegerDataStoreProcessor.Instance
+    elki.parallel.processor.WriteIntegerDataStoreProcessor +-- elki.parallel.processor.WriteIntegerDataStoreProcessor.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

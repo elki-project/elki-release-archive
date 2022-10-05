@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>VisualizeGeodesicDistances.Mode\n<size:10>elki.application.experiments" as elki.application.experiments.VisualizeGeodesicDistances.Mode [[VisualizeGeodesicDistances.Mode.html]] {
+        {static} +XTD
+        {static} +ATD
+        {static} +MINDIST
+    }
+
+    class "<size:14>VisualizeGeodesicDistances\n<size:10>elki.application.experiments" as elki.application.experiments.VisualizeGeodesicDistances [[VisualizeGeodesicDistances.html]]
+
+    elki.application.experiments.VisualizeGeodesicDistances +-- elki.application.experiments.VisualizeGeodesicDistances.Mode
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

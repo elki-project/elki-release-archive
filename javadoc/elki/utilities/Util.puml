@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Util\n<size:10>elki.utilities" as elki.utilities.Util [[Util.html]] {
+        {static} -HASHPRIME: long
+        {static} +mixHashCodes(int, int): int
+        {static} +mixHashCodes(int, int, int): int
+        {static} +mixHashCodes(int...): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

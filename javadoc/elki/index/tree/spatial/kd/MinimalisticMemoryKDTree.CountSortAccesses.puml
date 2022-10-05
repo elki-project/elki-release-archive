@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MinimalisticMemoryKDTree.CountSortAccesses\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.CountSortAccesses [[MinimalisticMemoryKDTree.CountSortAccesses.html]] {
+        ~objaccess: Counter
+        +CountSortAccesses(Counter, Relation<? extends NumberVector>)
+        +compare(DBIDRef, DBIDRef): int
+    }
+
+    class "<size:14>VectorUtil.SortDBIDsBySingleDimension\n<size:10>elki.data" as elki.data.VectorUtil.SortDBIDsBySingleDimension [[../../../../data/VectorUtil.SortDBIDsBySingleDimension.html]]
+    class "<size:14>MinimalisticMemoryKDTree\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MinimalisticMemoryKDTree<O extends NumberVector> [[MinimalisticMemoryKDTree.html]]
+
+    elki.data.VectorUtil.SortDBIDsBySingleDimension <|-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.CountSortAccesses
+    elki.index.tree.spatial.kd.MinimalisticMemoryKDTree +-- elki.index.tree.spatial.kd.MinimalisticMemoryKDTree.CountSortAccesses
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

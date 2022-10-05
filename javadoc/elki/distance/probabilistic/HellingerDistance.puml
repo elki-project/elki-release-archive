@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HellingerDistance\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.HellingerDistance [[HellingerDistance.html]] {
+        {static} +STATIC: HellingerDistance
+        {static} -NON_NEGATIVE: String
+        +distance(NumberVector, NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +similarity(NumberVector, NumberVector): double
+        +isSymmetric(): boolean
+        +isMetric(): boolean
+        +instantiate(Relation<T extends NumberVector>): SpatialPrimitiveDistanceSimilarityQuery<T extends NumberVector>
+        +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[../SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    interface "<size:14>NormalizedPrimitiveSimilarity\n<size:10>elki.similarity" as elki.similarity.NormalizedPrimitiveSimilarity<NumberVector> [[../../similarity/NormalizedPrimitiveSimilarity.html]]
+    class "<size:14>HellingerDistance.Par\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.HellingerDistance.Par [[HellingerDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.probabilistic.HellingerDistance
+    elki.distance.SpatialPrimitiveDistance <|.. elki.distance.probabilistic.HellingerDistance
+    elki.similarity.NormalizedPrimitiveSimilarity <|.. elki.distance.probabilistic.HellingerDistance
+    elki.distance.probabilistic.HellingerDistance +-- elki.distance.probabilistic.HellingerDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

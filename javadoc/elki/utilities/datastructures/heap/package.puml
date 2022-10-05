@@ -1,0 +1,719 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.datastructures.heap {
+
+        class DoubleMaxHeap [[DoubleMaxHeap.html]] {
+            #twoheap: double[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +DoubleMaxHeap()
+            +DoubleMaxHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(double): void
+            +add(double, int): void
+            +replaceTopElement(double): double
+            -heapifyUp(int, double): void
+            +poll(): double
+            -heapifyDown(double): void
+            +peek(): double
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.DoubleMaxHeap.UnsortedIter [[DoubleMaxHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +get(): double
+        }
+
+        class ComparatorMinHeap<K> [[ComparatorMinHeap.html]] {
+            #twoheap: Object[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            #comparator: Comparator<Object>
+            +ComparatorMinHeap(Comparator<? super K>)
+            +ComparatorMinHeap(int, Comparator<? super K>)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(K): void
+            +add(K, int): void
+            +replaceTopElement(K): K
+            -heapifyUp(int, Object): void
+            +poll(): K
+            -heapifyDown(Object): void
+            +peek(): K
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.ComparatorMinHeap.UnsortedIter [[ComparatorMinHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +get(): K
+        }
+
+        interface DoubleObjectHeap<V> [[DoubleObjectHeap.html]] {
+            {abstract} +add(double, V): void
+            {abstract} +add(double, V, int): void
+            {abstract} +replaceTopElement(double, V): void
+            {abstract} +peekKey(): double
+            {abstract} +peekValue(): V
+            {abstract} +containsKey(double): boolean
+            {abstract} +containsValue(V): boolean
+            {abstract} +poll(): void
+            {abstract} +clear(): void
+            {abstract} +size(): int
+            {abstract} +isEmpty(): boolean
+            {abstract} +unsortedIter(): UnsortedIter<V>
+        }
+
+        interface elki.utilities.datastructures.heap.DoubleObjectHeap.UnsortedIter<V> [[DoubleObjectHeap.UnsortedIter.html]] {
+            {abstract} +getKey(): double
+            {abstract} +getValue(): V
+        }
+
+        class DoubleObjectMinHeap<V> [[DoubleObjectMinHeap.html]] {
+            #twoheap: double[]
+            #twovals: Object[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +DoubleObjectMinHeap()
+            +DoubleObjectMinHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(double, V): void
+            +add(double, V, int): void
+            +replaceTopElement(double, V): void
+            -heapifyUp(int, double, Object): void
+            +poll(): void
+            -heapifyDown(double, Object): void
+            +peekKey(): double
+            +peekValue(): V
+            +containsKey(double): boolean
+            +containsValue(V): boolean
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.DoubleObjectMinHeap.UnsortedIter [[DoubleObjectMinHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +getKey(): double
+            +getValue(): V
+        }
+
+        interface ObjectHeap<K> [[ObjectHeap.html]] {
+            {abstract} +add(K): void
+            {abstract} +add(K, int): void
+            {abstract} +replaceTopElement(K): K
+            {abstract} +peek(): K
+            {abstract} +poll(): K
+            {abstract} +clear(): void
+            {abstract} +size(): int
+            {abstract} +isEmpty(): boolean
+            {abstract} +unsortedIter(): UnsortedIter<K>
+        }
+
+        interface elki.utilities.datastructures.heap.ObjectHeap.UnsortedIter<K> [[ObjectHeap.UnsortedIter.html]] {
+            {abstract} +get(): K
+        }
+
+        class DoubleObjectMaxHeap<V> [[DoubleObjectMaxHeap.html]] {
+            #twoheap: double[]
+            #twovals: Object[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +DoubleObjectMaxHeap()
+            +DoubleObjectMaxHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(double, V): void
+            +add(double, V, int): void
+            +replaceTopElement(double, V): void
+            -heapifyUp(int, double, Object): void
+            +poll(): void
+            -heapifyDown(double, Object): void
+            +peekKey(): double
+            +peekValue(): V
+            +containsKey(double): boolean
+            +containsValue(V): boolean
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.DoubleObjectMaxHeap.UnsortedIter [[DoubleObjectMaxHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +getKey(): double
+            +getValue(): V
+        }
+
+        class IntegerMinHeap [[IntegerMinHeap.html]] {
+            #twoheap: int[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +IntegerMinHeap()
+            +IntegerMinHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(int): void
+            +add(int, int): void
+            +replaceTopElement(int): int
+            -heapifyUp(int, int): void
+            +poll(): int
+            -heapifyDown(int): void
+            +peek(): int
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.IntegerMinHeap.UnsortedIter [[IntegerMinHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +get(): int
+        }
+
+        class DoubleMinHeap [[DoubleMinHeap.html]] {
+            #twoheap: double[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +DoubleMinHeap()
+            +DoubleMinHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(double): void
+            +add(double, int): void
+            +replaceTopElement(double): double
+            -heapifyUp(int, double): void
+            +poll(): double
+            -heapifyDown(double): void
+            +peek(): double
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.DoubleMinHeap.UnsortedIter [[DoubleMinHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +get(): double
+        }
+
+        class ComparatorMaxHeap<K> [[ComparatorMaxHeap.html]] {
+            #twoheap: Object[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            #comparator: Comparator<Object>
+            +ComparatorMaxHeap(Comparator<? super K>)
+            +ComparatorMaxHeap(int, Comparator<? super K>)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(K): void
+            +add(K, int): void
+            +replaceTopElement(K): K
+            -heapifyUp(int, Object): void
+            +poll(): K
+            -heapifyDown(Object): void
+            +peek(): K
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.ComparatorMaxHeap.UnsortedIter [[ComparatorMaxHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +get(): K
+        }
+
+        interface IntegerObjectHeap<V> [[IntegerObjectHeap.html]] {
+            {abstract} +add(int, V): void
+            {abstract} +add(int, V, int): void
+            {abstract} +replaceTopElement(int, V): void
+            {abstract} +peekKey(): int
+            {abstract} +peekValue(): V
+            {abstract} +containsKey(int): boolean
+            {abstract} +containsValue(V): boolean
+            {abstract} +poll(): void
+            {abstract} +clear(): void
+            {abstract} +size(): int
+            {abstract} +isEmpty(): boolean
+            {abstract} +unsortedIter(): UnsortedIter<V>
+        }
+
+        interface elki.utilities.datastructures.heap.IntegerObjectHeap.UnsortedIter<V> [[IntegerObjectHeap.UnsortedIter.html]] {
+            {abstract} +getKey(): int
+            {abstract} +getValue(): V
+        }
+
+        class DoubleIntegerMinHeap [[DoubleIntegerMinHeap.html]] {
+            #twoheap: double[]
+            #twovals: int[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +DoubleIntegerMinHeap()
+            +DoubleIntegerMinHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(double, int): void
+            +add(double, int, int): void
+            +replaceTopElement(double, int): void
+            -heapifyUp(int, double, int): void
+            +poll(): void
+            -heapifyDown(double, int): void
+            +peekKey(): double
+            +peekValue(): int
+            +containsKey(double): boolean
+            +containsValue(int): boolean
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.DoubleIntegerMinHeap.UnsortedIter [[DoubleIntegerMinHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +getKey(): double
+            +getValue(): int
+        }
+
+        class DoubleLongMinHeap [[DoubleLongMinHeap.html]] {
+            #twoheap: double[]
+            #twovals: long[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +DoubleLongMinHeap()
+            +DoubleLongMinHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(double, long): void
+            +add(double, long, int): void
+            +replaceTopElement(double, long): void
+            -heapifyUp(int, double, long): void
+            +poll(): void
+            -heapifyDown(double, long): void
+            +peekKey(): double
+            +peekValue(): long
+            +containsKey(double): boolean
+            +containsValue(long): boolean
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.DoubleLongMinHeap.UnsortedIter [[DoubleLongMinHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +getKey(): double
+            +getValue(): long
+        }
+
+        class IntegerMaxHeap [[IntegerMaxHeap.html]] {
+            #twoheap: int[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +IntegerMaxHeap()
+            +IntegerMaxHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(int): void
+            +add(int, int): void
+            +replaceTopElement(int): int
+            -heapifyUp(int, int): void
+            +poll(): int
+            -heapifyDown(int): void
+            +peek(): int
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.IntegerMaxHeap.UnsortedIter [[IntegerMaxHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +get(): int
+        }
+
+        class Heap<E> [[Heap.html]] {
+            #queue: Object[]
+            #size: int
+            #comparator: Comparator<Object>
+            -modCount: int
+            {static} -DEFAULT_INITIAL_CAPACITY: int
+            +Heap()
+            +Heap(int)
+            +Heap(Comparator<? super E>)
+            +Heap(int, Comparator<? super E>)
+            +add(E): void
+            +add(E, int): void
+            +peek(): E
+            +poll(): E
+            #heapifyUp(int, E): void
+            #heapifyDown(int, Object): boolean
+            +size(): int
+            +isEmpty(): boolean
+            +clear(): void
+            #heapModified(): void
+            +unorderedIter(): UnorderedIter
+            #checkHeap(): String
+        }
+
+        class elki.utilities.datastructures.heap.Heap.UnorderedIter [[Heap.UnorderedIter.html]] {
+            ~pos: int
+            +valid(): boolean
+            +advance(): UnorderedIter
+            +get(): E
+        }
+
+        class ComparableMaxHeap<K extends Comparable<? super K>> [[ComparableMaxHeap.html]] {
+            #twoheap: Comparable<Object>[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +ComparableMaxHeap()
+            +ComparableMaxHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(K extends Comparable<? super Comparable<? super K>>): void
+            +add(K extends Comparable<? super Comparable<? super K>>, int): void
+            +replaceTopElement(K extends Comparable<? super Comparable<? super K>>): K extends Comparable<? super Comparable<? super K>>
+            -heapifyUp(int, Comparable<Object>): void
+            +poll(): K extends Comparable<? super Comparable<? super K>>
+            -heapifyDown(Comparable<Object>): void
+            +peek(): K extends Comparable<? super Comparable<? super K>>
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.ComparableMaxHeap.UnsortedIter [[ComparableMaxHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +get(): K extends Comparable<? super Comparable<? super K>>
+        }
+
+        class IntegerObjectMaxHeap<V> [[IntegerObjectMaxHeap.html]] {
+            #twoheap: int[]
+            #twovals: Object[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +IntegerObjectMaxHeap()
+            +IntegerObjectMaxHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(int, V): void
+            +add(int, V, int): void
+            +replaceTopElement(int, V): void
+            -heapifyUp(int, int, Object): void
+            +poll(): void
+            -heapifyDown(int, Object): void
+            +peekKey(): int
+            +peekValue(): V
+            +containsKey(int): boolean
+            +containsValue(V): boolean
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.IntegerObjectMaxHeap.UnsortedIter [[IntegerObjectMaxHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +getKey(): int
+            +getValue(): V
+        }
+
+        interface DoubleLongHeap [[DoubleLongHeap.html]] {
+            {abstract} +add(double, long): void
+            {abstract} +add(double, long, int): void
+            {abstract} +replaceTopElement(double, long): void
+            {abstract} +peekKey(): double
+            {abstract} +peekValue(): long
+            {abstract} +containsKey(double): boolean
+            {abstract} +containsValue(long): boolean
+            {abstract} +poll(): void
+            {abstract} +clear(): void
+            {abstract} +size(): int
+            {abstract} +isEmpty(): boolean
+            {abstract} +unsortedIter(): UnsortedIter
+        }
+
+        interface elki.utilities.datastructures.heap.DoubleLongHeap.UnsortedIter [[DoubleLongHeap.UnsortedIter.html]] {
+            {abstract} +getKey(): double
+            {abstract} +getValue(): long
+        }
+
+        interface IntegerHeap [[IntegerHeap.html]] {
+            {abstract} +add(int): void
+            {abstract} +add(int, int): void
+            {abstract} +replaceTopElement(int): int
+            {abstract} +peek(): int
+            {abstract} +poll(): int
+            {abstract} +clear(): void
+            {abstract} +size(): int
+            {abstract} +isEmpty(): boolean
+            {abstract} +unsortedIter(): UnsortedIter
+        }
+
+        interface elki.utilities.datastructures.heap.IntegerHeap.UnsortedIter [[IntegerHeap.UnsortedIter.html]] {
+            {abstract} +get(): int
+        }
+
+        class HeapUtil [[HeapUtil.html]] {
+            {static} -MAX_ARRAY_SIZE: int
+            {static} +nextPow2Int(int): int
+            {static} +nextSize(int): int
+        }
+
+        class DoubleIntegerMaxHeap [[DoubleIntegerMaxHeap.html]] {
+            #twoheap: double[]
+            #twovals: int[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +DoubleIntegerMaxHeap()
+            +DoubleIntegerMaxHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(double, int): void
+            +add(double, int, int): void
+            +replaceTopElement(double, int): void
+            -heapifyUp(int, double, int): void
+            +poll(): void
+            -heapifyDown(double, int): void
+            +peekKey(): double
+            +peekValue(): int
+            +containsKey(double): boolean
+            +containsValue(int): boolean
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.DoubleIntegerMaxHeap.UnsortedIter [[DoubleIntegerMaxHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +getKey(): double
+            +getValue(): int
+        }
+
+        class ComparableMinHeap<K extends Comparable<? super K>> [[ComparableMinHeap.html]] {
+            #twoheap: Comparable<Object>[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +ComparableMinHeap()
+            +ComparableMinHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(K extends Comparable<? super Comparable<? super K>>): void
+            +add(K extends Comparable<? super Comparable<? super K>>, int): void
+            +replaceTopElement(K extends Comparable<? super Comparable<? super K>>): K extends Comparable<? super Comparable<? super K>>
+            -heapifyUp(int, Comparable<Object>): void
+            +poll(): K extends Comparable<? super Comparable<? super K>>
+            -heapifyDown(Comparable<Object>): void
+            +peek(): K extends Comparable<? super Comparable<? super K>>
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.ComparableMinHeap.UnsortedIter [[ComparableMinHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +get(): K extends Comparable<? super Comparable<? super K>>
+        }
+
+        class DoubleLongMaxHeap [[DoubleLongMaxHeap.html]] {
+            #twoheap: double[]
+            #twovals: long[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +DoubleLongMaxHeap()
+            +DoubleLongMaxHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(double, long): void
+            +add(double, long, int): void
+            +replaceTopElement(double, long): void
+            -heapifyUp(int, double, long): void
+            +poll(): void
+            -heapifyDown(double, long): void
+            +peekKey(): double
+            +peekValue(): long
+            +containsKey(double): boolean
+            +containsValue(long): boolean
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.DoubleLongMaxHeap.UnsortedIter [[DoubleLongMaxHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +getKey(): double
+            +getValue(): long
+        }
+
+        class IntegerObjectMinHeap<V> [[IntegerObjectMinHeap.html]] {
+            #twoheap: int[]
+            #twovals: Object[]
+            #size: int
+            {static} -TWO_HEAP_INITIAL_SIZE: int
+            +IntegerObjectMinHeap()
+            +IntegerObjectMinHeap(int)
+            +clear(): void
+            +size(): int
+            +isEmpty(): boolean
+            +add(int, V): void
+            +add(int, V, int): void
+            +replaceTopElement(int, V): void
+            -heapifyUp(int, int, Object): void
+            +poll(): void
+            -heapifyDown(int, Object): void
+            +peekKey(): int
+            +peekValue(): V
+            +containsKey(int): boolean
+            +containsValue(V): boolean
+            +unsortedIter(): UnsortedIter
+        }
+
+        class elki.utilities.datastructures.heap.IntegerObjectMinHeap.UnsortedIter [[IntegerObjectMinHeap.UnsortedIter.html]] {
+            #pos: int
+            +valid(): boolean
+            +advance(): UnsortedIter
+            +getKey(): int
+            +getValue(): V
+        }
+
+        interface DoubleHeap [[DoubleHeap.html]] {
+            {abstract} +add(double): void
+            {abstract} +add(double, int): void
+            {abstract} +replaceTopElement(double): double
+            {abstract} +peek(): double
+            {abstract} +poll(): double
+            {abstract} +clear(): void
+            {abstract} +size(): int
+            {abstract} +isEmpty(): boolean
+            {abstract} +unsortedIter(): UnsortedIter
+        }
+
+        interface elki.utilities.datastructures.heap.DoubleHeap.UnsortedIter [[DoubleHeap.UnsortedIter.html]] {
+            {abstract} +get(): double
+        }
+
+        interface DoubleIntegerHeap [[DoubleIntegerHeap.html]] {
+            {abstract} +add(double, int): void
+            {abstract} +add(double, int, int): void
+            {abstract} +replaceTopElement(double, int): void
+            {abstract} +peekKey(): double
+            {abstract} +peekValue(): int
+            {abstract} +containsKey(double): boolean
+            {abstract} +containsValue(int): boolean
+            {abstract} +poll(): void
+            {abstract} +clear(): void
+            {abstract} +size(): int
+            {abstract} +isEmpty(): boolean
+            {abstract} +unsortedIter(): UnsortedIter
+        }
+
+        interface elki.utilities.datastructures.heap.DoubleIntegerHeap.UnsortedIter [[DoubleIntegerHeap.UnsortedIter.html]] {
+            {abstract} +getKey(): double
+            {abstract} +getValue(): int
+        }
+
+        class UpdatableHeap<O> [[UpdatableHeap.html]] {
+            {static} #NO_VALUE: int
+            {static} #IN_TIES: int
+            #index: Object2IntOpenHashMap<Object>
+            +UpdatableHeap()
+            +UpdatableHeap(int)
+            +UpdatableHeap(Comparator<? super O>)
+            +UpdatableHeap(int, Comparator<? super O>)
+            +clear(): void
+            +add(O): void
+            #offerAt(int, O): void
+            +poll(): O
+            #heapifyUp(int, Object): void
+            #heapifyDown(int, Object): boolean
+        }
+
+        DoubleHeap <|.. DoubleMaxHeap
+        elki.utilities.datastructures.heap.DoubleHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.DoubleMaxHeap.UnsortedIter
+        DoubleMaxHeap +-- elki.utilities.datastructures.heap.DoubleMaxHeap.UnsortedIter
+        ObjectHeap <|.. ComparatorMinHeap
+        elki.utilities.datastructures.heap.ObjectHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.ComparatorMinHeap.UnsortedIter
+        ComparatorMinHeap +-- elki.utilities.datastructures.heap.ComparatorMinHeap.UnsortedIter
+        elki.utilities.datastructures.iterator.Iter <|-- elki.utilities.datastructures.heap.DoubleObjectHeap.UnsortedIter
+        DoubleObjectHeap +-- elki.utilities.datastructures.heap.DoubleObjectHeap.UnsortedIter
+        DoubleObjectHeap <|.. DoubleObjectMinHeap
+        elki.utilities.datastructures.heap.DoubleObjectHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.DoubleObjectMinHeap.UnsortedIter
+        DoubleObjectMinHeap +-- elki.utilities.datastructures.heap.DoubleObjectMinHeap.UnsortedIter
+        elki.utilities.datastructures.iterator.Iter <|-- elki.utilities.datastructures.heap.ObjectHeap.UnsortedIter
+        ObjectHeap +-- elki.utilities.datastructures.heap.ObjectHeap.UnsortedIter
+        DoubleObjectHeap <|.. DoubleObjectMaxHeap
+        elki.utilities.datastructures.heap.DoubleObjectHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.DoubleObjectMaxHeap.UnsortedIter
+        DoubleObjectMaxHeap +-- elki.utilities.datastructures.heap.DoubleObjectMaxHeap.UnsortedIter
+        IntegerHeap <|.. IntegerMinHeap
+        elki.utilities.datastructures.heap.IntegerHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.IntegerMinHeap.UnsortedIter
+        IntegerMinHeap +-- elki.utilities.datastructures.heap.IntegerMinHeap.UnsortedIter
+        DoubleHeap <|.. DoubleMinHeap
+        elki.utilities.datastructures.heap.DoubleHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.DoubleMinHeap.UnsortedIter
+        DoubleMinHeap +-- elki.utilities.datastructures.heap.DoubleMinHeap.UnsortedIter
+        ObjectHeap <|.. ComparatorMaxHeap
+        elki.utilities.datastructures.heap.ObjectHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.ComparatorMaxHeap.UnsortedIter
+        ComparatorMaxHeap +-- elki.utilities.datastructures.heap.ComparatorMaxHeap.UnsortedIter
+        elki.utilities.datastructures.iterator.Iter <|-- elki.utilities.datastructures.heap.IntegerObjectHeap.UnsortedIter
+        IntegerObjectHeap +-- elki.utilities.datastructures.heap.IntegerObjectHeap.UnsortedIter
+        DoubleIntegerHeap <|.. DoubleIntegerMinHeap
+        elki.utilities.datastructures.heap.DoubleIntegerHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.DoubleIntegerMinHeap.UnsortedIter
+        DoubleIntegerMinHeap +-- elki.utilities.datastructures.heap.DoubleIntegerMinHeap.UnsortedIter
+        DoubleLongHeap <|.. DoubleLongMinHeap
+        elki.utilities.datastructures.heap.DoubleLongHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.DoubleLongMinHeap.UnsortedIter
+        DoubleLongMinHeap +-- elki.utilities.datastructures.heap.DoubleLongMinHeap.UnsortedIter
+        IntegerHeap <|.. IntegerMaxHeap
+        elki.utilities.datastructures.heap.IntegerHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.IntegerMaxHeap.UnsortedIter
+        IntegerMaxHeap +-- elki.utilities.datastructures.heap.IntegerMaxHeap.UnsortedIter
+        elki.utilities.datastructures.iterator.Iter <|.. elki.utilities.datastructures.heap.Heap.UnorderedIter
+        Heap +-- elki.utilities.datastructures.heap.Heap.UnorderedIter
+        ObjectHeap <|.. ComparableMaxHeap
+        elki.utilities.datastructures.heap.ObjectHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.ComparableMaxHeap.UnsortedIter
+        ComparableMaxHeap +-- elki.utilities.datastructures.heap.ComparableMaxHeap.UnsortedIter
+        IntegerObjectHeap <|.. IntegerObjectMaxHeap
+        elki.utilities.datastructures.heap.IntegerObjectHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.IntegerObjectMaxHeap.UnsortedIter
+        IntegerObjectMaxHeap +-- elki.utilities.datastructures.heap.IntegerObjectMaxHeap.UnsortedIter
+        elki.utilities.datastructures.iterator.Iter <|-- elki.utilities.datastructures.heap.DoubleLongHeap.UnsortedIter
+        DoubleLongHeap +-- elki.utilities.datastructures.heap.DoubleLongHeap.UnsortedIter
+        elki.utilities.datastructures.iterator.Iter <|-- elki.utilities.datastructures.heap.IntegerHeap.UnsortedIter
+        IntegerHeap +-- elki.utilities.datastructures.heap.IntegerHeap.UnsortedIter
+        DoubleIntegerHeap <|.. DoubleIntegerMaxHeap
+        elki.utilities.datastructures.heap.DoubleIntegerHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.DoubleIntegerMaxHeap.UnsortedIter
+        DoubleIntegerMaxHeap +-- elki.utilities.datastructures.heap.DoubleIntegerMaxHeap.UnsortedIter
+        ObjectHeap <|.. ComparableMinHeap
+        elki.utilities.datastructures.heap.ObjectHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.ComparableMinHeap.UnsortedIter
+        ComparableMinHeap +-- elki.utilities.datastructures.heap.ComparableMinHeap.UnsortedIter
+        DoubleLongHeap <|.. DoubleLongMaxHeap
+        elki.utilities.datastructures.heap.DoubleLongHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.DoubleLongMaxHeap.UnsortedIter
+        DoubleLongMaxHeap +-- elki.utilities.datastructures.heap.DoubleLongMaxHeap.UnsortedIter
+        IntegerObjectHeap <|.. IntegerObjectMinHeap
+        elki.utilities.datastructures.heap.IntegerObjectHeap.UnsortedIter <|.. elki.utilities.datastructures.heap.IntegerObjectMinHeap.UnsortedIter
+        IntegerObjectMinHeap +-- elki.utilities.datastructures.heap.IntegerObjectMinHeap.UnsortedIter
+        elki.utilities.datastructures.iterator.Iter <|-- elki.utilities.datastructures.heap.DoubleHeap.UnsortedIter
+        DoubleHeap +-- elki.utilities.datastructures.heap.DoubleHeap.UnsortedIter
+        elki.utilities.datastructures.iterator.Iter <|-- elki.utilities.datastructures.heap.DoubleIntegerHeap.UnsortedIter
+        DoubleIntegerHeap +-- elki.utilities.datastructures.heap.DoubleIntegerHeap.UnsortedIter
+        Heap <|-- UpdatableHeap
+    }
+
+    namespace elki.utilities.datastructures.iterator {
+        interface Iter [[../iterator/Iter.html]] {
+            {abstract} +valid(): boolean
+            {abstract} +advance(): Iter
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MedoidLinkage.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.MedoidLinkage.Instance [[MedoidLinkage.Instance.html]] {
+        #clusters: Int2ObjectOpenHashMap<ModifiableDBIDs>
+        #dq: DistanceQuery<?>
+        #mi: DBIDArrayMIter
+        #mj: DBIDArrayMIter
+        #ix: DBIDArrayIter
+        #iy: DBIDArrayIter
+        +run(ClusterDistanceMatrix, ClusterMergeHistoryBuilder): ClusterMergeHistory
+        +run(ArrayDBIDs, ClusterDistanceMatrix, ClusterMergeHistoryBuilder, DistanceQuery<?>): ClusterPrototypeMergeHistory
+        #findMerge(): int
+        #merge(int, int): void
+        {static} -findMedoid(DistanceQuery<?>, DBIDs, DBIDArrayMIter): double
+        #updateMatrix(int, int): void
+    }
+
+    class "<size:14>AGNES.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AGNES.Instance [[AGNES.Instance.html]]
+    class "<size:14>MedoidLinkage\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.MedoidLinkage<O> [[MedoidLinkage.html]]
+
+    elki.clustering.hierarchical.AGNES.Instance <|-- elki.clustering.hierarchical.MedoidLinkage.Instance
+    elki.clustering.hierarchical.MedoidLinkage +-- elki.clustering.hierarchical.MedoidLinkage.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

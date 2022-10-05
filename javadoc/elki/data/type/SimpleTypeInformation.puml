@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleTypeInformation\n<size:10>elki.data.type" as elki.data.type.SimpleTypeInformation<T> [[SimpleTypeInformation.html]] {
+        -cls: Class<? super T>
+        -label: String
+        -serializer: ByteBufferSerializer<? super T>
+        +SimpleTypeInformation(Class<? super T>)
+        +SimpleTypeInformation(Class<? super T>, String)
+        +SimpleTypeInformation(Class<? super T>, ByteBufferSerializer<? super T>)
+        +SimpleTypeInformation(Class<? super T>, String, ByteBufferSerializer<? super T>)
+        +getRestrictionClass(): Class<? super T>
+        +isAssignableFromType(TypeInformation): boolean
+        +isAssignableFrom(Object): boolean
+        +cast(Object): T
+        +getLabel(): String
+        +getSerializer(): ByteBufferSerializer<? super T>
+        +setSerializer(ByteBufferSerializer<? super T>): void
+    }
+
+    interface "<size:14>TypeInformation\n<size:10>elki.data.type" as elki.data.type.TypeInformation [[TypeInformation.html]] {
+        {abstract} +isAssignableFromType(TypeInformation): boolean
+        {abstract} +isAssignableFrom(Object): boolean
+    }
+
+    elki.data.type.TypeInformation <|.. elki.data.type.SimpleTypeInformation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

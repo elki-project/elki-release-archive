@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMeansMinusMinus.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KMeansMinusMinus.Instance [[KMeansMinusMinus.Instance.html]] {
+        ~minHeap: DoubleMinHeap
+        ~heapsize: int
+        ~prevvartotal: double
+        ~clusters: List<ModifiableDoubleDBIDList>
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+        #iterate(int): int
+        #buildResultWithNoise(): Clustering<KMeansModel>
+        #assignToNearestCluster(): int
+        #meansWithTreshhold(double): double[]
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Instance [[AbstractKMeans.Instance.html]] {
+        {abstract} #iterate(int): int
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>KMeansMinusMinus\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.KMeansMinusMinus<V extends NumberVector> [[KMeansMinusMinus.html]]
+
+    elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.KMeansMinusMinus.Instance
+    elki.clustering.kmeans.KMeansMinusMinus +-- elki.clustering.kmeans.KMeansMinusMinus.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

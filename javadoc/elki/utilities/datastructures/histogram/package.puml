@@ -1,0 +1,156 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.datastructures.histogram {
+
+        abstract class AbstractStaticHistogram [[AbstractStaticHistogram.html]] {
+            #offset: int
+            #size: int
+            #base: double
+            #max: double
+            #binsize: double
+            +AbstractStaticHistogram(int, double, double)
+            #getBinNr(double): int
+            {static} #growSize(int, int): int
+            +getNumBins(): int
+            +getBinsize(): double
+            +getCoverMinimum(): double
+            +getCoverMaximum(): double
+            {abstract} +iter(): Iter
+        }
+
+        abstract class elki.utilities.datastructures.histogram.AbstractStaticHistogram.Iter [[AbstractStaticHistogram.Iter.html]] {
+            ~bin: int
+            +getCenter(): double
+            +getLeft(): double
+            +getRight(): double
+            +valid(): boolean
+            +advance(): Iter
+            +getOffset(): int
+            +advance(int): Iter
+            +retract(): Iter
+            +seek(int): Iter
+        }
+
+        abstract class AbstractObjDynamicHistogram<T> [[AbstractObjDynamicHistogram.html]] {
+            -cacheposs: double[]
+            -cachevals: Object[]
+            -cachefill: int
+            -destsize: int
+            +AbstractObjDynamicHistogram(int)
+            ~materialize(): void
+            +get(double): T
+            +putData(double, T): void
+            #aggregateSpecial(T, int): void
+            -testResample(double): void
+            +iter(): Iter
+            +getNumBins(): int
+            +getBinsize(): double
+            +getCoverMinimum(): double
+            +getCoverMaximum(): double
+            {abstract} #downsample(Object[], int, int, int): T
+            {abstract} #aggregate(T, T): T
+            {abstract} #cloneForCache(T): T
+            {abstract} #makeObject(): T
+        }
+
+        class DoubleHistogram [[DoubleHistogram.html]] {
+            ~data: double[]
+            +DoubleHistogram(int, double, double)
+            +increment(double, double): void
+            +get(double): double
+            +iter(): Iter
+        }
+
+        class elki.utilities.datastructures.histogram.DoubleHistogram.Iter [[DoubleHistogram.Iter.html]] {
+            +getValue(): double
+            +advance(): Iter
+            +advance(int): Iter
+            +retract(): Iter
+            +seek(int): Iter
+        }
+
+        class ObjHistogram<T> [[ObjHistogram.html]] {
+            ~data: Object[]
+            ~special: Object[]
+            +ObjHistogram(int, double, double, BucketFactory<T>)
+            +get(double): T
+            #getSpecial(int): T
+            +iter(): Iter
+        }
+
+        class elki.utilities.datastructures.histogram.ObjHistogram.Iter [[ObjHistogram.Iter.html]] {
+            +getValue(): T
+            +advance(): Iter
+            +advance(int): Iter
+            +retract(): Iter
+            +seek(int): Iter
+        }
+
+        interface elki.utilities.datastructures.histogram.ObjHistogram.BucketFactory<T> [[ObjHistogram.BucketFactory.html]] {
+            {abstract} +make(): T
+        }
+
+        class DoubleDynamicHistogram [[DoubleDynamicHistogram.html]] {
+            -cachec: double[]
+            -cachev: double[]
+            -cachefill: int
+            -destsize: int
+            +DoubleDynamicHistogram(int)
+            ~materialize(): void
+            +get(double): double
+            +increment(double, double): void
+            -testResample(double): void
+            +iter(): Iter
+            +getNumBins(): int
+            +getBinsize(): double
+            +getCoverMinimum(): double
+            +getCoverMaximum(): double
+            #downsample(double[], int, int, int): double
+        }
+
+        interface Histogram [[Histogram.html]] {
+            {static} +CACHE_SHIFT: int
+            {abstract} +getNumBins(): int
+            {abstract} +getBinsize(): double
+            {abstract} +getCoverMinimum(): double
+            {abstract} +getCoverMaximum(): double
+            {abstract} +iter(): Iter
+        }
+
+        interface elki.utilities.datastructures.histogram.Histogram.Iter [[Histogram.Iter.html]] {
+            {abstract} +getCenter(): double
+            {abstract} +getLeft(): double
+            {abstract} +getRight(): double
+        }
+
+        Histogram <|.. AbstractStaticHistogram
+        elki.utilities.datastructures.histogram.Histogram.Iter <|.. elki.utilities.datastructures.histogram.AbstractStaticHistogram.Iter
+        AbstractStaticHistogram +-- elki.utilities.datastructures.histogram.AbstractStaticHistogram.Iter
+        ObjHistogram <|-- AbstractObjDynamicHistogram
+        AbstractStaticHistogram <|-- DoubleHistogram
+        elki.utilities.datastructures.histogram.AbstractStaticHistogram.Iter <|-- elki.utilities.datastructures.histogram.DoubleHistogram.Iter
+        elki.utilities.datastructures.histogram.Histogram.Iter <|.. elki.utilities.datastructures.histogram.DoubleHistogram.Iter
+        DoubleHistogram +-- elki.utilities.datastructures.histogram.DoubleHistogram.Iter
+        AbstractStaticHistogram <|-- ObjHistogram
+        ObjHistogram --> elki.utilities.datastructures.histogram.ObjHistogram.BucketFactory: supplier
+        elki.utilities.datastructures.histogram.AbstractStaticHistogram.Iter <|-- elki.utilities.datastructures.histogram.ObjHistogram.Iter
+        elki.utilities.datastructures.histogram.Histogram.Iter <|.. elki.utilities.datastructures.histogram.ObjHistogram.Iter
+        ObjHistogram +-- elki.utilities.datastructures.histogram.ObjHistogram.Iter
+        ObjHistogram +-- elki.utilities.datastructures.histogram.ObjHistogram.BucketFactory
+        DoubleHistogram <|-- DoubleDynamicHistogram
+        elki.utilities.datastructures.iterator.ArrayIter <|-- elki.utilities.datastructures.histogram.Histogram.Iter
+        Histogram +-- elki.utilities.datastructures.histogram.Histogram.Iter
+    }
+
+    namespace elki.utilities.datastructures.iterator {
+        interface ArrayIter [[../iterator/ArrayIter.html]] {
+            {abstract} +advance(): ArrayIter
+            {abstract} +advance(int): ArrayIter
+            {abstract} +retract(): ArrayIter
+            {abstract} +seek(int): ArrayIter
+            {abstract} +getOffset(): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

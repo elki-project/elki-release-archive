@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseVectorFieldFilter\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.SparseVectorFieldFilter<V extends SparseNumberVector> [[SparseVectorFieldFilter.html]] {
+        {static} -LOG: Logging
+        ~maxdim: int
+        #prepareStart(SimpleTypeInformation<V extends SparseNumberVector>): boolean
+        #prepareProcessInstance(V extends SparseNumberVector): void
+        #filterSingleObject(V extends SparseNumberVector): V extends SparseNumberVector
+        #getInputTypeRestriction(): SimpleTypeInformation<? super SparseNumberVector>
+        #convertedType(SimpleTypeInformation<V extends SparseNumberVector>): SimpleTypeInformation<? super SparseNumberVector>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractConversionFilter<V extends SparseNumberVector, V extends SparseNumberVector> [[../AbstractConversionFilter.html]] {
+        {abstract} #getLogger(): Logging
+        {abstract} #filterSingleObject(V extends SparseNumberVector): V extends SparseNumberVector
+        {abstract} #getInputTypeRestriction(): SimpleTypeInformation<? super I>
+        {abstract} #convertedType(SimpleTypeInformation<​I>): SimpleTypeInformation<? super O>
+    }
+
+    elki.datasource.filter.AbstractConversionFilter <|-- elki.datasource.filter.typeconversions.SparseVectorFieldFilter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

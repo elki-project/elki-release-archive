@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CFTree.Factory\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.CFTree.Factory [[CFTree.Factory.html]] {
+        ~distance: BIRCHDistance
+        ~absorption: BIRCHAbsorptionCriterion
+        ~threshold: double
+        ~branchingFactor: int
+        ~maxleaves: double
+        +Factory(BIRCHDistance, BIRCHAbsorptionCriterion, double, int, double)
+        +newTree(DBIDs, Relation<? extends NumberVector>): CFTree
+    }
+
+    class "<size:14>CFTree\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.CFTree [[CFTree.html]]
+    class "<size:14>CFTree.Factory.Par\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.CFTree.Factory.Par [[CFTree.Factory.Par.html]]
+
+    elki.clustering.hierarchical.birch.CFTree +-- elki.clustering.hierarchical.birch.CFTree.Factory
+    elki.clustering.hierarchical.birch.CFTree.Factory +-- elki.clustering.hierarchical.birch.CFTree.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

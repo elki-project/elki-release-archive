@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CFKPlusPlusTrunk.Par\n<size:10>elki.clustering.kmeans.initialization.betula" as elki.clustering.kmeans.initialization.betula.CFKPlusPlusTrunk.Par [[CFKPlusPlusTrunk.Par.html]] {
+        +configure(Parameterization): void
+        +make(): CFKPlusPlusTrunk
+    }
+
+    class "<size:14>CFKPlusPlusLeaves.Par\n<size:10>elki.clustering.kmeans.initialization.betula" as elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves.Par [[CFKPlusPlusLeaves.Par.html]]
+    class "<size:14>CFKPlusPlusTrunk\n<size:10>elki.clustering.kmeans.initialization.betula" as elki.clustering.kmeans.initialization.betula.CFKPlusPlusTrunk [[CFKPlusPlusTrunk.html]]
+
+    elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves.Par <|-- elki.clustering.kmeans.initialization.betula.CFKPlusPlusTrunk.Par
+    elki.clustering.kmeans.initialization.betula.CFKPlusPlusTrunk +-- elki.clustering.kmeans.initialization.betula.CFKPlusPlusTrunk.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

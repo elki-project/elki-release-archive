@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ConstrainedQuadraticProblemSolver\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.ConstrainedQuadraticProblemSolver [[ConstrainedQuadraticProblemSolver.html]] {
+        -cache: ProblemData[]
+        +ConstrainedQuadraticProblemSolver(int)
+        +solve(double[], double[], double, double[], double[], double[]): double
+        -findLimitedDimensionWithDerivative(double[], double[], double[], double[]): int
+        -calculateLinearDerivativeLimits(double[], double[], double[], double[], int, double[]): void
+        -computeMaximumPossibleFuncValue(double[], double[], double, double[], double[]): double
+        -evaluateConstrainedQuadraticFunction(double[], double[], double, double[], double[], DimensionState[], boolean, double[], double): double
+        -evaluateConstrainedQuadraticFunction1D(double, double, double, double, double, double[], double): double
+        -startReducedProblem(double[], double[], double, double[], double[], DimensionState[], int, DimensionState, double[], double): double
+        -expandNewSolution(double[], double[], int, double): void
+        -reduceSolution(double[], int): double[]
+        {static} -reduceConstraints(double[], double[], double[], double[], DimensionState[], DimensionState[], int): void
+        {static} -reduceEquation(double[], double[], double, double[], double[], int, double): double
+        -findMaximumWithFunctionValue(double[], double[]): double[]
+        {static} -evaluateQuadraticFormula(double[], double[], double, double[]): double
+        {static} -contains(double[], double[], double[]): boolean
+    }
+    enum "<size:14>ConstrainedQuadraticProblemSolver.DimensionState\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.ConstrainedQuadraticProblemSolver.DimensionState [[ConstrainedQuadraticProblemSolver.DimensionState.html]]
+    class "<size:14>ConstrainedQuadraticProblemSolver.ProblemData\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.ConstrainedQuadraticProblemSolver.ProblemData [[ConstrainedQuadraticProblemSolver.ProblemData.html]]
+
+    elki.math.linearalgebra.ConstrainedQuadraticProblemSolver +-- elki.math.linearalgebra.ConstrainedQuadraticProblemSolver.DimensionState
+    elki.math.linearalgebra.ConstrainedQuadraticProblemSolver +-- elki.math.linearalgebra.ConstrainedQuadraticProblemSolver.ProblemData
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

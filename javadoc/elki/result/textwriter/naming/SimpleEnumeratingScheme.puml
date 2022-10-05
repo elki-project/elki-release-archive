@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleEnumeratingScheme\n<size:10>elki.result.textwriter.naming" as elki.result.textwriter.naming.SimpleEnumeratingScheme [[SimpleEnumeratingScheme.html]] {
+        -clustering: Clustering<?>
+        -namefreq: Object2IntOpenHashMap<String>
+        -names: Map<Cluster<?>, String>
+        {static} -NULLPOSTFIX: String
+        +SimpleEnumeratingScheme(Clustering<?>)
+        -updateNames(): void
+        +getNameFor(Cluster<?>): String
+    }
+
+    interface "<size:14>NamingScheme\n<size:10>elki.result.textwriter.naming" as elki.result.textwriter.naming.NamingScheme [[NamingScheme.html]] {
+        {abstract} +getNameFor(Cluster<?>): String
+    }
+
+    elki.result.textwriter.naming.NamingScheme <|.. elki.result.textwriter.naming.SimpleEnumeratingScheme
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

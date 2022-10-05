@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByLabelClustering\n<size:10>elki.clustering.trivial" as elki.clustering.trivial.ByLabelClustering [[ByLabelClustering.html]] {
+        -multiple: boolean
+        -noisepattern: Pattern
+        +ByLabelClustering(boolean, Pattern)
+        +ByLabelClustering()
+        +getInputTypeRestriction(): TypeInformation[]
+        +autorun(Database): Clustering<Model>
+        +run(Relation<?>): Clustering<Model>
+        -singleAssignment(Relation<?>): HashMap<String, DBIDs>
+        -multipleAssignment(Relation<?>): HashMap<String, DBIDs>
+        -assign(HashMap<String, DBIDs>, String, DBIDRef): void
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<Model>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>ByLabelClustering.Par\n<size:10>elki.clustering.trivial" as elki.clustering.trivial.ByLabelClustering.Par [[ByLabelClustering.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.trivial.ByLabelClustering
+    elki.clustering.trivial.ByLabelClustering +-- elki.clustering.trivial.ByLabelClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

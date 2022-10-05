@@ -1,0 +1,321 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.datasource {
+
+        class GeneratorXMLDatabaseConnection [[GeneratorXMLDatabaseConnection.html]] {
+            {static} +TAG_DATASET: String
+            {static} +TAG_CLUSTER: String
+            {static} +TAG_UNIFORM: String
+            {static} +TAG_NORMAL: String
+            {static} +TAG_GAMMA: String
+            {static} +TAG_HALTON: String
+            {static} +TAG_ROTATE: String
+            {static} +TAG_TRANSLATE: String
+            {static} +TAG_CLIP: String
+            {static} +TAG_STATIC: String
+            {static} +TAG_POINT: String
+            {static} +ATTR_TEST: String
+            {static} +ATTR_SEED: String
+            {static} +ATTR_DENSITY: String
+            {static} +ATTR_NAME: String
+            {static} +ATTR_SIZE: String
+            {static} +ATTR_MIN: String
+            {static} +ATTR_MAX: String
+            {static} +ATTR_MEAN: String
+            {static} +ATTR_STDDEV: String
+            {static} +ATTR_K: String
+            {static} +ATTR_THETA: String
+            {static} +ATTR_VECTOR: String
+            {static} +ATTR_AXIS1: String
+            {static} +ATTR_AXIS2: String
+            {static} +ATTR_ANGLE: String
+            {static} -LOG: Logging
+            {static} +WHITESPACE_PATTERN: Pattern
+            {static} +GENERATOR_SCHEMA_FILE: String
+            ~specfile: URI
+            ~sizescale: double
+            ~reassign: Pattern
+            -clusterRandom: RandomFactory
+            -testAgainstModel: Boolean
+            -reassignByDistance: boolean
+            +GeneratorXMLDatabaseConnection(List<? extends ObjectFilter>, URI, double, Pattern, boolean, RandomFactory)
+            +loadData(): MultipleObjectsBundle
+            -loadXMLSpecification(): GeneratorMain
+            -processElementDataset(GeneratorMain, Node): void
+            -processElementCluster(GeneratorMain, Node): void
+            -processElementUniform(GeneratorSingleCluster, Node): void
+            -processElementNormal(GeneratorSingleCluster, Node): void
+            -processElementGamma(GeneratorSingleCluster, Node): void
+            -processElementHalton(GeneratorSingleCluster, Node): void
+            -processElementRotate(GeneratorSingleCluster, Node): void
+            -processElementTranslate(GeneratorSingleCluster, Node): void
+            -processElementClipping(GeneratorSingleCluster, Node): void
+            -processElementStatic(GeneratorMain, Node): void
+            -processElementPoint(List<double[]>, Node): void
+            -parseVector(String): double[]
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.GeneratorXMLDatabaseConnection.Par [[GeneratorXMLDatabaseConnection.Par.html]] {
+            {static} +CONFIGFILE_ID: OptionID
+            {static} +SIZE_SCALE_ID: OptionID
+            {static} +REASSIGN_ID: OptionID
+            {static} +REASSIGN_DISTANCE_ID: OptionID
+            {static} +RANDOMSEED_ID: OptionID
+            ~specfile: URI
+            ~sizescale: double
+            ~reassign: Pattern
+            ~reassignByDistance: boolean
+            ~clusterRandom: RandomFactory
+            +configure(Parameterization): void
+            +make(): GeneratorXMLDatabaseConnection
+        }
+
+        class ExternalIDJoinDatabaseConnection [[ExternalIDJoinDatabaseConnection.html]] {
+            {static} -LOG: Logging
+            +ExternalIDJoinDatabaseConnection(List<? extends ObjectFilter>, List<? extends DatabaseConnection>)
+            +loadData(): MultipleObjectsBundle
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.ExternalIDJoinDatabaseConnection.Par [[ExternalIDJoinDatabaseConnection.Par.html]] {
+            {static} +SOURCES_ID: OptionID
+            +configure(Parameterization): void
+            +make(): ExternalIDJoinDatabaseConnection
+        }
+
+        class PresortedBlindJoinDatabaseConnection [[PresortedBlindJoinDatabaseConnection.html]] {
+            {static} -LOG: Logging
+            +PresortedBlindJoinDatabaseConnection(List<? extends ObjectFilter>, List<? extends DatabaseConnection>)
+            +loadData(): MultipleObjectsBundle
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.PresortedBlindJoinDatabaseConnection.Par [[PresortedBlindJoinDatabaseConnection.Par.html]] {
+            {static} +SOURCES_ID: OptionID
+            +configure(Parameterization): void
+            +make(): PresortedBlindJoinDatabaseConnection
+        }
+
+        class DBIDRangeDatabaseConnection [[DBIDRangeDatabaseConnection.html]] {
+            ~start: int
+            ~count: int
+            +DBIDRangeDatabaseConnection(int, int)
+            +loadData(): MultipleObjectsBundle
+        }
+
+        class elki.datasource.DBIDRangeDatabaseConnection.Par [[DBIDRangeDatabaseConnection.Par.html]] {
+            {static} +START_ID: OptionID
+            {static} +COUNT_ID: OptionID
+            ~start: int
+            ~count: int
+            +configure(Parameterization): void
+            +make(): DBIDRangeDatabaseConnection
+        }
+
+        class EmptyDatabaseConnection [[EmptyDatabaseConnection.html]] {
+            {static} -LOG: Logging
+            +loadData(): MultipleObjectsBundle
+            #getLogger(): Logging
+        }
+
+        class LabelJoinDatabaseConnection [[LabelJoinDatabaseConnection.html]] {
+            {static} -LOG: Logging
+            +LabelJoinDatabaseConnection(List<? extends ObjectFilter>, List<? extends DatabaseConnection>)
+            +loadData(): MultipleObjectsBundle
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.LabelJoinDatabaseConnection.Par [[LabelJoinDatabaseConnection.Par.html]] {
+            {static} +SOURCES_ID: OptionID
+            +configure(Parameterization): void
+            +make(): LabelJoinDatabaseConnection
+        }
+
+        class ArrayAdapterDatabaseConnection [[ArrayAdapterDatabaseConnection.html]] {
+            {static} -LOG: Logging
+            ~data: double[]
+            ~labels: String[]
+            ~startid: Integer
+            +ArrayAdapterDatabaseConnection(double[])
+            +ArrayAdapterDatabaseConnection(double[], List<ObjectFilter>)
+            +ArrayAdapterDatabaseConnection(double[], String[])
+            +ArrayAdapterDatabaseConnection(double[], String[], List<ObjectFilter>)
+            +ArrayAdapterDatabaseConnection(double[], String[], Integer)
+            +ArrayAdapterDatabaseConnection(double[], String[], Integer, List<ObjectFilter>)
+            +loadData(): MultipleObjectsBundle
+            #getLogger(): Logging
+        }
+
+        class BundleDatabaseConnection [[BundleDatabaseConnection.html]] {
+            {static} -LOG: Logging
+            -infile: Path
+            +BundleDatabaseConnection(List<? extends ObjectFilter>, Path)
+            +loadData(): MultipleObjectsBundle
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.BundleDatabaseConnection.Par [[BundleDatabaseConnection.Par.html]] {
+            {static} -BUNDLE_ID: OptionID
+            -infile: Path
+            +configure(Parameterization): void
+            +make(): BundleDatabaseConnection
+        }
+
+        class ConcatenateFilesDatabaseConnection [[ConcatenateFilesDatabaseConnection.html]] {
+            {static} -LOG: Logging
+            -files: List<URI>
+            +ConcatenateFilesDatabaseConnection(List<URI>, Parser, List<? extends ObjectFilter>)
+            +loadData(): MultipleObjectsBundle
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.ConcatenateFilesDatabaseConnection.Par [[ConcatenateFilesDatabaseConnection.Par.html]] {
+            {static} +INPUT_ID: OptionID
+            -files: List<URI>
+            +configure(Parameterization): void
+            +make(): ConcatenateFilesDatabaseConnection
+        }
+
+        class MultipleObjectsBundleDatabaseConnection [[MultipleObjectsBundleDatabaseConnection.html]] {
+            +MultipleObjectsBundleDatabaseConnection(MultipleObjectsBundle)
+            +loadData(): MultipleObjectsBundle
+        }
+
+        class RandomDoubleVectorDatabaseConnection [[RandomDoubleVectorDatabaseConnection.html]] {
+            {static} -LOG: Logging
+            #dim: int
+            #size: int
+            #rnd: RandomFactory
+            +RandomDoubleVectorDatabaseConnection(int, int, RandomFactory, List<? extends ObjectFilter>)
+            +loadData(): MultipleObjectsBundle
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.RandomDoubleVectorDatabaseConnection.Par [[RandomDoubleVectorDatabaseConnection.Par.html]] {
+            {static} +SEED_ID: OptionID
+            {static} +DIM_ID: OptionID
+            {static} +SIZE_ID: OptionID
+            ~dim: int
+            ~size: int
+            ~rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): RandomDoubleVectorDatabaseConnection
+        }
+
+        abstract class AbstractDatabaseConnection [[AbstractDatabaseConnection.html]] {
+            {static} +LABEL_CONCATENATION: String
+            #AbstractDatabaseConnection(List<? extends ObjectFilter>)
+            #invokeBundleFilters(MultipleObjectsBundle): MultipleObjectsBundle
+            #invokeStreamFilters(BundleStreamSource): BundleStreamSource
+            {abstract} #getLogger(): Logging
+        }
+
+        abstract class elki.datasource.AbstractDatabaseConnection.Par [[AbstractDatabaseConnection.Par.html]] {
+            {static} +FILTERS_ID: OptionID
+            {static} +PARSER_ID: OptionID
+            #configFilters(Parameterization): void
+            #configParser(Parameterization, Class<?>, Class<?>): void
+        }
+
+        class InputStreamDatabaseConnection [[InputStreamDatabaseConnection.html]] {
+            {static} -LOG: Logging
+            ~in: Supplier<InputStream>
+            ~ins: InputStream
+            +InputStreamDatabaseConnection(Supplier<InputStream>, List<? extends ObjectFilter>, Parser)
+            +InputStreamDatabaseConnection(InputStream, List<? extends ObjectFilter>, Parser)
+            +loadData(): MultipleObjectsBundle
+            +close(): void
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.InputStreamDatabaseConnection.Par [[InputStreamDatabaseConnection.Par.html]] {
+            {static} +STREAM_ID: OptionID
+            #instream: InputStream
+            +configure(Parameterization): void
+            +make(): InputStreamDatabaseConnection
+        }
+
+        class FileBasedDatabaseConnection [[FileBasedDatabaseConnection.html]] {
+            +FileBasedDatabaseConnection(List<? extends ObjectFilter>, Parser, URI)
+            +FileBasedDatabaseConnection(List<? extends ObjectFilter>, Parser, String)
+            +FileBasedDatabaseConnection(List<? extends ObjectFilter>, Parser, InputStream)
+        }
+
+        class elki.datasource.FileBasedDatabaseConnection.Par [[FileBasedDatabaseConnection.Par.html]] {
+            {static} +INPUT_ID: OptionID
+            #infile: URI
+            +configure(Parameterization): void
+            +make(): FileBasedDatabaseConnection
+        }
+
+        interface DatabaseConnection [[DatabaseConnection.html]] {
+            {abstract} +loadData(): MultipleObjectsBundle
+        }
+
+        AbstractDatabaseConnection <|-- GeneratorXMLDatabaseConnection
+        elki.datasource.AbstractDatabaseConnection.Par <|-- elki.datasource.GeneratorXMLDatabaseConnection.Par
+        GeneratorXMLDatabaseConnection +-- elki.datasource.GeneratorXMLDatabaseConnection.Par
+        AbstractDatabaseConnection <|-- ExternalIDJoinDatabaseConnection
+        ExternalIDJoinDatabaseConnection --> "*" DatabaseConnection: sources
+        elki.datasource.AbstractDatabaseConnection.Par <|-- elki.datasource.ExternalIDJoinDatabaseConnection.Par
+        ExternalIDJoinDatabaseConnection +-- elki.datasource.ExternalIDJoinDatabaseConnection.Par
+        elki.datasource.ExternalIDJoinDatabaseConnection.Par --> "*" DatabaseConnection: sources
+        AbstractDatabaseConnection <|-- PresortedBlindJoinDatabaseConnection
+        PresortedBlindJoinDatabaseConnection --> "*" DatabaseConnection: sources
+        elki.datasource.AbstractDatabaseConnection.Par <|-- elki.datasource.PresortedBlindJoinDatabaseConnection.Par
+        PresortedBlindJoinDatabaseConnection +-- elki.datasource.PresortedBlindJoinDatabaseConnection.Par
+        elki.datasource.PresortedBlindJoinDatabaseConnection.Par --> "*" DatabaseConnection: sources
+        DatabaseConnection <|.. DBIDRangeDatabaseConnection
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.DBIDRangeDatabaseConnection.Par
+        DBIDRangeDatabaseConnection +-- elki.datasource.DBIDRangeDatabaseConnection.Par
+        AbstractDatabaseConnection <|-- EmptyDatabaseConnection
+        AbstractDatabaseConnection <|-- LabelJoinDatabaseConnection
+        LabelJoinDatabaseConnection --> "*" DatabaseConnection: sources
+        elki.datasource.AbstractDatabaseConnection.Par <|-- elki.datasource.LabelJoinDatabaseConnection.Par
+        LabelJoinDatabaseConnection +-- elki.datasource.LabelJoinDatabaseConnection.Par
+        elki.datasource.LabelJoinDatabaseConnection.Par --> "*" DatabaseConnection: sources
+        AbstractDatabaseConnection <|-- ArrayAdapterDatabaseConnection
+        AbstractDatabaseConnection <|-- BundleDatabaseConnection
+        elki.datasource.AbstractDatabaseConnection.Par <|-- elki.datasource.BundleDatabaseConnection.Par
+        BundleDatabaseConnection +-- elki.datasource.BundleDatabaseConnection.Par
+        AbstractDatabaseConnection <|-- ConcatenateFilesDatabaseConnection
+        ConcatenateFilesDatabaseConnection --> elki.datasource.parser.Parser: parser
+        elki.datasource.AbstractDatabaseConnection.Par <|-- elki.datasource.ConcatenateFilesDatabaseConnection.Par
+        ConcatenateFilesDatabaseConnection +-- elki.datasource.ConcatenateFilesDatabaseConnection.Par
+        DatabaseConnection <|.. MultipleObjectsBundleDatabaseConnection
+        MultipleObjectsBundleDatabaseConnection --> elki.datasource.bundle.MultipleObjectsBundle: bundle
+        AbstractDatabaseConnection <|-- RandomDoubleVectorDatabaseConnection
+        elki.datasource.AbstractDatabaseConnection.Par <|-- elki.datasource.RandomDoubleVectorDatabaseConnection.Par
+        RandomDoubleVectorDatabaseConnection +-- elki.datasource.RandomDoubleVectorDatabaseConnection.Par
+        DatabaseConnection <|.. AbstractDatabaseConnection
+        AbstractDatabaseConnection --> "*" elki.datasource.filter.ObjectFilter: filters
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.AbstractDatabaseConnection.Par
+        AbstractDatabaseConnection +-- elki.datasource.AbstractDatabaseConnection.Par
+        elki.datasource.AbstractDatabaseConnection.Par --> "*" elki.datasource.filter.ObjectFilter: filters
+        elki.datasource.AbstractDatabaseConnection.Par --> elki.datasource.parser.Parser: parser
+        AbstractDatabaseConnection <|-- InputStreamDatabaseConnection
+        java.lang.AutoCloseable <|.. InputStreamDatabaseConnection
+        InputStreamDatabaseConnection --> elki.datasource.parser.Parser: parser
+        elki.datasource.AbstractDatabaseConnection.Par <|-- elki.datasource.InputStreamDatabaseConnection.Par
+        InputStreamDatabaseConnection +-- elki.datasource.InputStreamDatabaseConnection.Par
+        InputStreamDatabaseConnection <|-- FileBasedDatabaseConnection
+        elki.datasource.InputStreamDatabaseConnection.Par <|-- elki.datasource.FileBasedDatabaseConnection.Par
+        FileBasedDatabaseConnection +-- elki.datasource.FileBasedDatabaseConnection.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace java.lang {
+        interface AutoCloseable {
+            {abstract} +close(): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,54 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PartialVAFile\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile<V extends NumberVector> [[PartialVAFile.html]] {
+        {static} -LOG: Logging
+        ~daFiles: List<DAFile>
+        -partitions: int
+        -pageSize: int
+        -splitPartitions: double[]
+        #stats: Statistics
+        -vectorApprox: ArrayList<VectorApproximation>
+        +PartialVAFile(int, Relation<V extends NumberVector>, int)
+        +initialize(): void
+        +getLogger(): Logging
+        +logStatistics(): void
+        #calculateFullApproximation(DBIDRef, V extends NumberVector): VectorApproximation
+        +kNNByObject(DistanceQuery<V extends NumberVector>, int, int): KNNSearcher<V extends NumberVector>
+        +rangeByObject(DistanceQuery<V extends NumberVector>, double, int): RangeSearcher<V extends NumberVector>
+        {static} #calculateSelectivityCoeffs(List<DoubleObjPair<DAFile>>, NumberVector, double): void
+        {static} #calculatePartialApproximation(NumberVector, List<DoubleObjPair<DAFile>>): VectorApproximation
+        #roundToPageSize(long): long
+    }
+
+    abstract class "<size:14>AbstractRefiningIndex\n<size:10>elki.index" as elki.index.AbstractRefiningIndex<V extends NumberVector> [[../AbstractRefiningIndex.html]] {
+        {abstract} +getLogger(): Logging
+    }
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<V extends NumberVector> [[../KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    interface "<size:14>RangeIndex\n<size:10>elki.index" as elki.index.RangeIndex<V extends NumberVector> [[../RangeIndex.html]] {
+        {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+    }
+    class "<size:14>PartialVAFile.Statistics\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile.Statistics [[PartialVAFile.Statistics.html]]
+    class "<size:14>PartialVAFile.PartialVACandidate\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile.PartialVACandidate [[PartialVAFile.PartialVACandidate.html]]
+    class "<size:14>PartialVAFile.PartialVAFileRangeQuery\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile.PartialVAFileRangeQuery [[PartialVAFile.PartialVAFileRangeQuery.html]]
+    class "<size:14>PartialVAFile.PartialVAFileKNNQuery\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile.PartialVAFileKNNQuery [[PartialVAFile.PartialVAFileKNNQuery.html]]
+    class "<size:14>PartialVAFile.WorstCaseDistComparator\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile.WorstCaseDistComparator [[PartialVAFile.WorstCaseDistComparator.html]]
+    class "<size:14>PartialVAFile.Factory\n<size:10>elki.index.vafile" as elki.index.vafile.PartialVAFile.Factory<V extends NumberVector> [[PartialVAFile.Factory.html]]
+
+    elki.index.AbstractRefiningIndex <|-- elki.index.vafile.PartialVAFile
+    elki.index.KNNIndex <|.. elki.index.vafile.PartialVAFile
+    elki.index.RangeIndex <|.. elki.index.vafile.PartialVAFile
+    elki.index.vafile.PartialVAFile +-- elki.index.vafile.PartialVAFile.Statistics
+    elki.index.vafile.PartialVAFile +-- elki.index.vafile.PartialVAFile.PartialVACandidate
+    elki.index.vafile.PartialVAFile +-- elki.index.vafile.PartialVAFile.PartialVAFileRangeQuery
+    elki.index.vafile.PartialVAFile +-- elki.index.vafile.PartialVAFile.PartialVAFileKNNQuery
+    elki.index.vafile.PartialVAFile +-- elki.index.vafile.PartialVAFile.WorstCaseDistComparator
+    elki.index.vafile.PartialVAFile +-- elki.index.vafile.PartialVAFile.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

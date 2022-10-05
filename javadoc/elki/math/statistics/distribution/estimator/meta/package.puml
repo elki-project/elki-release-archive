@@ -1,0 +1,96 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.statistics.distribution.estimator.meta {
+
+        class BestFitEstimator [[BestFitEstimator.html]] {
+            {static} -LOG: Logging
+            #momests: Collection<MOMDistributionEstimator<?>>
+            #madests: Collection<MADDistributionEstimator<?>>
+            #lmmests: Collection<LMMDistributionEstimator<?>>
+            #logmomests: Collection<LogMOMDistributionEstimator<?>>
+            #logmadests: Collection<LogMADDistributionEstimator<?>>
+            +estimate(A, NumberArrayAdapter<?, A>): Distribution
+            -warnIfDebugging(ArithmeticException, DistributionEstimator<?>): void
+            +getDistributionClass(): Class<? super Distribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.meta.BestFitEstimator.BestFit {
+            ~dist: Distribution
+            ~score: double
+            ~est: DistributionEstimator<?>
+            -x: double[]
+            -scratch: double[]
+            +BestFit(double[], double[])
+            {static} -testFit(double[], double[], Distribution): double
+            +test(DistributionEstimator<?>, Distribution): void
+        }
+
+        class elki.math.statistics.distribution.estimator.meta.BestFitEstimator.Par [[BestFitEstimator.Par.html]] {
+            +make(): BestFitEstimator
+        }
+
+        class WinsorizingEstimator<D extends Distribution> [[WinsorizingEstimator.html]] {
+            -inner: DistributionEstimator<D extends Distribution>
+            -winsorize: double
+            +WinsorizingEstimator(DistributionEstimator<D extends Distribution>, double)
+            +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+            +getDistributionClass(): Class<? super Distribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.meta.WinsorizingEstimator.Par<D extends Distribution> {
+            {static} +INNER_ID: OptionID
+            {static} +WINSORIZE_ID: OptionID
+            -inner: DistributionEstimator<D extends Distribution>
+            -winsorize: double
+            +configure(Parameterization): void
+            +make(): WinsorizingEstimator<D extends Distribution>
+        }
+
+        class TrimmedEstimator<D extends Distribution> [[TrimmedEstimator.html]] {
+            -inner: DistributionEstimator<D extends Distribution>
+            -trim: double
+            +TrimmedEstimator(DistributionEstimator<D extends Distribution>, double)
+            +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+            {static} +toPrimitiveDoubleArray(A, NumberArrayAdapter<?, A>): double[]
+            +getDistributionClass(): Class<? super Distribution>
+        }
+
+        class elki.math.statistics.distribution.estimator.meta.TrimmedEstimator.Par<D extends Distribution> {
+            {static} +INNER_ID: OptionID
+            {static} +TRIM_ID: OptionID
+            -inner: DistributionEstimator<D extends Distribution>
+            -trim: double
+            +configure(Parameterization): void
+            +make(): TrimmedEstimator<D extends Distribution>
+        }
+
+        elki.math.statistics.distribution.estimator.DistributionEstimator <|.. BestFitEstimator
+        BestFitEstimator --> BestFitEstimator: STATIC
+        BestFitEstimator +-- elki.math.statistics.distribution.estimator.meta.BestFitEstimator.BestFit
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.meta.BestFitEstimator.Par
+        BestFitEstimator +-- elki.math.statistics.distribution.estimator.meta.BestFitEstimator.Par
+        elki.math.statistics.distribution.estimator.DistributionEstimator <|.. WinsorizingEstimator
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.meta.WinsorizingEstimator.Par
+        WinsorizingEstimator +-- elki.math.statistics.distribution.estimator.meta.WinsorizingEstimator.Par
+        elki.math.statistics.distribution.estimator.DistributionEstimator <|.. TrimmedEstimator
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.distribution.estimator.meta.TrimmedEstimator.Par
+        TrimmedEstimator +-- elki.math.statistics.distribution.estimator.meta.TrimmedEstimator.Par
+    }
+
+    namespace elki.math.statistics.distribution.estimator {
+        interface DistributionEstimator<D extends Distribution> [[../DistributionEstimator.html]] {
+            {abstract} +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+            +estimate(double[]): D extends Distribution
+            {abstract} +getDistributionClass(): Class<? super Distribution>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

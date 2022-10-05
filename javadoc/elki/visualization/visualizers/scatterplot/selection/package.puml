@@ -1,0 +1,212 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.scatterplot.selection {
+
+        class SelectionDotVisualization [[SelectionDotVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.selection.SelectionDotVisualization.Instance [[SelectionDotVisualization.Instance.html]] {
+            {static} +MARKER: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+        }
+
+        class SelectionToolCubeVisualization [[SelectionToolCubeVisualization.html]] {
+            {static} -LOG: Logging
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.selection.SelectionToolCubeVisualization.Instance [[SelectionToolCubeVisualization.Instance.html]] {
+            {static} -CSS_RANGEMARKER: String
+            -dim: int
+            -rtag: Element
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -deleteChildren(Element): void
+            -updateSelectionRectKoordinates(double, double, double, double, ModifiableHyperBoundingBox): void
+            +startDrag(SVGPoint, Event): boolean
+            +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            -updateSelection(SVGPoint, SVGPoint): void
+            #addCSSClasses(SVGPlot): void
+        }
+
+        class DistanceFunctionVisualization [[DistanceFunctionVisualization.html]] {
+            {static} +NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+            {static} +getLPNormP(AbstractMaterializeKNNPreprocessor<?>): double
+            {static} +isAngularDistance(AbstractMaterializeKNNPreprocessor<?>): boolean
+            {static} +drawCosine(SVGPlot, Projection2D, NumberVector, double): Element
+        }
+
+        class elki.visualization.visualizers.scatterplot.selection.DistanceFunctionVisualization.Instance [[DistanceFunctionVisualization.Instance.html]] {
+            {static} +KNNMARKER: String
+            {static} +KNNDIST: String
+            {static} +DISTANCEFUNCTION: String
+            -result: AbstractMaterializeKNNPreprocessor<? extends NumberVector>
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -addCSSClasses(SVGPlot): void
+        }
+
+        class MoveObjectsToolVisualization [[MoveObjectsToolVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.selection.MoveObjectsToolVisualization.Instance [[MoveObjectsToolVisualization.Instance.html]] {
+            {static} #CSS_ARROW: String
+            -rtag: Element
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -updateDB(DBIDs, double[]): void
+            -deleteChildren(Element): void
+            -addCSSClasses(SVGPlot): void
+            +startDrag(SVGPoint, Event): boolean
+            +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+        }
+
+        class SelectionCubeVisualization [[SelectionCubeVisualization.html]] {
+            {static} -NAME: String
+            +SelectionCubeVisualization(Par)
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.selection.SelectionCubeVisualization.Instance [[SelectionCubeVisualization.Instance.html]] {
+            {static} +MARKER: String
+            {static} +CSS_CUBE: String
+            {static} +CSS_CUBEFRAME: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            -addCSSClasses(SVGPlot): void
+            -setSVGRect(SVGPlot, Projection2D): void
+            +fullRedraw(): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.selection.SelectionCubeVisualization.Par [[SelectionCubeVisualization.Par.html]] {
+            {static} +NOFILL_ID: OptionID
+            #nofill: boolean
+            +configure(Parameterization): void
+            +make(): SelectionCubeVisualization
+        }
+
+        class SelectionToolDotVisualization [[SelectionToolDotVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        enum elki.visualization.visualizers.scatterplot.selection.SelectionToolDotVisualization.Mode [[SelectionToolDotVisualization.Mode.html]] {
+            {static} +REPLACE
+            {static} +ADD
+            {static} +INVERT
+        }
+
+        class elki.visualization.visualizers.scatterplot.selection.SelectionToolDotVisualization.Instance [[SelectionToolDotVisualization.Instance.html]] {
+            {static} -CSS_RANGEMARKER: String
+            ~rtag: Element
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -deleteChildren(Element): void
+            +startDrag(SVGPoint, Event): boolean
+            +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            -getInputMode(Event): Mode
+            -updateSelection(Mode, Projection2D, SVGPoint, SVGPoint): void
+            #addCSSClasses(SVGPlot): void
+        }
+
+        class SelectionConvexHullVisualization [[SelectionConvexHullVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.selection.SelectionConvexHullVisualization.Instance [[SelectionConvexHullVisualization.Instance.html]] {
+            {static} +SELECTEDHULL: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -addCSSClasses(SVGPlot): void
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. SelectionDotVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.selection.SelectionDotVisualization.Instance
+        elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.scatterplot.selection.SelectionDotVisualization.Instance
+        SelectionDotVisualization +-- elki.visualization.visualizers.scatterplot.selection.SelectionDotVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. SelectionToolCubeVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.selection.SelectionToolCubeVisualization.Instance
+        elki.visualization.batikutil.DragableArea.DragListener <|.. elki.visualization.visualizers.scatterplot.selection.SelectionToolCubeVisualization.Instance
+        SelectionToolCubeVisualization +-- elki.visualization.visualizers.scatterplot.selection.SelectionToolCubeVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. DistanceFunctionVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.selection.DistanceFunctionVisualization.Instance
+        elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.scatterplot.selection.DistanceFunctionVisualization.Instance
+        DistanceFunctionVisualization +-- elki.visualization.visualizers.scatterplot.selection.DistanceFunctionVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. MoveObjectsToolVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.selection.MoveObjectsToolVisualization.Instance
+        elki.visualization.batikutil.DragableArea.DragListener <|.. elki.visualization.visualizers.scatterplot.selection.MoveObjectsToolVisualization.Instance
+        MoveObjectsToolVisualization +-- elki.visualization.visualizers.scatterplot.selection.MoveObjectsToolVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. SelectionCubeVisualization
+        SelectionCubeVisualization --> elki.visualization.visualizers.scatterplot.selection.SelectionCubeVisualization.Par: settings
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.selection.SelectionCubeVisualization.Instance
+        SelectionCubeVisualization +-- elki.visualization.visualizers.scatterplot.selection.SelectionCubeVisualization.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.scatterplot.selection.SelectionCubeVisualization.Par
+        SelectionCubeVisualization +-- elki.visualization.visualizers.scatterplot.selection.SelectionCubeVisualization.Par
+        elki.visualization.visualizers.VisFactory <|.. SelectionToolDotVisualization
+        SelectionToolDotVisualization +-- elki.visualization.visualizers.scatterplot.selection.SelectionToolDotVisualization.Mode
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.selection.SelectionToolDotVisualization.Instance
+        elki.visualization.batikutil.DragableArea.DragListener <|.. elki.visualization.visualizers.scatterplot.selection.SelectionToolDotVisualization.Instance
+        SelectionToolDotVisualization +-- elki.visualization.visualizers.scatterplot.selection.SelectionToolDotVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. SelectionConvexHullVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.selection.SelectionConvexHullVisualization.Instance
+        elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.scatterplot.selection.SelectionConvexHullVisualization.Instance
+        SelectionConvexHullVisualization +-- elki.visualization.visualizers.scatterplot.selection.SelectionConvexHullVisualization.Instance
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+    }
+
+    namespace elki.visualization.visualizers.scatterplot {
+        abstract class AbstractScatterplotVisualization [[../AbstractScatterplotVisualization.html]] {
+            #proj: Projection2D
+            #rel: Relation<? extends NumberVector>
+            #sample: SamplingResult
+        }
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreListener [[../../../../database/datastore/DataStoreListener.html]] {
+            {abstract} +contentChanged(DataStoreEvent): void
+        }
+    }
+
+    namespace elki.visualization.batikutil {
+        interface elki.visualization.batikutil.DragableArea.DragListener [[../../../batikutil/DragableArea.DragListener.html]] {
+            {abstract} +startDrag(SVGPoint, Event): boolean
+            {abstract} +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+            {abstract} +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

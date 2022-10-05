@@ -1,0 +1,112 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.idistance {
+
+        class InMemoryIDistanceIndex<O> [[InMemoryIDistanceIndex.html]] {
+            {static} -LOG: Logging
+            -distanceQuery: DistanceQuery<O>
+            -initialization: KMedoidsInitialization<O>
+            -numref: int
+            -referencepoints: ArrayDBIDs
+            -index: ModifiableDoubleDBIDList[]
+            +InMemoryIDistanceIndex(Relation<O>, DistanceQuery<O>, KMedoidsInitialization<O>, int)
+            +initialize(): void
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            -getDistance(): Distance<? super O>
+            +getLogger(): Logging
+            +logStatistics(): void
+            {static} #rankReferencePoints(DistanceQuery<O>, O, ArrayDBIDs): DoubleIntPair[]
+            {static} #binarySearch(ModifiableDoubleDBIDList, DoubleDBIDListIter, double): void
+        }
+
+        class elki.index.idistance.InMemoryIDistanceIndex.IDistanceKNNSearcher [[InMemoryIDistanceIndex.IDistanceKNNSearcher.html]] {
+            +IDistanceKNNSearcher(DistanceQuery<O>)
+            +getKNN(O, int): KNNList
+        }
+
+        class elki.index.idistance.InMemoryIDistanceIndex.IDistanceRangeSearcher [[InMemoryIDistanceIndex.IDistanceRangeSearcher.html]] {
+            +IDistanceRangeSearcher(DistanceQuery<O>)
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class elki.index.idistance.InMemoryIDistanceIndex.Factory<V> [[InMemoryIDistanceIndex.Factory.html]] {
+            ~distance: Distance<? super V>
+            ~initialization: KMedoidsInitialization<V>
+            ~k: int
+            +Factory(Distance<? super V>, KMedoidsInitialization<V>, int)
+            +instantiate(Relation<V>): InMemoryIDistanceIndex<V>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.idistance.InMemoryIDistanceIndex.Factory.Par<V> {
+            {static} +DISTANCE_ID: OptionID
+            {static} +REFERENCE_ID: OptionID
+            {static} +K_ID: OptionID
+            ~distance: Distance<? super V>
+            ~initialization: KMedoidsInitialization<V>
+            ~k: int
+            +configure(Parameterization): void
+            +make(): Factory<V>
+        }
+
+        elki.index.AbstractRefiningIndex <|-- InMemoryIDistanceIndex
+        elki.index.RangeIndex <|.. InMemoryIDistanceIndex
+        elki.index.KNNIndex <|.. InMemoryIDistanceIndex
+        elki.index.AbstractRefiningIndex.AbstractRefiningQuery <|-- elki.index.idistance.InMemoryIDistanceIndex.IDistanceKNNSearcher
+        elki.database.query.knn.KNNSearcher <|.. elki.index.idistance.InMemoryIDistanceIndex.IDistanceKNNSearcher
+        InMemoryIDistanceIndex +-- elki.index.idistance.InMemoryIDistanceIndex.IDistanceKNNSearcher
+        elki.index.AbstractRefiningIndex.AbstractRefiningQuery <|-- elki.index.idistance.InMemoryIDistanceIndex.IDistanceRangeSearcher
+        elki.database.query.range.RangeSearcher <|.. elki.index.idistance.InMemoryIDistanceIndex.IDistanceRangeSearcher
+        InMemoryIDistanceIndex +-- elki.index.idistance.InMemoryIDistanceIndex.IDistanceRangeSearcher
+        elki.index.IndexFactory <|.. elki.index.idistance.InMemoryIDistanceIndex.Factory
+        InMemoryIDistanceIndex +-- elki.index.idistance.InMemoryIDistanceIndex.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.idistance.InMemoryIDistanceIndex.Factory.Par
+        elki.index.idistance.InMemoryIDistanceIndex.Factory +-- elki.index.idistance.InMemoryIDistanceIndex.Factory.Par
+    }
+
+    namespace elki.index {
+        abstract class AbstractRefiningIndex<O> [[../AbstractRefiningIndex.html]] {
+            #relation: Relation<O>
+            -refinements: Counter
+            {abstract} +getLogger(): Logging
+        }
+        interface RangeIndex<O> [[../RangeIndex.html]] {
+            {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+        interface KNNIndex<O> [[../KNNIndex.html]] {
+            {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        }
+        abstract class elki.index.AbstractRefiningIndex.AbstractRefiningQuery [[../AbstractRefiningIndex.AbstractRefiningQuery.html]] {
+            #distanceQuery: DistanceQuery<O>
+        }
+        interface IndexFactory<V> [[../IndexFactory.html]] {
+            {abstract} +instantiate(Relation<V>): Index
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+    }
+
+    namespace elki.database.query.knn {
+        interface KNNSearcher<O> [[../../database/query/knn/KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+    }
+
+    namespace elki.database.query.range {
+        interface RangeSearcher<O> [[../../database/query/range/RangeSearcher.html]] {
+            +getRange(O, double): DoubleDBIDList
+            {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

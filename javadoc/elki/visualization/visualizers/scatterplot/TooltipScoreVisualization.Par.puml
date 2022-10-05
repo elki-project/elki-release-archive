@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TooltipScoreVisualization.Par\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Par [[TooltipScoreVisualization.Par.html]] {
+        ~nf: NumberFormat
+        {static} +DIGITS_ID: OptionID
+        +configure(Parameterization): void
+        +make(): TooltipScoreVisualization
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>TooltipScoreVisualization\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.TooltipScoreVisualization [[TooltipScoreVisualization.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Par
+    elki.visualization.visualizers.scatterplot.TooltipScoreVisualization +-- elki.visualization.visualizers.scatterplot.TooltipScoreVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

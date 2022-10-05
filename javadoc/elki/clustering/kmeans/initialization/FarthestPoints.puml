@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FarthestPoints\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.FarthestPoints<O> [[FarthestPoints.html]] {
+        ~dropfirst: boolean
+        +FarthestPoints(RandomFactory, boolean)
+        +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+        +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+    }
+
+    abstract class "<size:14>AbstractKMeansInitialization\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AbstractKMeansInitialization [[AbstractKMeansInitialization.html]]
+    interface "<size:14>KMedoidsInitialization\n<size:10>elki.clustering.kmedoids.initialization" as elki.clustering.kmedoids.initialization.KMedoidsInitialization<O> [[../../kmedoids/initialization/KMedoidsInitialization.html]] {
+        {abstract} +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+    }
+    class "<size:14>FarthestPoints.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.FarthestPoints.Par<O> [[FarthestPoints.Par.html]]
+
+    elki.clustering.kmeans.initialization.AbstractKMeansInitialization <|-- elki.clustering.kmeans.initialization.FarthestPoints
+    elki.clustering.kmedoids.initialization.KMedoidsInitialization <|.. elki.clustering.kmeans.initialization.FarthestPoints
+    elki.clustering.kmeans.initialization.FarthestPoints +-- elki.clustering.kmeans.initialization.FarthestPoints.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

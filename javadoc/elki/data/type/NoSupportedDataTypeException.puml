@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NoSupportedDataTypeException\n<size:10>elki.data.type" as elki.data.type.NoSupportedDataTypeException [[NoSupportedDataTypeException.html]] {
+        {static} -serialVersionUID: long
+        -types: Collection<TypeInformation>
+        +NoSupportedDataTypeException(TypeInformation, Collection<TypeInformation>)
+        +NoSupportedDataTypeException(String)
+        +getMessage(): String
+    }
+
+    class "<size:14>IllegalStateException\n<size:10>java.lang" as java.lang.IllegalStateException
+
+    java.lang.IllegalStateException <|-- elki.data.type.NoSupportedDataTypeException
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

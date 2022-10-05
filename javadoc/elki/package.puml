@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki {
+
+        class KDDTask [[KDDTask.html]] {
+            +KDDTask(InputStep, AlgorithmStep, EvaluationStep, OutputStep, Collection<TrackedParameter>)
+            +run(): void
+            {static} +main(String[]): void
+        }
+
+        class elki.KDDTask.Par [[KDDTask.Par.html]] {
+            +configure(Parameterization): void
+            +make(): KDDTask
+        }
+
+        interface Algorithm [[Algorithm.html]] {
+            +autorun(Database): Object
+            {abstract} +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.Algorithm.Utils [[Algorithm.Utils.html]] {
+            {static} +autorun(Algorithm, Database): Object
+        }
+
+        KDDTask --> "*" elki.utilities.optionhandling.parameterization.TrackedParameter: settings
+        KDDTask --> elki.workflow.InputStep: inputStep
+        KDDTask --> elki.workflow.AlgorithmStep: algorithmStep
+        KDDTask --> elki.workflow.EvaluationStep: evaluationStep
+        KDDTask --> elki.workflow.OutputStep: outputStep
+        elki.utilities.optionhandling.Parameterizer <|.. elki.KDDTask.Par
+        KDDTask +-- elki.KDDTask.Par
+        elki.KDDTask.Par --> elki.workflow.InputStep: inputStep
+        elki.KDDTask.Par --> elki.workflow.AlgorithmStep: algorithmStep
+        elki.KDDTask.Par --> elki.workflow.EvaluationStep: evaluationStep
+        elki.KDDTask.Par --> "*" elki.utilities.optionhandling.parameterization.TrackedParameter: settings
+        elki.KDDTask.Par --> elki.workflow.OutputStep: outputStep
+        Algorithm +-- elki.Algorithm.Utils
+        elki.Algorithm.Utils --> elki.utilities.optionhandling.OptionID: ALGORITHM_ID\nDISTANCE_FUNCTION_ID
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

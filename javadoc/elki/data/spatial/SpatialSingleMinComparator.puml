@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SpatialSingleMinComparator\n<size:10>elki.data.spatial" as elki.data.spatial.SpatialSingleMinComparator [[SpatialSingleMinComparator.html]] {
+        ~dim: int
+        +SpatialSingleMinComparator(int)
+        +setDimension(int): void
+        +compare(SpatialComparable, SpatialComparable): int
+    }
+
+    interface "<size:14>Comparator\n<size:10>java.util" as java.util.Comparator<SpatialComparable> {
+        {abstract} +compare(SpatialComparable, SpatialComparable): int
+    }
+
+    java.util.Comparator <|.. elki.data.spatial.SpatialSingleMinComparator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

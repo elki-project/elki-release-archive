@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimplifiedCoverTree.CoverTreeRangeObjectSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeObjectSearcher [[SimplifiedCoverTree.CoverTreeRangeObjectSearcher.html]] {
+        -query: O
+        +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        #queryDistance(DBIDRef): double
+    }
+
+    abstract class "<size:14>SimplifiedCoverTree.CoverTreeRangeSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeSearcher [[SimplifiedCoverTree.CoverTreeRangeSearcher.html]] {
+        {abstract} #queryDistance(DBIDRef): double
+    }
+    interface "<size:14>RangeSearcher\n<size:10>elki.database.query.range" as elki.database.query.range.RangeSearcher<O> [[../../../../database/query/range/RangeSearcher.html]] {
+        {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+    class "<size:14>SimplifiedCoverTree\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree<O> [[SimplifiedCoverTree.html]]
+
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeSearcher <|-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeObjectSearcher
+    elki.database.query.range.RangeSearcher <|.. elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeObjectSearcher
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeObjectSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

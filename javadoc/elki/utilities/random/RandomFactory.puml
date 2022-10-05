@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomFactory\n<size:10>elki.utilities.random" as elki.utilities.random.RandomFactory [[RandomFactory.html]] {
+        {static} +DEFAULT: RandomFactory
+        #seed: long
+        +RandomFactory(long)
+        {static} -getGlobalSeed(): long
+        {static} +get(Long): RandomFactory
+        +getRandom(): Random
+        +getSingleThreadedRandom(): Random
+        {static} +murmurMix32(int): int
+        {static} +murmurMix64(long): long
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

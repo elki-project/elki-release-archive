@@ -1,0 +1,55 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BitVector\n<size:10>elki.data" as elki.data.BitVector [[BitVector.html]] {
+        {static} +FACTORY: Factory
+        {static} +SHORT_SERIALIZER: ByteBufferSerializer<BitVector>
+        -bits: long[]
+        -dimensionality: int
+        +BitVector(long[], int)
+        +getDimensionality(): int
+        +setDimensionality(int): void
+        +booleanValue(int): boolean
+        +--getValue--(int): Bit
+        +doubleValue(int): double
+        +longValue(int): long
+        +iter(): int
+        +iterAdvance(int): int
+        +iterRetract(int): int
+        +iterValid(int): boolean
+        +iterDim(int): int
+        +iterDoubleValue(int): double
+        +iterLongValue(int): long
+        +toArray(): double[]
+        +contains(long[]): boolean
+        +cloneBits(): long[]
+        +cardinality(): int
+        +jaccardSimilarity(BitVector): double
+        +hammingDistance(BitVector): int
+        +intersectionSize(BitVector): int
+        +unionSize(BitVector): int
+        +intersect(BitVector): boolean
+        +andOnto(long[]): void
+        +orOnto(long[]): void
+        +xorOnto(long[]): void
+    }
+
+    interface "<size:14>SparseNumberVector\n<size:10>elki.data" as elki.data.SparseNumberVector [[SparseNumberVector.html]] {
+        {abstract} +setDimensionality(int): void
+        {abstract} +iterDoubleValue(int): double
+        {abstract} +iterLongValue(int): long
+        {abstract} +--doubleValue--(int): double
+        {abstract} +--longValue--(int): long
+    }
+    class "<size:14>BitVector.Factory\n<size:10>elki.data" as elki.data.BitVector.Factory [[BitVector.Factory.html]]
+    class "<size:14>BitVector.ShortSerializer\n<size:10>elki.data" as elki.data.BitVector.ShortSerializer [[BitVector.ShortSerializer.html]]
+
+    elki.data.SparseNumberVector <|.. elki.data.BitVector
+    elki.data.BitVector +-- elki.data.BitVector.Factory
+    elki.data.BitVector +-- elki.data.BitVector.ShortSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

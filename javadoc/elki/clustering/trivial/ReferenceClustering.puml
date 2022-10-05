@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ReferenceClustering\n<size:10>elki.clustering.trivial" as elki.clustering.trivial.ReferenceClustering<M extends Model> [[ReferenceClustering.html]]
+
+    class "<size:14>Clustering\n<size:10>elki.data" as elki.data.Clustering<M extends Model> [[../../data/Clustering.html]]
+
+    elki.data.Clustering <|-- elki.clustering.trivial.ReferenceClustering
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

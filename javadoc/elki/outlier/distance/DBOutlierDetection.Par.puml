@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DBOutlierDetection.Par\n<size:10>elki.outlier.distance" as elki.outlier.distance.DBOutlierDetection.Par<O> [[DBOutlierDetection.Par.html]] {
+        {static} +P_ID: OptionID
+        #p: double
+        +configure(Parameterization): void
+        +make(): DBOutlierDetection<O>
+    }
+
+    abstract class "<size:14>AbstractDBOutlier.Par\n<size:10>elki.outlier.distance" as elki.outlier.distance.AbstractDBOutlier.Par<O> [[AbstractDBOutlier.Par.html]]
+    class "<size:14>DBOutlierDetection\n<size:10>elki.outlier.distance" as elki.outlier.distance.DBOutlierDetection<O> [[DBOutlierDetection.html]]
+
+    elki.outlier.distance.AbstractDBOutlier.Par <|-- elki.outlier.distance.DBOutlierDetection.Par
+    elki.outlier.distance.DBOutlierDetection +-- elki.outlier.distance.DBOutlierDetection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

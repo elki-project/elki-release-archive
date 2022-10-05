@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ConcordantPairsGammaTau\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.ConcordantPairsGammaTau [[ConcordantPairsGammaTau.html]] {
+        {static} -LOG: Logging
+        -noiseHandling: NoiseHandling
+        -distance: PrimitiveDistance<? super NumberVector>
+        -key: String
+        +ConcordantPairsGammaTau(PrimitiveDistance<? super NumberVector>, NoiseHandling)
+        +evaluateClustering(Relation<? extends NumberVector>, Clustering<?>): double
+        #countTies(double[], int[]): int
+        #computeWithinDistances(Relation<? extends NumberVector>, List<? extends Cluster<?>>, int): double[]
+        +computeTau(long, long, double, long, long): double
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../../Evaluator.html]]
+    class "<size:14>ConcordantPairsGammaTau.Par\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.ConcordantPairsGammaTau.Par [[ConcordantPairsGammaTau.Par.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.clustering.internal.ConcordantPairsGammaTau
+    elki.evaluation.clustering.internal.ConcordantPairsGammaTau +-- elki.evaluation.clustering.internal.ConcordantPairsGammaTau.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

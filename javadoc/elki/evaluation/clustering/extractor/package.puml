@@ -1,0 +1,92 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.evaluation.clustering.extractor {
+
+        class CutDendrogramByHeightExtractor [[CutDendrogramByHeightExtractor.html]] {
+            -inner: CutDendrogramByHeight
+            +CutDendrogramByHeightExtractor(CutDendrogramByHeight)
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.extractor.CutDendrogramByHeightExtractor.DummyHierarchicalClusteringAlgorithm {
+            +getInputTypeRestriction(): TypeInformation[]
+            +autorun(Database): ClusterMergeHistory
+        }
+
+        class elki.evaluation.clustering.extractor.CutDendrogramByHeightExtractor.Par [[CutDendrogramByHeightExtractor.Par.html]] {
+            ~inner: CutDendrogramByHeight
+            +configure(Parameterization): void
+            +make(): CutDendrogramByHeightExtractor
+        }
+
+        class CutDendrogramByNumberOfClustersExtractor [[CutDendrogramByNumberOfClustersExtractor.html]] {
+            -inner: CutDendrogramByNumberOfClusters
+            +CutDendrogramByNumberOfClustersExtractor(CutDendrogramByNumberOfClusters)
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.extractor.CutDendrogramByNumberOfClustersExtractor.Par [[CutDendrogramByNumberOfClustersExtractor.Par.html]] {
+            ~inner: CutDendrogramByNumberOfClusters
+            +configure(Parameterization): void
+            +make(): CutDendrogramByNumberOfClustersExtractor
+        }
+
+        class SimplifiedHierarchyExtractionEvaluator [[SimplifiedHierarchyExtractionEvaluator.html]] {
+            -inner: SimplifiedHierarchyExtraction
+            +SimplifiedHierarchyExtractionEvaluator(SimplifiedHierarchyExtraction)
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.extractor.SimplifiedHierarchyExtractionEvaluator.Par [[SimplifiedHierarchyExtractionEvaluator.Par.html]] {
+            ~inner: SimplifiedHierarchyExtraction
+            +configure(Parameterization): void
+            +make(): SimplifiedHierarchyExtractionEvaluator
+        }
+
+        class HDBSCANHierarchyExtractionEvaluator [[HDBSCANHierarchyExtractionEvaluator.html]] {
+            -inner: HDBSCANHierarchyExtraction
+            +HDBSCANHierarchyExtractionEvaluator(HDBSCANHierarchyExtraction)
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.clustering.extractor.HDBSCANHierarchyExtractionEvaluator.Par [[HDBSCANHierarchyExtractionEvaluator.Par.html]] {
+            ~inner: HDBSCANHierarchyExtraction
+            +configure(Parameterization): void
+            +make(): HDBSCANHierarchyExtractionEvaluator
+        }
+
+        elki.evaluation.Evaluator <|.. CutDendrogramByHeightExtractor
+        elki.clustering.hierarchical.HierarchicalClusteringAlgorithm <|.. elki.evaluation.clustering.extractor.CutDendrogramByHeightExtractor.DummyHierarchicalClusteringAlgorithm
+        CutDendrogramByHeightExtractor +-- elki.evaluation.clustering.extractor.CutDendrogramByHeightExtractor.DummyHierarchicalClusteringAlgorithm
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.extractor.CutDendrogramByHeightExtractor.Par
+        CutDendrogramByHeightExtractor +-- elki.evaluation.clustering.extractor.CutDendrogramByHeightExtractor.Par
+        elki.evaluation.Evaluator <|.. CutDendrogramByNumberOfClustersExtractor
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.extractor.CutDendrogramByNumberOfClustersExtractor.Par
+        CutDendrogramByNumberOfClustersExtractor +-- elki.evaluation.clustering.extractor.CutDendrogramByNumberOfClustersExtractor.Par
+        elki.evaluation.Evaluator <|.. SimplifiedHierarchyExtractionEvaluator
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.extractor.SimplifiedHierarchyExtractionEvaluator.Par
+        SimplifiedHierarchyExtractionEvaluator +-- elki.evaluation.clustering.extractor.SimplifiedHierarchyExtractionEvaluator.Par
+        elki.evaluation.Evaluator <|.. HDBSCANHierarchyExtractionEvaluator
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.extractor.HDBSCANHierarchyExtractionEvaluator.Par
+        HDBSCANHierarchyExtractionEvaluator +-- elki.evaluation.clustering.extractor.HDBSCANHierarchyExtractionEvaluator.Par
+    }
+
+    namespace elki.evaluation {
+        interface Evaluator [[../../Evaluator.html]]
+    }
+
+    namespace elki.clustering.hierarchical {
+        interface HierarchicalClusteringAlgorithm [[../../../clustering/hierarchical/HierarchicalClusteringAlgorithm.html]] {
+            +autorun(Database): ClusterMergeHistory
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

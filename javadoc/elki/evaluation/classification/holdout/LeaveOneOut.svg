@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="266px" preserveAspectRatio="none" style="width:302px;height:266px;background:#FFFFFF;" version="1.1" viewBox="0 0 302 266" width="302px" zoomAndPan="magnify"><defs/><g><!--MD5=[2f816c563b03dc7467e6e6054726f29e]
+class elki.evaluation.classification.holdout.LeaveOneOut--><a href="LeaveOneOut.html" target="_top" title="LeaveOneOut.html" xlink:actuate="onRequest" xlink:href="LeaveOneOut.html" xlink:show="new" xlink:title="LeaveOneOut.html" xlink:type="simple"><g id="elem_elki.evaluation.classification.holdout.LeaveOneOut"><rect codeLine="6" fill="#F1F1F1" height="135.4219" id="elki.evaluation.classification.holdout.LeaveOneOut" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="288" x="7" y="105"/><ellipse cx="61.75" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M64.7188,129.6094 Q64.1406,129.9063 63.5,130.0469 Q62.8594,130.2031 62.1563,130.2031 Q59.6563,130.2031 58.3281,128.5625 Q57.0156,126.9063 57.0156,123.7813 Q57.0156,120.6563 58.3281,119 Q59.6563,117.3438 62.1563,117.3438 Q62.8594,117.3438 63.5,117.5 Q64.1563,117.6563 64.7188,117.9531 L64.7188,120.6719 Q64.0938,120.0938 63.5,119.8281 Q62.9063,119.5469 62.2813,119.5469 Q60.9375,119.5469 60.25,120.625 Q59.5625,121.6875 59.5625,123.7813 Q59.5625,125.875 60.25,126.9531 Q60.9375,128.0156 62.2813,128.0156 Q62.9063,128.0156 63.5,127.75 Q64.0938,127.4688 64.7188,126.8906 L64.7188,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="94" x="120.25" y="122.9951">LeaveOneOut</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="170" x="82.25" y="135.5791">elki.evaluation.classification.holdout</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="294" y1="142.9375" y2="142.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="153.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47" x="27" y="159.9326">len: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="169.8828"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="52" x="27" y="176.2295">pos: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="294" y1="183.5313" y2="183.5313"/><ellipse cx="18" cy="197.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="256" x="27" y="200.5264">initialize(MultipleObjectsBundle): void</text><ellipse cx="18" cy="213.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169" x="27" y="216.8232">numberOfPartitions(): int</text><ellipse cx="18" cy="229.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="262" x="27" y="233.1201">nextPartitioning(): TrainingAndTestSet</text></g></a><!--MD5=[e3b138cac4f8955a765454e26c265828]
+class elki.evaluation.classification.holdout.AbstractHoldout--><a href="AbstractHoldout.html" target="_top" title="AbstractHoldout.html" xlink:actuate="onRequest" xlink:href="AbstractHoldout.html" xlink:show="new" xlink:title="AbstractHoldout.html" xlink:type="simple"><g id="elem_elki.evaluation.classification.holdout.AbstractHoldout"><rect codeLine="14" fill="#F1F1F1" height="37.9375" id="elki.evaluation.classification.holdout.AbstractHoldout" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="214" x="44" y="7"/><ellipse cx="59" cy="25.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M59.1094,21.3125 L57.9531,26.3906 L60.2813,26.3906 L59.1094,21.3125 Z M57.625,19.0781 L60.6094,19.0781 L63.9688,31.4688 L61.5156,31.4688 L60.75,28.4063 L57.4688,28.4063 L56.7188,31.4688 L54.2813,31.4688 L57.625,19.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="114" x="107" y="24.9951">AbstractHoldout</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="182" x="73" y="37.5791">elki.evaluation.classification.holdout</text></g></a><!--MD5=[74d5bcdb334ea92a5a11f04d41177a07]
+reverse link elki.evaluation.classification.holdout.AbstractHoldout to elki.evaluation.classification.holdout.LeaveOneOut--><g id="link_elki.evaluation.classification.holdout.AbstractHoldout_elki.evaluation.classification.holdout.LeaveOneOut"><path codeLine="16" d="M151,65.22 C151,77.35 151,91.15 151,104.69 " fill="none" id="elki.evaluation.classification.holdout.AbstractHoldout-backto-elki.evaluation.classification.holdout.LeaveOneOut" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="144,65.01,151,45.01,158,65.01,144,65.01" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="51" y="246.4219"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="51" y="255.7041">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[47941f0c968fafe3b416b050261fa15e]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LeaveOneOut\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.LeaveOneOut [[LeaveOneOut.html]] {
+        -len: int
+        -pos: int
+        +initialize(MultipleObjectsBundle): void
+        +numberOfPartitions(): int
+        +nextPartitioning(): TrainingAndTestSet
+    }
+
+    abstract class "<size:14>AbstractHoldout\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.AbstractHoldout [[AbstractHoldout.html]]
+
+    elki.evaluation.classification.holdout.AbstractHoldout <|- - elki.evaluation.classification.holdout.LeaveOneOut
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

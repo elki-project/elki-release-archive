@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluationStep.Par\n<size:10>elki.workflow" as elki.workflow.EvaluationStep.Par [[EvaluationStep.Par.html]] {
+        -evaluators: List<? extends Evaluator>
+        {static} +EVALUATOR_ID: OptionID
+        +configure(Parameterization): void
+        +make(): EvaluationStep
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>EvaluationStep\n<size:10>elki.workflow" as elki.workflow.EvaluationStep [[EvaluationStep.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.workflow.EvaluationStep.Par
+    elki.workflow.EvaluationStep +-- elki.workflow.EvaluationStep.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MeanVarianceMinMax\n<size:10>elki.math" as elki.math.MeanVarianceMinMax [[MeanVarianceMinMax.html]] {
+        ~min: double
+        ~max: double
+        +MeanVarianceMinMax()
+        +MeanVarianceMinMax(MeanVarianceMinMax)
+        +put(double): void
+        +put(double, double): void
+        +put(Mean): void
+        +put(double[]): MeanVarianceMinMax
+        +put(double[], double[]): MeanVariance
+        +getMin(): double
+        +getMax(): double
+        +getDoubleMinMax(): DoubleMinMax
+        +getDiff(): double
+        {static} +newArray(int): MeanVarianceMinMax[]
+        +reset(): MeanVarianceMinMax
+    }
+
+    class "<size:14>MeanVariance\n<size:10>elki.math" as elki.math.MeanVariance [[MeanVariance.html]]
+
+    elki.math.MeanVariance <|-- elki.math.MeanVarianceMinMax
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,130 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.evaluation.scores.adapter {
+
+        class OutlierScoreAdapter [[OutlierScoreAdapter.html]] {
+            -set: DBIDs
+            -iter: DBIDIter
+            -scores: DoubleRelation
+            -prev: double
+            +OutlierScoreAdapter(DBIDs, OutlierResult)
+            +valid(): boolean
+            +advance(): OutlierScoreAdapter
+            +tiedToPrevious(): boolean
+            +test(): boolean
+            +numPositive(): int
+            +numTotal(): int
+        }
+
+        abstract class AbstractVectorIter [[AbstractVectorIter.html]] {
+            #sort: int[]
+            #positive: NumberVector
+            #vec: NumberVector
+            #pos: int
+            #numPositive: int
+            +AbstractVectorIter(NumberVector, NumberVector)
+            +dim(): int
+            +valid(): boolean
+            +advance(): AbstractVectorIter
+            +tiedToPrevious(): boolean
+            +getOffset(): int
+            +advance(int): AbstractVectorIter
+            +retract(): AbstractVectorIter
+            +seek(int): AbstractVectorIter
+            +test(): boolean
+            +numPositive(): int
+            +numTotal(): int
+        }
+
+        class DecreasingVectorIter [[DecreasingVectorIter.html]] {
+            +DecreasingVectorIter(NumberVector, NumberVector)
+            +compare(int, int): int
+            +advance(int): DecreasingVectorIter
+            +retract(): DecreasingVectorIter
+            +seek(int): DecreasingVectorIter
+        }
+
+        class IncreasingVectorIter [[IncreasingVectorIter.html]] {
+            +IncreasingVectorIter(NumberVector, NumberVector)
+            +compare(int, int): int
+            +advance(int): IncreasingVectorIter
+            +retract(): IncreasingVectorIter
+            +seek(int): IncreasingVectorIter
+        }
+
+        class DistanceResultAdapter [[DistanceResultAdapter.html]] {
+            -set: DBIDs
+            #iter: DoubleDBIDListIter
+            -size: int
+            #prevDist: double
+            +DistanceResultAdapter(DBIDs, DoubleDBIDListIter, int)
+            +valid(): boolean
+            +advance(): DistanceResultAdapter
+            +tiedToPrevious(): boolean
+            +numPositive(): int
+            +numTotal(): int
+            +test(): boolean
+        }
+
+        class FilteredDistanceResultAdapter [[FilteredDistanceResultAdapter.html]] {
+            ~skip: DBIDRef
+            +FilteredDistanceResultAdapter(DBIDs, DoubleDBIDListIter, int, DBIDRef)
+            +advance(): DistanceResultAdapter
+        }
+
+        class SimpleAdapter [[SimpleAdapter.html]] {
+            -set: DBIDs
+            -iter: DBIDIter
+            -size: int
+            +SimpleAdapter(DBIDs, DBIDIter, int)
+            +valid(): boolean
+            +advance(): SimpleAdapter
+            +tiedToPrevious(): boolean
+            +test(): boolean
+            +numPositive(): int
+            +numTotal(): int
+        }
+
+        elki.evaluation.scores.ScoreEvaluation.Adapter <|.. OutlierScoreAdapter
+        elki.evaluation.scores.ScoreEvaluation.Adapter <|.. AbstractVectorIter
+        elki.utilities.datastructures.iterator.ArrayIter <|.. AbstractVectorIter
+        AbstractVectorIter <|-- DecreasingVectorIter
+        it.unimi.dsi.fastutil.ints.IntComparator <|.. DecreasingVectorIter
+        AbstractVectorIter <|-- IncreasingVectorIter
+        it.unimi.dsi.fastutil.ints.IntComparator <|.. IncreasingVectorIter
+        elki.evaluation.scores.ScoreEvaluation.Adapter <|.. DistanceResultAdapter
+        DistanceResultAdapter <|-- FilteredDistanceResultAdapter
+        elki.evaluation.scores.ScoreEvaluation.Adapter <|.. SimpleAdapter
+    }
+
+    namespace elki.evaluation.scores {
+        interface elki.evaluation.scores.ScoreEvaluation.Adapter [[../ScoreEvaluation.Adapter.html]] {
+            {abstract} +test(): boolean
+            {abstract} +tiedToPrevious(): boolean
+            {abstract} +numPositive(): int
+            {abstract} +numTotal(): int
+        }
+    }
+
+    namespace elki.utilities.datastructures.iterator {
+        interface ArrayIter [[../../../utilities/datastructures/iterator/ArrayIter.html]] {
+            {abstract} +advance(): ArrayIter
+            {abstract} +advance(int): ArrayIter
+            {abstract} +retract(): ArrayIter
+            {abstract} +seek(int): ArrayIter
+            {abstract} +getOffset(): int
+        }
+    }
+
+    namespace it.unimi.dsi.fastutil.ints {
+        interface IntComparator {
+            {abstract} +compare(int, int): int
+            +reversed(): IntComparator
+            +--compare--(Integer, Integer): int
+            +thenComparing(IntComparator): IntComparator
+            +thenComparing(Comparator<? super Integer>): Comparator<Integer>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

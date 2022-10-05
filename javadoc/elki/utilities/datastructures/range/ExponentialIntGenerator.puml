@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExponentialIntGenerator\n<size:10>elki.utilities.datastructures.range" as elki.utilities.datastructures.range.ExponentialIntGenerator [[ExponentialIntGenerator.html]] {
+        -start: int
+        -factor: int
+        -end: int
+        +ExponentialIntGenerator(int, int, int)
+        +getMin(): int
+        +getMax(): int
+        +forEach(IntConsumer): void
+        +serializeTo(StringBuilder): StringBuilder
+    }
+
+    interface "<size:14>IntGenerator\n<size:10>elki.utilities.datastructures.range" as elki.utilities.datastructures.range.IntGenerator [[IntGenerator.html]] {
+        {abstract} +getMin(): int
+        {abstract} +getMax(): int
+        {abstract} +forEach(IntConsumer): void
+        {abstract} +serializeTo(StringBuilder): StringBuilder
+    }
+
+    elki.utilities.datastructures.range.IntGenerator <|.. elki.utilities.datastructures.range.ExponentialIntGenerator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

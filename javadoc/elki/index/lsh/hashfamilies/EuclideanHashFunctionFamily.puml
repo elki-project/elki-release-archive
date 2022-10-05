@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EuclideanHashFunctionFamily\n<size:10>elki.index.lsh.hashfamilies" as elki.index.lsh.hashfamilies.EuclideanHashFunctionFamily [[EuclideanHashFunctionFamily.html]] {
+        +EuclideanHashFunctionFamily(RandomFactory, double, int)
+        +isCompatible(Distance<?>): boolean
+    }
+
+    abstract class "<size:14>AbstractProjectedHashFunctionFamily\n<size:10>elki.index.lsh.hashfamilies" as elki.index.lsh.hashfamilies.AbstractProjectedHashFunctionFamily [[AbstractProjectedHashFunctionFamily.html]]
+    class "<size:14>EuclideanHashFunctionFamily.Par\n<size:10>elki.index.lsh.hashfamilies" as elki.index.lsh.hashfamilies.EuclideanHashFunctionFamily.Par [[EuclideanHashFunctionFamily.Par.html]]
+
+    elki.index.lsh.hashfamilies.AbstractProjectedHashFunctionFamily <|-- elki.index.lsh.hashfamilies.EuclideanHashFunctionFamily
+    elki.index.lsh.hashfamilies.EuclideanHashFunctionFamily +-- elki.index.lsh.hashfamilies.EuclideanHashFunctionFamily.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

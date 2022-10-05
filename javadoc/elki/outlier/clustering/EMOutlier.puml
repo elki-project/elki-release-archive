@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EMOutlier\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.EMOutlier<V extends NumberVector> [[EMOutlier.html]] {
+        {static} -LOG: Logging
+        #k: int
+        #delta: double
+        #mfactory: EMClusterModelFactory<? super NumberVector, ?>
+        #miniter: int
+        #maxiter: int
+        #prior: double
+        {static} #MIN_LOGLIKELIHOOD: double
+        +EMOutlier(int, double, EMClusterModelFactory<? super NumberVector, ?>, int, int, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V extends NumberVector>): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>EMOutlier.Par\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.EMOutlier.Par<V extends NumberVector> [[EMOutlier.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.clustering.EMOutlier
+    elki.outlier.clustering.EMOutlier +-- elki.outlier.clustering.EMOutlier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

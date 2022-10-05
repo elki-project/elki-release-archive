@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleIntegerArrayQuickSort\n<size:10>elki.utilities.datastructures.arrays" as elki.utilities.datastructures.arrays.DoubleIntegerArrayQuickSort [[DoubleIntegerArrayQuickSort.html]] {
+        {static} -INSERTION_THRESHOLD: int
+        {static} +sort(double[], int[], int): void
+        {static} +sort(double[], int[], int, int): void
+        {static} -quickSort(double[], int[], int, int): void
+        {static} -sort5(double[], int[], int, int, int, int, int): void
+        {static} -insertionSort(double[], int[], int, int): void
+        {static} +sortReverse(double[], int[], int): void
+        {static} +sortReverse(double[], int[], int, int): void
+        {static} -quickSortReverse(double[], int[], int, int): void
+        {static} -sortReverse5(double[], int[], int, int, int, int, int): void
+        {static} -insertionSortReverse(double[], int[], int, int): void
+        {static} -swap(double[], int[], int, int): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

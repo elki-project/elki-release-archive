@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MultipleFilesOutput\n<size:10>elki.result.textwriter" as elki.result.textwriter.MultipleFilesOutput [[MultipleFilesOutput.html]] {
+        {static} -EXTENSION: String
+        {static} -GZIP_EXTENSION: String
+        -basename: Path
+        -usegzip: boolean
+        {static} -LOG: Logging
+        +MultipleFilesOutput(Path)
+        +MultipleFilesOutput(Path, boolean)
+        -newStream(String): PrintStream
+        +openStream(String): PrintStream
+        +closeStream(PrintStream): void
+        +close(): void
+    }
+
+    interface "<size:14>StreamFactory\n<size:10>elki.result.textwriter" as elki.result.textwriter.StreamFactory [[StreamFactory.html]] {
+        {abstract} +openStream(String): PrintStream
+        {abstract} +closeStream(PrintStream): void
+        {abstract} +close(): void
+    }
+
+    elki.result.textwriter.StreamFactory <|.. elki.result.textwriter.MultipleFilesOutput
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

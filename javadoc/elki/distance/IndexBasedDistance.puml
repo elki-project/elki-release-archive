@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>IndexBasedDistance\n<size:10>elki.distance" as elki.distance.IndexBasedDistance<O> [[IndexBasedDistance.html]] {
+        {static} +INDEX_ID: OptionID
+    }
+
+    interface "<size:14>Distance\n<size:10>elki.distance" as elki.distance.Distance<O> [[Distance.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+    }
+    interface "<size:14>IndexBasedDistance.Instance\n<size:10>elki.distance" as elki.distance.IndexBasedDistance.Instance<T, I extends Index> [[IndexBasedDistance.Instance.html]]
+
+    elki.distance.Distance <|-- elki.distance.IndexBasedDistance
+    elki.distance.IndexBasedDistance +-- elki.distance.IndexBasedDistance.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

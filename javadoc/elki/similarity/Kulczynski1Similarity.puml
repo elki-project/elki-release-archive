@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Kulczynski1Similarity\n<size:10>elki.similarity" as elki.similarity.Kulczynski1Similarity [[Kulczynski1Similarity.html]] {
+        {static} +STATIC: Kulczynski1Similarity
+        +distance(NumberVector, NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +similarity(NumberVector, NumberVector): double
+        +isSymmetric(): boolean
+        +instantiate(Relation<T extends NumberVector>): SpatialPrimitiveDistanceSimilarityQuery<T extends NumberVector>
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../distance/AbstractNumberVectorDistance.html]]
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[../distance/SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    interface "<size:14>PrimitiveSimilarity\n<size:10>elki.similarity" as elki.similarity.PrimitiveSimilarity<NumberVector> [[PrimitiveSimilarity.html]] {
+        {abstract} +similarity(NumberVector, NumberVector): double
+    }
+    class "<size:14>Kulczynski1Similarity.Par\n<size:10>elki.similarity" as elki.similarity.Kulczynski1Similarity.Par [[Kulczynski1Similarity.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.similarity.Kulczynski1Similarity
+    elki.distance.SpatialPrimitiveDistance <|.. elki.similarity.Kulczynski1Similarity
+    elki.similarity.PrimitiveSimilarity <|.. elki.similarity.Kulczynski1Similarity
+    elki.similarity.Kulczynski1Similarity +-- elki.similarity.Kulczynski1Similarity.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

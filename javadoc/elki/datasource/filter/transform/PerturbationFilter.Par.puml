@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PerturbationFilter.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.PerturbationFilter.Par<V extends NumberVector> [[PerturbationFilter.Par.html]] {
+        {static} +MINIMA_ID: OptionID
+        {static} +MAXIMA_ID: OptionID
+        -maxima: double[]
+        -minima: double[]
+        {static} +SEED_ID: OptionID
+        #seed: Long
+        {static} +PERCENTAGE_ID: OptionID
+        {static} +SCALINGREFERENCE_ID: OptionID
+        {static} +NOISEDISTRIBUTION_ID: OptionID
+        #percentage: double
+        #scalingreference: ScalingReference
+        #noisedistribution: NoiseDistribution
+        +configure(Parameterization): void
+        +make(): PerturbationFilter<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>PerturbationFilter\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.PerturbationFilter<V extends NumberVector> [[PerturbationFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.PerturbationFilter.Par
+    elki.datasource.filter.transform.PerturbationFilter +-- elki.datasource.filter.transform.PerturbationFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

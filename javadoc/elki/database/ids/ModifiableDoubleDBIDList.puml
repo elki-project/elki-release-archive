@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ModifiableDoubleDBIDList\n<size:10>elki.database.ids" as elki.database.ids.ModifiableDoubleDBIDList [[ModifiableDoubleDBIDList.html]] {
+        {abstract} +add(double, DBIDRef): void
+        {abstract} +add(DoubleDBIDPair): void
+        {abstract} +clear(): ModifiableDoubleDBIDList
+        {abstract} +sort(): ModifiableDoubleDBIDList
+        {abstract} +sortDescending(): ModifiableDoubleDBIDList
+        {abstract} +swap(int, int): void
+        {abstract} +remove(int): void
+        {abstract} +removeSwap(int): void
+        {abstract} +iter(): DoubleDBIDListMIter
+    }
+
+    interface "<size:14>DoubleDBIDList\n<size:10>elki.database.ids" as elki.database.ids.DoubleDBIDList [[DoubleDBIDList.html]] {
+        {abstract} +size(): int
+        {abstract} +assignVar(int, DBIDVar): DBIDVar
+        {abstract} +doubleValue(int): double
+        {abstract} +iter(): DoubleDBIDListIter
+        {abstract} +slice(int, int): DoubleDBIDList
+    }
+
+    elki.database.ids.DoubleDBIDList <|-- elki.database.ids.ModifiableDoubleDBIDList
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

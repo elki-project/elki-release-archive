@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Node\n<size:10>elki.index.tree" as elki.index.tree.Node<E> [[Node.html]] {
+        {abstract} +children(IndexTreePath<E>): Iterator<IndexTreePath<E>>
+        {abstract} +getNumEntries(): int
+        {abstract} +isLeaf(): boolean
+        {abstract} +getEntry(int): E
+        {abstract} +addEntry(E): int
+    }
+
+    interface "<size:14>Page\n<size:10>elki.persistent" as elki.persistent.Page [[../../persistent/Page.html]] {
+        {abstract} +getPageID(): int
+        {abstract} +setPageID(int): void
+        {abstract} +isDirty(): boolean
+        {abstract} +setDirty(boolean): void
+    }
+
+    elki.persistent.Page <|-- elki.index.tree.Node
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

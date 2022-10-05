@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ALOCI.ALOCIQuadTree\n<size:10>elki.outlier.lof" as elki.outlier.lof.ALOCI.ALOCIQuadTree [[ALOCI.ALOCIQuadTree.html]] {
+        -shift: double[]
+        -min: double[]
+        -width: double[]
+        -nmin: int
+        ~root: Node
+        -relation: Relation<? extends NumberVector>
+        +ALOCIQuadTree(double[], double[], double[], int, Relation<? extends NumberVector>)
+        -bulkLoad(double[], double[], List<Node>, ArrayModifiableDBIDs, int, int, int, int, int): void
+        -getShiftedDim(NumberVector, int, int): double
+        +findClosestNode(NumberVector, int): Node
+    }
+
+    class "<size:14>ALOCI\n<size:10>elki.outlier.lof" as elki.outlier.lof.ALOCI<V extends NumberVector> [[ALOCI.html]]
+
+    elki.outlier.lof.ALOCI +-- elki.outlier.lof.ALOCI.ALOCIQuadTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WeightedQuickUnionRangeDBIDs\n<size:10>elki.utilities.datastructures.unionfind" as elki.utilities.datastructures.unionfind.WeightedQuickUnionRangeDBIDs [[WeightedQuickUnionRangeDBIDs.html]] {
+        -ids: DBIDRange
+        -parent: int[]
+        -weight: int[]
+        ~WeightedQuickUnionRangeDBIDs(DBIDRange)
+        +find(DBIDRef): int
+        +union(DBIDRef, DBIDRef): int
+        +isConnected(DBIDRef, DBIDRef): boolean
+        +getRoots(): DBIDs
+    }
+
+    interface "<size:14>UnionFind\n<size:10>elki.utilities.datastructures.unionfind" as elki.utilities.datastructures.unionfind.UnionFind [[UnionFind.html]] {
+        {abstract} +union(DBIDRef, DBIDRef): int
+        {abstract} +isConnected(DBIDRef, DBIDRef): boolean
+        {abstract} +getRoots(): DBIDs
+        {abstract} +find(DBIDRef): int
+    }
+
+    elki.utilities.datastructures.unionfind.UnionFind <|.. elki.utilities.datastructures.unionfind.WeightedQuickUnionRangeDBIDs
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

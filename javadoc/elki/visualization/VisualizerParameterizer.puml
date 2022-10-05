@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VisualizerParameterizer\n<size:10>elki.visualization" as elki.visualization.VisualizerParameterizer [[VisualizerParameterizer.html]] {
+        {static} -LOG: Logging
+        {static} +DEFAULT_SAMPLE_SIZE: int
+        -stylelib: StyleLibrary
+        -factories: Collection<VisualizationProcessor>
+        -showVisualizers: Pattern
+        -samplesize: int
+        -rnd: RandomFactory
+        +VisualizerParameterizer(int, StyleLibrary, Collection<VisualizationProcessor>, Pattern)
+        +newContext(Object): VisualizerContext
+        {static} +getTitle(Database, Object): String
+        {static} #shortenClassname(String, char): String
+    }
+    class "<size:14>VisualizerParameterizer.Par\n<size:10>elki.visualization" as elki.visualization.VisualizerParameterizer.Par [[VisualizerParameterizer.Par.html]]
+
+    elki.visualization.VisualizerParameterizer +-- elki.visualization.VisualizerParameterizer.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

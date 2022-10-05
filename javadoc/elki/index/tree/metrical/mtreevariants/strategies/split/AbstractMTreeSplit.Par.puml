@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractMTreeSplit.Par\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit.Par<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> {
+        {static} +DISTRIBUTOR_ID: OptionID
+        #distributor: DistributionStrategy
+        +configure(Parameterization): void
+        {abstract} +make(): MTreeSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractMTreeSplit\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> [[AbstractMTreeSplit.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit.Par
+    elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit +-- elki.index.tree.metrical.mtreevariants.strategies.split.AbstractMTreeSplit.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

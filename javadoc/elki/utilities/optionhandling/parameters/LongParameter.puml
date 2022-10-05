@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LongParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.LongParameter [[LongParameter.html]] {
+        +LongParameter(OptionID, long)
+        +LongParameter(OptionID)
+        +getValueAsString(): String
+        #parseValue(Object): Long
+        +getSyntax(): String
+        +grab(Parameterization, LongConsumer): boolean
+    }
+
+    abstract class "<size:14>NumberParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.NumberParameter<LongParameter, Long> [[NumberParameter.html]]
+
+    elki.utilities.optionhandling.parameters.NumberParameter <|-- elki.utilities.optionhandling.parameters.LongParameter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

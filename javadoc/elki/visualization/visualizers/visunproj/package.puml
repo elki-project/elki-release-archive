@@ -1,0 +1,244 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.visunproj {
+
+        class XYCurveVisualization [[XYCurveVisualization.html]] {
+            {static} -NAME: String
+            {static} -SERIESID: String
+            {static} -CSS_AXIS_LABEL: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            -clipDraw(SVGPath, XYCurve, double, double, double, double, LinearScale, LinearScale, double, double): void
+            -setupCSS(VisualizerContext, SVGPlot): void
+            +processNewResult(VisualizerContext, Object): void
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class PixmapVisualizer [[PixmapVisualizer.html]] {
+            {static} -NAME: String
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class elki.visualization.visualizers.visunproj.PixmapVisualizer.Instance [[PixmapVisualizer.Instance.html]] {
+            -result: PixmapResult
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double)
+            +fullRedraw(): void
+        }
+
+        class SettingsVisualization [[SettingsVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class KeyVisualization [[KeyVisualization.html]] {
+            {static} -NAME: String
+            +processNewResult(VisualizerContext, Object): void
+            {static} #findDepth(Clustering<M extends Model>): int[]
+            {static} -findDepth(Hierarchy<Cluster<M extends Model>>, Cluster<M extends Model>, int[]): void
+            {static} #getPreferredColumns(double, double, int, double): int
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class elki.visualization.visualizers.visunproj.KeyVisualization.Instance [[KeyVisualization.Instance.html]] {
+            {static} -KEY_CAPTION: String
+            {static} -KEY_ENTRY: String
+            {static} -KEY_HIERLINE: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double)
+            +fullRedraw(): void
+            -drawHierarchy(SVGPlot, MarkerLibrary, DoubleDoublePair, DoubleDoublePair, int, Cluster<Model>, Object2IntOpenHashMap<Cluster<Model>>, Hierarchy<Cluster<Model>>): double
+            #setupCSS(SVGPlot): void
+        }
+
+        class SimilarityMatrixVisualizer [[SimilarityMatrixVisualizer.html]] {
+            {static} -NAME: String
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class elki.visualization.visualizers.visunproj.SimilarityMatrixVisualizer.Instance [[SimilarityMatrixVisualizer.Instance.html]] {
+            -result: SimilarityMatrix
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double)
+            +fullRedraw(): void
+        }
+
+        class LabelVisualization [[LabelVisualization.html]] {
+            -label: String
+            -rotated: boolean
+            +LabelVisualization()
+            +LabelVisualization(String)
+            +LabelVisualization(String, boolean)
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class EvaluationVisualization [[EvaluationVisualization.html]] {
+            {static} -NAME: String
+            {static} -BARLENGTH: double
+            {static} -BARHEIGHT: double
+            +processNewResult(VisualizerContext, Object): void
+            -addBarChart(SVGPlot, Element, double, String, double, double, double, double, boolean): double
+            -addHeader(SVGPlot, Element, double, String): double
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class DendrogramVisualization [[DendrogramVisualization.html]] {
+            {static} -NAME: String
+            +DendrogramVisualization(DrawingStyle, PositionStyle)
+            +processNewResult(VisualizerContext, Object): void
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        }
+
+        enum elki.visualization.visualizers.visunproj.DendrogramVisualization.DrawingStyle [[DendrogramVisualization.DrawingStyle.html]] {
+            {static} +RECTANGULAR
+            {static} +TRIANGULAR_MAX
+            {static} +TRIANGULAR
+        }
+
+        enum elki.visualization.visualizers.visunproj.DendrogramVisualization.PositionStyle [[DendrogramVisualization.PositionStyle.html]] {
+            {static} +HALF_POS
+            {static} +HALF_WIDTH
+        }
+
+        class elki.visualization.visualizers.visunproj.DendrogramVisualization.SwitchStyleAction [[DendrogramVisualization.SwitchStyleAction.html]] {
+            -task: VisualizationTask
+            -context: VisualizerContext
+            +SwitchStyleAction(VisualizationTask, VisualizerContext)
+            +getMenuName(): String
+            +activate(): void
+        }
+
+        class elki.visualization.visualizers.visunproj.DendrogramVisualization.Instance [[DendrogramVisualization.Instance.html]] {
+            {static} -KEY_CAPTION: String
+            {static} -KEY_HIERLINE: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double)
+            +fullRedraw(): void
+            #setupCSS(SVGPlot, double): void
+            #setupCSS(SVGPlot, ClassStylingPolicy, double): void
+        }
+
+        interface elki.visualization.visualizers.visunproj.DendrogramVisualization.Positions [[DendrogramVisualization.Positions.html]] {
+            {abstract} +set(int, double, double): void
+            {abstract} +getX(int): double
+            {abstract} +getY(int): double
+            {abstract} +combine(int, int, double, int): double
+        }
+
+        class elki.visualization.visualizers.visunproj.DendrogramVisualization.HalfPosPositions [[DendrogramVisualization.HalfPosPositions.html]] {
+            ~xy: double[]
+            -HalfPosPositions(int)
+            +set(int, double, double): void
+            +getX(int): double
+            +getY(int): double
+            +combine(int, int, double, int): double
+        }
+
+        class elki.visualization.visualizers.visunproj.DendrogramVisualization.HalfWidthPositions [[DendrogramVisualization.HalfWidthPositions.html]] {
+            ~xxy: double[]
+            -HalfWidthPositions(int)
+            +set(int, double, double): void
+            +getX(int): double
+            +getY(int): double
+            +combine(int, int, double, int): double
+        }
+
+        class elki.visualization.visualizers.visunproj.DendrogramVisualization.Par [[DendrogramVisualization.Par.html]] {
+            {static} +STYLE_ID: OptionID
+            {static} +LAYOUT_ID: OptionID
+            +configure(Parameterization): void
+            +make(): DendrogramVisualization
+        }
+
+        class XYPlotVisualization [[XYPlotVisualization.html]] {
+            {static} -NAME: String
+            {static} -SERIESID: String
+            {static} -CSS_AXIS_LABEL: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            -setupCSS(VisualizerContext, SVGPlot, XYPlot): void
+            +processNewResult(VisualizerContext, Object): void
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class HistogramVisualization [[HistogramVisualization.html]] {
+            {static} -NAME: String
+            {static} -SERIESID: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. XYCurveVisualization
+        elki.visualization.visualizers.VisFactory <|.. PixmapVisualizer
+        elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.visunproj.PixmapVisualizer.Instance
+        PixmapVisualizer +-- elki.visualization.visualizers.visunproj.PixmapVisualizer.Instance
+        elki.visualization.visualizers.VisFactory <|.. SettingsVisualization
+        elki.visualization.visualizers.VisFactory <|.. KeyVisualization
+        elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.visunproj.KeyVisualization.Instance
+        KeyVisualization +-- elki.visualization.visualizers.visunproj.KeyVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. SimilarityMatrixVisualizer
+        elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.visunproj.SimilarityMatrixVisualizer.Instance
+        SimilarityMatrixVisualizer +-- elki.visualization.visualizers.visunproj.SimilarityMatrixVisualizer.Instance
+        elki.visualization.visualizers.VisFactory <|.. LabelVisualization
+        elki.visualization.visualizers.VisFactory <|.. EvaluationVisualization
+        elki.visualization.visualizers.VisFactory <|.. DendrogramVisualization
+        DendrogramVisualization --> elki.visualization.visualizers.visunproj.DendrogramVisualization.DrawingStyle: style
+        DendrogramVisualization --> elki.visualization.visualizers.visunproj.DendrogramVisualization.PositionStyle: style2
+        DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.DrawingStyle
+        DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.PositionStyle
+        elki.visualization.VisualizationMenuAction <|.. elki.visualization.visualizers.visunproj.DendrogramVisualization.SwitchStyleAction
+        DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.SwitchStyleAction
+        elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.visunproj.DendrogramVisualization.Instance
+        DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.Instance
+        DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.Positions
+        elki.visualization.visualizers.visunproj.DendrogramVisualization.Positions <|.. elki.visualization.visualizers.visunproj.DendrogramVisualization.HalfPosPositions
+        DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.HalfPosPositions
+        elki.visualization.visualizers.visunproj.DendrogramVisualization.Positions <|.. elki.visualization.visualizers.visunproj.DendrogramVisualization.HalfWidthPositions
+        DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.HalfWidthPositions
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.visunproj.DendrogramVisualization.Par
+        DendrogramVisualization +-- elki.visualization.visualizers.visunproj.DendrogramVisualization.Par
+        elki.visualization.visualizers.visunproj.DendrogramVisualization.Par --> elki.visualization.visualizers.visunproj.DendrogramVisualization.DrawingStyle: style
+        elki.visualization.visualizers.visunproj.DendrogramVisualization.Par --> elki.visualization.visualizers.visunproj.DendrogramVisualization.PositionStyle: style2
+        elki.visualization.visualizers.VisFactory <|.. XYPlotVisualization
+        elki.visualization.visualizers.VisFactory <|.. HistogramVisualization
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+        abstract class AbstractVisualization [[../AbstractVisualization.html]] {
+            #task: VisualizationTask
+            #context: VisualizerContext
+            #svgp: VisualizationPlot
+            #layer: Element
+            -width: double
+            -height: double
+            {abstract} +fullRedraw(): void
+        }
+    }
+
+    namespace elki.visualization {
+        interface VisualizationMenuAction [[../../VisualizationMenuAction.html]] {
+            {abstract} +activate(): void
+            +enabled(): boolean
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

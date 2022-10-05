@@ -1,0 +1,175 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.database.datastore {
+
+        interface WritableDoubleDataStore [[WritableDoubleDataStore.html]] {
+            {abstract} +--put--(DBIDRef, Double): Double
+            {abstract} +putDouble(DBIDRef, double): double
+            {abstract} +put(DBIDRef, double): double
+            {abstract} +increment(DBIDRef, double): void
+        }
+
+        interface WritableDBIDDataStore [[WritableDBIDDataStore.html]] {
+            {abstract} +--put--(DBIDRef, DBID): DBID
+            {abstract} +putDBID(DBIDRef, DBIDRef): void
+            {abstract} +put(DBIDRef, DBIDRef): void
+        }
+
+        interface DataStoreListener [[DataStoreListener.html]] {
+            {abstract} +contentChanged(DataStoreEvent): void
+        }
+
+        class DataStoreEvent [[DataStoreEvent.html]] {
+            -inserts: DBIDs
+            -removals: DBIDs
+            -updates: DBIDs
+            +DataStoreEvent(DBIDs, DBIDs, DBIDs)
+            {static} +insertionEvent(DBIDs): DataStoreEvent
+            {static} +removalEvent(DBIDs): DataStoreEvent
+            {static} +updateEvent(DBIDs): DataStoreEvent
+            +getInserts(): DBIDs
+            +getRemovals(): DBIDs
+            +getUpdates(): DBIDs
+        }
+
+        interface DBIDDataStore [[DBIDDataStore.html]] {
+            {abstract} +--get--(DBIDRef): DBID
+            {abstract} +assignVar(DBIDRef, DBIDVar): DBIDVar
+        }
+
+        interface DataStoreIDMap [[DataStoreIDMap.html]] {
+            {abstract} +mapDBIDToOffset(DBIDRef): int
+        }
+
+        interface DoubleDataStore [[DoubleDataStore.html]] {
+            {abstract} +--get--(DBIDRef): Double
+            {abstract} +doubleValue(DBIDRef): double
+        }
+
+        interface WritableRecordStore [[WritableRecordStore.html]] {
+            {abstract} +getStorage(int, Class<? super T>): WritableDataStore<T>
+            {abstract} +remove(DBIDRef): boolean
+        }
+
+        interface RecordStore [[RecordStore.html]] {
+            {abstract} +getStorage(int, Class<? super T>): DataStore<T>
+        }
+
+        interface DataStoreFactory [[DataStoreFactory.html]] {
+            {static} +HINT_TEMP: int
+            {static} +HINT_HOT: int
+            {static} +HINT_STATIC: int
+            {static} +HINT_SORTED: int
+            {static} +HINT_DB: int
+            {abstract} +makeStorage(DBIDs, int, Class<? super T>): WritableDataStore<T>
+            {abstract} +makeDBIDStorage(DBIDs, int): WritableDBIDDataStore
+            {abstract} +makeDoubleStorage(DBIDs, int): WritableDoubleDataStore
+            {abstract} +makeDoubleStorage(DBIDs, int, double): WritableDoubleDataStore
+            {abstract} +makeIntegerStorage(DBIDs, int): WritableIntegerDataStore
+            {abstract} +makeIntegerStorage(DBIDs, int, int): WritableIntegerDataStore
+            {abstract} +makeRecordStorage(DBIDs, int, Class<?>...): WritableRecordStore
+        }
+
+        class DataStoreUtil [[DataStoreUtil.html]] {
+            {static} +makeStorage(DBIDs, int, Class<? super T>): WritableDataStore<T>
+            {static} +makeDBIDStorage(DBIDs, int): WritableDBIDDataStore
+            {static} +makeDoubleStorage(DBIDs, int): WritableDoubleDataStore
+            {static} +makeDoubleStorage(DBIDs, int, double): WritableDoubleDataStore
+            {static} +makeIntegerStorage(DBIDs, int): WritableIntegerDataStore
+            {static} +makeIntegerStorage(DBIDs, int, int): WritableIntegerDataStore
+            {static} +makeRecordStorage(DBIDs, int, Class<?>...): WritableRecordStore
+        }
+
+        class elki.database.datastore.DataStoreUtil.AscendingByDoubleDataStore [[DataStoreUtil.AscendingByDoubleDataStore.html]] {
+            +AscendingByDoubleDataStore(DoubleDataStore)
+            +compare(DBIDRef, DBIDRef): int
+        }
+
+        class elki.database.datastore.DataStoreUtil.DescendingByDoubleDataStore [[DataStoreUtil.DescendingByDoubleDataStore.html]] {
+            +DescendingByDoubleDataStore(DoubleDataStore)
+            +compare(DBIDRef, DBIDRef): int
+        }
+
+        class elki.database.datastore.DataStoreUtil.AscendingByDoubleDataStoreAndId [[DataStoreUtil.AscendingByDoubleDataStoreAndId.html]] {
+            +AscendingByDoubleDataStoreAndId(DoubleDataStore)
+            +compare(DBIDRef, DBIDRef): int
+        }
+
+        class elki.database.datastore.DataStoreUtil.DescendingByDoubleDataStoreAndId [[DataStoreUtil.DescendingByDoubleDataStoreAndId.html]] {
+            +DescendingByDoubleDataStoreAndId(DoubleDataStore)
+            +compare(DBIDRef, DBIDRef): int
+        }
+
+        class elki.database.datastore.DataStoreUtil.AscendingByIntegerDataStore [[DataStoreUtil.AscendingByIntegerDataStore.html]] {
+            +AscendingByIntegerDataStore(IntegerDataStore)
+            +compare(DBIDRef, DBIDRef): int
+        }
+
+        class elki.database.datastore.DataStoreUtil.DescendingByIntegerDataStore [[DataStoreUtil.DescendingByIntegerDataStore.html]] {
+            +DescendingByIntegerDataStore(IntegerDataStore)
+            +compare(DBIDRef, DBIDRef): int
+        }
+
+        interface DataStore<T> [[DataStore.html]] {
+            {abstract} +get(DBIDRef): T
+        }
+
+        interface IntegerDataStore [[IntegerDataStore.html]] {
+            {abstract} +--get--(DBIDRef): Integer
+            {abstract} +intValue(DBIDRef): int
+        }
+
+        interface WritableDataStore<T> [[WritableDataStore.html]] {
+            {abstract} +put(DBIDRef, T): T
+            {abstract} +destroy(): void
+            {abstract} +delete(DBIDRef): void
+            {abstract} +clear(): void
+        }
+
+        interface WritableIntegerDataStore [[WritableIntegerDataStore.html]] {
+            {abstract} +--put--(DBIDRef, Integer): Integer
+            {abstract} +putInt(DBIDRef, int): int
+            {abstract} +put(DBIDRef, int): int
+            {abstract} +increment(DBIDRef, int): void
+        }
+
+        class ObjectNotFoundException [[ObjectNotFoundException.html]] {
+            {static} -serialVersionUID: long
+            +ObjectNotFoundException(DBIDRef)
+        }
+
+        DoubleDataStore <|-- WritableDoubleDataStore
+        WritableDataStore <|-- WritableDoubleDataStore
+        DBIDDataStore <|-- WritableDBIDDataStore
+        WritableDataStore <|-- WritableDBIDDataStore
+        DataStore <|-- DBIDDataStore
+        DataStore <|-- DoubleDataStore
+        RecordStore <|-- WritableRecordStore
+        DataStoreFactory --> DataStoreFactory: FACTORY
+        DataStoreUtil +-- elki.database.datastore.DataStoreUtil.AscendingByDoubleDataStore
+        elki.database.datastore.DataStoreUtil.AscendingByDoubleDataStore --> DoubleDataStore: scores
+        DataStoreUtil +-- elki.database.datastore.DataStoreUtil.DescendingByDoubleDataStore
+        elki.database.datastore.DataStoreUtil.DescendingByDoubleDataStore --> DoubleDataStore: scores
+        DataStoreUtil +-- elki.database.datastore.DataStoreUtil.AscendingByDoubleDataStoreAndId
+        elki.database.datastore.DataStoreUtil.AscendingByDoubleDataStoreAndId --> DoubleDataStore: scores
+        DataStoreUtil +-- elki.database.datastore.DataStoreUtil.DescendingByDoubleDataStoreAndId
+        elki.database.datastore.DataStoreUtil.DescendingByDoubleDataStoreAndId --> DoubleDataStore: scores
+        DataStoreUtil +-- elki.database.datastore.DataStoreUtil.AscendingByIntegerDataStore
+        elki.database.datastore.DataStoreUtil.AscendingByIntegerDataStore --> IntegerDataStore: scores
+        DataStoreUtil +-- elki.database.datastore.DataStoreUtil.DescendingByIntegerDataStore
+        elki.database.datastore.DataStoreUtil.DescendingByIntegerDataStore --> IntegerDataStore: scores
+        DataStore <|-- IntegerDataStore
+        DataStore <|-- WritableDataStore
+        IntegerDataStore <|-- WritableIntegerDataStore
+        WritableDataStore <|-- WritableIntegerDataStore
+        java.lang.RuntimeException <|-- ObjectNotFoundException
+    }
+
+    namespace java.lang {
+        class RuntimeException {
+            {static} ~serialVersionUID: long
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

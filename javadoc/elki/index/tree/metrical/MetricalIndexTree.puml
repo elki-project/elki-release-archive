@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>MetricalIndexTree\n<size:10>elki.index.tree.metrical" as elki.index.tree.metrical.MetricalIndexTree<O, N extends Node<E>, E> [[MetricalIndexTree.html]] {
+        +MetricalIndexTree(PageFile<N extends Node<E>>)
+        {abstract} +getDistance(): Distance<? super O>
+        {abstract} +getLeaves(): List<E>
+    }
+
+    abstract class "<size:14>IndexTree\n<size:10>elki.index.tree" as elki.index.tree.IndexTree<N extends Node<E>, E> [[../IndexTree.html]] {
+        {abstract} #getLogger(): Logging
+        {abstract} #initializeCapacities(E): void
+        {abstract} #createEmptyRoot(E): void
+        {abstract} #createRootEntry(): E
+        {abstract} #createNewLeafNode(): N extends Node<E>
+        {abstract} #createNewDirectoryNode(): N extends Node<E>
+    }
+
+    elki.index.tree.IndexTree <|-- elki.index.tree.metrical.MetricalIndexTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

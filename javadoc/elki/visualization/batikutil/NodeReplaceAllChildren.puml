@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NodeReplaceAllChildren\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.NodeReplaceAllChildren [[NodeReplaceAllChildren.html]] {
+        +NodeReplaceAllChildren(Element, Element)
+        +NodeReplaceAllChildren(Element, Element, SVGPlot, String)
+        +run(): void
+    }
+
+    class "<size:14>NodeAppendChild\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.NodeAppendChild [[NodeAppendChild.html]]
+
+    elki.visualization.batikutil.NodeAppendChild <|-- elki.visualization.batikutil.NodeReplaceAllChildren
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

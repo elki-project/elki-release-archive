@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SVDD\n<size:10>elki.svm" as elki.svm.SVDD [[SVDD.html]] {
+        {static} -LOG: Logging
+        -C: double
+        +SVDD(double, boolean, double, double)
+        #solve(DataSet): SolutionInfo
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractSVR\n<size:10>elki.svm" as elki.svm.AbstractSVR [[AbstractSVR.html]]
+    interface "<size:14>SVDD.RadiusAcceptor\n<size:10>elki.svm" as elki.svm.SVDD.RadiusAcceptor [[SVDD.RadiusAcceptor.html]]
+
+    elki.svm.AbstractSVR <|-- elki.svm.SVDD
+    elki.svm.SVDD +-- elki.svm.SVDD.RadiusAcceptor
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

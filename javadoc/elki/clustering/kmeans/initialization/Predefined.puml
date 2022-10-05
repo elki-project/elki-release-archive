@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Predefined\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.Predefined [[Predefined.html]] {
+        ~initialMeans: double[]
+        +Predefined(double[])
+        +setInitialMeans(List<double[]>): void
+        +setInitialClusters(List<? extends Cluster<? extends MeanModel>>): void
+        +setInitialMeans(double[]): void
+        +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+    }
+
+    abstract class "<size:14>AbstractKMeansInitialization\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AbstractKMeansInitialization [[AbstractKMeansInitialization.html]]
+    class "<size:14>Predefined.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.Predefined.Par [[Predefined.Par.html]]
+
+    elki.clustering.kmeans.initialization.AbstractKMeansInitialization <|-- elki.clustering.kmeans.initialization.Predefined
+    elki.clustering.kmeans.initialization.Predefined +-- elki.clustering.kmeans.initialization.Predefined.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

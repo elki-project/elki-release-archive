@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearWeightedExtendedNeighborhood\n<size:10>elki.outlier.spatial.neighborhood.weighted" as elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood [[LinearWeightedExtendedNeighborhood.html]] {
+        -inner: NeighborSetPredicate
+        -steps: int
+        +LinearWeightedExtendedNeighborhood(NeighborSetPredicate, int)
+        -computeWeight(int): double
+        +getWeightedNeighbors(DBIDRef): Collection<DoubleDBIDPair>
+    }
+
+    interface "<size:14>WeightedNeighborSetPredicate\n<size:10>elki.outlier.spatial.neighborhood.weighted" as elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate [[WeightedNeighborSetPredicate.html]] {
+        {abstract} +getWeightedNeighbors(DBIDRef): Collection<DoubleDBIDPair>
+    }
+    class "<size:14>LinearWeightedExtendedNeighborhood.Factory\n<size:10>elki.outlier.spatial.neighborhood.weighted" as elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory<O> [[LinearWeightedExtendedNeighborhood.Factory.html]]
+
+    elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate <|.. elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood
+    elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood +-- elki.outlier.spatial.neighborhood.weighted.LinearWeightedExtendedNeighborhood.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

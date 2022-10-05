@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.documentation {
+
+        annotation References [[References.html]]
+
+        annotation Title [[Title.html]]
+
+        annotation Restricted [[Restricted.html]]
+
+        annotation Reference [[Reference.html]]
+
+        annotation Description [[Description.html]]
+
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

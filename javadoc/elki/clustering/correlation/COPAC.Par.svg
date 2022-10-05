@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="69px" preserveAspectRatio="none" style="width:194px;height:69px;background:#FFFFFF;" version="1.1" viewBox="0 0 194 69" width="194px" zoomAndPan="magnify"><defs/><g><!--MD5=[0a902ec44b88f82845fb8b14a7cd2cb3]
+class elki.clustering.correlation.COPAC--><a href="COPAC.html" target="_top" title="COPAC.html" xlink:actuate="onRequest" xlink:href="COPAC.html" xlink:show="new" xlink:title="COPAC.html" xlink:type="simple"><g id="elem_elki.clustering.correlation.COPAC"><rect codeLine="16" fill="#F1F1F1" height="37.9375" id="elki.clustering.correlation.COPAC" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="150" x="25" y="7"/><ellipse cx="40" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M42.9688,31.6094 Q42.3906,31.9063 41.75,32.0469 Q41.1094,32.2031 40.4063,32.2031 Q37.9063,32.2031 36.5781,30.5625 Q35.2656,28.9063 35.2656,25.7813 Q35.2656,22.6563 36.5781,21 Q37.9063,19.3438 40.4063,19.3438 Q41.1094,19.3438 41.75,19.5 Q42.4063,19.6563 42.9688,19.9531 L42.9688,22.6719 Q42.3438,22.0938 41.75,21.8281 Q41.1563,21.5469 40.5313,21.5469 Q39.1875,21.5469 38.5,22.625 Q37.8125,23.6875 37.8125,25.7813 Q37.8125,27.875 38.5,28.9531 Q39.1875,30.0156 40.5313,30.0156 Q41.1563,30.0156 41.75,29.75 Q42.3438,29.4688 42.9688,28.8906 L42.9688,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="49" x="88.5" y="24.9951">COPAC</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="118" x="54" y="37.5791">elki.clustering.correlation</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="0" y="49.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="0" y="59.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[bc22976645c9a25b22f554c40ee06c1d]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>COPAC.Par\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.COPAC.Par [[COPAC.Par.html]] {
+        {static} +K_ID: OptionID
+        #settings: Settings
+        +configure(Parameterization): void
+        +make(): COPAC
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>COPAC\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.COPAC [[COPAC.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.correlation.COPAC.Par
+    elki.clustering.correlation.COPAC +- - elki.clustering.correlation.COPAC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

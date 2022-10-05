@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AggarwalYuNaive\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.AggarwalYuNaive [[AggarwalYuNaive.html]] {
+        {static} -LOG: Logging
+        +AggarwalYuNaive(int, int)
+        +run(Relation<? extends NumberVector>): OutlierResult
+    }
+
+    abstract class "<size:14>AbstractAggarwalYuOutlier\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.AbstractAggarwalYuOutlier [[AbstractAggarwalYuOutlier.html]]
+    class "<size:14>AggarwalYuNaive.Par\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.AggarwalYuNaive.Par [[AggarwalYuNaive.Par.html]]
+
+    elki.outlier.subspace.AbstractAggarwalYuOutlier <|-- elki.outlier.subspace.AggarwalYuNaive
+    elki.outlier.subspace.AggarwalYuNaive +-- elki.outlier.subspace.AggarwalYuNaive.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

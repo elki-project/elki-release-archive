@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractProjection\n<size:10>elki.visualization.projections" as elki.visualization.projections.AbstractProjection [[AbstractProjection.html]] {
+        #scales: LinearScale[]
+        -p: Projector
+        +AbstractProjection(Projector, LinearScale[])
+        +getInputDimensionality(): int
+        +getScale(int): LinearScale
+        +getMenuName(): String
+        +getProjector(): Projector
+    }
+
+    interface "<size:14>Projection\n<size:10>elki.visualization.projections" as elki.visualization.projections.Projection [[Projection.html]] {
+        {abstract} +getInputDimensionality(): int
+        {abstract} +getScale(int): LinearScale
+        {abstract} +getProjector(): Projector
+    }
+
+    elki.visualization.projections.Projection <|.. elki.visualization.projections.AbstractProjection
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FuzzyCMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.FuzzyCMeans.Par [[FuzzyCMeans.Par.html]] {
+        {static} +K_ID: OptionID
+        {static} +DELTA_ID: OptionID
+        {static} +MINITER_ID: OptionID
+        {static} +M_ID: OptionID
+        {static} +SOFT_ID: OptionID
+        {static} +INIT_ID: OptionID
+        #k: int
+        #delta: double
+        #miniter: int
+        #maxiter: int
+        #m: double
+        #soft: boolean
+        ~initializer: KMeansInitialization
+        +configure(Parameterization): void
+        +make(): FuzzyCMeans<NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>FuzzyCMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.FuzzyCMeans<V extends NumberVector> [[FuzzyCMeans.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmeans.FuzzyCMeans.Par
+    elki.clustering.kmeans.FuzzyCMeans +-- elki.clustering.kmeans.FuzzyCMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

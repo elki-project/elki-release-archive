@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CSSClassManager\n<size:10>elki.visualization.css" as elki.visualization.css.CSSClassManager [[CSSClassManager.html]] {
+        -store: HashMap<String, CSSClass>
+        +addClass(CSSClass): CSSClass
+        +removeClass(CSSClass): void
+        +getClass(String, Object): CSSClass
+        +getClass(String): CSSClass
+        +contains(String): boolean
+        +serialize(StringBuilder): void
+        +getClasses(): Collection<CSSClass>
+        +testMergeable(CSSClassManager): boolean
+        +mergeCSSFrom(CSSClassManager): boolean
+        +updateStyleElement(Document, Element): void
+        +makeStyleElement(Document): Element
+    }
+    class "<size:14>CSSClassManager.CSSNamingConflict\n<size:10>elki.visualization.css" as elki.visualization.css.CSSClassManager.CSSNamingConflict [[CSSClassManager.CSSNamingConflict.html]]
+
+    elki.visualization.css.CSSClassManager +-- elki.visualization.css.CSSClassManager.CSSNamingConflict
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

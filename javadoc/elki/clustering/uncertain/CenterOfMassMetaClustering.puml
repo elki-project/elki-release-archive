@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CenterOfMassMetaClustering\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.CenterOfMassMetaClustering<C extends Clustering<?>> [[CenterOfMassMetaClustering.html]] {
+        #inner: ClusteringAlgorithm<C extends Clustering<?>>
+        +CenterOfMassMetaClustering(ClusteringAlgorithm<C extends Clustering<?>>)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends UncertainObject>): C extends Clustering<?>
+        #runClusteringAlgorithm(Object, DBIDs, DataStore<DoubleVector>, int, String): C extends Clustering<?>
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<C extends Clustering<?>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>CenterOfMassMetaClustering.Par\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.CenterOfMassMetaClustering.Par<C extends Clustering<?>> [[CenterOfMassMetaClustering.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.uncertain.CenterOfMassMetaClustering
+    elki.clustering.uncertain.CenterOfMassMetaClustering +-- elki.clustering.uncertain.CenterOfMassMetaClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

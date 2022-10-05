@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>COPACNeighborPredicate.COPACModel\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.COPACNeighborPredicate.COPACModel [[COPACNeighborPredicate.COPACModel.html]] {
+        ~cdim: int
+        ~ids: SetDBIDs
+        +COPACModel(int, SetDBIDs)
+        +iter(): DBIDIter
+        +size(): int
+        +contains(DBIDRef): boolean
+        +isEmpty(): boolean
+    }
+
+    interface "<size:14>SetDBIDs\n<size:10>elki.database.ids" as elki.database.ids.SetDBIDs [[../../../database/ids/SetDBIDs.html]]
+    class "<size:14>COPACNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.COPACNeighborPredicate [[COPACNeighborPredicate.html]]
+
+    elki.database.ids.SetDBIDs <|.. elki.clustering.dbscan.predicates.COPACNeighborPredicate.COPACModel
+    elki.clustering.dbscan.predicates.COPACNeighborPredicate +-- elki.clustering.dbscan.predicates.COPACNeighborPredicate.COPACModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

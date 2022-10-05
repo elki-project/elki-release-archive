@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DatabaseUtil\n<size:10>elki.database" as elki.database.DatabaseUtil [[DatabaseUtil.html]] {
+        {static} +guessLabelRepresentation(Database): Relation<String>
+        {static} +guessObjectLabelRepresentation(Database): Relation<String>
+        {static} +getClassLabels(Relation<? extends ClassLabel>): SortedSet<ClassLabel>
+        {static} +getClassLabels(Database): SortedSet<ClassLabel>
+        {static} +getObjectsByLabelMatch(Database, Pattern): ArrayModifiableDBIDs
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

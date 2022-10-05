@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>RandomizedHoldout\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.RandomizedHoldout [[RandomizedHoldout.html]] {
+        #random: RandomFactory
+        +RandomizedHoldout(RandomFactory)
+    }
+
+    abstract class "<size:14>AbstractHoldout\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.AbstractHoldout [[AbstractHoldout.html]]
+    abstract class "<size:14>RandomizedHoldout.Par\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.RandomizedHoldout.Par [[RandomizedHoldout.Par.html]]
+
+    elki.evaluation.classification.holdout.AbstractHoldout <|-- elki.evaluation.classification.holdout.RandomizedHoldout
+    elki.evaluation.classification.holdout.RandomizedHoldout +-- elki.evaluation.classification.holdout.RandomizedHoldout.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

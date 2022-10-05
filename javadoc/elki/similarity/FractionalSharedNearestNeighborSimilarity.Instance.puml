@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FractionalSharedNearestNeighborSimilarity.Instance\n<size:10>elki.similarity" as elki.similarity.FractionalSharedNearestNeighborSimilarity.Instance<T> [[FractionalSharedNearestNeighborSimilarity.Instance.html]] {
+        -similarityFunction: FractionalSharedNearestNeighborSimilarity<? super T>
+        +Instance(Relation<T>, SharedNearestNeighborIndex<T>, FractionalSharedNearestNeighborSimilarity<? super T>)
+        {static} #countSharedNeighbors(DBIDs, DBIDs): int
+        +similarity(DBIDRef, DBIDRef): double
+        +getSimilarity(): Similarity<? super T>
+    }
+
+    abstract class "<size:14>AbstractIndexBasedSimilarity.Instance\n<size:10>elki.similarity" as elki.similarity.AbstractIndexBasedSimilarity.Instance<T, SharedNearestNeighborIndex<T>> [[AbstractIndexBasedSimilarity.Instance.html]]
+    class "<size:14>FractionalSharedNearestNeighborSimilarity\n<size:10>elki.similarity" as elki.similarity.FractionalSharedNearestNeighborSimilarity<O> [[FractionalSharedNearestNeighborSimilarity.html]]
+
+    elki.similarity.AbstractIndexBasedSimilarity.Instance <|-- elki.similarity.FractionalSharedNearestNeighborSimilarity.Instance
+    elki.similarity.FractionalSharedNearestNeighborSimilarity +-- elki.similarity.FractionalSharedNearestNeighborSimilarity.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

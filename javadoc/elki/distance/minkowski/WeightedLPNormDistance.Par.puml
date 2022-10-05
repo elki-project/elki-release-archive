@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WeightedLPNormDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.WeightedLPNormDistance.Par [[WeightedLPNormDistance.Par.html]] {
+        #weights: double[]
+        +configure(Parameterization): void
+        +make(): WeightedLPNormDistance
+    }
+
+    class "<size:14>LPNormDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.LPNormDistance.Par [[LPNormDistance.Par.html]]
+    class "<size:14>WeightedLPNormDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.WeightedLPNormDistance [[WeightedLPNormDistance.html]]
+
+    elki.distance.minkowski.LPNormDistance.Par <|-- elki.distance.minkowski.WeightedLPNormDistance.Par
+    elki.distance.minkowski.WeightedLPNormDistance +-- elki.distance.minkowski.WeightedLPNormDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

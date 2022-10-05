@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LMCLUS\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.LMCLUS [[LMCLUS.html]] {
+        {static} -LOG: Logging
+        {static} -LOG_NOT_FROM_ONE_CLUSTER_PROBABILITY: double
+        {static} -BINS: int
+        -sensitivityThreshold: double
+        -maxLMDim: int
+        -minsize: int
+        -samplingLevel: int
+        -rnd: RandomFactory
+        +LMCLUS(int, int, int, double, RandomFactory)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends NumberVector>): Clustering<Model>
+        -deviation(double[], double[]): double
+        -findSeparation(Relation<? extends NumberVector>, DBIDs, int, Random): Separation
+        -generateOrthonormalBasis(List<double[]>): double[]
+        -findAndEvaluateThreshold(DoubleDynamicHistogram): double[]
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<Model>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>LMCLUS.Separation\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.LMCLUS.Separation [[LMCLUS.Separation.html]]
+    class "<size:14>LMCLUS.Par\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.LMCLUS.Par [[LMCLUS.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.correlation.LMCLUS
+    elki.clustering.correlation.LMCLUS +-- elki.clustering.correlation.LMCLUS.Separation
+    elki.clustering.correlation.LMCLUS +-- elki.clustering.correlation.LMCLUS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

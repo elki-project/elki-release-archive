@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DBSCAN\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.DBSCAN<O> [[DBSCAN.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super O>
+        #epsilon: double
+        #minpts: int
+        +DBSCAN(Distance<? super O>, double, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): Clustering<Model>
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<Model>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>DBSCAN.Instance\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.DBSCAN.Instance [[DBSCAN.Instance.html]]
+    class "<size:14>DBSCAN.Par\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.DBSCAN.Par<O> [[DBSCAN.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.dbscan.DBSCAN
+    elki.clustering.dbscan.DBSCAN +-- elki.clustering.dbscan.DBSCAN.Instance
+    elki.clustering.dbscan.DBSCAN +-- elki.clustering.dbscan.DBSCAN.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

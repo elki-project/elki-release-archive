@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CFKPlusPlusLeaves\n<size:10>elki.clustering.kmeans.initialization.betula" as elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves [[CFKPlusPlusLeaves.html]] {
+        #distance: CFInitWeight
+        #firstUniform: boolean
+        +CFKPlusPlusLeaves(CFInitWeight, boolean, RandomFactory)
+        +chooseInitialMeans(CFTree<?>, List<? extends ClusterFeature>, int): double[]
+        +run(CFTree<?>, List<? extends ClusterFeature>, int): double[]
+        -sampleFirst(ClusterFeature, List<? extends AsClusterFeature>, Random): ClusterFeature
+        -initialWeights(ClusterFeature, List<? extends AsClusterFeature>, double[]): double
+        -updateWeights(ClusterFeature, List<? extends AsClusterFeature>, double[]): double
+    }
+
+    abstract class "<size:14>AbstractCFKMeansInitialization\n<size:10>elki.clustering.kmeans.initialization.betula" as elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization [[AbstractCFKMeansInitialization.html]] {
+        {abstract} +chooseInitialMeans(CFTree<?>, List<? extends ClusterFeature>, int): double[]
+    }
+    class "<size:14>CFKPlusPlusLeaves.Par\n<size:10>elki.clustering.kmeans.initialization.betula" as elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves.Par [[CFKPlusPlusLeaves.Par.html]]
+
+    elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization <|-- elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves
+    elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves +-- elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

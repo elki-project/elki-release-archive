@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>RangeIndex\n<size:10>elki.index" as elki.index.RangeIndex<O> [[RangeIndex.html]] {
+        {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+        +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+    }
+
+    interface "<size:14>Index\n<size:10>elki.index" as elki.index.Index [[Index.html]] {
+        {abstract} +initialize(): void
+    }
+
+    elki.index.Index <|-- elki.index.RangeIndex
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

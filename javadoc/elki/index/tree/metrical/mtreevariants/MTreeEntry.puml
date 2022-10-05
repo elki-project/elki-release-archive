@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>MTreeEntry\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeEntry [[MTreeEntry.html]] {
+        {abstract} +getRoutingObjectID(): DBID
+        {abstract} +setRoutingObjectID(DBID): boolean
+        {abstract} +getParentDistance(): double
+        {abstract} +setParentDistance(double): boolean
+        {abstract} +getCoveringRadius(): double
+        {abstract} +setCoveringRadius(double): boolean
+    }
+
+    interface "<size:14>Externalizable\n<size:10>java.io" as java.io.Externalizable {
+        {abstract} +writeExternal(ObjectOutput): void
+        {abstract} +readExternal(ObjectInput): void
+    }
+
+    java.io.Externalizable <|-- elki.index.tree.metrical.mtreevariants.MTreeEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

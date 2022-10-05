@@ -1,0 +1,72 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.distance.colorhistogram {
+
+        class RGBHistogramQuadraticDistance [[RGBHistogramQuadraticDistance.html]] {
+            +RGBHistogramQuadraticDistance(int)
+            {static} +computeWeightMatrix(int): double[]
+        }
+
+        class elki.distance.colorhistogram.RGBHistogramQuadraticDistance.Par [[RGBHistogramQuadraticDistance.Par.html]] {
+            {static} +BPP_ID: OptionID
+            ~bpp: int
+            +configure(Parameterization): void
+            +make(): RGBHistogramQuadraticDistance
+        }
+
+        class HSBHistogramQuadraticDistance [[HSBHistogramQuadraticDistance.html]] {
+            +HSBHistogramQuadraticDistance(int, int, int)
+            {static} +computeWeightMatrix(int, int, int): double[]
+        }
+
+        class elki.distance.colorhistogram.HSBHistogramQuadraticDistance.Par [[HSBHistogramQuadraticDistance.Par.html]] {
+            {static} +BPP_ID: OptionID
+            ~quanth: int
+            ~quants: int
+            ~quantb: int
+            +configure(Parameterization): void
+            +make(): HSBHistogramQuadraticDistance
+        }
+
+        class HistogramIntersectionDistance [[HistogramIntersectionDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+        }
+
+        class elki.distance.colorhistogram.HistogramIntersectionDistance.Par [[HistogramIntersectionDistance.Par.html]] {
+            +make(): HistogramIntersectionDistance
+        }
+
+        elki.distance.MatrixWeightedQuadraticDistance <|-- RGBHistogramQuadraticDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.colorhistogram.RGBHistogramQuadraticDistance.Par
+        RGBHistogramQuadraticDistance +-- elki.distance.colorhistogram.RGBHistogramQuadraticDistance.Par
+        elki.distance.MatrixWeightedQuadraticDistance <|-- HSBHistogramQuadraticDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.colorhistogram.HSBHistogramQuadraticDistance.Par
+        HSBHistogramQuadraticDistance +-- elki.distance.colorhistogram.HSBHistogramQuadraticDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- HistogramIntersectionDistance
+        elki.distance.SpatialPrimitiveDistance <|.. HistogramIntersectionDistance
+        HistogramIntersectionDistance --> HistogramIntersectionDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.colorhistogram.HistogramIntersectionDistance.Par
+        HistogramIntersectionDistance +-- elki.distance.colorhistogram.HistogramIntersectionDistance.Par
+    }
+
+    namespace elki.distance {
+        class MatrixWeightedQuadraticDistance [[../MatrixWeightedQuadraticDistance.html]] {
+            #weightMatrix: double[]
+        }
+        abstract class AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+        interface SpatialPrimitiveDistance<V extends SpatialComparable> [[../SpatialPrimitiveDistance.html]] {
+            {abstract} +minDist(SpatialComparable, SpatialComparable): double
+            +instantiate(Relation<T extends SpatialComparable>): SpatialPrimitiveDistanceQuery<T extends SpatialComparable>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

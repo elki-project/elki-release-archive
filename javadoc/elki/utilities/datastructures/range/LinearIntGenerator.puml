@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearIntGenerator\n<size:10>elki.utilities.datastructures.range" as elki.utilities.datastructures.range.LinearIntGenerator [[LinearIntGenerator.html]] {
+        -start: int
+        -step: int
+        -stop: int
+        +LinearIntGenerator(int, int, int)
+        +getMin(): int
+        +getMax(): int
+        +forEach(IntConsumer): void
+        +serializeTo(StringBuilder): StringBuilder
+    }
+
+    interface "<size:14>IntGenerator\n<size:10>elki.utilities.datastructures.range" as elki.utilities.datastructures.range.IntGenerator [[IntGenerator.html]] {
+        {abstract} +getMin(): int
+        {abstract} +getMax(): int
+        {abstract} +forEach(IntConsumer): void
+        {abstract} +serializeTo(StringBuilder): StringBuilder
+    }
+
+    elki.utilities.datastructures.range.IntGenerator <|.. elki.utilities.datastructures.range.LinearIntGenerator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

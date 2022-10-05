@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractRandomProjectionFamily\n<size:10>elki.data.projection.random" as elki.data.projection.random.AbstractRandomProjectionFamily [[AbstractRandomProjectionFamily.html]] {
+        #random: Random
+        +AbstractRandomProjectionFamily(RandomFactory)
+    }
+
+    interface "<size:14>RandomProjectionFamily\n<size:10>elki.data.projection.random" as elki.data.projection.random.RandomProjectionFamily [[RandomProjectionFamily.html]] {
+        {abstract} +generateProjection(int, int): Projection
+    }
+    class "<size:14>AbstractRandomProjectionFamily.MatrixProjection\n<size:10>elki.data.projection.random" as elki.data.projection.random.AbstractRandomProjectionFamily.MatrixProjection [[AbstractRandomProjectionFamily.MatrixProjection.html]]
+    abstract class "<size:14>AbstractRandomProjectionFamily.Par\n<size:10>elki.data.projection.random" as elki.data.projection.random.AbstractRandomProjectionFamily.Par [[AbstractRandomProjectionFamily.Par.html]]
+
+    elki.data.projection.random.RandomProjectionFamily <|.. elki.data.projection.random.AbstractRandomProjectionFamily
+    elki.data.projection.random.AbstractRandomProjectionFamily +-- elki.data.projection.random.AbstractRandomProjectionFamily.MatrixProjection
+    elki.data.projection.random.AbstractRandomProjectionFamily +-- elki.data.projection.random.AbstractRandomProjectionFamily.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

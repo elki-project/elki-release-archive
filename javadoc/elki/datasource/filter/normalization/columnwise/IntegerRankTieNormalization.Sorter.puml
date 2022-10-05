@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntegerRankTieNormalization.Sorter\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.IntegerRankTieNormalization.Sorter [[IntegerRankTieNormalization.Sorter.html]] {
+        ~col: List<? extends NumberVector>
+        ~dim: int
+        +setup(List<? extends NumberVector>, int): void
+        +compare(int, int): int
+    }
+
+    interface "<size:14>IntComparator\n<size:10>it.unimi.dsi.fastutil.ints" as it.unimi.dsi.fastutil.ints.IntComparator {
+        {abstract} +compare(int, int): int
+    }
+    class "<size:14>IntegerRankTieNormalization\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.IntegerRankTieNormalization [[IntegerRankTieNormalization.html]]
+
+    it.unimi.dsi.fastutil.ints.IntComparator <|.. elki.datasource.filter.normalization.columnwise.IntegerRankTieNormalization.Sorter
+    elki.datasource.filter.normalization.columnwise.IntegerRankTieNormalization +-- elki.datasource.filter.normalization.columnwise.IntegerRankTieNormalization.Sorter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

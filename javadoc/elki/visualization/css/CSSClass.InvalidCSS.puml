@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CSSClass.InvalidCSS\n<size:10>elki.visualization.css" as elki.visualization.css.CSSClass.InvalidCSS [[CSSClass.InvalidCSS.html]] {
+        {static} -serialVersionUID: long
+        +InvalidCSS(String)
+    }
+
+    class "<size:14>RuntimeException\n<size:10>java.lang" as java.lang.RuntimeException
+    class "<size:14>CSSClass\n<size:10>elki.visualization.css" as elki.visualization.css.CSSClass [[CSSClass.html]]
+
+    java.lang.RuntimeException <|-- elki.visualization.css.CSSClass.InvalidCSS
+    elki.visualization.css.CSSClass +-- elki.visualization.css.CSSClass.InvalidCSS
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

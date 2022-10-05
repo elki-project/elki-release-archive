@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastABOD.Par\n<size:10>elki.outlier.anglebased" as elki.outlier.anglebased.FastABOD.Par<V extends NumberVector> [[FastABOD.Par.html]] {
+        {static} +K_ID: OptionID
+        #k: int
+        +configure(Parameterization): void
+        +make(): FastABOD<V extends NumberVector>
+    }
+
+    class "<size:14>ABOD.Par\n<size:10>elki.outlier.anglebased" as elki.outlier.anglebased.ABOD.Par<V extends NumberVector> [[ABOD.Par.html]]
+    class "<size:14>FastABOD\n<size:10>elki.outlier.anglebased" as elki.outlier.anglebased.FastABOD<V extends NumberVector> [[FastABOD.html]]
+
+    elki.outlier.anglebased.ABOD.Par <|-- elki.outlier.anglebased.FastABOD.Par
+    elki.outlier.anglebased.FastABOD +-- elki.outlier.anglebased.FastABOD.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

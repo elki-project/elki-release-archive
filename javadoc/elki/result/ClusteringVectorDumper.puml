@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusteringVectorDumper\n<size:10>elki.result" as elki.result.ClusteringVectorDumper [[ClusteringVectorDumper.html]] {
+        {static} -LOG: Logging
+        -outputFile: Path
+        -forceLabel: String
+        -append: boolean
+        +ClusteringVectorDumper(Path, boolean, String)
+        +ClusteringVectorDumper(Path, boolean)
+        +processNewResult(Object): void
+        #dumpClusteringOutput(Appendable, Clustering<?>): void
+    }
+
+    interface "<size:14>ResultHandler\n<size:10>elki.result" as elki.result.ResultHandler [[ResultHandler.html]]
+    class "<size:14>ClusteringVectorDumper.Par\n<size:10>elki.result" as elki.result.ClusteringVectorDumper.Par [[ClusteringVectorDumper.Par.html]]
+
+    elki.result.ResultHandler <|.. elki.result.ClusteringVectorDumper
+    elki.result.ClusteringVectorDumper +-- elki.result.ClusteringVectorDumper.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

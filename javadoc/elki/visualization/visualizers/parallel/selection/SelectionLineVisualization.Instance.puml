@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SelectionLineVisualization.Instance\n<size:10>elki.visualization.visualizers.parallel.selection" as elki.visualization.visualizers.parallel.selection.SelectionLineVisualization.Instance [[SelectionLineVisualization.Instance.html]] {
+        {static} +MARKER: String
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        -drawLine(DBIDRef): Element
+        -addCSSClasses(SVGPlot): void
+    }
+
+    abstract class "<size:14>AbstractParallelVisualization\n<size:10>elki.visualization.visualizers.parallel" as elki.visualization.visualizers.parallel.AbstractParallelVisualization<NumberVector> [[../AbstractParallelVisualization.html]]
+    interface "<size:14>DataStoreListener\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreListener [[../../../../database/datastore/DataStoreListener.html]] {
+        {abstract} +contentChanged(DataStoreEvent): void
+    }
+    class "<size:14>SelectionLineVisualization\n<size:10>elki.visualization.visualizers.parallel.selection" as elki.visualization.visualizers.parallel.selection.SelectionLineVisualization [[SelectionLineVisualization.html]]
+
+    elki.visualization.visualizers.parallel.AbstractParallelVisualization <|-- elki.visualization.visualizers.parallel.selection.SelectionLineVisualization.Instance
+    elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.parallel.selection.SelectionLineVisualization.Instance
+    elki.visualization.visualizers.parallel.selection.SelectionLineVisualization +-- elki.visualization.visualizers.parallel.selection.SelectionLineVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

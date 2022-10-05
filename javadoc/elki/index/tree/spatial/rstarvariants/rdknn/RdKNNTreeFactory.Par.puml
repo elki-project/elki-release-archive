@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RdKNNTreeFactory.Par\n<size:10>elki.index.tree.spatial.rstarvariants.rdknn" as elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTreeFactory.Par<O extends NumberVector> [[RdKNNTreeFactory.Par.html]] {
+        +configure(Parameterization): void
+        +make(): RdKNNTreeFactory<O extends NumberVector>
+        #createSettings(): RdkNNSettings
+    }
+
+    abstract class "<size:14>AbstractRStarTreeFactory.Par\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par<O extends NumberVector, RdkNNSettings> {
+        {abstract} #createSettings(): RdkNNSettings
+        {abstract} +make(): AbstractRStarTreeFactory<O extends NumberVector, ?, ?, ?>
+    }
+    class "<size:14>RdKNNTreeFactory\n<size:10>elki.index.tree.spatial.rstarvariants.rdknn" as elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTreeFactory<O extends NumberVector> [[RdKNNTreeFactory.html]]
+
+    elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par <|-- elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTreeFactory.Par
+    elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTreeFactory +-- elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTreeFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

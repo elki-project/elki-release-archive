@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InvertedOutlierScoreMeta\n<size:10>elki.result.outlier" as elki.result.outlier.InvertedOutlierScoreMeta [[InvertedOutlierScoreMeta.html]] {
+        +InvertedOutlierScoreMeta(double, double, double, double, double)
+        +InvertedOutlierScoreMeta(double, double, double, double)
+        +InvertedOutlierScoreMeta(double, double)
+        +normalizeScore(double): double
+    }
+
+    class "<size:14>BasicOutlierScoreMeta\n<size:10>elki.result.outlier" as elki.result.outlier.BasicOutlierScoreMeta [[BasicOutlierScoreMeta.html]]
+
+    elki.result.outlier.BasicOutlierScoreMeta <|-- elki.result.outlier.InvertedOutlierScoreMeta
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

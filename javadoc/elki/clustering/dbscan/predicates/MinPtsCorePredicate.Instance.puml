@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MinPtsCorePredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.MinPtsCorePredicate.Instance [[MinPtsCorePredicate.Instance.html]] {
+        #minpts: int
+        +Instance(int)
+        +isCorePoint(DBIDRef, DBIDs): boolean
+    }
+
+    interface "<size:14>CorePredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.CorePredicate.Instance<DBIDs> [[CorePredicate.Instance.html]] {
+        {abstract} +isCorePoint(DBIDRef, DBIDs): boolean
+    }
+    class "<size:14>MinPtsCorePredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.MinPtsCorePredicate [[MinPtsCorePredicate.html]]
+
+    elki.clustering.dbscan.predicates.CorePredicate.Instance <|.. elki.clustering.dbscan.predicates.MinPtsCorePredicate.Instance
+    elki.clustering.dbscan.predicates.MinPtsCorePredicate +-- elki.clustering.dbscan.predicates.MinPtsCorePredicate.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

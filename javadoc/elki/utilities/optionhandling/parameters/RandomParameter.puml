@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.RandomParameter [[RandomParameter.html]] {
+        {static} -GLOBAL_RANDOM_STR: String
+        ~seed: Long
+        +RandomParameter(OptionID)
+        +RandomParameter(OptionID, RandomFactory)
+        +getSyntax(): String
+        +setValue(Object): void
+        #parseValue(Object): RandomFactory
+        +getValueAsString(): String
+        +getDefaultValueAsString(): String
+        +grab(Parameterization, Consumer<RandomFactory>): boolean
+    }
+
+    abstract class "<size:14>AbstractParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.AbstractParameter<RandomParameter, RandomFactory> [[AbstractParameter.html]] {
+        {abstract} #parseValue(Object): RandomFactory
+    }
+
+    elki.utilities.optionhandling.parameters.AbstractParameter <|-- elki.utilities.optionhandling.parameters.RandomParameter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

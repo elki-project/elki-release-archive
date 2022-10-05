@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="266px" preserveAspectRatio="none" style="width:596px;height:266px;background:#FFFFFF;" version="1.1" viewBox="0 0 596 266" width="596px" zoomAndPan="magnify"><defs/><g><!--MD5=[6dc972d6dc824bfc6e38d09771e0965d]
+class elki.outlier.subspace.OutRankS1--><a href="OutRankS1.html" target="_top" title="OutRankS1.html" xlink:actuate="onRequest" xlink:href="OutRankS1.html" xlink:show="new" xlink:title="OutRankS1.html" xlink:type="simple"><g id="elem_elki.outlier.subspace.OutRankS1"><rect codeLine="6" fill="#F1F1F1" height="135.4219" id="elki.outlier.subspace.OutRankS1" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="580" x="9" y="105"/><ellipse cx="246.75" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M249.7188,129.6094 Q249.1406,129.9063 248.5,130.0469 Q247.8594,130.2031 247.1563,130.2031 Q244.6563,130.2031 243.3281,128.5625 Q242.0156,126.9063 242.0156,123.7813 Q242.0156,120.6563 243.3281,119 Q244.6563,117.3438 247.1563,117.3438 Q247.8594,117.3438 248.5,117.5 Q249.1563,117.6563 249.7188,117.9531 L249.7188,120.6719 Q249.0938,120.0938 248.5,119.8281 Q247.9063,119.5469 247.2813,119.5469 Q245.9375,119.5469 245.25,120.625 Q244.5625,121.6875 244.5625,123.7813 Q244.5625,125.875 245.25,126.9531 Q245.9375,128.0156 247.2813,128.0156 Q247.9063,128.0156 248.5,127.75 Q249.0938,127.4688 249.7188,126.8906 L249.7188,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="276.25" y="122.9951">OutRankS1</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="96" x="267.25" y="135.5791">elki.outlier.subspace</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="588" y1="142.9375" y2="142.9375"/><polygon fill="none" points="20,151.5859,24,155.5859,20,159.5859,16,155.5859" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="486" x="29" y="159.9326">clusteralg: SubspaceClusteringAlgorithm&lt;? extends SubspaceModel&gt;</text><polygon fill="none" points="20,168.8828,16,174.8828,24,174.8828" style="stroke:#1963A0;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="94" x="29" y="176.2295">alpha: double</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="588" y1="183.5313" y2="183.5313"/><ellipse cx="20" cy="197.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="554" x="29" y="200.5264">OutRankS1(SubspaceClusteringAlgorithm&lt;? extends SubspaceModel&gt;, double)</text><ellipse cx="20" cy="213.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="306" x="29" y="216.8232">getInputTypeRestriction(): TypeInformation[]</text><ellipse cx="20" cy="229.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="228" x="29" y="233.1201">autorun(Database): OutlierResult</text></g></a><!--MD5=[81019799438b1b9471ca37184b444d57]
+class elki.outlier.OutlierAlgorithm--><a href="../OutlierAlgorithm.html" target="_top" title="../OutlierAlgorithm.html" xlink:actuate="onRequest" xlink:href="../OutlierAlgorithm.html" xlink:show="new" xlink:title="../OutlierAlgorithm.html" xlink:type="simple"><g id="elem_elki.outlier.OutlierAlgorithm"><rect codeLine="14" fill="#F1F1F1" height="37.9375" id="elki.outlier.OutlierAlgorithm" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="148" x="225" y="7"/><ellipse cx="240" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M235.9219,21.7344 L235.9219,19.5781 L243.3125,19.5781 L243.3125,21.7344 L240.8438,21.7344 L240.8438,29.8125 L243.3125,29.8125 L243.3125,31.9688 L235.9219,31.9688 L235.9219,29.8125 L238.3906,29.8125 L238.3906,21.7344 L235.9219,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="116" x="254" y="24.9951">OutlierAlgorithm</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="53" x="285.5" y="37.5791">elki.outlier</text></g></a><!--MD5=[3f2be6453a4bf890ab1b8f03588ef8d2]
+reverse link elki.outlier.OutlierAlgorithm to elki.outlier.subspace.OutRankS1--><g id="link_elki.outlier.OutlierAlgorithm_elki.outlier.subspace.OutRankS1"><path codeLine="17" d="M299,65.22 C299,77.35 299,91.15 299,104.69 " fill="none" id="elki.outlier.OutlierAlgorithm-backto-elki.outlier.subspace.OutRankS1" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="292,65.01,299,45.01,306,65.01,292,65.01" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="198" y="246.4219"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="198" y="255.7041">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[22d194c4d8c76e940dc2c91c70c718ff]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutRankS1\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.OutRankS1 [[OutRankS1.html]] {
+        #clusteralg: SubspaceClusteringAlgorithm<? extends SubspaceModel>
+        ~alpha: double
+        +OutRankS1(SubspaceClusteringAlgorithm<? extends SubspaceModel>, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +autorun(Database): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>OutRankS1.Par\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.OutRankS1.Par [[OutRankS1.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.subspace.OutRankS1
+    elki.outlier.subspace.OutRankS1 +- - elki.outlier.subspace.OutRankS1.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

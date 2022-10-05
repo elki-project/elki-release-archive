@@ -1,0 +1,86 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.parallel.cluster {
+
+        class ClusterParallelMeanVisualization [[ClusterParallelMeanVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class elki.visualization.visualizers.parallel.cluster.ClusterParallelMeanVisualization.Instance [[ClusterParallelMeanVisualization.Instance.html]] {
+            {static} +CLUSTERMEAN: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+        }
+
+        class ClusterOutlineVisualization [[ClusterOutlineVisualization.html]] {
+            {static} -NAME: String
+            +ClusterOutlineVisualization(Par)
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Instance [[ClusterOutlineVisualization.Instance.html]] {
+            {static} +CLUSTERAREA: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -addCSSClasses(SVGPlot, int, double): void
+        }
+
+        class elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Par [[ClusterOutlineVisualization.Par.html]] {
+            {static} +STRAIGHT_ID: OptionID
+            -bend: boolean
+            +configure(Parameterization): void
+            +make(): ClusterOutlineVisualization
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. ClusterParallelMeanVisualization
+        elki.visualization.visualizers.parallel.AbstractParallelVisualization <|-- elki.visualization.visualizers.parallel.cluster.ClusterParallelMeanVisualization.Instance
+        elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.parallel.cluster.ClusterParallelMeanVisualization.Instance
+        ClusterParallelMeanVisualization +-- elki.visualization.visualizers.parallel.cluster.ClusterParallelMeanVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. ClusterOutlineVisualization
+        ClusterOutlineVisualization --> elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Par: settings
+        elki.visualization.visualizers.parallel.AbstractParallelVisualization <|-- elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Instance
+        elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Instance
+        ClusterOutlineVisualization +-- elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Par
+        ClusterOutlineVisualization +-- elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Par
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+    }
+
+    namespace elki.visualization.visualizers.parallel {
+        abstract class AbstractParallelVisualization<NV> [[../AbstractParallelVisualization.html]] {
+            #proj: ProjectionParallel
+            #relation: Relation<NV>
+            ~margins: double[]
+            #axsep: double
+            ~size: double[]
+        }
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreListener [[../../../../database/datastore/DataStoreListener.html]] {
+            {abstract} +contentChanged(DataStoreEvent): void
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

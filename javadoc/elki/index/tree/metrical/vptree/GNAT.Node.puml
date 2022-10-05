@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GNAT.Node\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.Node [[GNAT.Node.html]] {
+        ~vps: ArrayDBIDs
+        ~children: Node[]
+        ~lowerBound: double[]
+        ~upperBound: double[]
+        +Node(int)
+    }
+
+    class "<size:14>GNAT\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT<O> [[GNAT.html]]
+
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.Node
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

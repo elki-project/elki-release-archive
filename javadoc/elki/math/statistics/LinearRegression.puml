@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearRegression\n<size:10>elki.math.statistics" as elki.math.statistics.LinearRegression [[LinearRegression.html]] {
+        -t: double
+        -m: double
+        +LinearRegression(List<DoubleDoublePair>)
+        +getM(): double
+        +getT(): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

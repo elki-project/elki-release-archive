@@ -1,0 +1,49 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkMaxTreeIndex\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkmax" as elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeIndex<O> [[MkMaxTreeIndex.html]] {
+        -relation: Relation<O>
+        +MkMaxTreeIndex(Relation<O>, PageFile<MkMaxTreeNode<O>>, MkTreeSettings<O, MkMaxTreeNode<O>, MkMaxEntry>)
+        #createNewLeafEntry(DBID, DBIDRef, double): MkMaxLeafEntry
+        +initialize(): void
+        +insert(DBIDRef): void
+        +insertAll(DBIDs): void
+        +delete(DBIDRef): boolean
+        +deleteAll(DBIDs): void
+        +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+        +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+        +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+        +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+    }
+
+    abstract class "<size:14>MkMaxTree\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkmax" as elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTree<O> [[MkMaxTree.html]]
+    interface "<size:14>RangeIndex\n<size:10>elki.index" as elki.index.RangeIndex<O> [[../../../../../RangeIndex.html]] {
+        {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+    }
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<O> [[../../../../../KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    interface "<size:14>RKNNIndex\n<size:10>elki.index" as elki.index.RKNNIndex<O> [[../../../../../RKNNIndex.html]] {
+        {abstract} +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+        {abstract} +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+    }
+    interface "<size:14>DynamicIndex\n<size:10>elki.index" as elki.index.DynamicIndex [[../../../../../DynamicIndex.html]] {
+        {abstract} +delete(DBIDRef): boolean
+        {abstract} +insert(DBIDRef): void
+        {abstract} +deleteAll(DBIDs): void
+        {abstract} +insertAll(DBIDs): void
+    }
+
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTree <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeIndex
+    elki.index.RangeIndex <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeIndex
+    elki.index.KNNIndex <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeIndex
+    elki.index.RKNNIndex <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeIndex
+    elki.index.DynamicIndex <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeIndex
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

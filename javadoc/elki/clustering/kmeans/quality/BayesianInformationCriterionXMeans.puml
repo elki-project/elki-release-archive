@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BayesianInformationCriterionXMeans\n<size:10>elki.clustering.kmeans.quality" as elki.clustering.kmeans.quality.BayesianInformationCriterionXMeans [[BayesianInformationCriterionXMeans.html]] {
+        +quality(Clustering<? extends MeanModel>, NumberVectorDistance<? super NumberVector>, Relation<V extends NumberVector>): double
+        {static} +logLikelihoodXMeans(Relation<? extends NumberVector>, Clustering<? extends MeanModel>, NumberVectorDistance<?>): double
+        +isBetter(double, double): boolean
+    }
+
+    abstract class "<size:14>AbstractKMeansQualityMeasure\n<size:10>elki.clustering.kmeans.quality" as elki.clustering.kmeans.quality.AbstractKMeansQualityMeasure<NumberVector> [[AbstractKMeansQualityMeasure.html]]
+
+    elki.clustering.kmeans.quality.AbstractKMeansQualityMeasure <|-- elki.clustering.kmeans.quality.BayesianInformationCriterionXMeans
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

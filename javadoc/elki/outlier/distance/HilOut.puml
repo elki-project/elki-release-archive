@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HilOut\n<size:10>elki.outlier.distance" as elki.outlier.distance.HilOut<O extends NumberVector> [[HilOut.html]] {
+        {static} -LOG: Logging
+        -distance: Distance<? super NumberVector>
+        -k: int
+        -n: int
+        -h: int
+        -t: double
+        -tn: Enum<ScoreType>
+        -distq: DistanceQuery<O extends NumberVector>
+        -capital_n: int
+        -n_star: int
+        -capital_n_star: int
+        -d: int
+        -omega_star: double
+        +HilOut(LPNormDistance, int, int, int, Enum<ScoreType>)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O extends NumberVector>): OutlierResult
+        -scan(HilbertFeatures, int): void
+        -innerScan(HilbertFeatures, int, int): void
+        -trueOutliers(HilbertFeatures): void
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    enum "<size:14>HilOut.ScoreType\n<size:10>elki.outlier.distance" as elki.outlier.distance.HilOut.ScoreType [[HilOut.ScoreType.html]]
+    class "<size:14>HilOut.HilbertFeatures\n<size:10>elki.outlier.distance" as elki.outlier.distance.HilOut.HilbertFeatures [[HilOut.HilbertFeatures.html]]
+    class "<size:14>HilOut.HilFeature\n<size:10>elki.outlier.distance" as elki.outlier.distance.HilOut.HilFeature [[HilOut.HilFeature.html]]
+    class "<size:14>HilOut.Par\n<size:10>elki.outlier.distance" as elki.outlier.distance.HilOut.Par<O extends NumberVector>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.distance.HilOut
+    elki.outlier.distance.HilOut +-- elki.outlier.distance.HilOut.ScoreType
+    elki.outlier.distance.HilOut +-- elki.outlier.distance.HilOut.HilbertFeatures
+    elki.outlier.distance.HilOut +-- elki.outlier.distance.HilOut.HilFeature
+    elki.outlier.distance.HilOut +-- elki.outlier.distance.HilOut.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

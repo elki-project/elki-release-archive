@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VoronoiVisualization\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization [[VoronoiVisualization.html]] {
+        {static} -NAME: String
+        {static} -KMEANSBORDER: String
+        -mode: Mode
+        +VoronoiVisualization(Mode)
+        +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        +processNewResult(VisualizerContext, Object): void
+    }
+
+    interface "<size:14>VisFactory\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.VisFactory [[../../VisFactory.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+        {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+    }
+    enum "<size:14>VoronoiVisualization.Mode\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Mode [[VoronoiVisualization.Mode.html]]
+    class "<size:14>VoronoiVisualization.SwitchModeAction\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.SwitchModeAction [[VoronoiVisualization.SwitchModeAction.html]]
+    class "<size:14>VoronoiVisualization.Instance\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Instance [[VoronoiVisualization.Instance.html]]
+    class "<size:14>VoronoiVisualization.Par\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Par [[VoronoiVisualization.Par.html]]
+
+    elki.visualization.visualizers.VisFactory <|.. elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization
+    elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization +-- elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Mode
+    elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization +-- elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.SwitchModeAction
+    elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization +-- elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Instance
+    elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization +-- elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InputStreamDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.InputStreamDatabaseConnection [[InputStreamDatabaseConnection.html]] {
+        {static} -LOG: Logging
+        ~parser: Parser
+        ~in: Supplier<InputStream>
+        ~ins: InputStream
+        +InputStreamDatabaseConnection(Supplier<InputStream>, List<? extends ObjectFilter>, Parser)
+        +InputStreamDatabaseConnection(InputStream, List<? extends ObjectFilter>, Parser)
+        +loadData(): MultipleObjectsBundle
+        +close(): void
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.AbstractDatabaseConnection [[AbstractDatabaseConnection.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    interface "<size:14>AutoCloseable\n<size:10>java.lang" as java.lang.AutoCloseable {
+        {abstract} +close(): void
+    }
+    class "<size:14>InputStreamDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.InputStreamDatabaseConnection.Par [[InputStreamDatabaseConnection.Par.html]]
+
+    elki.datasource.AbstractDatabaseConnection <|-- elki.datasource.InputStreamDatabaseConnection
+    java.lang.AutoCloseable <|.. elki.datasource.InputStreamDatabaseConnection
+    elki.datasource.InputStreamDatabaseConnection +-- elki.datasource.InputStreamDatabaseConnection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExtendedArray\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.ExtendedArray<T> [[ExtendedArray.html]] {
+        ~array: Object
+        ~getter: ArrayAdapter<T, Object>
+        ~extra: T
+        ~size: int
+        #ExtendedArray(Object, ArrayAdapter<T, Object>, T)
+        +size(ExtendedArray<T>): int
+        +get(ExtendedArray<T>, int): T
+        {static} +extend(A, ArrayAdapter<T, A>, T): ExtendedArray<T>
+    }
+
+    interface "<size:14>ArrayAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.ArrayAdapter<T, ExtendedArray<T>> [[ArrayAdapter.html]] {
+        {abstract} +size(ExtendedArray<T>): int
+        {abstract} +get(ExtendedArray<T>, int): T
+    }
+
+    elki.utilities.datastructures.arraylike.ArrayAdapter <|.. elki.utilities.datastructures.arraylike.ExtendedArray
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

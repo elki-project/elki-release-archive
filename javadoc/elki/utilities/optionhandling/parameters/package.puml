@@ -1,0 +1,323 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.optionhandling.parameters {
+
+        class DoubleParameter [[DoubleParameter.html]] {
+            +DoubleParameter(OptionID, double)
+            +DoubleParameter(OptionID)
+            +getValueAsString(): String
+            #parseValue(Object): Double
+            +getSyntax(): String
+            +doubleValue(): double
+            +grab(Parameterization, DoubleConsumer): boolean
+        }
+
+        class EnumParameter<E extends Enum<E>> [[EnumParameter.html]] {
+            #enumClass: Class<E extends Enum<E>>
+            +EnumParameter(OptionID, Class<E extends Enum<E>>, E extends Enum<E extends Enum<E>>)
+            +EnumParameter(OptionID, Class<E extends Enum<E>>)
+            +getSyntax(): String
+            #parseValue(Object): E extends Enum<E extends Enum<E>>
+            +getValueAsString(): String
+            +describeValues(StringBuilder): StringBuilder
+            +getPossibleValues(): Collection<String>
+            -joinEnumNames(String): String
+            +grab(Parameterization, Consumer<E extends Enum<E>>): boolean
+        }
+
+        class FileListParameter [[FileListParameter.html]] {
+            +FileListParameter(OptionID, FilesType)
+            +getValueAsString(): String
+            +getDefaultValueAsString(): String
+            #parseValue(Object): List<URI>
+            #validate(List<URI>): boolean
+            +size(): int
+            +getSyntax(): String
+            +grab(Parameterization, Consumer<List<URI>>): boolean
+        }
+
+        enum elki.utilities.optionhandling.parameters.FileListParameter.FilesType [[FileListParameter.FilesType.html]] {
+            {static} +INPUT_FILES
+            {static} +OUTPUT_FILES
+        }
+
+        abstract class ListParameter<P extends ListParameter<P, T>, T> [[ListParameter.html]] {
+            {static} +SPLIT: Pattern
+            {static} +LIST_SEP: String
+            {static} +VECTOR_SPLIT: Pattern
+            {static} +VECTOR_SEP: String
+            +ListParameter(OptionID, T)
+            +ListParameter(OptionID)
+            {abstract} +size(): int
+        }
+
+        class LongParameter [[LongParameter.html]] {
+            +LongParameter(OptionID, long)
+            +LongParameter(OptionID)
+            +getValueAsString(): String
+            #parseValue(Object): Long
+            +getSyntax(): String
+            +grab(Parameterization, LongConsumer): boolean
+        }
+
+        class ObjectParameter<C> [[ObjectParameter.html]] {
+            -instance: C
+            +ObjectParameter(OptionID, Class<?>, Class<?>)
+            +ObjectParameter(OptionID, Class<?>, T extends C)
+            +ObjectParameter(OptionID, Class<?>)
+            #parseValue(Object): Class<? extends C>
+            +setValue(Object): void
+            +setOptional(boolean): ObjectParameter<C>
+            +getSyntax(): String
+            +instantiateClass(Parameterization): C
+        }
+
+        class ObjectListParameter<C> [[ObjectListParameter.html]] {
+            -instances: List<C>
+            +ObjectListParameter(OptionID, Class<?>)
+            +getSyntax(): String
+            #parseValue(Object): List<Class<? extends C>>
+            +setOptional(boolean): ObjectListParameter<C>
+            +instantiateClasses(Parameterization): List<C>
+        }
+
+        class IntListParameter [[IntListParameter.html]] {
+            +IntListParameter(OptionID)
+            +getValueAsString(): String
+            +getDefaultValueAsString(): String
+            #parseValue(Object): int[]
+            +size(): int
+            +getSyntax(): String
+            +grab(Parameterization, Consumer<int[]>): boolean
+        }
+
+        class DoubleArrayListParameter [[DoubleArrayListParameter.html]] {
+            +DoubleArrayListParameter(OptionID, ParameterConstraint<List<double[]>>, List<double[]>)
+            +DoubleArrayListParameter(OptionID, ParameterConstraint<List<double[]>>)
+            +DoubleArrayListParameter(OptionID, List<double[]>)
+            +DoubleArrayListParameter(OptionID)
+            +getValueAsString(): String
+            +getDefaultValueAsString(): String
+            #parseValue(Object): List<double[]>
+            +size(): int
+            +getSyntax(): String
+            +grab(Parameterization, Consumer<List<double[]>>): boolean
+        }
+
+        class Flag [[Flag.html]] {
+            {static} +SET: String
+            {static} +NOT_SET: String
+            +Flag(OptionID)
+            #parseValue(Object): Boolean
+            +getSyntax(): String
+            +getValueAsString(): String
+            #validate(Boolean): boolean
+            +setValue(boolean): void
+            +isTrue(): boolean
+            +isFalse(): boolean
+            +grab(Parameterization, BooleanConsumer): boolean
+        }
+
+        interface elki.utilities.optionhandling.parameters.Flag.BooleanConsumer [[Flag.BooleanConsumer.html]] {
+            {abstract} +accept(boolean): void
+        }
+
+        class FileParameter [[FileParameter.html]] {
+            +FileParameter(OptionID, FileType)
+            +getValueAsString(): String
+            #parseValue(Object): URI
+            #validate(URI): boolean
+            +getSyntax(): String
+            +grab(Parameterization, Consumer<URI>): boolean
+        }
+
+        enum elki.utilities.optionhandling.parameters.FileParameter.FileType [[FileParameter.FileType.html]] {
+            {static} +INPUT_FILE
+            {static} +OUTPUT_FILE
+        }
+
+        class ClassParameter<C> [[ClassParameter.html]] {
+            {static} -LOG: Logging
+            #restrictionClass: Class<C>
+            +ClassParameter(OptionID, Class<?>, Class<?>)
+            +ClassParameter(OptionID, Class<?>)
+            #parseValue(Object): Class<? extends C>
+            +validate(Class<? extends C>): boolean
+            +getSyntax(): String
+            +describeValues(StringBuilder): StringBuilder
+            {static} #describeImplementations(StringBuilder, Class<?>, List<Class<?>>): StringBuilder
+            +getValueAsString(): String
+            +getDefaultValueAsString(): String
+            {static} +canonicalClassName(Class<?>, Package): String
+            {static} +canonicalClassName(Class<?>, Class<?>): String
+            +instantiateClass(Parameterization): C
+            +getRestrictionClass(): Class<C>
+            +getKnownImplementations(): List<Class<?>>
+            +grab(Parameterization, Consumer<C>): boolean
+        }
+
+        abstract class NumberParameter<P extends NumberParameter<P, T extends Number>, T extends Number> [[NumberParameter.html]] {
+            +NumberParameter(OptionID, T extends Number)
+            +NumberParameter(OptionID)
+        }
+
+        class IntParameter [[IntParameter.html]] {
+            +IntParameter(OptionID, int)
+            +IntParameter(OptionID)
+            +getValueAsString(): String
+            #parseValue(Object): Integer
+            +getSyntax(): String
+            +intValue(): int
+            +grab(Parameterization, IntConsumer): boolean
+        }
+
+        class ClassListParameter<C> [[ClassListParameter.html]] {
+            #restrictionClass: Class<C>
+            +ClassListParameter(OptionID, Class<?>)
+            +getValueAsString(): String
+            +getDefaultValueAsString(): String
+            #formatValue(List<Class<? extends C>>): String
+            #parseValue(Object): List<Class<? extends C>>
+            #validate(List<Class<? extends C>>): boolean
+            +getRestrictionClass(): Class<C>
+            +getKnownImplementations(): List<Class<?>>
+            +getSyntax(): String
+            +instantiateClasses(Parameterization): List<C>
+            +describeValues(StringBuilder): StringBuilder
+            +size(): int
+            +grab(Parameterization, Consumer<List<? extends C>>): boolean
+        }
+
+        class PatternParameter [[PatternParameter.html]] {
+            +PatternParameter(OptionID, Pattern)
+            +PatternParameter(OptionID, String)
+            +PatternParameter(OptionID)
+            +getValueAsString(): String
+            #parseValue(Object): Pattern
+            +getSyntax(): String
+            +grab(Parameterization, Consumer<Pattern>): boolean
+        }
+
+        class RandomParameter [[RandomParameter.html]] {
+            {static} -GLOBAL_RANDOM_STR: String
+            ~seed: Long
+            +RandomParameter(OptionID)
+            +RandomParameter(OptionID, RandomFactory)
+            +getSyntax(): String
+            +setValue(Object): void
+            #parseValue(Object): RandomFactory
+            +getValueAsString(): String
+            +getDefaultValueAsString(): String
+            +grab(Parameterization, Consumer<RandomFactory>): boolean
+        }
+
+        class StringParameter [[StringParameter.html]] {
+            +StringParameter(OptionID, String)
+            +StringParameter(OptionID)
+            +getValueAsString(): String
+            #parseValue(Object): String
+            +getSyntax(): String
+            +grab(Parameterization, Consumer<String>): boolean
+        }
+
+        interface Parameter<T> [[Parameter.html]] {
+            {abstract} +setDefaultValue(T): Parameter<T>
+            {abstract} +hasDefaultValue(): boolean
+            {abstract} +tryDefaultValue(): boolean
+            {abstract} +setOptional(boolean): Parameter<T>
+            {abstract} +isOptional(): boolean
+            {abstract} +tookDefaultValue(): boolean
+            {abstract} +isDefined(): boolean
+            {abstract} +getDefaultValue(): T
+            {abstract} +getOptionID(): OptionID
+            {abstract} +setValue(Object): void
+            {abstract} +getValue(): T
+            {abstract} +isValid(Object): boolean
+            {abstract} +getSyntax(): String
+            {abstract} +getValueAsString(): String
+            {abstract} +getDefaultValueAsString(): String
+            {abstract} +describeValues(StringBuilder): StringBuilder
+            {abstract} +addConstraint(ParameterConstraint<? super T>): Parameter<T>
+            {abstract} +getConstraints(): List<ParameterConstraint<? super T>>
+        }
+
+        class DoubleListParameter [[DoubleListParameter.html]] {
+            +DoubleListParameter(OptionID)
+            +getValueAsString(): String
+            +getDefaultValueAsString(): String
+            #parseValue(Object): double[]
+            +size(): int
+            +getSyntax(): String
+            +grab(Parameterization, Consumer<double[]>): boolean
+        }
+
+        abstract class AbstractParameter<P extends AbstractParameter<P, T>, T> [[AbstractParameter.html]] {
+            #optionid: OptionID
+            #defaultValue: T
+            -defaultValueTaken: boolean
+            #optionalParameter: boolean
+            #constraints: List<ParameterConstraint<? super T>>
+            #givenValue: T
+            -value: T
+            +AbstractParameter(OptionID, T)
+            +AbstractParameter(OptionID)
+            +setDefaultValue(T): P extends AbstractParameter<P extends AbstractParameter<P,T>, T>
+            +hasDefaultValue(): boolean
+            +tryDefaultValue(): boolean
+            +setOptional(boolean): P extends AbstractParameter<P extends AbstractParameter<P,T>, T>
+            +isOptional(): boolean
+            +tookDefaultValue(): boolean
+            +isDefined(): boolean
+            +getDefaultValue(): T
+            +describeValues(StringBuilder): StringBuilder
+            #validate(T): boolean
+            +getOptionID(): OptionID
+            +setValue(Object): void
+            #setValueInternal(T): void
+            +getValue(): T
+            +isValid(Object): boolean
+            {abstract} #parseValue(Object): T
+            +getDefaultValueAsString(): String
+            +addConstraint(ParameterConstraint<? super T>): P extends AbstractParameter<P extends AbstractParameter<P,T>, T>
+            +getConstraints(): List<ParameterConstraint<? super T>>
+        }
+
+        class IntGeneratorParameter [[IntGeneratorParameter.html]] {
+            +IntGeneratorParameter(OptionID)
+            +getValueAsString(): String
+            +getDefaultValueAsString(): String
+            #parseValue(Object): IntGenerator
+            +getSyntax(): String
+            +grab(Parameterization, Consumer<IntGenerator>): boolean
+        }
+
+        NumberParameter <|-- DoubleParameter
+        AbstractParameter <|-- EnumParameter
+        ListParameter <|-- FileListParameter
+        FileListParameter --> elki.utilities.optionhandling.parameters.FileListParameter.FilesType: filesType
+        FileListParameter +-- elki.utilities.optionhandling.parameters.FileListParameter.FilesType
+        AbstractParameter <|-- ListParameter
+        NumberParameter <|-- LongParameter
+        ClassParameter <|-- ObjectParameter
+        ClassListParameter <|-- ObjectListParameter
+        ListParameter <|-- IntListParameter
+        ListParameter <|-- DoubleArrayListParameter
+        AbstractParameter <|-- Flag
+        Flag +-- elki.utilities.optionhandling.parameters.Flag.BooleanConsumer
+        AbstractParameter <|-- FileParameter
+        FileParameter --> elki.utilities.optionhandling.parameters.FileParameter.FileType: fileType
+        FileParameter +-- elki.utilities.optionhandling.parameters.FileParameter.FileType
+        AbstractParameter <|-- ClassParameter
+        AbstractParameter <|-- NumberParameter
+        NumberParameter <|-- IntParameter
+        ListParameter <|-- ClassListParameter
+        AbstractParameter <|-- PatternParameter
+        AbstractParameter <|-- RandomParameter
+        AbstractParameter <|-- StringParameter
+        ListParameter <|-- DoubleListParameter
+        Parameter <|.. AbstractParameter
+        AbstractParameter <|-- IntGeneratorParameter
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

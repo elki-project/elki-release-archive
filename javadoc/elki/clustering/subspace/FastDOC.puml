@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastDOC\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.FastDOC [[FastDOC.html]] {
+        {static} -LOG: Logging
+        -d_zero: int
+        +FastDOC(double, double, double, int, RandomFactory)
+        #runDOC(Relation<? extends NumberVector>, ArrayModifiableDBIDs, int, int, int, int, int): Cluster<SubspaceModel>
+    }
+
+    class "<size:14>DOC\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DOC [[DOC.html]]
+    class "<size:14>FastDOC.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.FastDOC.Par [[FastDOC.Par.html]]
+
+    elki.clustering.subspace.DOC <|-- elki.clustering.subspace.FastDOC
+    elki.clustering.subspace.FastDOC +-- elki.clustering.subspace.FastDOC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

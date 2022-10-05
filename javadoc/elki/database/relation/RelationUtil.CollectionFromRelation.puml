@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RelationUtil.CollectionFromRelation\n<size:10>elki.database.relation" as elki.database.relation.RelationUtil.CollectionFromRelation<O> [[RelationUtil.CollectionFromRelation.html]] {
+        ~db: Relation<? extends O>
+        +CollectionFromRelation(Relation<? extends O>)
+        +iterator(): Iterator<O>
+        +size(): int
+    }
+
+    abstract class "<size:14>AbstractCollection\n<size:10>java.util" as java.util.AbstractCollection<O> {
+        {abstract} +iterator(): Iterator<E>
+        {abstract} +size(): int
+    }
+    interface "<size:14>Collection\n<size:10>java.util" as java.util.Collection<O> {
+        {abstract} +size(): int
+        {abstract} +isEmpty(): boolean
+        {abstract} +contains(Object): boolean
+        {abstract} +iterator(): Iterator<E>
+        {abstract} +toArray(): Object[]
+        {abstract} +toArray(T[]): T[]
+        {abstract} +add(O): boolean
+        {abstract} +remove(Object): boolean
+        {abstract} +containsAll(Collection<?>): boolean
+        {abstract} +addAll(Collection<? extends E>): boolean
+        {abstract} +removeAll(Collection<?>): boolean
+        {abstract} +retainAll(Collection<?>): boolean
+        {abstract} +clear(): void
+    }
+    class "<size:14>RelationUtil\n<size:10>elki.database.relation" as elki.database.relation.RelationUtil [[RelationUtil.html]]
+
+    java.util.AbstractCollection <|-- elki.database.relation.RelationUtil.CollectionFromRelation
+    java.util.Collection <|.. elki.database.relation.RelationUtil.CollectionFromRelation
+    elki.database.relation.RelationUtil +-- elki.database.relation.RelationUtil.CollectionFromRelation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

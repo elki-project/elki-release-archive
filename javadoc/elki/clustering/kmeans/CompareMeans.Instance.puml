@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CompareMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.CompareMeans.Instance [[CompareMeans.Instance.html]] {
+        ~cdist: double[]
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+        #iterate(int): int
+        #recomputeSeperation(double[], double[]): void
+        #assignToNearestCluster(): int
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Instance [[AbstractKMeans.Instance.html]] {
+        {abstract} #iterate(int): int
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>CompareMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.CompareMeans<V extends NumberVector> [[CompareMeans.html]]
+
+    elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.CompareMeans.Instance
+    elki.clustering.kmeans.CompareMeans +-- elki.clustering.kmeans.CompareMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

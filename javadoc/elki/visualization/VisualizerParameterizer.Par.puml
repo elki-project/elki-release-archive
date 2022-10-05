@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VisualizerParameterizer.Par\n<size:10>elki.visualization" as elki.visualization.VisualizerParameterizer.Par [[VisualizerParameterizer.Par.html]] {
+        {static} +STYLELIB_ID: OptionID
+        {static} +ENABLEVIS_ID: OptionID
+        {static} +SAMPLING_ID: OptionID
+        {static} +SHOWVIS_ID: OptionID
+        #stylelib: StyleLibrary
+        #enableVisualizers: Pattern
+        #showVisualizers: Pattern
+        #factories: Collection<VisualizationProcessor>
+        #samplesize: int
+        +configure(Parameterization): void
+        {static} -collectFactorys(MergedParameterization, Pattern): Collection<VisualizationProcessor>
+        +make(): VisualizerParameterizer
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>VisualizerParameterizer\n<size:10>elki.visualization" as elki.visualization.VisualizerParameterizer [[VisualizerParameterizer.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.VisualizerParameterizer.Par
+    elki.visualization.VisualizerParameterizer +-- elki.visualization.VisualizerParameterizer.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

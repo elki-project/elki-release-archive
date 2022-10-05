@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HySortOD.Par\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD.Par {
+        {static} +B_ID: OptionID
+        {static} +MIN_SPLIT_ID: OptionID
+        #b: int
+        #minSplit: int
+        +configure(Parameterization): void
+        +make(): HySortOD
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>HySortOD\n<size:10>elki.outlier.density" as elki.outlier.density.HySortOD [[HySortOD.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.density.HySortOD.Par
+    elki.outlier.density.HySortOD +-- elki.outlier.density.HySortOD.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

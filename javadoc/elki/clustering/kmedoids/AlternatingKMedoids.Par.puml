@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AlternatingKMedoids.Par\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.AlternatingKMedoids.Par<V> [[AlternatingKMedoids.Par.html]] {
+        #k: int
+        #maxiter: int
+        #initializer: KMedoidsInitialization<V>
+        #distance: Distance<? super V>
+        +configure(Parameterization): void
+        +make(): AlternatingKMedoids<V>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AlternatingKMedoids\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.AlternatingKMedoids<O> [[AlternatingKMedoids.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmedoids.AlternatingKMedoids.Par
+    elki.clustering.kmedoids.AlternatingKMedoids +-- elki.clustering.kmedoids.AlternatingKMedoids.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

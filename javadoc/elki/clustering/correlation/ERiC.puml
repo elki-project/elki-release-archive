@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ERiC\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ERiC [[ERiC.html]] {
+        {static} -LOG: Logging
+        -settings: Settings
+        +ERiC(Settings)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Database, Relation<? extends NumberVector>): Clustering<CorrelationModel>
+        -extractCorrelationClusters(Clustering<Model>, Relation<? extends NumberVector>, int, Instance): List<List<Cluster<CorrelationModel>>>
+        -buildHierarchy(Clustering<CorrelationModel>, List<List<Cluster<CorrelationModel>>>, Instance): void
+        -isParent(Instance, Cluster<CorrelationModel>, It<Cluster<CorrelationModel>>): boolean
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<CorrelationModel>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>ERiC.Settings\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ERiC.Settings [[ERiC.Settings.html]]
+    class "<size:14>ERiC.Par\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ERiC.Par [[ERiC.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.correlation.ERiC
+    elki.clustering.correlation.ERiC +-- elki.clustering.correlation.ERiC.Settings
+    elki.clustering.correlation.ERiC +-- elki.clustering.correlation.ERiC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

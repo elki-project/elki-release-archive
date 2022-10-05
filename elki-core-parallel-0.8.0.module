@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-core-parallel",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-math",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-parallel-0.8.0.jar",
+          "url": "elki-core-parallel-0.8.0.jar",
+          "size": 37501,
+          "sha512": "06f27392d39aa0d09b46aaf78421a3e2b5faa810a0152e3dcc9ebf6294278c9182de774603aad0fb3176b4bb0379476afa6be4ab1b793b653319070a88949c95",
+          "sha256": "4b5c13e38ec4a8fe791a7ea415557b3a950332550255424bc8bbe11dcdadfe82",
+          "sha1": "525027ea04062240b987cc0e181e796c4f5217e3",
+          "md5": "6595e36247eb5dd79be4aaa7252f92fb"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-math",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-parallel-0.8.0.jar",
+          "url": "elki-core-parallel-0.8.0.jar",
+          "size": 37501,
+          "sha512": "06f27392d39aa0d09b46aaf78421a3e2b5faa810a0152e3dcc9ebf6294278c9182de774603aad0fb3176b4bb0379476afa6be4ab1b793b653319070a88949c95",
+          "sha256": "4b5c13e38ec4a8fe791a7ea415557b3a950332550255424bc8bbe11dcdadfe82",
+          "sha1": "525027ea04062240b987cc0e181e796c4f5217e3",
+          "md5": "6595e36247eb5dd79be4aaa7252f92fb"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-parallel",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-parallel-0.8.0-test-fixtures.jar",
+          "url": "elki-core-parallel-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "a9e80acd351e1b35815e187304806274406cafc51444fb7ec8ebf26d50f743d9584408ea8541dc7d0f7703a25d34aaccd15f6bf5b6234434407e32548352fe47",
+          "sha256": "1b2ad28508c613b85e10fc59c5ce8e0eeb66d09c15e2d28903ed2e8af7437410",
+          "sha1": "656e84832ebfc2f9a90a162e50a3b3cfebbff45b",
+          "md5": "7324f8c74c1293614894e6201e9d7516"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-core-parallel-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-parallel",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-parallel-0.8.0-test-fixtures.jar",
+          "url": "elki-core-parallel-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "a9e80acd351e1b35815e187304806274406cafc51444fb7ec8ebf26d50f743d9584408ea8541dc7d0f7703a25d34aaccd15f6bf5b6234434407e32548352fe47",
+          "sha256": "1b2ad28508c613b85e10fc59c5ce8e0eeb66d09c15e2d28903ed2e8af7437410",
+          "sha1": "656e84832ebfc2f9a90a162e50a3b3cfebbff45b",
+          "md5": "7324f8c74c1293614894e6201e9d7516"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-core-parallel-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

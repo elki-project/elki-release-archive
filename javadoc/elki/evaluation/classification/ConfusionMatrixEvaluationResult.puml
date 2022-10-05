@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ConfusionMatrixEvaluationResult\n<size:10>elki.evaluation.classification" as elki.evaluation.classification.ConfusionMatrixEvaluationResult [[ConfusionMatrixEvaluationResult.html]] {
+        +confusionmatrix: ConfusionMatrix
+        +evaluationName: String
+        +ConfusionMatrixEvaluationResult(ConfusionMatrix, String)
+        +getLongName(): String
+        +getShortName(): String
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

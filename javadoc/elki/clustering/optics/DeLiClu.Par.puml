@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DeLiClu.Par\n<size:10>elki.clustering.optics" as elki.clustering.optics.DeLiClu.Par<V extends NumberVector> [[DeLiClu.Par.html]] {
+        {static} +MINPTS_ID: OptionID
+        #minpts: int
+        #indexer: DeLiCluTreeFactory<? super NumberVector>
+        #distance: SpatialPrimitiveDistance<? super NumberVector>
+        +configure(Parameterization): void
+        +make(): DeLiClu<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>DeLiClu\n<size:10>elki.clustering.optics" as elki.clustering.optics.DeLiClu<V extends NumberVector> [[DeLiClu.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.optics.DeLiClu.Par
+    elki.clustering.optics.DeLiClu +-- elki.clustering.optics.DeLiClu.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

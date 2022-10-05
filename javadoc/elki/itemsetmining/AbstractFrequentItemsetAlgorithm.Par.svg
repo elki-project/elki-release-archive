@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="69px" preserveAspectRatio="none" style="width:289px;height:69px;background:#FFFFFF;" version="1.1" viewBox="0 0 289 69" width="289px" zoomAndPan="magnify"><defs/><g><!--MD5=[8559677ee3cad4c2158a59dfa4a3bb38]
+class elki.itemsetmining.AbstractFrequentItemsetAlgorithm--><a href="AbstractFrequentItemsetAlgorithm.html" target="_top" title="AbstractFrequentItemsetAlgorithm.html" xlink:actuate="onRequest" xlink:href="AbstractFrequentItemsetAlgorithm.html" xlink:show="new" xlink:title="AbstractFrequentItemsetAlgorithm.html" xlink:type="simple"><g id="elem_elki.itemsetmining.AbstractFrequentItemsetAlgorithm"><rect codeLine="19" fill="#F1F1F1" height="37.9375" id="elki.itemsetmining.AbstractFrequentItemsetAlgorithm" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="275" x="7" y="7"/><ellipse cx="22" cy="25.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M22.1094,21.3125 L20.9531,26.3906 L23.2813,26.3906 L22.1094,21.3125 Z M20.625,19.0781 L23.6094,19.0781 L26.9688,31.4688 L24.5156,31.4688 L23.75,28.4063 L20.4688,28.4063 L19.7188,31.4688 L17.2813,31.4688 L20.625,19.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="243" x="36" y="24.9951">AbstractFrequentItemsetAlgorithm</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="93" x="111" y="37.5791">elki.itemsetmining</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="44.5" y="49.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="44.5" y="59.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[ed687c150755bbc13e9d01cd2ef13a6f]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractFrequentItemsetAlgorithm.Par\n<size:10>elki.itemsetmining" as elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par [[AbstractFrequentItemsetAlgorithm.Par.html]] {
+        {static} +MINSUPP_ID: OptionID
+        {static} +MINLENGTH_ID: OptionID
+        {static} +MAXLENGTH_ID: OptionID
+        #minsupp: double
+        #minlength: int
+        #maxlength: int
+        +configure(Parameterization): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractFrequentItemsetAlgorithm\n<size:10>elki.itemsetmining" as elki.itemsetmining.AbstractFrequentItemsetAlgorithm [[AbstractFrequentItemsetAlgorithm.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par
+    elki.itemsetmining.AbstractFrequentItemsetAlgorithm +- - elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

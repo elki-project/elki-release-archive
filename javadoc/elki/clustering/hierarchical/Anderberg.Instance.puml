@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Anderberg.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.Anderberg.Instance [[Anderberg.Instance.html]] {
+        #bestd: double[]
+        #besti: int[]
+        +Instance(Linkage)
+        +run(ClusterDistanceMatrix, ClusterMergeHistoryBuilder): ClusterMergeHistory
+        {static} #initializeNNCache(double[], double[], int[]): void
+        #findMerge(): int
+        #merge(double, int, int): void
+        #updateMatrix(double, int, int, int, int): void
+        {static} #updateCache(double[], double[], int[], int, int, int, double): void
+        {static} #findBest(double[], double[], int[], int): void
+    }
+
+    class "<size:14>AGNES.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AGNES.Instance [[AGNES.Instance.html]]
+    class "<size:14>Anderberg\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.Anderberg<O> [[Anderberg.html]]
+
+    elki.clustering.hierarchical.AGNES.Instance <|-- elki.clustering.hierarchical.Anderberg.Instance
+    elki.clustering.hierarchical.Anderberg +-- elki.clustering.hierarchical.Anderberg.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

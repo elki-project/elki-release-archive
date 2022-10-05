@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SingularValueDecomposition\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.SingularValueDecomposition [[SingularValueDecomposition.html]] {
+        -U: double[]
+        -V: double[]
+        -s: double[]
+        -m: int
+        -n: int
+        +SingularValueDecomposition(double[])
+        -generateU(int, int): void
+        -generateV(int, double[], int): void
+        -deflate(double[], int, int, boolean): void
+        -split(double[], int, int, boolean): void
+        -qrStep(double[], int, int, boolean, boolean): void
+        -convergence(int, int, boolean, boolean): int
+        +getU(): double[]
+        +getV(): double[]
+        +getSingularValues(): double[]
+        +getS(): double[]
+        +norm2(): double
+        +cond(): double
+        +rank(): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

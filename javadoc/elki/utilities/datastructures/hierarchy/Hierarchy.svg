@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="291px" preserveAspectRatio="none" style="width:263px;height:291px;background:#FFFFFF;" version="1.1" viewBox="0 0 263 291" width="263px" zoomAndPan="magnify"><defs/><g><!--MD5=[13fee7129d501ef8bfe3c7f91402461d]
+class elki.utilities.datastructures.hierarchy.Hierarchy--><a href="Hierarchy.html" target="_top" title="Hierarchy.html" xlink:actuate="onRequest" xlink:href="Hierarchy.html" xlink:show="new" xlink:title="Hierarchy.html" xlink:type="simple"><g id="elem_elki.utilities.datastructures.hierarchy.Hierarchy"><rect codeLine="6" fill="#F1F1F1" height="257.7969" id="elki.utilities.datastructures.hierarchy.Hierarchy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="242" x="7" y="7"/><ellipse cx="28.75" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M24.6719,21.7344 L24.6719,19.5781 L32.0625,19.5781 L32.0625,21.7344 L29.5938,21.7344 L29.5938,29.8125 L32.0625,29.8125 L32.0625,31.9688 L24.6719,31.9688 L24.6719,29.8125 L27.1406,29.8125 L27.1406,21.7344 L24.6719,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="68" x="101.75" y="24.9951">Hierarchy</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="183" x="44.25" y="37.5791">elki.utilities.datastructures.hierarchy</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="242" y="4"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="243" y="16.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="248" y1="44.9375" y2="44.9375"/><ellipse cx="18" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="64" x="27" y="61.9326">size(): int</text><ellipse cx="18" cy="74.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="148" x="27" y="78.2295">contains(O): boolean</text><ellipse cx="18" cy="91.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="139" x="27" y="94.5264">numChildren(O): int</text><ellipse cx="18" cy="107.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="156" x="27" y="110.8232">iterChildren(O): It&lt;O&gt;</text><ellipse cx="18" cy="123.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="213" x="27" y="127.1201">iterChildrenReverse(O): It&lt;O&gt;</text><ellipse cx="18" cy="140.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="189" x="27" y="143.417">iterDescendants(O): It&lt;O&gt;</text><ellipse cx="18" cy="156.3672" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="216" x="27" y="159.7139">iterDescendantsSelf(O): It&lt;O&gt;</text><ellipse cx="18" cy="172.6641" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="132" x="27" y="176.0107">numParents(O): int</text><ellipse cx="18" cy="188.9609" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="149" x="27" y="192.3076">iterParents(O): It&lt;O&gt;</text><ellipse cx="18" cy="205.2578" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="206" x="27" y="208.6045">iterParentsReverse(O): It&lt;O&gt;</text><ellipse cx="18" cy="221.5547" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="166" x="27" y="224.9014">iterAncestors(O): It&lt;O&gt;</text><ellipse cx="18" cy="237.8516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="193" x="27" y="241.1982">iterAncestorsSelf(O): It&lt;O&gt;</text><ellipse cx="18" cy="254.1484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="104" x="27" y="257.4951">iterAll(): It&lt;O&gt;</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="34.5" y="271.7969"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="34.5" y="281.0791">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[0f654da51f6b0620b631fc3b92aef195]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Hierarchy\n<size:10>elki.utilities.datastructures.hierarchy" as elki.utilities.datastructures.hierarchy.Hierarchy<O> [[Hierarchy.html]] {
+        {abstract} +size(): int
+        {abstract} +contains(O): boolean
+        {abstract} +numChildren(O): int
+        {abstract} +iterChildren(O): It<O>
+        {abstract} +iterChildrenReverse(O): It<O>
+        {abstract} +iterDescendants(O): It<O>
+        {abstract} +iterDescendantsSelf(O): It<O>
+        {abstract} +numParents(O): int
+        {abstract} +iterParents(O): It<O>
+        {abstract} +iterParentsReverse(O): It<O>
+        {abstract} +iterAncestors(O): It<O>
+        {abstract} +iterAncestorsSelf(O): It<O>
+        {abstract} +iterAll(): It<O>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractMTreeNode\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.AbstractMTreeNode<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[AbstractMTreeNode.html]] {
+        +AbstractMTreeNode()
+        +AbstractMTreeNode(int, boolean)
+        +adjustEntry(E extends MTreeEntry, DBID, double, AbstractMTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>): boolean
+        +coveringRadiusFromEntries(DBID, AbstractMTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>): double
+        #integrityCheck(AbstractMTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, E extends MTreeEntry): void
+        #integrityCheckParameters(E extends MTreeEntry, N extends AbstractMTreeNode<O, N extends AbstractMTreeNode<O,N,E>, E extends MTreeEntry>, int, AbstractMTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>): void
+    }
+
+    abstract class "<size:14>AbstractNode\n<size:10>elki.index.tree" as elki.index.tree.AbstractNode<E extends MTreeEntry> [[../../AbstractNode.html]]
+
+    elki.index.tree.AbstractNode <|-- elki.index.tree.metrical.mtreevariants.AbstractMTreeNode
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

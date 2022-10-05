@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AttributeWiseMinMaxNormalization\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization<V extends NumberVector> [[AttributeWiseMinMaxNormalization.html]] {
+        {static} -LOG: Logging
+        -maxima: double[]
+        -minima: double[]
+        {static} -EMPTY_ARRAY: double[]
+        +AttributeWiseMinMaxNormalization()
+        +AttributeWiseMinMaxNormalization(double[], double[])
+        #prepareStart(SimpleTypeInformation<V extends NumberVector>): boolean
+        #prepareProcessInstance(V extends NumberVector): void
+        #filterSingleObject(V extends NumberVector): V extends NumberVector
+        +restore(V extends NumberVector): V extends NumberVector
+        -factor(int): double
+        +transform(LinearEquationSystem): LinearEquationSystem
+        #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+        #getLogger(): Logging
+        #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractVectorConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractVectorConversionFilter<V extends NumberVector, V extends NumberVector> [[../../AbstractVectorConversionFilter.html]]
+    interface "<size:14>Normalization\n<size:10>elki.datasource.filter.normalization" as elki.datasource.filter.normalization.Normalization<V extends NumberVector> [[../Normalization.html]]
+    class "<size:14>AttributeWiseMinMaxNormalization.Par\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization.Par<V extends NumberVector> [[AttributeWiseMinMaxNormalization.Par.html]]
+
+    elki.datasource.filter.AbstractVectorConversionFilter <|-- elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization
+    elki.datasource.filter.normalization.Normalization <|.. elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization
+    elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization +-- elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HACAM\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HACAM<O> [[HACAM.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super O>
+        #variant: Variant
+        +HACAM(Distance<? super O>, Variant)
+        +run(Relation<O>): ClusterPrototypeMergeHistory
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>HierarchicalClusteringAlgorithm\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HierarchicalClusteringAlgorithm [[HierarchicalClusteringAlgorithm.html]]
+    enum "<size:14>HACAM.Variant\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HACAM.Variant [[HACAM.Variant.html]]
+    class "<size:14>HACAM.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HACAM.Instance [[HACAM.Instance.html]]
+    class "<size:14>HACAM.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HACAM.Par<O>
+
+    elki.clustering.hierarchical.HierarchicalClusteringAlgorithm <|.. elki.clustering.hierarchical.HACAM
+    elki.clustering.hierarchical.HACAM +-- elki.clustering.hierarchical.HACAM.Variant
+    elki.clustering.hierarchical.HACAM +-- elki.clustering.hierarchical.HACAM.Instance
+    elki.clustering.hierarchical.HACAM +-- elki.clustering.hierarchical.HACAM.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

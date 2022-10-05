@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HilOut.HilbertFeatures\n<size:10>elki.outlier.distance" as elki.outlier.distance.HilOut.HilbertFeatures [[HilOut.HilbertFeatures.html]] {
+        ~relation: Relation<O extends NumberVector>
+        ~pf: HilFeature[]
+        ~min: double[]
+        ~diameter: double
+        ~shift: double
+        -top: Set<HilFeature>
+        -out: ObjectHeap<HilFeature>
+        -wlb: ObjectHeap<HilFeature>
+        +HilbertFeatures(Relation<O extends NumberVector>, double[], double)
+        -initialize(double): void
+        -updateOUT(int): void
+        -updateWLB(int): void
+        -fastUpperBound(int): double
+        -minDistLevel(DBID, int): double
+        -maxDistLevel(DBID, int): double
+        -numberSharedLevels(long[], long[]): int
+        -minRegLevel(int, int): int
+        -maxRegLevel(int, int): int
+        -boxRadius(int, int, int): double
+        -getDimForObject(NumberVector, int): double
+    }
+
+    class "<size:14>HilOut\n<size:10>elki.outlier.distance" as elki.outlier.distance.HilOut<O extends NumberVector> [[HilOut.html]]
+
+    elki.outlier.distance.HilOut +-- elki.outlier.distance.HilOut.HilbertFeatures
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

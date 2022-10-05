@@ -1,0 +1,101 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.trivial {
+
+        class ByModelClustering [[ByModelClustering.html]] {
+            -noisepattern: Pattern
+            +ByModelClustering(Pattern)
+            +ByModelClustering()
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<Model>): Clustering<Model>
+        }
+
+        class elki.clustering.trivial.ByModelClustering.Par [[ByModelClustering.Par.html]] {
+            {static} +NOISE_ID: OptionID
+            #noisepat: Pattern
+            +configure(Parameterization): void
+            +make(): ByModelClustering
+        }
+
+        class TrivialAllNoise [[TrivialAllNoise.html]] {
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<?>): Clustering<Model>
+        }
+
+        class ByLabelClustering [[ByLabelClustering.html]] {
+            -multiple: boolean
+            -noisepattern: Pattern
+            +ByLabelClustering(boolean, Pattern)
+            +ByLabelClustering()
+            +getInputTypeRestriction(): TypeInformation[]
+            +autorun(Database): Clustering<Model>
+            +run(Relation<?>): Clustering<Model>
+            -singleAssignment(Relation<?>): HashMap<String, DBIDs>
+            -multipleAssignment(Relation<?>): HashMap<String, DBIDs>
+            -assign(HashMap<String, DBIDs>, String, DBIDRef): void
+        }
+
+        class elki.clustering.trivial.ByLabelClustering.Par [[ByLabelClustering.Par.html]] {
+            {static} +MULTIPLE_ID: OptionID
+            {static} +NOISE_ID: OptionID
+            #multiple: boolean
+            #noisepat: Pattern
+            +configure(Parameterization): void
+            +make(): ByLabelClustering
+        }
+
+        class ByLabelOrAllInOneClustering [[ByLabelOrAllInOneClustering.html]] {
+            +autorun(Database): Clustering<Model>
+        }
+
+        class TrivialAllInOne [[TrivialAllInOne.html]] {
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<?>): Clustering<Model>
+        }
+
+        class ByLabelHierarchicalClustering [[ByLabelHierarchicalClustering.html]] {
+            {static} -LOG: Logging
+            +autorun(Database): Clustering<Model>
+            +run(Relation<?>): Clustering<Model>
+            -assign(HashMap<String, DBIDs>, String, DBIDRef): void
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class ReferenceClustering<M extends Model> [[ReferenceClustering.html]]
+
+        elki.clustering.ClusteringAlgorithm <|.. ByModelClustering
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.trivial.ByModelClustering.Par
+        ByModelClustering +-- elki.clustering.trivial.ByModelClustering.Par
+        elki.clustering.ClusteringAlgorithm <|.. TrivialAllNoise
+        elki.clustering.ClusteringAlgorithm <|.. ByLabelClustering
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.trivial.ByLabelClustering.Par
+        ByLabelClustering +-- elki.clustering.trivial.ByLabelClustering.Par
+        ByLabelClustering <|-- ByLabelOrAllInOneClustering
+        elki.clustering.ClusteringAlgorithm <|.. TrivialAllInOne
+        elki.clustering.ClusteringAlgorithm <|.. ByLabelHierarchicalClustering
+        elki.data.Clustering <|-- ReferenceClustering
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.data {
+        class Clustering<M extends Model> [[../../data/Clustering.html]] {
+            {static} +TYPE: SimpleTypeInformation<Clustering<?>>
+            -toplevelclusters: List<Cluster<M extends Model>>
+            -hierarchy: ModifiableHierarchy<Cluster<M extends Model>>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

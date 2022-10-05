@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KeyVisualization.Instance\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.KeyVisualization.Instance [[KeyVisualization.Instance.html]] {
+        {static} -KEY_CAPTION: String
+        {static} -KEY_ENTRY: String
+        {static} -KEY_HIERLINE: String
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double)
+        +fullRedraw(): void
+        -drawHierarchy(SVGPlot, MarkerLibrary, DoubleDoublePair, DoubleDoublePair, int, Cluster<Model>, Object2IntOpenHashMap<Cluster<Model>>, Hierarchy<Cluster<Model>>): double
+        #setupCSS(SVGPlot): void
+    }
+
+    abstract class "<size:14>AbstractVisualization\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.AbstractVisualization [[../AbstractVisualization.html]] {
+        {abstract} +fullRedraw(): void
+    }
+    class "<size:14>KeyVisualization\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.KeyVisualization [[KeyVisualization.html]]
+
+    elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.visunproj.KeyVisualization.Instance
+    elki.visualization.visualizers.visunproj.KeyVisualization +-- elki.visualization.visualizers.visunproj.KeyVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

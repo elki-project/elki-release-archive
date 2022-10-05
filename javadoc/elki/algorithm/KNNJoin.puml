@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KNNJoin\n<size:10>elki.algorithm" as elki.algorithm.KNNJoin [[KNNJoin.html]] {
+        {static} -LOG: Logging
+        #distance: SpatialPrimitiveDistance<?>
+        #k: int
+        +KNNJoin(SpatialPrimitiveDistance<?>, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +autorun(Database): Relation<KNNList>
+        +run(Relation<? extends SpatialComparable>): Relation<KNNList>
+        +run(Relation<? extends SpatialComparable>, DBIDs): WritableDataStore<KNNList>
+        +run(AbstractRStarTree<?, ?, ?>, DBIDs): WritableDataStore<KNNList>
+        -initHeaps(SpatialPrimitiveDistance<?>, AbstractRStarTreeNode<?, ?>): List<KNNHeap>
+        -processDataPages(SpatialPrimitiveDistance<?>, List<KNNHeap>, List<KNNHeap>, AbstractRStarTreeNode<?, ?>, AbstractRStarTreeNode<?, ?>): void
+        -computeStopDistance(List<KNNHeap>): double
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    class "<size:14>KNNJoin.Task\n<size:10>elki.algorithm" as elki.algorithm.KNNJoin.Task [[KNNJoin.Task.html]]
+    class "<size:14>KNNJoin.Par\n<size:10>elki.algorithm" as elki.algorithm.KNNJoin.Par [[KNNJoin.Par.html]]
+
+    elki.Algorithm <|.. elki.algorithm.KNNJoin
+    elki.algorithm.KNNJoin +-- elki.algorithm.KNNJoin.Task
+    elki.algorithm.KNNJoin +-- elki.algorithm.KNNJoin.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

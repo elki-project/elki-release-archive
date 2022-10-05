@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FlatRStarTreeFactory\n<size:10>elki.index.tree.spatial.rstarvariants.flat" as elki.index.tree.spatial.rstarvariants.flat.FlatRStarTreeFactory<O extends NumberVector> [[FlatRStarTreeFactory.html]] {
+        +FlatRStarTreeFactory(PageFileFactory<?>, RTreeSettings)
+        +instantiate(Relation<O extends NumberVector>): FlatRStarTreeIndex<O extends NumberVector>
+        #getNodeClass(): Class<FlatRStarTreeNode>
+    }
+
+    abstract class "<size:14>AbstractRStarTreeFactory\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory<O extends NumberVector, FlatRStarTreeNode, SpatialEntry, RTreeSettings> [[../AbstractRStarTreeFactory.html]]
+    class "<size:14>FlatRStarTreeFactory.Par\n<size:10>elki.index.tree.spatial.rstarvariants.flat" as elki.index.tree.spatial.rstarvariants.flat.FlatRStarTreeFactory.Par<O extends NumberVector> [[FlatRStarTreeFactory.Par.html]]
+
+    elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory <|-- elki.index.tree.spatial.rstarvariants.flat.FlatRStarTreeFactory
+    elki.index.tree.spatial.rstarvariants.flat.FlatRStarTreeFactory +-- elki.index.tree.spatial.rstarvariants.flat.FlatRStarTreeFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

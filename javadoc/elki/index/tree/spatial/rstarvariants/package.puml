@@ -1,0 +1,156 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.spatial.rstarvariants {
+
+        abstract class NonFlatRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[NonFlatRStarTree.html]] {
+            +NonFlatRStarTree(PageFile<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>>, S extends RTreeSettings)
+            #hasOverflow(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): boolean
+            #hasUnderflow(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): boolean
+            #computeHeight(): int
+            #createEmptyRoot(E extends SpatialEntry): void
+            #bulkLoad(List<E extends SpatialEntry>): void
+            -createBulkDirectoryNodes(List<E extends SpatialEntry>): List<E extends SpatialEntry>
+            -createRoot(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, List<E extends SpatialEntry>): N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>
+        }
+
+        abstract class AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry> [[AbstractRStarTreeNode.html]] {
+            +AbstractRStarTreeNode()
+            +AbstractRStarTreeNode(int, boolean)
+            +computeMBR(): ModifiableHyperBoundingBox
+            +adjustEntry(E extends SpatialEntry): boolean
+            +adjustEntryIncremental(E extends SpatialEntry, SpatialComparable): boolean
+            +integrityCheck(AbstractRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, ?>): int
+            #integrityCheckParameters(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, int): void
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        abstract class AbstractRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[AbstractRStarTree.html]] {
+            {static} #EXTRA_INTEGRITY_CHECKS: boolean
+            #height: int
+            ~lastInsertedEntry: E extends SpatialEntry
+            +AbstractRStarTree(PageFile<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>>, S extends RTreeSettings)
+            #findPathToObject(IndexTreePath<E extends SpatialEntry>, SpatialComparable, DBIDRef): IndexTreePath<E extends SpatialEntry>
+            +insertLeaf(E extends SpatialEntry): void
+            #insertEntry(E extends SpatialEntry, int): void
+            #deletePath(IndexTreePath<E extends SpatialEntry>): void
+            +initializeFromFile(TreeIndexHeader, PageFile<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>>): void
+            #initializeCapacities(E extends SpatialEntry): void
+            +canBulkLoad(): boolean
+            #createBulkLeafNodes(List<E extends SpatialEntry>): List<E extends SpatialEntry>
+            {abstract} #bulkLoad(List<E extends SpatialEntry>): void
+            +getHeight(): int
+            #setHeight(int): void
+            {abstract} #computeHeight(): int
+            {abstract} #hasOverflow(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): boolean
+            {abstract} #hasUnderflow(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): boolean
+            {abstract} #createNewDirectoryEntry(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): E extends SpatialEntry
+            #createNewRoot(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): IndexTreePath<E extends SpatialEntry>
+            #containedTest(IndexTreePath<E extends SpatialEntry>, N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, SpatialComparable): IndexTreePath<E extends SpatialEntry>
+            #choosePath(IndexTreePath<E extends SpatialEntry>, SpatialComparable, int, int): IndexTreePath<E extends SpatialEntry>
+            -overflowTreatment(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, IndexTreePath<E extends SpatialEntry>): N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>
+            -split(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>
+            +reInsert(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, IndexTreePath<E extends SpatialEntry>, int[]): void
+            #adjustTree(IndexTreePath<E extends SpatialEntry>): void
+            -condenseTree(IndexTreePath<E extends SpatialEntry>, ArrayDeque<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>>): void
+            +getLeaves(): List<E extends SpatialEntry>
+            -getLeafNodeEntries(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, List<E extends SpatialEntry>, int): void
+            +doExtraIntegrityChecks(): void
+            +logStatistics(): void
+        }
+
+        class elki.index.tree.spatial.rstarvariants.AbstractRStarTree.Statistics [[AbstractRStarTree.Statistics.html]] {
+            #distanceCalcs: Counter
+            #knnQueries: Counter
+            #rangeQueries: Counter
+            +countDistanceCalculation(): void
+            +countKNNQuery(): void
+            +countRangeQuery(): void
+            +logStatistics(): void
+        }
+
+        class RTreeSettings [[RTreeSettings.html]] {
+            #relativeMinFill: double
+            +RTreeSettings()
+            +RTreeSettings(BulkSplit)
+            +setMinimumFill(double): void
+        }
+
+        abstract class AbstractRStarTreeFactory<O extends NumberVector, N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[AbstractRStarTreeFactory.html]] {
+            +AbstractRStarTreeFactory(PageFileFactory<?>, S extends RTreeSettings)
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        abstract class elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par<O extends NumberVector, S extends RTreeSettings> {
+            {static} +INSERTION_STRATEGY_ID: OptionID
+            {static} +SPLIT_STRATEGY_ID: OptionID
+            {static} +BULK_SPLIT_ID: OptionID
+            {static} +MINIMUM_FILL_ID: OptionID
+            {static} +OVERFLOW_STRATEGY_ID: OptionID
+            {abstract} #createSettings(): S extends RTreeSettings
+            +configure(Parameterization): void
+            #configBulkLoad(Parameterization): void
+            {abstract} +make(): AbstractRStarTreeFactory<O extends NumberVector, ?, ?, ?>
+        }
+
+        AbstractRStarTree <|-- NonFlatRStarTree
+        elki.index.tree.AbstractNode <|-- AbstractRStarTreeNode
+        elki.index.tree.Node <|.. AbstractRStarTreeNode
+        elki.index.tree.IndexTree <|-- AbstractRStarTree
+        AbstractRStarTree --> elki.index.tree.spatial.rstarvariants.AbstractRStarTree.Statistics: statistics
+        AbstractRStarTree --> RTreeSettings: settings
+        AbstractRStarTree +-- elki.index.tree.spatial.rstarvariants.AbstractRStarTree.Statistics
+        RTreeSettings --> elki.index.tree.spatial.rstarvariants.strategies.bulk.BulkSplit: bulkSplitter\nbulkStrategy
+        RTreeSettings --> elki.index.tree.spatial.rstarvariants.strategies.split.SplitStrategy: nodeSplitter\nnodeSplitStrategy
+        RTreeSettings --> elki.index.tree.spatial.rstarvariants.strategies.insert.InsertionStrategy: insertionStrategy
+        RTreeSettings --> elki.index.tree.spatial.rstarvariants.strategies.overflow.OverflowTreatment: overflowTreatment
+        elki.index.PagedIndexFactory <|-- AbstractRStarTreeFactory
+        AbstractRStarTreeFactory --> RTreeSettings: settings
+        elki.index.PagedIndexFactory.Par <|-- elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par
+        AbstractRStarTreeFactory +-- elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par
+        elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par --> RTreeSettings: settings
+    }
+
+    namespace elki.index.tree {
+        abstract class AbstractNode<E> [[../../AbstractNode.html]] {
+            #numEntries: int
+            #entries: Object[]
+            #isLeaf: boolean
+        }
+        interface Node<E> [[../../Node.html]] {
+            {abstract} +children(IndexTreePath<E>): Iterator<IndexTreePath<E>>
+            {abstract} +getNumEntries(): int
+            {abstract} +isLeaf(): boolean
+            {abstract} +getEntry(int): E
+            {abstract} +addEntry(E): int
+        }
+        abstract class IndexTree<N extends Node<E>, E> [[../../IndexTree.html]] {
+            -file: PageFile<N extends Node<E>>
+            #initialized: boolean
+            #dirCapacity: int
+            #leafCapacity: int
+            #dirMinimum: int
+            #leafMinimum: int
+            -rootEntry: E
+            {abstract} #getLogger(): Logging
+            {abstract} #initializeCapacities(E): void
+            {abstract} #createEmptyRoot(E): void
+            {abstract} #createRootEntry(): E
+            {abstract} #createNewLeafNode(): N extends Node<E>
+            {abstract} #createNewDirectoryNode(): N extends Node<E>
+        }
+    }
+
+    namespace elki.index {
+        abstract class PagedIndexFactory<O> [[../../../PagedIndexFactory.html]] {
+            -pageFileFactory: PageFileFactory<?>
+        }
+        abstract class elki.index.PagedIndexFactory.Par<O> [[../../../PagedIndexFactory.Par.html]] {
+            {static} +PAGEFILE_ID: OptionID
+            #pageFileFactory: PageFileFactory<?>
+            {abstract} +make(): PagedIndexFactory<O>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

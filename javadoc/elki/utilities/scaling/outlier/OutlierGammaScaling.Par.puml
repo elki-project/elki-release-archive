@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierGammaScaling.Par\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierGammaScaling.Par [[OutlierGammaScaling.Par.html]] {
+        {static} +NORMALIZE_ID: OptionID
+        #normalize: boolean
+        +configure(Parameterization): void
+        +make(): OutlierGammaScaling
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>OutlierGammaScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierGammaScaling [[OutlierGammaScaling.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.outlier.OutlierGammaScaling.Par
+    elki.utilities.scaling.outlier.OutlierGammaScaling +-- elki.utilities.scaling.outlier.OutlierGammaScaling.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

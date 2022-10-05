@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExternalNeighborhood.Factory\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory [[ExternalNeighborhood.Factory.html]] {
+        -file: URI
+        +Factory(URI)
+        +instantiate(Database, Relation<?>): NeighborSetPredicate
+        +getInputTypeRestriction(): TypeInformation
+        -loadNeighbors(Database, Relation<?>): DataStore<DBIDs>
+    }
+
+    abstract class "<size:14>AbstractPrecomputedNeighborhood.Factory\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory<Object> [[AbstractPrecomputedNeighborhood.Factory.html]]
+    class "<size:14>ExternalNeighborhood\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.ExternalNeighborhood [[ExternalNeighborhood.html]]
+    class "<size:14>ExternalNeighborhood.Factory.Par\n<size:10>elki.outlier.spatial.neighborhood" as elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory.Par [[ExternalNeighborhood.Factory.Par.html]]
+
+    elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory <|-- elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory
+    elki.outlier.spatial.neighborhood.ExternalNeighborhood +-- elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory
+    elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory +-- elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

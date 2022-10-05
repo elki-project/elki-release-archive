@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CutDendrogramByNumberOfClusters.Par\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters.Par [[CutDendrogramByNumberOfClusters.Par.html]] {
+        {static} +MINCLUSTERS_ID: OptionID
+        ~minclusters: int
+        +configure(Parameterization): void
+        +make(): CutDendrogramByNumberOfClusters
+    }
+
+    abstract class "<size:14>AbstractCutDendrogram.Par\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Par [[AbstractCutDendrogram.Par.html]]
+    class "<size:14>CutDendrogramByNumberOfClusters\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters [[CutDendrogramByNumberOfClusters.html]]
+
+    elki.clustering.hierarchical.extraction.AbstractCutDendrogram.Par <|-- elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters.Par
+    elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters +-- elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

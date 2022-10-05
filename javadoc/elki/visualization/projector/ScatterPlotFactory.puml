@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ScatterPlotFactory\n<size:10>elki.visualization.projector" as elki.visualization.projector.ScatterPlotFactory [[ScatterPlotFactory.html]] {
+        {static} +MAX_DIMENSIONS_DEFAULT: int
+        -maxdim: int
+        +ScatterPlotFactory(int)
+        +processNewResult(VisualizerContext, Object): void
+        -dimensionality(Relation<?>): int
+    }
+
+    interface "<size:14>ProjectorFactory\n<size:10>elki.visualization.projector" as elki.visualization.projector.ProjectorFactory [[ProjectorFactory.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+    }
+    class "<size:14>ScatterPlotFactory.Par\n<size:10>elki.visualization.projector" as elki.visualization.projector.ScatterPlotFactory.Par [[ScatterPlotFactory.Par.html]]
+
+    elki.visualization.projector.ProjectorFactory <|.. elki.visualization.projector.ScatterPlotFactory
+    elki.visualization.projector.ScatterPlotFactory +-- elki.visualization.projector.ScatterPlotFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

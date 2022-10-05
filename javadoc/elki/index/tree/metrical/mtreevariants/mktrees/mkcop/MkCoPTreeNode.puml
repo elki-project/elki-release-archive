@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkCoPTreeNode\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkcop" as elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTreeNode<O> [[MkCoPTreeNode.html]] {
+        {static} -serialVersionUID: long
+        +MkCoPTreeNode()
+        +MkCoPTreeNode(int, boolean)
+        #conservativeKnnDistanceApproximation(int): ApproximationLine
+        #progressiveKnnDistanceApproximation(int): ApproximationLine
+        +adjustEntry(MkCoPEntry, DBID, double, AbstractMTree<O, MkCoPTreeNode<O>, MkCoPEntry, ?>): boolean
+        #integrityCheckParameters(MkCoPEntry, MkCoPTreeNode<O>, int, AbstractMTree<O, MkCoPTreeNode<O>, MkCoPEntry, ?>): void
+    }
+
+    abstract class "<size:14>AbstractMTreeNode\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.AbstractMTreeNode<O, MkCoPTreeNode<O>, MkCoPEntry> [[../../AbstractMTreeNode.html]]
+
+    elki.index.tree.metrical.mtreevariants.AbstractMTreeNode <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPTreeNode
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

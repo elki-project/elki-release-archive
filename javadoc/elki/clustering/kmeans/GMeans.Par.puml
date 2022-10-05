@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.GMeans.Par<V extends NumberVector, M extends MeanModel> [[GMeans.Par.html]] {
+        {static} +CRITICAL_ID: OptionID
+        #critical: double
+        #configureInformationCriterion(Parameterization): void
+        +make(): GMeans<V extends NumberVector, M extends MeanModel>
+    }
+
+    class "<size:14>XMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.XMeans.Par<V extends NumberVector, M extends MeanModel>
+    class "<size:14>GMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.GMeans<V extends NumberVector, M extends MeanModel> [[GMeans.html]]
+
+    elki.clustering.kmeans.XMeans.Par <|-- elki.clustering.kmeans.GMeans.Par
+    elki.clustering.kmeans.GMeans +-- elki.clustering.kmeans.GMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

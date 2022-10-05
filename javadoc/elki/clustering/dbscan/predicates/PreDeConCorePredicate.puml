@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PreDeConCorePredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.PreDeConCorePredicate [[PreDeConCorePredicate.html]] {
+        #settings: Settings
+        +PreDeConCorePredicate(Settings)
+        +instantiate(Database): Instance
+        +acceptsType(SimpleTypeInformation<? extends PreDeConModel>): boolean
+    }
+
+    interface "<size:14>CorePredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.CorePredicate<PreDeConModel> [[CorePredicate.html]] {
+        {abstract} +instantiate(Database): Instance<T>
+        {abstract} +acceptsType(SimpleTypeInformation<? extends T>): boolean
+    }
+    class "<size:14>PreDeConCorePredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.PreDeConCorePredicate.Instance [[PreDeConCorePredicate.Instance.html]]
+    class "<size:14>PreDeConCorePredicate.Par\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.PreDeConCorePredicate.Par [[PreDeConCorePredicate.Par.html]]
+
+    elki.clustering.dbscan.predicates.CorePredicate <|.. elki.clustering.dbscan.predicates.PreDeConCorePredicate
+    elki.clustering.dbscan.predicates.PreDeConCorePredicate +-- elki.clustering.dbscan.predicates.PreDeConCorePredicate.Instance
+    elki.clustering.dbscan.predicates.PreDeConCorePredicate +-- elki.clustering.dbscan.predicates.PreDeConCorePredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ComputeSimilarityMatrixImage\n<size:10>elki.evaluation.similaritymatrix" as elki.evaluation.similaritymatrix.ComputeSimilarityMatrixImage<O> [[ComputeSimilarityMatrixImage.html]] {
+        {static} -LOG: Logging
+        -distance: Distance<? super O>
+        -scaling: ScalingFunction
+        -skipzero: boolean
+        +ComputeSimilarityMatrixImage(Distance<? super O>, ScalingFunction, boolean)
+        -computeSimilarityMatrixImage(Relation<O>, DBIDIter): SimilarityMatrix
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../Evaluator.html]]
+    class "<size:14>ComputeSimilarityMatrixImage.SimilarityMatrix\n<size:10>elki.evaluation.similaritymatrix" as elki.evaluation.similaritymatrix.ComputeSimilarityMatrixImage.SimilarityMatrix [[ComputeSimilarityMatrixImage.SimilarityMatrix.html]]
+    class "<size:14>ComputeSimilarityMatrixImage.Par\n<size:10>elki.evaluation.similaritymatrix" as elki.evaluation.similaritymatrix.ComputeSimilarityMatrixImage.Par<O> [[ComputeSimilarityMatrixImage.Par.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.similaritymatrix.ComputeSimilarityMatrixImage
+    elki.evaluation.similaritymatrix.ComputeSimilarityMatrixImage +-- elki.evaluation.similaritymatrix.ComputeSimilarityMatrixImage.SimilarityMatrix
+    elki.evaluation.similaritymatrix.ComputeSimilarityMatrixImage +-- elki.evaluation.similaritymatrix.ComputeSimilarityMatrixImage.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

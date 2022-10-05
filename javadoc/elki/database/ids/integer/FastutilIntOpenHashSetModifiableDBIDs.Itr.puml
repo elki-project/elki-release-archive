@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastutilIntOpenHashSetModifiableDBIDs.Itr\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.Itr [[FastutilIntOpenHashSetModifiableDBIDs.Itr.html]] {
+        ~it: IntIterator
+        ~prev: int
+        +Itr(IntIterator)
+        +valid(): boolean
+        +advance(): IntegerDBIDMIter
+        +internalGetIndex(): int
+        +remove(): void
+    }
+
+    interface "<size:14>IntegerDBIDMIter\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDMIter [[IntegerDBIDMIter.html]]
+    class "<size:14>FastutilIntOpenHashSetModifiableDBIDs\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs [[FastutilIntOpenHashSetModifiableDBIDs.html]]
+
+    elki.database.ids.integer.IntegerDBIDMIter <|.. elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.Itr
+    elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs +-- elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.Itr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

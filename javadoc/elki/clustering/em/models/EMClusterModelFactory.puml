@@ -1,0 +1,13 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>EMClusterModelFactory\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.EMClusterModelFactory<O, M extends Model> [[EMClusterModelFactory.html]] {
+        {static} +INIT_ID: OptionID
+        {abstract} +buildInitialModels(Relation<? extends O>, int): List<? extends EMClusterModel<O, M extends Model>>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

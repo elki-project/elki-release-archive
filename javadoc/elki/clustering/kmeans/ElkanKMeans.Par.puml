@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ElkanKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.ElkanKMeans.Par<V extends NumberVector> [[ElkanKMeans.Par.html]] {
+        +make(): ElkanKMeans<V extends NumberVector>
+    }
+
+    class "<size:14>SimplifiedElkanKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.SimplifiedElkanKMeans.Par<V extends NumberVector> [[SimplifiedElkanKMeans.Par.html]]
+    class "<size:14>ElkanKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.ElkanKMeans<V extends NumberVector> [[ElkanKMeans.html]]
+
+    elki.clustering.kmeans.SimplifiedElkanKMeans.Par <|-- elki.clustering.kmeans.ElkanKMeans.Par
+    elki.clustering.kmeans.ElkanKMeans +-- elki.clustering.kmeans.ElkanKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

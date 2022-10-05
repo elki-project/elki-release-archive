@@ -1,0 +1,50 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleObjectMinHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleObjectMinHeap<V> [[DoubleObjectMinHeap.html]] {
+        #twoheap: double[]
+        #twovals: Object[]
+        #size: int
+        {static} -TWO_HEAP_INITIAL_SIZE: int
+        +DoubleObjectMinHeap()
+        +DoubleObjectMinHeap(int)
+        +clear(): void
+        +size(): int
+        +isEmpty(): boolean
+        +add(double, V): void
+        +add(double, V, int): void
+        +replaceTopElement(double, V): void
+        -heapifyUp(int, double, Object): void
+        +poll(): void
+        -heapifyDown(double, Object): void
+        +peekKey(): double
+        +peekValue(): V
+        +containsKey(double): boolean
+        +containsValue(V): boolean
+        +unsortedIter(): UnsortedIter
+    }
+
+    interface "<size:14>DoubleObjectHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleObjectHeap<V> [[DoubleObjectHeap.html]] {
+        {abstract} +add(double, V): void
+        {abstract} +add(double, V, int): void
+        {abstract} +replaceTopElement(double, V): void
+        {abstract} +peekKey(): double
+        {abstract} +peekValue(): V
+        {abstract} +containsKey(double): boolean
+        {abstract} +containsValue(V): boolean
+        {abstract} +poll(): void
+        {abstract} +clear(): void
+        {abstract} +size(): int
+        {abstract} +isEmpty(): boolean
+        {abstract} +unsortedIter(): UnsortedIter<V>
+    }
+    class "<size:14>DoubleObjectMinHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleObjectMinHeap.UnsortedIter [[DoubleObjectMinHeap.UnsortedIter.html]]
+
+    elki.utilities.datastructures.heap.DoubleObjectHeap <|.. elki.utilities.datastructures.heap.DoubleObjectMinHeap
+    elki.utilities.datastructures.heap.DoubleObjectMinHeap +-- elki.utilities.datastructures.heap.DoubleObjectMinHeap.UnsortedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

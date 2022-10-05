@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MaterializeKNNAndRKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor<O> [[MaterializeKNNAndRKNNPreprocessor.html]] {
+        {static} -LOG: Logging
+        -storageRkNN: WritableDataStore<ModifiableDoubleDBIDList>
+        +MaterializeKNNAndRKNNPreprocessor(Relation<O>, Distance<? super O>, int)
+        #preprocess(): void
+        -materializeKNNAndRKNNs(ArrayDBIDs, FiniteProgress): void
+        #objectsInserted(DBIDs): void
+        -updateKNNsAndRkNNs(DBIDs): DBIDs
+        #objectsRemoved(DBIDs): void
+        +getKNN(DBID): KNNList
+        +getRKNN(DBIDRef): DoubleDBIDList
+        +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+        +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+        #getLogger(): Logging
+    }
+
+    class "<size:14>MaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MaterializeKNNPreprocessor<O> [[MaterializeKNNPreprocessor.html]]
+    interface "<size:14>RKNNIndex\n<size:10>elki.index" as elki.index.RKNNIndex<O> [[../../RKNNIndex.html]] {
+        {abstract} +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+        {abstract} +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+    }
+    class "<size:14>MaterializeKNNAndRKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory<O> [[MaterializeKNNAndRKNNPreprocessor.Factory.html]]
+
+    elki.index.preprocessed.knn.MaterializeKNNPreprocessor <|-- elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor
+    elki.index.RKNNIndex <|.. elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor
+    elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor +-- elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

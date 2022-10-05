@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkAppTreeIndex\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkapp" as elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTreeIndex<O> [[MkAppTreeIndex.html]] {
+        -relation: Relation<O>
+        +MkAppTreeIndex(Relation<O>, PageFile<MkAppTreeNode<O>>, MkAppTreeSettings<O>)
+        #createNewLeafEntry(DBID, O, double): MkAppEntry
+        +initialize(): void
+        +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+        +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+        +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+        +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+    }
+
+    abstract class "<size:14>MkAppTree\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkapp" as elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTree<O> [[MkAppTree.html]]
+    interface "<size:14>RangeIndex\n<size:10>elki.index" as elki.index.RangeIndex<O> [[../../../../../RangeIndex.html]] {
+        {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+    }
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<O> [[../../../../../KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    interface "<size:14>RKNNIndex\n<size:10>elki.index" as elki.index.RKNNIndex<O> [[../../../../../RKNNIndex.html]] {
+        {abstract} +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+        {abstract} +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+    }
+
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTree <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTreeIndex
+    elki.index.RangeIndex <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTreeIndex
+    elki.index.KNNIndex <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTreeIndex
+    elki.index.RKNNIndex <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTreeIndex
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

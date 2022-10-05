@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TrimmedMeanApproach.Par\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.TrimmedMeanApproach.Par<N> {
+        {static} +P_ID: OptionID
+        #p: double
+        +configure(Parameterization): void
+        +make(): TrimmedMeanApproach<N>
+    }
+
+    abstract class "<size:14>AbstractNeighborhoodOutlier.Par\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.AbstractNeighborhoodOutlier.Par<N>
+    class "<size:14>TrimmedMeanApproach\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.TrimmedMeanApproach<N> [[TrimmedMeanApproach.html]]
+
+    elki.outlier.spatial.AbstractNeighborhoodOutlier.Par <|-- elki.outlier.spatial.TrimmedMeanApproach.Par
+    elki.outlier.spatial.TrimmedMeanApproach +-- elki.outlier.spatial.TrimmedMeanApproach.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ELKIServiceLoader\n<size:10>elki.utilities" as elki.utilities.ELKIServiceLoader [[ELKIServiceLoader.html]] {
+        {static} +RESOURCE_PREFIX: String
+        {static} +FILENAME_PREFIX: String
+        {static} +COMMENT_CHAR: char
+        {static} +load(Class<?>): void
+        {static} +load(Class<?>, ClassLoader): void
+        {static} -parseLine(Class<?>, char[], int, int): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

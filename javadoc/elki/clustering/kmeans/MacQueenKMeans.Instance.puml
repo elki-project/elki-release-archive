@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MacQueenKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.MacQueenKMeans.Instance [[MacQueenKMeans.Instance.html]] {
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+        #iterate(int): int
+        #getLogger(): Logging
+        -updateMeanAndAssignment(int, NumberVector, DBIDIter): boolean
+    }
+
+    abstract class "<size:14>AbstractKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Instance [[AbstractKMeans.Instance.html]] {
+        {abstract} #iterate(int): int
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>MacQueenKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.MacQueenKMeans<V extends NumberVector> [[MacQueenKMeans.html]]
+
+    elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.MacQueenKMeans.Instance
+    elki.clustering.kmeans.MacQueenKMeans +-- elki.clustering.kmeans.MacQueenKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

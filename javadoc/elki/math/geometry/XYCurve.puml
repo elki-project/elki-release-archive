@@ -1,0 +1,52 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>XYCurve\n<size:10>elki.math.geometry" as elki.math.geometry.XYCurve [[XYCurve.html]] {
+        {static} #THRESHOLD: double
+        #data: DoubleArray
+        #labelx: String
+        #labely: String
+        #minx: double
+        #maxx: double
+        #miny: double
+        #maxy: double
+        #mindx: double
+        #maxdx: double
+        #mindy: double
+        #maxdy: double
+        +XYCurve(String, String)
+        +XYCurve(String, String, int)
+        +XYCurve()
+        +XYCurve(int)
+        +XYCurve(XYCurve)
+        +add(double, double): void
+        +addAndSimplify(double, double): void
+        +getLabelx(): String
+        +getLabely(): String
+        +getMinx(): double
+        +getMaxx(): double
+        +getMiny(): double
+        +getMaxy(): double
+        +getMindx(): double
+        +getMaxdx(): double
+        +getMindy(): double
+        +getMaxdy(): double
+        +getX(int): double
+        +getY(int): double
+        +rescale(double, double): void
+        +setAxes(double, double, double, double): void
+        +setDrawingBounds(double, double, double, double): void
+        +isInDrawingBounds(double, double): boolean
+        +size(): int
+        +iterator(): Itr
+        {static} +areaUnderCurve(XYCurve): double
+    }
+    class "<size:14>XYCurve.Itr\n<size:10>elki.math.geometry" as elki.math.geometry.XYCurve.Itr [[XYCurve.Itr.html]]
+
+    elki.math.geometry.XYCurve +-- elki.math.geometry.XYCurve.Itr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

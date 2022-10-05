@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-input",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-distance",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-input-0.8.0.jar",
+          "url": "elki-input-0.8.0.jar",
+          "size": 262590,
+          "sha512": "ec8d1d8fcd967d97e23d2f52493cbc998e58d8509abcd479f36995853426ad65bbe1c3fefcdafee686afc21bc85bfc45077bff39bc00dc8b29d88f1d19b43c36",
+          "sha256": "58f7bd85396d62ba4fd5afef66d9fbb8bbe36cced4b2111673e80a4fb0e22d12",
+          "sha1": "0aaca7e203f0dfcc8be8555ec51ef673d6366af6",
+          "md5": "82bd2a826b73c7cbb66d98488dccf3f8"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-distance",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-input-0.8.0.jar",
+          "url": "elki-input-0.8.0.jar",
+          "size": 262590,
+          "sha512": "ec8d1d8fcd967d97e23d2f52493cbc998e58d8509abcd479f36995853426ad65bbe1c3fefcdafee686afc21bc85bfc45077bff39bc00dc8b29d88f1d19b43c36",
+          "sha256": "58f7bd85396d62ba4fd5afef66d9fbb8bbe36cced4b2111673e80a4fb0e22d12",
+          "sha1": "0aaca7e203f0dfcc8be8555ec51ef673d6366af6",
+          "md5": "82bd2a826b73c7cbb66d98488dccf3f8"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-input",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-input-0.8.0-test-fixtures.jar",
+          "url": "elki-input-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "1efcbc68524f51b2dd9b9adc7c5c668a9cfcad488cd529de882b2115c6e8677f71e407154259704eff093ab202117929ded2e30e78f6d40e8be5411e33ab3be1",
+          "sha256": "49110a35c34baf01f6a574b8d3063afb92c4a07dd34971e4e072bf171e7b5db5",
+          "sha1": "85df2605052623105c9222b7123ee4cdbd6ce9e5",
+          "md5": "b29aaef5c00fba673de2130859d403dd"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-input-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-input",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-input-0.8.0-test-fixtures.jar",
+          "url": "elki-input-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "1efcbc68524f51b2dd9b9adc7c5c668a9cfcad488cd529de882b2115c6e8677f71e407154259704eff093ab202117929ded2e30e78f6d40e8be5411e33ab3be1",
+          "sha256": "49110a35c34baf01f6a574b8d3063afb92c4a07dd34971e4e072bf171e7b5db5",
+          "sha1": "85df2605052623105c9222b7123ee4cdbd6ce9e5",
+          "md5": "b29aaef5c00fba673de2130859d403dd"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-input-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

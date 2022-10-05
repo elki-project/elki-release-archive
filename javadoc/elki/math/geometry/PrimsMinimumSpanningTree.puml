@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrimsMinimumSpanningTree\n<size:10>elki.math.geometry" as elki.math.geometry.PrimsMinimumSpanningTree [[PrimsMinimumSpanningTree.html]] {
+        {static} +ARRAY2D_ADAPTER: Array2DAdapter
+        {static} +processDense(double[]): int[]
+        {static} +processDense(T, Adapter<T>): int[]
+        {static} +processDense(T, Adapter<T>, Collector): void
+        {static} +pruneTree(int, int[], int): int[]
+    }
+    interface "<size:14>PrimsMinimumSpanningTree.Adapter\n<size:10>elki.math.geometry" as elki.math.geometry.PrimsMinimumSpanningTree.Adapter<T> [[PrimsMinimumSpanningTree.Adapter.html]]
+    interface "<size:14>PrimsMinimumSpanningTree.Collector\n<size:10>elki.math.geometry" as elki.math.geometry.PrimsMinimumSpanningTree.Collector [[PrimsMinimumSpanningTree.Collector.html]]
+    class "<size:14>PrimsMinimumSpanningTree.Array2DAdapter\n<size:10>elki.math.geometry" as elki.math.geometry.PrimsMinimumSpanningTree.Array2DAdapter [[PrimsMinimumSpanningTree.Array2DAdapter.html]]
+
+    elki.math.geometry.PrimsMinimumSpanningTree +-- elki.math.geometry.PrimsMinimumSpanningTree.Adapter
+    elki.math.geometry.PrimsMinimumSpanningTree +-- elki.math.geometry.PrimsMinimumSpanningTree.Collector
+    elki.math.geometry.PrimsMinimumSpanningTree +-- elki.math.geometry.PrimsMinimumSpanningTree.Array2DAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

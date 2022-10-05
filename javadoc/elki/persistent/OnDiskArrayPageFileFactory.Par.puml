@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OnDiskArrayPageFileFactory.Par\n<size:10>elki.persistent" as elki.persistent.OnDiskArrayPageFileFactory.Par {
+        -fileName: Path
+        {static} +FILE_ID: OptionID
+        +configure(Parameterization): void
+        +make(): OnDiskArrayPageFileFactory<Page>
+    }
+
+    abstract class "<size:14>AbstractPageFileFactory.Par\n<size:10>elki.persistent" as elki.persistent.AbstractPageFileFactory.Par<Page> {
+        {abstract} +make(): PageFileFactory<P extends Page>
+    }
+    class "<size:14>OnDiskArrayPageFileFactory\n<size:10>elki.persistent" as elki.persistent.OnDiskArrayPageFileFactory<P extends Page> [[OnDiskArrayPageFileFactory.html]]
+
+    elki.persistent.AbstractPageFileFactory.Par <|-- elki.persistent.OnDiskArrayPageFileFactory.Par
+    elki.persistent.OnDiskArrayPageFileFactory +-- elki.persistent.OnDiskArrayPageFileFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

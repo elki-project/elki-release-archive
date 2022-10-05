@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="152px" preserveAspectRatio="none" style="width:253px;height:152px;background:#FFFFFF;" version="1.1" viewBox="0 0 253 152" width="253px" zoomAndPan="magnify"><defs/><g><!--MD5=[e2c0cc4d960045864e9fd7006368df72]
+class elki.utilities.Util--><a href="Util.html" target="_top" title="Util.html" xlink:actuate="onRequest" xlink:href="Util.html" xlink:show="new" xlink:title="Util.html" xlink:type="simple"><g id="elem_elki.utilities.Util"><rect codeLine="6" fill="#F1F1F1" height="119.125" id="elki.utilities.Util" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="232" x="7" y="7"/><ellipse cx="93.25" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M96.2188,31.6094 Q95.6406,31.9063 95,32.0469 Q94.3594,32.2031 93.6563,32.2031 Q91.1563,32.2031 89.8281,30.5625 Q88.5156,28.9063 88.5156,25.7813 Q88.5156,22.6563 89.8281,21 Q91.1563,19.3438 93.6563,19.3438 Q94.3594,19.3438 95,19.5 Q95.6563,19.6563 96.2188,19.9531 L96.2188,22.6719 Q95.5938,22.0938 95,21.8281 Q94.4063,21.5469 93.7813,21.5469 Q92.4375,21.5469 91.75,22.625 Q91.0625,23.6875 91.0625,25.7813 Q91.0625,27.875 91.75,28.9531 Q92.4375,30.0156 93.7813,30.0156 Q94.4063,30.0156 95,29.75 Q95.5938,29.4688 96.2188,28.8906 L96.2188,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="21" x="128.75" y="24.9951">Util</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="51" x="113.75" y="37.5791">elki.utilities</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="238" y1="44.9375" y2="44.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="55.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="120" x="27" y="61.9326">HASHPRIME: long</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="238" y1="69.2344" y2="69.2344"/><ellipse cx="18" cy="82.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="181" x="27" y="86.2295">mixHashCodes(int, int): int</text><ellipse cx="18" cy="99.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="206" x="27" y="102.5264">mixHashCodes(int, int, int): int</text><ellipse cx="18" cy="115.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="168" x="27" y="118.8232">mixHashCodes(int...): int</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="29.5" y="133.125"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="29.5" y="142.4072">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[7d0e47e60ec5c345451313021d636e30]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Util\n<size:10>elki.utilities" as elki.utilities.Util [[Util.html]] {
+        {static} -HASHPRIME: long
+        {static} +mixHashCodes(int, int): int
+        {static} +mixHashCodes(int, int, int): int
+        {static} +mixHashCodes(int...): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

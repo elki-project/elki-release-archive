@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Predefined.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.Predefined.Par [[Predefined.Par.html]] {
+        {static} +INITIAL_MEANS: OptionID
+        #initialMeans: double[]
+        +configure(Parameterization): void
+        +make(): Predefined
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>Predefined\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.Predefined [[Predefined.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmeans.initialization.Predefined.Par
+    elki.clustering.kmeans.initialization.Predefined +-- elki.clustering.kmeans.initialization.Predefined.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

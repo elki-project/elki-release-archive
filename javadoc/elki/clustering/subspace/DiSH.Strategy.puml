@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>DiSH.Strategy\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH.Strategy [[DiSH.Strategy.html]] {
+        {static} +APRIORI
+        {static} +MAX_INTERSECTION
+    }
+
+    class "<size:14>DiSH\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH [[DiSH.html]]
+
+    elki.clustering.subspace.DiSH +-- elki.clustering.subspace.DiSH.Strategy
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

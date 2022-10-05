@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractSVC\n<size:10>elki.svm" as elki.svm.AbstractSVC [[AbstractSVC.html]] {
+        ~probability: boolean
+        +AbstractSVC(double, boolean, double)
+        +train(DataSet): ClassificationModel
+        +train(DataSet, double[]): ClassificationModel
+        +cross_validation(DataSet, double[], int, double[]): void
+        -sigmoid_train(double[], DataSet): double[]
+        -binary_svc_probability(DataSet, double, double): double[]
+    }
+
+    abstract class "<size:14>AbstractSingleSVM\n<size:10>elki.svm" as elki.svm.AbstractSingleSVM [[AbstractSingleSVM.html]] {
+        {abstract} #solve(DataSet): SolutionInfo
+        {abstract} #getLogger(): Logging
+    }
+
+    elki.svm.AbstractSingleSVM <|-- elki.svm.AbstractSVC
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

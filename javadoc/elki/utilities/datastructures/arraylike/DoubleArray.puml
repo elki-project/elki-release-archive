@@ -1,0 +1,47 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleArray\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.DoubleArray [[DoubleArray.html]] {
+        {static} -MAX_ARRAY_SIZE: int
+        {static} -LAST_GROW_SIZE: int
+        +data: double[]
+        +size: int
+        +DoubleArray()
+        +DoubleArray(int)
+        +DoubleArray(DoubleArray)
+        +clear(): void
+        +add(double): void
+        -grow(): void
+        +get(int): double
+        +set(int, double): void
+        +swap(int, int): void
+        +remove(int, int): void
+        +insert(int, double): void
+        +size(): int
+        +isEmpty(): boolean
+        +sort(): void
+        +size(DoubleArray): int
+        +get(DoubleArray, int): Double
+        +getDouble(DoubleArray, int): double
+        +getFloat(DoubleArray, int): float
+        +getInteger(DoubleArray, int): int
+        +getShort(DoubleArray, int): short
+        +getLong(DoubleArray, int): long
+        +getByte(DoubleArray, int): byte
+        +toArray(): double[]
+    }
+
+    interface "<size:14>NumberArrayAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.NumberArrayAdapter<Double, DoubleArray> [[NumberArrayAdapter.html]] {
+        {abstract} +size(DoubleArray): int
+        {abstract} +get(DoubleArray, int): Double
+        {abstract} +getDouble(DoubleArray, int): double
+        {abstract} +getLong(DoubleArray, int): long
+    }
+
+    elki.utilities.datastructures.arraylike.NumberArrayAdapter <|.. elki.utilities.datastructures.arraylike.DoubleArray
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LatLngDistance\n<size:10>elki.distance.geo" as elki.distance.geo.LatLngDistance [[LatLngDistance.html]] {
+        -model: EarthModel
+        +LatLngDistance(EarthModel)
+        +distance(NumberVector, NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        +isMetric(): boolean
+    }
+
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[../SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    interface "<size:14>NumberVectorDistance\n<size:10>elki.distance" as elki.distance.NumberVectorDistance<NumberVector> [[../NumberVectorDistance.html]] {
+        {abstract} +distance(NumberVector, NumberVector): double
+    }
+    class "<size:14>LatLngDistance.Par\n<size:10>elki.distance.geo" as elki.distance.geo.LatLngDistance.Par [[LatLngDistance.Par.html]]
+
+    elki.distance.SpatialPrimitiveDistance <|.. elki.distance.geo.LatLngDistance
+    elki.distance.NumberVectorDistance <|.. elki.distance.geo.LatLngDistance
+    elki.distance.geo.LatLngDistance +-- elki.distance.geo.LatLngDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

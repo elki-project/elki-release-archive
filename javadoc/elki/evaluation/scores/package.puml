@@ -1,0 +1,194 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.evaluation.scores {
+
+        class PrecisionAtKEvaluation [[PrecisionAtKEvaluation.html]] {
+            ~k: int
+            +PrecisionAtKEvaluation(int)
+            +evaluate(Adapter): double
+            +expected(int, int): double
+        }
+
+        class elki.evaluation.scores.PrecisionAtKEvaluation.Par [[PrecisionAtKEvaluation.Par.html]] {
+            {static} +K_ID: OptionID
+            ~k: int
+            +configure(Parameterization): void
+            +make(): PrecisionAtKEvaluation
+        }
+
+        class DCGEvaluation [[DCGEvaluation.html]] {
+            +evaluate(Adapter): double
+            +expected(int, int): double
+            {static} +sumInvLog1p(int, int): double
+            {static} +computeDCG(Adapter): double
+            {static} +maximum(int): double
+        }
+
+        class elki.evaluation.scores.DCGEvaluation.Par [[DCGEvaluation.Par.html]] {
+            +make(): DCGEvaluation
+        }
+
+        class NDCGEvaluation [[NDCGEvaluation.html]] {
+            +evaluate(Adapter): double
+            +expected(int, int): double
+            {static} +computeNDCG(Adapter): double
+        }
+
+        class elki.evaluation.scores.NDCGEvaluation.Par [[NDCGEvaluation.Par.html]] {
+            +make(): NDCGEvaluation
+        }
+
+        class MaximumF1Evaluation [[MaximumF1Evaluation.html]] {
+            +evaluate(Adapter): double
+            +expected(int, int): double
+        }
+
+        class elki.evaluation.scores.MaximumF1Evaluation.Par [[MaximumF1Evaluation.Par.html]] {
+            +make(): MaximumF1Evaluation
+        }
+
+        class ROCEvaluation [[ROCEvaluation.html]] {
+            +evaluate(Adapter): double
+            {static} +materializeROC(Adapter): ROCurve
+            {static} +computeAUROC(Adapter): double
+            +expected(int, int): double
+        }
+
+        class elki.evaluation.scores.ROCEvaluation.ROCurve [[ROCEvaluation.ROCurve.html]] {
+            -auc: double
+            +getAUC(): double
+        }
+
+        class elki.evaluation.scores.ROCEvaluation.Par [[ROCEvaluation.Par.html]] {
+            +make(): ROCEvaluation
+        }
+
+        interface ScoreEvaluation [[ScoreEvaluation.html]] {
+            {abstract} +evaluate(Adapter): double
+            +evaluate(DBIDs, DoubleDBIDList): double
+            {abstract} +expected(int, int): double
+        }
+
+        interface elki.evaluation.scores.ScoreEvaluation.Adapter [[ScoreEvaluation.Adapter.html]] {
+            {abstract} +test(): boolean
+            {abstract} +tiedToPrevious(): boolean
+            {abstract} +numPositive(): int
+            {abstract} +numTotal(): int
+        }
+
+        class AveragePrecisionEvaluation [[AveragePrecisionEvaluation.html]] {
+            +evaluate(Adapter): double
+            +expected(int, int): double
+        }
+
+        class elki.evaluation.scores.AveragePrecisionEvaluation.Par [[AveragePrecisionEvaluation.Par.html]] {
+            +make(): AveragePrecisionEvaluation
+        }
+
+        class PRGCEvaluation [[PRGCEvaluation.html]] {
+            +evaluate(Adapter): double
+            {static} +materializePRGC(Adapter): PRGCurve
+            {static} -computePRGAUC(Adapter, PRGCurve): double
+            +expected(int, int): double
+        }
+
+        class elki.evaluation.scores.PRGCEvaluation.PRGCurve [[PRGCEvaluation.PRGCurve.html]] {
+            -auc: double
+            +getAUC(): double
+        }
+
+        class elki.evaluation.scores.PRGCEvaluation.Par [[PRGCEvaluation.Par.html]] {
+            +make(): PRGCEvaluation
+        }
+
+        class AUPRCEvaluation [[AUPRCEvaluation.html]] {
+            +evaluate(Adapter): double
+            {static} +materializePRC(Adapter): PRCurve
+            {static} +computeAUPRC(Adapter): double
+            +expected(int, int): double
+        }
+
+        class elki.evaluation.scores.AUPRCEvaluation.PRCurve [[AUPRCEvaluation.PRCurve.html]] {
+            -auc: double
+            +getAUC(): double
+        }
+
+        class elki.evaluation.scores.AUPRCEvaluation.Par [[AUPRCEvaluation.Par.html]] {
+            +make(): AUPRCEvaluation
+        }
+
+        ScoreEvaluation <|.. PrecisionAtKEvaluation
+        PrecisionAtKEvaluation --> PrecisionAtKEvaluation: RPRECISION
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.scores.PrecisionAtKEvaluation.Par
+        PrecisionAtKEvaluation +-- elki.evaluation.scores.PrecisionAtKEvaluation.Par
+        ScoreEvaluation <|.. DCGEvaluation
+        DCGEvaluation --> DCGEvaluation: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.scores.DCGEvaluation.Par
+        DCGEvaluation +-- elki.evaluation.scores.DCGEvaluation.Par
+        ScoreEvaluation <|.. NDCGEvaluation
+        NDCGEvaluation --> NDCGEvaluation: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.scores.NDCGEvaluation.Par
+        NDCGEvaluation +-- elki.evaluation.scores.NDCGEvaluation.Par
+        ScoreEvaluation <|.. MaximumF1Evaluation
+        MaximumF1Evaluation --> MaximumF1Evaluation: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.scores.MaximumF1Evaluation.Par
+        MaximumF1Evaluation +-- elki.evaluation.scores.MaximumF1Evaluation.Par
+        ScoreEvaluation <|.. ROCEvaluation
+        ROCEvaluation --> ROCEvaluation: STATIC
+        elki.math.geometry.XYCurve <|-- elki.evaluation.scores.ROCEvaluation.ROCurve
+        ROCEvaluation +-- elki.evaluation.scores.ROCEvaluation.ROCurve
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.scores.ROCEvaluation.Par
+        ROCEvaluation +-- elki.evaluation.scores.ROCEvaluation.Par
+        elki.utilities.datastructures.iterator.Iter <|-- elki.evaluation.scores.ScoreEvaluation.Adapter
+        ScoreEvaluation +-- elki.evaluation.scores.ScoreEvaluation.Adapter
+        ScoreEvaluation <|.. AveragePrecisionEvaluation
+        AveragePrecisionEvaluation --> AveragePrecisionEvaluation: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.scores.AveragePrecisionEvaluation.Par
+        AveragePrecisionEvaluation +-- elki.evaluation.scores.AveragePrecisionEvaluation.Par
+        ScoreEvaluation <|.. PRGCEvaluation
+        PRGCEvaluation --> PRGCEvaluation: STATIC
+        elki.math.geometry.XYCurve <|-- elki.evaluation.scores.PRGCEvaluation.PRGCurve
+        PRGCEvaluation +-- elki.evaluation.scores.PRGCEvaluation.PRGCurve
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.scores.PRGCEvaluation.Par
+        PRGCEvaluation +-- elki.evaluation.scores.PRGCEvaluation.Par
+        ScoreEvaluation <|.. AUPRCEvaluation
+        AUPRCEvaluation --> AUPRCEvaluation: STATIC
+        elki.math.geometry.XYCurve <|-- elki.evaluation.scores.AUPRCEvaluation.PRCurve
+        AUPRCEvaluation +-- elki.evaluation.scores.AUPRCEvaluation.PRCurve
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.scores.AUPRCEvaluation.Par
+        AUPRCEvaluation +-- elki.evaluation.scores.AUPRCEvaluation.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.math.geometry {
+        class XYCurve [[../../math/geometry/XYCurve.html]] {
+            {static} #THRESHOLD: double
+            #data: DoubleArray
+            #labelx: String
+            #labely: String
+            #minx: double
+            #maxx: double
+            #miny: double
+            #maxy: double
+            #mindx: double
+            #maxdx: double
+            #mindy: double
+            #maxdy: double
+        }
+    }
+
+    namespace elki.utilities.datastructures.iterator {
+        interface Iter [[../../utilities/datastructures/iterator/Iter.html]] {
+            {abstract} +valid(): boolean
+            {abstract} +advance(): Iter
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

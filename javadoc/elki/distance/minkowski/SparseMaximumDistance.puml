@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseMaximumDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.SparseMaximumDistance [[SparseMaximumDistance.html]] {
+        {static} +STATIC: SparseMaximumDistance
+        +distance(SparseNumberVector, SparseNumberVector): double
+        +norm(SparseNumberVector): double
+    }
+
+    class "<size:14>SparseLPNormDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.SparseLPNormDistance [[SparseLPNormDistance.html]]
+    class "<size:14>SparseMaximumDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.SparseMaximumDistance.Par [[SparseMaximumDistance.Par.html]]
+
+    elki.distance.minkowski.SparseLPNormDistance <|-- elki.distance.minkowski.SparseMaximumDistance
+    elki.distance.minkowski.SparseMaximumDistance +-- elki.distance.minkowski.SparseMaximumDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

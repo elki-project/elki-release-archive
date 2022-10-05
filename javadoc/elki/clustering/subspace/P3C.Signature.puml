@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>P3C.Signature\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.P3C.Signature [[P3C.Signature.html]] {
+        ~spec: int[]
+        ~ids: DBIDs
+        ~prune: boolean
+        -Signature(int[], DBIDs)
+        +isSuperset(Signature): boolean
+        +getFirstDim(): int
+    }
+
+    class "<size:14>P3C\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.P3C [[P3C.html]]
+
+    elki.clustering.subspace.P3C +-- elki.clustering.subspace.P3C.Signature
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

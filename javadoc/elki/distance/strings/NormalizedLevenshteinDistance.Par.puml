@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NormalizedLevenshteinDistance.Par\n<size:10>elki.distance.strings" as elki.distance.strings.NormalizedLevenshteinDistance.Par [[NormalizedLevenshteinDistance.Par.html]] {
+        +make(): NormalizedLevenshteinDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>NormalizedLevenshteinDistance\n<size:10>elki.distance.strings" as elki.distance.strings.NormalizedLevenshteinDistance [[NormalizedLevenshteinDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.strings.NormalizedLevenshteinDistance.Par
+    elki.distance.strings.NormalizedLevenshteinDistance +-- elki.distance.strings.NormalizedLevenshteinDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

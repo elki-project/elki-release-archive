@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>JeffreyDivergenceDistance\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.JeffreyDivergenceDistance [[JeffreyDivergenceDistance.html]] {
+        {static} +STATIC: JeffreyDivergenceDistance
+        +distance(NumberVector, NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +isSquared(): boolean
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[../SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    class "<size:14>JeffreyDivergenceDistance.Par\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.JeffreyDivergenceDistance.Par [[JeffreyDivergenceDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.probabilistic.JeffreyDivergenceDistance
+    elki.distance.SpatialPrimitiveDistance <|.. elki.distance.probabilistic.JeffreyDivergenceDistance
+    elki.distance.probabilistic.JeffreyDivergenceDistance +-- elki.distance.probabilistic.JeffreyDivergenceDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

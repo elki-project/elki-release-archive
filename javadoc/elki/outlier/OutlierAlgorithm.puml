@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[OutlierAlgorithm.html]] {
+        +autorun(Database): OutlierResult
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    elki.Algorithm <|-- elki.outlier.OutlierAlgorithm
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

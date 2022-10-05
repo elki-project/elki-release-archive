@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InverseGaussianMLEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.InverseGaussianMLEstimator [[InverseGaussianMLEstimator.html]] {
+        {static} +STATIC: InverseGaussianMLEstimator
+        +estimate(A, NumberArrayAdapter<?, A>): InverseGaussianDistribution
+        +getDistributionClass(): Class<? super InverseGaussianDistribution>
+    }
+
+    interface "<size:14>DistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.DistributionEstimator<InverseGaussianDistribution> [[DistributionEstimator.html]] {
+        {abstract} +estimate(A, NumberArrayAdapter<?, A>): InverseGaussianDistribution
+        {abstract} +getDistributionClass(): Class<? super Distribution>
+    }
+    class "<size:14>InverseGaussianMLEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.InverseGaussianMLEstimator.Par [[InverseGaussianMLEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.DistributionEstimator <|.. elki.math.statistics.distribution.estimator.InverseGaussianMLEstimator
+    elki.math.statistics.distribution.estimator.InverseGaussianMLEstimator +-- elki.math.statistics.distribution.estimator.InverseGaussianMLEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

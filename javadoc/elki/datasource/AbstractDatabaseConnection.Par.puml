@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.AbstractDatabaseConnection.Par [[AbstractDatabaseConnection.Par.html]] {
+        {static} +FILTERS_ID: OptionID
+        {static} +PARSER_ID: OptionID
+        #filters: List<? extends ObjectFilter>
+        #parser: Parser
+        #configFilters(Parameterization): void
+        #configParser(Parameterization, Class<?>, Class<?>): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.AbstractDatabaseConnection [[AbstractDatabaseConnection.html]] {
+        {abstract} #getLogger(): Logging
+    }
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.AbstractDatabaseConnection.Par
+    elki.datasource.AbstractDatabaseConnection +-- elki.datasource.AbstractDatabaseConnection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

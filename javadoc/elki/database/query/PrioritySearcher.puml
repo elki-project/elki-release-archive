@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>PrioritySearcher\n<size:10>elki.database.query" as elki.database.query.PrioritySearcher<O> [[PrioritySearcher.html]] {
+        +search(O, double): PrioritySearcher<O>
+        {abstract} +search(O): PrioritySearcher<O>
+        +getKNN(O, int): KNNList
+        +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+        {abstract} +computeExactDistance(): double
+        +getApproximateDistance(): double
+        +getApproximateAccuracy(): double
+        +getLowerBound(): double
+        +getUpperBound(): double
+        {abstract} +allLowerBound(): double
+        {abstract} +advance(): PrioritySearcher<O>
+    }
+
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<O> [[knn/KNNSearcher.html]] {
+        {abstract} +getKNN(O, int): KNNList
+    }
+    interface "<size:14>RangeSearcher\n<size:10>elki.database.query.range" as elki.database.query.range.RangeSearcher<O> [[range/RangeSearcher.html]] {
+        {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+    interface "<size:14>DBIDIter\n<size:10>elki.database.ids" as elki.database.ids.DBIDIter [[../ids/DBIDIter.html]] {
+        {abstract} +advance(): DBIDIter
+    }
+
+    elki.database.query.knn.KNNSearcher <|-- elki.database.query.PrioritySearcher
+    elki.database.query.range.RangeSearcher <|-- elki.database.query.PrioritySearcher
+    elki.database.ids.DBIDIter <|-- elki.database.query.PrioritySearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

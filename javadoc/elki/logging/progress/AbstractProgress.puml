@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractProgress\n<size:10>elki.logging.progress" as elki.logging.progress.AbstractProgress [[AbstractProgress.html]] {
+        -processed: AtomicInteger
+        -task: String
+        -lastLogged: long
+        -lastValue: int
+        #ratems: double
+        +AbstractProgress(String)
+        +getTask(): String
+        #setProcessed(int): void
+        +setProcessed(int, Logging): void
+        +getProcessed(): int
+        {abstract} +appendToBuffer(StringBuilder): StringBuilder
+        +incrementProcessed(Logging): void
+        #testLoggingRate(int): boolean
+    }
+
+    interface "<size:14>Progress\n<size:10>elki.logging.progress" as elki.logging.progress.Progress [[Progress.html]] {
+        {abstract} +appendToBuffer(StringBuilder): StringBuilder
+        {abstract} +isComplete(): boolean
+    }
+
+    elki.logging.progress.Progress <|.. elki.logging.progress.AbstractProgress
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

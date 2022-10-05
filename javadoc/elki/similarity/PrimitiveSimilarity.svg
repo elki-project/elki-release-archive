@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="253px" preserveAspectRatio="none" style="width:521px;height:253px;background:#FFFFFF;" version="1.1" viewBox="0 0 521 253" width="521px" zoomAndPan="magnify"><defs/><g><!--MD5=[02160379d5a97d273c876f9717233c73]
+class elki.similarity.PrimitiveSimilarity--><a href="PrimitiveSimilarity.html" target="_top" title="PrimitiveSimilarity.html" xlink:actuate="onRequest" xlink:href="PrimitiveSimilarity.html" xlink:show="new" xlink:title="PrimitiveSimilarity.html" xlink:type="simple"><g id="elem_elki.similarity.PrimitiveSimilarity"><rect codeLine="6" fill="#F1F1F1" height="78.5313" id="elki.similarity.PrimitiveSimilarity" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="489" x="14" y="149"/><ellipse cx="184.75" cy="167.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M180.6719,163.7344 L180.6719,161.5781 L188.0625,161.5781 L188.0625,163.7344 L185.5938,163.7344 L185.5938,171.8125 L188.0625,171.8125 L188.0625,173.9688 L180.6719,173.9688 L180.6719,171.8125 L183.1406,171.8125 L183.1406,163.7344 L180.6719,163.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="127" x="205.25" y="166.9951">PrimitiveSimilarity</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="68" x="234.75" y="179.5791">elki.similarity</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="496" y="146"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="497" y="158.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="15" x2="502" y1="186.9375" y2="186.9375"/><ellipse cx="25" cy="200.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="162" x="34" y="203.9326">similarity(O, O): double</text><ellipse cx="25" cy="216.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="463" x="34" y="220.2295">instantiate(Relation&lt;T extends O&gt;): SimilarityQuery&lt;T extends O&gt;</text></g></a><!--MD5=[f4fef4298a038d640aee2c8323d982f2]
+class elki.similarity.Similarity--><a href="Similarity.html" target="_top" title="Similarity.html" xlink:actuate="onRequest" xlink:href="Similarity.html" xlink:show="new" xlink:title="Similarity.html" xlink:type="simple"><g id="elem_elki.similarity.Similarity"><rect codeLine="11" fill="#F1F1F1" height="78.5313" id="elki.similarity.Similarity" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="503" x="7" y="10"/><ellipse cx="214.25" cy="28.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M210.1719,24.7344 L210.1719,22.5781 L217.5625,22.5781 L217.5625,24.7344 L215.0938,24.7344 L215.0938,32.8125 L217.5625,32.8125 L217.5625,34.9688 L210.1719,34.9688 L210.1719,32.8125 L212.6406,32.8125 L212.6406,24.7344 L210.1719,24.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="66" x="235.75" y="27.9951">Similarity</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="68" x="234.75" y="40.5791">elki.similarity</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="503" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="504" y="19.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="509" y1="47.9375" y2="47.9375"/><ellipse cx="18" cy="61.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="305" x="27" y="64.9326">getInputTypeRestriction(): TypeInformation</text><ellipse cx="18" cy="77.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="477" x="27" y="81.2295">instantiate(Relation&lt;T extends O&gt;): SimilarityQuery&lt;T extends O&gt;</text></g></a><!--MD5=[6e7b0cfcb1b73b082cfea3014f078c24]
+reverse link elki.similarity.Similarity to elki.similarity.PrimitiveSimilarity--><g id="link_elki.similarity.Similarity_elki.similarity.PrimitiveSimilarity"><path codeLine="16" d="M258.5,109.3 C258.5,122.66 258.5,136.51 258.5,148.79 " fill="none" id="elki.similarity.Similarity-backto-elki.similarity.PrimitiveSimilarity" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="251.5,109.03,258.5,89.03,265.5,109.03,251.5,109.03" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="160.5" y="233.5313"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="160.5" y="242.8135">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[3da3a6281c39f6152ad575e94b0032ce]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>PrimitiveSimilarity\n<size:10>elki.similarity" as elki.similarity.PrimitiveSimilarity<O> [[PrimitiveSimilarity.html]] {
+        {abstract} +similarity(O, O): double
+        +instantiate(Relation<T extends O>): SimilarityQuery<T extends O>
+    }
+
+    interface "<size:14>Similarity\n<size:10>elki.similarity" as elki.similarity.Similarity<O> [[Similarity.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +instantiate(Relation<T extends O>): SimilarityQuery<T extends O>
+    }
+
+    elki.similarity.Similarity <|- - elki.similarity.PrimitiveSimilarity
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

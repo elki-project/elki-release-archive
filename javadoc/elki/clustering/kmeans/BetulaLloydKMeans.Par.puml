@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BetulaLloydKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.BetulaLloydKMeans.Par [[BetulaLloydKMeans.Par.html]] {
+        {static} +STORE_IDS_ID: OptionID
+        {static} +IGNORE_WEIGHT_ID: OptionID
+        ~cffactory: Factory<?>
+        ~initialization: AbstractCFKMeansInitialization
+        ~storeIds: boolean
+        ~ignoreWeight: boolean
+        +configure(Parameterization): void
+        +make(): BetulaLloydKMeans
+    }
+
+    abstract class "<size:14>AbstractKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Par<NumberVector> [[AbstractKMeans.Par.html]] {
+        {abstract} +make(): AbstractKMeans<V extends NumberVector, ?>
+    }
+    class "<size:14>BetulaLloydKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.BetulaLloydKMeans [[BetulaLloydKMeans.html]]
+
+    elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.BetulaLloydKMeans.Par
+    elki.clustering.kmeans.BetulaLloydKMeans +-- elki.clustering.kmeans.BetulaLloydKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

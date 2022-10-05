@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Bit\n<size:10>elki.data" as elki.data.Bit [[Bit.html]] {
+        {static} -serialVersionUID: long
+        {static} +BIT_PATTERN: Pattern
+        {static} +TRUE: Bit
+        {static} +FALSE: Bit
+        -bit: boolean
+        +--Bit--(boolean)
+        +--Bit--(int)
+        {static} +valueOf(String): Bit
+        {static} +valueOf(boolean): Bit
+        +intValue(): int
+        +longValue(): long
+        +floatValue(): float
+        +doubleValue(): double
+        +bitValue(): boolean
+    }
+
+    abstract class "<size:14>Number\n<size:10>java.lang" as java.lang.Number {
+        {abstract} +intValue(): int
+        {abstract} +longValue(): long
+        {abstract} +floatValue(): float
+        {abstract} +doubleValue(): double
+    }
+
+    java.lang.Number <|-- elki.data.Bit
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,145 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.distance.external {
+
+        class AsciiDistanceParser [[AsciiDistanceParser.html]] {
+            {static} -LOG: Logging
+            #reader: TokenizedReader
+            #tokenizer: Tokenizer
+            +AsciiDistanceParser(CSVReaderFormat)
+            +parse(InputStream, DistanceCacheWriter): void
+        }
+
+        class elki.distance.external.AsciiDistanceParser.Par [[AsciiDistanceParser.Par.html]] {
+            #format: CSVReaderFormat
+            +configure(Parameterization): void
+            +make(): AsciiDistanceParser
+        }
+
+        class DiskCacheBasedFloatDistance [[DiskCacheBasedFloatDistance.html]] {
+            {static} -LOG: Logging
+            {static} +FLOAT_CACHE_MAGIC: int
+            -cache: OnDiskUpperTriangleMatrix
+            +DiskCacheBasedFloatDistance(OnDiskUpperTriangleMatrix)
+            +DiskCacheBasedFloatDistance(Path)
+            +distance(int, int): double
+            +checkRange(DBIDRange): void
+        }
+
+        class elki.distance.external.DiskCacheBasedFloatDistance.Par [[DiskCacheBasedFloatDistance.Par.html]] {
+            {static} +MATRIX_ID: OptionID
+            #cache: OnDiskUpperTriangleMatrix
+            +configure(Parameterization): void
+            +make(): DiskCacheBasedFloatDistance
+        }
+
+        interface DistanceParser [[DistanceParser.html]] {
+            {abstract} +parse(InputStream, DistanceCacheWriter): void
+        }
+
+        interface elki.distance.external.DistanceParser.DistanceCacheWriter [[DistanceParser.DistanceCacheWriter.html]] {
+            {abstract} +put(int, int, double): void
+        }
+
+        class FileBasedSparseDoubleDistance [[FileBasedSparseDoubleDistance.html]] {
+            {static} -LOG: Logging
+            -cache: Long2DoubleOpenHashMap
+            -matrixfile: URI
+            -min: int
+            -max: int
+            #defaultDistance: double
+            +FileBasedSparseDoubleDistance(DistanceParser, URI, double)
+            +instantiate(Relation<O extends DBID>): DistanceQuery<O extends DBID>
+            +distance(int, int): double
+            #loadCache(int, InputStream): void
+            {static} #makeKey(int, int): long
+            +checkRange(DBIDRange): void
+        }
+
+        class elki.distance.external.FileBasedSparseDoubleDistance.Par [[FileBasedSparseDoubleDistance.Par.html]] {
+            {static} +MATRIX_ID: OptionID
+            {static} +PARSER_ID: OptionID
+            {static} +DEFAULTDIST_ID: OptionID
+            #matrixfile: URI
+            #defaultDistance: double
+            +configure(Parameterization): void
+            +make(): FileBasedSparseDoubleDistance
+        }
+
+        class DiskCacheBasedDoubleDistance [[DiskCacheBasedDoubleDistance.html]] {
+            {static} -LOG: Logging
+            {static} +DOUBLE_CACHE_MAGIC: int
+            -cache: OnDiskUpperTriangleMatrix
+            +DiskCacheBasedDoubleDistance(OnDiskUpperTriangleMatrix)
+            +DiskCacheBasedDoubleDistance(Path)
+            +distance(int, int): double
+            +checkRange(DBIDRange): void
+        }
+
+        class elki.distance.external.DiskCacheBasedDoubleDistance.Par [[DiskCacheBasedDoubleDistance.Par.html]] {
+            {static} +MATRIX_ID: OptionID
+            #cache: OnDiskUpperTriangleMatrix
+            +configure(Parameterization): void
+            +make(): DiskCacheBasedDoubleDistance
+        }
+
+        class FileBasedSparseFloatDistance [[FileBasedSparseFloatDistance.html]] {
+            {static} -LOG: Logging
+            -cache: Long2FloatOpenHashMap
+            -matrixfile: URI
+            -min: int
+            -max: int
+            #defaultDistance: float
+            +FileBasedSparseFloatDistance(DistanceParser, URI, float)
+            +instantiate(Relation<O extends DBID>): DistanceQuery<O extends DBID>
+            +distance(int, int): double
+            #loadCache(int, InputStream): void
+            {static} #makeKey(int, int): long
+            +checkRange(DBIDRange): void
+        }
+
+        class elki.distance.external.FileBasedSparseFloatDistance.Par [[FileBasedSparseFloatDistance.Par.html]] {
+            {static} +MATRIX_ID: OptionID
+            {static} +PARSER_ID: OptionID
+            {static} +DEFAULTDIST_ID: OptionID
+            #matrixfile: URI
+            #defaultDistance: float
+            +configure(Parameterization): void
+            +make(): FileBasedSparseFloatDistance
+        }
+
+        DistanceParser <|.. AsciiDistanceParser
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.external.AsciiDistanceParser.Par
+        AsciiDistanceParser +-- elki.distance.external.AsciiDistanceParser.Par
+        elki.distance.AbstractDBIDRangeDistance <|-- DiskCacheBasedFloatDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.external.DiskCacheBasedFloatDistance.Par
+        DiskCacheBasedFloatDistance +-- elki.distance.external.DiskCacheBasedFloatDistance.Par
+        DistanceParser +-- elki.distance.external.DistanceParser.DistanceCacheWriter
+        elki.distance.AbstractDBIDRangeDistance <|-- FileBasedSparseDoubleDistance
+        FileBasedSparseDoubleDistance --> DistanceParser: parser
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.external.FileBasedSparseDoubleDistance.Par
+        FileBasedSparseDoubleDistance +-- elki.distance.external.FileBasedSparseDoubleDistance.Par
+        elki.distance.external.FileBasedSparseDoubleDistance.Par --> DistanceParser: parser
+        elki.distance.AbstractDBIDRangeDistance <|-- DiskCacheBasedDoubleDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.external.DiskCacheBasedDoubleDistance.Par
+        DiskCacheBasedDoubleDistance +-- elki.distance.external.DiskCacheBasedDoubleDistance.Par
+        elki.distance.AbstractDBIDRangeDistance <|-- FileBasedSparseFloatDistance
+        FileBasedSparseFloatDistance --> DistanceParser: parser
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.external.FileBasedSparseFloatDistance.Par
+        FileBasedSparseFloatDistance +-- elki.distance.external.FileBasedSparseFloatDistance.Par
+        elki.distance.external.FileBasedSparseFloatDistance.Par --> DistanceParser: parser
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.distance {
+        abstract class AbstractDBIDRangeDistance [[../AbstractDBIDRangeDistance.html]]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

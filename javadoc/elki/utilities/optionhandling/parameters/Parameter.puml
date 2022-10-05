@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Parameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.Parameter<T> [[Parameter.html]] {
+        {abstract} +setDefaultValue(T): Parameter<T>
+        {abstract} +hasDefaultValue(): boolean
+        {abstract} +tryDefaultValue(): boolean
+        {abstract} +setOptional(boolean): Parameter<T>
+        {abstract} +isOptional(): boolean
+        {abstract} +tookDefaultValue(): boolean
+        {abstract} +isDefined(): boolean
+        {abstract} +getDefaultValue(): T
+        {abstract} +getOptionID(): OptionID
+        {abstract} +setValue(Object): void
+        {abstract} +getValue(): T
+        {abstract} +isValid(Object): boolean
+        {abstract} +getSyntax(): String
+        {abstract} +getValueAsString(): String
+        {abstract} +getDefaultValueAsString(): String
+        {abstract} +describeValues(StringBuilder): StringBuilder
+        {abstract} +addConstraint(ParameterConstraint<? super T>): Parameter<T>
+        {abstract} +getConstraints(): List<ParameterConstraint<? super T>>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

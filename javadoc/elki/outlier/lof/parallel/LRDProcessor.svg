@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="273px" preserveAspectRatio="none" style="width:491px;height:273px;background:#FFFFFF;" version="1.1" viewBox="0 0 491 273" width="491px" zoomAndPan="magnify"><defs/><g><!--MD5=[8e855af3becc9212b8b2717a1a650ec9]
+class elki.outlier.lof.parallel.LRDProcessor--><a href="LRDProcessor.html" target="_top" title="LRDProcessor.html" xlink:actuate="onRequest" xlink:href="LRDProcessor.html" xlink:show="new" xlink:title="LRDProcessor.html" xlink:type="simple"><g id="elem_elki.outlier.lof.parallel.LRDProcessor"><rect codeLine="6" fill="#F1F1F1" height="119.125" id="elki.outlier.lof.parallel.LRDProcessor" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="477" x="7" y="129"/><ellipse cx="191.25" cy="147.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M194.2188,153.6094 Q193.6406,153.9063 193,154.0469 Q192.3594,154.2031 191.6563,154.2031 Q189.1563,154.2031 187.8281,152.5625 Q186.5156,150.9063 186.5156,147.7813 Q186.5156,144.6563 187.8281,143 Q189.1563,141.3438 191.6563,141.3438 Q192.3594,141.3438 193,141.5 Q193.6563,141.6563 194.2188,141.9531 L194.2188,144.6719 Q193.5938,144.0938 193,143.8281 Q192.4063,143.5469 191.7813,143.5469 Q190.4375,143.5469 189.75,144.625 Q189.0625,145.6875 189.0625,147.7813 Q189.0625,149.875 189.75,150.9531 Q190.4375,152.0156 191.7813,152.0156 Q192.4063,152.0156 193,151.75 Q193.5938,151.4688 194.2188,150.8906 L194.2188,153.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="98" x="212.75" y="146.9951">LRDProcessor</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="100" x="211.75" y="159.5791">elki.outlier.lof.parallel</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="483" y1="166.9375" y2="166.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="177.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="259" x="27" y="183.9326">knns: DataStore&lt;? extends KNNList&gt;</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="193.8828"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169" x="27" y="200.2295">kdists: DoubleDataStore</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="483" y1="207.5313" y2="207.5313"/><ellipse cx="18" cy="221.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="451" x="27" y="224.5264">LRDProcessor(DataStore&lt;? extends KNNList&gt;, DoubleDataStore)</text><ellipse cx="18" cy="237.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="27" y="240.8232">instantiate(Executor): Instance</text></g></a><!--MD5=[a036fe86152ba8fe97cb74b572509015]
+class elki.parallel.processor.AbstractDoubleProcessor--><a href="../../../parallel/processor/AbstractDoubleProcessor.html" target="_top" title="../../../parallel/processor/AbstractDoubleProcessor.html" xlink:actuate="onRequest" xlink:href="../../../parallel/processor/AbstractDoubleProcessor.html" xlink:show="new" xlink:title="../../../parallel/processor/AbstractDoubleProcessor.html" xlink:type="simple"><g id="elem_elki.parallel.processor.AbstractDoubleProcessor"><rect codeLine="13" fill="#F1F1F1" height="62.2344" id="elki.parallel.processor.AbstractDoubleProcessor" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="242" x="124.5" y="7"/><ellipse cx="154.8" cy="25.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M154.9094,21.3125 L153.7531,26.3906 L156.0813,26.3906 L154.9094,21.3125 Z M153.425,19.0781 L156.4094,19.0781 L159.7688,31.4688 L157.3156,31.4688 L156.55,28.4063 L153.2688,28.4063 L152.5188,31.4688 L150.0813,31.4688 L153.425,19.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="176" x="172.2" y="24.9951">AbstractDoubleProcessor</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="109" x="205.7" y="37.5791">elki.parallel.processor</text><line style="stroke:#181818;stroke-width:0.5;" x1="125.5" x2="365.5" y1="44.9375" y2="44.9375"/><ellipse cx="135.5" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="216" x="144.5" y="61.9326">instantiate(Executor): Instance</text></g></a><!--MD5=[98421680e498e3eb8c7789b02b6e5e10]
+reverse link elki.parallel.processor.AbstractDoubleProcessor to elki.outlier.lof.parallel.LRDProcessor--><g id="link_elki.parallel.processor.AbstractDoubleProcessor_elki.outlier.lof.parallel.LRDProcessor"><path codeLine="18" d="M245.5,89.22 C245.5,101.98 245.5,115.81 245.5,128.95 " fill="none" id="elki.parallel.processor.AbstractDoubleProcessor-backto-elki.outlier.lof.parallel.LRDProcessor" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="238.5,89.05,245.5,69.05,252.5,89.05,238.5,89.05" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="145.5" y="254.125"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="145.5" y="263.4072">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[8ad0ec09351e4d7b8b1f6b753834b2b5]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LRDProcessor\n<size:10>elki.outlier.lof.parallel" as elki.outlier.lof.parallel.LRDProcessor [[LRDProcessor.html]] {
+        -knns: DataStore<? extends KNNList>
+        -kdists: DoubleDataStore
+        +LRDProcessor(DataStore<? extends KNNList>, DoubleDataStore)
+        +instantiate(Executor): Instance
+    }
+
+    abstract class "<size:14>AbstractDoubleProcessor\n<size:10>elki.parallel.processor" as elki.parallel.processor.AbstractDoubleProcessor [[../../../parallel/processor/AbstractDoubleProcessor.html]] {
+        {abstract} +instantiate(Executor): Instance
+    }
+    class "<size:14>LRDProcessor.Instance\n<size:10>elki.outlier.lof.parallel" as elki.outlier.lof.parallel.LRDProcessor.Instance [[LRDProcessor.Instance.html]]
+
+    elki.parallel.processor.AbstractDoubleProcessor <|- - elki.outlier.lof.parallel.LRDProcessor
+    elki.outlier.lof.parallel.LRDProcessor +- - elki.outlier.lof.parallel.LRDProcessor.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

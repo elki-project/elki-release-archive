@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractKMeansQualityMeasure\n<size:10>elki.clustering.kmeans.quality" as elki.clustering.kmeans.quality.AbstractKMeansQualityMeasure<O extends NumberVector> [[AbstractKMeansQualityMeasure.html]] {
+        {static} +numPoints(Clustering<? extends MeanModel>): int
+        {static} +varianceContributionOfCluster(Cluster<? extends MeanModel>, NumberVectorDistance<?>, Relation<? extends NumberVector>): double
+        {static} +logLikelihood(Relation<? extends NumberVector>, Clustering<? extends MeanModel>, NumberVectorDistance<?>): double
+        {static} +numberOfFreeParameters(Relation<? extends NumberVector>, Clustering<? extends MeanModel>): int
+    }
+
+    interface "<size:14>KMeansQualityMeasure\n<size:10>elki.clustering.kmeans.quality" as elki.clustering.kmeans.quality.KMeansQualityMeasure<O extends NumberVector> [[KMeansQualityMeasure.html]] {
+        {abstract} +quality(Clustering<? extends MeanModel>, NumberVectorDistance<? super NumberVector>, Relation<V extends NumberVector>): double
+        {abstract} +isBetter(double, double): boolean
+    }
+
+    elki.clustering.kmeans.quality.KMeansQualityMeasure <|.. elki.clustering.kmeans.quality.AbstractKMeansQualityMeasure
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

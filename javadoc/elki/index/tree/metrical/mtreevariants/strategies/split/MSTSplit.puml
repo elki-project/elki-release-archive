@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MSTSplit\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.MSTSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> [[MSTSplit.html]] {
+        +split(AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, N extends AbstractMTreeNode<?, N extends AbstractMTreeNode<?,N,E>, E extends MTreeEntry>): Assignments<E extends MTreeEntry>
+        {static} -coverRadius(double[], int[], int): double
+        {static} -mstPartition(double[]): int[]
+        {static} -thresholdLength(double[], int[]): double
+        {static} -edgelength(double[], int[], int): double
+        {static} -omitEdge(int[], int[], int[], int): void
+        {static} -follow(int, int[]): int
+    }
+
+    interface "<size:14>MTreeSplit\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split" as elki.index.tree.metrical.mtreevariants.strategies.split.MTreeSplit<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> [[MTreeSplit.html]] {
+        {abstract} +split(AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>): Assignments<E extends MTreeEntry>
+    }
+
+    elki.index.tree.metrical.mtreevariants.strategies.split.MTreeSplit <|.. elki.index.tree.metrical.mtreevariants.strategies.split.MSTSplit
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

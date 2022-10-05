@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>FileListParameter.FilesType\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.FileListParameter.FilesType [[FileListParameter.FilesType.html]] {
+        {static} +INPUT_FILES
+        {static} +OUTPUT_FILES
+    }
+
+    class "<size:14>FileListParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.FileListParameter [[FileListParameter.html]]
+
+    elki.utilities.optionhandling.parameters.FileListParameter +-- elki.utilities.optionhandling.parameters.FileListParameter.FilesType
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

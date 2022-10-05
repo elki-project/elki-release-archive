@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ModifiableHyperBoundingBox\n<size:10>elki.data" as elki.data.ModifiableHyperBoundingBox [[ModifiableHyperBoundingBox.html]] {
+        {static} -serialVersionUID: long
+        +ModifiableHyperBoundingBox()
+        +ModifiableHyperBoundingBox(SpatialComparable)
+        +ModifiableHyperBoundingBox(double[], double[])
+        +ModifiableHyperBoundingBox(int, double, double)
+        +setMax(int, double): void
+        +setMin(int, double): void
+        +getMinRef(): double[]
+        +getMaxRef(): double[]
+        +set(SpatialComparable): void
+        +extend(SpatialComparable): boolean
+    }
+
+    class "<size:14>HyperBoundingBox\n<size:10>elki.data" as elki.data.HyperBoundingBox [[HyperBoundingBox.html]]
+
+    elki.data.HyperBoundingBox <|-- elki.data.ModifiableHyperBoundingBox
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

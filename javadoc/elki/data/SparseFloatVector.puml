@@ -1,0 +1,47 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseFloatVector\n<size:10>elki.data" as elki.data.SparseFloatVector [[SparseFloatVector.html]] {
+        {static} +FACTORY: Factory
+        {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<SparseFloatVector>
+        {static} -FLOAT0: float
+        -indexes: int[]
+        -values: float[]
+        -dimensionality: int
+        +SparseFloatVector(int[], float[], int)
+        +SparseFloatVector(Int2FloatOpenHashMap, int)
+        +SparseFloatVector(float[])
+        -getMaxDim(): int
+        +getDimensionality(): int
+        +setDimensionality(int): void
+        +--getValue--(int): Float
+        +--doubleValue--(int): double
+        +--floatValue--(int): float
+        +--longValue--(int): long
+        +toArray(): double[]
+        +iterDim(int): int
+        +iterValid(int): boolean
+        +iterDoubleValue(int): double
+        +iterFloatValue(int): float
+        +iterLongValue(int): long
+    }
+
+    interface "<size:14>SparseNumberVector\n<size:10>elki.data" as elki.data.SparseNumberVector [[SparseNumberVector.html]] {
+        {abstract} +setDimensionality(int): void
+        {abstract} +iterDoubleValue(int): double
+        {abstract} +iterLongValue(int): long
+        {abstract} +--doubleValue--(int): double
+        {abstract} +--longValue--(int): long
+    }
+    class "<size:14>SparseFloatVector.Factory\n<size:10>elki.data" as elki.data.SparseFloatVector.Factory [[SparseFloatVector.Factory.html]]
+    class "<size:14>SparseFloatVector.VariableSerializer\n<size:10>elki.data" as elki.data.SparseFloatVector.VariableSerializer [[SparseFloatVector.VariableSerializer.html]]
+
+    elki.data.SparseNumberVector <|.. elki.data.SparseFloatVector
+    elki.data.SparseFloatVector +-- elki.data.SparseFloatVector.Factory
+    elki.data.SparseFloatVector +-- elki.data.SparseFloatVector.VariableSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

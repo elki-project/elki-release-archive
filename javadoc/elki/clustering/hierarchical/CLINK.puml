@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CLINK\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.CLINK<O> [[CLINK.html]] {
+        {static} -LOG: Logging
+        +CLINK(Distance<? super O>)
+        #process(DBIDRef, ArrayDBIDs, DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore, WritableDoubleDataStore): void
+        -clinkstep3(DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore, WritableDoubleDataStore): void
+        -clinkstep4567(DBIDRef, ArrayDBIDs, DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore, WritableDoubleDataStore): void
+        -clinkstep8(DBIDRef, DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore): void
+        #getLogger(): Logging
+    }
+
+    class "<size:14>SLINK\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.SLINK<O> [[SLINK.html]]
+    class "<size:14>CLINK.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.CLINK.Par<O> [[CLINK.Par.html]]
+
+    elki.clustering.hierarchical.SLINK <|-- elki.clustering.hierarchical.CLINK
+    elki.clustering.hierarchical.CLINK +-- elki.clustering.hierarchical.CLINK.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

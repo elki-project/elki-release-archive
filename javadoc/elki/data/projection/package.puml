@@ -1,0 +1,161 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.data.projection {
+
+        class LngLatToECEFProjection<V extends NumberVector> [[LngLatToECEFProjection.html]] {
+            ~model: EarthModel
+            -factory: Factory<V extends NumberVector>
+            +LngLatToECEFProjection(EarthModel)
+            +initialize(SimpleTypeInformation<? extends NumberVector>): void
+            +project(V extends NumberVector): V extends NumberVector
+            +getInputDataTypeInformation(): SimpleTypeInformation<? super NumberVector>
+            +getOutputDataTypeInformation(): SimpleTypeInformation<V extends NumberVector>
+        }
+
+        class elki.data.projection.LngLatToECEFProjection.Par {
+            ~model: EarthModel
+            +configure(Parameterization): void
+            +make(): LngLatToECEFProjection<NumberVector>
+        }
+
+        class LatLngToECEFProjection<V extends NumberVector> [[LatLngToECEFProjection.html]] {
+            -factory: Factory<V extends NumberVector>
+            -model: EarthModel
+            +LatLngToECEFProjection(EarthModel)
+            +initialize(SimpleTypeInformation<? extends NumberVector>): void
+            +project(V extends NumberVector): V extends NumberVector
+            +getInputDataTypeInformation(): SimpleTypeInformation<? super NumberVector>
+            +getOutputDataTypeInformation(): SimpleTypeInformation<V extends NumberVector>
+        }
+
+        class elki.data.projection.LatLngToECEFProjection.Par {
+            ~model: EarthModel
+            +configure(Parameterization): void
+            +make(): LatLngToECEFProjection<NumberVector>
+        }
+
+        class FeatureSelection<V extends FeatureVector<F>, F> [[FeatureSelection.html]] {
+            -mindim: int
+            -dims: int[]
+            -factory: Factory<V extends FeatureVector<F>, F>
+            -project: Function<V extends FeatureVector<F>, V extends FeatureVector<F>>
+            +FeatureSelection(int[])
+            +initialize(SimpleTypeInformation<? extends FeatureVector<F>>): void
+            +project(V extends FeatureVector<F>): V extends FeatureVector<F>
+            +getOutputDataTypeInformation(): SimpleTypeInformation<V extends FeatureVector<F>>
+            +getInputDataTypeInformation(): TypeInformation
+        }
+
+        class elki.data.projection.FeatureSelection.ProjectedFeatureVectorAdapter [[FeatureSelection.ProjectedFeatureVectorAdapter.html]] {
+            +size(V extends FeatureVector<F>): int
+            +get(V extends FeatureVector<F>, int): F
+        }
+
+        class elki.data.projection.FeatureSelection.ProjectedNumberFeatureVectorAdapter [[FeatureSelection.ProjectedNumberFeatureVectorAdapter.html]] {
+            +size(NumberVector): int
+            +get(NumberVector, int): Double
+            +getDouble(NumberVector, int): double
+            +getLong(NumberVector, int): long
+        }
+
+        class elki.data.projection.FeatureSelection.Par<V extends FeatureVector<F>, F> [[FeatureSelection.Par.html]] {
+            {static} +SELECTED_ATTRIBUTES_ID: OptionID
+            ~dims: int[]
+            +configure(Parameterization): void
+            +make(): FeatureSelection<V extends FeatureVector<F>, F>
+        }
+
+        class NumericalFeatureSelection<V extends NumberVector> [[NumericalFeatureSelection.html]] {
+            -mindim: int
+            -factory: Factory<V extends NumberVector>
+            -dims: int[]
+            +NumericalFeatureSelection(int[])
+            +NumericalFeatureSelection(long[])
+            +initialize(SimpleTypeInformation<? extends NumberVector>): void
+            +project(V extends NumberVector): V extends NumberVector
+            +getOutputDataTypeInformation(): SimpleTypeInformation<V extends NumberVector>
+            +getInputDataTypeInformation(): TypeInformation
+        }
+
+        class elki.data.projection.NumericalFeatureSelection.Par<V extends NumberVector> [[NumericalFeatureSelection.Par.html]] {
+            ~dims: int[]
+            +configure(Parameterization): void
+            +make(): NumericalFeatureSelection<V extends NumberVector>
+        }
+
+        interface Projection<IN, OUT> [[Projection.html]] {
+            {abstract} +initialize(SimpleTypeInformation<? extends IN>): void
+            {abstract} +project(IN): OUT
+            {abstract} +getInputDataTypeInformation(): TypeInformation
+            {abstract} +getOutputDataTypeInformation(): SimpleTypeInformation<OUT>
+        }
+
+        class RandomProjection<V extends NumberVector> [[RandomProjection.html]] {
+            {static} -LOG: Logging
+            -factory: Factory<V extends NumberVector>
+            -dimensionality: int
+            +RandomProjection(int, RandomProjectionFamily)
+            +initialize(SimpleTypeInformation<? extends NumberVector>): void
+            +project(V extends NumberVector): V extends NumberVector
+            +getInputDataTypeInformation(): TypeInformation
+            +getOutputDataTypeInformation(): SimpleTypeInformation<V extends NumberVector>
+        }
+
+        class elki.data.projection.RandomProjection.Par [[RandomProjection.Par.html]] {
+            {static} +FAMILY_ID: OptionID
+            {static} +DIMENSIONALITY_ID: OptionID
+            -dimensionality: int
+            +configure(Parameterization): void
+            +make(): RandomProjection<NumberVector>
+        }
+
+        Projection <|.. LngLatToECEFProjection
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.projection.LngLatToECEFProjection.Par
+        LngLatToECEFProjection +-- elki.data.projection.LngLatToECEFProjection.Par
+        Projection <|.. LatLngToECEFProjection
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.projection.LatLngToECEFProjection.Par
+        LatLngToECEFProjection +-- elki.data.projection.LatLngToECEFProjection.Par
+        Projection <|.. FeatureSelection
+        elki.utilities.datastructures.arraylike.ArrayAdapter <|.. elki.data.projection.FeatureSelection.ProjectedFeatureVectorAdapter
+        FeatureSelection +-- elki.data.projection.FeatureSelection.ProjectedFeatureVectorAdapter
+        elki.utilities.datastructures.arraylike.NumberArrayAdapter <|.. elki.data.projection.FeatureSelection.ProjectedNumberFeatureVectorAdapter
+        FeatureSelection +-- elki.data.projection.FeatureSelection.ProjectedNumberFeatureVectorAdapter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.projection.FeatureSelection.Par
+        FeatureSelection +-- elki.data.projection.FeatureSelection.Par
+        Projection <|.. NumericalFeatureSelection
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.projection.NumericalFeatureSelection.Par
+        NumericalFeatureSelection +-- elki.data.projection.NumericalFeatureSelection.Par
+        Projection <|.. RandomProjection
+        RandomProjection --> elki.data.projection.random.RandomProjectionFamily.Projection: projection
+        RandomProjection --> elki.data.projection.random.RandomProjectionFamily: family
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.projection.RandomProjection.Par
+        RandomProjection +-- elki.data.projection.RandomProjection.Par
+        elki.data.projection.RandomProjection.Par --> elki.data.projection.random.RandomProjectionFamily: family
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.utilities.datastructures.arraylike {
+        interface ArrayAdapter<T, A> [[../../utilities/datastructures/arraylike/ArrayAdapter.html]] {
+            {abstract} +size(A): int
+            {abstract} +get(A, int): T
+        }
+        interface NumberArrayAdapter<N extends Number, A> [[../../utilities/datastructures/arraylike/NumberArrayAdapter.html]] {
+            {abstract} +size(A): int
+            {abstract} +get(A, int): N extends Number
+            {abstract} +getDouble(A, int): double
+            +getFloat(A, int): float
+            +getInteger(A, int): int
+            +getShort(A, int): short
+            {abstract} +getLong(A, int): long
+            +getByte(A, int): byte
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

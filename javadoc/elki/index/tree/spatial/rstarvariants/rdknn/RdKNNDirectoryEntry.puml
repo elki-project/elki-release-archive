@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RdKNNDirectoryEntry\n<size:10>elki.index.tree.spatial.rstarvariants.rdknn" as elki.index.tree.spatial.rstarvariants.rdknn.RdKNNDirectoryEntry [[RdKNNDirectoryEntry.html]] {
+        {static} -serialVersionUID: long
+        -knnDistance: double
+        +RdKNNDirectoryEntry()
+        +RdKNNDirectoryEntry(int, ModifiableHyperBoundingBox, double)
+        +getKnnDistance(): double
+        +setKnnDistance(double): void
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+    }
+
+    class "<size:14>SpatialDirectoryEntry\n<size:10>elki.index.tree.spatial" as elki.index.tree.spatial.SpatialDirectoryEntry [[../../SpatialDirectoryEntry.html]]
+    interface "<size:14>RdKNNEntry\n<size:10>elki.index.tree.spatial.rstarvariants.rdknn" as elki.index.tree.spatial.rstarvariants.rdknn.RdKNNEntry [[RdKNNEntry.html]] {
+        {abstract} +getKnnDistance(): double
+        {abstract} +setKnnDistance(double): void
+    }
+
+    elki.index.tree.spatial.SpatialDirectoryEntry <|-- elki.index.tree.spatial.rstarvariants.rdknn.RdKNNDirectoryEntry
+    elki.index.tree.spatial.rstarvariants.rdknn.RdKNNEntry <|.. elki.index.tree.spatial.rstarvariants.rdknn.RdKNNDirectoryEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

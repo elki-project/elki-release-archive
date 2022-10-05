@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CanopyPreClustering\n<size:10>elki.clustering" as elki.clustering.CanopyPreClustering<O> [[CanopyPreClustering.html]] {
+        {static} -LOG: Logging
+        -distance: Distance<? super O>
+        -t1: double
+        -t2: double
+        +CanopyPreClustering(Distance<? super O>, double, double)
+        +run(Relation<O>): Clustering<PrototypeModel<O>>
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<PrototypeModel<O>>> [[ClusteringAlgorithm.html]]
+    class "<size:14>CanopyPreClustering.Par\n<size:10>elki.clustering" as elki.clustering.CanopyPreClustering.Par<O>
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.CanopyPreClustering
+    elki.clustering.CanopyPreClustering +-- elki.clustering.CanopyPreClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

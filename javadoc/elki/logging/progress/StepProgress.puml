@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>StepProgress\n<size:10>elki.logging.progress" as elki.logging.progress.StepProgress [[StepProgress.html]] {
+        ~stepTitle: String
+        +StepProgress(int)
+        +StepProgress(String, int)
+        +appendToBuffer(StringBuilder): StringBuilder
+        +beginStep(int, String, Logging): void
+        +setCompleted(Logging): void
+        #getStepTitle(): String
+    }
+
+    class "<size:14>FiniteProgress\n<size:10>elki.logging.progress" as elki.logging.progress.FiniteProgress [[FiniteProgress.html]]
+
+    elki.logging.progress.FiniteProgress <|-- elki.logging.progress.StepProgress
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

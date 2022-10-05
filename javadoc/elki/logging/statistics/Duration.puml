@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Duration\n<size:10>elki.logging.statistics" as elki.logging.statistics.Duration [[Duration.html]] {
+        {abstract} +begin(): Duration
+        {abstract} +end(): Duration
+        {abstract} +getBegin(): long
+        {abstract} +getEnd(): long
+        {abstract} +getDuration(): long
+    }
+
+    interface "<size:14>Statistic\n<size:10>elki.logging.statistics" as elki.logging.statistics.Statistic [[Statistic.html]] {
+        {abstract} +getKey(): String
+        {abstract} +formatValue(): String
+    }
+
+    elki.logging.statistics.Statistic <|-- elki.logging.statistics.Duration
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

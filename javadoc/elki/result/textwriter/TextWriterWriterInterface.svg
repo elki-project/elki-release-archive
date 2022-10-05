@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="112px" preserveAspectRatio="none" style="width:392px;height:112px;background:#FFFFFF;" version="1.1" viewBox="0 0 392 112" width="392px" zoomAndPan="magnify"><defs/><g><!--MD5=[f25ec50f0f54fdf13b81573d6f45a7ab]
+class elki.result.textwriter.TextWriterWriterInterface--><a href="TextWriterWriterInterface.html" target="_top" title="TextWriterWriterInterface.html" xlink:actuate="onRequest" xlink:href="TextWriterWriterInterface.html" xlink:show="new" xlink:title="TextWriterWriterInterface.html" xlink:type="simple"><g id="elem_elki.result.textwriter.TextWriterWriterInterface"><rect codeLine="6" fill="#F1F1F1" height="78.5313" id="elki.result.textwriter.TextWriterWriterInterface" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="371" x="7" y="7"/><ellipse cx="93.25" cy="25.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M93.3594,21.3125 L92.2031,26.3906 L94.5313,26.3906 L93.3594,21.3125 Z M91.875,19.0781 L94.8594,19.0781 L98.2188,31.4688 L95.7656,31.4688 L95,28.4063 L91.7188,28.4063 L90.9688,31.4688 L88.5313,31.4688 L91.875,19.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="178" x="113.75" y="24.9951">TextWriterWriterInterface</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="101" x="152.25" y="37.5791">elki.result.textwriter</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="371" y="4"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="372" y="16.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="377" y1="44.9375" y2="44.9375"/><ellipse cx="18" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="275" x="27" y="61.9326">write(TextWriterStream, String, O): void</text><ellipse cx="18" cy="74.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="345" x="27" y="78.2295">writeObject(TextWriterStream, String, Object): void</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="99" y="92.5313"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="99" y="101.8135">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[a947e6e489f23bef33b3b4855883dd9a]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>TextWriterWriterInterface\n<size:10>elki.result.textwriter" as elki.result.textwriter.TextWriterWriterInterface<O> [[TextWriterWriterInterface.html]] {
+        {abstract} +write(TextWriterStream, String, O): void
+        +writeObject(TextWriterStream, String, Object): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

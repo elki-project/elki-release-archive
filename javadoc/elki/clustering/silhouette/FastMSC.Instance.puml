@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastMSC.Instance\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.FastMSC.Instance [[FastMSC.Instance.html]] {
+        #ids: DBIDs
+        #distQ: DistanceQuery<?>
+        #assignment: WritableDataStore<Record>
+        #output: WritableIntegerDataStore
+        +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+        #run(ArrayModifiableDBIDs, int): double
+        #assignToNearestCluster(ArrayDBIDs): double
+        #findBestSwap(DBIDRef, double[]): double
+        #doSwap(ArrayDBIDs, int, DBIDRef): double
+        #updateThirdNearest(DBIDRef, Record, int, double, DBIDArrayIter): void
+        #updateRemovalLoss(double[]): void
+        +silhouetteScores(): DoubleDataStore
+    }
+
+    class "<size:14>FastMSC\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.FastMSC<O> [[FastMSC.html]]
+
+    elki.clustering.silhouette.FastMSC +-- elki.clustering.silhouette.FastMSC.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

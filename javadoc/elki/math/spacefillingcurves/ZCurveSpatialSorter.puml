@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ZCurveSpatialSorter\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.ZCurveSpatialSorter [[ZCurveSpatialSorter.html]] {
+        {static} +STATIC: ZCurveSpatialSorter
+        {static} -STOPVAL: double
+        +sort(List<? extends SpatialComparable>, int, int, double[], int[]): void
+        #zSort(List<? extends SpatialComparable>, int, int, double[], int[], int): void
+        {static} #pivotizeList1D(List<? extends SpatialComparable>, int, int, int, double, boolean): int
+        {static} -getMinPlusMaxObject(List<? extends SpatialComparable>, int, int): double
+    }
+
+    interface "<size:14>SpatialSorter\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.SpatialSorter [[SpatialSorter.html]] {
+        {abstract} +sort(List<? extends SpatialComparable>, int, int, double[], int[]): void
+    }
+    class "<size:14>ZCurveSpatialSorter.Par\n<size:10>elki.math.spacefillingcurves" as elki.math.spacefillingcurves.ZCurveSpatialSorter.Par [[ZCurveSpatialSorter.Par.html]]
+
+    elki.math.spacefillingcurves.SpatialSorter <|.. elki.math.spacefillingcurves.ZCurveSpatialSorter
+    elki.math.spacefillingcurves.ZCurveSpatialSorter +-- elki.math.spacefillingcurves.ZCurveSpatialSorter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

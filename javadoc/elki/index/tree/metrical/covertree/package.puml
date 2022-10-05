@@ -1,0 +1,375 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.metrical.covertree {
+
+        class SimplifiedCoverTree<O> [[SimplifiedCoverTree.html]] {
+            {static} -LOG: Logging
+            +SimplifiedCoverTree(Relation<O>, Distance<? super O>, double, int)
+            +initialize(): void
+            +bulkLoad(DBIDs): void
+            #bulkConstruct(DBIDRef, int, ModifiableDoubleDBIDList): Node
+            -checkCoverTree(Node, int[], int): void
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+            +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+            #getLogger(): Logging
+        }
+
+        class elki.index.tree.metrical.covertree.SimplifiedCoverTree.Node [[SimplifiedCoverTree.Node.html]] {
+            ~singletons: ArrayModifiableDBIDs
+            ~maxDist: double
+            +Node(DBIDRef, double)
+            +Node(DBIDRef, double, DoubleDBIDList)
+        }
+
+        abstract class elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeSearcher [[SimplifiedCoverTree.CoverTreeRangeSearcher.html]] {
+            -tmp: DBIDVar
+            {abstract} #queryDistance(DBIDRef): double
+            #doSearch(double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeObjectSearcher [[SimplifiedCoverTree.CoverTreeRangeObjectSearcher.html]] {
+            -query: O
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeDBIDSearcher [[SimplifiedCoverTree.CoverTreeRangeDBIDSearcher.html]] {
+            -query: DBIDRef
+            +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            #queryDistance(DBIDRef): double
+        }
+
+        abstract class elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNSearcher [[SimplifiedCoverTree.CoverTreeKNNSearcher.html]] {
+            -pq: DoubleObjectMinHeap<Node>
+            -tmp: DBIDVar
+            #doSearch(int): KNNList
+            {abstract} #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNObjectSearcher [[SimplifiedCoverTree.CoverTreeKNNObjectSearcher.html]] {
+            -query: O
+            +getKNN(O, int): KNNList
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNDBIDSearcher [[SimplifiedCoverTree.CoverTreeKNNDBIDSearcher.html]] {
+            -query: DBIDRef
+            +getKNN(DBIDRef, int): KNNList
+            #queryDistance(DBIDRef): double
+        }
+
+        abstract class elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePrioritySearcher<Q> [[SimplifiedCoverTree.CoverTreePrioritySearcher.html]] {
+            ~threshold: double
+            -tmp: DBIDVar
+            -pq: DoubleObjectMinHeap<Node>
+            -candidates: DBIDArrayIter
+            -routingDist: double
+            -maxDist: double
+            -lb: double
+            {abstract} #queryDistance(DBIDRef): double
+            #doSearch(): PrioritySearcher<Q>
+            +decreaseCutoff(double): PrioritySearcher<Q>
+            +allLowerBound(): double
+            +valid(): boolean
+            +advance(): PrioritySearcher<Q>
+            #advanceQueue(): boolean
+            +getApproximateDistance(): double
+            +getApproximateAccuracy(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            +computeExactDistance(): double
+            +internalGetIndex(): int
+        }
+
+        class elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePriorityObjectSearcher [[SimplifiedCoverTree.CoverTreePriorityObjectSearcher.html]] {
+            -query: O
+            +search(O): PrioritySearcher<O>
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePriorityDBIDSearcher [[SimplifiedCoverTree.CoverTreePriorityDBIDSearcher.html]] {
+            -query: DBIDRef
+            +search(DBIDRef): PrioritySearcher<DBIDRef>
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.covertree.SimplifiedCoverTree.Factory<O> [[SimplifiedCoverTree.Factory.html]] {
+            +Factory(Distance<? super O>, double, int)
+            +instantiate(Relation<O>): SimplifiedCoverTree<O>
+        }
+
+        class elki.index.tree.metrical.covertree.SimplifiedCoverTree.Factory.Par<O> [[SimplifiedCoverTree.Factory.Par.html]] {
+            +make(): Factory<O>
+        }
+
+        abstract class AbstractCoverTree<O> [[AbstractCoverTree.html]] {
+            #relation: Relation<O>
+            #expansion: double
+            #invLogExpansion: double
+            #scaleBottom: int
+            #distance: Distance<? super O>
+            -distanceQuery: DistanceQuery<O>
+            #distComputations: long
+            #truncate: int
+            +AbstractCoverTree(Relation<O>, Distance<? super O>, double, int)
+            #scaleToDist(int): double
+            #distToScale(double): int
+            #maxDistance(DoubleDBIDList): double
+            #distance(DBIDRef, DBIDRef): double
+            #distance(O, DBIDRef): double
+            #excludeNotCovered(ModifiableDoubleDBIDList, double, ModifiableDoubleDBIDList): void
+            #collectByCover(DBIDRef, ModifiableDoubleDBIDList, double, ModifiableDoubleDBIDList): void
+            +logStatistics(): void
+            {abstract} #getLogger(): Logging
+        }
+
+        abstract class elki.index.tree.metrical.covertree.AbstractCoverTree.Factory<O> [[AbstractCoverTree.Factory.html]] {
+            #distance: Distance<? super O>
+            #expansion: double
+            #truncate: int
+            +Factory(Distance<? super O>, double, int)
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        abstract class elki.index.tree.metrical.covertree.AbstractCoverTree.Factory.Par<O> [[AbstractCoverTree.Factory.Par.html]] {
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            {static} +TRUNCATE_ID: OptionID
+            {static} +EXPANSION_ID: OptionID
+            #distance: Distance<? super O>
+            #truncate: int
+            #expansion: double
+            +configure(Parameterization): void
+        }
+
+        class CoverTree<O> [[CoverTree.html]] {
+            {static} -LOG: Logging
+            +CoverTree(Relation<O>, Distance<? super O>, double, int)
+            +CoverTree(Relation<O>, Distance<? super O>, int)
+            +initialize(): void
+            +bulkLoad(DBIDs): void
+            #bulkConstruct(DBIDRef, int, double, ModifiableDoubleDBIDList): Node
+            -checkCoverTree(Node, int[], int): void
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+            +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+            #getLogger(): Logging
+        }
+
+        class elki.index.tree.metrical.covertree.CoverTree.Node [[CoverTree.Node.html]] {
+            ~singletons: ModifiableDoubleDBIDList
+            ~maxDist: double
+            ~parentDist: double
+            +Node(DBIDRef, double, double)
+            +Node(DBIDRef, double, double, DoubleDBIDList)
+        }
+
+        abstract class elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeSearcher [[CoverTree.CoverTreeRangeSearcher.html]] {
+            -tmp: DBIDVar
+            {abstract} #queryDistance(DBIDRef): double
+            #doSearch(double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeObjectSearcher [[CoverTree.CoverTreeRangeObjectSearcher.html]] {
+            -query: O
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeDBIDSearcher [[CoverTree.CoverTreeRangeDBIDSearcher.html]] {
+            -query: DBIDRef
+            +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            #queryDistance(DBIDRef): double
+        }
+
+        abstract class elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNSearcher [[CoverTree.CoverTreeKNNSearcher.html]] {
+            -pq: DoubleObjectMinHeap<Node>
+            -tmp: DBIDVar
+            #doSearch(int): KNNList
+            {abstract} #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNObjectSearcher [[CoverTree.CoverTreeKNNObjectSearcher.html]] {
+            -query: O
+            +getKNN(O, int): KNNList
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNDBIDSearcher [[CoverTree.CoverTreeKNNDBIDSearcher.html]] {
+            -query: DBIDRef
+            +getKNN(DBIDRef, int): KNNList
+            #queryDistance(DBIDRef): double
+        }
+
+        abstract class elki.index.tree.metrical.covertree.CoverTree.CoverTreePrioritySearcher<Q> [[CoverTree.CoverTreePrioritySearcher.html]] {
+            ~threshold: double
+            -tmp: DBIDVar
+            -pq: DoubleObjectMinHeap<Node>
+            -candidates: DoubleDBIDListIter
+            -routingDist: double
+            -lb: double
+            {abstract} #queryDistance(DBIDRef): double
+            #doSearch(): PrioritySearcher<Q>
+            +decreaseCutoff(double): PrioritySearcher<Q>
+            +allLowerBound(): double
+            +valid(): boolean
+            +advance(): PrioritySearcher<Q>
+            #advanceQueue(): boolean
+            +getApproximateDistance(): double
+            +getApproximateAccuracy(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            +computeExactDistance(): double
+            +internalGetIndex(): int
+        }
+
+        class elki.index.tree.metrical.covertree.CoverTree.CoverTreePriorityObjectSearcher [[CoverTree.CoverTreePriorityObjectSearcher.html]] {
+            -query: O
+            +search(O): PrioritySearcher<O>
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.covertree.CoverTree.CoverTreePriorityDBIDSearcher [[CoverTree.CoverTreePriorityDBIDSearcher.html]] {
+            -query: DBIDRef
+            +search(DBIDRef): PrioritySearcher<DBIDRef>
+            #queryDistance(DBIDRef): double
+        }
+
+        class elki.index.tree.metrical.covertree.CoverTree.Factory<O> [[CoverTree.Factory.html]] {
+            +Factory(Distance<? super O>, double, int)
+            +instantiate(Relation<O>): CoverTree<O>
+        }
+
+        class elki.index.tree.metrical.covertree.CoverTree.Factory.Par<O> [[CoverTree.Factory.Par.html]] {
+            +make(): Factory<O>
+        }
+
+        AbstractCoverTree <|-- SimplifiedCoverTree
+        elki.index.DistancePriorityIndex <|.. SimplifiedCoverTree
+        SimplifiedCoverTree --> elki.index.tree.metrical.covertree.SimplifiedCoverTree.Node: root
+        SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.Node
+        elki.index.tree.metrical.covertree.SimplifiedCoverTree.Node --> "*" elki.index.tree.metrical.covertree.SimplifiedCoverTree.Node: children
+        SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeSearcher
+        elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeSearcher --> "*" elki.index.tree.metrical.covertree.SimplifiedCoverTree.Node: open
+        elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeSearcher <|-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeObjectSearcher
+        elki.database.query.range.RangeSearcher <|.. elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeObjectSearcher
+        SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeObjectSearcher
+        elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeSearcher <|-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeDBIDSearcher
+        elki.database.query.range.RangeSearcher <|.. elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeDBIDSearcher
+        SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeDBIDSearcher
+        SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNSearcher
+        elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNSearcher <|-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNObjectSearcher
+        elki.database.query.knn.KNNSearcher <|.. elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNObjectSearcher
+        SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNObjectSearcher
+        elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNSearcher <|-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNDBIDSearcher
+        elki.database.query.knn.KNNSearcher <|.. elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNDBIDSearcher
+        SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNDBIDSearcher
+        elki.database.query.PrioritySearcher <|.. elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePrioritySearcher
+        SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePrioritySearcher
+        elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePrioritySearcher <|-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePriorityObjectSearcher
+        SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePriorityObjectSearcher
+        elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePrioritySearcher <|-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePriorityDBIDSearcher
+        SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePriorityDBIDSearcher
+        elki.index.tree.metrical.covertree.AbstractCoverTree.Factory <|-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.Factory
+        SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.Factory
+        elki.index.tree.metrical.covertree.AbstractCoverTree.Factory.Par <|-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.Factory.Par
+        elki.index.tree.metrical.covertree.SimplifiedCoverTree.Factory +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.Factory.Par
+        elki.index.Index <|.. AbstractCoverTree
+        elki.index.IndexFactory <|.. elki.index.tree.metrical.covertree.AbstractCoverTree.Factory
+        AbstractCoverTree +-- elki.index.tree.metrical.covertree.AbstractCoverTree.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.metrical.covertree.AbstractCoverTree.Factory.Par
+        elki.index.tree.metrical.covertree.AbstractCoverTree.Factory +-- elki.index.tree.metrical.covertree.AbstractCoverTree.Factory.Par
+        AbstractCoverTree <|-- CoverTree
+        elki.index.DistancePriorityIndex <|.. CoverTree
+        CoverTree --> elki.index.tree.metrical.covertree.CoverTree.Node: root
+        CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.Node
+        elki.index.tree.metrical.covertree.CoverTree.Node --> "*" elki.index.tree.metrical.covertree.CoverTree.Node: children
+        CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeSearcher
+        elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeSearcher --> "*" elki.index.tree.metrical.covertree.CoverTree.Node: open
+        elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeSearcher <|-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeObjectSearcher
+        elki.database.query.range.RangeSearcher <|.. elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeObjectSearcher
+        CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeObjectSearcher
+        elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeSearcher <|-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeDBIDSearcher
+        elki.database.query.range.RangeSearcher <|.. elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeDBIDSearcher
+        CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeRangeDBIDSearcher
+        CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNSearcher
+        elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNSearcher <|-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNObjectSearcher
+        elki.database.query.knn.KNNSearcher <|.. elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNObjectSearcher
+        CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNObjectSearcher
+        elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNSearcher <|-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNDBIDSearcher
+        elki.database.query.knn.KNNSearcher <|.. elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNDBIDSearcher
+        CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreeKNNDBIDSearcher
+        elki.database.query.PrioritySearcher <|.. elki.index.tree.metrical.covertree.CoverTree.CoverTreePrioritySearcher
+        CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreePrioritySearcher
+        elki.index.tree.metrical.covertree.CoverTree.CoverTreePrioritySearcher <|-- elki.index.tree.metrical.covertree.CoverTree.CoverTreePriorityObjectSearcher
+        CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreePriorityObjectSearcher
+        elki.index.tree.metrical.covertree.CoverTree.CoverTreePrioritySearcher <|-- elki.index.tree.metrical.covertree.CoverTree.CoverTreePriorityDBIDSearcher
+        CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.CoverTreePriorityDBIDSearcher
+        elki.index.tree.metrical.covertree.AbstractCoverTree.Factory <|-- elki.index.tree.metrical.covertree.CoverTree.Factory
+        CoverTree +-- elki.index.tree.metrical.covertree.CoverTree.Factory
+        elki.index.tree.metrical.covertree.AbstractCoverTree.Factory.Par <|-- elki.index.tree.metrical.covertree.CoverTree.Factory.Par
+        elki.index.tree.metrical.covertree.CoverTree.Factory +-- elki.index.tree.metrical.covertree.CoverTree.Factory.Par
+    }
+
+    namespace elki.index {
+        interface DistancePriorityIndex<O> [[../../../DistancePriorityIndex.html]] {
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        }
+        interface Index [[../../../Index.html]] {
+            {abstract} +initialize(): void
+            +logStatistics(): void
+        }
+        interface IndexFactory<V> [[../../../IndexFactory.html]] {
+            {abstract} +instantiate(Relation<V>): Index
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+    }
+
+    namespace elki.database.query.range {
+        interface RangeSearcher<O> [[../../../../database/query/range/RangeSearcher.html]] {
+            +getRange(O, double): DoubleDBIDList
+            {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+    }
+
+    namespace elki.database.query.knn {
+        interface KNNSearcher<O> [[../../../../database/query/knn/KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+    }
+
+    namespace elki.database.query {
+        interface PrioritySearcher<O> [[../../../../database/query/PrioritySearcher.html]] {
+            +search(O, double): PrioritySearcher<O>
+            {abstract} +search(O): PrioritySearcher<O>
+            +getKNN(O, int): KNNList
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+            {abstract} +computeExactDistance(): double
+            +getApproximateDistance(): double
+            +getApproximateAccuracy(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            {abstract} +allLowerBound(): double
+            {abstract} +advance(): PrioritySearcher<O>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

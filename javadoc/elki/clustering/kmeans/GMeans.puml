@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.GMeans<V extends NumberVector, M extends MeanModel> [[GMeans.html]] {
+        {static} -LOG: Logging
+        #critical: double
+        +GMeans(NumberVectorDistance<? super NumberVector>, double, int, int, int, KMeans<V extends NumberVector, M extends MeanModel>, KMeansInitialization, RandomFactory)
+        #splitCluster(Cluster<M extends MeanModel>, Relation<V extends NumberVector>): List<Cluster<M extends MeanModel>>
+        #splitCentroid(Cluster<? extends MeanModel>, Relation<V extends NumberVector>): double[]
+        #getLogger(): Logging
+    }
+
+    class "<size:14>XMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.XMeans<V extends NumberVector, M extends MeanModel> [[XMeans.html]]
+    class "<size:14>GMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.GMeans.Par<V extends NumberVector, M extends MeanModel> [[GMeans.Par.html]]
+
+    elki.clustering.kmeans.XMeans <|-- elki.clustering.kmeans.GMeans
+    elki.clustering.kmeans.GMeans +-- elki.clustering.kmeans.GMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

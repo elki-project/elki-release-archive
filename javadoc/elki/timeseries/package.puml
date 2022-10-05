@@ -1,0 +1,116 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.timeseries {
+
+        class OfflineChangePointDetectionAlgorithm [[OfflineChangePointDetectionAlgorithm.html]] {
+            ~bootstrapSamples: int
+            ~minConfidence: double
+            ~rnd: RandomFactory
+            +OfflineChangePointDetectionAlgorithm(double, int, RandomFactory)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<DoubleVector>): ChangePoints
+            {static} +cusum(double[], double[], int, int): void
+            {static} +bestChangeInMean(double[], int, int): DoubleIntPair
+            {static} +shuffle(double[], int, Random): void
+        }
+
+        class elki.timeseries.OfflineChangePointDetectionAlgorithm.Instance [[OfflineChangePointDetectionAlgorithm.Instance.html]] {
+            ~column: double[]
+            ~sums: double[]
+            ~bstrap: double[]
+            ~iter: DBIDArrayIter
+            ~columnnr: int
+            ~rnd: Random
+            +Instance(Random)
+            +run(Relation<DoubleVector>): ChangePoints
+            -multipleChangepointsWithConfidence(int, int): int
+            -bootstrapConfidence(int, int, double): double
+        }
+
+        class elki.timeseries.OfflineChangePointDetectionAlgorithm.Par [[OfflineChangePointDetectionAlgorithm.Par.html]] {
+            {static} +BOOTSTRAP_ID: OptionID
+            {static} +CONFIDENCE_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            ~bootstrapSamples: int
+            ~minConfidence: double
+            ~rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): OfflineChangePointDetectionAlgorithm
+        }
+
+        class SigniTrendChangeDetection [[SigniTrendChangeDetection.html]] {
+            -alpha: double
+            -bias: double
+            -minsigma: double
+            +SigniTrendChangeDetection(double, double, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<NumberVector>): ChangePoints
+        }
+
+        class elki.timeseries.SigniTrendChangeDetection.Instance [[SigniTrendChangeDetection.Instance.html]] {
+            #ewma: double[]
+            #ewmv: double[]
+            #weight: double
+            +run(Relation<NumberVector>): ChangePoints
+            -processRow(DBIDRef, NumberVector, ChangePoints): double
+        }
+
+        class elki.timeseries.SigniTrendChangeDetection.Par [[SigniTrendChangeDetection.Par.html]] {
+            {static} +HALFLIFE_ID: OptionID
+            {static} +BIAS_ID: OptionID
+            {static} +MINSIGMA_ID: OptionID
+            -halflife: double
+            -bias: double
+            -minsigma: double
+            +configure(Parameterization): void
+            +make(): SigniTrendChangeDetection
+        }
+
+        class ChangePoints [[ChangePoints.html]] {
+            +writeToText(TextWriterStream, String): void
+            +add(DBIDRef, int, double): void
+        }
+
+        class ChangePoint [[ChangePoint.html]] {
+            ~id: DBID
+            ~column: int
+            ~score: double
+            +ChangePoint(DBIDRef, int, double)
+            +appendTo(StringBuilder): StringBuilder
+        }
+
+        elki.Algorithm <|.. OfflineChangePointDetectionAlgorithm
+        OfflineChangePointDetectionAlgorithm +-- elki.timeseries.OfflineChangePointDetectionAlgorithm.Instance
+        elki.timeseries.OfflineChangePointDetectionAlgorithm.Instance --> ChangePoints: result
+        elki.utilities.optionhandling.Parameterizer <|.. elki.timeseries.OfflineChangePointDetectionAlgorithm.Par
+        OfflineChangePointDetectionAlgorithm +-- elki.timeseries.OfflineChangePointDetectionAlgorithm.Par
+        elki.Algorithm <|.. SigniTrendChangeDetection
+        SigniTrendChangeDetection +-- elki.timeseries.SigniTrendChangeDetection.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.timeseries.SigniTrendChangeDetection.Par
+        SigniTrendChangeDetection +-- elki.timeseries.SigniTrendChangeDetection.Par
+        elki.result.textwriter.TextWriteable <|.. ChangePoints
+        ChangePoints --> "*" ChangePoint: changepoints
+    }
+
+    namespace elki {
+        interface Algorithm [[../Algorithm.html]] {
+            +autorun(Database): Object
+            {abstract} +getInputTypeRestriction(): TypeInformation[]
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.result.textwriter {
+        interface TextWriteable [[../result/textwriter/TextWriteable.html]] {
+            {abstract} +writeToText(TextWriterStream, String): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

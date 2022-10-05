@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WrappedPrioritySearchDBIDByLookup\n<size:10>elki.database.query" as elki.database.query.WrappedPrioritySearchDBIDByLookup<O> [[WrappedPrioritySearchDBIDByLookup.html]] {
+        -relation: Relation<? extends O>
+        -inner: PrioritySearcher<O>
+        -WrappedPrioritySearchDBIDByLookup(Relation<? extends O>, PrioritySearcher<O>)
+        +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        +getKNN(DBIDRef, int): KNNList
+        +search(DBIDRef): PrioritySearcher<DBIDRef>
+        +advance(): PrioritySearcher<DBIDRef>
+        +valid(): boolean
+        +decreaseCutoff(double): PrioritySearcher<DBIDRef>
+        +internalGetIndex(): int
+        +getApproximateDistance(): double
+        +getApproximateAccuracy(): double
+        +getLowerBound(): double
+        +getUpperBound(): double
+        +computeExactDistance(): double
+        +allLowerBound(): double
+        {static} +wrap(Relation<? extends O>, PrioritySearcher<O>): PrioritySearcher<DBIDRef>
+    }
+
+    interface "<size:14>PrioritySearcher\n<size:10>elki.database.query" as elki.database.query.PrioritySearcher<DBIDRef> [[PrioritySearcher.html]] {
+        {abstract} +search(DBIDRef): PrioritySearcher<O>
+        {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+        {abstract} +computeExactDistance(): double
+        {abstract} +allLowerBound(): double
+        {abstract} +advance(): PrioritySearcher<O>
+    }
+    class "<size:14>WrappedPrioritySearchDBIDByLookup.Linear\n<size:10>elki.database.query" as elki.database.query.WrappedPrioritySearchDBIDByLookup.Linear<O> [[WrappedPrioritySearchDBIDByLookup.Linear.html]]
+
+    elki.database.query.PrioritySearcher <|.. elki.database.query.WrappedPrioritySearchDBIDByLookup
+    elki.database.query.WrappedPrioritySearchDBIDByLookup +-- elki.database.query.WrappedPrioritySearchDBIDByLookup.Linear
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

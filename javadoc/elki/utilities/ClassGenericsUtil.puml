@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClassGenericsUtil\n<size:10>elki.utilities" as elki.utilities.ClassGenericsUtil [[ClassGenericsUtil.html]] {
+        {static} -LOG: Logging
+        {static} ~CLASSLOADER: ClassLoader
+        {static} +FACTORY_METHOD_NAME: String
+        {static} +getParameterizer(Class<?>): Parameterizer
+        {static} +tryInstantiate(Class<C>, Class<?>, Parameterization): C
+        {static} +make(Parameterizer, Parameterization): Object
+        {static} +parameterizeOrAbort(Class<?>, Parameterization): C
+        {static} +uglyCastIntoSubclass(Class<D>): Class<T extends D>
+        {static} +instantiateLowlevel(Class<? extends T>): T
+        {static} +loadDefault(Class<T>, String): T
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FarthestPoints.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.FarthestPoints.Par<O> [[FarthestPoints.Par.html]] {
+        {static} +KEEPFIRST_ID: OptionID
+        #keepfirst: boolean
+        +configure(Parameterization): void
+        +make(): FarthestPoints<O>
+    }
+
+    abstract class "<size:14>AbstractKMeansInitialization.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par [[AbstractKMeansInitialization.Par.html]]
+    class "<size:14>FarthestPoints\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.FarthestPoints<O> [[FarthestPoints.html]]
+
+    elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.FarthestPoints.Par
+    elki.clustering.kmeans.initialization.FarthestPoints +-- elki.clustering.kmeans.initialization.FarthestPoints.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

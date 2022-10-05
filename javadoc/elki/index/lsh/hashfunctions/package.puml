@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.lsh.hashfunctions {
+
+        interface LocalitySensitiveHashFunction<V> [[LocalitySensitiveHashFunction.html]] {
+            {abstract} +hashObject(V): int
+            {abstract} +hashObject(V, double[]): int
+            {abstract} +getNumberOfProjections(): int
+        }
+
+        class CosineLocalitySensitiveHashFunction [[CosineLocalitySensitiveHashFunction.html]] {
+            -projection: Projection
+            +CosineLocalitySensitiveHashFunction(Projection)
+            +hashObject(NumberVector): int
+            +hashObject(NumberVector, double[]): int
+            +getNumberOfProjections(): int
+        }
+
+        class MultipleProjectionsLocalitySensitiveHashFunction [[MultipleProjectionsLocalitySensitiveHashFunction.html]] {
+            ~projection: Projection
+            ~shift: double[]
+            ~iwidth: double
+            ~randoms1: int[]
+            {static} -MASK32: long
+            +MultipleProjectionsLocalitySensitiveHashFunction(Projection, double, Random)
+            +hashObject(NumberVector): int
+            +hashObject(NumberVector, double[]): int
+            {static} +fastModPrime(long): int
+            +getNumberOfProjections(): int
+        }
+
+        LocalitySensitiveHashFunction <|.. CosineLocalitySensitiveHashFunction
+        LocalitySensitiveHashFunction <|.. MultipleProjectionsLocalitySensitiveHashFunction
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

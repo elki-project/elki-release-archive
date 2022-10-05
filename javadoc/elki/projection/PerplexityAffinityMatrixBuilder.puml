@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PerplexityAffinityMatrixBuilder\n<size:10>elki.projection" as elki.projection.PerplexityAffinityMatrixBuilder<O> [[PerplexityAffinityMatrixBuilder.html]] {
+        {static} -LOG: Logging
+        {static} #PERPLEXITY_ERROR: double
+        {static} #PERPLEXITY_MAXITER: int
+        {static} #MIN_PIJ: double
+        #distance: Distance<? super O>
+        #perplexity: double
+        +PerplexityAffinityMatrixBuilder(Distance<? super O>, double)
+        +computeAffinityMatrix(Relation<T extends O>, double): AffinityMatrix
+        {static} #computePij(double[], double, double): double[]
+        {static} #computePi(int, double[], double[], double, double): double
+        {static} #estimateInitialBeta(double[], double): double
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    class "<size:14>GaussianAffinityMatrixBuilder\n<size:10>elki.projection" as elki.projection.GaussianAffinityMatrixBuilder<O> [[GaussianAffinityMatrixBuilder.html]]
+    class "<size:14>PerplexityAffinityMatrixBuilder.Par\n<size:10>elki.projection" as elki.projection.PerplexityAffinityMatrixBuilder.Par<O> [[PerplexityAffinityMatrixBuilder.Par.html]]
+
+    elki.projection.GaussianAffinityMatrixBuilder <|-- elki.projection.PerplexityAffinityMatrixBuilder
+    elki.projection.PerplexityAffinityMatrixBuilder +-- elki.projection.PerplexityAffinityMatrixBuilder.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

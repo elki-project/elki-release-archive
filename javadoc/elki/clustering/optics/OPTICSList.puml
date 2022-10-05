@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSList\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSList<O> [[OPTICSList.html]] {
+        {static} -LOG: Logging
+        +OPTICSList(Distance<? super O>, double, int)
+        +run(Relation<O>): ClusterOrder
+    }
+
+    abstract class "<size:14>AbstractOPTICS\n<size:10>elki.clustering.optics" as elki.clustering.optics.AbstractOPTICS<O> [[AbstractOPTICS.html]] {
+        {abstract} +run(Relation<O>): ClusterOrder
+    }
+    class "<size:14>OPTICSList.Instance\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSList.Instance [[OPTICSList.Instance.html]]
+    class "<size:14>OPTICSList.Par\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSList.Par<O> [[OPTICSList.Par.html]]
+
+    elki.clustering.optics.AbstractOPTICS <|-- elki.clustering.optics.OPTICSList
+    elki.clustering.optics.OPTICSList +-- elki.clustering.optics.OPTICSList.Instance
+    elki.clustering.optics.OPTICSList +-- elki.clustering.optics.OPTICSList.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

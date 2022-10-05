@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParseUtil\n<size:10>elki.utilities.io" as elki.utilities.io.ParseUtil [[ParseUtil.html]] {
+        {static} -LOG: Logging
+        {static} +EMPTY_STRING: NumberFormatException
+        {static} +EXPONENT_OVERFLOW: NumberFormatException
+        {static} +INVALID_EXPONENT: NumberFormatException
+        {static} +TRAILING_CHARACTERS: NumberFormatException
+        {static} +PRECISION_OVERFLOW: NumberFormatException
+        {static} +NOT_A_NUMBER: NumberFormatException
+        {static} -INFINITY_PATTERN: char[]
+        {static} -INFINITY_LENGTH: int
+        {static} +parseDouble(byte[], int, int): double
+        {static} +parseDouble(CharSequence): double
+        {static} +parseDouble(CharSequence, int, int): double
+        {static} +parseLongBase10(CharSequence): long
+        {static} +parseLongBase10(CharSequence, int, int): long
+        {static} +parseIntBase10(CharSequence): int
+        {static} +parseIntBase10(CharSequence, int, int): int
+        {static} -matchInf(byte[], byte, int, int): boolean
+        {static} -matchInf(CharSequence, char, int, int): boolean
+        {static} -matchNaN(byte[], byte, int, int): boolean
+        {static} -matchNaN(CharSequence, char, int, int): boolean
+    }
+    class "<size:14>ParseUtil.PreallocatedException\n<size:10>elki.utilities.io" as elki.utilities.io.ParseUtil.PreallocatedException [[ParseUtil.PreallocatedException.html]]
+
+    elki.utilities.io.ParseUtil +-- elki.utilities.io.ParseUtil.PreallocatedException
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

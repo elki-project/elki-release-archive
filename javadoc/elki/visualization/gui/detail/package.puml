@@ -1,0 +1,59 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.gui.detail {
+
+        class DetailView [[DetailView.html]] {
+            {static} -LOG: Logging
+            -item: PlotItem
+            ~ratio: double
+            ~context: VisualizerContext
+            ~taskmap: Map<VisualizationTask, Visualization>
+            -width: double
+            -height: double
+            ~pendingRefresh: AtomicReference<Runnable>
+            +DetailView(VisualizerContext, PlotItem, double)
+            -addBackground(VisualizerContext): void
+            -initialize(): void
+            -refresh(): void
+            -instantiateVisualization(VisualizationTask): Visualization
+            +destroy(): void
+            +dispose(): void
+            +getRatio(): double
+            +setRatio(double): void
+            -lazyRefresh(): void
+            +resultAdded(Object, Object): void
+            +resultChanged(Object): void
+            +resultRemoved(Object, Object): void
+            +visualizationChanged(VisualizationItem): void
+            #redraw(): void
+            +getPlotItem(): PlotItem
+        }
+
+        elki.visualization.gui.VisualizationPlot <|-- DetailView
+        elki.result.ResultListener <|.. DetailView
+        elki.visualization.VisualizationListener <|.. DetailView
+    }
+
+    namespace elki.visualization.gui {
+        class VisualizationPlot [[../VisualizationPlot.html]] {
+            #pendingRedraw: Runnable
+            #updateQueue: ConcurrentLinkedDeque<Visualization>
+        }
+    }
+
+    namespace elki.result {
+        interface ResultListener [[../../../result/ResultListener.html]] {
+            +resultAdded(Object, Object): void
+            +resultChanged(Object): void
+            +resultRemoved(Object, Object): void
+        }
+    }
+
+    namespace elki.visualization {
+        interface VisualizationListener [[../../VisualizationListener.html]] {
+            {abstract} +visualizationChanged(VisualizationItem): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

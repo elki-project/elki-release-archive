@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LatLngAsECEFIndex.Factory\n<size:10>elki.index.projected" as elki.index.projected.LatLngAsECEFIndex.Factory<O extends NumberVector> [[LatLngAsECEFIndex.Factory.html]] {
+        ~norefine: boolean
+        +Factory(IndexFactory<O extends NumberVector>, boolean, boolean, EarthModel)
+        +instantiate(Relation<O extends NumberVector>): ProjectedIndex<O extends NumberVector, O extends NumberVector>
+    }
+
+    class "<size:14>ProjectedIndex.Factory\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.Factory<O extends NumberVector, O extends NumberVector> [[ProjectedIndex.Factory.html]]
+    class "<size:14>LatLngAsECEFIndex\n<size:10>elki.index.projected" as elki.index.projected.LatLngAsECEFIndex<O extends NumberVector> [[LatLngAsECEFIndex.html]]
+    class "<size:14>LatLngAsECEFIndex.Factory.Par\n<size:10>elki.index.projected" as elki.index.projected.LatLngAsECEFIndex.Factory.Par<O extends NumberVector>
+
+    elki.index.projected.ProjectedIndex.Factory <|-- elki.index.projected.LatLngAsECEFIndex.Factory
+    elki.index.projected.LatLngAsECEFIndex +-- elki.index.projected.LatLngAsECEFIndex.Factory
+    elki.index.projected.LatLngAsECEFIndex.Factory +-- elki.index.projected.LatLngAsECEFIndex.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

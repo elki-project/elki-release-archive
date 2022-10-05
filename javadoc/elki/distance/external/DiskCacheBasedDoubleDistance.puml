@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DiskCacheBasedDoubleDistance\n<size:10>elki.distance.external" as elki.distance.external.DiskCacheBasedDoubleDistance [[DiskCacheBasedDoubleDistance.html]] {
+        {static} -LOG: Logging
+        {static} +DOUBLE_CACHE_MAGIC: int
+        -cache: OnDiskUpperTriangleMatrix
+        +DiskCacheBasedDoubleDistance(OnDiskUpperTriangleMatrix)
+        +DiskCacheBasedDoubleDistance(Path)
+        +distance(int, int): double
+        +checkRange(DBIDRange): void
+    }
+
+    abstract class "<size:14>AbstractDBIDRangeDistance\n<size:10>elki.distance" as elki.distance.AbstractDBIDRangeDistance [[../AbstractDBIDRangeDistance.html]]
+    class "<size:14>DiskCacheBasedDoubleDistance.Par\n<size:10>elki.distance.external" as elki.distance.external.DiskCacheBasedDoubleDistance.Par [[DiskCacheBasedDoubleDistance.Par.html]]
+
+    elki.distance.AbstractDBIDRangeDistance <|-- elki.distance.external.DiskCacheBasedDoubleDistance
+    elki.distance.external.DiskCacheBasedDoubleDistance +-- elki.distance.external.DiskCacheBasedDoubleDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

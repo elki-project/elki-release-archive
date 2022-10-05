@@ -1,0 +1,172 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.datastructures.hierarchy {
+
+        class HashMapHierarchy<O> [[HashMapHierarchy.html]] {
+            -graph: HashMap<O, Rec<O>>
+            ~elems: Object[]
+            ~numelems: int
+            +contains(O): boolean
+            +size(): int
+            +add(O, O): boolean
+            +add(O): boolean
+            +remove(O, O): boolean
+            +remove(O): boolean
+            +removeSubtree(O): boolean
+            +numChildren(O): int
+            +iterChildren(O): It<O>
+            +iterChildrenReverse(O): It<O>
+            +iterDescendants(O): It<O>
+            +iterDescendantsSelf(O): It<O>
+            +numParents(O): int
+            +iterParents(O): It<O>
+            +iterParentsReverse(O): It<O>
+            +iterAncestors(O): It<O>
+            +iterAncestorsSelf(O): It<O>
+            +iterAll(): It<O>
+            -getRec(O): Rec<O>
+            -putRec(O, Rec<O>): void
+            -removeRec(O): void
+        }
+
+        class elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec<O> {
+            ~nump: int
+            ~numc: int
+            ~parents: Object[]
+            ~children: Object[]
+            {static} -EMPTY: Object[]
+            ~addParent(O): boolean
+            ~addChild(O): boolean
+            ~removeParent(O): boolean
+            ~removeChild(O): boolean
+            +iterParents(): It<O>
+            +iterParentsReverse(): It<O>
+            +iterChildren(): It<O>
+            +iterChildrenReverse(): It<O>
+        }
+
+        class elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrParents [[HashMapHierarchy.Rec.ItrParents.html]] {
+            ~pos: int
+            +valid(): boolean
+            +advance(): It<O>
+            +get(): O
+        }
+
+        class elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrParentsReverse [[HashMapHierarchy.Rec.ItrParentsReverse.html]] {
+            ~pos: int
+            +valid(): boolean
+            +advance(): It<O>
+            +get(): O
+        }
+
+        class elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrChildren [[HashMapHierarchy.Rec.ItrChildren.html]] {
+            ~pos: int
+            +valid(): boolean
+            +advance(): It<O>
+            +get(): O
+        }
+
+        class elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrChildrenReverse [[HashMapHierarchy.Rec.ItrChildrenReverse.html]] {
+            ~pos: int
+            +valid(): boolean
+            +advance(): It<O>
+            +get(): O
+        }
+
+        class elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrDesc [[HashMapHierarchy.ItrDesc.html]] {
+            ~childiter: It<O>
+            ~subiter: It<O>
+            ~extra: O
+            ~ItrDesc(O)
+            ~ItrDesc(O, O)
+            +valid(): boolean
+            +advance(): It<O>
+            +get(): O
+        }
+
+        class elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrAnc [[HashMapHierarchy.ItrAnc.html]] {
+            ~parentiter: It<O>
+            ~subiter: It<O>
+            ~extra: O
+            ~ItrAnc(O)
+            ~ItrAnc(O, O)
+            +valid(): boolean
+            +advance(): It<O>
+            +get(): O
+        }
+
+        class elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrAll [[HashMapHierarchy.ItrAll.html]] {
+            ~pos: int
+            +valid(): boolean
+            +get(): O
+            +advance(): ItrAll
+        }
+
+        class StackedIter<B, A extends B> [[StackedIter.html]] {
+            -it1: It<? extends B>
+            -it2: It<​B>
+            +StackedIter(It<? extends B>, Hierarchy<​B>)
+            +get(): B
+            +valid(): boolean
+            +advance(): StackedIter<B, A extends B>
+        }
+
+        interface Hierarchy<O> [[Hierarchy.html]] {
+            {abstract} +size(): int
+            {abstract} +contains(O): boolean
+            {abstract} +numChildren(O): int
+            {abstract} +iterChildren(O): It<O>
+            {abstract} +iterChildrenReverse(O): It<O>
+            {abstract} +iterDescendants(O): It<O>
+            {abstract} +iterDescendantsSelf(O): It<O>
+            {abstract} +numParents(O): int
+            {abstract} +iterParents(O): It<O>
+            {abstract} +iterParentsReverse(O): It<O>
+            {abstract} +iterAncestors(O): It<O>
+            {abstract} +iterAncestorsSelf(O): It<O>
+            {abstract} +iterAll(): It<O>
+        }
+
+        interface ModifiableHierarchy<O> [[ModifiableHierarchy.html]] {
+            {abstract} +add(O, O): boolean
+            {abstract} +add(O): boolean
+            {abstract} +remove(O, O): boolean
+            {abstract} +remove(O): boolean
+            {abstract} +removeSubtree(O): boolean
+        }
+
+        ModifiableHierarchy <|.. HashMapHierarchy
+        HashMapHierarchy +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec
+        elki.utilities.datastructures.iterator.It <|.. elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrParents
+        elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrParents
+        elki.utilities.datastructures.iterator.It <|.. elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrParentsReverse
+        elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrParentsReverse
+        elki.utilities.datastructures.iterator.It <|.. elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrChildren
+        elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrChildren
+        elki.utilities.datastructures.iterator.It <|.. elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrChildrenReverse
+        elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.Rec.ItrChildrenReverse
+        elki.utilities.datastructures.iterator.It <|.. elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrDesc
+        HashMapHierarchy +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrDesc
+        elki.utilities.datastructures.iterator.It <|.. elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrAnc
+        HashMapHierarchy +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrAnc
+        elki.utilities.datastructures.iterator.It <|.. elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrAll
+        HashMapHierarchy +-- elki.utilities.datastructures.hierarchy.HashMapHierarchy.ItrAll
+        elki.utilities.datastructures.iterator.It <|.. StackedIter
+        StackedIter --> Hierarchy: hier2
+        Hierarchy <|-- ModifiableHierarchy
+    }
+
+    namespace elki.utilities.datastructures.iterator {
+        interface It<O> [[../iterator/It.html]] {
+            {abstract} +get(): O
+            {abstract} +advance(): It<O>
+            +filter(Class<? super T>): It<T>
+            +filter(Predicate<? super O>): It<O>
+            +find(Object): boolean
+            +forEach(Consumer<? super O>): void
+            +collect(T extends Collection<? super O>): T extends Collection<? super O>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

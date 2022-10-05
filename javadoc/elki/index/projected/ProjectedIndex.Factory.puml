@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProjectedIndex.Factory\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.Factory<O, I> [[ProjectedIndex.Factory.html]] {
+        ~proj: Projection<O, I>
+        ~inner: IndexFactory<​I>
+        ~materialize: boolean
+        ~norefine: boolean
+        ~kmulti: double
+        +Factory(Projection<O, I>, IndexFactory<​I>, boolean, boolean, double)
+        +instantiate(Relation<O>): ProjectedIndex<O, I>
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<O> [[../IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>ProjectedIndex\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex<O, I> [[ProjectedIndex.html]]
+    class "<size:14>ProjectedIndex.Factory.Par\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.Factory.Par<O, I>
+
+    elki.index.IndexFactory <|.. elki.index.projected.ProjectedIndex.Factory
+    elki.index.projected.ProjectedIndex +-- elki.index.projected.ProjectedIndex.Factory
+    elki.index.projected.ProjectedIndex.Factory +-- elki.index.projected.ProjectedIndex.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

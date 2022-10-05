@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KernelMatrix.RangeMap\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.KernelMatrix.RangeMap {
+        ~range: DBIDRange
+        +RangeMap(DBIDRange)
+        +getOffset(DBIDRef): int
+        +iter(): DBIDArrayIter
+    }
+
+    interface "<size:14>KernelMatrix.DBIDMap\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.KernelMatrix.DBIDMap {
+        {abstract} +getOffset(DBIDRef): int
+        {abstract} +iter(): DBIDArrayIter
+    }
+    class "<size:14>KernelMatrix\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.KernelMatrix [[KernelMatrix.html]]
+
+    elki.similarity.kernel.KernelMatrix.DBIDMap <|.. elki.similarity.kernel.KernelMatrix.RangeMap
+    elki.similarity.kernel.KernelMatrix +-- elki.similarity.kernel.KernelMatrix.RangeMap
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MemoryKDTree.Factory.Par\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree.Factory.Par<O extends NumberVector> [[MemoryKDTree.Factory.Par.html]] {
+        {static} +SPLIT_P: OptionID
+        {static} +LEAFSIZE_P: OptionID
+        ~split: SplitStrategy
+        ~leafsize: int
+        +configure(Parameterization): void
+        +make(): Factory<O extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>MemoryKDTree.Factory\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree.Factory<O extends NumberVector> [[MemoryKDTree.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.kd.MemoryKDTree.Factory.Par
+    elki.index.tree.spatial.kd.MemoryKDTree.Factory +-- elki.index.tree.spatial.kd.MemoryKDTree.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

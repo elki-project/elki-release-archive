@@ -1,0 +1,44 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ComparatorMinHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.ComparatorMinHeap<K> [[ComparatorMinHeap.html]] {
+        #twoheap: Object[]
+        #size: int
+        {static} -TWO_HEAP_INITIAL_SIZE: int
+        #comparator: Comparator<Object>
+        +ComparatorMinHeap(Comparator<? super K>)
+        +ComparatorMinHeap(int, Comparator<? super K>)
+        +clear(): void
+        +size(): int
+        +isEmpty(): boolean
+        +add(K): void
+        +add(K, int): void
+        +replaceTopElement(K): K
+        -heapifyUp(int, Object): void
+        +poll(): K
+        -heapifyDown(Object): void
+        +peek(): K
+        +unsortedIter(): UnsortedIter
+    }
+
+    interface "<size:14>ObjectHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.ObjectHeap<K> [[ObjectHeap.html]] {
+        {abstract} +add(K): void
+        {abstract} +add(K, int): void
+        {abstract} +replaceTopElement(K): K
+        {abstract} +peek(): K
+        {abstract} +poll(): K
+        {abstract} +clear(): void
+        {abstract} +size(): int
+        {abstract} +isEmpty(): boolean
+        {abstract} +unsortedIter(): UnsortedIter<K>
+    }
+    class "<size:14>ComparatorMinHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.ComparatorMinHeap.UnsortedIter [[ComparatorMinHeap.UnsortedIter.html]]
+
+    elki.utilities.datastructures.heap.ObjectHeap <|.. elki.utilities.datastructures.heap.ComparatorMinHeap
+    elki.utilities.datastructures.heap.ComparatorMinHeap +-- elki.utilities.datastructures.heap.ComparatorMinHeap.UnsortedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

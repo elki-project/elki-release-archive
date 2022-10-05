@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SphericalGaussianModel\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.SphericalGaussianModel [[SphericalGaussianModel.html]] {
+        {static} -SINGULARITY_CHEAT: double
+        ~mean: double[]
+        ~variance: double
+        ~nmea: double[]
+        ~logNorm: double
+        ~logNormDet: double
+        ~weight: double
+        ~wsum: double
+        ~priorvar: double
+        +SphericalGaussianModel(double, double[])
+        +SphericalGaussianModel(double, double[], double)
+        +beginEStep(): void
+        +updateE(NumberVector, double): void
+        +finalizeEStep(double, double): void
+        +mahalanobisDistance(double[]): double
+        +mahalanobisDistance(NumberVector): double
+        +estimateLogDensity(NumberVector): double
+        +getWeight(): double
+        +setWeight(double): void
+        +finalizeCluster(): EMModel
+        +estimateLogDensity(ClusterFeature): double
+        +updateE(ClusterFeature, double): void
+    }
+
+    interface "<size:14>BetulaClusterModel\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.BetulaClusterModel [[BetulaClusterModel.html]] {
+        {abstract} +estimateLogDensity(ClusterFeature): double
+        {abstract} +updateE(ClusterFeature, double): void
+    }
+
+    elki.clustering.em.models.BetulaClusterModel <|.. elki.clustering.em.models.SphericalGaussianModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

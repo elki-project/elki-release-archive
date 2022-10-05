@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkAppDirectoryEntry\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkapp" as elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppDirectoryEntry [[MkAppDirectoryEntry.html]] {
+        {static} -serialVersionUID: long
+        -approximation: PolynomialApproximation
+        +MkAppDirectoryEntry()
+        +MkAppDirectoryEntry(DBID, double, int, double, PolynomialApproximation)
+        +approximatedValueAt(int): double
+        +getKnnDistanceApproximation(): PolynomialApproximation
+        +setKnnDistanceApproximation(PolynomialApproximation): void
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+    }
+
+    class "<size:14>MTreeDirectoryEntry\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeDirectoryEntry [[../../MTreeDirectoryEntry.html]]
+    interface "<size:14>MkAppEntry\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkapp" as elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppEntry [[MkAppEntry.html]] {
+        {abstract} +approximatedValueAt(int): double
+        {abstract} +getKnnDistanceApproximation(): PolynomialApproximation
+        {abstract} +setKnnDistanceApproximation(PolynomialApproximation): void
+    }
+
+    elki.index.tree.metrical.mtreevariants.MTreeDirectoryEntry <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppDirectoryEntry
+    elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppEntry <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppDirectoryEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

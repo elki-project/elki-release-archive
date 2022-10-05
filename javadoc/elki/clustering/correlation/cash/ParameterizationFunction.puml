@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParameterizationFunction\n<size:10>elki.clustering.correlation.cash" as elki.clustering.correlation.cash.ParameterizationFunction [[ParameterizationFunction.html]] {
+        {static} +DELTA: double
+        -alphaExtremum: double[]
+        -extremumType: ExtremumType
+        -vec: NumberVector
+        +ParameterizationFunction(NumberVector)
+        +function(double[]): double
+        +determineAlphaMinMax(HyperBoundingBox): HyperBoundingBox
+        -extremumType(int, double[], HyperBoundingBox): ExtremumType
+        -determineAlphaMin(int, double[], HyperBoundingBox): double
+        -determineAlphaMax(int, double[], HyperBoundingBox): double
+        +getGlobalAlphaExtremum(): double[]
+        +getGlobalExtremum(): double
+        +getGlobalExtremumType(): ExtremumType
+        +toString(int): String
+        {static} +sinusProduct(int, int, double[]): double
+        -determineGlobalExtremum(): void
+        -determineGlobalExtremumType(): void
+        -extremum_alpha_n(int, double[]): double
+        +getColumnVector(): double[]
+        +getDimensionality(): int
+    }
+    enum "<size:14>ParameterizationFunction.ExtremumType\n<size:10>elki.clustering.correlation.cash" as elki.clustering.correlation.cash.ParameterizationFunction.ExtremumType [[ParameterizationFunction.ExtremumType.html]]
+
+    elki.clustering.correlation.cash.ParameterizationFunction +-- elki.clustering.correlation.cash.ParameterizationFunction.ExtremumType
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

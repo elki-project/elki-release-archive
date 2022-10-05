@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LngLatToECEFProjection.Par\n<size:10>elki.data.projection" as elki.data.projection.LngLatToECEFProjection.Par {
+        ~model: EarthModel
+        +configure(Parameterization): void
+        +make(): LngLatToECEFProjection<NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LngLatToECEFProjection\n<size:10>elki.data.projection" as elki.data.projection.LngLatToECEFProjection<V extends NumberVector> [[LngLatToECEFProjection.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.data.projection.LngLatToECEFProjection.Par
+    elki.data.projection.LngLatToECEFProjection +-- elki.data.projection.LngLatToECEFProjection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

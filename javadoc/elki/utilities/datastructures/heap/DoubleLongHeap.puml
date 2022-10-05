@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DoubleLongHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleLongHeap [[DoubleLongHeap.html]] {
+        {abstract} +add(double, long): void
+        {abstract} +add(double, long, int): void
+        {abstract} +replaceTopElement(double, long): void
+        {abstract} +peekKey(): double
+        {abstract} +peekValue(): long
+        {abstract} +containsKey(double): boolean
+        {abstract} +containsValue(long): boolean
+        {abstract} +poll(): void
+        {abstract} +clear(): void
+        {abstract} +size(): int
+        {abstract} +isEmpty(): boolean
+        {abstract} +unsortedIter(): UnsortedIter
+    }
+    interface "<size:14>DoubleLongHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleLongHeap.UnsortedIter [[DoubleLongHeap.UnsortedIter.html]]
+
+    elki.utilities.datastructures.heap.DoubleLongHeap +-- elki.utilities.datastructures.heap.DoubleLongHeap.UnsortedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

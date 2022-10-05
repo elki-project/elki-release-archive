@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DisableQueryOptimizer\n<size:10>elki.database.query" as elki.database.query.DisableQueryOptimizer [[DisableQueryOptimizer.html]] {
+        {static} +STATIC: DisableQueryOptimizer
+    }
+
+    interface "<size:14>QueryOptimizer\n<size:10>elki.database.query" as elki.database.query.QueryOptimizer [[QueryOptimizer.html]]
+    class "<size:14>DisableQueryOptimizer.Par\n<size:10>elki.database.query" as elki.database.query.DisableQueryOptimizer.Par [[DisableQueryOptimizer.Par.html]]
+
+    elki.database.query.QueryOptimizer <|.. elki.database.query.DisableQueryOptimizer
+    elki.database.query.DisableQueryOptimizer +-- elki.database.query.DisableQueryOptimizer.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

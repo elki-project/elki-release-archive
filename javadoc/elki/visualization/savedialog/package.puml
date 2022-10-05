@@ -1,0 +1,56 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.savedialog {
+
+        class SVGSaveDialog [[SVGSaveDialog.html]] {
+            {static} +DEFAULT_TITLE: String
+            {static} -LOG: Logging
+            {static} ~AUTOMAGIC_FORMAT: String
+            {static} ~FORMATS: String[]
+            {static} ~VISIBLE_FORMATS: String[]
+            {static} +showSaveDialog(SVGPlot, int, int): int
+            {static} +guessFormat(String): String
+            {static} +getFormats(): String[]
+            {static} +getVisibleFormats(): String[]
+            {static} -showError(Component, String, String): void
+        }
+
+        class SaveOptionsPanel [[SaveOptionsPanel.html]] {
+            {static} -STR_CHOOSE_FORMAT: String
+            {static} -STR_IMAGE_WIDTH: String
+            {static} -STR_IMAGE_HEIGHT: String
+            {static} -STR_LOCK_ASPECT_RATIO: String
+            {static} -STR_JPEG_QUALITY: String
+            {static} -serialVersionUID: long
+            ~ratio: double
+            #spinnerWidth: JSpinner
+            #spinnerHeight: JSpinner
+            #spinnerQual: JSpinner
+            #modelWidth: SpinnerNumberModel
+            #modelHeight: SpinnerNumberModel
+            #modelQual: SpinnerNumberModel
+            #checkAspectRatio: JCheckBox
+            #resetSizeButton: JButton
+            #formatSelector: JComboBox<String>
+            -labelWidth: JLabel
+            -labelHeight: JLabel
+            -labelQual: JLabel
+            +SaveOptionsPanel(JFileChooser, int, int)
+            #setFormat(String): void
+            +getSelectedFormat(): String
+            +getSelectedWidth(): int
+            +getSelectedHeight(): int
+            +getJPEGQuality(): float
+        }
+
+        javax.swing.JPanel <|-- SaveOptionsPanel
+    }
+
+    namespace javax.swing {
+        class JPanel {
+            {static} -uiClassID: String
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

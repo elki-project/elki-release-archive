@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>CFTree.Threshold\n<size:10>elki.index.tree.betula" as elki.index.tree.betula.CFTree.Threshold [[CFTree.Threshold.html]] {
+        {static} +MEAN
+        {static} +MEDIAN
+    }
+
+    class "<size:14>CFTree\n<size:10>elki.index.tree.betula" as elki.index.tree.betula.CFTree<L extends ClusterFeature> [[CFTree.html]]
+
+    elki.index.tree.betula.CFTree +-- elki.index.tree.betula.CFTree.Threshold
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

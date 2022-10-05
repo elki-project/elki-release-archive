@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AttributeWiseMinMaxNormalization.Par\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization.Par<V extends NumberVector> [[AttributeWiseMinMaxNormalization.Par.html]] {
+        {static} +MINIMA_ID: OptionID
+        {static} +MAXIMA_ID: OptionID
+        -maxima: double[]
+        -minima: double[]
+        +configure(Parameterization): void
+        +make(): AttributeWiseMinMaxNormalization<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AttributeWiseMinMaxNormalization\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization<V extends NumberVector> [[AttributeWiseMinMaxNormalization.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization.Par
+    elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization +-- elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

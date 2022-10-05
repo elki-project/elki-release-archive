@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DataStoreUtil.AscendingByIntegerDataStore\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreUtil.AscendingByIntegerDataStore [[DataStoreUtil.AscendingByIntegerDataStore.html]] {
+        -scores: IntegerDataStore
+        +AscendingByIntegerDataStore(IntegerDataStore)
+        +compare(DBIDRef, DBIDRef): int
+    }
+
+    interface "<size:14>Comparator\n<size:10>java.util" as java.util.Comparator<DBIDRef> {
+        {abstract} +compare(DBIDRef, DBIDRef): int
+    }
+    class "<size:14>DataStoreUtil\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreUtil [[DataStoreUtil.html]]
+
+    java.util.Comparator <|.. elki.database.datastore.DataStoreUtil.AscendingByIntegerDataStore
+    elki.database.datastore.DataStoreUtil +-- elki.database.datastore.DataStoreUtil.AscendingByIntegerDataStore
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

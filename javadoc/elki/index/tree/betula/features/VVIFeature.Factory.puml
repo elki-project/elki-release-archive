@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VVIFeature.Factory\n<size:10>elki.index.tree.betula.features" as elki.index.tree.betula.features.VVIFeature.Factory [[VVIFeature.Factory.html]] {
+        {static} +STATIC: Factory
+        +make(int): VVIFeature
+    }
+
+    interface "<size:14>ClusterFeature.Factory\n<size:10>elki.index.tree.betula.features" as elki.index.tree.betula.features.ClusterFeature.Factory<VVIFeature> [[ClusterFeature.Factory.html]] {
+        {abstract} +make(int): VVIFeature
+    }
+    class "<size:14>VVIFeature\n<size:10>elki.index.tree.betula.features" as elki.index.tree.betula.features.VVIFeature [[VVIFeature.html]]
+    class "<size:14>VVIFeature.Factory.Par\n<size:10>elki.index.tree.betula.features" as elki.index.tree.betula.features.VVIFeature.Factory.Par [[VVIFeature.Factory.Par.html]]
+
+    elki.index.tree.betula.features.ClusterFeature.Factory <|.. elki.index.tree.betula.features.VVIFeature.Factory
+    elki.index.tree.betula.features.VVIFeature +-- elki.index.tree.betula.features.VVIFeature.Factory
+    elki.index.tree.betula.features.VVIFeature.Factory +-- elki.index.tree.betula.features.VVIFeature.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CompactCircularMSTLayout3DPC.Par\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.CompactCircularMSTLayout3DPC.Par [[CompactCircularMSTLayout3DPC.Par.html]] {
+        +make(): CompactCircularMSTLayout3DPC
+    }
+
+    abstract class "<size:14>AbstractLayout3DPC.Par\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.AbstractLayout3DPC.Par [[AbstractLayout3DPC.Par.html]]
+    class "<size:14>CompactCircularMSTLayout3DPC\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.CompactCircularMSTLayout3DPC [[CompactCircularMSTLayout3DPC.html]]
+
+    elki.visualization.parallel3d.layout.AbstractLayout3DPC.Par <|-- elki.visualization.parallel3d.layout.CompactCircularMSTLayout3DPC.Par
+    elki.visualization.parallel3d.layout.CompactCircularMSTLayout3DPC +-- elki.visualization.parallel3d.layout.CompactCircularMSTLayout3DPC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

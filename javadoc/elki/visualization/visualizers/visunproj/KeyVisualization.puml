@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KeyVisualization\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.KeyVisualization [[KeyVisualization.html]] {
+        {static} -NAME: String
+        +processNewResult(VisualizerContext, Object): void
+        {static} #findDepth(Clustering<M extends Model>): int[]
+        {static} -findDepth(Hierarchy<Cluster<M extends Model>>, Cluster<M extends Model>, int[]): void
+        {static} #getPreferredColumns(double, double, int, double): int
+        +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        +allowThumbnails(VisualizationTask): boolean
+    }
+
+    interface "<size:14>VisFactory\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.VisFactory [[../VisFactory.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+        {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+    }
+    class "<size:14>KeyVisualization.Instance\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.KeyVisualization.Instance [[KeyVisualization.Instance.html]]
+
+    elki.visualization.visualizers.VisFactory <|.. elki.visualization.visualizers.visunproj.KeyVisualization
+    elki.visualization.visualizers.visunproj.KeyVisualization +-- elki.visualization.visualizers.visunproj.KeyVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

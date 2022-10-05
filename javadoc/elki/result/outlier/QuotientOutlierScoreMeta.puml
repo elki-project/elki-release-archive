@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>QuotientOutlierScoreMeta\n<size:10>elki.result.outlier" as elki.result.outlier.QuotientOutlierScoreMeta [[QuotientOutlierScoreMeta.html]] {
+        +QuotientOutlierScoreMeta(double, double)
+        +QuotientOutlierScoreMeta(double, double, double, double)
+        +QuotientOutlierScoreMeta(double, double, double, double, double)
+    }
+
+    class "<size:14>BasicOutlierScoreMeta\n<size:10>elki.result.outlier" as elki.result.outlier.BasicOutlierScoreMeta [[BasicOutlierScoreMeta.html]]
+
+    elki.result.outlier.BasicOutlierScoreMeta <|-- elki.result.outlier.QuotientOutlierScoreMeta
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

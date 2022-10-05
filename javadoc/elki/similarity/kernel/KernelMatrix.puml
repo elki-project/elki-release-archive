@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KernelMatrix\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.KernelMatrix [[KernelMatrix.html]] {
+        ~kernel: double[]
+        ~idmap: DBIDMap
+        +KernelMatrix(PrimitiveSimilarity<? super O>, Relation<? extends O>, DBIDs)
+        +KernelMatrix(SimilarityQuery<? super O>, Relation<? extends O>, DBIDs)
+        +KernelMatrix(double[])
+        +getDistance(DBIDRef, DBIDRef): double
+        +getKernel(): double[]
+        +getSquaredDistance(DBIDRef, DBIDRef): double
+        {static} +centerMatrix(double[]): double[]
+        {static} +centerKernelMatrix(KernelMatrix): double[]
+        +getSimilarity(DBIDRef, DBIDRef): double
+    }
+    interface "<size:14>KernelMatrix.DBIDMap\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.KernelMatrix.DBIDMap
+    class "<size:14>KernelMatrix.RangeMap\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.KernelMatrix.RangeMap
+    class "<size:14>KernelMatrix.SortedArrayMap\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.KernelMatrix.SortedArrayMap
+
+    elki.similarity.kernel.KernelMatrix +-- elki.similarity.kernel.KernelMatrix.DBIDMap
+    elki.similarity.kernel.KernelMatrix +-- elki.similarity.kernel.KernelMatrix.RangeMap
+    elki.similarity.kernel.KernelMatrix +-- elki.similarity.kernel.KernelMatrix.SortedArrayMap
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

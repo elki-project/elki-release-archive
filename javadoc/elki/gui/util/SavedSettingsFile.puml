@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SavedSettingsFile\n<size:10>elki.gui.util" as elki.gui.util.SavedSettingsFile [[SavedSettingsFile.html]] {
+        {static} +COMMENT_PREFIX: String
+        -file: Path
+        -store: ArrayList<Pair<String, ArrayList<String>>>
+        +SavedSettingsFile(String)
+        +save(): void
+        +load(): void
+        +iterator(): Iterator<Pair<String, ArrayList<String>>>
+        +remove(String): void
+        +get(String): ArrayList<String>
+        +clear(): void
+        +put(String, ArrayList<String>): void
+        +size(): int
+        +getElementAt(int): Pair<String, ArrayList<String>>
+    }
+
+    interface "<size:14>Iterable\n<size:10>java.lang" as java.lang.Iterable<Pair<String, ArrayList<String>>> {
+        {abstract} +iterator(): Iterator<T>
+    }
+
+    java.lang.Iterable <|.. elki.gui.util.SavedSettingsFile
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

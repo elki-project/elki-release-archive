@@ -1,0 +1,166 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.data.type {
+
+        class TypeUtil [[TypeUtil.html]] {
+            {static} +array(TypeInformation...): TypeInformation[]
+        }
+
+        class CombinedTypeInformation [[CombinedTypeInformation.html]] {
+            +CombinedTypeInformation(TypeInformation...)
+            +isAssignableFromType(TypeInformation): boolean
+            +isAssignableFrom(Object): boolean
+        }
+
+        class MultivariateSeriesTypeInformation<V extends FeatureVector<?>> [[MultivariateSeriesTypeInformation.html]] {
+            #multiplicity: int
+            +MultivariateSeriesTypeInformation(Class<? super FeatureVector<?>>, int, int, int)
+            +MultivariateSeriesTypeInformation(Factory<V extends FeatureVector<?>, ?>, ByteBufferSerializer<? super FeatureVector<?>>, int, int, int)
+            {static} +typeRequest(Class<? super FeatureVector<?>>): MultivariateSeriesTypeInformation<V extends FeatureVector<?>>
+            +getMultiplicity(): int
+        }
+
+        class AlternativeTypeInformation [[AlternativeTypeInformation.html]] {
+            +AlternativeTypeInformation(TypeInformation...)
+            +isAssignableFromType(TypeInformation): boolean
+            +isAssignableFrom(Object): boolean
+        }
+
+        class VectorFieldTypeInformation<V extends FeatureVector<?>> [[VectorFieldTypeInformation.html]] {
+            -labels: String[]
+            +VectorFieldTypeInformation(Factory<V extends FeatureVector<?>, ?>, int, String[], ByteBufferSerializer<? super FeatureVector<?>>)
+            +VectorFieldTypeInformation(Factory<V extends FeatureVector<?>, ?>, int, int, ByteBufferSerializer<? super FeatureVector<?>>)
+            +VectorFieldTypeInformation(Factory<V extends FeatureVector<?>, ?>, int, ByteBufferSerializer<? super FeatureVector<?>>)
+            +VectorFieldTypeInformation(Factory<V extends FeatureVector<?>, ?>, int, String[])
+            -VectorFieldTypeInformation(Class<? super FeatureVector<?>>, int, int)
+            +VectorFieldTypeInformation(Factory<V extends FeatureVector<?>, ?>, int)
+            {static} +typeRequest(Class<? super FeatureVector<?>>): VectorFieldTypeInformation<V extends FeatureVector<?>>
+            {static} +typeRequest(Class<? super FeatureVector<?>>, int, int): VectorFieldTypeInformation<V extends FeatureVector<?>>
+            +isAssignableFromType(TypeInformation): boolean
+            +getDimensionality(): int
+            +getLabel(int): String
+            #getLabels(): String[]
+        }
+
+        interface TypeInformation [[TypeInformation.html]] {
+            {abstract} +isAssignableFromType(TypeInformation): boolean
+            {abstract} +isAssignableFrom(Object): boolean
+        }
+
+        class NoSupportedDataTypeException [[NoSupportedDataTypeException.html]] {
+            {static} -serialVersionUID: long
+            +NoSupportedDataTypeException(TypeInformation, Collection<TypeInformation>)
+            +NoSupportedDataTypeException(String)
+            +getMessage(): String
+        }
+
+        class TypeInformationSerializer [[TypeInformationSerializer.html]] {
+            {static} -TAG_SIMPLE: byte
+            {static} -TAG_VECTOR: byte
+            {static} -TAG_VECTOR_FIELD: byte
+            {static} ~SIMPLE_TYPE_SERIALIZER: ByteBufferSerializer<SimpleTypeInformation<?>>
+            {static} ~VECTOR_TYPE_SERIALIZER: ByteBufferSerializer<VectorTypeInformation<?>>
+            {static} ~VECTOR_FIELD_TYPE_SERIALIZER: ByteBufferSerializer<VectorFieldTypeInformation<?>>
+            +fromByteBuffer(ByteBuffer): TypeInformation
+            +toByteBuffer(ByteBuffer, TypeInformation): void
+            +getByteSize(TypeInformation): int
+        }
+
+        class elki.data.type.TypeInformationSerializer.SimpleTypeSerializer [[TypeInformationSerializer.SimpleTypeSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): SimpleTypeInformation<?>
+            +toByteBuffer(ByteBuffer, SimpleTypeInformation<?>): void
+            +getByteSize(SimpleTypeInformation<?>): int
+        }
+
+        class elki.data.type.TypeInformationSerializer.VectorTypeSerializer [[TypeInformationSerializer.VectorTypeSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): VectorTypeInformation<?>
+            +toByteBuffer(ByteBuffer, VectorTypeInformation<?>): void
+            +getByteSize(VectorTypeInformation<?>): int
+        }
+
+        class elki.data.type.TypeInformationSerializer.VectorFieldTypeSerializer [[TypeInformationSerializer.VectorFieldTypeSerializer.html]] {
+            +fromByteBuffer(ByteBuffer): VectorFieldTypeInformation<?>
+            +toByteBuffer(ByteBuffer, VectorFieldTypeInformation<?>): void
+            +getByteSize(VectorFieldTypeInformation<?>): int
+        }
+
+        class SimpleTypeInformation<T> [[SimpleTypeInformation.html]] {
+            -cls: Class<? super T>
+            -label: String
+            -serializer: ByteBufferSerializer<? super T>
+            +SimpleTypeInformation(Class<? super T>)
+            +SimpleTypeInformation(Class<? super T>, String)
+            +SimpleTypeInformation(Class<? super T>, ByteBufferSerializer<? super T>)
+            +SimpleTypeInformation(Class<? super T>, String, ByteBufferSerializer<? super T>)
+            +getRestrictionClass(): Class<? super T>
+            +isAssignableFromType(TypeInformation): boolean
+            +isAssignableFrom(Object): boolean
+            +cast(Object): T
+            +getLabel(): String
+            +getSerializer(): ByteBufferSerializer<? super T>
+            +setSerializer(ByteBufferSerializer<? super T>): void
+        }
+
+        class VectorTypeInformation<V extends FeatureVector<?>> [[VectorTypeInformation.html]] {
+            -factory: Factory<V extends FeatureVector<?>, ?>
+            #mindim: int
+            #maxdim: int
+            +VectorTypeInformation(Class<? super FeatureVector<?>>, int, int)
+            +VectorTypeInformation(Factory<V extends FeatureVector<?>, ?>, ByteBufferSerializer<? super FeatureVector<?>>, int, int)
+            {static} +typeRequest(Class<? super FeatureVector<?>>): VectorTypeInformation<V extends FeatureVector<?>>
+            {static} +typeRequest(Class<? super FeatureVector<?>>, int, int): VectorTypeInformation<V extends FeatureVector<?>>
+            +isAssignableFromType(TypeInformation): boolean
+            +isAssignableFrom(Object): boolean
+            +getFactory(): Factory<V extends FeatureVector<?>, ?>
+            +mindim(): int
+            +maxdim(): int
+            +getMultiplicity(): int
+        }
+
+        interface FieldTypeInformation [[FieldTypeInformation.html]] {
+            {abstract} +getDimensionality(): int
+        }
+
+        TypeUtil --> TypeInformation: GUESSED_LABEL
+        TypeUtil --> MultivariateSeriesTypeInformation: MULTIVARIATE_SERIES
+        TypeUtil --> VectorFieldTypeInformation: NUMBER_VECTOR_FIELD\nNUMBER_VECTOR_FIELD_1D\nNUMBER_VECTOR_FIELD_2D\nDOUBLE_VECTOR_FIELD\nFLOAT_VECTOR_FIELD\nBIT_VECTOR_FIELD\nSPARSE_VECTOR_FIELD\nSPARSE_FLOAT_FIELD\nSPARSE_DOUBLE_FIELD
+        TypeUtil --> VectorTypeInformation: NUMBER_VECTOR_VARIABLE_LENGTH\nBIT_VECTOR\nSPARSE_VECTOR_VARIABLE_LENGTH\nFEATURE_VECTORS
+        TypeUtil --> SimpleTypeInformation: ANY\nDBID\nDBIDS\nSTRING\nCLASSLABEL\nSIMPLE_CLASSLABEL\nLABELLIST\nNEIGHBORLIST\nEXTERNALID\nPOLYGON_TYPE\nDOUBLE\nINTEGER\nDOUBLE_ARRAY\nINTEGER_ARRAY\nMATRIX\nSPATIAL_OBJECT\nKNNLIST
+        TypeInformation <|.. CombinedTypeInformation
+        CombinedTypeInformation --> "*" TypeInformation: restrictions
+        VectorTypeInformation <|-- MultivariateSeriesTypeInformation
+        TypeInformation <|.. AlternativeTypeInformation
+        AlternativeTypeInformation --> "*" TypeInformation: restrictions
+        VectorTypeInformation <|-- VectorFieldTypeInformation
+        FieldTypeInformation <|.. VectorFieldTypeInformation
+        java.lang.IllegalStateException <|-- NoSupportedDataTypeException
+        NoSupportedDataTypeException --> "*" TypeInformation: types
+        elki.utilities.io.ByteBufferSerializer <|.. TypeInformationSerializer
+        TypeInformationSerializer --> TypeInformationSerializer: STATIC
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.type.TypeInformationSerializer.SimpleTypeSerializer
+        TypeInformationSerializer +-- elki.data.type.TypeInformationSerializer.SimpleTypeSerializer
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.type.TypeInformationSerializer.VectorTypeSerializer
+        TypeInformationSerializer +-- elki.data.type.TypeInformationSerializer.VectorTypeSerializer
+        elki.utilities.io.ByteBufferSerializer <|.. elki.data.type.TypeInformationSerializer.VectorFieldTypeSerializer
+        TypeInformationSerializer +-- elki.data.type.TypeInformationSerializer.VectorFieldTypeSerializer
+        TypeInformation <|.. SimpleTypeInformation
+        SimpleTypeInformation <|-- VectorTypeInformation
+        TypeInformation <|-- FieldTypeInformation
+    }
+
+    namespace java.lang {
+        class IllegalStateException {
+            {static} ~serialVersionUID: long
+        }
+    }
+
+    namespace elki.utilities.io {
+        interface ByteBufferSerializer<T> [[../../utilities/io/ByteBufferSerializer.html]] {
+            {abstract} +fromByteBuffer(ByteBuffer): T
+            {abstract} +toByteBuffer(ByteBuffer, T): void
+            {abstract} +getByteSize(T): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

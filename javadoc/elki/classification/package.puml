@@ -1,0 +1,72 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.classification {
+
+        interface Classifier<O> [[Classifier.html]] {
+            {abstract} +buildClassifier(Database, Relation<? extends ClassLabel>): void
+            {abstract} +classify(O): ClassLabel
+            {abstract} +model(): String
+        }
+
+        class KNNClassifier<O> [[KNNClassifier.html]] {
+            #k: int
+            #knnq: KNNSearcher<O>
+            #labelrep: Relation<? extends ClassLabel>
+            #distance: Distance<? super O>
+            +KNNClassifier(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +buildClassifier(Database, Relation<? extends ClassLabel>): void
+            +classify(O): ClassLabel
+            +classProbabilities(O, ArrayList<ClassLabel>): double[]
+            +model(): String
+            +getDistance(): Distance<? super O>
+        }
+
+        class elki.classification.KNNClassifier.Par<O> {
+            {static} +K_ID: OptionID
+            #distanceFunction: Distance<? super O>
+            #k: int
+            +configure(Parameterization): void
+            +make(): KNNClassifier<O>
+        }
+
+        class PriorProbabilityClassifier [[PriorProbabilityClassifier.html]] {
+            #distribution: double[]
+            #prediction: ClassLabel
+            #labels: ArrayList<ClassLabel>
+            +buildClassifier(Database, Relation<? extends ClassLabel>): void
+            +classProbabilities(Object, ArrayList<ClassLabel>): double[]
+            +classify(Object): ClassLabel
+            +model(): String
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        abstract class AbstractClassifier<O, R> [[AbstractClassifier.html]] {
+            +--autorun--(Database): R
+            #alignLabels(List<ClassLabel>, double[], Collection<ClassLabel>): double[]
+        }
+
+        elki.Algorithm <|-- Classifier
+        Classifier <|.. KNNClassifier
+        elki.utilities.optionhandling.Parameterizer <|.. elki.classification.KNNClassifier.Par
+        KNNClassifier +-- elki.classification.KNNClassifier.Par
+        AbstractClassifier <|-- PriorProbabilityClassifier
+        Classifier <|.. AbstractClassifier
+    }
+
+    namespace elki {
+        interface Algorithm [[../Algorithm.html]] {
+            +autorun(Database): Object
+            {abstract} +getInputTypeRestriction(): TypeInformation[]
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

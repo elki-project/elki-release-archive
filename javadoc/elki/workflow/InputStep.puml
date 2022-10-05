@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InputStep\n<size:10>elki.workflow" as elki.workflow.InputStep [[InputStep.html]] {
+        -database: Database
+        +InputStep(Database)
+        +getDatabase(): Database
+    }
+
+    interface "<size:14>WorkflowStep\n<size:10>elki.workflow" as elki.workflow.WorkflowStep [[WorkflowStep.html]]
+    class "<size:14>InputStep.Par\n<size:10>elki.workflow" as elki.workflow.InputStep.Par [[InputStep.Par.html]]
+
+    elki.workflow.WorkflowStep <|.. elki.workflow.InputStep
+    elki.workflow.InputStep +-- elki.workflow.InputStep.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleMinMaxProcessor\n<size:10>elki.parallel.processor" as elki.parallel.processor.DoubleMinMaxProcessor [[DoubleMinMaxProcessor.html]] {
+        ~minmax: DoubleMinMax
+        ~input: SharedDouble
+        +connectInput(SharedDouble): void
+        +instantiate(Executor): Instance
+        +cleanup(Instance): void
+        #merge(DoubleMinMax): void
+        +getMinMax(): DoubleMinMax
+    }
+
+    interface "<size:14>Processor\n<size:10>elki.parallel.processor" as elki.parallel.processor.Processor [[Processor.html]] {
+        {abstract} +instantiate(Executor): Instance
+        {abstract} +cleanup(Instance): void
+    }
+    class "<size:14>DoubleMinMaxProcessor.Instance\n<size:10>elki.parallel.processor" as elki.parallel.processor.DoubleMinMaxProcessor.Instance [[DoubleMinMaxProcessor.Instance.html]]
+
+    elki.parallel.processor.Processor <|.. elki.parallel.processor.DoubleMinMaxProcessor
+    elki.parallel.processor.DoubleMinMaxProcessor +-- elki.parallel.processor.DoubleMinMaxProcessor.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

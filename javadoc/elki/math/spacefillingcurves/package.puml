@@ -1,0 +1,137 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.spacefillingcurves {
+
+        class ZCurveTransformer [[ZCurveTransformer.html]] {
+            -maxValues: double[]
+            -minValues: double[]
+            -dimensionality: int
+            +ZCurveTransformer(Relation<? extends NumberVector>, DBIDs)
+            +asByteArray(NumberVector): byte[]
+        }
+
+        class HilbertSpatialSorter [[HilbertSpatialSorter.html]] {
+            +sort(List<? extends SpatialComparable>, int, int, double[], int[]): void
+            {static} +coordinatesToHilbert(long[], int, int): long[]
+            {static} +coordinatesToHilbert(int[], int, int): long[]
+            {static} +coordinatesToHilbert(short[], int, int): long[]
+            {static} +coordinatesToHilbert(byte[], int, int): long[]
+            {static} +interleaveBits(long[], int): long[]
+            {static} +interleaveBits(int[], int): long[]
+            {static} +interleaveBits(short[], int): long[]
+            {static} +interleaveBits(byte[], int): long[]
+        }
+
+        class elki.math.spacefillingcurves.HilbertSpatialSorter.HilbertRef [[HilbertSpatialSorter.HilbertRef.html]] {
+            #vec: SpatialComparable
+            #bits: long[]
+            #HilbertRef(SpatialComparable, long[])
+            +compareTo(HilbertRef): int
+        }
+
+        class elki.math.spacefillingcurves.HilbertSpatialSorter.Par [[HilbertSpatialSorter.Par.html]] {
+            +make(): HilbertSpatialSorter
+        }
+
+        class PeanoSpatialSorter [[PeanoSpatialSorter.html]] {
+            +sort(List<? extends SpatialComparable>, int, int, double[], int[]): void
+            #peanoSort(List<? extends SpatialComparable>, int, int, double[], int[], int, long[], boolean): void
+        }
+
+        class elki.math.spacefillingcurves.PeanoSpatialSorter.Par [[PeanoSpatialSorter.Par.html]] {
+            +make(): PeanoSpatialSorter
+        }
+
+        interface SpatialSorter [[SpatialSorter.html]] {
+            +sort(List<? extends SpatialComparable>): void
+            {abstract} +sort(List<? extends SpatialComparable>, int, int, double[], int[]): void
+            {static} +computeMinMax(Iterable<? extends SpatialComparable>): double[]
+        }
+
+        class ZCurveSpatialSorter [[ZCurveSpatialSorter.html]] {
+            {static} -STOPVAL: double
+            +sort(List<? extends SpatialComparable>, int, int, double[], int[]): void
+            #zSort(List<? extends SpatialComparable>, int, int, double[], int[], int): void
+            {static} #pivotizeList1D(List<? extends SpatialComparable>, int, int, int, double, boolean): int
+            {static} -getMinPlusMaxObject(List<? extends SpatialComparable>, int, int): double
+        }
+
+        class elki.math.spacefillingcurves.ZCurveSpatialSorter.Par [[ZCurveSpatialSorter.Par.html]] {
+            +make(): ZCurveSpatialSorter
+        }
+
+        class BinarySplitSpatialSorter [[BinarySplitSpatialSorter.html]] {
+            +sort(List<? extends SpatialComparable>, int, int, double[], int[]): void
+            -binarySplitSort(List<? extends SpatialComparable>, int, int, int, int, int[], Sorter): void
+        }
+
+        class elki.math.spacefillingcurves.BinarySplitSpatialSorter.Sorter [[BinarySplitSpatialSorter.Sorter.html]] {
+            ~dim: int
+            +Sorter(int)
+            +setDimension(int): void
+            +compare(SpatialComparable, SpatialComparable): int
+        }
+
+        class elki.math.spacefillingcurves.BinarySplitSpatialSorter.Par [[BinarySplitSpatialSorter.Par.html]] {
+            +make(): BinarySplitSpatialSorter
+        }
+
+        SpatialSorter <|.. HilbertSpatialSorter
+        HilbertSpatialSorter --> HilbertSpatialSorter: STATIC
+        java.lang.Comparable <|.. elki.math.spacefillingcurves.HilbertSpatialSorter.HilbertRef
+        HilbertSpatialSorter +-- elki.math.spacefillingcurves.HilbertSpatialSorter.HilbertRef
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.spacefillingcurves.HilbertSpatialSorter.Par
+        HilbertSpatialSorter +-- elki.math.spacefillingcurves.HilbertSpatialSorter.Par
+        SpatialSorter <|.. PeanoSpatialSorter
+        PeanoSpatialSorter --> PeanoSpatialSorter: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.spacefillingcurves.PeanoSpatialSorter.Par
+        PeanoSpatialSorter +-- elki.math.spacefillingcurves.PeanoSpatialSorter.Par
+        SpatialSorter <|.. ZCurveSpatialSorter
+        ZCurveSpatialSorter --> ZCurveSpatialSorter: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.spacefillingcurves.ZCurveSpatialSorter.Par
+        ZCurveSpatialSorter +-- elki.math.spacefillingcurves.ZCurveSpatialSorter.Par
+        SpatialSorter <|.. BinarySplitSpatialSorter
+        BinarySplitSpatialSorter --> BinarySplitSpatialSorter: STATIC
+        java.util.Comparator <|.. elki.math.spacefillingcurves.BinarySplitSpatialSorter.Sorter
+        BinarySplitSpatialSorter +-- elki.math.spacefillingcurves.BinarySplitSpatialSorter.Sorter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.spacefillingcurves.BinarySplitSpatialSorter.Par
+        BinarySplitSpatialSorter +-- elki.math.spacefillingcurves.BinarySplitSpatialSorter.Par
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace java.util {
+        interface Comparator<T> {
+            {abstract} +compare(T, T): int
+            +reversed(): Comparator<T>
+            +thenComparing(Comparator<? super T>): Comparator<T>
+            +thenComparing(Function<? super T, ? extends U>, Comparator<? super U>): Comparator<T>
+            +thenComparing(Function<? super T, ? extends Comparable<? super U>>): Comparator<T>
+            +thenComparingInt(ToIntFunction<? super T>): Comparator<T>
+            +thenComparingLong(ToLongFunction<? super T>): Comparator<T>
+            +thenComparingDouble(ToDoubleFunction<? super T>): Comparator<T>
+            {static} +reverseOrder(): Comparator<T extends Comparable<? super T>>
+            {static} +naturalOrder(): Comparator<T extends Comparable<? super T>>
+            {static} +nullsFirst(Comparator<? super T>): Comparator<T>
+            {static} +nullsLast(Comparator<? super T>): Comparator<T>
+            {static} +comparing(Function<? super T, ? extends U>, Comparator<? super U>): Comparator<T>
+            {static} +comparing(Function<? super T, ? extends Comparable<? super U>>): Comparator<T>
+            {static} +comparingInt(ToIntFunction<? super T>): Comparator<T>
+            {static} +comparingLong(ToLongFunction<? super T>): Comparator<T>
+            {static} +comparingDouble(ToDoubleFunction<? super T>): Comparator<T>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

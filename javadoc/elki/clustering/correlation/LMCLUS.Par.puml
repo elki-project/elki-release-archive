@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LMCLUS.Par\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.LMCLUS.Par [[LMCLUS.Par.html]] {
+        {static} +MAXDIM_ID: OptionID
+        {static} +MINSIZE_ID: OptionID
+        {static} +SAMPLINGL_ID: OptionID
+        {static} +THRESHOLD_ID: OptionID
+        {static} +RANDOM_ID: OptionID
+        -maxdim: int
+        -minsize: int
+        -samplingLevel: int
+        -threshold: double
+        -rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): LMCLUS
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LMCLUS\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.LMCLUS [[LMCLUS.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.correlation.LMCLUS.Par
+    elki.clustering.correlation.LMCLUS +-- elki.clustering.correlation.LMCLUS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

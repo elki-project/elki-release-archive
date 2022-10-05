@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Flag.BooleanConsumer\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.Flag.BooleanConsumer [[Flag.BooleanConsumer.html]] {
+        {abstract} +accept(boolean): void
+    }
+
+    class "<size:14>Flag\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.Flag [[Flag.html]]
+
+    elki.utilities.optionhandling.parameters.Flag +-- elki.utilities.optionhandling.parameters.Flag.BooleanConsumer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

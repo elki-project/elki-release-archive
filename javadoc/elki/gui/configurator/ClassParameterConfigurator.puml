@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClassParameterConfigurator\n<size:10>elki.gui.configurator" as elki.gui.configurator.ClassParameterConfigurator [[ClassParameterConfigurator.html]] {
+        ~panel: JPanel
+        ~textfield: JTextField
+        ~button: JButton
+        ~popup: TreePopup
+        ~child: ConfiguratorPanel
+        +ClassParameterConfigurator(ClassParameter<?>, JComponent)
+        +addParameter(Object, Parameter<?>, TrackParameters): void
+        +actionPerformed(ActionEvent): void
+        +stateChanged(ChangeEvent): void
+        +getUserInput(): String
+        +appendParameters(ListParameterization): void
+    }
+
+    abstract class "<size:14>AbstractSingleParameterConfigurator\n<size:10>elki.gui.configurator" as elki.gui.configurator.AbstractSingleParameterConfigurator<ClassParameter<?>> [[AbstractSingleParameterConfigurator.html]]
+    interface "<size:14>ActionListener\n<size:10>java.awt.event" as java.awt.event.ActionListener {
+        {abstract} +actionPerformed(ActionEvent): void
+    }
+    interface "<size:14>ChangeListener\n<size:10>javax.swing.event" as javax.swing.event.ChangeListener {
+        {abstract} +stateChanged(ChangeEvent): void
+    }
+
+    elki.gui.configurator.AbstractSingleParameterConfigurator <|-- elki.gui.configurator.ClassParameterConfigurator
+    java.awt.event.ActionListener <|.. elki.gui.configurator.ClassParameterConfigurator
+    javax.swing.event.ChangeListener <|.. elki.gui.configurator.ClassParameterConfigurator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

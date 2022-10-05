@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>SharedNearestNeighborIndex.Factory\n<size:10>elki.index.preprocessed.snn" as elki.index.preprocessed.snn.SharedNearestNeighborIndex.Factory<O> [[SharedNearestNeighborIndex.Factory.html]] {
+        {abstract} +instantiate(Relation<O>): SharedNearestNeighborIndex<O>
+        {abstract} +getNumberOfNeighbors(): int
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<O> [[../../IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    interface "<size:14>SharedNearestNeighborIndex\n<size:10>elki.index.preprocessed.snn" as elki.index.preprocessed.snn.SharedNearestNeighborIndex<O> [[SharedNearestNeighborIndex.html]] {
+        {abstract} +getNearestNeighborSet(DBIDRef): ArrayDBIDs
+        {abstract} +getNumberOfNeighbors(): int
+    }
+
+    elki.index.IndexFactory <|-- elki.index.preprocessed.snn.SharedNearestNeighborIndex.Factory
+    elki.index.preprocessed.snn.SharedNearestNeighborIndex +-- elki.index.preprocessed.snn.SharedNearestNeighborIndex.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

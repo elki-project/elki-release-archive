@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ReynoldsPAM.Instance\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.ReynoldsPAM.Instance [[ReynoldsPAM.Instance.html]] {
+        +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+        #run(ArrayModifiableDBIDs, int): double
+        #computeRemovalCost(int, WritableDoubleDataStore): double
+        #computeReassignmentCost(DBIDRef, WritableDoubleDataStore): double
+    }
+
+    class "<size:14>PAM.Instance\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.PAM.Instance [[PAM.Instance.html]]
+    class "<size:14>ReynoldsPAM\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.ReynoldsPAM<O> [[ReynoldsPAM.html]]
+
+    elki.clustering.kmedoids.PAM.Instance <|-- elki.clustering.kmedoids.ReynoldsPAM.Instance
+    elki.clustering.kmedoids.ReynoldsPAM +-- elki.clustering.kmedoids.ReynoldsPAM.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

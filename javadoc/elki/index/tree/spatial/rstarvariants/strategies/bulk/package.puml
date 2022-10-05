@@ -1,0 +1,118 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.spatial.rstarvariants.strategies.bulk {
+
+        class MaxExtensionSortTileRecursiveBulkSplit [[MaxExtensionSortTileRecursiveBulkSplit.html]] {
+            +partition(List<T extends SpatialComparable>, int, int): List<List<T extends SpatialComparable>>
+            #strPartition(List<T extends SpatialComparable>, int, int, int, int, int, SpatialSingleMeanComparator, List<List<T extends SpatialComparable>>): void
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.bulk.MaxExtensionSortTileRecursiveBulkSplit.Par [[MaxExtensionSortTileRecursiveBulkSplit.Par.html]] {
+            +make(): MaxExtensionSortTileRecursiveBulkSplit
+        }
+
+        interface BulkSplit [[BulkSplit.html]] {
+            {abstract} +partition(List<T extends SpatialComparable>, int, int): List<List<T extends SpatialComparable>>
+        }
+
+        class AdaptiveSortTileRecursiveBulkSplit [[AdaptiveSortTileRecursiveBulkSplit.html]] {
+            +partition(List<T extends SpatialComparable>, int, int): List<List<T extends SpatialComparable>>
+            #strPartition(List<T extends SpatialComparable>, int, int, int, int, int, SpatialSingleMeanComparator, List<List<T extends SpatialComparable>>): void
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.bulk.AdaptiveSortTileRecursiveBulkSplit.Par [[AdaptiveSortTileRecursiveBulkSplit.Par.html]] {
+            +make(): AdaptiveSortTileRecursiveBulkSplit
+        }
+
+        class SpatialSortBulkSplit [[SpatialSortBulkSplit.html]] {
+            ~sorter: SpatialSorter
+            #SpatialSortBulkSplit(SpatialSorter)
+            +partition(List<T extends SpatialComparable>, int, int): List<List<T extends SpatialComparable>>
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.bulk.SpatialSortBulkSplit.Par [[SpatialSortBulkSplit.Par.html]] {
+            {static} +SORTER_ID: OptionID
+            ~sorter: SpatialSorter
+            +configure(Parameterization): void
+            +make(): SpatialSortBulkSplit
+        }
+
+        class OneDimSortBulkSplit [[OneDimSortBulkSplit.html]] {
+            +partition(List<T extends SpatialComparable>, int, int): List<List<T extends SpatialComparable>>
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.bulk.OneDimSortBulkSplit.Par [[OneDimSortBulkSplit.Par.html]] {
+            +make(): OneDimSortBulkSplit
+        }
+
+        class MaxExtensionBulkSplit [[MaxExtensionBulkSplit.html]] {
+            {static} -LOG: Logging
+            +partition(List<N extends SpatialComparable>, int, int): List<List<N extends SpatialComparable>>
+            -chooseMaximalExtendedSplitAxis(List<? extends SpatialComparable>): int
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.bulk.MaxExtensionBulkSplit.Par [[MaxExtensionBulkSplit.Par.html]] {
+            +make(): MaxExtensionBulkSplit
+        }
+
+        abstract class AbstractBulkSplit [[AbstractBulkSplit.html]] {
+            #chooseBulkSplitPoint(int, int, int): int
+            #trivialPartition(List<T>, int, int): List<List<T>>
+        }
+
+        class FileOrderBulkSplit [[FileOrderBulkSplit.html]] {
+            +partition(List<T extends SpatialComparable>, int, int): List<List<T extends SpatialComparable>>
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.bulk.FileOrderBulkSplit.Par [[FileOrderBulkSplit.Par.html]] {
+            +make(): FileOrderBulkSplit
+        }
+
+        class SortTileRecursiveBulkSplit [[SortTileRecursiveBulkSplit.html]] {
+            +partition(List<T extends SpatialComparable>, int, int): List<List<T extends SpatialComparable>>
+            #strPartition(List<T extends SpatialComparable>, int, int, int, int, int, SpatialSingleMeanComparator, List<List<T extends SpatialComparable>>): void
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.bulk.SortTileRecursiveBulkSplit.Par [[SortTileRecursiveBulkSplit.Par.html]] {
+            +make(): SortTileRecursiveBulkSplit
+        }
+
+        AbstractBulkSplit <|-- MaxExtensionSortTileRecursiveBulkSplit
+        MaxExtensionSortTileRecursiveBulkSplit --> MaxExtensionSortTileRecursiveBulkSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.bulk.MaxExtensionSortTileRecursiveBulkSplit.Par
+        MaxExtensionSortTileRecursiveBulkSplit +-- elki.index.tree.spatial.rstarvariants.strategies.bulk.MaxExtensionSortTileRecursiveBulkSplit.Par
+        AbstractBulkSplit <|-- AdaptiveSortTileRecursiveBulkSplit
+        AdaptiveSortTileRecursiveBulkSplit --> AdaptiveSortTileRecursiveBulkSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.bulk.AdaptiveSortTileRecursiveBulkSplit.Par
+        AdaptiveSortTileRecursiveBulkSplit +-- elki.index.tree.spatial.rstarvariants.strategies.bulk.AdaptiveSortTileRecursiveBulkSplit.Par
+        AbstractBulkSplit <|-- SpatialSortBulkSplit
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.bulk.SpatialSortBulkSplit.Par
+        SpatialSortBulkSplit +-- elki.index.tree.spatial.rstarvariants.strategies.bulk.SpatialSortBulkSplit.Par
+        AbstractBulkSplit <|-- OneDimSortBulkSplit
+        OneDimSortBulkSplit --> OneDimSortBulkSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.bulk.OneDimSortBulkSplit.Par
+        OneDimSortBulkSplit +-- elki.index.tree.spatial.rstarvariants.strategies.bulk.OneDimSortBulkSplit.Par
+        AbstractBulkSplit <|-- MaxExtensionBulkSplit
+        MaxExtensionBulkSplit --> MaxExtensionBulkSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.bulk.MaxExtensionBulkSplit.Par
+        MaxExtensionBulkSplit +-- elki.index.tree.spatial.rstarvariants.strategies.bulk.MaxExtensionBulkSplit.Par
+        BulkSplit <|.. AbstractBulkSplit
+        AbstractBulkSplit <|-- FileOrderBulkSplit
+        FileOrderBulkSplit --> FileOrderBulkSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.bulk.FileOrderBulkSplit.Par
+        FileOrderBulkSplit +-- elki.index.tree.spatial.rstarvariants.strategies.bulk.FileOrderBulkSplit.Par
+        AbstractBulkSplit <|-- SortTileRecursiveBulkSplit
+        SortTileRecursiveBulkSplit --> SortTileRecursiveBulkSplit: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.bulk.SortTileRecursiveBulkSplit.Par
+        SortTileRecursiveBulkSplit +-- elki.index.tree.spatial.rstarvariants.strategies.bulk.SortTileRecursiveBulkSplit.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,45 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TwoPassMultivariateGaussianModel\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.TwoPassMultivariateGaussianModel [[TwoPassMultivariateGaussianModel.html]] {
+        ~mean: double[]
+        ~covariance: double[]
+        ~chol: CholeskyDecomposition
+        ~tmp: double[]
+        ~logNorm: double
+        ~logNormDet: double
+        ~weight: double
+        ~wsum: double
+        ~priormatrix: double[]
+        +TwoPassMultivariateGaussianModel(double, double[])
+        +TwoPassMultivariateGaussianModel(double, double[], double[])
+        +beginEStep(): void
+        +needsTwoPass(): boolean
+        +firstPassE(NumberVector, double): void
+        +finalizeFirstPassE(): void
+        +updateE(NumberVector, double): void
+        +finalizeEStep(double, double): void
+        +mahalanobisDistance(NumberVector): double
+        +estimateLogDensity(NumberVector): double
+        +getWeight(): double
+        +setWeight(double): void
+        +finalizeCluster(): EMModel
+    }
+
+    interface "<size:14>EMClusterModel\n<size:10>elki.clustering.em.models" as elki.clustering.em.models.EMClusterModel<NumberVector, EMModel> [[EMClusterModel.html]] {
+        {abstract} +beginEStep(): void
+        {abstract} +updateE(NumberVector, double): void
+        {abstract} +finalizeEStep(double, double): void
+        {abstract} +estimateLogDensity(NumberVector): double
+        {abstract} +finalizeCluster(): EMModel
+        {abstract} +getWeight(): double
+        {abstract} +setWeight(double): void
+    }
+
+    elki.clustering.em.models.EMClusterModel <|.. elki.clustering.em.models.TwoPassMultivariateGaussianModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DynamicParameters\n<size:10>elki.gui.util" as elki.gui.util.DynamicParameters [[DynamicParameters.html]] {
+        {static} +BIT_INCOMPLETE: int
+        {static} +BIT_INVALID: int
+        {static} +BIT_SYNTAX_ERROR: int
+        {static} +BIT_OPTIONAL: int
+        {static} +BIT_DEFAULT_VALUE: int
+        {static} +STRING_USE_DEFAULT: String
+        {static} +STRING_OPTIONAL: String
+        #parameters: ArrayList<Node>
+        {static} #REMAINING_OPTIONS_ID: OptionID
+        +size(): int
+        +updateFromTrackParameters(TrackParameters): void
+        +addParameter(Parameter<?>, String, int, int): void
+        +serializeParameters(ArrayList<String>): void
+        +getNode(int): Node
+    }
+    class "<size:14>DynamicParameters.Node\n<size:10>elki.gui.util" as elki.gui.util.DynamicParameters.Node [[DynamicParameters.Node.html]]
+    class "<size:14>DynamicParameters.RemainingOptions\n<size:10>elki.gui.util" as elki.gui.util.DynamicParameters.RemainingOptions [[DynamicParameters.RemainingOptions.html]]
+
+    elki.gui.util.DynamicParameters +-- elki.gui.util.DynamicParameters.Node
+    elki.gui.util.DynamicParameters +-- elki.gui.util.DynamicParameters.RemainingOptions
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

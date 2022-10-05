@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>MkMaxTree\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkmax" as elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTree<O> [[MkMaxTree.html]] {
+        {static} -LOG: Logging
+        +MkMaxTree(Relation<O>, PageFile<MkMaxTreeNode<O>>, MkTreeSettings<O, MkMaxTreeNode<O>, MkMaxEntry>)
+        +reverseKNNQuery(DBIDRef, int): DoubleDBIDList
+        #preInsert(MkMaxEntry): void
+        #kNNdistanceAdjustment(MkMaxEntry, Map<DBID, KNNList>): void
+        -doReverseKNNQuery(DBIDRef, MkMaxTreeNode<O>, MkMaxEntry, ModifiableDoubleDBIDList): void
+        -preInsert(MkMaxEntry, MkMaxEntry, KNNHeap): void
+        #initializeCapacities(MkMaxEntry): void
+        #createNewLeafNode(): MkMaxTreeNode<O>
+        #createNewDirectoryNode(): MkMaxTreeNode<O>
+        #createNewDirectoryEntry(MkMaxTreeNode<O>, DBID, double): MkMaxEntry
+        #createRootEntry(): MkMaxEntry
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractMkTreeUnified\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnified<O, MkMaxTreeNode<O>, MkMaxEntry, MkTreeSettings<O, MkMaxTreeNode<O>, MkMaxEntry>> [[../AbstractMkTreeUnified.html]] {
+        {abstract} #kNNdistanceAdjustment(MkMaxEntry, Map<DBID, KNNList>): void
+    }
+
+    elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnified <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SelectionToolLineVisualization\n<size:10>elki.visualization.visualizers.parallel.selection" as elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization [[SelectionToolLineVisualization.html]] {
+        {static} -NAME: String
+        +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        +processNewResult(VisualizerContext, Object): void
+    }
+
+    interface "<size:14>VisFactory\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.VisFactory [[../../VisFactory.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+        {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+    }
+    enum "<size:14>SelectionToolLineVisualization.Mode\n<size:10>elki.visualization.visualizers.parallel.selection" as elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization.Mode [[SelectionToolLineVisualization.Mode.html]]
+    class "<size:14>SelectionToolLineVisualization.Instance\n<size:10>elki.visualization.visualizers.parallel.selection" as elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization.Instance [[SelectionToolLineVisualization.Instance.html]]
+
+    elki.visualization.visualizers.VisFactory <|.. elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization
+    elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization +-- elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization.Mode
+    elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization +-- elki.visualization.visualizers.parallel.selection.SelectionToolLineVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

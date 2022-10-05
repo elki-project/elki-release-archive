@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VisualizationPlot\n<size:10>elki.visualization.gui" as elki.visualization.gui.VisualizationPlot [[VisualizationPlot.html]] {
+        #pendingRedraw: Runnable
+        #updateQueue: ConcurrentLinkedDeque<Visualization>
+        #synchronizedRedraw(): void
+        #redraw(): void
+        +requestRedraw(VisualizationTask, Visualization): void
+    }
+
+    class "<size:14>SVGPlot\n<size:10>elki.visualization.svg" as elki.visualization.svg.SVGPlot [[../svg/SVGPlot.html]]
+
+    elki.visualization.svg.SVGPlot <|-- elki.visualization.gui.VisualizationPlot
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

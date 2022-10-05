@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IsolationForest\n<size:10>elki.outlier.density" as elki.outlier.density.IsolationForest [[IsolationForest.html]] {
+        {static} -LOG: Logging
+        #numTrees: int
+        #subsampleSize: int
+        -rnd: RandomFactory
+        +IsolationForest(int, int, RandomFactory)
+        +run(Relation<? extends NumberVector>): OutlierResult
+        {static} #c(double): double
+        #isolationScore(Node, NumberVector): double
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>IsolationForest.ForestBuilder\n<size:10>elki.outlier.density" as elki.outlier.density.IsolationForest.ForestBuilder [[IsolationForest.ForestBuilder.html]]
+    class "<size:14>IsolationForest.Node\n<size:10>elki.outlier.density" as elki.outlier.density.IsolationForest.Node [[IsolationForest.Node.html]]
+    class "<size:14>IsolationForest.Par\n<size:10>elki.outlier.density" as elki.outlier.density.IsolationForest.Par [[IsolationForest.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.density.IsolationForest
+    elki.outlier.density.IsolationForest +-- elki.outlier.density.IsolationForest.ForestBuilder
+    elki.outlier.density.IsolationForest +-- elki.outlier.density.IsolationForest.Node
+    elki.outlier.density.IsolationForest +-- elki.outlier.density.IsolationForest.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

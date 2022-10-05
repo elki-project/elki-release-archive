@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LCSSDistance.Par\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.LCSSDistance.Par [[LCSSDistance.Par.html]] {
+        {static} +PDELTA_ID: OptionID
+        {static} +PEPSILON_ID: OptionID
+        -pDelta: double
+        -pEpsilon: double
+        +configure(Parameterization): void
+        +make(): LCSSDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LCSSDistance\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.LCSSDistance [[LCSSDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.timeseries.LCSSDistance.Par
+    elki.distance.timeseries.LCSSDistance +-- elki.distance.timeseries.LCSSDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

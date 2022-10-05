@@ -1,0 +1,69 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DBIDUtil\n<size:10>elki.database.ids" as elki.database.ids.DBIDUtil [[DBIDUtil.html]] {
+        {static} +EMPTYDBIDS: EmptyDBIDs
+        {static} +invalid(): DBIDRef
+        {static} +importInteger(int): DBID
+        {static} +asInteger(DBIDRef): int
+        {static} +compare(DBIDRef, DBIDRef): int
+        {static} +equal(DBIDRef, DBIDRef): boolean
+        {static} +deref(DBIDRef): DBID
+        {static} +toString(DBIDRef): String
+        {static} +toString(DBIDs): String
+        {static} +getDBIDSerializer(): ByteBufferSerializer<DBID>
+        {static} +getDBIDSerializerStatic(): ByteBufferSerializer<DBID>
+        {static} +generateSingleDBID(): DBID
+        {static} +deallocateSingleDBID(DBID): void
+        {static} +generateStaticDBIDRange(int): DBIDRange
+        {static} +deallocateDBIDRange(DBIDRange): void
+        {static} +newVar(DBIDRef): DBIDVar
+        {static} +newVar(): DBIDVar
+        {static} +newArray(): ArrayModifiableDBIDs
+        {static} +newHashSet(): HashSetModifiableDBIDs
+        {static} +newArray(int): ArrayModifiableDBIDs
+        {static} +newHashSet(int): HashSetModifiableDBIDs
+        {static} +newArray(DBIDs): ArrayModifiableDBIDs
+        {static} +newHashSet(DBIDs): HashSetModifiableDBIDs
+        {static} +intersection(DBIDs, DBIDs): ModifiableDBIDs
+        {static} -internalIntersection(DBIDs, DBIDs): ModifiableDBIDs
+        {static} +intersectionSize(DBIDs, DBIDs): int
+        {static} -internalIntersectionSize(DBIDs, DBIDs): int
+        {static} +symmetricIntersection(DBIDs, DBIDs, HashSetModifiableDBIDs, HashSetModifiableDBIDs, HashSetModifiableDBIDs): void
+        {static} +union(DBIDs, DBIDs): ModifiableDBIDs
+        {static} +difference(DBIDs, DBIDs): ModifiableDBIDs
+        {static} +makeUnmodifiable(DBIDs): StaticDBIDs
+        {static} +ensureArray(DBIDs): ArrayDBIDs
+        {static} +ensureSet(DBIDs): SetDBIDs
+        {static} +ensureModifiable(DBIDs): ModifiableDBIDs
+        {static} +newPair(DBIDRef, DBIDRef): DBIDPair
+        {static} +newPair(double, DBIDRef): DoubleDBIDPair
+        {static} +newMinHeap(int): DoubleDBIDHeap
+        {static} +newMaxHeap(int): DoubleDBIDHeap
+        {static} +newHeap(int): KNNHeap
+        {static} +newHeap(KNNList): KNNHeap
+        {static} +randomShuffle(ArrayModifiableDBIDs, RandomFactory): void
+        {static} +randomShuffle(ArrayModifiableDBIDs, Random): void
+        {static} +randomShuffle(ArrayModifiableDBIDs, Random, int): void
+        {static} +randomSample(DBIDs, int, int): ModifiableDBIDs
+        {static} +randomSample(DBIDs, int, Long): ModifiableDBIDs
+        {static} +randomSample(DBIDs, int, RandomFactory): ModifiableDBIDs
+        {static} +randomSampleExcept(DBIDs, DBIDRef, int, RandomFactory): ModifiableDBIDs
+        {static} +randomSample(DBIDs, int, Random): ModifiableDBIDs
+        {static} +randomSampleExcept(DBIDs, DBIDRef, int, Random): ModifiableDBIDs
+        {static} +randomSample(DBIDs, double, RandomFactory): DBIDs
+        {static} +randomSample(DBIDs, double, Random): DBIDs
+        {static} +randomSample(DBIDs, Random): DBIDVar
+        {static} +randomSample(DBIDs, RandomFactory): DBIDVar
+        {static} +randomSplit(DBIDs, int, RandomFactory): ArrayDBIDs[]
+        {static} +randomSplit(DBIDs, int, Random): ArrayDBIDs[]
+        {static} +newDistanceDBIDList(int): ModifiableDoubleDBIDList
+        {static} +newDistanceDBIDList(): ModifiableDoubleDBIDList
+        {static} +assertRange(DBIDs): DBIDRange
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FDBSCANNeighborPredicate.Instance\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.FDBSCANNeighborPredicate.Instance [[FDBSCANNeighborPredicate.Instance.html]] {
+        -epsilon: double
+        -epsilonsq: double
+        -sampleSize: int
+        -threshold: double
+        -relation: Relation<? extends UncertainObject>
+        -rand: Random
+        +Instance(double, int, double, Relation<? extends UncertainObject>, RandomFactory)
+        +getNeighbors(DBIDRef): DBIDs
+        -checkSamples(UncertainObject, UncertainObject): boolean
+        +getIDs(): DBIDs
+        +iterDBIDs(DBIDs): DBIDIter
+    }
+
+    interface "<size:14>NeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.NeighborPredicate.Instance<DBIDs> [[../dbscan/predicates/NeighborPredicate.Instance.html]] {
+        {abstract} +getNeighbors(DBIDRef): DBIDs
+        {abstract} +getIDs(): DBIDs
+        {abstract} +iterDBIDs(DBIDs): DBIDIter
+    }
+    class "<size:14>FDBSCANNeighborPredicate\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.FDBSCANNeighborPredicate [[FDBSCANNeighborPredicate.html]]
+
+    elki.clustering.dbscan.predicates.NeighborPredicate.Instance <|.. elki.clustering.uncertain.FDBSCANNeighborPredicate.Instance
+    elki.clustering.uncertain.FDBSCANNeighborPredicate +-- elki.clustering.uncertain.FDBSCANNeighborPredicate.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

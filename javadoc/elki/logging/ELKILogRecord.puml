@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ELKILogRecord\n<size:10>elki.logging" as elki.logging.ELKILogRecord [[ELKILogRecord.html]] {
+        {static} -serialVersionUID: long
+        -needToInferCaller: boolean
+        {static} +IGNORE_CLASSES: String[]
+        {static} -START_TRACE_AT: String
+        +ELKILogRecord(Level, CharSequence)
+        +getSourceClassName(): String
+        +setSourceClassName(String): void
+        +getSourceMethodName(): String
+        +setSourceMethodName(String): void
+        -inferCallerELKI(): void
+    }
+
+    class "<size:14>LogRecord\n<size:10>java.util.logging" as java.util.logging.LogRecord
+
+    java.util.logging.LogRecord <|-- elki.logging.ELKILogRecord
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProxyDatabase\n<size:10>elki.database" as elki.database.ProxyDatabase [[ProxyDatabase.html]] {
+        {static} -LOG: Logging
+        #idrep: DBIDView
+        +ProxyDatabase(DBIDs)
+        +ProxyDatabase(DBIDs, Iterable<Relation<?>>)
+        +ProxyDatabase(DBIDs, Relation<?>...)
+        +ProxyDatabase(DBIDs, Database)
+        +initialize(): void
+        +addRelation(Relation<?>): void
+        #getLogger(): Logging
+        +setDBIDs(DBIDs): void
+    }
+
+    abstract class "<size:14>AbstractDatabase\n<size:10>elki.database" as elki.database.AbstractDatabase [[AbstractDatabase.html]] {
+        {abstract} #getLogger(): Logging
+    }
+
+    elki.database.AbstractDatabase <|-- elki.database.ProxyDatabase
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

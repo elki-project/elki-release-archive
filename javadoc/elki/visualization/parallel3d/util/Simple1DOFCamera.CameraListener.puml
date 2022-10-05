@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Simple1DOFCamera.CameraListener\n<size:10>elki.visualization.parallel3d.util" as elki.visualization.parallel3d.util.Simple1DOFCamera.CameraListener [[Simple1DOFCamera.CameraListener.html]] {
+        {abstract} +cameraChanged(): void
+    }
+
+    class "<size:14>Simple1DOFCamera\n<size:10>elki.visualization.parallel3d.util" as elki.visualization.parallel3d.util.Simple1DOFCamera [[Simple1DOFCamera.html]]
+
+    elki.visualization.parallel3d.util.Simple1DOFCamera +-- elki.visualization.parallel3d.util.Simple1DOFCamera.CameraListener
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

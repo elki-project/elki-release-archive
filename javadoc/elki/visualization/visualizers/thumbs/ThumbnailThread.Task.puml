@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ThumbnailThread.Task\n<size:10>elki.visualization.visualizers.thumbs" as elki.visualization.visualizers.thumbs.ThumbnailThread.Task [[ThumbnailThread.Task.html]] {
+        ~callback: Listener
+        +Task(Listener)
+    }
+
+    class "<size:14>ThumbnailThread\n<size:10>elki.visualization.visualizers.thumbs" as elki.visualization.visualizers.thumbs.ThumbnailThread [[ThumbnailThread.html]]
+
+    elki.visualization.visualizers.thumbs.ThumbnailThread +-- elki.visualization.visualizers.thumbs.ThumbnailThread.Task
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

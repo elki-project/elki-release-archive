@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterAlphaHullVisualization.Par\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.ClusterAlphaHullVisualization.Par [[ClusterAlphaHullVisualization.Par.html]] {
+        {static} +ALPHA_ID: OptionID
+        ~alpha: double
+        +configure(Parameterization): void
+        +make(): ClusterAlphaHullVisualization
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ClusterAlphaHullVisualization\n<size:10>elki.visualization.visualizers.scatterplot.cluster" as elki.visualization.visualizers.scatterplot.cluster.ClusterAlphaHullVisualization [[ClusterAlphaHullVisualization.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.scatterplot.cluster.ClusterAlphaHullVisualization.Par
+    elki.visualization.visualizers.scatterplot.cluster.ClusterAlphaHullVisualization +-- elki.visualization.visualizers.scatterplot.cluster.ClusterAlphaHullVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

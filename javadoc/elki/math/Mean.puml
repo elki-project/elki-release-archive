@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Mean\n<size:10>elki.math" as elki.math.Mean [[Mean.html]] {
+        #sum: double
+        #n: double
+        +Mean()
+        +Mean(Mean)
+        +put(double): void
+        +put(double, double): void
+        +put(Mean): void
+        +put(double[]): Mean
+        +put(double[], double[]): Mean
+        +getCount(): double
+        +getMean(): double
+        {static} +newArray(int): Mean[]
+        +reset(): Mean
+        {static} +of(double...): double
+        {static} +highPrecision(double...): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

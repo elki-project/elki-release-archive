@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSOF\n<size:10>elki.outlier" as elki.outlier.OPTICSOF<O> [[OPTICSOF.html]] {
+        #distance: Distance<? super O>
+        #minpts: int
+        +OPTICSOF(Distance<? super O>, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[OutlierAlgorithm.html]]
+    class "<size:14>OPTICSOF.Par\n<size:10>elki.outlier" as elki.outlier.OPTICSOF.Par<O> [[OPTICSOF.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.OPTICSOF
+    elki.outlier.OPTICSOF +-- elki.outlier.OPTICSOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

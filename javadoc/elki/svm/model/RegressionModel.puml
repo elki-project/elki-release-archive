@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RegressionModel\n<size:10>elki.svm.model" as elki.svm.model.RegressionModel [[RegressionModel.html]] {
+        +predict(DataSet, int, double[]): double
+        +predict(DataSet, int): double
+    }
+
+    class "<size:14>Model\n<size:10>elki.svm.model" as elki.svm.model.Model [[Model.html]]
+
+    elki.svm.model.Model <|-- elki.svm.model.RegressionModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

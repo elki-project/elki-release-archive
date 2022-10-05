@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ChiDistribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.ChiDistribution [[ChiDistribution.html]] {
+        -dof: double
+        -chisq: ChiSquaredDistribution
+        +ChiDistribution(double)
+        +nextRandom(Random): double
+        +pdf(double): double
+        {static} +pdf(double, double): double
+        +logpdf(double): double
+        {static} +logpdf(double, double): double
+        +cdf(double): double
+        {static} +cdf(double, double): double
+        +quantile(double): double
+    }
+
+    interface "<size:14>Distribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution [[Distribution.html]] {
+        {abstract} +pdf(double): double
+        {abstract} +logpdf(double): double
+        {abstract} +cdf(double): double
+        {abstract} +quantile(double): double
+    }
+    class "<size:14>ChiDistribution.Par\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.ChiDistribution.Par [[ChiDistribution.Par.html]]
+
+    elki.math.statistics.distribution.Distribution <|.. elki.math.statistics.distribution.ChiDistribution
+    elki.math.statistics.distribution.ChiDistribution +-- elki.math.statistics.distribution.ChiDistribution.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

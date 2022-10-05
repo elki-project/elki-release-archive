@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PROCLUS.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PROCLUS.Par [[PROCLUS.Par.html]] {
+        {static} +M_I_ID: OptionID
+        {static} +SEED_ID: OptionID
+        #m_i: int
+        #rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): PROCLUS
+    }
+
+    abstract class "<size:14>AbstractProjectedClustering.Par\n<size:10>elki.clustering" as elki.clustering.AbstractProjectedClustering.Par [[../AbstractProjectedClustering.Par.html]]
+    class "<size:14>PROCLUS\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PROCLUS [[PROCLUS.html]]
+
+    elki.clustering.AbstractProjectedClustering.Par <|-- elki.clustering.subspace.PROCLUS.Par
+    elki.clustering.subspace.PROCLUS +-- elki.clustering.subspace.PROCLUS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

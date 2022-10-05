@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MedianLinkage\n<size:10>elki.clustering.hierarchical.linkage" as elki.clustering.hierarchical.linkage.MedianLinkage [[MedianLinkage.html]] {
+        {static} +STATIC: MedianLinkage
+        +combine(int, double, int, double, int, double): double
+        +merge(double[], int, double[], int): double[]
+        +distance(double[], int, double[], int): double
+    }
+
+    interface "<size:14>GeometricLinkage\n<size:10>elki.clustering.hierarchical.linkage" as elki.clustering.hierarchical.linkage.GeometricLinkage [[GeometricLinkage.html]] {
+        {abstract} +merge(double[], int, double[], int): double[]
+        {abstract} +distance(double[], int, double[], int): double
+    }
+    class "<size:14>MedianLinkage.Par\n<size:10>elki.clustering.hierarchical.linkage" as elki.clustering.hierarchical.linkage.MedianLinkage.Par [[MedianLinkage.Par.html]]
+
+    elki.clustering.hierarchical.linkage.GeometricLinkage <|.. elki.clustering.hierarchical.linkage.MedianLinkage
+    elki.clustering.hierarchical.linkage.MedianLinkage +-- elki.clustering.hierarchical.linkage.MedianLinkage.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

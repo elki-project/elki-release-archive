@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>COPVectorVisualization\n<size:10>elki.visualization.visualizers.scatterplot.outlier" as elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization [[COPVectorVisualization.html]] {
+        {static} +NAME: String
+        +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        +processNewResult(VisualizerContext, Object): void
+    }
+
+    interface "<size:14>VisFactory\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.VisFactory [[../../VisFactory.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+        {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+    }
+    class "<size:14>COPVectorVisualization.Instance\n<size:10>elki.visualization.visualizers.scatterplot.outlier" as elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization.Instance [[COPVectorVisualization.Instance.html]]
+
+    elki.visualization.visualizers.VisFactory <|.. elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization
+    elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization +-- elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

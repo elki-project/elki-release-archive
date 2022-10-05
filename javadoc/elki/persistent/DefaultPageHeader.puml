@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DefaultPageHeader\n<size:10>elki.persistent" as elki.persistent.DefaultPageHeader [[DefaultPageHeader.html]] {
+        {static} -SIZE: int
+        {static} -FILE_VERSION: int
+        -pageSize: int
+        +DefaultPageHeader()
+        +DefaultPageHeader(int)
+        +size(): int
+        +readHeader(ByteBuffer): void
+        +writeHeader(ByteBuffer): void
+        +getPageSize(): int
+        +getReservedPages(): int
+    }
+
+    interface "<size:14>PageHeader\n<size:10>elki.persistent" as elki.persistent.PageHeader [[PageHeader.html]] {
+        {abstract} +size(): int
+        {abstract} +readHeader(ByteBuffer): void
+        {abstract} +writeHeader(ByteBuffer): void
+        {abstract} +getPageSize(): int
+        {abstract} +getReservedPages(): int
+    }
+
+    elki.persistent.PageHeader <|.. elki.persistent.DefaultPageHeader
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

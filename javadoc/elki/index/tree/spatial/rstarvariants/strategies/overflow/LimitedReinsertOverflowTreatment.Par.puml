@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LimitedReinsertOverflowTreatment.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.overflow" as elki.index.tree.spatial.rstarvariants.strategies.overflow.LimitedReinsertOverflowTreatment.Par [[LimitedReinsertOverflowTreatment.Par.html]] {
+        {static} +REINSERT_STRATEGY_ID: OptionID
+        ~reinsertStrategy: ReinsertStrategy
+        +configure(Parameterization): void
+        +make(): LimitedReinsertOverflowTreatment
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LimitedReinsertOverflowTreatment\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.overflow" as elki.index.tree.spatial.rstarvariants.strategies.overflow.LimitedReinsertOverflowTreatment [[LimitedReinsertOverflowTreatment.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.overflow.LimitedReinsertOverflowTreatment.Par
+    elki.index.tree.spatial.rstarvariants.strategies.overflow.LimitedReinsertOverflowTreatment +-- elki.index.tree.spatial.rstarvariants.strategies.overflow.LimitedReinsertOverflowTreatment.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

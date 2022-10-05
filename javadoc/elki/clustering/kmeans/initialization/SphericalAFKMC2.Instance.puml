@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SphericalAFKMC2.Instance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SphericalAFKMC2.Instance [[SphericalAFKMC2.Instance.html]] {
+        #alpha: double
+        +Instance(Relation<? extends NumberVector>, int, double, RandomFactory)
+        #initialWeights(NumberVector): double
+        #similarity(NumberVector, DBIDRef): double
+        #distance(DBIDRef, List<NumberVector>): double
+    }
+
+    class "<size:14>AFKMC2.Instance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AFKMC2.Instance [[AFKMC2.Instance.html]]
+    class "<size:14>SphericalAFKMC2\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SphericalAFKMC2 [[SphericalAFKMC2.html]]
+
+    elki.clustering.kmeans.initialization.AFKMC2.Instance <|-- elki.clustering.kmeans.initialization.SphericalAFKMC2.Instance
+    elki.clustering.kmeans.initialization.SphericalAFKMC2 +-- elki.clustering.kmeans.initialization.SphericalAFKMC2.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="72px" preserveAspectRatio="none" style="width:194px;height:72px;background:#FFFFFF;" version="1.1" viewBox="0 0 194 72" width="194px" zoomAndPan="magnify"><defs/><g><!--MD5=[33f95f955ff89b41a08db3eaeda00099]
+class elki.outlier.spatial.CTLuZTestOutlier--><a href="CTLuZTestOutlier.html" target="_top" title="CTLuZTestOutlier.html" xlink:actuate="onRequest" xlink:href="CTLuZTestOutlier.html" xlink:show="new" xlink:title="CTLuZTestOutlier.html" xlink:type="simple"><g id="elem_elki.outlier.spatial.CTLuZTestOutlier"><rect codeLine="11" fill="#F1F1F1" height="37.9375" id="elki.outlier.spatial.CTLuZTestOutlier" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="166" x="15" y="10"/><ellipse cx="30" cy="28.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M32.9688,34.6094 Q32.3906,34.9063 31.75,35.0469 Q31.1094,35.2031 30.4063,35.2031 Q27.9063,35.2031 26.5781,33.5625 Q25.2656,31.9063 25.2656,28.7813 Q25.2656,25.6563 26.5781,24 Q27.9063,22.3438 30.4063,22.3438 Q31.1094,22.3438 31.75,22.5 Q32.4063,22.6563 32.9688,22.9531 L32.9688,25.6719 Q32.3438,25.0938 31.75,24.8281 Q31.1563,24.5469 30.5313,24.5469 Q29.1875,24.5469 28.5,25.625 Q27.8125,26.6875 27.8125,28.7813 Q27.8125,30.875 28.5,31.9531 Q29.1875,33.0156 30.5313,33.0156 Q31.1563,33.0156 31.75,32.75 Q32.3438,32.4688 32.9688,31.8906 L32.9688,34.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="121" x="44" y="27.9951">CTLuZTestOutlier</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="82" x="63.5" y="40.5791">elki.outlier.spatial</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="11" x="173" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="9" x="174" y="19.1387">N</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="0" y="52.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="0" y="62.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[e3290ba5a8e7d85ea9ffe09dbb74f679]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CTLuZTestOutlier.Par\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.CTLuZTestOutlier.Par<N> {
+        +make(): CTLuZTestOutlier<N>
+    }
+
+    abstract class "<size:14>AbstractNeighborhoodOutlier.Par\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.AbstractNeighborhoodOutlier.Par<N>
+    class "<size:14>CTLuZTestOutlier\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.CTLuZTestOutlier<N> [[CTLuZTestOutlier.html]]
+
+    elki.outlier.spatial.AbstractNeighborhoodOutlier.Par <|- - elki.outlier.spatial.CTLuZTestOutlier.Par
+    elki.outlier.spatial.CTLuZTestOutlier +- - elki.outlier.spatial.CTLuZTestOutlier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

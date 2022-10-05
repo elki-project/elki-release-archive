@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ComputeOutlierHistogram\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.ComputeOutlierHistogram [[ComputeOutlierHistogram.html]] {
+        -positiveClassName: Pattern
+        -bins: int
+        -scaling: ScalingFunction
+        -splitfreq: boolean
+        +ComputeOutlierHistogram(Pattern, int, ScalingFunction, boolean)
+        +evaluateOutlierResult(Database, OutlierResult): HistogramResult
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../Evaluator.html]]
+    class "<size:14>ComputeOutlierHistogram.Par\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.ComputeOutlierHistogram.Par [[ComputeOutlierHistogram.Par.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.outlier.ComputeOutlierHistogram
+    elki.evaluation.outlier.ComputeOutlierHistogram +-- elki.evaluation.outlier.ComputeOutlierHistogram.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

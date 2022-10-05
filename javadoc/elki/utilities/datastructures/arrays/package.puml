@@ -1,0 +1,49 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.datastructures.arrays {
+
+        class DoubleIntegerArrayQuickSort [[DoubleIntegerArrayQuickSort.html]] {
+            {static} -INSERTION_THRESHOLD: int
+            {static} +sort(double[], int[], int): void
+            {static} +sort(double[], int[], int, int): void
+            {static} -quickSort(double[], int[], int, int): void
+            {static} -sort5(double[], int[], int, int, int, int, int): void
+            {static} -insertionSort(double[], int[], int, int): void
+            {static} +sortReverse(double[], int[], int): void
+            {static} +sortReverse(double[], int[], int, int): void
+            {static} -quickSortReverse(double[], int[], int, int): void
+            {static} -sortReverse5(double[], int[], int, int, int, int, int): void
+            {static} -insertionSortReverse(double[], int[], int, int): void
+            {static} -swap(double[], int[], int, int): void
+        }
+
+        class IntegerArrayQuickSort [[IntegerArrayQuickSort.html]] {
+            {static} -INSERTION_THRESHOLD: int
+            {static} +sort(int[], IntComparator): void
+            {static} +sort(int[], int, int, IntComparator): void
+            {static} -quickSort(int[], int, int, IntComparator): void
+            {static} -insertionSort(int[], int, int, IntComparator): void
+            {static} -sort5(int[], int, int, int, int, int, IntComparator): void
+        }
+
+        class ArrayUtil [[ArrayUtil.html]] {
+            {static} +swap(ArrayList<T>, int, int): void
+            {static} +swap(T[], int, int): void
+            {static} +swap(int[], int, int): void
+            {static} +swap(short[], int, int): void
+            {static} +swap(byte[], int, int): void
+            {static} +swap(double[], int, int): void
+            {static} +swap(float[], int, int): void
+            {static} +randomShuffle(int[], Random, int): void
+            {static} +randomShuffle(short[], Random, int): void
+            {static} +randomShuffle(byte[], Random, int): void
+            {static} +randomShuffle(double[], Random, int): void
+            {static} +randomShuffle(float[], Random, int): void
+            {static} +randomShuffle(T[], Random, int): void
+            {static} +randomShuffle(ArrayList<T>, Random, int): void
+        }
+
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

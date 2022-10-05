@@ -1,0 +1,471 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.gui.util {
+
+        class LogPanel [[LogPanel.html]] {
+            {static} -serialVersionUID: long
+            #pbarmap: HashMap<Progress, JProgressBar>
+            +becomeDefaultLogger(): void
+            #publish(LogRecord): void
+            -publishTextRecord(LogRecord): void
+            -getOrCreateProgressBar(Progress): JProgressBar
+            -updateProgressBar(Progress, JProgressBar): void
+            -removeProgressBar(Progress, JProgressBar): void
+            +clear(): void
+            #addProgressBar(JProgressBar): void
+            #removeProgressBar(JProgressBar): void
+        }
+
+        class elki.gui.util.LogPanel.LogPanelHandler [[LogPanel.LogPanelHandler.html]] {
+            +close(): void
+            +flush(): void
+            +publish(LogRecord): void
+        }
+
+        class ParameterTable [[ParameterTable.html]] {
+            {static} -serialVersionUID: long
+            {static} ~COLOR_INCOMPLETE: Color
+            {static} ~COLOR_SYNTAX_ERROR: Color
+            {static} ~COLOR_OPTIONAL: Color
+            {static} ~COLOR_DEFAULT_VALUE: Color
+            #frame: Frame
+            +ParameterTable(Frame, ParametersModel, DynamicParameters)
+        }
+
+        class elki.gui.util.ParameterTable.Handler [[ParameterTable.Handler.html]] {
+            +keyTyped(KeyEvent): void
+            +keyPressed(KeyEvent): void
+            +keyReleased(KeyEvent): void
+        }
+
+        class elki.gui.util.ParameterTable.ColorfulRenderer [[ParameterTable.ColorfulRenderer.html]] {
+            {static} -serialVersionUID: long
+            +setValue(Object): void
+            +getTableCellRendererComponent(JTable, Object, boolean, boolean, int, int): Component
+        }
+
+        class elki.gui.util.ParameterTable.DropdownEditor [[ParameterTable.DropdownEditor.html]] {
+            {static} -serialVersionUID: long
+            ~panel: JPanel
+            -comboBox: JComboBox<String>
+            +DropdownEditor(JComboBox<String>)
+            +keyTyped(KeyEvent): void
+            +keyPressed(KeyEvent): void
+            +keyReleased(KeyEvent): void
+            +getTableCellEditorComponent(JTable, Object, boolean, int, int): Component
+        }
+
+        class elki.gui.util.ParameterTable.FileNameEditor [[ParameterTable.FileNameEditor.html]] {
+            {static} -serialVersionUID: long
+            ~panel: JPanel
+            ~textfield: JTextField
+            ~button: JButton
+            ~mode: int
+            ~defaultpath: String
+            +actionPerformed(ActionEvent): void
+            +keyTyped(KeyEvent): void
+            +keyPressed(KeyEvent): void
+            +keyReleased(KeyEvent): void
+            +getCellEditorValue(): Object
+            +getTableCellEditorComponent(JTable, Object, boolean, int, int): Component
+        }
+
+        class elki.gui.util.ParameterTable.ClassListEditor [[ParameterTable.ClassListEditor.html]] {
+            {static} -serialVersionUID: long
+            ~panel: JPanel
+            ~textfield: JTextField
+            ~button: JButton
+            -model: TreeModel
+            -option: Parameter<?>
+            +actionPerformed(ActionEvent): void
+            +getCellEditorValue(): Object
+            +keyTyped(KeyEvent): void
+            +keyPressed(KeyEvent): void
+            +keyReleased(KeyEvent): void
+            +getTableCellEditorComponent(JTable, Object, boolean, int, int): Component
+        }
+
+        class elki.gui.util.ParameterTable.AdjustingEditor [[ParameterTable.AdjustingEditor.html]] {
+            {static} -serialVersionUID: long
+            -plaintextEditor: DefaultCellEditor
+            -activeEditor: TableCellEditor
+            +getCellEditorValue(): Object
+            +getTableCellEditorComponent(JTable, Object, boolean, int, int): Component
+        }
+
+        class elki.gui.util.ParameterTable.DispatchingPanel [[ParameterTable.DispatchingPanel.html]] {
+            {static} -serialVersionUID: long
+            #component: JComponent
+            +DispatchingPanel(JComponent)
+            +addNotify(): void
+            #processKeyBinding(KeyStroke, KeyEvent, int, boolean): boolean
+        }
+
+        class SavedSettingsFile [[SavedSettingsFile.html]] {
+            {static} +COMMENT_PREFIX: String
+            -file: Path
+            -store: ArrayList<Pair<String, ArrayList<String>>>
+            +SavedSettingsFile(String)
+            +save(): void
+            +load(): void
+            +iterator(): Iterator<Pair<String, ArrayList<String>>>
+            +remove(String): void
+            +get(String): ArrayList<String>
+            +clear(): void
+            +put(String, ArrayList<String>): void
+            +size(): int
+            +getElementAt(int): Pair<String, ArrayList<String>>
+        }
+
+        class LogPane [[LogPane.html]] {
+            {static} -serialVersionUID: long
+            #baseStyle: Style
+            #msgStyle: Style
+            #dbgStyle: Style
+            #errStyle: Style
+            -msgformat: Formatter
+            -debugformat: Formatter
+            -errformat: Formatter
+            -lastNewlinePos: int
+            +publish(String, Level): void
+            #publish(LogRecord): void
+            -tailingNonNewline(String, int, int): int
+            +clear(): void
+            +becomeDefaultLogger(): void
+        }
+
+        class elki.gui.util.LogPane.LogPaneHandler [[LogPane.LogPaneHandler.html]] {
+            +close(): void
+            +flush(): void
+            +publish(LogRecord): void
+        }
+
+        class TreePopup [[TreePopup.html]] {
+            {static} -serialVersionUID: long
+            {static} +ACTION_SELECTED: String
+            {static} +ACTION_CANCELED: String
+            #tree: JTree
+            #scroller: JScrollPane
+            -model: TreeModel
+            {static} -TREE_BORDER: Border
+            +TreePopup()
+            +TreePopup(TreeModel)
+            #createTree(): JTree
+            #configurePopup(): void
+            #createScroller(): JScrollPane
+            +getTree(): JTree
+            +show(Component): void
+            #computePopupBounds(Component, int, int, int, int): Rectangle
+            +addActionListener(ActionListener): void
+            +removeActionListener(ActionListener): void
+            #fireActionPerformed(ActionEvent): void
+        }
+
+        class elki.gui.util.TreePopup.Renderer [[TreePopup.Renderer.html]] {
+            {static} -serialVersionUID: long
+            ~label: JLabel
+            -selbg: Color
+            -defbg: Color
+            -selfg: Color
+            -deffg: Color
+            -leafIcon: Icon
+            -folderIcon: Icon
+            +getTreeCellRendererComponent(JTree, Object, boolean, boolean, boolean, int, boolean): Component
+            +setLeafIcon(Icon): void
+            +setFolderIcon(Icon): void
+        }
+
+        class elki.gui.util.TreePopup.Handler [[TreePopup.Handler.html]] {
+            +keyTyped(KeyEvent): void
+            +keyPressed(KeyEvent): void
+            +keyReleased(KeyEvent): void
+            +mouseClicked(MouseEvent): void
+            +mousePressed(MouseEvent): void
+            +mouseReleased(MouseEvent): void
+            +mouseEntered(MouseEvent): void
+            +mouseExited(MouseEvent): void
+            +focusGained(FocusEvent): void
+            +focusLost(FocusEvent): void
+        }
+
+        class DynamicParameters [[DynamicParameters.html]] {
+            {static} +BIT_INCOMPLETE: int
+            {static} +BIT_INVALID: int
+            {static} +BIT_SYNTAX_ERROR: int
+            {static} +BIT_OPTIONAL: int
+            {static} +BIT_DEFAULT_VALUE: int
+            {static} +STRING_USE_DEFAULT: String
+            {static} +STRING_OPTIONAL: String
+            {static} #REMAINING_OPTIONS_ID: OptionID
+            +size(): int
+            +updateFromTrackParameters(TrackParameters): void
+            +addParameter(Parameter<?>, String, int, int): void
+            +serializeParameters(ArrayList<String>): void
+            +getNode(int): Node
+        }
+
+        class elki.gui.util.DynamicParameters.Node [[DynamicParameters.Node.html]] {
+            #param: Parameter<?>
+            #value: String
+            #flags: int
+            #depth: int
+            +Node(Parameter<?>, String, int, int)
+        }
+
+        class elki.gui.util.DynamicParameters.RemainingOptions [[DynamicParameters.RemainingOptions.html]]
+
+        class ParametersModel [[ParametersModel.html]] {
+            {static} -serialVersionUID: long
+            {static} -LOG: Logging
+            {static} +columns: String[]
+            +ParametersModel(DynamicParameters)
+            +getColumnCount(): int
+            +getRowCount(): int
+            +getValueAt(int, int): Object
+            +getColumnName(int): String
+            +getColumnClass(int): Class<?>
+            +isCellEditable(int, int): boolean
+            +setValueAt(Object, int, int): void
+        }
+
+        class ClassTree [[ClassTree.html]] {
+            {static} +build(List<Class<?>>, String): TreeNode
+            {static} -simplifyTree(MutableTreeNode, String): MutableTreeNode
+        }
+
+        class elki.gui.util.ClassTree.PackageNode [[ClassTree.PackageNode.html]] {
+            {static} -serialVersionUID: long
+            -pkgname: String
+            +PackageNode(String, String)
+            +getPackageName(): String
+        }
+
+        class elki.gui.util.ClassTree.ClassNode [[ClassTree.ClassNode.html]] {
+            {static} -serialVersionUID: long
+            -clsname: String
+            +ClassNode(String, String)
+            +getClassName(): String
+        }
+
+        javax.swing.JPanel <|-- LogPanel
+        LogPanel --> LogPane: logpane
+        java.util.logging.Handler <|-- elki.gui.util.LogPanel.LogPanelHandler
+        LogPanel +-- elki.gui.util.LogPanel.LogPanelHandler
+        javax.swing.JTable <|-- ParameterTable
+        ParameterTable --> DynamicParameters: parameters
+        java.awt.event.KeyListener <|.. elki.gui.util.ParameterTable.Handler
+        ParameterTable +-- elki.gui.util.ParameterTable.Handler
+        javax.swing.table.DefaultTableCellRenderer <|-- elki.gui.util.ParameterTable.ColorfulRenderer
+        ParameterTable +-- elki.gui.util.ParameterTable.ColorfulRenderer
+        javax.swing.DefaultCellEditor <|-- elki.gui.util.ParameterTable.DropdownEditor
+        java.awt.event.KeyListener <|.. elki.gui.util.ParameterTable.DropdownEditor
+        ParameterTable +-- elki.gui.util.ParameterTable.DropdownEditor
+        javax.swing.AbstractCellEditor <|-- elki.gui.util.ParameterTable.FileNameEditor
+        javax.swing.table.TableCellEditor <|.. elki.gui.util.ParameterTable.FileNameEditor
+        java.awt.event.ActionListener <|.. elki.gui.util.ParameterTable.FileNameEditor
+        java.awt.event.KeyListener <|.. elki.gui.util.ParameterTable.FileNameEditor
+        ParameterTable +-- elki.gui.util.ParameterTable.FileNameEditor
+        javax.swing.AbstractCellEditor <|-- elki.gui.util.ParameterTable.ClassListEditor
+        javax.swing.table.TableCellEditor <|.. elki.gui.util.ParameterTable.ClassListEditor
+        java.awt.event.ActionListener <|.. elki.gui.util.ParameterTable.ClassListEditor
+        java.awt.event.KeyListener <|.. elki.gui.util.ParameterTable.ClassListEditor
+        ParameterTable +-- elki.gui.util.ParameterTable.ClassListEditor
+        elki.gui.util.ParameterTable.ClassListEditor --> TreePopup: popup
+        javax.swing.AbstractCellEditor <|-- elki.gui.util.ParameterTable.AdjustingEditor
+        javax.swing.table.TableCellEditor <|.. elki.gui.util.ParameterTable.AdjustingEditor
+        ParameterTable +-- elki.gui.util.ParameterTable.AdjustingEditor
+        elki.gui.util.ParameterTable.AdjustingEditor --> elki.gui.util.ParameterTable.DropdownEditor: dropdownEditor
+        elki.gui.util.ParameterTable.AdjustingEditor --> elki.gui.util.ParameterTable.ClassListEditor: classListEditor
+        elki.gui.util.ParameterTable.AdjustingEditor --> elki.gui.util.ParameterTable.FileNameEditor: fileNameEditor
+        javax.swing.JPanel <|-- elki.gui.util.ParameterTable.DispatchingPanel
+        ParameterTable +-- elki.gui.util.ParameterTable.DispatchingPanel
+        java.lang.Iterable <|.. SavedSettingsFile
+        javax.swing.JTextPane <|-- LogPane
+        java.util.logging.Handler <|-- elki.gui.util.LogPane.LogPaneHandler
+        LogPane +-- elki.gui.util.LogPane.LogPaneHandler
+        javax.swing.JPopupMenu <|-- TreePopup
+        TreePopup --> elki.gui.util.TreePopup.Handler: handler
+        javax.swing.JPanel <|-- elki.gui.util.TreePopup.Renderer
+        javax.swing.tree.TreeCellRenderer <|.. elki.gui.util.TreePopup.Renderer
+        TreePopup +-- elki.gui.util.TreePopup.Renderer
+        java.awt.event.MouseListener <|.. elki.gui.util.TreePopup.Handler
+        java.awt.event.KeyListener <|.. elki.gui.util.TreePopup.Handler
+        java.awt.event.FocusListener <|.. elki.gui.util.TreePopup.Handler
+        TreePopup +-- elki.gui.util.TreePopup.Handler
+        DynamicParameters --> "*" elki.gui.util.DynamicParameters.Node: parameters
+        DynamicParameters +-- elki.gui.util.DynamicParameters.Node
+        elki.utilities.optionhandling.parameters.StringParameter <|-- elki.gui.util.DynamicParameters.RemainingOptions
+        DynamicParameters +-- elki.gui.util.DynamicParameters.RemainingOptions
+        javax.swing.table.AbstractTableModel <|-- ParametersModel
+        ParametersModel --> DynamicParameters: parameters
+        javax.swing.tree.DefaultMutableTreeNode <|-- elki.gui.util.ClassTree.PackageNode
+        ClassTree +-- elki.gui.util.ClassTree.PackageNode
+        javax.swing.tree.DefaultMutableTreeNode <|-- elki.gui.util.ClassTree.ClassNode
+        ClassTree +-- elki.gui.util.ClassTree.ClassNode
+    }
+
+    namespace javax.swing {
+        class JPanel {
+            {static} -uiClassID: String
+        }
+        class JTable {
+            {static} -uiClassID: String
+            {static} +AUTO_RESIZE_OFF: int
+            {static} +AUTO_RESIZE_NEXT_COLUMN: int
+            {static} +AUTO_RESIZE_SUBSEQUENT_COLUMNS: int
+            {static} +AUTO_RESIZE_LAST_COLUMN: int
+            {static} +AUTO_RESIZE_ALL_COLUMNS: int
+            #dataModel: TableModel
+            #columnModel: TableColumnModel
+            #selectionModel: ListSelectionModel
+            #tableHeader: JTableHeader
+            #rowHeight: int
+            #rowMargin: int
+            #gridColor: Color
+            #showHorizontalLines: boolean
+            #showVerticalLines: boolean
+            #autoResizeMode: int
+            #autoCreateColumnsFromModel: boolean
+            #preferredViewportSize: Dimension
+            #rowSelectionAllowed: boolean
+            #cellSelectionEnabled: boolean
+            #editorComp: Component
+            #cellEditor: TableCellEditor
+            #editingColumn: int
+            #editingRow: int
+            #defaultRenderersByColumnClass: Hashtable<Object, Object>
+            #defaultEditorsByColumnClass: Hashtable<Object, Object>
+            #selectionForeground: Color
+            #selectionBackground: Color
+            -rowModel: SizeSequence
+            -dragEnabled: boolean
+            -surrendersFocusOnKeystroke: boolean
+            -editorRemover: PropertyChangeListener
+            -columnSelectionAdjusting: boolean
+            -rowSelectionAdjusting: boolean
+            -printError: Throwable
+            -isRowHeightSet: boolean
+            -updateSelectionOnSort: boolean
+            -sortManager: SortManager
+            -ignoreSortChange: boolean
+            -sorterChanged: boolean
+            -autoCreateRowSorter: boolean
+            -fillsViewportHeight: boolean
+            -dropMode: DropMode
+            -dropLocation: DropLocation
+            -updateInProgress: boolean
+        }
+        class DefaultCellEditor {
+            #editorComponent: JComponent
+            #delegate: EditorDelegate
+            #clickCountToStart: int
+        }
+        abstract class AbstractCellEditor {
+            #listenerList: EventListenerList
+            #changeEvent: ChangeEvent
+        }
+        class JTextPane {
+            {static} -uiClassID: String
+        }
+        class JPopupMenu {
+            {static} -uiClassID: String
+            {static} -defaultLWPopupEnabledKey: Object
+            {static} ~popupPostionFixDisabled: boolean
+            ~invoker: Component
+            ~popup: Popup
+            ~frame: Frame
+            -desiredLocationX: int
+            -desiredLocationY: int
+            -label: String
+            -paintBorder: boolean
+            -margin: Insets
+            -lightWeightPopup: boolean
+            -selectionModel: SingleSelectionModel
+            {static} -classLock: Object
+            {static} -TRACE: boolean
+            {static} -VERBOSE: boolean
+            {static} -DEBUG: boolean
+        }
+    }
+
+    namespace java.util.logging {
+        abstract class Handler {
+            {static} -offValue: int
+            -manager: LogManager
+            -filter: Filter
+            -formatter: Formatter
+            -logLevel: Level
+            -errorManager: ErrorManager
+            -encoding: String
+            {abstract} +publish(LogRecord): void
+            {abstract} +flush(): void
+            {abstract} +close(): void
+        }
+    }
+
+    namespace java.awt.event {
+        interface KeyListener {
+            {abstract} +keyTyped(KeyEvent): void
+            {abstract} +keyPressed(KeyEvent): void
+            {abstract} +keyReleased(KeyEvent): void
+        }
+        interface ActionListener {
+            {abstract} +actionPerformed(ActionEvent): void
+        }
+        interface MouseListener {
+            {abstract} +mouseClicked(MouseEvent): void
+            {abstract} +mousePressed(MouseEvent): void
+            {abstract} +mouseReleased(MouseEvent): void
+            {abstract} +mouseEntered(MouseEvent): void
+            {abstract} +mouseExited(MouseEvent): void
+        }
+        interface FocusListener {
+            {abstract} +focusGained(FocusEvent): void
+            {abstract} +focusLost(FocusEvent): void
+        }
+    }
+
+    namespace javax.swing.table {
+        class DefaultTableCellRenderer {
+            {static} -SAFE_NO_FOCUS_BORDER: Border
+            {static} -DEFAULT_NO_FOCUS_BORDER: Border
+            {static} #noFocusBorder: Border
+            -unselectedForeground: Color
+            -unselectedBackground: Color
+        }
+        interface TableCellEditor {
+            {abstract} +getTableCellEditorComponent(JTable, Object, boolean, int, int): Component
+        }
+        abstract class AbstractTableModel {
+            #listenerList: EventListenerList
+        }
+    }
+
+    namespace java.lang {
+        interface Iterable<T> {
+            {abstract} +iterator(): Iterator<T>
+            +forEach(Consumer<? super T>): void
+            +spliterator(): Spliterator<T>
+        }
+    }
+
+    namespace javax.swing.tree {
+        interface TreeCellRenderer {
+            {abstract} +getTreeCellRendererComponent(JTree, Object, boolean, boolean, boolean, int, boolean): Component
+        }
+        class DefaultMutableTreeNode {
+            {static} -serialVersionUID: long
+            {static} +EMPTY_ENUMERATION: Enumeration<TreeNode>
+            #parent: MutableTreeNode
+            #children: Vector<TreeNode>
+            #userObject: Object
+            #allowsChildren: boolean
+        }
+    }
+
+    namespace elki.utilities.optionhandling.parameters {
+        class StringParameter [[../../utilities/optionhandling/parameters/StringParameter.html]]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

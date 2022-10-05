@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ERiC.Settings\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ERiC.Settings [[ERiC.Settings.html]] {
+        +k: int
+        +pca: PCARunner
+        +filter: EigenPairFilter
+        +delta: double
+        +tau: double
+        +minpts: int
+    }
+
+    class "<size:14>ERiC\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ERiC [[ERiC.html]]
+
+    elki.clustering.correlation.ERiC +-- elki.clustering.correlation.ERiC.Settings
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

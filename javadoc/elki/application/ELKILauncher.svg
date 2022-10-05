@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="120px" preserveAspectRatio="none" style="width:479px;height:120px;background:#FFFFFF;" version="1.1" viewBox="0 0 479 120" width="479px" zoomAndPan="magnify"><defs/><g><!--MD5=[d9c6d92d454d1ca350cf0d5d88ec4ce0]
+class elki.application.ELKILauncher--><a href="ELKILauncher.html" target="_top" title="ELKILauncher.html" xlink:actuate="onRequest" xlink:href="ELKILauncher.html" xlink:show="new" xlink:title="ELKILauncher.html" xlink:type="simple"><g id="elem_elki.application.ELKILauncher"><rect codeLine="6" fill="#F1F1F1" height="86.5313" id="elki.application.ELKILauncher" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="458" x="7" y="7"/><ellipse cx="185.75" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M188.7188,31.6094 Q188.1406,31.9063 187.5,32.0469 Q186.8594,32.2031 186.1563,32.2031 Q183.6563,32.2031 182.3281,30.5625 Q181.0156,28.9063 181.0156,25.7813 Q181.0156,22.6563 182.3281,21 Q183.6563,19.3438 186.1563,19.3438 Q186.8594,19.3438 187.5,19.5 Q188.1563,19.6563 188.7188,19.9531 L188.7188,22.6719 Q188.0938,22.0938 187.5,21.8281 Q186.9063,21.5469 186.2813,21.5469 Q184.9375,21.5469 184.25,22.625 Q183.5625,23.6875 183.5625,25.7813 Q183.5625,27.875 184.25,28.9531 Q184.9375,30.0156 186.2813,30.0156 Q186.9063,30.0156 187.5,29.75 Q188.0938,29.4688 188.7188,28.8906 L188.7188,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="206.25" y="24.9951">ELKILauncher</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="69" x="217.75" y="37.5791">elki.application</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="464" y1="44.9375" y2="44.9375"/><ellipse cx="18" cy="58.5859" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="432" x="27" y="61.9326">DEFAULT_APPLICATION: Class&lt;? extends AbstractApplication&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="464" y1="69.2344" y2="69.2344"/><ellipse cx="18" cy="82.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="130" x="27" y="86.2295">main(String[]): void</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="142.5" y="100.5313"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="142.5" y="109.8135">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[57d59b8654a81777d2c461bfcfb98a83]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ELKILauncher\n<size:10>elki.application" as elki.application.ELKILauncher [[ELKILauncher.html]] {
+        {static} +DEFAULT_APPLICATION: Class<? extends AbstractApplication>
+        {static} +main(String[]): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

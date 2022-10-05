@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>APRIORI.Par\n<size:10>elki.itemsetmining" as elki.itemsetmining.APRIORI.Par [[APRIORI.Par.html]] {
+        +make(): APRIORI
+    }
+
+    abstract class "<size:14>AbstractFrequentItemsetAlgorithm.Par\n<size:10>elki.itemsetmining" as elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par [[AbstractFrequentItemsetAlgorithm.Par.html]]
+    class "<size:14>APRIORI\n<size:10>elki.itemsetmining" as elki.itemsetmining.APRIORI [[APRIORI.html]]
+
+    elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par <|-- elki.itemsetmining.APRIORI.Par
+    elki.itemsetmining.APRIORI +-- elki.itemsetmining.APRIORI.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

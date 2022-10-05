@@ -1,0 +1,159 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.metrical.mtreevariants.mktrees.mkmax {
+
+        class MkMaxTreeFactory<O> [[MkMaxTreeFactory.html]] {
+            +MkMaxTreeFactory(PageFileFactory<?>, MkTreeSettings<O, MkMaxTreeNode<O>, MkMaxEntry>)
+            +instantiate(Relation<O>): MkMaxTreeIndex<O>
+            #getNodeClass(): Class<MkMaxTreeNode<O>>
+        }
+
+        class elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeFactory.Par<O> {
+            +make(): MkMaxTreeFactory<O>
+            #makeSettings(): MkTreeSettings<O, MkMaxTreeNode<O>, MkMaxEntry>
+        }
+
+        class MkMaxLeafEntry [[MkMaxLeafEntry.html]] {
+            {static} -serialVersionUID: long
+            -knnDistance: double
+            +MkMaxLeafEntry()
+            +MkMaxLeafEntry(DBID, double, double)
+            +getKnnDistance(): double
+            +setKnnDistance(double): void
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        class MkMaxTreeNode<O> [[MkMaxTreeNode.html]] {
+            {static} -serialVersionUID: long
+            +MkMaxTreeNode()
+            +MkMaxTreeNode(int, boolean)
+            #kNNDistance(): double
+            +adjustEntry(MkMaxEntry, DBID, double, AbstractMTree<O, MkMaxTreeNode<O>, MkMaxEntry, ?>): boolean
+            #integrityCheckParameters(MkMaxEntry, MkMaxTreeNode<O>, int, AbstractMTree<O, MkMaxTreeNode<O>, MkMaxEntry, ?>): void
+        }
+
+        class MkMaxDirectoryEntry [[MkMaxDirectoryEntry.html]] {
+            {static} -serialVersionUID: long
+            -knnDistance: double
+            +MkMaxDirectoryEntry()
+            +MkMaxDirectoryEntry(DBID, double, int, double, double)
+            +getKnnDistance(): double
+            +setKnnDistance(double): void
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        abstract class MkMaxTree<O> [[MkMaxTree.html]] {
+            {static} -LOG: Logging
+            +MkMaxTree(Relation<O>, PageFile<MkMaxTreeNode<O>>, MkTreeSettings<O, MkMaxTreeNode<O>, MkMaxEntry>)
+            +reverseKNNQuery(DBIDRef, int): DoubleDBIDList
+            #preInsert(MkMaxEntry): void
+            #kNNdistanceAdjustment(MkMaxEntry, Map<DBID, KNNList>): void
+            -doReverseKNNQuery(DBIDRef, MkMaxTreeNode<O>, MkMaxEntry, ModifiableDoubleDBIDList): void
+            -preInsert(MkMaxEntry, MkMaxEntry, KNNHeap): void
+            #initializeCapacities(MkMaxEntry): void
+            #createNewLeafNode(): MkMaxTreeNode<O>
+            #createNewDirectoryNode(): MkMaxTreeNode<O>
+            #createNewDirectoryEntry(MkMaxTreeNode<O>, DBID, double): MkMaxEntry
+            #createRootEntry(): MkMaxEntry
+            #getLogger(): Logging
+        }
+
+        interface MkMaxEntry [[MkMaxEntry.html]] {
+            {abstract} +getKnnDistance(): double
+            {abstract} +setKnnDistance(double): void
+        }
+
+        class MkMaxTreeIndex<O> [[MkMaxTreeIndex.html]] {
+            -relation: Relation<O>
+            +MkMaxTreeIndex(Relation<O>, PageFile<MkMaxTreeNode<O>>, MkTreeSettings<O, MkMaxTreeNode<O>, MkMaxEntry>)
+            #createNewLeafEntry(DBID, DBIDRef, double): MkMaxLeafEntry
+            +initialize(): void
+            +insert(DBIDRef): void
+            +insertAll(DBIDs): void
+            +delete(DBIDRef): boolean
+            +deleteAll(DBIDs): void
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+            +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+            +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+        }
+
+        elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory <|-- MkMaxTreeFactory
+        elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeFactory.Par
+        MkMaxTreeFactory +-- elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxTreeFactory.Par
+        elki.index.tree.metrical.mtreevariants.MTreeLeafEntry <|-- MkMaxLeafEntry
+        MkMaxEntry <|.. MkMaxLeafEntry
+        elki.index.tree.metrical.mtreevariants.AbstractMTreeNode <|-- MkMaxTreeNode
+        elki.index.tree.metrical.mtreevariants.MTreeDirectoryEntry <|-- MkMaxDirectoryEntry
+        MkMaxEntry <|.. MkMaxDirectoryEntry
+        elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnified <|-- MkMaxTree
+        elki.index.tree.metrical.mtreevariants.MTreeEntry <|-- MkMaxEntry
+        MkMaxTree <|-- MkMaxTreeIndex
+        elki.index.RangeIndex <|.. MkMaxTreeIndex
+        elki.index.KNNIndex <|.. MkMaxTreeIndex
+        elki.index.RKNNIndex <|.. MkMaxTreeIndex
+        elki.index.DynamicIndex <|.. MkMaxTreeIndex
+    }
+
+    namespace elki.index.tree.metrical.mtreevariants.mktrees {
+        abstract class AbstractMkTreeUnifiedFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMkTreeUnifiedFactory.html]]
+        abstract class elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMkTreeUnifiedFactory.Par.html]] {
+            {static} +K_MAX_ID: OptionID
+            {abstract} +make(): AbstractMkTreeUnifiedFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>>
+        }
+        abstract class AbstractMkTreeUnified<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMkTreeUnified.html]] {
+            {abstract} #kNNdistanceAdjustment(E extends MTreeEntry, Map<DBID, KNNList>): void
+        }
+    }
+
+    namespace elki.index.tree.metrical.mtreevariants {
+        class MTreeLeafEntry [[../../MTreeLeafEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: DBID
+            -parentDistance: double
+        }
+        abstract class AbstractMTreeNode<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[../../AbstractMTreeNode.html]]
+        class MTreeDirectoryEntry [[../../MTreeDirectoryEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: int
+            -routingObjectID: DBID
+            -parentDistance: double
+            -coveringRadius: double
+        }
+        interface MTreeEntry [[../../MTreeEntry.html]] {
+            {abstract} +getRoutingObjectID(): DBID
+            {abstract} +setRoutingObjectID(DBID): boolean
+            {abstract} +getParentDistance(): double
+            {abstract} +setParentDistance(double): boolean
+            {abstract} +getCoveringRadius(): double
+            {abstract} +setCoveringRadius(double): boolean
+        }
+    }
+
+    namespace elki.index {
+        interface RangeIndex<O> [[../../../../../RangeIndex.html]] {
+            {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+        interface KNNIndex<O> [[../../../../../KNNIndex.html]] {
+            {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        }
+        interface RKNNIndex<O> [[../../../../../RKNNIndex.html]] {
+            {abstract} +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+            {abstract} +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+        }
+        interface DynamicIndex [[../../../../../DynamicIndex.html]] {
+            {abstract} +delete(DBIDRef): boolean
+            {abstract} +insert(DBIDRef): void
+            {abstract} +deleteAll(DBIDs): void
+            {abstract} +insertAll(DBIDs): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

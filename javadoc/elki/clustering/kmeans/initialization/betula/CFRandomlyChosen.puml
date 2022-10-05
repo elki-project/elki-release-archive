@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CFRandomlyChosen\n<size:10>elki.clustering.kmeans.initialization.betula" as elki.clustering.kmeans.initialization.betula.CFRandomlyChosen [[CFRandomlyChosen.html]] {
+        +CFRandomlyChosen(RandomFactory)
+        +chooseInitialMeans(CFTree<?>, List<? extends ClusterFeature>, int): double[]
+    }
+
+    abstract class "<size:14>AbstractCFKMeansInitialization\n<size:10>elki.clustering.kmeans.initialization.betula" as elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization [[AbstractCFKMeansInitialization.html]] {
+        {abstract} +chooseInitialMeans(CFTree<?>, List<? extends ClusterFeature>, int): double[]
+    }
+    class "<size:14>CFRandomlyChosen.Par\n<size:10>elki.clustering.kmeans.initialization.betula" as elki.clustering.kmeans.initialization.betula.CFRandomlyChosen.Par [[CFRandomlyChosen.Par.html]]
+
+    elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization <|-- elki.clustering.kmeans.initialization.betula.CFRandomlyChosen
+    elki.clustering.kmeans.initialization.betula.CFRandomlyChosen +-- elki.clustering.kmeans.initialization.betula.CFRandomlyChosen.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

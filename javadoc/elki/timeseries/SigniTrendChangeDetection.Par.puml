@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SigniTrendChangeDetection.Par\n<size:10>elki.timeseries" as elki.timeseries.SigniTrendChangeDetection.Par [[SigniTrendChangeDetection.Par.html]] {
+        {static} +HALFLIFE_ID: OptionID
+        {static} +BIAS_ID: OptionID
+        {static} +MINSIGMA_ID: OptionID
+        -halflife: double
+        -bias: double
+        -minsigma: double
+        +configure(Parameterization): void
+        +make(): SigniTrendChangeDetection
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SigniTrendChangeDetection\n<size:10>elki.timeseries" as elki.timeseries.SigniTrendChangeDetection [[SigniTrendChangeDetection.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.timeseries.SigniTrendChangeDetection.Par
+    elki.timeseries.SigniTrendChangeDetection +-- elki.timeseries.SigniTrendChangeDetection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

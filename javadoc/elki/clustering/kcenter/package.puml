@@ -1,0 +1,44 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.kcenter {
+
+        class GreedyKCenter<O> [[GreedyKCenter.html]] {
+            {static} -LOG: Logging
+            ~distance: Distance<? super O>
+            ~k: int
+            ~rand: RandomFactory
+            +GreedyKCenter(int, Distance<? super O>, RandomFactory)
+            +run(Relation<O>): Clustering<SimplePrototypeModel<O>>
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.kcenter.GreedyKCenter.Par<O> [[GreedyKCenter.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            ~distance: Distance<? super O>
+            ~k: int
+            ~rand: RandomFactory
+            +configure(Parameterization): void
+            +make(): GreedyKCenter<O>
+        }
+
+        elki.clustering.ClusteringAlgorithm <|.. GreedyKCenter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kcenter.GreedyKCenter.Par
+        GreedyKCenter +-- elki.clustering.kcenter.GreedyKCenter.Par
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

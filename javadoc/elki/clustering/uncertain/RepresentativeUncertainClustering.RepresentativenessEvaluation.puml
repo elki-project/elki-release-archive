@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RepresentativeUncertainClustering.RepresentativenessEvaluation\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.RepresentativeUncertainClustering.RepresentativenessEvaluation [[RepresentativeUncertainClustering.RepresentativenessEvaluation.html]] {
+        +RepresentativenessEvaluation(double, double, double)
+        +visualizeSingleton(): boolean
+    }
+
+    class "<size:14>EvaluationResult\n<size:10>elki.result" as elki.result.EvaluationResult [[../../result/EvaluationResult.html]]
+    class "<size:14>RepresentativeUncertainClustering\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.RepresentativeUncertainClustering [[RepresentativeUncertainClustering.html]]
+
+    elki.result.EvaluationResult <|-- elki.clustering.uncertain.RepresentativeUncertainClustering.RepresentativenessEvaluation
+    elki.clustering.uncertain.RepresentativeUncertainClustering +-- elki.clustering.uncertain.RepresentativeUncertainClustering.RepresentativenessEvaluation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

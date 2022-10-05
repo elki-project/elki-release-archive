@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HoeffdingsD\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.HoeffdingsD [[HoeffdingsD.html]] {
+        {static} +STATIC: HoeffdingsD
+        {static} -TABVAL: double[]
+        {static} -TABPOS: double[]
+        +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+        {static} #computeBivariateRanks(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B, int): double[]
+        +toPValue(double, int): double
+    }
+
+    interface "<size:14>Dependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.Dependence [[Dependence.html]] {
+        {abstract} +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+    }
+    class "<size:14>HoeffdingsD.Par\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.HoeffdingsD.Par [[HoeffdingsD.Par.html]]
+
+    elki.math.statistics.dependence.Dependence <|.. elki.math.statistics.dependence.HoeffdingsD
+    elki.math.statistics.dependence.HoeffdingsD +-- elki.math.statistics.dependence.HoeffdingsD.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

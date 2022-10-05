@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GumbelDistribution.Par\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.GumbelDistribution.Par [[GumbelDistribution.Par.html]] {
+        ~mean: double
+        ~shape: double
+        +configure(Parameterization): void
+        +make(): GumbelDistribution
+    }
+
+    interface "<size:14>Distribution.Parameterizer\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution.Parameterizer [[Distribution.Parameterizer.html]]
+    class "<size:14>GumbelDistribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.GumbelDistribution [[GumbelDistribution.html]]
+
+    elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.GumbelDistribution.Par
+    elki.math.statistics.distribution.GumbelDistribution +-- elki.math.statistics.distribution.GumbelDistribution.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

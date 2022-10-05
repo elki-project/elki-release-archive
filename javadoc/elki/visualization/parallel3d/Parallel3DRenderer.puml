@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Parallel3DRenderer\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.Parallel3DRenderer<O extends NumberVector> [[Parallel3DRenderer.html]] {
+        {static} -LOG: Logging
+        ~shared: Shared<O extends NumberVector>
+        -textures: int[]
+        -completedTextures: int
+        -dindex: int[]
+        ~colors: float[]
+        ~axes: DoubleIntPair[]
+        ~vbi: int[]
+        ~frameBufferID: int[]
+        #Parallel3DRenderer(Shared<O extends NumberVector>)
+        #prepare(GL2): int
+        #drawParallelPlot(GLAutoDrawable, GL2): void
+        ~renderTexture(GL2, int): void
+        -prepareColors(StylingPolicy): void
+        #forgetTextures(GL): void
+        -sortAxes(): void
+        -sortEdges(int[]): IntIntPair[]
+        -renderLabels(GL2, IntIntPair[]): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

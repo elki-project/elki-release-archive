@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>SharedVariable\n<size:10>elki.parallel.variables" as elki.parallel.variables.SharedVariable<I extends Instance<?>> [[SharedVariable.html]] {
+        {abstract} +instantiate(): I extends Instance<?>
+    }
+    interface "<size:14>SharedVariable.Instance\n<size:10>elki.parallel.variables" as elki.parallel.variables.SharedVariable.Instance<T> [[SharedVariable.Instance.html]]
+
+    elki.parallel.variables.SharedVariable +-- elki.parallel.variables.SharedVariable.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

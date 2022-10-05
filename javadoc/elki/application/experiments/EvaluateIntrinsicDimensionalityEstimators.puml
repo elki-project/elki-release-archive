@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluateIntrinsicDimensionalityEstimators\n<size:10>elki.application.experiments" as elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators [[EvaluateIntrinsicDimensionalityEstimators.html]] {
+        ~startk: int
+        ~maxk: int
+        ~samples: int
+        ~dim: int
+        ~agg: Aggregate
+        ~format: OutputFormat
+        ~rnd: RandomFactory
+        +EvaluateIntrinsicDimensionalityEstimators(int, int, int, int, Aggregate, OutputFormat, RandomFactory)
+        +run(): void
+        #makeSample(int): double[]
+        {static} +main(String[]): void
+    }
+
+    abstract class "<size:14>AbstractApplication\n<size:10>elki.application" as elki.application.AbstractApplication [[../AbstractApplication.html]] {
+        {abstract} +run(): void
+    }
+    enum "<size:14>EvaluateIntrinsicDimensionalityEstimators.OutputFormat\n<size:10>elki.application.experiments" as elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.OutputFormat [[EvaluateIntrinsicDimensionalityEstimators.OutputFormat.html]]
+    enum "<size:14>EvaluateIntrinsicDimensionalityEstimators.Aggregate\n<size:10>elki.application.experiments" as elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Aggregate [[EvaluateIntrinsicDimensionalityEstimators.Aggregate.html]]
+    class "<size:14>EvaluateIntrinsicDimensionalityEstimators.Par\n<size:10>elki.application.experiments" as elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Par [[EvaluateIntrinsicDimensionalityEstimators.Par.html]]
+
+    elki.application.AbstractApplication <|-- elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators
+    elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators +-- elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.OutputFormat
+    elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators +-- elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Aggregate
+    elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators +-- elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

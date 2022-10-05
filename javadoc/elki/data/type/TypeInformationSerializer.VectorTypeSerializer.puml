@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TypeInformationSerializer.VectorTypeSerializer\n<size:10>elki.data.type" as elki.data.type.TypeInformationSerializer.VectorTypeSerializer [[TypeInformationSerializer.VectorTypeSerializer.html]] {
+        +fromByteBuffer(ByteBuffer): VectorTypeInformation<?>
+        +toByteBuffer(ByteBuffer, VectorTypeInformation<?>): void
+        +getByteSize(VectorTypeInformation<?>): int
+    }
+
+    interface "<size:14>ByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteBufferSerializer<VectorTypeInformation<?>> [[../../utilities/io/ByteBufferSerializer.html]] {
+        {abstract} +fromByteBuffer(ByteBuffer): VectorTypeInformation<?>
+        {abstract} +toByteBuffer(ByteBuffer, VectorTypeInformation<?>): void
+        {abstract} +getByteSize(VectorTypeInformation<?>): int
+    }
+    class "<size:14>TypeInformationSerializer\n<size:10>elki.data.type" as elki.data.type.TypeInformationSerializer [[TypeInformationSerializer.html]]
+
+    elki.utilities.io.ByteBufferSerializer <|.. elki.data.type.TypeInformationSerializer.VectorTypeSerializer
+    elki.data.type.TypeInformationSerializer +-- elki.data.type.TypeInformationSerializer.VectorTypeSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

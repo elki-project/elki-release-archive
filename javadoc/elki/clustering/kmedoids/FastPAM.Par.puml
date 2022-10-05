@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastPAM.Par\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastPAM.Par<V> [[FastPAM.Par.html]] {
+        {static} +FASTTOL_ID: OptionID
+        #fasttol: double
+        #defaultInitializer(): Class<? extends KMedoidsInitialization>
+        +configure(Parameterization): void
+        +make(): FastPAM<V>
+    }
+
+    class "<size:14>FastPAM1.Par\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastPAM1.Par<V> [[FastPAM1.Par.html]]
+    class "<size:14>FastPAM\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastPAM<O> [[FastPAM.html]]
+
+    elki.clustering.kmedoids.FastPAM1.Par <|-- elki.clustering.kmedoids.FastPAM.Par
+    elki.clustering.kmedoids.FastPAM +-- elki.clustering.kmedoids.FastPAM.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

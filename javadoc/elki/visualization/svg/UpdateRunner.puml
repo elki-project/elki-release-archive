@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UpdateRunner\n<size:10>elki.visualization.svg" as elki.visualization.svg.UpdateRunner [[UpdateRunner.html]] {
+        -sync: Object
+        -queue: ConcurrentLinkedQueue<Runnable>
+        -synchronizer: UpdateSynchronizer
+        #UpdateRunner(Object)
+        +invokeLater(Runnable): void
+        +runQueue(): void
+        +clear(): void
+        +isEmpty(): boolean
+        +synchronizeWith(UpdateSynchronizer): void
+        +unsynchronizeWith(UpdateSynchronizer): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

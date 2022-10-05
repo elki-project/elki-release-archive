@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AchlioptasRandomProjectionFamily.Par\n<size:10>elki.data.projection.random" as elki.data.projection.random.AchlioptasRandomProjectionFamily.Par [[AchlioptasRandomProjectionFamily.Par.html]] {
+        {static} +SPARSITY_ID: OptionID
+        -sparsity: double
+        +configure(Parameterization): void
+        +make(): AchlioptasRandomProjectionFamily
+    }
+
+    abstract class "<size:14>AbstractRandomProjectionFamily.Par\n<size:10>elki.data.projection.random" as elki.data.projection.random.AbstractRandomProjectionFamily.Par [[AbstractRandomProjectionFamily.Par.html]]
+    class "<size:14>AchlioptasRandomProjectionFamily\n<size:10>elki.data.projection.random" as elki.data.projection.random.AchlioptasRandomProjectionFamily [[AchlioptasRandomProjectionFamily.html]]
+
+    elki.data.projection.random.AbstractRandomProjectionFamily.Par <|-- elki.data.projection.random.AchlioptasRandomProjectionFamily.Par
+    elki.data.projection.random.AchlioptasRandomProjectionFamily +-- elki.data.projection.random.AchlioptasRandomProjectionFamily.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

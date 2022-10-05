@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="72px" preserveAspectRatio="none" style="width:194px;height:72px;background:#FFFFFF;" version="1.1" viewBox="0 0 194 72" width="194px" zoomAndPan="magnify"><defs/><g><!--MD5=[2f20c200ec62434a1c050405e38a277e]
+class elki.projection.SNE--><a href="SNE.html" target="_top" title="SNE.html" xlink:actuate="onRequest" xlink:href="SNE.html" xlink:show="new" xlink:title="SNE.html" xlink:type="simple"><g id="elem_elki.projection.SNE"><rect codeLine="28" fill="#F1F1F1" height="37.9375" id="elki.projection.SNE" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="109" x="43.5" y="10"/><ellipse cx="58.5" cy="28.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M61.4688,34.6094 Q60.8906,34.9063 60.25,35.0469 Q59.6094,35.2031 58.9063,35.2031 Q56.4063,35.2031 55.0781,33.5625 Q53.7656,31.9063 53.7656,28.7813 Q53.7656,25.6563 55.0781,24 Q56.4063,22.3438 58.9063,22.3438 Q59.6094,22.3438 60.25,22.5 Q60.9063,22.6563 61.4688,22.9531 L61.4688,25.6719 Q60.8438,25.0938 60.25,24.8281 Q59.6563,24.5469 59.0313,24.5469 Q57.6875,24.5469 57,25.625 Q56.3125,26.6875 56.3125,28.7813 Q56.3125,30.875 57,31.9531 Q57.6875,33.0156 59.0313,33.0156 Q59.6563,33.0156 60.25,32.75 Q60.8438,32.4688 61.4688,31.8906 L61.4688,34.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="28" x="91" y="27.9951">SNE</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="65" x="72.5" y="40.5791">elki.projection</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="145.5" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="146.5" y="19.1387">O</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="0" y="52.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="0" y="62.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[4f609536c19fa4754688af6d2e6ccd91]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SNE.Par\n<size:10>elki.projection" as elki.projection.SNE.Par<O> {
+        {static} +AFFINITY_ID: OptionID
+        {static} +DIM_ID: OptionID
+        {static} +MOMENTUM_ID: OptionID
+        {static} +LEARNING_RATE_ID: OptionID
+        {static} +ITER_ID: OptionID
+        {static} +RANDOM_ID: OptionID
+        #affinity: AffinityMatrixBuilder<? super O>
+        #dim: int
+        #learningRate: double
+        #finalMomentum: double
+        #iterations: int
+        #random: RandomFactory
+        #keep: boolean
+        +configure(Parameterization): void
+        #getDefaultAffinity(): Class<?>
+        +make(): SNE<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SNE\n<size:10>elki.projection" as elki.projection.SNE<O> [[SNE.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.projection.SNE.Par
+    elki.projection.SNE +- - elki.projection.SNE.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

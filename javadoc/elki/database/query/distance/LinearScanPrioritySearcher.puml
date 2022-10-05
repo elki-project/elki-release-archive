@@ -1,0 +1,43 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>LinearScanPrioritySearcher\n<size:10>elki.database.query.distance" as elki.database.query.distance.LinearScanPrioritySearcher<Q, O> [[LinearScanPrioritySearcher.html]] {
+        #distanceQuery: DistanceQuery<O>
+        #iter: DBIDIter
+        #query: O
+        #curdist: double
+        +LinearScanPrioritySearcher(DistanceQuery<O>)
+        #realSearch(O): PrioritySearcher<Q>
+        +valid(): boolean
+        +advance(): PrioritySearcher<Q>
+        +internalGetIndex(): int
+        +decreaseCutoff(double): PrioritySearcher<Q>
+        +computeExactDistance(): double
+        +getApproximateAccuracy(): double
+        +getApproximateDistance(): double
+        +getLowerBound(): double
+        +getUpperBound(): double
+        +allLowerBound(): double
+    }
+
+    interface "<size:14>PrioritySearcher\n<size:10>elki.database.query" as elki.database.query.PrioritySearcher<Q> [[../PrioritySearcher.html]] {
+        {abstract} +search(Q): PrioritySearcher<O>
+        {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+        {abstract} +computeExactDistance(): double
+        {abstract} +allLowerBound(): double
+        {abstract} +advance(): PrioritySearcher<O>
+    }
+    interface "<size:14>LinearScanQuery\n<size:10>elki.database.query" as elki.database.query.LinearScanQuery [[../LinearScanQuery.html]]
+    class "<size:14>LinearScanPrioritySearcher.ByObject\n<size:10>elki.database.query.distance" as elki.database.query.distance.LinearScanPrioritySearcher.ByObject<O> [[LinearScanPrioritySearcher.ByObject.html]]
+    class "<size:14>LinearScanPrioritySearcher.ByDBID\n<size:10>elki.database.query.distance" as elki.database.query.distance.LinearScanPrioritySearcher.ByDBID<O> [[LinearScanPrioritySearcher.ByDBID.html]]
+
+    elki.database.query.PrioritySearcher <|.. elki.database.query.distance.LinearScanPrioritySearcher
+    elki.database.query.LinearScanQuery <|.. elki.database.query.distance.LinearScanPrioritySearcher
+    elki.database.query.distance.LinearScanPrioritySearcher +-- elki.database.query.distance.LinearScanPrioritySearcher.ByObject
+    elki.database.query.distance.LinearScanPrioritySearcher +-- elki.database.query.distance.LinearScanPrioritySearcher.ByDBID
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

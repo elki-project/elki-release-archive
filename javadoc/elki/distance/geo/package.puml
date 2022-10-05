@@ -1,0 +1,88 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.distance.geo {
+
+        class LatLngDistance [[LatLngDistance.html]] {
+            -model: EarthModel
+            +LatLngDistance(EarthModel)
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+            +isMetric(): boolean
+        }
+
+        class elki.distance.geo.LatLngDistance.Par [[LatLngDistance.Par.html]] {
+            ~model: EarthModel
+            +configure(Parameterization): void
+            +make(): LatLngDistance
+        }
+
+        class LngLatDistance [[LngLatDistance.html]] {
+            -model: EarthModel
+            +LngLatDistance(EarthModel)
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+            +isMetric(): boolean
+        }
+
+        class elki.distance.geo.LngLatDistance.Par [[LngLatDistance.Par.html]] {
+            ~model: EarthModel
+            +configure(Parameterization): void
+            +make(): LngLatDistance
+        }
+
+        class DimensionSelectingLatLngDistance [[DimensionSelectingLatLngDistance.html]] {
+            ~dimlat: int
+            ~dimlng: int
+            ~model: EarthModel
+            +DimensionSelectingLatLngDistance(int, int, EarthModel)
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+            +isMetric(): boolean
+        }
+
+        class elki.distance.geo.DimensionSelectingLatLngDistance.Par [[DimensionSelectingLatLngDistance.Par.html]] {
+            {static} +LATDIM_ID: OptionID
+            {static} +LNGDIM_ID: OptionID
+            ~dimlat: int
+            ~dimlng: int
+            ~model: EarthModel
+            +configure(Parameterization): void
+            +make(): DimensionSelectingLatLngDistance
+        }
+
+        elki.distance.SpatialPrimitiveDistance <|.. LatLngDistance
+        elki.distance.NumberVectorDistance <|.. LatLngDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.geo.LatLngDistance.Par
+        LatLngDistance +-- elki.distance.geo.LatLngDistance.Par
+        elki.distance.SpatialPrimitiveDistance <|.. LngLatDistance
+        elki.distance.NumberVectorDistance <|.. LngLatDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.geo.LngLatDistance.Par
+        LngLatDistance +-- elki.distance.geo.LngLatDistance.Par
+        elki.distance.SpatialPrimitiveDistance <|.. DimensionSelectingLatLngDistance
+        elki.distance.NumberVectorDistance <|.. DimensionSelectingLatLngDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.geo.DimensionSelectingLatLngDistance.Par
+        DimensionSelectingLatLngDistance +-- elki.distance.geo.DimensionSelectingLatLngDistance.Par
+    }
+
+    namespace elki.distance {
+        interface SpatialPrimitiveDistance<V extends SpatialComparable> [[../SpatialPrimitiveDistance.html]] {
+            {abstract} +minDist(SpatialComparable, SpatialComparable): double
+            +instantiate(Relation<T extends SpatialComparable>): SpatialPrimitiveDistanceQuery<T extends SpatialComparable>
+        }
+        interface NumberVectorDistance<O> [[../NumberVectorDistance.html]] {
+            {abstract} +distance(NumberVector, NumberVector): double
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

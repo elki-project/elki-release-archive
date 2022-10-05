@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SettingsResult.SettingInformation\n<size:10>elki.result" as elki.result.SettingsResult.SettingInformation [[SettingsResult.SettingInformation.html]] {
+        +owner: String
+        +name: String
+        +value: String
+        +SettingInformation(String, String, String)
+    }
+
+    class "<size:14>SettingsResult\n<size:10>elki.result" as elki.result.SettingsResult [[SettingsResult.html]]
+
+    elki.result.SettingsResult +-- elki.result.SettingsResult.SettingInformation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

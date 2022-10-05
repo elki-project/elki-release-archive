@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkCoPDirectoryEntry\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkcop" as elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPDirectoryEntry [[MkCoPDirectoryEntry.html]] {
+        {static} -serialVersionUID: long
+        -conservativeApproximation: ApproximationLine
+        +MkCoPDirectoryEntry()
+        +MkCoPDirectoryEntry(DBID, double, int, double, ApproximationLine)
+        +approximateConservativeKnnDistance(int): double
+        +getConservativeKnnDistanceApproximation(): ApproximationLine
+        +setConservativeKnnDistanceApproximation(ApproximationLine): void
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+    }
+
+    class "<size:14>MTreeDirectoryEntry\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeDirectoryEntry [[../../MTreeDirectoryEntry.html]]
+    interface "<size:14>MkCoPEntry\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkcop" as elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPEntry [[MkCoPEntry.html]] {
+        {abstract} +approximateConservativeKnnDistance(int): double
+        {abstract} +getConservativeKnnDistanceApproximation(): ApproximationLine
+        {abstract} +setConservativeKnnDistanceApproximation(ApproximationLine): void
+    }
+
+    elki.index.tree.metrical.mtreevariants.MTreeDirectoryEntry <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPDirectoryEntry
+    elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPEntry <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkcop.MkCoPDirectoryEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

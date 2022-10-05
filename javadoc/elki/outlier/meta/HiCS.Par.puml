@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HiCS.Par\n<size:10>elki.outlier.meta" as elki.outlier.meta.HiCS.Par {
+        {static} +M_ID: OptionID
+        {static} +ALPHA_ID: OptionID
+        {static} +ALGO_ID: OptionID
+        {static} +TEST_ID: OptionID
+        {static} +LIMIT_ID: OptionID
+        {static} +SEED_ID: OptionID
+        -m: int
+        -alpha: double
+        -outlierAlgorithm: OutlierAlgorithm
+        -statTest: GoodnessOfFitTest
+        -cutoff: int
+        -rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): HiCS
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>HiCS\n<size:10>elki.outlier.meta" as elki.outlier.meta.HiCS [[HiCS.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.meta.HiCS.Par
+    elki.outlier.meta.HiCS +-- elki.outlier.meta.HiCS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

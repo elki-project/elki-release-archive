@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExternalDoubleOutlierScore.Par\n<size:10>elki.outlier.meta" as elki.outlier.meta.ExternalDoubleOutlierScore.Par [[ExternalDoubleOutlierScore.Par.html]] {
+        {static} +FILE_ID: OptionID
+        {static} +ID_ID: OptionID
+        {static} +SCORE_ID: OptionID
+        {static} +SCALING_ID: OptionID
+        {static} +INVERTED_ID: OptionID
+        -file: URI
+        -idpattern: Pattern
+        -scorepattern: Pattern
+        -scaling: ScalingFunction
+        -inverted: boolean
+        +configure(Parameterization): void
+        +make(): ExternalDoubleOutlierScore
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ExternalDoubleOutlierScore\n<size:10>elki.outlier.meta" as elki.outlier.meta.ExternalDoubleOutlierScore [[ExternalDoubleOutlierScore.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.meta.ExternalDoubleOutlierScore.Par
+    elki.outlier.meta.ExternalDoubleOutlierScore +-- elki.outlier.meta.ExternalDoubleOutlierScore.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KDistanceProcessor\n<size:10>elki.parallel.processor" as elki.parallel.processor.KDistanceProcessor [[KDistanceProcessor.html]] {
+        ~k: int
+        ~input: SharedObject<? extends KNNList>
+        +KDistanceProcessor(int)
+        +connectKNNInput(SharedObject<? extends KNNList>): void
+        +instantiate(Executor): Instance
+    }
+
+    abstract class "<size:14>AbstractDoubleProcessor\n<size:10>elki.parallel.processor" as elki.parallel.processor.AbstractDoubleProcessor [[AbstractDoubleProcessor.html]] {
+        {abstract} +instantiate(Executor): Instance
+    }
+    class "<size:14>KDistanceProcessor.Instance\n<size:10>elki.parallel.processor" as elki.parallel.processor.KDistanceProcessor.Instance [[KDistanceProcessor.Instance.html]]
+
+    elki.parallel.processor.AbstractDoubleProcessor <|-- elki.parallel.processor.KDistanceProcessor
+    elki.parallel.processor.KDistanceProcessor +-- elki.parallel.processor.KDistanceProcessor.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

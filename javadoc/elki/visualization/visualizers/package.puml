@@ -1,0 +1,77 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers {
+
+        interface VisFactory [[VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+
+        class StaticVisualizationInstance [[StaticVisualizationInstance.html]] {
+            +StaticVisualizationInstance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Element)
+            +incrementalRedraw(): void
+            +fullRedraw(): void
+        }
+
+        abstract class AbstractVisualization [[AbstractVisualization.html]] {
+            #task: VisualizationTask
+            #context: VisualizerContext
+            #svgp: VisualizationPlot
+            #layer: Element
+            -width: double
+            -height: double
+            +AbstractVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double)
+            #addListeners(): void
+            +destroy(): void
+            +getLayer(): Element
+            #getWidth(): double
+            #getHeight(): double
+            +incrementalRedraw(): void
+            {abstract} +fullRedraw(): void
+            +resultChanged(Object): void
+            +visualizationChanged(VisualizationItem): void
+            +contentChanged(DataStoreEvent): void
+        }
+
+        interface Visualization [[Visualization.html]] {
+            {abstract} +getLayer(): Element
+            {abstract} +incrementalRedraw(): void
+            {abstract} +fullRedraw(): void
+            {abstract} +destroy(): void
+        }
+
+        elki.visualization.VisualizationProcessor <|-- VisFactory
+        AbstractVisualization <|-- StaticVisualizationInstance
+        Visualization <|.. AbstractVisualization
+        elki.result.ResultListener <|.. AbstractVisualization
+        elki.visualization.VisualizationListener <|.. AbstractVisualization
+        elki.database.datastore.DataStoreListener <|.. AbstractVisualization
+    }
+
+    namespace elki.visualization {
+        interface VisualizationProcessor [[../VisualizationProcessor.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+        }
+        interface VisualizationListener [[../VisualizationListener.html]] {
+            {abstract} +visualizationChanged(VisualizationItem): void
+        }
+    }
+
+    namespace elki.result {
+        interface ResultListener [[../../result/ResultListener.html]] {
+            +resultAdded(Object, Object): void
+            +resultChanged(Object): void
+            +resultRemoved(Object, Object): void
+        }
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreListener [[../../database/datastore/DataStoreListener.html]] {
+            {abstract} +contentChanged(DataStoreEvent): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

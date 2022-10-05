@@ -1,0 +1,123 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.workflow {
+
+        interface WorkflowStep [[WorkflowStep.html]]
+
+        class InputStep [[InputStep.html]] {
+            -database: Database
+            +InputStep(Database)
+            +getDatabase(): Database
+        }
+
+        class elki.workflow.InputStep.Par [[InputStep.Par.html]] {
+            #database: Database
+            {static} +DATABASE_ID: OptionID
+            +configure(Parameterization): void
+            +make(): InputStep
+        }
+
+        class EvaluationStep [[EvaluationStep.html]] {
+            -evaluators: List<? extends Evaluator>
+            -stepresult: Object
+            +EvaluationStep(List<? extends Evaluator>)
+            +runEvaluators(Database): void
+            +getResult(): Object
+        }
+
+        class elki.workflow.EvaluationStep.Evaluation [[EvaluationStep.Evaluation.html]] {
+            -evaluators: List<? extends Evaluator>
+            +Evaluation(List<? extends Evaluator>, Database)
+            +update(Object): void
+            +resultAdded(Object, Object): void
+        }
+
+        class elki.workflow.EvaluationStep.Par [[EvaluationStep.Par.html]] {
+            -evaluators: List<? extends Evaluator>
+            {static} +EVALUATOR_ID: OptionID
+            +configure(Parameterization): void
+            +make(): EvaluationStep
+        }
+
+        class OutputStep [[OutputStep.html]] {
+            -resulthandlers: List<? extends ResultHandler>
+            {static} #defaultHandlers: ArrayList<Class<? extends ResultHandler>>
+            +OutputStep(List<? extends ResultHandler>)
+            +runResultHandlers(Database): void
+            {static} +setDefaultHandlerWriter(): void
+            {static} +setDefaultHandlerVisualizer(): void
+        }
+
+        class elki.workflow.OutputStep.Par [[OutputStep.Par.html]] {
+            -resulthandlers: List<? extends ResultHandler>
+            {static} +RESULT_HANDLER_ID: OptionID
+            {static} +OUTPUT_ID: OptionID
+            +configure(Parameterization): void
+            +make(): OutputStep
+        }
+
+        class LoggingStep [[LoggingStep.html]] {
+            +LoggingStep(Level, String[])
+        }
+
+        class elki.workflow.LoggingStep.Par [[LoggingStep.Par.html]] {
+            #verbose: Level
+            #levels: String[]
+            +configure(Parameterization): void
+            +make(): LoggingStep
+        }
+
+        class AlgorithmStep [[AlgorithmStep.html]] {
+            {static} -LOG: Logging
+            -algorithms: List<? extends Algorithm>
+            -stepresult: Object
+            +AlgorithmStep(List<? extends Algorithm>)
+            +runAlgorithms(Database): Object
+            +getResult(): Object
+        }
+
+        class elki.workflow.AlgorithmStep.Par [[AlgorithmStep.Par.html]] {
+            #time: boolean
+            #algorithms: List<? extends Algorithm>
+            {static} +TIME_ID: OptionID
+            {static} +ALGORITHM_ID: OptionID
+            +configure(Parameterization): void
+            +make(): AlgorithmStep
+        }
+
+        WorkflowStep <|.. InputStep
+        elki.utilities.optionhandling.Parameterizer <|.. elki.workflow.InputStep.Par
+        InputStep +-- elki.workflow.InputStep.Par
+        WorkflowStep <|.. EvaluationStep
+        elki.result.ResultListener <|.. elki.workflow.EvaluationStep.Evaluation
+        EvaluationStep +-- elki.workflow.EvaluationStep.Evaluation
+        elki.utilities.optionhandling.Parameterizer <|.. elki.workflow.EvaluationStep.Par
+        EvaluationStep +-- elki.workflow.EvaluationStep.Par
+        WorkflowStep <|.. OutputStep
+        elki.utilities.optionhandling.Parameterizer <|.. elki.workflow.OutputStep.Par
+        OutputStep +-- elki.workflow.OutputStep.Par
+        WorkflowStep <|.. LoggingStep
+        elki.utilities.optionhandling.Parameterizer <|.. elki.workflow.LoggingStep.Par
+        LoggingStep +-- elki.workflow.LoggingStep.Par
+        WorkflowStep <|.. AlgorithmStep
+        elki.utilities.optionhandling.Parameterizer <|.. elki.workflow.AlgorithmStep.Par
+        AlgorithmStep +-- elki.workflow.AlgorithmStep.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.result {
+        interface ResultListener [[../result/ResultListener.html]] {
+            +resultAdded(Object, Object): void
+            +resultChanged(Object): void
+            +resultRemoved(Object, Object): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

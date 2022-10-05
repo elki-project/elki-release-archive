@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MultivariateTimeSeriesFilter\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.MultivariateTimeSeriesFilter<V extends FeatureVector<?>> [[MultivariateTimeSeriesFilter.html]] {
+        ~variates: int
+        +MultivariateTimeSeriesFilter(int)
+        #filterSingleObject(V extends FeatureVector<?>): V extends FeatureVector<?>
+        #getInputTypeRestriction(): SimpleTypeInformation<? super FeatureVector<?>>
+        #convertedType(SimpleTypeInformation<V extends FeatureVector<?>>): SimpleTypeInformation<? super FeatureVector<?>>
+    }
+
+    abstract class "<size:14>AbstractStreamConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractStreamConversionFilter<V extends FeatureVector<?>, V extends FeatureVector<?>> [[../AbstractStreamConversionFilter.html]] {
+        {abstract} #filterSingleObject(V extends FeatureVector<?>): V extends FeatureVector<?>
+        {abstract} #getInputTypeRestriction(): TypeInformation
+        {abstract} #convertedType(SimpleTypeInformation<​I>): SimpleTypeInformation<? super O>
+    }
+    class "<size:14>MultivariateTimeSeriesFilter.Par\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.MultivariateTimeSeriesFilter.Par<V extends FeatureVector<?>>
+
+    elki.datasource.filter.AbstractStreamConversionFilter <|-- elki.datasource.filter.typeconversions.MultivariateTimeSeriesFilter
+    elki.datasource.filter.typeconversions.MultivariateTimeSeriesFilter +-- elki.datasource.filter.typeconversions.MultivariateTimeSeriesFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

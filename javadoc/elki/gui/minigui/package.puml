@@ -1,0 +1,81 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.gui.minigui {
+
+        class MiniGUI [[MiniGUI.html]] {
+            {static} +SAVED_SETTINGS_FILENAME: String
+            {static} -NEWLINE: String
+            {static} -LOG: Logging
+            {static} -ACTION_QUIT: String
+            ~frame: JFrame
+            ~panel: JPanel
+            #outputArea: LogPanel
+            #parameterTable: ParameterTable
+            #parameters: DynamicParameters
+            #store: SavedSettingsFile
+            #appCombo: JComboBox<String>
+            #savedCombo: JComboBox<String>
+            #runButton: JButton
+            -maincls: Class<? extends AbstractApplication>
+            -commandLine: JTextField
+            -APP_PREFIX: String
+            -setupAppChooser(): void
+            -setupParameterTable(): void
+            -setupLoadSaveButtons(): void
+            -setupCommandLine(): void
+            -setupLoggingArea(): void
+            #updateParameterTable(): void
+            #doSetParameters(List<String>): void
+            -strip_prefix(String): String
+            -format(Object...): String
+            -formatTo(StringBuilder, List<?>): void
+            -formatTo(StringBuilder, String): void
+            #loadLatest(): void
+            #startTask(): void
+            #reportErrors(SerializedParameterization): void
+            +run(): void
+            {static} +main(String[]): void
+        }
+
+        class elki.gui.minigui.MiniGUI.SettingsComboboxModel [[MiniGUI.SettingsComboboxModel.html]] {
+            {static} -serialVersionUID: long
+            #store: SavedSettingsFile
+            #selected: String
+            +SettingsComboboxModel(SavedSettingsFile)
+            +getSelectedItem(): String
+            +setSelectedItem(Object): void
+            +getElementAt(int): String
+            +getSize(): int
+            +update(): void
+        }
+
+        elki.application.AbstractApplication <|-- MiniGUI
+        MiniGUI --> elki.gui.minigui.MiniGUI.SettingsComboboxModel: savedSettingsModel
+        javax.swing.AbstractListModel <|-- elki.gui.minigui.MiniGUI.SettingsComboboxModel
+        javax.swing.ComboBoxModel <|.. elki.gui.minigui.MiniGUI.SettingsComboboxModel
+        MiniGUI +-- elki.gui.minigui.MiniGUI.SettingsComboboxModel
+    }
+
+    namespace elki.application {
+        abstract class AbstractApplication [[../../application/AbstractApplication.html]] {
+            {static} -LOG: Logging
+            {static} -NEWLINE: String
+            {static} +VERSION: String
+            {static} -REFERENCE_VERSION: String
+            {static} +REFERENCE: String
+            {abstract} +run(): void
+        }
+    }
+
+    namespace javax.swing {
+        abstract class AbstractListModel<E> {
+            #listenerList: EventListenerList
+        }
+        interface ComboBoxModel<E> {
+            {abstract} +setSelectedItem(Object): void
+            {abstract} +getSelectedItem(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

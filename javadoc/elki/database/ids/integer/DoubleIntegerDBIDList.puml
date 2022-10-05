@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DoubleIntegerDBIDList\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.DoubleIntegerDBIDList [[DoubleIntegerDBIDList.html]] {
+        +slice(int, int): DoubleIntegerDBIDList
+        {abstract} +iter(): DoubleIntegerDBIDListIter
+    }
+
+    interface "<size:14>DoubleDBIDList\n<size:10>elki.database.ids" as elki.database.ids.DoubleDBIDList [[../DoubleDBIDList.html]] {
+        {abstract} +size(): int
+        {abstract} +assignVar(int, DBIDVar): DBIDVar
+        {abstract} +doubleValue(int): double
+        {abstract} +iter(): DoubleDBIDListIter
+        {abstract} +slice(int, int): DoubleDBIDList
+    }
+    interface "<size:14>IntegerDBIDs\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDs [[IntegerDBIDs.html]] {
+        {abstract} +iter(): IntegerDBIDIter
+    }
+
+    elki.database.ids.DoubleDBIDList <|-- elki.database.ids.integer.DoubleIntegerDBIDList
+    elki.database.ids.integer.IntegerDBIDs <|-- elki.database.ids.integer.DoubleIntegerDBIDList
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

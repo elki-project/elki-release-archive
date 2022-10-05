@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Normalization\n<size:10>elki.datasource.filter.normalization" as elki.datasource.filter.normalization.Normalization<O> [[Normalization.html]] {
+        +restore(O): O
+        +transform(LinearEquationSystem): LinearEquationSystem
+    }
+
+    interface "<size:14>ObjectFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.ObjectFilter [[../ObjectFilter.html]] {
+        {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+
+    elki.datasource.filter.ObjectFilter <|-- elki.datasource.filter.normalization.Normalization
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

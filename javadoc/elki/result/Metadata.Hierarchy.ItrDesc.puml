@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Metadata.Hierarchy.ItrDesc\n<size:10>elki.result" as elki.result.Metadata.Hierarchy.ItrDesc [[Metadata.Hierarchy.ItrDesc.html]] {
+        ~childiter: It<Object>
+        ~subiter: It<Object>
+        ~extra: Object
+        ~ItrDesc()
+        ~ItrDesc(Object)
+        +valid(): boolean
+        +advance(): It<Object>
+        -lookahead(): boolean
+        +get(): Object
+    }
+
+    interface "<size:14>It\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.It<Object> [[../utilities/datastructures/iterator/It.html]] {
+        {abstract} +get(): Object
+        {abstract} +advance(): It<O>
+    }
+    class "<size:14>Metadata.Hierarchy\n<size:10>elki.result" as elki.result.Metadata.Hierarchy [[Metadata.Hierarchy.html]]
+
+    elki.utilities.datastructures.iterator.It <|.. elki.result.Metadata.Hierarchy.ItrDesc
+    elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrDesc
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

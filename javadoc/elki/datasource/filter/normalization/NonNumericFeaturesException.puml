@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NonNumericFeaturesException\n<size:10>elki.datasource.filter.normalization" as elki.datasource.filter.normalization.NonNumericFeaturesException [[NonNumericFeaturesException.html]] {
+        {static} -serialVersionUID: long
+        +NonNumericFeaturesException()
+        +NonNumericFeaturesException(String)
+        +NonNumericFeaturesException(Throwable)
+        +NonNumericFeaturesException(String, Throwable)
+    }
+
+    class "<size:14>Exception\n<size:10>java.lang" as java.lang.Exception
+
+    java.lang.Exception <|-- elki.datasource.filter.normalization.NonNumericFeaturesException
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>QRDecomposition\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.QRDecomposition [[QRDecomposition.html]] {
+        {static} #ERR_MATRIX_RANK_DEFICIENT: String
+        {static} -serialVersionUID: long
+        -QR: double[]
+        -m: int
+        -n: int
+        -Rdiag: double[]
+        +QRDecomposition(double[])
+        +QRDecomposition(double[], int, int)
+        +isFullRank(): boolean
+        +rank(double): int
+        +getH(): double[]
+        +getR(): double[]
+        +getQ(): double[]
+        +solve(double[]): double[]
+        -solveInplace(double[]): double[]
+        +solve(double[]): double[]
+        +solveInplace(double[]): double[]
+        +inverse(): double[]
+    }
+
+    interface "<size:14>Serializable\n<size:10>java.io" as java.io.Serializable
+
+    java.io.Serializable <|.. elki.math.linearalgebra.QRDecomposition
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

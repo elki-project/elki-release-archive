@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OneDimensionalDoubleVector\n<size:10>elki.data" as elki.data.OneDimensionalDoubleVector [[OneDimensionalDoubleVector.html]] {
+        {static} +STATIC: Factory
+        ~val: double
+        +OneDimensionalDoubleVector(double)
+        +getDimensionality(): int
+        +doubleValue(int): double
+        +longValue(int): long
+        +toArray(): double[]
+    }
+
+    interface "<size:14>NumberVector\n<size:10>elki.data" as elki.data.NumberVector [[NumberVector.html]] {
+        {abstract} +doubleValue(int): double
+        {abstract} +longValue(int): long
+        {abstract} +toArray(): double[]
+    }
+    class "<size:14>OneDimensionalDoubleVector.Factory\n<size:10>elki.data" as elki.data.OneDimensionalDoubleVector.Factory [[OneDimensionalDoubleVector.Factory.html]]
+
+    elki.data.NumberVector <|.. elki.data.OneDimensionalDoubleVector
+    elki.data.OneDimensionalDoubleVector +-- elki.data.OneDimensionalDoubleVector.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

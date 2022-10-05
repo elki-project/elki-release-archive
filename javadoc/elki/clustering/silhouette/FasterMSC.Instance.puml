@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FasterMSC.Instance\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.FasterMSC.Instance [[FasterMSC.Instance.html]] {
+        +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+        #run(ArrayModifiableDBIDs, int): double
+    }
+
+    class "<size:14>FastMSC.Instance\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.FastMSC.Instance [[FastMSC.Instance.html]]
+    class "<size:14>FasterMSC\n<size:10>elki.clustering.silhouette" as elki.clustering.silhouette.FasterMSC<O> [[FasterMSC.html]]
+
+    elki.clustering.silhouette.FastMSC.Instance <|-- elki.clustering.silhouette.FasterMSC.Instance
+    elki.clustering.silhouette.FasterMSC +-- elki.clustering.silhouette.FasterMSC.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

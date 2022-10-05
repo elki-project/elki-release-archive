@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkTabTreeFactory.Par\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mktab" as elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTreeFactory.Par<O> [[MkTabTreeFactory.Par.html]] {
+        +make(): MkTabTreeFactory<O>
+        #makeSettings(): MkTreeSettings<O, MkTabTreeNode<O>, MkTabEntry>
+    }
+
+    abstract class "<size:14>AbstractMkTreeUnifiedFactory.Par\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par<O, MkTabTreeNode<O>, MkTabEntry, MkTreeSettings<O, MkTabTreeNode<O>, MkTabEntry>> [[../AbstractMkTreeUnifiedFactory.Par.html]] {
+        {abstract} +make(): AbstractMkTreeUnifiedFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>>
+    }
+    class "<size:14>MkTabTreeFactory\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mktab" as elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTreeFactory<O> [[MkTabTreeFactory.html]]
+
+    elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par <|-- elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTreeFactory.Par
+    elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTreeFactory +-- elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTreeFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

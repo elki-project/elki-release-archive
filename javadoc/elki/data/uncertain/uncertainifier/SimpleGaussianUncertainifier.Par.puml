@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleGaussianUncertainifier.Par\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.SimpleGaussianUncertainifier.Par [[SimpleGaussianUncertainifier.Par.html]] {
+        {static} +DEV_MIN_ID: OptionID
+        {static} +DEV_MAX_ID: OptionID
+        #minDev: double
+        #maxDev: double
+        #symmetric: boolean
+        +configure(Parameterization): void
+        +make(): SimpleGaussianUncertainifier
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SimpleGaussianUncertainifier\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.SimpleGaussianUncertainifier [[SimpleGaussianUncertainifier.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.data.uncertain.uncertainifier.SimpleGaussianUncertainifier.Par
+    elki.data.uncertain.uncertainifier.SimpleGaussianUncertainifier +-- elki.data.uncertain.uncertainifier.SimpleGaussianUncertainifier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,47 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseByteVector\n<size:10>elki.data" as elki.data.SparseByteVector [[SparseByteVector.html]] {
+        {static} +FACTORY: Factory
+        {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<SparseByteVector>
+        -indexes: int[]
+        -values: byte[]
+        -dimensionality: int
+        {static} -BYTE0: Byte
+        +SparseByteVector(int[], byte[], int)
+        +SparseByteVector(Int2DoubleOpenHashMap, int)
+        +SparseByteVector(byte[])
+        -getMaxDim(): int
+        +getDimensionality(): int
+        +setDimensionality(int): void
+        +--getValue--(int): Byte
+        +--doubleValue--(int): double
+        +--longValue--(int): long
+        +byteValue(int): byte
+        +toArray(): double[]
+        +iterDim(int): int
+        +iterValid(int): boolean
+        +iterDoubleValue(int): double
+        +iterLongValue(int): long
+        +iterByteValue(int): byte
+    }
+
+    interface "<size:14>SparseNumberVector\n<size:10>elki.data" as elki.data.SparseNumberVector [[SparseNumberVector.html]] {
+        {abstract} +setDimensionality(int): void
+        {abstract} +iterDoubleValue(int): double
+        {abstract} +iterLongValue(int): long
+        {abstract} +--doubleValue--(int): double
+        {abstract} +--longValue--(int): long
+    }
+    class "<size:14>SparseByteVector.Factory\n<size:10>elki.data" as elki.data.SparseByteVector.Factory [[SparseByteVector.Factory.html]]
+    class "<size:14>SparseByteVector.VariableSerializer\n<size:10>elki.data" as elki.data.SparseByteVector.VariableSerializer [[SparseByteVector.VariableSerializer.html]]
+
+    elki.data.SparseNumberVector <|.. elki.data.SparseByteVector
+    elki.data.SparseByteVector +-- elki.data.SparseByteVector.Factory
+    elki.data.SparseByteVector +-- elki.data.SparseByteVector.VariableSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

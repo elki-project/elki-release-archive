@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AssociationRuleGeneration\n<size:10>elki.itemsetmining.associationrules" as elki.itemsetmining.associationrules.AssociationRuleGeneration [[AssociationRuleGeneration.html]] {
+        {static} -LOG: Logging
+        #frequentItemAlgo: AbstractFrequentItemsetAlgorithm
+        #interestingness: InterestingnessMeasure
+        #minmeasure: double
+        #maxmeasure: double
+        +AssociationRuleGeneration(AbstractFrequentItemsetAlgorithm, InterestingnessMeasure, double, double)
+        +AssociationRuleGeneration(AbstractFrequentItemsetAlgorithm, InterestingnessMeasure, double)
+        +autorun(Database): AssociationRuleResult
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    class "<size:14>AssociationRuleGeneration.Instance\n<size:10>elki.itemsetmining.associationrules" as elki.itemsetmining.associationrules.AssociationRuleGeneration.Instance [[AssociationRuleGeneration.Instance.html]]
+    class "<size:14>AssociationRuleGeneration.PartialItemset\n<size:10>elki.itemsetmining.associationrules" as elki.itemsetmining.associationrules.AssociationRuleGeneration.PartialItemset [[AssociationRuleGeneration.PartialItemset.html]]
+    class "<size:14>AssociationRuleGeneration.ItemsetSearcher\n<size:10>elki.itemsetmining.associationrules" as elki.itemsetmining.associationrules.AssociationRuleGeneration.ItemsetSearcher [[AssociationRuleGeneration.ItemsetSearcher.html]]
+    class "<size:14>AssociationRuleGeneration.Par\n<size:10>elki.itemsetmining.associationrules" as elki.itemsetmining.associationrules.AssociationRuleGeneration.Par [[AssociationRuleGeneration.Par.html]]
+
+    elki.Algorithm <|.. elki.itemsetmining.associationrules.AssociationRuleGeneration
+    elki.itemsetmining.associationrules.AssociationRuleGeneration +-- elki.itemsetmining.associationrules.AssociationRuleGeneration.Instance
+    elki.itemsetmining.associationrules.AssociationRuleGeneration +-- elki.itemsetmining.associationrules.AssociationRuleGeneration.PartialItemset
+    elki.itemsetmining.associationrules.AssociationRuleGeneration +-- elki.itemsetmining.associationrules.AssociationRuleGeneration.ItemsetSearcher
+    elki.itemsetmining.associationrules.AssociationRuleGeneration +-- elki.itemsetmining.associationrules.AssociationRuleGeneration.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SharedNearestNeighborSimilarity\n<size:10>elki.similarity" as elki.similarity.SharedNearestNeighborSimilarity<O> [[SharedNearestNeighborSimilarity.html]] {
+        +SharedNearestNeighborSimilarity(Factory<O>)
+        {static} #countSharedNeighbors(DBIDs, DBIDs): int
+        +instantiate(Relation<T extends O>): Instance<T extends O>
+    }
+
+    abstract class "<size:14>AbstractIndexBasedSimilarity\n<size:10>elki.similarity" as elki.similarity.AbstractIndexBasedSimilarity<O, Factory<O>> [[AbstractIndexBasedSimilarity.html]] {
+        {abstract} +instantiate(Relation<T extends O>): Instance<T extends O, ?>
+    }
+    class "<size:14>SharedNearestNeighborSimilarity.Instance\n<size:10>elki.similarity" as elki.similarity.SharedNearestNeighborSimilarity.Instance<O> [[SharedNearestNeighborSimilarity.Instance.html]]
+    class "<size:14>SharedNearestNeighborSimilarity.Par\n<size:10>elki.similarity" as elki.similarity.SharedNearestNeighborSimilarity.Par<O>
+
+    elki.similarity.AbstractIndexBasedSimilarity <|-- elki.similarity.SharedNearestNeighborSimilarity
+    elki.similarity.SharedNearestNeighborSimilarity +-- elki.similarity.SharedNearestNeighborSimilarity.Instance
+    elki.similarity.SharedNearestNeighborSimilarity +-- elki.similarity.SharedNearestNeighborSimilarity.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.colors {
+
+        class ListBasedColorLibrary [[ListBasedColorLibrary.html]] {
+            -colors: String[]
+            -name: String
+            +ListBasedColorLibrary(String[], String)
+            +getColor(int): String
+            +getNumberOfNativeColors(): int
+            #getName(): String
+        }
+
+        interface ColorLibrary [[ColorLibrary.html]] {
+            {static} +COLOR_LINE_COLORS: String
+            {static} +COLOR_PAGE_BACKGROUND: String
+            {static} +COLOR_AXIS_LINE: String
+            {static} +COLOR_AXIS_TICK: String
+            {static} +COLOR_AXIS_MINOR_TICK: String
+            {static} +COLOR_AXIS_LABEL: String
+            {static} +COLOR_KEY_BACKGROUND: String
+            {static} +COLOR_KEY_LABEL: String
+            {static} +COLOR_PLOT_BACKGROUND: String
+            {abstract} +getNumberOfNativeColors(): int
+            {abstract} +getColor(int): String
+        }
+
+        ColorLibrary <|.. ListBasedColorLibrary
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

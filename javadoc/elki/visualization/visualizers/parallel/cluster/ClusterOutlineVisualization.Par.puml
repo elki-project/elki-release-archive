@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterOutlineVisualization.Par\n<size:10>elki.visualization.visualizers.parallel.cluster" as elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Par [[ClusterOutlineVisualization.Par.html]] {
+        {static} +STRAIGHT_ID: OptionID
+        -bend: boolean
+        +configure(Parameterization): void
+        +make(): ClusterOutlineVisualization
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ClusterOutlineVisualization\n<size:10>elki.visualization.visualizers.parallel.cluster" as elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization [[ClusterOutlineVisualization.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Par
+    elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization +-- elki.visualization.visualizers.parallel.cluster.ClusterOutlineVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

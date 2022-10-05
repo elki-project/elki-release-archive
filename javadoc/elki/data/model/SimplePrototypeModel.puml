@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimplePrototypeModel\n<size:10>elki.data.model" as elki.data.model.SimplePrototypeModel<V> [[SimplePrototypeModel.html]] {
+        #prototype: V
+        +SimplePrototypeModel(V)
+        +getPrototype(): V
+        +writeToText(TextWriterStream, String): void
+        #prototypeToString(): String
+        +getPrototypeType(): String
+    }
+
+    interface "<size:14>PrototypeModel\n<size:10>elki.data.model" as elki.data.model.PrototypeModel<V> [[PrototypeModel.html]] {
+        {abstract} +getPrototype(): V
+        {abstract} +getPrototypeType(): String
+    }
+    interface "<size:14>TextWriteable\n<size:10>elki.result.textwriter" as elki.result.textwriter.TextWriteable [[../../result/textwriter/TextWriteable.html]] {
+        {abstract} +writeToText(TextWriterStream, String): void
+    }
+
+    elki.data.model.PrototypeModel <|.. elki.data.model.SimplePrototypeModel
+    elki.result.textwriter.TextWriteable <|.. elki.data.model.SimplePrototypeModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

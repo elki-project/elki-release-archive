@@ -1,0 +1,353 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.dbscan.predicates {
+
+        class MinPtsCorePredicate [[MinPtsCorePredicate.html]] {
+            {static} +LOG: Logging
+            #minpts: int
+            +MinPtsCorePredicate(int)
+            +instantiate(Database): Instance
+            +acceptsType(SimpleTypeInformation<? extends DBIDs>): boolean
+        }
+
+        class elki.clustering.dbscan.predicates.MinPtsCorePredicate.Instance [[MinPtsCorePredicate.Instance.html]] {
+            #minpts: int
+            +Instance(int)
+            +isCorePoint(DBIDRef, DBIDs): boolean
+        }
+
+        class elki.clustering.dbscan.predicates.MinPtsCorePredicate.Par [[MinPtsCorePredicate.Par.html]] {
+            #minpts: int
+            +configure(Parameterization): void
+            +make(): MinPtsCorePredicate
+        }
+
+        class PreDeConNeighborPredicate [[PreDeConNeighborPredicate.html]] {
+            {static} -LOG: Logging
+            -mvSize: MeanVariance
+            -mvVar: MeanVariance
+            -settings: Settings
+            +PreDeConNeighborPredicate(Settings)
+            +instantiate(Database): Instance
+            #computeLocalModel(DBIDRef, DoubleDBIDList, Relation<? extends NumberVector>): PreDeConModel
+            ~getLogger(): Logging
+            +getOutputType(): SimpleTypeInformation<PreDeConModel>
+        }
+
+        class elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.PreDeConModel [[PreDeConNeighborPredicate.PreDeConModel.html]] {
+            ~pdim: int
+            ~ids: SetDBIDs
+            +PreDeConModel(int, SetDBIDs)
+        }
+
+        class elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.Instance [[PreDeConNeighborPredicate.Instance.html]] {
+            +Instance(DBIDs, DataStore<PreDeConModel>)
+            +getNeighbors(DBIDRef): PreDeConModel
+            +iterDBIDs(PreDeConModel): DBIDIter
+        }
+
+        class elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.Par [[PreDeConNeighborPredicate.Par.html]] {
+            #settings: Settings
+            +configure(Parameterization): void
+            +make(): PreDeConNeighborPredicate
+        }
+
+        class SimilarityNeighborPredicate<O> [[SimilarityNeighborPredicate.html]] {
+            #epsilon: double
+            #simFunc: Similarity<? super O>
+            +SimilarityNeighborPredicate(double, Similarity<? super O>)
+            +instantiate(Database): Instance
+            +getOutputType(): SimpleTypeInformation<DoubleDBIDList>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.clustering.dbscan.predicates.SimilarityNeighborPredicate.Instance [[SimilarityNeighborPredicate.Instance.html]] {
+            #epsilon: double
+            #rq: RangeSearcher<DBIDRef>
+            #ids: DBIDs
+            +Instance(double, RangeSearcher<DBIDRef>, DBIDs)
+            +getIDs(): DBIDs
+            +getNeighbors(DBIDRef): DoubleDBIDList
+            +iterDBIDs(DoubleDBIDList): DBIDIter
+        }
+
+        class elki.clustering.dbscan.predicates.SimilarityNeighborPredicate.Par<O> {
+            {static} +SIMILARITY_FUNCTION_ID: OptionID
+            {static} +EPSILON_ID: OptionID
+            #epsilon: double
+            #distfun: Similarity<O>
+            +configure(Parameterization): void
+            +make(): SimilarityNeighborPredicate<O>
+        }
+
+        interface CorePredicate<T> [[CorePredicate.html]] {
+            {abstract} +instantiate(Database): Instance<T>
+            {abstract} +acceptsType(SimpleTypeInformation<? extends T>): boolean
+        }
+
+        interface elki.clustering.dbscan.predicates.CorePredicate.Instance<T> [[CorePredicate.Instance.html]] {
+            {abstract} +isCorePoint(DBIDRef, T): boolean
+        }
+
+        class PreDeConCorePredicate [[PreDeConCorePredicate.html]] {
+            #settings: Settings
+            +PreDeConCorePredicate(Settings)
+            +instantiate(Database): Instance
+            +acceptsType(SimpleTypeInformation<? extends PreDeConModel>): boolean
+        }
+
+        class elki.clustering.dbscan.predicates.PreDeConCorePredicate.Instance [[PreDeConCorePredicate.Instance.html]] {
+            #settings: Settings
+            +Instance(Settings)
+            +isCorePoint(DBIDRef, PreDeConModel): boolean
+        }
+
+        class elki.clustering.dbscan.predicates.PreDeConCorePredicate.Par [[PreDeConCorePredicate.Par.html]] {
+            #settings: Settings
+            +configure(Parameterization): void
+            +make(): PreDeConCorePredicate
+        }
+
+        class FourCCorePredicate [[FourCCorePredicate.html]] {
+            #settings: Settings
+            +FourCCorePredicate(Settings)
+            +instantiate(Database): Instance
+            +acceptsType(SimpleTypeInformation<? extends PreDeConModel>): boolean
+        }
+
+        class elki.clustering.dbscan.predicates.FourCCorePredicate.Instance [[FourCCorePredicate.Instance.html]] {
+            #settings: Settings
+            +Instance(Settings)
+            +isCorePoint(DBIDRef, PreDeConModel): boolean
+        }
+
+        class elki.clustering.dbscan.predicates.FourCCorePredicate.Par [[FourCCorePredicate.Par.html]] {
+            #settings: Settings
+            +configure(Parameterization): void
+            +make(): FourCCorePredicate
+        }
+
+        class COPACNeighborPredicate [[COPACNeighborPredicate.html]] {
+            {static} -LOG: Logging
+            #settings: Settings
+            #epsilonsq: double
+            +COPACNeighborPredicate(Settings)
+            +instantiate(Database): Instance<COPACModel>
+            +instantiate(Relation<? extends NumberVector>): Instance
+            #computeLocalModel(DBIDRef, DoubleDBIDList, Relation<? extends NumberVector>): COPACModel
+            +getInputTypeRestriction(): TypeInformation
+            +getOutputType(): SimpleTypeInformation<COPACModel>
+        }
+
+        class elki.clustering.dbscan.predicates.COPACNeighborPredicate.COPACModel [[COPACNeighborPredicate.COPACModel.html]] {
+            ~cdim: int
+            ~ids: SetDBIDs
+            +COPACModel(int, SetDBIDs)
+            +iter(): DBIDIter
+            +size(): int
+            +contains(DBIDRef): boolean
+            +isEmpty(): boolean
+        }
+
+        class elki.clustering.dbscan.predicates.COPACNeighborPredicate.Instance [[COPACNeighborPredicate.Instance.html]] {
+            +Instance(DBIDs, DataStore<COPACModel>)
+            +getNeighbors(DBIDRef): COPACModel
+            +iterDBIDs(COPACModel): DBIDIter
+            +dimensionality(DBIDRef): int
+        }
+
+        class elki.clustering.dbscan.predicates.COPACNeighborPredicate.Par [[COPACNeighborPredicate.Par.html]] {
+            #settings: Settings
+            +configure(Parameterization): void
+            +make(): COPACNeighborPredicate
+        }
+
+        class EpsilonNeighborPredicate<O> [[EpsilonNeighborPredicate.html]] {
+            #epsilon: double
+            #distance: Distance<? super O>
+            +EpsilonNeighborPredicate(double, Distance<? super O>)
+            +instantiate(Database): Instance
+            +getOutputType(): SimpleTypeInformation<DoubleDBIDList>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.clustering.dbscan.predicates.EpsilonNeighborPredicate.Instance [[EpsilonNeighborPredicate.Instance.html]] {
+            #epsilon: double
+            #rq: RangeSearcher<DBIDRef>
+            #ids: DBIDs
+            +Instance(double, RangeSearcher<DBIDRef>, DBIDs)
+            +getIDs(): DBIDs
+            +getNeighbors(DBIDRef): DoubleDBIDList
+            +iterDBIDs(DoubleDBIDList): DBIDIter
+        }
+
+        class elki.clustering.dbscan.predicates.EpsilonNeighborPredicate.Par<O> {
+            #epsilon: double
+            #distfun: Distance<O>
+            +configure(Parameterization): void
+            +make(): EpsilonNeighborPredicate<O>
+        }
+
+        class ERiCNeighborPredicate [[ERiCNeighborPredicate.html]] {
+            {static} -LOG: Logging
+            #settings: Settings
+            -deltasq: double
+            +ERiCNeighborPredicate(Settings)
+            +instantiate(Database): Instance
+            +instantiate(Relation<? extends NumberVector>): Instance
+            +getInputTypeRestriction(): TypeInformation
+            +getOutputType(): SimpleTypeInformation<DBIDs>
+        }
+
+        class elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Instance [[ERiCNeighborPredicate.Instance.html]] {
+            -relation: Relation<? extends NumberVector>
+            +Instance(DBIDs, DataStore<PCAFilteredResult>, Relation<? extends NumberVector>)
+            +getNeighbors(DBIDRef): DBIDs
+            +iterDBIDs(DBIDs): DBIDIter
+            +strongNeighbors(NumberVector, NumberVector, PCAFilteredResult, PCAFilteredResult): boolean
+            +weakNeighbors(double[], double[], PCAFilteredResult, PCAFilteredResult): boolean
+            #approximatelyLinearDependent(PCAFilteredResult, PCAFilteredResult): boolean
+            +dimensionality(DBIDRef): int
+        }
+
+        class elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Par [[ERiCNeighborPredicate.Par.html]] {
+            #settings: Settings
+            +configure(Parameterization): void
+            +make(): ERiCNeighborPredicate
+        }
+
+        interface NeighborPredicate<T> [[NeighborPredicate.html]] {
+            {abstract} +instantiate(Database): Instance<T>
+            {abstract} +getInputTypeRestriction(): TypeInformation
+            {abstract} +getOutputType(): SimpleTypeInformation<T>
+        }
+
+        interface elki.clustering.dbscan.predicates.NeighborPredicate.Instance<T> [[NeighborPredicate.Instance.html]] {
+            {abstract} +getNeighbors(DBIDRef): T
+            {abstract} +getIDs(): DBIDs
+            {abstract} +iterDBIDs(T): DBIDIter
+        }
+
+        class FourCNeighborPredicate [[FourCNeighborPredicate.html]] {
+            {static} -LOG: Logging
+            -settings: Settings
+            -mvSize: MeanVariance
+            -mvSize2: MeanVariance
+            -mvCorDim: MeanVariance
+            -pca: PCARunner
+            -filter: EigenPairFilter
+            +FourCNeighborPredicate(Settings)
+            +instantiate(Database): Instance
+            #computeLocalModel(DBIDRef, DoubleDBIDList, Relation<? extends NumberVector>): PreDeConModel
+            ~getLogger(): Logging
+            +getInputTypeRestriction(): TypeInformation
+            +getOutputType(): SimpleTypeInformation<PreDeConModel>
+        }
+
+        class elki.clustering.dbscan.predicates.FourCNeighborPredicate.Instance [[FourCNeighborPredicate.Instance.html]] {
+            +Instance(DBIDs, DataStore<PreDeConModel>)
+            +getNeighbors(DBIDRef): PreDeConModel
+            +iterDBIDs(PreDeConModel): DBIDIter
+        }
+
+        class elki.clustering.dbscan.predicates.FourCNeighborPredicate.Par [[FourCNeighborPredicate.Par.html]] {
+            #settings: Settings
+            +configure(Parameterization): void
+            +make(): FourCNeighborPredicate
+        }
+
+        abstract class AbstractRangeQueryNeighborPredicate<O, M, N> [[AbstractRangeQueryNeighborPredicate.html]] {
+            #epsilon: double
+            #distance: Distance<? super O>
+            +AbstractRangeQueryNeighborPredicate(double, Distance<? super O>)
+            +getInputTypeRestriction(): TypeInformation
+            +preprocess(Class<? super M>, Relation<? extends O>, RangeSearcher<DBIDRef>): DataStore<M>
+            {abstract} #computeLocalModel(DBIDRef, DoubleDBIDList, Relation<? extends O>): M
+            {abstract} ~getLogger(): Logging
+        }
+
+        abstract class elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance<N, M> [[AbstractRangeQueryNeighborPredicate.Instance.html]] {
+            #ids: DBIDs
+            #storage: DataStore<M>
+            +Instance(DBIDs, DataStore<M>)
+            +getIDs(): DBIDs
+        }
+
+        abstract class elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Par<O> {
+            ~epsilon: double
+            ~distfun: Distance<O>
+            +configure(Parameterization): void
+            #configDistance(Parameterization): void
+            #configEpsilon(Parameterization): void
+        }
+
+        CorePredicate <|.. MinPtsCorePredicate
+        elki.clustering.dbscan.predicates.CorePredicate.Instance <|.. elki.clustering.dbscan.predicates.MinPtsCorePredicate.Instance
+        MinPtsCorePredicate +-- elki.clustering.dbscan.predicates.MinPtsCorePredicate.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.MinPtsCorePredicate.Par
+        MinPtsCorePredicate +-- elki.clustering.dbscan.predicates.MinPtsCorePredicate.Par
+        AbstractRangeQueryNeighborPredicate <|-- PreDeConNeighborPredicate
+        PreDeConNeighborPredicate +-- elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.PreDeConModel
+        elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance <|-- elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.Instance
+        PreDeConNeighborPredicate +-- elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.Par
+        PreDeConNeighborPredicate +-- elki.clustering.dbscan.predicates.PreDeConNeighborPredicate.Par
+        NeighborPredicate <|.. SimilarityNeighborPredicate
+        elki.clustering.dbscan.predicates.NeighborPredicate.Instance <|.. elki.clustering.dbscan.predicates.SimilarityNeighborPredicate.Instance
+        SimilarityNeighborPredicate +-- elki.clustering.dbscan.predicates.SimilarityNeighborPredicate.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.SimilarityNeighborPredicate.Par
+        SimilarityNeighborPredicate +-- elki.clustering.dbscan.predicates.SimilarityNeighborPredicate.Par
+        CorePredicate +-- elki.clustering.dbscan.predicates.CorePredicate.Instance
+        CorePredicate <|.. PreDeConCorePredicate
+        elki.clustering.dbscan.predicates.CorePredicate.Instance <|.. elki.clustering.dbscan.predicates.PreDeConCorePredicate.Instance
+        PreDeConCorePredicate +-- elki.clustering.dbscan.predicates.PreDeConCorePredicate.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.PreDeConCorePredicate.Par
+        PreDeConCorePredicate +-- elki.clustering.dbscan.predicates.PreDeConCorePredicate.Par
+        CorePredicate <|.. FourCCorePredicate
+        elki.clustering.dbscan.predicates.CorePredicate.Instance <|.. elki.clustering.dbscan.predicates.FourCCorePredicate.Instance
+        FourCCorePredicate +-- elki.clustering.dbscan.predicates.FourCCorePredicate.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.FourCCorePredicate.Par
+        FourCCorePredicate +-- elki.clustering.dbscan.predicates.FourCCorePredicate.Par
+        NeighborPredicate <|.. COPACNeighborPredicate
+        elki.database.ids.SetDBIDs <|.. elki.clustering.dbscan.predicates.COPACNeighborPredicate.COPACModel
+        COPACNeighborPredicate +-- elki.clustering.dbscan.predicates.COPACNeighborPredicate.COPACModel
+        elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance <|-- elki.clustering.dbscan.predicates.COPACNeighborPredicate.Instance
+        COPACNeighborPredicate +-- elki.clustering.dbscan.predicates.COPACNeighborPredicate.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.COPACNeighborPredicate.Par
+        COPACNeighborPredicate +-- elki.clustering.dbscan.predicates.COPACNeighborPredicate.Par
+        NeighborPredicate <|.. EpsilonNeighborPredicate
+        elki.clustering.dbscan.predicates.NeighborPredicate.Instance <|.. elki.clustering.dbscan.predicates.EpsilonNeighborPredicate.Instance
+        EpsilonNeighborPredicate +-- elki.clustering.dbscan.predicates.EpsilonNeighborPredicate.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.EpsilonNeighborPredicate.Par
+        EpsilonNeighborPredicate +-- elki.clustering.dbscan.predicates.EpsilonNeighborPredicate.Par
+        NeighborPredicate <|.. ERiCNeighborPredicate
+        elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance <|-- elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Instance
+        ERiCNeighborPredicate +-- elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Par
+        ERiCNeighborPredicate +-- elki.clustering.dbscan.predicates.ERiCNeighborPredicate.Par
+        NeighborPredicate +-- elki.clustering.dbscan.predicates.NeighborPredicate.Instance
+        AbstractRangeQueryNeighborPredicate <|-- FourCNeighborPredicate
+        elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance <|-- elki.clustering.dbscan.predicates.FourCNeighborPredicate.Instance
+        FourCNeighborPredicate +-- elki.clustering.dbscan.predicates.FourCNeighborPredicate.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.FourCNeighborPredicate.Par
+        FourCNeighborPredicate +-- elki.clustering.dbscan.predicates.FourCNeighborPredicate.Par
+        NeighborPredicate <|.. AbstractRangeQueryNeighborPredicate
+        elki.clustering.dbscan.predicates.NeighborPredicate.Instance <|.. elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance
+        AbstractRangeQueryNeighborPredicate +-- elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Par
+        AbstractRangeQueryNeighborPredicate +-- elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.database.ids {
+        interface SetDBIDs [[../../../database/ids/SetDBIDs.html]]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

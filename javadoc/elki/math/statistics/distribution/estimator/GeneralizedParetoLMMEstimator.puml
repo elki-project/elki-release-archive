@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GeneralizedParetoLMMEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.GeneralizedParetoLMMEstimator [[GeneralizedParetoLMMEstimator.html]] {
+        {static} +STATIC: GeneralizedParetoLMMEstimator
+        +getNumMoments(): int
+        +estimateFromLMoments(double[]): GeneralizedParetoDistribution
+        +getDistributionClass(): Class<? super GeneralizedParetoDistribution>
+    }
+
+    interface "<size:14>LMMDistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LMMDistributionEstimator<GeneralizedParetoDistribution> [[LMMDistributionEstimator.html]] {
+        {abstract} +estimateFromLMoments(double[]): GeneralizedParetoDistribution
+        {abstract} +getNumMoments(): int
+    }
+    class "<size:14>GeneralizedParetoLMMEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.GeneralizedParetoLMMEstimator.Par [[GeneralizedParetoLMMEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.LMMDistributionEstimator <|.. elki.math.statistics.distribution.estimator.GeneralizedParetoLMMEstimator
+    elki.math.statistics.distribution.estimator.GeneralizedParetoLMMEstimator +-- elki.math.statistics.distribution.estimator.GeneralizedParetoLMMEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

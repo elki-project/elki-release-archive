@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MTreeLeafEntry\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeLeafEntry [[MTreeLeafEntry.html]] {
+        {static} -serialVersionUID: long
+        -id: DBID
+        -parentDistance: double
+        +MTreeLeafEntry()
+        +MTreeLeafEntry(DBID, double)
+        +getDBID(): DBID
+        +getRoutingObjectID(): DBID
+        +setRoutingObjectID(DBID): boolean
+        +getParentDistance(): double
+        +setParentDistance(double): boolean
+        +getCoveringRadius(): double
+        +setCoveringRadius(double): boolean
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+    }
+
+    interface "<size:14>LeafEntry\n<size:10>elki.index.tree" as elki.index.tree.LeafEntry [[../../LeafEntry.html]] {
+        {abstract} +getDBID(): DBID
+    }
+    interface "<size:14>MTreeEntry\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeEntry [[MTreeEntry.html]] {
+        {abstract} +getRoutingObjectID(): DBID
+        {abstract} +setRoutingObjectID(DBID): boolean
+        {abstract} +getParentDistance(): double
+        {abstract} +setParentDistance(double): boolean
+        {abstract} +getCoveringRadius(): double
+        {abstract} +setCoveringRadius(double): boolean
+    }
+
+    elki.index.tree.LeafEntry <|.. elki.index.tree.metrical.mtreevariants.MTreeLeafEntry
+    elki.index.tree.metrical.mtreevariants.MTreeEntry <|.. elki.index.tree.metrical.mtreevariants.MTreeLeafEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

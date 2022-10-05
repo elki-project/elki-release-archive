@@ -1,0 +1,53 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GammaDistribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.GammaDistribution [[GammaDistribution.html]] {
+        {static} +EULERS_CONST: double
+        {static} ~LANCZOS: double[]
+        {static} ~NUM_PRECISION: double
+        {static} ~MAX_ITERATIONS: int
+        {static} ~LOGGAMMA_G: double
+        {static} ~FPMIN: double
+        -k: double
+        -theta: double
+        +GammaDistribution(double, double)
+        +pdf(double): double
+        +logpdf(double): double
+        +cdf(double): double
+        +quantile(double): double
+        +nextRandom(Random): double
+        +getK(): double
+        +getTheta(): double
+        {static} +cdf(double, double, double): double
+        {static} +logcdf(double, double, double): double
+        {static} +pdf(double, double, double): double
+        {static} +logpdf(double, double, double): double
+        {static} +logGamma(double): double
+        {static} +gamma(double): double
+        {static} +regularizedGammaP(double, double): double
+        {static} +logregularizedGammaP(double, double): double
+        {static} +regularizedGammaQ(double, double): double
+        {static} +nextRandom(double, double, Random): double
+        {static} #chisquaredProbitApproximation(double, double, double): double
+        {static} +quantile(double, double, double): double
+        {static} #gammaQuantileNewtonRefinement(double, double, double, int, double): double
+        {static} +digamma(double): double
+        {static} +trigamma(double): double
+    }
+
+    interface "<size:14>Distribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution [[Distribution.html]] {
+        {abstract} +pdf(double): double
+        {abstract} +logpdf(double): double
+        {abstract} +cdf(double): double
+        {abstract} +quantile(double): double
+    }
+    class "<size:14>GammaDistribution.Par\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.GammaDistribution.Par [[GammaDistribution.Par.html]]
+
+    elki.math.statistics.distribution.Distribution <|.. elki.math.statistics.distribution.GammaDistribution
+    elki.math.statistics.distribution.GammaDistribution +-- elki.math.statistics.distribution.GammaDistribution.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

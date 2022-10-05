@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntegerDBIDRange\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDRange [[IntegerDBIDRange.html]] {
+        #start: int
+        #len: int
+        #IntegerDBIDRange(int, int)
+        +size(): int
+        +contains(DBIDRef): boolean
+        +get(int): DBID
+        +getOffset(DBIDRef): int
+        +assignVar(int, DBIDVar): DBIDVar
+        +binarySearch(DBIDRef): int
+        +mapDBIDToOffset(DBIDRef): int
+        +slice(int, int): ArrayDBIDs
+        +iter(): Itr
+    }
+
+    interface "<size:14>IntegerDBIDs\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDs [[IntegerDBIDs.html]] {
+        {abstract} +iter(): IntegerDBIDIter
+    }
+    interface "<size:14>DBIDRange\n<size:10>elki.database.ids" as elki.database.ids.DBIDRange [[../DBIDRange.html]] {
+        {abstract} +getOffset(DBIDRef): int
+    }
+    interface "<size:14>SetDBIDs\n<size:10>elki.database.ids" as elki.database.ids.SetDBIDs [[../SetDBIDs.html]]
+    class "<size:14>IntegerDBIDRange.Itr\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDRange.Itr [[IntegerDBIDRange.Itr.html]]
+
+    elki.database.ids.integer.IntegerDBIDs <|.. elki.database.ids.integer.IntegerDBIDRange
+    elki.database.ids.DBIDRange <|.. elki.database.ids.integer.IntegerDBIDRange
+    elki.database.ids.SetDBIDs <|.. elki.database.ids.integer.IntegerDBIDRange
+    elki.database.ids.integer.IntegerDBIDRange +-- elki.database.ids.integer.IntegerDBIDRange.Itr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

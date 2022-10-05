@@ -1,0 +1,50 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.evaluation {
+
+        class NoAutomaticEvaluation [[NoAutomaticEvaluation.html]] {
+            +processNewResult(Object): void
+        }
+
+        class elki.evaluation.NoAutomaticEvaluation.Par [[NoAutomaticEvaluation.Par.html]] {
+            +make(): NoAutomaticEvaluation
+        }
+
+        class AutomaticEvaluation [[AutomaticEvaluation.html]] {
+            {static} -LOG: Logging
+            +processNewResult(Object): void
+            #autoEvaluateOutliers(Object): void
+            #autoEvaluateClusterings(Object): void
+            {static} +ensureClusteringResult(Database): void
+        }
+
+        class elki.evaluation.AutomaticEvaluation.Par [[AutomaticEvaluation.Par.html]] {
+            +make(): AutomaticEvaluation
+        }
+
+        interface Evaluator [[Evaluator.html]]
+
+        Evaluator <|.. NoAutomaticEvaluation
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.NoAutomaticEvaluation.Par
+        NoAutomaticEvaluation +-- elki.evaluation.NoAutomaticEvaluation.Par
+        Evaluator <|.. AutomaticEvaluation
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.AutomaticEvaluation.Par
+        AutomaticEvaluation +-- elki.evaluation.AutomaticEvaluation.Par
+        elki.result.ResultProcessor <|-- Evaluator
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.result {
+        interface ResultProcessor [[../result/ResultProcessor.html]] {
+            {abstract} +processNewResult(Object): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

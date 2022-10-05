@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>NoiseHandling\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.NoiseHandling [[NoiseHandling.html]] {
+        {static} +MERGE_NOISE
+        {static} +TREAT_NOISE_AS_SINGLETONS
+        {static} +IGNORE_NOISE
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

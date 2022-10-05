@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseNumberVectorLabelParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.SparseNumberVectorLabelParser.Par<V extends SparseNumberVector> [[SparseNumberVectorLabelParser.Par.html]] {
+        #getFactory(Parameterization): void
+        +make(): SparseNumberVectorLabelParser<V extends SparseNumberVector>
+    }
+
+    class "<size:14>NumberVectorLabelParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.NumberVectorLabelParser.Par<V extends SparseNumberVector> [[NumberVectorLabelParser.Par.html]]
+    class "<size:14>SparseNumberVectorLabelParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.SparseNumberVectorLabelParser<V extends SparseNumberVector> [[SparseNumberVectorLabelParser.html]]
+
+    elki.datasource.parser.NumberVectorLabelParser.Par <|-- elki.datasource.parser.SparseNumberVectorLabelParser.Par
+    elki.datasource.parser.SparseNumberVectorLabelParser +-- elki.datasource.parser.SparseNumberVectorLabelParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

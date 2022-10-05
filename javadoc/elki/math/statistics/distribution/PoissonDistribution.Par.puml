@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PoissonDistribution.Par\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.PoissonDistribution.Par [[PoissonDistribution.Par.html]] {
+        {static} +N_ID: OptionID
+        {static} +PROB_ID: OptionID
+        ~n: int
+        ~p: double
+        +configure(Parameterization): void
+        +make(): PoissonDistribution
+    }
+
+    interface "<size:14>Distribution.Parameterizer\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.Distribution.Parameterizer [[Distribution.Parameterizer.html]]
+    class "<size:14>PoissonDistribution\n<size:10>elki.math.statistics.distribution" as elki.math.statistics.distribution.PoissonDistribution [[PoissonDistribution.html]]
+
+    elki.math.statistics.distribution.Distribution.Parameterizer <|.. elki.math.statistics.distribution.PoissonDistribution.Par
+    elki.math.statistics.distribution.PoissonDistribution +-- elki.math.statistics.distribution.PoissonDistribution.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

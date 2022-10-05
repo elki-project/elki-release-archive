@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KernelDensityEstimator\n<size:10>elki.math.statistics" as elki.math.statistics.KernelDensityEstimator [[KernelDensityEstimator.html]] {
+        -dens: double[]
+        -var: double[]
+        +KernelDensityEstimator(double[], double, double, KernelDensityFunction, int, double)
+        +KernelDensityEstimator(double[], KernelDensityFunction, double)
+        -process(double[], double, double, KernelDensityFunction, int, double): void
+        +getDensity(): double[]
+        +getVariance(): double[]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

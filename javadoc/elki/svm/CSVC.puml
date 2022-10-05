@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CSVC\n<size:10>elki.svm" as elki.svm.CSVC [[CSVC.html]] {
+        {static} -LOG: Logging
+        ~Cp: double
+        ~Cn: double
+        +CSVC(double, boolean, double)
+        +set_weights(double, double): void
+        #solve(DataSet): SolutionInfo
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractSVC\n<size:10>elki.svm" as elki.svm.AbstractSVC [[AbstractSVC.html]]
+
+    elki.svm.AbstractSVC <|-- elki.svm.CSVC
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GeneratorMain.AssignLabelsByDistance\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDistance [[GeneratorMain.AssignLabelsByDistance.html]] {
+        -centers: double[]
+        +AssignLabelsByDistance(ClassLabel[])
+        -clusterCenters(ArrayList<GeneratorInterface>, ClassLabel[]): double[]
+        +getAssignment(int, double[]): int
+    }
+
+    class "<size:14>GeneratorMain.AssignPoint\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorMain.AssignPoint
+    class "<size:14>GeneratorMain\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorMain [[GeneratorMain.html]]
+
+    elki.data.synthetic.bymodel.GeneratorMain.AssignPoint <|-- elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDistance
+    elki.data.synthetic.bymodel.GeneratorMain +-- elki.data.synthetic.bymodel.GeneratorMain.AssignLabelsByDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

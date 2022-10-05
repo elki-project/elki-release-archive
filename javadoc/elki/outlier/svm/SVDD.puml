@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SVDD\n<size:10>elki.outlier.svm" as elki.outlier.svm.SVDD<V> [[SVDD.html]] {
+        {static} -LOG: Logging
+        ~kernel: PrimitiveSimilarity<? super V>
+        ~C: double
+        +SVDD(PrimitiveSimilarity<? super V>, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V>): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>SVDD.Par\n<size:10>elki.outlier.svm" as elki.outlier.svm.SVDD.Par<V>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.svm.SVDD
+    elki.outlier.svm.SVDD +-- elki.outlier.svm.SVDD.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

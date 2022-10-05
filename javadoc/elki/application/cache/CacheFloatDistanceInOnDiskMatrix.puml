@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CacheFloatDistanceInOnDiskMatrix\n<size:10>elki.application.cache" as elki.application.cache.CacheFloatDistanceInOnDiskMatrix<O> [[CacheFloatDistanceInOnDiskMatrix.html]] {
+        {static} -LOG: Logging
+        {static} -debugExtraCheckSymmetry: boolean
+        -database: Database
+        -distance: Distance<? super O>
+        -out: Path
+        +CacheFloatDistanceInOnDiskMatrix(Database, Distance<? super O>, Path)
+        +run(): void
+        {static} +main(String[]): void
+    }
+
+    abstract class "<size:14>AbstractApplication\n<size:10>elki.application" as elki.application.AbstractApplication [[../AbstractApplication.html]] {
+        {abstract} +run(): void
+    }
+    class "<size:14>CacheFloatDistanceInOnDiskMatrix.Par\n<size:10>elki.application.cache" as elki.application.cache.CacheFloatDistanceInOnDiskMatrix.Par<O> [[CacheFloatDistanceInOnDiskMatrix.Par.html]]
+
+    elki.application.AbstractApplication <|-- elki.application.cache.CacheFloatDistanceInOnDiskMatrix
+    elki.application.cache.CacheFloatDistanceInOnDiskMatrix +-- elki.application.cache.CacheFloatDistanceInOnDiskMatrix.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastOPTICS\n<size:10>elki.clustering.optics" as elki.clustering.optics.FastOPTICS<V extends NumberVector> [[FastOPTICS.html]] {
+        {static} -LOG: Logging
+        {static} +UNDEFINED_DISTANCE: double
+        ~order: ClusterOrder
+        ~reachDist: WritableDoubleDataStore
+        ~processed: ModifiableDBIDs
+        ~neighs: DataStore<? extends DBIDs>
+        ~inverseDensities: DoubleDataStore
+        ~minPts: int
+        ~index: RandomProjectedNeighborsAndDensities
+        +FastOPTICS(int, RandomProjectedNeighborsAndDensities)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V extends NumberVector>): ClusterOrder
+        #expandClusterOrder(DBID, ClusterOrder, DistanceQuery<V extends NumberVector>, FiniteProgress): void
+        +getMinPts(): int
+    }
+
+    interface "<size:14>OPTICSTypeAlgorithm\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSTypeAlgorithm [[OPTICSTypeAlgorithm.html]] {
+        {abstract} +getMinPts(): int
+    }
+    class "<size:14>FastOPTICS.Par\n<size:10>elki.clustering.optics" as elki.clustering.optics.FastOPTICS.Par<V extends NumberVector>
+
+    elki.clustering.optics.OPTICSTypeAlgorithm <|.. elki.clustering.optics.FastOPTICS
+    elki.clustering.optics.FastOPTICS +-- elki.clustering.optics.FastOPTICS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

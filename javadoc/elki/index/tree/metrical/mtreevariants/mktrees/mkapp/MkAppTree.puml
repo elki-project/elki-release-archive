@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>MkAppTree\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkapp" as elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTree<O> [[MkAppTree.html]] {
+        {static} -LOG: Logging
+        +MkAppTree(Relation<O>, PageFile<MkAppTreeNode<O>>, MkAppTreeSettings<O>)
+        +insert(MkAppEntry, boolean): void
+        #preInsert(MkAppEntry): void
+        +insertAll(List<MkAppEntry>): void
+        +reverseKNNQuery(DBIDRef, int): DoubleDBIDList
+        +getK_max(): int
+        #initializeCapacities(MkAppEntry): void
+        -getMeanKNNList(DBIDs, Map<DBID, KNNList>): double[]
+        -adjustApproximatedKNNDistances(MkAppEntry, Map<DBID, KNNList>): void
+        -leafEntryIDs(MkAppTreeNode<O>, ModifiableDBIDs): void
+        -approximateKnnDistances(double[]): PolynomialApproximation
+        #createNewLeafNode(): MkAppTreeNode<O>
+        #createNewDirectoryNode(): MkAppTreeNode<O>
+        #createNewDirectoryEntry(MkAppTreeNode<O>, DBID, double): MkAppEntry
+        #createRootEntry(): MkAppEntry
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractMkTree\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTree<O, MkAppTreeNode<O>, MkAppEntry, MkAppTreeSettings<O>> [[../AbstractMkTree.html]] {
+        {abstract} +reverseKNNQuery(DBIDRef, int): DoubleDBIDList
+    }
+
+    elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTree <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

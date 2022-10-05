@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SharedNearestNeighborJaccardDistance\n<size:10>elki.distance" as elki.distance.SharedNearestNeighborJaccardDistance<O> [[SharedNearestNeighborJaccardDistance.html]] {
+        +SharedNearestNeighborJaccardDistance(Factory<O>)
+        +instantiate(Relation<T extends O>): Instance<T extends O>
+    }
+
+    abstract class "<size:14>AbstractIndexBasedDistance\n<size:10>elki.distance" as elki.distance.AbstractIndexBasedDistance<O, Factory<O>> [[AbstractIndexBasedDistance.html]]
+    class "<size:14>SharedNearestNeighborJaccardDistance.Instance\n<size:10>elki.distance" as elki.distance.SharedNearestNeighborJaccardDistance.Instance<T> [[SharedNearestNeighborJaccardDistance.Instance.html]]
+    class "<size:14>SharedNearestNeighborJaccardDistance.Par\n<size:10>elki.distance" as elki.distance.SharedNearestNeighborJaccardDistance.Par<O> [[SharedNearestNeighborJaccardDistance.Par.html]]
+
+    elki.distance.AbstractIndexBasedDistance <|-- elki.distance.SharedNearestNeighborJaccardDistance
+    elki.distance.SharedNearestNeighborJaccardDistance +-- elki.distance.SharedNearestNeighborJaccardDistance.Instance
+    elki.distance.SharedNearestNeighborJaccardDistance +-- elki.distance.SharedNearestNeighborJaccardDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

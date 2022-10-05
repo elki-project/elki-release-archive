@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HartiganWongKMeans.Parameterizer\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.HartiganWongKMeans.Parameterizer<V extends NumberVector> [[HartiganWongKMeans.Parameterizer.html]] {
+        +configure(Parameterization): void
+        +make(): HartiganWongKMeans<V extends NumberVector>
+    }
+
+    abstract class "<size:14>AbstractKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Par<V extends NumberVector> [[AbstractKMeans.Par.html]] {
+        {abstract} +make(): AbstractKMeans<V extends NumberVector, ?>
+    }
+    class "<size:14>HartiganWongKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.HartiganWongKMeans<V extends NumberVector> [[HartiganWongKMeans.html]]
+
+    elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.HartiganWongKMeans.Parameterizer
+    elki.clustering.kmeans.HartiganWongKMeans +-- elki.clustering.kmeans.HartiganWongKMeans.Parameterizer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

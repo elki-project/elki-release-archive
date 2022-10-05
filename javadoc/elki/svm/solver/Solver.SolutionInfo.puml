@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Solver.SolutionInfo\n<size:10>elki.svm.solver" as elki.svm.solver.Solver.SolutionInfo [[Solver.SolutionInfo.html]] {
+        +obj: double
+        +rho: double
+        +upper_bound_p: double
+        +upper_bound_n: double
+        +alpha: double[]
+        +r_square: double
+    }
+
+    class "<size:14>Solver\n<size:10>elki.svm.solver" as elki.svm.solver.Solver [[Solver.html]]
+
+    elki.svm.solver.Solver +-- elki.svm.solver.Solver.SolutionInfo
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

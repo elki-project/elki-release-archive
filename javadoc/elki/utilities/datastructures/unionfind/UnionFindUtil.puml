@@ -1,0 +1,12 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UnionFindUtil\n<size:10>elki.utilities.datastructures.unionfind" as elki.utilities.datastructures.unionfind.UnionFindUtil [[UnionFindUtil.html]] {
+        {static} +make(StaticDBIDs): UnionFind
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

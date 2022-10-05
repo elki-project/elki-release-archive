@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>CFDistance\n<size:10>elki.index.tree.betula.distance" as elki.index.tree.betula.distance.CFDistance [[CFDistance.html]] {
+        {abstract} +squaredDistance(NumberVector, ClusterFeature): double
+        {abstract} +squaredDistance(ClusterFeature, ClusterFeature): double
+        +matSelfInit(ClusterFeature): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

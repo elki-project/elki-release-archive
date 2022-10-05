@@ -1,0 +1,44 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ThumbnailVisualization\n<size:10>elki.visualization.visualizers.thumbs" as elki.visualization.visualizers.thumbs.ThumbnailVisualization [[ThumbnailVisualization.html]] {
+        #visFactory: VisFactory
+        #thumbid: int
+        #pendingThumbnail: Task
+        #tresolution: int
+        -thumb: BufferedImage
+        -plot: SVGPlot
+        -proj: Projection
+        +ThumbnailVisualization(VisualizerContext, VisFactory, VisualizationTask, VisualizationPlot, double, double, Projection, int)
+        +destroy(): void
+        +getLayer(): Element
+        +fullRedraw(): void
+        +doThumbnail(): void
+        -refreshThumbnail(): void
+        +resultChanged(Object): void
+        +visualizationChanged(VisualizationItem): void
+    }
+
+    abstract class "<size:14>AbstractVisualization\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.AbstractVisualization [[../AbstractVisualization.html]] {
+        {abstract} +fullRedraw(): void
+    }
+    interface "<size:14>ThumbnailThread.Listener\n<size:10>elki.visualization.visualizers.thumbs" as elki.visualization.visualizers.thumbs.ThumbnailThread.Listener [[ThumbnailThread.Listener.html]] {
+        {abstract} +doThumbnail(): void
+    }
+    interface "<size:14>DataStoreListener\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreListener [[../../../database/datastore/DataStoreListener.html]] {
+        {abstract} +contentChanged(DataStoreEvent): void
+    }
+    interface "<size:14>VisualizationListener\n<size:10>elki.visualization" as elki.visualization.VisualizationListener [[../../VisualizationListener.html]] {
+        {abstract} +visualizationChanged(VisualizationItem): void
+    }
+
+    elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.thumbs.ThumbnailVisualization
+    elki.visualization.visualizers.thumbs.ThumbnailThread.Listener <|.. elki.visualization.visualizers.thumbs.ThumbnailVisualization
+    elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.thumbs.ThumbnailVisualization
+    elki.visualization.VisualizationListener <|.. elki.visualization.visualizers.thumbs.ThumbnailVisualization
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

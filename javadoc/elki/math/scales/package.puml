@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.scales {
+
+        class LinearScale [[LinearScale.html]] {
+            {static} +MAXTICKS: int
+            -ZOOMFACTOR: double
+            -min: double
+            -max: double
+            -res: double
+            -log10res: int
+            -delta: double
+            +LinearScale(double, double)
+            +getMin(): double
+            +getMax(): double
+            +getRes(): double
+            +getLog10Res(): double
+            +getScaled(double): double
+            +getUnscaled(double): double
+            +getRelativeScaled(double): double
+            +getRelativeUnscaled(double): double
+            +getScaled(double, double, double): double
+            +getUnscaled(double, double, double): double
+            +getRelativeScaled(double, double, double): double
+            +getRelativeUnscaled(double, double, double): double
+            +formatValue(double): String
+        }
+
+        class Scales [[Scales.html]] {
+            {static} +calcScales(Relation<? extends SpatialComparable>): LinearScale[]
+        }
+
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

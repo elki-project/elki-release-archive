@@ -1,0 +1,113 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.datasource.filter {
+
+        class FixedDBIDsFilter [[FixedDBIDsFilter.html]] {
+            ~meta: BundleMeta
+            ~curid: int
+            +FixedDBIDsFilter(int)
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        }
+
+        class elki.datasource.filter.FixedDBIDsFilter.Par [[FixedDBIDsFilter.Par.html]] {
+            {static} +IDSTART_ID: OptionID
+            ~startid: int
+            +configure(Parameterization): void
+            +make(): FixedDBIDsFilter
+        }
+
+        abstract class AbstractConversionFilter<I, O> [[AbstractConversionFilter.html]] {
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+            {abstract} #getLogger(): Logging
+            {abstract} #filterSingleObject(I): O
+            {abstract} #getInputTypeRestriction(): SimpleTypeInformation<? super I>
+            {abstract} #convertedType(SimpleTypeInformation<​I>): SimpleTypeInformation<? super O>
+            #prepareStart(SimpleTypeInformation<​I>): boolean
+            #prepareProcessInstance(I): void
+            #prepareComplete(): void
+        }
+
+        class NoOpFilter [[NoOpFilter.html]] {
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+            +getMeta(): BundleMeta
+            +data(int): Object
+            +nextEvent(): Event
+        }
+
+        class FilterUtil [[FilterUtil.html]] {
+            {static} +guessFactory(SimpleTypeInformation<V extends NumberVector>): Factory<V extends NumberVector>
+            {static} +findLabelColumn(MultipleObjectsBundle): int
+            {static} +findLabelColumn(BundleMeta): int
+        }
+
+        abstract class AbstractStreamFilter [[AbstractStreamFilter.html]] {
+            #source: BundleStreamSource
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+            +init(BundleStreamSource): BundleStreamSource
+            +hasDBIDs(): boolean
+            +assignDBID(DBIDVar): boolean
+            +asMultipleObjectsBundle(): MultipleObjectsBundle
+        }
+
+        abstract class AbstractVectorConversionFilter<I, O extends NumberVector> [[AbstractVectorConversionFilter.html]] {
+            #factory: Factory<O extends NumberVector>
+            #initializeOutputType(SimpleTypeInformation<O extends NumberVector>): void
+        }
+
+        abstract class AbstractStreamConversionFilter<I, O> [[AbstractStreamConversionFilter.html]] {
+            ~meta: BundleMeta
+            ~column: int
+            +getMeta(): BundleMeta
+            +data(int): Object
+            +nextEvent(): Event
+            {abstract} #filterSingleObject(I): O
+            {abstract} #getInputTypeRestriction(): TypeInformation
+            {abstract} #convertedType(SimpleTypeInformation<​I>): SimpleTypeInformation<? super O>
+        }
+
+        abstract class AbstractVectorStreamConversionFilter<I, O extends NumberVector> [[AbstractVectorStreamConversionFilter.html]] {
+            #factory: Factory<O extends NumberVector>
+            #initializeOutputType(SimpleTypeInformation<O extends NumberVector>): void
+        }
+
+        interface StreamFilter [[StreamFilter.html]] {
+            {abstract} +init(BundleStreamSource): BundleStreamSource
+        }
+
+        interface ObjectFilter [[ObjectFilter.html]] {
+            {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        }
+
+        ObjectFilter <|.. FixedDBIDsFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.FixedDBIDsFilter.Par
+        FixedDBIDsFilter +-- elki.datasource.filter.FixedDBIDsFilter.Par
+        ObjectFilter <|.. AbstractConversionFilter
+        AbstractStreamFilter <|-- NoOpFilter
+        StreamFilter <|.. AbstractStreamFilter
+        AbstractConversionFilter <|-- AbstractVectorConversionFilter
+        AbstractStreamFilter <|-- AbstractStreamConversionFilter
+        AbstractStreamConversionFilter <|-- AbstractVectorStreamConversionFilter
+        ObjectFilter <|-- StreamFilter
+        elki.datasource.bundle.BundleStreamSource <|-- StreamFilter
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.datasource.bundle {
+        interface BundleStreamSource [[../bundle/BundleStreamSource.html]] {
+            {abstract} +getMeta(): BundleMeta
+            {abstract} +data(int): Object
+            {abstract} +hasDBIDs(): boolean
+            {abstract} +assignDBID(DBIDVar): boolean
+            {abstract} +nextEvent(): Event
+            {abstract} +asMultipleObjectsBundle(): MultipleObjectsBundle
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

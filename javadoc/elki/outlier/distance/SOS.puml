@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SOS\n<size:10>elki.outlier.distance" as elki.outlier.distance.SOS<O> [[SOS.html]] {
+        {static} -LOG: Logging
+        {static} #PERPLEXITY_ERROR: double
+        {static} #PERPLEXITY_MAXITER: int
+        #distance: Distance<? super O>
+        #perplexity: double
+        +SOS(Distance<? super O>, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+        {static} +sumOfProbabilities(DBIDIter, DBIDArrayIter, double[]): double
+        {static} +nominateNeighbors(DBIDIter, DBIDArrayIter, double[], double, WritableDoubleDataStore): void
+        {static} +computePi(DBIDRef, DoubleDBIDListIter, double[], double, double): double
+        {static} #estimateInitialBeta(DBIDRef, DoubleDBIDListIter, double): double
+        {static} #computeH(DBIDRef, DoubleDBIDListIter, double[], double): double
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>SOS.Par\n<size:10>elki.outlier.distance" as elki.outlier.distance.SOS.Par<O>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.distance.SOS
+    elki.outlier.distance.SOS +-- elki.outlier.distance.SOS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

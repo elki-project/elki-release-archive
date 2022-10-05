@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LibSVMFormatParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.LibSVMFormatParser<V extends SparseNumberVector> [[LibSVMFormatParser.html]] {
+        {static} -LOG: Logging
+        {static} +WHITESPACE_PATTERN: Pattern
+        {static} +COMMENT_PATTERN: Pattern
+        +LibSVMFormatParser(Factory<V extends SparseNumberVector>)
+        #parseLineInternal(): boolean
+        #getLogger(): Logging
+    }
+
+    class "<size:14>SparseNumberVectorLabelParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.SparseNumberVectorLabelParser<V extends SparseNumberVector> [[SparseNumberVectorLabelParser.html]]
+    class "<size:14>LibSVMFormatParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.LibSVMFormatParser.Par<V extends SparseNumberVector> [[LibSVMFormatParser.Par.html]]
+
+    elki.datasource.parser.SparseNumberVectorLabelParser <|-- elki.datasource.parser.LibSVMFormatParser
+    elki.datasource.parser.LibSVMFormatParser +-- elki.datasource.parser.LibSVMFormatParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

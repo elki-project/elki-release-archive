@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractPartialReinsert.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.reinsert" as elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert.Par [[AbstractPartialReinsert.Par.html]] {
+        {static} +REINSERT_AMOUNT_ID: OptionID
+        {static} +REINSERT_DISTANCE_ID: OptionID
+        ~reinsertAmount: double
+        ~distance: SpatialPrimitiveDistance<?>
+        +configure(Parameterization): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractPartialReinsert\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.reinsert" as elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert [[AbstractPartialReinsert.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert.Par
+    elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert +-- elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

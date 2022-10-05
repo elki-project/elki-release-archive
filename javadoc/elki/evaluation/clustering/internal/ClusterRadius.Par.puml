@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterRadius.Par\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.ClusterRadius.Par [[ClusterRadius.Par.html]] {
+        {static} +DISTANCE_ID: OptionID
+        {static} +NOISE_ID: OptionID
+        -distance: NumberVectorDistance<?>
+        -noiseOption: NoiseHandling
+        +configure(Parameterization): void
+        +make(): ClusterRadius
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ClusterRadius\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.ClusterRadius [[ClusterRadius.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.internal.ClusterRadius.Par
+    elki.evaluation.clustering.internal.ClusterRadius +-- elki.evaluation.clustering.internal.ClusterRadius.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,180 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-clustering",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-clustering-0.8.0.jar",
+          "url": "elki-clustering-0.8.0.jar",
+          "size": 1304712,
+          "sha512": "3373a41c2b610e45054450d901621fd4ce56b0c4d43fbbcad6dd72669e259b71cf2951c916bd5e6247bb1be5fbd5edbee7c36ae51d2892f30dd2727d6896082c",
+          "sha256": "cc33965375bc4ed1b5ab92c30c5bacbd412bf9b6a957512c522adcfed703a8a4",
+          "sha1": "6d690308df68223f6881f29343b53e09c954f67e",
+          "md5": "06bab0df30768bbe546dcc83f5ba446e"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-clustering-0.8.0.jar",
+          "url": "elki-clustering-0.8.0.jar",
+          "size": 1304712,
+          "sha512": "3373a41c2b610e45054450d901621fd4ce56b0c4d43fbbcad6dd72669e259b71cf2951c916bd5e6247bb1be5fbd5edbee7c36ae51d2892f30dd2727d6896082c",
+          "sha256": "cc33965375bc4ed1b5ab92c30c5bacbd412bf9b6a957512c522adcfed703a8a4",
+          "sha1": "6d690308df68223f6881f29343b53e09c954f67e",
+          "md5": "06bab0df30768bbe546dcc83f5ba446e"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-clustering",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-test-core",
+          "version": {
+            "requires": "0.8.0"
+          },
+          "requestedCapabilities": [
+            {
+              "group": "io.github.elki-project",
+              "name": "elki-test-core-test-fixtures",
+              "version": "0.8.0"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-clustering-0.8.0-test-fixtures.jar",
+          "url": "elki-clustering-0.8.0-test-fixtures.jar",
+          "size": 2379,
+          "sha512": "abea6a0a2000c482f6d551e364e50ac8b082b2726b2c71c27040b7d2490200127e851e29b6a92efde35f265f6c9bc479bfaf77a237c4eb19285fbc11fe89662f",
+          "sha256": "00ff341010097961fc720b94771c2ccdef1efe315e181a64e78b3828fd22e792",
+          "sha1": "c662d9f0e5111e34607aa2d951731d6bbfada949",
+          "md5": "772e7138647c121ffdc03c6c919d29e0"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-clustering-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-clustering",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-test-core",
+          "version": {
+            "requires": "0.8.0"
+          },
+          "requestedCapabilities": [
+            {
+              "group": "io.github.elki-project",
+              "name": "elki-test-core-test-fixtures",
+              "version": "0.8.0"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-clustering-0.8.0-test-fixtures.jar",
+          "url": "elki-clustering-0.8.0-test-fixtures.jar",
+          "size": 2379,
+          "sha512": "abea6a0a2000c482f6d551e364e50ac8b082b2726b2c71c27040b7d2490200127e851e29b6a92efde35f265f6c9bc479bfaf77a237c4eb19285fbc11fe89662f",
+          "sha256": "00ff341010097961fc720b94771c2ccdef1efe315e181a64e78b3828fd22e792",
+          "sha1": "c662d9f0e5111e34607aa2d951731d6bbfada949",
+          "md5": "772e7138647c121ffdc03c6c919d29e0"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-clustering-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

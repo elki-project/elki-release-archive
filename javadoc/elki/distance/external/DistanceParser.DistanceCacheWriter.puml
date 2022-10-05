@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DistanceParser.DistanceCacheWriter\n<size:10>elki.distance.external" as elki.distance.external.DistanceParser.DistanceCacheWriter [[DistanceParser.DistanceCacheWriter.html]] {
+        {abstract} +put(int, int, double): void
+    }
+
+    interface "<size:14>DistanceParser\n<size:10>elki.distance.external" as elki.distance.external.DistanceParser [[DistanceParser.html]] {
+        {abstract} +parse(InputStream, DistanceCacheWriter): void
+    }
+
+    elki.distance.external.DistanceParser +-- elki.distance.external.DistanceParser.DistanceCacheWriter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

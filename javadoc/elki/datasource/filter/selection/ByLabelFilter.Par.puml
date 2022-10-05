@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByLabelFilter.Par\n<size:10>elki.datasource.filter.selection" as elki.datasource.filter.selection.ByLabelFilter.Par [[ByLabelFilter.Par.html]] {
+        {static} +LABELFILTER_PATTERN_ID: OptionID
+        {static} +LABELFILTER_PATTERN_INVERT_ID: OptionID
+        ~pattern: Pattern
+        -inverted: boolean
+        +configure(Parameterization): void
+        +make(): ByLabelFilter
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ByLabelFilter\n<size:10>elki.datasource.filter.selection" as elki.datasource.filter.selection.ByLabelFilter [[ByLabelFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.selection.ByLabelFilter.Par
+    elki.datasource.filter.selection.ByLabelFilter +-- elki.datasource.filter.selection.ByLabelFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

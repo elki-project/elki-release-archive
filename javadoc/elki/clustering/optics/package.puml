@@ -1,0 +1,359 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.optics {
+
+        class DeLiClu<V extends NumberVector> [[DeLiClu.html]] {
+            {static} -LOG: Logging
+            #distance: SpatialPrimitiveDistance<? super NumberVector>
+            #indexer: DeLiCluTreeFactory<? super NumberVector>
+            -heap: UpdatableHeap<SpatialObjectPair>
+            -minpts: int
+            +DeLiClu(DeLiCluTreeFactory<? super NumberVector>, SpatialPrimitiveDistance<? super NumberVector>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): ClusterOrder
+            -expandNodes(DeLiCluTree, SpatialObjectPair, DataStore<KNNList>): void
+            -expandDirNodes(DeLiCluNode, DeLiCluNode): void
+            -expandLeafNodes(DeLiCluNode, DeLiCluNode, DataStore<KNNList>): void
+            -reinsertExpanded(DeLiCluTree, IndexTreePath<DeLiCluEntry>, DataStore<KNNList>): void
+            -reinsertExpanded(DeLiCluTree, List<IndexTreePath<DeLiCluEntry>>, int, DeLiCluEntry, DataStore<KNNList>): void
+            +getMinPts(): int
+        }
+
+        class elki.clustering.optics.DeLiClu.SpatialObjectPair [[DeLiClu.SpatialObjectPair.html]] {
+            ~entry1: DeLiCluEntry
+            ~entry2: DeLiCluEntry
+            ~isExpandable: boolean
+            ~distance: double
+            +SpatialObjectPair(double, DeLiCluEntry, DeLiCluEntry, boolean)
+            +compareTo(SpatialObjectPair): int
+        }
+
+        class elki.clustering.optics.DeLiClu.Par<V extends NumberVector> [[DeLiClu.Par.html]] {
+            {static} +MINPTS_ID: OptionID
+            #minpts: int
+            #indexer: DeLiCluTreeFactory<? super NumberVector>
+            #distance: SpatialPrimitiveDistance<? super NumberVector>
+            +configure(Parameterization): void
+            +make(): DeLiClu<V extends NumberVector>
+        }
+
+        class OPTICSHeapEntry [[OPTICSHeapEntry.html]] {
+            ~objectID: DBID
+            ~predecessorID: DBID
+            ~reachability: double
+            +OPTICSHeapEntry(DBID, DBID, double)
+            +compareTo(OPTICSHeapEntry): int
+        }
+
+        class ClusterOrder [[ClusterOrder.html]] {
+            ~ids: ArrayModifiableDBIDs
+            ~reachability: WritableDoubleDataStore
+            ~predecessor: WritableDBIDDataStore
+            +ClusterOrder(DBIDs)
+            +ClusterOrder(ArrayModifiableDBIDs, WritableDoubleDataStore, WritableDBIDDataStore)
+            +add(DBIDRef, double, DBIDRef): void
+            +getDBIDs(): ArrayDBIDs
+            +iter(): DBIDArrayIter
+            +order(DBIDs): ArrayModifiableDBIDs
+            +size(): int
+            +getReachability(DBIDRef): double
+            +getPredecessor(DBIDRef, DBIDVar): void
+        }
+
+        class OPTICSList<O> [[OPTICSList.html]] {
+            {static} -LOG: Logging
+            +OPTICSList(Distance<? super O>, double, int)
+            +run(Relation<O>): ClusterOrder
+        }
+
+        class elki.clustering.optics.OPTICSList.Instance [[OPTICSList.Instance.html]] {
+            ~processedIDs: ModifiableDBIDs
+            ~candidates: ArrayModifiableDBIDs
+            ~predecessor: WritableDBIDDataStore
+            ~reachability: WritableDoubleDataStore
+            ~ids: DBIDs
+            ~progress: FiniteProgress
+            ~rangeQuery: RangeSearcher<DBIDRef>
+            +Instance(Relation<O>)
+            +run(): ClusterOrder
+            #expandClusterOrder(DBIDRef): void
+            +findBest(ArrayModifiableDBIDs, DBIDArrayMIter, DBIDVar): void
+        }
+
+        class elki.clustering.optics.OPTICSList.Par<O> [[OPTICSList.Par.html]] {
+            +make(): OPTICSList<O>
+        }
+
+        class OPTICSHeap<O> [[OPTICSHeap.html]] {
+            {static} -LOG: Logging
+            +OPTICSHeap(Distance<? super O>, double, int)
+            +run(Relation<O>): ClusterOrder
+        }
+
+        class elki.clustering.optics.OPTICSHeap.Instance [[OPTICSHeap.Instance.html]] {
+            -processedIDs: ModifiableDBIDs
+            ~heap: UpdatableHeap<OPTICSHeapEntry>
+            -ids: DBIDs
+            ~progress: FiniteProgress
+            ~rangeQuery: RangeSearcher<DBIDRef>
+            +Instance(Relation<O>)
+            +run(): ClusterOrder
+            #expandClusterOrder(DBIDRef): void
+        }
+
+        class elki.clustering.optics.OPTICSHeap.Par<O> [[OPTICSHeap.Par.html]] {
+            +make(): OPTICSHeap<O>
+        }
+
+        interface OPTICSTypeAlgorithm [[OPTICSTypeAlgorithm.html]] {
+            +autorun(Database): ClusterOrder
+            {abstract} +getMinPts(): int
+        }
+
+        class CorrelationClusterOrder [[CorrelationClusterOrder.html]] {
+            #correlationValue: WritableIntegerDataStore
+            +CorrelationClusterOrder(ArrayModifiableDBIDs, WritableDoubleDataStore, WritableDBIDDataStore, WritableIntegerDataStore)
+            +getCorrelationValue(DBIDRef): int
+            +getEuclideanValue(DBIDRef): double
+        }
+
+        class OPTICSXi [[OPTICSXi.html]] {
+            {static} -LOG: Logging
+            ~xi: double
+            ~nocorrect: boolean
+            ~keepsteep: boolean
+            +OPTICSXi(OPTICSTypeAlgorithm, double, boolean, boolean)
+            +OPTICSXi(OPTICSTypeAlgorithm, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +autorun(Database): Clustering<OPTICSModel>
+            +run(ClusterOrder): Clustering<OPTICSModel>
+            -extractClusters(ClusterOrder, double, int): Clustering<OPTICSModel>
+            {static} -predecessorFilter(ClusterOrder, int, int, DBIDArrayIter): int
+            {static} -updateFilterSDASet(double, List<SteepDownArea>, double): void
+        }
+
+        class elki.clustering.optics.OPTICSXi.ClusterHierarchyBuilder [[OPTICSXi.ClusterHierarchyBuilder.html]] {
+            ~clustering: Clustering<OPTICSModel>
+            ~curclusters: HashSet<Cluster<OPTICSModel>>
+            ~unclaimedids: HashSetModifiableDBIDs
+            +ClusterHierarchyBuilder(DBIDs)
+            -addCluster(DBIDArrayIter, int, int): void
+            -build(ClusterOrder, DBIDArrayIter): Clustering<OPTICSModel>
+        }
+
+        class elki.clustering.optics.OPTICSXi.SteepScanPosition [[OPTICSXi.SteepScanPosition.html]] {
+            ~index: int
+            -cur: DBIDArrayIter
+            -next: DBIDArrayIter
+            -prog: FiniteProgress
+            +SteepScanPosition(ClusterOrder)
+            +next(): void
+            +hasNext(): boolean
+            +steepUp(double): boolean
+            +steepDown(double): boolean
+            +getReachability(): double
+            +getNextReachability(): double
+        }
+
+        abstract class elki.clustering.optics.OPTICSXi.SteepArea [[OPTICSXi.SteepArea.html]] {
+            ~startindex: int
+            ~endindex: int
+            ~maximum: double
+            +SteepArea(int, int, double)
+            +getStartIndex(): int
+            +getEndIndex(): int
+        }
+
+        class elki.clustering.optics.OPTICSXi.SteepDownArea [[OPTICSXi.SteepDownArea.html]] {
+            ~mib: double
+            +SteepDownArea(int, int, double, double)
+        }
+
+        class elki.clustering.optics.OPTICSXi.SteepUpArea [[OPTICSXi.SteepUpArea.html]] {
+            +SteepUpArea(int, int, double)
+        }
+
+        class elki.clustering.optics.OPTICSXi.SteepAreaResult [[OPTICSXi.SteepAreaResult.html]] {
+            +SteepAreaResult(Collection<SteepArea>)
+            +iterator(): Iterator<SteepArea>
+        }
+
+        class elki.clustering.optics.OPTICSXi.Par [[OPTICSXi.Par.html]] {
+            {static} +XIALG_ID: OptionID
+            {static} +XI_ID: OptionID
+            {static} +NOCORRECT_ID: OptionID
+            {static} +KEEPSTEEP_ID: OptionID
+            #xi: double
+            #nocorrect: boolean
+            #keepsteep: boolean
+            +configure(Parameterization): void
+            +make(): OPTICSXi
+        }
+
+        abstract class AbstractOPTICS<O> [[AbstractOPTICS.html]] {
+            #distance: Distance<? super O>
+            #epsilon: double
+            #minpts: int
+            +AbstractOPTICS(Distance<? super O>, double, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            {abstract} +run(Relation<O>): ClusterOrder
+            +getMinPts(): int
+        }
+
+        abstract class elki.clustering.optics.AbstractOPTICS.Par<O> {
+            {static} +EPSILON_ID: OptionID
+            {static} +MINPTS_ID: OptionID
+            #epsilon: double
+            #minpts: int
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+        }
+
+        class FastOPTICS<V extends NumberVector> [[FastOPTICS.html]] {
+            {static} -LOG: Logging
+            {static} +UNDEFINED_DISTANCE: double
+            ~reachDist: WritableDoubleDataStore
+            ~processed: ModifiableDBIDs
+            ~neighs: DataStore<? extends DBIDs>
+            ~inverseDensities: DoubleDataStore
+            ~minPts: int
+            ~index: RandomProjectedNeighborsAndDensities
+            +FastOPTICS(int, RandomProjectedNeighborsAndDensities)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): ClusterOrder
+            #expandClusterOrder(DBID, ClusterOrder, DistanceQuery<V extends NumberVector>, FiniteProgress): void
+            +getMinPts(): int
+        }
+
+        class elki.clustering.optics.FastOPTICS.Par<V extends NumberVector> {
+            ~minpts: int
+            ~index: RandomProjectedNeighborsAndDensities
+            +configure(Parameterization): void
+            +make(): FastOPTICS<V extends NumberVector>
+        }
+
+        interface GeneralizedOPTICS [[GeneralizedOPTICS.html]]
+
+        abstract class elki.clustering.optics.GeneralizedOPTICS.Instance<R> [[GeneralizedOPTICS.Instance.html]] {
+            #processedIDs: ModifiableDBIDs
+            #candidates: ArrayModifiableDBIDs
+            #predecessor: WritableDBIDDataStore
+            #reachability: WritableDoubleDataStore
+            ~ids: DBIDs
+            ~progress: FiniteProgress
+            +Instance(DBIDs)
+            +compare(DBIDRef, DBIDRef): int
+            +run(): R
+            {abstract} #initialDBID(DBIDRef): void
+            {abstract} #expandDBID(DBIDRef): void
+            {abstract} #buildResult(): R
+            {abstract} #getLogger(): Logging
+        }
+
+        OPTICSTypeAlgorithm <|.. DeLiClu
+        java.lang.Comparable <|.. elki.clustering.optics.DeLiClu.SpatialObjectPair
+        DeLiClu +-- elki.clustering.optics.DeLiClu.SpatialObjectPair
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.optics.DeLiClu.Par
+        DeLiClu +-- elki.clustering.optics.DeLiClu.Par
+        java.lang.Comparable <|.. OPTICSHeapEntry
+        elki.result.OrderingResult <|.. ClusterOrder
+        AbstractOPTICS <|-- OPTICSList
+        OPTICSList +-- elki.clustering.optics.OPTICSList.Instance
+        elki.clustering.optics.OPTICSList.Instance --> ClusterOrder: clusterOrder
+        elki.clustering.optics.AbstractOPTICS.Par <|-- elki.clustering.optics.OPTICSList.Par
+        OPTICSList +-- elki.clustering.optics.OPTICSList.Par
+        AbstractOPTICS <|-- OPTICSHeap
+        OPTICSHeap +-- elki.clustering.optics.OPTICSHeap.Instance
+        elki.clustering.optics.OPTICSHeap.Instance --> ClusterOrder: clusterOrder
+        elki.clustering.optics.AbstractOPTICS.Par <|-- elki.clustering.optics.OPTICSHeap.Par
+        OPTICSHeap +-- elki.clustering.optics.OPTICSHeap.Par
+        elki.Algorithm <|-- OPTICSTypeAlgorithm
+        ClusterOrder <|-- CorrelationClusterOrder
+        elki.clustering.ClusteringAlgorithm <|.. OPTICSXi
+        OPTICSXi --> OPTICSTypeAlgorithm: optics
+        OPTICSXi +-- elki.clustering.optics.OPTICSXi.ClusterHierarchyBuilder
+        OPTICSXi +-- elki.clustering.optics.OPTICSXi.SteepScanPosition
+        elki.clustering.optics.OPTICSXi.SteepScanPosition --> ClusterOrder: co
+        OPTICSXi +-- elki.clustering.optics.OPTICSXi.SteepArea
+        elki.clustering.optics.OPTICSXi.SteepArea <|-- elki.clustering.optics.OPTICSXi.SteepDownArea
+        OPTICSXi +-- elki.clustering.optics.OPTICSXi.SteepDownArea
+        elki.clustering.optics.OPTICSXi.SteepArea <|-- elki.clustering.optics.OPTICSXi.SteepUpArea
+        OPTICSXi +-- elki.clustering.optics.OPTICSXi.SteepUpArea
+        elki.result.IterableResult <|.. elki.clustering.optics.OPTICSXi.SteepAreaResult
+        OPTICSXi +-- elki.clustering.optics.OPTICSXi.SteepAreaResult
+        elki.clustering.optics.OPTICSXi.SteepAreaResult --> "*" elki.clustering.optics.OPTICSXi.SteepArea: areas
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.optics.OPTICSXi.Par
+        OPTICSXi +-- elki.clustering.optics.OPTICSXi.Par
+        elki.clustering.optics.OPTICSXi.Par --> OPTICSTypeAlgorithm: optics
+        OPTICSTypeAlgorithm <|.. AbstractOPTICS
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.optics.AbstractOPTICS.Par
+        AbstractOPTICS +-- elki.clustering.optics.AbstractOPTICS.Par
+        OPTICSTypeAlgorithm <|.. FastOPTICS
+        FastOPTICS --> ClusterOrder: order
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.optics.FastOPTICS.Par
+        FastOPTICS +-- elki.clustering.optics.FastOPTICS.Par
+        OPTICSTypeAlgorithm <|-- GeneralizedOPTICS
+        java.util.Comparator <|.. elki.clustering.optics.GeneralizedOPTICS.Instance
+        GeneralizedOPTICS +-- elki.clustering.optics.GeneralizedOPTICS.Instance
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.result {
+        interface OrderingResult [[../../result/OrderingResult.html]] {
+            {abstract} +getDBIDs(): DBIDs
+            {abstract} +order(DBIDs): ArrayModifiableDBIDs
+        }
+        interface IterableResult<O> [[../../result/IterableResult.html]] {
+            {abstract} +iterator(): Iterator<O>
+        }
+    }
+
+    namespace elki {
+        interface Algorithm [[../../Algorithm.html]] {
+            +autorun(Database): Object
+            {abstract} +getInputTypeRestriction(): TypeInformation[]
+        }
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace java.util {
+        interface Comparator<T> {
+            {abstract} +compare(T, T): int
+            +reversed(): Comparator<T>
+            +thenComparing(Comparator<? super T>): Comparator<T>
+            +thenComparing(Function<? super T, ? extends U>, Comparator<? super U>): Comparator<T>
+            +thenComparing(Function<? super T, ? extends Comparable<? super U>>): Comparator<T>
+            +thenComparingInt(ToIntFunction<? super T>): Comparator<T>
+            +thenComparingLong(ToLongFunction<? super T>): Comparator<T>
+            +thenComparingDouble(ToDoubleFunction<? super T>): Comparator<T>
+            {static} +reverseOrder(): Comparator<T extends Comparable<? super T>>
+            {static} +naturalOrder(): Comparator<T extends Comparable<? super T>>
+            {static} +nullsFirst(Comparator<? super T>): Comparator<T>
+            {static} +nullsLast(Comparator<? super T>): Comparator<T>
+            {static} +comparing(Function<? super T, ? extends U>, Comparator<? super U>): Comparator<T>
+            {static} +comparing(Function<? super T, ? extends Comparable<? super U>>): Comparator<T>
+            {static} +comparingInt(ToIntFunction<? super T>): Comparator<T>
+            {static} +comparingLong(ToLongFunction<? super T>): Comparator<T>
+            {static} +comparingDouble(ToDoubleFunction<? super T>): Comparator<T>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

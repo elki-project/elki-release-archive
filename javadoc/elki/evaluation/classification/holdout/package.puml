@@ -1,0 +1,131 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.evaluation.classification.holdout {
+
+        class TrainingAndTestSet [[TrainingAndTestSet.html]] {
+            -labels: ArrayList<ClassLabel>
+            -training: MultipleObjectsBundle
+            -test: MultipleObjectsBundle
+            +TrainingAndTestSet(MultipleObjectsBundle, MultipleObjectsBundle, ArrayList<ClassLabel>)
+            +getTest(): MultipleObjectsBundle
+            +getTraining(): MultipleObjectsBundle
+            +getLabels(): ArrayList<ClassLabel>
+        }
+
+        class StratifiedCrossValidation [[StratifiedCrossValidation.html]] {
+            #nfold: int
+            #fold: int
+            #assignment: int[]
+            #sizes: int[]
+            +StratifiedCrossValidation(int)
+            +numberOfPartitions(): int
+            +initialize(MultipleObjectsBundle): void
+            +nextPartitioning(): TrainingAndTestSet
+        }
+
+        class elki.evaluation.classification.holdout.StratifiedCrossValidation.Par [[StratifiedCrossValidation.Par.html]] {
+            {static} +N_DEFAULT: int
+            {static} +NFOLD_ID: OptionID
+            #nfold: int
+            +configure(Parameterization): void
+            +make(): StratifiedCrossValidation
+        }
+
+        class LeaveOneOut [[LeaveOneOut.html]] {
+            -len: int
+            -pos: int
+            +initialize(MultipleObjectsBundle): void
+            +numberOfPartitions(): int
+            +nextPartitioning(): TrainingAndTestSet
+        }
+
+        abstract class RandomizedHoldout [[RandomizedHoldout.html]] {
+            #random: RandomFactory
+            +RandomizedHoldout(RandomFactory)
+        }
+
+        abstract class elki.evaluation.classification.holdout.RandomizedHoldout.Par [[RandomizedHoldout.Par.html]] {
+            {static} +SEED_ID: OptionID
+            #random: RandomFactory
+            +configure(Parameterization): void
+        }
+
+        interface Holdout [[Holdout.html]] {
+            {abstract} +initialize(MultipleObjectsBundle): void
+            {abstract} +nextPartitioning(): TrainingAndTestSet
+            {abstract} +getLabels(): ArrayList<ClassLabel>
+            {abstract} +numberOfPartitions(): int
+        }
+
+        class RandomizedCrossValidation [[RandomizedCrossValidation.html]] {
+            #nfold: int
+            #fold: int
+            +RandomizedCrossValidation(RandomFactory, int)
+            +initialize(MultipleObjectsBundle): void
+            +numberOfPartitions(): int
+            +nextPartitioning(): TrainingAndTestSet
+        }
+
+        class elki.evaluation.classification.holdout.RandomizedCrossValidation.Par [[RandomizedCrossValidation.Par.html]] {
+            {static} +NFOLD_ID: OptionID
+            {static} +N_DEFAULT: int
+            #nfold: int
+            +configure(Parameterization): void
+            +make(): RandomizedCrossValidation
+        }
+
+        abstract class AbstractHoldout [[AbstractHoldout.html]] {
+            #labels: ArrayList<ClassLabel>
+            #labelcol: int
+            #bundle: MultipleObjectsBundle
+            +initialize(MultipleObjectsBundle): void
+            +getLabels(): ArrayList<ClassLabel>
+            {static} +findClassLabelColumn(MultipleObjectsBundle): int
+            {static} +allClassLabels(MultipleObjectsBundle): ArrayList<ClassLabel>
+            {static} +allClassLabels(MultipleObjectsBundle, int): ArrayList<ClassLabel>
+        }
+
+        class DisjointCrossValidation [[DisjointCrossValidation.html]] {
+            #nfold: int
+            #fold: int
+            #assignment: int[]
+            #sizes: int[]
+            +DisjointCrossValidation(RandomFactory, int)
+            +initialize(MultipleObjectsBundle): void
+            +numberOfPartitions(): int
+            +nextPartitioning(): TrainingAndTestSet
+        }
+
+        class elki.evaluation.classification.holdout.DisjointCrossValidation.Par [[DisjointCrossValidation.Par.html]] {
+            {static} +N_DEFAULT: int
+            {static} +NFOLD_ID: OptionID
+            #nfold: int
+            +configure(Parameterization): void
+            +make(): DisjointCrossValidation
+        }
+
+        AbstractHoldout <|-- StratifiedCrossValidation
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.classification.holdout.StratifiedCrossValidation.Par
+        StratifiedCrossValidation +-- elki.evaluation.classification.holdout.StratifiedCrossValidation.Par
+        AbstractHoldout <|-- LeaveOneOut
+        AbstractHoldout <|-- RandomizedHoldout
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.classification.holdout.RandomizedHoldout.Par
+        RandomizedHoldout +-- elki.evaluation.classification.holdout.RandomizedHoldout.Par
+        RandomizedHoldout <|-- RandomizedCrossValidation
+        elki.evaluation.classification.holdout.RandomizedHoldout.Par <|-- elki.evaluation.classification.holdout.RandomizedCrossValidation.Par
+        RandomizedCrossValidation +-- elki.evaluation.classification.holdout.RandomizedCrossValidation.Par
+        Holdout <|.. AbstractHoldout
+        RandomizedHoldout <|-- DisjointCrossValidation
+        elki.evaluation.classification.holdout.RandomizedHoldout.Par <|-- elki.evaluation.classification.holdout.DisjointCrossValidation.Par
+        DisjointCrossValidation +-- elki.evaluation.classification.holdout.DisjointCrossValidation.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

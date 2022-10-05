@@ -1,0 +1,185 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.em {
+
+        class BetulaGMM [[BetulaGMM.html]] {
+            {static} -LOG: Logging
+            ~cffactory: Factory<?>
+            ~k: int
+            -delta: double
+            ~maxiter: int
+            -prior: double
+            -soft: boolean
+            {static} #MIN_LOGLIKELIHOOD: double
+            {static} +SOFT_TYPE: SimpleTypeInformation<double[]>
+            +BetulaGMM(Factory<?>, double, int, int, boolean, BetulaClusterModelFactory<?>, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<NumberVector>): Clustering<EMModel>
+            -isSoft(): boolean
+            +assignProbabilitiesToInstances(ArrayList<? extends ClusterFeature>, List<? extends BetulaClusterModel>, Map<ClusterFeature, double[]>): double
+            +assignProbabilitiesToInstances(Relation<? extends NumberVector>, List<? extends BetulaClusterModel>, WritableDataStore<double[]>): double
+            +recomputeCovarianceMatrices(ArrayList<? extends ClusterFeature>, Map<ClusterFeature, double[]>, List<? extends BetulaClusterModel>, double, int): void
+        }
+
+        class elki.clustering.em.BetulaGMM.Par [[BetulaGMM.Par.html]] {
+            {static} +INIT_ID: OptionID
+            {static} +DELTA_ID: OptionID
+            {static} +PRIOR_ID: OptionID
+            ~cffactory: Factory<?>
+            #k: int
+            #maxiter: int
+            #delta: double
+            #soft: boolean
+            #prior: double
+            +configure(Parameterization): void
+            +make(): BetulaGMM
+        }
+
+        class BetulaGMMWeighted [[BetulaGMMWeighted.html]] {
+            +BetulaGMMWeighted(Factory<?>, double, int, int, boolean, BetulaClusterModelFactory<?>, double)
+            +assignProbabilitiesToInstances(ArrayList<? extends ClusterFeature>, List<? extends BetulaClusterModel>, Map<ClusterFeature, double[]>): double
+        }
+
+        class elki.clustering.em.BetulaGMMWeighted.Par [[BetulaGMMWeighted.Par.html]] {
+            +make(): BetulaGMMWeighted
+        }
+
+        class KDTreeEM [[KDTreeEM.html]] {
+            {static} -LOG: Logging
+            -soft: boolean
+            -delta: double
+            {static} +SOFT_TYPE: SimpleTypeInformation<double[]>
+            -k: int
+            -mbw: double
+            -tau: double
+            -tauClass: double
+            -miniter: int
+            -maxiter: int
+            #sorted: ArrayModifiableDBIDs
+            -solver: ConstrainedQuadraticProblemSolver
+            -ipiPow: double
+            -wsum: double[]
+            #exactAssign: boolean
+            +KDTreeEM(int, double, double, double, double, TextbookMultivariateGaussianModelFactory, int, int, boolean, boolean)
+            +run(Relation<? extends NumberVector>): Clustering<EMModel>
+            -analyseDimWidth(Relation<? extends NumberVector>): double[]
+            -checkStoppingCondition(KDTree, int[]): int[]
+            -calculateModelLimits(KDTree, TextbookMultivariateGaussianModel, double[], double[], double[]): void
+            -makeStats(KDTree, int[], WritableDataStore<double[]>): double
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.em.KDTreeEM.KDTree [[KDTreeEM.KDTree.html]] {
+            ~left: int
+            ~right: int
+            ~sum: double[]
+            ~sumSq: double[]
+            ~midpoint: double[]
+            ~halfwidth: double[]
+            +KDTree(Relation<? extends NumberVector>, ArrayModifiableDBIDs, int, int, double[], double)
+            -computeBoundingBox(Relation<? extends NumberVector>, DBIDArrayIter): void
+            -aggregateStats(Relation<? extends NumberVector>, DBIDArrayIter, int): void
+        }
+
+        class elki.clustering.em.KDTreeEM.Par [[KDTreeEM.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +DELTA_ID: OptionID
+            {static} +MBW_ID: OptionID
+            {static} +TAU_ID: OptionID
+            {static} +TAU_CLASS_ID: OptionID
+            {static} +MINITER_ID: OptionID
+            {static} +MAXITER_ID: OptionID
+            {static} +SOFT_ID: OptionID
+            {static} +EXACT_ASSIGN_ID: OptionID
+            #k: int
+            #mbw: double
+            #tau: double
+            #tauclass: double
+            #delta: double
+            #miniter: int
+            #maxiter: int
+            ~soft: boolean
+            ~exactAssign: boolean
+            +configure(Parameterization): void
+            +make(): KDTreeEM
+        }
+
+        class EM<O, M extends MeanModel> [[EM.html]] {
+            {static} -LOG: Logging
+            {static} -KEY: String
+            #k: int
+            #delta: double
+            #miniter: int
+            #maxiter: int
+            #prior: double
+            #soft: boolean
+            {static} #MIN_LOGLIKELIHOOD: double
+            {static} +SOFT_TYPE: SimpleTypeInformation<double[]>
+            +EM(int, double, EMClusterModelFactory<? super O, M extends MeanModel>)
+            +EM(int, double, EMClusterModelFactory<? super O, M extends MeanModel>, int, boolean)
+            +EM(int, double, EMClusterModelFactory<? super O, M extends MeanModel>, int, double, boolean)
+            +EM(int, double, EMClusterModelFactory<? super O, M extends MeanModel>, int, int, double, boolean)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): Clustering<M extends MeanModel>
+            {static} +recomputeCovarianceMatrices(Relation<? extends O>, WritableDataStore<double[]>, List<? extends EMClusterModel<? super O, ?>>, double): void
+            {static} +assignProbabilitiesToInstances(Relation<? extends O>, List<? extends EMClusterModel<? super O, ?>>, WritableDataStore<double[]>, WritableDoubleDataStore): double
+            {static} +logSumExp(double[]): double
+            {static} #logSumExp(double, double): double
+        }
+
+        class elki.clustering.em.EM.Par<O, M extends MeanModel> [[EM.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +DELTA_ID: OptionID
+            {static} +MODEL_ID: OptionID
+            {static} +MINITER_ID: OptionID
+            {static} +MAXITER_ID: OptionID
+            {static} +PRIOR_ID: OptionID
+            {static} +SOFT_ID: OptionID
+            #k: int
+            #delta: double
+            #miniter: int
+            #maxiter: int
+            ~prior: double
+            ~soft: boolean
+            +configure(Parameterization): void
+            +make(): EM<O, M extends MeanModel>
+        }
+
+        elki.clustering.ClusteringAlgorithm <|.. BetulaGMM
+        BetulaGMM --> elki.clustering.em.models.BetulaClusterModelFactory: initializer
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.BetulaGMM.Par
+        BetulaGMM +-- elki.clustering.em.BetulaGMM.Par
+        elki.clustering.em.BetulaGMM.Par --> elki.clustering.em.models.BetulaClusterModelFactory: initialization
+        BetulaGMM <|-- BetulaGMMWeighted
+        elki.clustering.em.BetulaGMM.Par <|-- elki.clustering.em.BetulaGMMWeighted.Par
+        BetulaGMMWeighted +-- elki.clustering.em.BetulaGMMWeighted.Par
+        elki.clustering.ClusteringAlgorithm <|.. KDTreeEM
+        KDTreeEM --> elki.clustering.em.models.TextbookMultivariateGaussianModelFactory: mfactory
+        KDTreeEM --> "*" elki.clustering.em.models.TextbookMultivariateGaussianModel: models\nnewmodels
+        KDTreeEM +-- elki.clustering.em.KDTreeEM.KDTree
+        elki.clustering.em.KDTreeEM.KDTree --> elki.clustering.em.KDTreeEM.KDTree: leftChild\nrightChild
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.KDTreeEM.Par
+        KDTreeEM +-- elki.clustering.em.KDTreeEM.Par
+        elki.clustering.em.KDTreeEM.Par --> elki.clustering.em.models.TextbookMultivariateGaussianModelFactory: mfactory
+        elki.clustering.ClusteringAlgorithm <|.. EM
+        EM --> elki.clustering.em.models.EMClusterModelFactory: mfactory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.em.EM.Par
+        EM +-- elki.clustering.em.EM.Par
+        elki.clustering.em.EM.Par --> elki.clustering.em.models.EMClusterModelFactory: mfactory
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

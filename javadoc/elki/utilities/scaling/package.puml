@@ -1,0 +1,92 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.scaling {
+
+        class IdentityScaling [[IdentityScaling.html]] {
+            +getScaled(double): double
+            +getMin(): double
+            +getMax(): double
+        }
+
+        class LinearScaling [[LinearScaling.html]] {
+            -factor: double
+            -shift: double
+            +LinearScaling()
+            +LinearScaling(double)
+            +LinearScaling(double, double)
+            +LinearScaling(DoubleMinMax)
+            +getScaled(double): double
+            +getMin(): double
+            +getMax(): double
+            {static} +fromMinMax(double, double): LinearScaling
+        }
+
+        interface ScalingFunction [[ScalingFunction.html]] {
+            {abstract} +getScaled(double): double
+            {abstract} +getMin(): double
+            {abstract} +getMax(): double
+        }
+
+        class ClipScaling [[ClipScaling.html]] {
+            {static} +MIN_ID: OptionID
+            {static} +MAX_ID: OptionID
+            -min: Double
+            -max: Double
+            +ClipScaling(Double, Double)
+            +getScaled(double): double
+            +getMin(): double
+            +getMax(): double
+        }
+
+        class elki.utilities.scaling.ClipScaling.Par [[ClipScaling.Par.html]] {
+            #min: Double
+            #max: Double
+            +configure(Parameterization): void
+            +make(): ClipScaling
+        }
+
+        class GammaScaling [[GammaScaling.html]] {
+            -gamma: double
+            +GammaScaling()
+            +GammaScaling(double)
+            +getScaled(double): double
+            +getMin(): double
+            +getMax(): double
+        }
+
+        class elki.utilities.scaling.GammaScaling.Par [[GammaScaling.Par.html]] {
+            {static} +GAMMA_ID: OptionID
+            ~gamma: double
+            +configure(Parameterization): void
+            +make(): GammaScaling
+        }
+
+        interface StaticScalingFunction [[StaticScalingFunction.html]]
+
+        class MinusLogScaling [[MinusLogScaling.html]] {
+            +getScaled(double): double
+            +getMin(): double
+            +getMax(): double
+        }
+
+        StaticScalingFunction <|.. IdentityScaling
+        StaticScalingFunction <|.. LinearScaling
+        StaticScalingFunction <|.. ClipScaling
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.ClipScaling.Par
+        ClipScaling +-- elki.utilities.scaling.ClipScaling.Par
+        StaticScalingFunction <|.. GammaScaling
+        elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.scaling.GammaScaling.Par
+        GammaScaling +-- elki.utilities.scaling.GammaScaling.Par
+        ScalingFunction <|-- StaticScalingFunction
+        StaticScalingFunction <|.. MinusLogScaling
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

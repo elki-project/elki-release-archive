@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OnDiskArrayPageFile\n<size:10>elki.persistent" as elki.persistent.OnDiskArrayPageFile<P extends Page> [[OnDiskArrayPageFile.html]] {
+        {static} -LOG: Logging
+        {static} -EMPTY_PAGE: int
+        {static} -FILLED_PAGE: int
+        -filename: Path
+        -file: OnDiskArray
+        #header: PageHeader
+        -existed: boolean
+        +OnDiskArrayPageFile(int, Path)
+        +readPage(int): P extends Page
+        +deletePage(int): void
+        +writePage(int, P extends Page): void
+        +close(): void
+        +clear(): void
+        -byteBufferToPage(ByteBuffer): P extends Page
+        -pageToByteArray(P extends Page): byte[]
+        +initialize(PageHeader): boolean
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractStoringPageFile\n<size:10>elki.persistent" as elki.persistent.AbstractStoringPageFile<P extends Page> [[AbstractStoringPageFile.html]]
+
+    elki.persistent.AbstractStoringPageFile <|-- elki.persistent.OnDiskArrayPageFile
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutRankS1.Par\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.OutRankS1.Par [[OutRankS1.Par.html]] {
+        {static} +ALGORITHM_ID: OptionID
+        {static} +ALPHA_ID: OptionID
+        #algorithm: SubspaceClusteringAlgorithm<? extends SubspaceModel>
+        #alpha: double
+        +configure(Parameterization): void
+        +make(): OutRankS1
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>OutRankS1\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.OutRankS1 [[OutRankS1.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.subspace.OutRankS1.Par
+    elki.outlier.subspace.OutRankS1 +-- elki.outlier.subspace.OutRankS1.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

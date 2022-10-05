@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SVGHyperCube\n<size:10>elki.visualization.svg" as elki.visualization.svg.SVGHyperCube [[SVGHyperCube.html]] {
+        {static} +drawFrame(SVGPlot, Projection2D, double[], double[]): Element
+        {static} +drawFrame(SVGPlot, Projection2D, NumberVector, NumberVector): Element
+        {static} +drawFrame(SVGPlot, Projection2D, SpatialComparable): Element
+        {static} +drawFilled(SVGPlot, String, Projection2D, double[], double[]): Element
+        {static} +drawFilled(SVGPlot, String, Projection2D, NumberVector, NumberVector): Element
+        {static} +drawFilled(SVGPlot, String, Projection2D, SpatialComparable): Element
+        {static} -getVisibleEdges(Projection2D, double[], double[]): ArrayList<double[]>
+        {static} -getVisibleEdges(Projection2D, NumberVector, NumberVector): ArrayList<double[]>
+        {static} -getVisibleEdges(Projection2D, SpatialComparable): ArrayList<double[]>
+        {static} -recDrawEdges(SVGPath, double, double, List<double[]>, long[]): void
+        {static} -recDrawSides(SVGPlot, Element, String, double, double, List<double[]>, long[]): void
+        {static} -isFinite(double): boolean
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

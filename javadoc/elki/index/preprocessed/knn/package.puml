@@ -1,0 +1,573 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.preprocessed.knn {
+
+        class KNNJoinMaterializeKNNPreprocessor<V extends SpatialComparable> [[KNNJoinMaterializeKNNPreprocessor.html]] {
+            {static} -LOG: Logging
+            +KNNJoinMaterializeKNNPreprocessor(Relation<V extends SpatialComparable>, Distance<? super SpatialComparable>, int)
+            #preprocess(): void
+            #getLogger(): Logging
+            +getLongName(): String
+            +getShortName(): String
+        }
+
+        class elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory<O extends SpatialComparable> [[KNNJoinMaterializeKNNPreprocessor.Factory.html]] {
+            +Factory(int, Distance<? super SpatialComparable>)
+            +instantiate(Relation<O extends SpatialComparable>): KNNJoinMaterializeKNNPreprocessor<O extends SpatialComparable>
+        }
+
+        class elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory.Par<O extends SpatialComparable> {
+            +make(): Factory<O extends SpatialComparable>
+        }
+
+        class MetricalIndexApproximationMaterializeKNNPreprocessor<O extends NumberVector, N extends Node<E extends MTreeEntry>, E extends MTreeEntry> [[MetricalIndexApproximationMaterializeKNNPreprocessor.html]] {
+            {static} -LOG: Logging
+            +MetricalIndexApproximationMaterializeKNNPreprocessor(Relation<O extends NumberVector>, Distance<? super NumberVector>, int)
+            #preprocess(): void
+            -getMetricalIndex(Relation<? extends NumberVector>): MetricalIndexTree<O extends NumberVector, N extends Node<E extends MTreeEntry>, E extends MTreeEntry>
+            #getLogger(): Logging
+        }
+
+        class elki.index.preprocessed.knn.MetricalIndexApproximationMaterializeKNNPreprocessor.Factory<O extends NumberVector, N extends Node<E extends MTreeEntry>, E extends MTreeEntry> [[MetricalIndexApproximationMaterializeKNNPreprocessor.Factory.html]] {
+            +Factory(int, Distance<? super NumberVector>)
+            +instantiate(Relation<O extends NumberVector>): MetricalIndexApproximationMaterializeKNNPreprocessor<O extends NumberVector, N extends Node<E extends MTreeEntry>, E extends MTreeEntry>
+        }
+
+        class elki.index.preprocessed.knn.MetricalIndexApproximationMaterializeKNNPreprocessor.Factory.Par<O extends NumberVector, N extends Node<E extends MTreeEntry>, E extends MTreeEntry> [[MetricalIndexApproximationMaterializeKNNPreprocessor.Factory.Par.html]] {
+            +make(): Factory<O extends NumberVector, N extends Node<E extends MTreeEntry>, E extends MTreeEntry>
+        }
+
+        class SpatialApproximationMaterializeKNNPreprocessor<O extends NumberVector> [[SpatialApproximationMaterializeKNNPreprocessor.html]] {
+            {static} -LOG: Logging
+            +SpatialApproximationMaterializeKNNPreprocessor(Relation<O extends NumberVector>, Distance<? super NumberVector>, int)
+            #preprocess(): void
+            #getSpatialIndex(Relation<O extends NumberVector>): AbstractRStarTree<?, SpatialEntry, ?>
+            #getLogger(): Logging
+        }
+
+        class elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory [[SpatialApproximationMaterializeKNNPreprocessor.Factory.html]] {
+            +Factory(int, Distance<? super NumberVector>)
+            +instantiate(Relation<NumberVector>): SpatialApproximationMaterializeKNNPreprocessor<NumberVector>
+        }
+
+        class elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory.Par [[SpatialApproximationMaterializeKNNPreprocessor.Factory.Par.html]] {
+            +make(): Factory
+        }
+
+        class CachedDoubleDistanceKNNPreprocessor<O> [[CachedDoubleDistanceKNNPreprocessor.html]] {
+            -filename: Path
+            {static} -LOG: Logging
+            +CachedDoubleDistanceKNNPreprocessor(Relation<O>, Distance<? super O>, int, Path)
+            #preprocess(): void
+            #getLogger(): Logging
+        }
+
+        class elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor.Factory<O> [[CachedDoubleDistanceKNNPreprocessor.Factory.html]] {
+            -filename: Path
+            +Factory(int, Distance<? super O>, Path)
+            +instantiate(Relation<O>): CachedDoubleDistanceKNNPreprocessor<O>
+        }
+
+        class elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor.Factory.Par<O> [[CachedDoubleDistanceKNNPreprocessor.Factory.Par.html]] {
+            {static} +CACHE_ID: OptionID
+            -filename: Path
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        class NNDescent<O> [[NNDescent.html]] {
+            {static} -LOG: Logging
+            -prefix: String
+            -rnd: RandomFactory
+            -delta: double
+            -rho: double
+            -iterations: int
+            -noInitialNeighbors: boolean
+            -store: WritableDataStore<KNNHeap>
+            +NNDescent(Relation<O>, Distance<? super O>, int, RandomFactory, double, double, boolean, int)
+            #preprocess(): void
+            -clearAll(DBIDs, WritableDataStore<HashSetModifiableDBIDs>): void
+            -boundSize(HashSetModifiableDBIDs, int): void
+            -processNewNeighbors(WritableDataStore<HashSetModifiableDBIDs>, HashSetModifiableDBIDs, HashSetModifiableDBIDs, HashSetModifiableDBIDs, HashSetModifiableDBIDs): int
+            -add(DBIDRef, DBIDRef, double): boolean
+            -addpair(WritableDataStore<HashSetModifiableDBIDs>, DBIDRef, DBIDRef): void
+            -sampleNew(DBIDs, WritableDataStore<HashSetModifiableDBIDs>, WritableDataStore<HashSetModifiableDBIDs>, int): int
+            -reverse(WritableDataStore<HashSetModifiableDBIDs>, WritableDataStore<HashSetModifiableDBIDs>, WritableDataStore<HashSetModifiableDBIDs>): void
+            #getLogger(): Logging
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+        }
+
+        class elki.index.preprocessed.knn.NNDescent.Factory<O> [[NNDescent.Factory.html]] {
+            -rnd: RandomFactory
+            -delta: double
+            -rho: double
+            -noInitialNeighbors: boolean
+            -iterations: int
+            +Factory(int, Distance<? super O>, RandomFactory, double, double, boolean, int)
+            +instantiate(Relation<O>): NNDescent<O>
+        }
+
+        class elki.index.preprocessed.knn.NNDescent.Factory.Par<O> {
+            {static} +SEED_ID: OptionID
+            {static} +DELTA_ID: OptionID
+            {static} +RHO_ID: OptionID
+            {static} +INITIAL_ID: OptionID
+            {static} +ITER_ID: OptionID
+            -rnd: RandomFactory
+            -delta: double
+            -rho: double
+            -noInitialNeighbors: boolean
+            -iterations: int
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        class SpacefillingMaterializeKNNPreprocessor<O extends NumberVector> [[SpacefillingMaterializeKNNPreprocessor.html]] {
+            {static} -LOG: Logging
+            ~curvegen: List<? extends SpatialSorter>
+            ~window: double
+            ~variants: int
+            ~mean: Mean
+            ~random: Random
+            +SpacefillingMaterializeKNNPreprocessor(Relation<O extends NumberVector>, Distance<? super NumberVector>, int, List<? extends SpatialSorter>, double, int, Random)
+            #preprocess(): void
+            +logStatistics(): void
+            #getLogger(): Logging
+            +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+        }
+
+        class elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory<V extends NumberVector> [[SpacefillingMaterializeKNNPreprocessor.Factory.html]] {
+            ~curvegen: List<? extends SpatialSorter>
+            ~window: double
+            ~variants: int
+            ~random: RandomFactory
+            +Factory(int, Distance<? super NumberVector>, List<? extends SpatialSorter>, double, int, RandomFactory)
+            +instantiate(Relation<V extends NumberVector>): SpacefillingMaterializeKNNPreprocessor<V extends NumberVector>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory.Par<V extends NumberVector> {
+            {static} +CURVES_ID: OptionID
+            {static} +WINDOW_ID: OptionID
+            {static} +VARIANTS_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            ~curvegen: List<? extends SpatialSorter>
+            ~window: double
+            ~variants: int
+            ~random: RandomFactory
+            +configure(Parameterization): void
+            +make(): Factory<V extends NumberVector>
+        }
+
+        class MaterializeKNNPreprocessor<O> [[MaterializeKNNPreprocessor.html]] {
+            {static} -LOG: Logging
+            #knnQuery: KNNSearcher<DBIDRef>
+            #listenerList: EventListenerList
+            +MaterializeKNNPreprocessor(Relation<O>, Distance<? super O>, int)
+            +MaterializeKNNPreprocessor(Relation<O>, DistanceQuery<O>, int, boolean)
+            #preprocess(): void
+            +insert(DBIDRef): void
+            +insertAll(DBIDs): void
+            +delete(DBIDRef): boolean
+            +deleteAll(DBIDs): void
+            #objectsInserted(DBIDs): void
+            -updateKNNsAfterInsertion(DBIDs): ArrayDBIDs
+            -updateKNNsAfterDeletion(DBIDs): ArrayDBIDs
+            #objectsRemoved(DBIDs): void
+            #fireKNNsInserted(DBIDs, DBIDs): void
+            #fireKNNsRemoved(DBIDs, DBIDs): void
+            +addKNNListener(KNNListener): void
+            +removeKNNListener(KNNListener): void
+            #getLogger(): Logging
+        }
+
+        class elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory<O> [[MaterializeKNNPreprocessor.Factory.html]] {
+            +Factory(int, Distance<? super O>)
+            +instantiate(Relation<O>): MaterializeKNNPreprocessor<O>
+        }
+
+        class elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory.Par<O> [[MaterializeKNNPreprocessor.Factory.Par.html]] {
+            +make(): Factory<O>
+        }
+
+        class RandomSampleKNNPreprocessor<O> [[RandomSampleKNNPreprocessor.html]] {
+            {static} -LOG: Logging
+            -share: double
+            -rnd: RandomFactory
+            +RandomSampleKNNPreprocessor(Relation<O>, Distance<? super O>, int, double, RandomFactory)
+            #preprocess(): void
+            #getLogger(): Logging
+        }
+
+        class elki.index.preprocessed.knn.RandomSampleKNNPreprocessor.Factory<O> [[RandomSampleKNNPreprocessor.Factory.html]] {
+            -share: double
+            -rnd: RandomFactory
+            +Factory(int, Distance<? super O>, double, RandomFactory)
+            +instantiate(Relation<O>): RandomSampleKNNPreprocessor<O>
+        }
+
+        class elki.index.preprocessed.knn.RandomSampleKNNPreprocessor.Factory.Par<O> {
+            {static} +SHARE_ID: OptionID
+            {static} +SEED_ID: OptionID
+            -share: double
+            -rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        class SpacefillingKNNPreprocessor<O extends NumberVector> [[SpacefillingKNNPreprocessor.html]] {
+            {static} -LOG: Logging
+            #relation: Relation<O extends NumberVector>
+            ~curvegen: List<? extends SpatialSorter>
+            ~window: double
+            ~variants: int
+            ~curves: List<List<SpatialPair<DBID, NumberVector>>>
+            ~positions: WritableDataStore<int[]>
+            ~mean: Mean
+            ~odim: int
+            ~proj: RandomProjectionFamily
+            ~random: Random
+            +SpacefillingKNNPreprocessor(Relation<O extends NumberVector>, List<? extends SpatialSorter>, double, int, int, RandomProjectionFamily, Random)
+            +initialize(): void
+            #preprocess(): void
+            {static} +range(int, int): int[]
+            {static} +randomPermutation(int[], Random): int[]
+            +logStatistics(): void
+            +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+            +kNNByDBID(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<DBIDRef>
+        }
+
+        class elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.SpaceFillingKNNQuery [[SpacefillingKNNPreprocessor.SpaceFillingKNNQuery.html]] {
+            ~distq: DistanceQuery<O extends NumberVector>
+            +SpaceFillingKNNQuery(DistanceQuery<O extends NumberVector>)
+            +getKNN(DBIDRef, int): KNNList
+        }
+
+        class elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.Factory<V extends NumberVector> [[SpacefillingKNNPreprocessor.Factory.html]] {
+            ~curvegen: List<? extends SpatialSorter>
+            ~window: double
+            ~variants: int
+            ~odim: int
+            ~proj: RandomProjectionFamily
+            ~random: RandomFactory
+            +Factory(List<? extends SpatialSorter>, double, int, int, RandomProjectionFamily, RandomFactory)
+            +instantiate(Relation<V extends NumberVector>): SpacefillingKNNPreprocessor<V extends NumberVector>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.Factory.Par [[SpacefillingKNNPreprocessor.Factory.Par.html]] {
+            {static} +CURVES_ID: OptionID
+            {static} +WINDOW_ID: OptionID
+            {static} +VARIANTS_ID: OptionID
+            {static} +DIM_ID: OptionID
+            {static} +PROJECTION_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            ~curvegen: List<? extends SpatialSorter>
+            ~window: double
+            ~variants: int
+            ~odim: int
+            ~proj: RandomProjectionFamily
+            ~random: RandomFactory
+            +configure(Parameterization): void
+            +make(): Factory<?>
+        }
+
+        class NaiveProjectedKNNPreprocessor<O extends NumberVector> [[NaiveProjectedKNNPreprocessor.html]] {
+            #relation: Relation<O extends NumberVector>
+            {static} -LOG: Logging
+            ~window: double
+            ~projections: int
+            ~positions: WritableDataStore<int[]>
+            ~mean: Mean
+            ~proj: RandomProjectionFamily
+            ~random: Random
+            ~projected: List<ModifiableDoubleDBIDList>
+            +NaiveProjectedKNNPreprocessor(Relation<O extends NumberVector>, double, int, RandomProjectionFamily, Random)
+            +initialize(): void
+            #preprocess(): void
+            {static} +range(int, int): int[]
+            {static} +randomPermutation(int[], Random): int[]
+            +logStatistics(): void
+            +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+            +kNNByDBID(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<DBIDRef>
+        }
+
+        class elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.NaiveProjectedKNNQuery [[NaiveProjectedKNNPreprocessor.NaiveProjectedKNNQuery.html]] {
+            ~distq: DistanceQuery<O extends NumberVector>
+            +NaiveProjectedKNNQuery(DistanceQuery<O extends NumberVector>)
+            +getKNN(DBIDRef, int): KNNList
+        }
+
+        class elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory<V extends NumberVector> [[NaiveProjectedKNNPreprocessor.Factory.html]] {
+            ~window: double
+            ~projections: int
+            ~proj: RandomProjectionFamily
+            ~random: RandomFactory
+            +Factory(double, int, RandomProjectionFamily, RandomFactory)
+            +instantiate(Relation<V extends NumberVector>): NaiveProjectedKNNPreprocessor<V extends NumberVector>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory.Par [[NaiveProjectedKNNPreprocessor.Factory.Par.html]] {
+            {static} +WINDOW_ID: OptionID
+            {static} +PROJECTIONS_ID: OptionID
+            {static} +PROJECTION_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            ~window: double
+            ~projections: int
+            ~proj: RandomProjectionFamily
+            ~random: RandomFactory
+            +configure(Parameterization): void
+            +make(): Factory<?>
+        }
+
+        class KNNChangeEvent [[KNNChangeEvent.html]] {
+            {static} -serialVersionUID: long
+            -objects: DBIDs
+            -updates: DBIDs
+            +KNNChangeEvent(Object, Type, DBIDs, DBIDs)
+            +getObjects(): DBIDs
+            +getUpdates(): DBIDs
+        }
+
+        enum elki.index.preprocessed.knn.KNNChangeEvent.Type [[KNNChangeEvent.Type.html]] {
+            {static} +INSERT
+            {static} +DELETE
+        }
+
+        abstract class AbstractMaterializeKNNPreprocessor<O> [[AbstractMaterializeKNNPreprocessor.html]] {
+            #relation: Relation<O>
+            #k: int
+            #distance: Distance<? super O>
+            #distanceQuery: DistanceQuery<O>
+            #storage: WritableDataStore<KNNList>
+            +AbstractMaterializeKNNPreprocessor(Relation<O>, Distance<? super O>, int)
+            +AbstractMaterializeKNNPreprocessor(Relation<O>, DistanceQuery<O>, int)
+            +getDistanceQuery(): DistanceQuery<O>
+            +getK(): int
+            {abstract} #preprocess(): void
+            +get(DBIDRef): KNNList
+            ~createStorage(): void
+            +initialize(): void
+            +--kNNByObject--(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): PreprocessorKNNQuery
+            {abstract} #getLogger(): Logging
+        }
+
+        abstract class elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory<O> [[AbstractMaterializeKNNPreprocessor.Factory.html]] {
+            {static} +K_ID: OptionID
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            #k: int
+            #distance: Distance<? super O>
+            +Factory(int, Distance<? super O>)
+            {abstract} +instantiate(Relation<O>): AbstractMaterializeKNNPreprocessor<O>
+            +getDistance(): Distance<? super O>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        abstract class elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par<O> {
+            #k: int
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            {abstract} +make(): Factory<O>
+        }
+
+        class MaterializeKNNAndRKNNPreprocessor<O> [[MaterializeKNNAndRKNNPreprocessor.html]] {
+            {static} -LOG: Logging
+            -storageRkNN: WritableDataStore<ModifiableDoubleDBIDList>
+            +MaterializeKNNAndRKNNPreprocessor(Relation<O>, Distance<? super O>, int)
+            #preprocess(): void
+            -materializeKNNAndRKNNs(ArrayDBIDs, FiniteProgress): void
+            #objectsInserted(DBIDs): void
+            -updateKNNsAndRkNNs(DBIDs): DBIDs
+            #objectsRemoved(DBIDs): void
+            +getKNN(DBID): KNNList
+            +getRKNN(DBIDRef): DoubleDBIDList
+            +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+            +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+            #getLogger(): Logging
+        }
+
+        class elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory<O> [[MaterializeKNNAndRKNNPreprocessor.Factory.html]] {
+            +Factory(int, Distance<? super O>)
+            +instantiate(Relation<O>): MaterializeKNNAndRKNNPreprocessor<O>
+        }
+
+        class elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory.Par<O> [[MaterializeKNNAndRKNNPreprocessor.Factory.Par.html]] {
+            +make(): Factory<O>
+        }
+
+        class PartitionApproximationMaterializeKNNPreprocessor<O> [[PartitionApproximationMaterializeKNNPreprocessor.html]] {
+            {static} -LOG: Logging
+            -partitions: int
+            -rnd: RandomFactory
+            +PartitionApproximationMaterializeKNNPreprocessor(Relation<O>, Distance<? super O>, int, int, RandomFactory)
+            #preprocess(): void
+            #getLogger(): Logging
+        }
+
+        class elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor.Factory<O> [[PartitionApproximationMaterializeKNNPreprocessor.Factory.html]] {
+            ~partitions: int
+            -rnd: RandomFactory
+            +Factory(int, Distance<? super O>, int, RandomFactory)
+            +instantiate(Relation<O>): PartitionApproximationMaterializeKNNPreprocessor<O>
+        }
+
+        class elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor.Factory.Par<O> [[PartitionApproximationMaterializeKNNPreprocessor.Factory.Par.html]] {
+            {static} +PARTITIONS_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #partitions: int
+            -rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        interface KNNListener [[KNNListener.html]] {
+            {abstract} +kNNsChanged(KNNChangeEvent): void
+        }
+
+        class SpatialPair<K, V extends SpatialComparable> [[SpatialPair.html]] {
+            +SpatialPair(K, V extends SpatialComparable)
+            +getDimensionality(): int
+            +getMin(int): double
+            +getMax(int): double
+        }
+
+        AbstractMaterializeKNNPreprocessor <|-- KNNJoinMaterializeKNNPreprocessor
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory
+        KNNJoinMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory.Par
+        elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory.Par
+        AbstractMaterializeKNNPreprocessor <|-- MetricalIndexApproximationMaterializeKNNPreprocessor
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.MetricalIndexApproximationMaterializeKNNPreprocessor.Factory
+        MetricalIndexApproximationMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.MetricalIndexApproximationMaterializeKNNPreprocessor.Factory
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.MetricalIndexApproximationMaterializeKNNPreprocessor.Factory.Par
+        elki.index.preprocessed.knn.MetricalIndexApproximationMaterializeKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.MetricalIndexApproximationMaterializeKNNPreprocessor.Factory.Par
+        AbstractMaterializeKNNPreprocessor <|-- SpatialApproximationMaterializeKNNPreprocessor
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory
+        SpatialApproximationMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory.Par
+        elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.SpatialApproximationMaterializeKNNPreprocessor.Factory.Par
+        AbstractMaterializeKNNPreprocessor <|-- CachedDoubleDistanceKNNPreprocessor
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor.Factory
+        CachedDoubleDistanceKNNPreprocessor +-- elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor.Factory
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor.Factory.Par
+        elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.CachedDoubleDistanceKNNPreprocessor.Factory.Par
+        AbstractMaterializeKNNPreprocessor <|-- NNDescent
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.NNDescent.Factory
+        NNDescent +-- elki.index.preprocessed.knn.NNDescent.Factory
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.NNDescent.Factory.Par
+        elki.index.preprocessed.knn.NNDescent.Factory +-- elki.index.preprocessed.knn.NNDescent.Factory.Par
+        AbstractMaterializeKNNPreprocessor <|-- SpacefillingMaterializeKNNPreprocessor
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory
+        SpacefillingMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory.Par
+        elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory.Par
+        AbstractMaterializeKNNPreprocessor <|-- MaterializeKNNPreprocessor
+        elki.index.DynamicIndex <|.. MaterializeKNNPreprocessor
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory
+        MaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory.Par
+        elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory.Par
+        AbstractMaterializeKNNPreprocessor <|-- RandomSampleKNNPreprocessor
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.RandomSampleKNNPreprocessor.Factory
+        RandomSampleKNNPreprocessor +-- elki.index.preprocessed.knn.RandomSampleKNNPreprocessor.Factory
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.RandomSampleKNNPreprocessor.Factory.Par
+        elki.index.preprocessed.knn.RandomSampleKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.RandomSampleKNNPreprocessor.Factory.Par
+        elki.index.KNNIndex <|.. SpacefillingKNNPreprocessor
+        elki.database.query.knn.KNNSearcher <|.. elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.SpaceFillingKNNQuery
+        SpacefillingKNNPreprocessor +-- elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.SpaceFillingKNNQuery
+        elki.index.IndexFactory <|.. elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.Factory
+        SpacefillingKNNPreprocessor +-- elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.Factory.Par
+        elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.SpacefillingKNNPreprocessor.Factory.Par
+        elki.index.KNNIndex <|.. NaiveProjectedKNNPreprocessor
+        elki.database.query.knn.KNNSearcher <|.. elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.NaiveProjectedKNNQuery
+        NaiveProjectedKNNPreprocessor +-- elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.NaiveProjectedKNNQuery
+        elki.index.IndexFactory <|.. elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory
+        NaiveProjectedKNNPreprocessor +-- elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory.Par
+        elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory.Par
+        java.util.EventObject <|-- KNNChangeEvent
+        KNNChangeEvent --> elki.index.preprocessed.knn.KNNChangeEvent.Type: type
+        KNNChangeEvent +-- elki.index.preprocessed.knn.KNNChangeEvent.Type
+        elki.index.KNNIndex <|.. AbstractMaterializeKNNPreprocessor
+        elki.index.IndexFactory <|.. elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory
+        AbstractMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par
+        MaterializeKNNPreprocessor <|-- MaterializeKNNAndRKNNPreprocessor
+        elki.index.RKNNIndex <|.. MaterializeKNNAndRKNNPreprocessor
+        elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory
+        MaterializeKNNAndRKNNPreprocessor +-- elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory
+        elki.index.preprocessed.knn.MaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory.Par
+        elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.MaterializeKNNAndRKNNPreprocessor.Factory.Par
+        AbstractMaterializeKNNPreprocessor <|-- PartitionApproximationMaterializeKNNPreprocessor
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor.Factory
+        PartitionApproximationMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor.Factory
+        elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor.Factory.Par
+        elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.PartitionApproximationMaterializeKNNPreprocessor.Factory.Par
+        java.util.EventListener <|-- KNNListener
+        elki.utilities.pairs.Pair <|-- SpatialPair
+        elki.data.spatial.SpatialComparable <|.. SpatialPair
+    }
+
+    namespace elki.index {
+        interface DynamicIndex [[../../DynamicIndex.html]] {
+            {abstract} +delete(DBIDRef): boolean
+            {abstract} +insert(DBIDRef): void
+            {abstract} +deleteAll(DBIDs): void
+            {abstract} +insertAll(DBIDs): void
+        }
+        interface KNNIndex<O> [[../../KNNIndex.html]] {
+            {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        }
+        interface IndexFactory<V> [[../../IndexFactory.html]] {
+            {abstract} +instantiate(Relation<V>): Index
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+        interface RKNNIndex<O> [[../../RKNNIndex.html]] {
+            {abstract} +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+            {abstract} +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+        }
+    }
+
+    namespace elki.database.query.knn {
+        interface KNNSearcher<O> [[../../../database/query/knn/KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace java.util {
+        class EventObject {
+            {static} -serialVersionUID: long
+            #source: Object
+        }
+        interface EventListener
+    }
+
+    namespace elki.utilities.pairs {
+        class Pair<F, S> [[../../../utilities/pairs/Pair.html]] {
+            +first: F
+            +second: S
+        }
+    }
+
+    namespace elki.data.spatial {
+        interface SpatialComparable [[../../../data/spatial/SpatialComparable.html]] {
+            {abstract} +getDimensionality(): int
+            {abstract} +getMin(int): double
+            {abstract} +getMax(int): double
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

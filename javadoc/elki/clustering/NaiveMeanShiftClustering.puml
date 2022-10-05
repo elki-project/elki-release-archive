@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NaiveMeanShiftClustering\n<size:10>elki.clustering" as elki.clustering.NaiveMeanShiftClustering<V extends NumberVector> [[NaiveMeanShiftClustering.html]] {
+        {static} -LOG: Logging
+        #distance: NumberVectorDistance<? super NumberVector>
+        #kernel: KernelDensityFunction
+        #bandwidth: double
+        {static} #MAXITER: int
+        +NaiveMeanShiftClustering(NumberVectorDistance<? super NumberVector>, KernelDensityFunction, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V extends NumberVector>): Clustering<MeanModel>
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<MeanModel>> [[ClusteringAlgorithm.html]]
+    class "<size:14>NaiveMeanShiftClustering.Par\n<size:10>elki.clustering" as elki.clustering.NaiveMeanShiftClustering.Par<V extends NumberVector>
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.NaiveMeanShiftClustering
+    elki.clustering.NaiveMeanShiftClustering +-- elki.clustering.NaiveMeanShiftClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

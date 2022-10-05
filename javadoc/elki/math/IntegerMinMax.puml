@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntegerMinMax\n<size:10>elki.math" as elki.math.IntegerMinMax [[IntegerMinMax.html]] {
+        -min: int
+        -max: int
+        +IntegerMinMax()
+        +IntegerMinMax(int, int)
+        +put(int): void
+        +put(int[]): void
+        +put(IntegerMinMax): void
+        +getMin(): int
+        +getMax(): int
+        +getDiff(): long
+        +isValid(): boolean
+        +asIntArray(): int[]
+        {static} +newArray(int): IntegerMinMax[]
+        +reset(): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

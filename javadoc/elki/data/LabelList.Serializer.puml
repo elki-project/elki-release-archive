@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LabelList.Serializer\n<size:10>elki.data" as elki.data.LabelList.Serializer [[LabelList.Serializer.html]] {
+        +fromByteBuffer(ByteBuffer): LabelList
+        +toByteBuffer(ByteBuffer, LabelList): void
+        +getByteSize(LabelList): int
+    }
+
+    interface "<size:14>ByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteBufferSerializer<LabelList> [[../utilities/io/ByteBufferSerializer.html]] {
+        {abstract} +fromByteBuffer(ByteBuffer): LabelList
+        {abstract} +toByteBuffer(ByteBuffer, LabelList): void
+        {abstract} +getByteSize(LabelList): int
+    }
+    class "<size:14>LabelList\n<size:10>elki.data" as elki.data.LabelList [[LabelList.html]]
+
+    elki.utilities.io.ByteBufferSerializer <|.. elki.data.LabelList.Serializer
+    elki.data.LabelList +-- elki.data.LabelList.Serializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

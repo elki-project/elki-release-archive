@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierPrecisionAtKCurve.Par\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierPrecisionAtKCurve.Par [[OutlierPrecisionAtKCurve.Par.html]] {
+        {static} +POSITIVE_CLASS_NAME_ID: OptionID
+        {static} +MAX_K_ID: OptionID
+        -positiveClassName: Pattern
+        -maxk: int
+        +configure(Parameterization): void
+        +make(): OutlierPrecisionAtKCurve
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>OutlierPrecisionAtKCurve\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierPrecisionAtKCurve [[OutlierPrecisionAtKCurve.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.outlier.OutlierPrecisionAtKCurve.Par
+    elki.evaluation.outlier.OutlierPrecisionAtKCurve +-- elki.evaluation.outlier.OutlierPrecisionAtKCurve.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

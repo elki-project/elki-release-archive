@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseIntegerVector.VariableSerializer\n<size:10>elki.data" as elki.data.SparseIntegerVector.VariableSerializer [[SparseIntegerVector.VariableSerializer.html]] {
+        +fromByteBuffer(ByteBuffer): SparseIntegerVector
+        +toByteBuffer(ByteBuffer, SparseIntegerVector): void
+        +getByteSize(SparseIntegerVector): int
+    }
+
+    interface "<size:14>ByteBufferSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteBufferSerializer<SparseIntegerVector> [[../utilities/io/ByteBufferSerializer.html]] {
+        {abstract} +fromByteBuffer(ByteBuffer): SparseIntegerVector
+        {abstract} +toByteBuffer(ByteBuffer, SparseIntegerVector): void
+        {abstract} +getByteSize(SparseIntegerVector): int
+    }
+    class "<size:14>SparseIntegerVector\n<size:10>elki.data" as elki.data.SparseIntegerVector [[SparseIntegerVector.html]]
+
+    elki.utilities.io.ByteBufferSerializer <|.. elki.data.SparseIntegerVector.VariableSerializer
+    elki.data.SparseIntegerVector +-- elki.data.SparseIntegerVector.VariableSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

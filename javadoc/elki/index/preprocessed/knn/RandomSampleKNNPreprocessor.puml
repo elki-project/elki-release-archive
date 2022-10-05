@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomSampleKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.RandomSampleKNNPreprocessor<O> [[RandomSampleKNNPreprocessor.html]] {
+        {static} -LOG: Logging
+        -share: double
+        -rnd: RandomFactory
+        +RandomSampleKNNPreprocessor(Relation<O>, Distance<? super O>, int, double, RandomFactory)
+        #preprocess(): void
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor<O> [[AbstractMaterializeKNNPreprocessor.html]] {
+        {abstract} #preprocess(): void
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>RandomSampleKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.RandomSampleKNNPreprocessor.Factory<O> [[RandomSampleKNNPreprocessor.Factory.html]]
+
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor <|-- elki.index.preprocessed.knn.RandomSampleKNNPreprocessor
+    elki.index.preprocessed.knn.RandomSampleKNNPreprocessor +-- elki.index.preprocessed.knn.RandomSampleKNNPreprocessor.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UniformUncertainifier\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.UniformUncertainifier [[UniformUncertainifier.html]] {
+        ~minDev: double
+        ~maxDev: double
+        ~symmetric: boolean
+        +UniformUncertainifier(double, double, boolean)
+        +newFeatureVector(Random, A, NumberArrayAdapter<?, A>): UniformContinuousUncertainObject
+        +getFactory(): Factory<UniformContinuousUncertainObject, ?>
+    }
+
+    interface "<size:14>Uncertainifier\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.Uncertainifier<UniformContinuousUncertainObject> [[Uncertainifier.html]] {
+        {abstract} +newFeatureVector(Random, A, NumberArrayAdapter<?, A>): UniformContinuousUncertainObject
+        {abstract} +getFactory(): Factory<UO extends UncertainObject, ?>
+    }
+    class "<size:14>UniformUncertainifier.Par\n<size:10>elki.data.uncertain.uncertainifier" as elki.data.uncertain.uncertainifier.UniformUncertainifier.Par [[UniformUncertainifier.Par.html]]
+
+    elki.data.uncertain.uncertainifier.Uncertainifier <|.. elki.data.uncertain.uncertainifier.UniformUncertainifier
+    elki.data.uncertain.uncertainifier.UniformUncertainifier +-- elki.data.uncertain.uncertainifier.UniformUncertainifier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

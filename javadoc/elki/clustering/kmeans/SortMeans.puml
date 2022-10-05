@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SortMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.SortMeans<V extends NumberVector> [[SortMeans.html]] {
+        {static} -LOG: Logging
+        +SortMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+        +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+        #getLogger(): Logging
+    }
+
+    class "<size:14>CompareMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.CompareMeans<V extends NumberVector> [[CompareMeans.html]]
+    class "<size:14>SortMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.SortMeans.Instance [[SortMeans.Instance.html]]
+    class "<size:14>SortMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.SortMeans.Par<V extends NumberVector> [[SortMeans.Par.html]]
+
+    elki.clustering.kmeans.CompareMeans <|-- elki.clustering.kmeans.SortMeans
+    elki.clustering.kmeans.SortMeans +-- elki.clustering.kmeans.SortMeans.Instance
+    elki.clustering.kmeans.SortMeans +-- elki.clustering.kmeans.SortMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

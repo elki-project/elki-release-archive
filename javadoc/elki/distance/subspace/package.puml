@@ -1,0 +1,160 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.distance.subspace {
+
+        class SubspaceMaximumDistance [[SubspaceMaximumDistance.html]] {
+            +SubspaceMaximumDistance(long[])
+            +distance(NumberVector, NumberVector): double
+            #minDistObject(SpatialComparable, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +norm(NumberVector): double
+        }
+
+        class elki.distance.subspace.SubspaceMaximumDistance.Par [[SubspaceMaximumDistance.Par.html]] {
+            +make(): SubspaceMaximumDistance
+        }
+
+        interface DimensionSelectingSubspaceDistance<O> [[DimensionSelectingSubspaceDistance.html]] {
+            {abstract} +getSelectedDimensions(): long[]
+            {abstract} +setSelectedDimensions(long[]): void
+        }
+
+        abstract class AbstractDimensionsSelectingDistance<V extends FeatureVector<?>> [[AbstractDimensionsSelectingDistance.html]] {
+            #dimensions: long[]
+            +AbstractDimensionsSelectingDistance(long[])
+            +distance(V extends FeatureVector<?>, V extends FeatureVector<?>): double
+            +getSelectedDimensions(): long[]
+            +setSelectedDimensions(long[]): void
+        }
+
+        abstract class elki.distance.subspace.AbstractDimensionsSelectingDistance.Par [[AbstractDimensionsSelectingDistance.Par.html]] {
+            {static} +DIMS_ID: OptionID
+            #dimensions: long[]
+            +configure(Parameterization): void
+        }
+
+        class SubspaceEuclideanDistance [[SubspaceEuclideanDistance.html]] {
+            +SubspaceEuclideanDistance(long[])
+            +distance(NumberVector, NumberVector): double
+            #minDistObject(SpatialComparable, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +norm(NumberVector): double
+        }
+
+        class elki.distance.subspace.SubspaceEuclideanDistance.Par [[SubspaceEuclideanDistance.Par.html]] {
+            +make(): SubspaceEuclideanDistance
+        }
+
+        class OnedimensionalDistance [[OnedimensionalDistance.html]] {
+            -dim: int
+            +OnedimensionalDistance(int)
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +norm(NumberVector): double
+            +getSelectedDimension(): int
+            +--getSelectedDimensions--(): long[]
+            +--setSelectedDimensions--(long[]): void
+            +getInputTypeRestriction(): VectorTypeInformation<? super NumberVector>
+        }
+
+        class elki.distance.subspace.OnedimensionalDistance.Par [[OnedimensionalDistance.Par.html]] {
+            {static} +DIM_ID: OptionID
+            #dim: int
+            +configure(Parameterization): void
+            +make(): OnedimensionalDistance
+        }
+
+        class SubspaceLPNormDistance [[SubspaceLPNormDistance.html]] {
+            -p: double
+            +SubspaceLPNormDistance(double, long[])
+            +getP(): double
+            +distance(NumberVector, NumberVector): double
+            #minDistObject(SpatialComparable, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +norm(NumberVector): double
+            +instantiate(Relation<T extends NumberVector>): SpatialPrimitiveDistanceQuery<T extends NumberVector>
+            +getInputTypeRestriction(): VectorFieldTypeInformation<? super NumberVector>
+            +isMetric(): boolean
+        }
+
+        class elki.distance.subspace.SubspaceLPNormDistance.Par [[SubspaceLPNormDistance.Par.html]] {
+            -p: double
+            +configure(Parameterization): void
+            +make(): SubspaceLPNormDistance
+        }
+
+        class SubspaceManhattanDistance [[SubspaceManhattanDistance.html]] {
+            +SubspaceManhattanDistance(long[])
+            +distance(NumberVector, NumberVector): double
+            #minDistObject(SpatialComparable, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +norm(NumberVector): double
+        }
+
+        class elki.distance.subspace.SubspaceManhattanDistance.Par [[SubspaceManhattanDistance.Par.html]] {
+            +make(): SubspaceManhattanDistance
+        }
+
+        SubspaceLPNormDistance <|-- SubspaceMaximumDistance
+        elki.distance.subspace.AbstractDimensionsSelectingDistance.Par <|-- elki.distance.subspace.SubspaceMaximumDistance.Par
+        SubspaceMaximumDistance +-- elki.distance.subspace.SubspaceMaximumDistance.Par
+        elki.distance.Distance <|-- DimensionSelectingSubspaceDistance
+        elki.distance.PrimitiveDistance <|.. AbstractDimensionsSelectingDistance
+        DimensionSelectingSubspaceDistance <|.. AbstractDimensionsSelectingDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.subspace.AbstractDimensionsSelectingDistance.Par
+        AbstractDimensionsSelectingDistance +-- elki.distance.subspace.AbstractDimensionsSelectingDistance.Par
+        SubspaceLPNormDistance <|-- SubspaceEuclideanDistance
+        elki.distance.subspace.AbstractDimensionsSelectingDistance.Par <|-- elki.distance.subspace.SubspaceEuclideanDistance.Par
+        SubspaceEuclideanDistance +-- elki.distance.subspace.SubspaceEuclideanDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- OnedimensionalDistance
+        elki.distance.SpatialPrimitiveDistance <|.. OnedimensionalDistance
+        DimensionSelectingSubspaceDistance <|.. OnedimensionalDistance
+        elki.distance.Norm <|.. OnedimensionalDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.subspace.OnedimensionalDistance.Par
+        OnedimensionalDistance +-- elki.distance.subspace.OnedimensionalDistance.Par
+        AbstractDimensionsSelectingDistance <|-- SubspaceLPNormDistance
+        elki.distance.SpatialPrimitiveDistance <|.. SubspaceLPNormDistance
+        elki.distance.Norm <|.. SubspaceLPNormDistance
+        elki.distance.NumberVectorDistance <|.. SubspaceLPNormDistance
+        elki.distance.subspace.AbstractDimensionsSelectingDistance.Par <|-- elki.distance.subspace.SubspaceLPNormDistance.Par
+        SubspaceLPNormDistance +-- elki.distance.subspace.SubspaceLPNormDistance.Par
+        SubspaceLPNormDistance <|-- SubspaceManhattanDistance
+        elki.distance.subspace.AbstractDimensionsSelectingDistance.Par <|-- elki.distance.subspace.SubspaceManhattanDistance.Par
+        SubspaceManhattanDistance +-- elki.distance.subspace.SubspaceManhattanDistance.Par
+    }
+
+    namespace elki.distance {
+        interface Distance<O> [[../Distance.html]] {
+            +isSymmetric(): boolean
+            +isMetric(): boolean
+            +isSquared(): boolean
+            {abstract} +getInputTypeRestriction(): TypeInformation
+            {abstract} +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+        }
+        interface PrimitiveDistance<O> [[../PrimitiveDistance.html]] {
+            {abstract} +distance(O, O): double
+            {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+            +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+        }
+        abstract class AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+        interface SpatialPrimitiveDistance<V extends SpatialComparable> [[../SpatialPrimitiveDistance.html]] {
+            {abstract} +minDist(SpatialComparable, SpatialComparable): double
+            +instantiate(Relation<T extends SpatialComparable>): SpatialPrimitiveDistanceQuery<T extends SpatialComparable>
+        }
+        interface Norm<O> [[../Norm.html]] {
+            {abstract} +norm(O): double
+        }
+        interface NumberVectorDistance<O> [[../NumberVectorDistance.html]] {
+            {abstract} +distance(NumberVector, NumberVector): double
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

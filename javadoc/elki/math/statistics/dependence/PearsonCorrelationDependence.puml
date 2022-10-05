@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PearsonCorrelationDependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.PearsonCorrelationDependence [[PearsonCorrelationDependence.html]] {
+        {static} -LOG: Logging
+        {static} +STATIC: PearsonCorrelationDependence
+        +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+        +dependence(NumberArrayAdapter<?, A>, List<? extends A>): double[]
+    }
+
+    interface "<size:14>Dependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.Dependence [[Dependence.html]] {
+        {abstract} +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+    }
+    class "<size:14>PearsonCorrelationDependence.Par\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.PearsonCorrelationDependence.Par [[PearsonCorrelationDependence.Par.html]]
+
+    elki.math.statistics.dependence.Dependence <|.. elki.math.statistics.dependence.PearsonCorrelationDependence
+    elki.math.statistics.dependence.PearsonCorrelationDependence +-- elki.math.statistics.dependence.PearsonCorrelationDependence.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ClusterFeature.Factory\n<size:10>elki.index.tree.betula.features" as elki.index.tree.betula.features.ClusterFeature.Factory<F extends ClusterFeature> [[ClusterFeature.Factory.html]] {
+        {abstract} +make(int): F extends ClusterFeature
+    }
+
+    interface "<size:14>ClusterFeature\n<size:10>elki.index.tree.betula.features" as elki.index.tree.betula.features.ClusterFeature [[ClusterFeature.html]] {
+        {abstract} +addToStatistics(NumberVector): void
+        {abstract} +addToStatistics(ClusterFeature): void
+        {abstract} +resetStatistics(): void
+        {abstract} +getWeight(): int
+        {abstract} +centroid(int): double
+        {abstract} +variance(): double
+        {abstract} +sumdev(): double
+        {abstract} +variance(int): double
+        {abstract} +covariance(): double[]
+    }
+
+    elki.index.tree.betula.features.ClusterFeature +-- elki.index.tree.betula.features.ClusterFeature.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

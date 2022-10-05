@@ -1,0 +1,73 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.histogram {
+
+        abstract class AbstractHistogramVisualization [[AbstractHistogramVisualization.html]] {
+            #proj: Projection1D
+            +AbstractHistogramVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +resultChanged(Object): void
+        }
+
+        class ColoredHistogramVisualizer [[ColoredHistogramVisualizer.html]] {
+            {static} -CNAME: String
+            {static} -DEFAULT_BINS: int
+            +ColoredHistogramVisualizer(Par)
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+            +allowThumbnails(VisualizationTask): boolean
+        }
+
+        class elki.visualization.visualizers.histogram.ColoredHistogramVisualizer.Instance<NV extends NumberVector> [[ColoredHistogramVisualizer.Instance.html]] {
+            {static} +BIN: String
+            -relation: Relation<NV extends NumberVector>
+            -sample: SamplingResult
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -setupCSS(SVGPlot, int): void
+        }
+
+        class elki.visualization.visualizers.histogram.ColoredHistogramVisualizer.Par [[ColoredHistogramVisualizer.Par.html]] {
+            {static} +STYLE_CURVES_ID: OptionID
+            {static} +HISTOGRAM_BINS_ID: OptionID
+            #curves: boolean
+            #bins: int
+            +configure(Parameterization): void
+            +make(): ColoredHistogramVisualizer
+        }
+
+        elki.visualization.visualizers.AbstractVisualization <|-- AbstractHistogramVisualization
+        elki.visualization.visualizers.VisFactory <|.. ColoredHistogramVisualizer
+        ColoredHistogramVisualizer --> elki.visualization.visualizers.histogram.ColoredHistogramVisualizer.Par: settings
+        AbstractHistogramVisualization <|-- elki.visualization.visualizers.histogram.ColoredHistogramVisualizer.Instance
+        ColoredHistogramVisualizer +-- elki.visualization.visualizers.histogram.ColoredHistogramVisualizer.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.histogram.ColoredHistogramVisualizer.Par
+        ColoredHistogramVisualizer +-- elki.visualization.visualizers.histogram.ColoredHistogramVisualizer.Par
+    }
+
+    namespace elki.visualization.visualizers {
+        abstract class AbstractVisualization [[../AbstractVisualization.html]] {
+            #task: VisualizationTask
+            #context: VisualizerContext
+            #svgp: VisualizationPlot
+            #layer: Element
+            -width: double
+            -height: double
+            {abstract} +fullRedraw(): void
+        }
+        interface VisFactory [[../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

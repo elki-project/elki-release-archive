@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VAFile.Factory.Par\n<size:10>elki.index.vafile" as elki.index.vafile.VAFile.Factory.Par [[VAFile.Factory.Par.html]] {
+        {static} +PARTITIONS_ID: OptionID
+        ~pagesize: int
+        ~numpart: int
+        +configure(Parameterization): void
+        +make(): Factory<?>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>VAFile.Factory\n<size:10>elki.index.vafile" as elki.index.vafile.VAFile.Factory<V extends NumberVector> [[VAFile.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.vafile.VAFile.Factory.Par
+    elki.index.vafile.VAFile.Factory +-- elki.index.vafile.VAFile.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

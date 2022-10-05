@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FirstNStreamFilter.Par\n<size:10>elki.datasource.filter.selection" as elki.datasource.filter.selection.FirstNStreamFilter.Par [[FirstNStreamFilter.Par.html]] {
+        {static} +SIZE_ID: OptionID
+        #n: int
+        +configure(Parameterization): void
+        +make(): FirstNStreamFilter
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>FirstNStreamFilter\n<size:10>elki.datasource.filter.selection" as elki.datasource.filter.selection.FirstNStreamFilter [[FirstNStreamFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.selection.FirstNStreamFilter.Par
+    elki.datasource.filter.selection.FirstNStreamFilter +-- elki.datasource.filter.selection.FirstNStreamFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

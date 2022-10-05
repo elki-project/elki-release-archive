@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LPCAEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.LPCAEstimator [[LPCAEstimator.html]] {
+        #pcaRunner: PCARunner
+        #eigenFilter: EigenPairFilter
+        +LPCAEstimator(EigenPairFilter)
+        +estimate(KNNSearcher<DBIDRef>, DistanceQuery<? extends NumberVector>, DBIDRef, int): double
+        +estimate(RangeSearcher<DBIDRef>, DistanceQuery<? extends NumberVector>, DBIDRef, double): double
+        #estimate(DBIDs, Relation<? extends NumberVector>): double
+    }
+
+    interface "<size:14>IntrinsicDimensionalityEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.IntrinsicDimensionalityEstimator<NumberVector> [[IntrinsicDimensionalityEstimator.html]] {
+        {abstract} +estimate(KNNSearcher<DBIDRef>, DistanceQuery<? extends O>, DBIDRef, int): double
+        {abstract} +estimate(RangeSearcher<DBIDRef>, DistanceQuery<? extends O>, DBIDRef, double): double
+    }
+    class "<size:14>LPCAEstimator.Par\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.LPCAEstimator.Par [[LPCAEstimator.Par.html]]
+
+    elki.math.statistics.intrinsicdimensionality.IntrinsicDimensionalityEstimator <|.. elki.math.statistics.intrinsicdimensionality.LPCAEstimator
+    elki.math.statistics.intrinsicdimensionality.LPCAEstimator +-- elki.math.statistics.intrinsicdimensionality.LPCAEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

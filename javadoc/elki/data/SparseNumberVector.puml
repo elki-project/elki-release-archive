@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>SparseNumberVector\n<size:10>elki.data" as elki.data.SparseNumberVector [[SparseNumberVector.html]] {
+        {static} +VARIABLE_LENGTH: VectorTypeInformation<SparseNumberVector>
+        {static} +FIELD: VectorFieldTypeInformation<SparseNumberVector>
+        +iter(): int
+        {abstract} +setDimensionality(int): void
+        {abstract} +iterDoubleValue(int): double
+        +iterFloatValue(int): float
+        +iterIntValue(int): int
+        +iterShortValue(int): short
+        {abstract} +iterLongValue(int): long
+        +iterByteValue(int): byte
+        {abstract} +--doubleValue--(int): double
+        +--floatValue--(int): float
+        +--intValue--(int): int
+        {abstract} +--longValue--(int): long
+        +--shortValue--(int): short
+        +--byteValue--(int): byte
+    }
+
+    interface "<size:14>NumberVector\n<size:10>elki.data" as elki.data.NumberVector [[NumberVector.html]] {
+        {abstract} +doubleValue(int): double
+        {abstract} +longValue(int): long
+        {abstract} +toArray(): double[]
+    }
+    interface "<size:14>SparseFeatureVector\n<size:10>elki.data" as elki.data.SparseFeatureVector<Number> [[SparseFeatureVector.html]] {
+        {abstract} +iterDim(int): int
+        {abstract} +iterValid(int): boolean
+    }
+    interface "<size:14>SparseNumberVector.Factory\n<size:10>elki.data" as elki.data.SparseNumberVector.Factory<V extends SparseNumberVector> [[SparseNumberVector.Factory.html]]
+
+    elki.data.NumberVector <|-- elki.data.SparseNumberVector
+    elki.data.SparseFeatureVector <|-- elki.data.SparseNumberVector
+    elki.data.SparseNumberVector +-- elki.data.SparseNumberVector.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

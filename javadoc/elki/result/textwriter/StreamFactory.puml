@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>StreamFactory\n<size:10>elki.result.textwriter" as elki.result.textwriter.StreamFactory [[StreamFactory.html]] {
+        {abstract} +openStream(String): PrintStream
+        {abstract} +closeStream(PrintStream): void
+        {abstract} +close(): void
+    }
+
+    interface "<size:14>AutoCloseable\n<size:10>java.lang" as java.lang.AutoCloseable {
+        {abstract} +close(): void
+    }
+
+    java.lang.AutoCloseable <|-- elki.result.textwriter.StreamFactory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

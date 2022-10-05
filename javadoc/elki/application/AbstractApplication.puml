@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractApplication\n<size:10>elki.application" as elki.application.AbstractApplication [[AbstractApplication.html]] {
+        {static} -LOG: Logging
+        {static} -NEWLINE: String
+        {static} +VERSION: String
+        {static} -REFERENCE_VERSION: String
+        {static} +REFERENCE: String
+        {static} +runCLIApplication(Class<?>, String[]): void
+        {static} +usage(Collection<TrackedParameter>): String
+        {static} #printErrorMessage(Exception): void
+        {static} -printDescription(Class<?>): void
+        {abstract} +run(): void
+    }
+    abstract class "<size:14>AbstractApplication.Par\n<size:10>elki.application" as elki.application.AbstractApplication.Par [[AbstractApplication.Par.html]]
+
+    elki.application.AbstractApplication +-- elki.application.AbstractApplication.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

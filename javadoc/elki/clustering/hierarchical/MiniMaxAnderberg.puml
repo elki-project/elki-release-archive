@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MiniMaxAnderberg\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.MiniMaxAnderberg<O> [[MiniMaxAnderberg.html]] {
+        {static} -LOG: Logging
+        +MiniMaxAnderberg(Distance<? super O>)
+        +run(Relation<O>): ClusterPrototypeMergeHistory
+    }
+
+    class "<size:14>MiniMax\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.MiniMax<O> [[MiniMax.html]]
+    class "<size:14>MiniMaxAnderberg.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.MiniMaxAnderberg.Instance [[MiniMaxAnderberg.Instance.html]]
+    class "<size:14>MiniMaxAnderberg.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.MiniMaxAnderberg.Par<O>
+
+    elki.clustering.hierarchical.MiniMax <|-- elki.clustering.hierarchical.MiniMaxAnderberg
+    elki.clustering.hierarchical.MiniMaxAnderberg +-- elki.clustering.hierarchical.MiniMaxAnderberg.Instance
+    elki.clustering.hierarchical.MiniMaxAnderberg +-- elki.clustering.hierarchical.MiniMaxAnderberg.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

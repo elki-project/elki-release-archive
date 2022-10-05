@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RescaleMetaOutlierAlgorithm\n<size:10>elki.outlier.meta" as elki.outlier.meta.RescaleMetaOutlierAlgorithm [[RescaleMetaOutlierAlgorithm.html]] {
+        -algorithm: Algorithm
+        -scaling: ScalingFunction
+        +RescaleMetaOutlierAlgorithm(Algorithm, ScalingFunction)
+        +autorun(Database): OutlierResult
+        -getOutlierResult(Object): OutlierResult
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>RescaleMetaOutlierAlgorithm.Par\n<size:10>elki.outlier.meta" as elki.outlier.meta.RescaleMetaOutlierAlgorithm.Par [[RescaleMetaOutlierAlgorithm.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.meta.RescaleMetaOutlierAlgorithm
+    elki.outlier.meta.RescaleMetaOutlierAlgorithm +-- elki.outlier.meta.RescaleMetaOutlierAlgorithm.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

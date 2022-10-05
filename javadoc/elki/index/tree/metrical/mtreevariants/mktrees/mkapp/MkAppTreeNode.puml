@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkAppTreeNode\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkapp" as elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTreeNode<O> [[MkAppTreeNode.html]] {
+        {static} -serialVersionUID: long
+        {static} -LOG: Logging
+        +MkAppTreeNode()
+        +MkAppTreeNode(int, boolean)
+        #knnDistanceApproximation(): PolynomialApproximation
+        +adjustEntry(MkAppEntry, DBID, double, AbstractMTree<O, MkAppTreeNode<O>, MkAppEntry, ?>): boolean
+        #integrityCheckParameters(MkAppEntry, MkAppTreeNode<O>, int, AbstractMTree<O, MkAppTreeNode<O>, MkAppEntry, ?>): void
+    }
+
+    abstract class "<size:14>AbstractMTreeNode\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.AbstractMTreeNode<O, MkAppTreeNode<O>, MkAppEntry> [[../../AbstractMTreeNode.html]]
+
+    elki.index.tree.metrical.mtreevariants.AbstractMTreeNode <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkapp.MkAppTreeNode
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

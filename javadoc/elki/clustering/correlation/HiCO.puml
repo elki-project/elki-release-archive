@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HiCO\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.HiCO [[HiCO.html]] {
+        {static} -LOG: Logging
+        {static} +DEFAULT_DELTA: double
+        {static} +DEFAULT_ALPHA: double
+        -deltasq: double
+        -mu: int
+        -k: int
+        -pca: PCARunner
+        -filter: EigenPairFilter
+        +HiCO(int, PCARunner, double, int, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends NumberVector>): ClusterOrder
+        +correlationDistance(PCAFilteredResult, PCAFilteredResult, int): int
+        -adjust(double[], double[], int): void
+        +getMinPts(): int
+    }
+
+    interface "<size:14>GeneralizedOPTICS\n<size:10>elki.clustering.optics" as elki.clustering.optics.GeneralizedOPTICS [[../optics/GeneralizedOPTICS.html]]
+    class "<size:14>HiCO.Instance\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.HiCO.Instance [[HiCO.Instance.html]]
+    class "<size:14>HiCO.Par\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.HiCO.Par [[HiCO.Par.html]]
+
+    elki.clustering.optics.GeneralizedOPTICS <|.. elki.clustering.correlation.HiCO
+    elki.clustering.correlation.HiCO +-- elki.clustering.correlation.HiCO.Instance
+    elki.clustering.correlation.HiCO +-- elki.clustering.correlation.HiCO.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HamerlyKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.HamerlyKMeans.Instance [[HamerlyKMeans.Instance.html]] {
+        ~sums: double[]
+        ~newmeans: double[]
+        ~upper: WritableDoubleDataStore
+        ~lower: WritableDoubleDataStore
+        ~sep: double[]
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+        #iterate(int): int
+        #initialAssignToNearestCluster(): int
+        #assignToNearestCluster(): int
+        #recomputeSeperation(double[]): void
+        #updateBounds(double[]): void
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Instance [[AbstractKMeans.Instance.html]] {
+        {abstract} #iterate(int): int
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>HamerlyKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.HamerlyKMeans<V extends NumberVector> [[HamerlyKMeans.html]]
+
+    elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.HamerlyKMeans.Instance
+    elki.clustering.kmeans.HamerlyKMeans +-- elki.clustering.kmeans.HamerlyKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

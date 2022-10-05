@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CanberraDistance\n<size:10>elki.distance" as elki.distance.CanberraDistance [[CanberraDistance.html]] {
+        {static} +STATIC: CanberraDistance
+        +distance(NumberVector, NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +isMetric(): boolean
+        +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    interface "<size:14>NumberVectorDistance\n<size:10>elki.distance" as elki.distance.NumberVectorDistance<NumberVector> [[NumberVectorDistance.html]] {
+        {abstract} +distance(NumberVector, NumberVector): double
+    }
+    class "<size:14>CanberraDistance.Par\n<size:10>elki.distance" as elki.distance.CanberraDistance.Par [[CanberraDistance.Par.html]]
+
+    elki.distance.SpatialPrimitiveDistance <|.. elki.distance.CanberraDistance
+    elki.distance.NumberVectorDistance <|.. elki.distance.CanberraDistance
+    elki.distance.CanberraDistance +-- elki.distance.CanberraDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

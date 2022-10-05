@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EuclideanSphericalSimplifiedElkanKMeans\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans<V extends NumberVector> [[EuclideanSphericalSimplifiedElkanKMeans.html]] {
+        {static} -LOG: Logging
+        #varstat: boolean
+        +EuclideanSphericalSimplifiedElkanKMeans(int, int, KMeansInitialization, boolean)
+        +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+        #getLogger(): Logging
+    }
+
+    class "<size:14>SphericalKMeans\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.SphericalKMeans<V extends NumberVector> [[SphericalKMeans.html]]
+    class "<size:14>EuclideanSphericalSimplifiedElkanKMeans.Instance\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Instance [[EuclideanSphericalSimplifiedElkanKMeans.Instance.html]]
+    class "<size:14>EuclideanSphericalSimplifiedElkanKMeans.Par\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Par<V extends NumberVector> [[EuclideanSphericalSimplifiedElkanKMeans.Par.html]]
+
+    elki.clustering.kmeans.spherical.SphericalKMeans <|-- elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans
+    elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans +-- elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Instance
+    elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans +-- elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

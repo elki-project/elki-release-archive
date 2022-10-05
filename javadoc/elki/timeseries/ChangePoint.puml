@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ChangePoint\n<size:10>elki.timeseries" as elki.timeseries.ChangePoint [[ChangePoint.html]] {
+        ~id: DBID
+        ~column: int
+        ~score: double
+        +ChangePoint(DBIDRef, int, double)
+        +appendTo(StringBuilder): StringBuilder
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

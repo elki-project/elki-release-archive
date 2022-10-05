@@ -1,0 +1,45 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ArffParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.ArffParser [[ArffParser.html]] {
+        {static} -LOG: Logging
+        {static} +ARFF_HEADER_RELATION: Matcher
+        {static} +ARFF_HEADER_ATTRIBUTE: Matcher
+        {static} +ARFF_HEADER_DATA: Matcher
+        {static} +ARFF_COMMENT: Matcher
+        {static} +DEFAULT_ARFF_MAGIC_EID: String
+        {static} +DEFAULT_ARFF_MAGIC_CLASS: String
+        {static} +ARFF_NUMERIC: Matcher
+        {static} +EMPTY: Matcher
+        ~magic_eid: Matcher
+        ~magic_class: Matcher
+        ~labels: ArrayList<String>
+        ~denseFactory: Factory<?>
+        +ArffParser(Pattern, Pattern)
+        +ArffParser(String, String)
+        +parse(InputStream): MultipleObjectsBundle
+        -loadSparseInstance(StreamTokenizer, int[], int[], TypeInformation[], int): Object[]
+        -loadDenseInstance(StreamTokenizer, int[], TypeInformation[], int): Object[]
+        -makeArffTokenizer(BufferedReader): StreamTokenizer
+        -setupBundleHeaders(ArrayList<String>, int[], TypeInformation[], int[], MultipleObjectsBundle, boolean): void
+        -readHeader(BufferedReader): void
+        -parseAttributeStatements(BufferedReader, ArrayList<String>, ArrayList<String>): void
+        -processColumnTypes(ArrayList<String>, ArrayList<String>, int[], TypeInformation[], int[]): void
+        -nextToken(StreamTokenizer): void
+        +cleanup(): void
+    }
+
+    interface "<size:14>Parser\n<size:10>elki.datasource.parser" as elki.datasource.parser.Parser [[Parser.html]] {
+        {abstract} +parse(InputStream): MultipleObjectsBundle
+        {abstract} +cleanup(): void
+    }
+    class "<size:14>ArffParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.ArffParser.Par [[ArffParser.Par.html]]
+
+    elki.datasource.parser.Parser <|.. elki.datasource.parser.ArffParser
+    elki.datasource.parser.ArffParser +-- elki.datasource.parser.ArffParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

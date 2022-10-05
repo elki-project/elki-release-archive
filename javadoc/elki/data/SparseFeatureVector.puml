@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>SparseFeatureVector\n<size:10>elki.data" as elki.data.SparseFeatureVector<D> [[SparseFeatureVector.html]] {
+        +iter(): int
+        {abstract} +iterDim(int): int
+        +iterAdvance(int): int
+        +iterRetract(int): int
+        {abstract} +iterValid(int): boolean
+    }
+
+    interface "<size:14>FeatureVector\n<size:10>elki.data" as elki.data.FeatureVector<D> [[FeatureVector.html]] {
+        {abstract} +getDimensionality(): int
+        {abstract} +getValue(int): D
+    }
+
+    elki.data.FeatureVector <|-- elki.data.SparseFeatureVector
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

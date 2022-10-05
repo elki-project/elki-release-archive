@@ -1,0 +1,127 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.parallel3d {
+
+        class Parallel3DRenderer<O extends NumberVector> [[Parallel3DRenderer.html]] {
+            {static} -LOG: Logging
+            -textures: int[]
+            -completedTextures: int
+            -dindex: int[]
+            ~colors: float[]
+            ~axes: DoubleIntPair[]
+            ~vbi: int[]
+            ~frameBufferID: int[]
+            #Parallel3DRenderer(Shared<O extends NumberVector>)
+            #prepare(GL2): int
+            #drawParallelPlot(GLAutoDrawable, GL2): void
+            ~renderTexture(GL2, int): void
+            -prepareColors(StylingPolicy): void
+            #forgetTextures(GL): void
+            -sortAxes(): void
+            -sortEdges(int[]): IntIntPair[]
+            -renderLabels(GL2, IntIntPair[]): void
+        }
+
+        class OpenGL3DParallelCoordinates<O extends NumberVector> [[OpenGL3DParallelCoordinates.html]] {
+            {static} -LOG: Logging
+            +OpenGL3DParallelCoordinates(Layouter3DPC<? super NumberVector>)
+            +processNewResult(Object): void
+            +getStylePolicy(Object, StyleLibrary): StylingPolicy
+        }
+
+        class elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Settings<O> [[OpenGL3DParallelCoordinates.Settings.html]] {
+            +sim: Dependence
+            +linewidth: float
+            +texwidth: int
+            +texheight: int
+            +mipmaps: int
+        }
+
+        class elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance<O extends NumberVector> [[OpenGL3DParallelCoordinates.Instance.html]] {
+            {static} ~DEBUG: boolean
+            ~frame: JFrame
+            ~glu: GLU
+            ~canvas: GLCanvas
+            ~menuStarter: MouseAdapter
+            +Instance(Relation<? extends NumberVector>, ProjectionParallel, Settings<O extends NumberVector>, StylingPolicy, StyleLibrary)
+            ~initLabels(): void
+            #relayout(String): void
+            -startLayoutThread(): void
+            +run(): void
+            +stop(): void
+            +init(GLAutoDrawable): void
+            ~switchState(State): void
+            +reshape(GLAutoDrawable, int, int, int, int): void
+            +display(GLAutoDrawable): void
+            #setLayout(Layout): void
+            +dispose(GLAutoDrawable): void
+        }
+
+        enum elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.State [[OpenGL3DParallelCoordinates.Instance.State.html]] {
+            {static} +PREPARATION
+            {static} +EXPLORE
+            {static} +MENU
+        }
+
+        class elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.Shared<O> [[OpenGL3DParallelCoordinates.Instance.Shared.html]] {
+            ~dim: int
+            ~rel: Relation<? extends O>
+            ~labels: String[]
+            ~proj: ProjectionParallel
+            ~stylepol: StylingPolicy
+            ~stylelib: StyleLibrary
+            ~textrenderer: TextRenderer
+            ~mat: double[]
+        }
+
+        class elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Par<O extends NumberVector> {
+            {static} +LAYOUT_ID: OptionID
+            +configure(Parameterization): void
+            +make(): OpenGL3DParallelCoordinates<O extends NumberVector>
+        }
+
+        Parallel3DRenderer --> elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.Shared: shared
+        elki.result.ResultHandler <|.. OpenGL3DParallelCoordinates
+        OpenGL3DParallelCoordinates --> elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Settings: settings
+        OpenGL3DParallelCoordinates +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Settings
+        elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Settings --> elki.visualization.parallel3d.layout.Layouter3DPC: layout
+        javax.media.opengl.GLEventListener <|.. elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance
+        OpenGL3DParallelCoordinates +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance
+        elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance --> Parallel3DRenderer: prenderer
+        elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance --> elki.visualization.parallel3d.util.Arcball1DOFAdapter: arcball
+        elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance --> elki.visualization.parallel3d.util.SimpleMenuOverlay: menuOverlay
+        elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance --> elki.visualization.parallel3d.util.SimpleMessageOverlay: messageOverlay
+        elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance --> elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.State: state
+        elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance --> elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.Shared: shared
+        elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.State
+        elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.Shared
+        elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.Shared --> elki.visualization.parallel3d.layout.Layout: layout
+        elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.Shared --> elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Settings: settings
+        elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.Shared --> elki.visualization.parallel3d.util.Simple1DOFCamera: camera
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Par
+        OpenGL3DParallelCoordinates +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Par
+        elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Par --> elki.visualization.parallel3d.layout.Layouter3DPC: layout
+    }
+
+    namespace elki.result {
+        interface ResultHandler [[../../result/ResultHandler.html]]
+    }
+
+    namespace javax.media.opengl {
+        interface GLEventListener {
+            {abstract} +init(GLAutoDrawable): void
+            {abstract} +dispose(GLAutoDrawable): void
+            {abstract} +display(GLAutoDrawable): void
+            {abstract} +reshape(GLAutoDrawable, int, int, int, int): void
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

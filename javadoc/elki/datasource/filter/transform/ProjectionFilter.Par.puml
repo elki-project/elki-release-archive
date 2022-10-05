@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProjectionFilter.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.ProjectionFilter.Par<I, O> {
+        {static} +PROJ_ID: OptionID
+        ~projection: Projection<I, O>
+        +configure(Parameterization): void
+        +make(): ProjectionFilter<I, O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ProjectionFilter\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.ProjectionFilter<I, O> [[ProjectionFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.transform.ProjectionFilter.Par
+    elki.datasource.filter.transform.ProjectionFilter +-- elki.datasource.filter.transform.ProjectionFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

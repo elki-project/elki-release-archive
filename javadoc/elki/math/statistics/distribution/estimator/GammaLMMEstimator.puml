@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GammaLMMEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.GammaLMMEstimator [[GammaLMMEstimator.html]] {
+        {static} +STATIC: GammaLMMEstimator
+        {static} -A1: double
+        {static} -A2: double
+        {static} -A3: double
+        {static} -B1: double
+        {static} -B2: double
+        {static} -B3: double
+        {static} -B4: double
+        +getNumMoments(): int
+        +estimateFromLMoments(double[]): GammaDistribution
+        +getDistributionClass(): Class<? super GammaDistribution>
+    }
+
+    interface "<size:14>LMMDistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.LMMDistributionEstimator<GammaDistribution> [[LMMDistributionEstimator.html]] {
+        {abstract} +estimateFromLMoments(double[]): GammaDistribution
+        {abstract} +getNumMoments(): int
+    }
+    class "<size:14>GammaLMMEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.GammaLMMEstimator.Par [[GammaLMMEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.LMMDistributionEstimator <|.. elki.math.statistics.distribution.estimator.GammaLMMEstimator
+    elki.math.statistics.distribution.estimator.GammaLMMEstimator +-- elki.math.statistics.distribution.estimator.GammaLMMEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

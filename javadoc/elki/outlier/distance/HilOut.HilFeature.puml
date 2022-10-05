@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HilOut.HilFeature\n<size:10>elki.outlier.distance" as elki.outlier.distance.HilOut.HilFeature [[HilOut.HilFeature.html]] {
+        +id: DBID
+        +hilbert: long[]
+        +level: int
+        +ubound: double
+        +lbound: double
+        +nn: ObjectHeap<DoubleDBIDPair>
+        +nn_keys: HashSetModifiableDBIDs
+        +sum_nn: double
+        +HilFeature(DBID, ObjectHeap<DoubleDBIDPair>)
+        +compareTo(HilFeature): int
+        #insert(DBID, double, int): void
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<HilFeature> {
+        {abstract} +compareTo(HilFeature): int
+    }
+    class "<size:14>HilOut\n<size:10>elki.outlier.distance" as elki.outlier.distance.HilOut<O extends NumberVector> [[HilOut.html]]
+
+    java.lang.Comparable <|.. elki.outlier.distance.HilOut.HilFeature
+    elki.outlier.distance.HilOut +-- elki.outlier.distance.HilOut.HilFeature
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

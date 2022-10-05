@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProjectedIndex.ProjectedKNNByDBID\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.ProjectedKNNByDBID [[ProjectedIndex.ProjectedKNNByDBID.html]] {
+        ~inner: KNNSearcher<​I>
+        ~distq: DistanceQuery<O>
+        +ProjectedKNNByDBID(DistanceQuery<O>, KNNSearcher<​I>)
+        +getKNN(DBIDRef, int): KNNList
+    }
+
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<DBIDRef> [[../../database/query/knn/KNNSearcher.html]] {
+        {abstract} +getKNN(DBIDRef, int): KNNList
+    }
+    class "<size:14>ProjectedIndex\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex<O, I> [[ProjectedIndex.html]]
+
+    elki.database.query.knn.KNNSearcher <|.. elki.index.projected.ProjectedIndex.ProjectedKNNByDBID
+    elki.index.projected.ProjectedIndex +-- elki.index.projected.ProjectedIndex.ProjectedKNNByDBID
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

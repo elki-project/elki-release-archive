@@ -1,0 +1,44 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KDTreeEM\n<size:10>elki.clustering.em" as elki.clustering.em.KDTreeEM [[KDTreeEM.html]] {
+        {static} -LOG: Logging
+        -mfactory: TextbookMultivariateGaussianModelFactory
+        -soft: boolean
+        -delta: double
+        {static} +SOFT_TYPE: SimpleTypeInformation<double[]>
+        -k: int
+        -mbw: double
+        -tau: double
+        -tauClass: double
+        -miniter: int
+        -maxiter: int
+        #sorted: ArrayModifiableDBIDs
+        -models: List<TextbookMultivariateGaussianModel>
+        -newmodels: List<TextbookMultivariateGaussianModel>
+        -solver: ConstrainedQuadraticProblemSolver
+        -ipiPow: double
+        -wsum: double[]
+        #exactAssign: boolean
+        +KDTreeEM(int, double, double, double, double, TextbookMultivariateGaussianModelFactory, int, int, boolean, boolean)
+        +run(Relation<? extends NumberVector>): Clustering<EMModel>
+        -analyseDimWidth(Relation<? extends NumberVector>): double[]
+        -checkStoppingCondition(KDTree, int[]): int[]
+        -calculateModelLimits(KDTree, TextbookMultivariateGaussianModel, double[], double[], double[]): void
+        -makeStats(KDTree, int[], WritableDataStore<double[]>): double
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<EMModel>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>KDTreeEM.KDTree\n<size:10>elki.clustering.em" as elki.clustering.em.KDTreeEM.KDTree [[KDTreeEM.KDTree.html]]
+    class "<size:14>KDTreeEM.Par\n<size:10>elki.clustering.em" as elki.clustering.em.KDTreeEM.Par [[KDTreeEM.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.em.KDTreeEM
+    elki.clustering.em.KDTreeEM +-- elki.clustering.em.KDTreeEM.KDTree
+    elki.clustering.em.KDTreeEM +-- elki.clustering.em.KDTreeEM.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

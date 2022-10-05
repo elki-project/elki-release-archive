@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractSimilarityAdapter.Instance\n<size:10>elki.distance.adapter" as elki.distance.adapter.AbstractSimilarityAdapter.Instance<O> [[AbstractSimilarityAdapter.Instance.html]] {
+        -similarityQuery: SimilarityQuery<? super O>
+        +Instance(Relation<O>, Distance<? super O>, SimilarityQuery<? super O>)
+        {abstract} +transform(double): double
+        +distance(DBIDRef, DBIDRef): double
+    }
+
+    abstract class "<size:14>AbstractDatabaseDistance.Instance\n<size:10>elki.distance" as elki.distance.AbstractDatabaseDistance.Instance<O> [[../AbstractDatabaseDistance.Instance.html]]
+    abstract class "<size:14>AbstractSimilarityAdapter\n<size:10>elki.distance.adapter" as elki.distance.adapter.AbstractSimilarityAdapter<O> [[AbstractSimilarityAdapter.html]] {
+        {abstract} +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+    }
+
+    elki.distance.AbstractDatabaseDistance.Instance <|-- elki.distance.adapter.AbstractSimilarityAdapter.Instance
+    elki.distance.adapter.AbstractSimilarityAdapter +-- elki.distance.adapter.AbstractSimilarityAdapter.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

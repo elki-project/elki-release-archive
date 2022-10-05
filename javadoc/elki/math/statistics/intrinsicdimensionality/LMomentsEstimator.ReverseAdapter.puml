@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LMomentsEstimator.ReverseAdapter\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.LMomentsEstimator.ReverseAdapter<A> {
+        -size: int
+        -last: int
+        -inner: NumberArrayAdapter<?, ? super A>
+        +ReverseAdapter(NumberArrayAdapter<?, ? super A>, int, int)
+        +size(A): int
+        +get(A, int): Double
+        +getDouble(A, int): double
+        +getFloat(A, int): float
+        +getInteger(A, int): int
+        +getShort(A, int): short
+        +getLong(A, int): long
+        +getByte(A, int): byte
+    }
+
+    interface "<size:14>NumberArrayAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.NumberArrayAdapter<Double, A> [[../../../utilities/datastructures/arraylike/NumberArrayAdapter.html]] {
+        {abstract} +size(A): int
+        {abstract} +get(A, int): Double
+        {abstract} +getDouble(A, int): double
+        {abstract} +getLong(A, int): long
+    }
+    class "<size:14>LMomentsEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.LMomentsEstimator [[LMomentsEstimator.html]]
+
+    elki.utilities.datastructures.arraylike.NumberArrayAdapter <|.. elki.math.statistics.intrinsicdimensionality.LMomentsEstimator.ReverseAdapter
+    elki.math.statistics.intrinsicdimensionality.LMomentsEstimator +-- elki.math.statistics.intrinsicdimensionality.LMomentsEstimator.ReverseAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

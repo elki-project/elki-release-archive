@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FlagParameterConfigurator\n<size:10>elki.gui.configurator" as elki.gui.configurator.FlagParameterConfigurator [[FlagParameterConfigurator.html]] {
+        ~value: JCheckBox
+        +FlagParameterConfigurator(Flag, JComponent)
+        +actionPerformed(ActionEvent): void
+        +getUserInput(): Boolean
+    }
+
+    abstract class "<size:14>AbstractParameterConfigurator\n<size:10>elki.gui.configurator" as elki.gui.configurator.AbstractParameterConfigurator<Flag> [[AbstractParameterConfigurator.html]] {
+        {abstract} +getUserInput(): Object
+    }
+    interface "<size:14>ActionListener\n<size:10>java.awt.event" as java.awt.event.ActionListener {
+        {abstract} +actionPerformed(ActionEvent): void
+    }
+
+    elki.gui.configurator.AbstractParameterConfigurator <|-- elki.gui.configurator.FlagParameterConfigurator
+    java.awt.event.ActionListener <|.. elki.gui.configurator.FlagParameterConfigurator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

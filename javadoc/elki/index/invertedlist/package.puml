@@ -1,0 +1,100 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.invertedlist {
+
+        class InMemoryInvertedIndex<V extends NumberVector> [[InMemoryInvertedIndex.html]] {
+            {static} -LOG: Logging
+            #relation: Relation<V extends NumberVector>
+            #index: ArrayList<ModifiableDoubleDBIDList>
+            #length: WritableDoubleDataStore
+            +InMemoryInvertedIndex(Relation<V extends NumberVector>)
+            +initialize(): void
+            -indexSparse(DBIDRef, SparseNumberVector): void
+            -indexDense(DBIDRef, V extends NumberVector): void
+            -getOrCreateColumn(int): ModifiableDoubleDBIDList
+            -naiveQuerySparse(SparseNumberVector, WritableDoubleDataStore, HashSetModifiableDBIDs): double
+            -naiveQueryDense(NumberVector, WritableDoubleDataStore, HashSetModifiableDBIDs): double
+            -naiveQuery(V extends NumberVector, WritableDoubleDataStore, HashSetModifiableDBIDs): double
+            +logStatistics(): void
+            +kNNByObject(DistanceQuery<V extends NumberVector>, int, int): KNNSearcher<V extends NumberVector>
+            +rangeByObject(DistanceQuery<V extends NumberVector>, double, int): RangeSearcher<V extends NumberVector>
+        }
+
+        class elki.index.invertedlist.InMemoryInvertedIndex.CosineKNNQuery [[InMemoryInvertedIndex.CosineKNNQuery.html]] {
+            +getKNN(V extends NumberVector, int): KNNList
+        }
+
+        class elki.index.invertedlist.InMemoryInvertedIndex.ArcCosineKNNQuery [[InMemoryInvertedIndex.ArcCosineKNNQuery.html]] {
+            +getKNN(V extends NumberVector, int): KNNList
+        }
+
+        class elki.index.invertedlist.InMemoryInvertedIndex.CosineRangeQuery [[InMemoryInvertedIndex.CosineRangeQuery.html]] {
+            +getRange(V extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class elki.index.invertedlist.InMemoryInvertedIndex.ArcCosineRangeQuery [[InMemoryInvertedIndex.ArcCosineRangeQuery.html]] {
+            +getRange(V extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class elki.index.invertedlist.InMemoryInvertedIndex.Factory<V extends NumberVector> [[InMemoryInvertedIndex.Factory.html]] {
+            +instantiate(Relation<V extends NumberVector>): InMemoryInvertedIndex<V extends NumberVector>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.invertedlist.InMemoryInvertedIndex.Factory.Par<V extends NumberVector> {
+            +make(): Factory<V extends NumberVector>
+        }
+
+        elki.index.KNNIndex <|.. InMemoryInvertedIndex
+        elki.index.RangeIndex <|.. InMemoryInvertedIndex
+        elki.database.query.knn.KNNSearcher <|.. elki.index.invertedlist.InMemoryInvertedIndex.CosineKNNQuery
+        InMemoryInvertedIndex +-- elki.index.invertedlist.InMemoryInvertedIndex.CosineKNNQuery
+        elki.database.query.knn.KNNSearcher <|.. elki.index.invertedlist.InMemoryInvertedIndex.ArcCosineKNNQuery
+        InMemoryInvertedIndex +-- elki.index.invertedlist.InMemoryInvertedIndex.ArcCosineKNNQuery
+        elki.database.query.range.RangeSearcher <|.. elki.index.invertedlist.InMemoryInvertedIndex.CosineRangeQuery
+        InMemoryInvertedIndex +-- elki.index.invertedlist.InMemoryInvertedIndex.CosineRangeQuery
+        elki.database.query.range.RangeSearcher <|.. elki.index.invertedlist.InMemoryInvertedIndex.ArcCosineRangeQuery
+        InMemoryInvertedIndex +-- elki.index.invertedlist.InMemoryInvertedIndex.ArcCosineRangeQuery
+        elki.index.IndexFactory <|.. elki.index.invertedlist.InMemoryInvertedIndex.Factory
+        InMemoryInvertedIndex +-- elki.index.invertedlist.InMemoryInvertedIndex.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.invertedlist.InMemoryInvertedIndex.Factory.Par
+        elki.index.invertedlist.InMemoryInvertedIndex.Factory +-- elki.index.invertedlist.InMemoryInvertedIndex.Factory.Par
+    }
+
+    namespace elki.index {
+        interface KNNIndex<O> [[../KNNIndex.html]] {
+            {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        }
+        interface RangeIndex<O> [[../RangeIndex.html]] {
+            {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+        interface IndexFactory<V> [[../IndexFactory.html]] {
+            {abstract} +instantiate(Relation<V>): Index
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+    }
+
+    namespace elki.database.query.knn {
+        interface KNNSearcher<O> [[../../database/query/knn/KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+    }
+
+    namespace elki.database.query.range {
+        interface RangeSearcher<O> [[../../database/query/range/RangeSearcher.html]] {
+            +getRange(O, double): DoubleDBIDList
+            {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

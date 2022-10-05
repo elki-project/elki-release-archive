@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LBABOD\n<size:10>elki.outlier.anglebased" as elki.outlier.anglebased.LBABOD<V extends NumberVector> [[LBABOD.html]] {
+        {static} -LOG: Logging
+        #l: int
+        +LBABOD(Similarity<? super NumberVector>, int, int)
+        +run(Relation<V extends NumberVector>): OutlierResult
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    class "<size:14>FastABOD\n<size:10>elki.outlier.anglebased" as elki.outlier.anglebased.FastABOD<V extends NumberVector> [[FastABOD.html]]
+    class "<size:14>LBABOD.Par\n<size:10>elki.outlier.anglebased" as elki.outlier.anglebased.LBABOD.Par<V extends NumberVector> [[LBABOD.Par.html]]
+
+    elki.outlier.anglebased.FastABOD <|-- elki.outlier.anglebased.LBABOD
+    elki.outlier.anglebased.LBABOD +-- elki.outlier.anglebased.LBABOD.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

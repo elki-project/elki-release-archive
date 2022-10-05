@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FarReinsert.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.reinsert" as elki.index.tree.spatial.rstarvariants.strategies.reinsert.FarReinsert.Par [[FarReinsert.Par.html]] {
+        +make(): FarReinsert
+    }
+
+    abstract class "<size:14>AbstractPartialReinsert.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.reinsert" as elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert.Par [[AbstractPartialReinsert.Par.html]]
+    class "<size:14>FarReinsert\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.reinsert" as elki.index.tree.spatial.rstarvariants.strategies.reinsert.FarReinsert [[FarReinsert.html]]
+
+    elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert.Par <|-- elki.index.tree.spatial.rstarvariants.strategies.reinsert.FarReinsert.Par
+    elki.index.tree.spatial.rstarvariants.strategies.reinsert.FarReinsert +-- elki.index.tree.spatial.rstarvariants.strategies.reinsert.FarReinsert.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastABOD\n<size:10>elki.outlier.anglebased" as elki.outlier.anglebased.FastABOD<V extends NumberVector> [[FastABOD.html]] {
+        #k: int
+        +FastABOD(Similarity<? super NumberVector>, int)
+        +run(Relation<V extends NumberVector>): OutlierResult
+        -kNNABOD(Relation<V extends NumberVector>, DBIDs, WritableDoubleDataStore, DoubleMinMax): boolean
+        -fastABOD(Relation<V extends NumberVector>, DBIDs, WritableDoubleDataStore, DoubleMinMax): void
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    class "<size:14>ABOD\n<size:10>elki.outlier.anglebased" as elki.outlier.anglebased.ABOD<V extends NumberVector> [[ABOD.html]]
+    class "<size:14>FastABOD.Par\n<size:10>elki.outlier.anglebased" as elki.outlier.anglebased.FastABOD.Par<V extends NumberVector> [[FastABOD.Par.html]]
+
+    elki.outlier.anglebased.ABOD <|-- elki.outlier.anglebased.FastABOD
+    elki.outlier.anglebased.FastABOD +-- elki.outlier.anglebased.FastABOD.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

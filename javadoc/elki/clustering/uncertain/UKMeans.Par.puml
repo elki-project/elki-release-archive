@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UKMeans.Par\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.UKMeans.Par [[UKMeans.Par.html]] {
+        #k: int
+        #maxiter: int
+        #rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): UKMeans
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>UKMeans\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.UKMeans [[UKMeans.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.uncertain.UKMeans.Par
+    elki.clustering.uncertain.UKMeans +-- elki.clustering.uncertain.UKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

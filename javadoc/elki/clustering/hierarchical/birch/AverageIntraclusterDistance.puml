@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AverageIntraclusterDistance\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.AverageIntraclusterDistance [[AverageIntraclusterDistance.html]] {
+        {static} +STATIC: AverageIntraclusterDistance
+        +squaredDistance(NumberVector, ClusteringFeature): double
+        +squaredDistance(ClusteringFeature, ClusteringFeature): double
+    }
+
+    interface "<size:14>BIRCHDistance\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.BIRCHDistance [[BIRCHDistance.html]] {
+        {abstract} +squaredDistance(NumberVector, ClusteringFeature): double
+        {abstract} +squaredDistance(ClusteringFeature, ClusteringFeature): double
+    }
+    class "<size:14>AverageIntraclusterDistance.Par\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.AverageIntraclusterDistance.Par [[AverageIntraclusterDistance.Par.html]]
+
+    elki.clustering.hierarchical.birch.BIRCHDistance <|.. elki.clustering.hierarchical.birch.AverageIntraclusterDistance
+    elki.clustering.hierarchical.birch.AverageIntraclusterDistance +-- elki.clustering.hierarchical.birch.AverageIntraclusterDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

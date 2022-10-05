@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FilteredConvexHull2D\n<size:10>elki.math.geometry" as elki.math.geometry.FilteredConvexHull2D [[FilteredConvexHull2D.html]] {
+        -points: List<double[]>
+        -leftx: double
+        -rightx: double
+        -topy: double
+        -bottomy: double
+        -topleft: double[]
+        -topright: double[]
+        -bottomright: double[]
+        -bottomleft: double[]
+        -poly: Polygon
+        +add(double...): void
+        -computeConvexHull(): Polygon
+        -checkCandidate(double[]): boolean
+        -checkCandidateUpdate(double[]): boolean
+        +getHull(): Polygon
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

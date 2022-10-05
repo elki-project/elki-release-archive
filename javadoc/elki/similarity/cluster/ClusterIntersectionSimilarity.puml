@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterIntersectionSimilarity\n<size:10>elki.similarity.cluster" as elki.similarity.cluster.ClusterIntersectionSimilarity [[ClusterIntersectionSimilarity.html]] {
+        {static} +STATIC: ClusterIntersectionSimilarity
+        +similarity(Cluster<?>, Cluster<?>): double
+        +distance(Cluster<?>, Cluster<?>): double
+        +isSymmetric(): boolean
+        +isMetric(): boolean
+        +instantiate(Relation<T extends Cluster<?>>): DistanceSimilarityQuery<T extends Cluster<?>>
+        +getInputTypeRestriction(): SimpleTypeInformation<? super Cluster<?>>
+    }
+
+    interface "<size:14>PrimitiveDistance\n<size:10>elki.distance" as elki.distance.PrimitiveDistance<Cluster<?>> [[../../distance/PrimitiveDistance.html]] {
+        {abstract} +distance(Cluster<?>, Cluster<?>): double
+        {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+    }
+    interface "<size:14>PrimitiveSimilarity\n<size:10>elki.similarity" as elki.similarity.PrimitiveSimilarity<Cluster<?>> [[../PrimitiveSimilarity.html]] {
+        {abstract} +similarity(Cluster<?>, Cluster<?>): double
+    }
+    class "<size:14>ClusterIntersectionSimilarity.Par\n<size:10>elki.similarity.cluster" as elki.similarity.cluster.ClusterIntersectionSimilarity.Par [[ClusterIntersectionSimilarity.Par.html]]
+
+    elki.distance.PrimitiveDistance <|.. elki.similarity.cluster.ClusterIntersectionSimilarity
+    elki.similarity.PrimitiveSimilarity <|.. elki.similarity.cluster.ClusterIntersectionSimilarity
+    elki.similarity.cluster.ClusterIntersectionSimilarity +-- elki.similarity.cluster.ClusterIntersectionSimilarity.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

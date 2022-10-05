@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>LocalitySensitiveHashFunctionFamily\n<size:10>elki.index.lsh.hashfamilies" as elki.index.lsh.hashfamilies.LocalitySensitiveHashFunctionFamily<V> [[LocalitySensitiveHashFunctionFamily.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +generateHashFunctions(Relation<? extends V>, int): ArrayList<? extends LocalitySensitiveHashFunction<? super V>>
+        {abstract} +isCompatible(Distance<?>): boolean
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

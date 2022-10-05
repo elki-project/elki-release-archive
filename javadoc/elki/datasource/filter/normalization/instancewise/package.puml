@@ -1,0 +1,156 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.datasource.filter.normalization.instancewise {
+
+        class InstanceLogRankNormalization<V extends NumberVector> [[InstanceLogRankNormalization.html]] {
+            {static} -CENTER: double
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.datasource.filter.normalization.instancewise.InstanceLogRankNormalization.Par [[InstanceLogRankNormalization.Par.html]] {
+            +make(): InstanceLogRankNormalization<NumberVector>
+        }
+
+        class InstanceMeanVarianceNormalization<V extends NumberVector> [[InstanceMeanVarianceNormalization.html]] {
+            -multiplicity: int
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            #univariateStandardization(double[]): double[]
+            #multivariateStandardization(double[]): double[]
+            #initializeOutputType(SimpleTypeInformation<V extends NumberVector>): void
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.datasource.filter.normalization.instancewise.InstanceMeanVarianceNormalization.Par<V extends NumberVector> [[InstanceMeanVarianceNormalization.Par.html]] {
+            +make(): InstanceMeanVarianceNormalization<V extends NumberVector>
+        }
+
+        class InstanceMinMaxNormalization<V extends NumberVector> [[InstanceMinMaxNormalization.html]] {
+            -min: double
+            -max: double
+            -multiplicity: int
+            +InstanceMinMaxNormalization(double, double)
+            +InstanceMinMaxNormalization()
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            #initializeOutputType(SimpleTypeInformation<V extends NumberVector>): void
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.datasource.filter.normalization.instancewise.InstanceMinMaxNormalization.Par<V extends NumberVector> [[InstanceMinMaxNormalization.Par.html]] {
+            {static} +MIN_ID: OptionID
+            {static} +MAX_ID: OptionID
+            -min: double
+            -max: double
+            +configure(Parameterization): void
+            +make(): InstanceMinMaxNormalization<V extends NumberVector>
+        }
+
+        class InstanceRankNormalization<V extends NumberVector> [[InstanceRankNormalization.html]] {
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.datasource.filter.normalization.instancewise.InstanceRankNormalization.Par [[InstanceRankNormalization.Par.html]] {
+            +make(): InstanceRankNormalization<NumberVector>
+        }
+
+        class Log1PlusNormalization<V extends NumberVector> [[Log1PlusNormalization.html]] {
+            #boost: double
+            #scale: double
+            +Log1PlusNormalization(double)
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.datasource.filter.normalization.instancewise.Log1PlusNormalization.Par<V extends NumberVector> [[Log1PlusNormalization.Par.html]] {
+            {static} +BOOST_ID: OptionID
+            #boost: double
+            +configure(Parameterization): void
+            +make(): Log1PlusNormalization<V extends NumberVector>
+        }
+
+        class HellingerHistogramNormalization<V extends NumberVector> [[HellingerHistogramNormalization.html]] {
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.datasource.filter.normalization.instancewise.HellingerHistogramNormalization.Par [[HellingerHistogramNormalization.Par.html]] {
+            +make(): HellingerHistogramNormalization<NumberVector>
+        }
+
+        class LengthNormalization<V extends NumberVector> [[LengthNormalization.html]] {
+            ~norm: Norm<? super NumberVector>
+            ~map: Int2DoubleOpenHashMap
+            +LengthNormalization(Norm<? super NumberVector>)
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.datasource.filter.normalization.instancewise.LengthNormalization.Par<V extends NumberVector> [[LengthNormalization.Par.html]] {
+            {static} +NORM_ID: OptionID
+            ~norm: Norm<? super NumberVector>
+            +configure(Parameterization): void
+            +make(): LengthNormalization<V extends NumberVector>
+        }
+
+        elki.datasource.filter.AbstractVectorStreamConversionFilter <|-- InstanceLogRankNormalization
+        elki.datasource.filter.normalization.Normalization <|.. InstanceLogRankNormalization
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.instancewise.InstanceLogRankNormalization.Par
+        InstanceLogRankNormalization +-- elki.datasource.filter.normalization.instancewise.InstanceLogRankNormalization.Par
+        elki.datasource.filter.AbstractVectorStreamConversionFilter <|-- InstanceMeanVarianceNormalization
+        elki.datasource.filter.normalization.Normalization <|.. InstanceMeanVarianceNormalization
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.instancewise.InstanceMeanVarianceNormalization.Par
+        InstanceMeanVarianceNormalization +-- elki.datasource.filter.normalization.instancewise.InstanceMeanVarianceNormalization.Par
+        elki.datasource.filter.AbstractVectorStreamConversionFilter <|-- InstanceMinMaxNormalization
+        elki.datasource.filter.normalization.Normalization <|.. InstanceMinMaxNormalization
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.instancewise.InstanceMinMaxNormalization.Par
+        InstanceMinMaxNormalization +-- elki.datasource.filter.normalization.instancewise.InstanceMinMaxNormalization.Par
+        elki.datasource.filter.AbstractVectorStreamConversionFilter <|-- InstanceRankNormalization
+        elki.datasource.filter.normalization.Normalization <|.. InstanceRankNormalization
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.instancewise.InstanceRankNormalization.Par
+        InstanceRankNormalization +-- elki.datasource.filter.normalization.instancewise.InstanceRankNormalization.Par
+        elki.datasource.filter.AbstractVectorStreamConversionFilter <|-- Log1PlusNormalization
+        elki.datasource.filter.normalization.Normalization <|.. Log1PlusNormalization
+        Log1PlusNormalization --> Log1PlusNormalization: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.instancewise.Log1PlusNormalization.Par
+        Log1PlusNormalization +-- elki.datasource.filter.normalization.instancewise.Log1PlusNormalization.Par
+        elki.datasource.filter.AbstractVectorStreamConversionFilter <|-- HellingerHistogramNormalization
+        elki.datasource.filter.normalization.Normalization <|.. HellingerHistogramNormalization
+        HellingerHistogramNormalization --> HellingerHistogramNormalization: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.instancewise.HellingerHistogramNormalization.Par
+        HellingerHistogramNormalization +-- elki.datasource.filter.normalization.instancewise.HellingerHistogramNormalization.Par
+        elki.datasource.filter.AbstractVectorStreamConversionFilter <|-- LengthNormalization
+        elki.datasource.filter.normalization.Normalization <|.. LengthNormalization
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.instancewise.LengthNormalization.Par
+        LengthNormalization +-- elki.datasource.filter.normalization.instancewise.LengthNormalization.Par
+    }
+
+    namespace elki.datasource.filter {
+        abstract class AbstractVectorStreamConversionFilter<I, O extends NumberVector> [[../../AbstractVectorStreamConversionFilter.html]] {
+            #factory: Factory<O extends NumberVector>
+        }
+    }
+
+    namespace elki.datasource.filter.normalization {
+        interface Normalization<O> [[../Normalization.html]] {
+            +restore(O): O
+            +transform(LinearEquationSystem): LinearEquationSystem
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

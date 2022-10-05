@@ -1,0 +1,154 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.metrical.mtreevariants.mktrees.mktab {
+
+        class MkTabDirectoryEntry [[MkTabDirectoryEntry.html]] {
+            {static} -serialVersionUID: long
+            -knnDistances: double[]
+            +MkTabDirectoryEntry()
+            +MkTabDirectoryEntry(DBID, double, int, double, double[])
+            +getKnnDistances(): double[]
+            +setKnnDistances(double[]): void
+            +getKnnDistance(int): double
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        interface MkTabEntry [[MkTabEntry.html]] {
+            {abstract} +getKnnDistances(): double[]
+            {abstract} +setKnnDistances(double[]): void
+            {abstract} +getKnnDistance(int): double
+        }
+
+        class MkTabTreeIndex<O> [[MkTabTreeIndex.html]] {
+            -relation: Relation<O>
+            +MkTabTreeIndex(Relation<O>, PageFile<MkTabTreeNode<O>>, MkTreeSettings<O, MkTabTreeNode<O>, MkTabEntry>)
+            #createNewLeafEntry(DBID, DBIDRef, double): MkTabEntry
+            -knnDistances(DBIDRef): double[]
+            +initialize(): void
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+            +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+            +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+        }
+
+        class MkTabTreeFactory<O> [[MkTabTreeFactory.html]] {
+            +MkTabTreeFactory(PageFileFactory<?>, MkTreeSettings<O, MkTabTreeNode<O>, MkTabEntry>)
+            +instantiate(Relation<O>): MkTabTreeIndex<O>
+            #getNodeClass(): Class<MkTabTreeNode<O>>
+        }
+
+        class elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTreeFactory.Par<O> [[MkTabTreeFactory.Par.html]] {
+            +make(): MkTabTreeFactory<O>
+            #makeSettings(): MkTreeSettings<O, MkTabTreeNode<O>, MkTabEntry>
+        }
+
+        class MkTabTreeNode<O> [[MkTabTreeNode.html]] {
+            {static} -serialVersionUID: long
+            +MkTabTreeNode()
+            +MkTabTreeNode(int, boolean)
+            #kNNDistances(): double[]
+            +adjustEntry(MkTabEntry, DBID, double, AbstractMTree<O, MkTabTreeNode<O>, MkTabEntry, ?>): boolean
+            #integrityCheckParameters(MkTabEntry, MkTabTreeNode<O>, int, AbstractMTree<O, MkTabTreeNode<O>, MkTabEntry, ?>): void
+        }
+
+        class MkTabLeafEntry [[MkTabLeafEntry.html]] {
+            {static} -serialVersionUID: long
+            -knnDistances: double[]
+            +MkTabLeafEntry()
+            +MkTabLeafEntry(DBID, double, double[])
+            +getKnnDistances(): double[]
+            +setKnnDistances(double[]): void
+            +getKnnDistance(int): double
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        abstract class MkTabTree<O> [[MkTabTree.html]] {
+            {static} -LOG: Logging
+            +MkTabTree(Relation<O>, PageFile<MkTabTreeNode<O>>, MkTreeSettings<O, MkTabTreeNode<O>, MkTabEntry>)
+            #preInsert(MkTabEntry): void
+            +insert(MkTabEntry, boolean): void
+            +reverseKNNQuery(DBIDRef, int): DoubleDBIDList
+            #initializeCapacities(MkTabEntry): void
+            #kNNdistanceAdjustment(MkTabEntry, Map<DBID, KNNList>): void
+            #createNewLeafNode(): MkTabTreeNode<O>
+            #createNewDirectoryNode(): MkTabTreeNode<O>
+            #createNewDirectoryEntry(MkTabTreeNode<O>, DBID, double): MkTabEntry
+            #createRootEntry(): MkTabEntry
+            -doReverseKNNQuery(int, DBIDRef, MkTabEntry, MkTabTreeNode<O>, ModifiableDoubleDBIDList): void
+            -max(double[], double[]): double[]
+            -initKnnDistanceList(): double[]
+            #getLogger(): Logging
+        }
+
+        elki.index.tree.metrical.mtreevariants.MTreeDirectoryEntry <|-- MkTabDirectoryEntry
+        MkTabEntry <|.. MkTabDirectoryEntry
+        elki.index.tree.metrical.mtreevariants.MTreeEntry <|-- MkTabEntry
+        MkTabTree <|-- MkTabTreeIndex
+        elki.index.RangeIndex <|.. MkTabTreeIndex
+        elki.index.KNNIndex <|.. MkTabTreeIndex
+        elki.index.RKNNIndex <|.. MkTabTreeIndex
+        elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory <|-- MkTabTreeFactory
+        elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par <|-- elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTreeFactory.Par
+        MkTabTreeFactory +-- elki.index.tree.metrical.mtreevariants.mktrees.mktab.MkTabTreeFactory.Par
+        elki.index.tree.metrical.mtreevariants.AbstractMTreeNode <|-- MkTabTreeNode
+        elki.index.tree.metrical.mtreevariants.MTreeLeafEntry <|-- MkTabLeafEntry
+        MkTabEntry <|.. MkTabLeafEntry
+        elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnified <|-- MkTabTree
+    }
+
+    namespace elki.index.tree.metrical.mtreevariants {
+        class MTreeDirectoryEntry [[../../MTreeDirectoryEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: int
+            -routingObjectID: DBID
+            -parentDistance: double
+            -coveringRadius: double
+        }
+        interface MTreeEntry [[../../MTreeEntry.html]] {
+            {abstract} +getRoutingObjectID(): DBID
+            {abstract} +setRoutingObjectID(DBID): boolean
+            {abstract} +getParentDistance(): double
+            {abstract} +setParentDistance(double): boolean
+            {abstract} +getCoveringRadius(): double
+            {abstract} +setCoveringRadius(double): boolean
+        }
+        abstract class AbstractMTreeNode<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[../../AbstractMTreeNode.html]]
+        class MTreeLeafEntry [[../../MTreeLeafEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: DBID
+            -parentDistance: double
+        }
+    }
+
+    namespace elki.index {
+        interface RangeIndex<O> [[../../../../../RangeIndex.html]] {
+            {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+        interface KNNIndex<O> [[../../../../../KNNIndex.html]] {
+            {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        }
+        interface RKNNIndex<O> [[../../../../../RKNNIndex.html]] {
+            {abstract} +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+            {abstract} +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+        }
+    }
+
+    namespace elki.index.tree.metrical.mtreevariants.mktrees {
+        abstract class AbstractMkTreeUnifiedFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMkTreeUnifiedFactory.html]]
+        abstract class elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMkTreeUnifiedFactory.Par.html]] {
+            {static} +K_MAX_ID: OptionID
+            {abstract} +make(): AbstractMkTreeUnifiedFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>>
+        }
+        abstract class AbstractMkTreeUnified<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMkTreeUnified.html]] {
+            {abstract} #kNNdistanceAdjustment(E extends MTreeEntry, Map<DBID, KNNList>): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

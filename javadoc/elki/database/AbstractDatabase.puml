@@ -1,0 +1,39 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractDatabase\n<size:10>elki.database" as elki.database.AbstractDatabase [[AbstractDatabase.html]] {
+        #eventManager: DatabaseEventManager
+        #relations: List<Relation<?>>
+        #indexFactories: Collection<IndexFactory<?>>
+        +getBundle(DBIDRef): SingleObjectBundle
+        +getRelations(): Collection<Relation<?>>
+        +getRelation(TypeInformation, Object...): Relation<O>
+        +addDataStoreListener(DataStoreListener): void
+        +removeDataStoreListener(DataStoreListener): void
+        +accumulateDataStoreEvents(): void
+        +flushDataStoreEvents(): void
+        +getLongName(): String
+        +getShortName(): String
+        {abstract} #getLogger(): Logging
+    }
+
+    interface "<size:14>Database\n<size:10>elki.database" as elki.database.Database [[Database.html]] {
+        {abstract} +initialize(): void
+        {abstract} +getRelations(): Collection<Relation<?>>
+        {abstract} +getRelation(TypeInformation, Object...): Relation<O>
+        {abstract} +getBundle(DBIDRef): SingleObjectBundle
+        {abstract} +addDataStoreListener(DataStoreListener): void
+        {abstract} +removeDataStoreListener(DataStoreListener): void
+        {abstract} +accumulateDataStoreEvents(): void
+        {abstract} +flushDataStoreEvents(): void
+    }
+    abstract class "<size:14>AbstractDatabase.Par\n<size:10>elki.database" as elki.database.AbstractDatabase.Par [[AbstractDatabase.Par.html]]
+
+    elki.database.Database <|.. elki.database.AbstractDatabase
+    elki.database.AbstractDatabase +-- elki.database.AbstractDatabase.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

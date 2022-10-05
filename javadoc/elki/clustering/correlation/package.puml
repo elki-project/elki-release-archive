@@ -1,0 +1,353 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.correlation {
+
+        class CASH [[CASH.html]] {
+            {static} -LOG: Logging
+            #minPts: int
+            #maxLevel: int
+            #minDim: int
+            #jitter: double
+            #adjust: boolean
+            -noiseDim: int
+            -processedIDs: ModifiableDBIDs
+            -fulldatabase: Relation<ParameterizationFunction>
+            +CASH(int, int, int, double, boolean)
+            +run(Relation<? extends NumberVector>): Clustering<Model>
+            -preprocess(Relation<? extends NumberVector>): Relation<ParameterizationFunction>
+            -doRun(Relation<ParameterizationFunction>, FiniteProgress): Clustering<Model>
+            {static} -dimensionality(Relation<ParameterizationFunction>): int
+            -initHeap(ObjectHeap<CASHInterval>, Relation<ParameterizationFunction>, int, DBIDs): void
+            -buildDB(int, double[], DBIDs, Relation<ParameterizationFunction>): MaterializedRelation<ParameterizationFunction>
+            -project(double[], ParameterizationFunction): ParameterizationFunction
+            -determineBasis(double[]): double[]
+            -determineNextIntervalAtMaxLevel(ObjectHeap<CASHInterval>): CASHInterval
+            -doDetermineNextIntervalAtMaxLevel(ObjectHeap<CASHInterval>): CASHInterval
+            -determineMinMaxDistance(Relation<ParameterizationFunction>, int): double[]
+            -runDerivator(Relation<ParameterizationFunction>, int, CASHInterval, ModifiableDBIDs): double[]
+            -runDerivator(Relation<ParameterizationFunction>, int, DBIDs): LinearEquationSystem
+            -buildDerivatorDB(Relation<ParameterizationFunction>, DBIDs): Relation<DoubleVector>
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.correlation.CASH.Par [[CASH.Par.html]] {
+            {static} +MINPTS_ID: OptionID
+            {static} +MAXLEVEL_ID: OptionID
+            {static} +MINDIM_ID: OptionID
+            {static} +JITTER_ID: OptionID
+            {static} +ADJUST_ID: OptionID
+            #minPts: int
+            #maxLevel: int
+            #minDim: int
+            #jitter: double
+            #adjust: boolean
+            +configure(Parameterization): void
+            +make(): CASH
+        }
+
+        class LMCLUS [[LMCLUS.html]] {
+            {static} -LOG: Logging
+            {static} -LOG_NOT_FROM_ONE_CLUSTER_PROBABILITY: double
+            {static} -BINS: int
+            -sensitivityThreshold: double
+            -maxLMDim: int
+            -minsize: int
+            -samplingLevel: int
+            -rnd: RandomFactory
+            +LMCLUS(int, int, int, double, RandomFactory)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): Clustering<Model>
+            -deviation(double[], double[]): double
+            -findSeparation(Relation<? extends NumberVector>, DBIDs, int, Random): Separation
+            -generateOrthonormalBasis(List<double[]>): double[]
+            -findAndEvaluateThreshold(DoubleDynamicHistogram): double[]
+        }
+
+        class elki.clustering.correlation.LMCLUS.Separation [[LMCLUS.Separation.html]] {
+            ~goodness: double
+            ~threshold: double
+            ~basis: double[]
+            ~originV: double[]
+        }
+
+        class elki.clustering.correlation.LMCLUS.Par [[LMCLUS.Par.html]] {
+            {static} +MAXDIM_ID: OptionID
+            {static} +MINSIZE_ID: OptionID
+            {static} +SAMPLINGL_ID: OptionID
+            {static} +THRESHOLD_ID: OptionID
+            {static} +RANDOM_ID: OptionID
+            -maxdim: int
+            -minsize: int
+            -samplingLevel: int
+            -threshold: double
+            -rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): LMCLUS
+        }
+
+        class HiCO [[HiCO.html]] {
+            {static} -LOG: Logging
+            {static} +DEFAULT_DELTA: double
+            {static} +DEFAULT_ALPHA: double
+            -deltasq: double
+            -mu: int
+            -k: int
+            -pca: PCARunner
+            -filter: EigenPairFilter
+            +HiCO(int, PCARunner, double, int, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): ClusterOrder
+            +correlationDistance(PCAFilteredResult, PCAFilteredResult, int): int
+            -adjust(double[], double[], int): void
+            +getMinPts(): int
+        }
+
+        class elki.clustering.correlation.HiCO.Instance [[HiCO.Instance.html]] {
+            -relation: Relation<? extends NumberVector>
+            #localPCAs: WritableDataStore<PCAFilteredResult>
+            -clusterOrder: ArrayModifiableDBIDs
+            -correlationValue: WritableIntegerDataStore
+            -tmpCorrelation: WritableIntegerDataStore
+            -tmpDistance: WritableDoubleDataStore
+            -tmpIds: ArrayModifiableDBIDs
+            ~tmpcomp: Comparator<DBIDRef>
+            +Instance(Relation<? extends NumberVector>)
+            +run(): CorrelationClusterOrder
+            #buildResult(): CorrelationClusterOrder
+            #initialDBID(DBIDRef): void
+            #expandDBID(DBIDRef): void
+            +compare(DBIDRef, DBIDRef): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.correlation.HiCO.Par [[HiCO.Par.html]] {
+            {static} +MU_ID: OptionID
+            {static} +K_ID: OptionID
+            {static} +DELTA_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            #k: int
+            #pca: PCARunner
+            ~mu: int
+            ~alpha: double
+            ~delta: double
+            +configure(Parameterization): void
+            +make(): HiCO
+        }
+
+        class COPAC [[COPAC.html]] {
+            +COPAC(Settings)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<? extends NumberVector>): Clustering<DimensionModel>
+        }
+
+        class elki.clustering.correlation.COPAC.Settings [[COPAC.Settings.html]] {
+            +k: int
+            +pca: PCARunner
+            +filter: EigenPairFilter
+            +epsilon: double
+            +minpts: int
+        }
+
+        class elki.clustering.correlation.COPAC.Par [[COPAC.Par.html]] {
+            {static} +K_ID: OptionID
+            +configure(Parameterization): void
+            +make(): COPAC
+        }
+
+        class ORCLUS [[ORCLUS.html]] {
+            {static} -LOG: Logging
+            -alpha: double
+            -rnd: RandomFactory
+            -pca: PCARunner
+            +ORCLUS(int, int, int, double, RandomFactory, PCARunner)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<? extends NumberVector>): Clustering<Model>
+            -initialSeeds(Relation<? extends NumberVector>, int): List<ORCLUSCluster>
+            -assign(Relation<? extends NumberVector>, List<ORCLUSCluster>): void
+            -findBasis(Relation<? extends NumberVector>, ORCLUSCluster, int): double[]
+            -merge(Relation<? extends NumberVector>, List<ORCLUSCluster>, int, int, IndefiniteProgress): void
+            -projectedEnergy(Relation<? extends NumberVector>, ORCLUSCluster, ORCLUSCluster, int, int, int): ProjectedEnergy
+            -union(Relation<? extends NumberVector>, ORCLUSCluster, ORCLUSCluster, int): ORCLUSCluster
+        }
+
+        class elki.clustering.correlation.ORCLUS.ORCLUSCluster [[ORCLUS.ORCLUSCluster.html]] {
+            ~objectIDs: ModifiableDBIDs
+            ~basis: double[]
+            ~centroid: double[]
+            ~ORCLUSCluster()
+            ~ORCLUSCluster(double[], DBIDRef)
+        }
+
+        class elki.clustering.correlation.ORCLUS.ProjectedEnergy [[ORCLUS.ProjectedEnergy.html]] {
+            ~i: int
+            ~j: int
+            ~projectedEnergy: double
+            ~ProjectedEnergy(int, int, ORCLUSCluster, double)
+            +compareTo(ProjectedEnergy): int
+        }
+
+        class elki.clustering.correlation.ORCLUS.Par [[ORCLUS.Par.html]] {
+            {static} +ALPHA_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #alpha: double
+            #rnd: RandomFactory
+            #pca: PCARunner
+            +configure(Parameterization): void
+            +make(): ORCLUS
+        }
+
+        class FourC [[FourC.html]] {
+            +FourC(Settings)
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.correlation.FourC.Settings [[FourC.Settings.html]] {
+            +epsilon: double
+            +absolute: boolean
+            +delta: double
+            +kappa: double
+            +lambda: int
+            +minpts: int
+        }
+
+        class elki.clustering.correlation.FourC.Settings.Par [[FourC.Settings.Par.html]] {
+            {static} +DEFAULT_DELTA: double
+            {static} +KAPPA_ID: OptionID
+            {static} +KAPPA_DEFAULT: double
+            {static} +LAMBDA_ID: OptionID
+            +configure(Parameterization): void
+            +make(): Object
+        }
+
+        class elki.clustering.correlation.FourC.Par [[FourC.Par.html]] {
+            +configure(Parameterization): void
+            +make(): FourC
+        }
+
+        class ERiC [[ERiC.html]] {
+            {static} -LOG: Logging
+            +ERiC(Settings)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Database, Relation<? extends NumberVector>): Clustering<CorrelationModel>
+            -extractCorrelationClusters(Clustering<Model>, Relation<? extends NumberVector>, int, Instance): List<List<Cluster<CorrelationModel>>>
+            -buildHierarchy(Clustering<CorrelationModel>, List<List<Cluster<CorrelationModel>>>, Instance): void
+            -isParent(Instance, Cluster<CorrelationModel>, It<Cluster<CorrelationModel>>): boolean
+        }
+
+        class elki.clustering.correlation.ERiC.Settings [[ERiC.Settings.html]] {
+            +k: int
+            +pca: PCARunner
+            +filter: EigenPairFilter
+            +delta: double
+            +tau: double
+            +minpts: int
+        }
+
+        class elki.clustering.correlation.ERiC.Par [[ERiC.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +DELTA_ID: OptionID
+            {static} +TAU_ID: OptionID
+            +configure(Parameterization): void
+            +make(): ERiC
+        }
+
+        elki.clustering.ClusteringAlgorithm <|.. CASH
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.correlation.CASH.Par
+        CASH +-- elki.clustering.correlation.CASH.Par
+        elki.clustering.ClusteringAlgorithm <|.. LMCLUS
+        LMCLUS +-- elki.clustering.correlation.LMCLUS.Separation
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.correlation.LMCLUS.Par
+        LMCLUS +-- elki.clustering.correlation.LMCLUS.Par
+        elki.clustering.optics.GeneralizedOPTICS <|.. HiCO
+        elki.clustering.optics.GeneralizedOPTICS.Instance <|-- elki.clustering.correlation.HiCO.Instance
+        HiCO +-- elki.clustering.correlation.HiCO.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.correlation.HiCO.Par
+        HiCO +-- elki.clustering.correlation.HiCO.Par
+        elki.clustering.ClusteringAlgorithm <|.. COPAC
+        COPAC --> elki.clustering.correlation.COPAC.Settings: settings
+        COPAC +-- elki.clustering.correlation.COPAC.Settings
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.correlation.COPAC.Par
+        COPAC +-- elki.clustering.correlation.COPAC.Par
+        elki.clustering.correlation.COPAC.Par --> elki.clustering.correlation.COPAC.Settings: settings
+        elki.clustering.AbstractProjectedClustering <|-- ORCLUS
+        ORCLUS +-- elki.clustering.correlation.ORCLUS.ORCLUSCluster
+        java.lang.Comparable <|.. elki.clustering.correlation.ORCLUS.ProjectedEnergy
+        ORCLUS +-- elki.clustering.correlation.ORCLUS.ProjectedEnergy
+        elki.clustering.correlation.ORCLUS.ProjectedEnergy --> elki.clustering.correlation.ORCLUS.ORCLUSCluster: cluster
+        elki.clustering.AbstractProjectedClustering.Par <|-- elki.clustering.correlation.ORCLUS.Par
+        ORCLUS +-- elki.clustering.correlation.ORCLUS.Par
+        elki.clustering.dbscan.GeneralizedDBSCAN <|-- FourC
+        FourC +-- elki.clustering.correlation.FourC.Settings
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.correlation.FourC.Settings.Par
+        elki.clustering.correlation.FourC.Settings +-- elki.clustering.correlation.FourC.Settings.Par
+        elki.clustering.correlation.FourC.Settings.Par --> elki.clustering.correlation.FourC.Settings: settings
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.correlation.FourC.Par
+        FourC +-- elki.clustering.correlation.FourC.Par
+        elki.clustering.correlation.FourC.Par --> elki.clustering.correlation.FourC.Settings: settings
+        elki.clustering.ClusteringAlgorithm <|.. ERiC
+        ERiC --> elki.clustering.correlation.ERiC.Settings: settings
+        ERiC +-- elki.clustering.correlation.ERiC.Settings
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.correlation.ERiC.Par
+        ERiC +-- elki.clustering.correlation.ERiC.Par
+        elki.clustering.correlation.ERiC.Par --> elki.clustering.correlation.ERiC.Settings: settings
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+        abstract class AbstractProjectedClustering<R extends Clustering<?>> [[../AbstractProjectedClustering.html]] {
+            #k: int
+            #k_i: int
+            #l: int
+        }
+        abstract class elki.clustering.AbstractProjectedClustering.Par [[../AbstractProjectedClustering.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +K_I_ID: OptionID
+            {static} +L_ID: OptionID
+            #k: int
+            #k_i: int
+            #l: int
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.clustering.optics {
+        interface GeneralizedOPTICS [[../optics/GeneralizedOPTICS.html]]
+        abstract class elki.clustering.optics.GeneralizedOPTICS.Instance<R> [[../optics/GeneralizedOPTICS.Instance.html]] {
+            #processedIDs: ModifiableDBIDs
+            #candidates: ArrayModifiableDBIDs
+            #predecessor: WritableDBIDDataStore
+            #reachability: WritableDoubleDataStore
+            ~ids: DBIDs
+            ~progress: FiniteProgress
+            {abstract} #initialDBID(DBIDRef): void
+            {abstract} #expandDBID(DBIDRef): void
+            {abstract} #buildResult(): R
+            {abstract} #getLogger(): Logging
+        }
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    namespace elki.clustering.dbscan {
+        class GeneralizedDBSCAN [[../dbscan/GeneralizedDBSCAN.html]] {
+            {static} -LOG: Logging
+            #npred: NeighborPredicate<?>
+            #corepred: CorePredicate<?>
+            #coremodel: boolean
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SelectionToolAxisRangeVisualization.Instance\n<size:10>elki.visualization.visualizers.parallel.selection" as elki.visualization.visualizers.parallel.selection.SelectionToolAxisRangeVisualization.Instance [[SelectionToolAxisRangeVisualization.Instance.html]] {
+        {static} -CSS_RANGEMARKER: String
+        -rtag: Element
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        -deleteChildren(Element): void
+        -updateSelectionRectKoordinates(double, double, double, double, ModifiableHyperBoundingBox): void
+        +startDrag(SVGPoint, Event): boolean
+        +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+        +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+        -updateSelection(Projection, SVGPoint, SVGPoint): void
+        #addCSSClasses(SVGPlot): void
+    }
+
+    abstract class "<size:14>AbstractParallelVisualization\n<size:10>elki.visualization.visualizers.parallel" as elki.visualization.visualizers.parallel.AbstractParallelVisualization<NumberVector> [[../AbstractParallelVisualization.html]]
+    interface "<size:14>DragableArea.DragListener\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.DragableArea.DragListener [[../../../batikutil/DragableArea.DragListener.html]] {
+        {abstract} +startDrag(SVGPoint, Event): boolean
+        {abstract} +duringDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+        {abstract} +endDrag(SVGPoint, SVGPoint, Event, boolean): boolean
+    }
+    class "<size:14>SelectionToolAxisRangeVisualization\n<size:10>elki.visualization.visualizers.parallel.selection" as elki.visualization.visualizers.parallel.selection.SelectionToolAxisRangeVisualization [[SelectionToolAxisRangeVisualization.html]]
+
+    elki.visualization.visualizers.parallel.AbstractParallelVisualization <|-- elki.visualization.visualizers.parallel.selection.SelectionToolAxisRangeVisualization.Instance
+    elki.visualization.batikutil.DragableArea.DragListener <|.. elki.visualization.visualizers.parallel.selection.SelectionToolAxisRangeVisualization.Instance
+    elki.visualization.visualizers.parallel.selection.SelectionToolAxisRangeVisualization +-- elki.visualization.visualizers.parallel.selection.SelectionToolAxisRangeVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

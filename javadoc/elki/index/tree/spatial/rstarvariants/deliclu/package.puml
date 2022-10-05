@@ -1,0 +1,151 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.spatial.rstarvariants.deliclu {
+
+        interface DeLiCluEntry [[DeLiCluEntry.html]] {
+            {abstract} +hasHandled(): boolean
+            {abstract} +hasUnhandled(): boolean
+            {abstract} +setHasHandled(boolean): void
+            {abstract} +setHasUnhandled(boolean): void
+        }
+
+        abstract class DeLiCluTree [[DeLiCluTree.html]] {
+            {static} -LOG: Logging
+            -expanded: Int2ObjectOpenHashMap<IntSet>
+            +DeLiCluTree(PageFile<DeLiCluNode>, RTreeSettings)
+            +setExpanded(DeLiCluEntry, DeLiCluEntry): void
+            +getExpanded(DeLiCluEntry): IntSet
+            +getExpanded(DeLiCluNode): IntSet
+            #createNewLeafNode(): DeLiCluNode
+            #createNewDirectoryNode(): DeLiCluNode
+            #createNewDirectoryEntry(DeLiCluNode): DeLiCluEntry
+            #createRootEntry(): DeLiCluEntry
+            #getLogger(): Logging
+        }
+
+        class DeLiCluLeafEntry [[DeLiCluLeafEntry.html]] {
+            {static} -serialVersionUID: long
+            -hasHandled: boolean
+            -hasUnhandled: boolean
+            +DeLiCluLeafEntry()
+            +DeLiCluLeafEntry(DBID, NumberVector)
+            +hasHandled(): boolean
+            +hasUnhandled(): boolean
+            +setHasHandled(boolean): void
+            +setHasUnhandled(boolean): void
+        }
+
+        class DeLiCluDirectoryEntry [[DeLiCluDirectoryEntry.html]] {
+            {static} -serialVersionUID: long
+            -hasHandled: boolean
+            -hasUnhandled: boolean
+            +DeLiCluDirectoryEntry()
+            +DeLiCluDirectoryEntry(int, ModifiableHyperBoundingBox, boolean, boolean)
+            +hasHandled(): boolean
+            +hasUnhandled(): boolean
+            +setHasHandled(boolean): void
+            +setHasUnhandled(boolean): void
+        }
+
+        class DeLiCluTreeFactory<O extends NumberVector> [[DeLiCluTreeFactory.html]] {
+            +DeLiCluTreeFactory(PageFileFactory<?>, RTreeSettings)
+            +instantiate(Relation<O extends NumberVector>): DeLiCluTreeIndex<O extends NumberVector>
+            #getNodeClass(): Class<DeLiCluNode>
+        }
+
+        class elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluTreeFactory.Par<O extends NumberVector> [[DeLiCluTreeFactory.Par.html]] {
+            +make(): DeLiCluTreeFactory<O extends NumberVector>
+            #createSettings(): RTreeSettings
+        }
+
+        class DeLiCluTreeIndex<O extends NumberVector> [[DeLiCluTreeIndex.html]] {
+            -relation: Relation<O extends NumberVector>
+            {static} -LOG: Logging
+            +DeLiCluTreeIndex(Relation<O extends NumberVector>, PageFile<DeLiCluNode>, RTreeSettings)
+            #createNewLeafEntry(DBID): DeLiCluLeafEntry
+            +setHandled(DBIDRef, O extends NumberVector): IndexTreePath<DeLiCluEntry>
+            +initialize(): void
+            +insert(DBIDRef): void
+            +insertAll(DBIDs): void
+            +delete(DBIDRef): boolean
+            +deleteAll(DBIDs): void
+            +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+            +rangeByObject(DistanceQuery<O extends NumberVector>, double, int): RangeSearcher<O extends NumberVector>
+            +priorityByObject(DistanceQuery<O extends NumberVector>, double, int): PrioritySearcher<O extends NumberVector>
+            #getLogger(): Logging
+        }
+
+        class DeLiCluNode [[DeLiCluNode.html]] {
+            {static} -serialVersionUID: long
+            +DeLiCluNode()
+            +DeLiCluNode(int, boolean)
+            +hasHandled(): boolean
+            +hasUnhandled(): boolean
+            +adjustEntry(DeLiCluEntry): boolean
+            #integrityCheckParameters(DeLiCluNode, int): void
+        }
+
+        elki.index.tree.spatial.SpatialEntry <|-- DeLiCluEntry
+        elki.index.tree.spatial.rstarvariants.NonFlatRStarTree <|-- DeLiCluTree
+        elki.index.tree.spatial.SpatialPointLeafEntry <|-- DeLiCluLeafEntry
+        DeLiCluEntry <|.. DeLiCluLeafEntry
+        elki.index.tree.spatial.SpatialDirectoryEntry <|-- DeLiCluDirectoryEntry
+        DeLiCluEntry <|.. DeLiCluDirectoryEntry
+        elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory <|-- DeLiCluTreeFactory
+        elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par <|-- elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluTreeFactory.Par
+        DeLiCluTreeFactory +-- elki.index.tree.spatial.rstarvariants.deliclu.DeLiCluTreeFactory.Par
+        DeLiCluTree <|-- DeLiCluTreeIndex
+        elki.index.DistancePriorityIndex <|.. DeLiCluTreeIndex
+        elki.index.DynamicIndex <|.. DeLiCluTreeIndex
+        elki.index.tree.spatial.rstarvariants.AbstractRStarTreeNode <|-- DeLiCluNode
+    }
+
+    namespace elki.index.tree.spatial {
+        interface SpatialEntry [[../../SpatialEntry.html]]
+        class SpatialPointLeafEntry [[../../SpatialPointLeafEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: DBID
+            -values: double[]
+        }
+        class SpatialDirectoryEntry [[../../SpatialDirectoryEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: int
+            -mbr: ModifiableHyperBoundingBox
+        }
+    }
+
+    namespace elki.index.tree.spatial.rstarvariants {
+        abstract class NonFlatRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[../NonFlatRStarTree.html]]
+        abstract class AbstractRStarTreeFactory<O extends NumberVector, N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[../AbstractRStarTreeFactory.html]] {
+            #settings: S extends RTreeSettings
+        }
+        abstract class elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par<O extends NumberVector, S extends RTreeSettings> {
+            {static} +INSERTION_STRATEGY_ID: OptionID
+            {static} +SPLIT_STRATEGY_ID: OptionID
+            {static} +BULK_SPLIT_ID: OptionID
+            {static} +MINIMUM_FILL_ID: OptionID
+            {static} +OVERFLOW_STRATEGY_ID: OptionID
+            #settings: S extends RTreeSettings
+            {abstract} #createSettings(): S extends RTreeSettings
+            {abstract} +make(): AbstractRStarTreeFactory<O extends NumberVector, ?, ?, ?>
+        }
+        abstract class AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry> [[../AbstractRStarTreeNode.html]]
+    }
+
+    namespace elki.index {
+        interface DistancePriorityIndex<O> [[../../../../DistancePriorityIndex.html]] {
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        }
+        interface DynamicIndex [[../../../../DynamicIndex.html]] {
+            {abstract} +delete(DBIDRef): boolean
+            {abstract} +insert(DBIDRef): void
+            {abstract} +deleteAll(DBIDs): void
+            {abstract} +insertAll(DBIDs): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

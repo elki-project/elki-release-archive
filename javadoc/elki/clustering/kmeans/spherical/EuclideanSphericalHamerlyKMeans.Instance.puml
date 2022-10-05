@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EuclideanSphericalHamerlyKMeans.Instance\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Instance [[EuclideanSphericalHamerlyKMeans.Instance.html]] {
+        ~sums: double[]
+        ~newmeans: double[]
+        ~upper: WritableDoubleDataStore
+        ~lower: WritableDoubleDataStore
+        ~sep: double[]
+        +Instance(Relation<? extends NumberVector>, double[])
+        +iterate(int): int
+        #initialAssignToNearestCluster(): int
+        #assignToNearestCluster(): int
+        #updateBounds(double[]): void
+        #getLogger(): Logging
+    }
+
+    class "<size:14>SphericalKMeans.Instance\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.SphericalKMeans.Instance [[SphericalKMeans.Instance.html]]
+    class "<size:14>EuclideanSphericalHamerlyKMeans\n<size:10>elki.clustering.kmeans.spherical" as elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans<V extends NumberVector> [[EuclideanSphericalHamerlyKMeans.html]]
+
+    elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|-- elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Instance
+    elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans +-- elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

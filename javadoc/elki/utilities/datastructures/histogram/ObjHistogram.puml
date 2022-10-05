@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ObjHistogram\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.ObjHistogram<T> [[ObjHistogram.html]] {
+        ~data: Object[]
+        ~special: Object[]
+        ~supplier: BucketFactory<T>
+        +ObjHistogram(int, double, double, BucketFactory<T>)
+        +get(double): T
+        #getSpecial(int): T
+        +iter(): Iter
+    }
+
+    abstract class "<size:14>AbstractStaticHistogram\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.AbstractStaticHistogram [[AbstractStaticHistogram.html]] {
+        {abstract} +iter(): Iter
+    }
+    class "<size:14>ObjHistogram.Iter\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.ObjHistogram.Iter [[ObjHistogram.Iter.html]]
+    interface "<size:14>ObjHistogram.BucketFactory\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.ObjHistogram.BucketFactory<T> [[ObjHistogram.BucketFactory.html]]
+
+    elki.utilities.datastructures.histogram.AbstractStaticHistogram <|-- elki.utilities.datastructures.histogram.ObjHistogram
+    elki.utilities.datastructures.histogram.ObjHistogram +-- elki.utilities.datastructures.histogram.ObjHistogram.Iter
+    elki.utilities.datastructures.histogram.ObjHistogram +-- elki.utilities.datastructures.histogram.ObjHistogram.BucketFactory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

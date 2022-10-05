@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PINN\n<size:10>elki.index.projected" as elki.index.projected.PINN<O extends NumberVector> [[PINN.html]] {
+        +PINN(IndexFactory<O extends NumberVector>, int, double, double, RandomFactory)
+    }
+
+    class "<size:14>ProjectedIndex.Factory\n<size:10>elki.index.projected" as elki.index.projected.ProjectedIndex.Factory<O extends NumberVector, O extends NumberVector> [[ProjectedIndex.Factory.html]]
+    class "<size:14>PINN.Par\n<size:10>elki.index.projected" as elki.index.projected.PINN.Par<O extends NumberVector>
+
+    elki.index.projected.ProjectedIndex.Factory <|-- elki.index.projected.PINN
+    elki.index.projected.PINN +-- elki.index.projected.PINN.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

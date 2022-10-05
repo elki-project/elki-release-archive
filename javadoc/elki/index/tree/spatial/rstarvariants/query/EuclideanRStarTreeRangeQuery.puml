@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EuclideanRStarTreeRangeQuery\n<size:10>elki.index.tree.spatial.rstarvariants.query" as elki.index.tree.spatial.rstarvariants.query.EuclideanRStarTreeRangeQuery<O extends NumberVector> [[EuclideanRStarTreeRangeQuery.html]] {
+        {static} -SQUARED: SquaredEuclideanDistance
+        +EuclideanRStarTreeRangeQuery(AbstractRStarTree<?, ?, ?>, Relation<? extends NumberVector>)
+        +getRange(O extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+
+    class "<size:14>RStarTreeRangeSearcher\n<size:10>elki.index.tree.spatial.rstarvariants.query" as elki.index.tree.spatial.rstarvariants.query.RStarTreeRangeSearcher<O extends NumberVector> [[RStarTreeRangeSearcher.html]]
+
+    elki.index.tree.spatial.rstarvariants.query.RStarTreeRangeSearcher <|-- elki.index.tree.spatial.rstarvariants.query.EuclideanRStarTreeRangeQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

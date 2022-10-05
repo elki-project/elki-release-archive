@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GlobalPrincipalComponentAnalysisTransform\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform<O extends NumberVector> [[GlobalPrincipalComponentAnalysisTransform.html]] {
+        {static} -LOG: Logging
+        ~filter: EigenPairFilter
+        ~covmat: CovarianceMatrix
+        ~proj: double[]
+        ~buf: double[]
+        ~mean: double[]
+        ~mode: Mode
+        +GlobalPrincipalComponentAnalysisTransform(EigenPairFilter)
+        +GlobalPrincipalComponentAnalysisTransform(EigenPairFilter, Mode)
+        #prepareStart(SimpleTypeInformation<O extends NumberVector>): boolean
+        #prepareProcessInstance(O extends NumberVector): void
+        #prepareComplete(): void
+        #filterSingleObject(O extends NumberVector): O extends NumberVector
+        #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        #convertedType(SimpleTypeInformation<O extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractVectorConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractVectorConversionFilter<O extends NumberVector, O extends NumberVector> [[../AbstractVectorConversionFilter.html]]
+    enum "<size:14>GlobalPrincipalComponentAnalysisTransform.Mode\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Mode [[GlobalPrincipalComponentAnalysisTransform.Mode.html]]
+    class "<size:14>GlobalPrincipalComponentAnalysisTransform.Par\n<size:10>elki.datasource.filter.transform" as elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Par<O extends NumberVector> [[GlobalPrincipalComponentAnalysisTransform.Par.html]]
+
+    elki.datasource.filter.AbstractVectorConversionFilter <|-- elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform
+    elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform +-- elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Mode
+    elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform +-- elki.datasource.filter.transform.GlobalPrincipalComponentAnalysisTransform.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

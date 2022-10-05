@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ArrayModifiableIntegerDBIDs.Slice.SliceItr\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Slice.SliceItr [[ArrayModifiableIntegerDBIDs.Slice.SliceItr.html]] {
+        ~pos: int
+        +internalGetIndex(): int
+        +valid(): boolean
+        +advance(): SliceItr
+        +getOffset(): int
+        +advance(int): SliceItr
+        +retract(): SliceItr
+        +seek(int): SliceItr
+    }
+
+    interface "<size:14>IntegerDBIDArrayIter\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDArrayIter [[IntegerDBIDArrayIter.html]]
+    class "<size:14>ArrayModifiableIntegerDBIDs.Slice\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Slice [[ArrayModifiableIntegerDBIDs.Slice.html]]
+
+    elki.database.ids.integer.IntegerDBIDArrayIter <|.. elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Slice.SliceItr
+    elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Slice +-- elki.database.ids.integer.ArrayModifiableIntegerDBIDs.Slice.SliceItr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

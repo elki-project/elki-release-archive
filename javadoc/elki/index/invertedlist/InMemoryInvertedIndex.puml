@@ -1,0 +1,46 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InMemoryInvertedIndex\n<size:10>elki.index.invertedlist" as elki.index.invertedlist.InMemoryInvertedIndex<V extends NumberVector> [[InMemoryInvertedIndex.html]] {
+        {static} -LOG: Logging
+        #relation: Relation<V extends NumberVector>
+        #index: ArrayList<ModifiableDoubleDBIDList>
+        #length: WritableDoubleDataStore
+        +InMemoryInvertedIndex(Relation<V extends NumberVector>)
+        +initialize(): void
+        -indexSparse(DBIDRef, SparseNumberVector): void
+        -indexDense(DBIDRef, V extends NumberVector): void
+        -getOrCreateColumn(int): ModifiableDoubleDBIDList
+        -naiveQuerySparse(SparseNumberVector, WritableDoubleDataStore, HashSetModifiableDBIDs): double
+        -naiveQueryDense(NumberVector, WritableDoubleDataStore, HashSetModifiableDBIDs): double
+        -naiveQuery(V extends NumberVector, WritableDoubleDataStore, HashSetModifiableDBIDs): double
+        +logStatistics(): void
+        +kNNByObject(DistanceQuery<V extends NumberVector>, int, int): KNNSearcher<V extends NumberVector>
+        +rangeByObject(DistanceQuery<V extends NumberVector>, double, int): RangeSearcher<V extends NumberVector>
+    }
+
+    interface "<size:14>KNNIndex\n<size:10>elki.index" as elki.index.KNNIndex<V extends NumberVector> [[../KNNIndex.html]] {
+        {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+    }
+    interface "<size:14>RangeIndex\n<size:10>elki.index" as elki.index.RangeIndex<V extends NumberVector> [[../RangeIndex.html]] {
+        {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+    }
+    class "<size:14>InMemoryInvertedIndex.CosineKNNQuery\n<size:10>elki.index.invertedlist" as elki.index.invertedlist.InMemoryInvertedIndex.CosineKNNQuery [[InMemoryInvertedIndex.CosineKNNQuery.html]]
+    class "<size:14>InMemoryInvertedIndex.ArcCosineKNNQuery\n<size:10>elki.index.invertedlist" as elki.index.invertedlist.InMemoryInvertedIndex.ArcCosineKNNQuery [[InMemoryInvertedIndex.ArcCosineKNNQuery.html]]
+    class "<size:14>InMemoryInvertedIndex.CosineRangeQuery\n<size:10>elki.index.invertedlist" as elki.index.invertedlist.InMemoryInvertedIndex.CosineRangeQuery [[InMemoryInvertedIndex.CosineRangeQuery.html]]
+    class "<size:14>InMemoryInvertedIndex.ArcCosineRangeQuery\n<size:10>elki.index.invertedlist" as elki.index.invertedlist.InMemoryInvertedIndex.ArcCosineRangeQuery [[InMemoryInvertedIndex.ArcCosineRangeQuery.html]]
+    class "<size:14>InMemoryInvertedIndex.Factory\n<size:10>elki.index.invertedlist" as elki.index.invertedlist.InMemoryInvertedIndex.Factory<V extends NumberVector> [[InMemoryInvertedIndex.Factory.html]]
+
+    elki.index.KNNIndex <|.. elki.index.invertedlist.InMemoryInvertedIndex
+    elki.index.RangeIndex <|.. elki.index.invertedlist.InMemoryInvertedIndex
+    elki.index.invertedlist.InMemoryInvertedIndex +-- elki.index.invertedlist.InMemoryInvertedIndex.CosineKNNQuery
+    elki.index.invertedlist.InMemoryInvertedIndex +-- elki.index.invertedlist.InMemoryInvertedIndex.ArcCosineKNNQuery
+    elki.index.invertedlist.InMemoryInvertedIndex +-- elki.index.invertedlist.InMemoryInvertedIndex.CosineRangeQuery
+    elki.index.invertedlist.InMemoryInvertedIndex +-- elki.index.invertedlist.InMemoryInvertedIndex.ArcCosineRangeQuery
+    elki.index.invertedlist.InMemoryInvertedIndex +-- elki.index.invertedlist.InMemoryInvertedIndex.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

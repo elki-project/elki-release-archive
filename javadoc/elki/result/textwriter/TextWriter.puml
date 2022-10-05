@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TextWriter\n<size:10>elki.result.textwriter" as elki.result.textwriter.TextWriter [[TextWriter.html]] {
+        {static} +FILE_EXTENSION: String
+        {static} +writers: HandlerList<TextWriterWriterInterface<?>>
+        #filenames: Map<String, Object>
+        -fallback: TextWriterWriterInterface<?>
+        #getFilename(Object, String): String
+        +output(Database, Object, StreamFactory, Pattern): void
+        -printObject(TextWriterStream, Database, DBIDRef, List<Relation<?>>): void
+        -writeClusterResult(Database, StreamFactory, Clustering<Model>, Cluster<Model>, List<Relation<?>>, NamingScheme): void
+        -writeIterableResult(StreamFactory, IterableResult<?>): void
+        -writeOrderingResult(Database, StreamFactory, OrderingResult, List<Relation<?>>): void
+        -writeSettingsResult(StreamFactory, List<SettingsResult>): void
+        -writeOtherResult(StreamFactory, Object): void
+        -filenameFromLabel(String): String
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

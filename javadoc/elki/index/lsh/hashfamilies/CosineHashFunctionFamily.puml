@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CosineHashFunctionFamily\n<size:10>elki.index.lsh.hashfamilies" as elki.index.lsh.hashfamilies.CosineHashFunctionFamily [[CosineHashFunctionFamily.html]] {
+        -proj: RandomProjectionFamily
+        -k: int
+        +CosineHashFunctionFamily(int, RandomFactory)
+        +getInputTypeRestriction(): TypeInformation
+        +generateHashFunctions(Relation<? extends NumberVector>, int): ArrayList<? extends LocalitySensitiveHashFunction<? super NumberVector>>
+        +isCompatible(Distance<?>): boolean
+    }
+
+    interface "<size:14>LocalitySensitiveHashFunctionFamily\n<size:10>elki.index.lsh.hashfamilies" as elki.index.lsh.hashfamilies.LocalitySensitiveHashFunctionFamily<NumberVector> [[LocalitySensitiveHashFunctionFamily.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +generateHashFunctions(Relation<? extends V>, int): ArrayList<? extends LocalitySensitiveHashFunction<? super V>>
+        {abstract} +isCompatible(Distance<?>): boolean
+    }
+    class "<size:14>CosineHashFunctionFamily.Par\n<size:10>elki.index.lsh.hashfamilies" as elki.index.lsh.hashfamilies.CosineHashFunctionFamily.Par [[CosineHashFunctionFamily.Par.html]]
+
+    elki.index.lsh.hashfamilies.LocalitySensitiveHashFunctionFamily <|.. elki.index.lsh.hashfamilies.CosineHashFunctionFamily
+    elki.index.lsh.hashfamilies.CosineHashFunctionFamily +-- elki.index.lsh.hashfamilies.CosineHashFunctionFamily.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

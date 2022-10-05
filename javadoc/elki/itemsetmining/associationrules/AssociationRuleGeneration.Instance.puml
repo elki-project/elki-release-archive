@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AssociationRuleGeneration.Instance\n<size:10>elki.itemsetmining.associationrules" as elki.itemsetmining.associationrules.AssociationRuleGeneration.Instance [[AssociationRuleGeneration.Instance.html]] {
+        -totalTransactions: int
+        -scratch1: PartialItemset
+        -scratch2: PartialItemset
+        -rules: ArrayList<AssociationRule>
+        -searcher: ItemsetSearcher
+        -meta: VectorFieldTypeInformation<BitVector>
+        +run(FrequentItemsetsResult): AssociationRuleResult
+        -processSubsets(Itemset, int, int): void
+    }
+
+    class "<size:14>AssociationRuleGeneration\n<size:10>elki.itemsetmining.associationrules" as elki.itemsetmining.associationrules.AssociationRuleGeneration [[AssociationRuleGeneration.html]]
+
+    elki.itemsetmining.associationrules.AssociationRuleGeneration +-- elki.itemsetmining.associationrules.AssociationRuleGeneration.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

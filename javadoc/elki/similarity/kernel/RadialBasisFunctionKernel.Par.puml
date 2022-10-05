@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RadialBasisFunctionKernel.Par\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.RadialBasisFunctionKernel.Par [[RadialBasisFunctionKernel.Par.html]] {
+        {static} +GAMMA_ID: OptionID
+        {static} +SIGMA_ID: OptionID
+        #gamma: double
+        +configure(Parameterization): void
+        +make(): RadialBasisFunctionKernel
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>RadialBasisFunctionKernel\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.RadialBasisFunctionKernel [[RadialBasisFunctionKernel.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.kernel.RadialBasisFunctionKernel.Par
+    elki.similarity.kernel.RadialBasisFunctionKernel +-- elki.similarity.kernel.RadialBasisFunctionKernel.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

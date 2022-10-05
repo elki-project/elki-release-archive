@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CSVReaderFormat\n<size:10>elki.datasource.parser" as elki.datasource.parser.CSVReaderFormat [[CSVReaderFormat.html]] {
+        {static} +DEFAULT_SEPARATOR: String
+        {static} +QUOTE_CHARS: String
+        {static} +NUMBER_PATTERN: String
+        {static} +COMMENT_PATTERN: String
+        {static} +ATTRIBUTE_CONCATENATION: String
+        {static} +DEFAULT_FORMAT: CSVReaderFormat
+        #colSep: Pattern
+        #quoteChars: String
+        #comment: Pattern
+        +CSVReaderFormat(Pattern, String, Pattern)
+        +makeReader(): TokenizedReader
+    }
+    class "<size:14>CSVReaderFormat.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.CSVReaderFormat.Par [[CSVReaderFormat.Par.html]]
+
+    elki.datasource.parser.CSVReaderFormat +-- elki.datasource.parser.CSVReaderFormat.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

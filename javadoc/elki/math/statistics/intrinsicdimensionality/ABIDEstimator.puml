@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ABIDEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.ABIDEstimator [[ABIDEstimator.html]] {
+        {static} +STATIC: ABIDEstimator
+        +estimate(KNNSearcher<DBIDRef>, DistanceQuery<?>, DBIDRef, int): double
+    }
+
+    class "<size:14>RABIDEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.RABIDEstimator [[RABIDEstimator.html]]
+    class "<size:14>ABIDEstimator.Par\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.ABIDEstimator.Par [[ABIDEstimator.Par.html]]
+
+    elki.math.statistics.intrinsicdimensionality.RABIDEstimator <|-- elki.math.statistics.intrinsicdimensionality.ABIDEstimator
+    elki.math.statistics.intrinsicdimensionality.ABIDEstimator +-- elki.math.statistics.intrinsicdimensionality.ABIDEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,51 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MemoryKDTree\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree<O extends NumberVector> [[MemoryKDTree.html]] {
+        {static} -LOG: Logging
+        #relation: Relation<O extends NumberVector>
+        #split: SplitStrategy
+        #leafsize: int
+        #sorted: ArrayDBIDs
+        #root: Object
+        #dims: int
+        #objaccess: Counter
+        #distcalc: Counter
+        +MemoryKDTree(Relation<O extends NumberVector>, int)
+        +MemoryKDTree(Relation<O extends NumberVector>, SplitStrategy, int)
+        +initialize(): void
+        +buildTree(Relation<? extends NumberVector>, int, int, ArrayModifiableDBIDs, DBIDArrayMIter, SortDBIDsBySingleDimension): Object
+        -assertSplitConsistent(int, int, int, int, double, DBIDArrayMIter): boolean
+        +logStatistics(): void
+        #countObjectAccess(): void
+        #countDistanceComputation(): void
+        +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+        +rangeByObject(DistanceQuery<O extends NumberVector>, double, int): RangeSearcher<O extends NumberVector>
+        +priorityByObject(DistanceQuery<O extends NumberVector>, double, int): PrioritySearcher<O extends NumberVector>
+    }
+
+    interface "<size:14>DistancePriorityIndex\n<size:10>elki.index" as elki.index.DistancePriorityIndex<O extends NumberVector> [[../../../DistancePriorityIndex.html]] {
+        {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+    }
+    class "<size:14>MemoryKDTree.CountingRelation\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree.CountingRelation [[MemoryKDTree.CountingRelation.html]]
+    class "<size:14>MemoryKDTree.KDNode\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree.KDNode [[MemoryKDTree.KDNode.html]]
+    class "<size:14>MemoryKDTree.KDTreeKNNSearcher\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree.KDTreeKNNSearcher [[MemoryKDTree.KDTreeKNNSearcher.html]]
+    class "<size:14>MemoryKDTree.KDTreeRangeSearcher\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree.KDTreeRangeSearcher [[MemoryKDTree.KDTreeRangeSearcher.html]]
+    class "<size:14>MemoryKDTree.PrioritySearchBranch\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree.PrioritySearchBranch [[MemoryKDTree.PrioritySearchBranch.html]]
+    class "<size:14>MemoryKDTree.KDTreePrioritySearcher\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree.KDTreePrioritySearcher [[MemoryKDTree.KDTreePrioritySearcher.html]]
+    class "<size:14>MemoryKDTree.Factory\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree.Factory<O extends NumberVector> [[MemoryKDTree.Factory.html]]
+
+    elki.index.DistancePriorityIndex <|.. elki.index.tree.spatial.kd.MemoryKDTree
+    elki.index.tree.spatial.kd.MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.CountingRelation
+    elki.index.tree.spatial.kd.MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.KDNode
+    elki.index.tree.spatial.kd.MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.KDTreeKNNSearcher
+    elki.index.tree.spatial.kd.MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.KDTreeRangeSearcher
+    elki.index.tree.spatial.kd.MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.PrioritySearchBranch
+    elki.index.tree.spatial.kd.MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.KDTreePrioritySearcher
+    elki.index.tree.spatial.kd.MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

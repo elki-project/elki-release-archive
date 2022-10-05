@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParameterException\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.ParameterException [[ParameterException.html]] {
+        {static} -serialVersionUID: long
+        +ParameterException(Parameter<?>, String)
+        +ParameterException(Parameter<?>, String, Throwable)
+        +ParameterException(String)
+        +ParameterException(String, Throwable)
+        {static} +prefixParameterToMessage(Parameter<?>, String): String
+        {static} +prefixParametersToMessage(Parameter<?>, String, Parameter<?>, String): String
+    }
+
+    class "<size:14>Exception\n<size:10>java.lang" as java.lang.Exception
+
+    java.lang.Exception <|-- elki.utilities.optionhandling.ParameterException
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

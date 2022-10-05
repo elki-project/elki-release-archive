@@ -1,0 +1,89 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.database.query.range {
+
+        class LinearScanPrimitiveDistanceRangeByObject<O> [[LinearScanPrimitiveDistanceRangeByObject.html]] {
+            -distance: PrimitiveDistanceQuery<O>
+            +LinearScanPrimitiveDistanceRangeByObject(PrimitiveDistanceQuery<O>)
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class LinearScanEuclideanRangeByObject<O extends NumberVector> [[LinearScanEuclideanRangeByObject.html]] {
+            -relation: Relation<? extends NumberVector>
+            +LinearScanEuclideanRangeByObject(DistanceQuery<O extends NumberVector>)
+            +getRange(O extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class LinearScanDistanceRangeByObject<O> [[LinearScanDistanceRangeByObject.html]] {
+            -distanceQuery: DistanceQuery<O>
+            +LinearScanDistanceRangeByObject(DistanceQuery<O>)
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class LinearScanSimilarityRangeByDBID<O> [[LinearScanSimilarityRangeByDBID.html]] {
+            #simQuery: SimilarityQuery<O>
+            +LinearScanSimilarityRangeByDBID(SimilarityQuery<O>)
+            +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class LinearScanPrimitiveSimilarityRangeByObject<O> [[LinearScanPrimitiveSimilarityRangeByObject.html]] {
+            -sim: PrimitiveSimilarityQuery<O>
+            +LinearScanPrimitiveSimilarityRangeByObject(PrimitiveSimilarityQuery<O>)
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class LinearScanDistanceRangeByDBID<O> [[LinearScanDistanceRangeByDBID.html]] {
+            -distanceQuery: DistanceQuery<O>
+            +LinearScanDistanceRangeByDBID(DistanceQuery<O>)
+            +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class LinearScanSimilarityRangeByObject<O> [[LinearScanSimilarityRangeByObject.html]] {
+            #simQuery: SimilarityQuery<O>
+            +LinearScanSimilarityRangeByObject(SimilarityQuery<O>)
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class WrappedRangeDBIDByLookup<O> [[WrappedRangeDBIDByLookup.html]] {
+            -relation: Relation<? extends O>
+            -WrappedRangeDBIDByLookup(Relation<? extends O>, RangeSearcher<O>)
+            +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            {static} +wrap(Relation<? extends O>, RangeSearcher<O>): RangeSearcher<DBIDRef>
+        }
+
+        class elki.database.query.range.WrappedRangeDBIDByLookup.Linear<O> [[WrappedRangeDBIDByLookup.Linear.html]] {
+            -Linear(Relation<? extends O>, RangeSearcher<O>)
+        }
+
+        interface RangeSearcher<O> [[RangeSearcher.html]] {
+            +getRange(O, double): DoubleDBIDList
+            {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        RangeSearcher <|.. LinearScanPrimitiveDistanceRangeByObject
+        elki.database.query.LinearScanQuery <|.. LinearScanPrimitiveDistanceRangeByObject
+        RangeSearcher <|.. LinearScanEuclideanRangeByObject
+        elki.database.query.LinearScanQuery <|.. LinearScanEuclideanRangeByObject
+        RangeSearcher <|.. LinearScanDistanceRangeByObject
+        elki.database.query.LinearScanQuery <|.. LinearScanDistanceRangeByObject
+        RangeSearcher <|.. LinearScanSimilarityRangeByDBID
+        elki.database.query.LinearScanQuery <|.. LinearScanSimilarityRangeByDBID
+        RangeSearcher <|.. LinearScanPrimitiveSimilarityRangeByObject
+        elki.database.query.LinearScanQuery <|.. LinearScanPrimitiveSimilarityRangeByObject
+        RangeSearcher <|.. LinearScanDistanceRangeByDBID
+        elki.database.query.LinearScanQuery <|.. LinearScanDistanceRangeByDBID
+        RangeSearcher <|.. LinearScanSimilarityRangeByObject
+        elki.database.query.LinearScanQuery <|.. LinearScanSimilarityRangeByObject
+        RangeSearcher <|.. WrappedRangeDBIDByLookup
+        WrappedRangeDBIDByLookup --> RangeSearcher: inner
+        WrappedRangeDBIDByLookup <|-- elki.database.query.range.WrappedRangeDBIDByLookup.Linear
+        elki.database.query.LinearScanQuery <|.. elki.database.query.range.WrappedRangeDBIDByLookup.Linear
+        WrappedRangeDBIDByLookup +-- elki.database.query.range.WrappedRangeDBIDByLookup.Linear
+    }
+
+    namespace elki.database.query {
+        interface LinearScanQuery [[../LinearScanQuery.html]]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

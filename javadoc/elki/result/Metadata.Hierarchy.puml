@@ -1,0 +1,47 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Metadata.Hierarchy\n<size:10>elki.result" as elki.result.Metadata.Hierarchy [[Metadata.Hierarchy.html]] {
+        ~nump: int
+        ~numc: int
+        -parents: Metadata[]
+        -children: Object[]
+        +addChild(Object): boolean
+        +addWeakChild(Object): boolean
+        +removeChild(Object): boolean
+        -addParentInt(Metadata): boolean
+        -addChildInt(Object): boolean
+        -removeParentInt(Metadata): boolean
+        -removeChildInt(Object): boolean
+        +hasChildren(): boolean
+        +iterParents(): It<Object>
+        +iterParentsReverse(): It<Object>
+        +iterAncestors(): It<Object>
+        +iterAncestorsSelf(): It<Object>
+        +iterChildren(): It<Object>
+        +iterChildrenReverse(): It<Object>
+        +iterDescendants(): It<Object>
+        +iterDescendantsSelf(): It<Object>
+    }
+
+    class "<size:14>Metadata\n<size:10>elki.result" as elki.result.Metadata [[Metadata.html]]
+    class "<size:14>Metadata.Hierarchy.ItrParents\n<size:10>elki.result" as elki.result.Metadata.Hierarchy.ItrParents [[Metadata.Hierarchy.ItrParents.html]]
+    class "<size:14>Metadata.Hierarchy.ItrParentsReverse\n<size:10>elki.result" as elki.result.Metadata.Hierarchy.ItrParentsReverse [[Metadata.Hierarchy.ItrParentsReverse.html]]
+    class "<size:14>Metadata.Hierarchy.ItrChildren\n<size:10>elki.result" as elki.result.Metadata.Hierarchy.ItrChildren [[Metadata.Hierarchy.ItrChildren.html]]
+    class "<size:14>Metadata.Hierarchy.ItrChildrenReverse\n<size:10>elki.result" as elki.result.Metadata.Hierarchy.ItrChildrenReverse [[Metadata.Hierarchy.ItrChildrenReverse.html]]
+    class "<size:14>Metadata.Hierarchy.ItrDesc\n<size:10>elki.result" as elki.result.Metadata.Hierarchy.ItrDesc [[Metadata.Hierarchy.ItrDesc.html]]
+    class "<size:14>Metadata.Hierarchy.ItrAnc\n<size:10>elki.result" as elki.result.Metadata.Hierarchy.ItrAnc [[Metadata.Hierarchy.ItrAnc.html]]
+
+    elki.result.Metadata +-- elki.result.Metadata.Hierarchy
+    elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrParents
+    elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrParentsReverse
+    elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrChildren
+    elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrChildrenReverse
+    elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrDesc
+    elki.result.Metadata.Hierarchy +-- elki.result.Metadata.Hierarchy.ItrAnc
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

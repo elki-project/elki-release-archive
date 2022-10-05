@@ -1,0 +1,310 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.kmeans.spherical {
+
+        class SphericalSimplifiedHamerlyKMeans<V extends NumberVector> [[SphericalSimplifiedHamerlyKMeans.html]] {
+            {static} -LOG: Logging
+            #varstat: boolean
+            +SphericalSimplifiedHamerlyKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans.Instance [[SphericalSimplifiedHamerlyKMeans.Instance.html]] {
+            ~sums: double[]
+            ~newmeans: double[]
+            ~lsim: WritableDoubleDataStore
+            ~usim: WritableDoubleDataStore
+            ~csim: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #updateBounds(double[]): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans.Par<V extends NumberVector> [[SphericalSimplifiedHamerlyKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): SphericalSimplifiedHamerlyKMeans<V extends NumberVector>
+        }
+
+        class SphericalHamerlyKMeans<V extends NumberVector> [[SphericalHamerlyKMeans.html]] {
+            {static} -LOG: Logging
+            #varstat: boolean
+            +SphericalHamerlyKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalHamerlyKMeans.Instance [[SphericalHamerlyKMeans.Instance.html]] {
+            ~sums: double[]
+            ~newmeans: double[]
+            ~lsim: WritableDoubleDataStore
+            ~usim: WritableDoubleDataStore
+            ~csim: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #initialAssignToNearestCluster(): int
+            #recomputeSeperation(double[]): void
+            #assignToNearestCluster(): int
+            #updateBounds(double[]): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalHamerlyKMeans.Par<V extends NumberVector> [[SphericalHamerlyKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): SphericalHamerlyKMeans<V extends NumberVector>
+        }
+
+        class EuclideanSphericalHamerlyKMeans<V extends NumberVector> [[EuclideanSphericalHamerlyKMeans.html]] {
+            {static} -LOG: Logging
+            #varstat: boolean
+            +EuclideanSphericalHamerlyKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Instance [[EuclideanSphericalHamerlyKMeans.Instance.html]] {
+            ~sums: double[]
+            ~newmeans: double[]
+            ~upper: WritableDoubleDataStore
+            ~lower: WritableDoubleDataStore
+            ~sep: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #updateBounds(double[]): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Par<V extends NumberVector> [[EuclideanSphericalHamerlyKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): EuclideanSphericalHamerlyKMeans<V extends NumberVector>
+        }
+
+        class EuclideanSphericalElkanKMeans<V extends NumberVector> [[EuclideanSphericalElkanKMeans.html]] {
+            {static} -LOG: Logging
+            +EuclideanSphericalElkanKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans.Instance [[EuclideanSphericalElkanKMeans.Instance.html]] {
+            ~cdist: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans.Par<V extends NumberVector> [[EuclideanSphericalElkanKMeans.Par.html]] {
+            +make(): EuclideanSphericalElkanKMeans<V extends NumberVector>
+        }
+
+        class SphericalSimplifiedElkanKMeans<V extends NumberVector> [[SphericalSimplifiedElkanKMeans.html]] {
+            {static} -LOG: Logging
+            #varstat: boolean
+            +SphericalSimplifiedElkanKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Instance [[SphericalSimplifiedElkanKMeans.Instance.html]] {
+            ~sums: double[]
+            ~newmeans: double[]
+            ~lsim: WritableDoubleDataStore
+            ~usim: WritableDataStore<double[]>
+            ~csim: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #updateBounds(double[]): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Par<V extends NumberVector> [[SphericalSimplifiedElkanKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): SphericalSimplifiedElkanKMeans<V extends NumberVector>
+        }
+
+        class SphericalSingleAssignmentKMeans<V extends NumberVector> [[SphericalSingleAssignmentKMeans.html]] {
+            {static} -LOG: Logging
+            +SphericalSingleAssignmentKMeans(int, KMeansInitialization)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Instance [[SphericalSingleAssignmentKMeans.Instance.html]] {
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Par<V extends NumberVector> [[SphericalSingleAssignmentKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): SphericalSingleAssignmentKMeans<V extends NumberVector>
+        }
+
+        class SphericalKMeans<V extends NumberVector> [[SphericalKMeans.html]] {
+            {static} -LOG: Logging
+            +SphericalKMeans(int, int, KMeansInitialization)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            +getInputTypeRestriction(): TypeInformation[]
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalKMeans.Instance [[SphericalKMeans.Instance.html]] {
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #assignToNearestCluster(): int
+            #similarity(NumberVector, double[]): double
+            #similarity(double[], double[]): double
+            #distance(double[], double[]): double
+            #distance(NumberVector, double[]): double
+            #distance(NumberVector, NumberVector): double
+            #sqrtdistance(NumberVector, double[]): double
+            #sqrtdistance(NumberVector, NumberVector): double
+            #initialSeparation(double[]): void
+            #movedSimilarity(double[], double[], double[]): void
+            #meansFromSums(double[], double[], double[]): void
+            #recomputeVariance(Relation<? extends NumberVector>): void
+            #getLogger(): Logging
+            {static} #means(List<? extends DBIDs>, double[], Relation<? extends NumberVector>): double[]
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalKMeans.Par<V extends NumberVector> [[SphericalKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): SphericalKMeans<V extends NumberVector>
+        }
+
+        class SphericalElkanKMeans<V extends NumberVector> [[SphericalElkanKMeans.html]] {
+            {static} -LOG: Logging
+            +SphericalElkanKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalElkanKMeans.Instance [[SphericalElkanKMeans.Instance.html]] {
+            ~ccsim: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            #initialAssignToNearestCluster(): int
+            #recomputeSeperation(double[], double[]): void
+            #assignToNearestCluster(): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.SphericalElkanKMeans.Par<V extends NumberVector> [[SphericalElkanKMeans.Par.html]] {
+            +make(): SphericalElkanKMeans<V extends NumberVector>
+        }
+
+        class EuclideanSphericalSimplifiedElkanKMeans<V extends NumberVector> [[EuclideanSphericalSimplifiedElkanKMeans.html]] {
+            {static} -LOG: Logging
+            #varstat: boolean
+            +EuclideanSphericalSimplifiedElkanKMeans(int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Instance [[EuclideanSphericalSimplifiedElkanKMeans.Instance.html]] {
+            ~sums: double[]
+            ~newmeans: double[]
+            ~upper: WritableDoubleDataStore
+            ~lower: WritableDataStore<double[]>
+            ~sep: double[]
+            +Instance(Relation<? extends NumberVector>, double[])
+            +iterate(int): int
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #updateBounds(double[]): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Par<V extends NumberVector> [[EuclideanSphericalSimplifiedElkanKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): EuclideanSphericalSimplifiedElkanKMeans<V extends NumberVector>
+        }
+
+        SphericalKMeans <|-- SphericalSimplifiedHamerlyKMeans
+        elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|-- elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans.Instance
+        SphericalSimplifiedHamerlyKMeans +-- elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalKMeans.Par <|-- elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans.Par
+        SphericalSimplifiedHamerlyKMeans +-- elki.clustering.kmeans.spherical.SphericalSimplifiedHamerlyKMeans.Par
+        SphericalKMeans <|-- SphericalHamerlyKMeans
+        elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|-- elki.clustering.kmeans.spherical.SphericalHamerlyKMeans.Instance
+        SphericalHamerlyKMeans +-- elki.clustering.kmeans.spherical.SphericalHamerlyKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalKMeans.Par <|-- elki.clustering.kmeans.spherical.SphericalHamerlyKMeans.Par
+        SphericalHamerlyKMeans +-- elki.clustering.kmeans.spherical.SphericalHamerlyKMeans.Par
+        SphericalKMeans <|-- EuclideanSphericalHamerlyKMeans
+        elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|-- elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Instance
+        EuclideanSphericalHamerlyKMeans +-- elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalKMeans.Par <|-- elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Par
+        EuclideanSphericalHamerlyKMeans +-- elki.clustering.kmeans.spherical.EuclideanSphericalHamerlyKMeans.Par
+        EuclideanSphericalSimplifiedElkanKMeans <|-- EuclideanSphericalElkanKMeans
+        elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Instance <|-- elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans.Instance
+        EuclideanSphericalElkanKMeans +-- elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans.Instance
+        elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Par <|-- elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans.Par
+        EuclideanSphericalElkanKMeans +-- elki.clustering.kmeans.spherical.EuclideanSphericalElkanKMeans.Par
+        SphericalKMeans <|-- SphericalSimplifiedElkanKMeans
+        elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|-- elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Instance
+        SphericalSimplifiedElkanKMeans +-- elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalKMeans.Par <|-- elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Par
+        SphericalSimplifiedElkanKMeans +-- elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Par
+        SphericalKMeans <|-- SphericalSingleAssignmentKMeans
+        elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|-- elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Instance
+        SphericalSingleAssignmentKMeans +-- elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalKMeans.Par <|-- elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Par
+        SphericalSingleAssignmentKMeans +-- elki.clustering.kmeans.spherical.SphericalSingleAssignmentKMeans.Par
+        elki.clustering.kmeans.AbstractKMeans <|-- SphericalKMeans
+        elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.spherical.SphericalKMeans.Instance
+        SphericalKMeans +-- elki.clustering.kmeans.spherical.SphericalKMeans.Instance
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.spherical.SphericalKMeans.Par
+        SphericalKMeans +-- elki.clustering.kmeans.spherical.SphericalKMeans.Par
+        SphericalSimplifiedElkanKMeans <|-- SphericalElkanKMeans
+        elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Instance <|-- elki.clustering.kmeans.spherical.SphericalElkanKMeans.Instance
+        SphericalElkanKMeans +-- elki.clustering.kmeans.spherical.SphericalElkanKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalSimplifiedElkanKMeans.Par <|-- elki.clustering.kmeans.spherical.SphericalElkanKMeans.Par
+        SphericalElkanKMeans +-- elki.clustering.kmeans.spherical.SphericalElkanKMeans.Par
+        SphericalKMeans <|-- EuclideanSphericalSimplifiedElkanKMeans
+        elki.clustering.kmeans.spherical.SphericalKMeans.Instance <|-- elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Instance
+        EuclideanSphericalSimplifiedElkanKMeans +-- elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Instance
+        elki.clustering.kmeans.spherical.SphericalKMeans.Par <|-- elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Par
+        EuclideanSphericalSimplifiedElkanKMeans +-- elki.clustering.kmeans.spherical.EuclideanSphericalSimplifiedElkanKMeans.Par
+    }
+
+    namespace elki.clustering.kmeans {
+        abstract class AbstractKMeans<V extends NumberVector, M extends Model> [[../AbstractKMeans.html]] {
+            #distance: NumberVectorDistance<? super NumberVector>
+            #k: int
+            #maxiter: int
+            #initializer: KMeansInitialization
+            {abstract} #getLogger(): Logging
+        }
+        abstract class elki.clustering.kmeans.AbstractKMeans.Instance [[../AbstractKMeans.Instance.html]] {
+            #means: double[]
+            #clusters: List<ModifiableDBIDs>
+            #assignment: WritableIntegerDataStore
+            #varsum: double[]
+            #relation: Relation<? extends NumberVector>
+            #diststat: long
+            -df: NumberVectorDistance<?>
+            #k: int
+            #isSquared: boolean
+            #key: String
+            {abstract} #iterate(int): int
+            {abstract} #getLogger(): Logging
+        }
+        abstract class elki.clustering.kmeans.AbstractKMeans.Par<V extends NumberVector> [[../AbstractKMeans.Par.html]] {
+            #k: int
+            #maxiter: int
+            #initializer: KMeansInitialization
+            #varstat: boolean
+            #distance: NumberVectorDistance<? super NumberVector>
+            {abstract} +make(): AbstractKMeans<V extends NumberVector, ?>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

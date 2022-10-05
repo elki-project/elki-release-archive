@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierRankingEvaluation\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierRankingEvaluation [[OutlierRankingEvaluation.html]] {
+        {static} -LOG: Logging
+        -positiveClassName: Pattern
+        -key: String
+        +OutlierRankingEvaluation(Pattern)
+        -evaluate(EvaluationResult, int, int, Supplier<Adapter>): void
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../Evaluator.html]]
+    class "<size:14>OutlierRankingEvaluation.Par\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierRankingEvaluation.Par [[OutlierRankingEvaluation.Par.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.outlier.OutlierRankingEvaluation
+    elki.evaluation.outlier.OutlierRankingEvaluation +-- elki.evaluation.outlier.OutlierRankingEvaluation.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

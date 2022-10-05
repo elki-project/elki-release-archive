@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>APRIORI\n<size:10>elki.itemsetmining" as elki.itemsetmining.APRIORI [[APRIORI.html]] {
+        {static} -LOG: Logging
+        -STAT: String
+        +APRIORI(double, int, int)
+        +APRIORI(double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<BitVector>): FrequentItemsetsResult
+        #buildFrequentOneItemsets(Relation<? extends SparseFeatureVector<?>>, int, int): List<OneItemset>
+        #buildFrequentTwoItemsets(List<OneItemset>, Relation<BitVector>, int, int, DBIDs, ArrayModifiableDBIDs): List<SparseItemset>
+        #aprioriGenerate(List<? extends Itemset>, int, int): List<Itemset>
+        #frequentItemsets(List<? extends Itemset>, Relation<BitVector>, int, DBIDs, ArrayModifiableDBIDs, int): List<? extends Itemset>
+        #frequentItemsetsSparse(List<SparseItemset>, Relation<BitVector>, int, DBIDs, ArrayModifiableDBIDs, int): List<SparseItemset>
+        -initializeSearchItemset(BitVector, int[], int[]): boolean
+        -nextSearchItemset(BitVector, int[], int[]): boolean
+        -binarySearch(List<SparseItemset>, SparseItemset, int, int): int
+        -debugDumpCandidates(StringBuilder, List<? extends Itemset>, VectorFieldTypeInformation<BitVector>): StringBuilder
+    }
+
+    abstract class "<size:14>AbstractFrequentItemsetAlgorithm\n<size:10>elki.itemsetmining" as elki.itemsetmining.AbstractFrequentItemsetAlgorithm [[AbstractFrequentItemsetAlgorithm.html]]
+    class "<size:14>APRIORI.Par\n<size:10>elki.itemsetmining" as elki.itemsetmining.APRIORI.Par [[APRIORI.Par.html]]
+
+    elki.itemsetmining.AbstractFrequentItemsetAlgorithm <|-- elki.itemsetmining.APRIORI
+    elki.itemsetmining.APRIORI +-- elki.itemsetmining.APRIORI.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

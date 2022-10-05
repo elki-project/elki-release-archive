@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="69px" preserveAspectRatio="none" style="width:194px;height:69px;background:#FFFFFF;" version="1.1" viewBox="0 0 194 69" width="194px" zoomAndPan="magnify"><defs/><g><!--MD5=[4d30bb4e76043a1d92898200397cf529]
+class elki.data.FloatVector--><a href="FloatVector.html" target="_top" title="FloatVector.html" xlink:actuate="onRequest" xlink:href="FloatVector.html" xlink:show="new" xlink:title="FloatVector.html" xlink:type="simple"><g id="elem_elki.data.FloatVector"><rect codeLine="16" fill="#F1F1F1" height="37.9375" id="elki.data.FloatVector" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="110" x="45" y="7"/><ellipse cx="60" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M62.9688,31.6094 Q62.3906,31.9063 61.75,32.0469 Q61.1094,32.2031 60.4063,32.2031 Q57.9063,32.2031 56.5781,30.5625 Q55.2656,28.9063 55.2656,25.7813 Q55.2656,22.6563 56.5781,21 Q57.9063,19.3438 60.4063,19.3438 Q61.1094,19.3438 61.75,19.5 Q62.4063,19.6563 62.9688,19.9531 L62.9688,22.6719 Q62.3438,22.0938 61.75,21.8281 Q61.1563,21.5469 60.5313,21.5469 Q59.1875,21.5469 58.5,22.625 Q57.8125,23.6875 57.8125,25.7813 Q57.8125,27.875 58.5,28.9531 Q59.1875,30.0156 60.5313,30.0156 Q61.1563,30.0156 61.75,29.75 Q62.3438,29.4688 62.9688,28.8906 L62.9688,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="74" y="24.9951">FloatVector</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="40" x="93" y="37.5791">elki.data</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="0" y="49.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="0" y="59.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[dbe3db982c406e2fe292de4576f82d94]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FloatVector.Factory\n<size:10>elki.data" as elki.data.FloatVector.Factory [[FloatVector.Factory.html]] {
+        +newFeatureVector(A, ArrayAdapter<? extends Number, A>): FloatVector
+        +newNumberVector(A, NumberArrayAdapter<?, ? super A>): FloatVector
+        +getDefaultSerializer(): ByteBufferSerializer<FloatVector>
+        +getRestrictionClass(): Class<? super FloatVector>
+    }
+
+    interface "<size:14>NumberVector.Factory\n<size:10>elki.data" as elki.data.NumberVector.Factory<FloatVector> [[NumberVector.Factory.html]] {
+        {abstract} +newNumberVector(A, NumberArrayAdapter<?, ? super A>): FloatVector
+    }
+    class "<size:14>FloatVector\n<size:10>elki.data" as elki.data.FloatVector [[FloatVector.html]]
+    class "<size:14>FloatVector.Factory.Par\n<size:10>elki.data" as elki.data.FloatVector.Factory.Par [[FloatVector.Factory.Par.html]]
+
+    elki.data.NumberVector.Factory <|.. elki.data.FloatVector.Factory
+    elki.data.FloatVector +- - elki.data.FloatVector.Factory
+    elki.data.FloatVector.Factory +- - elki.data.FloatVector.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

@@ -1,0 +1,235 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.datasource.filter.normalization.columnwise {
+
+        class AttributeWiseVarianceNormalization<V extends NumberVector> [[AttributeWiseVarianceNormalization.html]] {
+            {static} -LOG: Logging
+            -mean: double[]
+            -stddev: double[]
+            ~mvs: MeanVariance[]
+            +AttributeWiseVarianceNormalization()
+            +AttributeWiseVarianceNormalization(double[], double[])
+            #prepareStart(SimpleTypeInformation<V extends NumberVector>): boolean
+            #prepareProcessInstance(V extends NumberVector): void
+            #prepareComplete(): void
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            +restore(V extends NumberVector): V extends NumberVector
+            -normalize(int, double): double
+            -restore(int, double): double
+            +transform(LinearEquationSystem): LinearEquationSystem
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            #getLogger(): Logging
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.datasource.filter.normalization.columnwise.AttributeWiseVarianceNormalization.Par<V extends NumberVector> [[AttributeWiseVarianceNormalization.Par.html]] {
+            {static} +MEAN_ID: OptionID
+            {static} +STDDEV_ID: OptionID
+            -mean: double[]
+            -stddev: double[]
+            +configure(Parameterization): void
+            +make(): AttributeWiseVarianceNormalization<V extends NumberVector>
+        }
+
+        class InverseDocumentFrequencyNormalization<V extends SparseNumberVector> [[InverseDocumentFrequencyNormalization.html]] {
+            {static} -LOG: Logging
+            ~idf: Int2DoubleOpenHashMap
+            ~objcnt: int
+            #prepareStart(SimpleTypeInformation<V extends SparseNumberVector>): boolean
+            #prepareProcessInstance(V extends SparseNumberVector): void
+            #prepareComplete(): void
+            #filterSingleObject(V extends SparseNumberVector): V extends SparseNumberVector
+            +restore(V extends SparseNumberVector): V extends SparseNumberVector
+            #convertedType(SimpleTypeInformation<V extends SparseNumberVector>): SimpleTypeInformation<? super SparseNumberVector>
+            #getInputTypeRestriction(): SimpleTypeInformation<? super SparseNumberVector>
+            #getLogger(): Logging
+        }
+
+        class AttributeWiseBetaNormalization<V extends NumberVector> [[AttributeWiseBetaNormalization.html]] {
+            {static} -LOG: Logging
+            #factory: Factory<V extends NumberVector>
+            #alpha: double
+            +AttributeWiseBetaNormalization(List<? extends DistributionEstimator<?>>, double)
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+            +restore(V extends NumberVector): V extends NumberVector
+            +transform(LinearEquationSystem): LinearEquationSystem
+        }
+
+        class elki.datasource.filter.normalization.columnwise.AttributeWiseBetaNormalization.Par<V extends NumberVector> [[AttributeWiseBetaNormalization.Par.html]] {
+            {static} +DISTRIBUTIONS_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            -estimators: List<? extends DistributionEstimator<?>>
+            -alpha: double
+            +configure(Parameterization): void
+            +make(): AttributeWiseBetaNormalization<V extends NumberVector>
+        }
+
+        class AttributeWiseCDFNormalization<V extends NumberVector> [[AttributeWiseCDFNormalization.html]] {
+            {static} -LOG: Logging
+            #estimators: List<? extends DistributionEstimator<?>>
+            #dists: List<Distribution>
+            #factory: Factory<V extends NumberVector>
+            +AttributeWiseCDFNormalization(List<? extends DistributionEstimator<?>>)
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+            #findBestFit(List<V extends NumberVector>, Adapter, int, double[]): Distribution
+            #constantZero(List<V extends NumberVector>, Adapter): boolean
+        }
+
+        class elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization.Adapter {
+            ~dim: int
+            +size(List<? extends NumberVector>): int
+            +get(List<? extends NumberVector>, int): Double
+            +getDouble(List<? extends NumberVector>, int): double
+            +getLong(List<? extends NumberVector>, int): long
+        }
+
+        class elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization.Par<V extends NumberVector> [[AttributeWiseCDFNormalization.Par.html]] {
+            {static} +DISTRIBUTIONS_ID: OptionID
+            -estimators: List<? extends DistributionEstimator<?>>
+            +configure(Parameterization): void
+            +make(): AttributeWiseCDFNormalization<V extends NumberVector>
+        }
+
+        class AttributeWiseMeanNormalization<V extends NumberVector> [[AttributeWiseMeanNormalization.html]] {
+            {static} -LOG: Logging
+            -mean: double[]
+            ~sums: double[]
+            ~c: int
+            +AttributeWiseMeanNormalization(double[])
+            +AttributeWiseMeanNormalization()
+            #prepareStart(SimpleTypeInformation<V extends NumberVector>): boolean
+            #prepareProcessInstance(V extends NumberVector): void
+            #prepareComplete(): void
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            +restore(V extends NumberVector): V extends NumberVector
+            -normalize(int, double): double
+            -restore(int, double): double
+            +transform(LinearEquationSystem): LinearEquationSystem
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            #getLogger(): Logging
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class AttributeWiseMinMaxNormalization<V extends NumberVector> [[AttributeWiseMinMaxNormalization.html]] {
+            {static} -LOG: Logging
+            -maxima: double[]
+            -minima: double[]
+            {static} -EMPTY_ARRAY: double[]
+            +AttributeWiseMinMaxNormalization()
+            +AttributeWiseMinMaxNormalization(double[], double[])
+            #prepareStart(SimpleTypeInformation<V extends NumberVector>): boolean
+            #prepareProcessInstance(V extends NumberVector): void
+            #filterSingleObject(V extends NumberVector): V extends NumberVector
+            +restore(V extends NumberVector): V extends NumberVector
+            -factor(int): double
+            +transform(LinearEquationSystem): LinearEquationSystem
+            #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+            #getLogger(): Logging
+            #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization.Par<V extends NumberVector> [[AttributeWiseMinMaxNormalization.Par.html]] {
+            {static} +MINIMA_ID: OptionID
+            {static} +MAXIMA_ID: OptionID
+            -maxima: double[]
+            -minima: double[]
+            +configure(Parameterization): void
+            +make(): AttributeWiseMinMaxNormalization<V extends NumberVector>
+        }
+
+        class AttributeWiseMADNormalization<V extends NumberVector> [[AttributeWiseMADNormalization.html]] {
+            {static} -LOG: Logging
+            #factory: Factory<V extends NumberVector>
+            -median: double[]
+            -imadsigma: double[]
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+            +restore(V extends NumberVector): V extends NumberVector
+            -normalize(int, double): double
+            -restore(int, double): double
+        }
+
+        class IntegerRankTieNormalization [[IntegerRankTieNormalization.html]] {
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        }
+
+        class elki.datasource.filter.normalization.columnwise.IntegerRankTieNormalization.Sorter [[IntegerRankTieNormalization.Sorter.html]] {
+            ~col: List<? extends NumberVector>
+            ~dim: int
+            +setup(List<? extends NumberVector>, int): void
+            +compare(int, int): int
+        }
+
+        elki.datasource.filter.AbstractVectorConversionFilter <|-- AttributeWiseVarianceNormalization
+        elki.datasource.filter.normalization.Normalization <|.. AttributeWiseVarianceNormalization
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.columnwise.AttributeWiseVarianceNormalization.Par
+        AttributeWiseVarianceNormalization +-- elki.datasource.filter.normalization.columnwise.AttributeWiseVarianceNormalization.Par
+        elki.datasource.filter.AbstractVectorConversionFilter <|-- InverseDocumentFrequencyNormalization
+        elki.datasource.filter.normalization.Normalization <|.. InverseDocumentFrequencyNormalization
+        AttributeWiseCDFNormalization <|-- AttributeWiseBetaNormalization
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.columnwise.AttributeWiseBetaNormalization.Par
+        AttributeWiseBetaNormalization +-- elki.datasource.filter.normalization.columnwise.AttributeWiseBetaNormalization.Par
+        elki.datasource.filter.normalization.Normalization <|.. AttributeWiseCDFNormalization
+        elki.utilities.datastructures.arraylike.NumberArrayAdapter <|.. elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization.Adapter
+        AttributeWiseCDFNormalization +-- elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization.Adapter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization.Par
+        AttributeWiseCDFNormalization +-- elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization.Par
+        elki.datasource.filter.AbstractVectorConversionFilter <|-- AttributeWiseMeanNormalization
+        elki.datasource.filter.normalization.Normalization <|.. AttributeWiseMeanNormalization
+        elki.datasource.filter.AbstractVectorConversionFilter <|-- AttributeWiseMinMaxNormalization
+        elki.datasource.filter.normalization.Normalization <|.. AttributeWiseMinMaxNormalization
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization.Par
+        AttributeWiseMinMaxNormalization +-- elki.datasource.filter.normalization.columnwise.AttributeWiseMinMaxNormalization.Par
+        elki.datasource.filter.normalization.Normalization <|.. AttributeWiseMADNormalization
+        elki.datasource.filter.ObjectFilter <|.. IntegerRankTieNormalization
+        it.unimi.dsi.fastutil.ints.IntComparator <|.. elki.datasource.filter.normalization.columnwise.IntegerRankTieNormalization.Sorter
+        IntegerRankTieNormalization +-- elki.datasource.filter.normalization.columnwise.IntegerRankTieNormalization.Sorter
+    }
+
+    namespace elki.datasource.filter {
+        abstract class AbstractVectorConversionFilter<I, O extends NumberVector> [[../../AbstractVectorConversionFilter.html]] {
+            #factory: Factory<O extends NumberVector>
+        }
+        interface ObjectFilter [[../../ObjectFilter.html]] {
+            {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        }
+    }
+
+    namespace elki.datasource.filter.normalization {
+        interface Normalization<O> [[../Normalization.html]] {
+            +restore(O): O
+            +transform(LinearEquationSystem): LinearEquationSystem
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.utilities.datastructures.arraylike {
+        interface NumberArrayAdapter<N extends Number, A> [[../../../../utilities/datastructures/arraylike/NumberArrayAdapter.html]] {
+            {abstract} +size(A): int
+            {abstract} +get(A, int): N extends Number
+            {abstract} +getDouble(A, int): double
+            +getFloat(A, int): float
+            +getInteger(A, int): int
+            +getShort(A, int): short
+            {abstract} +getLong(A, int): long
+            +getByte(A, int): byte
+        }
+    }
+
+    namespace it.unimi.dsi.fastutil.ints {
+        interface IntComparator {
+            {abstract} +compare(int, int): int
+            +reversed(): IntComparator
+            +--compare--(Integer, Integer): int
+            +thenComparing(IntComparator): IntComparator
+            +thenComparing(Comparator<? super Integer>): Comparator<Integer>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TopologicalSplitter\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.split" as elki.index.tree.spatial.rstarvariants.strategies.split.TopologicalSplitter [[TopologicalSplitter.html]] {
+        {static} +STATIC: TopologicalSplitter
+        +split(A, ArrayAdapter<E extends SpatialComparable, A>, int): long[]
+    }
+
+    interface "<size:14>SplitStrategy\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.split" as elki.index.tree.spatial.rstarvariants.strategies.split.SplitStrategy [[SplitStrategy.html]] {
+        {abstract} +split(A, ArrayAdapter<E extends SpatialComparable, A>, int): long[]
+    }
+    class "<size:14>TopologicalSplitter.Split\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.split" as elki.index.tree.spatial.rstarvariants.strategies.split.TopologicalSplitter.Split<A, E extends SpatialComparable> [[TopologicalSplitter.Split.html]]
+    class "<size:14>TopologicalSplitter.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.split" as elki.index.tree.spatial.rstarvariants.strategies.split.TopologicalSplitter.Par [[TopologicalSplitter.Par.html]]
+
+    elki.index.tree.spatial.rstarvariants.strategies.split.SplitStrategy <|.. elki.index.tree.spatial.rstarvariants.strategies.split.TopologicalSplitter
+    elki.index.tree.spatial.rstarvariants.strategies.split.TopologicalSplitter +-- elki.index.tree.spatial.rstarvariants.strategies.split.TopologicalSplitter.Split
+    elki.index.tree.spatial.rstarvariants.strategies.split.TopologicalSplitter +-- elki.index.tree.spatial.rstarvariants.strategies.split.TopologicalSplitter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

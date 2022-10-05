@@ -1,0 +1,59 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.datastructures.unionfind {
+
+        class WeightedQuickUnionRangeDBIDs [[WeightedQuickUnionRangeDBIDs.html]] {
+            -ids: DBIDRange
+            -parent: int[]
+            -weight: int[]
+            ~WeightedQuickUnionRangeDBIDs(DBIDRange)
+            +find(DBIDRef): int
+            +union(DBIDRef, DBIDRef): int
+            +isConnected(DBIDRef, DBIDRef): boolean
+            +getRoots(): DBIDs
+        }
+
+        class WeightedQuickUnionInteger [[WeightedQuickUnionInteger.html]] {
+            -used: int
+            -parent: int[]
+            -weight: int[]
+            {static} -INITIAL_SIZE: int
+            +WeightedQuickUnionInteger()
+            +WeightedQuickUnionInteger(int)
+            +nextIndex(int): int
+            +find(int): int
+            +union(int, int): int
+            +isConnected(int, int): boolean
+            +getRoots(): IntList
+            +size(): int
+        }
+
+        class UnionFindUtil [[UnionFindUtil.html]] {
+            {static} +make(StaticDBIDs): UnionFind
+        }
+
+        interface UnionFind [[UnionFind.html]] {
+            {abstract} +union(DBIDRef, DBIDRef): int
+            {abstract} +isConnected(DBIDRef, DBIDRef): boolean
+            {abstract} +getRoots(): DBIDs
+            {abstract} +find(DBIDRef): int
+        }
+
+        class WeightedQuickUnionStaticDBIDs [[WeightedQuickUnionStaticDBIDs.html]] {
+            -ids: ArrayDBIDs
+            -index: WritableIntegerDataStore
+            -parent: int[]
+            -weight: int[]
+            ~WeightedQuickUnionStaticDBIDs(StaticDBIDs)
+            +find(DBIDRef): int
+            +union(DBIDRef, DBIDRef): int
+            +isConnected(DBIDRef, DBIDRef): boolean
+            +getRoots(): DBIDs
+        }
+
+        UnionFind <|.. WeightedQuickUnionRangeDBIDs
+        UnionFind <|.. WeightedQuickUnionStaticDBIDs
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

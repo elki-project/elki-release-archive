@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VAFile.VAFileKNNQuery\n<size:10>elki.index.vafile" as elki.index.vafile.VAFile.VAFileKNNQuery [[VAFile.VAFileKNNQuery.html]] {
+        ~p: double
+        +VAFileKNNQuery(DistanceQuery<V extends NumberVector>, double)
+        +getKNN(V extends NumberVector, int): KNNList
+    }
+
+    abstract class "<size:14>AbstractRefiningIndex.AbstractRefiningQuery\n<size:10>elki.index" as elki.index.AbstractRefiningIndex.AbstractRefiningQuery [[../AbstractRefiningIndex.AbstractRefiningQuery.html]]
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<V extends NumberVector> [[../../database/query/knn/KNNSearcher.html]] {
+        {abstract} +getKNN(V extends NumberVector, int): KNNList
+    }
+    class "<size:14>VAFile\n<size:10>elki.index.vafile" as elki.index.vafile.VAFile<V extends NumberVector> [[VAFile.html]]
+
+    elki.index.AbstractRefiningIndex.AbstractRefiningQuery <|-- elki.index.vafile.VAFile.VAFileKNNQuery
+    elki.database.query.knn.KNNSearcher <|.. elki.index.vafile.VAFile.VAFileKNNQuery
+    elki.index.vafile.VAFile +-- elki.index.vafile.VAFile.VAFileKNNQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

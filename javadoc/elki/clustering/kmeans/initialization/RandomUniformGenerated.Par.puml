@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomUniformGenerated.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.RandomUniformGenerated.Par [[RandomUniformGenerated.Par.html]] {
+        +make(): RandomUniformGenerated
+    }
+
+    abstract class "<size:14>AbstractKMeansInitialization.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par [[AbstractKMeansInitialization.Par.html]]
+    class "<size:14>RandomUniformGenerated\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.RandomUniformGenerated [[RandomUniformGenerated.html]]
+
+    elki.clustering.kmeans.initialization.AbstractKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.RandomUniformGenerated.Par
+    elki.clustering.kmeans.initialization.RandomUniformGenerated +-- elki.clustering.kmeans.initialization.RandomUniformGenerated.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

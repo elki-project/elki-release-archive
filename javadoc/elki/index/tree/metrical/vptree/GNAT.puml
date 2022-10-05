@@ -1,0 +1,64 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GNAT\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT<O> [[GNAT.html]] {
+        {static} -LOG: Logging
+        #distComputations: long
+        #relation: Relation<O>
+        ~distFunc: Distance<? super O>
+        ~distQuery: DistanceQuery<O>
+        ~sorted: ModifiableDoubleDBIDList
+        ~random: RandomFactory
+        ~numberVPs: int
+        ~root: Node
+        +GNAT(Relation<O>, Distance<? super O>, RandomFactory, int)
+        +initialize(): void
+        -distance(DBIDRef, DBIDRef): double
+        -distance(O, DBIDRef): double
+        -buildTree(Node, DBIDs, int): void
+        -findVantagePoints(DBIDs, int): ArrayDBIDs
+        +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+        +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+        +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+        +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        {static} -intersect(double, double, double, double): boolean
+        +logStatistics(): void
+    }
+
+    interface "<size:14>DistancePriorityIndex\n<size:10>elki.index" as elki.index.DistancePriorityIndex<O> [[../../../DistancePriorityIndex.html]] {
+        {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+    }
+    class "<size:14>GNAT.Node\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.Node [[GNAT.Node.html]]
+    abstract class "<size:14>GNAT.GNATKNNSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATKNNSearcher [[GNAT.GNATKNNSearcher.html]]
+    class "<size:14>GNAT.GNATKNNObjectSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATKNNObjectSearcher [[GNAT.GNATKNNObjectSearcher.html]]
+    class "<size:14>GNAT.GNATKNNDBIDSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATKNNDBIDSearcher [[GNAT.GNATKNNDBIDSearcher.html]]
+    abstract class "<size:14>GNAT.GNATRangeSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATRangeSearcher [[GNAT.GNATRangeSearcher.html]]
+    class "<size:14>GNAT.GNATRangeObjectSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATRangeObjectSearcher [[GNAT.GNATRangeObjectSearcher.html]]
+    class "<size:14>GNAT.GNATRangeDBIDSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATRangeDBIDSearcher [[GNAT.GNATRangeDBIDSearcher.html]]
+    class "<size:14>GNAT.PrioritySearchBranch\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.PrioritySearchBranch [[GNAT.PrioritySearchBranch.html]]
+    abstract class "<size:14>GNAT.GNATPrioritySearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATPrioritySearcher<T> [[GNAT.GNATPrioritySearcher.html]]
+    class "<size:14>GNAT.GNATPriorityObjectSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATPriorityObjectSearcher [[GNAT.GNATPriorityObjectSearcher.html]]
+    class "<size:14>GNAT.GNATPriorityDBIDSearcher\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.GNATPriorityDBIDSearcher [[GNAT.GNATPriorityDBIDSearcher.html]]
+    class "<size:14>GNAT.Factory\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.Factory<O extends NumberVector> [[GNAT.Factory.html]]
+
+    elki.index.DistancePriorityIndex <|.. elki.index.tree.metrical.vptree.GNAT
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.Node
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATKNNSearcher
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATKNNObjectSearcher
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATKNNDBIDSearcher
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATRangeSearcher
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATRangeObjectSearcher
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATRangeDBIDSearcher
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.PrioritySearchBranch
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATPrioritySearcher
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATPriorityObjectSearcher
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.GNATPriorityDBIDSearcher
+    elki.index.tree.metrical.vptree.GNAT +-- elki.index.tree.metrical.vptree.GNAT.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

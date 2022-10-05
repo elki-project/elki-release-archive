@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EmptyDBIDs\n<size:10>elki.database.ids" as elki.database.ids.EmptyDBIDs [[EmptyDBIDs.html]] {
+        {static} +EMPTY_ITERATOR: EmptyDBIDIterator
+        +contains(DBIDRef): boolean
+        +size(): int
+        +isEmpty(): boolean
+        +get(int): DBID
+        +assignVar(int, DBIDVar): DBIDVar
+        +iter(): DBIDArrayMIter
+        +binarySearch(DBIDRef): int
+        +slice(int, int): ArrayDBIDs
+        +forEach(Consumer<? super DBIDRef>): void
+    }
+
+    interface "<size:14>ArrayStaticDBIDs\n<size:10>elki.database.ids" as elki.database.ids.ArrayStaticDBIDs [[ArrayStaticDBIDs.html]]
+    interface "<size:14>SetDBIDs\n<size:10>elki.database.ids" as elki.database.ids.SetDBIDs [[SetDBIDs.html]]
+    class "<size:14>EmptyDBIDs.EmptyDBIDIterator\n<size:10>elki.database.ids" as elki.database.ids.EmptyDBIDs.EmptyDBIDIterator [[EmptyDBIDs.EmptyDBIDIterator.html]]
+
+    elki.database.ids.ArrayStaticDBIDs <|.. elki.database.ids.EmptyDBIDs
+    elki.database.ids.SetDBIDs <|.. elki.database.ids.EmptyDBIDs
+    elki.database.ids.EmptyDBIDs +-- elki.database.ids.EmptyDBIDs.EmptyDBIDIterator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

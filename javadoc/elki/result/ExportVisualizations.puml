@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExportVisualizations\n<size:10>elki.result" as elki.result.ExportVisualizations [[ExportVisualizations.html]] {
+        {static} -LOG: Logging
+        ~output: Path
+        ~manager: VisualizerParameterizer
+        ~ratio: double
+        ~baseResult: Object
+        ~context: VisualizerContext
+        ~counter: Map<String, Integer>
+        ~format: Format
+        ~iwidth: int
+        +ExportVisualizations(Path, VisualizerParameterizer, double, Format)
+        +ExportVisualizations(Path, VisualizerParameterizer, double, Format, int)
+        +processNewResult(Object): void
+        -processItem(PlotItem): void
+    }
+
+    interface "<size:14>ResultHandler\n<size:10>elki.result" as elki.result.ResultHandler [[ResultHandler.html]]
+    enum "<size:14>ExportVisualizations.Format\n<size:10>elki.result" as elki.result.ExportVisualizations.Format [[ExportVisualizations.Format.html]]
+    class "<size:14>ExportVisualizations.Par\n<size:10>elki.result" as elki.result.ExportVisualizations.Par [[ExportVisualizations.Par.html]]
+
+    elki.result.ResultHandler <|.. elki.result.ExportVisualizations
+    elki.result.ExportVisualizations +-- elki.result.ExportVisualizations.Format
+    elki.result.ExportVisualizations +-- elki.result.ExportVisualizations.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

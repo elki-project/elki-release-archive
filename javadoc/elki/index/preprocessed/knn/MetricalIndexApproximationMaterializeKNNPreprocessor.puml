@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MetricalIndexApproximationMaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MetricalIndexApproximationMaterializeKNNPreprocessor<O extends NumberVector, N extends Node<E extends MTreeEntry>, E extends MTreeEntry> [[MetricalIndexApproximationMaterializeKNNPreprocessor.html]] {
+        {static} -LOG: Logging
+        +MetricalIndexApproximationMaterializeKNNPreprocessor(Relation<O extends NumberVector>, Distance<? super NumberVector>, int)
+        #preprocess(): void
+        -getMetricalIndex(Relation<? extends NumberVector>): MetricalIndexTree<O extends NumberVector, N extends Node<E extends MTreeEntry>, E extends MTreeEntry>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor<O extends NumberVector> [[AbstractMaterializeKNNPreprocessor.html]] {
+        {abstract} #preprocess(): void
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>MetricalIndexApproximationMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.MetricalIndexApproximationMaterializeKNNPreprocessor.Factory<O extends NumberVector, N extends Node<E extends MTreeEntry>, E extends MTreeEntry> [[MetricalIndexApproximationMaterializeKNNPreprocessor.Factory.html]]
+
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor <|-- elki.index.preprocessed.knn.MetricalIndexApproximationMaterializeKNNPreprocessor
+    elki.index.preprocessed.knn.MetricalIndexApproximationMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.MetricalIndexApproximationMaterializeKNNPreprocessor.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

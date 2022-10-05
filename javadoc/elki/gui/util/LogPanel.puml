@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LogPanel\n<size:10>elki.gui.util" as elki.gui.util.LogPanel [[LogPanel.html]] {
+        {static} -serialVersionUID: long
+        #logpane: LogPane
+        #pbarmap: HashMap<Progress, JProgressBar>
+        +becomeDefaultLogger(): void
+        #publish(LogRecord): void
+        -publishTextRecord(LogRecord): void
+        -getOrCreateProgressBar(Progress): JProgressBar
+        -updateProgressBar(Progress, JProgressBar): void
+        -removeProgressBar(Progress, JProgressBar): void
+        +clear(): void
+        #addProgressBar(JProgressBar): void
+        #removeProgressBar(JProgressBar): void
+    }
+
+    class "<size:14>JPanel\n<size:10>javax.swing" as javax.swing.JPanel
+    class "<size:14>LogPanel.LogPanelHandler\n<size:10>elki.gui.util" as elki.gui.util.LogPanel.LogPanelHandler [[LogPanel.LogPanelHandler.html]]
+
+    javax.swing.JPanel <|-- elki.gui.util.LogPanel
+    elki.gui.util.LogPanel +-- elki.gui.util.LogPanel.LogPanelHandler
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

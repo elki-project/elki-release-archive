@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DataStoreEvent\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreEvent [[DataStoreEvent.html]] {
+        -inserts: DBIDs
+        -removals: DBIDs
+        -updates: DBIDs
+        +DataStoreEvent(DBIDs, DBIDs, DBIDs)
+        {static} +insertionEvent(DBIDs): DataStoreEvent
+        {static} +removalEvent(DBIDs): DataStoreEvent
+        {static} +updateEvent(DBIDs): DataStoreEvent
+        +getInserts(): DBIDs
+        +getRemovals(): DBIDs
+        +getUpdates(): DBIDs
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,203 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.evaluation.clustering {
+
+        class EditDistance [[EditDistance.html]] {
+            ~editFirst: int
+            ~editSecond: int
+            ~editOperationsBaseline: int
+            #EditDistance(ClusterContingencyTable)
+            +editOperationsBaseline(): int
+            +editOperationsFirst(): int
+            +editOperationsSecond(): int
+            +editDistanceFirst(): double
+            +editDistanceSecond(): double
+            +f1Measure(): double
+        }
+
+        class PairCounting [[PairCounting.html]] {
+            #inBoth: long
+            #inFirst: long
+            #inSecond: long
+            #inNone: long
+            #PairCounting(ClusterContingencyTable)
+            +fMeasure(double): double
+            +f1Measure(): double
+            +precision(): double
+            +recall(): double
+            +fowlkesMallows(): double
+            +randIndex(): double
+            +adjustedRandIndex(): double
+            +jaccard(): double
+            +mirkin(): long
+        }
+
+        class EvaluateClustering [[EvaluateClustering.html]] {
+            {static} -LOG: Logging
+            -referencealg: ClusteringAlgorithm<?>
+            -noiseSpecialHandling: boolean
+            -selfPairing: boolean
+            +EvaluateClustering(ClusteringAlgorithm<?>, boolean, boolean)
+            {static} +evaluateRanking(ScoreEvaluation, Cluster<?>, DoubleDBIDList): double
+            +processNewResult(Object): void
+            #evaluteResult(Database, Clustering<?>, Clustering<?>): void
+            -isReferenceResult(Clustering<?>): boolean
+        }
+
+        class elki.evaluation.clustering.EvaluateClustering.ScoreResult [[EvaluateClustering.ScoreResult.html]] {
+            +ScoreResult(ClusterContingencyTable)
+            +visualizeSingleton(): boolean
+        }
+
+        class elki.evaluation.clustering.EvaluateClustering.Par [[EvaluateClustering.Par.html]] {
+            {static} +REFERENCE_ID: OptionID
+            {static} +NOISE_ID: OptionID
+            {static} +SELFPAIR_ID: OptionID
+            -referencealg: ClusteringAlgorithm<?>
+            -noiseSpecialHandling: boolean
+            -selfPairing: boolean
+            +configure(Parameterization): void
+            +make(): EvaluateClustering
+        }
+
+        class LogClusterSizes [[LogClusterSizes.html]] {
+            {static} -LOG: Logging
+            {static} +PREFIX: String
+            {static} +logClusterSizes(Clustering<C extends Model>): void
+            +processNewResult(Object): void
+        }
+
+        class MaximumMatchingAccuracy [[MaximumMatchingAccuracy.html]] {
+            #accuracy: double
+            +MaximumMatchingAccuracy(ClusterContingencyTable)
+            +getAccuracy(): double
+        }
+
+        class Entropy [[Entropy.html]] {
+            #entropyFirst: double
+            #entropySecond: double
+            #entropyJoint: double
+            #mutualInformation: double
+            #variationOfInformation: double
+            #expectedMutualInformation: double
+            #vibound: double
+            #Entropy(ClusterContingencyTable)
+            -computeMILarge(int[], int, int, double, double): void
+            -computeMIFull(int[], int, int, int, int, double, double, double[]): void
+            {static} -log(int, double[]): double
+            {static} -lfac(int, double[]): double
+            {static} -maxClusterSize(int[], int, int): int
+            {static} -computeEntropyFirst(int[], int, int, double, double, double[]): double
+            {static} -computeEntropySecond(int[], int, int, double, double, double[]): double
+            +entropyFirst(): double
+            +entropySecond(): double
+            +entropyJoint(): double
+            +conditionalEntropyFirst(): double
+            +conditionalEntropySecond(): double
+            +entropyPowers(): double
+            +mutualInformation(): double
+            +upperBoundMI(): double
+            +jointNMI(): double
+            +minNMI(): double
+            +maxNMI(): double
+            +arithmeticNMI(): double
+            +geometricNMI(): double
+            +variationOfInformation(): double
+            +upperBoundVI(): double
+            +normalizedVariationOfInformation(): double
+            +normalizedInformationDistance(): double
+            +expectedMutualInformation(): double
+            +adjustedJointMI(): double
+            +adjustedArithmeticMI(): double
+            +adjustedGeometricMI(): double
+            +adjustedMinMI(): double
+            +adjustedMaxMI(): double
+        }
+
+        class BCubed [[BCubed.html]] {
+            #bCubedPrecision: double
+            #bCubedRecall: double
+            #BCubed(ClusterContingencyTable)
+            +precision(): double
+            +recall(): double
+            +f1Measure(): double
+        }
+
+        class SetMatchingPurity [[SetMatchingPurity.html]] {
+            #smPurity: double
+            #smInversePurity: double
+            #smFFirst: double
+            #smFSecond: double
+            #SetMatchingPurity(ClusterContingencyTable)
+            +purity(): double
+            +inversePurity(): double
+            +f1Measure(): double
+            +fMeasureFirst(): double
+            +fMeasureSecond(): double
+        }
+
+        class PairSetsIndex [[PairSetsIndex.html]] {
+            #simplifiedPSI: double
+            #psi: double
+            +PairSetsIndex(ClusterContingencyTable)
+            +psi(): double
+            +simplifiedPSI(): double
+        }
+
+        class ClusterContingencyTable [[ClusterContingencyTable.html]] {
+            #breakNoiseClusters: boolean
+            #selfPairing: boolean
+            #size1: int
+            #size2: int
+            #contingency: int[]
+            #noise1: long[]
+            #noise2: long[]
+            +ClusterContingencyTable(boolean, boolean, Clustering<?>, Clustering<?>)
+            +isStrictPartitioning(): boolean
+            +averageSymmetricGini(): MeanVariance
+            +adjustedSymmetricGini(): MeanVariance
+        }
+
+        class elki.evaluation.clustering.ClusterContingencyTable.Util {
+            {static} +fMeasure(double, double, double): double
+            {static} +f1Measure(double, double): double
+        }
+
+        elki.evaluation.Evaluator <|.. EvaluateClustering
+        elki.result.EvaluationResult <|-- elki.evaluation.clustering.EvaluateClustering.ScoreResult
+        EvaluateClustering +-- elki.evaluation.clustering.EvaluateClustering.ScoreResult
+        elki.evaluation.clustering.EvaluateClustering.ScoreResult --> ClusterContingencyTable: contmat\ncontingencyTable
+        elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.EvaluateClustering.Par
+        EvaluateClustering +-- elki.evaluation.clustering.EvaluateClustering.Par
+        elki.evaluation.Evaluator <|.. LogClusterSizes
+        ClusterContingencyTable --> PairCounting: paircount
+        ClusterContingencyTable --> Entropy: entropy
+        ClusterContingencyTable --> EditDistance: edit
+        ClusterContingencyTable --> BCubed: bcubed\nbCubed
+        ClusterContingencyTable --> SetMatchingPurity: smp\nsetMatchingPurity
+        ClusterContingencyTable --> MaximumMatchingAccuracy: mmacc\nmaximumMatchingAccuracy
+        ClusterContingencyTable --> PairSetsIndex: psi\npairSetsIndex
+        ClusterContingencyTable +-- elki.evaluation.clustering.ClusterContingencyTable.Util
+    }
+
+    namespace elki.evaluation {
+        interface Evaluator [[../Evaluator.html]]
+    }
+
+    namespace elki.result {
+        class EvaluationResult [[../../result/EvaluationResult.html]] {
+            {static} +RANKING: String
+            ~groups: ArrayList<MeasurementGroup>
+            ~header: ArrayList<String>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

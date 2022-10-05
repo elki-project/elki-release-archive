@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractIndexBasedDistance\n<size:10>elki.distance" as elki.distance.AbstractIndexBasedDistance<O, F extends IndexFactory<O>> [[AbstractIndexBasedDistance.html]] {
+        #indexFactory: F extends IndexFactory<O>
+        +AbstractIndexBasedDistance(F extends IndexFactory<O>)
+        +isMetric(): boolean
+        +isSymmetric(): boolean
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    abstract class "<size:14>AbstractDatabaseDistance\n<size:10>elki.distance" as elki.distance.AbstractDatabaseDistance<O> [[AbstractDatabaseDistance.html]]
+    interface "<size:14>IndexBasedDistance\n<size:10>elki.distance" as elki.distance.IndexBasedDistance<O> [[IndexBasedDistance.html]]
+    abstract class "<size:14>AbstractIndexBasedDistance.Instance\n<size:10>elki.distance" as elki.distance.AbstractIndexBasedDistance.Instance<O, I extends Index, F extends Distance<? super O>> [[AbstractIndexBasedDistance.Instance.html]]
+    abstract class "<size:14>AbstractIndexBasedDistance.Par\n<size:10>elki.distance" as elki.distance.AbstractIndexBasedDistance.Par<F extends IndexFactory<?>>
+
+    elki.distance.AbstractDatabaseDistance <|-- elki.distance.AbstractIndexBasedDistance
+    elki.distance.IndexBasedDistance <|.. elki.distance.AbstractIndexBasedDistance
+    elki.distance.AbstractIndexBasedDistance +-- elki.distance.AbstractIndexBasedDistance.Instance
+    elki.distance.AbstractIndexBasedDistance +-- elki.distance.AbstractIndexBasedDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

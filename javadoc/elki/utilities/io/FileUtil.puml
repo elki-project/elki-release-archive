@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FileUtil\n<size:10>elki.utilities.io" as elki.utilities.io.FileUtil [[FileUtil.html]] {
+        {static} +getFilenameExtension(Path): String
+        {static} +getFilenameExtension(String): String
+        {static} +open(URI, OpenOption...): InputStream
+        {static} +exists(URI): boolean
+        {static} +openSystemFile(String): InputStream
+        {static} +tryGzipInput(InputStream): InputStream
+        {static} +locateFile(String, String): File
+        {static} +slurp(InputStream): String
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

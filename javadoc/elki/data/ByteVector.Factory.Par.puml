@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByteVector.Factory.Par\n<size:10>elki.data" as elki.data.ByteVector.Factory.Par [[ByteVector.Factory.Par.html]] {
+        +make(): Factory
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ByteVector.Factory\n<size:10>elki.data" as elki.data.ByteVector.Factory [[ByteVector.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.data.ByteVector.Factory.Par
+    elki.data.ByteVector.Factory +-- elki.data.ByteVector.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

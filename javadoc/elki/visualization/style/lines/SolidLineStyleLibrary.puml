@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SolidLineStyleLibrary\n<size:10>elki.visualization.style.lines" as elki.visualization.style.lines.SolidLineStyleLibrary [[SolidLineStyleLibrary.html]] {
+        -colors: ColorLibrary
+        -dotcolor: String
+        -graycolor: String
+        +SolidLineStyleLibrary(StyleLibrary)
+        +formatCSSClass(CSSClass, int, double, Object...): void
+    }
+
+    interface "<size:14>LineStyleLibrary\n<size:10>elki.visualization.style.lines" as elki.visualization.style.lines.LineStyleLibrary [[LineStyleLibrary.html]] {
+        {abstract} +formatCSSClass(CSSClass, int, double, Object...): void
+    }
+
+    elki.visualization.style.lines.LineStyleLibrary <|.. elki.visualization.style.lines.SolidLineStyleLibrary
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

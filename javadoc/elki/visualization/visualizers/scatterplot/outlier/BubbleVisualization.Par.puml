@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BubbleVisualization.Par\n<size:10>elki.visualization.visualizers.scatterplot.outlier" as elki.visualization.visualizers.scatterplot.outlier.BubbleVisualization.Par [[BubbleVisualization.Par.html]] {
+        {static} +FILL_ID: OptionID
+        {static} +SCALING_ID: OptionID
+        #fill: boolean
+        #scaling: ScalingFunction
+        +configure(Parameterization): void
+        +make(): BubbleVisualization
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>BubbleVisualization\n<size:10>elki.visualization.visualizers.scatterplot.outlier" as elki.visualization.visualizers.scatterplot.outlier.BubbleVisualization [[BubbleVisualization.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.scatterplot.outlier.BubbleVisualization.Par
+    elki.visualization.visualizers.scatterplot.outlier.BubbleVisualization +-- elki.visualization.visualizers.scatterplot.outlier.BubbleVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

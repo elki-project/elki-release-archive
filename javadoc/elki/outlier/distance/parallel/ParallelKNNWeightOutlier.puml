@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParallelKNNWeightOutlier\n<size:10>elki.outlier.distance.parallel" as elki.outlier.distance.parallel.ParallelKNNWeightOutlier<O> [[ParallelKNNWeightOutlier.html]] {
+        #distance: Distance<? super O>
+        #kplus: int
+        +ParallelKNNWeightOutlier(Distance<? super O>, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../../OutlierAlgorithm.html]]
+    class "<size:14>ParallelKNNWeightOutlier.Par\n<size:10>elki.outlier.distance.parallel" as elki.outlier.distance.parallel.ParallelKNNWeightOutlier.Par<O>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.distance.parallel.ParallelKNNWeightOutlier
+    elki.outlier.distance.parallel.ParallelKNNWeightOutlier +-- elki.outlier.distance.parallel.ParallelKNNWeightOutlier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

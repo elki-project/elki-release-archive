@@ -1,0 +1,58 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SVGPlot\n<size:10>elki.visualization.svg" as elki.visualization.svg.SVGPlot [[SVGPlot.html]] {
+        {static} +DEFAULT_QUALITY: float
+        {static} +NO_EXPORT_ATTRIBUTE: String
+        {static} -BATIK_DOM: DOMImplementation
+        {static} -BATIK_DOMS: String[]
+        -document: SVGDocument
+        -root: Element
+        -defs: Element
+        -style: Element
+        -cssman: CSSClassManager
+        -objWithId: HashMap<String, WeakReference<Element>>
+        -runner: UpdateRunner
+        -disableInteractions: boolean
+        {static} +getDomImpl(): DOMImplementation
+        +dispose(): void
+        +svgElement(String): Element
+        +svgElement(String, String): Element
+        +svgRect(double, double, double, double): Element
+        +svgCircle(double, double, double): Element
+        +svgLine(double, double, double, double): Element
+        +svgText(double, double, String): Element
+        +elementCoordinatesFromEvent(Element, Event): SVGPoint
+        +getDocument(): SVGDocument
+        +getRoot(): Element
+        +getDefs(): Element
+        +getCSSClassManager(): CSSClassManager
+        +addCSSClassOrLogError(CSSClass): void
+        +updateStyleElement(): void
+        +saveAsSVG(Path): void
+        #transcode(Path, Transcoder): void
+        #cloneDocument(): SVGDocument
+        +saveAsPDF(Path): void
+        +saveAsPS(Path): void
+        +saveAsEPS(Path): void
+        +saveAsPNG(Path, int, int): void
+        +saveAsJPEG(Path, int, int, float): void
+        +saveAsJPEG(Path, int, int): void
+        +saveAsANY(Path, int, int, float): void
+        +makeAWTImage(int, int): BufferedImage
+        +dumpDebugFile(): void
+        +putIdElement(String, Element): void
+        +getIdElement(String): Element
+        #getAllIds(): Collection<String>
+        +scheduleUpdate(Runnable): void
+        +synchronizeWith(UpdateSynchronizer): void
+        +unsynchronizeWith(UpdateSynchronizer): void
+        +getDisableInteractions(): boolean
+        +setDisableInteractions(boolean): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

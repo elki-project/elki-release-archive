@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OfflineChangePointDetectionAlgorithm\n<size:10>elki.timeseries" as elki.timeseries.OfflineChangePointDetectionAlgorithm [[OfflineChangePointDetectionAlgorithm.html]] {
+        ~bootstrapSamples: int
+        ~minConfidence: double
+        ~rnd: RandomFactory
+        +OfflineChangePointDetectionAlgorithm(double, int, RandomFactory)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<DoubleVector>): ChangePoints
+        {static} +cusum(double[], double[], int, int): void
+        {static} +bestChangeInMean(double[], int, int): DoubleIntPair
+        {static} +shuffle(double[], int, Random): void
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    class "<size:14>OfflineChangePointDetectionAlgorithm.Instance\n<size:10>elki.timeseries" as elki.timeseries.OfflineChangePointDetectionAlgorithm.Instance [[OfflineChangePointDetectionAlgorithm.Instance.html]]
+    class "<size:14>OfflineChangePointDetectionAlgorithm.Par\n<size:10>elki.timeseries" as elki.timeseries.OfflineChangePointDetectionAlgorithm.Par [[OfflineChangePointDetectionAlgorithm.Par.html]]
+
+    elki.Algorithm <|.. elki.timeseries.OfflineChangePointDetectionAlgorithm
+    elki.timeseries.OfflineChangePointDetectionAlgorithm +-- elki.timeseries.OfflineChangePointDetectionAlgorithm.Instance
+    elki.timeseries.OfflineChangePointDetectionAlgorithm +-- elki.timeseries.OfflineChangePointDetectionAlgorithm.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

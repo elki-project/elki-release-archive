@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ISOS\n<size:10>elki.outlier.intrinsic" as elki.outlier.intrinsic.ISOS<O> [[ISOS.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super O>
+        #k: int
+        #estimator: DistanceBasedIntrinsicDimensionalityEstimator
+        #phi: double
+        +ISOS(Distance<? super O>, int, DistanceBasedIntrinsicDimensionalityEstimator)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+        {static} #adjustDistances(DBIDRef, DoubleDBIDListIter, double, double, ModifiableDoubleDBIDList): void
+        #estimateID(DBIDRef, DoubleDBIDListIter, double[]): double
+        {static} +nominateNeighbors(DBIDIter, DBIDArrayIter, double[], double, WritableDoubleDataStore): void
+        {static} +transformScores(WritableDoubleDataStore, DBIDs, double, double): DoubleMinMax
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>ISOS.Par\n<size:10>elki.outlier.intrinsic" as elki.outlier.intrinsic.ISOS.Par<O>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.intrinsic.ISOS
+    elki.outlier.intrinsic.ISOS +-- elki.outlier.intrinsic.ISOS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

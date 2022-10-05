@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WrappedPrioritySearchDBIDByLookup.Linear\n<size:10>elki.database.query" as elki.database.query.WrappedPrioritySearchDBIDByLookup.Linear<O> [[WrappedPrioritySearchDBIDByLookup.Linear.html]] {
+        -Linear(Relation<? extends O>, PrioritySearcher<O>)
+    }
+
+    class "<size:14>WrappedPrioritySearchDBIDByLookup\n<size:10>elki.database.query" as elki.database.query.WrappedPrioritySearchDBIDByLookup<O> [[WrappedPrioritySearchDBIDByLookup.html]]
+    interface "<size:14>LinearScanQuery\n<size:10>elki.database.query" as elki.database.query.LinearScanQuery [[LinearScanQuery.html]]
+    class "<size:14>WrappedPrioritySearchDBIDByLookup\n<size:10>elki.database.query" as elki.database.query.WrappedPrioritySearchDBIDByLookup<O> [[WrappedPrioritySearchDBIDByLookup.html]]
+
+    elki.database.query.WrappedPrioritySearchDBIDByLookup <|-- elki.database.query.WrappedPrioritySearchDBIDByLookup.Linear
+    elki.database.query.LinearScanQuery <|.. elki.database.query.WrappedPrioritySearchDBIDByLookup.Linear
+    elki.database.query.WrappedPrioritySearchDBIDByLookup +-- elki.database.query.WrappedPrioritySearchDBIDByLookup.Linear
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

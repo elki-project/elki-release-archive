@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HashmapDatabase.Par\n<size:10>elki.database" as elki.database.HashmapDatabase.Par [[HashmapDatabase.Par.html]] {
+        #databaseConnection: DatabaseConnection
+        -indexFactories: Collection<? extends IndexFactory<?>>
+        +configure(Parameterization): void
+        +make(): HashmapDatabase
+    }
+
+    abstract class "<size:14>AbstractDatabase.Par\n<size:10>elki.database" as elki.database.AbstractDatabase.Par [[AbstractDatabase.Par.html]] {
+        {abstract} +make(): Database
+    }
+    class "<size:14>HashmapDatabase\n<size:10>elki.database" as elki.database.HashmapDatabase [[HashmapDatabase.html]]
+
+    elki.database.AbstractDatabase.Par <|-- elki.database.HashmapDatabase.Par
+    elki.database.HashmapDatabase +-- elki.database.HashmapDatabase.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

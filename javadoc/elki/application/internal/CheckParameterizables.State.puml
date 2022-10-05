@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>CheckParameterizables.State\n<size:10>elki.application.internal" as elki.application.internal.CheckParameterizables.State [[CheckParameterizables.State.html]] {
+        {static} +NO_CONSTRUCTOR
+        {static} +INSTANTIABLE
+        {static} +DEFAULT_INSTANTIABLE
+        {static} +ERROR
+    }
+
+    class "<size:14>CheckParameterizables\n<size:10>elki.application.internal" as elki.application.internal.CheckParameterizables [[CheckParameterizables.html]]
+
+    elki.application.internal.CheckParameterizables +-- elki.application.internal.CheckParameterizables.State
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

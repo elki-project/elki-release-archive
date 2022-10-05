@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AutotuningPCA.Cand\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.AutotuningPCA.Cand [[AutotuningPCA.Cand.html]] {
+        ~m: double[]
+        ~explain: double
+        ~dim: int
+        ~Cand(double[], double, int)
+    }
+
+    class "<size:14>AutotuningPCA\n<size:10>elki.math.linearalgebra.pca" as elki.math.linearalgebra.pca.AutotuningPCA [[AutotuningPCA.html]]
+
+    elki.math.linearalgebra.pca.AutotuningPCA +-- elki.math.linearalgebra.pca.AutotuningPCA.Cand
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

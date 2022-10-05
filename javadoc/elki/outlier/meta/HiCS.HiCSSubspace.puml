@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HiCS.HiCSSubspace\n<size:10>elki.outlier.meta" as elki.outlier.meta.HiCS.HiCSSubspace [[HiCS.HiCSSubspace.html]] {
+        #bits: long[]
+        #contrast: double
+        {static} +SORT_BY_CONTRAST_ASC: Comparator<HiCSSubspace>
+        {static} +SORT_BY_CONTRAST_DESC: Comparator<HiCSSubspace>
+        {static} +SORT_BY_SUBSPACE: Comparator<HiCSSubspace>
+        #HiCSSubspace(int)
+        #HiCSSubspace(HiCSSubspace)
+        +dimensionality(): int
+        #set(int): HiCSSubspace
+        #or(HiCSSubspace): HiCSSubspace
+        +nextSetBit(int): int
+    }
+
+    class "<size:14>HiCS\n<size:10>elki.outlier.meta" as elki.outlier.meta.HiCS [[HiCS.html]]
+
+    elki.outlier.meta.HiCS +-- elki.outlier.meta.HiCS.HiCSSubspace
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

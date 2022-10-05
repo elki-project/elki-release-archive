@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CosineKernelDensityFunction.Par\n<size:10>elki.math.statistics.kernelfunctions" as elki.math.statistics.kernelfunctions.CosineKernelDensityFunction.Par [[CosineKernelDensityFunction.Par.html]] {
+        +make(): CosineKernelDensityFunction
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>CosineKernelDensityFunction\n<size:10>elki.math.statistics.kernelfunctions" as elki.math.statistics.kernelfunctions.CosineKernelDensityFunction [[CosineKernelDensityFunction.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.kernelfunctions.CosineKernelDensityFunction.Par
+    elki.math.statistics.kernelfunctions.CosineKernelDensityFunction +-- elki.math.statistics.kernelfunctions.CosineKernelDensityFunction.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

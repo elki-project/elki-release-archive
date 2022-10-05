@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SphereUtil\n<size:10>elki.math.geodesy" as elki.math.geodesy.SphereUtil [[SphereUtil.html]] {
+        {static} -MAX_ITER: int
+        {static} -PRECISION: double
+        {static} -ONE_SIXTH: double
+        {static} +cosineFormulaDeg(double, double, double, double): double
+        {static} +cosineFormulaRad(double, double, double, double): double
+        {static} +haversineFormulaDeg(double, double, double, double): double
+        {static} +haversineFormulaRad(double, double, double, double): double
+        {static} +cosineOrHaversineDeg(double, double, double, double): double
+        {static} +cosineOrHaversineRad(double, double, double, double): double
+        {static} +sphericalVincentyFormulaDeg(double, double, double, double): double
+        {static} +sphericalVincentyFormulaRad(double, double, double, double): double
+        {static} +ellipsoidVincentyFormulaDeg(double, double, double, double, double): double
+        {static} +ellipsoidVincentyFormulaRad(double, double, double, double, double): double
+        {static} +crossTrackDistanceDeg(double, double, double, double, double, double): double
+        {static} +crossTrackDistanceRad(double, double, double, double, double, double, double): double
+        {static} +crossTrackDistanceDeg(double, double, double, double, double, double, double): double
+        {static} +crossTrackDistanceRad(double, double, double, double, double, double): double
+        {static} +alongTrackDistanceDeg(double, double, double, double, double, double): double
+        {static} +alongTrackDistanceRad(double, double, double, double, double, double): double
+        {static} +alongTrackDistanceDeg(double, double, double, double, double, double, double, double): double
+        {static} +alongTrackDistanceRad(double, double, double, double, double, double, double, double): double
+        {static} +latlngMinDistDeg(double, double, double, double, double, double): double
+        {static} +latlngMinDistRad(double, double, double, double, double, double): double
+        {static} +latlngMinDistRadFull(double, double, double, double, double, double): double
+        {static} +bearingDegDeg(double, double, double, double): double
+        {static} +bearingRad(double, double, double, double): double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

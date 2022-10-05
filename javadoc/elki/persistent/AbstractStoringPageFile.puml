@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractStoringPageFile\n<size:10>elki.persistent" as elki.persistent.AbstractStoringPageFile<P extends Page> [[AbstractStoringPageFile.html]] {
+        #emptyPages: IntegerArray
+        #nextPageID: int
+        #pageSize: int
+        #AbstractStoringPageFile(int)
+        +setPageID(P extends Page): int
+        +deletePage(int): void
+        -getNextEmptyPageID(): int
+        +getNextPageID(): int
+        +setNextPageID(int): void
+        +getPageSize(): int
+        +initialize(PageHeader): boolean
+        +logStatistics(): void
+    }
+
+    abstract class "<size:14>AbstractPageFile\n<size:10>elki.persistent" as elki.persistent.AbstractPageFile<P extends Page> [[AbstractPageFile.html]] {
+        {abstract} #getLogger(): Logging
+        {abstract} #writePage(int, P extends Page): void
+    }
+
+    elki.persistent.AbstractPageFile <|-- elki.persistent.AbstractStoringPageFile
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

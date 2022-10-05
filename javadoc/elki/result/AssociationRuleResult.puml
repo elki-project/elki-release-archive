@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AssociationRuleResult\n<size:10>elki.result" as elki.result.AssociationRuleResult [[AssociationRuleResult.html]] {
+        -rules: List<AssociationRule>
+        -meta: VectorFieldTypeInformation<BitVector>
+        +AssociationRuleResult(List<AssociationRule>, VectorFieldTypeInformation<BitVector>)
+        +getRules(): List<AssociationRule>
+        +getMeta(): VectorFieldTypeInformation<BitVector>
+        +writeToText(TextWriterStream, String): void
+    }
+
+    interface "<size:14>TextWriteable\n<size:10>elki.result.textwriter" as elki.result.textwriter.TextWriteable [[textwriter/TextWriteable.html]] {
+        {abstract} +writeToText(TextWriterStream, String): void
+    }
+
+    elki.result.textwriter.TextWriteable <|.. elki.result.AssociationRuleResult
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

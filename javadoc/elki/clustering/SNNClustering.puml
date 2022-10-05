@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SNNClustering\n<size:10>elki.clustering" as elki.clustering.SNNClustering<O> [[SNNClustering.html]] {
+        {static} -LOG: Logging
+        -epsilon: int
+        -minpts: int
+        #resultList: List<ModifiableDBIDs>
+        #noise: ModifiableDBIDs
+        #processedIDs: ModifiableDBIDs
+        -similarityFunction: SharedNearestNeighborSimilarity<O>
+        +SNNClustering(SharedNearestNeighborSimilarity<O>, int, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): Clustering<Model>
+        #findSNNNeighbors(SimilarityQuery<O>, DBIDRef): ArrayModifiableDBIDs
+        #expandCluster(SimilarityQuery<O>, DBIDRef, FiniteProgress, IndefiniteProgress): void
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<Model>> [[ClusteringAlgorithm.html]]
+    class "<size:14>SNNClustering.Par\n<size:10>elki.clustering" as elki.clustering.SNNClustering.Par<O>
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.SNNClustering
+    elki.clustering.SNNClustering +-- elki.clustering.SNNClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

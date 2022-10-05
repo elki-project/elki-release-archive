@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByLabelOutlier\n<size:10>elki.outlier.trivial" as elki.outlier.trivial.ByLabelOutlier [[ByLabelOutlier.html]] {
+        {static} +DEFAULT_PATTERN: String
+        ~pattern: Pattern
+        +ByLabelOutlier(Pattern)
+        +ByLabelOutlier()
+        +getInputTypeRestriction(): TypeInformation[]
+        +autorun(Database): OutlierResult
+        +run(Relation<?>): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>ByLabelOutlier.Par\n<size:10>elki.outlier.trivial" as elki.outlier.trivial.ByLabelOutlier.Par [[ByLabelOutlier.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.trivial.ByLabelOutlier
+    elki.outlier.trivial.ByLabelOutlier +-- elki.outlier.trivial.ByLabelOutlier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FilteredIt\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.FilteredIt<O> [[FilteredIt.html]] {
+        ~filter: Predicate<? super O>
+        ~current: O
+        -it: It<O>
+        +FilteredIt(It<O>, Predicate<? super O>)
+        +get(): O
+        +valid(): boolean
+        +advance(): FilteredIt<O>
+    }
+
+    interface "<size:14>It\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.It<O> [[It.html]] {
+        {abstract} +get(): O
+        {abstract} +advance(): It<O>
+    }
+
+    elki.utilities.datastructures.iterator.It <|.. elki.utilities.datastructures.iterator.FilteredIt
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

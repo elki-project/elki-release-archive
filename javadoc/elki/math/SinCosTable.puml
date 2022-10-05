@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>SinCosTable\n<size:10>elki.math" as elki.math.SinCosTable [[SinCosTable.html]] {
+        #steps: int
+        -SinCosTable(int)
+        {abstract} +cos(int): double
+        {abstract} +sin(int): double
+        {static} +make(int): SinCosTable
+    }
+    class "<size:14>SinCosTable.FullTable\n<size:10>elki.math" as elki.math.SinCosTable.FullTable [[SinCosTable.FullTable.html]]
+    class "<size:14>SinCosTable.HalfTable\n<size:10>elki.math" as elki.math.SinCosTable.HalfTable [[SinCosTable.HalfTable.html]]
+    class "<size:14>SinCosTable.QuarterTable\n<size:10>elki.math" as elki.math.SinCosTable.QuarterTable [[SinCosTable.QuarterTable.html]]
+
+    elki.math.SinCosTable +-- elki.math.SinCosTable.FullTable
+    elki.math.SinCosTable +-- elki.math.SinCosTable.HalfTable
+    elki.math.SinCosTable +-- elki.math.SinCosTable.QuarterTable
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

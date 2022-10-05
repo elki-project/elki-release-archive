@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractIndexBasedDistance.Instance\n<size:10>elki.distance" as elki.distance.AbstractIndexBasedDistance.Instance<O, I extends Index, F extends Distance<? super O>> [[AbstractIndexBasedDistance.Instance.html]] {
+        #relation: Relation<O>
+        #index: I extends Index
+        #parent: F extends Distance<? super O>
+        +Instance(Relation<O>, I extends Index, F extends Distance<? super O>)
+        +getRelation(): Relation<? extends O>
+        +getIndex(): I extends Index
+        +getDistance(): F extends Distance<? super O>
+    }
+
+    interface "<size:14>IndexBasedDistance.Instance\n<size:10>elki.distance" as elki.distance.IndexBasedDistance.Instance<O, I extends Index> [[IndexBasedDistance.Instance.html]] {
+        {abstract} +getIndex(): I extends Index
+    }
+    abstract class "<size:14>AbstractIndexBasedDistance\n<size:10>elki.distance" as elki.distance.AbstractIndexBasedDistance<O, F extends IndexFactory<O>> [[AbstractIndexBasedDistance.html]]
+
+    elki.distance.IndexBasedDistance.Instance <|.. elki.distance.AbstractIndexBasedDistance.Instance
+    elki.distance.AbstractIndexBasedDistance +-- elki.distance.AbstractIndexBasedDistance.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

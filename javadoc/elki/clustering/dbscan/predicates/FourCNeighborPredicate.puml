@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FourCNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.FourCNeighborPredicate [[FourCNeighborPredicate.html]] {
+        {static} -LOG: Logging
+        -settings: Settings
+        -mvSize: MeanVariance
+        -mvSize2: MeanVariance
+        -mvCorDim: MeanVariance
+        -pca: PCARunner
+        -filter: EigenPairFilter
+        +FourCNeighborPredicate(Settings)
+        +instantiate(Database): Instance
+        #computeLocalModel(DBIDRef, DoubleDBIDList, Relation<? extends NumberVector>): PreDeConModel
+        ~getLogger(): Logging
+        +getInputTypeRestriction(): TypeInformation
+        +getOutputType(): SimpleTypeInformation<PreDeConModel>
+    }
+
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate<NumberVector, PreDeConModel, PreDeConModel> [[AbstractRangeQueryNeighborPredicate.html]] {
+        {abstract} #computeLocalModel(DBIDRef, DoubleDBIDList, Relation<? extends O>): PreDeConModel
+        {abstract} ~getLogger(): Logging
+    }
+    class "<size:14>FourCNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.FourCNeighborPredicate.Instance [[FourCNeighborPredicate.Instance.html]]
+    class "<size:14>FourCNeighborPredicate.Par\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.FourCNeighborPredicate.Par [[FourCNeighborPredicate.Par.html]]
+
+    elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate <|-- elki.clustering.dbscan.predicates.FourCNeighborPredicate
+    elki.clustering.dbscan.predicates.FourCNeighborPredicate +-- elki.clustering.dbscan.predicates.FourCNeighborPredicate.Instance
+    elki.clustering.dbscan.predicates.FourCNeighborPredicate +-- elki.clustering.dbscan.predicates.FourCNeighborPredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

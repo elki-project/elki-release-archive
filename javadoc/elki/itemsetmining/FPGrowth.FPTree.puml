@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FPGrowth.FPTree\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth.FPTree [[FPGrowth.FPTree.html]] {
+        ~header: FPNode[]
+        ~nodes: int
+        +FPTree(int)
+        +insert(int[], int, int, int): void
+        +newNode(FPNode, int): FPNode
+        +extract(int, int, int, boolean, Collector): void
+        -extract(int, int, int, int, int[], int, int[], int[], boolean, Collector): void
+        -extractLinear(int, int, int, int, int[], int, int[], Collector): void
+        +logStatistics(): void
+    }
+
+    class "<size:14>FPGrowth.FPNode\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth.FPNode [[FPGrowth.FPNode.html]]
+    class "<size:14>FPGrowth\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth [[FPGrowth.html]]
+    interface "<size:14>FPGrowth.FPTree.Collector\n<size:10>elki.itemsetmining" as elki.itemsetmining.FPGrowth.FPTree.Collector [[FPGrowth.FPTree.Collector.html]]
+
+    elki.itemsetmining.FPGrowth.FPNode <|-- elki.itemsetmining.FPGrowth.FPTree
+    elki.itemsetmining.FPGrowth +-- elki.itemsetmining.FPGrowth.FPTree
+    elki.itemsetmining.FPGrowth.FPTree +-- elki.itemsetmining.FPGrowth.FPTree.Collector
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

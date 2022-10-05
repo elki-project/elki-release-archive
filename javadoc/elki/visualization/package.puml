@@ -1,0 +1,201 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization {
+
+        class VisualizationTree [[VisualizationTree.html]] {
+            +addVisualizationListener(VisualizationListener): void
+            +removeVisualizationListener(VisualizationListener): void
+            +visChanged(VisualizationItem): void
+            {static} +findVis(VisualizerContext): It<Object>
+            {static} +findVis(VisualizerContext, Object): It<Object>
+            {static} +findNewResults(VisualizerContext, Object): It<Object>
+            {static} +findNewSiblings(VisualizerContext, Object, Class<? super A>, Class<? super VisualizationItem>, BiConsumer<A, B extends VisualizationItem>): void
+            {static} +findNewResultVis(VisualizerContext, Object, Class<? super A>, Class<? super VisualizationItem>, BiConsumer<A, B extends VisualizationItem>): void
+            {static} +setVisible(VisualizerContext, VisualizationTask, boolean): void
+        }
+
+        interface VisualizationProcessor [[VisualizationProcessor.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+        }
+
+        class VisualizerContext [[VisualizerContext.html]] {
+            {static} -LOG: Logging
+            -listenerList: ArrayList<DataStoreListener>
+            -selection: SelectionResult
+            -baseResult: Object
+            +VisualizerContext(Object, StyleLibrary, Collection<VisualizationProcessor>)
+            #makeStyleResult(StyleLibrary): void
+            -generateDefaultClustering(): Clustering<Model>
+            +getSelectionResult(): SelectionResult
+            +getSelection(): DBIDSelection
+            +setSelection(DBIDSelection): void
+            +addDataStoreListener(DataStoreListener): void
+            +removeDataStoreListener(DataStoreListener): void
+            +contentChanged(DataStoreEvent): void
+            +addResultListener(ResultListener): void
+            +removeResultListener(ResultListener): void
+            +addVisualizationListener(VisualizationListener): void
+            +removeVisualizationListener(VisualizationListener): void
+            +getLongName(): String
+            +getShortName(): String
+            +getBaseResult(): Object
+            +addVis(Object, VisualizationItem): void
+            +visChanged(VisualizationItem): void
+            -notifyFactories(Object): void
+            +getVisTasks(VisualizationItem): List<VisualizationTask>
+        }
+
+        interface VisualizationListener [[VisualizationListener.html]] {
+            {abstract} +visualizationChanged(VisualizationItem): void
+        }
+
+        interface VisualizationMenuToggle [[VisualizationMenuToggle.html]] {
+            {abstract} +toggle(): void
+            {abstract} +active(): boolean
+            {abstract} +enabled(): boolean
+        }
+
+        class VisualizerParameterizer [[VisualizerParameterizer.html]] {
+            {static} -LOG: Logging
+            {static} +DEFAULT_SAMPLE_SIZE: int
+            -showVisualizers: Pattern
+            -samplesize: int
+            -rnd: RandomFactory
+            +VisualizerParameterizer(int, StyleLibrary, Collection<VisualizationProcessor>, Pattern)
+            +newContext(Object): VisualizerContext
+            {static} +getTitle(Database, Object): String
+            {static} #shortenClassname(String, char): String
+        }
+
+        class elki.visualization.VisualizerParameterizer.Par [[VisualizerParameterizer.Par.html]] {
+            {static} +STYLELIB_ID: OptionID
+            {static} +ENABLEVIS_ID: OptionID
+            {static} +SAMPLING_ID: OptionID
+            {static} +SHOWVIS_ID: OptionID
+            #enableVisualizers: Pattern
+            #showVisualizers: Pattern
+            #samplesize: int
+            +configure(Parameterization): void
+            {static} -collectFactorys(MergedParameterization, Pattern): Collection<VisualizationProcessor>
+            +make(): VisualizerParameterizer
+        }
+
+        interface VisualizationItem [[VisualizationItem.html]] {
+            {abstract} +getMenuName(): String
+        }
+
+        interface VisualizationMenuAction [[VisualizationMenuAction.html]] {
+            {abstract} +activate(): void
+            +enabled(): boolean
+        }
+
+        class VisualizationTask [[VisualizationTask.html]] {
+            -level: int
+            -visible: boolean
+            -flags: int
+            -updatemask: int
+            -tool: boolean
+            {static} +LEVEL_BACKGROUND: int
+            {static} +LEVEL_DATA: int
+            {static} +LEVEL_STATIC: int
+            {static} +LEVEL_FOREGROUND: int
+            {static} +LEVEL_INTERACTIVE: int
+            -name: String
+            -result: Object
+            -relation: Relation<?>
+            -reqwidth: double
+            -reqheight: double
+            +VisualizationTask(VisFactory, String, Object, Relation<?>)
+            +with(UpdateFlag): VisualizationTask
+            +has(UpdateFlag): boolean
+            +with(RenderFlag): VisualizationTask
+            +has(RenderFlag): boolean
+            +level(int): VisualizationTask
+            +level(): int
+            +tool(boolean): VisualizationTask
+            +isTool(): boolean
+            +visibility(boolean): VisualizationTask
+            +isVisible(): boolean
+            +requestSize(double, double): VisualizationTask
+            +getRequestedWidth(): double
+            +getRequestedHeight(): double
+            +getResult(): R
+            +getRelation(): R extends Relation<?>
+            +getMenuName(): String
+            +compareTo(VisualizationTask): int
+        }
+
+        enum elki.visualization.VisualizationTask.RenderFlag [[VisualizationTask.RenderFlag.html]] {
+            {static} +NO_THUMBNAIL
+            {static} +NO_DETAIL
+            {static} +NO_EXPORT
+            {static} +NO_EMBED
+            ~bit: int
+            -RenderFlag(int)
+        }
+
+        enum elki.visualization.VisualizationTask.UpdateFlag [[VisualizationTask.UpdateFlag.html]] {
+            {static} +ON_DATA
+            {static} +ON_SELECTION
+            {static} +ON_STYLEPOLICY
+            {static} +ON_SAMPLE
+            ~bit: int
+            -UpdateFlag(int)
+        }
+
+        elki.utilities.datastructures.hierarchy.HashMapHierarchy <|-- VisualizationTree
+        VisualizationTree --> "*" VisualizationListener: vlistenerList
+        elki.database.datastore.DataStoreListener <|.. VisualizerContext
+        VisualizerContext --> "*" VisualizationProcessor: factories
+        VisualizerContext --> elki.visualization.style.StylingPolicy: stylepolicy\nstylingPolicy
+        VisualizerContext --> elki.visualization.style.StyleLibrary: stylelibrary\nstyleLibrary
+        VisualizerContext --> VisualizationTree: vistree\nvisHierarchy
+        java.util.EventListener <|-- VisualizationListener
+        VisualizationItem <|-- VisualizationMenuToggle
+        VisualizerParameterizer --> elki.visualization.style.StyleLibrary: stylelib
+        VisualizerParameterizer --> "*" VisualizationProcessor: factories
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.VisualizerParameterizer.Par
+        VisualizerParameterizer +-- elki.visualization.VisualizerParameterizer.Par
+        elki.visualization.VisualizerParameterizer.Par --> elki.visualization.style.StyleLibrary: stylelib
+        elki.visualization.VisualizerParameterizer.Par --> "*" VisualizationProcessor: factories
+        VisualizationItem <|-- VisualizationMenuAction
+        VisualizationItem <|.. VisualizationTask
+        java.lang.Comparable <|.. VisualizationTask
+        VisualizationTask --> elki.visualization.visualizers.VisFactory: factory
+        VisualizationTask +-- elki.visualization.VisualizationTask.RenderFlag
+        VisualizationTask +-- elki.visualization.VisualizationTask.UpdateFlag
+    }
+
+    namespace elki.utilities.datastructures.hierarchy {
+        class HashMapHierarchy<O> [[../utilities/datastructures/hierarchy/HashMapHierarchy.html]] {
+            -graph: HashMap<O, Rec<O>>
+            ~elems: Object[]
+            ~numelems: int
+        }
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreListener [[../database/datastore/DataStoreListener.html]] {
+            {abstract} +contentChanged(DataStoreEvent): void
+        }
+    }
+
+    namespace java.util {
+        interface EventListener
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

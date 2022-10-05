@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AttributeWiseBetaNormalization\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseBetaNormalization<V extends NumberVector> [[AttributeWiseBetaNormalization.html]] {
+        {static} -LOG: Logging
+        #factory: Factory<V extends NumberVector>
+        #alpha: double
+        +AttributeWiseBetaNormalization(List<? extends DistributionEstimator<?>>, double)
+        +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        +restore(V extends NumberVector): V extends NumberVector
+        +transform(LinearEquationSystem): LinearEquationSystem
+    }
+
+    class "<size:14>AttributeWiseCDFNormalization\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization<V extends NumberVector> [[AttributeWiseCDFNormalization.html]]
+    class "<size:14>AttributeWiseBetaNormalization.Par\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseBetaNormalization.Par<V extends NumberVector> [[AttributeWiseBetaNormalization.Par.html]]
+
+    elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization <|-- elki.datasource.filter.normalization.columnwise.AttributeWiseBetaNormalization
+    elki.datasource.filter.normalization.columnwise.AttributeWiseBetaNormalization +-- elki.datasource.filter.normalization.columnwise.AttributeWiseBetaNormalization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

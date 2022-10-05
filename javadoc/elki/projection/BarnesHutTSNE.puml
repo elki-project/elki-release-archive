@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BarnesHutTSNE\n<size:10>elki.projection" as elki.projection.BarnesHutTSNE<O> [[BarnesHutTSNE.html]] {
+        {static} -LOG: Logging
+        {static} #PERPLEXITY_ERROR: double
+        {static} #PERPLEXITY_MAXITER: int
+        {static} -QUADTREE_MIN_RESOLUION: double
+        #sqtheta: double
+        +BarnesHutTSNE(AffinityMatrixBuilder<? super O>, int, double, double, int, RandomFactory, boolean, double)
+        +run(Database, Relation<O>): Relation<DoubleVector>
+        #optimizetSNE(AffinityMatrix, double[]): void
+        -computeGradient(AffinityMatrix, double[], double[]): void
+        -computeAttractiveForces(double[], AffinityMatrix, double[]): void
+        -computeRepulsiveForces(double[], int, double[], QuadTree): double
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    class "<size:14>TSNE\n<size:10>elki.projection" as elki.projection.TSNE<O> [[TSNE.html]]
+    class "<size:14>BarnesHutTSNE.QuadTree\n<size:10>elki.projection" as elki.projection.BarnesHutTSNE.QuadTree [[BarnesHutTSNE.QuadTree.html]]
+    class "<size:14>BarnesHutTSNE.Par\n<size:10>elki.projection" as elki.projection.BarnesHutTSNE.Par<O>
+
+    elki.projection.TSNE <|-- elki.projection.BarnesHutTSNE
+    elki.projection.BarnesHutTSNE +-- elki.projection.BarnesHutTSNE.QuadTree
+    elki.projection.BarnesHutTSNE +-- elki.projection.BarnesHutTSNE.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

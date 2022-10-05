@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleHistogram\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.DoubleHistogram [[DoubleHistogram.html]] {
+        ~data: double[]
+        +DoubleHistogram(int, double, double)
+        +increment(double, double): void
+        +get(double): double
+        +iter(): Iter
+    }
+
+    abstract class "<size:14>AbstractStaticHistogram\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.AbstractStaticHistogram [[AbstractStaticHistogram.html]] {
+        {abstract} +iter(): Iter
+    }
+    class "<size:14>DoubleHistogram.Iter\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.DoubleHistogram.Iter [[DoubleHistogram.Iter.html]]
+
+    elki.utilities.datastructures.histogram.AbstractStaticHistogram <|-- elki.utilities.datastructures.histogram.DoubleHistogram
+    elki.utilities.datastructures.histogram.DoubleHistogram +-- elki.utilities.datastructures.histogram.DoubleHistogram.Iter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

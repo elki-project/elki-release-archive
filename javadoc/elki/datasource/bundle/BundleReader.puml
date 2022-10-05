@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BundleReader\n<size:10>elki.datasource.bundle" as elki.datasource.bundle.BundleReader [[BundleReader.html]] {
+        {static} +MAGIC: int
+        ~buffer: MappedByteBuffer
+        ~meta: BundleMeta
+        ~input: FileChannel
+        ~sers: ByteBufferSerializer<?>[]
+        ~data: Object[]
+        ~hasids: boolean
+        +BundleReader(MappedByteBuffer)
+        +BundleReader(FileChannel)
+        +getMeta(): BundleMeta
+        ~openBuffer(): void
+        ~readMeta(): void
+        ~readObject(): void
+        +nextEvent(): Event
+        +data(int): Object
+        +hasDBIDs(): boolean
+        +assignDBID(DBIDVar): boolean
+        +asMultipleObjectsBundle(): MultipleObjectsBundle
+    }
+
+    interface "<size:14>BundleStreamSource\n<size:10>elki.datasource.bundle" as elki.datasource.bundle.BundleStreamSource [[BundleStreamSource.html]] {
+        {abstract} +getMeta(): BundleMeta
+        {abstract} +data(int): Object
+        {abstract} +hasDBIDs(): boolean
+        {abstract} +assignDBID(DBIDVar): boolean
+        {abstract} +nextEvent(): Event
+        {abstract} +asMultipleObjectsBundle(): MultipleObjectsBundle
+    }
+
+    elki.datasource.bundle.BundleStreamSource <|.. elki.datasource.bundle.BundleReader
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

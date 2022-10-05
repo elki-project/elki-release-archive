@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SOF\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.SOF<N, O> [[SOF.html]] {
+        +SOF(Factory<N>, PrimitiveDistance<O>)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Database, Relation<N>, Relation<O>): OutlierResult
+    }
+
+    abstract class "<size:14>AbstractDistanceBasedSpatialOutlier\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier<N, O> [[AbstractDistanceBasedSpatialOutlier.html]]
+    class "<size:14>SOF.Par\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.SOF.Par<N, O>
+
+    elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier <|-- elki.outlier.spatial.SOF
+    elki.outlier.spatial.SOF +-- elki.outlier.spatial.SOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

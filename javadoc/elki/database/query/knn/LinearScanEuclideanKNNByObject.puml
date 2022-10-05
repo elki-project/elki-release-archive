@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LinearScanEuclideanKNNByObject\n<size:10>elki.database.query.knn" as elki.database.query.knn.LinearScanEuclideanKNNByObject<O extends NumberVector> [[LinearScanEuclideanKNNByObject.html]] {
+        +LinearScanEuclideanKNNByObject(PrimitiveDistanceQuery<O extends NumberVector>)
+        +getKNN(O extends NumberVector, int): KNNList
+    }
+
+    class "<size:14>LinearScanPrimitiveKNNByObject\n<size:10>elki.database.query.knn" as elki.database.query.knn.LinearScanPrimitiveKNNByObject<O extends NumberVector> [[LinearScanPrimitiveKNNByObject.html]]
+
+    elki.database.query.knn.LinearScanPrimitiveKNNByObject <|-- elki.database.query.knn.LinearScanEuclideanKNNByObject
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

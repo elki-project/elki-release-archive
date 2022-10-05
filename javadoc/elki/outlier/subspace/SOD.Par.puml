@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SOD.Par\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.SOD.Par<V extends NumberVector> [[SOD.Par.html]] {
+        {static} +KNN_ID: OptionID
+        {static} +ALPHA_ID: OptionID
+        {static} +SIM_ID: OptionID
+        {static} +MODELS_ID: OptionID
+        -knn: int
+        -alpha: double
+        -similarityFunction: Similarity<V extends NumberVector>
+        -models: boolean
+        +configure(Parameterization): void
+        +make(): SOD<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SOD\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.SOD<V extends NumberVector> [[SOD.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.subspace.SOD.Par
+    elki.outlier.subspace.SOD +-- elki.outlier.subspace.SOD.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

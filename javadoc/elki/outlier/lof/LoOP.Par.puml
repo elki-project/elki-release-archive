@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LoOP.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.LoOP.Par<O> {
+        {static} +REACHABILITY_DISTANCE_FUNCTION_ID: OptionID
+        {static} +COMPARISON_DISTANCE_FUNCTION_ID: OptionID
+        {static} +KREACH_ID: OptionID
+        {static} +KCOMP_ID: OptionID
+        {static} +LAMBDA_ID: OptionID
+        ~kreach: int
+        ~kcomp: int
+        ~lambda: double
+        #reachabilityDistance: Distance<O>
+        #comparisonDistance: Distance<O>
+        +configure(Parameterization): void
+        +make(): LoOP<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LoOP\n<size:10>elki.outlier.lof" as elki.outlier.lof.LoOP<O> [[LoOP.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.lof.LoOP.Par
+    elki.outlier.lof.LoOP +-- elki.outlier.lof.LoOP.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

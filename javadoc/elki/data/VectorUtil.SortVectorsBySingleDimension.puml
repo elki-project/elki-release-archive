@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VectorUtil.SortVectorsBySingleDimension\n<size:10>elki.data" as elki.data.VectorUtil.SortVectorsBySingleDimension [[VectorUtil.SortVectorsBySingleDimension.html]] {
+        -d: int
+        +SortVectorsBySingleDimension(int)
+        +SortVectorsBySingleDimension()
+        +getDimension(): int
+        +setDimension(int): void
+        +compare(NumberVector, NumberVector): int
+    }
+
+    interface "<size:14>Comparator\n<size:10>java.util" as java.util.Comparator<NumberVector> {
+        {abstract} +compare(NumberVector, NumberVector): int
+    }
+    class "<size:14>VectorUtil\n<size:10>elki.data" as elki.data.VectorUtil [[VectorUtil.html]]
+
+    java.util.Comparator <|.. elki.data.VectorUtil.SortVectorsBySingleDimension
+    elki.data.VectorUtil +-- elki.data.VectorUtil.SortVectorsBySingleDimension
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

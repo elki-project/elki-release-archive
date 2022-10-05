@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ScoreEvaluation\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.ScoreEvaluation [[ScoreEvaluation.html]] {
+        {abstract} +evaluate(Adapter): double
+        +evaluate(DBIDs, DoubleDBIDList): double
+        {abstract} +expected(int, int): double
+    }
+    interface "<size:14>ScoreEvaluation.Adapter\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.ScoreEvaluation.Adapter [[ScoreEvaluation.Adapter.html]]
+
+    elki.evaluation.scores.ScoreEvaluation +-- elki.evaluation.scores.ScoreEvaluation.Adapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

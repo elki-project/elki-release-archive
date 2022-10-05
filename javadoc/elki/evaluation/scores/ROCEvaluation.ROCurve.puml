@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ROCEvaluation.ROCurve\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.ROCEvaluation.ROCurve [[ROCEvaluation.ROCurve.html]] {
+        -auc: double
+        +getAUC(): double
+    }
+
+    class "<size:14>XYCurve\n<size:10>elki.math.geometry" as elki.math.geometry.XYCurve [[../../math/geometry/XYCurve.html]]
+    class "<size:14>ROCEvaluation\n<size:10>elki.evaluation.scores" as elki.evaluation.scores.ROCEvaluation [[ROCEvaluation.html]]
+
+    elki.math.geometry.XYCurve <|-- elki.evaluation.scores.ROCEvaluation.ROCurve
+    elki.evaluation.scores.ROCEvaluation +-- elki.evaluation.scores.ROCEvaluation.ROCurve
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MutableProgress\n<size:10>elki.logging.progress" as elki.logging.progress.MutableProgress [[MutableProgress.html]] {
+        -total: int
+        +MutableProgress(String, int, Logging)
+        +appendToBuffer(StringBuilder): StringBuilder
+        +isComplete(): boolean
+        +setTotal(int): void
+        +getTotal(): int
+    }
+
+    abstract class "<size:14>AbstractProgress\n<size:10>elki.logging.progress" as elki.logging.progress.AbstractProgress [[AbstractProgress.html]] {
+        {abstract} +appendToBuffer(StringBuilder): StringBuilder
+    }
+
+    elki.logging.progress.AbstractProgress <|-- elki.logging.progress.MutableProgress
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

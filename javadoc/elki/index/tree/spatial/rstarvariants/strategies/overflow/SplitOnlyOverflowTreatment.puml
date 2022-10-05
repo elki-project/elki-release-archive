@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SplitOnlyOverflowTreatment\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.overflow" as elki.index.tree.spatial.rstarvariants.strategies.overflow.SplitOnlyOverflowTreatment [[SplitOnlyOverflowTreatment.html]] {
+        {static} +STATIC: SplitOnlyOverflowTreatment
+        +handleOverflow(AbstractRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, ?>, N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, IndexTreePath<E extends SpatialEntry>): boolean
+        +reinitialize(): void
+    }
+
+    interface "<size:14>OverflowTreatment\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.overflow" as elki.index.tree.spatial.rstarvariants.strategies.overflow.OverflowTreatment [[OverflowTreatment.html]] {
+        {abstract} +reinitialize(): void
+        {abstract} +handleOverflow(AbstractRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, ?>, N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, IndexTreePath<E extends SpatialEntry>): boolean
+    }
+    class "<size:14>SplitOnlyOverflowTreatment.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.overflow" as elki.index.tree.spatial.rstarvariants.strategies.overflow.SplitOnlyOverflowTreatment.Par [[SplitOnlyOverflowTreatment.Par.html]]
+
+    elki.index.tree.spatial.rstarvariants.strategies.overflow.OverflowTreatment <|.. elki.index.tree.spatial.rstarvariants.strategies.overflow.SplitOnlyOverflowTreatment
+    elki.index.tree.spatial.rstarvariants.strategies.overflow.SplitOnlyOverflowTreatment +-- elki.index.tree.spatial.rstarvariants.strategies.overflow.SplitOnlyOverflowTreatment.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

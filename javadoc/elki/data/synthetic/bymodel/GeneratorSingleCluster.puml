@@ -1,0 +1,54 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GeneratorSingleCluster\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorSingleCluster [[GeneratorSingleCluster.html]] {
+        -axes: List<Distribution>
+        -rnds: List<Random>
+        -trans: AffineTransformation
+        -dim: int
+        -clipmin: double[]
+        -clipmax: double[]
+        -densitycorrection: double
+        -size: int
+        -name: String
+        -retries: int
+        -discarded: int
+        -random: Random
+        +GeneratorSingleCluster(String, int, double, Random)
+        +addGenerator(Distribution, Random): void
+        +addRotation(int, int, double): void
+        +addTranslation(double[]): void
+        +setClipping(double[], double[]): void
+        +getDim(): int
+        -testClipping(double[]): boolean
+        +generate(int): List<double[]>
+        +getDensity(double[]): double
+        +getTransformation(): AffineTransformation
+        +getClipmin(): double[]
+        +getClipmax(): double[]
+        +getSize(): int
+        +getName(): String
+        +getDiscarded(): int
+        +incrementDiscarded(): void
+        +getRetries(): int
+        +getDensityCorrection(): double
+        +setDensityCorrection(double): void
+        +getNewRandomGenerator(): Random
+        +makeModel(): Model
+        +getDistribution(int): Distribution
+        +computeMean(): double[]
+    }
+
+    interface "<size:14>GeneratorInterfaceDynamic\n<size:10>elki.data.synthetic.bymodel" as elki.data.synthetic.bymodel.GeneratorInterfaceDynamic [[GeneratorInterfaceDynamic.html]] {
+        {abstract} +getDiscarded(): int
+        {abstract} +getRetries(): int
+        {abstract} +incrementDiscarded(): void
+    }
+
+    elki.data.synthetic.bymodel.GeneratorInterfaceDynamic <|.. elki.data.synthetic.bymodel.GeneratorSingleCluster
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

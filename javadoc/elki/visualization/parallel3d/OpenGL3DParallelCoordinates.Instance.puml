@@ -1,0 +1,49 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OpenGL3DParallelCoordinates.Instance\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance<O extends NumberVector> [[OpenGL3DParallelCoordinates.Instance.html]] {
+        {static} ~DEBUG: boolean
+        ~frame: JFrame
+        ~glu: GLU
+        -prenderer: Parallel3DRenderer<O extends NumberVector>
+        ~canvas: GLCanvas
+        ~arcball: Arcball1DOFAdapter
+        ~menuOverlay: SimpleMenuOverlay
+        ~messageOverlay: SimpleMessageOverlay
+        ~menuStarter: MouseAdapter
+        ~state: State
+        ~shared: Shared<O extends NumberVector>
+        +Instance(Relation<? extends NumberVector>, ProjectionParallel, Settings<O extends NumberVector>, StylingPolicy, StyleLibrary)
+        ~initLabels(): void
+        #relayout(String): void
+        -startLayoutThread(): void
+        +run(): void
+        +stop(): void
+        +init(GLAutoDrawable): void
+        ~switchState(State): void
+        +reshape(GLAutoDrawable, int, int, int, int): void
+        +display(GLAutoDrawable): void
+        #setLayout(Layout): void
+        +dispose(GLAutoDrawable): void
+    }
+
+    interface "<size:14>GLEventListener\n<size:10>javax.media.opengl" as javax.media.opengl.GLEventListener {
+        {abstract} +init(GLAutoDrawable): void
+        {abstract} +dispose(GLAutoDrawable): void
+        {abstract} +display(GLAutoDrawable): void
+        {abstract} +reshape(GLAutoDrawable, int, int, int, int): void
+    }
+    class "<size:14>OpenGL3DParallelCoordinates\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates<O extends NumberVector> [[OpenGL3DParallelCoordinates.html]]
+    enum "<size:14>OpenGL3DParallelCoordinates.Instance.State\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.State [[OpenGL3DParallelCoordinates.Instance.State.html]]
+    class "<size:14>OpenGL3DParallelCoordinates.Instance.Shared\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.Shared<O> [[OpenGL3DParallelCoordinates.Instance.Shared.html]]
+
+    javax.media.opengl.GLEventListener <|.. elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance
+    elki.visualization.parallel3d.OpenGL3DParallelCoordinates +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance
+    elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.State
+    elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Instance.Shared
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

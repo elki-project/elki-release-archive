@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ORCLUS.ORCLUSCluster\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ORCLUS.ORCLUSCluster [[ORCLUS.ORCLUSCluster.html]] {
+        ~objectIDs: ModifiableDBIDs
+        ~basis: double[]
+        ~centroid: double[]
+        ~ORCLUSCluster()
+        ~ORCLUSCluster(double[], DBIDRef)
+    }
+
+    class "<size:14>ORCLUS\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.ORCLUS [[ORCLUS.html]]
+
+    elki.clustering.correlation.ORCLUS +-- elki.clustering.correlation.ORCLUS.ORCLUSCluster
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

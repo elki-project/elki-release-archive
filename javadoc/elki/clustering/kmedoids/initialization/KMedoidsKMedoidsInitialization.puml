@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMedoidsKMedoidsInitialization\n<size:10>elki.clustering.kmedoids.initialization" as elki.clustering.kmedoids.initialization.KMedoidsKMedoidsInitialization<O> [[KMedoidsKMedoidsInitialization.html]] {
+        -inner: KMedoidsClustering<O>
+        +KMedoidsKMedoidsInitialization(KMedoidsClustering<O>)
+        +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+    }
+
+    interface "<size:14>KMedoidsInitialization\n<size:10>elki.clustering.kmedoids.initialization" as elki.clustering.kmedoids.initialization.KMedoidsInitialization<O> [[KMedoidsInitialization.html]] {
+        {abstract} +chooseInitialMedoids(int, DBIDs, DistanceQuery<? super O>): DBIDs
+    }
+    class "<size:14>KMedoidsKMedoidsInitialization.Par\n<size:10>elki.clustering.kmedoids.initialization" as elki.clustering.kmedoids.initialization.KMedoidsKMedoidsInitialization.Par<O> [[KMedoidsKMedoidsInitialization.Par.html]]
+
+    elki.clustering.kmedoids.initialization.KMedoidsInitialization <|.. elki.clustering.kmedoids.initialization.KMedoidsKMedoidsInitialization
+    elki.clustering.kmedoids.initialization.KMedoidsKMedoidsInitialization +-- elki.clustering.kmedoids.initialization.KMedoidsKMedoidsInitialization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrecomputedSimilarityMatrix.PrecomputedSimilarityRangeQuery\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedSimilarityMatrix.PrecomputedSimilarityRangeQuery [[PrecomputedSimilarityMatrix.PrecomputedSimilarityRangeQuery.html]] {
+        +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+
+    interface "<size:14>RangeSearcher\n<size:10>elki.database.query.range" as elki.database.query.range.RangeSearcher<DBIDRef> [[../../database/query/range/RangeSearcher.html]] {
+        {abstract} +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+    class "<size:14>PrecomputedSimilarityMatrix\n<size:10>elki.index.distancematrix" as elki.index.distancematrix.PrecomputedSimilarityMatrix<O> [[PrecomputedSimilarityMatrix.html]]
+
+    elki.database.query.range.RangeSearcher <|.. elki.index.distancematrix.PrecomputedSimilarityMatrix.PrecomputedSimilarityRangeQuery
+    elki.index.distancematrix.PrecomputedSimilarityMatrix +-- elki.index.distancematrix.PrecomputedSimilarityMatrix.PrecomputedSimilarityRangeQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

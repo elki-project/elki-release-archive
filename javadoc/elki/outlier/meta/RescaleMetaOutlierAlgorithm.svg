@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="282px" preserveAspectRatio="none" style="width:431px;height:282px;background:#FFFFFF;" version="1.1" viewBox="0 0 431 282" width="431px" zoomAndPan="magnify"><defs/><g><!--MD5=[d6c3376ab1ee4196eed9624c5f0f8df3]
+class elki.outlier.meta.RescaleMetaOutlierAlgorithm--><a href="RescaleMetaOutlierAlgorithm.html" target="_top" title="RescaleMetaOutlierAlgorithm.html" xlink:actuate="onRequest" xlink:href="RescaleMetaOutlierAlgorithm.html" xlink:show="new" xlink:title="RescaleMetaOutlierAlgorithm.html" xlink:type="simple"><g id="elem_elki.outlier.meta.RescaleMetaOutlierAlgorithm"><rect codeLine="6" fill="#F1F1F1" height="151.7188" id="elki.outlier.meta.RescaleMetaOutlierAlgorithm" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="417" x="7" y="105"/><ellipse cx="111.75" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M114.7188,129.6094 Q114.1406,129.9063 113.5,130.0469 Q112.8594,130.2031 112.1563,130.2031 Q109.6563,130.2031 108.3281,128.5625 Q107.0156,126.9063 107.0156,123.7813 Q107.0156,120.6563 108.3281,119 Q109.6563,117.3438 112.1563,117.3438 Q112.8594,117.3438 113.5,117.5 Q114.1563,117.6563 114.7188,117.9531 L114.7188,120.6719 Q114.0938,120.0938 113.5,119.8281 Q112.9063,119.5469 112.2813,119.5469 Q110.9375,119.5469 110.25,120.625 Q109.5625,121.6875 109.5625,123.7813 Q109.5625,125.875 110.25,126.9531 Q110.9375,128.0156 112.2813,128.0156 Q112.9063,128.0156 113.5,127.75 Q114.0938,127.4688 114.7188,126.8906 L114.7188,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="199" x="132.25" y="122.9951">RescaleMetaOutlierAlgorithm</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="77" x="193.25" y="135.5791">elki.outlier.meta</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="423" y1="142.9375" y2="142.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="153.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="138" x="27" y="159.9326">algorithm: Algorithm</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="169.8828"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166" x="27" y="176.2295">scaling: ScalingFunction</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="423" y1="183.5313" y2="183.5313"/><ellipse cx="18" cy="197.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="391" x="27" y="200.5264">RescaleMetaOutlierAlgorithm(Algorithm, ScalingFunction)</text><ellipse cx="18" cy="213.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="228" x="27" y="216.8232">autorun(Database): OutlierResult</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="226.7734"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="265" x="27" y="233.1201">getOutlierResult(Object): OutlierResult</text><ellipse cx="18" cy="246.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="306" x="27" y="249.417">getInputTypeRestriction(): TypeInformation[]</text></g></a><!--MD5=[81019799438b1b9471ca37184b444d57]
+class elki.outlier.OutlierAlgorithm--><a href="../OutlierAlgorithm.html" target="_top" title="../OutlierAlgorithm.html" xlink:actuate="onRequest" xlink:href="../OutlierAlgorithm.html" xlink:show="new" xlink:title="../OutlierAlgorithm.html" xlink:type="simple"><g id="elem_elki.outlier.OutlierAlgorithm"><rect codeLine="15" fill="#F1F1F1" height="37.9375" id="elki.outlier.OutlierAlgorithm" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="148" x="141.5" y="7"/><ellipse cx="156.5" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M152.4219,21.7344 L152.4219,19.5781 L159.8125,19.5781 L159.8125,21.7344 L157.3438,21.7344 L157.3438,29.8125 L159.8125,29.8125 L159.8125,31.9688 L152.4219,31.9688 L152.4219,29.8125 L154.8906,29.8125 L154.8906,21.7344 L152.4219,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="116" x="170.5" y="24.9951">OutlierAlgorithm</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="53" x="202" y="37.5791">elki.outlier</text></g></a><!--MD5=[5d9be5b3455833c339a95e453845bf55]
+reverse link elki.outlier.OutlierAlgorithm to elki.outlier.meta.RescaleMetaOutlierAlgorithm--><g id="link_elki.outlier.OutlierAlgorithm_elki.outlier.meta.RescaleMetaOutlierAlgorithm"><path codeLine="18" d="M215.5,65.26 C215.5,77.35 215.5,91.17 215.5,104.93 " fill="none" id="elki.outlier.OutlierAlgorithm-backto-elki.outlier.meta.RescaleMetaOutlierAlgorithm" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="208.5,65.15,215.5,45.15,222.5,65.15,208.5,65.15" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="115.5" y="262.7188"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="115.5" y="272.001">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[9172e7498bd6df7c828d5dadac772dcb]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RescaleMetaOutlierAlgorithm\n<size:10>elki.outlier.meta" as elki.outlier.meta.RescaleMetaOutlierAlgorithm [[RescaleMetaOutlierAlgorithm.html]] {
+        -algorithm: Algorithm
+        -scaling: ScalingFunction
+        +RescaleMetaOutlierAlgorithm(Algorithm, ScalingFunction)
+        +autorun(Database): OutlierResult
+        -getOutlierResult(Object): OutlierResult
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>RescaleMetaOutlierAlgorithm.Par\n<size:10>elki.outlier.meta" as elki.outlier.meta.RescaleMetaOutlierAlgorithm.Par [[RescaleMetaOutlierAlgorithm.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.meta.RescaleMetaOutlierAlgorithm
+    elki.outlier.meta.RescaleMetaOutlierAlgorithm +- - elki.outlier.meta.RescaleMetaOutlierAlgorithm.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

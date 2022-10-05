@@ -1,0 +1,63 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RdKNNTree\n<size:10>elki.index.tree.spatial.rstarvariants.rdknn" as elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTree<O extends NumberVector> [[RdKNNTree.html]] {
+        {static} -LOG: Logging
+        -distanceQuery: SpatialDistanceQuery<O extends NumberVector>
+        #knnQuery: KNNSearcher<DBIDRef>
+        -relation: Relation<O extends NumberVector>
+        +RdKNNTree(Relation<O extends NumberVector>, PageFile<RdKNNNode>, RdkNNSettings)
+        #preInsert(RdKNNEntry): void
+        #postDelete(RdKNNEntry): void
+        #bulkLoad(List<RdKNNEntry>): void
+        +reverseKNNQuery(DBID, int, SpatialPrimitiveDistance<? super NumberVector>): DoubleDBIDList
+        #createHeader(): TreeIndexHeader
+        #initializeCapacities(RdKNNEntry): void
+        #getSortedEntries(AbstractRStarTreeNode<?, ?>, SpatialComparable, SpatialPrimitiveDistance<?>): List<DoubleObjPair<RdKNNEntry>>
+        -preInsert(RdKNNEntry, RdKNNEntry, KNNHeap): void
+        -doReverseKNN(RdKNNNode, DBID, ModifiableDoubleDBIDList): void
+        -adjustKNNDistances(RdKNNEntry, ArrayDBIDs, double[]): void
+        #createNewLeafNode(): RdKNNNode
+        #createNewDirectoryNode(): RdKNNNode
+        #createNewDirectoryEntry(RdKNNNode): RdKNNEntry
+        #createRootEntry(): RdKNNEntry
+        -checkDistance(SpatialPrimitiveDistance<? super NumberVector>): void
+        #createNewLeafEntry(DBID): RdKNNLeafEntry
+        +initialize(): void
+        +insert(DBIDRef): void
+        +insertAll(DBIDs): void
+        +delete(DBIDRef): boolean
+        +deleteAll(DBIDs): void
+        +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+        +rangeByObject(DistanceQuery<O extends NumberVector>, double, int): RangeSearcher<O extends NumberVector>
+        +priorityByObject(DistanceQuery<O extends NumberVector>, double, int): PrioritySearcher<O extends NumberVector>
+        +rkNNByObject(DistanceQuery<O extends NumberVector>, int, int): RKNNSearcher<O extends NumberVector>
+        +rkNNByDBID(DistanceQuery<O extends NumberVector>, int, int): RKNNSearcher<DBIDRef>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>NonFlatRStarTree\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.NonFlatRStarTree<RdKNNNode, RdKNNEntry, RdkNNSettings> [[../NonFlatRStarTree.html]]
+    interface "<size:14>DistancePriorityIndex\n<size:10>elki.index" as elki.index.DistancePriorityIndex<O extends NumberVector> [[../../../../DistancePriorityIndex.html]] {
+        {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+    }
+    interface "<size:14>RKNNIndex\n<size:10>elki.index" as elki.index.RKNNIndex<O extends NumberVector> [[../../../../RKNNIndex.html]] {
+        {abstract} +rkNNByObject(DistanceQuery<O>, int, int): RKNNSearcher<O>
+        {abstract} +rkNNByDBID(DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+    }
+    interface "<size:14>DynamicIndex\n<size:10>elki.index" as elki.index.DynamicIndex [[../../../../DynamicIndex.html]] {
+        {abstract} +delete(DBIDRef): boolean
+        {abstract} +insert(DBIDRef): void
+        {abstract} +deleteAll(DBIDs): void
+        {abstract} +insertAll(DBIDs): void
+    }
+
+    elki.index.tree.spatial.rstarvariants.NonFlatRStarTree <|-- elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTree
+    elki.index.DistancePriorityIndex <|.. elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTree
+    elki.index.RKNNIndex <|.. elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTree
+    elki.index.DynamicIndex <|.. elki.index.tree.spatial.rstarvariants.rdknn.RdKNNTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

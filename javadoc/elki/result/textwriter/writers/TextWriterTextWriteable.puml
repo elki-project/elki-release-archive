@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TextWriterTextWriteable\n<size:10>elki.result.textwriter.writers" as elki.result.textwriter.writers.TextWriterTextWriteable [[TextWriterTextWriteable.html]] {
+        +write(TextWriterStream, String, TextWriteable): void
+    }
+
+    abstract class "<size:14>TextWriterWriterInterface\n<size:10>elki.result.textwriter" as elki.result.textwriter.TextWriterWriterInterface<TextWriteable> [[../TextWriterWriterInterface.html]] {
+        {abstract} +write(TextWriterStream, String, TextWriteable): void
+    }
+
+    elki.result.textwriter.TextWriterWriterInterface <|-- elki.result.textwriter.writers.TextWriterTextWriteable
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

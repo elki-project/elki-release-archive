@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractStaticHistogram\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.AbstractStaticHistogram [[AbstractStaticHistogram.html]] {
+        #offset: int
+        #size: int
+        #base: double
+        #max: double
+        #binsize: double
+        +AbstractStaticHistogram(int, double, double)
+        #getBinNr(double): int
+        {static} #growSize(int, int): int
+        +getNumBins(): int
+        +getBinsize(): double
+        +getCoverMinimum(): double
+        +getCoverMaximum(): double
+        {abstract} +iter(): Iter
+    }
+
+    interface "<size:14>Histogram\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.Histogram [[Histogram.html]] {
+        {abstract} +getNumBins(): int
+        {abstract} +getBinsize(): double
+        {abstract} +getCoverMinimum(): double
+        {abstract} +getCoverMaximum(): double
+        {abstract} +iter(): Iter
+    }
+    abstract class "<size:14>AbstractStaticHistogram.Iter\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.AbstractStaticHistogram.Iter [[AbstractStaticHistogram.Iter.html]]
+
+    elki.utilities.datastructures.histogram.Histogram <|.. elki.utilities.datastructures.histogram.AbstractStaticHistogram
+    elki.utilities.datastructures.histogram.AbstractStaticHistogram +-- elki.utilities.datastructures.histogram.AbstractStaticHistogram.Iter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

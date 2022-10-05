@@ -1,0 +1,100 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.result.textwriter {
+
+        class SingleStreamOutput [[SingleStreamOutput.html]] {
+            -stream: PrintStream
+            +SingleStreamOutput()
+            +SingleStreamOutput(Path)
+            +SingleStreamOutput(Path, boolean)
+            +SingleStreamOutput(OutputStream)
+            +SingleStreamOutput(OutputStream, boolean)
+            +SingleStreamOutput(PrintStream)
+            +openStream(String): PrintStream
+            +closeStream(PrintStream): void
+            +close(): void
+        }
+
+        class TextWriter [[TextWriter.html]] {
+            {static} +FILE_EXTENSION: String
+            {static} +writers: HandlerList<TextWriterWriterInterface<?>>
+            #filenames: Map<String, Object>
+            #getFilename(Object, String): String
+            +output(Database, Object, StreamFactory, Pattern): void
+            -printObject(TextWriterStream, Database, DBIDRef, List<Relation<?>>): void
+            -writeClusterResult(Database, StreamFactory, Clustering<Model>, Cluster<Model>, List<Relation<?>>, NamingScheme): void
+            -writeIterableResult(StreamFactory, IterableResult<?>): void
+            -writeOrderingResult(Database, StreamFactory, OrderingResult, List<Relation<?>>): void
+            -writeSettingsResult(StreamFactory, List<SettingsResult>): void
+            -writeOtherResult(StreamFactory, Object): void
+            -filenameFromLabel(String): String
+        }
+
+        class MultipleFilesOutput [[MultipleFilesOutput.html]] {
+            {static} -EXTENSION: String
+            {static} -GZIP_EXTENSION: String
+            -basename: Path
+            -usegzip: boolean
+            {static} -LOG: Logging
+            +MultipleFilesOutput(Path)
+            +MultipleFilesOutput(Path, boolean)
+            -newStream(String): PrintStream
+            +openStream(String): PrintStream
+            +closeStream(PrintStream): void
+            +close(): void
+        }
+
+        interface TextWriteable [[TextWriteable.html]] {
+            {abstract} +writeToText(TextWriterStream, String): void
+        }
+
+        abstract class TextWriterWriterInterface<O> [[TextWriterWriterInterface.html]] {
+            {abstract} +write(TextWriterStream, String, O): void
+            +writeObject(TextWriterStream, String, Object): void
+        }
+
+        interface StreamFactory [[StreamFactory.html]] {
+            {abstract} +openStream(String): PrintStream
+            {abstract} +closeStream(PrintStream): void
+            {abstract} +close(): void
+        }
+
+        class TextWriterStream [[TextWriterStream.html]] {
+            -outStream: PrintStream
+            -inline: StringBuilder
+            -comment: StringBuilder
+            -writers: HandlerList<TextWriterWriterInterface<?>>
+            {static} +SEPARATOR: String
+            {static} +QUOTE: String
+            {static} +COMMENTSEP: String
+            {static} -NEWLINE: String
+            {static} +SER_MARKER: String
+            +TextWriterStream(PrintStream, HandlerList<TextWriterWriterInterface<?>>, TextWriterWriterInterface<?>)
+            +commentPrint(Object): void
+            +commentPrint(CharSequence): void
+            +commentPrintLn(CharSequence): void
+            +commentPrintLn(Object): void
+            +commentPrintLn(): void
+            +commentPrintSeparator(): void
+            +inlinePrint(Object): void
+            +inlinePrintNoQuotes(Object): void
+            +flush(): void
+            -quotePrintln(PrintStream, String): void
+            +getWriterFor(Object): TextWriterWriterInterface<?>
+        }
+
+        StreamFactory <|.. SingleStreamOutput
+        TextWriter --> TextWriterWriterInterface: fallback
+        StreamFactory <|.. MultipleFilesOutput
+        java.lang.AutoCloseable <|-- StreamFactory
+        TextWriterStream --> TextWriterWriterInterface: fallbackwriter
+    }
+
+    namespace java.lang {
+        interface AutoCloseable {
+            {abstract} +close(): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

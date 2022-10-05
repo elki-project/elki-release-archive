@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SVGCloneVisible\n<size:10>elki.visualization.svg" as elki.visualization.svg.SVGCloneVisible [[SVGCloneVisible.html]] {
+        +cloneNode(Document, Node): Node
+    }
+
+    class "<size:14>DOMCloner\n<size:10>elki.utilities.xml" as elki.utilities.xml.DOMCloner [[../../utilities/xml/DOMCloner.html]]
+
+    elki.utilities.xml.DOMCloner <|-- elki.visualization.svg.SVGCloneVisible
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

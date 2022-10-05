@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DropNaNFilter\n<size:10>elki.datasource.filter.cleaning" as elki.datasource.filter.cleaning.DropNaNFilter [[DropNaNFilter.html]] {
+        {static} -LOG: Logging
+        -densecols: long[]
+        +getMeta(): BundleMeta
+        +data(int): Object
+        +nextEvent(): Event
+        -updateMeta(BundleMeta): void
+        +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+
+    abstract class "<size:14>AbstractStreamFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractStreamFilter [[../AbstractStreamFilter.html]]
+    class "<size:14>DropNaNFilter.Par\n<size:10>elki.datasource.filter.cleaning" as elki.datasource.filter.cleaning.DropNaNFilter.Par [[DropNaNFilter.Par.html]]
+
+    elki.datasource.filter.AbstractStreamFilter <|-- elki.datasource.filter.cleaning.DropNaNFilter
+    elki.datasource.filter.cleaning.DropNaNFilter +-- elki.datasource.filter.cleaning.DropNaNFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

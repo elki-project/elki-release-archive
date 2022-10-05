@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleMinMax\n<size:10>elki.math" as elki.math.DoubleMinMax [[DoubleMinMax.html]] {
+        -min: double
+        -max: double
+        +DoubleMinMax()
+        +DoubleMinMax(double, double)
+        +put(double): void
+        +put(double[]): void
+        +put(DoubleMinMax): void
+        +getMin(): double
+        +getMax(): double
+        +getDiff(): double
+        +isValid(): boolean
+        +asDoubleArray(): double[]
+        {static} +newArray(int): DoubleMinMax[]
+        +reset(): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

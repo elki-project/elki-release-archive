@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DistanceEntry\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.split.distribution" as elki.index.tree.metrical.mtreevariants.strategies.split.distribution.DistanceEntry<E> [[DistanceEntry.html]] {
+        -entry: E
+        -distance: double
+        +DistanceEntry(E, double)
+        +getEntry(): E
+        +getDistance(): double
+        +compareTo(DistanceEntry<E>): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<DistanceEntry<E>> {
+        {abstract} +compareTo(DistanceEntry<E>): int
+    }
+
+    java.lang.Comparable <|.. elki.index.tree.metrical.mtreevariants.strategies.split.distribution.DistanceEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

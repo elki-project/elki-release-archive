@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InMemoryLSHIndex\n<size:10>elki.index.lsh" as elki.index.lsh.InMemoryLSHIndex<V> [[InMemoryLSHIndex.html]] {
+        {static} -LOG: Logging
+        ~family: LocalitySensitiveHashFunctionFamily<? super V>
+        ~l: int
+        ~numberOfBuckets: int
+        +InMemoryLSHIndex(LocalitySensitiveHashFunctionFamily<? super V>, int, int)
+        +instantiate(Relation<V>): Instance
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<V> [[../IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>InMemoryLSHIndex.Instance\n<size:10>elki.index.lsh" as elki.index.lsh.InMemoryLSHIndex.Instance [[InMemoryLSHIndex.Instance.html]]
+    class "<size:14>InMemoryLSHIndex.Par\n<size:10>elki.index.lsh" as elki.index.lsh.InMemoryLSHIndex.Par<V> [[InMemoryLSHIndex.Par.html]]
+
+    elki.index.IndexFactory <|.. elki.index.lsh.InMemoryLSHIndex
+    elki.index.lsh.InMemoryLSHIndex +-- elki.index.lsh.InMemoryLSHIndex.Instance
+    elki.index.lsh.InMemoryLSHIndex +-- elki.index.lsh.InMemoryLSHIndex.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

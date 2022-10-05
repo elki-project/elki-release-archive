@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="97px" preserveAspectRatio="none" style="width:427px;height:97px;background:#FFFFFF;" version="1.1" viewBox="0 0 427 97" width="427px" zoomAndPan="magnify"><defs/><g><!--MD5=[65741f9ab1d9b71be36c274839b2c01a]
+class elki.clustering.kmeans.AbstractKMeans--><a href="AbstractKMeans.html" target="_top" title="AbstractKMeans.html" xlink:actuate="onRequest" xlink:href="AbstractKMeans.html" xlink:show="new" xlink:title="AbstractKMeans.html" xlink:type="simple"><g id="elem_elki.clustering.kmeans.AbstractKMeans"><rect codeLine="39" fill="#F1F1F1" height="62.2344" id="elki.clustering.kmeans.AbstractKMeans" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="407" x="9" y="10"/><ellipse cx="24" cy="28.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M24.1094,24.3125 L22.9531,29.3906 L25.2813,29.3906 L24.1094,24.3125 Z M22.625,22.0781 L25.6094,22.0781 L28.9688,34.4688 L26.5156,34.4688 L25.75,31.4063 L22.4688,31.4063 L21.7188,34.4688 L19.2813,34.4688 L22.625,22.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="113" x="38" y="27.9951">AbstractKMeans</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="112" x="38.5" y="40.5791">elki.clustering.kmeans</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="260" x="159" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="258" x="160" y="19.1387">V extends NumberVector, M extends Model</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="415" y1="47.9375" y2="47.9375"/><polygon fill="#FFFF44" points="20,56.5859,24,60.5859,20,64.5859,16,60.5859" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="148" x="29" y="64.9326">getLogger(): Logging</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="113.5" y="78.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="113.5" y="87.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[4aba4e9f960ea22629fdfddc0aaefb5d]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractKMeans.Instance\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans.Instance [[AbstractKMeans.Instance.html]] {
+        #means: double[]
+        #clusters: List<ModifiableDBIDs>
+        #assignment: WritableIntegerDataStore
+        #varsum: double[]
+        #relation: Relation<? extends NumberVector>
+        #diststat: long
+        -df: NumberVectorDistance<?>
+        #k: int
+        #isSquared: boolean
+        #key: String
+        +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+        #distance(NumberVector, NumberVector): double
+        #distance(NumberVector, double[]): double
+        #distance(double[], double[]): double
+        #sqrtdistance(NumberVector, NumberVector): double
+        #sqrtdistance(NumberVector, double[]): double
+        #sqrtdistance(double[], double[]): double
+        +run(int): void
+        {abstract} #iterate(int): int
+        #meansFromSums(double[], double[], double[]): void
+        #copyMeans(double[], double[]): void
+        #assignToNearestCluster(): int
+        #recomputeSeperation(double[], double[]): void
+        #initialSeperation(double[]): void
+        #computeSquaredSeparation(double[]): void
+        #movedDistance(double[], double[], double[]): void
+        +buildResult(): Clustering<KMeansModel>
+        +buildResult(boolean, Relation<? extends NumberVector>): Clustering<KMeansModel>
+        #recomputeVariance(Relation<? extends NumberVector>): void
+        {abstract} #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.AbstractKMeans<V extends NumberVector, M extends Model> [[AbstractKMeans.html]] {
+        {abstract} #getLogger(): Logging
+    }
+
+    elki.clustering.kmeans.AbstractKMeans +- - elki.clustering.kmeans.AbstractKMeans.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

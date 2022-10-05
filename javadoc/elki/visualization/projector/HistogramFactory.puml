@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HistogramFactory\n<size:10>elki.visualization.projector" as elki.visualization.projector.HistogramFactory [[HistogramFactory.html]] {
+        -maxdim: int
+        +HistogramFactory(int)
+        +processNewResult(VisualizerContext, Object): void
+    }
+
+    interface "<size:14>ProjectorFactory\n<size:10>elki.visualization.projector" as elki.visualization.projector.ProjectorFactory [[ProjectorFactory.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+    }
+    class "<size:14>HistogramFactory.Par\n<size:10>elki.visualization.projector" as elki.visualization.projector.HistogramFactory.Par [[HistogramFactory.Par.html]]
+
+    elki.visualization.projector.ProjectorFactory <|.. elki.visualization.projector.HistogramFactory
+    elki.visualization.projector.HistogramFactory +-- elki.visualization.projector.HistogramFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

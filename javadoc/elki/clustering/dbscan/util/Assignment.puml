@@ -1,0 +1,10 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>Assignment\n<size:10>elki.clustering.dbscan.util" as elki.clustering.dbscan.util.Assignment [[Assignment.html]]
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

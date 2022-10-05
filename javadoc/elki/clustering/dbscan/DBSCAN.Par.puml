@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DBSCAN.Par\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.DBSCAN.Par<O> [[DBSCAN.Par.html]] {
+        {static} +EPSILON_ID: OptionID
+        {static} +MINPTS_ID: OptionID
+        #epsilon: double
+        #minpts: int
+        #distance: Distance<? super O>
+        +configure(Parameterization): void
+        +make(): DBSCAN<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>DBSCAN\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.DBSCAN<O> [[DBSCAN.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.DBSCAN.Par
+    elki.clustering.dbscan.DBSCAN +-- elki.clustering.dbscan.DBSCAN.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

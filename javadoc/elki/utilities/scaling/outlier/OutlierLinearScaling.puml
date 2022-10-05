@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierLinearScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierLinearScaling [[OutlierLinearScaling.html]] {
+        #min: Double
+        #max: Double
+        ~factor: double
+        ~usemean: boolean
+        ~nozeros: boolean
+        +OutlierLinearScaling()
+        +OutlierLinearScaling(Double, Double, boolean, boolean)
+        +getScaled(double): double
+        +prepare(OutlierResult): void
+        +prepare(A, NumberArrayAdapter<?, A>): void
+        +getMin(): double
+        +getMax(): double
+    }
+
+    interface "<size:14>OutlierScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierScaling [[OutlierScaling.html]] {
+        {abstract} +prepare(OutlierResult): void
+        {abstract} +prepare(A, NumberArrayAdapter<?, A>): void
+    }
+    class "<size:14>OutlierLinearScaling.Par\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierLinearScaling.Par [[OutlierLinearScaling.Par.html]]
+
+    elki.utilities.scaling.outlier.OutlierScaling <|.. elki.utilities.scaling.outlier.OutlierLinearScaling
+    elki.utilities.scaling.outlier.OutlierLinearScaling +-- elki.utilities.scaling.outlier.OutlierLinearScaling.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

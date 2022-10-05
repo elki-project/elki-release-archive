@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WrappedRangeDBIDByLookup.Linear\n<size:10>elki.database.query.range" as elki.database.query.range.WrappedRangeDBIDByLookup.Linear<O> [[WrappedRangeDBIDByLookup.Linear.html]] {
+        -Linear(Relation<? extends O>, RangeSearcher<O>)
+    }
+
+    class "<size:14>WrappedRangeDBIDByLookup\n<size:10>elki.database.query.range" as elki.database.query.range.WrappedRangeDBIDByLookup<O> [[WrappedRangeDBIDByLookup.html]]
+    interface "<size:14>LinearScanQuery\n<size:10>elki.database.query" as elki.database.query.LinearScanQuery [[../LinearScanQuery.html]]
+    class "<size:14>WrappedRangeDBIDByLookup\n<size:10>elki.database.query.range" as elki.database.query.range.WrappedRangeDBIDByLookup<O> [[WrappedRangeDBIDByLookup.html]]
+
+    elki.database.query.range.WrappedRangeDBIDByLookup <|-- elki.database.query.range.WrappedRangeDBIDByLookup.Linear
+    elki.database.query.LinearScanQuery <|.. elki.database.query.range.WrappedRangeDBIDByLookup.Linear
+    elki.database.query.range.WrappedRangeDBIDByLookup +-- elki.database.query.range.WrappedRangeDBIDByLookup.Linear
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

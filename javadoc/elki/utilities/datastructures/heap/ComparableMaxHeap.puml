@@ -1,0 +1,43 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ComparableMaxHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.ComparableMaxHeap<K extends Comparable<? super K>> [[ComparableMaxHeap.html]] {
+        #twoheap: Comparable<Object>[]
+        #size: int
+        {static} -TWO_HEAP_INITIAL_SIZE: int
+        +ComparableMaxHeap()
+        +ComparableMaxHeap(int)
+        +clear(): void
+        +size(): int
+        +isEmpty(): boolean
+        +add(K extends Comparable<? super Comparable<? super K>>): void
+        +add(K extends Comparable<? super Comparable<? super K>>, int): void
+        +replaceTopElement(K extends Comparable<? super Comparable<? super K>>): K extends Comparable<? super Comparable<? super K>>
+        -heapifyUp(int, Comparable<Object>): void
+        +poll(): K extends Comparable<? super Comparable<? super K>>
+        -heapifyDown(Comparable<Object>): void
+        +peek(): K extends Comparable<? super Comparable<? super K>>
+        +unsortedIter(): UnsortedIter
+    }
+
+    interface "<size:14>ObjectHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.ObjectHeap<K extends Comparable<? super K>> [[ObjectHeap.html]] {
+        {abstract} +add(K extends Comparable<? super K>): void
+        {abstract} +add(K extends Comparable<? super K>, int): void
+        {abstract} +replaceTopElement(K extends Comparable<? super K>): K extends Comparable<? super K>
+        {abstract} +peek(): K extends Comparable<? super K>
+        {abstract} +poll(): K extends Comparable<? super K>
+        {abstract} +clear(): void
+        {abstract} +size(): int
+        {abstract} +isEmpty(): boolean
+        {abstract} +unsortedIter(): UnsortedIter<K>
+    }
+    class "<size:14>ComparableMaxHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.ComparableMaxHeap.UnsortedIter [[ComparableMaxHeap.UnsortedIter.html]]
+
+    elki.utilities.datastructures.heap.ObjectHeap <|.. elki.utilities.datastructures.heap.ComparableMaxHeap
+    elki.utilities.datastructures.heap.ComparableMaxHeap +-- elki.utilities.datastructures.heap.ComparableMaxHeap.UnsortedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

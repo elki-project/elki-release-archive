@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KDDCLIApplication.Par\n<size:10>elki.application" as elki.application.KDDCLIApplication.Par [[KDDCLIApplication.Par.html]] {
+        #task: KDDTask
+        +configure(Parameterization): void
+        +make(): KDDCLIApplication
+    }
+
+    abstract class "<size:14>AbstractApplication.Par\n<size:10>elki.application" as elki.application.AbstractApplication.Par [[AbstractApplication.Par.html]] {
+        {abstract} +make(): AbstractApplication
+    }
+    class "<size:14>KDDCLIApplication\n<size:10>elki.application" as elki.application.KDDCLIApplication [[KDDCLIApplication.html]]
+
+    elki.application.AbstractApplication.Par <|-- elki.application.KDDCLIApplication.Par
+    elki.application.KDDCLIApplication +-- elki.application.KDDCLIApplication.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

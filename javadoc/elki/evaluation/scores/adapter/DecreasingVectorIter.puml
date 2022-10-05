@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DecreasingVectorIter\n<size:10>elki.evaluation.scores.adapter" as elki.evaluation.scores.adapter.DecreasingVectorIter [[DecreasingVectorIter.html]] {
+        +DecreasingVectorIter(NumberVector, NumberVector)
+        +compare(int, int): int
+        +advance(int): DecreasingVectorIter
+        +retract(): DecreasingVectorIter
+        +seek(int): DecreasingVectorIter
+    }
+
+    abstract class "<size:14>AbstractVectorIter\n<size:10>elki.evaluation.scores.adapter" as elki.evaluation.scores.adapter.AbstractVectorIter [[AbstractVectorIter.html]]
+    interface "<size:14>IntComparator\n<size:10>it.unimi.dsi.fastutil.ints" as it.unimi.dsi.fastutil.ints.IntComparator {
+        {abstract} +compare(int, int): int
+    }
+
+    elki.evaluation.scores.adapter.AbstractVectorIter <|-- elki.evaluation.scores.adapter.DecreasingVectorIter
+    it.unimi.dsi.fastutil.ints.IntComparator <|.. elki.evaluation.scores.adapter.DecreasingVectorIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

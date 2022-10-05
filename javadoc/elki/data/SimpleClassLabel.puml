@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleClassLabel\n<size:10>elki.data" as elki.data.SimpleClassLabel [[SimpleClassLabel.html]] {
+        {static} +SERIALIZER: ByteBufferSerializer<SimpleClassLabel>
+        {static} +TYPE: SimpleTypeInformation<SimpleClassLabel>
+        -label: String
+        +SimpleClassLabel(String)
+        +compareTo(ClassLabel): int
+    }
+
+    abstract class "<size:14>ClassLabel\n<size:10>elki.data" as elki.data.ClassLabel [[ClassLabel.html]]
+    class "<size:14>SimpleClassLabel.Serializer\n<size:10>elki.data" as elki.data.SimpleClassLabel.Serializer [[SimpleClassLabel.Serializer.html]]
+    class "<size:14>SimpleClassLabel.Factory\n<size:10>elki.data" as elki.data.SimpleClassLabel.Factory [[SimpleClassLabel.Factory.html]]
+
+    elki.data.ClassLabel <|-- elki.data.SimpleClassLabel
+    elki.data.SimpleClassLabel +-- elki.data.SimpleClassLabel.Serializer
+    elki.data.SimpleClassLabel +-- elki.data.SimpleClassLabel.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

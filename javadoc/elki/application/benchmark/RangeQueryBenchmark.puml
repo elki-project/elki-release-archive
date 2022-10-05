@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RangeQueryBenchmark\n<size:10>elki.application.benchmark" as elki.application.benchmark.RangeQueryBenchmark<O extends NumberVector> [[RangeQueryBenchmark.html]] {
+        {static} -LOG: Logging
+        #radius: double
+        #queries: DatabaseConnection
+        #sampling: double
+        #random: RandomFactory
+        +RangeQueryBenchmark(InputStep, Distance<? super NumberVector>, double, double, RandomFactory)
+        +RangeQueryBenchmark(InputStep, Distance<? super NumberVector>, DatabaseConnection, double, RandomFactory)
+        +run(): void
+        -logIndexStatistics(Database): void
+        #run(RangeSearcher<DBIDRef>, Relation<O extends NumberVector>, double, Duration, MeanVariance): int
+        #run(RangeSearcher<DBIDRef>, Relation<O extends NumberVector>, Relation<NumberVector>, Duration, MeanVariance): int
+        #run(RangeSearcher<O extends NumberVector>, Relation<O extends NumberVector>, DatabaseConnection, Duration, MeanVariance): int
+        #processResult(DoubleDBIDList, MeanVariance): int
+        {static} +main(String[]): void
+    }
+
+    abstract class "<size:14>AbstractDistanceBasedApplication\n<size:10>elki.application" as elki.application.AbstractDistanceBasedApplication<O extends NumberVector> [[../AbstractDistanceBasedApplication.html]]
+    class "<size:14>RangeQueryBenchmark.Par\n<size:10>elki.application.benchmark" as elki.application.benchmark.RangeQueryBenchmark.Par<O extends NumberVector>
+
+    elki.application.AbstractDistanceBasedApplication <|-- elki.application.benchmark.RangeQueryBenchmark
+    elki.application.benchmark.RangeQueryBenchmark +-- elki.application.benchmark.RangeQueryBenchmark.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

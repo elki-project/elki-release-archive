@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OfflineChangePointDetectionAlgorithm.Instance\n<size:10>elki.timeseries" as elki.timeseries.OfflineChangePointDetectionAlgorithm.Instance [[OfflineChangePointDetectionAlgorithm.Instance.html]] {
+        ~column: double[]
+        ~sums: double[]
+        ~bstrap: double[]
+        ~iter: DBIDArrayIter
+        ~result: ChangePoints
+        ~columnnr: int
+        ~rnd: Random
+        +Instance(Random)
+        +run(Relation<DoubleVector>): ChangePoints
+        -multipleChangepointsWithConfidence(int, int): int
+        -bootstrapConfidence(int, int, double): double
+    }
+
+    class "<size:14>OfflineChangePointDetectionAlgorithm\n<size:10>elki.timeseries" as elki.timeseries.OfflineChangePointDetectionAlgorithm [[OfflineChangePointDetectionAlgorithm.html]]
+
+    elki.timeseries.OfflineChangePointDetectionAlgorithm +-- elki.timeseries.OfflineChangePointDetectionAlgorithm.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

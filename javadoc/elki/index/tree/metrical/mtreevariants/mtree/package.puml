@@ -1,0 +1,102 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.metrical.mtreevariants.mtree {
+
+        class MTreeIndex<O> [[MTreeIndex.html]] {
+            -relation: Relation<O>
+            #distanceQuery: DistanceQuery<O>
+            +MTreeIndex(Relation<O>, PageFile<MTreeNode<O>>, MTreeSettings<O, MTreeNode<O>, MTreeEntry>)
+            +distance(DBIDRef, DBIDRef): double
+            #initializeCapacities(MTreeEntry): void
+            #createNewLeafEntry(DBID, O, double): MTreeEntry
+            +initialize(): void
+            +insert(DBIDRef): void
+            +insertAll(DBIDs): void
+            +delete(DBIDRef): boolean
+            +deleteAll(DBIDs): void
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+
+        class MTreeFactory<O> [[MTreeFactory.html]] {
+            +MTreeFactory(PageFileFactory<?>, MTreeSettings<O, MTreeNode<O>, MTreeEntry>)
+            +instantiate(Relation<O>): MTreeIndex<O>
+            #getNodeClass(): Class<MTreeNode<O>>
+        }
+
+        class elki.index.tree.metrical.mtreevariants.mtree.MTreeFactory.Par<O> {
+            +make(): MTreeFactory<O>
+            #makeSettings(): MTreeSettings<O, MTreeNode<O>, MTreeEntry>
+        }
+
+        abstract class MTree<O> [[MTree.html]] {
+            {static} -LOG: Logging
+            +MTree(PageFile<MTreeNode<O>>, MTreeSettings<O, MTreeNode<O>, MTreeEntry>)
+            #preInsert(MTreeEntry): void
+            #createNewDirectoryEntry(MTreeNode<O>, DBID, double): MTreeEntry
+            #createRootEntry(): MTreeEntry
+            #createNewLeafNode(): MTreeNode<O>
+            #createNewDirectoryNode(): MTreeNode<O>
+            #getLogger(): Logging
+        }
+
+        class MTreeNode<O> [[MTreeNode.html]] {
+            {static} -serialVersionUID: long
+            +MTreeNode()
+            +MTreeNode(int, boolean)
+        }
+
+        MTree <|-- MTreeIndex
+        elki.index.RangeIndex <|.. MTreeIndex
+        elki.index.KNNIndex <|.. MTreeIndex
+        elki.index.DynamicIndex <|.. MTreeIndex
+        elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory <|-- MTreeFactory
+        elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par <|-- elki.index.tree.metrical.mtreevariants.mtree.MTreeFactory.Par
+        MTreeFactory +-- elki.index.tree.metrical.mtreevariants.mtree.MTreeFactory.Par
+        elki.index.tree.metrical.mtreevariants.AbstractMTree <|-- MTree
+        elki.index.tree.metrical.mtreevariants.AbstractMTreeNode <|-- MTreeNode
+    }
+
+    namespace elki.index {
+        interface RangeIndex<O> [[../../../../RangeIndex.html]] {
+            {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+        interface KNNIndex<O> [[../../../../KNNIndex.html]] {
+            {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        }
+        interface DynamicIndex [[../../../../DynamicIndex.html]] {
+            {abstract} +delete(DBIDRef): boolean
+            {abstract} +insert(DBIDRef): void
+            {abstract} +deleteAll(DBIDs): void
+            {abstract} +insertAll(DBIDs): void
+        }
+    }
+
+    namespace elki.index.tree.metrical.mtreevariants {
+        abstract class AbstractMTreeFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMTreeFactory.html]] {
+            #settings: S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+        }
+        abstract class elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMTreeFactory.Par.html]] {
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            {static} +SPLIT_STRATEGY_ID: OptionID
+            {static} +INSERT_STRATEGY_ID: OptionID
+            #settings: S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+            {abstract} #makeSettings(): S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+            {abstract} +make(): AbstractMTreeFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>
+        }
+        abstract class AbstractMTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMTree.html]] {
+            {static} -EXTRA_INTEGRITY_CHECKS: boolean
+            #settings: S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+            +statistics: Statistics
+            {abstract} +distance(DBIDRef, DBIDRef): double
+            {abstract} #createNewDirectoryEntry(N extends AbstractMTreeNode<O, N extends AbstractMTreeNode<O,N,E>, E extends MTreeEntry>, DBID, double): E extends MTreeEntry
+        }
+        abstract class AbstractMTreeNode<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[../AbstractMTreeNode.html]]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

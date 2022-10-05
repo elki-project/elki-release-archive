@@ -1,0 +1,166 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-core",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-preprocessed",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-parallel",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-0.8.0.jar",
+          "url": "elki-core-0.8.0.jar",
+          "size": 123381,
+          "sha512": "70af390cf9d818f5add38c66789a93077a22bc5fc0de0064adf2aa9903c40f2602dd3734cb43a00641f09bd7596e0f613a947b02d33cd4e452604e5310766903",
+          "sha256": "a4fc098a046c8f114b248700cd5da5cee79ab61ccd245405f212b9717662b9d9",
+          "sha1": "36742a99f4cc95464e34ef4307c7310e1d0e44d6",
+          "md5": "c04bdab34278c32290d215ba82424806"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-preprocessed",
+          "version": {
+            "requires": "0.8.0"
+          }
+        },
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-parallel",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-0.8.0.jar",
+          "url": "elki-core-0.8.0.jar",
+          "size": 123381,
+          "sha512": "70af390cf9d818f5add38c66789a93077a22bc5fc0de0064adf2aa9903c40f2602dd3734cb43a00641f09bd7596e0f613a947b02d33cd4e452604e5310766903",
+          "sha256": "a4fc098a046c8f114b248700cd5da5cee79ab61ccd245405f212b9717662b9d9",
+          "sha1": "36742a99f4cc95464e34ef4307c7310e1d0e44d6",
+          "md5": "c04bdab34278c32290d215ba82424806"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-0.8.0-test-fixtures.jar",
+          "url": "elki-core-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "d641cb1c6774f0807702b2a778a70e6226bd300d189b07e8100c88a8a04cb12592ed8a41a5d99a974a6a9bc2d74010db864368493f6041a1329d336ebe31cb28",
+          "sha256": "3865d249923219bb303b5064e009a6943fe7191080e1e9a94a26259d7f7a67f3",
+          "sha1": "fd3ac6fd1abf4cf514dd4ea153b7cb92f8dd2696",
+          "md5": "9ec294b60bd159b47db09fced8625407"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-core-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-0.8.0-test-fixtures.jar",
+          "url": "elki-core-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "d641cb1c6774f0807702b2a778a70e6226bd300d189b07e8100c88a8a04cb12592ed8a41a5d99a974a6a9bc2d74010db864368493f6041a1329d336ebe31cb28",
+          "sha256": "3865d249923219bb303b5064e009a6943fe7191080e1e9a94a26259d7f7a67f3",
+          "sha1": "fd3ac6fd1abf4cf514dd4ea153b7cb92f8dd2696",
+          "md5": "9ec294b60bd159b47db09fced8625407"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-core-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

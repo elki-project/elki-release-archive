@@ -1,0 +1,39 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterContingencyTable\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.ClusterContingencyTable [[ClusterContingencyTable.html]] {
+        #breakNoiseClusters: boolean
+        #selfPairing: boolean
+        #size1: int
+        #size2: int
+        #contingency: int[]
+        #noise1: long[]
+        #noise2: long[]
+        #paircount: PairCounting
+        #entropy: Entropy
+        #smp: SetMatchingPurity
+        #mmacc: MaximumMatchingAccuracy
+        #psi: PairSetsIndex
+        #edit: EditDistance
+        #bcubed: BCubed
+        +ClusterContingencyTable(boolean, boolean, Clustering<?>, Clustering<?>)
+        +isStrictPartitioning(): boolean
+        +getPaircount(): PairCounting
+        +getEntropy(): Entropy
+        +getEdit(): EditDistance
+        +getBCubed(): BCubed
+        +getSetMatchingPurity(): SetMatchingPurity
+        +getMaximumMatchingAccuracy(): MaximumMatchingAccuracy
+        +getPairSetsIndex(): PairSetsIndex
+        +averageSymmetricGini(): MeanVariance
+        +adjustedSymmetricGini(): MeanVariance
+    }
+    class "<size:14>ClusterContingencyTable.Util\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.ClusterContingencyTable.Util
+
+    elki.evaluation.clustering.ClusterContingencyTable +-- elki.evaluation.clustering.ClusterContingencyTable.Util
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Clustering\n<size:10>elki.data" as elki.data.Clustering<M extends Model> [[Clustering.html]] {
+        {static} +TYPE: SimpleTypeInformation<Clustering<?>>
+        -toplevelclusters: List<Cluster<M extends Model>>
+        -hierarchy: ModifiableHierarchy<Cluster<M extends Model>>
+        +Clustering(List<Cluster<M extends Model>>)
+        +Clustering()
+        +addToplevelCluster(Cluster<M extends Model>): void
+        +addChildCluster(Cluster<M extends Model>, Cluster<M extends Model>): void
+        +getToplevelClusters(): List<Cluster<M extends Model>>
+        +getClusterHierarchy(): Hierarchy<Cluster<M extends Model>>
+        +getAllClusters(): List<Cluster<M extends Model>>
+        +iterToplevelClusters(): It<Cluster<M extends Model>>
+        {static} +getClusteringResults(Object): List<Clustering<? extends Model>>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

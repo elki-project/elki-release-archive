@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MTreeSettings\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[MTreeSettings.html]] {
+        #distanceFunction: Distance<? super O>
+        #splitStrategy: MTreeSplit<E extends MTreeEntry, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>>
+        #insertStrategy: MTreeInsert<E extends MTreeEntry, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

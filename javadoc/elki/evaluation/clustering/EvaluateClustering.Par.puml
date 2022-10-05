@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluateClustering.Par\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.EvaluateClustering.Par [[EvaluateClustering.Par.html]] {
+        {static} +REFERENCE_ID: OptionID
+        {static} +NOISE_ID: OptionID
+        {static} +SELFPAIR_ID: OptionID
+        -referencealg: ClusteringAlgorithm<?>
+        -noiseSpecialHandling: boolean
+        -selfPairing: boolean
+        +configure(Parameterization): void
+        +make(): EvaluateClustering
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>EvaluateClustering\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.EvaluateClustering [[EvaluateClustering.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.evaluation.clustering.EvaluateClustering.Par
+    elki.evaluation.clustering.EvaluateClustering +-- elki.evaluation.clustering.EvaluateClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

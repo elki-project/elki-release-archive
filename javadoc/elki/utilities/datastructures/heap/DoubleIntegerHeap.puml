@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DoubleIntegerHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleIntegerHeap [[DoubleIntegerHeap.html]] {
+        {abstract} +add(double, int): void
+        {abstract} +add(double, int, int): void
+        {abstract} +replaceTopElement(double, int): void
+        {abstract} +peekKey(): double
+        {abstract} +peekValue(): int
+        {abstract} +containsKey(double): boolean
+        {abstract} +containsValue(int): boolean
+        {abstract} +poll(): void
+        {abstract} +clear(): void
+        {abstract} +size(): int
+        {abstract} +isEmpty(): boolean
+        {abstract} +unsortedIter(): UnsortedIter
+    }
+    interface "<size:14>DoubleIntegerHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleIntegerHeap.UnsortedIter [[DoubleIntegerHeap.UnsortedIter.html]]
+
+    elki.utilities.datastructures.heap.DoubleIntegerHeap +-- elki.utilities.datastructures.heap.DoubleIntegerHeap.UnsortedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CBLOF.Par\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.CBLOF.Par<O extends NumberVector> {
+        {static} +CLUSTERING_ID: OptionID
+        {static} +ALPHPA_ID: OptionID
+        {static} +BETA_ID: OptionID
+        #clusteringAlgorithm: ClusteringAlgorithm<Clustering<MeanModel>>
+        #alpha: double
+        #beta: double
+        #distance: NumberVectorDistance<? super NumberVector>
+        +configure(Parameterization): void
+        +make(): CBLOF<O extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>CBLOF\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.CBLOF<O extends NumberVector> [[CBLOF.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.clustering.CBLOF.Par
+    elki.outlier.clustering.CBLOF +-- elki.outlier.clustering.CBLOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

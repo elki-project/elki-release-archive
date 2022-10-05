@@ -1,0 +1,70 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.evaluation.clustering.pairsegments {
+
+        class Segment [[Segment.html]] {
+            {static} +UNCLUSTERED: int
+            #objIDs: DBIDs
+            #pairsize: long
+            #clusterIds: int[]
+            +Segment(int)
+            +Segment(int[])
+            +getPairCount(): long
+            +get(int): int
+            +isUnpaired(): boolean
+            +isNone(): boolean
+            +getUnpairedClusteringIndex(): int
+            +getDBIDs(): DBIDs
+            +compareTo(Segment): int
+        }
+
+        class ClusterPairSegmentAnalysis [[ClusterPairSegmentAnalysis.html]] {
+            +processNewResult(Object): void
+        }
+
+        class Segments [[Segments.html]] {
+            {static} -LOG: Logging
+            -clusterings: List<Clustering<?>>
+            -clusters: List<List<? extends Cluster<?>>>
+            -clusteringsCount: int
+            -numclusters: int[]
+            -totalObjects: int
+            -actualPairs: long
+            -segments: TreeMap<Segment, Segment>
+            +Segments(List<Clustering<?>>)
+            -recursivelyFill(List<List<? extends Cluster<?>>>): void
+            -recursivelyFill(List<List<? extends Cluster<?>>>, int, SetDBIDs, SetDBIDs, int[], boolean): void
+            -makeOrUpdateSegment(int[], DBIDs, int): void
+            +getClusteringDescription(int): String
+            +getPairedSegments(Segment): List<Segment>
+            +unifySegment(Segment): Segment
+            +size(): int
+            +getPairCount(boolean): long
+            +getClusterings(): int
+            +getTotalClusterCount(): int
+            +getHighestClusterCount(): int
+            +iterator(): Iterator<Segment>
+        }
+
+        java.lang.Comparable <|.. Segment
+        elki.evaluation.Evaluator <|.. ClusterPairSegmentAnalysis
+        java.lang.Iterable <|.. Segments
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+        interface Iterable<T> {
+            {abstract} +iterator(): Iterator<T>
+            +forEach(Consumer<? super T>): void
+            +spliterator(): Spliterator<T>
+        }
+    }
+
+    namespace elki.evaluation {
+        interface Evaluator [[../../Evaluator.html]]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

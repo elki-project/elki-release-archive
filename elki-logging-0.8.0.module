@@ -1,0 +1,134 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-logging",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "elki-logging-0.8.0.jar",
+          "url": "elki-logging-0.8.0.jar",
+          "size": 45059,
+          "sha512": "3a9ea62993676469a63a9cca85cf623345cac35d312919dbc131465b23cd5167fe2d8df79f89c0e1c239d5316e268073e923e062f3550bc23607041d42b65dfd",
+          "sha256": "78c7827ece079f562400ca373434b395b9cb7e45da26ebc1d0cb7923ea77c050",
+          "sha1": "2e73537b1e51aa0d97231780bc2268ed0f159bd7",
+          "md5": "a20e640cae754267642916d47a17a984"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "elki-logging-0.8.0.jar",
+          "url": "elki-logging-0.8.0.jar",
+          "size": 45059,
+          "sha512": "3a9ea62993676469a63a9cca85cf623345cac35d312919dbc131465b23cd5167fe2d8df79f89c0e1c239d5316e268073e923e062f3550bc23607041d42b65dfd",
+          "sha256": "78c7827ece079f562400ca373434b395b9cb7e45da26ebc1d0cb7923ea77c050",
+          "sha1": "2e73537b1e51aa0d97231780bc2268ed0f159bd7",
+          "md5": "a20e640cae754267642916d47a17a984"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-logging",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-logging-0.8.0-test-fixtures.jar",
+          "url": "elki-logging-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "cade3af87cc762f25f051cb727bbca061f3722baf857c466be2db4d80db0d555bfc14b5fb57e3c25b42c39549fdadd38bcde423c82e02a026650abac38aca1b5",
+          "sha256": "f279eeacf07de058f63c21ae75bd14e1e7cc405cb610a5e7176fe66a82232d35",
+          "sha1": "d7a02538a13e5ce55211d8dc968579f221a20973",
+          "md5": "c3caf59858a7e657a058fadb942b21ff"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-logging-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-logging",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-logging-0.8.0-test-fixtures.jar",
+          "url": "elki-logging-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "cade3af87cc762f25f051cb727bbca061f3722baf857c466be2db4d80db0d555bfc14b5fb57e3c25b42c39549fdadd38bcde423c82e02a026650abac38aca1b5",
+          "sha256": "f279eeacf07de058f63c21ae75bd14e1e7cc405cb610a5e7176fe66a82232d35",
+          "sha1": "d7a02538a13e5ce55211d8dc968579f221a20973",
+          "md5": "c3caf59858a7e657a058fadb942b21ff"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-logging-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

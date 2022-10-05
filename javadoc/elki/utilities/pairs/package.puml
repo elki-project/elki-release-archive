@@ -1,0 +1,78 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.pairs {
+
+        class DoubleObjPair<O> [[DoubleObjPair.html]] {
+            +first: double
+            +second: O
+            +DoubleObjPair(double, O)
+            +compareTo(DoubleObjPair<O>): int
+        }
+
+        class DoubleIntPair [[DoubleIntPair.html]] {
+            +first: double
+            +second: int
+            {static} +BYFIRST_COMPARATOR: Comparator<DoubleIntPair>
+            {static} +BYSECOND_COMPARATOR: Comparator<DoubleIntPair>
+            {static} +SWAPPED_COMPARATOR: Comparator<DoubleIntPair>
+            +DoubleIntPair(double, int)
+            +compareTo(DoubleIntPair): int
+            +compareSwappedTo(DoubleIntPair): int
+            +setFirst(double): void
+            +setSecond(int): void
+        }
+
+        class DoubleDoublePair [[DoubleDoublePair.html]] {
+            +first: double
+            +second: double
+            {static} +BYFIRST_COMPARATOR: Comparator<DoubleDoublePair>
+            {static} +BYSECOND_COMPARATOR: Comparator<DoubleDoublePair>
+            {static} +SWAPPED_COMPARATOR: Comparator<DoubleDoublePair>
+            +DoubleDoublePair(double, double)
+            +DoubleDoublePair(DoubleDoublePair)
+            +compareTo(DoubleDoublePair): int
+            +compareSwappedTo(DoubleDoublePair): int
+            +setFirst(double): void
+            +setSecond(double): void
+        }
+
+        class IntIntPair [[IntIntPair.html]] {
+            +first: int
+            +second: int
+            {static} +BYFIRST_COMPARATOR: Comparator<IntIntPair>
+            {static} +BYSECOND_COMPARATOR: Comparator<IntIntPair>
+            {static} +SWAPPED_COMPARATOR: Comparator<IntIntPair>
+            +IntIntPair(int, int)
+            +compareTo(IntIntPair): int
+            +compareSwappedTo(IntIntPair): int
+            +setFirst(int): void
+            +setSecond(int): void
+        }
+
+        class Pair<F, S> [[Pair.html]] {
+            +first: F
+            +second: S
+            +Pair(F, S)
+            +getFirst(): F
+            +setFirst(F): void
+            +getSecond(): S
+            +setSecond(S): void
+        }
+
+        class IntDoublePair [[IntDoublePair.html]] {
+            +first: int
+            +second: double
+            {static} +BYFIRST_COMPARATOR: Comparator<IntDoublePair>
+            {static} +BYSECOND_COMPARATOR: Comparator<IntDoublePair>
+            {static} +SWAPPED_COMPARATOR: Comparator<IntDoublePair>
+            +IntDoublePair(int, double)
+            +compareTo(IntDoublePair): int
+            +compareSwappedTo(IntDoublePair): int
+            +setFirst(int): void
+            +setSecond(double): void
+        }
+
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

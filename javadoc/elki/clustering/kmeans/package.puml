@@ -1,0 +1,807 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.kmeans {
+
+        class BisectingKMeans<V extends NumberVector, M extends MeanModel> [[BisectingKMeans.html]] {
+            {static} -LOG: Logging
+            -k: int
+            +BisectingKMeans(int, KMeans<V extends NumberVector, M extends MeanModel>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): Clustering<M extends MeanModel>
+            +getDistance(): NumberVectorDistance<? super NumberVector>
+            +setK(int): void
+            +setDistance(NumberVectorDistance<? super NumberVector>): void
+        }
+
+        class elki.clustering.kmeans.BisectingKMeans.Par<V extends NumberVector, M extends MeanModel> {
+            {static} +KMEANS_ID: OptionID
+            #k: int
+            +configure(Parameterization): void
+            +make(): BisectingKMeans<V extends NumberVector, M extends MeanModel>
+        }
+
+        class ElkanKMeans<V extends NumberVector> [[ElkanKMeans.html]] {
+            {static} -LOG: Logging
+            +ElkanKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.ElkanKMeans.Instance [[ElkanKMeans.Instance.html]] {
+            ~cdist: double[]
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.ElkanKMeans.Par<V extends NumberVector> [[ElkanKMeans.Par.html]] {
+            +make(): ElkanKMeans<V extends NumberVector>
+        }
+
+        class SimplifiedElkanKMeans<V extends NumberVector> [[SimplifiedElkanKMeans.html]] {
+            {static} -LOG: Logging
+            #varstat: boolean
+            +SimplifiedElkanKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.SimplifiedElkanKMeans.Instance [[SimplifiedElkanKMeans.Instance.html]] {
+            ~sums: double[]
+            ~newmeans: double[]
+            ~upper: WritableDoubleDataStore
+            ~lower: WritableDataStore<double[]>
+            ~sep: double[]
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #iterate(int): int
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #updateBounds(double[]): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.SimplifiedElkanKMeans.Par<V extends NumberVector> [[SimplifiedElkanKMeans.Par.html]] {
+            #needsMetric(): boolean
+            +configure(Parameterization): void
+            +make(): SimplifiedElkanKMeans<V extends NumberVector>
+        }
+
+        class ExponionKMeans<V extends NumberVector> [[ExponionKMeans.html]] {
+            {static} -LOG: Logging
+            +ExponionKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.ExponionKMeans.Instance [[ExponionKMeans.Instance.html]] {
+            ~cdist: double[]
+            ~cnum: int[]
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.ExponionKMeans.Par<V extends NumberVector> [[ExponionKMeans.Par.html]] {
+            +make(): ExponionKMeans<V extends NumberVector>
+        }
+
+        class SortMeans<V extends NumberVector> [[SortMeans.html]] {
+            {static} -LOG: Logging
+            +SortMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.SortMeans.Instance [[SortMeans.Instance.html]] {
+            ~cnum: int[]
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #assignToNearestCluster(): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.SortMeans.Par<V extends NumberVector> [[SortMeans.Par.html]] {
+            #needsMetric(): boolean
+            +make(): SortMeans<V extends NumberVector>
+        }
+
+        class HamerlyKMeans<V extends NumberVector> [[HamerlyKMeans.html]] {
+            {static} -LOG: Logging
+            #varstat: boolean
+            +HamerlyKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.HamerlyKMeans.Instance [[HamerlyKMeans.Instance.html]] {
+            ~sums: double[]
+            ~newmeans: double[]
+            ~upper: WritableDoubleDataStore
+            ~lower: WritableDoubleDataStore
+            ~sep: double[]
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #iterate(int): int
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #recomputeSeperation(double[]): void
+            #updateBounds(double[]): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.HamerlyKMeans.Par<V extends NumberVector> [[HamerlyKMeans.Par.html]] {
+            #needsMetric(): boolean
+            +configure(Parameterization): void
+            +make(): HamerlyKMeans<V extends NumberVector>
+        }
+
+        class KMeansMinusMinus<V extends NumberVector> [[KMeansMinusMinus.html]] {
+            {static} -LOG: Logging
+            +rate: double
+            +noiseFlag: boolean
+            +KMeansMinusMinus(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization, double, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.KMeansMinusMinus.Instance [[KMeansMinusMinus.Instance.html]] {
+            ~minHeap: DoubleMinHeap
+            ~heapsize: int
+            ~prevvartotal: double
+            ~clusters: List<ModifiableDoubleDBIDList>
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #iterate(int): int
+            #buildResultWithNoise(): Clustering<KMeansModel>
+            #assignToNearestCluster(): int
+            #meansWithTreshhold(double): double[]
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.KMeansMinusMinus.Par<V extends NumberVector> [[KMeansMinusMinus.Par.html]] {
+            {static} +RATE_ID: OptionID
+            {static} +NOISE_FLAG_ID: OptionID
+            -rate: double
+            -noiseFlag: boolean
+            +configure(Parameterization): void
+            +make(): KMeansMinusMinus<V extends NumberVector>
+        }
+
+        class AnnulusKMeans<V extends NumberVector> [[AnnulusKMeans.html]] {
+            {static} -LOG: Logging
+            +AnnulusKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.AnnulusKMeans.Instance [[AnnulusKMeans.Instance.html]] {
+            ~second: WritableIntegerDataStore
+            ~cdist: double[]
+            ~cnum: int[]
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #initialAssignToNearestCluster(): int
+            #orderMeans(): void
+            #assignToNearestCluster(): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.AnnulusKMeans.Par<V extends NumberVector> [[AnnulusKMeans.Par.html]] {
+            +make(): AnnulusKMeans<V extends NumberVector>
+        }
+
+        class FuzzyCMeans<V extends NumberVector> [[FuzzyCMeans.html]] {
+            {static} -LOG: Logging
+            {static} -KEY: String
+            -k: int
+            -m: double
+            -delta: double
+            -miniter: int
+            -maxiter: int
+            -soft: boolean
+            {static} +SOFT_TYPE: SimpleTypeInformation<double[]>
+            +FuzzyCMeans(int, int, int, double, double, boolean, KMeansInitialization)
+            +run(Relation<V extends NumberVector>): Clustering<MeanModel>
+            -updateMeans(Relation<V extends NumberVector>, WritableDataStore<double[]>, double[], int): double
+            +assignProbabilitiesToInstances(Relation<V extends NumberVector>, double[], WritableDataStore<double[]>): double
+            -distance(V extends NumberVector, double[]): double
+            -distance(double[], double[]): double
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.kmeans.FuzzyCMeans.Par [[FuzzyCMeans.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +DELTA_ID: OptionID
+            {static} +MINITER_ID: OptionID
+            {static} +M_ID: OptionID
+            {static} +SOFT_ID: OptionID
+            {static} +INIT_ID: OptionID
+            #k: int
+            #delta: double
+            #miniter: int
+            #maxiter: int
+            #m: double
+            #soft: boolean
+            +configure(Parameterization): void
+            +make(): FuzzyCMeans<NumberVector>
+        }
+
+        class MacQueenKMeans<V extends NumberVector> [[MacQueenKMeans.html]] {
+            {static} -LOG: Logging
+            +MacQueenKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.MacQueenKMeans.Instance [[MacQueenKMeans.Instance.html]] {
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #iterate(int): int
+            #getLogger(): Logging
+            -updateMeanAndAssignment(int, NumberVector, DBIDIter): boolean
+        }
+
+        class elki.clustering.kmeans.MacQueenKMeans.Par<V extends NumberVector> [[MacQueenKMeans.Par.html]] {
+            +make(): MacQueenKMeans<V extends NumberVector>
+        }
+
+        class KDTreePruningKMeans<V extends NumberVector> [[KDTreePruningKMeans.html]] {
+            {static} -LOG: Logging
+            #leafsize: int
+            +KDTreePruningKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization, Split, int)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        enum elki.clustering.kmeans.KDTreePruningKMeans.Split [[KDTreePruningKMeans.Split.html]] {
+            {static} +MIDPOINT
+            {static} +BOUNDED_MIDPOINT
+            {static} +MEDIAN
+            {static} +SSQ
+        }
+
+        class elki.clustering.kmeans.KDTreePruningKMeans.Instance [[KDTreePruningKMeans.Instance.html]] {
+            #sorted: ArrayModifiableDBIDs
+            #iter: DBIDArrayMIter
+            #indices: int[]
+            #clusterSums: double[]
+            #clusterSizes: int[]
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            +run(int): void
+            #buildTreeMidpoint(Relation<? extends NumberVector>, int, int): KDNode
+            #buildTreeBoundedMidpoint(Relation<? extends NumberVector>, int, int, SortDBIDsBySingleDimension): KDNode
+            #buildTreeMedian(Relation<? extends NumberVector>, int, int, SortDBIDsBySingleDimension): KDNode
+            #buildTreeSSQ(Relation<? extends NumberVector>, int, int, SortDBIDsBySingleDimension): KDNode
+            #iterate(int): int
+            #traversal(KDNode, int): int
+            #labelSubtree(double[], int, int, int): int
+            #pruning(KDNode, int): int
+            #getMinMaxDist(double[], double[], int): double
+            #mindist(double[], double[], double[]): double
+            #traverseLeaf(int, int, int): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.KDTreePruningKMeans.KDNode [[KDTreePruningKMeans.KDNode.html]] {
+            ~sum: double[]
+            ~mid: double[]
+            ~halfwidth: double[]
+            ~start: int
+            ~end: int
+            +KDNode(Relation<? extends NumberVector>, DBIDArrayIter, int, int)
+        }
+
+        class elki.clustering.kmeans.KDTreePruningKMeans.Par<V extends NumberVector> [[KDTreePruningKMeans.Par.html]] {
+            {static} +SPLIT_ID: OptionID
+            {static} +LEAFSIZE_ID: OptionID
+            #leafsize: int
+            +configure(Parameterization): void
+            +make(): KDTreePruningKMeans<V extends NumberVector>
+        }
+
+        class GMeans<V extends NumberVector, M extends MeanModel> [[GMeans.html]] {
+            {static} -LOG: Logging
+            #critical: double
+            +GMeans(NumberVectorDistance<? super NumberVector>, double, int, int, int, KMeans<V extends NumberVector, M extends MeanModel>, KMeansInitialization, RandomFactory)
+            #splitCluster(Cluster<M extends MeanModel>, Relation<V extends NumberVector>): List<Cluster<M extends MeanModel>>
+            #splitCentroid(Cluster<? extends MeanModel>, Relation<V extends NumberVector>): double[]
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.GMeans.Par<V extends NumberVector, M extends MeanModel> [[GMeans.Par.html]] {
+            {static} +CRITICAL_ID: OptionID
+            #critical: double
+            #configureInformationCriterion(Parameterization): void
+            +make(): GMeans<V extends NumberVector, M extends MeanModel>
+        }
+
+        class CompareMeans<V extends NumberVector> [[CompareMeans.html]] {
+            {static} -LOG: Logging
+            +CompareMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.CompareMeans.Instance [[CompareMeans.Instance.html]] {
+            ~cdist: double[]
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #iterate(int): int
+            #recomputeSeperation(double[], double[]): void
+            #assignToNearestCluster(): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.CompareMeans.Par<V extends NumberVector> [[CompareMeans.Par.html]] {
+            #needsMetric(): boolean
+            +make(): CompareMeans<V extends NumberVector>
+        }
+
+        class BetulaLloydKMeans [[BetulaLloydKMeans.html]] {
+            {static} -LOG: Logging
+            ~cffactory: Factory<?>
+            ~storeIds: boolean
+            ~ignoreWeight: boolean
+            ~diststat: long
+            +BetulaLloydKMeans(int, int, Factory<?>, AbstractCFKMeansInitialization, boolean, boolean)
+            +run(Relation<NumberVector>): Clustering<KMeansModel>
+            -kmeans(ArrayList<? extends ClusterFeature>, int[], int[], CFTree<?>): double[]
+            -means(int[], double[], ArrayList<? extends ClusterFeature>, int[]): double[]
+            -assignToNearestCluster(int[], double[], ArrayList<? extends ClusterFeature>, int[]): int
+            #calculateVariances(int[], double[], ArrayList<? extends ClusterFeature>, int[]): double[]
+            -distance(NumberVector, double[]): double
+            -distance(double[], double[]): double
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.BetulaLloydKMeans.Par [[BetulaLloydKMeans.Par.html]] {
+            {static} +STORE_IDS_ID: OptionID
+            {static} +IGNORE_WEIGHT_ID: OptionID
+            ~cffactory: Factory<?>
+            ~storeIds: boolean
+            ~ignoreWeight: boolean
+            +configure(Parameterization): void
+            +make(): BetulaLloydKMeans
+        }
+
+        class SingleAssignmentKMeans<V extends NumberVector> [[SingleAssignmentKMeans.html]] {
+            {static} -LOG: Logging
+            +SingleAssignmentKMeans(NumberVectorDistance<? super NumberVector>, int, KMeansInitialization)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.SingleAssignmentKMeans.Instance [[SingleAssignmentKMeans.Instance.html]] {
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #iterate(int): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.SingleAssignmentKMeans.Par<V extends NumberVector> [[SingleAssignmentKMeans.Par.html]] {
+            +configure(Parameterization): void
+            +make(): SingleAssignmentKMeans<V extends NumberVector>
+        }
+
+        class LloydKMeans<V extends NumberVector> [[LloydKMeans.html]] {
+            {static} -LOG: Logging
+            +LloydKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.LloydKMeans.Instance [[LloydKMeans.Instance.html]] {
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #iterate(int): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.LloydKMeans.Par<V extends NumberVector> [[LloydKMeans.Par.html]] {
+            +make(): LloydKMeans<V extends NumberVector>
+        }
+
+        class XMeans<V extends NumberVector, M extends MeanModel> [[XMeans.html]] {
+            {static} -LOG: Logging
+            -k_min: int
+            -k_max: int
+            ~rnd: RandomFactory
+            +XMeans(NumberVectorDistance<? super NumberVector>, int, int, int, KMeans<V extends NumberVector, M extends MeanModel>, KMeansInitialization, KMeansQualityMeasure<V extends NumberVector>, RandomFactory)
+            +run(Relation<V extends NumberVector>): Clustering<M extends MeanModel>
+            #splitCluster(Cluster<M extends MeanModel>, Relation<V extends NumberVector>): List<Cluster<M extends MeanModel>>
+            #splitCentroid(Cluster<? extends MeanModel>, Relation<V extends NumberVector>): double[]
+            +getInputTypeRestriction(): TypeInformation[]
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.XMeans.Par<V extends NumberVector, M extends MeanModel> {
+            {static} +INNER_KMEANS_ID: OptionID
+            {static} +K_MIN_ID: OptionID
+            {static} +SEED_ID: OptionID
+            {static} +INFORMATION_CRITERION_ID: OptionID
+            #k_min: int
+            #k_max: int
+            #random: RandomFactory
+            +configure(Parameterization): void
+            #configureInformationCriterion(Parameterization): void
+            +make(): XMeans<V extends NumberVector, M extends MeanModel>
+        }
+
+        class HartiganWongKMeans<V extends NumberVector> [[HartiganWongKMeans.html]] {
+            {static} -LOG: Logging
+            +HartiganWongKMeans(int, KMeansInitialization)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.HartiganWongKMeans.Instance [[HartiganWongKMeans.Instance.html]] {
+            ~secondary: WritableIntegerDataStore
+            ~r1s: WritableDoubleDataStore
+            ~ncp: int[]
+            ~live: int[]
+            ~itran: boolean[]
+            ~an1: double[]
+            ~an2: double[]
+            -optries: int
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #iterate(int): int
+            -initialAssignToNearestCluster(): int
+            -initialize(): void
+            -optimalTransfer(): int
+            -quickTransfer(): int
+            -cacheR1(DBIDIter, NumberVector, int): double
+            -transfer(DBIDRef, NumberVector, int, int): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.HartiganWongKMeans.Parameterizer<V extends NumberVector> [[HartiganWongKMeans.Parameterizer.html]] {
+            +configure(Parameterization): void
+            +make(): HartiganWongKMeans<V extends NumberVector>
+        }
+
+        class ShallotKMeans<V extends NumberVector> [[ShallotKMeans.html]] {
+            {static} -LOG: Logging
+            +ShallotKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization, boolean)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.ShallotKMeans.Instance [[ShallotKMeans.Instance.html]] {
+            ~second: WritableIntegerDataStore
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #initialAssignToNearestCluster(): int
+            #assignToNearestCluster(): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.ShallotKMeans.Par<V extends NumberVector> [[ShallotKMeans.Par.html]] {
+            +make(): ShallotKMeans<V extends NumberVector>
+        }
+
+        class YinYangKMeans<V extends NumberVector> [[YinYangKMeans.html]] {
+            {static} -LOG: Logging
+            {static} -GROUP_KMEANS_MAXITER: int
+            -t: int
+            +YinYangKMeans(int, int, KMeansInitialization, int)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.YinYangKMeans.Instance [[YinYangKMeans.Instance.html]] {
+            ~groups: int[]
+            ~gdrift: double[]
+            ~cdrift: double[]
+            ~sums: double[]
+            ~glabel: int[]
+            ~upper: WritableDoubleDataStore
+            ~lower: WritableDataStore<double[]>
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[], int)
+            +run(int): void
+            -groupKMeans(int): int[]
+            -initialGroupAssignment(int, double[], int[]): void
+            -updateGroupAssignment(int, double[], int[]): boolean
+            #iterate(int): int
+            -updateCenters(): void
+            #assignToNearestCluster(): int
+            -initialAssignToNearestCluster(): int
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.YinYangKMeans.Par<V extends NumberVector> [[YinYangKMeans.Par.html]] {
+            {static} +T_ID: OptionID
+            #t: int
+            #needsMetric(): boolean
+            +configure(Parameterization): void
+            +make(): YinYangKMeans<V extends NumberVector>
+        }
+
+        class KDTreeFilteringKMeans<V extends NumberVector> [[KDTreeFilteringKMeans.html]] {
+            {static} -LOG: Logging
+            +KDTreeFilteringKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization, Split, int)
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.KDTreeFilteringKMeans.Instance [[KDTreeFilteringKMeans.Instance.html]] {
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #pruning(KDNode, int): int
+            #getNearestCenter(double[], int): int
+            #isFarther(double[], double[], double[], double[]): boolean
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.KDTreeFilteringKMeans.Par<V extends NumberVector> [[KDTreeFilteringKMeans.Par.html]] {
+            +make(): KDTreeFilteringKMeans<V extends NumberVector>
+        }
+
+        abstract class AbstractKMeans<V extends NumberVector, M extends Model> [[AbstractKMeans.html]] {
+            #distance: NumberVectorDistance<? super NumberVector>
+            #k: int
+            #maxiter: int
+            +AbstractKMeans(int, int, KMeansInitialization)
+            +AbstractKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+            +getInputTypeRestriction(): TypeInformation[]
+            #initialMeans(Relation<V extends NumberVector>): double[]
+            {static} #means(List<? extends DBIDs>, double[], Relation<? extends NumberVector>): double[]
+            {static} -denseMeans(List<? extends DBIDs>, double[], Relation<? extends NumberVector>): double[]
+            {static} +plusEquals(double[], NumberVector): void
+            {static} -densePlusEquals(double[], NumberVector): void
+            {static} -sparsePlusEquals(double[], SparseNumberVector): void
+            {static} +minusEquals(double[], NumberVector): void
+            {static} +plusMinusEquals(double[], double[], NumberVector): void
+            {static} -densePlusMinusEquals(double[], double[], NumberVector): void
+            {static} -sparsePlusMinusEquals(double[], double[], SparseNumberVector): void
+            {static} -sparseMeans(List<? extends DBIDs>, double[], Relation<? extends SparseNumberVector>): double[]
+            {static} #nearestMeans(double[], int[]): void
+            {static} #incrementalUpdateMean(double[], NumberVector, int, double): void
+            +setK(int): void
+            +getDistance(): NumberVectorDistance<? super NumberVector>
+            +setDistance(NumberVectorDistance<? super NumberVector>): void
+            {abstract} #getLogger(): Logging
+        }
+
+        abstract class elki.clustering.kmeans.AbstractKMeans.Instance [[AbstractKMeans.Instance.html]] {
+            #means: double[]
+            #clusters: List<ModifiableDBIDs>
+            #assignment: WritableIntegerDataStore
+            #varsum: double[]
+            #relation: Relation<? extends NumberVector>
+            #diststat: long
+            -df: NumberVectorDistance<?>
+            #k: int
+            #isSquared: boolean
+            #key: String
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #distance(NumberVector, NumberVector): double
+            #distance(NumberVector, double[]): double
+            #distance(double[], double[]): double
+            #sqrtdistance(NumberVector, NumberVector): double
+            #sqrtdistance(NumberVector, double[]): double
+            #sqrtdistance(double[], double[]): double
+            +run(int): void
+            {abstract} #iterate(int): int
+            #meansFromSums(double[], double[], double[]): void
+            #copyMeans(double[], double[]): void
+            #assignToNearestCluster(): int
+            #recomputeSeperation(double[], double[]): void
+            #initialSeperation(double[]): void
+            #computeSquaredSeparation(double[]): void
+            #movedDistance(double[], double[], double[]): void
+            +buildResult(): Clustering<KMeansModel>
+            +buildResult(boolean, Relation<? extends NumberVector>): Clustering<KMeansModel>
+            #recomputeVariance(Relation<? extends NumberVector>): void
+            {abstract} #getLogger(): Logging
+        }
+
+        abstract class elki.clustering.kmeans.AbstractKMeans.Par<V extends NumberVector> [[AbstractKMeans.Par.html]] {
+            #k: int
+            #maxiter: int
+            #varstat: boolean
+            #distance: NumberVectorDistance<? super NumberVector>
+            +configure(Parameterization): void
+            #getParameterK(Parameterization): void
+            #getParameterDistance(Parameterization): void
+            #needsMetric(): boolean
+            #getParameterInitialization(Parameterization): void
+            #getParameterMaxIter(Parameterization): void
+            #getParameterVarstat(Parameterization): void
+            {abstract} +make(): AbstractKMeans<V extends NumberVector, ?>
+        }
+
+        interface KMeans<V extends NumberVector, M extends Model> [[KMeans.html]] {
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            {static} +INIT_ID: OptionID
+            {static} +K_ID: OptionID
+            {static} +MAXITER_ID: OptionID
+            {static} +SEED_ID: OptionID
+            {static} +VARSTAT_ID: OptionID
+            {abstract} +run(Relation<V extends NumberVector>): Clustering<M extends Model>
+            {abstract} +setK(int): void
+            {abstract} +setDistance(NumberVectorDistance<? super NumberVector>): void
+            {abstract} +getDistance(): NumberVectorDistance<? super NumberVector>
+            {abstract} +setInitializer(KMeansInitialization): void
+        }
+
+        class BestOfMultipleKMeans<V extends NumberVector, M extends MeanModel> [[BestOfMultipleKMeans.html]] {
+            {static} -LOG: Logging
+            -trials: int
+            +BestOfMultipleKMeans(int, KMeans<V extends NumberVector, M extends MeanModel>, KMeansQualityMeasure<? super NumberVector>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): Clustering<M extends MeanModel>
+            +getDistance(): NumberVectorDistance<? super NumberVector>
+            +setK(int): void
+            +setDistance(NumberVectorDistance<? super NumberVector>): void
+        }
+
+        class elki.clustering.kmeans.BestOfMultipleKMeans.Par<V extends NumberVector, M extends MeanModel> {
+            {static} +TRIALS_ID: OptionID
+            {static} +KMEANS_ID: OptionID
+            {static} +QUALITYMEASURE_ID: OptionID
+            #trials: int
+            +configure(Parameterization): void
+            +make(): BestOfMultipleKMeans<V extends NumberVector, M extends MeanModel>
+        }
+
+        class KMediansLloyd<V extends NumberVector> [[KMediansLloyd.html]] {
+            {static} -LOG: Logging
+            +KMediansLloyd(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+            +run(Relation<V extends NumberVector>): Clustering<MeanModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.KMediansLloyd.Instance [[KMediansLloyd.Instance.html]] {
+            +Instance(Relation<? extends NumberVector>, NumberVectorDistance<?>, double[])
+            #iterate(int): int
+            #buildMediansResult(): Clustering<MeanModel>
+            #medians(List<? extends DBIDs>, double[], Relation<? extends NumberVector>): double[]
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.KMediansLloyd.Par<V extends NumberVector> [[KMediansLloyd.Par.html]] {
+            +make(): KMediansLloyd<V extends NumberVector>
+        }
+
+        KMeans <|.. BisectingKMeans
+        BisectingKMeans --> KMeans: innerkMeans
+        BisectingKMeans --> elki.clustering.kmeans.initialization.KMeansInitialization: initializer
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmeans.BisectingKMeans.Par
+        BisectingKMeans +-- elki.clustering.kmeans.BisectingKMeans.Par
+        elki.clustering.kmeans.BisectingKMeans.Par --> KMeans: kMeansVariant
+        SimplifiedElkanKMeans <|-- ElkanKMeans
+        elki.clustering.kmeans.SimplifiedElkanKMeans.Instance <|-- elki.clustering.kmeans.ElkanKMeans.Instance
+        ElkanKMeans +-- elki.clustering.kmeans.ElkanKMeans.Instance
+        elki.clustering.kmeans.SimplifiedElkanKMeans.Par <|-- elki.clustering.kmeans.ElkanKMeans.Par
+        ElkanKMeans +-- elki.clustering.kmeans.ElkanKMeans.Par
+        AbstractKMeans <|-- SimplifiedElkanKMeans
+        elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.SimplifiedElkanKMeans.Instance
+        SimplifiedElkanKMeans +-- elki.clustering.kmeans.SimplifiedElkanKMeans.Instance
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.SimplifiedElkanKMeans.Par
+        SimplifiedElkanKMeans +-- elki.clustering.kmeans.SimplifiedElkanKMeans.Par
+        HamerlyKMeans <|-- ExponionKMeans
+        elki.clustering.kmeans.HamerlyKMeans.Instance <|-- elki.clustering.kmeans.ExponionKMeans.Instance
+        ExponionKMeans +-- elki.clustering.kmeans.ExponionKMeans.Instance
+        elki.clustering.kmeans.HamerlyKMeans.Par <|-- elki.clustering.kmeans.ExponionKMeans.Par
+        ExponionKMeans +-- elki.clustering.kmeans.ExponionKMeans.Par
+        CompareMeans <|-- SortMeans
+        elki.clustering.kmeans.CompareMeans.Instance <|-- elki.clustering.kmeans.SortMeans.Instance
+        SortMeans +-- elki.clustering.kmeans.SortMeans.Instance
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.SortMeans.Par
+        SortMeans +-- elki.clustering.kmeans.SortMeans.Par
+        AbstractKMeans <|-- HamerlyKMeans
+        elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.HamerlyKMeans.Instance
+        HamerlyKMeans +-- elki.clustering.kmeans.HamerlyKMeans.Instance
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.HamerlyKMeans.Par
+        HamerlyKMeans +-- elki.clustering.kmeans.HamerlyKMeans.Par
+        AbstractKMeans <|-- KMeansMinusMinus
+        elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.KMeansMinusMinus.Instance
+        KMeansMinusMinus +-- elki.clustering.kmeans.KMeansMinusMinus.Instance
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.KMeansMinusMinus.Par
+        KMeansMinusMinus +-- elki.clustering.kmeans.KMeansMinusMinus.Par
+        HamerlyKMeans <|-- AnnulusKMeans
+        elki.clustering.kmeans.HamerlyKMeans.Instance <|-- elki.clustering.kmeans.AnnulusKMeans.Instance
+        AnnulusKMeans +-- elki.clustering.kmeans.AnnulusKMeans.Instance
+        elki.clustering.kmeans.HamerlyKMeans.Par <|-- elki.clustering.kmeans.AnnulusKMeans.Par
+        AnnulusKMeans +-- elki.clustering.kmeans.AnnulusKMeans.Par
+        elki.clustering.ClusteringAlgorithm <|.. FuzzyCMeans
+        FuzzyCMeans --> elki.clustering.kmeans.initialization.KMeansInitialization: initializer
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmeans.FuzzyCMeans.Par
+        FuzzyCMeans +-- elki.clustering.kmeans.FuzzyCMeans.Par
+        elki.clustering.kmeans.FuzzyCMeans.Par --> elki.clustering.kmeans.initialization.KMeansInitialization: initializer
+        AbstractKMeans <|-- MacQueenKMeans
+        elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.MacQueenKMeans.Instance
+        MacQueenKMeans +-- elki.clustering.kmeans.MacQueenKMeans.Instance
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.MacQueenKMeans.Par
+        MacQueenKMeans +-- elki.clustering.kmeans.MacQueenKMeans.Par
+        AbstractKMeans <|-- KDTreePruningKMeans
+        KDTreePruningKMeans --> elki.clustering.kmeans.KDTreePruningKMeans.Split: split
+        KDTreePruningKMeans +-- elki.clustering.kmeans.KDTreePruningKMeans.Split
+        elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.KDTreePruningKMeans.Instance
+        KDTreePruningKMeans +-- elki.clustering.kmeans.KDTreePruningKMeans.Instance
+        elki.clustering.kmeans.KDTreePruningKMeans.Instance --> elki.clustering.kmeans.KDTreePruningKMeans.KDNode: root
+        KDTreePruningKMeans +-- elki.clustering.kmeans.KDTreePruningKMeans.KDNode
+        elki.clustering.kmeans.KDTreePruningKMeans.KDNode --> elki.clustering.kmeans.KDTreePruningKMeans.KDNode: leftChild\nrightChild
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.KDTreePruningKMeans.Par
+        KDTreePruningKMeans +-- elki.clustering.kmeans.KDTreePruningKMeans.Par
+        elki.clustering.kmeans.KDTreePruningKMeans.Par --> elki.clustering.kmeans.KDTreePruningKMeans.Split: split
+        XMeans <|-- GMeans
+        elki.clustering.kmeans.XMeans.Par <|-- elki.clustering.kmeans.GMeans.Par
+        GMeans +-- elki.clustering.kmeans.GMeans.Par
+        AbstractKMeans <|-- CompareMeans
+        elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.CompareMeans.Instance
+        CompareMeans +-- elki.clustering.kmeans.CompareMeans.Instance
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.CompareMeans.Par
+        CompareMeans +-- elki.clustering.kmeans.CompareMeans.Par
+        AbstractKMeans <|-- BetulaLloydKMeans
+        BetulaLloydKMeans --> elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization: initialization
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.BetulaLloydKMeans.Par
+        BetulaLloydKMeans +-- elki.clustering.kmeans.BetulaLloydKMeans.Par
+        elki.clustering.kmeans.BetulaLloydKMeans.Par --> elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization: initialization
+        AbstractKMeans <|-- SingleAssignmentKMeans
+        elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.SingleAssignmentKMeans.Instance
+        SingleAssignmentKMeans +-- elki.clustering.kmeans.SingleAssignmentKMeans.Instance
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.SingleAssignmentKMeans.Par
+        SingleAssignmentKMeans +-- elki.clustering.kmeans.SingleAssignmentKMeans.Par
+        AbstractKMeans <|-- LloydKMeans
+        elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.LloydKMeans.Instance
+        LloydKMeans +-- elki.clustering.kmeans.LloydKMeans.Instance
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.LloydKMeans.Par
+        LloydKMeans +-- elki.clustering.kmeans.LloydKMeans.Par
+        AbstractKMeans <|-- XMeans
+        XMeans --> KMeans: innerKMeans
+        XMeans --> elki.clustering.kmeans.initialization.Predefined: splitInitializer
+        XMeans --> elki.clustering.kmeans.quality.KMeansQualityMeasure: informationCriterion
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.XMeans.Par
+        XMeans +-- elki.clustering.kmeans.XMeans.Par
+        elki.clustering.kmeans.XMeans.Par --> KMeans: innerKMeans
+        elki.clustering.kmeans.XMeans.Par --> elki.clustering.kmeans.quality.KMeansQualityMeasure: informationCriterion
+        AbstractKMeans <|-- HartiganWongKMeans
+        elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.HartiganWongKMeans.Instance
+        HartiganWongKMeans +-- elki.clustering.kmeans.HartiganWongKMeans.Instance
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.HartiganWongKMeans.Parameterizer
+        HartiganWongKMeans +-- elki.clustering.kmeans.HartiganWongKMeans.Parameterizer
+        ExponionKMeans <|-- ShallotKMeans
+        elki.clustering.kmeans.ExponionKMeans.Instance <|-- elki.clustering.kmeans.ShallotKMeans.Instance
+        ShallotKMeans +-- elki.clustering.kmeans.ShallotKMeans.Instance
+        elki.clustering.kmeans.HamerlyKMeans.Par <|-- elki.clustering.kmeans.ShallotKMeans.Par
+        ShallotKMeans +-- elki.clustering.kmeans.ShallotKMeans.Par
+        AbstractKMeans <|-- YinYangKMeans
+        elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.YinYangKMeans.Instance
+        YinYangKMeans +-- elki.clustering.kmeans.YinYangKMeans.Instance
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.YinYangKMeans.Par
+        YinYangKMeans +-- elki.clustering.kmeans.YinYangKMeans.Par
+        KDTreePruningKMeans <|-- KDTreeFilteringKMeans
+        elki.clustering.kmeans.KDTreePruningKMeans.Instance <|-- elki.clustering.kmeans.KDTreeFilteringKMeans.Instance
+        KDTreeFilteringKMeans +-- elki.clustering.kmeans.KDTreeFilteringKMeans.Instance
+        elki.clustering.kmeans.KDTreePruningKMeans.Par <|-- elki.clustering.kmeans.KDTreeFilteringKMeans.Par
+        KDTreeFilteringKMeans +-- elki.clustering.kmeans.KDTreeFilteringKMeans.Par
+        KMeans <|.. AbstractKMeans
+        AbstractKMeans --> elki.clustering.kmeans.initialization.KMeansInitialization: initializer
+        AbstractKMeans +-- elki.clustering.kmeans.AbstractKMeans.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmeans.AbstractKMeans.Par
+        AbstractKMeans +-- elki.clustering.kmeans.AbstractKMeans.Par
+        elki.clustering.kmeans.AbstractKMeans.Par --> elki.clustering.kmeans.initialization.KMeansInitialization: initializer
+        elki.clustering.ClusteringAlgorithm <|-- KMeans
+        KMeans <|.. BestOfMultipleKMeans
+        BestOfMultipleKMeans --> KMeans: innerkMeans
+        BestOfMultipleKMeans --> elki.clustering.kmeans.quality.KMeansQualityMeasure: qualityMeasure
+        BestOfMultipleKMeans --> elki.clustering.kmeans.initialization.KMeansInitialization: initializer
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmeans.BestOfMultipleKMeans.Par
+        BestOfMultipleKMeans +-- elki.clustering.kmeans.BestOfMultipleKMeans.Par
+        elki.clustering.kmeans.BestOfMultipleKMeans.Par --> KMeans: kMeansVariant
+        elki.clustering.kmeans.BestOfMultipleKMeans.Par --> elki.clustering.kmeans.quality.KMeansQualityMeasure: qualityMeasure
+        AbstractKMeans <|-- KMediansLloyd
+        elki.clustering.kmeans.AbstractKMeans.Instance <|-- elki.clustering.kmeans.KMediansLloyd.Instance
+        KMediansLloyd +-- elki.clustering.kmeans.KMediansLloyd.Instance
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.KMediansLloyd.Par
+        KMediansLloyd +-- elki.clustering.kmeans.KMediansLloyd.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DAFile\n<size:10>elki.index.vafile" as elki.index.vafile.DAFile [[DAFile.html]] {
+        -dimension: int
+        -splitPositions: double[]
+        +DAFile(Relation<? extends NumberVector>, int, int)
+        +getSplitPositions(): double[]
+        +getDimension(): int
+        +getIOCosts(): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KNNKernelDensityMinimaClustering\n<size:10>elki.clustering.onedimensional" as elki.clustering.onedimensional.KNNKernelDensityMinimaClustering [[KNNKernelDensityMinimaClustering.html]] {
+        {static} -LOG: Logging
+        #dim: int
+        #kernel: KernelDensityFunction
+        #mode: Mode
+        #k: int
+        #minwindow: int
+        +KNNKernelDensityMinimaClustering(int, KernelDensityFunction, Mode, int, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends NumberVector>): Clustering<ClusterModel>
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<ClusterModel>> [[../ClusteringAlgorithm.html]]
+    enum "<size:14>KNNKernelDensityMinimaClustering.Mode\n<size:10>elki.clustering.onedimensional" as elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Mode [[KNNKernelDensityMinimaClustering.Mode.html]]
+    class "<size:14>KNNKernelDensityMinimaClustering.Par\n<size:10>elki.clustering.onedimensional" as elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Par [[KNNKernelDensityMinimaClustering.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.onedimensional.KNNKernelDensityMinimaClustering
+    elki.clustering.onedimensional.KNNKernelDensityMinimaClustering +-- elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Mode
+    elki.clustering.onedimensional.KNNKernelDensityMinimaClustering +-- elki.clustering.onedimensional.KNNKernelDensityMinimaClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

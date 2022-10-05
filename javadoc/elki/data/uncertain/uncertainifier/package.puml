@@ -1,0 +1,112 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.data.uncertain.uncertainifier {
+
+        class WeightedDiscreteUncertainifier [[WeightedDiscreteUncertainifier.html]] {
+            +WeightedDiscreteUncertainifier(Uncertainifier<?>, int, int)
+            +newFeatureVector(Random, A, NumberArrayAdapter<?, A>): WeightedDiscreteUncertainObject
+            +getFactory(): Factory<WeightedDiscreteUncertainObject, ?>
+        }
+
+        class elki.data.uncertain.uncertainifier.WeightedDiscreteUncertainifier.Par [[WeightedDiscreteUncertainifier.Par.html]] {
+            +make(): WeightedDiscreteUncertainifier
+        }
+
+        interface Uncertainifier<UO extends UncertainObject> [[Uncertainifier.html]] {
+            {static} +SYMMETRIC_ID: OptionID
+            {abstract} +newFeatureVector(Random, A, NumberArrayAdapter<?, A>): UO extends UncertainObject
+            {abstract} +getFactory(): Factory<UO extends UncertainObject, ?>
+        }
+
+        class SimpleGaussianUncertainifier [[SimpleGaussianUncertainifier.html]] {
+            ~minDev: double
+            ~maxDev: double
+            ~symmetric: boolean
+            +SimpleGaussianUncertainifier(double, double, boolean)
+            +newFeatureVector(Random, A, NumberArrayAdapter<?, A>): SimpleGaussianContinuousUncertainObject
+            +getFactory(): Factory<SimpleGaussianContinuousUncertainObject, ?>
+        }
+
+        class elki.data.uncertain.uncertainifier.SimpleGaussianUncertainifier.Par [[SimpleGaussianUncertainifier.Par.html]] {
+            {static} +DEV_MIN_ID: OptionID
+            {static} +DEV_MAX_ID: OptionID
+            #minDev: double
+            #maxDev: double
+            #symmetric: boolean
+            +configure(Parameterization): void
+            +make(): SimpleGaussianUncertainifier
+        }
+
+        class UnweightedDiscreteUncertainifier [[UnweightedDiscreteUncertainifier.html]] {
+            +UnweightedDiscreteUncertainifier(Uncertainifier<?>, int, int)
+            +newFeatureVector(Random, A, NumberArrayAdapter<?, A>): UnweightedDiscreteUncertainObject
+            +getFactory(): Factory<UnweightedDiscreteUncertainObject, ?>
+        }
+
+        class elki.data.uncertain.uncertainifier.UnweightedDiscreteUncertainifier.Par [[UnweightedDiscreteUncertainifier.Par.html]] {
+            +make(): UnweightedDiscreteUncertainifier
+        }
+
+        abstract class AbstractDiscreteUncertainifier<UO extends UncertainObject> [[AbstractDiscreteUncertainifier.html]] {
+            #minQuant: int
+            #maxQuant: int
+            +AbstractDiscreteUncertainifier(Uncertainifier<?>, int, int)
+        }
+
+        abstract class elki.data.uncertain.uncertainifier.AbstractDiscreteUncertainifier.Par [[AbstractDiscreteUncertainifier.Par.html]] {
+            {static} +DEFAULT_SAMPLE_SIZE: int
+            {static} +INNER_ID: OptionID
+            {static} +MULT_MAX_ID: OptionID
+            {static} +MULT_MIN_ID: OptionID
+            #minQuant: int
+            #maxQuant: int
+            +configure(Parameterization): void
+        }
+
+        class UniformUncertainifier [[UniformUncertainifier.html]] {
+            ~minDev: double
+            ~maxDev: double
+            ~symmetric: boolean
+            +UniformUncertainifier(double, double, boolean)
+            +newFeatureVector(Random, A, NumberArrayAdapter<?, A>): UniformContinuousUncertainObject
+            +getFactory(): Factory<UniformContinuousUncertainObject, ?>
+        }
+
+        class elki.data.uncertain.uncertainifier.UniformUncertainifier.Par [[UniformUncertainifier.Par.html]] {
+            {static} +DEV_MIN_ID: OptionID
+            {static} +DEV_MAX_ID: OptionID
+            #minDev: double
+            #maxDev: double
+            #symmetric: boolean
+            +configure(Parameterization): void
+            +make(): UniformUncertainifier
+        }
+
+        AbstractDiscreteUncertainifier <|-- WeightedDiscreteUncertainifier
+        elki.data.uncertain.uncertainifier.AbstractDiscreteUncertainifier.Par <|-- elki.data.uncertain.uncertainifier.WeightedDiscreteUncertainifier.Par
+        WeightedDiscreteUncertainifier +-- elki.data.uncertain.uncertainifier.WeightedDiscreteUncertainifier.Par
+        Uncertainifier <|.. SimpleGaussianUncertainifier
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.uncertain.uncertainifier.SimpleGaussianUncertainifier.Par
+        SimpleGaussianUncertainifier +-- elki.data.uncertain.uncertainifier.SimpleGaussianUncertainifier.Par
+        AbstractDiscreteUncertainifier <|-- UnweightedDiscreteUncertainifier
+        elki.data.uncertain.uncertainifier.AbstractDiscreteUncertainifier.Par <|-- elki.data.uncertain.uncertainifier.UnweightedDiscreteUncertainifier.Par
+        UnweightedDiscreteUncertainifier +-- elki.data.uncertain.uncertainifier.UnweightedDiscreteUncertainifier.Par
+        Uncertainifier <|.. AbstractDiscreteUncertainifier
+        AbstractDiscreteUncertainifier --> Uncertainifier: inner
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.uncertain.uncertainifier.AbstractDiscreteUncertainifier.Par
+        AbstractDiscreteUncertainifier +-- elki.data.uncertain.uncertainifier.AbstractDiscreteUncertainifier.Par
+        elki.data.uncertain.uncertainifier.AbstractDiscreteUncertainifier.Par --> Uncertainifier: inner
+        Uncertainifier <|.. UniformUncertainifier
+        elki.utilities.optionhandling.Parameterizer <|.. elki.data.uncertain.uncertainifier.UniformUncertainifier.Par
+        UniformUncertainifier +-- elki.data.uncertain.uncertainifier.UniformUncertainifier.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

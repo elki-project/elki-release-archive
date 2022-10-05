@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CTLuZTestOutlier\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.CTLuZTestOutlier<N> [[CTLuZTestOutlier.html]] {
+        +CTLuZTestOutlier(Factory<N>)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Database, Relation<N>, Relation<? extends NumberVector>): OutlierResult
+    }
+
+    abstract class "<size:14>AbstractNeighborhoodOutlier\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.AbstractNeighborhoodOutlier<N> [[AbstractNeighborhoodOutlier.html]]
+    class "<size:14>CTLuZTestOutlier.Par\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.CTLuZTestOutlier.Par<N>
+
+    elki.outlier.spatial.AbstractNeighborhoodOutlier <|-- elki.outlier.spatial.CTLuZTestOutlier
+    elki.outlier.spatial.CTLuZTestOutlier +-- elki.outlier.spatial.CTLuZTestOutlier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.meta {
+
+        class ExternalClustering [[ExternalClustering.html]] {
+            {static} -LOG: Logging
+            {static} +COMMENT: String
+            -file: URI
+            +ExternalClustering(URI)
+            +getInputTypeRestriction(): TypeInformation[]
+            +autorun(Database): Clustering<? extends Model>
+            -attachToRelation(Relation<?>, IntArrayList, ArrayList<String>): void
+        }
+
+        class elki.clustering.meta.ExternalClustering.Par [[ExternalClustering.Par.html]] {
+            {static} +FILE_ID: OptionID
+            -file: URI
+            +configure(Parameterization): void
+            +make(): ExternalClustering
+        }
+
+        elki.clustering.ClusteringAlgorithm <|.. ExternalClustering
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.meta.ExternalClustering.Par
+        ExternalClustering +-- elki.clustering.meta.ExternalClustering.Par
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

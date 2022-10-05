@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractConversionFilter<I, O> [[AbstractConversionFilter.html]] {
+        +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        {abstract} #getLogger(): Logging
+        {abstract} #filterSingleObject(I): O
+        {abstract} #getInputTypeRestriction(): SimpleTypeInformation<? super I>
+        {abstract} #convertedType(SimpleTypeInformation<​I>): SimpleTypeInformation<? super O>
+        #prepareStart(SimpleTypeInformation<​I>): boolean
+        #prepareProcessInstance(I): void
+        #prepareComplete(): void
+    }
+
+    interface "<size:14>ObjectFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.ObjectFilter [[ObjectFilter.html]] {
+        {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+
+    elki.datasource.filter.ObjectFilter <|.. elki.datasource.filter.AbstractConversionFilter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

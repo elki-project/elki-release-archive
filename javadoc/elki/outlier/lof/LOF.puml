@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LOF\n<size:10>elki.outlier.lof" as elki.outlier.lof.LOF<O> [[LOF.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super O>
+        #kplus: int
+        +LOF(int, Distance<? super O>)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+        -computeLRDs(KNNSearcher<DBIDRef>, DBIDs, WritableDoubleDataStore): void
+        #computeLRD(KNNSearcher<DBIDRef>, DBIDIter): double
+        -computeLOFScores(KNNSearcher<DBIDRef>, DBIDs, DoubleDataStore, WritableDoubleDataStore, DoubleMinMax): void
+        #computeLOFScore(KNNSearcher<DBIDRef>, DBIDRef, DoubleDataStore): double
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>LOF.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.LOF.Par<O>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.lof.LOF
+    elki.outlier.lof.LOF +-- elki.outlier.lof.LOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CASH\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.CASH [[CASH.html]] {
+        {static} -LOG: Logging
+        #minPts: int
+        #maxLevel: int
+        #minDim: int
+        #jitter: double
+        #adjust: boolean
+        -noiseDim: int
+        -processedIDs: ModifiableDBIDs
+        -fulldatabase: Relation<ParameterizationFunction>
+        +CASH(int, int, int, double, boolean)
+        +run(Relation<? extends NumberVector>): Clustering<Model>
+        -preprocess(Relation<? extends NumberVector>): Relation<ParameterizationFunction>
+        -doRun(Relation<ParameterizationFunction>, FiniteProgress): Clustering<Model>
+        {static} -dimensionality(Relation<ParameterizationFunction>): int
+        -initHeap(ObjectHeap<CASHInterval>, Relation<ParameterizationFunction>, int, DBIDs): void
+        -buildDB(int, double[], DBIDs, Relation<ParameterizationFunction>): MaterializedRelation<ParameterizationFunction>
+        -project(double[], ParameterizationFunction): ParameterizationFunction
+        -determineBasis(double[]): double[]
+        -determineNextIntervalAtMaxLevel(ObjectHeap<CASHInterval>): CASHInterval
+        -doDetermineNextIntervalAtMaxLevel(ObjectHeap<CASHInterval>): CASHInterval
+        -determineMinMaxDistance(Relation<ParameterizationFunction>, int): double[]
+        -runDerivator(Relation<ParameterizationFunction>, int, CASHInterval, ModifiableDBIDs): double[]
+        -runDerivator(Relation<ParameterizationFunction>, int, DBIDs): LinearEquationSystem
+        -buildDerivatorDB(Relation<ParameterizationFunction>, DBIDs): Relation<DoubleVector>
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<Model>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>CASH.Par\n<size:10>elki.clustering.correlation" as elki.clustering.correlation.CASH.Par [[CASH.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.correlation.CASH
+    elki.clustering.correlation.CASH +-- elki.clustering.correlation.CASH.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

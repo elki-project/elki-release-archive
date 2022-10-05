@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CutDendrogramByNumberOfClusters\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters [[CutDendrogramByNumberOfClusters.html]] {
+        {static} ~LOG: Logging
+        -minclusters: int
+        +CutDendrogramByNumberOfClusters(HierarchicalClusteringAlgorithm, int, boolean)
+        +CutDendrogramByNumberOfClusters(HierarchicalClusteringAlgorithm, int, boolean, boolean)
+        +run(ClusterMergeHistory): Clustering<DendrogramModel>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractCutDendrogram\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.AbstractCutDendrogram [[AbstractCutDendrogram.html]] {
+        {abstract} +run(ClusterMergeHistory): Clustering<DendrogramModel>
+        {abstract} #getLogger(): Logging
+    }
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<DendrogramModel>> [[../../ClusteringAlgorithm.html]]
+    class "<size:14>CutDendrogramByNumberOfClusters.Instance\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters.Instance [[CutDendrogramByNumberOfClusters.Instance.html]]
+    class "<size:14>CutDendrogramByNumberOfClusters.Par\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters.Par [[CutDendrogramByNumberOfClusters.Par.html]]
+
+    elki.clustering.hierarchical.extraction.AbstractCutDendrogram <|-- elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters
+    elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters +-- elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters.Instance
+    elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters +-- elki.clustering.hierarchical.extraction.CutDendrogramByNumberOfClusters.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

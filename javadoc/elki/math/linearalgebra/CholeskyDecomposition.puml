@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CholeskyDecomposition\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.CholeskyDecomposition [[CholeskyDecomposition.html]] {
+        -L: double[]
+        -isspd: boolean
+        +CholeskyDecomposition(double[])
+        +isSPD(): boolean
+        +getL(): double[]
+        +solve(double[]): double[]
+        -solveL(double[]): double[]
+        -solveLtransposed(double[]): double[]
+        +solve(double[]): double[]
+        +solveLInplace(double[]): double[]
+        +solveLtransposed(double[]): double[]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

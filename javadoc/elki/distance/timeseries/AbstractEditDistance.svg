@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="249px" preserveAspectRatio="none" style="width:562px;height:249px;background:#FFFFFF;" version="1.1" viewBox="0 0 562 249" width="562px" zoomAndPan="magnify"><defs/><g><!--MD5=[1e4c0d0bda404567dbebb714a24d317e]
+class elki.distance.timeseries.AbstractEditDistance--><a href="AbstractEditDistance.html" target="_top" title="AbstractEditDistance.html" xlink:actuate="onRequest" xlink:href="AbstractEditDistance.html" xlink:show="new" xlink:title="AbstractEditDistance.html" xlink:type="simple"><g id="elem_elki.distance.timeseries.AbstractEditDistance"><rect codeLine="6" fill="#F1F1F1" height="119.125" id="elki.distance.timeseries.AbstractEditDistance" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="546" x="9" y="105"/><ellipse cx="204.25" cy="123.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M204.3594,119.3125 L203.2031,124.3906 L205.5313,124.3906 L204.3594,119.3125 Z M202.875,117.0781 L205.8594,117.0781 L209.2188,129.4688 L206.7656,129.4688 L206,126.4063 L202.7188,126.4063 L201.9688,129.4688 L199.5313,129.4688 L202.875,117.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="147" x="224.75" y="122.9951">AbstractEditDistance</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="118" x="239.25" y="135.5791">elki.distance.timeseries</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="554" y1="142.9375" y2="142.9375"/><polygon fill="none" points="20,151.5859,24,155.5859,20,159.5859,16,155.5859" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="121" x="29" y="159.9326">bandSize: double</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="554" y1="167.2344" y2="167.2344"/><ellipse cx="20" cy="180.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="202" x="29" y="184.2295">AbstractEditDistance(double)</text><polygon fill="#FFFF44" points="20,192.1797,24,196.1797,20,200.1797,16,196.1797" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="201" x="29" y="200.5264">effectiveBandSize(int, int): int</text><ellipse cx="20" cy="213.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="520" x="29" y="216.8232">getInputTypeRestriction(): VectorTypeInformation&lt;? super NumberVector&gt;</text></g></a><!--MD5=[b1a010d4da3e8e2631d5f818e480f936]
+class elki.distance.AbstractNumberVectorDistance--><a href="../AbstractNumberVectorDistance.html" target="_top" title="../AbstractNumberVectorDistance.html" xlink:actuate="onRequest" xlink:href="../AbstractNumberVectorDistance.html" xlink:show="new" xlink:title="../AbstractNumberVectorDistance.html" xlink:type="simple"><g id="elem_elki.distance.AbstractNumberVectorDistance"><rect codeLine="13" fill="#F1F1F1" height="37.9375" id="elki.distance.AbstractNumberVectorDistance" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="255" x="154.5" y="7"/><ellipse cx="169.5" cy="25.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M169.6094,21.3125 L168.4531,26.3906 L170.7813,26.3906 L169.6094,21.3125 Z M168.125,19.0781 L171.1094,19.0781 L174.4688,31.4688 L172.0156,31.4688 L171.25,28.4063 L167.9688,28.4063 L167.2188,31.4688 L164.7813,31.4688 L168.125,19.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="223" x="183.5" y="24.9951">AbstractNumberVectorDistance</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="63" x="263.5" y="37.5791">elki.distance</text></g></a><!--MD5=[300b41435aa855e162dd2775009fe9d2]
+reverse link elki.distance.AbstractNumberVectorDistance to elki.distance.timeseries.AbstractEditDistance--><g id="link_elki.distance.AbstractNumberVectorDistance_elki.distance.timeseries.AbstractEditDistance"><path codeLine="16" d="M282,65.5 C282,77.69 282,91.46 282,104.73 " fill="none" id="elki.distance.AbstractNumberVectorDistance-backto-elki.distance.timeseries.AbstractEditDistance" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="275,65.13,282,45.13,289,65.13,275,65.13" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="181" y="230.125"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="181" y="239.4072">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[d1334d41a74079d066cd5653d809af2d]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractEditDistance\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.AbstractEditDistance [[AbstractEditDistance.html]] {
+        #bandSize: double
+        +AbstractEditDistance(double)
+        #effectiveBandSize(int, int): int
+        +getInputTypeRestriction(): VectorTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    abstract class "<size:14>AbstractEditDistance.Par\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.AbstractEditDistance.Par [[AbstractEditDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|- - elki.distance.timeseries.AbstractEditDistance
+    elki.distance.timeseries.AbstractEditDistance +- - elki.distance.timeseries.AbstractEditDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NaiveProjectedKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory<V extends NumberVector> [[NaiveProjectedKNNPreprocessor.Factory.html]] {
+        ~window: double
+        ~projections: int
+        ~proj: RandomProjectionFamily
+        ~random: RandomFactory
+        +Factory(double, int, RandomProjectionFamily, RandomFactory)
+        +instantiate(Relation<V extends NumberVector>): NaiveProjectedKNNPreprocessor<V extends NumberVector>
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>IndexFactory\n<size:10>elki.index" as elki.index.IndexFactory<V extends NumberVector> [[../../IndexFactory.html]] {
+        {abstract} +instantiate(Relation<V>): Index
+        {abstract} +getInputTypeRestriction(): TypeInformation
+    }
+    class "<size:14>NaiveProjectedKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor<O extends NumberVector> [[NaiveProjectedKNNPreprocessor.html]]
+    class "<size:14>NaiveProjectedKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory.Par [[NaiveProjectedKNNPreprocessor.Factory.Par.html]]
+
+    elki.index.IndexFactory <|.. elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor +-- elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.NaiveProjectedKNNPreprocessor.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

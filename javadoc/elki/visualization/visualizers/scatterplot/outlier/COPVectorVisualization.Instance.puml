@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>COPVectorVisualization.Instance\n<size:10>elki.visualization.visualizers.scatterplot.outlier" as elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization.Instance [[COPVectorVisualization.Instance.html]] {
+        {static} +VEC: String
+        #result: Relation<double[]>
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        -setupCSS(SVGPlot): void
+    }
+
+    abstract class "<size:14>AbstractScatterplotVisualization\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization [[../AbstractScatterplotVisualization.html]]
+    interface "<size:14>DataStoreListener\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreListener [[../../../../database/datastore/DataStoreListener.html]] {
+        {abstract} +contentChanged(DataStoreEvent): void
+    }
+    class "<size:14>COPVectorVisualization\n<size:10>elki.visualization.visualizers.scatterplot.outlier" as elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization [[COPVectorVisualization.html]]
+
+    elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization.Instance
+    elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization.Instance
+    elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization +-- elki.visualization.visualizers.scatterplot.outlier.COPVectorVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,172 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.similarity.kernel {
+
+        class KernelMatrix [[KernelMatrix.html]] {
+            ~kernel: double[]
+            +KernelMatrix(PrimitiveSimilarity<? super O>, Relation<? extends O>, DBIDs)
+            +KernelMatrix(SimilarityQuery<? super O>, Relation<? extends O>, DBIDs)
+            +KernelMatrix(double[])
+            +getDistance(DBIDRef, DBIDRef): double
+            +getKernel(): double[]
+            +getSquaredDistance(DBIDRef, DBIDRef): double
+            {static} +centerMatrix(double[]): double[]
+            {static} +centerKernelMatrix(KernelMatrix): double[]
+            +getSimilarity(DBIDRef, DBIDRef): double
+        }
+
+        interface elki.similarity.kernel.KernelMatrix.DBIDMap {
+            {abstract} +getOffset(DBIDRef): int
+            {abstract} +iter(): DBIDArrayIter
+        }
+
+        class elki.similarity.kernel.KernelMatrix.RangeMap {
+            ~range: DBIDRange
+            +RangeMap(DBIDRange)
+            +getOffset(DBIDRef): int
+            +iter(): DBIDArrayIter
+        }
+
+        class elki.similarity.kernel.KernelMatrix.SortedArrayMap {
+            ~ids: ArrayModifiableDBIDs
+            +SortedArrayMap(DBIDs)
+            +getOffset(DBIDRef): int
+            +iter(): DBIDArrayIter
+        }
+
+        class LinearKernel [[LinearKernel.html]] {
+            +similarity(NumberVector, NumberVector): double
+            +distance(NumberVector, NumberVector): double
+        }
+
+        class elki.similarity.kernel.LinearKernel.Par [[LinearKernel.Par.html]] {
+            +make(): LinearKernel
+        }
+
+        class RadialBasisFunctionKernel [[RadialBasisFunctionKernel.html]] {
+            -mgamma: double
+            +RadialBasisFunctionKernel(double)
+            +similarity(NumberVector, NumberVector): double
+        }
+
+        class elki.similarity.kernel.RadialBasisFunctionKernel.Par [[RadialBasisFunctionKernel.Par.html]] {
+            {static} +GAMMA_ID: OptionID
+            {static} +SIGMA_ID: OptionID
+            #gamma: double
+            +configure(Parameterization): void
+            +make(): RadialBasisFunctionKernel
+        }
+
+        class SigmoidKernel [[SigmoidKernel.html]] {
+            -c: double
+            -theta: double
+            +SigmoidKernel(double, double)
+            +similarity(NumberVector, NumberVector): double
+        }
+
+        class elki.similarity.kernel.SigmoidKernel.Par [[SigmoidKernel.Par.html]] {
+            {static} +C_ID: OptionID
+            {static} +THETA_ID: OptionID
+            #c: double
+            #theta: double
+            +configure(Parameterization): void
+            +make(): SigmoidKernel
+        }
+
+        class LaplaceKernel [[LaplaceKernel.html]] {
+            -mgamma: double
+            +LaplaceKernel(double)
+            +similarity(NumberVector, NumberVector): double
+        }
+
+        class elki.similarity.kernel.LaplaceKernel.Par [[LaplaceKernel.Par.html]] {
+            {static} +SIGMA_ID: OptionID
+            #sigma: double
+            +configure(Parameterization): void
+            +make(): LaplaceKernel
+        }
+
+        class PolynomialKernel [[PolynomialKernel.html]] {
+            {static} +DEFAULT_DEGREE: int
+            -degree: int
+            -bias: double
+            +PolynomialKernel(int, double)
+            +PolynomialKernel(int)
+            +similarity(NumberVector, NumberVector): double
+            +isSymmetric(): boolean
+            +isMetric(): boolean
+            +distance(NumberVector, NumberVector): double
+            +instantiate(Relation<T extends NumberVector>): DistanceSimilarityQuery<T extends NumberVector>
+        }
+
+        class elki.similarity.kernel.PolynomialKernel.Par [[PolynomialKernel.Par.html]] {
+            {static} +DEGREE_ID: OptionID
+            {static} +BIAS_ID: OptionID
+            #degree: int
+            #bias: double
+            +configure(Parameterization): void
+            +make(): PolynomialKernel
+        }
+
+        class RationalQuadraticKernel [[RationalQuadraticKernel.html]] {
+            -c: double
+            +RationalQuadraticKernel(double)
+            +similarity(NumberVector, NumberVector): double
+        }
+
+        class elki.similarity.kernel.RationalQuadraticKernel.Par [[RationalQuadraticKernel.Par.html]] {
+            {static} +C_ID: OptionID
+            #c: double
+            +configure(Parameterization): void
+            +make(): RationalQuadraticKernel
+        }
+
+        KernelMatrix --> elki.similarity.kernel.KernelMatrix.DBIDMap: idmap
+        KernelMatrix +-- elki.similarity.kernel.KernelMatrix.DBIDMap
+        elki.similarity.kernel.KernelMatrix.DBIDMap <|.. elki.similarity.kernel.KernelMatrix.RangeMap
+        KernelMatrix +-- elki.similarity.kernel.KernelMatrix.RangeMap
+        elki.similarity.kernel.KernelMatrix.DBIDMap <|.. elki.similarity.kernel.KernelMatrix.SortedArrayMap
+        KernelMatrix +-- elki.similarity.kernel.KernelMatrix.SortedArrayMap
+        PolynomialKernel <|-- LinearKernel
+        LinearKernel --> LinearKernel: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.kernel.LinearKernel.Par
+        LinearKernel +-- elki.similarity.kernel.LinearKernel.Par
+        elki.similarity.AbstractVectorSimilarity <|-- RadialBasisFunctionKernel
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.kernel.RadialBasisFunctionKernel.Par
+        RadialBasisFunctionKernel +-- elki.similarity.kernel.RadialBasisFunctionKernel.Par
+        elki.similarity.AbstractVectorSimilarity <|-- SigmoidKernel
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.kernel.SigmoidKernel.Par
+        SigmoidKernel +-- elki.similarity.kernel.SigmoidKernel.Par
+        elki.similarity.AbstractVectorSimilarity <|-- LaplaceKernel
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.kernel.LaplaceKernel.Par
+        LaplaceKernel +-- elki.similarity.kernel.LaplaceKernel.Par
+        elki.similarity.AbstractVectorSimilarity <|-- PolynomialKernel
+        elki.distance.PrimitiveDistance <|.. PolynomialKernel
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.kernel.PolynomialKernel.Par
+        PolynomialKernel +-- elki.similarity.kernel.PolynomialKernel.Par
+        elki.similarity.AbstractVectorSimilarity <|-- RationalQuadraticKernel
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.kernel.RationalQuadraticKernel.Par
+        RationalQuadraticKernel +-- elki.similarity.kernel.RationalQuadraticKernel.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.similarity {
+        abstract class AbstractVectorSimilarity [[../AbstractVectorSimilarity.html]]
+    }
+
+    namespace elki.distance {
+        interface PrimitiveDistance<O> [[../../distance/PrimitiveDistance.html]] {
+            {abstract} +distance(O, O): double
+            {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+            +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

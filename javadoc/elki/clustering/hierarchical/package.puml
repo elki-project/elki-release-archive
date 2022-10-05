@@ -1,0 +1,521 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.hierarchical {
+
+        class AGNES<O> [[AGNES.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            +AGNES(Distance<? super O>, Linkage)
+            +run(Relation<O>): ClusterMergeHistory
+            {static} #initializeDistanceMatrix(ArrayDBIDs, DistanceQuery<?>, Linkage): ClusterDistanceMatrix
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.hierarchical.AGNES.Instance [[AGNES.Instance.html]] {
+            #end: int
+            +Instance(Linkage)
+            +run(ClusterDistanceMatrix, ClusterMergeHistoryBuilder): ClusterMergeHistory
+            #findMerge(): int
+            #merge(double, int, int): void
+            #updateMatrix(double, int, int, int, int): void
+            {static} #shrinkActiveSet(int[], int, int): int
+        }
+
+        class elki.clustering.hierarchical.AGNES.Par<O> {
+            {static} +LINKAGE_ID: OptionID
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): AGNES<O>
+        }
+
+        class MedoidLinkage<O> [[MedoidLinkage.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            +MedoidLinkage(Distance<? super O>)
+            +run(Relation<O>): ClusterPrototypeMergeHistory
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.hierarchical.MedoidLinkage.Instance [[MedoidLinkage.Instance.html]] {
+            #clusters: Int2ObjectOpenHashMap<ModifiableDBIDs>
+            #dq: DistanceQuery<?>
+            #mi: DBIDArrayMIter
+            #mj: DBIDArrayMIter
+            #ix: DBIDArrayIter
+            #iy: DBIDArrayIter
+            +run(ClusterDistanceMatrix, ClusterMergeHistoryBuilder): ClusterMergeHistory
+            +run(ArrayDBIDs, ClusterDistanceMatrix, ClusterMergeHistoryBuilder, DistanceQuery<?>): ClusterPrototypeMergeHistory
+            #findMerge(): int
+            #merge(int, int): void
+            {static} -findMedoid(DistanceQuery<?>, DBIDs, DBIDArrayMIter): double
+            #updateMatrix(int, int): void
+        }
+
+        class elki.clustering.hierarchical.MedoidLinkage.Par<O> {
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): MedoidLinkage<O>
+        }
+
+        class HACAM<O> [[HACAM.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            +HACAM(Distance<? super O>, Variant)
+            +run(Relation<O>): ClusterPrototypeMergeHistory
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        enum elki.clustering.hierarchical.HACAM.Variant [[HACAM.Variant.html]] {
+            {static} +MINIMUM_SUM
+            {static} +MINIMUM_SUM_INCREASE
+        }
+
+        class elki.clustering.hierarchical.HACAM.Instance [[HACAM.Instance.html]] {
+            #clusters: Int2ObjectOpenHashMap<ModifiableDBIDs>
+            #tds: double[]
+            #dq: DistanceQuery<?>
+            #prots: DBIDArrayMIter
+            #ix: DBIDArrayIter
+            #iy: DBIDArrayIter
+            +Instance(Variant)
+            +run(ClusterDistanceMatrix, ClusterMergeHistoryBuilder): ClusterMergeHistory
+            +run(ArrayDBIDs, ClusterDistanceMatrix, ClusterMergeHistoryBuilder, DistanceQuery<?>, DBIDArrayMIter): ClusterPrototypeMergeHistory
+            #findMerge(): int
+            #merge(int, int): void
+            -updateMatrices(int, int): void
+            #updateEntry(int, int): void
+            {static} -findPrototype(DistanceQuery<?>, DBIDs, DBIDs, DBIDVar, double): double
+            {static} -findPrototypeSingleton(DistanceQuery<?>, DBIDs, DBIDRef, DBIDVar): double
+            {static} -distanceSum(DistanceQuery<?>, DBIDIter, DBIDs, double, double): double
+        }
+
+        class elki.clustering.hierarchical.HACAM.Par<O> {
+            {static} +VARIANT_ID: OptionID
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): HACAM<O>
+        }
+
+        class ClusterDensityMergeHistory [[ClusterDensityMergeHistory.html]] {
+            #coredists: DoubleDataStore
+            +ClusterDensityMergeHistory(ArrayDBIDs, int[], double[], int[], boolean, DoubleDataStore)
+            +getCoreDistanceStore(): DoubleDataStore
+        }
+
+        class Anderberg<O> [[Anderberg.html]] {
+            {static} -LOG: Logging
+            +Anderberg(Distance<? super O>, Linkage)
+            +run(Relation<O>): ClusterMergeHistory
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.hierarchical.Anderberg.Instance [[Anderberg.Instance.html]] {
+            #bestd: double[]
+            #besti: int[]
+            +Instance(Linkage)
+            +run(ClusterDistanceMatrix, ClusterMergeHistoryBuilder): ClusterMergeHistory
+            {static} #initializeNNCache(double[], double[], int[]): void
+            #findMerge(): int
+            #merge(double, int, int): void
+            #updateMatrix(double, int, int, int, int): void
+            {static} #updateCache(double[], double[], int[], int, int, int, double): void
+            {static} #findBest(double[], double[], int[], int): void
+        }
+
+        class elki.clustering.hierarchical.Anderberg.Par<O> {
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): Anderberg<O>
+        }
+
+        class MiniMaxNNChain<O> [[MiniMaxNNChain.html]] {
+            {static} -LOG: Logging
+            +MiniMaxNNChain(Distance<? super O>)
+            +run(Relation<O>): ClusterPrototypeMergeHistory
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.hierarchical.MiniMaxNNChain.Instance [[MiniMaxNNChain.Instance.html]] {
+            +run(ArrayDBIDs, ClusterDistanceMatrix, ClusterMergeHistoryBuilder, DistanceQuery<?>, DBIDArrayMIter): ClusterPrototypeMergeHistory
+            -nnChainCore(): void
+        }
+
+        class elki.clustering.hierarchical.MiniMaxNNChain.Par<O> {
+            +make(): MiniMaxNNChain<O>
+        }
+
+        class OPTICSToHierarchical [[OPTICSToHierarchical.html]] {
+            ~inner: OPTICSTypeAlgorithm
+            +OPTICSToHierarchical(OPTICSTypeAlgorithm)
+            +autorun(Database): ClusterMergeHistory
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.hierarchical.OPTICSToHierarchical.Par [[OPTICSToHierarchical.Par.html]] {
+            {static} +OPTICS_ID: OptionID
+            ~inner: OPTICSTypeAlgorithm
+            +configure(Parameterization): void
+            +make(): OPTICSToHierarchical
+        }
+
+        class SLINK<O> [[SLINK.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            +SLINK(Distance<? super O>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): ClusterMergeHistory
+            {static} #convertOutput(ClusterMergeHistoryBuilder, ArrayDBIDs, DBIDDataStore, DoubleDataStore): ClusterMergeHistoryBuilder
+            -step2(DBIDRef, DBIDArrayIter, int, DistanceQuery<? super O>, WritableDoubleDataStore): void
+            -step2primitive(DBIDRef, DBIDArrayIter, int, Relation<? extends O>, PrimitiveDistance<? super O>, WritableDoubleDataStore): void
+            #process(DBIDRef, ArrayDBIDs, DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore, WritableDoubleDataStore): void
+            -slinkstep3(DBIDRef, DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore, WritableDoubleDataStore): void
+            -slinkstep4(DBIDRef, DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.hierarchical.SLINK.Par<O> [[SLINK.Par.html]] {
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): SLINK<O>
+        }
+
+        class MiniMax<O> [[MiniMax.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            +MiniMax(Distance<? super O>)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): ClusterPrototypeMergeHistory
+            {static} #initializeMatrices(ArrayDBIDs, ArrayModifiableDBIDs, DistanceQuery<O>): ClusterDistanceMatrix
+        }
+
+        class elki.clustering.hierarchical.MiniMax.Instance [[MiniMax.Instance.html]] {
+            #clusters: Int2ObjectOpenHashMap<ModifiableDBIDs>
+            #protiter: DBIDArrayMIter
+            #dq: DistanceQuery<?>
+            #ix: DBIDArrayIter
+            #iy: DBIDArrayIter
+            +run(ClusterDistanceMatrix, ClusterMergeHistoryBuilder): ClusterMergeHistory
+            +run(ArrayDBIDs, ClusterDistanceMatrix, ClusterMergeHistoryBuilder, DistanceQuery<?>, DBIDArrayMIter): ClusterPrototypeMergeHistory
+            #findMerge(): int
+            #merge(int, int): void
+            #updateMatrices(int): void
+            #updateEntry(int, int): void
+            {static} -findPrototype(DistanceQuery<?>, DBIDs, DBIDs, DBIDVar, double): double
+            {static} -findPrototypeSingleton(DistanceQuery<?>, DBIDs, DBIDRef, DBIDVar): double
+            {static} -findMax(DistanceQuery<?>, DBIDIter, DBIDs, double, double): double
+        }
+
+        class elki.clustering.hierarchical.MiniMax.Par<O> {
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): MiniMax<O>
+        }
+
+        class ClusterDistanceMatrix [[ClusterDistanceMatrix.html]] {
+            +matrix: double[]
+            +clustermap: int[]
+            +size: int
+            +ClusterDistanceMatrix(int)
+            {static} +triangleSize(int): int
+            +get(int, int): double
+        }
+
+        class ClusterMergeHistory [[ClusterMergeHistory.html]] {
+            #ids: ArrayDBIDs
+            #distances: double[]
+            #sizes: int[]
+            #merges: int[]
+            #positions: int[]
+            ~isSquared: boolean
+            +ClusterMergeHistory(ArrayDBIDs, int[], double[], int[], boolean)
+            +assignVar(int, DBIDVar): DBIDVar
+            +getMergeA(int): int
+            +getMergeB(int): int
+            +getMergeHeight(int): double
+            +getSize(int): int
+            +size(): int
+            +numMerges(): int
+            +isSquared(): boolean
+            +getDBIDs(): ArrayDBIDs
+            +getPositions(): int[]
+        }
+
+        abstract class AbstractHDBSCAN<O> [[AbstractHDBSCAN.html]] {
+            #minPts: int
+            #distance: Distance<? super O>
+            +AbstractHDBSCAN(Distance<? super O>, int)
+            #computeCoreDists(DBIDs, KNNSearcher<DBIDRef>, int): WritableDoubleDataStore
+            #convertToMergeList(ArrayDBIDs, DoubleLongHeap, ClusterMergeHistoryBuilder): ClusterMergeHistoryBuilder
+            +getInputTypeRestriction(): TypeInformation[]
+            {abstract} #getLogger(): Logging
+        }
+
+        class elki.clustering.hierarchical.AbstractHDBSCAN.HDBSCANAdapter [[AbstractHDBSCAN.HDBSCANAdapter.html]] {
+            -ids: ArrayDBIDs
+            -q: DBIDArrayIter
+            -p: DBIDArrayIter
+            -coredists: DoubleDataStore
+            -distq: DistanceQuery<?>
+            +HDBSCANAdapter(ArrayDBIDs, DoubleDataStore, DistanceQuery<?>)
+            +distance(ArrayDBIDs, int, int): double
+            +size(ArrayDBIDs): int
+        }
+
+        class elki.clustering.hierarchical.AbstractHDBSCAN.HeapMSTCollector [[AbstractHDBSCAN.HeapMSTCollector.html]] {
+            -heap: DoubleLongHeap
+            -prog: FiniteProgress
+            -log: Logging
+            +HeapMSTCollector(DoubleLongHeap, FiniteProgress, Logging)
+            +addEdge(double, int, int): void
+        }
+
+        abstract class elki.clustering.hierarchical.AbstractHDBSCAN.Par<O> {
+            {static} +MIN_PTS_ID: OptionID
+            #minPts: int
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+        }
+
+        class CLINK<O> [[CLINK.html]] {
+            {static} -LOG: Logging
+            +CLINK(Distance<? super O>)
+            #process(DBIDRef, ArrayDBIDs, DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore, WritableDoubleDataStore): void
+            -clinkstep3(DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore, WritableDoubleDataStore): void
+            -clinkstep4567(DBIDRef, ArrayDBIDs, DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore, WritableDoubleDataStore): void
+            -clinkstep8(DBIDRef, DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.hierarchical.CLINK.Par<O> [[CLINK.Par.html]] {
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): CLINK<O>
+        }
+
+        class HDBSCANLinearMemory<O> [[HDBSCANLinearMemory.html]] {
+            {static} -LOG: Logging
+            +HDBSCANLinearMemory(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): ClusterDensityMergeHistory
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.hierarchical.HDBSCANLinearMemory.Par<O> {
+            +make(): HDBSCANLinearMemory<O>
+        }
+
+        interface HierarchicalClusteringAlgorithm [[HierarchicalClusteringAlgorithm.html]] {
+            +autorun(Database): ClusterMergeHistory
+        }
+
+        class MiniMaxAnderberg<O> [[MiniMaxAnderberg.html]] {
+            {static} -LOG: Logging
+            +MiniMaxAnderberg(Distance<? super O>)
+            +run(Relation<O>): ClusterPrototypeMergeHistory
+        }
+
+        class elki.clustering.hierarchical.MiniMaxAnderberg.Instance [[MiniMaxAnderberg.Instance.html]] {
+            #bestd: double[]
+            #besti: int[]
+            +run(ArrayDBIDs, ClusterDistanceMatrix, ClusterMergeHistoryBuilder, DistanceQuery<?>, DBIDArrayMIter): ClusterPrototypeMergeHistory
+            #findMerge(): int
+            #merge(int, int): void
+            -updateMatrices(int, int): void
+        }
+
+        class elki.clustering.hierarchical.MiniMaxAnderberg.Par<O> {
+            +make(): MiniMaxAnderberg<O>
+        }
+
+        class ClusterMergeHistoryBuilder [[ClusterMergeHistoryBuilder.html]] {
+            {static} -LOG: Logging
+            #ids: ArrayDBIDs
+            #mergeDistance: double[]
+            #csize: int[]
+            #merges: int[]
+            #parent: int[]
+            #mergecount: int
+            #prototypes: ArrayModifiableDBIDs
+            #isSquared: boolean
+            +ClusterMergeHistoryBuilder(ArrayDBIDs, boolean)
+            +add(int, double, int): int
+            +strictAdd(int, double, int): int
+            +strictAdd(int, double, int, DBIDRef): int
+            +complete(): ClusterMergeHistory
+            +complete(WritableDoubleDataStore): ClusterDensityMergeHistory
+            +getSize(int): int
+            +setSize(int, int): void
+            +optimizeOrder(): int[]
+            -checkMonotone(): boolean
+            -addRecursive(int[], int, byte[], int, int): int
+        }
+
+        class NNChain<O> [[NNChain.html]] {
+            {static} -LOG: Logging
+            +NNChain(Distance<? super O>, Linkage)
+            +run(Relation<O>): ClusterMergeHistory
+        }
+
+        class elki.clustering.hierarchical.NNChain.Instance [[NNChain.Instance.html]] {
+            +Instance(Linkage)
+            +run(ClusterDistanceMatrix, ClusterMergeHistoryBuilder): ClusterMergeHistory
+            -nnChainCore(): void
+            {static} +findUnlinked(int, int, int[]): int
+        }
+
+        class elki.clustering.hierarchical.NNChain.Par<O> {
+            +make(): NNChain<O>
+        }
+
+        class LinearMemoryNNChain<O extends NumberVector> [[LinearMemoryNNChain.html]] {
+            {static} -LOG: Logging
+            +LinearMemoryNNChain(GeometricLinkage)
+            +run(Relation<O extends NumberVector>): ClusterMergeHistory
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.hierarchical.LinearMemoryNNChain.Instance<O extends NumberVector> [[LinearMemoryNNChain.Instance.html]] {
+            +Instance(GeometricLinkage)
+            +run(ArrayDBIDs, Relation<O extends NumberVector>, ClusterMergeHistoryBuilder): ClusterMergeHistory
+            -nnChainCore(DBIDArrayIter, DBIDArrayIter, ClusterMergeHistoryBuilder, Relation<O extends NumberVector>): void
+            #merge(int, double[], ClusterMergeHistoryBuilder, int[], double, int, int): void
+        }
+
+        class elki.clustering.hierarchical.LinearMemoryNNChain.Par<O extends NumberVector> {
+            {static} +LINKAGE_ID: OptionID
+            +configure(Parameterization): void
+            +make(): LinearMemoryNNChain<O extends NumberVector>
+        }
+
+        class ClusterPrototypeMergeHistory [[ClusterPrototypeMergeHistory.html]] {
+            #prototypes: ArrayDBIDs
+            +ClusterPrototypeMergeHistory(ArrayDBIDs, int[], double[], int[], boolean, ArrayDBIDs)
+            +prototype(int): DBID
+        }
+
+        class SLINKHDBSCANLinearMemory<O> [[SLINKHDBSCANLinearMemory.html]] {
+            {static} -LOG: Logging
+            +SLINKHDBSCANLinearMemory(Distance<? super O>, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): ClusterMergeHistory
+            -step2(DBIDRef, DBIDs, DistanceQuery<? super O>, DoubleDataStore, WritableDoubleDataStore): void
+            -step3(DBIDRef, WritableDBIDDataStore, WritableDoubleDataStore, DBIDs, WritableDoubleDataStore): void
+            -step4(DBIDRef, WritableDBIDDataStore, WritableDoubleDataStore, DBIDs): void
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.hierarchical.SLINKHDBSCANLinearMemory.Par<O> {
+            +make(): SLINKHDBSCANLinearMemory<O>
+        }
+
+        HierarchicalClusteringAlgorithm <|.. AGNES
+        AGNES --> elki.clustering.hierarchical.linkage.Linkage: linkage
+        AGNES +-- elki.clustering.hierarchical.AGNES.Instance
+        elki.clustering.hierarchical.AGNES.Instance --> elki.clustering.hierarchical.linkage.Linkage: linkage
+        elki.clustering.hierarchical.AGNES.Instance --> ClusterDistanceMatrix: mat
+        elki.clustering.hierarchical.AGNES.Instance --> ClusterMergeHistoryBuilder: builder
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.AGNES.Par
+        AGNES +-- elki.clustering.hierarchical.AGNES.Par
+        elki.clustering.hierarchical.AGNES.Par --> elki.clustering.hierarchical.linkage.Linkage: linkage
+        HierarchicalClusteringAlgorithm <|.. MedoidLinkage
+        elki.clustering.hierarchical.AGNES.Instance <|-- elki.clustering.hierarchical.MedoidLinkage.Instance
+        MedoidLinkage +-- elki.clustering.hierarchical.MedoidLinkage.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.MedoidLinkage.Par
+        MedoidLinkage +-- elki.clustering.hierarchical.MedoidLinkage.Par
+        HierarchicalClusteringAlgorithm <|.. HACAM
+        HACAM --> elki.clustering.hierarchical.HACAM.Variant: variant
+        HACAM +-- elki.clustering.hierarchical.HACAM.Variant
+        elki.clustering.hierarchical.Anderberg.Instance <|-- elki.clustering.hierarchical.HACAM.Instance
+        HACAM +-- elki.clustering.hierarchical.HACAM.Instance
+        elki.clustering.hierarchical.HACAM.Instance --> elki.clustering.hierarchical.HACAM.Variant: variant
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.HACAM.Par
+        HACAM +-- elki.clustering.hierarchical.HACAM.Par
+        elki.clustering.hierarchical.HACAM.Par --> elki.clustering.hierarchical.HACAM.Variant: variant
+        ClusterMergeHistory <|-- ClusterDensityMergeHistory
+        AGNES <|-- Anderberg
+        elki.clustering.hierarchical.AGNES.Instance <|-- elki.clustering.hierarchical.Anderberg.Instance
+        Anderberg +-- elki.clustering.hierarchical.Anderberg.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.Anderberg.Par
+        Anderberg +-- elki.clustering.hierarchical.Anderberg.Par
+        elki.clustering.hierarchical.Anderberg.Par --> elki.clustering.hierarchical.linkage.Linkage: linkage
+        MiniMax <|-- MiniMaxNNChain
+        elki.clustering.hierarchical.MiniMax.Instance <|-- elki.clustering.hierarchical.MiniMaxNNChain.Instance
+        MiniMaxNNChain +-- elki.clustering.hierarchical.MiniMaxNNChain.Instance
+        elki.clustering.hierarchical.MiniMax.Par <|-- elki.clustering.hierarchical.MiniMaxNNChain.Par
+        MiniMaxNNChain +-- elki.clustering.hierarchical.MiniMaxNNChain.Par
+        HierarchicalClusteringAlgorithm <|.. OPTICSToHierarchical
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.OPTICSToHierarchical.Par
+        OPTICSToHierarchical +-- elki.clustering.hierarchical.OPTICSToHierarchical.Par
+        HierarchicalClusteringAlgorithm <|.. SLINK
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.SLINK.Par
+        SLINK +-- elki.clustering.hierarchical.SLINK.Par
+        HierarchicalClusteringAlgorithm <|.. MiniMax
+        elki.clustering.hierarchical.AGNES.Instance <|-- elki.clustering.hierarchical.MiniMax.Instance
+        MiniMax +-- elki.clustering.hierarchical.MiniMax.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.MiniMax.Par
+        MiniMax +-- elki.clustering.hierarchical.MiniMax.Par
+        elki.Algorithm <|.. AbstractHDBSCAN
+        elki.math.geometry.PrimsMinimumSpanningTree.Adapter <|.. elki.clustering.hierarchical.AbstractHDBSCAN.HDBSCANAdapter
+        AbstractHDBSCAN +-- elki.clustering.hierarchical.AbstractHDBSCAN.HDBSCANAdapter
+        elki.math.geometry.PrimsMinimumSpanningTree.Collector <|.. elki.clustering.hierarchical.AbstractHDBSCAN.HeapMSTCollector
+        AbstractHDBSCAN +-- elki.clustering.hierarchical.AbstractHDBSCAN.HeapMSTCollector
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.AbstractHDBSCAN.Par
+        AbstractHDBSCAN +-- elki.clustering.hierarchical.AbstractHDBSCAN.Par
+        SLINK <|-- CLINK
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.CLINK.Par
+        CLINK +-- elki.clustering.hierarchical.CLINK.Par
+        AbstractHDBSCAN <|-- HDBSCANLinearMemory
+        HierarchicalClusteringAlgorithm <|.. HDBSCANLinearMemory
+        elki.clustering.hierarchical.AbstractHDBSCAN.Par <|-- elki.clustering.hierarchical.HDBSCANLinearMemory.Par
+        HDBSCANLinearMemory +-- elki.clustering.hierarchical.HDBSCANLinearMemory.Par
+        elki.Algorithm <|-- HierarchicalClusteringAlgorithm
+        MiniMax <|-- MiniMaxAnderberg
+        elki.clustering.hierarchical.MiniMax.Instance <|-- elki.clustering.hierarchical.MiniMaxAnderberg.Instance
+        MiniMaxAnderberg +-- elki.clustering.hierarchical.MiniMaxAnderberg.Instance
+        elki.clustering.hierarchical.MiniMax.Par <|-- elki.clustering.hierarchical.MiniMaxAnderberg.Par
+        MiniMaxAnderberg +-- elki.clustering.hierarchical.MiniMaxAnderberg.Par
+        AGNES <|-- NNChain
+        elki.clustering.hierarchical.AGNES.Instance <|-- elki.clustering.hierarchical.NNChain.Instance
+        NNChain +-- elki.clustering.hierarchical.NNChain.Instance
+        elki.clustering.hierarchical.AGNES.Par <|-- elki.clustering.hierarchical.NNChain.Par
+        NNChain +-- elki.clustering.hierarchical.NNChain.Par
+        HierarchicalClusteringAlgorithm <|.. LinearMemoryNNChain
+        LinearMemoryNNChain --> elki.clustering.hierarchical.linkage.GeometricLinkage: linkage
+        LinearMemoryNNChain +-- elki.clustering.hierarchical.LinearMemoryNNChain.Instance
+        elki.clustering.hierarchical.LinearMemoryNNChain.Instance --> elki.clustering.hierarchical.linkage.GeometricLinkage: linkage
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.LinearMemoryNNChain.Par
+        LinearMemoryNNChain +-- elki.clustering.hierarchical.LinearMemoryNNChain.Par
+        elki.clustering.hierarchical.LinearMemoryNNChain.Par --> elki.clustering.hierarchical.linkage.GeometricLinkage: linkage
+        ClusterMergeHistory <|-- ClusterPrototypeMergeHistory
+        AbstractHDBSCAN <|-- SLINKHDBSCANLinearMemory
+        HierarchicalClusteringAlgorithm <|.. SLINKHDBSCANLinearMemory
+        elki.clustering.hierarchical.AbstractHDBSCAN.Par <|-- elki.clustering.hierarchical.SLINKHDBSCANLinearMemory.Par
+        SLINKHDBSCANLinearMemory +-- elki.clustering.hierarchical.SLINKHDBSCANLinearMemory.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki {
+        interface Algorithm [[../../Algorithm.html]] {
+            +autorun(Database): Object
+            {abstract} +getInputTypeRestriction(): TypeInformation[]
+        }
+    }
+
+    namespace elki.math.geometry {
+        interface elki.math.geometry.PrimsMinimumSpanningTree.Adapter<T> [[../../math/geometry/PrimsMinimumSpanningTree.Adapter.html]] {
+            {abstract} +distance(T, int, int): double
+            {abstract} +size(T): int
+        }
+        interface elki.math.geometry.PrimsMinimumSpanningTree.Collector [[../../math/geometry/PrimsMinimumSpanningTree.Collector.html]] {
+            {abstract} +addEdge(double, int, int): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>SingleObjectsStylingPolicy\n<size:10>elki.visualization.style" as elki.visualization.style.SingleObjectsStylingPolicy [[SingleObjectsStylingPolicy.html]]
+
+    interface "<size:14>StylingPolicy\n<size:10>elki.visualization.style" as elki.visualization.style.StylingPolicy [[StylingPolicy.html]] {
+        {abstract} +getColorForDBID(DBIDRef): int
+    }
+
+    elki.visualization.style.StylingPolicy <|-- elki.visualization.style.SingleObjectsStylingPolicy
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

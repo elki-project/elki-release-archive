@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LevenbergMarquardtMethod\n<size:10>elki.math.linearalgebra.fitting" as elki.math.linearalgebra.fitting.LevenbergMarquardtMethod [[LevenbergMarquardtMethod.html]] {
+        +func: FittingFunction
+        -x: double[]
+        -y: double[]
+        -s: double[]
+        -numparams: int
+        -params: double[]
+        -chisq: double
+        -numfit: int
+        -dofit: boolean[]
+        -covmat: double[]
+        -alpha: double[]
+        -lambda: double
+        -paramstry: double[]
+        -beta: double[]
+        -deltaparams: double[]
+        +maxruns: int
+        +maxsmall: int
+        +small: double
+        +LevenbergMarquardtMethod(FittingFunction, double[], boolean[], double[], double[], double[])
+        -simulateParameters(double[]): double
+        +iterate(): void
+        +getCovmat(): double[]
+        +getParams(): double[]
+        +getChiSq(): double
+        +run(): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

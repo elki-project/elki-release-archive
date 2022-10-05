@@ -1,0 +1,43 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MultipleObjectsBundle\n<size:10>elki.datasource.bundle" as elki.datasource.bundle.MultipleObjectsBundle [[MultipleObjectsBundle.html]] {
+        {static} -LOG: Logging
+        -meta: BundleMeta
+        -columns: List<List<?>>
+        -ids: ArrayDBIDs
+        +meta(): BundleMeta
+        +meta(int): SimpleTypeInformation<?>
+        +metaLength(): int
+        +data(int, int): Object
+        +assignDBID(int, DBIDVar): boolean
+        +dataLength(): int
+        +appendSimple(Object...): void
+        +appendColumn(SimpleTypeInformation<?>, List<?>): MultipleObjectsBundle
+        +setDBIDs(ArrayDBIDs): void
+        +getDBIDs(): ArrayDBIDs
+        +getColumn(int): List<?>
+        {static} +makeSimple(SimpleTypeInformation<? super V>, List<? extends V>): MultipleObjectsBundle
+        {static} +makeSimple(SimpleTypeInformation<? super V1>, List<? extends V1>, SimpleTypeInformation<? super V2>, List<? extends V2>): MultipleObjectsBundle
+        {static} +makeSimple(SimpleTypeInformation<? super V1>, List<? extends V1>, SimpleTypeInformation<? super V2>, List<? extends V2>, SimpleTypeInformation<? super V3>, List<? extends V3>): MultipleObjectsBundle
+        +asStream(): BundleStreamSource
+        {static} +fromStream(BundleStreamSource): MultipleObjectsBundle
+        +getRow(int): Object[]
+    }
+
+    interface "<size:14>ObjectBundle\n<size:10>elki.datasource.bundle" as elki.datasource.bundle.ObjectBundle [[ObjectBundle.html]] {
+        {abstract} +meta(): BundleMeta
+        {abstract} +meta(int): SimpleTypeInformation<?>
+        {abstract} +metaLength(): int
+        {abstract} +dataLength(): int
+        {abstract} +data(int, int): Object
+        {abstract} +assignDBID(int, DBIDVar): boolean
+    }
+
+    elki.datasource.bundle.ObjectBundle <|.. elki.datasource.bundle.MultipleObjectsBundle
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

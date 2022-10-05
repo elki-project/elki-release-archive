@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-classification",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-classification-0.8.0.jar",
+          "url": "elki-classification-0.8.0.jar",
+          "size": 46205,
+          "sha512": "f81537eb91467484efee4af9411b89339d34ddfc26bec4b4184a3a0af732bdd90f9538bdced93bf124610f3f8a8710b2afad0c11e5dd3cba3928919395393885",
+          "sha256": "9545ad49c85659921e39f0e32fc0169379373bdffb03926a0685b0ed1c436f2e",
+          "sha1": "8d96bb48fdb2f3ab623169134148bda6eb9178d1",
+          "md5": "3268b2e3c83221a13790110abd5135aa"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-classification-0.8.0.jar",
+          "url": "elki-classification-0.8.0.jar",
+          "size": 46205,
+          "sha512": "f81537eb91467484efee4af9411b89339d34ddfc26bec4b4184a3a0af732bdd90f9538bdced93bf124610f3f8a8710b2afad0c11e5dd3cba3928919395393885",
+          "sha256": "9545ad49c85659921e39f0e32fc0169379373bdffb03926a0685b0ed1c436f2e",
+          "sha1": "8d96bb48fdb2f3ab623169134148bda6eb9178d1",
+          "md5": "3268b2e3c83221a13790110abd5135aa"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-classification",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-classification-0.8.0-test-fixtures.jar",
+          "url": "elki-classification-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "2fbb5aaea8660fd5f5cb7ed8bddab2e33f17bb67c646406d0af7806b9da03e60b7fad74a05806326a80bc2a9d2002343acf8b316bcff013055d750bfab2b5394",
+          "sha256": "9230909248b11863258807431cd6cbff6266897cffc55b2177911324f08968d2",
+          "sha1": "47b4c181293de61121f106484072718a50bb56fb",
+          "md5": "90738badc1ec89f43447f49d9f2ada1c"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-classification-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-classification",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-classification-0.8.0-test-fixtures.jar",
+          "url": "elki-classification-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "2fbb5aaea8660fd5f5cb7ed8bddab2e33f17bb67c646406d0af7806b9da03e60b7fad74a05806326a80bc2a9d2002343acf8b316bcff013055d750bfab2b5394",
+          "sha256": "9230909248b11863258807431cd6cbff6266897cffc55b2177911324f08968d2",
+          "sha1": "47b4c181293de61121f106484072718a50bb56fb",
+          "md5": "90738badc1ec89f43447f49d9f2ada1c"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-classification-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntegerObjectMaxHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.IntegerObjectMaxHeap<V> [[IntegerObjectMaxHeap.html]] {
+        #twoheap: int[]
+        #twovals: Object[]
+        #size: int
+        {static} -TWO_HEAP_INITIAL_SIZE: int
+        +IntegerObjectMaxHeap()
+        +IntegerObjectMaxHeap(int)
+        +clear(): void
+        +size(): int
+        +isEmpty(): boolean
+        +add(int, V): void
+        +add(int, V, int): void
+        +replaceTopElement(int, V): void
+        -heapifyUp(int, int, Object): void
+        +poll(): void
+        -heapifyDown(int, Object): void
+        +peekKey(): int
+        +peekValue(): V
+        +containsKey(int): boolean
+        +containsValue(V): boolean
+        +unsortedIter(): UnsortedIter
+    }
+
+    interface "<size:14>IntegerObjectHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.IntegerObjectHeap<V> [[IntegerObjectHeap.html]] {
+        {abstract} +add(int, V): void
+        {abstract} +add(int, V, int): void
+        {abstract} +replaceTopElement(int, V): void
+        {abstract} +peekKey(): int
+        {abstract} +peekValue(): V
+        {abstract} +containsKey(int): boolean
+        {abstract} +containsValue(V): boolean
+        {abstract} +poll(): void
+        {abstract} +clear(): void
+        {abstract} +size(): int
+        {abstract} +isEmpty(): boolean
+        {abstract} +unsortedIter(): UnsortedIter<V>
+    }
+    class "<size:14>IntegerObjectMaxHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.IntegerObjectMaxHeap.UnsortedIter [[IntegerObjectMaxHeap.UnsortedIter.html]]
+
+    elki.utilities.datastructures.heap.IntegerObjectHeap <|.. elki.utilities.datastructures.heap.IntegerObjectMaxHeap
+    elki.utilities.datastructures.heap.IntegerObjectMaxHeap +-- elki.utilities.datastructures.heap.IntegerObjectMaxHeap.UnsortedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

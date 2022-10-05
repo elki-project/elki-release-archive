@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractRStarTreeFactory\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory<O extends NumberVector, N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[AbstractRStarTreeFactory.html]] {
+        #settings: S extends RTreeSettings
+        +AbstractRStarTreeFactory(PageFileFactory<?>, S extends RTreeSettings)
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    abstract class "<size:14>PagedIndexFactory\n<size:10>elki.index" as elki.index.PagedIndexFactory<O extends NumberVector> [[../../../PagedIndexFactory.html]]
+    abstract class "<size:14>AbstractRStarTreeFactory.Par\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par<O extends NumberVector, S extends RTreeSettings>
+
+    elki.index.PagedIndexFactory <|-- elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory
+    elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory +-- elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

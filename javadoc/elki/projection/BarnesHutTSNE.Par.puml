@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BarnesHutTSNE.Par\n<size:10>elki.projection" as elki.projection.BarnesHutTSNE.Par<O> {
+        {static} +THETA_ID: OptionID
+        +theta: double
+        +configure(Parameterization): void
+        #getDefaultAffinity(): Class<?>
+        +make(): BarnesHutTSNE<O>
+    }
+
+    class "<size:14>TSNE.Par\n<size:10>elki.projection" as elki.projection.TSNE.Par<O>
+    class "<size:14>BarnesHutTSNE\n<size:10>elki.projection" as elki.projection.BarnesHutTSNE<O> [[BarnesHutTSNE.html]]
+
+    elki.projection.TSNE.Par <|-- elki.projection.BarnesHutTSNE.Par
+    elki.projection.BarnesHutTSNE +-- elki.projection.BarnesHutTSNE.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractMkTreeUnified\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnified<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMkTreeUnified.html]] {
+        +AbstractMkTreeUnified(Relation<O>, PageFile<N extends AbstractMTreeNode<O, N, E extends MTreeEntry>>, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>)
+        #createHeader(): TreeIndexHeader
+        +insertAll(List<E extends MTreeEntry>): void
+        {abstract} #kNNdistanceAdjustment(E extends MTreeEntry, Map<DBID, KNNList>): void
+        +getKmax(): int
+    }
+
+    abstract class "<size:14>AbstractMkTree\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMkTree.html]] {
+        {abstract} +reverseKNNQuery(DBIDRef, int): DoubleDBIDList
+    }
+
+    elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTree <|-- elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnified
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

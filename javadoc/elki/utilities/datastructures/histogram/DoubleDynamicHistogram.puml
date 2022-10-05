@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleDynamicHistogram\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.DoubleDynamicHistogram [[DoubleDynamicHistogram.html]] {
+        -cachec: double[]
+        -cachev: double[]
+        -cachefill: int
+        -destsize: int
+        +DoubleDynamicHistogram(int)
+        ~materialize(): void
+        +get(double): double
+        +increment(double, double): void
+        -testResample(double): void
+        +iter(): Iter
+        +getNumBins(): int
+        +getBinsize(): double
+        +getCoverMinimum(): double
+        +getCoverMaximum(): double
+        #downsample(double[], int, int, int): double
+    }
+
+    class "<size:14>DoubleHistogram\n<size:10>elki.utilities.datastructures.histogram" as elki.utilities.datastructures.histogram.DoubleHistogram [[DoubleHistogram.html]]
+
+    elki.utilities.datastructures.histogram.DoubleHistogram <|-- elki.utilities.datastructures.histogram.DoubleDynamicHistogram
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

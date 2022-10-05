@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DoubleHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleHeap.UnsortedIter [[DoubleHeap.UnsortedIter.html]] {
+        {abstract} +get(): double
+    }
+
+    interface "<size:14>Iter\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.Iter [[../iterator/Iter.html]] {
+        {abstract} +valid(): boolean
+        {abstract} +advance(): Iter
+    }
+    interface "<size:14>DoubleHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleHeap [[DoubleHeap.html]] {
+        {abstract} +add(double): void
+        {abstract} +add(double, int): void
+        {abstract} +replaceTopElement(double): double
+        {abstract} +peek(): double
+        {abstract} +poll(): double
+        {abstract} +clear(): void
+        {abstract} +size(): int
+        {abstract} +isEmpty(): boolean
+        {abstract} +unsortedIter(): UnsortedIter
+    }
+
+    elki.utilities.datastructures.iterator.Iter <|-- elki.utilities.datastructures.heap.DoubleHeap.UnsortedIter
+    elki.utilities.datastructures.heap.DoubleHeap +-- elki.utilities.datastructures.heap.DoubleHeap.UnsortedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

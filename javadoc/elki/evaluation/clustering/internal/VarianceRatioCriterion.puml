@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VarianceRatioCriterion\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.VarianceRatioCriterion [[VarianceRatioCriterion.html]] {
+        {static} -LOG: Logging
+        -noiseOption: NoiseHandling
+        -penalize: boolean
+        -key: String
+        +VarianceRatioCriterion(NoiseHandling, boolean)
+        +evaluateClustering(Relation<? extends NumberVector>, Clustering<?>): double
+        {static} +globalCentroid(Centroid, Relation<? extends NumberVector>, List<? extends Cluster<?>>, NumberVector[], NoiseHandling): int
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../../Evaluator.html]]
+    class "<size:14>VarianceRatioCriterion.Par\n<size:10>elki.evaluation.clustering.internal" as elki.evaluation.clustering.internal.VarianceRatioCriterion.Par [[VarianceRatioCriterion.Par.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.clustering.internal.VarianceRatioCriterion
+    elki.evaluation.clustering.internal.VarianceRatioCriterion +-- elki.evaluation.clustering.internal.VarianceRatioCriterion.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

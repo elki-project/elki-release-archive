@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CFKPlusPlusLeaves.Par\n<size:10>elki.clustering.kmeans.initialization.betula" as elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves.Par [[CFKPlusPlusLeaves.Par.html]] {
+        {static} +KMPP_DISTANCE_ID: OptionID
+        {static} +FIRST_UNIFORM_ID: OptionID
+        ~dist: CFInitWeight
+        ~firstUniform: boolean
+        +configure(Parameterization): void
+        +make(): CFKPlusPlusLeaves
+    }
+
+    abstract class "<size:14>AbstractCFKMeansInitialization.Par\n<size:10>elki.clustering.kmeans.initialization.betula" as elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization.Par [[AbstractCFKMeansInitialization.Par.html]]
+    class "<size:14>CFKPlusPlusLeaves\n<size:10>elki.clustering.kmeans.initialization.betula" as elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves [[CFKPlusPlusLeaves.html]]
+
+    elki.clustering.kmeans.initialization.betula.AbstractCFKMeansInitialization.Par <|-- elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves.Par
+    elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves +-- elki.clustering.kmeans.initialization.betula.CFKPlusPlusLeaves.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

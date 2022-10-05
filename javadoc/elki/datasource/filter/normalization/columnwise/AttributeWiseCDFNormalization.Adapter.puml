@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AttributeWiseCDFNormalization.Adapter\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization.Adapter {
+        ~dim: int
+        +size(List<? extends NumberVector>): int
+        +get(List<? extends NumberVector>, int): Double
+        +getDouble(List<? extends NumberVector>, int): double
+        +getLong(List<? extends NumberVector>, int): long
+    }
+
+    interface "<size:14>NumberArrayAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.NumberArrayAdapter<Double, List<? extends NumberVector>> [[../../../../utilities/datastructures/arraylike/NumberArrayAdapter.html]] {
+        {abstract} +size(List<? extends NumberVector>): int
+        {abstract} +get(List<? extends NumberVector>, int): Double
+        {abstract} +getDouble(List<? extends NumberVector>, int): double
+        {abstract} +getLong(List<? extends NumberVector>, int): long
+    }
+    class "<size:14>AttributeWiseCDFNormalization\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization<V extends NumberVector> [[AttributeWiseCDFNormalization.html]]
+
+    elki.utilities.datastructures.arraylike.NumberArrayAdapter <|.. elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization.Adapter
+    elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization +-- elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization.Adapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CLIQUESubspace\n<size:10>elki.clustering.subspace.clique" as elki.clustering.subspace.clique.CLIQUESubspace [[CLIQUESubspace.html]] {
+        -denseUnits: List<CLIQUEUnit>
+        -coverage: int
+        {static} +BY_COVERAGE: Comparator<CLIQUESubspace>
+        +CLIQUESubspace(int)
+        +CLIQUESubspace(long[])
+        +addDenseUnit(CLIQUEUnit): void
+        +determineClusters(): List<Pair<Subspace, ModifiableDBIDs>>
+        +dfs(CLIQUEUnit, ModifiableDBIDs, CLIQUESubspace): void
+        #leftNeighbor(CLIQUEUnit, int): CLIQUEUnit
+        #rightNeighbor(CLIQUEUnit, int): CLIQUEUnit
+        +getCoverage(): int
+        +join(CLIQUESubspace, double, double): CLIQUESubspace
+    }
+
+    class "<size:14>Subspace\n<size:10>elki.data" as elki.data.Subspace [[../../../data/Subspace.html]]
+
+    elki.data.Subspace <|-- elki.clustering.subspace.clique.CLIQUESubspace
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

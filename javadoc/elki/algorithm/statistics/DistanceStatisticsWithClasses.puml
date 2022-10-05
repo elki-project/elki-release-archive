@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DistanceStatisticsWithClasses\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.DistanceStatisticsWithClasses<O> [[DistanceStatisticsWithClasses.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super O>
+        #numbin: int
+        #sampling: boolean
+        #exact: boolean
+        +DistanceStatisticsWithClasses(Distance<? super O>, int, boolean, boolean)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Database, Relation<O>): HistogramResult
+        -sampleMinMax(Relation<O>, DistanceQuery<O>): DoubleMinMax
+        -exactMinMax(Relation<O>, DistanceQuery<O>): DoubleMinMax
+        {static} -shrinkHeap(TreeSet<DoubleDBIDPair>, int): void
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    class "<size:14>DistanceStatisticsWithClasses.Par\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.DistanceStatisticsWithClasses.Par<O>
+
+    elki.Algorithm <|.. elki.algorithm.statistics.DistanceStatisticsWithClasses
+    elki.algorithm.statistics.DistanceStatisticsWithClasses +-- elki.algorithm.statistics.DistanceStatisticsWithClasses.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

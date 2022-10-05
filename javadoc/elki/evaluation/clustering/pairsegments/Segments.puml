@@ -1,0 +1,38 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Segments\n<size:10>elki.evaluation.clustering.pairsegments" as elki.evaluation.clustering.pairsegments.Segments [[Segments.html]] {
+        {static} -LOG: Logging
+        -clusterings: List<Clustering<?>>
+        -clusters: List<List<? extends Cluster<?>>>
+        -clusteringsCount: int
+        -numclusters: int[]
+        -totalObjects: int
+        -actualPairs: long
+        -segments: TreeMap<Segment, Segment>
+        +Segments(List<Clustering<?>>)
+        -recursivelyFill(List<List<? extends Cluster<?>>>): void
+        -recursivelyFill(List<List<? extends Cluster<?>>>, int, SetDBIDs, SetDBIDs, int[], boolean): void
+        -makeOrUpdateSegment(int[], DBIDs, int): void
+        +getClusteringDescription(int): String
+        +getPairedSegments(Segment): List<Segment>
+        +unifySegment(Segment): Segment
+        +size(): int
+        +getPairCount(boolean): long
+        +getClusterings(): int
+        +getTotalClusterCount(): int
+        +getHighestClusterCount(): int
+        +iterator(): Iterator<Segment>
+    }
+
+    interface "<size:14>Iterable\n<size:10>java.lang" as java.lang.Iterable<Segment> {
+        {abstract} +iterator(): Iterator<T>
+    }
+
+    java.lang.Iterable <|.. elki.evaluation.clustering.pairsegments.Segments
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

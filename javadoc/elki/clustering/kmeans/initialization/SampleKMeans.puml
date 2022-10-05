@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SampleKMeans\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SampleKMeans<V extends NumberVector> [[SampleKMeans.html]] {
+        -innerkMeans: KMeans<V extends NumberVector, ?>
+        -rate: double
+        +SampleKMeans(RandomFactory, KMeans<V extends NumberVector, ?>, double)
+        +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+    }
+
+    abstract class "<size:14>AbstractKMeansInitialization\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AbstractKMeansInitialization [[AbstractKMeansInitialization.html]]
+    class "<size:14>SampleKMeans.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SampleKMeans.Par<V extends NumberVector>
+
+    elki.clustering.kmeans.initialization.AbstractKMeansInitialization <|-- elki.clustering.kmeans.initialization.SampleKMeans
+    elki.clustering.kmeans.initialization.SampleKMeans +-- elki.clustering.kmeans.initialization.SampleKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

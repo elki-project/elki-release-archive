@@ -1,0 +1,270 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.database.datastore.memory {
+
+        class MemoryDataStoreFactory [[MemoryDataStoreFactory.html]] {
+            +makeStorage(DBIDs, int, Class<? super T>): WritableDataStore<T>
+            +makeDBIDStorage(DBIDs, int): WritableDBIDDataStore
+            +makeDoubleStorage(DBIDs, int): WritableDoubleDataStore
+            +makeDoubleStorage(DBIDs, int, double): WritableDoubleDataStore
+            +makeIntegerStorage(DBIDs, int): WritableIntegerDataStore
+            +makeIntegerStorage(DBIDs, int, int): WritableIntegerDataStore
+            +makeRecordStorage(DBIDs, int, Class<?>...): WritableRecordStore
+        }
+
+        class ArrayIntegerStore [[ArrayIntegerStore.html]] {
+            -data: int[]
+            -idmap: DataStoreIDMap
+            -def: int
+            +ArrayIntegerStore(int, DataStoreIDMap)
+            +ArrayIntegerStore(int, DataStoreIDMap, int)
+            +--get--(DBIDRef): Integer
+            +--put--(DBIDRef, Integer): Integer
+            +intValue(DBIDRef): int
+            +putInt(DBIDRef, int): int
+            +put(DBIDRef, int): int
+            +increment(DBIDRef, int): void
+            +destroy(): void
+            +delete(DBIDRef): void
+            +clear(): void
+        }
+
+        class MapIntegerDBIDRecordStore [[MapIntegerDBIDRecordStore.html]] {
+            -rlen: int
+            -data: Int2ObjectMap<Object[]>
+            +MapIntegerDBIDRecordStore(int, Int2ObjectMap<Object[]>)
+            +MapIntegerDBIDRecordStore(int)
+            +MapIntegerDBIDRecordStore(int, int)
+            +getStorage(int, Class<? super T>): WritableDataStore<T>
+            #get(DBIDRef, int): T
+            #set(DBIDRef, int, T): T
+            +remove(DBIDRef): boolean
+        }
+
+        class elki.database.datastore.memory.MapIntegerDBIDRecordStore.StorageAccessor<T> [[MapIntegerDBIDRecordStore.StorageAccessor.html]] {
+            -index: int
+            #StorageAccessor(int)
+            +get(DBIDRef): T
+            +put(DBIDRef, T): T
+            +destroy(): void
+            +delete(DBIDRef): void
+            +clear(): void
+        }
+
+        class MapStore<T> [[MapStore.html]] {
+            -data: Map<DBID, T>
+            +MapStore(Map<DBID, T>)
+            +MapStore()
+            +get(DBIDRef): T
+            +put(DBIDRef, T): T
+            +destroy(): void
+            +delete(DBIDRef): void
+            +clear(): void
+        }
+
+        class MapRecordStore [[MapRecordStore.html]] {
+            -rlen: int
+            -data: Map<DBID, Object[]>
+            +MapRecordStore(int, Map<DBID, Object[]>)
+            +MapRecordStore(int)
+            +getStorage(int, Class<? super T>): WritableDataStore<T>
+            #get(DBIDRef, int): T
+            #set(DBIDRef, int, T): T
+            +remove(DBIDRef): boolean
+        }
+
+        class elki.database.datastore.memory.MapRecordStore.StorageAccessor<T> [[MapRecordStore.StorageAccessor.html]] {
+            -index: int
+            #StorageAccessor(int)
+            +get(DBIDRef): T
+            +put(DBIDRef, T): T
+            +destroy(): void
+            +clear(): void
+            +delete(DBIDRef): void
+        }
+
+        class MapIntegerDBIDStore<T> [[MapIntegerDBIDStore.html]] {
+            -data: Int2ObjectMap<T>
+            +MapIntegerDBIDStore(Int2ObjectMap<T>)
+            +MapIntegerDBIDStore()
+            +MapIntegerDBIDStore(int)
+            +get(DBIDRef): T
+            +put(DBIDRef, T): T
+            +destroy(): void
+            +delete(DBIDRef): void
+            +clear(): void
+        }
+
+        class ArrayDoubleStore [[ArrayDoubleStore.html]] {
+            -data: double[]
+            -def: double
+            -idmap: DataStoreIDMap
+            +ArrayDoubleStore(int, DataStoreIDMap)
+            +ArrayDoubleStore(int, DataStoreIDMap, double)
+            +--get--(DBIDRef): Double
+            +--put--(DBIDRef, Double): Double
+            +doubleValue(DBIDRef): double
+            +putDouble(DBIDRef, double): double
+            +put(DBIDRef, double): double
+            +increment(DBIDRef, double): void
+            +clear(): void
+            +destroy(): void
+            +delete(DBIDRef): void
+        }
+
+        class ArrayDBIDStore [[ArrayDBIDStore.html]] {
+            -data: ArrayModifiableDBIDs
+            -idmap: DataStoreIDMap
+            +ArrayDBIDStore(int, DataStoreIDMap)
+            +--get--(DBIDRef): DBID
+            +assignVar(DBIDRef, DBIDVar): DBIDVar
+            +--put--(DBIDRef, DBID): DBID
+            +putDBID(DBIDRef, DBIDRef): void
+            +put(DBIDRef, DBIDRef): void
+            +destroy(): void
+            +clear(): void
+            +delete(DBIDRef): void
+        }
+
+        class ArrayStore<T> [[ArrayStore.html]] {
+            -data: Object[]
+            -idmap: DataStoreIDMap
+            +ArrayStore(Object[], DataStoreIDMap)
+            +get(DBIDRef): T
+            +put(DBIDRef, T): T
+            +destroy(): void
+            +delete(DBIDRef): void
+            +clear(): void
+        }
+
+        class MapIntegerDBIDDBIDStore [[MapIntegerDBIDDBIDStore.html]] {
+            -map: Int2IntMap
+            +MapIntegerDBIDDBIDStore(int)
+            +--get--(DBIDRef): DBID
+            +--put--(DBIDRef, DBID): DBID
+            +put(DBIDRef, DBIDRef): void
+            +putDBID(DBIDRef, DBIDRef): void
+            +assignVar(DBIDRef, DBIDVar): DBIDVar
+            +delete(DBIDRef): void
+            +destroy(): void
+            +clear(): void
+        }
+
+        class ArrayRecordStore [[ArrayRecordStore.html]] {
+            -data: Object[]
+            -idmap: DataStoreIDMap
+            +ArrayRecordStore(Object[], DataStoreIDMap)
+            +getStorage(int, Class<? super T>): WritableDataStore<T>
+            #get(DBIDRef, int): T
+            #set(DBIDRef, int, T): T
+            +remove(DBIDRef): boolean
+        }
+
+        class elki.database.datastore.memory.ArrayRecordStore.StorageAccessor<T> [[ArrayRecordStore.StorageAccessor.html]] {
+            -index: int
+            #StorageAccessor(int)
+            +get(DBIDRef): T
+            +put(DBIDRef, T): T
+            +destroy(): void
+            +delete(DBIDRef): void
+            +clear(): void
+        }
+
+        class MapIntegerDBIDIntegerStore [[MapIntegerDBIDIntegerStore.html]] {
+            -map: Int2IntOpenHashMap
+            +MapIntegerDBIDIntegerStore(int)
+            +MapIntegerDBIDIntegerStore(int, int)
+            +--get--(DBIDRef): Integer
+            +intValue(DBIDRef): int
+            +--put--(DBIDRef, Integer): Integer
+            +destroy(): void
+            +delete(DBIDRef): void
+            +putInt(DBIDRef, int): int
+            +put(DBIDRef, int): int
+            +increment(DBIDRef, int): void
+            +clear(): void
+        }
+
+        class MapIntegerDBIDDoubleStore [[MapIntegerDBIDDoubleStore.html]] {
+            -map: Int2DoubleOpenHashMap
+            +MapIntegerDBIDDoubleStore(int)
+            +MapIntegerDBIDDoubleStore(int, double)
+            +--get--(DBIDRef): Double
+            +doubleValue(DBIDRef): double
+            +--put--(DBIDRef, Double): Double
+            +delete(DBIDRef): void
+            +putDouble(DBIDRef, double): double
+            +put(DBIDRef, double): double
+            +increment(DBIDRef, double): void
+            +clear(): void
+            +destroy(): void
+        }
+
+        elki.database.datastore.DataStoreFactory <|.. MemoryDataStoreFactory
+        elki.database.datastore.WritableIntegerDataStore <|.. ArrayIntegerStore
+        elki.database.datastore.WritableRecordStore <|.. MapIntegerDBIDRecordStore
+        elki.database.datastore.WritableDataStore <|.. elki.database.datastore.memory.MapIntegerDBIDRecordStore.StorageAccessor
+        MapIntegerDBIDRecordStore +-- elki.database.datastore.memory.MapIntegerDBIDRecordStore.StorageAccessor
+        elki.database.datastore.WritableDataStore <|.. MapStore
+        elki.database.datastore.WritableRecordStore <|.. MapRecordStore
+        elki.database.datastore.WritableDataStore <|.. elki.database.datastore.memory.MapRecordStore.StorageAccessor
+        MapRecordStore +-- elki.database.datastore.memory.MapRecordStore.StorageAccessor
+        elki.database.datastore.WritableDataStore <|.. MapIntegerDBIDStore
+        elki.database.datastore.WritableDoubleDataStore <|.. ArrayDoubleStore
+        elki.database.datastore.WritableDBIDDataStore <|.. ArrayDBIDStore
+        elki.database.datastore.WritableDataStore <|.. ArrayStore
+        elki.database.datastore.WritableDBIDDataStore <|.. MapIntegerDBIDDBIDStore
+        elki.database.datastore.WritableRecordStore <|.. ArrayRecordStore
+        elki.database.datastore.WritableDataStore <|.. elki.database.datastore.memory.ArrayRecordStore.StorageAccessor
+        ArrayRecordStore +-- elki.database.datastore.memory.ArrayRecordStore.StorageAccessor
+        elki.database.datastore.WritableIntegerDataStore <|.. MapIntegerDBIDIntegerStore
+        elki.database.datastore.WritableDoubleDataStore <|.. MapIntegerDBIDDoubleStore
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreFactory [[../DataStoreFactory.html]] {
+            {static} +FACTORY: DataStoreFactory
+            {static} +HINT_TEMP: int
+            {static} +HINT_HOT: int
+            {static} +HINT_STATIC: int
+            {static} +HINT_SORTED: int
+            {static} +HINT_DB: int
+            {abstract} +makeStorage(DBIDs, int, Class<? super T>): WritableDataStore<T>
+            {abstract} +makeDBIDStorage(DBIDs, int): WritableDBIDDataStore
+            {abstract} +makeDoubleStorage(DBIDs, int): WritableDoubleDataStore
+            {abstract} +makeDoubleStorage(DBIDs, int, double): WritableDoubleDataStore
+            {abstract} +makeIntegerStorage(DBIDs, int): WritableIntegerDataStore
+            {abstract} +makeIntegerStorage(DBIDs, int, int): WritableIntegerDataStore
+            {abstract} +makeRecordStorage(DBIDs, int, Class<?>...): WritableRecordStore
+        }
+        interface WritableIntegerDataStore [[../WritableIntegerDataStore.html]] {
+            {abstract} +--put--(DBIDRef, Integer): Integer
+            {abstract} +putInt(DBIDRef, int): int
+            {abstract} +put(DBIDRef, int): int
+            {abstract} +increment(DBIDRef, int): void
+        }
+        interface WritableRecordStore [[../WritableRecordStore.html]] {
+            {abstract} +getStorage(int, Class<? super T>): WritableDataStore<T>
+            {abstract} +remove(DBIDRef): boolean
+        }
+        interface WritableDataStore<T> [[../WritableDataStore.html]] {
+            {abstract} +put(DBIDRef, T): T
+            {abstract} +destroy(): void
+            {abstract} +delete(DBIDRef): void
+            {abstract} +clear(): void
+        }
+        interface WritableDoubleDataStore [[../WritableDoubleDataStore.html]] {
+            {abstract} +--put--(DBIDRef, Double): Double
+            {abstract} +putDouble(DBIDRef, double): double
+            {abstract} +put(DBIDRef, double): double
+            {abstract} +increment(DBIDRef, double): void
+        }
+        interface WritableDBIDDataStore [[../WritableDBIDDataStore.html]] {
+            {abstract} +--put--(DBIDRef, DBID): DBID
+            {abstract} +putDBID(DBIDRef, DBIDRef): void
+            {abstract} +put(DBIDRef, DBIDRef): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

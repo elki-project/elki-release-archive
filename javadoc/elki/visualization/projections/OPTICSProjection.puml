@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSProjection\n<size:10>elki.visualization.projections" as elki.visualization.projections.OPTICSProjection [[OPTICSProjection.html]] {
+        ~projector: OPTICSProjector
+        +OPTICSProjection(OPTICSProjector)
+        +getMenuName(): String
+        +getInputDimensionality(): int
+        +getScale(int): LinearScale
+        +getOPTICSPlot(VisualizerContext): OPTICSPlot
+        +getResult(): ClusterOrder
+        +getProjector(): Projector
+    }
+
+    interface "<size:14>Projection\n<size:10>elki.visualization.projections" as elki.visualization.projections.Projection [[Projection.html]] {
+        {abstract} +getInputDimensionality(): int
+        {abstract} +getScale(int): LinearScale
+        {abstract} +getProjector(): Projector
+    }
+
+    elki.visualization.projections.Projection <|.. elki.visualization.projections.OPTICSProjection
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

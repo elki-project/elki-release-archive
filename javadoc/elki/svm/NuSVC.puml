@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NuSVC\n<size:10>elki.svm" as elki.svm.NuSVC [[NuSVC.html]] {
+        {static} -LOG: Logging
+        #nu: double
+        +NuSVC(double, boolean, double, double)
+        #solve(DataSet): SolutionInfo
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractSVC\n<size:10>elki.svm" as elki.svm.AbstractSVC [[AbstractSVC.html]]
+
+    elki.svm.AbstractSVC <|-- elki.svm.NuSVC
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

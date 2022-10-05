@@ -1,0 +1,130 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.distance.correlation {
+
+        class AbsoluteUncenteredCorrelationDistance [[AbsoluteUncenteredCorrelationDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+        }
+
+        class elki.distance.correlation.AbsoluteUncenteredCorrelationDistance.Par [[AbsoluteUncenteredCorrelationDistance.Par.html]] {
+            +make(): AbsoluteUncenteredCorrelationDistance
+        }
+
+        class UncenteredCorrelationDistance [[UncenteredCorrelationDistance.html]] {
+            {static} +uncenteredCorrelation(NumberVector, NumberVector): double
+            {static} +uncenteredCorrelation(double[], double[]): double
+            +distance(NumberVector, NumberVector): double
+        }
+
+        class elki.distance.correlation.UncenteredCorrelationDistance.Par [[UncenteredCorrelationDistance.Par.html]] {
+            +make(): UncenteredCorrelationDistance
+        }
+
+        class PearsonCorrelationDistance [[PearsonCorrelationDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+        }
+
+        class elki.distance.correlation.PearsonCorrelationDistance.Par [[PearsonCorrelationDistance.Par.html]] {
+            +make(): PearsonCorrelationDistance
+        }
+
+        class WeightedPearsonCorrelationDistance [[WeightedPearsonCorrelationDistance.html]] {
+            -weights: double[]
+            +WeightedPearsonCorrelationDistance(double[])
+            +distance(NumberVector, NumberVector): double
+        }
+
+        class elki.distance.correlation.WeightedPearsonCorrelationDistance.Par [[WeightedPearsonCorrelationDistance.Par.html]] {
+            #weights: double[]
+            +configure(Parameterization): void
+            +make(): WeightedPearsonCorrelationDistance
+        }
+
+        class SquaredPearsonCorrelationDistance [[SquaredPearsonCorrelationDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +isSquared(): boolean
+        }
+
+        class elki.distance.correlation.SquaredPearsonCorrelationDistance.Par [[SquaredPearsonCorrelationDistance.Par.html]] {
+            +make(): SquaredPearsonCorrelationDistance
+        }
+
+        class AbsolutePearsonCorrelationDistance [[AbsolutePearsonCorrelationDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+        }
+
+        class elki.distance.correlation.AbsolutePearsonCorrelationDistance.Par [[AbsolutePearsonCorrelationDistance.Par.html]] {
+            +make(): AbsolutePearsonCorrelationDistance
+        }
+
+        class WeightedSquaredPearsonCorrelationDistance [[WeightedSquaredPearsonCorrelationDistance.html]] {
+            -weights: double[]
+            +WeightedSquaredPearsonCorrelationDistance(double[])
+            +distance(NumberVector, NumberVector): double
+        }
+
+        class elki.distance.correlation.WeightedSquaredPearsonCorrelationDistance.Par [[WeightedSquaredPearsonCorrelationDistance.Par.html]] {
+            #weights: double[]
+            +configure(Parameterization): void
+            +make(): WeightedSquaredPearsonCorrelationDistance
+        }
+
+        class SquaredUncenteredCorrelationDistance [[SquaredUncenteredCorrelationDistance.html]] {
+            +distance(NumberVector, NumberVector): double
+            +isSquared(): boolean
+        }
+
+        class elki.distance.correlation.SquaredUncenteredCorrelationDistance.Par [[SquaredUncenteredCorrelationDistance.Par.html]] {
+            +make(): SquaredUncenteredCorrelationDistance
+        }
+
+        elki.distance.AbstractNumberVectorDistance <|-- AbsoluteUncenteredCorrelationDistance
+        AbsoluteUncenteredCorrelationDistance --> AbsoluteUncenteredCorrelationDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.correlation.AbsoluteUncenteredCorrelationDistance.Par
+        AbsoluteUncenteredCorrelationDistance +-- elki.distance.correlation.AbsoluteUncenteredCorrelationDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- UncenteredCorrelationDistance
+        UncenteredCorrelationDistance --> UncenteredCorrelationDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.correlation.UncenteredCorrelationDistance.Par
+        UncenteredCorrelationDistance +-- elki.distance.correlation.UncenteredCorrelationDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- PearsonCorrelationDistance
+        PearsonCorrelationDistance --> PearsonCorrelationDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.correlation.PearsonCorrelationDistance.Par
+        PearsonCorrelationDistance +-- elki.distance.correlation.PearsonCorrelationDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- WeightedPearsonCorrelationDistance
+        elki.distance.WeightedNumberVectorDistance <|.. WeightedPearsonCorrelationDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.correlation.WeightedPearsonCorrelationDistance.Par
+        WeightedPearsonCorrelationDistance +-- elki.distance.correlation.WeightedPearsonCorrelationDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- SquaredPearsonCorrelationDistance
+        SquaredPearsonCorrelationDistance --> SquaredPearsonCorrelationDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.correlation.SquaredPearsonCorrelationDistance.Par
+        SquaredPearsonCorrelationDistance +-- elki.distance.correlation.SquaredPearsonCorrelationDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- AbsolutePearsonCorrelationDistance
+        AbsolutePearsonCorrelationDistance --> AbsolutePearsonCorrelationDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.correlation.AbsolutePearsonCorrelationDistance.Par
+        AbsolutePearsonCorrelationDistance +-- elki.distance.correlation.AbsolutePearsonCorrelationDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- WeightedSquaredPearsonCorrelationDistance
+        elki.distance.WeightedNumberVectorDistance <|.. WeightedSquaredPearsonCorrelationDistance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.correlation.WeightedSquaredPearsonCorrelationDistance.Par
+        WeightedSquaredPearsonCorrelationDistance +-- elki.distance.correlation.WeightedSquaredPearsonCorrelationDistance.Par
+        elki.distance.AbstractNumberVectorDistance <|-- SquaredUncenteredCorrelationDistance
+        SquaredUncenteredCorrelationDistance --> SquaredUncenteredCorrelationDistance: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.correlation.SquaredUncenteredCorrelationDistance.Par
+        SquaredUncenteredCorrelationDistance +-- elki.distance.correlation.SquaredUncenteredCorrelationDistance.Par
+    }
+
+    namespace elki.distance {
+        abstract class AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+        interface WeightedNumberVectorDistance<V> [[../WeightedNumberVectorDistance.html]] {
+            {static} +WEIGHTS_ID: OptionID
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

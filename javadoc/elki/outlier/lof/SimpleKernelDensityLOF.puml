@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleKernelDensityLOF\n<size:10>elki.outlier.lof" as elki.outlier.lof.SimpleKernelDensityLOF<O extends NumberVector> [[SimpleKernelDensityLOF.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super NumberVector>
+        #kplus: int
+        #kernel: KernelDensityFunction
+        +SimpleKernelDensityLOF(int, Distance<? super NumberVector>, KernelDensityFunction)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O extends NumberVector>): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>SimpleKernelDensityLOF.Par\n<size:10>elki.outlier.lof" as elki.outlier.lof.SimpleKernelDensityLOF.Par<O extends NumberVector>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.lof.SimpleKernelDensityLOF
+    elki.outlier.lof.SimpleKernelDensityLOF +-- elki.outlier.lof.SimpleKernelDensityLOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

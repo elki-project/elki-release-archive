@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AbstractHDBSCAN.HeapMSTCollector\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AbstractHDBSCAN.HeapMSTCollector [[AbstractHDBSCAN.HeapMSTCollector.html]] {
+        -heap: DoubleLongHeap
+        -prog: FiniteProgress
+        -log: Logging
+        +HeapMSTCollector(DoubleLongHeap, FiniteProgress, Logging)
+        +addEdge(double, int, int): void
+    }
+
+    interface "<size:14>PrimsMinimumSpanningTree.Collector\n<size:10>elki.math.geometry" as elki.math.geometry.PrimsMinimumSpanningTree.Collector [[../../math/geometry/PrimsMinimumSpanningTree.Collector.html]] {
+        {abstract} +addEdge(double, int, int): void
+    }
+    abstract class "<size:14>AbstractHDBSCAN\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AbstractHDBSCAN<O> [[AbstractHDBSCAN.html]] {
+        {abstract} #getLogger(): Logging
+    }
+
+    elki.math.geometry.PrimsMinimumSpanningTree.Collector <|.. elki.clustering.hierarchical.AbstractHDBSCAN.HeapMSTCollector
+    elki.clustering.hierarchical.AbstractHDBSCAN +-- elki.clustering.hierarchical.AbstractHDBSCAN.HeapMSTCollector
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

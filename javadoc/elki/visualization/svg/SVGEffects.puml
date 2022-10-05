@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SVGEffects\n<size:10>elki.visualization.svg" as elki.visualization.svg.SVGEffects [[SVGEffects.html]] {
+        {static} +SHADOW_ID: String
+        {static} +LIGHT_GRADIENT_ID: String
+        {static} +SVG_CHECKMARK_PATH: String
+        {static} +addShadowFilter(SVGPlot): void
+        {static} +addLightGradient(SVGPlot): void
+        {static} +makeCheckmark(SVGPlot): Element
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

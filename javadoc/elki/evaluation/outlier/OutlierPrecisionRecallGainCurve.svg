@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="266px" preserveAspectRatio="none" style="width:320px;height:266px;background:#FFFFFF;" version="1.1" viewBox="0 0 320 266" width="320px" zoomAndPan="magnify"><defs/><g><!--MD5=[65606bd944649fddc81ab5691abc9262]
+class elki.evaluation.outlier.OutlierPrecisionRecallGainCurve--><a href="OutlierPrecisionRecallGainCurve.html" target="_top" title="OutlierPrecisionRecallGainCurve.html" xlink:actuate="onRequest" xlink:href="OutlierPrecisionRecallGainCurve.html" xlink:show="new" xlink:title="OutlierPrecisionRecallGainCurve.html" xlink:type="simple"><g id="elem_elki.evaluation.outlier.OutlierPrecisionRecallGainCurve"><rect codeLine="6" fill="#F1F1F1" height="135.4219" id="elki.evaluation.outlier.OutlierPrecisionRecallGainCurve" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="306" x="7" y="105"/><ellipse cx="46.3" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M49.2688,129.6094 Q48.6906,129.9063 48.05,130.0469 Q47.4094,130.2031 46.7063,130.2031 Q44.2063,130.2031 42.8781,128.5625 Q41.5656,126.9063 41.5656,123.7813 Q41.5656,120.6563 42.8781,119 Q44.2063,117.3438 46.7063,117.3438 Q47.4094,117.3438 48.05,117.5 Q48.7063,117.6563 49.2688,117.9531 L49.2688,120.6719 Q48.6438,120.0938 48.05,119.8281 Q47.4563,119.5469 46.8313,119.5469 Q45.4875,119.5469 44.8,120.625 Q44.1125,121.6875 44.1125,123.7813 Q44.1125,125.875 44.8,126.9531 Q45.4875,128.0156 46.8313,128.0156 Q47.4563,128.0156 48.05,127.75 Q48.6438,127.4688 49.2688,126.8906 L49.2688,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="220" x="65.7" y="122.9951">OutlierPrecisionRecallGainCurve</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="101" x="125.2" y="135.5791">elki.evaluation.outlier</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="312" y1="142.9375" y2="142.9375"/><ellipse cx="18" cy="156.5859" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="157" x="27" y="159.9326">AUPRGC_LABEL: String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="169.8828"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="27" y="176.2295">LOG: Logging</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="186.1797"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="189" x="27" y="192.5264">positiveClassName: Pattern</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="312" y1="199.8281" y2="199.8281"/><ellipse cx="18" cy="213.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="280" x="27" y="216.8232">OutlierPrecisionRecallGainCurve(Pattern)</text><ellipse cx="18" cy="229.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="222" x="27" y="233.1201">processNewResult(Object): void</text></g></a><!--MD5=[ab738d497caecbdd52763596d8334661]
+class elki.evaluation.Evaluator--><a href="../Evaluator.html" target="_top" title="../Evaluator.html" xlink:actuate="onRequest" xlink:href="../Evaluator.html" xlink:show="new" xlink:title="../Evaluator.html" xlink:type="simple"><g id="elem_elki.evaluation.Evaluator"><rect codeLine="14" fill="#F1F1F1" height="37.9375" id="elki.evaluation.Evaluator" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="105" x="107.5" y="7"/><ellipse cx="122.5" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M118.4219,21.7344 L118.4219,19.5781 L125.8125,19.5781 L125.8125,21.7344 L123.3438,21.7344 L123.3438,29.8125 L125.8125,29.8125 L125.8125,31.9688 L118.4219,31.9688 L118.4219,29.8125 L120.8906,29.8125 L120.8906,21.7344 L118.4219,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="67" x="139.5" y="24.9951">Evaluator</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="73" x="136.5" y="37.5791">elki.evaluation</text></g></a><!--MD5=[0c50ba0295cf19acd839ec0ebf3b041d]
+reverse link elki.evaluation.Evaluator to elki.evaluation.outlier.OutlierPrecisionRecallGainCurve--><g id="link_elki.evaluation.Evaluator_elki.evaluation.outlier.OutlierPrecisionRecallGainCurve"><path codeLine="17" d="M160,65.22 C160,77.35 160,91.15 160,104.69 " fill="none" id="elki.evaluation.Evaluator-backto-elki.evaluation.outlier.OutlierPrecisionRecallGainCurve" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="153,65.01,160,45.01,167,65.01,153,65.01" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="60" y="246.4219"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="60" y="255.7041">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[e5127e97fb89421efc93a29f19ae85f5]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierPrecisionRecallGainCurve\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierPrecisionRecallGainCurve [[OutlierPrecisionRecallGainCurve.html]] {
+        {static} +AUPRGC_LABEL: String
+        {static} -LOG: Logging
+        -positiveClassName: Pattern
+        +OutlierPrecisionRecallGainCurve(Pattern)
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../Evaluator.html]]
+    class "<size:14>OutlierPrecisionRecallGainCurve.Par\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierPrecisionRecallGainCurve.Par [[OutlierPrecisionRecallGainCurve.Par.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.outlier.OutlierPrecisionRecallGainCurve
+    elki.evaluation.outlier.OutlierPrecisionRecallGainCurve +- - elki.evaluation.outlier.OutlierPrecisionRecallGainCurve.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

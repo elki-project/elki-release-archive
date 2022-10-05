@@ -1,0 +1,50 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DoubleIntegerMaxHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleIntegerMaxHeap [[DoubleIntegerMaxHeap.html]] {
+        #twoheap: double[]
+        #twovals: int[]
+        #size: int
+        {static} -TWO_HEAP_INITIAL_SIZE: int
+        +DoubleIntegerMaxHeap()
+        +DoubleIntegerMaxHeap(int)
+        +clear(): void
+        +size(): int
+        +isEmpty(): boolean
+        +add(double, int): void
+        +add(double, int, int): void
+        +replaceTopElement(double, int): void
+        -heapifyUp(int, double, int): void
+        +poll(): void
+        -heapifyDown(double, int): void
+        +peekKey(): double
+        +peekValue(): int
+        +containsKey(double): boolean
+        +containsValue(int): boolean
+        +unsortedIter(): UnsortedIter
+    }
+
+    interface "<size:14>DoubleIntegerHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleIntegerHeap [[DoubleIntegerHeap.html]] {
+        {abstract} +add(double, int): void
+        {abstract} +add(double, int, int): void
+        {abstract} +replaceTopElement(double, int): void
+        {abstract} +peekKey(): double
+        {abstract} +peekValue(): int
+        {abstract} +containsKey(double): boolean
+        {abstract} +containsValue(int): boolean
+        {abstract} +poll(): void
+        {abstract} +clear(): void
+        {abstract} +size(): int
+        {abstract} +isEmpty(): boolean
+        {abstract} +unsortedIter(): UnsortedIter
+    }
+    class "<size:14>DoubleIntegerMaxHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleIntegerMaxHeap.UnsortedIter [[DoubleIntegerMaxHeap.UnsortedIter.html]]
+
+    elki.utilities.datastructures.heap.DoubleIntegerHeap <|.. elki.utilities.datastructures.heap.DoubleIntegerMaxHeap
+    elki.utilities.datastructures.heap.DoubleIntegerMaxHeap +-- elki.utilities.datastructures.heap.DoubleIntegerMaxHeap.UnsortedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

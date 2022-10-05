@@ -1,0 +1,39 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.dbscan.util {
+
+        class Core [[Core.html]] {
+            +num: int
+            +Core(int)
+            +mergeWith(Core): void
+        }
+
+        class Border [[Border.html]] {
+            +Border(Core)
+            +compareTo(Border): int
+        }
+
+        class MultiBorder [[MultiBorder.html]] {
+            +MultiBorder(Border, Border)
+            +update(Border): Assignment
+        }
+
+        interface Assignment [[Assignment.html]]
+
+        Assignment <|.. Core
+        Assignment <|.. Border
+        java.lang.Comparable <|.. Border
+        Border --> Core: core
+        Assignment <|.. MultiBorder
+        MultiBorder --> "*" Border: cs
+        MultiBorder --> Core: core
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,249 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.math.statistics.intrinsicdimensionality {
+
+        class PWM2Estimator [[PWM2Estimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.PWM2Estimator.Par [[PWM2Estimator.Par.html]] {
+            +make(): PWM2Estimator
+        }
+
+        class LMomentsEstimator [[LMomentsEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.LMomentsEstimator.ReverseAdapter<A> {
+            -size: int
+            -last: int
+            -inner: NumberArrayAdapter<?, ? super A>
+            +ReverseAdapter(NumberArrayAdapter<?, ? super A>, int, int)
+            +size(A): int
+            +get(A, int): Double
+            +getDouble(A, int): double
+            +getFloat(A, int): float
+            +getInteger(A, int): int
+            +getShort(A, int): short
+            +getLong(A, int): long
+            +getByte(A, int): byte
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.LMomentsEstimator.Par [[LMomentsEstimator.Par.html]] {
+            +make(): LMomentsEstimator
+        }
+
+        interface IntrinsicDimensionalityEstimator<O> [[IntrinsicDimensionalityEstimator.html]] {
+            {abstract} +estimate(KNNSearcher<DBIDRef>, DistanceQuery<? extends O>, DBIDRef, int): double
+            {abstract} +estimate(RangeSearcher<DBIDRef>, DistanceQuery<? extends O>, DBIDRef, double): double
+        }
+
+        class RABIDEstimator [[RABIDEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+            -cos2(double, double, double): double
+            +estimate(KNNSearcher<DBIDRef>, DistanceQuery<?>, DBIDRef, int): double
+            #computeABID(DistanceQuery<?>, KNNList, boolean): double
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.RABIDEstimator.Par [[RABIDEstimator.Par.html]] {
+            +make(): RABIDEstimator
+        }
+
+        class TightLIDEstimator [[TightLIDEstimator.html]] {
+            +estimate(RangeSearcher<DBIDRef>, DistanceQuery<? extends Object>, DBIDRef, double): double
+            +estimate(KNNSearcher<DBIDRef>, DistanceQuery<? extends Object>, DBIDRef, int): double
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.TightLIDEstimator.Par [[TightLIDEstimator.Par.html]] {
+            +make(): TightLIDEstimator
+        }
+
+        class AggregatedHillEstimator [[AggregatedHillEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.AggregatedHillEstimator.Par [[AggregatedHillEstimator.Par.html]] {
+            +make(): AggregatedHillEstimator
+        }
+
+        class PWMEstimator [[PWMEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.PWMEstimator.Par [[PWMEstimator.Par.html]] {
+            +make(): PWMEstimator
+        }
+
+        class ABIDEstimator [[ABIDEstimator.html]] {
+            +estimate(KNNSearcher<DBIDRef>, DistanceQuery<?>, DBIDRef, int): double
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.ABIDEstimator.Par [[ABIDEstimator.Par.html]] {
+            +make(): ABIDEstimator
+        }
+
+        class HillEstimator [[HillEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.HillEstimator.Par [[HillEstimator.Par.html]] {
+            +make(): HillEstimator
+        }
+
+        class RVEstimator [[RVEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.RVEstimator.Par [[RVEstimator.Par.html]] {
+            +make(): RVEstimator
+        }
+
+        class EnsembleEstimator [[EnsembleEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+        }
+
+        class ZipfEstimator [[ZipfEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.ZipfEstimator.Par [[ZipfEstimator.Par.html]] {
+            +make(): ZipfEstimator
+        }
+
+        class LPCAEstimator [[LPCAEstimator.html]] {
+            #pcaRunner: PCARunner
+            #eigenFilter: EigenPairFilter
+            +LPCAEstimator(EigenPairFilter)
+            +estimate(KNNSearcher<DBIDRef>, DistanceQuery<? extends NumberVector>, DBIDRef, int): double
+            +estimate(RangeSearcher<DBIDRef>, DistanceQuery<? extends NumberVector>, DBIDRef, double): double
+            #estimate(DBIDs, Relation<? extends NumberVector>): double
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.LPCAEstimator.Par [[LPCAEstimator.Par.html]] {
+            {static} +FILTER_ID: OptionID
+            -eigenPairFilter: EigenPairFilter
+            +configure(Parameterization): void
+            +make(): LPCAEstimator
+        }
+
+        interface DistanceBasedIntrinsicDimensionalityEstimator [[DistanceBasedIntrinsicDimensionalityEstimator.html]] {
+            {abstract} +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+            +estimate(double[]): double
+            +estimate(double[], int): double
+            +estimate(A, NumberArrayAdapter<?, ? super A>): double
+            +estimate(KNNSearcher<DBIDRef>, DistanceQuery<? extends Object>, DBIDRef, int): double
+            +estimate(RangeSearcher<DBIDRef>, DistanceQuery<? extends Object>, DBIDRef, double): double
+            {static} +countLeadingZeros(A, NumberArrayAdapter<?, ? super A>, int): int
+        }
+
+        class ALIDEstimator [[ALIDEstimator.html]] {
+            +estimate(KNNSearcher<DBIDRef>, DistanceQuery<?>, DBIDRef, int): double
+            +estimate(RangeSearcher<DBIDRef>, DistanceQuery<?>, DBIDRef, double): double
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.ALIDEstimator.Par [[ALIDEstimator.Par.html]] {
+            +make(): ALIDEstimator
+        }
+
+        class GEDEstimator [[GEDEstimator.html]] {
+            ~ilogs: double[]
+            +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+            -precomputeLogs(int): void
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.GEDEstimator.Par [[GEDEstimator.Par.html]] {
+            +make(): GEDEstimator
+        }
+
+        class MOMEstimator [[MOMEstimator.html]] {
+            +estimate(A, NumberArrayAdapter<?, ? super A>, int): double
+        }
+
+        class elki.math.statistics.intrinsicdimensionality.MOMEstimator.Par [[MOMEstimator.Par.html]] {
+            +make(): MOMEstimator
+        }
+
+        DistanceBasedIntrinsicDimensionalityEstimator <|.. PWM2Estimator
+        PWM2Estimator --> PWM2Estimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.PWM2Estimator.Par
+        PWM2Estimator +-- elki.math.statistics.intrinsicdimensionality.PWM2Estimator.Par
+        DistanceBasedIntrinsicDimensionalityEstimator <|.. LMomentsEstimator
+        LMomentsEstimator --> LMomentsEstimator: STATIC
+        elki.utilities.datastructures.arraylike.NumberArrayAdapter <|.. elki.math.statistics.intrinsicdimensionality.LMomentsEstimator.ReverseAdapter
+        LMomentsEstimator +-- elki.math.statistics.intrinsicdimensionality.LMomentsEstimator.ReverseAdapter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.LMomentsEstimator.Par
+        LMomentsEstimator +-- elki.math.statistics.intrinsicdimensionality.LMomentsEstimator.Par
+        DistanceBasedIntrinsicDimensionalityEstimator <|.. RABIDEstimator
+        RABIDEstimator --> RABIDEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.RABIDEstimator.Par
+        RABIDEstimator +-- elki.math.statistics.intrinsicdimensionality.RABIDEstimator.Par
+        IntrinsicDimensionalityEstimator <|.. TightLIDEstimator
+        TightLIDEstimator --> TightLIDEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.TightLIDEstimator.Par
+        TightLIDEstimator +-- elki.math.statistics.intrinsicdimensionality.TightLIDEstimator.Par
+        DistanceBasedIntrinsicDimensionalityEstimator <|.. AggregatedHillEstimator
+        AggregatedHillEstimator --> AggregatedHillEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.AggregatedHillEstimator.Par
+        AggregatedHillEstimator +-- elki.math.statistics.intrinsicdimensionality.AggregatedHillEstimator.Par
+        DistanceBasedIntrinsicDimensionalityEstimator <|.. PWMEstimator
+        PWMEstimator --> PWMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.PWMEstimator.Par
+        PWMEstimator +-- elki.math.statistics.intrinsicdimensionality.PWMEstimator.Par
+        RABIDEstimator <|-- ABIDEstimator
+        ABIDEstimator --> ABIDEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.ABIDEstimator.Par
+        ABIDEstimator +-- elki.math.statistics.intrinsicdimensionality.ABIDEstimator.Par
+        DistanceBasedIntrinsicDimensionalityEstimator <|.. HillEstimator
+        HillEstimator --> HillEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.HillEstimator.Par
+        HillEstimator +-- elki.math.statistics.intrinsicdimensionality.HillEstimator.Par
+        DistanceBasedIntrinsicDimensionalityEstimator <|.. RVEstimator
+        RVEstimator --> RVEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.RVEstimator.Par
+        RVEstimator +-- elki.math.statistics.intrinsicdimensionality.RVEstimator.Par
+        DistanceBasedIntrinsicDimensionalityEstimator <|.. EnsembleEstimator
+        EnsembleEstimator --> EnsembleEstimator: STATIC
+        DistanceBasedIntrinsicDimensionalityEstimator <|.. ZipfEstimator
+        ZipfEstimator --> ZipfEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.ZipfEstimator.Par
+        ZipfEstimator +-- elki.math.statistics.intrinsicdimensionality.ZipfEstimator.Par
+        IntrinsicDimensionalityEstimator <|.. LPCAEstimator
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.LPCAEstimator.Par
+        LPCAEstimator +-- elki.math.statistics.intrinsicdimensionality.LPCAEstimator.Par
+        IntrinsicDimensionalityEstimator <|-- DistanceBasedIntrinsicDimensionalityEstimator
+        IntrinsicDimensionalityEstimator <|.. ALIDEstimator
+        ALIDEstimator --> ALIDEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.ALIDEstimator.Par
+        ALIDEstimator +-- elki.math.statistics.intrinsicdimensionality.ALIDEstimator.Par
+        DistanceBasedIntrinsicDimensionalityEstimator <|.. GEDEstimator
+        GEDEstimator --> GEDEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.GEDEstimator.Par
+        GEDEstimator +-- elki.math.statistics.intrinsicdimensionality.GEDEstimator.Par
+        DistanceBasedIntrinsicDimensionalityEstimator <|.. MOMEstimator
+        MOMEstimator --> MOMEstimator: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.math.statistics.intrinsicdimensionality.MOMEstimator.Par
+        MOMEstimator +-- elki.math.statistics.intrinsicdimensionality.MOMEstimator.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.utilities.datastructures.arraylike {
+        interface NumberArrayAdapter<N extends Number, A> [[../../../utilities/datastructures/arraylike/NumberArrayAdapter.html]] {
+            {abstract} +size(A): int
+            {abstract} +get(A, int): N extends Number
+            {abstract} +getDouble(A, int): double
+            +getFloat(A, int): float
+            +getInteger(A, int): int
+            +getShort(A, int): short
+            {abstract} +getLong(A, int): long
+            +getByte(A, int): byte
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

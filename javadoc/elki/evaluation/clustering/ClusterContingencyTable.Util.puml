@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterContingencyTable.Util\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.ClusterContingencyTable.Util {
+        {static} +fMeasure(double, double, double): double
+        {static} +f1Measure(double, double): double
+    }
+
+    class "<size:14>ClusterContingencyTable\n<size:10>elki.evaluation.clustering" as elki.evaluation.clustering.ClusterContingencyTable [[ClusterContingencyTable.html]]
+
+    elki.evaluation.clustering.ClusterContingencyTable +-- elki.evaluation.clustering.ClusterContingencyTable.Util
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

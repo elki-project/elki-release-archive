@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CBLOF\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.CBLOF<O extends NumberVector> [[CBLOF.html]] {
+        {static} -LOG: Logging
+        #distance: NumberVectorDistance<? super NumberVector>
+        #clusteringAlgorithm: ClusteringAlgorithm<Clustering<MeanModel>>
+        #alpha: double
+        #beta: double
+        +CBLOF(NumberVectorDistance<? super NumberVector>, ClusteringAlgorithm<Clustering<MeanModel>>, double, double)
+        +run(Database, Relation<O extends NumberVector>): OutlierResult
+        -getClusterBoundary(Relation<O extends NumberVector>, List<? extends Cluster<MeanModel>>): int
+        -computeCBLOFs(Relation<O extends NumberVector>, WritableDoubleDataStore, DoubleMinMax, List<? extends Cluster<MeanModel>>, List<? extends Cluster<MeanModel>>): void
+        -storeCBLOFScore(WritableDoubleDataStore, DoubleMinMax, double, DBIDIter): void
+        -computeSmallClusterCBLOF(O extends NumberVector, NumberVectorDistance<? super NumberVector>, List<NumberVector>, Cluster<MeanModel>): double
+        -computeLargeClusterCBLOF(O extends NumberVector, NumberVectorDistance<? super NumberVector>, NumberVector, Cluster<MeanModel>): double
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>CBLOF.Par\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.CBLOF.Par<O extends NumberVector>
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.clustering.CBLOF
+    elki.outlier.clustering.CBLOF +-- elki.outlier.clustering.CBLOF.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

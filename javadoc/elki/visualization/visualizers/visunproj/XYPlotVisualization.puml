@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>XYPlotVisualization\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.XYPlotVisualization [[XYPlotVisualization.html]] {
+        {static} -NAME: String
+        {static} -SERIESID: String
+        {static} -CSS_AXIS_LABEL: String
+        +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        -setupCSS(VisualizerContext, SVGPlot, XYPlot): void
+        +processNewResult(VisualizerContext, Object): void
+        +allowThumbnails(VisualizationTask): boolean
+    }
+
+    interface "<size:14>VisFactory\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.VisFactory [[../VisFactory.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+        {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+    }
+
+    elki.visualization.visualizers.VisFactory <|.. elki.visualization.visualizers.visunproj.XYPlotVisualization
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

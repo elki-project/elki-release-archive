@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ALIDEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.ALIDEstimator [[ALIDEstimator.html]] {
+        {static} +STATIC: ALIDEstimator
+        +estimate(KNNSearcher<DBIDRef>, DistanceQuery<?>, DBIDRef, int): double
+        +estimate(RangeSearcher<DBIDRef>, DistanceQuery<?>, DBIDRef, double): double
+    }
+
+    interface "<size:14>IntrinsicDimensionalityEstimator\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.IntrinsicDimensionalityEstimator<Object> [[IntrinsicDimensionalityEstimator.html]] {
+        {abstract} +estimate(KNNSearcher<DBIDRef>, DistanceQuery<? extends O>, DBIDRef, int): double
+        {abstract} +estimate(RangeSearcher<DBIDRef>, DistanceQuery<? extends O>, DBIDRef, double): double
+    }
+    class "<size:14>ALIDEstimator.Par\n<size:10>elki.math.statistics.intrinsicdimensionality" as elki.math.statistics.intrinsicdimensionality.ALIDEstimator.Par [[ALIDEstimator.Par.html]]
+
+    elki.math.statistics.intrinsicdimensionality.IntrinsicDimensionalityEstimator <|.. elki.math.statistics.intrinsicdimensionality.ALIDEstimator
+    elki.math.statistics.intrinsicdimensionality.ALIDEstimator +-- elki.math.statistics.intrinsicdimensionality.ALIDEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

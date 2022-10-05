@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>COPACNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.COPACNeighborPredicate.Instance [[COPACNeighborPredicate.Instance.html]] {
+        +Instance(DBIDs, DataStore<COPACModel>)
+        +getNeighbors(DBIDRef): COPACModel
+        +iterDBIDs(COPACModel): DBIDIter
+        +dimensionality(DBIDRef): int
+    }
+
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance<COPACModel, COPACModel> [[AbstractRangeQueryNeighborPredicate.Instance.html]]
+    class "<size:14>COPACNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.COPACNeighborPredicate [[COPACNeighborPredicate.html]]
+
+    elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Instance <|-- elki.clustering.dbscan.predicates.COPACNeighborPredicate.Instance
+    elki.clustering.dbscan.predicates.COPACNeighborPredicate +-- elki.clustering.dbscan.predicates.COPACNeighborPredicate.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

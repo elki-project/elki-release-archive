@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PolynomialApproximation\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkapp" as elki.index.tree.metrical.mtreevariants.mktrees.mkapp.PolynomialApproximation [[PolynomialApproximation.html]] {
+        {static} -serialVersionUID: long
+        -b: double[]
+        +PolynomialApproximation()
+        +PolynomialApproximation(double[])
+        +getB(int): double
+        +getCoefficients(): double[]
+        +getPolynomialOrder(): int
+        +getValueAt(int): double
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+    }
+
+    interface "<size:14>Externalizable\n<size:10>java.io" as java.io.Externalizable {
+        {abstract} +writeExternal(ObjectOutput): void
+        {abstract} +readExternal(ObjectInput): void
+    }
+
+    java.io.Externalizable <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkapp.PolynomialApproximation
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

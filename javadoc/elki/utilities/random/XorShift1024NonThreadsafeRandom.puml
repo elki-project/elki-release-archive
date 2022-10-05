@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>XorShift1024NonThreadsafeRandom\n<size:10>elki.utilities.random" as elki.utilities.random.XorShift1024NonThreadsafeRandom [[XorShift1024NonThreadsafeRandom.html]] {
+        {static} -serialVersionUID: long
+        -x: long[]
+        ~p: int
+        {static} #BADBOUND: String
+        +XorShift1024NonThreadsafeRandom()
+        +XorShift1024NonThreadsafeRandom(long)
+        +setSeed(long): void
+        +nextLong(): long
+        #next(int): int
+        +nextInt(): int
+        +nextDouble(): double
+        +nextInt(int): int
+    }
+
+    class "<size:14>Random\n<size:10>java.util" as java.util.Random
+
+    java.util.Random <|-- elki.utilities.random.XorShift1024NonThreadsafeRandom
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

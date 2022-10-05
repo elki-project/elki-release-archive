@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="69px" preserveAspectRatio="none" style="width:538px;height:69px;background:#FFFFFF;" version="1.1" viewBox="0 0 538 69" width="538px" zoomAndPan="magnify"><defs/><g><!--MD5=[8200b35217aeac05b42c3e4cc92f9623]
+class elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization--><a href="AbstractScatterplotVisualization.html" target="_top" title="AbstractScatterplotVisualization.html" xlink:actuate="onRequest" xlink:href="AbstractScatterplotVisualization.html" xlink:show="new" xlink:title="AbstractScatterplotVisualization.html" xlink:type="simple"><g id="elem_elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization"><rect codeLine="14" fill="#F1F1F1" height="37.9375" id="elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="257" x="7" y="7"/><ellipse cx="22" cy="25.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M22.1094,21.3125 L20.9531,26.3906 L23.2813,26.3906 L22.1094,21.3125 Z M20.625,19.0781 L23.6094,19.0781 L26.9688,31.4688 L24.5156,31.4688 L23.75,28.4063 L20.4688,28.4063 L19.7188,31.4688 L17.2813,31.4688 L20.625,19.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="225" x="36" y="24.9951">AbstractScatterplotVisualization</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="195" x="51" y="37.5791">elki.visualization.visualizers.scatterplot</text></g></a><!--MD5=[cf082704b9ffdd6f8f423223ea61d28a]
+class elki.visualization.visualizers.scatterplot.ReferencePointsVisualization--><a href="ReferencePointsVisualization.html" target="_top" title="ReferencePointsVisualization.html" xlink:actuate="onRequest" xlink:href="ReferencePointsVisualization.html" xlink:show="new" xlink:title="ReferencePointsVisualization.html" xlink:type="simple"><g id="elem_elki.visualization.visualizers.scatterplot.ReferencePointsVisualization"><rect codeLine="15" fill="#F1F1F1" height="37.9375" id="elki.visualization.visualizers.scatterplot.ReferencePointsVisualization" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="232" x="299.5" y="7"/><ellipse cx="314.5" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M317.4688,31.6094 Q316.8906,31.9063 316.25,32.0469 Q315.6094,32.2031 314.9063,32.2031 Q312.4063,32.2031 311.0781,30.5625 Q309.7656,28.9063 309.7656,25.7813 Q309.7656,22.6563 311.0781,21 Q312.4063,19.3438 314.9063,19.3438 Q315.6094,19.3438 316.25,19.5 Q316.9063,19.6563 317.4688,19.9531 L317.4688,22.6719 Q316.8438,22.0938 316.25,21.8281 Q315.6563,21.5469 315.0313,21.5469 Q313.6875,21.5469 313,22.625 Q312.3125,23.6875 312.3125,25.7813 Q312.3125,27.875 313,28.9531 Q313.6875,30.0156 315.0313,30.0156 Q315.6563,30.0156 316.25,29.75 Q316.8438,29.4688 317.4688,28.8906 L317.4688,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="200" x="328.5" y="24.9951">ReferencePointsVisualization</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="183" x="337" y="37.5791">elki.visualization.visualizers.scatterplot</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="169.25" y="49.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="169.25" y="59.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[3d5a8b2a0cee69fae553304d1870b46b]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ReferencePointsVisualization.Instance\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.ReferencePointsVisualization.Instance [[ReferencePointsVisualization.Instance.html]] {
+        {static} +REFPOINT: String
+        #result: ReferencePointsResult<? extends NumberVector>
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        -setupCSS(SVGPlot): void
+    }
+
+    abstract class "<size:14>AbstractScatterplotVisualization\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization [[AbstractScatterplotVisualization.html]]
+    class "<size:14>ReferencePointsVisualization\n<size:10>elki.visualization.visualizers.scatterplot" as elki.visualization.visualizers.scatterplot.ReferencePointsVisualization [[ReferencePointsVisualization.html]]
+
+    elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|- - elki.visualization.visualizers.scatterplot.ReferencePointsVisualization.Instance
+    elki.visualization.visualizers.scatterplot.ReferencePointsVisualization +- - elki.visualization.visualizers.scatterplot.ReferencePointsVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

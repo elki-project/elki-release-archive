@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ProgressLogRecord\n<size:10>elki.logging.progress" as elki.logging.progress.ProgressLogRecord [[ProgressLogRecord.html]] {
+        {static} -serialVersionUID: long
+        -progress: Progress
+        +ProgressLogRecord(Level, Progress)
+        +getProgress(): Progress
+    }
+
+    class "<size:14>ELKILogRecord\n<size:10>elki.logging" as elki.logging.ELKILogRecord [[../ELKILogRecord.html]]
+
+    elki.logging.ELKILogRecord <|-- elki.logging.progress.ProgressLogRecord
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

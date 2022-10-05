@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>StaticVisualizationInstance\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.StaticVisualizationInstance [[StaticVisualizationInstance.html]] {
+        +StaticVisualizationInstance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Element)
+        +incrementalRedraw(): void
+        +fullRedraw(): void
+    }
+
+    abstract class "<size:14>AbstractVisualization\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.AbstractVisualization [[AbstractVisualization.html]] {
+        {abstract} +fullRedraw(): void
+    }
+
+    elki.visualization.visualizers.AbstractVisualization <|-- elki.visualization.visualizers.StaticVisualizationInstance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

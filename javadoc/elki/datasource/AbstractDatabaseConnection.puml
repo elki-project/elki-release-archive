@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.AbstractDatabaseConnection [[AbstractDatabaseConnection.html]] {
+        {static} +LABEL_CONCATENATION: String
+        #filters: List<? extends ObjectFilter>
+        #AbstractDatabaseConnection(List<? extends ObjectFilter>)
+        #invokeBundleFilters(MultipleObjectsBundle): MultipleObjectsBundle
+        #invokeStreamFilters(BundleStreamSource): BundleStreamSource
+        {abstract} #getLogger(): Logging
+    }
+
+    interface "<size:14>DatabaseConnection\n<size:10>elki.datasource" as elki.datasource.DatabaseConnection [[DatabaseConnection.html]] {
+        {abstract} +loadData(): MultipleObjectsBundle
+    }
+    abstract class "<size:14>AbstractDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.AbstractDatabaseConnection.Par [[AbstractDatabaseConnection.Par.html]]
+
+    elki.datasource.DatabaseConnection <|.. elki.datasource.AbstractDatabaseConnection
+    elki.datasource.AbstractDatabaseConnection +-- elki.datasource.AbstractDatabaseConnection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KMLOutputHandler.Par\n<size:10>elki.result" as elki.result.KMLOutputHandler.Par [[KMLOutputHandler.Par.html]] {
+        {static} +SCALING_ID: OptionID
+        {static} +COMPAT_ID: OptionID
+        {static} +AUTOOPEN_ID: OptionID
+        ~filename: Path
+        ~scaling: OutlierScaling
+        ~compat: boolean
+        ~autoopen: boolean
+        +configure(Parameterization): void
+        +make(): KMLOutputHandler
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>KMLOutputHandler\n<size:10>elki.result" as elki.result.KMLOutputHandler [[KMLOutputHandler.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.result.KMLOutputHandler.Par
+    elki.result.KMLOutputHandler +-- elki.result.KMLOutputHandler.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

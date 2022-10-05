@@ -1,0 +1,150 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.hierarchical.linkage {
+
+        class SingleLinkage [[SingleLinkage.html]] {
+            +combine(int, double, int, double, int, double): double
+        }
+
+        class elki.clustering.hierarchical.linkage.SingleLinkage.Par [[SingleLinkage.Par.html]] {
+            +make(): SingleLinkage
+        }
+
+        interface GeometricLinkage [[GeometricLinkage.html]] {
+            {abstract} +merge(double[], int, double[], int): double[]
+            {abstract} +distance(double[], int, double[], int): double
+        }
+
+        class MedianLinkage [[MedianLinkage.html]] {
+            +combine(int, double, int, double, int, double): double
+            +merge(double[], int, double[], int): double[]
+            +distance(double[], int, double[], int): double
+        }
+
+        class elki.clustering.hierarchical.linkage.MedianLinkage.Par [[MedianLinkage.Par.html]] {
+            +make(): MedianLinkage
+        }
+
+        class CentroidLinkage [[CentroidLinkage.html]] {
+            +combine(int, double, int, double, int, double): double
+            +merge(double[], int, double[], int): double[]
+            +distance(double[], int, double[], int): double
+        }
+
+        class elki.clustering.hierarchical.linkage.CentroidLinkage.Par [[CentroidLinkage.Par.html]] {
+            +make(): CentroidLinkage
+        }
+
+        class WardLinkage [[WardLinkage.html]] {
+            +initial(double, boolean): double
+            +restore(double, boolean): double
+            +combine(int, double, int, double, int, double): double
+            +merge(double[], int, double[], int): double[]
+            +distance(double[], int, double[], int): double
+        }
+
+        class elki.clustering.hierarchical.linkage.WardLinkage.Par [[WardLinkage.Par.html]] {
+            +make(): WardLinkage
+        }
+
+        class CompleteLinkage [[CompleteLinkage.html]] {
+            +combine(int, double, int, double, int, double): double
+        }
+
+        class elki.clustering.hierarchical.linkage.CompleteLinkage.Par [[CompleteLinkage.Par.html]] {
+            +make(): CompleteLinkage
+        }
+
+        class GroupAverageLinkage [[GroupAverageLinkage.html]] {
+            +combine(int, double, int, double, int, double): double
+        }
+
+        class elki.clustering.hierarchical.linkage.GroupAverageLinkage.Par [[GroupAverageLinkage.Par.html]] {
+            +make(): GroupAverageLinkage
+        }
+
+        class MinimumVarianceLinkage [[MinimumVarianceLinkage.html]] {
+            +initial(double, boolean): double
+            +restore(double, boolean): double
+            +combine(int, double, int, double, int, double): double
+        }
+
+        class elki.clustering.hierarchical.linkage.MinimumVarianceLinkage.Par [[MinimumVarianceLinkage.Par.html]] {
+            +make(): MinimumVarianceLinkage
+        }
+
+        class WeightedAverageLinkage [[WeightedAverageLinkage.html]] {
+            +combine(int, double, int, double, int, double): double
+        }
+
+        class elki.clustering.hierarchical.linkage.WeightedAverageLinkage.Par [[WeightedAverageLinkage.Par.html]] {
+            +make(): WeightedAverageLinkage
+        }
+
+        class FlexibleBetaLinkage [[FlexibleBetaLinkage.html]] {
+            ~alpha: double
+            ~beta: double
+            +FlexibleBetaLinkage(double)
+            +combine(int, double, int, double, int, double): double
+        }
+
+        class elki.clustering.hierarchical.linkage.FlexibleBetaLinkage.Par [[FlexibleBetaLinkage.Par.html]] {
+            {static} +BETA_ID: OptionID
+            ~beta: double
+            +configure(Parameterization): void
+            +make(): FlexibleBetaLinkage
+        }
+
+        interface Linkage [[Linkage.html]] {
+            +initial(double, boolean): double
+            +restore(double, boolean): double
+            {abstract} +combine(int, double, int, double, int, double): double
+        }
+
+        Linkage <|.. SingleLinkage
+        SingleLinkage --> SingleLinkage: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.linkage.SingleLinkage.Par
+        SingleLinkage +-- elki.clustering.hierarchical.linkage.SingleLinkage.Par
+        Linkage <|-- GeometricLinkage
+        GeometricLinkage <|.. MedianLinkage
+        MedianLinkage --> MedianLinkage: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.linkage.MedianLinkage.Par
+        MedianLinkage +-- elki.clustering.hierarchical.linkage.MedianLinkage.Par
+        GeometricLinkage <|.. CentroidLinkage
+        CentroidLinkage --> CentroidLinkage: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.linkage.CentroidLinkage.Par
+        CentroidLinkage +-- elki.clustering.hierarchical.linkage.CentroidLinkage.Par
+        GeometricLinkage <|.. WardLinkage
+        WardLinkage --> WardLinkage: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.linkage.WardLinkage.Par
+        WardLinkage +-- elki.clustering.hierarchical.linkage.WardLinkage.Par
+        Linkage <|.. CompleteLinkage
+        CompleteLinkage --> CompleteLinkage: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.linkage.CompleteLinkage.Par
+        CompleteLinkage +-- elki.clustering.hierarchical.linkage.CompleteLinkage.Par
+        Linkage <|.. GroupAverageLinkage
+        GroupAverageLinkage --> GroupAverageLinkage: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.linkage.GroupAverageLinkage.Par
+        GroupAverageLinkage +-- elki.clustering.hierarchical.linkage.GroupAverageLinkage.Par
+        Linkage <|.. MinimumVarianceLinkage
+        MinimumVarianceLinkage --> MinimumVarianceLinkage: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.linkage.MinimumVarianceLinkage.Par
+        MinimumVarianceLinkage +-- elki.clustering.hierarchical.linkage.MinimumVarianceLinkage.Par
+        Linkage <|.. WeightedAverageLinkage
+        WeightedAverageLinkage --> WeightedAverageLinkage: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.linkage.WeightedAverageLinkage.Par
+        WeightedAverageLinkage +-- elki.clustering.hierarchical.linkage.WeightedAverageLinkage.Par
+        Linkage <|.. FlexibleBetaLinkage
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.linkage.FlexibleBetaLinkage.Par
+        FlexibleBetaLinkage +-- elki.clustering.hierarchical.linkage.FlexibleBetaLinkage.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

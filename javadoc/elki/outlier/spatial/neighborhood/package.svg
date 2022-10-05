@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="476px" preserveAspectRatio="none" style="width:1270px;height:476px;background:#FFFFFF;" version="1.1" viewBox="0 0 1270 476" width="1270px" zoomAndPan="magnify"><defs/><g><!--MD5=[c3ad51d4e2de4b8956ca14677babc183]
+cluster elki.outlier.spatial.neighborhood--><g id="cluster_elki.outlier.spatial.neighborhood"><path d="M8.5,6 L264.5,6 A3.75,3.75 0 0 1 267,8.5 L274,28.2969 L1260.5,28.2969 A2.5,2.5 0 0 1 1263,30.7969 L1263,448.5 A2.5,2.5 0 0 1 1260.5,451 L8.5,451 A2.5,2.5 0 0 1 6,448.5 L6,8.5 A2.5,2.5 0 0 1 8.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="274" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="255" x="10" y="20.9951">elki.outlier.spatial.neighborhood</text></g><!--MD5=[8eb33c99129db1712167ed6aac1aa1f6]
+class elki.outlier.spatial.neighborhood.NeighborSetPredicate--><a href="NeighborSetPredicate.html" target="_top" title="NeighborSetPredicate.html" xlink:actuate="onRequest" xlink:href="NeighborSetPredicate.html" xlink:show="new" xlink:title="NeighborSetPredicate.html" xlink:type="simple"><g id="elem_elki.outlier.spatial.neighborhood.NeighborSetPredicate"><rect codeLine="4" fill="#F1F1F1" height="64.2969" id="elki.outlier.spatial.neighborhood.NeighborSetPredicate" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="279" x="489.5" y="41"/><ellipse cx="547.75" cy="57" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M543.6719,52.7656 L543.6719,50.6094 L551.0625,50.6094 L551.0625,52.7656 L548.5938,52.7656 L548.5938,60.8438 L551.0625,60.8438 L551.0625,63 L543.6719,63 L543.6719,60.8438 L546.1406,60.8438 L546.1406,52.7656 L543.6719,52.7656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="154" x="568.25" y="61.8467">NeighborSetPredicate</text><line style="stroke:#181818;stroke-width:0.5;" x1="490.5" x2="767.5" y1="73" y2="73"/><line style="stroke:#181818;stroke-width:0.5;" x1="490.5" x2="767.5" y1="81" y2="81"/><ellipse cx="500.5" cy="94.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="253" x="509.5" y="97.9951">getNeighborDBIDs(DBIDRef): DBIDs</text></g></a><!--MD5=[5247a7cf6fc6a33801c8f275c1180ec1]
+class elki.outlier.spatial.neighborhood.ExternalNeighborhood--><a href="ExternalNeighborhood.html" target="_top" title="ExternalNeighborhood.html" xlink:actuate="onRequest" xlink:href="ExternalNeighborhood.html" xlink:show="new" xlink:title="ExternalNeighborhood.html" xlink:type="simple"><g id="elem_elki.outlier.spatial.neighborhood.ExternalNeighborhood"><rect codeLine="13" fill="#F1F1F1" height="96.8906" id="elki.outlier.spatial.neighborhood.ExternalNeighborhood" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="326" x="22" y="338"/><ellipse cx="103.75" cy="354" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M106.7188,359.6406 Q106.1406,359.9375 105.5,360.0781 Q104.8594,360.2344 104.1563,360.2344 Q101.6563,360.2344 100.3281,358.5938 Q99.0156,356.9375 99.0156,353.8125 Q99.0156,350.6875 100.3281,349.0313 Q101.6563,347.375 104.1563,347.375 Q104.8594,347.375 105.5,347.5313 Q106.1563,347.6875 106.7188,347.9844 L106.7188,350.7031 Q106.0938,350.125 105.5,349.8594 Q104.9063,349.5781 104.2813,349.5781 Q102.9375,349.5781 102.25,350.6563 Q101.5625,351.7188 101.5625,353.8125 Q101.5625,355.9063 102.25,356.9844 Q102.9375,358.0469 104.2813,358.0469 Q104.9063,358.0469 105.5,357.7813 Q106.0938,357.5 106.7188,356.9219 L106.7188,359.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="154" x="124.25" y="358.8467">ExternalNeighborhood</text><line style="stroke:#181818;stroke-width:0.5;" x1="23" x2="347" y1="370" y2="370"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="30" y="380.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="42" y="386.9951">LOG: Logging</text><line style="stroke:#181818;stroke-width:0.5;" x1="23" x2="347" y1="394.2969" y2="394.2969"/><ellipse cx="33" cy="407.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="300" x="42" y="411.292">ExternalNeighborhood(DataStore&lt;DBIDs&gt;)</text><polygon fill="#FFFF44" points="33,419.2422,37,423.2422,33,427.2422,29,423.2422" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="42" y="427.5889">getLogger(): Logging</text></g></a><!--MD5=[6472f3ae0a4faea0822cdf0f8265d488]
+class elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood--><a href="PrecomputedKNearestNeighborNeighborhood.html" target="_top" title="PrecomputedKNearestNeighborNeighborhood.html" xlink:actuate="onRequest" xlink:href="PrecomputedKNearestNeighborNeighborhood.html" xlink:show="new" xlink:title="PrecomputedKNearestNeighborNeighborhood.html" xlink:type="simple"><g id="elem_elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood"><rect codeLine="34" fill="#F1F1F1" height="96.8906" id="elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="491" x="383.5" y="338"/><ellipse cx="465.25" cy="354" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M468.2188,359.6406 Q467.6406,359.9375 467,360.0781 Q466.3594,360.2344 465.6563,360.2344 Q463.1563,360.2344 461.8281,358.5938 Q460.5156,356.9375 460.5156,353.8125 Q460.5156,350.6875 461.8281,349.0313 Q463.1563,347.375 465.6563,347.375 Q466.3594,347.375 467,347.5313 Q467.6563,347.6875 468.2188,347.9844 L468.2188,350.7031 Q467.5938,350.125 467,349.8594 Q466.4063,349.5781 465.7813,349.5781 Q464.4375,349.5781 463.75,350.6563 Q463.0625,351.7188 463.0625,353.8125 Q463.0625,355.9063 463.75,356.9844 Q464.4375,358.0469 465.7813,358.0469 Q466.4063,358.0469 467,357.7813 Q467.5938,357.5 468.2188,356.9219 L468.2188,359.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="319" x="485.75" y="358.8467">PrecomputedKNearestNeighborNeighborhood</text><line style="stroke:#181818;stroke-width:0.5;" x1="384.5" x2="873.5" y1="370" y2="370"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="391.5" y="380.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="403.5" y="386.9951">LOG: Logging</text><line style="stroke:#181818;stroke-width:0.5;" x1="384.5" x2="873.5" y1="394.2969" y2="394.2969"/><ellipse cx="394.5" cy="407.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="465" x="403.5" y="411.292">PrecomputedKNearestNeighborNeighborhood(DataStore&lt;DBIDs&gt;)</text><polygon fill="#FFFF44" points="394.5,419.2422,398.5,423.2422,394.5,427.2422,390.5,423.2422" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="403.5" y="427.5889">getLogger(): Logging</text></g></a><!--MD5=[3a436871fc7db8ba1cbd859b6fee1b6f]
+class elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood--><a href="AbstractPrecomputedNeighborhood.html" target="_top" title="AbstractPrecomputedNeighborhood.html" xlink:actuate="onRequest" xlink:href="AbstractPrecomputedNeighborhood.html" xlink:show="new" xlink:title="AbstractPrecomputedNeighborhood.html" xlink:type="simple"><g id="elem_elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood"><rect codeLine="57" fill="#F1F1F1" height="113.1875" id="elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="422" x="418" y="165"/><ellipse cx="498.25" cy="181" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M498.3594,176.3438 L497.2031,181.4219 L499.5313,181.4219 L498.3594,176.3438 Z M496.875,174.1094 L499.8594,174.1094 L503.2188,186.5 L500.7656,186.5 L500,183.4375 L496.7188,183.4375 L495.9688,186.5 L493.5313,186.5 L496.875,174.1094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="253" x="518.75" y="185.8467">AbstractPrecomputedNeighborhood</text><line style="stroke:#181818;stroke-width:0.5;" x1="419" x2="839" y1="197" y2="197"/><polygon fill="none" points="429,205.6484,433,209.6484,429,213.6484,425,209.6484" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="181" x="438" y="213.9951">store: DataStore&lt;DBIDs&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="419" x2="839" y1="221.2969" y2="221.2969"/><ellipse cx="429" cy="234.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="396" x="438" y="238.292">AbstractPrecomputedNeighborhood(DataStore&lt;DBIDs&gt;)</text><ellipse cx="429" cy="251.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="249" x="438" y="254.5889">getNeighborDBIDs(DBIDRef): DBIDs</text><polygon fill="#FFFF44" points="429,262.5391,433,266.5391,429,270.5391,425,266.5391" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="148" x="438" y="270.8857">getLogger(): Logging</text></g></a><!--MD5=[910037f10333ae534c09a29265f60e19]
+class elki.outlier.spatial.neighborhood.ExtendedNeighborhood--><a href="ExtendedNeighborhood.html" target="_top" title="ExtendedNeighborhood.html" xlink:actuate="onRequest" xlink:href="ExtendedNeighborhood.html" xlink:show="new" xlink:title="ExtendedNeighborhood.html" xlink:type="simple"><g id="elem_elki.outlier.spatial.neighborhood.ExtendedNeighborhood"><rect codeLine="66" fill="#F1F1F1" height="96.8906" id="elki.outlier.spatial.neighborhood.ExtendedNeighborhood" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="337" x="909.5" y="338"/><ellipse cx="991.25" cy="354" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M994.2188,359.6406 Q993.6406,359.9375 993,360.0781 Q992.3594,360.2344 991.6563,360.2344 Q989.1563,360.2344 987.8281,358.5938 Q986.5156,356.9375 986.5156,353.8125 Q986.5156,350.6875 987.8281,349.0313 Q989.1563,347.375 991.6563,347.375 Q992.3594,347.375 993,347.5313 Q993.6563,347.6875 994.2188,347.9844 L994.2188,350.7031 Q993.5938,350.125 993,349.8594 Q992.4063,349.5781 991.7813,349.5781 Q990.4375,349.5781 989.75,350.6563 Q989.0625,351.7188 989.0625,353.8125 Q989.0625,355.9063 989.75,356.9844 Q990.4375,358.0469 991.7813,358.0469 Q992.4063,358.0469 993,357.7813 Q993.5938,357.5 994.2188,356.9219 L994.2188,359.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="1011.75" y="358.8467">ExtendedNeighborhood</text><line style="stroke:#181818;stroke-width:0.5;" x1="910.5" x2="1245.5" y1="370" y2="370"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="917.5" y="380.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="929.5" y="386.9951">LOG: Logging</text><line style="stroke:#181818;stroke-width:0.5;" x1="910.5" x2="1245.5" y1="394.2969" y2="394.2969"/><ellipse cx="920.5" cy="407.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="311" x="929.5" y="411.292">ExtendedNeighborhood(DataStore&lt;DBIDs&gt;)</text><polygon fill="#FFFF44" points="920.5,419.2422,924.5,423.2422,920.5,427.2422,916.5,423.2422" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="929.5" y="427.5889">getLogger(): Logging</text></g></a><!--MD5=[420313123c82e20033f56c13f8d31e1b]
+reverse link elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood to elki.outlier.spatial.neighborhood.ExternalNeighborhood--><g id="link_elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood_elki.outlier.spatial.neighborhood.ExternalNeighborhood"><path codeLine="89" d="M458.89,284.95 C411,302.53 359.7,321.37 314.59,337.92 " fill="none" id="elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood-backto-elki.outlier.spatial.neighborhood.ExternalNeighborhood" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="456.57,278.35,477.75,278.03,461.39,291.49,456.57,278.35" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d9bd00343cd7fda655d7eac904a28581]
+reverse link elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood to elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood--><g id="link_elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood_elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood"><path codeLine="94" d="M629,298.3 C629,311.82 629,325.55 629,337.99 " fill="none" id="elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood-backto-elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="622,298.14,629,278.14,636,298.14,622,298.14" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[c4675826456bffbd49e2279239d4339d]
+reverse link elki.outlier.spatial.neighborhood.NeighborSetPredicate to elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood--><g id="link_elki.outlier.spatial.neighborhood.NeighborSetPredicate_elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood"><path codeLine="99" d="M629,125.36 C629,138.16 629,151.94 629,164.93 " fill="none" id="elki.outlier.spatial.neighborhood.NeighborSetPredicate-backto-elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="622,125.07,629,105.07,636,125.07,622,125.07" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[8ae46cc6252d19502c01032c9ec67ec9]
+reverse link elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood to elki.outlier.spatial.neighborhood.ExtendedNeighborhood--><g id="link_elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood_elki.outlier.spatial.neighborhood.ExtendedNeighborhood"><path codeLine="102" d="M801.03,284.95 C849.46,302.53 901.33,321.37 946.95,337.92 " fill="none" id="elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood-backto-elki.outlier.spatial.neighborhood.ExtendedNeighborhood" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="798.36,291.43,781.95,278.03,803.14,278.27,798.36,291.43" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="535" y="457"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="535" y="466.2822">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[d6b0d5fd0f0674587f641d67caa44792]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.spatial.neighborhood {
+
+        interface NeighborSetPredicate [[NeighborSetPredicate.html]] {
+            {abstract} +getNeighborDBIDs(DBIDRef): DBIDs
+        }
+
+        interface elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory<O> [[NeighborSetPredicate.Factory.html]] {
+            {abstract} +instantiate(Database, Relation<? extends O>): NeighborSetPredicate
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+
+        class ExternalNeighborhood [[ExternalNeighborhood.html]] {
+            {static} -LOG: Logging
+            +ExternalNeighborhood(DataStore<DBIDs>)
+            #getLogger(): Logging
+        }
+
+        class elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory [[ExternalNeighborhood.Factory.html]] {
+            -file: URI
+            +Factory(URI)
+            +instantiate(Database, Relation<?>): NeighborSetPredicate
+            +getInputTypeRestriction(): TypeInformation
+            -loadNeighbors(Database, Relation<?>): DataStore<DBIDs>
+        }
+
+        class elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory.Par [[ExternalNeighborhood.Factory.Par.html]] {
+            {static} +NEIGHBORHOOD_FILE_ID: OptionID
+            ~file: URI
+            +configure(Parameterization): void
+            +make(): Factory
+        }
+
+        class PrecomputedKNearestNeighborNeighborhood [[PrecomputedKNearestNeighborNeighborhood.html]] {
+            {static} -LOG: Logging
+            +PrecomputedKNearestNeighborNeighborhood(DataStore<DBIDs>)
+            #getLogger(): Logging
+        }
+
+        class elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory<O> [[PrecomputedKNearestNeighborNeighborhood.Factory.html]] {
+            -k: int
+            -distance: Distance<? super O>
+            +Factory(int, Distance<? super O>)
+            +instantiate(Database, Relation<? extends O>): NeighborSetPredicate
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory.Par<O> {
+            {static} +K_ID: OptionID
+            {static} +DISTANCEFUNCTION_ID: OptionID
+            ~k: int
+            ~distFunc: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        abstract class AbstractPrecomputedNeighborhood [[AbstractPrecomputedNeighborhood.html]] {
+            #store: DataStore<DBIDs>
+            +AbstractPrecomputedNeighborhood(DataStore<DBIDs>)
+            +getNeighborDBIDs(DBIDRef): DBIDs
+            {abstract} #getLogger(): Logging
+        }
+
+        abstract class elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory<O> [[AbstractPrecomputedNeighborhood.Factory.html]]
+
+        class ExtendedNeighborhood [[ExtendedNeighborhood.html]] {
+            {static} -LOG: Logging
+            +ExtendedNeighborhood(DataStore<DBIDs>)
+            #getLogger(): Logging
+        }
+
+        class elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory<O> [[ExtendedNeighborhood.Factory.html]] {
+            -steps: int
+            +Factory(Factory<O>, int)
+            +instantiate(Database, Relation<? extends O>): NeighborSetPredicate
+            +getInputTypeRestriction(): TypeInformation
+            -extendNeighborhood(Database, Relation<? extends O>): DataStore<DBIDs>
+        }
+
+        class elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory.Par<O> [[ExtendedNeighborhood.Factory.Par.html]] {
+            {static} +NEIGHBORHOOD_ID: OptionID
+            {static} +STEPS_ID: OptionID
+            -steps: int
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        NeighborSetPredicate +- - elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory
+        AbstractPrecomputedNeighborhood <|- - ExternalNeighborhood
+        elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory <|- - elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory
+        ExternalNeighborhood +- - elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory.Par
+        elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory +- - elki.outlier.spatial.neighborhood.ExternalNeighborhood.Factory.Par
+        AbstractPrecomputedNeighborhood <|- - PrecomputedKNearestNeighborNeighborhood
+        elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory <|.. elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory
+        PrecomputedKNearestNeighborNeighborhood +- - elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory.Par
+        elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory +- - elki.outlier.spatial.neighborhood.PrecomputedKNearestNeighborNeighborhood.Factory.Par
+        NeighborSetPredicate <|.. AbstractPrecomputedNeighborhood
+        elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory <|.. elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory
+        AbstractPrecomputedNeighborhood +- - elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory
+        AbstractPrecomputedNeighborhood <|- - ExtendedNeighborhood
+        elki.outlier.spatial.neighborhood.AbstractPrecomputedNeighborhood.Factory <|- - elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory
+        ExtendedNeighborhood +- - elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory
+        elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory - -> elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory: inner
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory.Par
+        elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory +- - elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory.Par
+        elki.outlier.spatial.neighborhood.ExtendedNeighborhood.Factory.Par - -> elki.outlier.spatial.neighborhood.NeighborSetPredicate.Factory: inner
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

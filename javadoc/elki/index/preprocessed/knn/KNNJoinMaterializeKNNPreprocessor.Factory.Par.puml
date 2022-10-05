@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KNNJoinMaterializeKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory.Par<O extends SpatialComparable> {
+        +make(): Factory<O extends SpatialComparable>
+    }
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par<O extends SpatialComparable> {
+        {abstract} +make(): Factory<O>
+    }
+    class "<size:14>KNNJoinMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory<O extends SpatialComparable> [[KNNJoinMaterializeKNNPreprocessor.Factory.html]]
+
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory.Par <|-- elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory.Par
+    elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

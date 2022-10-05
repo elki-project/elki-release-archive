@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ThumbnailThread\n<size:10>elki.visualization.visualizers.thumbs" as elki.visualization.visualizers.thumbs.ThumbnailThread [[ThumbnailThread.html]] {
+        -queue: Queue<Task>
+        -shutdown: boolean
+        {static} -THREAD: ThumbnailThread
+        {static} +queue(Listener): Task
+        {static} +unqueue(Task): void
+        -generateThumbnail(Task): void
+        +run(): void
+    }
+
+    class "<size:14>Thread\n<size:10>java.lang" as java.lang.Thread
+    class "<size:14>ThumbnailThread.Task\n<size:10>elki.visualization.visualizers.thumbs" as elki.visualization.visualizers.thumbs.ThumbnailThread.Task [[ThumbnailThread.Task.html]]
+    interface "<size:14>ThumbnailThread.Listener\n<size:10>elki.visualization.visualizers.thumbs" as elki.visualization.visualizers.thumbs.ThumbnailThread.Listener [[ThumbnailThread.Listener.html]]
+
+    java.lang.Thread <|-- elki.visualization.visualizers.thumbs.ThumbnailThread
+    elki.visualization.visualizers.thumbs.ThumbnailThread +-- elki.visualization.visualizers.thumbs.ThumbnailThread.Task
+    elki.visualization.visualizers.thumbs.ThumbnailThread +-- elki.visualization.visualizers.thumbs.ThumbnailThread.Listener
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>QueryOptimizer\n<size:10>elki.database.query" as elki.database.query.QueryOptimizer [[QueryOptimizer.html]] {
+        +getSimilarityQuery(Relation<? extends O>, Similarity<? super O>, int): SimilarityQuery<O>
+        +getDistanceQuery(Relation<? extends O>, Distance<? super O>, int): DistanceQuery<O>
+        +kNNByObject(Relation<? extends O>, DistanceQuery<O>, int, int): KNNSearcher<O>
+        +kNNByDBID(Relation<? extends O>, DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        +rangeByObject(Relation<? extends O>, DistanceQuery<O>, double, int): RangeSearcher<O>
+        +rangeByDBID(Relation<? extends O>, DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        +similarityRangeByObject(Relation<? extends O>, SimilarityQuery<O>, double, int): RangeSearcher<O>
+        +similarityRangeByDBID(Relation<? extends O>, SimilarityQuery<O>, double, int): RangeSearcher<DBIDRef>
+        +rkNNByObject(Relation<? extends O>, DistanceQuery<O>, int, int): RKNNSearcher<O>
+        +rkNNByDBID(Relation<? extends O>, DistanceQuery<O>, int, int): RKNNSearcher<DBIDRef>
+        +priorityByObject(Relation<? extends O>, DistanceQuery<O>, double, int): PrioritySearcher<O>
+        +priorityByDBID(Relation<? extends O>, DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

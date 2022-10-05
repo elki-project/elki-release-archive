@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GaussianUniformMixture\n<size:10>elki.outlier" as elki.outlier.GaussianUniformMixture [[GaussianUniformMixture.html]] {
+        {static} -MAX_ITER: int
+        -c: double
+        -logl: double
+        -logml: double
+        +GaussianUniformMixture(double, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends NumberVector>): OutlierResult
+        -loglikelihoodAnomalous(DBIDs): double
+        -loglikelihoodNormal(DBIDs, SetDBIDs, CovarianceMatrix, Relation<? extends NumberVector>): double
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[OutlierAlgorithm.html]]
+    class "<size:14>GaussianUniformMixture.Par\n<size:10>elki.outlier" as elki.outlier.GaussianUniformMixture.Par [[GaussianUniformMixture.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.GaussianUniformMixture
+    elki.outlier.GaussianUniformMixture +-- elki.outlier.GaussianUniformMixture.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

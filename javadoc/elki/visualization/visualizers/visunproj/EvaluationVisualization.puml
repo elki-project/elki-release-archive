@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluationVisualization\n<size:10>elki.visualization.visualizers.visunproj" as elki.visualization.visualizers.visunproj.EvaluationVisualization [[EvaluationVisualization.html]] {
+        {static} -NAME: String
+        {static} -BARLENGTH: double
+        {static} -BARHEIGHT: double
+        +processNewResult(VisualizerContext, Object): void
+        -addBarChart(SVGPlot, Element, double, String, double, double, double, double, boolean): double
+        -addHeader(SVGPlot, Element, double, String): double
+        +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+        +allowThumbnails(VisualizationTask): boolean
+    }
+
+    interface "<size:14>VisFactory\n<size:10>elki.visualization.visualizers" as elki.visualization.visualizers.VisFactory [[../VisFactory.html]] {
+        {abstract} +processNewResult(VisualizerContext, Object): void
+        {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+    }
+
+    elki.visualization.visualizers.VisFactory <|.. elki.visualization.visualizers.visunproj.EvaluationVisualization
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

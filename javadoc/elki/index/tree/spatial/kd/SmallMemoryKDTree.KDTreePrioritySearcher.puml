@@ -1,0 +1,39 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SmallMemoryKDTree.KDTreePrioritySearcher\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreePrioritySearcher [[SmallMemoryKDTree.KDTreePrioritySearcher.html]] {
+        -distance: PrimitiveDistance<? super NumberVector>
+        -heap: ComparableMinHeap<PrioritySearchBranch>
+        -iter: DoubleDBIDListIter
+        -query: O extends NumberVector
+        -threshold: double
+        -pos: int
+        -cur: PrioritySearchBranch
+        +KDTreePrioritySearcher(PrimitiveDistance<? super NumberVector>)
+        +search(O extends NumberVector): PrioritySearcher<O extends NumberVector>
+        +advance(): PrioritySearcher<O extends NumberVector>
+        +valid(): boolean
+        +getLowerBound(): double
+        +allLowerBound(): double
+        +computeExactDistance(): double
+        +internalGetIndex(): int
+        +decreaseCutoff(double): PrioritySearcher<O extends NumberVector>
+    }
+
+    interface "<size:14>PrioritySearcher\n<size:10>elki.database.query" as elki.database.query.PrioritySearcher<O extends NumberVector> [[../../../../database/query/PrioritySearcher.html]] {
+        {abstract} +search(O extends NumberVector): PrioritySearcher<O>
+        {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+        {abstract} +computeExactDistance(): double
+        {abstract} +allLowerBound(): double
+        {abstract} +advance(): PrioritySearcher<O>
+    }
+    class "<size:14>SmallMemoryKDTree\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.SmallMemoryKDTree<O extends NumberVector> [[SmallMemoryKDTree.html]]
+
+    elki.database.query.PrioritySearcher <|.. elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreePrioritySearcher
+    elki.index.tree.spatial.kd.SmallMemoryKDTree +-- elki.index.tree.spatial.kd.SmallMemoryKDTree.KDTreePrioritySearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

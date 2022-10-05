@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-index-rtree",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-index-rtree-0.8.0.jar",
+          "url": "elki-index-rtree-0.8.0.jar",
+          "size": 174165,
+          "sha512": "52e49cd43fb6b36c333d8422ad51caa0d1f233862e0d2890263a24b73d19cad0da77140246dc6dcc08daef3d16342346abfa1f41015b8a919ffe7c31d4e8d91f",
+          "sha256": "4fd88261e508e30871673f72acb15f4834e0a5644c292d5a2e91d692a7896f53",
+          "sha1": "d35650faaa1801722b4ff9f1902dc98084b78346",
+          "md5": "10f5a15dbf8ecdfa832dee49fa168ff8"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-index-rtree-0.8.0.jar",
+          "url": "elki-index-rtree-0.8.0.jar",
+          "size": 174165,
+          "sha512": "52e49cd43fb6b36c333d8422ad51caa0d1f233862e0d2890263a24b73d19cad0da77140246dc6dcc08daef3d16342346abfa1f41015b8a919ffe7c31d4e8d91f",
+          "sha256": "4fd88261e508e30871673f72acb15f4834e0a5644c292d5a2e91d692a7896f53",
+          "sha1": "d35650faaa1801722b4ff9f1902dc98084b78346",
+          "md5": "10f5a15dbf8ecdfa832dee49fa168ff8"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-rtree",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-index-rtree-0.8.0-test-fixtures.jar",
+          "url": "elki-index-rtree-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "e0d0c328c5f0e66012f8b6ce2a17ec2b1d912cbdbb93b2fdca835bc0088be9fbc77f9b350a33dc0dab3034571f929c4f2aebfcb8175f29ed4f3244d13b675e09",
+          "sha256": "ccff424a883db95908ba4d58b1b068adcdd6e1c45a5288e00716bf71983b0f9c",
+          "sha1": "b698c2a5b7209b0249c29b10efb7ae6ee36f6b60",
+          "md5": "0d50e758e67fcff00485b3c48b05fcfb"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-index-rtree-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-index-rtree",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-index-rtree-0.8.0-test-fixtures.jar",
+          "url": "elki-index-rtree-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "e0d0c328c5f0e66012f8b6ce2a17ec2b1d912cbdbb93b2fdca835bc0088be9fbc77f9b350a33dc0dab3034571f929c4f2aebfcb8175f29ed4f3244d13b675e09",
+          "sha256": "ccff424a883db95908ba4d58b1b068adcdd6e1c45a5288e00716bf71983b0f9c",
+          "sha1": "b698c2a5b7209b0249c29b10efb7ae6ee36f6b60",
+          "md5": "0d50e758e67fcff00485b3c48b05fcfb"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-index-rtree-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

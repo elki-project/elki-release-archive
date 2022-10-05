@@ -1,0 +1,97 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.svm {
+
+        class SVDD<V> [[SVDD.html]] {
+            {static} -LOG: Logging
+            ~kernel: PrimitiveSimilarity<? super V>
+            ~C: double
+            +SVDD(PrimitiveSimilarity<? super V>, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V>): OutlierResult
+        }
+
+        class elki.outlier.svm.SVDD.Par<V> {
+            {static} +KERNEL_ID: OptionID
+            {static} +C_ID: OptionID
+            #kernel: PrimitiveSimilarity<? super V>
+            #C: double
+            +configure(Parameterization): void
+            +make(): SVDD<V>
+        }
+
+        class OCSVM<V> [[OCSVM.html]] {
+            {static} -LOG: Logging
+            ~kernel: PrimitiveSimilarity<? super V>
+            ~nu: double
+            +OCSVM(PrimitiveSimilarity<? super V>, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V>): OutlierResult
+        }
+
+        class elki.outlier.svm.OCSVM.Par<V> {
+            {static} +KERNEL_ID: OptionID
+            {static} +NU_ID: OptionID
+            #kernel: PrimitiveSimilarity<? super V>
+            #nu: double
+            +configure(Parameterization): void
+            +make(): OCSVM<V>
+        }
+
+        class LibSVMOneClassOutlierDetection<V extends NumberVector> [[LibSVMOneClassOutlierDetection.html]] {
+            {static} -LOG: Logging
+            ~nu: double
+            ~gamma: double
+            {static} ~LOG_HELPER: svm_print_interface
+            +LibSVMOneClassOutlierDetection(SVMKernel, double, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): OutlierResult
+        }
+
+        enum elki.outlier.svm.LibSVMOneClassOutlierDetection.SVMKernel [[LibSVMOneClassOutlierDetection.SVMKernel.html]] {
+            {static} +LINEAR
+            {static} +QUADRATIC
+            {static} +CUBIC
+            {static} +RBF
+            {static} +SIGMOID
+        }
+
+        class elki.outlier.svm.LibSVMOneClassOutlierDetection.Par<V extends NumberVector> {
+            {static} +KERNEL_ID: OptionID
+            {static} +NU_ID: OptionID
+            {static} +GAMMA_ID: OptionID
+            #nu: double
+            ~gamma: double
+            +configure(Parameterization): void
+            +make(): LibSVMOneClassOutlierDetection<V extends NumberVector>
+        }
+
+        elki.outlier.OutlierAlgorithm <|.. SVDD
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.svm.SVDD.Par
+        SVDD +-- elki.outlier.svm.SVDD.Par
+        elki.outlier.OutlierAlgorithm <|.. OCSVM
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.svm.OCSVM.Par
+        OCSVM +-- elki.outlier.svm.OCSVM.Par
+        elki.outlier.OutlierAlgorithm <|.. LibSVMOneClassOutlierDetection
+        LibSVMOneClassOutlierDetection --> elki.outlier.svm.LibSVMOneClassOutlierDetection.SVMKernel: kernel
+        LibSVMOneClassOutlierDetection +-- elki.outlier.svm.LibSVMOneClassOutlierDetection.SVMKernel
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.svm.LibSVMOneClassOutlierDetection.Par
+        LibSVMOneClassOutlierDetection +-- elki.outlier.svm.LibSVMOneClassOutlierDetection.Par
+        elki.outlier.svm.LibSVMOneClassOutlierDetection.Par --> elki.outlier.svm.LibSVMOneClassOutlierDetection.SVMKernel: kernel
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

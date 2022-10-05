@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SqrtJensenShannonDivergenceDistance\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.SqrtJensenShannonDivergenceDistance [[SqrtJensenShannonDivergenceDistance.html]] {
+        {static} +STATIC: SqrtJensenShannonDivergenceDistance
+        +distance(NumberVector, NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +isMetric(): boolean
+        +isSquared(): boolean
+    }
+
+    class "<size:14>JensenShannonDivergenceDistance\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.JensenShannonDivergenceDistance [[JensenShannonDivergenceDistance.html]]
+    class "<size:14>SqrtJensenShannonDivergenceDistance.Par\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.SqrtJensenShannonDivergenceDistance.Par [[SqrtJensenShannonDivergenceDistance.Par.html]]
+
+    elki.distance.probabilistic.JensenShannonDivergenceDistance <|-- elki.distance.probabilistic.SqrtJensenShannonDivergenceDistance
+    elki.distance.probabilistic.SqrtJensenShannonDivergenceDistance +-- elki.distance.probabilistic.SqrtJensenShannonDivergenceDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

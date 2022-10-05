@@ -1,0 +1,41 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>QuickSelect\n<size:10>elki.utilities.datastructures" as elki.utilities.datastructures.QuickSelect [[QuickSelect.html]] {
+        {static} -SMALL: int
+        {static} +DOUBLE_ADAPTER: Adapter<double[]>
+        {static} +INTEGER_ADAPTER: Adapter<int[]>
+        {static} +FLOAT_ADAPTER: Adapter<float[]>
+        {static} +SHORT_ADAPTER: Adapter<short[]>
+        {static} +LONG_ADAPTER: Adapter<long[]>
+        {static} +BYTE_ADAPTER: Adapter<byte[]>
+        {static} +CHAR_ADAPTER: Adapter<char[]>
+        {static} -bestPivot(int, int, int, int, int, int): int
+        {static} +quickSelect(T, Adapter<T>, int, int, int): void
+        {static} -insertionSort(T, Adapter<T>, int, int): void
+        {static} +quickSelect(double[], int): double
+        {static} +median(double[]): double
+        {static} +median(double[], int, int): double
+        {static} +quantile(double[], double): double
+        {static} +quantile(double[], int, int, double): double
+        {static} +quickSelect(double[], int, int, int): double
+        {static} -insertionSort(double[], int, int): void
+        {static} -swap(double[], int, int): void
+        {static} -swap(List<T>, int, int): void
+        {static} +quickSelect(List<? extends T>, Comparator<? super T>, int): T
+        {static} +median(List<? extends T>, Comparator<? super T>): T
+        {static} +median(List<? extends T>, Comparator<? super T>, int, int): T
+        {static} +quantile(List<? extends T>, Comparator<? super T>, double): T
+        {static} +quantile(List<? extends T>, Comparator<? super T>, int, int, double): T
+        {static} +quickSelect(List<? extends T>, Comparator<? super T>, int, int, int): void
+        {static} -insertionSort(List<T>, Comparator<? super T>, int, int): void
+    }
+    interface "<size:14>QuickSelect.Adapter\n<size:10>elki.utilities.datastructures" as elki.utilities.datastructures.QuickSelect.Adapter<T> [[QuickSelect.Adapter.html]]
+
+    elki.utilities.datastructures.QuickSelect +-- elki.utilities.datastructures.QuickSelect.Adapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

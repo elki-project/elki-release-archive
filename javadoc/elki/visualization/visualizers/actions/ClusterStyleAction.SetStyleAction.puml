@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClusterStyleAction.SetStyleAction\n<size:10>elki.visualization.visualizers.actions" as elki.visualization.visualizers.actions.ClusterStyleAction.SetStyleAction [[ClusterStyleAction.SetStyleAction.html]] {
+        -c: Clustering<?>
+        -context: VisualizerContext
+        -SetStyleAction(Clustering<?>, VisualizerContext)
+        +activate(): void
+        +getMenuName(): String
+        +enabled(): boolean
+    }
+
+    interface "<size:14>VisualizationMenuAction\n<size:10>elki.visualization" as elki.visualization.VisualizationMenuAction [[../../VisualizationMenuAction.html]] {
+        {abstract} +activate(): void
+    }
+    class "<size:14>ClusterStyleAction\n<size:10>elki.visualization.visualizers.actions" as elki.visualization.visualizers.actions.ClusterStyleAction [[ClusterStyleAction.html]]
+
+    elki.visualization.VisualizationMenuAction <|.. elki.visualization.visualizers.actions.ClusterStyleAction.SetStyleAction
+    elki.visualization.visualizers.actions.ClusterStyleAction +-- elki.visualization.visualizers.actions.ClusterStyleAction.SetStyleAction
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

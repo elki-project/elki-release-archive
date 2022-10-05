@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NNChain.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.NNChain.Par<O> {
+        +make(): NNChain<O>
+    }
+
+    class "<size:14>AGNES.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AGNES.Par<O>
+    class "<size:14>NNChain\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.NNChain<O> [[NNChain.html]]
+
+    elki.clustering.hierarchical.AGNES.Par <|-- elki.clustering.hierarchical.NNChain.Par
+    elki.clustering.hierarchical.NNChain +-- elki.clustering.hierarchical.NNChain.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

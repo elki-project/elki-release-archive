@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FixedDBIDsFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.FixedDBIDsFilter [[FixedDBIDsFilter.html]] {
+        ~meta: BundleMeta
+        ~curid: int
+        +FixedDBIDsFilter(int)
+        +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+
+    interface "<size:14>ObjectFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.ObjectFilter [[ObjectFilter.html]] {
+        {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+    }
+    class "<size:14>FixedDBIDsFilter.Par\n<size:10>elki.datasource.filter" as elki.datasource.filter.FixedDBIDsFilter.Par [[FixedDBIDsFilter.Par.html]]
+
+    elki.datasource.filter.ObjectFilter <|.. elki.datasource.filter.FixedDBIDsFilter
+    elki.datasource.filter.FixedDBIDsFilter +-- elki.datasource.filter.FixedDBIDsFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

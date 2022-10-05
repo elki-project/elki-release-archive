@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SLOM.Par\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.SLOM.Par<N, O> {
+        +make(): SLOM<N, O>
+    }
+
+    abstract class "<size:14>AbstractDistanceBasedSpatialOutlier.Par\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier.Par<N, O>
+    class "<size:14>SLOM\n<size:10>elki.outlier.spatial" as elki.outlier.spatial.SLOM<N, O> [[SLOM.html]]
+
+    elki.outlier.spatial.AbstractDistanceBasedSpatialOutlier.Par <|-- elki.outlier.spatial.SLOM.Par
+    elki.outlier.spatial.SLOM +-- elki.outlier.spatial.SLOM.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

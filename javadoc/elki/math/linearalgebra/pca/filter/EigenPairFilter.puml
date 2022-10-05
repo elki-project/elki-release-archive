@@ -1,0 +1,13 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>EigenPairFilter\n<size:10>elki.math.linearalgebra.pca.filter" as elki.math.linearalgebra.pca.filter.EigenPairFilter [[EigenPairFilter.html]] {
+        {static} +PCA_EIGENPAIR_FILTER: OptionID
+        {abstract} +filter(double[]): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

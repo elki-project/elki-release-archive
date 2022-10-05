@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ListEachNumberConstraint\n<size:10>elki.utilities.optionhandling.constraints" as elki.utilities.optionhandling.constraints.ListEachNumberConstraint<T> [[ListEachNumberConstraint.html]] {
+        -constraints: List<AbstractNumberConstraint>
+        +ListEachNumberConstraint()
+        +ListEachNumberConstraint(AbstractNumberConstraint)
+        +addConstraint(AbstractNumberConstraint): void
+        +test(T): void
+        +getDescription(String): String
+    }
+
+    interface "<size:14>ParameterConstraint\n<size:10>elki.utilities.optionhandling.constraints" as elki.utilities.optionhandling.constraints.ParameterConstraint<T> [[ParameterConstraint.html]] {
+        {abstract} +test(T): void
+        {abstract} +getDescription(String): String
+    }
+
+    elki.utilities.optionhandling.constraints.ParameterConstraint <|.. elki.utilities.optionhandling.constraints.ListEachNumberConstraint
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

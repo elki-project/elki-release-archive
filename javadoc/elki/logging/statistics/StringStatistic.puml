@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>StringStatistic\n<size:10>elki.logging.statistics" as elki.logging.statistics.StringStatistic [[StringStatistic.html]] {
+        -val: String
+        +StringStatistic(String, String)
+        +StringStatistic(String)
+        +setString(String): void
+        +formatValue(): String
+    }
+
+    abstract class "<size:14>AbstractStatistic\n<size:10>elki.logging.statistics" as elki.logging.statistics.AbstractStatistic [[AbstractStatistic.html]]
+
+    elki.logging.statistics.AbstractStatistic <|-- elki.logging.statistics.StringStatistic
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

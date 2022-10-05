@@ -1,0 +1,109 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.datasource.filter.selection {
+
+        class ShuffleObjectsFilter [[ShuffleObjectsFilter.html]] {
+            {static} -LOG: Logging
+            ~rnd: RandomFactory
+            +ShuffleObjectsFilter(RandomFactory)
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        }
+
+        class elki.datasource.filter.selection.ShuffleObjectsFilter.Par [[ShuffleObjectsFilter.Par.html]] {
+            {static} +SEED_ID: OptionID
+            ~rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): ShuffleObjectsFilter
+        }
+
+        class ByLabelFilter [[ByLabelFilter.html]] {
+            {static} -LOG: Logging
+            -matcher: Matcher
+            -inverted: boolean
+            -lblcol: int
+            +ByLabelFilter(Pattern, boolean)
+            +getMeta(): BundleMeta
+            +data(int): Object
+            +nextEvent(): Event
+        }
+
+        class elki.datasource.filter.selection.ByLabelFilter.Par [[ByLabelFilter.Par.html]] {
+            {static} +LABELFILTER_PATTERN_ID: OptionID
+            {static} +LABELFILTER_PATTERN_INVERT_ID: OptionID
+            ~pattern: Pattern
+            -inverted: boolean
+            +configure(Parameterization): void
+            +make(): ByLabelFilter
+        }
+
+        class SortByLabelFilter [[SortByLabelFilter.html]] {
+            {static} -LOG: Logging
+            +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        }
+
+        class RandomSamplingStreamFilter [[RandomSamplingStreamFilter.html]] {
+            #prob: double
+            #random: Random
+            +RandomSamplingStreamFilter(double, RandomFactory)
+            +getMeta(): BundleMeta
+            +data(int): Object
+            +nextEvent(): Event
+        }
+
+        class elki.datasource.filter.selection.RandomSamplingStreamFilter.Par [[RandomSamplingStreamFilter.Par.html]] {
+            {static} +PROB_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #prob: double
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): RandomSamplingStreamFilter
+        }
+
+        class FirstNStreamFilter [[FirstNStreamFilter.html]] {
+            #n: int
+            +FirstNStreamFilter(int)
+            +getMeta(): BundleMeta
+            +data(int): Object
+            +nextEvent(): Event
+        }
+
+        class elki.datasource.filter.selection.FirstNStreamFilter.Par [[FirstNStreamFilter.Par.html]] {
+            {static} +SIZE_ID: OptionID
+            #n: int
+            +configure(Parameterization): void
+            +make(): FirstNStreamFilter
+        }
+
+        elki.datasource.filter.ObjectFilter <|.. ShuffleObjectsFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.selection.ShuffleObjectsFilter.Par
+        ShuffleObjectsFilter +-- elki.datasource.filter.selection.ShuffleObjectsFilter.Par
+        elki.datasource.filter.AbstractStreamFilter <|-- ByLabelFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.selection.ByLabelFilter.Par
+        ByLabelFilter +-- elki.datasource.filter.selection.ByLabelFilter.Par
+        elki.datasource.filter.ObjectFilter <|.. SortByLabelFilter
+        elki.datasource.filter.AbstractStreamFilter <|-- RandomSamplingStreamFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.selection.RandomSamplingStreamFilter.Par
+        RandomSamplingStreamFilter +-- elki.datasource.filter.selection.RandomSamplingStreamFilter.Par
+        elki.datasource.filter.AbstractStreamFilter <|-- FirstNStreamFilter
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.selection.FirstNStreamFilter.Par
+        FirstNStreamFilter +-- elki.datasource.filter.selection.FirstNStreamFilter.Par
+    }
+
+    namespace elki.datasource.filter {
+        interface ObjectFilter [[../ObjectFilter.html]] {
+            {abstract} +filter(MultipleObjectsBundle): MultipleObjectsBundle
+        }
+        abstract class AbstractStreamFilter [[../AbstractStreamFilter.html]] {
+            #source: BundleStreamSource
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

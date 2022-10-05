@@ -1,0 +1,44 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VIIFeature\n<size:10>elki.index.tree.betula.features" as elki.index.tree.betula.features.VIIFeature [[VIIFeature.html]] {
+        ~n: int
+        ~mean: double[]
+        ~ssd: double
+        +VIIFeature(int)
+        +addToStatistics(NumberVector): void
+        +addToStatistics(ClusterFeature): void
+        +addToStatistics(VIIFeature): void
+        +resetStatistics(): void
+        +centroid(int): double
+        +variance(): double
+        +sumdev(): double
+        +variance(int): double
+        +covariance(): double[]
+        +sumOfSquaredDev(): double
+        +getDimensionality(): int
+        +getWeight(): int
+        +toArray(): double[]
+    }
+
+    interface "<size:14>ClusterFeature\n<size:10>elki.index.tree.betula.features" as elki.index.tree.betula.features.ClusterFeature [[ClusterFeature.html]] {
+        {abstract} +addToStatistics(NumberVector): void
+        {abstract} +addToStatistics(ClusterFeature): void
+        {abstract} +resetStatistics(): void
+        {abstract} +getWeight(): int
+        {abstract} +centroid(int): double
+        {abstract} +variance(): double
+        {abstract} +sumdev(): double
+        {abstract} +variance(int): double
+        {abstract} +covariance(): double[]
+    }
+    class "<size:14>VIIFeature.Factory\n<size:10>elki.index.tree.betula.features" as elki.index.tree.betula.features.VIIFeature.Factory [[VIIFeature.Factory.html]]
+
+    elki.index.tree.betula.features.ClusterFeature <|.. elki.index.tree.betula.features.VIIFeature
+    elki.index.tree.betula.features.VIIFeature +-- elki.index.tree.betula.features.VIIFeature.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

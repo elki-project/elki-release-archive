@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HopkinsStatisticClusteringTendency\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.HopkinsStatisticClusteringTendency [[HopkinsStatisticClusteringTendency.html]] {
+        {static} -LOG: Logging
+        #sampleSize: int
+        #rep: int
+        #k: int
+        #random: RandomFactory
+        -maxima: double[]
+        -minima: double[]
+        #distance: NumberVectorDistance<? super NumberVector>
+        +HopkinsStatisticClusteringTendency(NumberVectorDistance<? super NumberVector>, int, RandomFactory, int, int, double[], double[])
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<NumberVector>): Double
+        #computeNNForRealData(KNNSearcher<DBIDRef>, Relation<NumberVector>, int): double
+        #computeNNForUniformData(KNNSearcher<NumberVector>, double[], double[]): double
+        #initializeDataExtends(Relation<NumberVector>, int, double[], double[]): void
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    class "<size:14>HopkinsStatisticClusteringTendency.Par\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.HopkinsStatisticClusteringTendency.Par [[HopkinsStatisticClusteringTendency.Par.html]]
+
+    elki.Algorithm <|.. elki.algorithm.statistics.HopkinsStatisticClusteringTendency
+    elki.algorithm.statistics.HopkinsStatisticClusteringTendency +-- elki.algorithm.statistics.HopkinsStatisticClusteringTendency.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

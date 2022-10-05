@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SelectionResult\n<size:10>elki.result" as elki.result.SelectionResult [[SelectionResult.html]] {
+        ~selection: DBIDSelection
+        +getSelection(): DBIDSelection
+        +setSelection(DBIDSelection): void
+        +getLongName(): String
+        +getShortName(): String
+        {static} +ensureSelectionResult(Database): SelectionResult
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

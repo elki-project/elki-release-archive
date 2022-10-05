@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>TreeSphereVisualization.Mode\n<size:10>elki.visualization.visualizers.scatterplot.index" as elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Mode [[TreeSphereVisualization.Mode.html]] {
+        {static} +MANHATTAN
+        {static} +EUCLIDEAN
+        {static} +LPCROSS
+    }
+
+    class "<size:14>TreeSphereVisualization\n<size:10>elki.visualization.visualizers.scatterplot.index" as elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization [[TreeSphereVisualization.html]]
+
+    elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization +-- elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Mode
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ApproximativeLeastOverlapInsertionStrategy\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.insert" as elki.index.tree.spatial.rstarvariants.strategies.insert.ApproximativeLeastOverlapInsertionStrategy [[ApproximativeLeastOverlapInsertionStrategy.html]] {
+        -numCandidates: int
+        +ApproximativeLeastOverlapInsertionStrategy(int)
+        +choose(A, ArrayAdapter<? extends SpatialComparable, A>, SpatialComparable, int, int): int
+    }
+
+    class "<size:14>LeastOverlapInsertionStrategy\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.insert" as elki.index.tree.spatial.rstarvariants.strategies.insert.LeastOverlapInsertionStrategy [[LeastOverlapInsertionStrategy.html]]
+    class "<size:14>ApproximativeLeastOverlapInsertionStrategy.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.insert" as elki.index.tree.spatial.rstarvariants.strategies.insert.ApproximativeLeastOverlapInsertionStrategy.Par [[ApproximativeLeastOverlapInsertionStrategy.Par.html]]
+
+    elki.index.tree.spatial.rstarvariants.strategies.insert.LeastOverlapInsertionStrategy <|-- elki.index.tree.spatial.rstarvariants.strategies.insert.ApproximativeLeastOverlapInsertionStrategy
+    elki.index.tree.spatial.rstarvariants.strategies.insert.ApproximativeLeastOverlapInsertionStrategy +-- elki.index.tree.spatial.rstarvariants.strategies.insert.ApproximativeLeastOverlapInsertionStrategy.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

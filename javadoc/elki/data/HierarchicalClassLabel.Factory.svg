@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="69px" preserveAspectRatio="none" style="width:199px;height:69px;background:#FFFFFF;" version="1.1" viewBox="0 0 199 69" width="199px" zoomAndPan="magnify"><defs/><g><!--MD5=[f4e314fea9642706e1f1d40d1d36f6cf]
+class elki.data.HierarchicalClassLabel--><a href="HierarchicalClassLabel.html" target="_top" title="HierarchicalClassLabel.html" xlink:actuate="onRequest" xlink:href="HierarchicalClassLabel.html" xlink:show="new" xlink:title="HierarchicalClassLabel.html" xlink:type="simple"><g id="elem_elki.data.HierarchicalClassLabel"><rect codeLine="15" fill="#F1F1F1" height="37.9375" id="elki.data.HierarchicalClassLabel" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="184" x="8" y="7"/><ellipse cx="23" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M25.9688,31.6094 Q25.3906,31.9063 24.75,32.0469 Q24.1094,32.2031 23.4063,32.2031 Q20.9063,32.2031 19.5781,30.5625 Q18.2656,28.9063 18.2656,25.7813 Q18.2656,22.6563 19.5781,21 Q20.9063,19.3438 23.4063,19.3438 Q24.1094,19.3438 24.75,19.5 Q25.4063,19.6563 25.9688,19.9531 L25.9688,22.6719 Q25.3438,22.0938 24.75,21.8281 Q24.1563,21.5469 23.5313,21.5469 Q22.1875,21.5469 21.5,22.625 Q20.8125,23.6875 20.8125,25.7813 Q20.8125,27.875 21.5,28.9531 Q22.1875,30.0156 23.5313,30.0156 Q24.1563,30.0156 24.75,29.75 Q25.3438,29.4688 25.9688,28.8906 L25.9688,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152" x="37" y="24.9951">HierarchicalClassLabel</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="40" x="93" y="37.5791">elki.data</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="0" y="49.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="0" y="59.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[8dc37f0699c38ae89eb217bafe7b104c]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HierarchicalClassLabel.Factory\n<size:10>elki.data" as elki.data.HierarchicalClassLabel.Factory [[HierarchicalClassLabel.Factory.html]] {
+        +makeFromString(String): HierarchicalClassLabel
+        +getTypeInformation(): SimpleTypeInformation<? super HierarchicalClassLabel>
+    }
+
+    abstract class "<size:14>ClassLabel.Factory\n<size:10>elki.data" as elki.data.ClassLabel.Factory<HierarchicalClassLabel> [[ClassLabel.Factory.html]] {
+        {abstract} +makeFromString(String): HierarchicalClassLabel
+        {abstract} +getTypeInformation(): SimpleTypeInformation<? super ClassLabel>
+    }
+    class "<size:14>HierarchicalClassLabel\n<size:10>elki.data" as elki.data.HierarchicalClassLabel [[HierarchicalClassLabel.html]]
+
+    elki.data.ClassLabel.Factory <|- - elki.data.HierarchicalClassLabel.Factory
+    elki.data.HierarchicalClassLabel +- - elki.data.HierarchicalClassLabel.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

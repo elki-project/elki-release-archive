@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MkMaxLeafEntry\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkmax" as elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxLeafEntry [[MkMaxLeafEntry.html]] {
+        {static} -serialVersionUID: long
+        -knnDistance: double
+        +MkMaxLeafEntry()
+        +MkMaxLeafEntry(DBID, double, double)
+        +getKnnDistance(): double
+        +setKnnDistance(double): void
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+    }
+
+    class "<size:14>MTreeLeafEntry\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.MTreeLeafEntry [[../../MTreeLeafEntry.html]]
+    interface "<size:14>MkMaxEntry\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees.mkmax" as elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxEntry [[MkMaxEntry.html]] {
+        {abstract} +getKnnDistance(): double
+        {abstract} +setKnnDistance(double): void
+    }
+
+    elki.index.tree.metrical.mtreevariants.MTreeLeafEntry <|-- elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxLeafEntry
+    elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxEntry <|.. elki.index.tree.metrical.mtreevariants.mktrees.mkmax.MkMaxLeafEntry
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

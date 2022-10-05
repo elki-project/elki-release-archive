@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ManhattanHashFunctionFamily.Par\n<size:10>elki.index.lsh.hashfamilies" as elki.index.lsh.hashfamilies.ManhattanHashFunctionFamily.Par [[ManhattanHashFunctionFamily.Par.html]] {
+        +make(): ManhattanHashFunctionFamily
+    }
+
+    abstract class "<size:14>AbstractProjectedHashFunctionFamily.Par\n<size:10>elki.index.lsh.hashfamilies" as elki.index.lsh.hashfamilies.AbstractProjectedHashFunctionFamily.Par [[AbstractProjectedHashFunctionFamily.Par.html]]
+    class "<size:14>ManhattanHashFunctionFamily\n<size:10>elki.index.lsh.hashfamilies" as elki.index.lsh.hashfamilies.ManhattanHashFunctionFamily [[ManhattanHashFunctionFamily.html]]
+
+    elki.index.lsh.hashfamilies.AbstractProjectedHashFunctionFamily.Par <|-- elki.index.lsh.hashfamilies.ManhattanHashFunctionFamily.Par
+    elki.index.lsh.hashfamilies.ManhattanHashFunctionFamily +-- elki.index.lsh.hashfamilies.ManhattanHashFunctionFamily.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Ostrovsky\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.Ostrovsky [[Ostrovsky.html]] {
+        {static} -LOG: Logging
+        +Ostrovsky(RandomFactory)
+        +chooseInitialMeans(Relation<? extends NumberVector>, int, NumberVectorDistance<?>): double[]
+    }
+
+    abstract class "<size:14>AbstractKMeansInitialization\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AbstractKMeansInitialization [[AbstractKMeansInitialization.html]]
+    class "<size:14>Ostrovsky.NumberVectorInstance\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.Ostrovsky.NumberVectorInstance [[Ostrovsky.NumberVectorInstance.html]]
+    class "<size:14>Ostrovsky.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.Ostrovsky.Par [[Ostrovsky.Par.html]]
+
+    elki.clustering.kmeans.initialization.AbstractKMeansInitialization <|-- elki.clustering.kmeans.initialization.Ostrovsky
+    elki.clustering.kmeans.initialization.Ostrovsky +-- elki.clustering.kmeans.initialization.Ostrovsky.NumberVectorInstance
+    elki.clustering.kmeans.initialization.Ostrovsky +-- elki.clustering.kmeans.initialization.Ostrovsky.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

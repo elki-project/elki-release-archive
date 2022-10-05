@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ResultWindow.DynamicMenu\n<size:10>elki.visualization.gui" as elki.visualization.gui.ResultWindow.DynamicMenu [[ResultWindow.DynamicMenu.html]] {
+        -menubar: JMenuBar
+        -filemenu: JMenu
+        -overviewItem: JMenuItem
+        -quitItem: JMenuItem
+        -exportItem: JMenuItem
+        -writeItem: JMenuItem
+        -visualizersMenu: JMenu
+        #simplify: boolean
+        #updateVisualizerMenus(): void
+        -recursiveBuildMenu(Collection<JMenuItem>, Object, Hierarchy<Object>, Projection): void
+        -makeMenuItemForVisualizer(Object): JMenuItem
+        +getMenuBar(): JMenuBar
+        +enableOverview(boolean): void
+        +enableExport(boolean): void
+        +enableWriter(boolean): void
+    }
+
+    class "<size:14>ResultWindow\n<size:10>elki.visualization.gui" as elki.visualization.gui.ResultWindow [[ResultWindow.html]]
+
+    elki.visualization.gui.ResultWindow +-- elki.visualization.gui.ResultWindow.DynamicMenu
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

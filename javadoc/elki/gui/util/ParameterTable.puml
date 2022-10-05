@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParameterTable\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable [[ParameterTable.html]] {
+        {static} -serialVersionUID: long
+        {static} ~COLOR_INCOMPLETE: Color
+        {static} ~COLOR_SYNTAX_ERROR: Color
+        {static} ~COLOR_OPTIONAL: Color
+        {static} ~COLOR_DEFAULT_VALUE: Color
+        #frame: Frame
+        #parameters: DynamicParameters
+        +ParameterTable(Frame, ParametersModel, DynamicParameters)
+    }
+
+    class "<size:14>JTable\n<size:10>javax.swing" as javax.swing.JTable
+    class "<size:14>ParameterTable.Handler\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable.Handler [[ParameterTable.Handler.html]]
+    class "<size:14>ParameterTable.ColorfulRenderer\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable.ColorfulRenderer [[ParameterTable.ColorfulRenderer.html]]
+    class "<size:14>ParameterTable.DropdownEditor\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable.DropdownEditor [[ParameterTable.DropdownEditor.html]]
+    class "<size:14>ParameterTable.FileNameEditor\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable.FileNameEditor [[ParameterTable.FileNameEditor.html]]
+    class "<size:14>ParameterTable.ClassListEditor\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable.ClassListEditor [[ParameterTable.ClassListEditor.html]]
+    class "<size:14>ParameterTable.AdjustingEditor\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable.AdjustingEditor [[ParameterTable.AdjustingEditor.html]]
+    class "<size:14>ParameterTable.DispatchingPanel\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable.DispatchingPanel [[ParameterTable.DispatchingPanel.html]]
+
+    javax.swing.JTable <|-- elki.gui.util.ParameterTable
+    elki.gui.util.ParameterTable +-- elki.gui.util.ParameterTable.Handler
+    elki.gui.util.ParameterTable +-- elki.gui.util.ParameterTable.ColorfulRenderer
+    elki.gui.util.ParameterTable +-- elki.gui.util.ParameterTable.DropdownEditor
+    elki.gui.util.ParameterTable +-- elki.gui.util.ParameterTable.FileNameEditor
+    elki.gui.util.ParameterTable +-- elki.gui.util.ParameterTable.ClassListEditor
+    elki.gui.util.ParameterTable +-- elki.gui.util.ParameterTable.AdjustingEditor
+    elki.gui.util.ParameterTable +-- elki.gui.util.ParameterTable.DispatchingPanel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

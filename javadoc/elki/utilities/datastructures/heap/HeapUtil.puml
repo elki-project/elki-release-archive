@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HeapUtil\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.HeapUtil [[HeapUtil.html]] {
+        {static} -MAX_ARRAY_SIZE: int
+        {static} +nextPow2Int(int): int
+        {static} +nextSize(int): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

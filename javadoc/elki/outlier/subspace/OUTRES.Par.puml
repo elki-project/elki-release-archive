@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OUTRES.Par\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.OUTRES.Par [[OUTRES.Par.html]] {
+        {static} +D_ID: OptionID
+        #eps: double
+        +configure(Parameterization): void
+        +make(): OUTRES
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>OUTRES\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.OUTRES [[OUTRES.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.subspace.OUTRES.Par
+    elki.outlier.subspace.OUTRES +-- elki.outlier.subspace.OUTRES.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

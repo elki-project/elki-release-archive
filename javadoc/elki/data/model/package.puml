@@ -1,0 +1,205 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.data.model {
+
+        class CorrelationAnalysisSolution [[CorrelationAnalysisSolution.html]] {
+            {static} -EMPTY_VECTOR: double[]
+            -linearEquationSystem: LinearEquationSystem
+            -nf: NumberFormat
+            -correlationDimensionality: int
+            -standardDeviation: double
+            -weakEigenvectors: double[]
+            -strongEigenvectors: double[]
+            -similarityMatrix: double[]
+            -centroid: double[]
+            +CorrelationAnalysisSolution(LinearEquationSystem, Relation<? extends NumberVector>, double[], double[], double[], double[])
+            +CorrelationAnalysisSolution(LinearEquationSystem, Relation<? extends NumberVector>, double[], double[], double[], double[], NumberFormat)
+            +getNormalizedLinearEquationSystem(Normalization<?>): LinearEquationSystem
+            +getCorrelationDimensionality(): int
+            +squaredDistance(NumberVector): double
+            +errorVector(NumberVector): double[]
+            +dataVector(NumberVector): double[]
+            +getStandardDeviation(): double
+            +getStrongEigenvectors(): double[]
+            +getWeakEigenvectors(): double[]
+            +getSimilarityMatrix(): double[]
+            +getCentroid(): double[]
+            +writeToText(TextWriterStream, String): void
+            +getLongName(): String
+        }
+
+        class GeneratorModel [[GeneratorModel.html]] {
+            -generator: GeneratorInterface
+            +GeneratorModel(GeneratorInterface, double[])
+            +getGenerator(): GeneratorInterface
+        }
+
+        class OPTICSModel [[OPTICSModel.html]] {
+            -startIndex: int
+            -endIndex: int
+            +OPTICSModel(int, int)
+            +getStartIndex(): int
+            +getEndIndex(): int
+        }
+
+        class BiclusterWithInversionsModel [[BiclusterWithInversionsModel.html]] {
+            -invertedRows: DBIDs
+            +BiclusterWithInversionsModel(int[], DBIDs)
+            +setInvertedRows(DBIDs): void
+            +getInvertedRows(): DBIDs
+        }
+
+        interface Model [[Model.html]] {
+            {static} +TYPE: SimpleTypeInformation<Model>
+            +writeToText(TextWriterStream, String): void
+        }
+
+        class ModelUtil [[ModelUtil.html]] {
+            {static} +getPrototype(Model, Relation<? extends NumberVector>, Factory<V extends NumberVector>): V extends NumberVector
+            {static} +getPrototype(Model, Relation<? extends NumberVector>): NumberVector
+            {static} +getPrototypeOrCentroid(Model, Relation<? extends NumberVector>, DBIDs, Factory<V extends NumberVector>): V extends NumberVector
+            {static} +getPrototypeOrCentroid(Model, Relation<? extends NumberVector>, DBIDs): NumberVector
+        }
+
+        class SimplePrototypeModel<V> [[SimplePrototypeModel.html]] {
+            #prototype: V
+            +SimplePrototypeModel(V)
+            +getPrototype(): V
+            +writeToText(TextWriterStream, String): void
+            #prototypeToString(): String
+            +getPrototypeType(): String
+        }
+
+        class BiclusterModel [[BiclusterModel.html]] {
+            -colIDs: int[]
+            +BiclusterModel(int[])
+            +getColumnIDs(): int[]
+        }
+
+        class CorrelationModel [[CorrelationModel.html]] {
+            -pcaresult: PCAFilteredResult
+            +CorrelationModel(PCAFilteredResult, double[])
+            +getPCAResult(): PCAFilteredResult
+            +setPCAResult(PCAFilteredResult): void
+            +writeToText(TextWriterStream, String): void
+        }
+
+        class CoreObjectsModel [[CoreObjectsModel.html]] {
+            ~core: DBIDs
+            +CoreObjectsModel(DBIDs)
+            +getCoreObjects(): DBIDs
+            +writeToText(TextWriterStream, String): void
+        }
+
+        class PrototypeDendrogramModel [[PrototypeDendrogramModel.html]] {
+            #prototype: DBID
+            +PrototypeDendrogramModel(double, DBID)
+            +getPrototype(): DBID
+            +writeToText(TextWriterStream, String): void
+            +getPrototypeType(): String
+        }
+
+        class DendrogramModel [[DendrogramModel.html]] {
+            -height: double
+            +DendrogramModel(double)
+            +getDistance(): double
+            +writeToText(TextWriterStream, String): void
+        }
+
+        class EMModel [[EMModel.html]] {
+            -covarianceMatrix: double[]
+            +EMModel(double[], double[])
+            +writeToText(TextWriterStream, String): void
+            +getCovarianceMatrix(): double[]
+            +setCovarianceMatrix(double[]): void
+        }
+
+        class MedoidModel [[MedoidModel.html]] {
+            +MedoidModel(DBID)
+            +getMedoid(): DBID
+            +getPrototypeType(): String
+        }
+
+        class DimensionModel [[DimensionModel.html]] {
+            -dimension: int
+            +DimensionModel(int)
+            +getDimension(): int
+            +setDimension(int): void
+            +writeToText(TextWriterStream, String): void
+        }
+
+        class ClusterModel [[ClusterModel.html]]
+
+        class LinearEquationModel [[LinearEquationModel.html]] {
+            -les: LinearEquationSystem
+            +LinearEquationModel(LinearEquationSystem)
+            +getLes(): LinearEquationSystem
+            +setLes(LinearEquationSystem): void
+            +writeToText(TextWriterStream, String): void
+        }
+
+        class SubspaceModel [[SubspaceModel.html]] {
+            -subspace: Subspace
+            +SubspaceModel(Subspace, double[])
+            +getSubspace(): Subspace
+            +getDimensions(): long[]
+            +writeToText(TextWriterStream, String): void
+        }
+
+        interface PrototypeModel<V> [[PrototypeModel.html]] {
+            {abstract} +getPrototype(): V
+            +writeToText(TextWriterStream, String): void
+            {abstract} +getPrototypeType(): String
+        }
+
+        class KMeansModel [[KMeansModel.html]] {
+            ~varsum: double
+            +KMeansModel(double[], double)
+            +getVarianceContribution(): double
+        }
+
+        class MeanModel [[MeanModel.html]] {
+            +MeanModel(double[])
+            +getMean(): double[]
+            +getPrototypeType(): String
+        }
+
+        elki.result.textwriter.TextWriteable <|.. CorrelationAnalysisSolution
+        Model <|.. CorrelationAnalysisSolution
+        MeanModel <|-- GeneratorModel
+        Model <|.. OPTICSModel
+        BiclusterModel <|-- BiclusterWithInversionsModel
+        PrototypeModel <|.. SimplePrototypeModel
+        elki.result.textwriter.TextWriteable <|.. SimplePrototypeModel
+        Model <|.. BiclusterModel
+        SimplePrototypeModel <|-- CorrelationModel
+        Model <|.. CoreObjectsModel
+        elki.result.textwriter.TextWriteable <|.. CoreObjectsModel
+        DendrogramModel <|-- PrototypeDendrogramModel
+        PrototypeModel <|.. PrototypeDendrogramModel
+        Model <|.. DendrogramModel
+        MeanModel <|-- EMModel
+        SimplePrototypeModel <|-- MedoidModel
+        elki.result.textwriter.TextWriteable <|.. MedoidModel
+        Model <|.. DimensionModel
+        elki.result.textwriter.TextWriteable <|.. DimensionModel
+        Model <|.. ClusterModel
+        ClusterModel --> ClusterModel: CLUSTER
+        Model <|.. LinearEquationModel
+        elki.result.textwriter.TextWriteable <|.. LinearEquationModel
+        MeanModel <|-- SubspaceModel
+        elki.result.textwriter.TextWriteable <|.. SubspaceModel
+        Model <|-- PrototypeModel
+        MeanModel <|-- KMeansModel
+        SimplePrototypeModel <|-- MeanModel
+        elki.result.textwriter.TextWriteable <|.. MeanModel
+    }
+
+    namespace elki.result.textwriter {
+        interface TextWriteable [[../../result/textwriter/TextWriteable.html]] {
+            {abstract} +writeToText(TextWriterStream, String): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

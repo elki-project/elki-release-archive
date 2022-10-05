@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UnspecifiedParameterException\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.UnspecifiedParameterException [[UnspecifiedParameterException.html]] {
+        {static} -serialVersionUID: long
+        -parameter: String
+        +UnspecifiedParameterException(Parameter<?>)
+        +getParameterName(): String
+    }
+
+    class "<size:14>WrongParameterValueException\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.WrongParameterValueException [[WrongParameterValueException.html]]
+
+    elki.utilities.optionhandling.WrongParameterValueException <|-- elki.utilities.optionhandling.UnspecifiedParameterException
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,112 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.parallel3d.util {
+
+        class SimpleMessageOverlay [[SimpleMessageOverlay.html]] {
+            ~renderer: TextRenderer
+            -message: String
+            ~fontsize: int
+            ~renderContents(GL2): void
+            +getMessage(): String
+            +setMessage(String): void
+        }
+
+        abstract class AbstractSimpleOverlay [[AbstractSimpleOverlay.html]] {
+            ~width: int
+            ~height: int
+            +render(GL2): void
+            {abstract} ~renderContents(GL2): void
+            +setSize(int, int): void
+        }
+
+        abstract class SimpleMenuOverlay [[SimpleMenuOverlay.html]] {
+            ~renderer: TextRenderer
+            -options: ArrayList<String>
+            ~fontsize: int
+            ~renderContents(GL2): void
+            +mouseClicked(MouseEvent): void
+            {abstract} +menuItemClicked(int): void
+            +mousePressed(MouseEvent): void
+            +mouseReleased(MouseEvent): void
+            +mouseEntered(MouseEvent): void
+            +mouseExited(MouseEvent): void
+            +getOptions(): ArrayList<String>
+            +setOptions(ArrayList<String>): void
+        }
+
+        class Simple1DOFCamera [[Simple1DOFCamera.html]] {
+            -rotationZ: double
+            -distance: double
+            -height: double
+            -ratio: double
+            -viewp: int[]
+            -modelview: double[]
+            -projection: double[]
+            -glu: GLU
+            -cosZ: double
+            -sinZ: double
+            +Simple1DOFCamera(GLU)
+            +Simple1DOFCamera(Simple1DOFCamera)
+            +getDistance(): double
+            +setDistance(double): void
+            +getHeight(): double
+            +setHeight(double): void
+            +getRatio(): double
+            +setRatio(double): void
+            +getRotationZ(): double
+            +setRotationZ(double): void
+            +apply(GL2): void
+            +unproject(double, double, double): double[]
+            +unproject(double, double, double, double[]): void
+            +project(double, double, double, double[]): void
+            +squaredDistanceFromCamera(double, double): double
+            +squaredDistanceFromCamera(double, double, double): double
+            +addCameraListener(CameraListener): void
+            +removeCameraListener(CameraListener): void
+            #fireCameraChangedEvent(): void
+        }
+
+        interface elki.visualization.parallel3d.util.Simple1DOFCamera.CameraListener [[Simple1DOFCamera.CameraListener.html]] {
+            {abstract} +cameraChanged(): void
+        }
+
+        class Arcball1DOFAdapter [[Arcball1DOFAdapter.html]] {
+            {static} -DEBUG: boolean
+            -startvec: double[]
+            -endvec: double[]
+            -near: double[]
+            -far: double[]
+            ~startangle: double
+            +Arcball1DOFAdapter(Simple1DOFCamera)
+            +mouseWheelMoved(MouseWheelEvent): void
+            +mousePressed(MouseEvent): void
+            -mapMouseToPlane(Simple1DOFCamera, Point, double[]): void
+            +mouseDragged(MouseEvent): void
+            +debugRender(GL2): void
+        }
+
+        AbstractSimpleOverlay <|-- SimpleMessageOverlay
+        AbstractSimpleOverlay <|-- SimpleMenuOverlay
+        java.awt.event.MouseListener <|.. SimpleMenuOverlay
+        Simple1DOFCamera --> "*" elki.visualization.parallel3d.util.Simple1DOFCamera.CameraListener: listeners
+        Simple1DOFCamera +-- elki.visualization.parallel3d.util.Simple1DOFCamera.CameraListener
+        javax.swing.event.MouseInputAdapter <|-- Arcball1DOFAdapter
+        Arcball1DOFAdapter --> Simple1DOFCamera: camera\nstartcamera
+    }
+
+    namespace java.awt.event {
+        interface MouseListener {
+            {abstract} +mouseClicked(MouseEvent): void
+            {abstract} +mousePressed(MouseEvent): void
+            {abstract} +mouseReleased(MouseEvent): void
+            {abstract} +mouseEntered(MouseEvent): void
+            {abstract} +mouseExited(MouseEvent): void
+        }
+    }
+
+    namespace javax.swing.event {
+        abstract class MouseInputAdapter
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FloatVector\n<size:10>elki.data" as elki.data.FloatVector [[FloatVector.html]] {
+        {static} +FACTORY: Factory
+        {static} +BYTE_SERIALIZER: ByteBufferSerializer<FloatVector>
+        {static} +SHORT_SERIALIZER: ByteBufferSerializer<FloatVector>
+        {static} +VARIABLE_SERIALIZER: ByteBufferSerializer<FloatVector>
+        -values: float[]
+        -FloatVector(float[], boolean)
+        +FloatVector(float[])
+        +getDimensionality(): int
+        +--getValue--(int): Float
+        +doubleValue(int): double
+        +floatValue(int): float
+        +longValue(int): long
+        +toArray(): double[]
+    }
+
+    interface "<size:14>NumberVector\n<size:10>elki.data" as elki.data.NumberVector [[NumberVector.html]] {
+        {abstract} +doubleValue(int): double
+        {abstract} +longValue(int): long
+        {abstract} +toArray(): double[]
+    }
+    class "<size:14>FloatVector.Factory\n<size:10>elki.data" as elki.data.FloatVector.Factory [[FloatVector.Factory.html]]
+    class "<size:14>FloatVector.SmallSerializer\n<size:10>elki.data" as elki.data.FloatVector.SmallSerializer [[FloatVector.SmallSerializer.html]]
+    class "<size:14>FloatVector.ShortSerializer\n<size:10>elki.data" as elki.data.FloatVector.ShortSerializer [[FloatVector.ShortSerializer.html]]
+    class "<size:14>FloatVector.VariableSerializer\n<size:10>elki.data" as elki.data.FloatVector.VariableSerializer [[FloatVector.VariableSerializer.html]]
+
+    elki.data.NumberVector <|.. elki.data.FloatVector
+    elki.data.FloatVector +-- elki.data.FloatVector.Factory
+    elki.data.FloatVector +-- elki.data.FloatVector.SmallSerializer
+    elki.data.FloatVector +-- elki.data.FloatVector.ShortSerializer
+    elki.data.FloatVector +-- elki.data.FloatVector.VariableSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

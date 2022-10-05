@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ClusteringDistanceSimilarity\n<size:10>elki.similarity.cluster" as elki.similarity.cluster.ClusteringDistanceSimilarity [[ClusteringDistanceSimilarity.html]] {
+        +isSymmetric(): boolean
+        {abstract} +instantiate(Relation<T extends Clustering<?>>): DistanceSimilarityQuery<T extends Clustering<?>>
+    }
+
+    interface "<size:14>PrimitiveSimilarity\n<size:10>elki.similarity" as elki.similarity.PrimitiveSimilarity<Clustering<?>> [[../PrimitiveSimilarity.html]] {
+        {abstract} +similarity(Clustering<?>, Clustering<?>): double
+    }
+    interface "<size:14>PrimitiveDistance\n<size:10>elki.distance" as elki.distance.PrimitiveDistance<Clustering<?>> [[../../distance/PrimitiveDistance.html]] {
+        {abstract} +distance(Clustering<?>, Clustering<?>): double
+        {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+    }
+
+    elki.similarity.PrimitiveSimilarity <|-- elki.similarity.cluster.ClusteringDistanceSimilarity
+    elki.distance.PrimitiveDistance <|-- elki.similarity.cluster.ClusteringDistanceSimilarity
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

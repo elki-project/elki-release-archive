@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AlgorithmStep\n<size:10>elki.workflow" as elki.workflow.AlgorithmStep [[AlgorithmStep.html]] {
+        {static} -LOG: Logging
+        -algorithms: List<? extends Algorithm>
+        -stepresult: Object
+        +AlgorithmStep(List<? extends Algorithm>)
+        +runAlgorithms(Database): Object
+        +getResult(): Object
+    }
+
+    interface "<size:14>WorkflowStep\n<size:10>elki.workflow" as elki.workflow.WorkflowStep [[WorkflowStep.html]]
+    class "<size:14>AlgorithmStep.Par\n<size:10>elki.workflow" as elki.workflow.AlgorithmStep.Par [[AlgorithmStep.Par.html]]
+
+    elki.workflow.WorkflowStep <|.. elki.workflow.AlgorithmStep
+    elki.workflow.AlgorithmStep +-- elki.workflow.AlgorithmStep.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

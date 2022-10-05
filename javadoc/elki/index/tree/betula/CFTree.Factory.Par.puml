@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CFTree.Factory.Par\n<size:10>elki.index.tree.betula" as elki.index.tree.betula.CFTree.Factory.Par<L extends ClusterFeature> [[CFTree.Factory.Par.html]] {
+        {static} +FEATURES_ID: OptionID
+        {static} +DISTANCE_ID: OptionID
+        {static} +ABSORPTION_ID: OptionID
+        {static} +THRESHOLD_ID: OptionID
+        {static} +SPLIT_ID: OptionID
+        {static} +BRANCHING_ID: OptionID
+        {static} +MAXLEAVES_ID: OptionID
+        ~factory: Factory<L extends ClusterFeature>
+        ~dist: CFDistance
+        ~abs: CFDistance
+        ~threshold: double
+        ~branchingFactor: int
+        ~maxleaves: double
+        ~tCriterium: Threshold
+        +configure(Parameterization): void
+        +make(): Factory<L extends ClusterFeature>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>CFTree.Factory\n<size:10>elki.index.tree.betula" as elki.index.tree.betula.CFTree.Factory<L extends ClusterFeature> [[CFTree.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.betula.CFTree.Factory.Par
+    elki.index.tree.betula.CFTree.Factory +-- elki.index.tree.betula.CFTree.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

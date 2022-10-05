@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Metadata.CleanerThread\n<size:10>elki.result" as elki.result.Metadata.CleanerThread [[Metadata.CleanerThread.html]] {
+        +run(): void
+    }
+
+    class "<size:14>Thread\n<size:10>java.lang" as java.lang.Thread
+    class "<size:14>Metadata\n<size:10>elki.result" as elki.result.Metadata [[Metadata.html]]
+
+    java.lang.Thread <|-- elki.result.Metadata.CleanerThread
+    elki.result.Metadata +-- elki.result.Metadata.CleanerThread
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

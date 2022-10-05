@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>MOMDistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.MOMDistributionEstimator<D extends Distribution> [[MOMDistributionEstimator.html]] {
+        {abstract} +estimateFromStatisticalMoments(StatisticalMoments): D extends Distribution
+        +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+    }
+
+    interface "<size:14>DistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.DistributionEstimator<D extends Distribution> [[DistributionEstimator.html]] {
+        {abstract} +estimate(A, NumberArrayAdapter<?, A>): D extends Distribution
+        {abstract} +getDistributionClass(): Class<? super Distribution>
+    }
+
+    elki.math.statistics.distribution.estimator.DistributionEstimator <|-- elki.math.statistics.distribution.estimator.MOMDistributionEstimator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

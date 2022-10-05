@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractApplication.Par\n<size:10>elki.application" as elki.application.AbstractApplication.Par [[AbstractApplication.Par.html]] {
+        {static} +OUTPUT_ID: OptionID
+        {static} +INPUT_ID: OptionID
+        {static} +DATABASE_ID: OptionID
+        {static} +HELP_ID: OptionID
+        {static} +HELP_LONG_ID: OptionID
+        {static} +DESCRIPTION_ID: OptionID
+        {static} +DEBUG_ID: OptionID
+        {static} +VERBOSE_ID: OptionID
+        {static} +parseVerbose(Parameterization): Level
+        {static} +parseDebugParameter(Parameterization): String[]
+        {static} +applyLoggingLevels(String[]): void
+        #getParameterOutputFile(Parameterization): Path
+        #getParameterOutputFile(Parameterization, String): Path
+        #getParameterInputFile(Parameterization): URI
+        #getParameterInputFile(Parameterization, String): URI
+        {abstract} +make(): AbstractApplication
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractApplication\n<size:10>elki.application" as elki.application.AbstractApplication [[AbstractApplication.html]] {
+        {abstract} +run(): void
+    }
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.application.AbstractApplication.Par
+    elki.application.AbstractApplication +-- elki.application.AbstractApplication.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

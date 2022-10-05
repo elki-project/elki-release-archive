@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DeLiClu\n<size:10>elki.clustering.optics" as elki.clustering.optics.DeLiClu<V extends NumberVector> [[DeLiClu.html]] {
+        {static} -LOG: Logging
+        #distance: SpatialPrimitiveDistance<? super NumberVector>
+        #indexer: DeLiCluTreeFactory<? super NumberVector>
+        -heap: UpdatableHeap<SpatialObjectPair>
+        -minpts: int
+        +DeLiClu(DeLiCluTreeFactory<? super NumberVector>, SpatialPrimitiveDistance<? super NumberVector>, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V extends NumberVector>): ClusterOrder
+        -expandNodes(DeLiCluTree, SpatialObjectPair, DataStore<KNNList>): void
+        -expandDirNodes(DeLiCluNode, DeLiCluNode): void
+        -expandLeafNodes(DeLiCluNode, DeLiCluNode, DataStore<KNNList>): void
+        -reinsertExpanded(DeLiCluTree, IndexTreePath<DeLiCluEntry>, DataStore<KNNList>): void
+        -reinsertExpanded(DeLiCluTree, List<IndexTreePath<DeLiCluEntry>>, int, DeLiCluEntry, DataStore<KNNList>): void
+        +getMinPts(): int
+    }
+
+    interface "<size:14>OPTICSTypeAlgorithm\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSTypeAlgorithm [[OPTICSTypeAlgorithm.html]] {
+        {abstract} +getMinPts(): int
+    }
+    class "<size:14>DeLiClu.SpatialObjectPair\n<size:10>elki.clustering.optics" as elki.clustering.optics.DeLiClu.SpatialObjectPair [[DeLiClu.SpatialObjectPair.html]]
+    class "<size:14>DeLiClu.Par\n<size:10>elki.clustering.optics" as elki.clustering.optics.DeLiClu.Par<V extends NumberVector> [[DeLiClu.Par.html]]
+
+    elki.clustering.optics.OPTICSTypeAlgorithm <|.. elki.clustering.optics.DeLiClu
+    elki.clustering.optics.DeLiClu +-- elki.clustering.optics.DeLiClu.SpatialObjectPair
+    elki.clustering.optics.DeLiClu +-- elki.clustering.optics.DeLiClu.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

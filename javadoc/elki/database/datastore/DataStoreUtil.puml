@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DataStoreUtil\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreUtil [[DataStoreUtil.html]] {
+        {static} +makeStorage(DBIDs, int, Class<? super T>): WritableDataStore<T>
+        {static} +makeDBIDStorage(DBIDs, int): WritableDBIDDataStore
+        {static} +makeDoubleStorage(DBIDs, int): WritableDoubleDataStore
+        {static} +makeDoubleStorage(DBIDs, int, double): WritableDoubleDataStore
+        {static} +makeIntegerStorage(DBIDs, int): WritableIntegerDataStore
+        {static} +makeIntegerStorage(DBIDs, int, int): WritableIntegerDataStore
+        {static} +makeRecordStorage(DBIDs, int, Class<?>...): WritableRecordStore
+    }
+    class "<size:14>DataStoreUtil.AscendingByDoubleDataStore\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreUtil.AscendingByDoubleDataStore [[DataStoreUtil.AscendingByDoubleDataStore.html]]
+    class "<size:14>DataStoreUtil.DescendingByDoubleDataStore\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreUtil.DescendingByDoubleDataStore [[DataStoreUtil.DescendingByDoubleDataStore.html]]
+    class "<size:14>DataStoreUtil.AscendingByDoubleDataStoreAndId\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreUtil.AscendingByDoubleDataStoreAndId [[DataStoreUtil.AscendingByDoubleDataStoreAndId.html]]
+    class "<size:14>DataStoreUtil.DescendingByDoubleDataStoreAndId\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreUtil.DescendingByDoubleDataStoreAndId [[DataStoreUtil.DescendingByDoubleDataStoreAndId.html]]
+    class "<size:14>DataStoreUtil.AscendingByIntegerDataStore\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreUtil.AscendingByIntegerDataStore [[DataStoreUtil.AscendingByIntegerDataStore.html]]
+    class "<size:14>DataStoreUtil.DescendingByIntegerDataStore\n<size:10>elki.database.datastore" as elki.database.datastore.DataStoreUtil.DescendingByIntegerDataStore [[DataStoreUtil.DescendingByIntegerDataStore.html]]
+
+    elki.database.datastore.DataStoreUtil +-- elki.database.datastore.DataStoreUtil.AscendingByDoubleDataStore
+    elki.database.datastore.DataStoreUtil +-- elki.database.datastore.DataStoreUtil.DescendingByDoubleDataStore
+    elki.database.datastore.DataStoreUtil +-- elki.database.datastore.DataStoreUtil.AscendingByDoubleDataStoreAndId
+    elki.database.datastore.DataStoreUtil +-- elki.database.datastore.DataStoreUtil.DescendingByDoubleDataStoreAndId
+    elki.database.datastore.DataStoreUtil +-- elki.database.datastore.DataStoreUtil.AscendingByIntegerDataStore
+    elki.database.datastore.DataStoreUtil +-- elki.database.datastore.DataStoreUtil.DescendingByIntegerDataStore
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

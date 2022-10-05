@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SpatialPair\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpatialPair<K, V extends SpatialComparable> [[SpatialPair.html]] {
+        +SpatialPair(K, V extends SpatialComparable)
+        +getDimensionality(): int
+        +getMin(int): double
+        +getMax(int): double
+    }
+
+    class "<size:14>Pair\n<size:10>elki.utilities.pairs" as elki.utilities.pairs.Pair<K, V extends SpatialComparable> [[../../../utilities/pairs/Pair.html]]
+    interface "<size:14>SpatialComparable\n<size:10>elki.data.spatial" as elki.data.spatial.SpatialComparable [[../../../data/spatial/SpatialComparable.html]] {
+        {abstract} +getDimensionality(): int
+        {abstract} +getMin(int): double
+        {abstract} +getMax(int): double
+    }
+
+    elki.utilities.pairs.Pair <|-- elki.index.preprocessed.knn.SpatialPair
+    elki.data.spatial.SpatialComparable <|.. elki.index.preprocessed.knn.SpatialPair
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

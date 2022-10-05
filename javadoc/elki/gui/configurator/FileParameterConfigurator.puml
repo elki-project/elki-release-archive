@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FileParameterConfigurator\n<size:10>elki.gui.configurator" as elki.gui.configurator.FileParameterConfigurator [[FileParameterConfigurator.html]] {
+        ~panel: JPanel
+        ~textfield: JTextField
+        ~button: JButton
+        +FileParameterConfigurator(FileParameter, JComponent)
+        +actionPerformed(ActionEvent): void
+        +getUserInput(): String
+    }
+
+    abstract class "<size:14>AbstractSingleParameterConfigurator\n<size:10>elki.gui.configurator" as elki.gui.configurator.AbstractSingleParameterConfigurator<FileParameter> [[AbstractSingleParameterConfigurator.html]]
+    interface "<size:14>ActionListener\n<size:10>java.awt.event" as java.awt.event.ActionListener {
+        {abstract} +actionPerformed(ActionEvent): void
+    }
+
+    elki.gui.configurator.AbstractSingleParameterConfigurator <|-- elki.gui.configurator.FileParameterConfigurator
+    java.awt.event.ActionListener <|.. elki.gui.configurator.FileParameterConfigurator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

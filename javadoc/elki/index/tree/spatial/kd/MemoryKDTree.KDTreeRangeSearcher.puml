@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MemoryKDTree.KDTreeRangeSearcher\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree.KDTreeRangeSearcher [[MemoryKDTree.KDTreeRangeSearcher.html]] {
+        -distance: PartialDistance<? super NumberVector>
+        +KDTreeRangeSearcher(PartialDistance<? super NumberVector>)
+        +getRange(O extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        -kdRangeSearch(Object, O extends NumberVector, ModifiableDoubleDBIDList, DBIDArrayIter, double[], double, double): void
+    }
+
+    interface "<size:14>RangeSearcher\n<size:10>elki.database.query.range" as elki.database.query.range.RangeSearcher<O extends NumberVector> [[../../../../database/query/range/RangeSearcher.html]] {
+        {abstract} +getRange(O extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+    }
+    class "<size:14>MemoryKDTree\n<size:10>elki.index.tree.spatial.kd" as elki.index.tree.spatial.kd.MemoryKDTree<O extends NumberVector> [[MemoryKDTree.html]]
+
+    elki.database.query.range.RangeSearcher <|.. elki.index.tree.spatial.kd.MemoryKDTree.KDTreeRangeSearcher
+    elki.index.tree.spatial.kd.MemoryKDTree +-- elki.index.tree.spatial.kd.MemoryKDTree.KDTreeRangeSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DashedLineStyleLibrary\n<size:10>elki.visualization.style.lines" as elki.visualization.style.lines.DashedLineStyleLibrary [[DashedLineStyleLibrary.html]] {
+        -colors: ColorLibrary
+        -dashpatterns: double[]
+        -solidreplacement: double[]
+        -dotcolor: String
+        -graycolor: String
+        +DashedLineStyleLibrary(StyleLibrary)
+        +formatCSSClass(CSSClass, int, double, Object...): void
+    }
+
+    interface "<size:14>LineStyleLibrary\n<size:10>elki.visualization.style.lines" as elki.visualization.style.lines.LineStyleLibrary [[LineStyleLibrary.html]] {
+        {abstract} +formatCSSClass(CSSClass, int, double, Object...): void
+    }
+
+    elki.visualization.style.lines.LineStyleLibrary <|.. elki.visualization.style.lines.DashedLineStyleLibrary
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

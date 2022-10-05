@@ -1,0 +1,57 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimplifiedCoverTree\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree<O> [[SimplifiedCoverTree.html]] {
+        {static} -LOG: Logging
+        -root: Node
+        +SimplifiedCoverTree(Relation<O>, Distance<? super O>, double, int)
+        +initialize(): void
+        +bulkLoad(DBIDs): void
+        #bulkConstruct(DBIDRef, int, ModifiableDoubleDBIDList): Node
+        -checkCoverTree(Node, int[], int): void
+        +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+        +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+        +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+        +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractCoverTree\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.AbstractCoverTree<O> [[AbstractCoverTree.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    interface "<size:14>DistancePriorityIndex\n<size:10>elki.index" as elki.index.DistancePriorityIndex<O> [[../../../DistancePriorityIndex.html]] {
+        {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+    }
+    class "<size:14>SimplifiedCoverTree.Node\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.Node [[SimplifiedCoverTree.Node.html]]
+    abstract class "<size:14>SimplifiedCoverTree.CoverTreeRangeSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeSearcher [[SimplifiedCoverTree.CoverTreeRangeSearcher.html]]
+    class "<size:14>SimplifiedCoverTree.CoverTreeRangeObjectSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeObjectSearcher [[SimplifiedCoverTree.CoverTreeRangeObjectSearcher.html]]
+    class "<size:14>SimplifiedCoverTree.CoverTreeRangeDBIDSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeDBIDSearcher [[SimplifiedCoverTree.CoverTreeRangeDBIDSearcher.html]]
+    abstract class "<size:14>SimplifiedCoverTree.CoverTreeKNNSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNSearcher [[SimplifiedCoverTree.CoverTreeKNNSearcher.html]]
+    class "<size:14>SimplifiedCoverTree.CoverTreeKNNObjectSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNObjectSearcher [[SimplifiedCoverTree.CoverTreeKNNObjectSearcher.html]]
+    class "<size:14>SimplifiedCoverTree.CoverTreeKNNDBIDSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNDBIDSearcher [[SimplifiedCoverTree.CoverTreeKNNDBIDSearcher.html]]
+    abstract class "<size:14>SimplifiedCoverTree.CoverTreePrioritySearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePrioritySearcher<Q> [[SimplifiedCoverTree.CoverTreePrioritySearcher.html]]
+    class "<size:14>SimplifiedCoverTree.CoverTreePriorityObjectSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePriorityObjectSearcher [[SimplifiedCoverTree.CoverTreePriorityObjectSearcher.html]]
+    class "<size:14>SimplifiedCoverTree.CoverTreePriorityDBIDSearcher\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePriorityDBIDSearcher [[SimplifiedCoverTree.CoverTreePriorityDBIDSearcher.html]]
+    class "<size:14>SimplifiedCoverTree.Factory\n<size:10>elki.index.tree.metrical.covertree" as elki.index.tree.metrical.covertree.SimplifiedCoverTree.Factory<O> [[SimplifiedCoverTree.Factory.html]]
+
+    elki.index.tree.metrical.covertree.AbstractCoverTree <|-- elki.index.tree.metrical.covertree.SimplifiedCoverTree
+    elki.index.DistancePriorityIndex <|.. elki.index.tree.metrical.covertree.SimplifiedCoverTree
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.Node
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeSearcher
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeObjectSearcher
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeRangeDBIDSearcher
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNSearcher
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNObjectSearcher
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreeKNNDBIDSearcher
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePrioritySearcher
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePriorityObjectSearcher
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.CoverTreePriorityDBIDSearcher
+    elki.index.tree.metrical.covertree.SimplifiedCoverTree +-- elki.index.tree.metrical.covertree.SimplifiedCoverTree.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

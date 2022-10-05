@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Segment\n<size:10>elki.evaluation.clustering.pairsegments" as elki.evaluation.clustering.pairsegments.Segment [[Segment.html]] {
+        {static} +UNCLUSTERED: int
+        #objIDs: DBIDs
+        #pairsize: long
+        #clusterIds: int[]
+        +Segment(int)
+        +Segment(int[])
+        +getPairCount(): long
+        +get(int): int
+        +isUnpaired(): boolean
+        +isNone(): boolean
+        +getUnpairedClusteringIndex(): int
+        +getDBIDs(): DBIDs
+        +compareTo(Segment): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<Segment> {
+        {abstract} +compareTo(Segment): int
+    }
+
+    java.lang.Comparable <|.. elki.evaluation.clustering.pairsegments.Segment
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

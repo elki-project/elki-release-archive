@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractRStarTreeNode\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry> [[AbstractRStarTreeNode.html]] {
+        +AbstractRStarTreeNode()
+        +AbstractRStarTreeNode(int, boolean)
+        +computeMBR(): ModifiableHyperBoundingBox
+        +adjustEntry(E extends SpatialEntry): boolean
+        +adjustEntryIncremental(E extends SpatialEntry, SpatialComparable): boolean
+        +integrityCheck(AbstractRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, ?>): int
+        #integrityCheckParameters(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, int): void
+        +writeExternal(ObjectOutput): void
+        +readExternal(ObjectInput): void
+    }
+
+    abstract class "<size:14>AbstractNode\n<size:10>elki.index.tree" as elki.index.tree.AbstractNode<E extends SpatialEntry> [[../../AbstractNode.html]]
+    interface "<size:14>Node\n<size:10>elki.index.tree" as elki.index.tree.Node<E extends SpatialEntry> [[../../Node.html]] {
+        {abstract} +children(IndexTreePath<E>): Iterator<IndexTreePath<E>>
+        {abstract} +getNumEntries(): int
+        {abstract} +isLeaf(): boolean
+        {abstract} +getEntry(int): E extends SpatialEntry
+        {abstract} +addEntry(E extends SpatialEntry): int
+    }
+
+    elki.index.tree.AbstractNode <|-- elki.index.tree.spatial.rstarvariants.AbstractRStarTreeNode
+    elki.index.tree.Node <|.. elki.index.tree.spatial.rstarvariants.AbstractRStarTreeNode
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

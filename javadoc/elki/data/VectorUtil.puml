@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VectorUtil\n<size:10>elki.data" as elki.data.VectorUtil [[VectorUtil.html]] {
+        {static} +randomVector(Factory<V extends NumberVector>, int, Random): V extends NumberVector
+        {static} +randomVector(Factory<V extends NumberVector>, int): V extends NumberVector
+        {static} +angleDense(NumberVector, NumberVector): double
+        {static} +angleSparse(SparseNumberVector, SparseNumberVector): double
+        {static} +angleSparseDense(SparseNumberVector, NumberVector): double
+        {static} +cosAngle(NumberVector, NumberVector): double
+        {static} +minCosAngle(SpatialComparable, SpatialComparable): double
+        {static} +angle(NumberVector, NumberVector, NumberVector): double
+        {static} +dotDense(NumberVector, NumberVector): double
+        {static} +dotDense(NumberVector, double[]): double
+        {static} +dotSparse(SparseNumberVector, SparseNumberVector): double
+        {static} +dotSparseDense(SparseNumberVector, NumberVector): double
+        {static} +dotSparseDense(SparseNumberVector, double[]): double
+        {static} +dot(NumberVector, NumberVector): double
+        {static} +dot(NumberVector, double[]): double
+        {static} +minDot(SpatialComparable, SpatialComparable): double
+        {static} +project(V extends NumberVector, long[], Factory<V extends NumberVector>): V extends NumberVector
+    }
+    class "<size:14>VectorUtil.SortDBIDsBySingleDimension\n<size:10>elki.data" as elki.data.VectorUtil.SortDBIDsBySingleDimension [[VectorUtil.SortDBIDsBySingleDimension.html]]
+    class "<size:14>VectorUtil.SortVectorsBySingleDimension\n<size:10>elki.data" as elki.data.VectorUtil.SortVectorsBySingleDimension [[VectorUtil.SortVectorsBySingleDimension.html]]
+
+    elki.data.VectorUtil +-- elki.data.VectorUtil.SortDBIDsBySingleDimension
+    elki.data.VectorUtil +-- elki.data.VectorUtil.SortVectorsBySingleDimension
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

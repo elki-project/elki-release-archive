@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CutDendrogramByNumberOfClustersExtractor\n<size:10>elki.evaluation.clustering.extractor" as elki.evaluation.clustering.extractor.CutDendrogramByNumberOfClustersExtractor [[CutDendrogramByNumberOfClustersExtractor.html]] {
+        -inner: CutDendrogramByNumberOfClusters
+        +CutDendrogramByNumberOfClustersExtractor(CutDendrogramByNumberOfClusters)
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../../Evaluator.html]]
+    class "<size:14>CutDendrogramByNumberOfClustersExtractor.Par\n<size:10>elki.evaluation.clustering.extractor" as elki.evaluation.clustering.extractor.CutDendrogramByNumberOfClustersExtractor.Par [[CutDendrogramByNumberOfClustersExtractor.Par.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.clustering.extractor.CutDendrogramByNumberOfClustersExtractor
+    elki.evaluation.clustering.extractor.CutDendrogramByNumberOfClustersExtractor +-- elki.evaluation.clustering.extractor.CutDendrogramByNumberOfClustersExtractor.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

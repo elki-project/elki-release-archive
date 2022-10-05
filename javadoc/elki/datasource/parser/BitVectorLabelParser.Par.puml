@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BitVectorLabelParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.BitVectorLabelParser.Par [[BitVectorLabelParser.Par.html]] {
+        +make(): BitVectorLabelParser
+    }
+
+    abstract class "<size:14>AbstractStreamingParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.AbstractStreamingParser.Par [[AbstractStreamingParser.Par.html]] {
+        {abstract} +make(): AbstractStreamingParser
+    }
+    class "<size:14>BitVectorLabelParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.BitVectorLabelParser [[BitVectorLabelParser.html]]
+
+    elki.datasource.parser.AbstractStreamingParser.Par <|-- elki.datasource.parser.BitVectorLabelParser.Par
+    elki.datasource.parser.BitVectorLabelParser +-- elki.datasource.parser.BitVectorLabelParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PrimitiveSimilarityQuery\n<size:10>elki.database.query.similarity" as elki.database.query.similarity.PrimitiveSimilarityQuery<O> [[PrimitiveSimilarityQuery.html]] {
+        #relation: Relation<? extends O>
+        #similarityFunction: PrimitiveSimilarity<? super O>
+        +PrimitiveSimilarityQuery(Relation<? extends O>, PrimitiveSimilarity<? super O>)
+        +similarity(DBIDRef, DBIDRef): double
+        +similarity(O, DBIDRef): double
+        +similarity(DBIDRef, O): double
+        +similarity(O, O): double
+        +getRelation(): Relation<? extends O>
+        +getSimilarity(): PrimitiveSimilarity<? super O>
+    }
+
+    interface "<size:14>SimilarityQuery\n<size:10>elki.database.query.similarity" as elki.database.query.similarity.SimilarityQuery<O> [[SimilarityQuery.html]] {
+        {abstract} +similarity(DBIDRef, DBIDRef): double
+        {abstract} +similarity(O, DBIDRef): double
+        {abstract} +similarity(DBIDRef, O): double
+        {abstract} +similarity(O, O): double
+        {abstract} +getRelation(): Relation<? extends O>
+        {abstract} +getSimilarity(): Similarity<? super O>
+    }
+
+    elki.database.query.similarity.SimilarityQuery <|.. elki.database.query.similarity.PrimitiveSimilarityQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HopkinsStatisticClusteringTendency.Par\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.HopkinsStatisticClusteringTendency.Par [[HopkinsStatisticClusteringTendency.Par.html]] {
+        {static} +SAMPLESIZE_ID: OptionID
+        {static} +REP_ID: OptionID
+        {static} +SEED_ID: OptionID
+        {static} +MINIMA_ID: OptionID
+        {static} +MAXIMA_ID: OptionID
+        {static} +K_ID: OptionID
+        #distance: NumberVectorDistance<? super NumberVector>
+        #sampleSize: int
+        #rep: int
+        #k: int
+        #random: RandomFactory
+        #maxima: double[]
+        #minima: double[]
+        +configure(Parameterization): void
+        +make(): HopkinsStatisticClusteringTendency
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>HopkinsStatisticClusteringTendency\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.HopkinsStatisticClusteringTendency [[HopkinsStatisticClusteringTendency.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.statistics.HopkinsStatisticClusteringTendency.Par
+    elki.algorithm.statistics.HopkinsStatisticClusteringTendency +-- elki.algorithm.statistics.HopkinsStatisticClusteringTendency.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

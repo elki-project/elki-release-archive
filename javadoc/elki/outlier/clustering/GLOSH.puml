@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GLOSH\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.GLOSH [[GLOSH.html]] {
+        -hdbscanExtraction: HDBSCANHierarchyExtraction
+        +GLOSH(HDBSCANHierarchyExtraction)
+        +run(Database, Relation<? extends NumberVector>): OutlierResult
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>GLOSH.Par\n<size:10>elki.outlier.clustering" as elki.outlier.clustering.GLOSH.Par [[GLOSH.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.clustering.GLOSH
+    elki.outlier.clustering.GLOSH +-- elki.outlier.clustering.GLOSH.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

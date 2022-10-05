@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TrainingAndTestSet\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.TrainingAndTestSet [[TrainingAndTestSet.html]] {
+        -labels: ArrayList<ClassLabel>
+        -training: MultipleObjectsBundle
+        -test: MultipleObjectsBundle
+        +TrainingAndTestSet(MultipleObjectsBundle, MultipleObjectsBundle, ArrayList<ClassLabel>)
+        +getTest(): MultipleObjectsBundle
+        +getTraining(): MultipleObjectsBundle
+        +getLabels(): ArrayList<ClassLabel>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

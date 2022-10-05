@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KNNJoinMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory<O extends SpatialComparable> [[KNNJoinMaterializeKNNPreprocessor.Factory.html]] {
+        +Factory(int, Distance<? super SpatialComparable>)
+        +instantiate(Relation<O extends SpatialComparable>): KNNJoinMaterializeKNNPreprocessor<O extends SpatialComparable>
+    }
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory<O extends SpatialComparable> [[AbstractMaterializeKNNPreprocessor.Factory.html]] {
+        {abstract} +instantiate(Relation<O>): AbstractMaterializeKNNPreprocessor<O>
+    }
+    class "<size:14>KNNJoinMaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor<V extends SpatialComparable> [[KNNJoinMaterializeKNNPreprocessor.html]]
+    class "<size:14>KNNJoinMaterializeKNNPreprocessor.Factory.Par\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory.Par<O extends SpatialComparable>
+
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor.Factory <|-- elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory
+    elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory +-- elki.index.preprocessed.knn.KNNJoinMaterializeKNNPreprocessor.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

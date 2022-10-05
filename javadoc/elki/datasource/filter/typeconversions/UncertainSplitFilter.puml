@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UncertainSplitFilter\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.UncertainSplitFilter [[UncertainSplitFilter.html]] {
+        {static} -LOG: Logging
+        -dims: int
+        +UncertainSplitFilter(int)
+        #filterSingleObject(NumberVector): UnweightedDiscreteUncertainObject
+        #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        #convertedType(SimpleTypeInformation<NumberVector>): SimpleTypeInformation<UnweightedDiscreteUncertainObject>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractConversionFilter<NumberVector, UnweightedDiscreteUncertainObject> [[../AbstractConversionFilter.html]] {
+        {abstract} #getLogger(): Logging
+        {abstract} #filterSingleObject(NumberVector): UnweightedDiscreteUncertainObject
+        {abstract} #getInputTypeRestriction(): SimpleTypeInformation<? super I>
+        {abstract} #convertedType(SimpleTypeInformation<​I>): SimpleTypeInformation<? super O>
+    }
+    class "<size:14>UncertainSplitFilter.Par\n<size:10>elki.datasource.filter.typeconversions" as elki.datasource.filter.typeconversions.UncertainSplitFilter.Par [[UncertainSplitFilter.Par.html]]
+
+    elki.datasource.filter.AbstractConversionFilter <|-- elki.datasource.filter.typeconversions.UncertainSplitFilter
+    elki.datasource.filter.typeconversions.UncertainSplitFilter +-- elki.datasource.filter.typeconversions.UncertainSplitFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

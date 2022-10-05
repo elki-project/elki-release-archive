@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-core-math",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-api",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-math-0.8.0.jar",
+          "url": "elki-core-math-0.8.0.jar",
+          "size": 537217,
+          "sha512": "2b007b3427bc552578193a1f87f0d50fc62fc43d7d55ed20fa584b04c37fec52f3e2f4332facd5511934bae347fcf72da0b80abe7aec2a4e4c67996494751628",
+          "sha256": "f3b3eb2f51d21ffeb6d494ee0572647d8077ad8f58448d2a130453d90a6194e6",
+          "sha1": "641b4766951adbd55f165db2770b795869f5832a",
+          "md5": "2e81de0ae5d5c3ba089d637d59566d0c"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-api",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-math-0.8.0.jar",
+          "url": "elki-core-math-0.8.0.jar",
+          "size": 537217,
+          "sha512": "2b007b3427bc552578193a1f87f0d50fc62fc43d7d55ed20fa584b04c37fec52f3e2f4332facd5511934bae347fcf72da0b80abe7aec2a4e4c67996494751628",
+          "sha256": "f3b3eb2f51d21ffeb6d494ee0572647d8077ad8f58448d2a130453d90a6194e6",
+          "sha1": "641b4766951adbd55f165db2770b795869f5832a",
+          "md5": "2e81de0ae5d5c3ba089d637d59566d0c"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-math",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-math-0.8.0-test-fixtures.jar",
+          "url": "elki-core-math-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "b4eda3278ca04d811cda121bd8a7f1c1487d217c23cfd980b520c142ba5ed7a23a57d3820f9d73c7bd544f45f47869931d42e6f59c14299851cc8da437e3f1fb",
+          "sha256": "13b646f01dd9703f21bb81ef4c0885ee06d3aa10ca9b3a7a3583c902d183d6d7",
+          "sha1": "31876ad7b836c8bdb6fc305bbf4fc3103ee16f13",
+          "md5": "4bae476e7e5e317c1f5821ce038dad23"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-core-math-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-core-math",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-core-math-0.8.0-test-fixtures.jar",
+          "url": "elki-core-math-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "b4eda3278ca04d811cda121bd8a7f1c1487d217c23cfd980b520c142ba5ed7a23a57d3820f9d73c7bd544f45f47869931d42e6f59c14299851cc8da437e3f1fb",
+          "sha256": "13b646f01dd9703f21bb81ef4c0885ee06d3aa10ca9b3a7a3583c902d183d6d7",
+          "sha1": "31876ad7b836c8bdb6fc305bbf4fc3103ee16f13",
+          "md5": "4bae476e7e5e317c1f5821ce038dad23"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-core-math-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

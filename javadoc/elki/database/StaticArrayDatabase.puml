@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>StaticArrayDatabase\n<size:10>elki.database" as elki.database.StaticArrayDatabase [[StaticArrayDatabase.html]] {
+        {static} -LOG: Logging
+        -ids: ArrayStaticDBIDs
+        -idrep: DBIDView
+        #databaseConnection: DatabaseConnection
+        +StaticArrayDatabase(DatabaseConnection, Collection<? extends IndexFactory<?>>)
+        +StaticArrayDatabase(DatabaseConnection)
+        +initialize(): void
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractDatabase\n<size:10>elki.database" as elki.database.AbstractDatabase [[AbstractDatabase.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>StaticArrayDatabase.Par\n<size:10>elki.database" as elki.database.StaticArrayDatabase.Par [[StaticArrayDatabase.Par.html]]
+
+    elki.database.AbstractDatabase <|-- elki.database.StaticArrayDatabase
+    elki.database.StaticArrayDatabase +-- elki.database.StaticArrayDatabase.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

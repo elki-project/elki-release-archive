@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HiSC\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.HiSC [[HiSC.html]] {
+        {static} -LOG: Logging
+        -alpha: double
+        #k: int
+        +HiSC(double, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends NumberVector>): ClusterOrder
+        +weightedDistance(NumberVector, NumberVector, long[]): double
+        +getMinPts(): int
+    }
+
+    interface "<size:14>GeneralizedOPTICS\n<size:10>elki.clustering.optics" as elki.clustering.optics.GeneralizedOPTICS [[../optics/GeneralizedOPTICS.html]]
+    class "<size:14>HiSC.Instance\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.HiSC.Instance [[HiSC.Instance.html]]
+    class "<size:14>HiSC.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.HiSC.Par [[HiSC.Par.html]]
+
+    elki.clustering.optics.GeneralizedOPTICS <|.. elki.clustering.subspace.HiSC
+    elki.clustering.subspace.HiSC +-- elki.clustering.subspace.HiSC.Instance
+    elki.clustering.subspace.HiSC +-- elki.clustering.subspace.HiSC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

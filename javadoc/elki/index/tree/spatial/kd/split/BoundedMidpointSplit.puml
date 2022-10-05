@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BoundedMidpointSplit\n<size:10>elki.index.tree.spatial.kd.split" as elki.index.tree.spatial.kd.split.BoundedMidpointSplit [[BoundedMidpointSplit.html]] {
+        {static} +STATIC: BoundedMidpointSplit
+        +findSplit(Relation<? extends NumberVector>, int, ArrayModifiableDBIDs, DBIDArrayMIter, int, int, SortDBIDsBySingleDimension): Info
+    }
+
+    interface "<size:14>SplitStrategy\n<size:10>elki.index.tree.spatial.kd.split" as elki.index.tree.spatial.kd.split.SplitStrategy [[SplitStrategy.html]] {
+        {abstract} +findSplit(Relation<? extends NumberVector>, int, ArrayModifiableDBIDs, DBIDArrayMIter, int, int, SortDBIDsBySingleDimension): Info
+    }
+    class "<size:14>BoundedMidpointSplit.Par\n<size:10>elki.index.tree.spatial.kd.split" as elki.index.tree.spatial.kd.split.BoundedMidpointSplit.Par [[BoundedMidpointSplit.Par.html]]
+
+    elki.index.tree.spatial.kd.split.SplitStrategy <|.. elki.index.tree.spatial.kd.split.BoundedMidpointSplit
+    elki.index.tree.spatial.kd.split.BoundedMidpointSplit +-- elki.index.tree.spatial.kd.split.BoundedMidpointSplit.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

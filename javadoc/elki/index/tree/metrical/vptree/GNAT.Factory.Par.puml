@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GNAT.Factory.Par\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.Factory.Par<O extends NumberVector> [[GNAT.Factory.Par.html]] {
+        {static} +DISTANCE_FUNCTION_ID: OptionID
+        {static} +NUMBER_VANTAGE_POINTS_ID: OptionID
+        {static} +SEED_ID: OptionID
+        #distance: Distance<? super NumberVector>
+        #random: RandomFactory
+        #amountVantagePoints: int
+        +configure(Parameterization): void
+        +make(): Factory<O extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>GNAT.Factory\n<size:10>elki.index.tree.metrical.vptree" as elki.index.tree.metrical.vptree.GNAT.Factory<O extends NumberVector> [[GNAT.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.metrical.vptree.GNAT.Factory.Par
+    elki.index.tree.metrical.vptree.GNAT.Factory +-- elki.index.tree.metrical.vptree.GNAT.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

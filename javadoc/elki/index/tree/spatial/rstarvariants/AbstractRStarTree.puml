@@ -1,0 +1,57 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractRStarTree\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[AbstractRStarTree.html]] {
+        {static} #EXTRA_INTEGRITY_CHECKS: boolean
+        #height: int
+        +statistics: Statistics
+        ~lastInsertedEntry: E extends SpatialEntry
+        #settings: S extends RTreeSettings
+        +AbstractRStarTree(PageFile<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>>, S extends RTreeSettings)
+        #findPathToObject(IndexTreePath<E extends SpatialEntry>, SpatialComparable, DBIDRef): IndexTreePath<E extends SpatialEntry>
+        +insertLeaf(E extends SpatialEntry): void
+        #insertEntry(E extends SpatialEntry, int): void
+        #deletePath(IndexTreePath<E extends SpatialEntry>): void
+        +initializeFromFile(TreeIndexHeader, PageFile<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>>): void
+        #initializeCapacities(E extends SpatialEntry): void
+        +canBulkLoad(): boolean
+        #createBulkLeafNodes(List<E extends SpatialEntry>): List<E extends SpatialEntry>
+        {abstract} #bulkLoad(List<E extends SpatialEntry>): void
+        +getHeight(): int
+        #setHeight(int): void
+        {abstract} #computeHeight(): int
+        {abstract} #hasOverflow(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): boolean
+        {abstract} #hasUnderflow(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): boolean
+        {abstract} #createNewDirectoryEntry(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): E extends SpatialEntry
+        #createNewRoot(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): IndexTreePath<E extends SpatialEntry>
+        #containedTest(IndexTreePath<E extends SpatialEntry>, N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, SpatialComparable): IndexTreePath<E extends SpatialEntry>
+        #choosePath(IndexTreePath<E extends SpatialEntry>, SpatialComparable, int, int): IndexTreePath<E extends SpatialEntry>
+        -overflowTreatment(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, IndexTreePath<E extends SpatialEntry>): N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>
+        -split(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>): N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>
+        +reInsert(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, IndexTreePath<E extends SpatialEntry>, int[]): void
+        #adjustTree(IndexTreePath<E extends SpatialEntry>): void
+        -condenseTree(IndexTreePath<E extends SpatialEntry>, ArrayDeque<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>>): void
+        +getLeaves(): List<E extends SpatialEntry>
+        -getLeafNodeEntries(N extends AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N,E>, E extends SpatialEntry>, List<E extends SpatialEntry>, int): void
+        +doExtraIntegrityChecks(): void
+        +logStatistics(): void
+    }
+
+    abstract class "<size:14>IndexTree\n<size:10>elki.index.tree" as elki.index.tree.IndexTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry> [[../../IndexTree.html]] {
+        {abstract} #getLogger(): Logging
+        {abstract} #initializeCapacities(E extends SpatialEntry): void
+        {abstract} #createEmptyRoot(E extends SpatialEntry): void
+        {abstract} #createRootEntry(): E extends SpatialEntry
+        {abstract} #createNewLeafNode(): N extends AbstractRStarTreeNode<N, E extends SpatialEntry>
+        {abstract} #createNewDirectoryNode(): N extends AbstractRStarTreeNode<N, E extends SpatialEntry>
+    }
+    class "<size:14>AbstractRStarTree.Statistics\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTree.Statistics [[AbstractRStarTree.Statistics.html]]
+
+    elki.index.tree.IndexTree <|-- elki.index.tree.spatial.rstarvariants.AbstractRStarTree
+    elki.index.tree.spatial.rstarvariants.AbstractRStarTree +-- elki.index.tree.spatial.rstarvariants.AbstractRStarTree.Statistics
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

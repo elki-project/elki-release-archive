@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TreeSphereVisualization.Par\n<size:10>elki.visualization.visualizers.scatterplot.index" as elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Par [[TreeSphereVisualization.Par.html]] {
+        #fill: boolean
+        +configure(Parameterization): void
+        +make(): TreeSphereVisualization
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>TreeSphereVisualization\n<size:10>elki.visualization.visualizers.scatterplot.index" as elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization [[TreeSphereVisualization.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Par
+    elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization +-- elki.visualization.visualizers.scatterplot.index.TreeSphereVisualization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

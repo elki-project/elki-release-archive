@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="114px" preserveAspectRatio="none" style="width:573px;height:114px;background:#FFFFFF;" version="1.1" viewBox="0 0 573 114" width="573px" zoomAndPan="magnify"><defs/><g><!--MD5=[d4b28d15ca62d37c236a3d5cad149579]
+class elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate--><a href="AbstractRangeQueryNeighborPredicate.html" target="_top" title="AbstractRangeQueryNeighborPredicate.html" xlink:actuate="onRequest" xlink:href="AbstractRangeQueryNeighborPredicate.html" xlink:show="new" xlink:title="AbstractRangeQueryNeighborPredicate.html" xlink:type="simple"><g id="elem_elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate"><rect codeLine="17" fill="#F1F1F1" height="78.5313" id="elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="553" x="9" y="10"/><ellipse cx="119.25" cy="28.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M119.3594,24.3125 L118.2031,29.3906 L120.5313,29.3906 L119.3594,24.3125 Z M117.875,22.0781 L120.8594,22.0781 L124.2188,34.4688 L121.7656,34.4688 L121,31.4063 L117.7188,31.4063 L116.9688,34.4688 L114.5313,34.4688 L117.875,22.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="277" x="139.75" y="27.9951">AbstractRangeQueryNeighborPredicate</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="163" x="196.75" y="40.5791">elki.clustering.dbscan.predicates</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="45" x="520" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="521" y="19.1387">O, M, N</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="561" y1="47.9375" y2="47.9375"/><polygon fill="#FFFF44" points="20,56.5859,24,60.5859,20,64.5859,16,60.5859" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="527" x="29" y="64.9326">computeLocalModel(DBIDRef, DoubleDBIDList, Relation&lt;? extends O&gt;): M</text><polygon fill="#4177AF" points="20,73.8828,16,79.8828,24,79.8828" style="stroke:#1963A0;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="148" x="29" y="81.2295">getLogger(): Logging</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="186.5" y="94.5313"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="186.5" y="103.8135">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[a6062a661eec303bae85514195f069b9]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate.Par\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Par<O> {
+        ~epsilon: double
+        ~distfun: Distance<O>
+        +configure(Parameterization): void
+        #configDistance(Parameterization): void
+        #configEpsilon(Parameterization): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractRangeQueryNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate<O, M, N> [[AbstractRangeQueryNeighborPredicate.html]] {
+        {abstract} #computeLocalModel(DBIDRef, DoubleDBIDList, Relation<? extends O>): M
+        {abstract} ~getLogger(): Logging
+    }
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Par
+    elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate +- - elki.clustering.dbscan.predicates.AbstractRangeQueryNeighborPredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

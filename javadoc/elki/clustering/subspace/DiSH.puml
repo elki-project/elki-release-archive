@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DiSH\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH [[DiSH.html]] {
+        {static} -LOG: Logging
+        -epsilon: double
+        -minpts: int
+        -strategy: Strategy
+        +DiSH(double, int, Strategy)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<? extends NumberVector>): Clustering<SubspaceModel>
+        -computeClusters(Relation<? extends NumberVector>, DiSHClusterOrder): Clustering<SubspaceModel>
+        -logClusterSizes(String, int, Object2ObjectOpenCustomHashMap<long[], List<ArrayModifiableDBIDs>>): void
+        -extractClusters(Relation<? extends NumberVector>, DiSHClusterOrder): Object2ObjectOpenCustomHashMap<long[], List<ArrayModifiableDBIDs>>
+        -sortClusters(Relation<? extends NumberVector>, Object2ObjectMap<long[], List<ArrayModifiableDBIDs>>): List<Cluster<SubspaceModel>>
+        -checkClusters(Relation<? extends NumberVector>, Object2ObjectMap<long[], List<ArrayModifiableDBIDs>>): void
+        -findParent(Relation<? extends NumberVector>, Pair<long[], ArrayModifiableDBIDs>, Object2ObjectMap<long[], List<ArrayModifiableDBIDs>>): Pair<long[], ArrayModifiableDBIDs>
+        -buildHierarchy(Relation<? extends NumberVector>, Clustering<SubspaceModel>, List<Cluster<SubspaceModel>>, int): void
+        -isParent(Relation<? extends NumberVector>, Cluster<SubspaceModel>, It<Cluster<SubspaceModel>>, int): boolean
+        -subspaceDimensionality(NumberVector, NumberVector, long[], long[], long[]): int
+        {static} #weightedDistance(NumberVector, NumberVector, long[]): double
+    }
+
+    interface "<size:14>SubspaceClusteringAlgorithm\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.SubspaceClusteringAlgorithm<SubspaceModel> [[SubspaceClusteringAlgorithm.html]]
+    enum "<size:14>DiSH.Strategy\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH.Strategy [[DiSH.Strategy.html]]
+    class "<size:14>DiSH.Instance\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH.Instance [[DiSH.Instance.html]]
+    class "<size:14>DiSH.DiSHClusterOrder\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH.DiSHClusterOrder [[DiSH.DiSHClusterOrder.html]]
+    class "<size:14>DiSH.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH.Par [[DiSH.Par.html]]
+
+    elki.clustering.subspace.SubspaceClusteringAlgorithm <|.. elki.clustering.subspace.DiSH
+    elki.clustering.subspace.DiSH +-- elki.clustering.subspace.DiSH.Strategy
+    elki.clustering.subspace.DiSH +-- elki.clustering.subspace.DiSH.Instance
+    elki.clustering.subspace.DiSH +-- elki.clustering.subspace.DiSH.DiSHClusterOrder
+    elki.clustering.subspace.DiSH +-- elki.clustering.subspace.DiSH.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClassTree.ClassNode\n<size:10>elki.gui.util" as elki.gui.util.ClassTree.ClassNode [[ClassTree.ClassNode.html]] {
+        {static} -serialVersionUID: long
+        -clsname: String
+        +ClassNode(String, String)
+        +getClassName(): String
+    }
+
+    class "<size:14>DefaultMutableTreeNode\n<size:10>javax.swing.tree" as javax.swing.tree.DefaultMutableTreeNode
+    class "<size:14>ClassTree\n<size:10>elki.gui.util" as elki.gui.util.ClassTree [[ClassTree.html]]
+
+    javax.swing.tree.DefaultMutableTreeNode <|-- elki.gui.util.ClassTree.ClassNode
+    elki.gui.util.ClassTree +-- elki.gui.util.ClassTree.ClassNode
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

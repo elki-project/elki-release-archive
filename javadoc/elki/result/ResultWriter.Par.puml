@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ResultWriter.Par\n<size:10>elki.result" as elki.result.ResultWriter.Par [[ResultWriter.Par.html]] {
+        {static} +GZIP_OUTPUT_ID: OptionID
+        {static} +OVERWRITE_OPTION_ID: OptionID
+        {static} +FILTER_PATTERN_ID: OptionID
+        -out: Path
+        -gzip: boolean
+        -warnoverwrite: boolean
+        -filter: Pattern
+        +configure(Parameterization): void
+        +make(): ResultWriter
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>ResultWriter\n<size:10>elki.result" as elki.result.ResultWriter [[ResultWriter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.result.ResultWriter.Par
+    elki.result.ResultWriter +-- elki.result.ResultWriter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

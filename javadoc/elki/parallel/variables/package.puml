@@ -1,0 +1,61 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.parallel.variables {
+
+        class SharedInteger [[SharedInteger.html]] {
+            +instantiate(): Instance
+        }
+
+        class elki.parallel.variables.SharedInteger.Instance [[SharedInteger.Instance.html]] {
+            -data: int
+            +--get--(): Integer
+            +--set--(Integer): void
+            +intValue(): int
+            +set(int): void
+        }
+
+        class SharedDouble [[SharedDouble.html]] {
+            +instantiate(): Instance
+        }
+
+        class elki.parallel.variables.SharedDouble.Instance [[SharedDouble.Instance.html]] {
+            -data: double
+            +--get--(): Double
+            +--set--(Double): void
+            +doubleValue(): double
+            +set(double): void
+        }
+
+        interface SharedVariable<I extends Instance<?>> [[SharedVariable.html]] {
+            {abstract} +instantiate(): I extends Instance<?>
+        }
+
+        interface elki.parallel.variables.SharedVariable.Instance<T> [[SharedVariable.Instance.html]] {
+            {abstract} +get(): T
+            {abstract} +set(T): void
+        }
+
+        class SharedObject<T> [[SharedObject.html]] {
+            +instantiate(): Instance<T>
+        }
+
+        class elki.parallel.variables.SharedObject.Instance<T> [[SharedObject.Instance.html]] {
+            -data: T
+            +get(): T
+            +set(T): void
+        }
+
+        SharedVariable <|.. SharedInteger
+        elki.parallel.variables.SharedVariable.Instance <|.. elki.parallel.variables.SharedInteger.Instance
+        SharedInteger +-- elki.parallel.variables.SharedInteger.Instance
+        SharedVariable <|.. SharedDouble
+        elki.parallel.variables.SharedVariable.Instance <|.. elki.parallel.variables.SharedDouble.Instance
+        SharedDouble +-- elki.parallel.variables.SharedDouble.Instance
+        SharedVariable +-- elki.parallel.variables.SharedVariable.Instance
+        SharedVariable <|.. SharedObject
+        elki.parallel.variables.SharedVariable.Instance <|.. elki.parallel.variables.SharedObject.Instance
+        SharedObject +-- elki.parallel.variables.SharedObject.Instance
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

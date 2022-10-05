@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluateIntrinsicDimensionalityEstimators.Par\n<size:10>elki.application.experiments" as elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Par [[EvaluateIntrinsicDimensionalityEstimators.Par.html]] {
+        {static} +STARTK_ID: OptionID
+        {static} +MAXK_ID: OptionID
+        {static} +SAMPLE_ID: OptionID
+        {static} +DIM_ID: OptionID
+        {static} +SEED_ID: OptionID
+        {static} +AGGREGATE_ID: OptionID
+        {static} +FORMAT_ID: OptionID
+        ~startk: int
+        ~maxk: int
+        ~samples: int
+        ~dim: int
+        ~agg: Aggregate
+        ~format: OutputFormat
+        ~rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): EvaluateIntrinsicDimensionalityEstimators
+    }
+
+    abstract class "<size:14>AbstractApplication.Par\n<size:10>elki.application" as elki.application.AbstractApplication.Par [[../AbstractApplication.Par.html]] {
+        {abstract} +make(): AbstractApplication
+    }
+    class "<size:14>EvaluateIntrinsicDimensionalityEstimators\n<size:10>elki.application.experiments" as elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators [[EvaluateIntrinsicDimensionalityEstimators.html]]
+
+    elki.application.AbstractApplication.Par <|-- elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Par
+    elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators +-- elki.application.experiments.EvaluateIntrinsicDimensionalityEstimators.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

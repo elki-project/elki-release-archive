@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>VoronoiDraw\n<size:10>elki.visualization.svg" as elki.visualization.svg.VoronoiDraw [[VoronoiDraw.html]] {
+        {static} +drawDelaunay(Projection2D, List<Triangle>, List<double[]>): SVGPath
+        {static} +drawVoronoi(Projection2D, List<Triangle>, List<double[]>): SVGPath
+        {static} +drawFakeVoronoi(Projection2D, List<double[]>): SVGPath
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

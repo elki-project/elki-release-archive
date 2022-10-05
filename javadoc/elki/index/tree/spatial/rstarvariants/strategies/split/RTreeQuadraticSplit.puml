@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RTreeQuadraticSplit\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.split" as elki.index.tree.spatial.rstarvariants.strategies.split.RTreeQuadraticSplit [[RTreeQuadraticSplit.html]] {
+        {static} +STATIC: RTreeQuadraticSplit
+        +split(A, ArrayAdapter<E extends SpatialComparable, A>, int): long[]
+    }
+
+    interface "<size:14>SplitStrategy\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.split" as elki.index.tree.spatial.rstarvariants.strategies.split.SplitStrategy [[SplitStrategy.html]] {
+        {abstract} +split(A, ArrayAdapter<E extends SpatialComparable, A>, int): long[]
+    }
+    class "<size:14>RTreeQuadraticSplit.Par\n<size:10>elki.index.tree.spatial.rstarvariants.strategies.split" as elki.index.tree.spatial.rstarvariants.strategies.split.RTreeQuadraticSplit.Par [[RTreeQuadraticSplit.Par.html]]
+
+    elki.index.tree.spatial.rstarvariants.strategies.split.SplitStrategy <|.. elki.index.tree.spatial.rstarvariants.strategies.split.RTreeQuadraticSplit
+    elki.index.tree.spatial.rstarvariants.strategies.split.RTreeQuadraticSplit +-- elki.index.tree.spatial.rstarvariants.strategies.split.RTreeQuadraticSplit.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

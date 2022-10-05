@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AGNES.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AGNES.Instance [[AGNES.Instance.html]] {
+        #linkage: Linkage
+        #mat: ClusterDistanceMatrix
+        #builder: ClusterMergeHistoryBuilder
+        #end: int
+        +Instance(Linkage)
+        +run(ClusterDistanceMatrix, ClusterMergeHistoryBuilder): ClusterMergeHistory
+        #findMerge(): int
+        #merge(double, int, int): void
+        #updateMatrix(double, int, int, int, int): void
+        {static} #shrinkActiveSet(int[], int, int): int
+    }
+
+    class "<size:14>AGNES\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AGNES<O> [[AGNES.html]]
+
+    elki.clustering.hierarchical.AGNES +-- elki.clustering.hierarchical.AGNES.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace tutorial.javaapi {
+
+        class PassingDataToELKI [[PassingDataToELKI.html]] {
+            {static} +main(String[]): void
+        }
+
+        class GeoIndexing [[GeoIndexing.html]] {
+            {static} +main(String[]): void
+            {static} -randomLatitudeLongitude(Random): double[]
+        }
+
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

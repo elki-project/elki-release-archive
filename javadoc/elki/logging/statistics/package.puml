@@ -1,0 +1,117 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.logging.statistics {
+
+        class LongStatistic [[LongStatistic.html]] {
+            ~value: long
+            +LongStatistic(String)
+            +LongStatistic(String, long)
+            +setLong(long): LongStatistic
+            +increment(long): LongStatistic
+            +formatValue(): String
+        }
+
+        abstract class AbstractStatistic [[AbstractStatistic.html]] {
+            ~key: String
+            +AbstractStatistic(String)
+            +getKey(): String
+        }
+
+        interface Counter [[Counter.html]] {
+            {abstract} +increment(): long
+            {abstract} +decrement(): long
+            {abstract} +getValue(): long
+            {abstract} +increment(long): long
+        }
+
+        interface Statistic [[Statistic.html]] {
+            {abstract} +getKey(): String
+            {abstract} +formatValue(): String
+        }
+
+        class UnsynchronizedLongCounter [[UnsynchronizedLongCounter.html]] {
+            ~counter: long
+            +UnsynchronizedLongCounter(String)
+            +increment(): long
+            +decrement(): long
+            +increment(long): long
+            +getValue(): long
+            +formatValue(): String
+        }
+
+        class NanoDuration [[NanoDuration.html]] {
+            ~begin: long
+            ~end: long
+            +NanoDuration(String)
+            +begin(): NanoDuration
+            +end(): NanoDuration
+            +getBegin(): long
+            +getEnd(): long
+            +getDuration(): long
+            +formatValue(): String
+        }
+
+        class MillisTimeDuration [[MillisTimeDuration.html]] {
+            ~begin: long
+            ~end: long
+            +MillisTimeDuration(String)
+            +begin(): MillisTimeDuration
+            +end(): MillisTimeDuration
+            +getBegin(): long
+            +getEnd(): long
+            +getDuration(): long
+            +formatValue(): String
+        }
+
+        class StringStatistic [[StringStatistic.html]] {
+            -val: String
+            +StringStatistic(String, String)
+            +StringStatistic(String)
+            +setString(String): void
+            +formatValue(): String
+        }
+
+        interface Duration [[Duration.html]] {
+            {abstract} +begin(): Duration
+            {abstract} +end(): Duration
+            {abstract} +getBegin(): long
+            {abstract} +getEnd(): long
+            {abstract} +getDuration(): long
+        }
+
+        class AtomicLongCounter [[AtomicLongCounter.html]] {
+            ~counter: AtomicLong
+            +AtomicLongCounter(String)
+            +increment(): long
+            +decrement(): long
+            +increment(long): long
+            +getValue(): long
+            +formatValue(): String
+        }
+
+        class DoubleStatistic [[DoubleStatistic.html]] {
+            ~value: double
+            +DoubleStatistic(String)
+            +DoubleStatistic(String, double)
+            +setDouble(double): DoubleStatistic
+            +formatValue(): String
+        }
+
+        AbstractStatistic <|-- LongStatistic
+        Statistic <|.. AbstractStatistic
+        Statistic <|-- Counter
+        AbstractStatistic <|-- UnsynchronizedLongCounter
+        Counter <|.. UnsynchronizedLongCounter
+        AbstractStatistic <|-- NanoDuration
+        Duration <|.. NanoDuration
+        AbstractStatistic <|-- MillisTimeDuration
+        Duration <|.. MillisTimeDuration
+        AbstractStatistic <|-- StringStatistic
+        Statistic <|-- Duration
+        AbstractStatistic <|-- AtomicLongCounter
+        Counter <|.. AtomicLongCounter
+        AbstractStatistic <|-- DoubleStatistic
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

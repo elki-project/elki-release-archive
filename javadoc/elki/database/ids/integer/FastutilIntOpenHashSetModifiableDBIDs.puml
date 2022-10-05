@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastutilIntOpenHashSetModifiableDBIDs\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs [[FastutilIntOpenHashSetModifiableDBIDs.html]] {
+        ~store: IntOpenHashSet
+        #FastutilIntOpenHashSetModifiableDBIDs(int)
+        #FastutilIntOpenHashSetModifiableDBIDs()
+        #FastutilIntOpenHashSetModifiableDBIDs(DBIDs)
+        +iter(): Itr
+        +addDBIDs(DBIDs): boolean
+        +removeDBIDs(DBIDs): boolean
+        +add(DBIDRef): boolean
+        +remove(DBIDRef): boolean
+        +retainAll(DBIDs): boolean
+        +size(): int
+        +isEmpty(): boolean
+        +clear(): FastutilIntOpenHashSetModifiableDBIDs
+        +contains(DBIDRef): boolean
+        +pop(DBIDVar): DBIDVar
+    }
+
+    interface "<size:14>HashSetModifiableDBIDs\n<size:10>elki.database.ids" as elki.database.ids.HashSetModifiableDBIDs [[../HashSetModifiableDBIDs.html]] {
+        {abstract} +retainAll(DBIDs): boolean
+        {abstract} +clear(): HashSetModifiableDBIDs
+        {abstract} +iter(): DBIDMIter
+    }
+    interface "<size:14>IntegerDBIDs\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDs [[IntegerDBIDs.html]] {
+        {abstract} +iter(): IntegerDBIDIter
+    }
+    class "<size:14>FastutilIntOpenHashSetModifiableDBIDs.IntOpenHashSet\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.IntOpenHashSet [[FastutilIntOpenHashSetModifiableDBIDs.IntOpenHashSet.html]]
+    class "<size:14>FastutilIntOpenHashSetModifiableDBIDs.Itr\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.Itr [[FastutilIntOpenHashSetModifiableDBIDs.Itr.html]]
+
+    elki.database.ids.HashSetModifiableDBIDs <|.. elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs
+    elki.database.ids.integer.IntegerDBIDs <|.. elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs
+    elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs +-- elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.IntOpenHashSet
+    elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs +-- elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.Itr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

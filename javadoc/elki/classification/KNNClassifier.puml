@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KNNClassifier\n<size:10>elki.classification" as elki.classification.KNNClassifier<O> [[KNNClassifier.html]] {
+        #k: int
+        #knnq: KNNSearcher<O>
+        #labelrep: Relation<? extends ClassLabel>
+        #distance: Distance<? super O>
+        +KNNClassifier(Distance<? super O>, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +buildClassifier(Database, Relation<? extends ClassLabel>): void
+        +classify(O): ClassLabel
+        +classProbabilities(O, ArrayList<ClassLabel>): double[]
+        +model(): String
+        +getDistance(): Distance<? super O>
+    }
+
+    interface "<size:14>Classifier\n<size:10>elki.classification" as elki.classification.Classifier<O> [[Classifier.html]] {
+        {abstract} +buildClassifier(Database, Relation<? extends ClassLabel>): void
+        {abstract} +classify(O): ClassLabel
+        {abstract} +model(): String
+    }
+    class "<size:14>KNNClassifier.Par\n<size:10>elki.classification" as elki.classification.KNNClassifier.Par<O>
+
+    elki.classification.Classifier <|.. elki.classification.KNNClassifier
+    elki.classification.KNNClassifier +-- elki.classification.KNNClassifier.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

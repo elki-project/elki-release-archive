@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MapIntegerDBIDRecordStore\n<size:10>elki.database.datastore.memory" as elki.database.datastore.memory.MapIntegerDBIDRecordStore [[MapIntegerDBIDRecordStore.html]] {
+        -rlen: int
+        -data: Int2ObjectMap<Object[]>
+        +MapIntegerDBIDRecordStore(int, Int2ObjectMap<Object[]>)
+        +MapIntegerDBIDRecordStore(int)
+        +MapIntegerDBIDRecordStore(int, int)
+        +getStorage(int, Class<? super T>): WritableDataStore<T>
+        #get(DBIDRef, int): T
+        #set(DBIDRef, int, T): T
+        +remove(DBIDRef): boolean
+    }
+
+    interface "<size:14>WritableRecordStore\n<size:10>elki.database.datastore" as elki.database.datastore.WritableRecordStore [[../WritableRecordStore.html]] {
+        {abstract} +getStorage(int, Class<? super T>): WritableDataStore<T>
+        {abstract} +remove(DBIDRef): boolean
+    }
+    class "<size:14>MapIntegerDBIDRecordStore.StorageAccessor\n<size:10>elki.database.datastore.memory" as elki.database.datastore.memory.MapIntegerDBIDRecordStore.StorageAccessor<T> [[MapIntegerDBIDRecordStore.StorageAccessor.html]]
+
+    elki.database.datastore.WritableRecordStore <|.. elki.database.datastore.memory.MapIntegerDBIDRecordStore
+    elki.database.datastore.memory.MapIntegerDBIDRecordStore +-- elki.database.datastore.memory.MapIntegerDBIDRecordStore.StorageAccessor
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

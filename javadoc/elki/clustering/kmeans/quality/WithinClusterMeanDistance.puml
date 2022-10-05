@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WithinClusterMeanDistance\n<size:10>elki.clustering.kmeans.quality" as elki.clustering.kmeans.quality.WithinClusterMeanDistance [[WithinClusterMeanDistance.html]] {
+        +quality(Clustering<? extends MeanModel>, NumberVectorDistance<? super NumberVector>, Relation<V extends NumberVector>): double
+        +isBetter(double, double): boolean
+    }
+
+    interface "<size:14>KMeansQualityMeasure\n<size:10>elki.clustering.kmeans.quality" as elki.clustering.kmeans.quality.KMeansQualityMeasure<NumberVector> [[KMeansQualityMeasure.html]] {
+        {abstract} +quality(Clustering<? extends MeanModel>, NumberVectorDistance<? super NumberVector>, Relation<V extends NumberVector>): double
+        {abstract} +isBetter(double, double): boolean
+    }
+
+    elki.clustering.kmeans.quality.KMeansQualityMeasure <|.. elki.clustering.kmeans.quality.WithinClusterMeanDistance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

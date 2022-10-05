@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SavedSettingsTabPanel.SettingsComboboxModel\n<size:10>elki.gui.multistep.panels" as elki.gui.multistep.panels.SavedSettingsTabPanel.SettingsComboboxModel [[SavedSettingsTabPanel.SettingsComboboxModel.html]] {
+        {static} -serialVersionUID: long
+        #selected: String
+        +getSelectedItem(): String
+        +setSelectedItem(Object): void
+        +getElementAt(int): String
+        +getSize(): int
+        +update(): void
+    }
+
+    abstract class "<size:14>AbstractListModel\n<size:10>javax.swing" as javax.swing.AbstractListModel<String>
+    interface "<size:14>ComboBoxModel\n<size:10>javax.swing" as javax.swing.ComboBoxModel<String> {
+        {abstract} +setSelectedItem(Object): void
+        {abstract} +getSelectedItem(): Object
+    }
+    class "<size:14>SavedSettingsTabPanel\n<size:10>elki.gui.multistep.panels" as elki.gui.multistep.panels.SavedSettingsTabPanel [[SavedSettingsTabPanel.html]]
+
+    javax.swing.AbstractListModel <|-- elki.gui.multistep.panels.SavedSettingsTabPanel.SettingsComboboxModel
+    javax.swing.ComboBoxModel <|.. elki.gui.multistep.panels.SavedSettingsTabPanel.SettingsComboboxModel
+    elki.gui.multistep.panels.SavedSettingsTabPanel +-- elki.gui.multistep.panels.SavedSettingsTabPanel.SettingsComboboxModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

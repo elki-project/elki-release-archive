@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ExactPrioritySearcher\n<size:10>elki.database.query" as elki.database.query.ExactPrioritySearcher<O> [[ExactPrioritySearcher.html]] {
+        -inner: PrioritySearcher<O>
+        -threshold: double
+        -exact: DoubleDBIDHeap
+        +ExactPrioritySearcher(PrioritySearcher<O>)
+        +search(O): PrioritySearcher<O>
+        +decreaseCutoff(double): PrioritySearcher<O>
+        +getApproximateDistance(): double
+        +getApproximateAccuracy(): double
+        +getLowerBound(): double
+        +getUpperBound(): double
+        +computeExactDistance(): double
+        +internalGetIndex(): int
+        +allLowerBound(): double
+        +valid(): boolean
+        +advance(): PrioritySearcher<O>
+    }
+
+    interface "<size:14>PrioritySearcher\n<size:10>elki.database.query" as elki.database.query.PrioritySearcher<O> [[PrioritySearcher.html]] {
+        {abstract} +search(O): PrioritySearcher<O>
+        {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+        {abstract} +computeExactDistance(): double
+        {abstract} +allLowerBound(): double
+        {abstract} +advance(): PrioritySearcher<O>
+    }
+
+    elki.database.query.PrioritySearcher <|.. elki.database.query.ExactPrioritySearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

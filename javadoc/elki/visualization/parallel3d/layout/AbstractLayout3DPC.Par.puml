@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractLayout3DPC.Par\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.AbstractLayout3DPC.Par [[AbstractLayout3DPC.Par.html]] {
+        ~sim: Dependence
+        +configure(Parameterization): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractLayout3DPC\n<size:10>elki.visualization.parallel3d.layout" as elki.visualization.parallel3d.layout.AbstractLayout3DPC<N extends Node> [[AbstractLayout3DPC.html]] {
+        {abstract} +layout(int, double[]): Layout
+        {abstract} ~makeNode(int, List<N extends Node>): N extends Node
+    }
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.parallel3d.layout.AbstractLayout3DPC.Par
+    elki.visualization.parallel3d.layout.AbstractLayout3DPC +-- elki.visualization.parallel3d.layout.AbstractLayout3DPC.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RepresentativeUncertainClustering.Par\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.RepresentativeUncertainClustering.Par [[RepresentativeUncertainClustering.Par.html]] {
+        {static} +DEFAULT_ENSEMBLE_DEPTH: int
+        {static} +CLUSTERDISTANCE_ID: OptionID
+        {static} +META_ALGORITHM_ID: OptionID
+        {static} +ALGORITHM_ID: OptionID
+        {static} +SAMPLES_ID: OptionID
+        {static} +KEEP_SAMPLES_ID: OptionID
+        {static} +RANDOM_ID: OptionID
+        {static} +ALPHA_ID: OptionID
+        #distance: ClusteringDistanceSimilarity
+        #metaAlgorithm: ClusteringAlgorithm<?>
+        #samplesAlgorithm: ClusteringAlgorithm<?>
+        #numsamples: int
+        #random: RandomFactory
+        #alpha: double
+        #keep: boolean
+        +configure(Parameterization): void
+        +make(): RepresentativeUncertainClustering
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>RepresentativeUncertainClustering\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.RepresentativeUncertainClustering [[RepresentativeUncertainClustering.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.uncertain.RepresentativeUncertainClustering.Par
+    elki.clustering.uncertain.RepresentativeUncertainClustering +-- elki.clustering.uncertain.RepresentativeUncertainClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

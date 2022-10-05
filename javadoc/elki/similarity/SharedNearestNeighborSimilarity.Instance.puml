@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SharedNearestNeighborSimilarity.Instance\n<size:10>elki.similarity" as elki.similarity.SharedNearestNeighborSimilarity.Instance<O> [[SharedNearestNeighborSimilarity.Instance.html]] {
+        -similarityFunction: SharedNearestNeighborSimilarity<? super O>
+        +Instance(Relation<O>, SharedNearestNeighborIndex<O>, SharedNearestNeighborSimilarity<? super O>)
+        +similarity(DBIDRef, DBIDRef): double
+        +getSimilarity(): Similarity<? super O>
+    }
+
+    abstract class "<size:14>AbstractIndexBasedSimilarity.Instance\n<size:10>elki.similarity" as elki.similarity.AbstractIndexBasedSimilarity.Instance<O, SharedNearestNeighborIndex<O>> [[AbstractIndexBasedSimilarity.Instance.html]]
+    class "<size:14>SharedNearestNeighborSimilarity\n<size:10>elki.similarity" as elki.similarity.SharedNearestNeighborSimilarity<O> [[SharedNearestNeighborSimilarity.html]]
+
+    elki.similarity.AbstractIndexBasedSimilarity.Instance <|-- elki.similarity.SharedNearestNeighborSimilarity.Instance
+    elki.similarity.SharedNearestNeighborSimilarity +-- elki.similarity.SharedNearestNeighborSimilarity.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,92 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.spatial.rstarvariants.rstar {
+
+        class RStarTreeFactory<O extends NumberVector> [[RStarTreeFactory.html]] {
+            +RStarTreeFactory(PageFileFactory<?>, RTreeSettings)
+            +instantiate(Relation<O extends NumberVector>): RStarTreeIndex<O extends NumberVector>
+            #getNodeClass(): Class<RStarTreeNode>
+        }
+
+        class elki.index.tree.spatial.rstarvariants.rstar.RStarTreeFactory.Par<O extends NumberVector> {
+            +make(): RStarTreeFactory<O extends NumberVector>
+            #createSettings(): RTreeSettings
+        }
+
+        class RStarTreeIndex<O extends NumberVector> [[RStarTreeIndex.html]] {
+            {static} -LOG: Logging
+            -relation: Relation<O extends NumberVector>
+            +RStarTreeIndex(Relation<O extends NumberVector>, PageFile<RStarTreeNode>, RTreeSettings)
+            #createNewLeafEntry(DBIDRef): SpatialPointLeafEntry
+            +initialize(): void
+            +insert(DBIDRef): void
+            +insertAll(DBIDs): void
+            +delete(DBIDRef): boolean
+            +deleteAll(DBIDs): void
+            +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+            +rangeByObject(DistanceQuery<O extends NumberVector>, double, int): RangeSearcher<O extends NumberVector>
+            +priorityByObject(DistanceQuery<O extends NumberVector>, double, int): PrioritySearcher<O extends NumberVector>
+            #getLogger(): Logging
+        }
+
+        abstract class RStarTree [[RStarTree.html]] {
+            {static} -LOG: Logging
+            +RStarTree(PageFile<RStarTreeNode>, RTreeSettings)
+            #createRootEntry(): SpatialEntry
+            #createNewDirectoryEntry(RStarTreeNode): SpatialEntry
+            #createNewLeafNode(): RStarTreeNode
+            #createNewDirectoryNode(): RStarTreeNode
+            #getLogger(): Logging
+        }
+
+        class RStarTreeNode [[RStarTreeNode.html]] {
+            {static} -serialVersionUID: long
+            +RStarTreeNode()
+            +RStarTreeNode(int, boolean)
+        }
+
+        elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory <|-- RStarTreeFactory
+        elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par <|-- elki.index.tree.spatial.rstarvariants.rstar.RStarTreeFactory.Par
+        RStarTreeFactory +-- elki.index.tree.spatial.rstarvariants.rstar.RStarTreeFactory.Par
+        RStarTree <|-- RStarTreeIndex
+        elki.index.DistancePriorityIndex <|.. RStarTreeIndex
+        elki.index.DynamicIndex <|.. RStarTreeIndex
+        elki.index.tree.spatial.rstarvariants.NonFlatRStarTree <|-- RStarTree
+        elki.index.tree.spatial.rstarvariants.AbstractRStarTreeNode <|-- RStarTreeNode
+    }
+
+    namespace elki.index.tree.spatial.rstarvariants {
+        abstract class AbstractRStarTreeFactory<O extends NumberVector, N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[../AbstractRStarTreeFactory.html]] {
+            #settings: S extends RTreeSettings
+        }
+        abstract class elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par<O extends NumberVector, S extends RTreeSettings> {
+            {static} +INSERTION_STRATEGY_ID: OptionID
+            {static} +SPLIT_STRATEGY_ID: OptionID
+            {static} +BULK_SPLIT_ID: OptionID
+            {static} +MINIMUM_FILL_ID: OptionID
+            {static} +OVERFLOW_STRATEGY_ID: OptionID
+            #settings: S extends RTreeSettings
+            {abstract} #createSettings(): S extends RTreeSettings
+            {abstract} +make(): AbstractRStarTreeFactory<O extends NumberVector, ?, ?, ?>
+        }
+        abstract class NonFlatRStarTree<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[../NonFlatRStarTree.html]]
+        abstract class AbstractRStarTreeNode<N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry> [[../AbstractRStarTreeNode.html]]
+    }
+
+    namespace elki.index {
+        interface DistancePriorityIndex<O> [[../../../../DistancePriorityIndex.html]] {
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        }
+        interface DynamicIndex [[../../../../DynamicIndex.html]] {
+            {abstract} +delete(DBIDRef): boolean
+            {abstract} +insert(DBIDRef): void
+            {abstract} +deleteAll(DBIDs): void
+            {abstract} +insertAll(DBIDs): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

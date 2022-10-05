@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RankingQualityHistogram.Par\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.RankingQualityHistogram.Par<O> {
+        {static} +HISTOGRAM_BINS_ID: OptionID
+        #distance: Distance<? super O>
+        #numbins: int
+        +configure(Parameterization): void
+        +make(): RankingQualityHistogram<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>RankingQualityHistogram\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.RankingQualityHistogram<O> [[RankingQualityHistogram.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.statistics.RankingQualityHistogram.Par
+    elki.algorithm.statistics.RankingQualityHistogram +-- elki.algorithm.statistics.RankingQualityHistogram.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RStarTreeUtil\n<size:10>elki.index.tree.spatial.rstarvariants.query" as elki.index.tree.spatial.rstarvariants.query.RStarTreeUtil [[RStarTreeUtil.html]] {
+        {static} +getRangeQuery(AbstractRStarTree<?, ?, ?>, SpatialDistanceQuery<O extends SpatialComparable>, Object...): RangeSearcher<O extends SpatialComparable>
+        {static} +getKNNQuery(AbstractRStarTree<?, ?, ?>, SpatialDistanceQuery<O extends SpatialComparable>, Object...): KNNSearcher<O extends SpatialComparable>
+        {static} +getDistancePrioritySearcher(AbstractRStarTree<?, ?, ?>, SpatialDistanceQuery<O extends SpatialComparable>, Object...): PrioritySearcher<O extends SpatialComparable>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

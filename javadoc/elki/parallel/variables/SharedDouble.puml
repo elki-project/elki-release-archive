@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SharedDouble\n<size:10>elki.parallel.variables" as elki.parallel.variables.SharedDouble [[SharedDouble.html]] {
+        +instantiate(): Instance
+    }
+
+    interface "<size:14>SharedVariable\n<size:10>elki.parallel.variables" as elki.parallel.variables.SharedVariable<Instance> [[SharedVariable.html]] {
+        {abstract} +instantiate(): Instance
+    }
+    class "<size:14>SharedDouble.Instance\n<size:10>elki.parallel.variables" as elki.parallel.variables.SharedDouble.Instance [[SharedDouble.Instance.html]]
+
+    elki.parallel.variables.SharedVariable <|.. elki.parallel.variables.SharedDouble
+    elki.parallel.variables.SharedDouble +-- elki.parallel.variables.SharedDouble.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

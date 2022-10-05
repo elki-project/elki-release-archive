@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>TreePopup.Renderer\n<size:10>elki.gui.util" as elki.gui.util.TreePopup.Renderer [[TreePopup.Renderer.html]] {
+        {static} -serialVersionUID: long
+        ~label: JLabel
+        -selbg: Color
+        -defbg: Color
+        -selfg: Color
+        -deffg: Color
+        -leafIcon: Icon
+        -folderIcon: Icon
+        +getTreeCellRendererComponent(JTree, Object, boolean, boolean, boolean, int, boolean): Component
+        +setLeafIcon(Icon): void
+        +setFolderIcon(Icon): void
+    }
+
+    class "<size:14>JPanel\n<size:10>javax.swing" as javax.swing.JPanel
+    interface "<size:14>TreeCellRenderer\n<size:10>javax.swing.tree" as javax.swing.tree.TreeCellRenderer {
+        {abstract} +getTreeCellRendererComponent(JTree, Object, boolean, boolean, boolean, int, boolean): Component
+    }
+    class "<size:14>TreePopup\n<size:10>elki.gui.util" as elki.gui.util.TreePopup [[TreePopup.html]]
+
+    javax.swing.JPanel <|-- elki.gui.util.TreePopup.Renderer
+    javax.swing.tree.TreeCellRenderer <|.. elki.gui.util.TreePopup.Renderer
+    elki.gui.util.TreePopup +-- elki.gui.util.TreePopup.Renderer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

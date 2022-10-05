@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ERPDistance.Par\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.ERPDistance.Par [[ERPDistance.Par.html]] {
+        {static} +G_ID: OptionID
+        #g: double
+        +configure(Parameterization): void
+        +make(): ERPDistance
+    }
+
+    abstract class "<size:14>AbstractEditDistance.Par\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.AbstractEditDistance.Par [[AbstractEditDistance.Par.html]]
+    class "<size:14>ERPDistance\n<size:10>elki.distance.timeseries" as elki.distance.timeseries.ERPDistance [[ERPDistance.html]]
+
+    elki.distance.timeseries.AbstractEditDistance.Par <|-- elki.distance.timeseries.ERPDistance.Par
+    elki.distance.timeseries.ERPDistance +-- elki.distance.timeseries.ERPDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

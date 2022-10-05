@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SpacefillingMaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor<O extends NumberVector> [[SpacefillingMaterializeKNNPreprocessor.html]] {
+        {static} -LOG: Logging
+        ~curvegen: List<? extends SpatialSorter>
+        ~window: double
+        ~variants: int
+        ~mean: Mean
+        ~random: Random
+        +SpacefillingMaterializeKNNPreprocessor(Relation<O extends NumberVector>, Distance<? super NumberVector>, int, List<? extends SpatialSorter>, double, int, Random)
+        #preprocess(): void
+        +logStatistics(): void
+        #getLogger(): Logging
+        +kNNByObject(DistanceQuery<O extends NumberVector>, int, int): KNNSearcher<O extends NumberVector>
+    }
+
+    abstract class "<size:14>AbstractMaterializeKNNPreprocessor\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor<O extends NumberVector> [[AbstractMaterializeKNNPreprocessor.html]] {
+        {abstract} #preprocess(): void
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>SpacefillingMaterializeKNNPreprocessor.Factory\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory<V extends NumberVector> [[SpacefillingMaterializeKNNPreprocessor.Factory.html]]
+
+    elki.index.preprocessed.knn.AbstractMaterializeKNNPreprocessor <|-- elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor
+    elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor +-- elki.index.preprocessed.knn.SpacefillingMaterializeKNNPreprocessor.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

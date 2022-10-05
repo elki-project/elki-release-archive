@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CLARA.Par\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.CLARA.Par<V> [[CLARA.Par.html]] {
+        {static} +NUMSAMPLES_ID: OptionID
+        {static} +SAMPLESIZE_ID: OptionID
+        {static} +NOKEEPMED_ID: OptionID
+        {static} +RANDOM_ID: OptionID
+        ~sampling: double
+        ~numsamples: int
+        ~keepmed: boolean
+        ~random: RandomFactory
+        +configure(Parameterization): void
+        +make(): CLARA<V>
+    }
+
+    class "<size:14>PAM.Par\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.PAM.Par<V> [[PAM.Par.html]]
+    class "<size:14>CLARA\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.CLARA<V> [[CLARA.html]]
+
+    elki.clustering.kmedoids.PAM.Par <|-- elki.clustering.kmedoids.CLARA.Par
+    elki.clustering.kmedoids.CLARA +-- elki.clustering.kmedoids.CLARA.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GeneralizedDBSCAN.Instance\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.GeneralizedDBSCAN.Instance<T> [[GeneralizedDBSCAN.Instance.html]] {
+        {static} #UNPROCESSED: int
+        {static} #NOISE: int
+        #npred: Instance<T>
+        #corepred: Instance<? super T>
+        #coremodel: boolean
+        +Instance(Instance<T>, Instance<? super T>, boolean)
+        +run(): Clustering<Model>
+        #expandCluster(DBIDRef, int, WritableIntegerDataStore, T, ArrayModifiableDBIDs, FiniteProgress): int
+        #processCorePoint(DBIDRef, T, int, WritableIntegerDataStore, ArrayModifiableDBIDs): int
+    }
+
+    class "<size:14>GeneralizedDBSCAN\n<size:10>elki.clustering.dbscan" as elki.clustering.dbscan.GeneralizedDBSCAN [[GeneralizedDBSCAN.html]]
+
+    elki.clustering.dbscan.GeneralizedDBSCAN +-- elki.clustering.dbscan.GeneralizedDBSCAN.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

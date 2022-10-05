@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AffineTransformation\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.AffineTransformation [[AffineTransformation.html]] {
+        -dim: int
+        -trans: double[]
+        -inv: double[]
+        +AffineTransformation(int)
+        +AffineTransformation(int, double[], double[])
+        {static} +reorderAxesTransformation(int, int...): AffineTransformation
+        +getDimensionality(): int
+        +addTranslation(double[]): void
+        +addMatrix(double[]): void
+        +addRotation(int, int, double): void
+        +addAxisReflection(int): void
+        +addScaling(double): void
+        +getTransformation(): double[]
+        +getInverse(): double[]
+        -updateInverse(): void
+        +homogeneVector(double[]): double[]
+        +homogeneRelativeVector(double[]): double[]
+        +unhomogeneVector(double[]): double[]
+        +unhomogeneRelativeVector(double[]): double[]
+        +apply(double[]): double[]
+        +applyInverse(double[]): double[]
+        +applyRelative(double[]): double[]
+        +applyRelativeInverse(double[]): double[]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

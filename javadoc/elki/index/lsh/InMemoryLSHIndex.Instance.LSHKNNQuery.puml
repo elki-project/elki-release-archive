@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InMemoryLSHIndex.Instance.LSHKNNQuery\n<size:10>elki.index.lsh" as elki.index.lsh.InMemoryLSHIndex.Instance.LSHKNNQuery [[InMemoryLSHIndex.Instance.LSHKNNQuery.html]] {
+        +LSHKNNQuery(DistanceQuery<V>)
+        +getKNN(V, int): KNNList
+    }
+
+    abstract class "<size:14>AbstractRefiningIndex.AbstractRefiningQuery\n<size:10>elki.index" as elki.index.AbstractRefiningIndex.AbstractRefiningQuery [[../AbstractRefiningIndex.AbstractRefiningQuery.html]]
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<V> [[../../database/query/knn/KNNSearcher.html]] {
+        {abstract} +getKNN(V, int): KNNList
+    }
+    class "<size:14>InMemoryLSHIndex.Instance\n<size:10>elki.index.lsh" as elki.index.lsh.InMemoryLSHIndex.Instance [[InMemoryLSHIndex.Instance.html]]
+
+    elki.index.AbstractRefiningIndex.AbstractRefiningQuery <|-- elki.index.lsh.InMemoryLSHIndex.Instance.LSHKNNQuery
+    elki.database.query.knn.KNNSearcher <|.. elki.index.lsh.InMemoryLSHIndex.Instance.LSHKNNQuery
+    elki.index.lsh.InMemoryLSHIndex.Instance +-- elki.index.lsh.InMemoryLSHIndex.Instance.LSHKNNQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

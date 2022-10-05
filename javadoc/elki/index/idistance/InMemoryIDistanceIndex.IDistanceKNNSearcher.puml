@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>InMemoryIDistanceIndex.IDistanceKNNSearcher\n<size:10>elki.index.idistance" as elki.index.idistance.InMemoryIDistanceIndex.IDistanceKNNSearcher [[InMemoryIDistanceIndex.IDistanceKNNSearcher.html]] {
+        +IDistanceKNNSearcher(DistanceQuery<O>)
+        +getKNN(O, int): KNNList
+    }
+
+    abstract class "<size:14>AbstractRefiningIndex.AbstractRefiningQuery\n<size:10>elki.index" as elki.index.AbstractRefiningIndex.AbstractRefiningQuery [[../AbstractRefiningIndex.AbstractRefiningQuery.html]]
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<O> [[../../database/query/knn/KNNSearcher.html]] {
+        {abstract} +getKNN(O, int): KNNList
+    }
+    class "<size:14>InMemoryIDistanceIndex\n<size:10>elki.index.idistance" as elki.index.idistance.InMemoryIDistanceIndex<O> [[InMemoryIDistanceIndex.html]]
+
+    elki.index.AbstractRefiningIndex.AbstractRefiningQuery <|-- elki.index.idistance.InMemoryIDistanceIndex.IDistanceKNNSearcher
+    elki.database.query.knn.KNNSearcher <|.. elki.index.idistance.InMemoryIDistanceIndex.IDistanceKNNSearcher
+    elki.index.idistance.InMemoryIDistanceIndex +-- elki.index.idistance.InMemoryIDistanceIndex.IDistanceKNNSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

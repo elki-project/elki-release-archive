@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LengthNormalization\n<size:10>elki.datasource.filter.normalization.instancewise" as elki.datasource.filter.normalization.instancewise.LengthNormalization<V extends NumberVector> [[LengthNormalization.html]] {
+        ~norm: Norm<? super NumberVector>
+        ~map: Int2DoubleOpenHashMap
+        +LengthNormalization(Norm<? super NumberVector>)
+        #filterSingleObject(V extends NumberVector): V extends NumberVector
+        #convertedType(SimpleTypeInformation<V extends NumberVector>): SimpleTypeInformation<? super NumberVector>
+        #getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractVectorStreamConversionFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractVectorStreamConversionFilter<V extends NumberVector, V extends NumberVector> [[../../AbstractVectorStreamConversionFilter.html]]
+    interface "<size:14>Normalization\n<size:10>elki.datasource.filter.normalization" as elki.datasource.filter.normalization.Normalization<V extends NumberVector> [[../Normalization.html]]
+    class "<size:14>LengthNormalization.Par\n<size:10>elki.datasource.filter.normalization.instancewise" as elki.datasource.filter.normalization.instancewise.LengthNormalization.Par<V extends NumberVector> [[LengthNormalization.Par.html]]
+
+    elki.datasource.filter.AbstractVectorStreamConversionFilter <|-- elki.datasource.filter.normalization.instancewise.LengthNormalization
+    elki.datasource.filter.normalization.Normalization <|.. elki.datasource.filter.normalization.instancewise.LengthNormalization
+    elki.datasource.filter.normalization.instancewise.LengthNormalization +-- elki.datasource.filter.normalization.instancewise.LengthNormalization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

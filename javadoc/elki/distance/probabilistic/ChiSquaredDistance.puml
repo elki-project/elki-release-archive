@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ChiSquaredDistance\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.ChiSquaredDistance [[ChiSquaredDistance.html]] {
+        {static} +STATIC: ChiSquaredDistance
+        +distance(NumberVector, NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +isSquared(): boolean
+        +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[../SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    class "<size:14>ChiSquaredDistance.Par\n<size:10>elki.distance.probabilistic" as elki.distance.probabilistic.ChiSquaredDistance.Par [[ChiSquaredDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.probabilistic.ChiSquaredDistance
+    elki.distance.SpatialPrimitiveDistance <|.. elki.distance.probabilistic.ChiSquaredDistance
+    elki.distance.probabilistic.ChiSquaredDistance +-- elki.distance.probabilistic.ChiSquaredDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

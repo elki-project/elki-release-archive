@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>LAESA.LAESAKNNSearcher\n<size:10>elki.index.laesa" as elki.index.laesa.LAESA.LAESAKNNSearcher<Q> [[LAESA.LAESAKNNSearcher.html]] {
+        ~maxnc: int
+        +LAESAKNNSearcher(int)
+        #laesaKNNSearch(KNNHeap): void
+        -processPoints(ModifiableDoubleDBIDList, DoubleDBIDListMIter, double, double, DoubleDataStore, int): int
+        -findInRef(DBIDRef, DBIDArrayIter): int
+        {abstract} #queryDistance(DBIDRef): double
+    }
+
+    interface "<size:14>KNNSearcher\n<size:10>elki.database.query.knn" as elki.database.query.knn.KNNSearcher<Q> [[../../database/query/knn/KNNSearcher.html]] {
+        {abstract} +getKNN(Q, int): KNNList
+    }
+    class "<size:14>LAESA\n<size:10>elki.index.laesa" as elki.index.laesa.LAESA<O> [[LAESA.html]]
+
+    elki.database.query.knn.KNNSearcher <|.. elki.index.laesa.LAESA.LAESAKNNSearcher
+    elki.index.laesa.LAESA +-- elki.index.laesa.LAESA.LAESAKNNSearcher
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

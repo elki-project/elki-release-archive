@@ -1,0 +1,81 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.random {
+
+        class XorShift1024NonThreadsafeRandom [[XorShift1024NonThreadsafeRandom.html]] {
+            {static} -serialVersionUID: long
+            -x: long[]
+            ~p: int
+            {static} #BADBOUND: String
+            +XorShift1024NonThreadsafeRandom()
+            +XorShift1024NonThreadsafeRandom(long)
+            +setSeed(long): void
+            +nextLong(): long
+            #next(int): int
+            +nextInt(): int
+            +nextDouble(): double
+            +nextInt(int): int
+        }
+
+        class FastNonThreadsafeRandom [[FastNonThreadsafeRandom.html]] {
+            {static} -serialVersionUID: long
+            {static} -multiplier: long
+            {static} -addend: long
+            {static} -mask: long
+            -seed: long
+            {static} #BADBOUND: String
+            +FastNonThreadsafeRandom()
+            +FastNonThreadsafeRandom(long)
+            +setSeed(long): void
+            #next(int): int
+            +nextInt(): int
+            +nextDouble(): double
+            +nextInt(int): int
+            +nextIntRefined(int): int
+        }
+
+        class RandomFactory [[RandomFactory.html]] {
+            #seed: long
+            +RandomFactory(long)
+            {static} -getGlobalSeed(): long
+            {static} +get(Long): RandomFactory
+            +getRandom(): Random
+            +getSingleThreadedRandom(): Random
+            {static} +murmurMix32(int): int
+            {static} +murmurMix64(long): long
+        }
+
+        class Xoroshiro128NonThreadsafeRandom [[Xoroshiro128NonThreadsafeRandom.html]] {
+            {static} -serialVersionUID: long
+            -s0: long
+            -s1: long
+            {static} ~BADBOUND: String
+            +Xoroshiro128NonThreadsafeRandom()
+            +Xoroshiro128NonThreadsafeRandom(long)
+            +setSeed(long): void
+            +nextLong(): long
+            #next(int): int
+            +nextInt(): int
+            +nextDouble(): double
+            +nextInt(int): int
+        }
+
+        class XorShift64NonThreadsafeRandom [[XorShift64NonThreadsafeRandom.html]] {
+            {static} -serialVersionUID: long
+            ~x: long
+            {static} #BADBOUND: String
+            +XorShift64NonThreadsafeRandom()
+            +XorShift64NonThreadsafeRandom(long)
+            +setSeed(long): void
+            +nextLong(): long
+            #next(int): int
+            +nextInt(): int
+            +nextDouble(): double
+            +nextInt(int): int
+        }
+
+        RandomFactory --> RandomFactory: DEFAULT
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

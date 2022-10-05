@@ -1,0 +1,17 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Model\n<size:10>elki.svm.model" as elki.svm.model.Model [[Model.html]] {
+        +nr_class: int
+        +l: int
+        +sv_coef: double[]
+        +rho: double[]
+        +sv_indices: int[]
+        +r_square: double
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

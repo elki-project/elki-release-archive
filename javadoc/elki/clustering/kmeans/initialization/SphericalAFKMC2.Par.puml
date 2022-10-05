@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SphericalAFKMC2.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SphericalAFKMC2.Par [[SphericalAFKMC2.Par.html]] {
+        {static} +ALPHA_ID: OptionID
+        #alpha: double
+        +configure(Parameterization): void
+        +make(): SphericalAFKMC2
+    }
+
+    class "<size:14>AFKMC2.Par\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.AFKMC2.Par [[AFKMC2.Par.html]]
+    class "<size:14>SphericalAFKMC2\n<size:10>elki.clustering.kmeans.initialization" as elki.clustering.kmeans.initialization.SphericalAFKMC2 [[SphericalAFKMC2.html]]
+
+    elki.clustering.kmeans.initialization.AFKMC2.Par <|-- elki.clustering.kmeans.initialization.SphericalAFKMC2.Par
+    elki.clustering.kmeans.initialization.SphericalAFKMC2 +-- elki.clustering.kmeans.initialization.SphericalAFKMC2.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

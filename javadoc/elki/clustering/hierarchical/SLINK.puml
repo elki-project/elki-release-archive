@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SLINK\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.SLINK<O> [[SLINK.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super O>
+        +SLINK(Distance<? super O>)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): ClusterMergeHistory
+        {static} #convertOutput(ClusterMergeHistoryBuilder, ArrayDBIDs, DBIDDataStore, DoubleDataStore): ClusterMergeHistoryBuilder
+        -step2(DBIDRef, DBIDArrayIter, int, DistanceQuery<? super O>, WritableDoubleDataStore): void
+        -step2primitive(DBIDRef, DBIDArrayIter, int, Relation<? extends O>, PrimitiveDistance<? super O>, WritableDoubleDataStore): void
+        #process(DBIDRef, ArrayDBIDs, DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore, WritableDoubleDataStore): void
+        -slinkstep3(DBIDRef, DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore, WritableDoubleDataStore): void
+        -slinkstep4(DBIDRef, DBIDArrayIter, int, WritableDBIDDataStore, WritableDoubleDataStore): void
+        #getLogger(): Logging
+    }
+
+    interface "<size:14>HierarchicalClusteringAlgorithm\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HierarchicalClusteringAlgorithm [[HierarchicalClusteringAlgorithm.html]]
+    class "<size:14>SLINK.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.SLINK.Par<O> [[SLINK.Par.html]]
+
+    elki.clustering.hierarchical.HierarchicalClusteringAlgorithm <|.. elki.clustering.hierarchical.SLINK
+    elki.clustering.hierarchical.SLINK +-- elki.clustering.hierarchical.SLINK.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleOutlierEnsemble.Par\n<size:10>elki.outlier.meta" as elki.outlier.meta.SimpleOutlierEnsemble.Par [[SimpleOutlierEnsemble.Par.html]] {
+        {static} +VOTING_ID: OptionID
+        -algorithms: List<? extends OutlierAlgorithm>
+        -voting: EnsembleVoting
+        +configure(Parameterization): void
+        +make(): SimpleOutlierEnsemble
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SimpleOutlierEnsemble\n<size:10>elki.outlier.meta" as elki.outlier.meta.SimpleOutlierEnsemble [[SimpleOutlierEnsemble.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.meta.SimpleOutlierEnsemble.Par
+    elki.outlier.meta.SimpleOutlierEnsemble +-- elki.outlier.meta.SimpleOutlierEnsemble.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

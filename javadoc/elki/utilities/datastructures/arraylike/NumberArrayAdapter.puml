@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>NumberArrayAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.NumberArrayAdapter<N extends Number, A> [[NumberArrayAdapter.html]] {
+        {abstract} +size(A): int
+        {abstract} +get(A, int): N extends Number
+        {abstract} +getDouble(A, int): double
+        +getFloat(A, int): float
+        +getInteger(A, int): int
+        +getShort(A, int): short
+        {abstract} +getLong(A, int): long
+        +getByte(A, int): byte
+    }
+
+    interface "<size:14>ArrayAdapter\n<size:10>elki.utilities.datastructures.arraylike" as elki.utilities.datastructures.arraylike.ArrayAdapter<N extends Number, A> [[ArrayAdapter.html]] {
+        {abstract} +size(A): int
+        {abstract} +get(A, int): N extends Number
+    }
+
+    elki.utilities.datastructures.arraylike.ArrayAdapter <|-- elki.utilities.datastructures.arraylike.NumberArrayAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

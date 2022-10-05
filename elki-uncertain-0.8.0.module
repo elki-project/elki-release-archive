@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.elki-project",
+    "module": "elki-uncertain",
+    "version": "0.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-clustering",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-uncertain-0.8.0.jar",
+          "url": "elki-uncertain-0.8.0.jar",
+          "size": 85691,
+          "sha512": "d6b9905e88d92e89915f7f05816db620bdf226ef5aac76a0dd2207895dcee94c1f835185057bfd743b8c982bc5299fb6aad953aec681b05cb03ef7dd3a3f3a26",
+          "sha256": "cd30419d5430dc2d4de4a8e2fadbae9b46249af2ad0f2ba7975b27d3f4b5004f",
+          "sha1": "8418ba05d1ac60f608b629979485179d46178e67",
+          "md5": "d9a88cd658a3096dd0deaeecf45c19f7"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-clustering",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-uncertain-0.8.0.jar",
+          "url": "elki-uncertain-0.8.0.jar",
+          "size": 85691,
+          "sha512": "d6b9905e88d92e89915f7f05816db620bdf226ef5aac76a0dd2207895dcee94c1f835185057bfd743b8c982bc5299fb6aad953aec681b05cb03ef7dd3a3f3a26",
+          "sha256": "cd30419d5430dc2d4de4a8e2fadbae9b46249af2ad0f2ba7975b27d3f4b5004f",
+          "sha1": "8418ba05d1ac60f608b629979485179d46178e67",
+          "md5": "d9a88cd658a3096dd0deaeecf45c19f7"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-uncertain",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-uncertain-0.8.0-test-fixtures.jar",
+          "url": "elki-uncertain-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "ddd91c28d958cbe20c52787a7c9024f008990d96a405ecefcef480ba37544e7e4e0184e6b19b8c6661ca0f1d021ccc895db4d7221db28a4fd9f11e0ef6935a59",
+          "sha256": "719b7b65ed8b12e02dabf1d494128c7ae712fbc7805c04b2725a449be4c504bf",
+          "sha1": "871c4a123c2fb172d6ad14c877cfd21ebaabd91d",
+          "md5": "e813830a431a61551c4822c4742dbd5b"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-uncertain-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    },
+    {
+      "name": "testFixturesRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.github.elki-project",
+          "module": "elki-uncertain",
+          "version": {
+            "requires": "0.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "elki-uncertain-0.8.0-test-fixtures.jar",
+          "url": "elki-uncertain-0.8.0-test-fixtures.jar",
+          "size": 261,
+          "sha512": "ddd91c28d958cbe20c52787a7c9024f008990d96a405ecefcef480ba37544e7e4e0184e6b19b8c6661ca0f1d021ccc895db4d7221db28a4fd9f11e0ef6935a59",
+          "sha256": "719b7b65ed8b12e02dabf1d494128c7ae712fbc7805c04b2725a449be4c504bf",
+          "sha1": "871c4a123c2fb172d6ad14c877cfd21ebaabd91d",
+          "md5": "e813830a431a61551c4822c4742dbd5b"
+        }
+      ],
+      "capabilities": [
+        {
+          "group": "io.github.elki-project",
+          "name": "elki-uncertain-test-fixtures",
+          "version": "0.8.0"
+        }
+      ]
+    }
+  ]
+}

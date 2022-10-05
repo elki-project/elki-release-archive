@@ -1,0 +1,369 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.datasource.parser {
+
+        class ClusteringVectorParser [[ClusteringVectorParser.html]] {
+            {static} -LOG: Logging
+            ~numterms: int
+            #meta: BundleMeta
+            ~nextevent: Event
+            ~curclu: Clustering<Model>
+            ~curlbl: LabelList
+            ~buf1: IntArrayList
+            ~range: DBIDRange
+            ~lbl: ArrayList<String>
+            ~haslbl: boolean
+            +ClusteringVectorParser(CSVReaderFormat)
+            +initStream(InputStream): void
+            +nextEvent(): Event
+            +data(int): Object
+            +getMeta(): BundleMeta
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.parser.ClusteringVectorParser.Par [[ClusteringVectorParser.Par.html]] {
+            +make(): ClusteringVectorParser
+        }
+
+        class ArffParser [[ArffParser.html]] {
+            {static} -LOG: Logging
+            {static} +ARFF_HEADER_RELATION: Matcher
+            {static} +ARFF_HEADER_ATTRIBUTE: Matcher
+            {static} +ARFF_HEADER_DATA: Matcher
+            {static} +ARFF_COMMENT: Matcher
+            {static} +DEFAULT_ARFF_MAGIC_EID: String
+            {static} +DEFAULT_ARFF_MAGIC_CLASS: String
+            {static} +ARFF_NUMERIC: Matcher
+            {static} +EMPTY: Matcher
+            ~magic_eid: Matcher
+            ~magic_class: Matcher
+            ~labels: ArrayList<String>
+            ~denseFactory: Factory<?>
+            +ArffParser(Pattern, Pattern)
+            +ArffParser(String, String)
+            +parse(InputStream): MultipleObjectsBundle
+            -loadSparseInstance(StreamTokenizer, int[], int[], TypeInformation[], int): Object[]
+            -loadDenseInstance(StreamTokenizer, int[], TypeInformation[], int): Object[]
+            -makeArffTokenizer(BufferedReader): StreamTokenizer
+            -setupBundleHeaders(ArrayList<String>, int[], TypeInformation[], int[], MultipleObjectsBundle, boolean): void
+            -readHeader(BufferedReader): void
+            -parseAttributeStatements(BufferedReader, ArrayList<String>, ArrayList<String>): void
+            -processColumnTypes(ArrayList<String>, ArrayList<String>, int[], TypeInformation[], int[]): void
+            -nextToken(StreamTokenizer): void
+            +cleanup(): void
+        }
+
+        class elki.datasource.parser.ArffParser.Par [[ArffParser.Par.html]] {
+            {static} +MAGIC_EID_ID: OptionID
+            {static} +MAGIC_CLASS_ID: OptionID
+            ~magic_eid: Pattern
+            ~magic_class: Pattern
+            +configure(Parameterization): void
+            +make(): ArffParser
+        }
+
+        class CategorialDataAsNumberVectorParser<V extends NumberVector> [[CategorialDataAsNumberVectorParser.html]] {
+            {static} -LOG: Logging
+            ~unique: Object2IntOpenHashMap<String>
+            ~ustart: int
+            ~nanpattern: Matcher
+            +CategorialDataAsNumberVectorParser(Factory<V extends NumberVector>)
+            +CategorialDataAsNumberVectorParser(CSVReaderFormat, long[], Factory<V extends NumberVector>)
+            +nextEvent(): Event
+            #parseLineInternal(): boolean
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.parser.CategorialDataAsNumberVectorParser.Par<V extends NumberVector> [[CategorialDataAsNumberVectorParser.Par.html]] {
+            +make(): CategorialDataAsNumberVectorParser<V extends NumberVector>
+        }
+
+        class SimplePolygonParser [[SimplePolygonParser.html]] {
+            {static} -LOG: Logging
+            {static} +COORD: Pattern
+            {static} +POLYGON_SEPARATOR: String
+            ~nextevent: Event
+            #meta: BundleMeta
+            #haslabels: boolean
+            #curpoly: PolygonsObject
+            #curlbl: LabelList
+            #cureid: ExternalID
+            -coords: List<double[]>
+            -polys: List<Polygon>
+            -labels: ArrayList<String>
+            +SimplePolygonParser(CSVReaderFormat)
+            +nextEvent(): Event
+            #buildMeta(): void
+            +getMeta(): BundleMeta
+            +data(int): Object
+            -parseLine(): boolean
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.parser.SimplePolygonParser.Par [[SimplePolygonParser.Par.html]] {
+            +make(): SimplePolygonParser
+        }
+
+        class NumberVectorLabelParser<V extends NumberVector> [[NumberVectorLabelParser.html]] {
+            {static} -LOG: Logging
+            -labelIndices: long[]
+            #factory: Factory<V extends NumberVector>
+            #mindim: int
+            #maxdim: int
+            #meta: BundleMeta
+            #columnnames: List<String>
+            #haslabels: boolean
+            #curvec: V extends NumberVector
+            #curlbl: LabelList
+            #attributes: DoubleArray
+            ~labels: ArrayList<String>
+            ~unique: ObjectOpenHashSet<String>
+            ~nextevent: Event
+            ~warnedPrecision: boolean
+            ~warnedDim: boolean
+            +NumberVectorLabelParser(CSVReaderFormat, long[], Factory<V extends NumberVector>)
+            +NumberVectorLabelParser(Factory<V extends NumberVector>)
+            +NumberVectorLabelParser(Pattern, String, Pattern, long[], Factory<V extends NumberVector>)
+            #isLabelColumn(int): boolean
+            +initStream(InputStream): void
+            +getMeta(): BundleMeta
+            +nextEvent(): Event
+            +cleanup(): void
+            #buildMeta(): void
+            +data(int): Object
+            #parseLineInternal(): boolean
+            #createVector(): V extends NumberVector
+            ~getTypeInformation(int, int): SimpleTypeInformation<V extends NumberVector>
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.parser.NumberVectorLabelParser.Par<V extends NumberVector> [[NumberVectorLabelParser.Par.html]] {
+            {static} +LABEL_INDICES_ID: OptionID
+            {static} +VECTOR_TYPE_ID: OptionID
+            #labelIndices: long[]
+            #factory: Factory<V extends NumberVector>
+            +configure(Parameterization): void
+            #getFactory(Parameterization): void
+            #getLabelIndices(Parameterization): void
+            +make(): NumberVectorLabelParser<V extends NumberVector>
+        }
+
+        interface StreamingParser [[StreamingParser.html]] {
+            {abstract} +initStream(InputStream): void
+        }
+
+        class LibSVMFormatParser<V extends SparseNumberVector> [[LibSVMFormatParser.html]] {
+            {static} -LOG: Logging
+            {static} +WHITESPACE_PATTERN: Pattern
+            {static} +COMMENT_PATTERN: Pattern
+            +LibSVMFormatParser(Factory<V extends SparseNumberVector>)
+            #parseLineInternal(): boolean
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.parser.LibSVMFormatParser.Par<V extends SparseNumberVector> [[LibSVMFormatParser.Par.html]] {
+            #getFactory(Parameterization): void
+            +configure(Parameterization): void
+            +make(): LibSVMFormatParser<V extends SparseNumberVector>
+        }
+
+        class SimpleTransactionParser [[SimpleTransactionParser.html]] {
+            {static} -LOG: Logging
+            ~numterms: int
+            ~keymap: Object2IntOpenHashMap<String>
+            #meta: BundleMeta
+            ~nextevent: Event
+            ~curvec: BitVector
+            ~buf: LongArrayList
+            +SimpleTransactionParser(CSVReaderFormat)
+            +initStream(InputStream): void
+            +nextEvent(): Event
+            +cleanup(): void
+            +data(int): Object
+            +getMeta(): BundleMeta
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.parser.SimpleTransactionParser.Par [[SimpleTransactionParser.Par.html]] {
+            +make(): SimpleTransactionParser
+        }
+
+        class TermFrequencyParser<V extends SparseNumberVector> [[TermFrequencyParser.html]] {
+            {static} -LOG: Logging
+            ~numterms: int
+            ~keymap: Object2IntOpenHashMap<String>
+            ~normalize: boolean
+            -sparsefactory: Factory<V extends SparseNumberVector>
+            ~values: Int2DoubleOpenHashMap
+            ~labels: ArrayList<String>
+            +TermFrequencyParser(boolean, Factory<V extends SparseNumberVector>)
+            +TermFrequencyParser(boolean, CSVReaderFormat, long[], Factory<V extends SparseNumberVector>)
+            #parseLineInternal(): boolean
+            #getTypeInformation(int, int): SimpleTypeInformation<V extends SparseNumberVector>
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.parser.TermFrequencyParser.Par<V extends SparseNumberVector> [[TermFrequencyParser.Par.html]] {
+            {static} +NORMALIZE_FLAG: OptionID
+            ~normalize: boolean
+            +configure(Parameterization): void
+            #getFactory(Parameterization): void
+            +make(): TermFrequencyParser<V extends SparseNumberVector>
+        }
+
+        class StringParser [[StringParser.html]] {
+            ~comment: Matcher
+            ~trimWhitespace: boolean
+            +StringParser(Pattern, boolean)
+            +parse(InputStream): MultipleObjectsBundle
+            +cleanup(): void
+        }
+
+        class elki.datasource.parser.StringParser.Par [[StringParser.Par.html]] {
+            {static} +TRIM_ID: OptionID
+            ~comment: Pattern
+            ~trimWhitespace: boolean
+            +configure(Parameterization): void
+            +make(): StringParser
+        }
+
+        abstract class AbstractStreamingParser [[AbstractStreamingParser.html]] {
+            #reader: TokenizedReader
+            #tokenizer: Tokenizer
+            +AbstractStreamingParser(CSVReaderFormat)
+            +parse(InputStream): MultipleObjectsBundle
+            +initStream(InputStream): void
+            +hasDBIDs(): boolean
+            +assignDBID(DBIDVar): boolean
+            +asMultipleObjectsBundle(): MultipleObjectsBundle
+            +cleanup(): void
+            {abstract} #getLogger(): Logging
+        }
+
+        abstract class elki.datasource.parser.AbstractStreamingParser.Par [[AbstractStreamingParser.Par.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): AbstractStreamingParser
+        }
+
+        interface Parser [[Parser.html]] {
+            {abstract} +parse(InputStream): MultipleObjectsBundle
+            {abstract} +cleanup(): void
+        }
+
+        class BitVectorLabelParser [[BitVectorLabelParser.html]] {
+            {static} -LOG: Logging
+            ~buf: LongArrayList
+            +BitVectorLabelParser(CSVReaderFormat)
+            #parseLineInternal(): boolean
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.parser.BitVectorLabelParser.Par [[BitVectorLabelParser.Par.html]] {
+            +make(): BitVectorLabelParser
+        }
+
+        class CSVReaderFormat [[CSVReaderFormat.html]] {
+            {static} +DEFAULT_SEPARATOR: String
+            {static} +QUOTE_CHARS: String
+            {static} +NUMBER_PATTERN: String
+            {static} +COMMENT_PATTERN: String
+            {static} +ATTRIBUTE_CONCATENATION: String
+            #colSep: Pattern
+            #quoteChars: String
+            #comment: Pattern
+            +CSVReaderFormat(Pattern, String, Pattern)
+            +makeReader(): TokenizedReader
+        }
+
+        class elki.datasource.parser.CSVReaderFormat.Par [[CSVReaderFormat.Par.html]] {
+            {static} +COLUMN_SEPARATOR_ID: OptionID
+            {static} +QUOTE_ID: OptionID
+            {static} +COMMENT_ID: OptionID
+            #colSep: Pattern
+            #quoteChars: String
+            #comment: Pattern
+            +configure(Parameterization): void
+            +make(): CSVReaderFormat
+        }
+
+        class SparseNumberVectorLabelParser<V extends SparseNumberVector> [[SparseNumberVectorLabelParser.html]] {
+            {static} -LOG: Logging
+            #sparsefactory: Factory<V extends SparseNumberVector>
+            ~values: Int2DoubleOpenHashMap
+            ~labels: ArrayList<String>
+            +SparseNumberVectorLabelParser(CSVReaderFormat, long[], Factory<V extends SparseNumberVector>)
+            +SparseNumberVectorLabelParser(Pattern, String, Pattern, long[], Factory<V extends SparseNumberVector>)
+            #parseLineInternal(): boolean
+            #getTypeInformation(int, int): SimpleTypeInformation<V extends SparseNumberVector>
+            #getLogger(): Logging
+        }
+
+        class elki.datasource.parser.SparseNumberVectorLabelParser.Par<V extends SparseNumberVector> [[SparseNumberVectorLabelParser.Par.html]] {
+            #getFactory(Parameterization): void
+            +make(): SparseNumberVectorLabelParser<V extends SparseNumberVector>
+        }
+
+        AbstractStreamingParser <|-- ClusteringVectorParser
+        elki.datasource.parser.AbstractStreamingParser.Par <|-- elki.datasource.parser.ClusteringVectorParser.Par
+        ClusteringVectorParser +-- elki.datasource.parser.ClusteringVectorParser.Par
+        Parser <|.. ArffParser
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.parser.ArffParser.Par
+        ArffParser +-- elki.datasource.parser.ArffParser.Par
+        NumberVectorLabelParser <|-- CategorialDataAsNumberVectorParser
+        elki.datasource.parser.NumberVectorLabelParser.Par <|-- elki.datasource.parser.CategorialDataAsNumberVectorParser.Par
+        CategorialDataAsNumberVectorParser +-- elki.datasource.parser.CategorialDataAsNumberVectorParser.Par
+        AbstractStreamingParser <|-- SimplePolygonParser
+        elki.datasource.parser.AbstractStreamingParser.Par <|-- elki.datasource.parser.SimplePolygonParser.Par
+        SimplePolygonParser +-- elki.datasource.parser.SimplePolygonParser.Par
+        AbstractStreamingParser <|-- NumberVectorLabelParser
+        elki.datasource.parser.AbstractStreamingParser.Par <|-- elki.datasource.parser.NumberVectorLabelParser.Par
+        NumberVectorLabelParser +-- elki.datasource.parser.NumberVectorLabelParser.Par
+        Parser <|-- StreamingParser
+        elki.datasource.bundle.BundleStreamSource <|-- StreamingParser
+        SparseNumberVectorLabelParser <|-- LibSVMFormatParser
+        elki.datasource.parser.NumberVectorLabelParser.Par <|-- elki.datasource.parser.LibSVMFormatParser.Par
+        LibSVMFormatParser +-- elki.datasource.parser.LibSVMFormatParser.Par
+        AbstractStreamingParser <|-- SimpleTransactionParser
+        elki.datasource.parser.AbstractStreamingParser.Par <|-- elki.datasource.parser.SimpleTransactionParser.Par
+        SimpleTransactionParser +-- elki.datasource.parser.SimpleTransactionParser.Par
+        NumberVectorLabelParser <|-- TermFrequencyParser
+        elki.datasource.parser.NumberVectorLabelParser.Par <|-- elki.datasource.parser.TermFrequencyParser.Par
+        TermFrequencyParser +-- elki.datasource.parser.TermFrequencyParser.Par
+        Parser <|.. StringParser
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.parser.StringParser.Par
+        StringParser +-- elki.datasource.parser.StringParser.Par
+        StreamingParser <|.. AbstractStreamingParser
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.parser.AbstractStreamingParser.Par
+        AbstractStreamingParser +-- elki.datasource.parser.AbstractStreamingParser.Par
+        elki.datasource.parser.AbstractStreamingParser.Par --> CSVReaderFormat: format
+        NumberVectorLabelParser <|-- BitVectorLabelParser
+        elki.datasource.parser.AbstractStreamingParser.Par <|-- elki.datasource.parser.BitVectorLabelParser.Par
+        BitVectorLabelParser +-- elki.datasource.parser.BitVectorLabelParser.Par
+        CSVReaderFormat --> CSVReaderFormat: DEFAULT_FORMAT
+        elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.parser.CSVReaderFormat.Par
+        CSVReaderFormat +-- elki.datasource.parser.CSVReaderFormat.Par
+        NumberVectorLabelParser <|-- SparseNumberVectorLabelParser
+        elki.datasource.parser.NumberVectorLabelParser.Par <|-- elki.datasource.parser.SparseNumberVectorLabelParser.Par
+        SparseNumberVectorLabelParser +-- elki.datasource.parser.SparseNumberVectorLabelParser.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.datasource.bundle {
+        interface BundleStreamSource [[../bundle/BundleStreamSource.html]] {
+            {abstract} +getMeta(): BundleMeta
+            {abstract} +data(int): Object
+            {abstract} +hasDBIDs(): boolean
+            {abstract} +assignDBID(DBIDVar): boolean
+            {abstract} +nextEvent(): Event
+            {abstract} +asMultipleObjectsBundle(): MultipleObjectsBundle
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

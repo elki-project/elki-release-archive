@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NaiveAgglomerativeHierarchicalClustering2.Par\n<size:10>tutorial.clustering" as tutorial.clustering.NaiveAgglomerativeHierarchicalClustering2.Par<O> {
+        #distance: Distance<? super O>
+        #numclusters: int
+        +configure(Parameterization): void
+        +make(): NaiveAgglomerativeHierarchicalClustering2<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../elki/utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>NaiveAgglomerativeHierarchicalClustering2\n<size:10>tutorial.clustering" as tutorial.clustering.NaiveAgglomerativeHierarchicalClustering2<O> [[NaiveAgglomerativeHierarchicalClustering2.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. tutorial.clustering.NaiveAgglomerativeHierarchicalClustering2.Par
+    tutorial.clustering.NaiveAgglomerativeHierarchicalClustering2 +-- tutorial.clustering.NaiveAgglomerativeHierarchicalClustering2.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

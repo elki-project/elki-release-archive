@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Subspace\n<size:10>elki.data" as elki.data.Subspace [[Subspace.html]] {
+        -dimensions: long[]
+        -dimensionality: int
+        {static} +DIMENSION_COMPARATOR: Comparator<Subspace>
+        +Subspace(int)
+        +Subspace(long[])
+        +getDimensions(): long[]
+        +dimensionality(): int
+        +join(Subspace): Subspace
+        +dimensionsToString(): String
+        +dimensonsToString(String): String
+        +isSubspace(Subspace): boolean
+        #joinLastDimensions(Subspace): long[]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

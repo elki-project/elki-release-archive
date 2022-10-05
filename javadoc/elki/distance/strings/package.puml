@@ -1,0 +1,56 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.distance.strings {
+
+        class LevenshteinDistance [[LevenshteinDistance.html]] {
+            {static} #TYPE: SimpleTypeInformation<? super String>
+            +distance(String, String): double
+            {static} +levenshteinDistance(String, String): int
+            {static} -prefixLen(String, String): int
+            {static} -postfixLen(String, String, int): int
+            {static} +levenshteinDistance(String, String, int, int): int
+            {static} -min(int, int, int): int
+            +getInputTypeRestriction(): SimpleTypeInformation<? super String>
+            +isMetric(): boolean
+        }
+
+        class elki.distance.strings.LevenshteinDistance.Par [[LevenshteinDistance.Par.html]] {
+            +make(): LevenshteinDistance
+        }
+
+        class NormalizedLevenshteinDistance [[NormalizedLevenshteinDistance.html]] {
+            +distance(String, String): double
+            +getInputTypeRestriction(): SimpleTypeInformation<? super String>
+        }
+
+        class elki.distance.strings.NormalizedLevenshteinDistance.Par [[NormalizedLevenshteinDistance.Par.html]] {
+            +make(): NormalizedLevenshteinDistance
+        }
+
+        elki.distance.PrimitiveDistance <|.. LevenshteinDistance
+        LevenshteinDistance --> LevenshteinDistance: STATIC_SENSITIVE
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.strings.LevenshteinDistance.Par
+        LevenshteinDistance +-- elki.distance.strings.LevenshteinDistance.Par
+        elki.distance.PrimitiveDistance <|.. NormalizedLevenshteinDistance
+        NormalizedLevenshteinDistance --> NormalizedLevenshteinDistance: STATIC_SENSITIVE
+        elki.utilities.optionhandling.Parameterizer <|.. elki.distance.strings.NormalizedLevenshteinDistance.Par
+        NormalizedLevenshteinDistance +-- elki.distance.strings.NormalizedLevenshteinDistance.Par
+    }
+
+    namespace elki.distance {
+        interface PrimitiveDistance<O> [[../PrimitiveDistance.html]] {
+            {abstract} +distance(O, O): double
+            {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+            +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KDTreeEM.KDTree\n<size:10>elki.clustering.em" as elki.clustering.em.KDTreeEM.KDTree [[KDTreeEM.KDTree.html]] {
+        ~leftChild: KDTree
+        ~rightChild: KDTree
+        ~left: int
+        ~right: int
+        ~sum: double[]
+        ~sumSq: double[]
+        ~midpoint: double[]
+        ~halfwidth: double[]
+        +KDTree(Relation<? extends NumberVector>, ArrayModifiableDBIDs, int, int, double[], double)
+        -computeBoundingBox(Relation<? extends NumberVector>, DBIDArrayIter): void
+        -aggregateStats(Relation<? extends NumberVector>, DBIDArrayIter, int): void
+    }
+
+    class "<size:14>KDTreeEM\n<size:10>elki.clustering.em" as elki.clustering.em.KDTreeEM [[KDTreeEM.html]]
+
+    elki.clustering.em.KDTreeEM +-- elki.clustering.em.KDTreeEM.KDTree
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

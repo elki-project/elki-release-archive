@@ -1,0 +1,157 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.outlier.density {
+
+        class IsolationForest [[IsolationForest.html]] {
+            {static} -LOG: Logging
+            #numTrees: int
+            #subsampleSize: int
+            -rnd: RandomFactory
+            +IsolationForest(int, int, RandomFactory)
+            +run(Relation<? extends NumberVector>): OutlierResult
+            {static} #c(double): double
+            #isolationScore(Node, NumberVector): double
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.density.IsolationForest.ForestBuilder [[IsolationForest.ForestBuilder.html]] {
+            ~relation: Relation<? extends NumberVector>
+            ~ids: ArrayModifiableDBIDs
+            ~iter: DBIDArrayMIter
+            ~min: double[]
+            ~max: double[]
+            ~active: int[]
+            ~maxheight: int
+            ~rnd: Random
+            ~subsampleSize: int
+            #ForestBuilder(Relation<? extends NumberVector>, int, Random)
+            #newTree(): Node
+            #build(int, int, int): Node
+        }
+
+        class elki.outlier.density.IsolationForest.Node [[IsolationForest.Node.html]] {
+            ~dim: int
+            ~split: double
+            ~size: int
+            +Node(int, double, int, Node, Node)
+        }
+
+        class elki.outlier.density.IsolationForest.Par [[IsolationForest.Par.html]] {
+            {static} +NUM_TREES_ID: OptionID
+            {static} +SUBSAMPLE_SIZE_ID: OptionID
+            {static} +SEED_ID: OptionID
+            #numTrees: int
+            #subsampleSize: int
+            #rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): IsolationForest
+        }
+
+        class HySortOD [[HySortOD.html]] {
+            {static} -LOG: Logging
+            -b: int
+            -l: double
+            +HySortOD(int, int)
+            +run(Database, Relation<? extends NumberVector>): OutlierResult
+            -getSortedHypercubes(Relation<? extends NumberVector>): List<Hypercube>
+            -score(int): double
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.outlier.density.HySortOD.Hypercube [[HySortOD.Hypercube.html]] {
+            ~coords: int[]
+            ~instances: ArrayModifiableDBIDs
+            +Hypercube(NumberVector, double)
+            +compareTo(Hypercube): int
+            +getCoordAt(int): int
+            +getCoords(): int[]
+            +getNumDimensions(): int
+            +getInstances(): DBIDs
+            +add(DBIDRef): void
+            +getDensity(): int
+        }
+
+        abstract class elki.outlier.density.HySortOD.DensityStrategy [[HySortOD.DensityStrategy.html]] {
+            ~Wmax: int
+            {abstract} ~buildIndex(List<Hypercube>): DensityStrategy
+            {abstract} ~getDensities(): int[]
+            ~getMaxDensity(): double
+            #isImmediate(Hypercube, Hypercube): boolean
+            #isProspective(Hypercube, Hypercube, int): boolean
+        }
+
+        class elki.outlier.density.HySortOD.NaiveStrategy [[HySortOD.NaiveStrategy.html]] {
+            ~buildIndex(List<Hypercube>): DensityStrategy
+            +getDensities(): int[]
+        }
+
+        class elki.outlier.density.HySortOD.TreeStrategy [[HySortOD.TreeStrategy.html]] {
+            ~minSplit: int
+            +TreeStrategy(int)
+            ~buildIndex(List<Hypercube>): DensityStrategy
+            -buildIndex(Node, int): void
+            ~getDensities(): int[]
+            -density(int, Node, int): int
+        }
+
+        class elki.outlier.density.HySortOD.TreeStrategy.Node [[HySortOD.TreeStrategy.Node.html]] {
+            +value: int
+            +begin: int
+            +end: int
+            +children: Int2ObjectOpenHashMap<Node>
+            +Node(int, int, int)
+            +add(Node): void
+        }
+
+        class elki.outlier.density.HySortOD.Par {
+            {static} +B_ID: OptionID
+            {static} +MIN_SPLIT_ID: OptionID
+            #b: int
+            #minSplit: int
+            +configure(Parameterization): void
+            +make(): HySortOD
+        }
+
+        elki.outlier.OutlierAlgorithm <|.. IsolationForest
+        IsolationForest +-- elki.outlier.density.IsolationForest.ForestBuilder
+        IsolationForest +-- elki.outlier.density.IsolationForest.Node
+        elki.outlier.density.IsolationForest.Node --> elki.outlier.density.IsolationForest.Node: left\nright
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.density.IsolationForest.Par
+        IsolationForest +-- elki.outlier.density.IsolationForest.Par
+        elki.outlier.OutlierAlgorithm <|.. HySortOD
+        HySortOD --> elki.outlier.density.HySortOD.DensityStrategy: strategy
+        java.lang.Comparable <|.. elki.outlier.density.HySortOD.Hypercube
+        HySortOD +-- elki.outlier.density.HySortOD.Hypercube
+        HySortOD +-- elki.outlier.density.HySortOD.DensityStrategy
+        elki.outlier.density.HySortOD.DensityStrategy --> "*" elki.outlier.density.HySortOD.Hypercube: H
+        elki.outlier.density.HySortOD.DensityStrategy <|-- elki.outlier.density.HySortOD.NaiveStrategy
+        HySortOD +-- elki.outlier.density.HySortOD.NaiveStrategy
+        elki.outlier.density.HySortOD.DensityStrategy <|-- elki.outlier.density.HySortOD.TreeStrategy
+        HySortOD +-- elki.outlier.density.HySortOD.TreeStrategy
+        elki.outlier.density.HySortOD.TreeStrategy --> elki.outlier.density.HySortOD.TreeStrategy.Node: root
+        elki.outlier.density.HySortOD.TreeStrategy +-- elki.outlier.density.HySortOD.TreeStrategy.Node
+        elki.utilities.optionhandling.Parameterizer <|.. elki.outlier.density.HySortOD.Par
+        HySortOD +-- elki.outlier.density.HySortOD.Par
+    }
+
+    namespace elki.outlier {
+        interface OutlierAlgorithm [[../OutlierAlgorithm.html]] {
+            +autorun(Database): OutlierResult
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

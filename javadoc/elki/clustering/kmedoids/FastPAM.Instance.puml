@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastPAM.Instance\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastPAM.Instance [[FastPAM.Instance.html]] {
+        #fastswap: double
+        +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore, double)
+        #run(ArrayModifiableDBIDs, int): double
+        #findBestSwaps(DBIDArrayIter, ArrayModifiableDBIDs, double[], double[], double[]): void
+        #computeReassignmentCost(DBIDRef, int): double
+    }
+
+    class "<size:14>FastPAM1.Instance\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastPAM1.Instance [[FastPAM1.Instance.html]]
+    class "<size:14>FastPAM\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.FastPAM<O> [[FastPAM.html]]
+
+    elki.clustering.kmedoids.FastPAM1.Instance <|-- elki.clustering.kmedoids.FastPAM.Instance
+    elki.clustering.kmedoids.FastPAM +-- elki.clustering.kmedoids.FastPAM.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

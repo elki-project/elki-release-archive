@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IndexPurity\n<size:10>elki.evaluation.index" as elki.evaluation.index.IndexPurity [[IndexPurity.html]] {
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../Evaluator.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.index.IndexPurity
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

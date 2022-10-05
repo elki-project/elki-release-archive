@@ -1,0 +1,279 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.vafile {
+
+        class PartialVAFile<V extends NumberVector> [[PartialVAFile.html]] {
+            {static} -LOG: Logging
+            -partitions: int
+            -pageSize: int
+            -splitPartitions: double[]
+            +PartialVAFile(int, Relation<V extends NumberVector>, int)
+            +initialize(): void
+            +getLogger(): Logging
+            +logStatistics(): void
+            #calculateFullApproximation(DBIDRef, V extends NumberVector): VectorApproximation
+            +kNNByObject(DistanceQuery<V extends NumberVector>, int, int): KNNSearcher<V extends NumberVector>
+            +rangeByObject(DistanceQuery<V extends NumberVector>, double, int): RangeSearcher<V extends NumberVector>
+            {static} #calculateSelectivityCoeffs(List<DoubleObjPair<DAFile>>, NumberVector, double): void
+            {static} #calculatePartialApproximation(NumberVector, List<DoubleObjPair<DAFile>>): VectorApproximation
+            #roundToPageSize(long): long
+        }
+
+        class elki.index.vafile.PartialVAFile.Statistics [[PartialVAFile.Statistics.html]] {
+            -scannedBytes: Counter
+            -queryTime: Counter
+            -issuedQueries: Counter
+            -refinements: Counter
+            #Statistics(String)
+            +logStatistics(): void
+            #incrementScannedBytes(long): void
+            #incrementQueryTime(long): void
+            #incrementIssuedQueries(): void
+            #incrementRefinements(): void
+        }
+
+        class elki.index.vafile.PartialVAFile.PartialVACandidate [[PartialVAFile.PartialVACandidate.html]] {
+            #maxDistP: double
+            #minDistP: double
+            +PartialVACandidate(VectorApproximation)
+            +getApproximation(int): int
+            +getApprox(): DBIDRef
+            +compareTo(PartialVACandidate): int
+        }
+
+        class elki.index.vafile.PartialVAFile.PartialVAFileRangeQuery [[PartialVAFile.PartialVAFileRangeQuery.html]] {
+            -p: double
+            -subspace: long[]
+            +PartialVAFileRangeQuery(DistanceQuery<V extends NumberVector>, double, long[])
+            +getRange(V extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class elki.index.vafile.PartialVAFile.PartialVAFileKNNQuery [[PartialVAFile.PartialVAFileKNNQuery.html]] {
+            -p: double
+            -subspace: long[]
+            +PartialVAFileKNNQuery(DistanceQuery<V extends NumberVector>, double, long[])
+            +getKNN(V extends NumberVector, int): KNNList
+            -filter1(int, int, List<DAFile>, VectorApproximation, int, VALPNormDistance): LinkedList<PartialVACandidate>
+            -getIOCosts(int, int): int
+            -getIOCosts(DAFile, int): int
+            +getWorstCaseDistOrder(VALPNormDistance, long[]): List<DAFile>
+            #retrieveAccurateDistances(List<PartialVACandidate>, int, long[], V extends NumberVector): KNNList
+        }
+
+        class elki.index.vafile.PartialVAFile.WorstCaseDistComparator [[PartialVAFile.WorstCaseDistComparator.html]] {
+            +WorstCaseDistComparator(VALPNormDistance)
+            +compare(DAFile, DAFile): int
+        }
+
+        class elki.index.vafile.PartialVAFile.Factory<V extends NumberVector> [[PartialVAFile.Factory.html]] {
+            {static} +PARTITIONS_ID: OptionID
+            ~pagesize: int
+            ~numpart: int
+            +Factory(int, int)
+            +instantiate(Relation<V extends NumberVector>): PartialVAFile<V extends NumberVector>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.vafile.PartialVAFile.Factory.Par [[PartialVAFile.Factory.Par.html]] {
+            ~pagesize: int
+            ~numpart: int
+            +configure(Parameterization): void
+            +make(): Factory<?>
+        }
+
+        class VectorApproximation [[VectorApproximation.html]] {
+            ~approximation: int[]
+            ~id: int
+            +VectorApproximation(DBIDRef, int[])
+            +getDimensionality(): int
+            +getApproximation(int): int
+            +internalGetIndex(): int
+            {static} +byteOnDisk(int, int): int
+        }
+
+        class VAFile<V extends NumberVector> [[VAFile.html]] {
+            {static} -LOG: Logging
+            -partitions: int
+            -splitPositions: double[]
+            ~pageSize: int
+            ~scans: int
+            +VAFile(int, Relation<V extends NumberVector>, int)
+            +initialize(): void
+            +setPartitions(Relation<V extends NumberVector>): void
+            +calculateApproximation(DBIDRef, V extends NumberVector): VectorApproximation
+            +getScannedPages(): long
+            +getLogger(): Logging
+            +logStatistics(): void
+            +kNNByObject(DistanceQuery<V extends NumberVector>, int, int): KNNSearcher<V extends NumberVector>
+            +rangeByObject(DistanceQuery<V extends NumberVector>, double, int): RangeSearcher<V extends NumberVector>
+        }
+
+        class elki.index.vafile.VAFile.VAFileRangeQuery [[VAFile.VAFileRangeQuery.html]] {
+            ~p: double
+            +VAFileRangeQuery(DistanceQuery<V extends NumberVector>, double)
+            +getRange(V extends NumberVector, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class elki.index.vafile.VAFile.VAFileKNNQuery [[VAFile.VAFileKNNQuery.html]] {
+            ~p: double
+            +VAFileKNNQuery(DistanceQuery<V extends NumberVector>, double)
+            +getKNN(V extends NumberVector, int): KNNList
+        }
+
+        class elki.index.vafile.VAFile.Factory<V extends NumberVector> [[VAFile.Factory.html]] {
+            ~pagesize: int
+            ~numpart: int
+            +Factory(int, int)
+            +instantiate(Relation<V extends NumberVector>): VAFile<V extends NumberVector>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.vafile.VAFile.Factory.Par [[VAFile.Factory.Par.html]] {
+            {static} +PARTITIONS_ID: OptionID
+            ~pagesize: int
+            ~numpart: int
+            +configure(Parameterization): void
+            +make(): Factory<?>
+        }
+
+        class DAFile [[DAFile.html]] {
+            -dimension: int
+            -splitPositions: double[]
+            +DAFile(Relation<? extends NumberVector>, int, int)
+            +getSplitPositions(): double[]
+            +getDimension(): int
+            +getIOCosts(): int
+        }
+
+        class VALPNormDistance [[VALPNormDistance.html]] {
+            -onebyp: double
+            -lookup: double[]
+            +VALPNormDistance(double, double[], NumberVector, VectorApproximation)
+            +getPartialMinDist(int, int): double
+            +getMinDist(VectorApproximation): double
+            +getPartialMaxDist(int, int): double
+            +getMaxDist(VectorApproximation): double
+            +getPartialMaxMaxDist(int): double
+            -initializeLookupTable(double[], NumberVector, double): void
+        }
+
+        elki.index.AbstractRefiningIndex <|-- PartialVAFile
+        elki.index.KNNIndex <|.. PartialVAFile
+        elki.index.RangeIndex <|.. PartialVAFile
+        PartialVAFile --> "*" DAFile: daFiles
+        PartialVAFile --> elki.index.vafile.PartialVAFile.Statistics: stats
+        PartialVAFile --> "*" VectorApproximation: vectorApprox
+        PartialVAFile +-- elki.index.vafile.PartialVAFile.Statistics
+        java.lang.Comparable <|.. elki.index.vafile.PartialVAFile.PartialVACandidate
+        PartialVAFile +-- elki.index.vafile.PartialVAFile.PartialVACandidate
+        elki.index.vafile.PartialVAFile.PartialVACandidate --> VectorApproximation: approx
+        elki.index.AbstractRefiningIndex.AbstractRefiningQuery <|-- elki.index.vafile.PartialVAFile.PartialVAFileRangeQuery
+        elki.database.query.range.RangeSearcher <|.. elki.index.vafile.PartialVAFile.PartialVAFileRangeQuery
+        PartialVAFile +-- elki.index.vafile.PartialVAFile.PartialVAFileRangeQuery
+        elki.index.AbstractRefiningIndex.AbstractRefiningQuery <|-- elki.index.vafile.PartialVAFile.PartialVAFileKNNQuery
+        elki.database.query.knn.KNNSearcher <|.. elki.index.vafile.PartialVAFile.PartialVAFileKNNQuery
+        PartialVAFile +-- elki.index.vafile.PartialVAFile.PartialVAFileKNNQuery
+        java.util.Comparator <|.. elki.index.vafile.PartialVAFile.WorstCaseDistComparator
+        PartialVAFile +-- elki.index.vafile.PartialVAFile.WorstCaseDistComparator
+        elki.index.vafile.PartialVAFile.WorstCaseDistComparator --> VALPNormDistance: dist
+        elki.index.IndexFactory <|.. elki.index.vafile.PartialVAFile.Factory
+        PartialVAFile +-- elki.index.vafile.PartialVAFile.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.vafile.PartialVAFile.Factory.Par
+        elki.index.vafile.PartialVAFile.Factory +-- elki.index.vafile.PartialVAFile.Factory.Par
+        elki.database.ids.DBIDRef <|.. VectorApproximation
+        elki.index.AbstractRefiningIndex <|-- VAFile
+        elki.index.KNNIndex <|.. VAFile
+        elki.index.RangeIndex <|.. VAFile
+        VAFile --> "*" VectorApproximation: vectorApprox
+        elki.index.AbstractRefiningIndex.AbstractRefiningQuery <|-- elki.index.vafile.VAFile.VAFileRangeQuery
+        elki.database.query.range.RangeSearcher <|.. elki.index.vafile.VAFile.VAFileRangeQuery
+        VAFile +-- elki.index.vafile.VAFile.VAFileRangeQuery
+        elki.index.AbstractRefiningIndex.AbstractRefiningQuery <|-- elki.index.vafile.VAFile.VAFileKNNQuery
+        elki.database.query.knn.KNNSearcher <|.. elki.index.vafile.VAFile.VAFileKNNQuery
+        VAFile +-- elki.index.vafile.VAFile.VAFileKNNQuery
+        elki.index.IndexFactory <|.. elki.index.vafile.VAFile.Factory
+        VAFile +-- elki.index.vafile.VAFile.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.vafile.VAFile.Factory.Par
+        elki.index.vafile.VAFile.Factory +-- elki.index.vafile.VAFile.Factory.Par
+        VALPNormDistance --> VectorApproximation: queryApprox
+    }
+
+    namespace elki.index {
+        abstract class AbstractRefiningIndex<O> [[../AbstractRefiningIndex.html]] {
+            #relation: Relation<O>
+            -refinements: Counter
+            {abstract} +getLogger(): Logging
+        }
+        interface KNNIndex<O> [[../KNNIndex.html]] {
+            {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        }
+        interface RangeIndex<O> [[../RangeIndex.html]] {
+            {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+        abstract class elki.index.AbstractRefiningIndex.AbstractRefiningQuery [[../AbstractRefiningIndex.AbstractRefiningQuery.html]] {
+            #distanceQuery: DistanceQuery<O>
+        }
+        interface IndexFactory<V> [[../IndexFactory.html]] {
+            {abstract} +instantiate(Relation<V>): Index
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+    }
+
+    namespace java.lang {
+        interface Comparable<T> {
+            {abstract} +compareTo(T): int
+        }
+    }
+
+    namespace elki.database.query.range {
+        interface RangeSearcher<O> [[../../database/query/range/RangeSearcher.html]] {
+            +getRange(O, double): DoubleDBIDList
+            {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+    }
+
+    namespace elki.database.query.knn {
+        interface KNNSearcher<O> [[../../database/query/knn/KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+    }
+
+    namespace java.util {
+        interface Comparator<T> {
+            {abstract} +compare(T, T): int
+            +reversed(): Comparator<T>
+            +thenComparing(Comparator<? super T>): Comparator<T>
+            +thenComparing(Function<? super T, ? extends U>, Comparator<? super U>): Comparator<T>
+            +thenComparing(Function<? super T, ? extends Comparable<? super U>>): Comparator<T>
+            +thenComparingInt(ToIntFunction<? super T>): Comparator<T>
+            +thenComparingLong(ToLongFunction<? super T>): Comparator<T>
+            +thenComparingDouble(ToDoubleFunction<? super T>): Comparator<T>
+            {static} +reverseOrder(): Comparator<T extends Comparable<? super T>>
+            {static} +naturalOrder(): Comparator<T extends Comparable<? super T>>
+            {static} +nullsFirst(Comparator<? super T>): Comparator<T>
+            {static} +nullsLast(Comparator<? super T>): Comparator<T>
+            {static} +comparing(Function<? super T, ? extends U>, Comparator<? super U>): Comparator<T>
+            {static} +comparing(Function<? super T, ? extends Comparable<? super U>>): Comparator<T>
+            {static} +comparingInt(ToIntFunction<? super T>): Comparator<T>
+            {static} +comparingLong(ToLongFunction<? super T>): Comparator<T>
+            {static} +comparingDouble(ToDoubleFunction<? super T>): Comparator<T>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.database.ids {
+        interface DBIDRef [[../../database/ids/DBIDRef.html]] {
+            {abstract} +internalGetIndex(): int
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

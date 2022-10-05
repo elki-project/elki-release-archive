@@ -1,0 +1,166 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.metrical.mtreevariants {
+
+        abstract class AbstractMTreeNode<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[AbstractMTreeNode.html]] {
+            +AbstractMTreeNode()
+            +AbstractMTreeNode(int, boolean)
+            +adjustEntry(E extends MTreeEntry, DBID, double, AbstractMTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>): boolean
+            +coveringRadiusFromEntries(DBID, AbstractMTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>): double
+            #integrityCheck(AbstractMTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, E extends MTreeEntry): void
+            #integrityCheckParameters(E extends MTreeEntry, N extends AbstractMTreeNode<O, N extends AbstractMTreeNode<O,N,E>, E extends MTreeEntry>, int, AbstractMTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>): void
+        }
+
+        abstract class AbstractMTree<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMTree.html]] {
+            {static} -EXTRA_INTEGRITY_CHECKS: boolean
+            +AbstractMTree(PageFile<N extends AbstractMTreeNode<O, N, E extends MTreeEntry>>, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>)
+            +getDistance(): Distance<? super O>
+            +insert(E extends MTreeEntry, boolean): void
+            +insertAll(List<E extends MTreeEntry>): void
+            #createEmptyRoot(E extends MTreeEntry): void
+            #getSortedEntries(N extends AbstractMTreeNode<O, N extends AbstractMTreeNode<O,N,E>, E extends MTreeEntry>, DBID): List<DoubleIntPair>
+            {abstract} +distance(DBIDRef, DBIDRef): double
+            +distance(E extends MTreeEntry, E extends MTreeEntry): double
+            {abstract} #createNewDirectoryEntry(N extends AbstractMTreeNode<O, N extends AbstractMTreeNode<O,N,E>, E extends MTreeEntry>, DBID, double): E extends MTreeEntry
+            -adjustTree(IndexTreePath<E extends MTreeEntry>): void
+            -hasOverflow(N extends AbstractMTreeNode<O, N extends AbstractMTreeNode<O,N,E>, E extends MTreeEntry>): boolean
+            -createNewRoot(N extends AbstractMTreeNode<O, N extends AbstractMTreeNode<O,N,E>, E extends MTreeEntry>, N extends AbstractMTreeNode<O, N extends AbstractMTreeNode<O,N,E>, E extends MTreeEntry>, DBID, DBID): IndexTreePath<E extends MTreeEntry>
+            +getHeight(): int
+            +logStatistics(): void
+            #doExtraIntegrityChecks(): void
+        }
+
+        class elki.index.tree.metrical.mtreevariants.AbstractMTree.Statistics [[AbstractMTree.Statistics.html]] {
+            #distanceCalcs: Counter
+            #knnQueries: Counter
+            #rangeQueries: Counter
+            +countDistanceCalculation(): void
+            +countKNNQuery(): void
+            +countRangeQuery(): void
+            +logStatistics(): void
+        }
+
+        abstract class AbstractMTreeFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMTreeFactory.html]] {
+            +AbstractMTreeFactory(PageFileFactory<?>, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>)
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        abstract class elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMTreeFactory.Par.html]] {
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            {static} +SPLIT_STRATEGY_ID: OptionID
+            {static} +INSERT_STRATEGY_ID: OptionID
+            +configure(Parameterization): void
+            {abstract} #makeSettings(): S extends MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+            {abstract} +make(): AbstractMTreeFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>
+        }
+
+        class MTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry> [[MTreeSettings.html]] {
+            #distanceFunction: Distance<? super O>
+        }
+
+        interface MTreeEntry [[MTreeEntry.html]] {
+            {abstract} +getRoutingObjectID(): DBID
+            {abstract} +setRoutingObjectID(DBID): boolean
+            {abstract} +getParentDistance(): double
+            {abstract} +setParentDistance(double): boolean
+            {abstract} +getCoveringRadius(): double
+            {abstract} +setCoveringRadius(double): boolean
+        }
+
+        class MTreeDirectoryEntry [[MTreeDirectoryEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: int
+            -routingObjectID: DBID
+            -parentDistance: double
+            -coveringRadius: double
+            +MTreeDirectoryEntry()
+            +MTreeDirectoryEntry(DBID, double, int, double)
+            +getPageID(): int
+            +getCoveringRadius(): double
+            +setCoveringRadius(double): boolean
+            +getRoutingObjectID(): DBID
+            +setRoutingObjectID(DBID): boolean
+            +getParentDistance(): double
+            +setParentDistance(double): boolean
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        class MTreeLeafEntry [[MTreeLeafEntry.html]] {
+            {static} -serialVersionUID: long
+            -id: DBID
+            -parentDistance: double
+            +MTreeLeafEntry()
+            +MTreeLeafEntry(DBID, double)
+            +getDBID(): DBID
+            +getRoutingObjectID(): DBID
+            +setRoutingObjectID(DBID): boolean
+            +getParentDistance(): double
+            +setParentDistance(double): boolean
+            +getCoveringRadius(): double
+            +setCoveringRadius(double): boolean
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+        }
+
+        elki.index.tree.AbstractNode <|-- AbstractMTreeNode
+        elki.index.tree.metrical.MetricalIndexTree <|-- AbstractMTree
+        AbstractMTree --> MTreeSettings: settings
+        AbstractMTree --> elki.index.tree.metrical.mtreevariants.AbstractMTree.Statistics: statistics
+        AbstractMTree --> "*" MTreeEntry: leaves
+        AbstractMTree +-- elki.index.tree.metrical.mtreevariants.AbstractMTree.Statistics
+        elki.index.PagedIndexFactory <|-- AbstractMTreeFactory
+        AbstractMTreeFactory --> MTreeSettings: settings
+        elki.index.PagedIndexFactory.Par <|-- elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par
+        AbstractMTreeFactory +-- elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par
+        elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par --> MTreeSettings: settings
+        MTreeSettings --> elki.index.tree.metrical.mtreevariants.strategies.split.MTreeSplit: splitStrategy
+        MTreeSettings --> elki.index.tree.metrical.mtreevariants.strategies.insert.MTreeInsert: insertStrategy
+        java.io.Externalizable <|-- MTreeEntry
+        elki.index.tree.DirectoryEntry <|.. MTreeDirectoryEntry
+        MTreeEntry <|.. MTreeDirectoryEntry
+        elki.index.tree.LeafEntry <|.. MTreeLeafEntry
+        MTreeEntry <|.. MTreeLeafEntry
+    }
+
+    namespace elki.index.tree {
+        abstract class AbstractNode<E> [[../../AbstractNode.html]] {
+            #numEntries: int
+            #entries: Object[]
+            #isLeaf: boolean
+        }
+        interface DirectoryEntry [[../../DirectoryEntry.html]] {
+            {abstract} +getPageID(): int
+        }
+        interface LeafEntry [[../../LeafEntry.html]] {
+            {abstract} +getDBID(): DBID
+        }
+    }
+
+    namespace elki.index.tree.metrical {
+        abstract class MetricalIndexTree<O, N extends Node<E>, E> [[../MetricalIndexTree.html]] {
+            {abstract} +getDistance(): Distance<? super O>
+            {abstract} +getLeaves(): List<E>
+        }
+    }
+
+    namespace elki.index {
+        abstract class PagedIndexFactory<O> [[../../../PagedIndexFactory.html]] {
+            -pageFileFactory: PageFileFactory<?>
+        }
+        abstract class elki.index.PagedIndexFactory.Par<O> [[../../../PagedIndexFactory.Par.html]] {
+            {static} +PAGEFILE_ID: OptionID
+            #pageFileFactory: PageFileFactory<?>
+            {abstract} +make(): PagedIndexFactory<O>
+        }
+    }
+
+    namespace java.io {
+        interface Externalizable {
+            {abstract} +writeExternal(ObjectOutput): void
+            {abstract} +readExternal(ObjectInput): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

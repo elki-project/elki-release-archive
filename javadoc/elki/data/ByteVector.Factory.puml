@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByteVector.Factory\n<size:10>elki.data" as elki.data.ByteVector.Factory [[ByteVector.Factory.html]] {
+        +newFeatureVector(A, ArrayAdapter<? extends Number, A>): ByteVector
+        +newNumberVector(A, NumberArrayAdapter<?, ? super A>): ByteVector
+        +getDefaultSerializer(): ByteBufferSerializer<ByteVector>
+        +getRestrictionClass(): Class<? super ByteVector>
+    }
+
+    interface "<size:14>NumberVector.Factory\n<size:10>elki.data" as elki.data.NumberVector.Factory<ByteVector> [[NumberVector.Factory.html]] {
+        {abstract} +newNumberVector(A, NumberArrayAdapter<?, ? super A>): ByteVector
+    }
+    class "<size:14>ByteVector\n<size:10>elki.data" as elki.data.ByteVector [[ByteVector.html]]
+    class "<size:14>ByteVector.Factory.Par\n<size:10>elki.data" as elki.data.ByteVector.Factory.Par [[ByteVector.Factory.Par.html]]
+
+    elki.data.NumberVector.Factory <|.. elki.data.ByteVector.Factory
+    elki.data.ByteVector +-- elki.data.ByteVector.Factory
+    elki.data.ByteVector.Factory +-- elki.data.ByteVector.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

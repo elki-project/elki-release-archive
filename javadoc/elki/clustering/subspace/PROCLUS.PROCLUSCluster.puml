@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PROCLUS.PROCLUSCluster\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PROCLUS.PROCLUSCluster [[PROCLUS.PROCLUSCluster.html]] {
+        ~objectIDs: ModifiableDBIDs
+        ~dimensions: long[]
+        ~centroid: double[]
+        +PROCLUSCluster(ModifiableDBIDs, long[], double[])
+        +getDimensions(): long[]
+    }
+
+    class "<size:14>PROCLUS\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PROCLUS [[PROCLUS.html]]
+
+    elki.clustering.subspace.PROCLUS +-- elki.clustering.subspace.PROCLUS.PROCLUSCluster
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

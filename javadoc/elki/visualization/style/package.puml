@@ -1,0 +1,150 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.style {
+
+        interface ClassStylingPolicy [[ClassStylingPolicy.html]] {
+            {abstract} +getStyleForDBID(DBIDRef): int
+            {abstract} +getMinStyle(): int
+            {abstract} +getMaxStyle(): int
+            {abstract} +iterateClass(int): DBIDIter
+            {abstract} +classSize(int): int
+        }
+
+        interface StyleLibrary [[StyleLibrary.html]] {
+            {static} +DEFAULT: String
+            {static} +PAGE: String
+            {static} +PLOT: String
+            {static} +AXIS: String
+            {static} +AXIS_TICK: String
+            {static} +AXIS_TICK_MINOR: String
+            {static} +AXIS_LABEL: String
+            {static} +KEY: String
+            {static} +CLUSTERORDER: String
+            {static} +MARGIN: String
+            {static} +BUBBLEPLOT: String
+            {static} +MARKERPLOT: String
+            {static} +DOTPLOT: String
+            {static} +PLOTGRAY: String
+            {static} +REFERENCE_POINTS: String
+            {static} +POLYGONS: String
+            {static} +SELECTION: String
+            {static} +SELECTION_ACTIVE: String
+            {static} +SCALE: double
+            {static} +COLOR: String
+            {static} +BACKGROUND_COLOR: String
+            {static} +TEXT_COLOR: String
+            {static} +COLORSET: String
+            {static} +LINE_WIDTH: String
+            {static} +TEXT_SIZE: String
+            {static} +FONT_FAMILY: String
+            {static} +GENERIC_SIZE: String
+            {static} +OPACITY: String
+            {static} +XYCURVE: String
+            {abstract} +getColor(String): String
+            {abstract} +getBackgroundColor(String): String
+            {abstract} +getTextColor(String): String
+            {abstract} +getColorSet(String): ColorLibrary
+            {abstract} +getLineWidth(String): double
+            {abstract} +getSize(String): double
+            {abstract} +getTextSize(String): double
+            {abstract} +getFontFamily(String): String
+            {abstract} +getOpacity(String): double
+            {abstract} +lines(): LineStyleLibrary
+            {abstract} +markers(): MarkerLibrary
+        }
+
+        class PropertiesBasedStyleLibrary [[PropertiesBasedStyleLibrary.html]] {
+            {static} -LOG: Logging
+            {static} +DEFAULT_SCHEME_NAME: String
+            {static} +DEFAULT_SCHEME_FILENAME: String
+            {static} +DEFAULT_PROPERTIES_EXTENSION: String
+            {static} -DEFAULT_PROPERTIES_PATH: String
+            {static} +LIST_SEPARATOR: String
+            {static} +PROP_LINES_LIBRARY: String
+            {static} +PROP_MARKER_LIBRARY: String
+            -properties: Properties
+            -name: String
+            -cache: Map<String, Object>
+            +PropertiesBasedStyleLibrary()
+            +PropertiesBasedStyleLibrary(String, String)
+            #getName(): String
+            -getCached(String, String, Class<T>): T
+            -setCached(String, String, T): void
+            #getPropertyValue(String, String): String
+            +getColor(String): String
+            +getBackgroundColor(String): String
+            +getTextColor(String): String
+            +getColorSet(String): ColorLibrary
+            +getLineWidth(String): double
+            +getTextSize(String): double
+            +getFontFamily(String): String
+            +getSize(String): double
+            +getOpacity(String): double
+            +lines(): LineStyleLibrary
+            +markers(): MarkerLibrary
+        }
+
+        interface StylingPolicy [[StylingPolicy.html]] {
+            {abstract} +getColorForDBID(DBIDRef): int
+            +getIntensityForDBID(DBIDRef): double
+        }
+
+        interface SingleObjectsStylingPolicy [[SingleObjectsStylingPolicy.html]]
+
+        enum ColorInterpolation [[ColorInterpolation.html]] {
+            {static} +RGB
+            {static} +HSV
+            {abstract} +interpolate(String, String, double): String
+        }
+
+        class ClusterStylingPolicy [[ClusterStylingPolicy.html]] {
+            ~ids: ArrayList<DBIDs>
+            ~cmap: Object2IntOpenHashMap<Cluster<?>>
+            ~colors: IntArrayList
+            ~clustering: Clustering<?>
+            ~intensities: WritableDoubleDataStore
+            ~minint: double
+            ~maxint: double
+            +ClusterStylingPolicy(Clustering<?>, StyleLibrary)
+            +getStyleForDBID(DBIDRef): int
+            +getColorForDBID(DBIDRef): int
+            +getIntensityForDBID(DBIDRef): double
+            +getMinStyle(): int
+            +getMaxStyle(): int
+            +iterateClass(int): DBIDIter
+            +classSize(int): int
+            +getClustering(): Clustering<?>
+            +getStyleForCluster(Cluster<?>): int
+            +getMenuName(): String
+        }
+
+        enum elki.visualization.style.ClusterStylingPolicy.IntensityTransform [[ClusterStylingPolicy.IntensityTransform.html]] {
+            {static} +MAXLINEAR
+            {static} +SCALEDLINEAR
+            {static} +MAXQUADRATIC
+            {static} +MAX2QUOTIENT
+            {static} +MAX2QUOTIENTQUAD
+            {static} +MAX2SUBTRACT
+            {abstract} +transform(double[]): double
+            +scale(double, double, double): double
+        }
+
+        StylingPolicy <|-- ClassStylingPolicy
+        StyleLibrary <|.. PropertiesBasedStyleLibrary
+        PropertiesBasedStyleLibrary --> elki.visualization.style.lines.LineStyleLibrary: linelib
+        PropertiesBasedStyleLibrary --> elki.visualization.style.marker.MarkerLibrary: markerlib
+        elki.visualization.VisualizationItem <|-- StylingPolicy
+        StylingPolicy <|-- SingleObjectsStylingPolicy
+        ClassStylingPolicy <|.. ClusterStylingPolicy
+        ClusterStylingPolicy --> elki.visualization.style.ClusterStylingPolicy.IntensityTransform: inttrans
+        ClusterStylingPolicy +-- elki.visualization.style.ClusterStylingPolicy.IntensityTransform
+    }
+
+    namespace elki.visualization {
+        interface VisualizationItem [[../VisualizationItem.html]] {
+            {abstract} +getMenuName(): String
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

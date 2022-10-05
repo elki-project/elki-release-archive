@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RayleighMLEEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.RayleighMLEEstimator [[RayleighMLEEstimator.html]] {
+        {static} +STATIC: RayleighMLEEstimator
+        +estimate(A, NumberArrayAdapter<?, A>): RayleighDistribution
+        +getDistributionClass(): Class<? super RayleighDistribution>
+    }
+
+    interface "<size:14>DistributionEstimator\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.DistributionEstimator<RayleighDistribution> [[DistributionEstimator.html]] {
+        {abstract} +estimate(A, NumberArrayAdapter<?, A>): RayleighDistribution
+        {abstract} +getDistributionClass(): Class<? super Distribution>
+    }
+    class "<size:14>RayleighMLEEstimator.Par\n<size:10>elki.math.statistics.distribution.estimator" as elki.math.statistics.distribution.estimator.RayleighMLEEstimator.Par [[RayleighMLEEstimator.Par.html]]
+
+    elki.math.statistics.distribution.estimator.DistributionEstimator <|.. elki.math.statistics.distribution.estimator.RayleighMLEEstimator
+    elki.math.statistics.distribution.estimator.RayleighMLEEstimator +-- elki.math.statistics.distribution.estimator.RayleighMLEEstimator.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

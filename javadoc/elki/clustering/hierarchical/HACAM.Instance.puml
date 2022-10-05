@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HACAM.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HACAM.Instance [[HACAM.Instance.html]] {
+        #variant: Variant
+        #clusters: Int2ObjectOpenHashMap<ModifiableDBIDs>
+        #tds: double[]
+        #dq: DistanceQuery<?>
+        #prots: DBIDArrayMIter
+        #ix: DBIDArrayIter
+        #iy: DBIDArrayIter
+        +Instance(Variant)
+        +run(ClusterDistanceMatrix, ClusterMergeHistoryBuilder): ClusterMergeHistory
+        +run(ArrayDBIDs, ClusterDistanceMatrix, ClusterMergeHistoryBuilder, DistanceQuery<?>, DBIDArrayMIter): ClusterPrototypeMergeHistory
+        #findMerge(): int
+        #merge(int, int): void
+        -updateMatrices(int, int): void
+        #updateEntry(int, int): void
+        {static} -findPrototype(DistanceQuery<?>, DBIDs, DBIDs, DBIDVar, double): double
+        {static} -findPrototypeSingleton(DistanceQuery<?>, DBIDs, DBIDRef, DBIDVar): double
+        {static} -distanceSum(DistanceQuery<?>, DBIDIter, DBIDs, double, double): double
+    }
+
+    class "<size:14>Anderberg.Instance\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.Anderberg.Instance [[Anderberg.Instance.html]]
+    class "<size:14>HACAM\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.HACAM<O> [[HACAM.html]]
+
+    elki.clustering.hierarchical.Anderberg.Instance <|-- elki.clustering.hierarchical.HACAM.Instance
+    elki.clustering.hierarchical.HACAM +-- elki.clustering.hierarchical.HACAM.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

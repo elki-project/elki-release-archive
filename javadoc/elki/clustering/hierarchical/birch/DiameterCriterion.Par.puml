@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DiameterCriterion.Par\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.DiameterCriterion.Par [[DiameterCriterion.Par.html]] {
+        +make(): DiameterCriterion
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>DiameterCriterion\n<size:10>elki.clustering.hierarchical.birch" as elki.clustering.hierarchical.birch.DiameterCriterion [[DiameterCriterion.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.birch.DiameterCriterion.Par
+    elki.clustering.hierarchical.birch.DiameterCriterion +-- elki.clustering.hierarchical.birch.DiameterCriterion.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

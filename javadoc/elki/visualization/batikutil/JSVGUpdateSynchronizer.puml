@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>JSVGUpdateSynchronizer\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.JSVGUpdateSynchronizer [[JSVGUpdateSynchronizer.html]] {
+        -cref: WeakReference<JSVGComponent>
+        -updaterunner: Set<WeakReference<UpdateRunner>>
+        -umadapter: UMAdapter
+        -pending: AtomicReference<Runnable>
+        #JSVGUpdateSynchronizer(JSVGComponent)
+        +activate(): void
+        #makeRunnerIfNeeded(): void
+        +addUpdateRunner(UpdateRunner): void
+    }
+
+    interface "<size:14>UpdateSynchronizer\n<size:10>elki.visualization.svg" as elki.visualization.svg.UpdateSynchronizer [[../svg/UpdateSynchronizer.html]] {
+        {abstract} +activate(): void
+        {abstract} +addUpdateRunner(UpdateRunner): void
+    }
+    class "<size:14>JSVGUpdateSynchronizer.UMAdapter\n<size:10>elki.visualization.batikutil" as elki.visualization.batikutil.JSVGUpdateSynchronizer.UMAdapter [[JSVGUpdateSynchronizer.UMAdapter.html]]
+
+    elki.visualization.svg.UpdateSynchronizer <|.. elki.visualization.batikutil.JSVGUpdateSynchronizer
+    elki.visualization.batikutil.JSVGUpdateSynchronizer +-- elki.visualization.batikutil.JSVGUpdateSynchronizer.UMAdapter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

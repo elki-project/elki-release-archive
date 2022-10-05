@@ -1,0 +1,60 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree.spatial.rstarvariants.strategies.reinsert {
+
+        class FarReinsert [[FarReinsert.html]] {
+            +FarReinsert(double, SpatialPrimitiveDistance<?>)
+            +computeReinserts(A, ArrayAdapter<? extends SpatialComparable, ? super A>, SpatialComparable): int[]
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.reinsert.FarReinsert.Par [[FarReinsert.Par.html]] {
+            +make(): FarReinsert
+        }
+
+        abstract class AbstractPartialReinsert [[AbstractPartialReinsert.html]] {
+            #reinsertAmount: double
+            ~distance: SpatialPrimitiveDistance<?>
+            +AbstractPartialReinsert(double, SpatialPrimitiveDistance<?>)
+        }
+
+        abstract class elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert.Par [[AbstractPartialReinsert.Par.html]] {
+            {static} +REINSERT_AMOUNT_ID: OptionID
+            {static} +REINSERT_DISTANCE_ID: OptionID
+            ~reinsertAmount: double
+            ~distance: SpatialPrimitiveDistance<?>
+            +configure(Parameterization): void
+        }
+
+        class CloseReinsert [[CloseReinsert.html]] {
+            +CloseReinsert(double, SpatialPrimitiveDistance<?>)
+            +computeReinserts(A, ArrayAdapter<? extends SpatialComparable, ? super A>, SpatialComparable): int[]
+        }
+
+        class elki.index.tree.spatial.rstarvariants.strategies.reinsert.CloseReinsert.Par [[CloseReinsert.Par.html]] {
+            +make(): CloseReinsert
+        }
+
+        interface ReinsertStrategy [[ReinsertStrategy.html]] {
+            {abstract} +computeReinserts(A, ArrayAdapter<? extends SpatialComparable, ? super A>, SpatialComparable): int[]
+        }
+
+        AbstractPartialReinsert <|-- FarReinsert
+        elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert.Par <|-- elki.index.tree.spatial.rstarvariants.strategies.reinsert.FarReinsert.Par
+        FarReinsert +-- elki.index.tree.spatial.rstarvariants.strategies.reinsert.FarReinsert.Par
+        ReinsertStrategy <|.. AbstractPartialReinsert
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert.Par
+        AbstractPartialReinsert +-- elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert.Par
+        AbstractPartialReinsert <|-- CloseReinsert
+        elki.index.tree.spatial.rstarvariants.strategies.reinsert.AbstractPartialReinsert.Par <|-- elki.index.tree.spatial.rstarvariants.strategies.reinsert.CloseReinsert.Par
+        CloseReinsert +-- elki.index.tree.spatial.rstarvariants.strategies.reinsert.CloseReinsert.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

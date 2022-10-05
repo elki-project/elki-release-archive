@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WrappedRKNNDBIDByLookup\n<size:10>elki.database.query.rknn" as elki.database.query.rknn.WrappedRKNNDBIDByLookup<O> [[WrappedRKNNDBIDByLookup.html]] {
+        -relation: Relation<? extends O>
+        -inner: RKNNSearcher<O>
+        -WrappedRKNNDBIDByLookup(Relation<? extends O>, RKNNSearcher<O>)
+        +getRKNN(DBIDRef, int): DoubleDBIDList
+        {static} +wrap(Relation<? extends O>, RKNNSearcher<O>): RKNNSearcher<DBIDRef>
+    }
+
+    interface "<size:14>RKNNSearcher\n<size:10>elki.database.query.rknn" as elki.database.query.rknn.RKNNSearcher<DBIDRef> [[RKNNSearcher.html]] {
+        {abstract} +getRKNN(DBIDRef, int): DoubleDBIDList
+    }
+    class "<size:14>WrappedRKNNDBIDByLookup.Linear\n<size:10>elki.database.query.rknn" as elki.database.query.rknn.WrappedRKNNDBIDByLookup.Linear<O> [[WrappedRKNNDBIDByLookup.Linear.html]]
+
+    elki.database.query.rknn.RKNNSearcher <|.. elki.database.query.rknn.WrappedRKNNDBIDByLookup
+    elki.database.query.rknn.WrappedRKNNDBIDByLookup +-- elki.database.query.rknn.WrappedRKNNDBIDByLookup.Linear
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

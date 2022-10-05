@@ -1,0 +1,42 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSXi\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi [[OPTICSXi.html]] {
+        {static} -LOG: Logging
+        ~optics: OPTICSTypeAlgorithm
+        ~xi: double
+        ~nocorrect: boolean
+        ~keepsteep: boolean
+        +OPTICSXi(OPTICSTypeAlgorithm, double, boolean, boolean)
+        +OPTICSXi(OPTICSTypeAlgorithm, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +autorun(Database): Clustering<OPTICSModel>
+        +run(ClusterOrder): Clustering<OPTICSModel>
+        -extractClusters(ClusterOrder, double, int): Clustering<OPTICSModel>
+        {static} -predecessorFilter(ClusterOrder, int, int, DBIDArrayIter): int
+        {static} -updateFilterSDASet(double, List<SteepDownArea>, double): void
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<OPTICSModel>> [[../ClusteringAlgorithm.html]]
+    class "<size:14>OPTICSXi.ClusterHierarchyBuilder\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi.ClusterHierarchyBuilder [[OPTICSXi.ClusterHierarchyBuilder.html]]
+    class "<size:14>OPTICSXi.SteepScanPosition\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi.SteepScanPosition [[OPTICSXi.SteepScanPosition.html]]
+    abstract class "<size:14>OPTICSXi.SteepArea\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi.SteepArea [[OPTICSXi.SteepArea.html]]
+    class "<size:14>OPTICSXi.SteepDownArea\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi.SteepDownArea [[OPTICSXi.SteepDownArea.html]]
+    class "<size:14>OPTICSXi.SteepUpArea\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi.SteepUpArea [[OPTICSXi.SteepUpArea.html]]
+    class "<size:14>OPTICSXi.SteepAreaResult\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi.SteepAreaResult [[OPTICSXi.SteepAreaResult.html]]
+    class "<size:14>OPTICSXi.Par\n<size:10>elki.clustering.optics" as elki.clustering.optics.OPTICSXi.Par [[OPTICSXi.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.optics.OPTICSXi
+    elki.clustering.optics.OPTICSXi +-- elki.clustering.optics.OPTICSXi.ClusterHierarchyBuilder
+    elki.clustering.optics.OPTICSXi +-- elki.clustering.optics.OPTICSXi.SteepScanPosition
+    elki.clustering.optics.OPTICSXi +-- elki.clustering.optics.OPTICSXi.SteepArea
+    elki.clustering.optics.OPTICSXi +-- elki.clustering.optics.OPTICSXi.SteepDownArea
+    elki.clustering.optics.OPTICSXi +-- elki.clustering.optics.OPTICSXi.SteepUpArea
+    elki.clustering.optics.OPTICSXi +-- elki.clustering.optics.OPTICSXi.SteepAreaResult
+    elki.clustering.optics.OPTICSXi +-- elki.clustering.optics.OPTICSXi.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

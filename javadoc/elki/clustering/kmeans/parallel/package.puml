@@ -1,0 +1,84 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.kmeans.parallel {
+
+        class ParallelLloydKMeans<V extends NumberVector> [[ParallelLloydKMeans.html]] {
+            {static} -LOG: Logging
+            +ParallelLloydKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): Clustering<KMeansModel>
+            #getLogger(): Logging
+        }
+
+        class elki.clustering.kmeans.parallel.ParallelLloydKMeans.Par<V extends NumberVector> {
+            +make(): ParallelLloydKMeans<V extends NumberVector>
+        }
+
+        class KMeansProcessor<V extends NumberVector> [[KMeansProcessor.html]] {
+            ~relation: Relation<V extends NumberVector>
+            ~distance: NumberVectorDistance<? super NumberVector>
+            ~assignment: WritableIntegerDataStore
+            ~means: double[]
+            ~centroids: double[]
+            ~sizes: int[]
+            ~varsum: double[]
+            ~changed: boolean
+            +KMeansProcessor(Relation<V extends NumberVector>, NumberVectorDistance<? super NumberVector>, WritableIntegerDataStore, double[])
+            +changed(): boolean
+            +nextIteration(double[]): void
+            +instantiate(Executor): Instance<V extends NumberVector>
+            +cleanup(Instance): void
+            +getMeans(): double[]
+        }
+
+        class elki.clustering.kmeans.parallel.KMeansProcessor.Instance<V extends NumberVector> [[KMeansProcessor.Instance.html]] {
+            -relation: Relation<V extends NumberVector>
+            -distance: NumberVectorDistance<? super NumberVector>
+            -assignment: WritableIntegerDataStore
+            -means: double[]
+            -centroids: double[]
+            -sizes: int[]
+            -varsum: double[]
+            -changed: boolean
+            +Instance(Relation<V extends NumberVector>, NumberVectorDistance<? super NumberVector>, WritableIntegerDataStore, double[])
+            +map(DBIDRef): void
+        }
+
+        elki.clustering.kmeans.AbstractKMeans <|-- ParallelLloydKMeans
+        elki.clustering.kmeans.AbstractKMeans.Par <|-- elki.clustering.kmeans.parallel.ParallelLloydKMeans.Par
+        ParallelLloydKMeans +-- elki.clustering.kmeans.parallel.ParallelLloydKMeans.Par
+        elki.parallel.processor.Processor <|.. KMeansProcessor
+        elki.parallel.processor.Processor.Instance <|.. elki.clustering.kmeans.parallel.KMeansProcessor.Instance
+        KMeansProcessor +-- elki.clustering.kmeans.parallel.KMeansProcessor.Instance
+    }
+
+    namespace elki.clustering.kmeans {
+        abstract class AbstractKMeans<V extends NumberVector, M extends Model> [[../AbstractKMeans.html]] {
+            #distance: NumberVectorDistance<? super NumberVector>
+            #k: int
+            #maxiter: int
+            #initializer: KMeansInitialization
+            {abstract} #getLogger(): Logging
+        }
+        abstract class elki.clustering.kmeans.AbstractKMeans.Par<V extends NumberVector> [[../AbstractKMeans.Par.html]] {
+            #k: int
+            #maxiter: int
+            #initializer: KMeansInitialization
+            #varstat: boolean
+            #distance: NumberVectorDistance<? super NumberVector>
+            {abstract} +make(): AbstractKMeans<V extends NumberVector, ?>
+        }
+    }
+
+    namespace elki.parallel.processor {
+        interface Processor [[../../../parallel/processor/Processor.html]] {
+            {abstract} +instantiate(Executor): Instance
+            {abstract} +cleanup(Instance): void
+        }
+        interface elki.parallel.processor.Processor.Instance [[../../../parallel/processor/Processor.Instance.html]] {
+            {abstract} +map(DBIDRef): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

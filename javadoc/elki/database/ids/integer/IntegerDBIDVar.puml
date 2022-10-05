@@ -1,0 +1,43 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>IntegerDBIDVar\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDVar [[IntegerDBIDVar.html]] {
+        ~id: int
+        #IntegerDBIDVar()
+        #IntegerDBIDVar(DBIDRef)
+        +internalGetIndex(): int
+        #internalSetIndex(int): void
+        +set(DBIDRef): DBIDVar
+        +--get--(int): DBID
+        +size(): int
+        +isEmpty(): boolean
+        +unset(): void
+        +isSet(): boolean
+        +binarySearch(DBIDRef): int
+        +contains(DBIDRef): boolean
+        +assignVar(int, DBIDVar): DBIDVar
+        +from(DBIDDataStore, DBIDRef): DBIDVar
+        +slice(int, int): ArrayDBIDs
+        +iter(): Itr
+    }
+
+    interface "<size:14>DBIDVar\n<size:10>elki.database.ids" as elki.database.ids.DBIDVar [[../DBIDVar.html]] {
+        {abstract} +set(DBIDRef): DBIDVar
+        {abstract} +from(DBIDDataStore, DBIDRef): DBIDVar
+        {abstract} +unset(): void
+        {abstract} +isSet(): boolean
+    }
+    interface "<size:14>IntegerDBIDs\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDs [[IntegerDBIDs.html]] {
+        {abstract} +iter(): IntegerDBIDIter
+    }
+    class "<size:14>IntegerDBIDVar.Itr\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDVar.Itr [[IntegerDBIDVar.Itr.html]]
+
+    elki.database.ids.DBIDVar <|.. elki.database.ids.integer.IntegerDBIDVar
+    elki.database.ids.integer.IntegerDBIDs <|.. elki.database.ids.integer.IntegerDBIDVar
+    elki.database.ids.integer.IntegerDBIDVar +-- elki.database.ids.integer.IntegerDBIDVar.Itr
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

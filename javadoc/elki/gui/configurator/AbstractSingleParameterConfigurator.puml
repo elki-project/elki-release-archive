@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractSingleParameterConfigurator\n<size:10>elki.gui.configurator" as elki.gui.configurator.AbstractSingleParameterConfigurator<T extends Parameter<?>> [[AbstractSingleParameterConfigurator.html]] {
+        ~label: JLabel
+        +AbstractSingleParameterConfigurator(T extends Parameter<?>, JComponent)
+    }
+
+    abstract class "<size:14>AbstractParameterConfigurator\n<size:10>elki.gui.configurator" as elki.gui.configurator.AbstractParameterConfigurator<T extends Parameter<?>> [[AbstractParameterConfigurator.html]] {
+        {abstract} +getUserInput(): Object
+    }
+
+    elki.gui.configurator.AbstractParameterConfigurator <|-- elki.gui.configurator.AbstractSingleParameterConfigurator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="249px" preserveAspectRatio="none" style="width:363px;height:249px;background:#FFFFFF;" version="1.1" viewBox="0 0 363 249" width="363px" zoomAndPan="magnify"><defs/><g><!--MD5=[3d4de60bdc1b25a9f289ffb57f6f1e3f]
+class elki.application.AbstractApplication--><a href="AbstractApplication.html" target="_top" title="AbstractApplication.html" xlink:actuate="onRequest" xlink:href="AbstractApplication.html" xlink:show="new" xlink:title="AbstractApplication.html" xlink:type="simple"><g id="elem_elki.application.AbstractApplication"><rect codeLine="6" fill="#F1F1F1" height="216.9063" id="elki.application.AbstractApplication" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="347" x="9" y="7"/><ellipse cx="109.25" cy="25.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M109.3594,21.3125 L108.2031,26.3906 L110.5313,26.3906 L109.3594,21.3125 Z M107.875,19.0781 L110.8594,19.0781 L114.2188,31.4688 L111.7656,31.4688 L111,28.4063 L107.7188,28.4063 L106.9688,31.4688 L104.5313,31.4688 L107.875,19.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="138" x="129.75" y="24.9951">AbstractApplication</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="76" x="160.75" y="37.5791">elki.application</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="355" y1="44.9375" y2="44.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="55.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="29" y="61.9326">LOG: Logging</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="71.8828"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="110" x="29" y="78.2295">NEWLINE: String</text><ellipse cx="20" cy="91.1797" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="110" x="29" y="94.5264">VERSION: String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="104.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="201" x="29" y="110.8232">REFERENCE_VERSION: String</text><ellipse cx="20" cy="123.7734" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="133" x="29" y="127.1201">REFERENCE: String</text><line style="stroke:#181818;stroke-width:0.5;" x1="10" x2="355" y1="134.4219" y2="134.4219"/><ellipse cx="20" cy="148.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="291" x="29" y="151.417">runCLIApplication(Class&lt;?&gt;, String[]): void</text><ellipse cx="20" cy="164.3672" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="321" x="29" y="167.7139">usage(Collection&lt;TrackedParameter&gt;): String</text><polygon fill="#FFFF44" points="20,175.6641,24,179.6641,20,183.6641,16,179.6641" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="242" x="29" y="184.0107">printErrorMessage(Exception): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="17" y="193.9609"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="225" x="29" y="200.3076">printDescription(Class&lt;?&gt;): void</text><ellipse cx="20" cy="213.2578" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="72" x="29" y="216.6045">run(): void</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="81.5" y="229.9063"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="81.5" y="239.1885">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[120f8c3e6e6c459b04eabaf6ca044cc5]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractApplication\n<size:10>elki.application" as elki.application.AbstractApplication [[AbstractApplication.html]] {
+        {static} -LOG: Logging
+        {static} -NEWLINE: String
+        {static} +VERSION: String
+        {static} -REFERENCE_VERSION: String
+        {static} +REFERENCE: String
+        {static} +runCLIApplication(Class<?>, String[]): void
+        {static} +usage(Collection<TrackedParameter>): String
+        {static} #printErrorMessage(Exception): void
+        {static} -printDescription(Class<?>): void
+        {abstract} +run(): void
+    }
+    abstract class "<size:14>AbstractApplication.Par\n<size:10>elki.application" as elki.application.AbstractApplication.Par [[AbstractApplication.Par.html]]
+
+    elki.application.AbstractApplication +- - elki.application.AbstractApplication.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

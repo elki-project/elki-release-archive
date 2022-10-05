@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>WeightedNeighborSetPredicate\n<size:10>elki.outlier.spatial.neighborhood.weighted" as elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate [[WeightedNeighborSetPredicate.html]] {
+        {abstract} +getWeightedNeighbors(DBIDRef): Collection<DoubleDBIDPair>
+    }
+    interface "<size:14>WeightedNeighborSetPredicate.Factory\n<size:10>elki.outlier.spatial.neighborhood.weighted" as elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate.Factory<O> [[WeightedNeighborSetPredicate.Factory.html]]
+
+    elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate +-- elki.outlier.spatial.neighborhood.weighted.WeightedNeighborSetPredicate.Factory
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

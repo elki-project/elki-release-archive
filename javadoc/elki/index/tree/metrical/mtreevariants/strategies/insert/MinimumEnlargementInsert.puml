@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MinimumEnlargementInsert\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.insert" as elki.index.tree.metrical.mtreevariants.strategies.insert.MinimumEnlargementInsert<N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry> [[MinimumEnlargementInsert.html]] {
+        +choosePath(AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, E extends MTreeEntry): IndexTreePath<E extends MTreeEntry>
+        -choosePath(AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, E extends MTreeEntry, IndexTreePath<E extends MTreeEntry>): IndexTreePath<E extends MTreeEntry>
+    }
+
+    interface "<size:14>MTreeInsert\n<size:10>elki.index.tree.metrical.mtreevariants.strategies.insert" as elki.index.tree.metrical.mtreevariants.strategies.insert.MTreeInsert<E extends MTreeEntry, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>> [[MTreeInsert.html]] {
+        {abstract} +choosePath(AbstractMTree<?, N extends AbstractMTreeNode<?, N, E extends MTreeEntry>, E extends MTreeEntry, ?>, E extends MTreeEntry): IndexTreePath<E extends MTreeEntry>
+    }
+
+    elki.index.tree.metrical.mtreevariants.strategies.insert.MTreeInsert <|.. elki.index.tree.metrical.mtreevariants.strategies.insert.MinimumEnlargementInsert
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

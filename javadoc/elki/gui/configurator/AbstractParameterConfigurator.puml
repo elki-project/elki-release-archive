@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractParameterConfigurator\n<size:10>elki.gui.configurator" as elki.gui.configurator.AbstractParameterConfigurator<T extends Parameter<?>> [[AbstractParameterConfigurator.html]] {
+        ~param: T extends Parameter<?>
+        ~parent: JComponent
+        #listenerList: EventListenerList
+        +AbstractParameterConfigurator(T extends Parameter<?>, JComponent)
+        #finishGridRow(): void
+        +addParameter(Object, Parameter<?>, TrackParameters): void
+        +addChangeListener(ChangeListener): void
+        +removeChangeListener(ChangeListener): void
+        #fireValueChanged(): void
+        +appendParameters(ListParameterization): void
+        {abstract} +getUserInput(): Object
+    }
+
+    interface "<size:14>ParameterConfigurator\n<size:10>elki.gui.configurator" as elki.gui.configurator.ParameterConfigurator [[ParameterConfigurator.html]] {
+        {abstract} +addParameter(Object, Parameter<?>, TrackParameters): void
+        {abstract} +addChangeListener(ChangeListener): void
+        {abstract} +removeChangeListener(ChangeListener): void
+        {abstract} +appendParameters(ListParameterization): void
+    }
+
+    elki.gui.configurator.ParameterConfigurator <|.. elki.gui.configurator.AbstractParameterConfigurator
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

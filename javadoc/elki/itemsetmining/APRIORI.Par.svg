@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="69px" preserveAspectRatio="none" style="width:194px;height:69px;background:#FFFFFF;" version="1.1" viewBox="0 0 194 69" width="194px" zoomAndPan="magnify"><defs/><g><!--MD5=[7692e53c613784ea2079fc6c9a82d547]
+class elki.itemsetmining.APRIORI--><a href="APRIORI.html" target="_top" title="APRIORI.html" xlink:actuate="onRequest" xlink:href="APRIORI.html" xlink:show="new" xlink:title="APRIORI.html" xlink:type="simple"><g id="elem_elki.itemsetmining.APRIORI"><rect codeLine="11" fill="#F1F1F1" height="37.9375" id="elki.itemsetmining.APRIORI" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="119" x="40.5" y="7"/><ellipse cx="55.5" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M58.4688,31.6094 Q57.8906,31.9063 57.25,32.0469 Q56.6094,32.2031 55.9063,32.2031 Q53.4063,32.2031 52.0781,30.5625 Q50.7656,28.9063 50.7656,25.7813 Q50.7656,22.6563 52.0781,21 Q53.4063,19.3438 55.9063,19.3438 Q56.6094,19.3438 57.25,19.5 Q57.9063,19.6563 58.4688,19.9531 L58.4688,22.6719 Q57.8438,22.0938 57.25,21.8281 Q56.6563,21.5469 56.0313,21.5469 Q54.6875,21.5469 54,22.625 Q53.3125,23.6875 53.3125,25.7813 Q53.3125,27.875 54,28.9531 Q54.6875,30.0156 56.0313,30.0156 Q56.6563,30.0156 57.25,29.75 Q57.8438,29.4688 58.4688,28.8906 L58.4688,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="85.5" y="24.9951">APRIORI</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="87" x="69.5" y="37.5791">elki.itemsetmining</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="0" y="49.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="0" y="59.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[1c0b3954934303c72bf85118b1286d8e]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>APRIORI.Par\n<size:10>elki.itemsetmining" as elki.itemsetmining.APRIORI.Par [[APRIORI.Par.html]] {
+        +make(): APRIORI
+    }
+
+    abstract class "<size:14>AbstractFrequentItemsetAlgorithm.Par\n<size:10>elki.itemsetmining" as elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par [[AbstractFrequentItemsetAlgorithm.Par.html]]
+    class "<size:14>APRIORI\n<size:10>elki.itemsetmining" as elki.itemsetmining.APRIORI [[APRIORI.html]]
+
+    elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par <|- - elki.itemsetmining.APRIORI.Par
+    elki.itemsetmining.APRIORI +- - elki.itemsetmining.APRIORI.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

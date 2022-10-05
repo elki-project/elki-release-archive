@@ -1,0 +1,34 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PAM\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.PAM<O> [[PAM.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super O>
+        #k: int
+        #maxiter: int
+        #initializer: KMedoidsInitialization<O>
+        +PAM(Distance<? super O>, int, int, KMedoidsInitialization<O>)
+        +run(Relation<O>): Clustering<MedoidModel>
+        +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+        #initialMedoids(DistanceQuery<? super O>, DBIDs, int): ArrayModifiableDBIDs
+        {static} #wrapResult(DBIDs, WritableIntegerDataStore, ArrayModifiableDBIDs, String): Clustering<MedoidModel>
+        +getInputTypeRestriction(): TypeInformation[]
+        #getLogger(): Logging
+    }
+
+    interface "<size:14>KMedoidsClustering\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.KMedoidsClustering<O> [[KMedoidsClustering.html]] {
+        {abstract} +run(Relation<O>): Clustering<MedoidModel>
+        {abstract} +run(Relation<O>, int, DistanceQuery<? super O>): Clustering<MedoidModel>
+    }
+    class "<size:14>PAM.Instance\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.PAM.Instance [[PAM.Instance.html]]
+    class "<size:14>PAM.Par\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.PAM.Par<O> [[PAM.Par.html]]
+
+    elki.clustering.kmedoids.KMedoidsClustering <|.. elki.clustering.kmedoids.PAM
+    elki.clustering.kmedoids.PAM +-- elki.clustering.kmedoids.PAM.Instance
+    elki.clustering.kmedoids.PAM +-- elki.clustering.kmedoids.PAM.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

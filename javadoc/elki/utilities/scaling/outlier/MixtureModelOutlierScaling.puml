@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MixtureModelOutlierScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.MixtureModelOutlierScaling [[MixtureModelOutlierScaling.html]] {
+        {static} -LOG: Logging
+        #mu: double
+        #sigma: double
+        #lambda: double
+        #alpha: double
+        {static} +ONEBYSQRT2PI: double
+        {static} -DELTA: double
+        {static} #calcP_i(double, double, double): double
+        {static} #calcQ_i(double, double): double
+        {static} #calcPosterior(double, double, double, double, double): double
+        +prepare(OutlierResult): void
+        +prepare(A, NumberArrayAdapter<?, A>): void
+        +getMax(): double
+        +getMin(): double
+        +getScaled(double): double
+    }
+
+    interface "<size:14>OutlierScaling\n<size:10>elki.utilities.scaling.outlier" as elki.utilities.scaling.outlier.OutlierScaling [[OutlierScaling.html]] {
+        {abstract} +prepare(OutlierResult): void
+        {abstract} +prepare(A, NumberArrayAdapter<?, A>): void
+    }
+
+    elki.utilities.scaling.outlier.OutlierScaling <|.. elki.utilities.scaling.outlier.MixtureModelOutlierScaling
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

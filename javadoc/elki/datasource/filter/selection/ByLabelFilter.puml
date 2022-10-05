@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByLabelFilter\n<size:10>elki.datasource.filter.selection" as elki.datasource.filter.selection.ByLabelFilter [[ByLabelFilter.html]] {
+        {static} -LOG: Logging
+        -matcher: Matcher
+        -inverted: boolean
+        -lblcol: int
+        +ByLabelFilter(Pattern, boolean)
+        +getMeta(): BundleMeta
+        +data(int): Object
+        +nextEvent(): Event
+    }
+
+    abstract class "<size:14>AbstractStreamFilter\n<size:10>elki.datasource.filter" as elki.datasource.filter.AbstractStreamFilter [[../AbstractStreamFilter.html]]
+    class "<size:14>ByLabelFilter.Par\n<size:10>elki.datasource.filter.selection" as elki.datasource.filter.selection.ByLabelFilter.Par [[ByLabelFilter.Par.html]]
+
+    elki.datasource.filter.AbstractStreamFilter <|-- elki.datasource.filter.selection.ByLabelFilter
+    elki.datasource.filter.selection.ByLabelFilter +-- elki.datasource.filter.selection.ByLabelFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

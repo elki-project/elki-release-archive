@@ -1,0 +1,68 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Logging\n<size:10>elki.logging" as elki.logging.Logging [[Logging.html]] {
+        {static} -loggers: HashMap<String, Logging>
+        -logger: Logger
+        +Logging(Logger)
+        {static} +getLogger(Class<?>): Logging
+        {static} +getLogger(String): Logging
+        +isLoggable(Level): boolean
+        +isStatistics(): boolean
+        +isVerbose(): boolean
+        +isInfo(): boolean
+        +isVeryVerbose(): boolean
+        +isDebugging(): boolean
+        +isDebuggingFine(): boolean
+        +isDebuggingFiner(): boolean
+        +isDebuggingFinest(): boolean
+        +log(Level, CharSequence): void
+        +log(Level, CharSequence, Throwable): void
+        +log(LogRecord): void
+        +error(CharSequence, Throwable): void
+        +error(CharSequence): void
+        +warning(CharSequence, Throwable): void
+        +warning(CharSequence): void
+        +statistics(CharSequence, Throwable): void
+        +statistics(CharSequence): void
+        +verbose(CharSequence, Throwable): void
+        +verbose(CharSequence): void
+        +info(CharSequence, Throwable): void
+        +info(CharSequence): void
+        +veryverbose(CharSequence, Throwable): void
+        +veryverbose(CharSequence): void
+        +debug(CharSequence, Throwable): void
+        +debug(CharSequence): void
+        +debugFine(CharSequence, Throwable): void
+        +debugFine(CharSequence): void
+        +fine(CharSequence, Throwable): void
+        +fine(CharSequence): void
+        +debugFiner(CharSequence, Throwable): void
+        +debugFiner(CharSequence): void
+        +finer(CharSequence, Throwable): void
+        +finer(CharSequence): void
+        +debugFinest(CharSequence, Throwable): void
+        +debugFinest(CharSequence): void
+        +finest(CharSequence, Throwable): void
+        +finest(CharSequence): void
+        +exception(CharSequence, Throwable): void
+        +exception(Throwable): void
+        +progress(Progress): void
+        +newCounter(String): Counter
+        +newDuration(String): Duration
+        +incrementProcessed(AbstractProgress): void
+        +ensureCompleted(FiniteProgress): void
+        +beginStep(StepProgress, int, String): void
+        +setCompleted(StepProgress): void
+        +setCompleted(IndefiniteProgress): void
+        +statistics(Statistic): void
+    }
+    class "<size:14>Logging.Level\n<size:10>elki.logging" as elki.logging.Logging.Level [[Logging.Level.html]]
+
+    elki.logging.Logging +-- elki.logging.Logging.Level
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

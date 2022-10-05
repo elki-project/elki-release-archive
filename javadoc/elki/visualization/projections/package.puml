@@ -1,0 +1,276 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.projections {
+
+        class Simple2D [[Simple2D.html]] {
+            -dim1: int
+            -dim2: int
+            +Simple2D(Projector, LinearScale[], int, int)
+            +fastProjectDataToRenderSpace(double[]): double[]
+            +fastProjectDataToRenderSpace(NumberVector): double[]
+            +fastProjectDataToScaledSpace(double[]): double[]
+            +fastProjectDataToScaledSpace(NumberVector): double[]
+            +fastProjectScaledToRenderSpace(double[]): double[]
+            +fastProjectRenderToDataSpace(double, double): double[]
+            +fastProjectRenderToScaledSpace(double, double): double[]
+            +fastProjectRelativeDataToRenderSpace(double[]): double[]
+            +fastProjectRelativeDataToRenderSpace(NumberVector): double[]
+            +fastProjectRelativeScaledToRenderSpace(double[]): double[]
+            +getVisibleDimensions2D(): long[]
+            +estimateViewport(): CanvasSize
+            #rearrange(double[]): double[]
+            #dearrange(double[]): double[]
+            +getMenuName(): String
+        }
+
+        class SimpleParallel [[SimpleParallel.html]] {
+            ~visDims: int
+            ~flags: byte[]
+            ~dimOrder: int[]
+            -scales: LinearScale[]
+            -p: Projector
+            {static} ~FLAG_HIDDEN: byte
+            {static} ~FLAG_INVERTED: byte
+            +SimpleParallel(Projector, LinearScale[])
+            +getScale(int): LinearScale
+            +isAxisInverted(int): boolean
+            +setAxisInverted(int, boolean): void
+            +toggleAxisInverted(int): void
+            +isDimInverted(int): boolean
+            +setDimInverted(int, boolean): void
+            +toggleDimInverted(int): void
+            +getAxisScale(int): LinearScale
+            #isDimHidden(int): boolean
+            +isAxisVisible(int): boolean
+            +setAxisVisible(int, boolean): void
+            +toggleAxisVisible(int): void
+            +getVisibleDimensions(): int
+            +getDimForAxis(int): int
+            +getDimForVisibleAxis(int): int
+            +swapAxes(int, int): void
+            +moveAxis(int, int): void
+            +fastProjectDataToRenderSpace(NumberVector): double[]
+            +fastProjectDataToRenderSpace(double[]): double[]
+            +fastProjectRenderToDataSpace(double, int): double
+            +fastProjectDataToRenderSpace(double, int): double
+            +getAxisForDim(int): int
+            +getInputDimensionality(): int
+            +getMenuName(): String
+            +getProjector(): Projector
+        }
+
+        interface Projection2D [[Projection2D.html]] {
+            {abstract} +fastProjectDataToRenderSpace(double[]): double[]
+            {abstract} +fastProjectDataToRenderSpace(NumberVector): double[]
+            {abstract} +fastProjectDataToScaledSpace(double[]): double[]
+            {abstract} +fastProjectDataToScaledSpace(NumberVector): double[]
+            {abstract} +fastProjectScaledToRenderSpace(double[]): double[]
+            {abstract} +fastProjectRenderToDataSpace(double, double): double[]
+            {abstract} +fastProjectRenderToScaledSpace(double, double): double[]
+            {abstract} +fastProjectRelativeDataToRenderSpace(double[]): double[]
+            {abstract} +fastProjectRelativeDataToRenderSpace(NumberVector): double[]
+            {abstract} +fastProjectRelativeScaledToRenderSpace(double[]): double[]
+            {abstract} +estimateViewport(): CanvasSize
+            {abstract} +getVisibleDimensions2D(): long[]
+        }
+
+        abstract class AbstractSimpleProjection [[AbstractSimpleProjection.html]] {
+            +AbstractSimpleProjection(Projector, LinearScale[])
+            +projectScaledToRender(double[]): double[]
+            +projectRenderToScaled(double[]): double[]
+            +projectRelativeScaledToRender(double[]): double[]
+            +projectRelativeRenderToScaled(double[]): double[]
+            #flipSecondEquals(double[]): double[]
+            {abstract} #rearrange(double[]): double[]
+            {abstract} #dearrange(double[]): double[]
+        }
+
+        interface ProjectionParallel [[ProjectionParallel.html]] {
+            {abstract} +isAxisInverted(int): boolean
+            {abstract} +setAxisInverted(int, boolean): void
+            {abstract} +toggleAxisInverted(int): void
+            {abstract} +isDimInverted(int): boolean
+            {abstract} +setDimInverted(int, boolean): void
+            {abstract} +toggleDimInverted(int): void
+            {abstract} +getAxisScale(int): LinearScale
+            {abstract} +isAxisVisible(int): boolean
+            {abstract} +setAxisVisible(int, boolean): void
+            {abstract} +toggleAxisVisible(int): void
+            {abstract} +getVisibleDimensions(): int
+            {abstract} +swapAxes(int, int): void
+            {abstract} +moveAxis(int, int): void
+            {abstract} +getDimForAxis(int): int
+            {abstract} +getDimForVisibleAxis(int): int
+            {abstract} +fastProjectDataToRenderSpace(double[]): double[]
+            {abstract} +fastProjectDataToRenderSpace(NumberVector): double[]
+            {abstract} +fastProjectDataToRenderSpace(double, int): double
+            {abstract} +fastProjectRenderToDataSpace(double, int): double
+            {abstract} +getAxisForDim(int): int
+        }
+
+        class OPTICSProjection [[OPTICSProjection.html]] {
+            ~projector: OPTICSProjector
+            +OPTICSProjection(OPTICSProjector)
+            +getMenuName(): String
+            +getInputDimensionality(): int
+            +getScale(int): LinearScale
+            +getOPTICSPlot(VisualizerContext): OPTICSPlot
+            +getResult(): ClusterOrder
+            +getProjector(): Projector
+        }
+
+        abstract class AbstractFullProjection [[AbstractFullProjection.html]] {
+            +AbstractFullProjection(Projector, LinearScale[])
+            +projectDataToScaledSpace(NumberVector): double[]
+            +projectDataToScaledSpace(double[]): double[]
+            +projectRelativeDataToScaledSpace(NumberVector): double[]
+            +projectRelativeDataToScaledSpace(double[]): double[]
+            +projectDataToRenderSpace(NumberVector): double[]
+            +projectDataToRenderSpace(double[]): double[]
+            +projectRelativeDataToRenderSpace(NumberVector): double[]
+            +projectRelativeDataToRenderSpace(double[]): double[]
+            +projectScaledToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+            +projectRenderToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+            +projectRelativeScaledToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+            +projectRelativeRenderToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+        }
+
+        interface Projection [[Projection.html]] {
+            {static} +SCALE: double
+            {static} +INVSCALE: double
+            {abstract} +getInputDimensionality(): int
+            {abstract} +getScale(int): LinearScale
+            {abstract} +getProjector(): Projector
+        }
+
+        class SilhouetteProjection [[SilhouetteProjection.html]] {
+            ~projector: SilhouettePlotProjector
+            +SilhouetteProjection(SilhouettePlotProjector)
+            +getMenuName(): String
+            +getInputDimensionality(): int
+            +getScale(int): LinearScale
+            +getSilhouettePlot(VisualizerContext): SilhouettePlot
+            +getResult(): Clustering<?>
+            +getSilhouetteValues(): DoubleDBIDList[]
+            +getProjector(): Projector
+        }
+
+        class Simple1D [[Simple1D.html]] {
+            ~dnum: int
+            +Simple1D(Projector, LinearScale[], int)
+            +fastProjectDataToRenderSpace(double[]): double
+            +fastProjectDataToRenderSpace(NumberVector): double
+            +fastProjectScaledToRender(double[]): double
+            +fastProjectRelativeDataToRenderSpace(double[]): double
+            +fastProjectRelativeDataToRenderSpace(NumberVector): double
+            +fastProjectRelativeScaledToRender(double[]): double
+            #rearrange(double[]): double[]
+            #dearrange(double[]): double[]
+            +getMenuName(): String
+        }
+
+        abstract class AbstractProjection [[AbstractProjection.html]] {
+            #scales: LinearScale[]
+            -p: Projector
+            +AbstractProjection(Projector, LinearScale[])
+            +getInputDimensionality(): int
+            +getScale(int): LinearScale
+            +getMenuName(): String
+            +getProjector(): Projector
+        }
+
+        class AffineProjection [[AffineProjection.html]] {
+            -proj: AffineTransformation
+            +AffineProjection(Projector, LinearScale[], AffineTransformation)
+            +projectScaledToRender(double[]): double[]
+            +projectRenderToScaled(double[]): double[]
+            +projectRelativeScaledToRender(double[]): double[]
+            +projectRelativeRenderToScaled(double[]): double[]
+            +estimateViewport(): CanvasSize
+            {static} +axisProjection(int, int, int): AffineTransformation
+            +fastProjectDataToRenderSpace(double[]): double[]
+            +fastProjectDataToRenderSpace(NumberVector): double[]
+            +fastProjectDataToScaledSpace(double[]): double[]
+            +fastProjectDataToScaledSpace(NumberVector): double[]
+            +fastProjectScaledToRenderSpace(double[]): double[]
+            +fastProjectRelativeDataToRenderSpace(double[]): double[]
+            +fastProjectRelativeDataToRenderSpace(NumberVector): double[]
+            +fastProjectRelativeScaledToRenderSpace(double[]): double[]
+            +fastProjectRenderToDataSpace(double, double): double[]
+            +fastProjectRenderToScaledSpace(double, double): double[]
+            +getVisibleDimensions2D(): long[]
+        }
+
+        class CanvasSize [[CanvasSize.html]] {
+            +minx: double
+            +maxx: double
+            +miny: double
+            +maxy: double
+            +CanvasSize(double, double, double, double)
+            +getMinX(): double
+            +getMaxX(): double
+            +getMinY(): double
+            +getMaxY(): double
+            +getDiffX(): double
+            +getDiffY(): double
+            +continueToMargin(double[], double[]): double
+            +clipToMargin(double[], double[]): boolean
+        }
+
+        interface FullProjection [[FullProjection.html]] {
+            {abstract} +projectScaledToRender(double[]): double[]
+            {abstract} +projectRenderToScaled(double[]): double[]
+            {abstract} +projectRelativeScaledToRender(double[]): double[]
+            {abstract} +projectRelativeRenderToScaled(double[]): double[]
+            {abstract} +projectDataToScaledSpace(NumberVector): double[]
+            {abstract} +projectDataToScaledSpace(double[]): double[]
+            {abstract} +projectRelativeDataToScaledSpace(NumberVector): double[]
+            {abstract} +projectRelativeDataToScaledSpace(double[]): double[]
+            {abstract} +projectDataToRenderSpace(NumberVector): double[]
+            {abstract} +projectDataToRenderSpace(double[]): double[]
+            {abstract} +projectScaledToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+            {abstract} +projectRenderToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+            {abstract} +projectRelativeDataToRenderSpace(NumberVector): double[]
+            {abstract} +projectRelativeDataToRenderSpace(double[]): double[]
+            {abstract} +projectRelativeScaledToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+            {abstract} +projectRelativeRenderToDataSpace(double[], Factory<NV extends NumberVector>): NV extends NumberVector
+        }
+
+        interface Projection1D [[Projection1D.html]] {
+            {abstract} +fastProjectDataToRenderSpace(double[]): double
+            {abstract} +fastProjectDataToRenderSpace(NumberVector): double
+            {abstract} +fastProjectScaledToRender(double[]): double
+            {abstract} +fastProjectRelativeDataToRenderSpace(double[]): double
+            {abstract} +fastProjectRelativeDataToRenderSpace(NumberVector): double
+            {abstract} +fastProjectRelativeScaledToRender(double[]): double
+        }
+
+        AbstractSimpleProjection <|-- Simple2D
+        Projection2D <|.. Simple2D
+        ProjectionParallel <|.. SimpleParallel
+        Projection <|-- Projection2D
+        AbstractFullProjection <|-- AbstractSimpleProjection
+        Projection <|-- ProjectionParallel
+        Projection <|.. OPTICSProjection
+        AbstractProjection <|-- AbstractFullProjection
+        FullProjection <|.. AbstractFullProjection
+        elki.visualization.VisualizationItem <|-- Projection
+        Projection <|.. SilhouetteProjection
+        AbstractSimpleProjection <|-- Simple1D
+        Projection1D <|.. Simple1D
+        Projection <|.. AbstractProjection
+        AbstractFullProjection <|-- AffineProjection
+        Projection2D <|.. AffineProjection
+        AffineProjection --> CanvasSize: viewport
+        Projection <|-- FullProjection
+        Projection <|-- Projection1D
+    }
+
+    namespace elki.visualization {
+        interface VisualizationItem [[../VisualizationItem.html]] {
+            {abstract} +getMenuName(): String
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

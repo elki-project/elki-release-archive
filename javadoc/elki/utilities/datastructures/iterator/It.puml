@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>It\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.It<O> [[It.html]] {
+        {abstract} +get(): O
+        {abstract} +advance(): It<O>
+        +filter(Class<? super T>): It<T>
+        +filter(Predicate<? super O>): It<O>
+        +find(Object): boolean
+        +forEach(Consumer<? super O>): void
+        +collect(T extends Collection<? super O>): T extends Collection<? super O>
+    }
+
+    interface "<size:14>Iter\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.Iter [[Iter.html]] {
+        {abstract} +valid(): boolean
+        {abstract} +advance(): Iter
+    }
+
+    elki.utilities.datastructures.iterator.Iter <|-- elki.utilities.datastructures.iterator.It
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

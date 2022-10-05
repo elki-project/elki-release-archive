@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>ChengAndChurch.CellVisitor\n<size:10>elki.clustering.biclustering" as elki.clustering.biclustering.ChengAndChurch.CellVisitor [[ChengAndChurch.CellVisitor.html]] {
+        {static} +ALL: int
+        {static} +SELECTED: int
+        {static} +NOT_SELECTED: int
+        {abstract} +visit(double, int, int, boolean, boolean): boolean
+    }
+
+    class "<size:14>ChengAndChurch\n<size:10>elki.clustering.biclustering" as elki.clustering.biclustering.ChengAndChurch [[ChengAndChurch.html]]
+
+    elki.clustering.biclustering.ChengAndChurch +-- elki.clustering.biclustering.ChengAndChurch.CellVisitor
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

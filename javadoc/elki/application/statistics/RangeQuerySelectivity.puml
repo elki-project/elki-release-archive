@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RangeQuerySelectivity\n<size:10>elki.application.statistics" as elki.application.statistics.RangeQuerySelectivity<V extends NumberVector> [[RangeQuerySelectivity.html]] {
+        {static} -LOG: Logging
+        #radius: double
+        #sampling: double
+        #random: RandomFactory
+        +RangeQuerySelectivity(InputStep, Distance<? super NumberVector>, double, double, RandomFactory)
+        +run(): void
+    }
+
+    abstract class "<size:14>AbstractDistanceBasedApplication\n<size:10>elki.application" as elki.application.AbstractDistanceBasedApplication<V extends NumberVector> [[../AbstractDistanceBasedApplication.html]]
+    class "<size:14>RangeQuerySelectivity.Par\n<size:10>elki.application.statistics" as elki.application.statistics.RangeQuerySelectivity.Par<V extends NumberVector>
+
+    elki.application.AbstractDistanceBasedApplication <|-- elki.application.statistics.RangeQuerySelectivity
+    elki.application.statistics.RangeQuerySelectivity +-- elki.application.statistics.RangeQuerySelectivity.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

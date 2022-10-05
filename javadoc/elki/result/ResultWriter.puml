@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ResultWriter\n<size:10>elki.result" as elki.result.ResultWriter [[ResultWriter.html]] {
+        {static} -LOG: Logging
+        -out: Path
+        -gzip: boolean
+        -warnoverwrite: boolean
+        -filter: Pattern
+        +ResultWriter(Path, boolean, boolean, Pattern)
+        +processNewResult(Object): void
+        -openStreamFactory(): StreamFactory
+    }
+
+    interface "<size:14>ResultHandler\n<size:10>elki.result" as elki.result.ResultHandler [[ResultHandler.html]]
+    class "<size:14>ResultWriter.Par\n<size:10>elki.result" as elki.result.ResultWriter.Par [[ResultWriter.Par.html]]
+
+    elki.result.ResultHandler <|.. elki.result.ResultWriter
+    elki.result.ResultWriter +-- elki.result.ResultWriter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

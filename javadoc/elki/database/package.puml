@@ -1,0 +1,159 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.database {
+
+        class DatabaseUtil [[DatabaseUtil.html]] {
+            {static} +guessLabelRepresentation(Database): Relation<String>
+            {static} +guessObjectLabelRepresentation(Database): Relation<String>
+            {static} +getClassLabels(Relation<? extends ClassLabel>): SortedSet<ClassLabel>
+            {static} +getClassLabels(Database): SortedSet<ClassLabel>
+            {static} +getObjectsByLabelMatch(Database, Pattern): ArrayModifiableDBIDs
+        }
+
+        abstract class AbstractDatabase [[AbstractDatabase.html]] {
+            #indexFactories: Collection<IndexFactory<?>>
+            +getBundle(DBIDRef): SingleObjectBundle
+            +getRelation(TypeInformation, Object...): Relation<O>
+            +addDataStoreListener(DataStoreListener): void
+            +removeDataStoreListener(DataStoreListener): void
+            +accumulateDataStoreEvents(): void
+            +flushDataStoreEvents(): void
+            +getLongName(): String
+            +getShortName(): String
+            {abstract} #getLogger(): Logging
+        }
+
+        abstract class elki.database.AbstractDatabase.Par [[AbstractDatabase.Par.html]] {
+            {static} +DATABASE_CONNECTION_ID: OptionID
+            {static} +INDEX_ID: OptionID
+            {abstract} +make(): Database
+        }
+
+        class ProxyDatabase [[ProxyDatabase.html]] {
+            {static} -LOG: Logging
+            +ProxyDatabase(DBIDs)
+            +ProxyDatabase(DBIDs, Iterable<Relation<?>>)
+            +ProxyDatabase(DBIDs, Relation<?>...)
+            +ProxyDatabase(DBIDs, Database)
+            +initialize(): void
+            +addRelation(Relation<?>): void
+            #getLogger(): Logging
+        }
+
+        class DatabaseEventManager [[DatabaseEventManager.html]] {
+            -resultListenerList: List<ResultListener>
+            -accumulateDataStoreEvents: boolean
+            +accumulateDataStoreEvents(): void
+            +flushDataStoreEvents(): void
+            +addListener(DataStoreListener): void
+            +removeListener(DataStoreListener): void
+            +addListener(ResultListener): void
+            +removeListener(ResultListener): void
+            +fireObjectsInserted(DBIDs): void
+            +fireObjectInserted(DBIDRef): void
+            +fireObjectsUpdated(DBIDs): void
+            +fireObjectsUpdated(DBIDRef): void
+            #fireObjectsRemoved(DBIDs): void
+            #fireObjectRemoved(DBIDRef): void
+            -fireObjectsChanged(DBIDs, Type): void
+            -fireObjectChanged(DBIDRef, Type): void
+            +fireResultAdded(Object, Object): void
+            +fireResultRemoved(Object, Object): void
+        }
+
+        enum elki.database.DatabaseEventManager.Type [[DatabaseEventManager.Type.html]] {
+            {static} +INSERT
+            {static} +REMOVE
+            {static} +UPDATE
+        }
+
+        class StaticArrayDatabase [[StaticArrayDatabase.html]] {
+            {static} -LOG: Logging
+            #databaseConnection: DatabaseConnection
+            +StaticArrayDatabase(DatabaseConnection, Collection<? extends IndexFactory<?>>)
+            +StaticArrayDatabase(DatabaseConnection)
+            +initialize(): void
+            #getLogger(): Logging
+        }
+
+        class elki.database.StaticArrayDatabase.Par [[StaticArrayDatabase.Par.html]] {
+            #databaseConnection: DatabaseConnection
+            -indexFactories: Collection<? extends IndexFactory<?>>
+            +configure(Parameterization): void
+            +make(): StaticArrayDatabase
+        }
+
+        class HashmapDatabase [[HashmapDatabase.html]] {
+            {static} -LOG: Logging
+            #databaseConnection: DatabaseConnection
+            +HashmapDatabase(DatabaseConnection, Collection<? extends IndexFactory<?>>)
+            +HashmapDatabase()
+            +initialize(): void
+            +insert(ObjectBundle): DBIDs
+            #alignColumns(ObjectBundle): Relation<?>[]
+            -addNewRelation(SimpleTypeInformation<?>): Relation<?>
+            +delete(DBIDs): MultipleObjectsBundle
+            +delete(DBIDRef): SingleObjectBundle
+            -doDelete(DBIDRef): void
+            #getLogger(): Logging
+        }
+
+        class elki.database.HashmapDatabase.Par [[HashmapDatabase.Par.html]] {
+            #databaseConnection: DatabaseConnection
+            -indexFactories: Collection<? extends IndexFactory<?>>
+            +configure(Parameterization): void
+            +make(): HashmapDatabase
+        }
+
+        interface Database [[Database.html]] {
+            {abstract} +initialize(): void
+            {abstract} +getRelations(): Collection<Relation<?>>
+            {abstract} +getRelation(TypeInformation, Object...): Relation<O>
+            {abstract} +getBundle(DBIDRef): SingleObjectBundle
+            {abstract} +addDataStoreListener(DataStoreListener): void
+            {abstract} +removeDataStoreListener(DataStoreListener): void
+            {abstract} +accumulateDataStoreEvents(): void
+            {abstract} +flushDataStoreEvents(): void
+        }
+
+        interface UpdatableDatabase [[UpdatableDatabase.html]] {
+            {abstract} +insert(ObjectBundle): DBIDs
+            {abstract} +delete(DBIDs): ObjectBundle
+            {abstract} +delete(DBIDRef): SingleObjectBundle
+        }
+
+        Database <|.. AbstractDatabase
+        AbstractDatabase --> DatabaseEventManager: eventManager
+        AbstractDatabase --> "*" elki.database.relation.Relation: relations
+        elki.utilities.optionhandling.Parameterizer <|.. elki.database.AbstractDatabase.Par
+        AbstractDatabase +-- elki.database.AbstractDatabase.Par
+        AbstractDatabase <|-- ProxyDatabase
+        ProxyDatabase --> elki.database.relation.DBIDView: idrep
+        ProxyDatabase --> elki.database.ids.DBIDs: dBIDs
+        DatabaseEventManager --> "*" elki.database.datastore.DataStoreListener: dataListenerList
+        DatabaseEventManager --> elki.database.DatabaseEventManager.Type: currentDataStoreEventType
+        DatabaseEventManager --> elki.database.ids.HashSetModifiableDBIDs: dataStoreObjects
+        DatabaseEventManager +-- elki.database.DatabaseEventManager.Type
+        AbstractDatabase <|-- StaticArrayDatabase
+        StaticArrayDatabase --> elki.database.ids.ArrayStaticDBIDs: ids
+        StaticArrayDatabase --> elki.database.relation.DBIDView: idrep
+        elki.database.AbstractDatabase.Par <|-- elki.database.StaticArrayDatabase.Par
+        StaticArrayDatabase +-- elki.database.StaticArrayDatabase.Par
+        AbstractDatabase <|-- HashmapDatabase
+        UpdatableDatabase <|.. HashmapDatabase
+        HashmapDatabase --> elki.database.ids.HashSetModifiableDBIDs: ids
+        HashmapDatabase --> elki.database.relation.DBIDView: idrep
+        elki.database.AbstractDatabase.Par <|-- elki.database.HashmapDatabase.Par
+        HashmapDatabase +-- elki.database.HashmapDatabase.Par
+        Database <|-- UpdatableDatabase
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

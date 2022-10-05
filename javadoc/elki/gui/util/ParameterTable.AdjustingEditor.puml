@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParameterTable.AdjustingEditor\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable.AdjustingEditor [[ParameterTable.AdjustingEditor.html]] {
+        {static} -serialVersionUID: long
+        -dropdownEditor: DropdownEditor
+        -plaintextEditor: DefaultCellEditor
+        -classListEditor: ClassListEditor
+        -fileNameEditor: FileNameEditor
+        -activeEditor: TableCellEditor
+        +getCellEditorValue(): Object
+        +getTableCellEditorComponent(JTable, Object, boolean, int, int): Component
+    }
+
+    abstract class "<size:14>AbstractCellEditor\n<size:10>javax.swing" as javax.swing.AbstractCellEditor
+    interface "<size:14>TableCellEditor\n<size:10>javax.swing.table" as javax.swing.table.TableCellEditor {
+        {abstract} +getTableCellEditorComponent(JTable, Object, boolean, int, int): Component
+    }
+    class "<size:14>ParameterTable\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable [[ParameterTable.html]]
+
+    javax.swing.AbstractCellEditor <|-- elki.gui.util.ParameterTable.AdjustingEditor
+    javax.swing.table.TableCellEditor <|.. elki.gui.util.ParameterTable.AdjustingEditor
+    elki.gui.util.ParameterTable +-- elki.gui.util.ParameterTable.AdjustingEditor
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

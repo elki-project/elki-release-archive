@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CanvasSize\n<size:10>elki.visualization.projections" as elki.visualization.projections.CanvasSize [[CanvasSize.html]] {
+        +minx: double
+        +maxx: double
+        +miny: double
+        +maxy: double
+        +CanvasSize(double, double, double, double)
+        +getMinX(): double
+        +getMaxX(): double
+        +getMinY(): double
+        +getMaxY(): double
+        +getDiffX(): double
+        +getDiffY(): double
+        +continueToMargin(double[], double[]): double
+        +clipToMargin(double[], double[]): boolean
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

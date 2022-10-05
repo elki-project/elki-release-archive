@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="314px" preserveAspectRatio="none" style="width:232px;height:314px;background:#FFFFFF;" version="1.1" viewBox="0 0 232 314" width="232px" zoomAndPan="magnify"><defs/><g><!--MD5=[c58a6da60855798c90cb05515cfda729]
+class elki.utilities.scaling.ClipScaling--><a href="ClipScaling.html" target="_top" title="ClipScaling.html" xlink:actuate="onRequest" xlink:href="ClipScaling.html" xlink:show="new" xlink:title="ClipScaling.html" xlink:type="simple"><g id="elem_elki.utilities.scaling.ClipScaling"><rect codeLine="6" fill="#F1F1F1" height="184.3125" id="elki.utilities.scaling.ClipScaling" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="218" x="7" y="105"/><ellipse cx="68.75" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M71.7188,129.6094 Q71.1406,129.9063 70.5,130.0469 Q69.8594,130.2031 69.1563,130.2031 Q66.6563,130.2031 65.3281,128.5625 Q64.0156,126.9063 64.0156,123.7813 Q64.0156,120.6563 65.3281,119 Q66.6563,117.3438 69.1563,117.3438 Q69.8594,117.3438 70.5,117.5 Q71.1563,117.6563 71.7188,117.9531 L71.7188,120.6719 Q71.0938,120.0938 70.5,119.8281 Q69.9063,119.5469 69.2813,119.5469 Q67.9375,119.5469 67.25,120.625 Q66.5625,121.6875 66.5625,123.7813 Q66.5625,125.875 67.25,126.9531 Q67.9375,128.0156 69.2813,128.0156 Q69.9063,128.0156 70.5,127.75 Q71.0938,127.4688 71.7188,126.8906 L71.7188,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="74" x="95.25" y="122.9951">ClipScaling</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="86" x="89.25" y="135.5791">elki.utilities.scaling</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="224" y1="142.9375" y2="142.9375"/><ellipse cx="18" cy="156.5859" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="115" x="27" y="159.9326">MIN_ID: OptionID</text><ellipse cx="18" cy="172.8828" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="122" x="27" y="176.2295">MAX_ID: OptionID</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="186.1797"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="27" y="192.5264">min: Double</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="202.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="27" y="208.8232">max: Double</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="224" y1="216.125" y2="216.125"/><ellipse cx="18" cy="229.7734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="192" x="27" y="233.1201">ClipScaling(Double, Double)</text><ellipse cx="18" cy="246.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="184" x="27" y="249.417">getScaled(double): double</text><ellipse cx="18" cy="262.3672" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114" x="27" y="265.7139">getMin(): double</text><ellipse cx="18" cy="278.6641" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="117" x="27" y="282.0107">getMax(): double</text></g></a><!--MD5=[d5465c2f12cf87aabf0728275ad73542]
+class elki.utilities.scaling.StaticScalingFunction--><a href="StaticScalingFunction.html" target="_top" title="StaticScalingFunction.html" xlink:actuate="onRequest" xlink:href="StaticScalingFunction.html" xlink:show="new" xlink:title="StaticScalingFunction.html" xlink:type="simple"><g id="elem_elki.utilities.scaling.StaticScalingFunction"><rect codeLine="17" fill="#F1F1F1" height="37.9375" id="elki.utilities.scaling.StaticScalingFunction" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="185" x="23.5" y="7"/><ellipse cx="38.5" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M34.4219,21.7344 L34.4219,19.5781 L41.8125,19.5781 L41.8125,21.7344 L39.3438,21.7344 L39.3438,29.8125 L41.8125,29.8125 L41.8125,31.9688 L34.4219,31.9688 L34.4219,29.8125 L36.8906,29.8125 L36.8906,21.7344 L34.4219,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="153" x="52.5" y="24.9951">StaticScalingFunction</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="96" x="81" y="37.5791">elki.utilities.scaling</text></g></a><!--MD5=[469cffdd053ca8d11bb4677eafbe8a45]
+reverse link elki.utilities.scaling.StaticScalingFunction to elki.utilities.scaling.ClipScaling--><g id="link_elki.utilities.scaling.StaticScalingFunction_elki.utilities.scaling.ClipScaling"><path codeLine="20" d="M116,65.42 C116,77.33 116,90.99 116,104.9 " fill="none" id="elki.utilities.scaling.StaticScalingFunction-backto-elki.utilities.scaling.ClipScaling" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="109,65.09,116,45.09,123,65.09,109,65.09" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="16" y="295.3125"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="16" y="304.5947">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[7d8d620f339909fe52e777811be104aa]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ClipScaling\n<size:10>elki.utilities.scaling" as elki.utilities.scaling.ClipScaling [[ClipScaling.html]] {
+        {static} +MIN_ID: OptionID
+        {static} +MAX_ID: OptionID
+        -min: Double
+        -max: Double
+        +ClipScaling(Double, Double)
+        +getScaled(double): double
+        +getMin(): double
+        +getMax(): double
+    }
+
+    interface "<size:14>StaticScalingFunction\n<size:10>elki.utilities.scaling" as elki.utilities.scaling.StaticScalingFunction [[StaticScalingFunction.html]]
+    class "<size:14>ClipScaling.Par\n<size:10>elki.utilities.scaling" as elki.utilities.scaling.ClipScaling.Par [[ClipScaling.Par.html]]
+
+    elki.utilities.scaling.StaticScalingFunction <|.. elki.utilities.scaling.ClipScaling
+    elki.utilities.scaling.ClipScaling +- - elki.utilities.scaling.ClipScaling.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

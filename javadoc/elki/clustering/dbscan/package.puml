@@ -1,0 +1,180 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.clustering.dbscan {
+
+        class DBSCAN<O> [[DBSCAN.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super O>
+            #epsilon: double
+            #minpts: int
+            +DBSCAN(Distance<? super O>, double, int)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O>): Clustering<Model>
+        }
+
+        class elki.clustering.dbscan.DBSCAN.Instance [[DBSCAN.Instance.html]] {
+            #resultList: List<ModifiableDBIDs>
+            #noise: ModifiableDBIDs
+            #processedIDs: ModifiableDBIDs
+            #ncounter: long
+            #objprog: FiniteProgress
+            #clusprog: IndefiniteProgress
+            #rangeQuery: RangeSearcher<DBIDRef>
+            #neighbors: ModifiableDoubleDBIDList
+            #run(Relation<O>, RangeSearcher<DBIDRef>): void
+            #expandCluster(DBIDRef, ArrayModifiableDBIDs): void
+            -processNeighbors(DoubleDBIDList, ModifiableDBIDs, ArrayModifiableDBIDs): void
+        }
+
+        class elki.clustering.dbscan.DBSCAN.Par<O> [[DBSCAN.Par.html]] {
+            {static} +EPSILON_ID: OptionID
+            {static} +MINPTS_ID: OptionID
+            #epsilon: double
+            #minpts: int
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): DBSCAN<O>
+        }
+
+        class LSDBC<O extends NumberVector> [[LSDBC.html]] {
+            {static} -LOG: Logging
+            #kplus: int
+            #alpha: double
+            #distance: Distance<? super NumberVector>
+            {static} #UNPROCESSED: int
+            {static} #NOISE: int
+            +LSDBC(Distance<? super NumberVector>, int, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<O extends NumberVector>): Clustering<Model>
+            -isLocalMaximum(double, DBIDs, WritableDoubleDataStore): boolean
+            #expandCluster(int, WritableIntegerDataStore, KNNSearcher<DBIDRef>, DBIDs, double, FiniteProgress): int
+            -fillDensities(KNNSearcher<DBIDRef>, DBIDs, WritableDoubleDataStore): void
+        }
+
+        class elki.clustering.dbscan.LSDBC.Par<O extends NumberVector> [[LSDBC.Par.html]] {
+            {static} +K_ID: OptionID
+            {static} +ALPHA_ID: OptionID
+            #k: int
+            #alpha: double
+            #distance: Distance<? super NumberVector>
+            +configure(Parameterization): void
+            +make(): LSDBC<O extends NumberVector>
+        }
+
+        class GeneralizedDBSCAN [[GeneralizedDBSCAN.html]] {
+            {static} -LOG: Logging
+            #coremodel: boolean
+            +GeneralizedDBSCAN(NeighborPredicate<?>, CorePredicate<?>, boolean)
+            +autorun(Database): Clustering<Model>
+            +getInputTypeRestriction(): TypeInformation[]
+        }
+
+        class elki.clustering.dbscan.GeneralizedDBSCAN.Instance<T> [[GeneralizedDBSCAN.Instance.html]] {
+            {static} #UNPROCESSED: int
+            {static} #NOISE: int
+            #coremodel: boolean
+            +Instance(Instance<T>, Instance<? super T>, boolean)
+            +run(): Clustering<Model>
+            #expandCluster(DBIDRef, int, WritableIntegerDataStore, T, ArrayModifiableDBIDs, FiniteProgress): int
+            #processCorePoint(DBIDRef, T, int, WritableIntegerDataStore, ArrayModifiableDBIDs): int
+        }
+
+        class elki.clustering.dbscan.GeneralizedDBSCAN.Par [[GeneralizedDBSCAN.Par.html]] {
+            {static} +NEIGHBORHOODPRED_ID: OptionID
+            {static} +COREPRED_ID: OptionID
+            {static} +COREMODEL_ID: OptionID
+            #coremodel: boolean
+            +configure(Parameterization): void
+            +make(): GeneralizedDBSCAN
+        }
+
+        class GriDBSCAN<V extends NumberVector> [[GriDBSCAN.html]] {
+            {static} -LOG: Logging
+            #distance: Distance<? super NumberVector>
+            #epsilon: double
+            #minpts: int
+            #gridwidth: double
+            +GriDBSCAN(Distance<? super NumberVector>, double, int, double)
+            +getInputTypeRestriction(): TypeInformation[]
+            +run(Relation<V extends NumberVector>): Clustering<Model>
+        }
+
+        class elki.clustering.dbscan.GriDBSCAN.Instance<V extends NumberVector> [[GriDBSCAN.Instance.html]] {
+            {static} #UNPROCESSED: int
+            {static} #NOISE: int
+            #distance: Distance<? super NumberVector>
+            #epsilon: double
+            #minpts: int
+            #gridwidth: double
+            #domain: double[]
+            #dim: int
+            #offset: double[]
+            #cells: int[]
+            ~grid: Long2ObjectOpenHashMap<ModifiableDBIDs>
+            -clusterids: WritableDataStore<Assignment>
+            -temporary: WritableIntegerDataStore
+            -overflown: boolean
+            +Instance(Distance<? super NumberVector>, double, int, double)
+            +run(Relation<V extends NumberVector>): Clustering<Model>
+            -runDBSCANOnCell(DBIDs, Relation<V extends NumberVector>, ModifiableDoubleDBIDList, ArrayModifiableDBIDs, int): int
+            -updateCoreBorderObjects(int): void
+            -computeGridBaseOffsets(int): long
+            #buildGrid(Relation<V extends NumberVector>, int, double[]): void
+            -insertIntoGrid(DBIDRef, V extends NumberVector, int, int): void
+            #checkGridCellSizes(int, long): int
+            #expandCluster(DBIDRef, int, WritableIntegerDataStore, ModifiableDoubleDBIDList, ArrayModifiableDBIDs, RangeSearcher<DBIDRef>, FiniteProgress): int
+            #processCorePoint(DBIDRef, DoubleDBIDList, int, WritableIntegerDataStore, ArrayModifiableDBIDs): int
+            #mergeClusterInformation(ModifiableDBIDs, WritableIntegerDataStore, WritableDataStore<Assignment>): void
+            #buildResult(DBIDs, int): Clustering<Model>
+        }
+
+        class elki.clustering.dbscan.GriDBSCAN.Par<O extends NumberVector> {
+            {static} +GRID_ID: OptionID
+            #epsilon: double
+            #minpts: int
+            #gridwidth: double
+            #distance: LPNormDistance
+            +configure(Parameterization): void
+            +make(): GriDBSCAN<O extends NumberVector>
+        }
+
+        elki.clustering.ClusteringAlgorithm <|.. DBSCAN
+        DBSCAN +-- elki.clustering.dbscan.DBSCAN.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.DBSCAN.Par
+        DBSCAN +-- elki.clustering.dbscan.DBSCAN.Par
+        elki.clustering.ClusteringAlgorithm <|.. LSDBC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.LSDBC.Par
+        LSDBC +-- elki.clustering.dbscan.LSDBC.Par
+        elki.clustering.ClusteringAlgorithm <|.. GeneralizedDBSCAN
+        GeneralizedDBSCAN --> elki.clustering.dbscan.predicates.NeighborPredicate: npred
+        GeneralizedDBSCAN --> elki.clustering.dbscan.predicates.CorePredicate: corepred
+        GeneralizedDBSCAN +-- elki.clustering.dbscan.GeneralizedDBSCAN.Instance
+        elki.clustering.dbscan.GeneralizedDBSCAN.Instance --> elki.clustering.dbscan.predicates.NeighborPredicate.Instance: npred
+        elki.clustering.dbscan.GeneralizedDBSCAN.Instance --> elki.clustering.dbscan.predicates.CorePredicate.Instance: corepred
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.GeneralizedDBSCAN.Par
+        GeneralizedDBSCAN +-- elki.clustering.dbscan.GeneralizedDBSCAN.Par
+        elki.clustering.dbscan.GeneralizedDBSCAN.Par --> elki.clustering.dbscan.predicates.NeighborPredicate: npred
+        elki.clustering.dbscan.GeneralizedDBSCAN.Par --> elki.clustering.dbscan.predicates.CorePredicate: corepred
+        elki.clustering.ClusteringAlgorithm <|.. GriDBSCAN
+        GriDBSCAN +-- elki.clustering.dbscan.GriDBSCAN.Instance
+        elki.clustering.dbscan.GriDBSCAN.Instance --> "*" elki.clustering.dbscan.util.Core: cores
+        elki.clustering.dbscan.GriDBSCAN.Instance --> "*" elki.clustering.dbscan.util.Border: borders
+        elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.dbscan.GriDBSCAN.Par
+        GriDBSCAN +-- elki.clustering.dbscan.GriDBSCAN.Par
+    }
+
+    namespace elki.clustering {
+        interface ClusteringAlgorithm<C extends Clustering<? extends Model>> [[../ClusteringAlgorithm.html]] {
+            +autorun(Database): C extends Clustering<? extends Model>
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,219 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.visualization.visualizers.scatterplot.cluster {
+
+        class ClusterOrderVisualization [[ClusterOrderVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.cluster.ClusterOrderVisualization.Instance [[ClusterOrderVisualization.Instance.html]] {
+            {static} -CSSNAME: String
+            #result: ClusterOrder
+            #order: boolean
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+        }
+
+        class VoronoiVisualization [[VoronoiVisualization.html]] {
+            {static} -NAME: String
+            {static} -KMEANSBORDER: String
+            +VoronoiVisualization(Mode)
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        enum elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Mode [[VoronoiVisualization.Mode.html]] {
+            {static} +VORONOI
+            {static} +DELAUNAY
+            {static} +V_AND_D
+        }
+
+        class elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.SwitchModeAction [[VoronoiVisualization.SwitchModeAction.html]] {
+            -task: VisualizationTask
+            -context: VisualizerContext
+            +SwitchModeAction(VisualizationTask, VisualizerContext)
+            +getMenuName(): String
+            +activate(): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Instance [[VoronoiVisualization.Instance.html]] {
+            ~voronoi: Element
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -addCSSClasses(SVGPlot): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Par [[VoronoiVisualization.Par.html]] {
+            {static} +MODE_ID: OptionID
+            +configure(Parameterization): void
+            +make(): VoronoiVisualization
+        }
+
+        class ClusterStarVisualization [[ClusterStarVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.cluster.ClusterStarVisualization.Instance [[ClusterStarVisualization.Instance.html]] {
+            {static} -CSS_MEAN_STAR: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+        }
+
+        class ClusterConvexHullVisualization [[ClusterConvexHullVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.cluster.ClusterConvexHullVisualization.Instance [[ClusterConvexHullVisualization.Instance.html]] {
+            {static} +CLUSTERHULL: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -buildHullsRecursively(Cluster<Model>, Hierarchy<Cluster<Model>>, Map<Object, DoubleObjPair<Polygon>>): DoubleObjPair<Polygon>
+            -addCSSClasses(SVGPlot, int, double): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.cluster.ClusterConvexHullVisualization.Par [[ClusterConvexHullVisualization.Par.html]] {
+            +make(): ClusterConvexHullVisualization
+        }
+
+        class ClusterAlphaHullVisualization [[ClusterAlphaHullVisualization.html]] {
+            {static} -NAME: String
+            ~alpha: double
+            +ClusterAlphaHullVisualization(double)
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.cluster.ClusterAlphaHullVisualization.Instance [[ClusterAlphaHullVisualization.Instance.html]] {
+            {static} +CLUSTERHULL: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            -addRecursively(ArrayList<double[]>, Hierarchy<Cluster<Model>>, Cluster<Model>): double
+            -addCSSClasses(SVGPlot, int, double): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.cluster.ClusterAlphaHullVisualization.Par [[ClusterAlphaHullVisualization.Par.html]] {
+            {static} +ALPHA_ID: OptionID
+            ~alpha: double
+            +configure(Parameterization): void
+            +make(): ClusterAlphaHullVisualization
+        }
+
+        class EMClusterVisualization [[EMClusterVisualization.html]] {
+            {static} -LOG: Logging
+            {static} -NAME: String
+            {static} ~SIGMA: double[]
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Instance
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.cluster.EMClusterVisualization.Instance [[EMClusterVisualization.Instance.html]] {
+            {static} +EMBORDER: String
+            {static} -KAPPA: double
+            {static} -MKAPPA: double
+            -opacStyle: int
+            -softBorder: int
+            -drawStyle: int
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+            #drawSphere2D(String, double[], double[]): void
+            -equalsPlusTimes(double[], double[], double[], double): double[]
+            #drawHullLines(String, double[], Polygon): void
+            #makeHull(double[]): Polygon
+            #makeHullComplex(double[]): Polygon
+            #drawHullArc(String, double[], Polygon): void
+            -drawArc(SVGPath, double[], double[], double[], double[], double[], double): void
+        }
+
+        class ClusterMeanVisualization [[ClusterMeanVisualization.html]] {
+            {static} -NAME: String
+            +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +processNewResult(VisualizerContext, Object): void
+        }
+
+        class elki.visualization.visualizers.scatterplot.cluster.ClusterMeanVisualization.Instance [[ClusterMeanVisualization.Instance.html]] {
+            {static} -CSS_MEAN_CENTER: String
+            {static} -CSS_MEAN: String
+            +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+            +fullRedraw(): void
+        }
+
+        elki.visualization.visualizers.VisFactory <|.. ClusterOrderVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.cluster.ClusterOrderVisualization.Instance
+        elki.database.datastore.DataStoreListener <|.. elki.visualization.visualizers.scatterplot.cluster.ClusterOrderVisualization.Instance
+        ClusterOrderVisualization +-- elki.visualization.visualizers.scatterplot.cluster.ClusterOrderVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. VoronoiVisualization
+        VoronoiVisualization --> elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Mode: mode
+        VoronoiVisualization +-- elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Mode
+        elki.visualization.VisualizationMenuAction <|.. elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.SwitchModeAction
+        VoronoiVisualization +-- elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.SwitchModeAction
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Instance
+        VoronoiVisualization +-- elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Par
+        VoronoiVisualization +-- elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Par
+        elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Par --> elki.visualization.visualizers.scatterplot.cluster.VoronoiVisualization.Mode: mode
+        elki.visualization.visualizers.VisFactory <|.. ClusterStarVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.cluster.ClusterStarVisualization.Instance
+        ClusterStarVisualization +-- elki.visualization.visualizers.scatterplot.cluster.ClusterStarVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. ClusterConvexHullVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.cluster.ClusterConvexHullVisualization.Instance
+        ClusterConvexHullVisualization +-- elki.visualization.visualizers.scatterplot.cluster.ClusterConvexHullVisualization.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.scatterplot.cluster.ClusterConvexHullVisualization.Par
+        ClusterConvexHullVisualization +-- elki.visualization.visualizers.scatterplot.cluster.ClusterConvexHullVisualization.Par
+        elki.visualization.visualizers.VisFactory <|.. ClusterAlphaHullVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.cluster.ClusterAlphaHullVisualization.Instance
+        ClusterAlphaHullVisualization +-- elki.visualization.visualizers.scatterplot.cluster.ClusterAlphaHullVisualization.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.visualizers.scatterplot.cluster.ClusterAlphaHullVisualization.Par
+        ClusterAlphaHullVisualization +-- elki.visualization.visualizers.scatterplot.cluster.ClusterAlphaHullVisualization.Par
+        elki.visualization.visualizers.VisFactory <|.. EMClusterVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.cluster.EMClusterVisualization.Instance
+        EMClusterVisualization +-- elki.visualization.visualizers.scatterplot.cluster.EMClusterVisualization.Instance
+        elki.visualization.visualizers.VisFactory <|.. ClusterMeanVisualization
+        elki.visualization.visualizers.scatterplot.AbstractScatterplotVisualization <|-- elki.visualization.visualizers.scatterplot.cluster.ClusterMeanVisualization.Instance
+        ClusterMeanVisualization +-- elki.visualization.visualizers.scatterplot.cluster.ClusterMeanVisualization.Instance
+    }
+
+    namespace elki.visualization.visualizers {
+        interface VisFactory [[../../VisFactory.html]] {
+            {abstract} +processNewResult(VisualizerContext, Object): void
+            {abstract} +makeVisualization(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection): Visualization
+            +allowThumbnails(VisualizationTask): boolean
+            +makeVisualizationOrThumbnail(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection, int): Visualization
+        }
+    }
+
+    namespace elki.visualization.visualizers.scatterplot {
+        abstract class AbstractScatterplotVisualization [[../AbstractScatterplotVisualization.html]] {
+            #proj: Projection2D
+            #rel: Relation<? extends NumberVector>
+            #sample: SamplingResult
+        }
+    }
+
+    namespace elki.database.datastore {
+        interface DataStoreListener [[../../../../database/datastore/DataStoreListener.html]] {
+            {abstract} +contentChanged(DataStoreEvent): void
+        }
+    }
+
+    namespace elki.visualization {
+        interface VisualizationMenuAction [[../../../VisualizationMenuAction.html]] {
+            {abstract} +activate(): void
+            +enabled(): boolean
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

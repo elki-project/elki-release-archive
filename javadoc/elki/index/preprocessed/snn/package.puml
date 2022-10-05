@@ -1,0 +1,74 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.preprocessed.snn {
+
+        interface SharedNearestNeighborIndex<O> [[SharedNearestNeighborIndex.html]] {
+            {abstract} +getNearestNeighborSet(DBIDRef): ArrayDBIDs
+            {abstract} +getNumberOfNeighbors(): int
+        }
+
+        interface elki.index.preprocessed.snn.SharedNearestNeighborIndex.Factory<O> [[SharedNearestNeighborIndex.Factory.html]] {
+            {abstract} +instantiate(Relation<O>): SharedNearestNeighborIndex<O>
+            {abstract} +getNumberOfNeighbors(): int
+        }
+
+        class SharedNearestNeighborPreprocessor<O> [[SharedNearestNeighborPreprocessor.html]] {
+            {static} -LOG: Logging
+            #numberOfNeighbors: int
+            #distance: Distance<O>
+            #storage: WritableDataStore<ArrayDBIDs>
+            #relation: Relation<O>
+            +SharedNearestNeighborPreprocessor(Relation<O>, int, Distance<O>)
+            +initialize(): void
+            +getNearestNeighborSet(DBIDRef): ArrayDBIDs
+            +getNumberOfNeighbors(): int
+        }
+
+        class elki.index.preprocessed.snn.SharedNearestNeighborPreprocessor.Factory<O> [[SharedNearestNeighborPreprocessor.Factory.html]] {
+            {static} +NUMBER_OF_NEIGHBORS_ID: OptionID
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            #numberOfNeighbors: int
+            #distanceFunction: Distance<O>
+            +Factory(int, Distance<O>)
+            +instantiate(Relation<O>): SharedNearestNeighborPreprocessor<O>
+            +getNumberOfNeighbors(): int
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.preprocessed.snn.SharedNearestNeighborPreprocessor.Factory.Par<O> [[SharedNearestNeighborPreprocessor.Factory.Par.html]] {
+            #numberOfNeighbors: int
+            #distanceFunction: Distance<O>
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        elki.index.Index <|-- SharedNearestNeighborIndex
+        elki.index.IndexFactory <|-- elki.index.preprocessed.snn.SharedNearestNeighborIndex.Factory
+        SharedNearestNeighborIndex +-- elki.index.preprocessed.snn.SharedNearestNeighborIndex.Factory
+        SharedNearestNeighborIndex <|.. SharedNearestNeighborPreprocessor
+        elki.index.preprocessed.snn.SharedNearestNeighborIndex.Factory <|.. elki.index.preprocessed.snn.SharedNearestNeighborPreprocessor.Factory
+        SharedNearestNeighborPreprocessor +-- elki.index.preprocessed.snn.SharedNearestNeighborPreprocessor.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.preprocessed.snn.SharedNearestNeighborPreprocessor.Factory.Par
+        elki.index.preprocessed.snn.SharedNearestNeighborPreprocessor.Factory +-- elki.index.preprocessed.snn.SharedNearestNeighborPreprocessor.Factory.Par
+    }
+
+    namespace elki.index {
+        interface Index [[../../Index.html]] {
+            {abstract} +initialize(): void
+            +logStatistics(): void
+        }
+        interface IndexFactory<V> [[../../IndexFactory.html]] {
+            {abstract} +instantiate(Relation<V>): Index
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

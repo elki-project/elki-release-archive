@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AveragePrecisionAtK.Par\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.AveragePrecisionAtK.Par<O> {
+        {static} -K_ID: OptionID
+        {static} +SAMPLING_ID: OptionID
+        {static} +SEED_ID: OptionID
+        {static} +INCLUDESELF_ID: OptionID
+        #distance: Distance<? super O>
+        #k: int
+        #sampling: double
+        #seed: RandomFactory
+        #includeSelf: boolean
+        +configure(Parameterization): void
+        +make(): AveragePrecisionAtK<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AveragePrecisionAtK\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.AveragePrecisionAtK<O> [[AveragePrecisionAtK.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.algorithm.statistics.AveragePrecisionAtK.Par
+    elki.algorithm.statistics.AveragePrecisionAtK +-- elki.algorithm.statistics.AveragePrecisionAtK.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LAESA.Factory.Par\n<size:10>elki.index.laesa" as elki.index.laesa.LAESA.Factory.Par<O> [[LAESA.Factory.Par.html]] {
+        {static} +DISTANCE_FUNCTION_ID: OptionID
+        {static} +M_ID: OptionID
+        {static} +K_ID: OptionID
+        {static} +SEED_ID: OptionID
+        ~distance: Distance<? super O>
+        ~m: int
+        ~k: int
+        ~rng: RandomFactory
+        +configure(Parameterization): void
+        +make(): Factory<O>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>LAESA.Factory\n<size:10>elki.index.laesa" as elki.index.laesa.LAESA.Factory<O> [[LAESA.Factory.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.index.laesa.LAESA.Factory.Par
+    elki.index.laesa.LAESA.Factory +-- elki.index.laesa.LAESA.Factory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

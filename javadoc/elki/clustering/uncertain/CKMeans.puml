@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CKMeans\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.CKMeans [[CKMeans.html]] {
+        +CKMeans(KMeans<?, KMeansModel>)
+        +CKMeans(NumberVectorDistance<? super NumberVector>, int, int, KMeansInitialization)
+    }
+
+    class "<size:14>CenterOfMassMetaClustering\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.CenterOfMassMetaClustering<Clustering<KMeansModel>> [[CenterOfMassMetaClustering.html]]
+    class "<size:14>CKMeans.Par\n<size:10>elki.clustering.uncertain" as elki.clustering.uncertain.CKMeans.Par [[CKMeans.Par.html]]
+
+    elki.clustering.uncertain.CenterOfMassMetaClustering <|-- elki.clustering.uncertain.CKMeans
+    elki.clustering.uncertain.CKMeans +-- elki.clustering.uncertain.CKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

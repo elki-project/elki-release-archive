@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="72px" preserveAspectRatio="none" style="width:1512px;height:72px;background:#FFFFFF;" version="1.1" viewBox="0 0 1512 72" width="1512px" zoomAndPan="magnify"><defs/><g><!--MD5=[73d52c4f49dd17e71bcb54f52aaa95fc]
+class elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory--><a href="AbstractMkTreeUnifiedFactory.html" target="_top" title="AbstractMkTreeUnifiedFactory.html" xlink:actuate="onRequest" xlink:href="AbstractMkTreeUnifiedFactory.html" xlink:show="new" xlink:title="AbstractMkTreeUnifiedFactory.html" xlink:type="simple"><g id="elem_elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory"><rect codeLine="16" fill="#F1F1F1" height="37.9375" id="elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="1494" x="7" y="10"/><ellipse cx="22" cy="28.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M22.1094,24.3125 L20.9531,29.3906 L23.2813,29.3906 L22.1094,24.3125 Z M20.625,22.0781 L23.6094,22.0781 L26.9688,34.4688 L24.5156,34.4688 L23.75,31.4063 L20.4688,31.4063 L19.7188,34.4688 L17.2813,34.4688 L20.625,22.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="212" x="46.5" y="27.9951">AbstractMkTreeUnifiedFactory</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="233" x="36" y="40.5791">elki.index.tree.metrical.mtreevariants.mktrees</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="1227" x="277" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="1225" x="278" y="19.1387">O, N extends AbstractMTreeNode&lt;O, N, E extends MTreeEntry&gt;, E extends MTreeEntry, S extends MkTreeSettings&lt;O, N extends AbstractMTreeNode&lt;O, N, E extends MTreeEntry&gt;, E extends MTreeEntry&gt;</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="656" y="52.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="656" y="62.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[e3743c285753ea0c67d81a83934be7be]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractMkTreeUnifiedFactory.Par\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMkTreeUnifiedFactory.Par.html]] {
+        {static} +K_MAX_ID: OptionID
+        +configure(Parameterization): void
+        {abstract} +make(): AbstractMkTreeUnifiedFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>>
+    }
+
+    abstract class "<size:14>AbstractMTreeFactory.Par\n<size:10>elki.index.tree.metrical.mtreevariants" as elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[../AbstractMTreeFactory.Par.html]] {
+        {abstract} #makeSettings(): S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>
+        {abstract} +make(): AbstractMTreeFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, ?>
+    }
+    abstract class "<size:14>AbstractMkTreeUnifiedFactory\n<size:10>elki.index.tree.metrical.mtreevariants.mktrees" as elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry, S extends MkTreeSettings<O, N extends AbstractMTreeNode<O, N, E extends MTreeEntry>, E extends MTreeEntry>> [[AbstractMkTreeUnifiedFactory.html]]
+
+    elki.index.tree.metrical.mtreevariants.AbstractMTreeFactory.Par <|- - elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par
+    elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory +- - elki.index.tree.metrical.mtreevariants.mktrees.AbstractMkTreeUnifiedFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

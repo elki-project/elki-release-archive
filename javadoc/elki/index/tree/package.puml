@@ -1,0 +1,175 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.tree {
+
+        class TreeIndexHeader [[TreeIndexHeader.html]] {
+            {static} -SIZE: int
+            ~dirCapacity: int
+            ~leafCapacity: int
+            ~dirMinimum: int
+            ~leafMinimum: int
+            -emptyPagesSize: int
+            -largestPageID: int
+            +TreeIndexHeader()
+            +TreeIndexHeader(int, int, int, int, int)
+            +readHeader(ByteBuffer): void
+            +writeHeader(ByteBuffer): void
+            +getDirCapacity(): int
+            +getLeafCapacity(): int
+            +getDirMinimum(): int
+            +getLeafMinimum(): int
+            +getEmptyPagesSize(): int
+            +setEmptyPagesSize(int): void
+            +getLargestPageID(): int
+            +setLargestPageID(int): void
+            +size(): int
+            +writeEmptyPages(IntegerArray, FileChannel): void
+            +readEmptyPages(FileChannel): IntegerArray
+        }
+
+        abstract class AbstractNode<E> [[AbstractNode.html]] {
+            #numEntries: int
+            #entries: Object[]
+            #isLeaf: boolean
+            +AbstractNode()
+            +AbstractNode(int, boolean)
+            +children(IndexTreePath<E>): Iterator<IndexTreePath<E>>
+            +getNumEntries(): int
+            +isLeaf(): boolean
+            +getEntry(int): E
+            +writeExternal(ObjectOutput): void
+            +readExternal(ObjectInput): void
+            +addEntry(E): int
+            +deleteEntry(int): boolean
+            +deleteAllEntries(): void
+            +getCapacity(): int
+            +removeMask(long[]): void
+            +splitTo(AbstractNode<E>, List<E>, int): void
+            +splitTo(AbstractNode<E>, List<E>, List<E>): void
+            +splitByMask(AbstractNode<E>, long[]): void
+        }
+
+        interface LeafEntry [[LeafEntry.html]] {
+            {abstract} +getDBID(): DBID
+        }
+
+        interface DirectoryEntry [[DirectoryEntry.html]] {
+            {abstract} +getPageID(): int
+        }
+
+        abstract class IndexTree<N extends Node<E>, E> [[IndexTree.html]] {
+            -file: PageFile<N extends Node<E>>
+            #initialized: boolean
+            #dirCapacity: int
+            #leafCapacity: int
+            #dirMinimum: int
+            #leafMinimum: int
+            -rootEntry: E
+            +IndexTree(PageFile<N extends Node<E>>)
+            +initialize(): void
+            {abstract} #getLogger(): Logging
+            +getRootEntry(): E
+            +getRootID(): int
+            #isRoot(N extends Node<E>): boolean
+            #getPageID(E): int
+            +getNode(int): N extends Node<E>
+            +getNode(E): N extends Node<E>
+            #writeNode(N extends Node<E>): void
+            #deleteNode(N extends Node<E>): void
+            #createHeader(): TreeIndexHeader
+            +initializeFromFile(TreeIndexHeader, PageFile<N extends Node<E>>): void
+            #initialize(E): void
+            {abstract} #initializeCapacities(E): void
+            {abstract} #createEmptyRoot(E): void
+            {abstract} #createRootEntry(): E
+            {abstract} #createNewLeafNode(): N extends Node<E>
+            {abstract} #createNewDirectoryNode(): N extends Node<E>
+            #preInsert(E): void
+            #postDelete(E): void
+            +logStatistics(): void
+            #getPageSize(): int
+            #--getFile--(): PageFile<N extends Node<E>>
+        }
+
+        class IndexTreePath<E> [[IndexTreePath.html]] {
+            -entry: E
+            -index: int
+            +IndexTreePath(IndexTreePath<E>, E, int)
+            +getEntry(): E
+            +getIndex(): int
+            +getPathCount(): int
+        }
+
+        class BreadthFirstEnumeration<N extends Node<E>, E> [[BreadthFirstEnumeration.html]] {
+            +EMPTY_ENUMERATION: Iterator<IndexTreePath<E>>
+            -queue: Queue<Iterator<IndexTreePath<E>>>
+            +BreadthFirstEnumeration(IndexTree<N extends Node<E>, E>, IndexTreePath<E>)
+            +hasNext(): boolean
+            +next(): IndexTreePath<E>
+        }
+
+        interface Node<E> [[Node.html]] {
+            {abstract} +children(IndexTreePath<E>): Iterator<IndexTreePath<E>>
+            {abstract} +getNumEntries(): int
+            {abstract} +isLeaf(): boolean
+            {abstract} +getEntry(int): E
+            {abstract} +addEntry(E): int
+        }
+
+        elki.persistent.DefaultPageHeader <|-- TreeIndexHeader
+        elki.persistent.AbstractExternalizablePage <|-- AbstractNode
+        Node <|.. AbstractNode
+        java.io.Externalizable <|-- LeafEntry
+        java.io.Externalizable <|-- DirectoryEntry
+        elki.index.Index <|.. IndexTree
+        IndexTree --> IndexTreePath: rootPath
+        IndexTreePath --> IndexTreePath: parentPath
+        java.util.Iterator <|.. BreadthFirstEnumeration
+        BreadthFirstEnumeration --> IndexTree: index
+        elki.persistent.Page <|-- Node
+    }
+
+    namespace elki.persistent {
+        class DefaultPageHeader [[../../persistent/DefaultPageHeader.html]] {
+            {static} -SIZE: int
+            {static} -FILE_VERSION: int
+            -pageSize: int
+        }
+        abstract class AbstractExternalizablePage [[../../persistent/AbstractExternalizablePage.html]] {
+            {static} -serialVersionUID: long
+            -id: int
+            -dirty: boolean
+        }
+        interface Page [[../../persistent/Page.html]] {
+            {abstract} +getPageID(): int
+            {abstract} +setPageID(int): void
+            {abstract} +isDirty(): boolean
+            {abstract} +setDirty(boolean): void
+        }
+    }
+
+    namespace java.io {
+        interface Externalizable {
+            {abstract} +writeExternal(ObjectOutput): void
+            {abstract} +readExternal(ObjectInput): void
+        }
+    }
+
+    namespace elki.index {
+        interface Index [[../Index.html]] {
+            {abstract} +initialize(): void
+            +logStatistics(): void
+        }
+    }
+
+    namespace java.util {
+        interface Iterator<E> {
+            {abstract} +hasNext(): boolean
+            {abstract} +next(): E
+            +remove(): void
+            +forEachRemaining(Consumer<? super E>): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

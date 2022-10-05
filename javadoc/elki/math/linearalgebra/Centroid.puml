@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Centroid\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.Centroid [[Centroid.html]] {
+        #wsum: double
+        #elements: double[]
+        +Centroid(int)
+        +put(double[]): void
+        +put(double[], double): void
+        +put(NumberVector): void
+        +put(NumberVector, double): void
+        +doubleValue(int): double
+        +longValue(int): long
+        +getDimensionality(): int
+        +toArray(): double[]
+        {static} +make(Relation<? extends NumberVector>, DBIDs): Centroid
+        +getArrayRef(): double[]
+    }
+
+    interface "<size:14>NumberVector\n<size:10>elki.data" as elki.data.NumberVector [[../../data/NumberVector.html]] {
+        {abstract} +doubleValue(int): double
+        {abstract} +longValue(int): long
+        {abstract} +toArray(): double[]
+    }
+
+    elki.data.NumberVector <|.. elki.math.linearalgebra.Centroid
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

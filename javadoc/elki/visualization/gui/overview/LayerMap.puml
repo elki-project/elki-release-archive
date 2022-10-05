@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LayerMap\n<size:10>elki.visualization.gui.overview" as elki.visualization.gui.overview.LayerMap [[LayerMap.html]] {
+        -map: HashMap<Pair<PlotItem, VisualizationTask>, Pair<Element, Visualization>>
+        -key(PlotItem, VisualizationTask): Pair<PlotItem, VisualizationTask>
+        -value(Element, Visualization): Pair<Element, Visualization>
+        +getVisualization(PlotItem, VisualizationTask): Visualization
+        +getContainer(PlotItem, VisualizationTask): Element
+        +values(): Iterable<Pair<Element, Visualization>>
+        +clear(): void
+        +put(PlotItem, VisualizationTask, Element, Visualization): void
+        +remove(PlotItem, VisualizationTask): Pair<Element, Visualization>
+        +put(PlotItem, VisualizationTask, Pair<Element, Visualization>): void
+        +get(PlotItem, VisualizationTask): Pair<Element, Visualization>
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

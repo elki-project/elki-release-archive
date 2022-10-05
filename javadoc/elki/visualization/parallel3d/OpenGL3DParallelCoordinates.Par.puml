@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OpenGL3DParallelCoordinates.Par\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Par<O extends NumberVector> {
+        {static} +LAYOUT_ID: OptionID
+        ~layout: Layouter3DPC<O extends NumberVector>
+        +configure(Parameterization): void
+        +make(): OpenGL3DParallelCoordinates<O extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>OpenGL3DParallelCoordinates\n<size:10>elki.visualization.parallel3d" as elki.visualization.parallel3d.OpenGL3DParallelCoordinates<O extends NumberVector> [[OpenGL3DParallelCoordinates.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Par
+    elki.visualization.parallel3d.OpenGL3DParallelCoordinates +-- elki.visualization.parallel3d.OpenGL3DParallelCoordinates.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

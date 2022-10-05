@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractHDBSCAN.Par\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AbstractHDBSCAN.Par<O> {
+        {static} +MIN_PTS_ID: OptionID
+        #minPts: int
+        #distance: Distance<? super O>
+        +configure(Parameterization): void
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    abstract class "<size:14>AbstractHDBSCAN\n<size:10>elki.clustering.hierarchical" as elki.clustering.hierarchical.AbstractHDBSCAN<O> [[AbstractHDBSCAN.html]] {
+        {abstract} #getLogger(): Logging
+    }
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.AbstractHDBSCAN.Par
+    elki.clustering.hierarchical.AbstractHDBSCAN +-- elki.clustering.hierarchical.AbstractHDBSCAN.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

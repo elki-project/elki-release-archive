@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.gui {
+
+        class GUIUtil [[GUIUtil.html]] {
+            {static} +PREFER_GTK: boolean
+            {static} +setLookAndFeel(): void
+            {static} +logUncaughtExceptions(Logging): void
+        }
+
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>UnionFind\n<size:10>elki.utilities.datastructures.unionfind" as elki.utilities.datastructures.unionfind.UnionFind [[UnionFind.html]] {
+        {abstract} +union(DBIDRef, DBIDRef): int
+        {abstract} +isConnected(DBIDRef, DBIDRef): boolean
+        {abstract} +getRoots(): DBIDs
+        {abstract} +find(DBIDRef): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

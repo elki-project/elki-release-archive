@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomStableDistance\n<size:10>elki.distance" as elki.distance.RandomStableDistance [[RandomStableDistance.html]] {
+        {static} +STATIC: RandomStableDistance
+        -seed: long
+        +RandomStableDistance(long)
+        +distance(DBIDRef, DBIDRef): double
+        -pseudoRandom(long, int): double
+        +getInputTypeRestriction(): TypeInformation
+        +instantiate(Relation<T extends DBID>): DistanceQuery<T extends DBID>
+    }
+
+    abstract class "<size:14>AbstractDatabaseDistance\n<size:10>elki.distance" as elki.distance.AbstractDatabaseDistance<DBID> [[AbstractDatabaseDistance.html]]
+    interface "<size:14>DBIDDistance\n<size:10>elki.distance" as elki.distance.DBIDDistance [[DBIDDistance.html]] {
+        {abstract} +distance(DBIDRef, DBIDRef): double
+    }
+    class "<size:14>RandomStableDistance.Par\n<size:10>elki.distance" as elki.distance.RandomStableDistance.Par [[RandomStableDistance.Par.html]]
+
+    elki.distance.AbstractDatabaseDistance <|-- elki.distance.RandomStableDistance
+    elki.distance.DBIDDistance <|.. elki.distance.RandomStableDistance
+    elki.distance.RandomStableDistance +-- elki.distance.RandomStableDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

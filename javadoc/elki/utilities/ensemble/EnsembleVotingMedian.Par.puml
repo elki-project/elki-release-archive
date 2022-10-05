@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EnsembleVotingMedian.Par\n<size:10>elki.utilities.ensemble" as elki.utilities.ensemble.EnsembleVotingMedian.Par [[EnsembleVotingMedian.Par.html]] {
+        {static} +QUANTILE_ID: OptionID
+        -quantile: double
+        +configure(Parameterization): void
+        +make(): EnsembleVotingMedian
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>EnsembleVotingMedian\n<size:10>elki.utilities.ensemble" as elki.utilities.ensemble.EnsembleVotingMedian [[EnsembleVotingMedian.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.utilities.ensemble.EnsembleVotingMedian.Par
+    elki.utilities.ensemble.EnsembleVotingMedian +-- elki.utilities.ensemble.EnsembleVotingMedian.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

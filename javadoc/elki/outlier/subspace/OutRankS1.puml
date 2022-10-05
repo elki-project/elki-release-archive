@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutRankS1\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.OutRankS1 [[OutRankS1.html]] {
+        #clusteralg: SubspaceClusteringAlgorithm<? extends SubspaceModel>
+        ~alpha: double
+        +OutRankS1(SubspaceClusteringAlgorithm<? extends SubspaceModel>, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +autorun(Database): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>OutRankS1.Par\n<size:10>elki.outlier.subspace" as elki.outlier.subspace.OutRankS1.Par [[OutRankS1.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.subspace.OutRankS1
+    elki.outlier.subspace.OutRankS1 +-- elki.outlier.subspace.OutRankS1.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

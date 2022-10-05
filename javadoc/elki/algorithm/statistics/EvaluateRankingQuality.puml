@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EvaluateRankingQuality\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.EvaluateRankingQuality<V extends NumberVector> [[EvaluateRankingQuality.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super NumberVector>
+        #numbins: int
+        +EvaluateRankingQuality(Distance<? super NumberVector>, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Database, Relation<V extends NumberVector>): HistogramResult
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    class "<size:14>EvaluateRankingQuality.Par\n<size:10>elki.algorithm.statistics" as elki.algorithm.statistics.EvaluateRankingQuality.Par<V extends NumberVector>
+
+    elki.Algorithm <|.. elki.algorithm.statistics.EvaluateRankingQuality
+    elki.algorithm.statistics.EvaluateRankingQuality +-- elki.algorithm.statistics.EvaluateRankingQuality.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

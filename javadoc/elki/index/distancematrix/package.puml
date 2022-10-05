@@ -1,0 +1,251 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.distancematrix {
+
+        class PrecomputedSimilarityMatrix<O> [[PrecomputedSimilarityMatrix.html]] {
+            {static} -LOG: Logging
+            #relation: Relation<O>
+            #similarityFunction: Similarity<? super O>
+            #similarityQuery: SimilarityQuery<O>
+            -matrix: double[]
+            -ids: DBIDRange
+            -size: int
+            +PrecomputedSimilarityMatrix(Relation<O>, Similarity<? super O>)
+            +initialize(): void
+            {static} #triangleSize(int): int
+            -getOffset(int, int): int
+            +logStatistics(): void
+            +getSimilarityQuery(Similarity<? super O>): SimilarityQuery<O>
+            +similarityRangeByDBID(SimilarityQuery<O>, double, int): RangeSearcher<DBIDRef>
+            +similarityRangeByObject(SimilarityQuery<O>, double, int): RangeSearcher<O>
+        }
+
+        class elki.index.distancematrix.PrecomputedSimilarityMatrix.PrecomputedSimilarityQuery [[PrecomputedSimilarityMatrix.PrecomputedSimilarityQuery.html]] {
+            +similarity(DBIDRef, DBIDRef): double
+            +similarity(O, DBIDRef): double
+            +similarity(DBIDRef, O): double
+            +similarity(O, O): double
+            +getSimilarity(): Similarity<? super O>
+            +getRelation(): Relation<? extends O>
+        }
+
+        class elki.index.distancematrix.PrecomputedSimilarityMatrix.PrecomputedSimilarityRangeQuery [[PrecomputedSimilarityMatrix.PrecomputedSimilarityRangeQuery.html]] {
+            +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory<O> [[PrecomputedSimilarityMatrix.Factory.html]] {
+            #similarityFunction: Similarity<? super O>
+            +Factory(Similarity<? super O>)
+            +instantiate(Relation<O>): PrecomputedSimilarityMatrix<O>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory.Par<O> {
+            {static} +DISTANCE_ID: OptionID
+            #similarityFunction: Similarity<? super O>
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        class PrecomputedDistanceMatrix<O> [[PrecomputedDistanceMatrix.html]] {
+            {static} -LOG: Logging
+            #refrelation: WeakReference<Relation<O>>
+            #distance: Distance<? super O>
+            -matrix: double[]
+            -ids: DBIDRange
+            +PrecomputedDistanceMatrix(Relation<O>, DBIDRange, Distance<? super O>)
+            +initialize(): void
+            {static} #triangleSize(int): int
+            -getOffset(int, int): int
+            +logStatistics(): void
+            +getDistanceQuery(Distance<? super O>): DistanceQuery<O>
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+            +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        }
+
+        class elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistanceQuery [[PrecomputedDistanceMatrix.PrecomputedDistanceQuery.html]] {
+            +distance(DBIDRef, DBIDRef): double
+            +getDistance(): Distance<? super O>
+            +getRelation(): Relation<? extends O>
+        }
+
+        class elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedRangeQuery [[PrecomputedDistanceMatrix.PrecomputedRangeQuery.html]] {
+            ~it: DBIDArrayIter
+            +getRange(DBIDRef, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+
+        class elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedKNNQuery [[PrecomputedDistanceMatrix.PrecomputedKNNQuery.html]] {
+            ~it: DBIDArrayIter
+            +getKNN(DBIDRef, int): KNNList
+        }
+
+        class elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher [[PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher.html]] {
+            ~it: DBIDArrayIter
+            ~off: int
+            ~sorted: int
+            ~lbsorted: int
+            ~upsorted: int
+            ~threshold: double
+            ~idx: int[]
+            ~dists: double[]
+            +search(DBIDRef): PrioritySearcher<DBIDRef>
+            -partialSort(int): void
+            +advance(): PrioritySearcher<DBIDRef>
+            +valid(): boolean
+            +decreaseCutoff(double): PrioritySearcher<DBIDRef>
+            +internalGetIndex(): int
+            +computeExactDistance(): double
+            +getApproximateDistance(): double
+            +getApproximateAccuracy(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            +allLowerBound(): double
+            +compare(PrecomputedDistancePrioritySearcher, int, int): int
+            +swap(PrecomputedDistancePrioritySearcher, int, int): void
+            +isSorted(PrecomputedDistancePrioritySearcher, int, int): void
+        }
+
+        class elki.index.distancematrix.PrecomputedDistanceMatrix.Factory<O> [[PrecomputedDistanceMatrix.Factory.html]] {
+            #distance: Distance<? super O>
+            +Factory(Distance<? super O>)
+            +instantiate(Relation<O>): PrecomputedDistanceMatrix<O>
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        class elki.index.distancematrix.PrecomputedDistanceMatrix.Factory.Par<O> {
+            {static} +DISTANCE_ID: OptionID
+            #distanceFunction: Distance<? super O>
+            +configure(Parameterization): void
+            +make(): Factory<O>
+        }
+
+        elki.index.SimilarityIndex <|.. PrecomputedSimilarityMatrix
+        elki.index.SimilarityRangeIndex <|.. PrecomputedSimilarityMatrix
+        elki.database.query.similarity.SimilarityQuery <|.. elki.index.distancematrix.PrecomputedSimilarityMatrix.PrecomputedSimilarityQuery
+        PrecomputedSimilarityMatrix +-- elki.index.distancematrix.PrecomputedSimilarityMatrix.PrecomputedSimilarityQuery
+        elki.database.query.range.RangeSearcher <|.. elki.index.distancematrix.PrecomputedSimilarityMatrix.PrecomputedSimilarityRangeQuery
+        PrecomputedSimilarityMatrix +-- elki.index.distancematrix.PrecomputedSimilarityMatrix.PrecomputedSimilarityRangeQuery
+        elki.index.IndexFactory <|.. elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory
+        PrecomputedSimilarityMatrix +-- elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory.Par
+        elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory +-- elki.index.distancematrix.PrecomputedSimilarityMatrix.Factory.Par
+        elki.index.DistanceIndex <|.. PrecomputedDistanceMatrix
+        elki.index.RangeIndex <|.. PrecomputedDistanceMatrix
+        elki.index.KNNIndex <|.. PrecomputedDistanceMatrix
+        elki.index.DistancePriorityIndex <|.. PrecomputedDistanceMatrix
+        elki.database.query.distance.DatabaseDistanceQuery <|.. elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistanceQuery
+        PrecomputedDistanceMatrix +-- elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistanceQuery
+        elki.database.query.range.RangeSearcher <|.. elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedRangeQuery
+        PrecomputedDistanceMatrix +-- elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedRangeQuery
+        elki.database.query.knn.KNNSearcher <|.. elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedKNNQuery
+        PrecomputedDistanceMatrix +-- elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedKNNQuery
+        elki.database.query.PrioritySearcher <|.. elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher
+        elki.utilities.datastructures.QuickSelect.Adapter <|.. elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher
+        PrecomputedDistanceMatrix +-- elki.index.distancematrix.PrecomputedDistanceMatrix.PrecomputedDistancePrioritySearcher
+        elki.index.IndexFactory <|.. elki.index.distancematrix.PrecomputedDistanceMatrix.Factory
+        PrecomputedDistanceMatrix +-- elki.index.distancematrix.PrecomputedDistanceMatrix.Factory
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.distancematrix.PrecomputedDistanceMatrix.Factory.Par
+        elki.index.distancematrix.PrecomputedDistanceMatrix.Factory +-- elki.index.distancematrix.PrecomputedDistanceMatrix.Factory.Par
+    }
+
+    namespace elki.index {
+        interface SimilarityIndex<O> [[../SimilarityIndex.html]] {
+            {abstract} +getSimilarityQuery(Similarity<? super O>): SimilarityQuery<O>
+        }
+        interface SimilarityRangeIndex<O> [[../SimilarityRangeIndex.html]] {
+            {abstract} +similarityRangeByObject(SimilarityQuery<O>, double, int): RangeSearcher<O>
+            {abstract} +similarityRangeByDBID(SimilarityQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+        interface IndexFactory<V> [[../IndexFactory.html]] {
+            {abstract} +instantiate(Relation<V>): Index
+            {abstract} +getInputTypeRestriction(): TypeInformation
+        }
+        interface DistanceIndex<O> [[../DistanceIndex.html]] {
+            {abstract} +getDistanceQuery(Distance<? super O>): DistanceQuery<O>
+        }
+        interface RangeIndex<O> [[../RangeIndex.html]] {
+            {abstract} +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            +rangeByDBID(DistanceQuery<O>, double, int): RangeSearcher<DBIDRef>
+        }
+        interface KNNIndex<O> [[../KNNIndex.html]] {
+            {abstract} +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +kNNByDBID(DistanceQuery<O>, int, int): KNNSearcher<DBIDRef>
+        }
+        interface DistancePriorityIndex<O> [[../DistancePriorityIndex.html]] {
+            +kNNByObject(DistanceQuery<O>, int, int): KNNSearcher<O>
+            +rangeByObject(DistanceQuery<O>, double, int): RangeSearcher<O>
+            {abstract} +priorityByObject(DistanceQuery<O>, double, int): PrioritySearcher<O>
+            +priorityByDBID(DistanceQuery<O>, double, int): PrioritySearcher<DBIDRef>
+        }
+    }
+
+    namespace elki.database.query.similarity {
+        interface SimilarityQuery<O> [[../../database/query/similarity/SimilarityQuery.html]] {
+            {abstract} +similarity(DBIDRef, DBIDRef): double
+            {abstract} +similarity(O, DBIDRef): double
+            {abstract} +similarity(DBIDRef, O): double
+            {abstract} +similarity(O, O): double
+            {abstract} +getRelation(): Relation<? extends O>
+            {abstract} +getSimilarity(): Similarity<? super O>
+        }
+    }
+
+    namespace elki.database.query.range {
+        interface RangeSearcher<O> [[../../database/query/range/RangeSearcher.html]] {
+            +getRange(O, double): DoubleDBIDList
+            {abstract} +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+        }
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.database.query.distance {
+        interface DatabaseDistanceQuery<O> [[../../database/query/distance/DatabaseDistanceQuery.html]] {
+            +distance(O, DBIDRef): double
+            +distance(DBIDRef, O): double
+            +distance(O, O): double
+        }
+    }
+
+    namespace elki.database.query.knn {
+        interface KNNSearcher<O> [[../../database/query/knn/KNNSearcher.html]] {
+            {abstract} +getKNN(O, int): KNNList
+        }
+    }
+
+    namespace elki.database.query {
+        interface PrioritySearcher<O> [[../../database/query/PrioritySearcher.html]] {
+            +search(O, double): PrioritySearcher<O>
+            {abstract} +search(O): PrioritySearcher<O>
+            +getKNN(O, int): KNNList
+            +getRange(O, double, ModifiableDoubleDBIDList): ModifiableDoubleDBIDList
+            {abstract} +decreaseCutoff(double): PrioritySearcher<O>
+            {abstract} +computeExactDistance(): double
+            +getApproximateDistance(): double
+            +getApproximateAccuracy(): double
+            +getLowerBound(): double
+            +getUpperBound(): double
+            {abstract} +allLowerBound(): double
+            {abstract} +advance(): PrioritySearcher<O>
+        }
+    }
+
+    namespace elki.utilities.datastructures {
+        interface elki.utilities.datastructures.QuickSelect.Adapter<T> [[../../utilities/datastructures/QuickSelect.Adapter.html]] {
+            {abstract} +swap(T, int, int): void
+            {abstract} +compare(T, int, int): int
+            +isSorted(T, int, int): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DBIDRangeDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.DBIDRangeDatabaseConnection.Par [[DBIDRangeDatabaseConnection.Par.html]] {
+        {static} +START_ID: OptionID
+        {static} +COUNT_ID: OptionID
+        ~start: int
+        ~count: int
+        +configure(Parameterization): void
+        +make(): DBIDRangeDatabaseConnection
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>DBIDRangeDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.DBIDRangeDatabaseConnection [[DBIDRangeDatabaseConnection.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.DBIDRangeDatabaseConnection.Par
+    elki.datasource.DBIDRangeDatabaseConnection +-- elki.datasource.DBIDRangeDatabaseConnection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

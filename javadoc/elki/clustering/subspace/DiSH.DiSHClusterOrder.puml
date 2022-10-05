@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>DiSH.DiSHClusterOrder\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH.DiSHClusterOrder [[DiSH.DiSHClusterOrder.html]] {
+        -commonPreferenceVectors: WritableDataStore<long[]>
+        +DiSHClusterOrder(ArrayModifiableDBIDs, WritableDoubleDataStore, WritableDBIDDataStore, WritableIntegerDataStore, WritableDataStore<long[]>)
+        +getCommonPreferenceVector(DBIDRef): long[]
+    }
+
+    class "<size:14>CorrelationClusterOrder\n<size:10>elki.clustering.optics" as elki.clustering.optics.CorrelationClusterOrder [[../optics/CorrelationClusterOrder.html]]
+    class "<size:14>DiSH\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.DiSH [[DiSH.html]]
+
+    elki.clustering.optics.CorrelationClusterOrder <|-- elki.clustering.subspace.DiSH.DiSHClusterOrder
+    elki.clustering.subspace.DiSH +-- elki.clustering.subspace.DiSH.DiSHClusterOrder
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

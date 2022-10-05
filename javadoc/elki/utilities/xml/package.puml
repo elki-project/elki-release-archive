@@ -1,0 +1,40 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.xml {
+
+        class XMLNodeListIterator [[XMLNodeListIterator.html]] {
+            -index: int
+            -nodelist: NodeList
+            +XMLNodeListIterator(NodeList)
+            +hasNext(): boolean
+            +next(): Node
+        }
+
+        class XMLNodeIterator [[XMLNodeIterator.html]] {
+            -next: Node
+            +XMLNodeIterator(Node)
+            +hasNext(): boolean
+            +next(): Node
+        }
+
+        class DOMCloner [[DOMCloner.html]] {
+            +cloneDocument(DOMImplementation, Document): Document
+            +cloneNode(Document, Node): Node
+            +copyAttributes(Document, Element, Element): void
+        }
+
+        java.util.Iterator <|.. XMLNodeListIterator
+        java.util.Iterator <|.. XMLNodeIterator
+    }
+
+    namespace java.util {
+        interface Iterator<E> {
+            {abstract} +hasNext(): boolean
+            {abstract} +next(): E
+            +remove(): void
+            +forEachRemaining(Consumer<? super E>): void
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

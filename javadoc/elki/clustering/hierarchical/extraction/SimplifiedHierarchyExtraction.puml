@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimplifiedHierarchyExtraction\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction [[SimplifiedHierarchyExtraction.html]] {
+        {static} -LOG: Logging
+        -minClSize: int
+        -algorithm: HierarchicalClusteringAlgorithm
+        +SimplifiedHierarchyExtraction(HierarchicalClusteringAlgorithm, int)
+        +autorun(Database): Clustering<DendrogramModel>
+        +run(ClusterMergeHistory): Clustering<DendrogramModel>
+        +getInputTypeRestriction(): TypeInformation[]
+    }
+
+    interface "<size:14>ClusteringAlgorithm\n<size:10>elki.clustering" as elki.clustering.ClusteringAlgorithm<Clustering<DendrogramModel>> [[../../ClusteringAlgorithm.html]]
+    class "<size:14>SimplifiedHierarchyExtraction.Instance\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.Instance [[SimplifiedHierarchyExtraction.Instance.html]]
+    class "<size:14>SimplifiedHierarchyExtraction.TempCluster\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.TempCluster [[SimplifiedHierarchyExtraction.TempCluster.html]]
+    class "<size:14>SimplifiedHierarchyExtraction.Par\n<size:10>elki.clustering.hierarchical.extraction" as elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.Par [[SimplifiedHierarchyExtraction.Par.html]]
+
+    elki.clustering.ClusteringAlgorithm <|.. elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction
+    elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction +-- elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.Instance
+    elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction +-- elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.TempCluster
+    elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction +-- elki.clustering.hierarchical.extraction.SimplifiedHierarchyExtraction.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

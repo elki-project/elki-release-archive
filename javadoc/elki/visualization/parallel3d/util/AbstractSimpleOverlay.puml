@@ -1,0 +1,16 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractSimpleOverlay\n<size:10>elki.visualization.parallel3d.util" as elki.visualization.parallel3d.util.AbstractSimpleOverlay [[AbstractSimpleOverlay.html]] {
+        ~width: int
+        ~height: int
+        +render(GL2): void
+        {abstract} ~renderContents(GL2): void
+        +setSize(int, int): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractHoldout\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.AbstractHoldout [[AbstractHoldout.html]] {
+        #labels: ArrayList<ClassLabel>
+        #labelcol: int
+        #bundle: MultipleObjectsBundle
+        +initialize(MultipleObjectsBundle): void
+        +getLabels(): ArrayList<ClassLabel>
+        {static} +findClassLabelColumn(MultipleObjectsBundle): int
+        {static} +allClassLabels(MultipleObjectsBundle): ArrayList<ClassLabel>
+        {static} +allClassLabels(MultipleObjectsBundle, int): ArrayList<ClassLabel>
+    }
+
+    interface "<size:14>Holdout\n<size:10>elki.evaluation.classification.holdout" as elki.evaluation.classification.holdout.Holdout [[Holdout.html]] {
+        {abstract} +initialize(MultipleObjectsBundle): void
+        {abstract} +nextPartitioning(): TrainingAndTestSet
+        {abstract} +getLabels(): ArrayList<ClassLabel>
+        {abstract} +numberOfPartitions(): int
+    }
+
+    elki.evaluation.classification.holdout.Holdout <|.. elki.evaluation.classification.holdout.AbstractHoldout
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>NumberVectorLabelParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.NumberVectorLabelParser<V extends NumberVector> [[NumberVectorLabelParser.html]] {
+        {static} -LOG: Logging
+        -labelIndices: long[]
+        #factory: Factory<V extends NumberVector>
+        #mindim: int
+        #maxdim: int
+        #meta: BundleMeta
+        #columnnames: List<String>
+        #haslabels: boolean
+        #curvec: V extends NumberVector
+        #curlbl: LabelList
+        #attributes: DoubleArray
+        ~labels: ArrayList<String>
+        ~unique: ObjectOpenHashSet<String>
+        ~nextevent: Event
+        ~warnedPrecision: boolean
+        ~warnedDim: boolean
+        +NumberVectorLabelParser(CSVReaderFormat, long[], Factory<V extends NumberVector>)
+        +NumberVectorLabelParser(Factory<V extends NumberVector>)
+        +NumberVectorLabelParser(Pattern, String, Pattern, long[], Factory<V extends NumberVector>)
+        #isLabelColumn(int): boolean
+        +initStream(InputStream): void
+        +getMeta(): BundleMeta
+        +nextEvent(): Event
+        +cleanup(): void
+        #buildMeta(): void
+        +data(int): Object
+        #parseLineInternal(): boolean
+        #createVector(): V extends NumberVector
+        ~getTypeInformation(int, int): SimpleTypeInformation<V extends NumberVector>
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>AbstractStreamingParser\n<size:10>elki.datasource.parser" as elki.datasource.parser.AbstractStreamingParser [[AbstractStreamingParser.html]] {
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>NumberVectorLabelParser.Par\n<size:10>elki.datasource.parser" as elki.datasource.parser.NumberVectorLabelParser.Par<V extends NumberVector> [[NumberVectorLabelParser.Par.html]]
+
+    elki.datasource.parser.AbstractStreamingParser <|-- elki.datasource.parser.NumberVectorLabelParser
+    elki.datasource.parser.NumberVectorLabelParser +-- elki.datasource.parser.NumberVectorLabelParser.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>ColorInterpolation\n<size:10>elki.visualization.style" as elki.visualization.style.ColorInterpolation [[ColorInterpolation.html]] {
+        {static} +RGB
+        {static} +HSV
+        {abstract} +interpolate(String, String, double): String
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

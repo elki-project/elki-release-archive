@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PAM.Instance\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.PAM.Instance [[PAM.Instance.html]] {
+        ~ids: DBIDs
+        ~distQ: DistanceQuery<?>
+        ~nearest: WritableDoubleDataStore
+        ~second: WritableDoubleDataStore
+        ~assignment: WritableIntegerDataStore
+        +Instance(DistanceQuery<?>, DBIDs, WritableIntegerDataStore)
+        #run(ArrayModifiableDBIDs, int): double
+        #computeReassignmentCost(DBIDRef, int): double
+        #assignToNearestCluster(ArrayDBIDs): double
+    }
+
+    class "<size:14>PAM\n<size:10>elki.clustering.kmedoids" as elki.clustering.kmedoids.PAM<O> [[PAM.html]]
+
+    elki.clustering.kmedoids.PAM +-- elki.clustering.kmedoids.PAM.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

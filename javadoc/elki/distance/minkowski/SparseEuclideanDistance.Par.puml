@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SparseEuclideanDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.SparseEuclideanDistance.Par [[SparseEuclideanDistance.Par.html]] {
+        +make(): SparseEuclideanDistance
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>SparseEuclideanDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.SparseEuclideanDistance [[SparseEuclideanDistance.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.distance.minkowski.SparseEuclideanDistance.Par
+    elki.distance.minkowski.SparseEuclideanDistance +-- elki.distance.minkowski.SparseEuclideanDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>ConstrainedQuadraticProblemSolver.DimensionState\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.ConstrainedQuadraticProblemSolver.DimensionState [[ConstrainedQuadraticProblemSolver.DimensionState.html]] {
+        {static} +LOLIM
+        {static} +UPLIM
+        {static} +UNCONSTR
+        {static} +CONSTR
+    }
+
+    class "<size:14>ConstrainedQuadraticProblemSolver\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.ConstrainedQuadraticProblemSolver [[ConstrainedQuadraticProblemSolver.html]]
+
+    elki.math.linearalgebra.ConstrainedQuadraticProblemSolver +-- elki.math.linearalgebra.ConstrainedQuadraticProblemSolver.DimensionState
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

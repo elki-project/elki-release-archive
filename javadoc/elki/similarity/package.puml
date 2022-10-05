@@ -1,0 +1,187 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.similarity {
+
+        class FractionalSharedNearestNeighborSimilarity<O> [[FractionalSharedNearestNeighborSimilarity.html]] {
+            +FractionalSharedNearestNeighborSimilarity(Factory<O>)
+            +instantiate(Relation<T extends O>): Instance<T extends O>
+        }
+
+        class elki.similarity.FractionalSharedNearestNeighborSimilarity.Instance<T> [[FractionalSharedNearestNeighborSimilarity.Instance.html]] {
+            +Instance(Relation<T>, SharedNearestNeighborIndex<T>, FractionalSharedNearestNeighborSimilarity<? super T>)
+            {static} #countSharedNeighbors(DBIDs, DBIDs): int
+            +similarity(DBIDRef, DBIDRef): double
+        }
+
+        class elki.similarity.FractionalSharedNearestNeighborSimilarity.Par<O> {
+            +configure(Parameterization): void
+            +make(): FractionalSharedNearestNeighborSimilarity<O>
+        }
+
+        class SharedNearestNeighborSimilarity<O> [[SharedNearestNeighborSimilarity.html]] {
+            +SharedNearestNeighborSimilarity(Factory<O>)
+            {static} #countSharedNeighbors(DBIDs, DBIDs): int
+            +instantiate(Relation<T extends O>): Instance<T extends O>
+        }
+
+        class elki.similarity.SharedNearestNeighborSimilarity.Instance<O> [[SharedNearestNeighborSimilarity.Instance.html]] {
+            +Instance(Relation<O>, SharedNearestNeighborIndex<O>, SharedNearestNeighborSimilarity<? super O>)
+            +similarity(DBIDRef, DBIDRef): double
+        }
+
+        class elki.similarity.SharedNearestNeighborSimilarity.Par<O> {
+            +configure(Parameterization): void
+            +make(): SharedNearestNeighborSimilarity<O>
+        }
+
+        abstract class AbstractIndexBasedSimilarity<O, F extends IndexFactory<O>> [[AbstractIndexBasedSimilarity.html]] {
+            #indexFactory: F extends IndexFactory<O>
+            +AbstractIndexBasedSimilarity(F extends IndexFactory<O>)
+            {abstract} +instantiate(Relation<T extends O>): Instance<T extends O, ?>
+            +isSymmetric(): boolean
+            +getInputTypeRestriction(): TypeInformation
+        }
+
+        abstract class elki.similarity.AbstractIndexBasedSimilarity.Instance<O, I extends Index> [[AbstractIndexBasedSimilarity.Instance.html]] {
+            #relation: Relation<O>
+            #index: I extends Index
+            +Instance(Relation<O>, I extends Index)
+            +getRelation(): Relation<? extends O>
+            +getIndex(): I extends Index
+        }
+
+        abstract class elki.similarity.AbstractIndexBasedSimilarity.Par<F extends IndexFactory<?>> [[AbstractIndexBasedSimilarity.Par.html]] {
+            {static} +INDEX_ID: OptionID
+            #factory: F extends IndexFactory<?>
+            #configIndexFactory(Parameterization, Class<?>, Class<?>): void
+        }
+
+        abstract class AbstractDBIDSimilarity [[AbstractDBIDSimilarity.html]] {
+            #database: Relation<? extends DBID>
+            +AbstractDBIDSimilarity(Relation<? extends DBID>)
+        }
+
+        interface IndexBasedSimilarity<O> [[IndexBasedSimilarity.html]] {
+            {abstract} +instantiate(Relation<T extends O>): Instance<T extends O, ?>
+        }
+
+        interface elki.similarity.IndexBasedSimilarity.Instance<T, I extends Index> [[IndexBasedSimilarity.Instance.html]] {
+            {abstract} +getIndex(): I extends Index
+        }
+
+        abstract class AbstractVectorSimilarity [[AbstractVectorSimilarity.html]] {
+            +getInputTypeRestriction(): SimpleTypeInformation<? super NumberVector>
+        }
+
+        class InvertedDistanceSimilarity<O> [[InvertedDistanceSimilarity.html]] {
+            {static} +DISTANCE_FUNCTION_ID: OptionID
+            #distanceFunction: PrimitiveDistance<? super O>
+            +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+            +similarity(O, O): double
+        }
+
+        class Kulczynski1Similarity [[Kulczynski1Similarity.html]] {
+            +distance(NumberVector, NumberVector): double
+            +minDist(SpatialComparable, SpatialComparable): double
+            +similarity(NumberVector, NumberVector): double
+            +isSymmetric(): boolean
+            +instantiate(Relation<T extends NumberVector>): SpatialPrimitiveDistanceSimilarityQuery<T extends NumberVector>
+        }
+
+        class elki.similarity.Kulczynski1Similarity.Par [[Kulczynski1Similarity.Par.html]] {
+            +make(): Kulczynski1Similarity
+        }
+
+        class Kulczynski2Similarity [[Kulczynski2Similarity.html]] {
+            +similarity(NumberVector, NumberVector): double
+        }
+
+        class elki.similarity.Kulczynski2Similarity.Par [[Kulczynski2Similarity.Par.html]] {
+            +make(): Kulczynski2Similarity
+        }
+
+        interface Similarity<O> [[Similarity.html]] {
+            +isSymmetric(): boolean
+            {abstract} +getInputTypeRestriction(): TypeInformation
+            {abstract} +instantiate(Relation<T extends O>): SimilarityQuery<T extends O>
+        }
+
+        interface NormalizedSimilarity<O> [[NormalizedSimilarity.html]]
+
+        interface DBIDSimilarity [[DBIDSimilarity.html]]
+
+        interface PrimitiveSimilarity<O> [[PrimitiveSimilarity.html]] {
+            {abstract} +similarity(O, O): double
+            +instantiate(Relation<T extends O>): SimilarityQuery<T extends O>
+        }
+
+        interface NormalizedPrimitiveSimilarity<O> [[NormalizedPrimitiveSimilarity.html]]
+
+        AbstractIndexBasedSimilarity <|-- FractionalSharedNearestNeighborSimilarity
+        NormalizedSimilarity <|.. FractionalSharedNearestNeighborSimilarity
+        elki.similarity.AbstractIndexBasedSimilarity.Instance <|-- elki.similarity.FractionalSharedNearestNeighborSimilarity.Instance
+        FractionalSharedNearestNeighborSimilarity +-- elki.similarity.FractionalSharedNearestNeighborSimilarity.Instance
+        elki.similarity.FractionalSharedNearestNeighborSimilarity.Instance --> FractionalSharedNearestNeighborSimilarity: similarityFunction
+        elki.similarity.FractionalSharedNearestNeighborSimilarity.Instance --> Similarity: similarity
+        elki.similarity.AbstractIndexBasedSimilarity.Par <|-- elki.similarity.FractionalSharedNearestNeighborSimilarity.Par
+        FractionalSharedNearestNeighborSimilarity +-- elki.similarity.FractionalSharedNearestNeighborSimilarity.Par
+        AbstractIndexBasedSimilarity <|-- SharedNearestNeighborSimilarity
+        elki.similarity.AbstractIndexBasedSimilarity.Instance <|-- elki.similarity.SharedNearestNeighborSimilarity.Instance
+        SharedNearestNeighborSimilarity +-- elki.similarity.SharedNearestNeighborSimilarity.Instance
+        elki.similarity.SharedNearestNeighborSimilarity.Instance --> SharedNearestNeighborSimilarity: similarityFunction
+        elki.similarity.SharedNearestNeighborSimilarity.Instance --> Similarity: similarity
+        elki.similarity.AbstractIndexBasedSimilarity.Par <|-- elki.similarity.SharedNearestNeighborSimilarity.Par
+        SharedNearestNeighborSimilarity +-- elki.similarity.SharedNearestNeighborSimilarity.Par
+        IndexBasedSimilarity <|.. AbstractIndexBasedSimilarity
+        elki.similarity.IndexBasedSimilarity.Instance <|.. elki.similarity.AbstractIndexBasedSimilarity.Instance
+        AbstractIndexBasedSimilarity +-- elki.similarity.AbstractIndexBasedSimilarity.Instance
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.AbstractIndexBasedSimilarity.Par
+        AbstractIndexBasedSimilarity +-- elki.similarity.AbstractIndexBasedSimilarity.Par
+        DBIDSimilarity <|.. AbstractDBIDSimilarity
+        Similarity <|-- IndexBasedSimilarity
+        elki.database.query.similarity.DatabaseSimilarityQuery <|-- elki.similarity.IndexBasedSimilarity.Instance
+        IndexBasedSimilarity +-- elki.similarity.IndexBasedSimilarity.Instance
+        PrimitiveSimilarity <|.. AbstractVectorSimilarity
+        PrimitiveSimilarity <|.. InvertedDistanceSimilarity
+        elki.distance.AbstractNumberVectorDistance <|-- Kulczynski1Similarity
+        elki.distance.SpatialPrimitiveDistance <|.. Kulczynski1Similarity
+        PrimitiveSimilarity <|.. Kulczynski1Similarity
+        Kulczynski1Similarity --> Kulczynski1Similarity: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.Kulczynski1Similarity.Par
+        Kulczynski1Similarity +-- elki.similarity.Kulczynski1Similarity.Par
+        AbstractVectorSimilarity <|-- Kulczynski2Similarity
+        Kulczynski2Similarity --> Kulczynski2Similarity: STATIC_CONTINUOUS
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.Kulczynski2Similarity.Par
+        Kulczynski2Similarity +-- elki.similarity.Kulczynski2Similarity.Par
+        Similarity <|-- NormalizedSimilarity
+        PrimitiveSimilarity <|-- DBIDSimilarity
+        Similarity <|-- PrimitiveSimilarity
+        PrimitiveSimilarity <|-- NormalizedPrimitiveSimilarity
+        NormalizedSimilarity <|-- NormalizedPrimitiveSimilarity
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    namespace elki.database.query.similarity {
+        interface DatabaseSimilarityQuery<O> [[../database/query/similarity/DatabaseSimilarityQuery.html]] {
+            +similarity(O, DBIDRef): double
+            +similarity(DBIDRef, O): double
+            +similarity(O, O): double
+        }
+    }
+
+    namespace elki.distance {
+        abstract class AbstractNumberVectorDistance [[../distance/AbstractNumberVectorDistance.html]]
+        interface SpatialPrimitiveDistance<V extends SpatialComparable> [[../distance/SpatialPrimitiveDistance.html]] {
+            {abstract} +minDist(SpatialComparable, SpatialComparable): double
+            +instantiate(Relation<T extends SpatialComparable>): SpatialPrimitiveDistanceQuery<T extends SpatialComparable>
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

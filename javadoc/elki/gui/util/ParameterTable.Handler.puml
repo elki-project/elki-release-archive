@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParameterTable.Handler\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable.Handler [[ParameterTable.Handler.html]] {
+        +keyTyped(KeyEvent): void
+        +keyPressed(KeyEvent): void
+        +keyReleased(KeyEvent): void
+    }
+
+    interface "<size:14>KeyListener\n<size:10>java.awt.event" as java.awt.event.KeyListener {
+        {abstract} +keyTyped(KeyEvent): void
+        {abstract} +keyPressed(KeyEvent): void
+        {abstract} +keyReleased(KeyEvent): void
+    }
+    class "<size:14>ParameterTable\n<size:10>elki.gui.util" as elki.gui.util.ParameterTable [[ParameterTable.html]]
+
+    java.awt.event.KeyListener <|.. elki.gui.util.ParameterTable.Handler
+    elki.gui.util.ParameterTable +-- elki.gui.util.ParameterTable.Handler
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

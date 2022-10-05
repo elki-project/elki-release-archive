@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RandomSamplingStreamFilter.Par\n<size:10>elki.datasource.filter.selection" as elki.datasource.filter.selection.RandomSamplingStreamFilter.Par [[RandomSamplingStreamFilter.Par.html]] {
+        {static} +PROB_ID: OptionID
+        {static} +SEED_ID: OptionID
+        #prob: double
+        #rnd: RandomFactory
+        +configure(Parameterization): void
+        +make(): RandomSamplingStreamFilter
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>RandomSamplingStreamFilter\n<size:10>elki.datasource.filter.selection" as elki.datasource.filter.selection.RandomSamplingStreamFilter [[RandomSamplingStreamFilter.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.selection.RandomSamplingStreamFilter.Par
+    elki.datasource.filter.selection.RandomSamplingStreamFilter +-- elki.datasource.filter.selection.RandomSamplingStreamFilter.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

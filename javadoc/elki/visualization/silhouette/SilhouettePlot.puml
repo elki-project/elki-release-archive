@@ -1,0 +1,37 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SilhouettePlot\n<size:10>elki.visualization.silhouette" as elki.visualization.silhouette.SilhouettePlot [[SilhouettePlot.html]] {
+        {static} -LOG: Logging
+        {static} -MIN_HEIGHT: int
+        {static} -MAX_HEIGHT: int
+        ~scale: LinearScale
+        ~width: int
+        ~height: int
+        ~ratio: double
+        ~silhouettes: DoubleDBIDList[]
+        ~colors: StylingPolicy
+        #plot: RenderedImage
+        #plotnum: int
+        +SilhouettePlot(DoubleDBIDList[], StylingPolicy)
+        +replot(): void
+        +scaleToPixel(double): int
+        +scaleFromPixel(double): double
+        #computeScale(DoubleDBIDList[]): LinearScale
+        +getScale(): LinearScale
+        +getWidth(): int
+        +getHeight(): int
+        +getRatio(): double
+        +getPlot(): RenderedImage
+        +forgetRenderedImage(): void
+        +getSVGPlotURI(): String
+        +getLongName(): String
+        +getShortName(): String
+        {static} +plotForSilhouetteValues(DoubleDBIDList[], VisualizerContext): SilhouettePlot
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

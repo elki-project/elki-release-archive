@@ -1,0 +1,141 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.similarity.cluster {
+
+        class ClusterIntersectionSimilarity [[ClusterIntersectionSimilarity.html]] {
+            +similarity(Cluster<?>, Cluster<?>): double
+            +distance(Cluster<?>, Cluster<?>): double
+            +isSymmetric(): boolean
+            +isMetric(): boolean
+            +instantiate(Relation<T extends Cluster<?>>): DistanceSimilarityQuery<T extends Cluster<?>>
+            +getInputTypeRestriction(): SimpleTypeInformation<? super Cluster<?>>
+        }
+
+        class elki.similarity.cluster.ClusterIntersectionSimilarity.Par [[ClusterIntersectionSimilarity.Par.html]] {
+            +make(): ClusterIntersectionSimilarity
+        }
+
+        class ClusteringFowlkesMallowsSimilarity [[ClusteringFowlkesMallowsSimilarity.html]] {
+            +similarity(Clustering<?>, Clustering<?>): double
+            +distance(Clustering<?>, Clustering<?>): double
+            +isMetric(): boolean
+            +instantiate(Relation<T extends Clustering<?>>): DistanceSimilarityQuery<T extends Clustering<?>>
+            +getInputTypeRestriction(): SimpleTypeInformation<? super Clustering<?>>
+        }
+
+        class elki.similarity.cluster.ClusteringFowlkesMallowsSimilarity.Par [[ClusteringFowlkesMallowsSimilarity.Par.html]] {
+            +make(): ClusteringFowlkesMallowsSimilarity
+        }
+
+        class ClusteringRandIndexSimilarity [[ClusteringRandIndexSimilarity.html]] {
+            +similarity(Clustering<?>, Clustering<?>): double
+            +distance(Clustering<?>, Clustering<?>): double
+            +isMetric(): boolean
+            +instantiate(Relation<T extends Clustering<?>>): DistanceSimilarityQuery<T extends Clustering<?>>
+            +getInputTypeRestriction(): SimpleTypeInformation<? super Clustering<?>>
+        }
+
+        class elki.similarity.cluster.ClusteringRandIndexSimilarity.Par [[ClusteringRandIndexSimilarity.Par.html]] {
+            +make(): ClusteringRandIndexSimilarity
+        }
+
+        class ClusteringBCubedF1Similarity [[ClusteringBCubedF1Similarity.html]] {
+            +similarity(Clustering<?>, Clustering<?>): double
+            +distance(Clustering<?>, Clustering<?>): double
+            +isMetric(): boolean
+            +instantiate(Relation<T extends Clustering<?>>): DistanceSimilarityQuery<T extends Clustering<?>>
+            +getInputTypeRestriction(): SimpleTypeInformation<? super Clustering<?>>
+        }
+
+        class elki.similarity.cluster.ClusteringBCubedF1Similarity.Par [[ClusteringBCubedF1Similarity.Par.html]] {
+            +make(): ClusteringBCubedF1Similarity
+        }
+
+        interface ClusteringDistanceSimilarity [[ClusteringDistanceSimilarity.html]] {
+            +isSymmetric(): boolean
+            {abstract} +instantiate(Relation<T extends Clustering<?>>): DistanceSimilarityQuery<T extends Clustering<?>>
+        }
+
+        class ClusteringAdjustedRandIndexSimilarity [[ClusteringAdjustedRandIndexSimilarity.html]] {
+            +similarity(Clustering<?>, Clustering<?>): double
+            +distance(Clustering<?>, Clustering<?>): double
+            +isMetric(): boolean
+            +instantiate(Relation<T extends Clustering<?>>): DistanceSimilarityQuery<T extends Clustering<?>>
+            +getInputTypeRestriction(): SimpleTypeInformation<? super Clustering<?>>
+        }
+
+        class elki.similarity.cluster.ClusteringAdjustedRandIndexSimilarity.Par [[ClusteringAdjustedRandIndexSimilarity.Par.html]] {
+            +make(): ClusteringAdjustedRandIndexSimilarity
+        }
+
+        class ClusterJaccardSimilarity [[ClusterJaccardSimilarity.html]] {
+            +similarity(Cluster<?>, Cluster<?>): double
+            +distance(Cluster<?>, Cluster<?>): double
+            +isSymmetric(): boolean
+            +isMetric(): boolean
+            +instantiate(Relation<T extends Cluster<?>>): DistanceSimilarityQuery<T extends Cluster<?>>
+            +getInputTypeRestriction(): SimpleTypeInformation<? super Cluster<?>>
+        }
+
+        class elki.similarity.cluster.ClusterJaccardSimilarity.Par [[ClusterJaccardSimilarity.Par.html]] {
+            +make(): ClusterJaccardSimilarity
+        }
+
+        elki.distance.PrimitiveDistance <|.. ClusterIntersectionSimilarity
+        elki.similarity.PrimitiveSimilarity <|.. ClusterIntersectionSimilarity
+        ClusterIntersectionSimilarity --> ClusterIntersectionSimilarity: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.cluster.ClusterIntersectionSimilarity.Par
+        ClusterIntersectionSimilarity +-- elki.similarity.cluster.ClusterIntersectionSimilarity.Par
+        ClusteringDistanceSimilarity <|.. ClusteringFowlkesMallowsSimilarity
+        elki.similarity.NormalizedSimilarity <|.. ClusteringFowlkesMallowsSimilarity
+        ClusteringFowlkesMallowsSimilarity --> ClusteringFowlkesMallowsSimilarity: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.cluster.ClusteringFowlkesMallowsSimilarity.Par
+        ClusteringFowlkesMallowsSimilarity +-- elki.similarity.cluster.ClusteringFowlkesMallowsSimilarity.Par
+        ClusteringDistanceSimilarity <|.. ClusteringRandIndexSimilarity
+        ClusteringRandIndexSimilarity --> ClusteringRandIndexSimilarity: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.cluster.ClusteringRandIndexSimilarity.Par
+        ClusteringRandIndexSimilarity +-- elki.similarity.cluster.ClusteringRandIndexSimilarity.Par
+        ClusteringDistanceSimilarity <|.. ClusteringBCubedF1Similarity
+        elki.similarity.NormalizedSimilarity <|.. ClusteringBCubedF1Similarity
+        ClusteringBCubedF1Similarity --> ClusteringBCubedF1Similarity: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.cluster.ClusteringBCubedF1Similarity.Par
+        ClusteringBCubedF1Similarity +-- elki.similarity.cluster.ClusteringBCubedF1Similarity.Par
+        elki.similarity.PrimitiveSimilarity <|-- ClusteringDistanceSimilarity
+        elki.distance.PrimitiveDistance <|-- ClusteringDistanceSimilarity
+        ClusteringDistanceSimilarity <|.. ClusteringAdjustedRandIndexSimilarity
+        elki.similarity.NormalizedSimilarity <|.. ClusteringAdjustedRandIndexSimilarity
+        ClusteringAdjustedRandIndexSimilarity --> ClusteringAdjustedRandIndexSimilarity: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.cluster.ClusteringAdjustedRandIndexSimilarity.Par
+        ClusteringAdjustedRandIndexSimilarity +-- elki.similarity.cluster.ClusteringAdjustedRandIndexSimilarity.Par
+        elki.distance.PrimitiveDistance <|.. ClusterJaccardSimilarity
+        elki.similarity.PrimitiveSimilarity <|.. ClusterJaccardSimilarity
+        ClusterJaccardSimilarity --> ClusterJaccardSimilarity: STATIC
+        elki.utilities.optionhandling.Parameterizer <|.. elki.similarity.cluster.ClusterJaccardSimilarity.Par
+        ClusterJaccardSimilarity +-- elki.similarity.cluster.ClusterJaccardSimilarity.Par
+    }
+
+    namespace elki.distance {
+        interface PrimitiveDistance<O> [[../../distance/PrimitiveDistance.html]] {
+            {abstract} +distance(O, O): double
+            {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+            +instantiate(Relation<T extends O>): DistanceQuery<T extends O>
+        }
+    }
+
+    namespace elki.similarity {
+        interface PrimitiveSimilarity<O> [[../PrimitiveSimilarity.html]] {
+            {abstract} +similarity(O, O): double
+            +instantiate(Relation<T extends O>): SimilarityQuery<T extends O>
+        }
+        interface NormalizedSimilarity<O> [[../NormalizedSimilarity.html]]
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

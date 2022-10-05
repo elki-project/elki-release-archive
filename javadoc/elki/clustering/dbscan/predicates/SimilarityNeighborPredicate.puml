@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimilarityNeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.SimilarityNeighborPredicate<O> [[SimilarityNeighborPredicate.html]] {
+        #epsilon: double
+        #simFunc: Similarity<? super O>
+        +SimilarityNeighborPredicate(double, Similarity<? super O>)
+        +instantiate(Database): Instance
+        +getOutputType(): SimpleTypeInformation<DoubleDBIDList>
+        +getInputTypeRestriction(): TypeInformation
+    }
+
+    interface "<size:14>NeighborPredicate\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.NeighborPredicate<DoubleDBIDList> [[NeighborPredicate.html]] {
+        {abstract} +instantiate(Database): Instance<T>
+        {abstract} +getInputTypeRestriction(): TypeInformation
+        {abstract} +getOutputType(): SimpleTypeInformation<T>
+    }
+    class "<size:14>SimilarityNeighborPredicate.Instance\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.SimilarityNeighborPredicate.Instance [[SimilarityNeighborPredicate.Instance.html]]
+    class "<size:14>SimilarityNeighborPredicate.Par\n<size:10>elki.clustering.dbscan.predicates" as elki.clustering.dbscan.predicates.SimilarityNeighborPredicate.Par<O>
+
+    elki.clustering.dbscan.predicates.NeighborPredicate <|.. elki.clustering.dbscan.predicates.SimilarityNeighborPredicate
+    elki.clustering.dbscan.predicates.SimilarityNeighborPredicate +-- elki.clustering.dbscan.predicates.SimilarityNeighborPredicate.Instance
+    elki.clustering.dbscan.predicates.SimilarityNeighborPredicate +-- elki.clustering.dbscan.predicates.SimilarityNeighborPredicate.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

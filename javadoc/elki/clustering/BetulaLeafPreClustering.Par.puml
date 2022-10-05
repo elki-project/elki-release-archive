@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BetulaLeafPreClustering.Par\n<size:10>elki.clustering" as elki.clustering.BetulaLeafPreClustering.Par [[BetulaLeafPreClustering.Par.html]] {
+        {static} +STORE_IDS_ID: OptionID
+        ~cffactory: Factory<?>
+        ~storeIds: boolean
+        +configure(Parameterization): void
+        +make(): BetulaLeafPreClustering
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>BetulaLeafPreClustering\n<size:10>elki.clustering" as elki.clustering.BetulaLeafPreClustering [[BetulaLeafPreClustering.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.BetulaLeafPreClustering.Par
+    elki.clustering.BetulaLeafPreClustering +-- elki.clustering.BetulaLeafPreClustering.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

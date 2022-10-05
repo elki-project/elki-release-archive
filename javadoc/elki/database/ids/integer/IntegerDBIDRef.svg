@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="216px" preserveAspectRatio="none" style="width:197px;height:216px;background:#FFFFFF;" version="1.1" viewBox="0 0 197 216" width="197px" zoomAndPan="magnify"><defs/><g><!--MD5=[7007bc361edeb9c37ba46cfb4ac6429e]
+class elki.database.ids.integer.IntegerDBIDRef--><a href="IntegerDBIDRef.html" target="_top" title="IntegerDBIDRef.html" xlink:actuate="onRequest" xlink:href="IntegerDBIDRef.html" xlink:show="new" xlink:title="IntegerDBIDRef.html" xlink:type="simple"><g id="elem_elki.database.ids.integer.IntegerDBIDRef"><rect codeLine="6" fill="#F1F1F1" height="62.2344" id="elki.database.ids.integer.IntegerDBIDRef" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="181" x="9.5" y="129"/><ellipse cx="37.1" cy="147.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M33.0219,143.7344 L33.0219,141.5781 L40.4125,141.5781 L40.4125,143.7344 L37.9438,143.7344 L37.9438,151.8125 L40.4125,151.8125 L40.4125,153.9688 L33.0219,153.9688 L33.0219,151.8125 L35.4906,151.8125 L35.4906,143.7344 L33.0219,143.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="110" x="59.4" y="146.9951">IntegerDBIDRef</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="121" x="53.9" y="159.5791">elki.database.ids.integer</text><line style="stroke:#181818;stroke-width:0.5;" x1="10.5" x2="189.5" y1="166.9375" y2="166.9375"/><ellipse cx="20.5" cy="180.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="155" x="29.5" y="183.9326">internalGetIndex(): int</text></g></a><!--MD5=[11fe6fbe3f81b6fccae4d321b8166948]
+class elki.database.ids.DBIDRef--><a href="../DBIDRef.html" target="_top" title="../DBIDRef.html" xlink:actuate="onRequest" xlink:href="../DBIDRef.html" xlink:show="new" xlink:title="../DBIDRef.html" xlink:type="simple"><g id="elem_elki.database.ids.DBIDRef"><rect codeLine="10" fill="#F1F1F1" height="62.2344" id="elki.database.ids.DBIDRef" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="181" x="9.5" y="7"/><ellipse cx="54.25" cy="25.9688" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M50.1719,21.7344 L50.1719,19.5781 L57.5625,19.5781 L57.5625,21.7344 L55.0938,21.7344 L55.0938,29.8125 L57.5625,29.8125 L57.5625,31.9688 L50.1719,31.9688 L50.1719,29.8125 L52.6406,29.8125 L52.6406,21.7344 L50.1719,21.7344 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="60" x="86.25" y="24.9951">DBIDRef</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="83" x="74.75" y="37.5791">elki.database.ids</text><line style="stroke:#181818;stroke-width:0.5;" x1="10.5" x2="189.5" y1="44.9375" y2="44.9375"/><ellipse cx="20.5" cy="58.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="155" x="29.5" y="61.9326">internalGetIndex(): int</text></g></a><!--MD5=[564ba5c81ca28b963e910ce390554135]
+reverse link elki.database.ids.DBIDRef to elki.database.ids.integer.IntegerDBIDRef--><g id="link_elki.database.ids.DBIDRef_elki.database.ids.integer.IntegerDBIDRef"><path codeLine="14" d="M100,89.37 C100,102.75 100,116.79 100,128.73 " fill="none" id="elki.database.ids.DBIDRef-backto-elki.database.ids.integer.IntegerDBIDRef" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="93,89.28,100,69.28,107,89.28,93,89.28" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="0" y="197.2344"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="0" y="206.5166">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[de6f5a874fdaaf92b06a4648a9ed0f1f]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>IntegerDBIDRef\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.IntegerDBIDRef [[IntegerDBIDRef.html]] {
+        {abstract} +internalGetIndex(): int
+    }
+
+    interface "<size:14>DBIDRef\n<size:10>elki.database.ids" as elki.database.ids.DBIDRef [[../DBIDRef.html]] {
+        {abstract} +internalGetIndex(): int
+    }
+
+    elki.database.ids.DBIDRef <|- - elki.database.ids.integer.IntegerDBIDRef
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

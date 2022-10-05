@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LabelJoinDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.LabelJoinDatabaseConnection.Par [[LabelJoinDatabaseConnection.Par.html]] {
+        {static} +SOURCES_ID: OptionID
+        #sources: List<? extends DatabaseConnection>
+        +configure(Parameterization): void
+        +make(): LabelJoinDatabaseConnection
+    }
+
+    abstract class "<size:14>AbstractDatabaseConnection.Par\n<size:10>elki.datasource" as elki.datasource.AbstractDatabaseConnection.Par [[AbstractDatabaseConnection.Par.html]]
+    class "<size:14>LabelJoinDatabaseConnection\n<size:10>elki.datasource" as elki.datasource.LabelJoinDatabaseConnection [[LabelJoinDatabaseConnection.html]]
+
+    elki.datasource.AbstractDatabaseConnection.Par <|-- elki.datasource.LabelJoinDatabaseConnection.Par
+    elki.datasource.LabelJoinDatabaseConnection +-- elki.datasource.LabelJoinDatabaseConnection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

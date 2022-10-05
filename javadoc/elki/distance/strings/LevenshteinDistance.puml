@@ -1,0 +1,30 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LevenshteinDistance\n<size:10>elki.distance.strings" as elki.distance.strings.LevenshteinDistance [[LevenshteinDistance.html]] {
+        {static} +STATIC_SENSITIVE: LevenshteinDistance
+        {static} #TYPE: SimpleTypeInformation<? super String>
+        +distance(String, String): double
+        {static} +levenshteinDistance(String, String): int
+        {static} -prefixLen(String, String): int
+        {static} -postfixLen(String, String, int): int
+        {static} +levenshteinDistance(String, String, int, int): int
+        {static} -min(int, int, int): int
+        +getInputTypeRestriction(): SimpleTypeInformation<? super String>
+        +isMetric(): boolean
+    }
+
+    interface "<size:14>PrimitiveDistance\n<size:10>elki.distance" as elki.distance.PrimitiveDistance<String> [[../PrimitiveDistance.html]] {
+        {abstract} +distance(String, String): double
+        {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+    }
+    class "<size:14>LevenshteinDistance.Par\n<size:10>elki.distance.strings" as elki.distance.strings.LevenshteinDistance.Par [[LevenshteinDistance.Par.html]]
+
+    elki.distance.PrimitiveDistance <|.. elki.distance.strings.LevenshteinDistance
+    elki.distance.strings.LevenshteinDistance +-- elki.distance.strings.LevenshteinDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

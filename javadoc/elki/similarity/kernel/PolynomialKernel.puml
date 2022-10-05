@@ -1,0 +1,32 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PolynomialKernel\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.PolynomialKernel [[PolynomialKernel.html]] {
+        {static} +DEFAULT_DEGREE: int
+        -degree: int
+        -bias: double
+        +PolynomialKernel(int, double)
+        +PolynomialKernel(int)
+        +similarity(NumberVector, NumberVector): double
+        +isSymmetric(): boolean
+        +isMetric(): boolean
+        +distance(NumberVector, NumberVector): double
+        +instantiate(Relation<T extends NumberVector>): DistanceSimilarityQuery<T extends NumberVector>
+    }
+
+    abstract class "<size:14>AbstractVectorSimilarity\n<size:10>elki.similarity" as elki.similarity.AbstractVectorSimilarity [[../AbstractVectorSimilarity.html]]
+    interface "<size:14>PrimitiveDistance\n<size:10>elki.distance" as elki.distance.PrimitiveDistance<NumberVector> [[../../distance/PrimitiveDistance.html]] {
+        {abstract} +distance(NumberVector, NumberVector): double
+        {abstract} +getInputTypeRestriction(): SimpleTypeInformation<? super O>
+    }
+    class "<size:14>PolynomialKernel.Par\n<size:10>elki.similarity.kernel" as elki.similarity.kernel.PolynomialKernel.Par [[PolynomialKernel.Par.html]]
+
+    elki.similarity.AbstractVectorSimilarity <|-- elki.similarity.kernel.PolynomialKernel
+    elki.distance.PrimitiveDistance <|.. elki.similarity.kernel.PolynomialKernel
+    elki.similarity.kernel.PolynomialKernel +-- elki.similarity.kernel.PolynomialKernel.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

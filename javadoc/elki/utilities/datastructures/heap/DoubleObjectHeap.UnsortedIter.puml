@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    interface "<size:14>DoubleObjectHeap.UnsortedIter\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleObjectHeap.UnsortedIter<V> [[DoubleObjectHeap.UnsortedIter.html]] {
+        {abstract} +getKey(): double
+        {abstract} +getValue(): V
+    }
+
+    interface "<size:14>Iter\n<size:10>elki.utilities.datastructures.iterator" as elki.utilities.datastructures.iterator.Iter [[../iterator/Iter.html]] {
+        {abstract} +valid(): boolean
+        {abstract} +advance(): Iter
+    }
+    interface "<size:14>DoubleObjectHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.DoubleObjectHeap<V> [[DoubleObjectHeap.html]] {
+        {abstract} +add(double, V): void
+        {abstract} +add(double, V, int): void
+        {abstract} +replaceTopElement(double, V): void
+        {abstract} +peekKey(): double
+        {abstract} +peekValue(): V
+        {abstract} +containsKey(double): boolean
+        {abstract} +containsValue(V): boolean
+        {abstract} +poll(): void
+        {abstract} +clear(): void
+        {abstract} +size(): int
+        {abstract} +isEmpty(): boolean
+        {abstract} +unsortedIter(): UnsortedIter<V>
+    }
+
+    elki.utilities.datastructures.iterator.Iter <|-- elki.utilities.datastructures.heap.DoubleObjectHeap.UnsortedIter
+    elki.utilities.datastructures.heap.DoubleObjectHeap +-- elki.utilities.datastructures.heap.DoubleObjectHeap.UnsortedIter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

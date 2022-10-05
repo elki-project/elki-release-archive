@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OutlierSmROCCurve\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierSmROCCurve [[OutlierSmROCCurve.html]] {
+        {static} +SMAUROC_LABEL: String
+        {static} -LOG: Logging
+        -positiveClassName: Pattern
+        +OutlierSmROCCurve(Pattern)
+        -computeSmROCResult(SetDBIDs, OutlierResult): SmROCResult
+        +processNewResult(Object): void
+    }
+
+    interface "<size:14>Evaluator\n<size:10>elki.evaluation" as elki.evaluation.Evaluator [[../Evaluator.html]]
+    class "<size:14>OutlierSmROCCurve.SmROCResult\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierSmROCCurve.SmROCResult [[OutlierSmROCCurve.SmROCResult.html]]
+    class "<size:14>OutlierSmROCCurve.Par\n<size:10>elki.evaluation.outlier" as elki.evaluation.outlier.OutlierSmROCCurve.Par [[OutlierSmROCCurve.Par.html]]
+
+    elki.evaluation.Evaluator <|.. elki.evaluation.outlier.OutlierSmROCCurve
+    elki.evaluation.outlier.OutlierSmROCCurve +-- elki.evaluation.outlier.OutlierSmROCCurve.SmROCResult
+    elki.evaluation.outlier.OutlierSmROCCurve +-- elki.evaluation.outlier.OutlierSmROCCurve.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

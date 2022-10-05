@@ -1,0 +1,77 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.utilities.optionhandling.constraints {
+
+        interface ParameterConstraint<T> [[ParameterConstraint.html]] {
+            {abstract} +test(T): void
+            {abstract} +getDescription(String): String
+        }
+
+        class GreaterEqualConstraint [[GreaterEqualConstraint.html]] {
+            +GreaterEqualConstraint(Number)
+            +GreaterEqualConstraint(int)
+            +GreaterEqualConstraint(double)
+            +test(Number): void
+            +getDescription(String): String
+        }
+
+        class ListEachNumberConstraint<T> [[ListEachNumberConstraint.html]] {
+            +ListEachNumberConstraint()
+            +ListEachNumberConstraint(AbstractNumberConstraint)
+            +addConstraint(AbstractNumberConstraint): void
+            +test(T): void
+            +getDescription(String): String
+        }
+
+        class LessEqualConstraint [[LessEqualConstraint.html]] {
+            +LessEqualConstraint(Number)
+            +LessEqualConstraint(double)
+            +LessEqualConstraint(int)
+            +test(Number): void
+            +getDescription(String): String
+        }
+
+        class ListSizeConstraint [[ListSizeConstraint.html]] {
+            -sizeConstraint: int
+            +ListSizeConstraint(int)
+            +test(Object): void
+            +getDescription(String): String
+        }
+
+        class CommonConstraints [[CommonConstraints.html]]
+
+        class LessConstraint [[LessConstraint.html]] {
+            +LessConstraint(Number)
+            +LessConstraint(int)
+            +LessConstraint(double)
+            +test(Number): void
+            +getDescription(String): String
+        }
+
+        abstract class AbstractNumberConstraint [[AbstractNumberConstraint.html]] {
+            ~constraintValue: Number
+            +AbstractNumberConstraint(Number)
+        }
+
+        class GreaterConstraint [[GreaterConstraint.html]] {
+            +GreaterConstraint(Number)
+            +GreaterConstraint(int)
+            +GreaterConstraint(double)
+            +test(Number): void
+            +getDescription(String): String
+        }
+
+        AbstractNumberConstraint <|-- GreaterEqualConstraint
+        ParameterConstraint <|.. ListEachNumberConstraint
+        ListEachNumberConstraint --> "*" AbstractNumberConstraint: constraints
+        AbstractNumberConstraint <|-- LessEqualConstraint
+        ParameterConstraint <|.. ListSizeConstraint
+        CommonConstraints --> AbstractNumberConstraint: GREATER_EQUAL_MINUSONE_INT\nGREATER_EQUAL_ZERO_INT\nGREATER_EQUAL_ONE_INT\nGREATER_THAN_ONE_INT\nGREATER_EQUAL_ZERO_DOUBLE\nGREATER_THAN_ZERO_DOUBLE\nLESS_THAN_HALF_DOUBLE\nGREATER_EQUAL_ONE_DOUBLE\nGREATER_THAN_ONE_DOUBLE\nLESS_THAN_ONE_DOUBLE\nLESS_EQUAL_ONE_DOUBLE
+        CommonConstraints --> ParameterConstraint: GREATER_EQUAL_ZERO_INT_LIST\nGREATER_EQUAL_ONE_INT_LIST\nGREATER_THAN_ONE_INT_LIST\nGREATER_EQUAL_ZERO_DOUBLE_LIST\nGREATER_EQUAL_ONE_DOUBLE_LIST\nGREATER_THAN_ONE_DOUBLE_LIST
+        AbstractNumberConstraint <|-- LessConstraint
+        ParameterConstraint <|.. AbstractNumberConstraint
+        AbstractNumberConstraint <|-- GreaterConstraint
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

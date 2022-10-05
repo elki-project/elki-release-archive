@@ -1,0 +1,33 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ComputeKNNOutlierScores\n<size:10>elki.application.greedyensemble" as elki.application.greedyensemble.ComputeKNNOutlierScores<O extends NumberVector> [[ComputeKNNOutlierScores.html]] {
+        {static} -LOG: Logging
+        ~krange: IntGenerator
+        ~outfile: Path
+        ~bylabel: ByLabelOutlier
+        ~scaling: ScalingFunction
+        ~disable: Pattern
+        ~ksquarestop: int
+        ~timelimit: long
+        +ComputeKNNOutlierScores(InputStep, Distance<? super NumberVector>, IntGenerator, ByLabelOutlier, Path, ScalingFunction, Pattern, int, long)
+        +run(): void
+        ~writeResult(Appendable, DBIDs, OutlierResult, ScalingFunction, String): void
+        -runForEachK(String, int, int, IntFunction<OutlierResult>, BiConsumer<String, OutlierResult>): void
+        #isDisabled(String): boolean
+        {static} +main(String[]): void
+    }
+
+    abstract class "<size:14>AbstractDistanceBasedApplication\n<size:10>elki.application" as elki.application.AbstractDistanceBasedApplication<O extends NumberVector> [[../AbstractDistanceBasedApplication.html]]
+    class "<size:14>ComputeKNNOutlierScores.TimeoutException\n<size:10>elki.application.greedyensemble" as elki.application.greedyensemble.ComputeKNNOutlierScores.TimeoutException [[ComputeKNNOutlierScores.TimeoutException.html]]
+    class "<size:14>ComputeKNNOutlierScores.Par\n<size:10>elki.application.greedyensemble" as elki.application.greedyensemble.ComputeKNNOutlierScores.Par<O extends NumberVector> [[ComputeKNNOutlierScores.Par.html]]
+
+    elki.application.AbstractDistanceBasedApplication <|-- elki.application.greedyensemble.ComputeKNNOutlierScores
+    elki.application.greedyensemble.ComputeKNNOutlierScores +-- elki.application.greedyensemble.ComputeKNNOutlierScores.TimeoutException
+    elki.application.greedyensemble.ComputeKNNOutlierScores +-- elki.application.greedyensemble.ComputeKNNOutlierScores.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

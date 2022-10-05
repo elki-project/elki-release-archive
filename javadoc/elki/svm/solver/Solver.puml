@@ -1,0 +1,56 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>Solver\n<size:10>elki.svm.solver" as elki.svm.solver.Solver [[Solver.html]] {
+        {static} -LOG: Logging
+        ~active_size: int
+        ~y: byte[]
+        ~G: double[]
+        {static} ~LOWER_BOUND: byte
+        {static} ~UPPER_BOUND: byte
+        {static} ~FREE: byte
+        ~alpha_status: byte[]
+        ~alpha: double[]
+        ~Q: QMatrix
+        ~eps: double
+        ~Cp: double
+        ~Cn: double
+        ~p: double[]
+        ~active_set: int[]
+        ~G_bar: double[]
+        ~Q_i: float[]
+        ~Q_j: float[]
+        ~l: int
+        ~unshrink: boolean
+        ~get_C(int): double
+        ~update_alpha_status(int): void
+        ~is_upper_bound(int): boolean
+        ~is_lower_bound(int): boolean
+        ~is_free(int): boolean
+        ~swap_index(int, int): void
+        ~reconstruct_gradient(): void
+        +solve(int, QMatrix, double[], byte[], double[], double, double, double, boolean): SolutionInfo
+        ~buildSolutionInfo(int, double, double): SolutionInfo
+        #initializeAlpha(): void
+        #initializeActiveSet(): void
+        -update_G(int, int, double, double): void
+        -update_G_bar(double, float[]): void
+        +initializeGradient(): void
+        #calculate_obj(): double
+        {static} #nonzero(double): double
+        ~select_working_set(int[]): boolean
+        #maxViolating(int[]): double
+        #minViolating(int[], double): double
+        ~do_shrinking(): void
+        -be_shrunk(int, double, double): boolean
+        ~calculate_rho(): double
+    }
+    class "<size:14>Solver.SolutionInfo\n<size:10>elki.svm.solver" as elki.svm.solver.Solver.SolutionInfo [[Solver.SolutionInfo.html]]
+
+    elki.svm.solver.Solver +-- elki.svm.solver.Solver.SolutionInfo
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

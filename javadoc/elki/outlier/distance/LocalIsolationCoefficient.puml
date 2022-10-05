@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>LocalIsolationCoefficient\n<size:10>elki.outlier.distance" as elki.outlier.distance.LocalIsolationCoefficient<O> [[LocalIsolationCoefficient.html]] {
+        {static} -LOG: Logging
+        -kplus: int
+        #distance: Distance<? super O>
+        +LocalIsolationCoefficient(Distance<? super O>, int)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<O>): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[../OutlierAlgorithm.html]]
+    class "<size:14>LocalIsolationCoefficient.Par\n<size:10>elki.outlier.distance" as elki.outlier.distance.LocalIsolationCoefficient.Par<O> [[LocalIsolationCoefficient.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.distance.LocalIsolationCoefficient
+    elki.outlier.distance.LocalIsolationCoefficient +-- elki.outlier.distance.LocalIsolationCoefficient.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

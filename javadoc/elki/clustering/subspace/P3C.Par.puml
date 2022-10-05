@@ -1,0 +1,31 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>P3C.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.P3C.Par [[P3C.Par.html]] {
+        {static} +ALPHA_THRESHOLD_ID: OptionID
+        {static} +POISSON_THRESHOLD_ID: OptionID
+        {static} +MAX_EM_ITERATIONS_ID: OptionID
+        {static} +EM_DELTA_ID: OptionID
+        {static} +MIN_CLUSTER_SIZE_ID: OptionID
+        #alpha: double
+        #poissonThreshold: double
+        #maxEmIterations: int
+        #emDelta: double
+        #minClusterSize: int
+        +configure(Parameterization): void
+        +make(): P3C
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>P3C\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.P3C [[P3C.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.subspace.P3C.Par
+    elki.clustering.subspace.P3C +-- elki.clustering.subspace.P3C.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PROCLUS\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PROCLUS [[PROCLUS.html]] {
+        {static} -LOG: Logging
+        -m_i: int
+        -rnd: RandomFactory
+        +PROCLUS(int, int, int, int, RandomFactory)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V extends NumberVector>): Clustering<SubspaceModel>
+        -greedy(DistanceQuery<? extends NumberVector>, DBIDs, int, Random): ArrayDBIDs
+        -initialSet(DBIDs, int, Random): ArrayDBIDs
+        -computeM_current(DBIDs, DBIDs, DBIDs, Random): ArrayDBIDs
+        -getLocalities(DBIDs, DistanceQuery<? extends NumberVector>, RangeSearcher<DBIDRef>): DataStore<DBIDs>
+        -findDimensions(ArrayDBIDs, Relation<? extends NumberVector>, DistanceQuery<? extends NumberVector>, RangeSearcher<DBIDRef>): long[]
+        -findDimensions(ArrayList<PROCLUSCluster>, Relation<? extends NumberVector>): List<Pair<double[], long[]>>
+        -computeZijs(double[], int): List<DoubleIntInt>
+        -computeDimensionMap(List<DoubleIntInt>, int, int): long[]
+        -assignPoints(ArrayDBIDs, long[], Relation<? extends NumberVector>): ArrayList<PROCLUSCluster>
+        -finalAssignment(List<Pair<double[], long[]>>, Relation<? extends NumberVector>): List<PROCLUSCluster>
+        -manhattanSegmentalDistance(NumberVector, NumberVector, long[]): double
+        -manhattanSegmentalDistance(NumberVector, double[], long[]): double
+        -evaluateClusters(ArrayList<PROCLUSCluster>, long[], Relation<? extends NumberVector>): double
+        -avgDistance(double[], DBIDs, Relation<? extends NumberVector>, int): double
+        -computeBadMedoids(ArrayDBIDs, ArrayList<PROCLUSCluster>, int): DBIDs
+    }
+
+    abstract class "<size:14>AbstractProjectedClustering\n<size:10>elki.clustering" as elki.clustering.AbstractProjectedClustering<Clustering<SubspaceModel>> [[../AbstractProjectedClustering.html]]
+    interface "<size:14>SubspaceClusteringAlgorithm\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.SubspaceClusteringAlgorithm<SubspaceModel> [[SubspaceClusteringAlgorithm.html]]
+    class "<size:14>PROCLUS.DoubleIntInt\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PROCLUS.DoubleIntInt [[PROCLUS.DoubleIntInt.html]]
+    class "<size:14>PROCLUS.PROCLUSCluster\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PROCLUS.PROCLUSCluster [[PROCLUS.PROCLUSCluster.html]]
+    class "<size:14>PROCLUS.Par\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PROCLUS.Par [[PROCLUS.Par.html]]
+
+    elki.clustering.AbstractProjectedClustering <|-- elki.clustering.subspace.PROCLUS
+    elki.clustering.subspace.SubspaceClusteringAlgorithm <|.. elki.clustering.subspace.PROCLUS
+    elki.clustering.subspace.PROCLUS +-- elki.clustering.subspace.PROCLUS.DoubleIntInt
+    elki.clustering.subspace.PROCLUS +-- elki.clustering.subspace.PROCLUS.PROCLUSCluster
+    elki.clustering.subspace.PROCLUS +-- elki.clustering.subspace.PROCLUS.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>CASHIntervalSplit\n<size:10>elki.clustering.correlation.cash" as elki.clustering.correlation.cash.CASHIntervalSplit [[CASHIntervalSplit.html]] {
+        {static} -LOG: Logging
+        -database: Relation<ParameterizationFunction>
+        -f_minima: Map<HyperBoundingBox, WritableDoubleDataStore>
+        -f_maxima: Map<HyperBoundingBox, WritableDoubleDataStore>
+        -minPts: int
+        +CASHIntervalSplit(Relation<ParameterizationFunction>, int)
+        +determineIDs(DBIDs, HyperBoundingBox, double, double): ModifiableDBIDs
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

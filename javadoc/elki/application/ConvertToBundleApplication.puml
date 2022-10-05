@@ -1,0 +1,25 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ConvertToBundleApplication\n<size:10>elki.application" as elki.application.ConvertToBundleApplication [[ConvertToBundleApplication.html]] {
+        {static} -LOG: Logging
+        -input: DatabaseConnection
+        -outfile: Path
+        +ConvertToBundleApplication(DatabaseConnection, Path)
+        +run(): void
+        {static} +main(String[]): void
+    }
+
+    abstract class "<size:14>AbstractApplication\n<size:10>elki.application" as elki.application.AbstractApplication [[AbstractApplication.html]] {
+        {abstract} +run(): void
+    }
+    class "<size:14>ConvertToBundleApplication.Par\n<size:10>elki.application" as elki.application.ConvertToBundleApplication.Par [[ConvertToBundleApplication.Par.html]]
+
+    elki.application.AbstractApplication <|-- elki.application.ConvertToBundleApplication
+    elki.application.ConvertToBundleApplication +-- elki.application.ConvertToBundleApplication.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

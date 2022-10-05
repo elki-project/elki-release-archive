@@ -1,0 +1,68 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ByteArrayUtil\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil [[ByteArrayUtil.html]] {
+        {static} +SIZE_BYTE: int
+        {static} +SIZE_SHORT: int
+        {static} +SIZE_INT: int
+        {static} +SIZE_LONG: int
+        {static} +SIZE_FLOAT: int
+        {static} +SIZE_DOUBLE: int
+        {static} +BYTE_SERIALIZER: ByteSerializer
+        {static} +SHORT_SERIALIZER: ShortSerializer
+        {static} +INT_SERIALIZER: IntegerSerializer
+        {static} +LONG_SERIALIZER: LongSerializer
+        {static} +FLOAT_SERIALIZER: FloatSerializer
+        {static} +DOUBLE_SERIALIZER: DoubleSerializer
+        {static} +STRING_SERIALIZER: StringSerializer
+        {static} +VARINT_SERIALIZER: VarintSerializer
+        {static} +writeShort(byte[], int, int): int
+        {static} +writeInt(byte[], int, int): int
+        {static} +writeLong(byte[], int, long): int
+        {static} +writeFloat(byte[], int, float): int
+        {static} +writeDouble(byte[], int, double): int
+        {static} +readShort(byte[], int): short
+        {static} +readUnsignedShort(byte[], int): int
+        {static} +readInt(byte[], int): int
+        {static} +readLong(byte[], int): long
+        {static} +readFloat(byte[], int): float
+        {static} +readDouble(byte[], int): double
+        {static} +writeSignedVarint(ByteBuffer, int): void
+        {static} +writeSignedVarintLong(ByteBuffer, long): void
+        {static} +writeUnsignedVarint(ByteBuffer, int): void
+        {static} +writeUnsignedVarintLong(ByteBuffer, long): void
+        {static} +writeString(ByteBuffer, String): void
+        {static} +getSignedVarintSize(int): int
+        {static} +getUnsignedVarintSize(int): int
+        {static} +getSignedVarintLongSize(long): int
+        {static} +getUnsignedVarintLongSize(long): int
+        {static} +getStringSize(String): int
+        {static} +readSignedVarint(ByteBuffer): int
+        {static} +readUnsignedVarint(ByteBuffer): int
+        {static} +readSignedVarintLong(ByteBuffer): long
+        {static} +readUnsignedVarintLong(ByteBuffer): long
+        {static} +readString(ByteBuffer): String
+    }
+    class "<size:14>ByteArrayUtil.ByteSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil.ByteSerializer [[ByteArrayUtil.ByteSerializer.html]]
+    class "<size:14>ByteArrayUtil.ShortSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil.ShortSerializer [[ByteArrayUtil.ShortSerializer.html]]
+    class "<size:14>ByteArrayUtil.IntegerSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil.IntegerSerializer [[ByteArrayUtil.IntegerSerializer.html]]
+    class "<size:14>ByteArrayUtil.LongSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil.LongSerializer [[ByteArrayUtil.LongSerializer.html]]
+    class "<size:14>ByteArrayUtil.FloatSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil.FloatSerializer [[ByteArrayUtil.FloatSerializer.html]]
+    class "<size:14>ByteArrayUtil.DoubleSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil.DoubleSerializer [[ByteArrayUtil.DoubleSerializer.html]]
+    class "<size:14>ByteArrayUtil.StringSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil.StringSerializer [[ByteArrayUtil.StringSerializer.html]]
+    class "<size:14>ByteArrayUtil.VarintSerializer\n<size:10>elki.utilities.io" as elki.utilities.io.ByteArrayUtil.VarintSerializer [[ByteArrayUtil.VarintSerializer.html]]
+
+    elki.utilities.io.ByteArrayUtil +-- elki.utilities.io.ByteArrayUtil.ByteSerializer
+    elki.utilities.io.ByteArrayUtil +-- elki.utilities.io.ByteArrayUtil.ShortSerializer
+    elki.utilities.io.ByteArrayUtil +-- elki.utilities.io.ByteArrayUtil.IntegerSerializer
+    elki.utilities.io.ByteArrayUtil +-- elki.utilities.io.ByteArrayUtil.LongSerializer
+    elki.utilities.io.ByteArrayUtil +-- elki.utilities.io.ByteArrayUtil.FloatSerializer
+    elki.utilities.io.ByteArrayUtil +-- elki.utilities.io.ByteArrayUtil.DoubleSerializer
+    elki.utilities.io.ByteArrayUtil +-- elki.utilities.io.ByteArrayUtil.StringSerializer
+    elki.utilities.io.ByteArrayUtil +-- elki.utilities.io.ByteArrayUtil.VarintSerializer
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

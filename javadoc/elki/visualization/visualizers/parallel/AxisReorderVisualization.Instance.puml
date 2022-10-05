@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AxisReorderVisualization.Instance\n<size:10>elki.visualization.visualizers.parallel" as elki.visualization.visualizers.parallel.AxisReorderVisualization.Instance [[AxisReorderVisualization.Instance.html]] {
+        {static} +SELECTDIMENSIONORDER: String
+        {static} +SDO_BUTTON: String
+        {static} +SDO_BORDER: String
+        {static} +SDO_ARROW: String
+        -selecteddim: int
+        +Instance(VisualizerContext, VisualizationTask, VisualizationPlot, double, double, Projection)
+        +fullRedraw(): void
+        -addEventListener(Element, int, Direction): void
+        -addCSSClasses(SVGPlot): void
+    }
+
+    abstract class "<size:14>AbstractParallelVisualization\n<size:10>elki.visualization.visualizers.parallel" as elki.visualization.visualizers.parallel.AbstractParallelVisualization<NumberVector> [[AbstractParallelVisualization.html]]
+    class "<size:14>AxisReorderVisualization\n<size:10>elki.visualization.visualizers.parallel" as elki.visualization.visualizers.parallel.AxisReorderVisualization [[AxisReorderVisualization.html]]
+
+    elki.visualization.visualizers.parallel.AbstractParallelVisualization <|-- elki.visualization.visualizers.parallel.AxisReorderVisualization.Instance
+    elki.visualization.visualizers.parallel.AxisReorderVisualization +-- elki.visualization.visualizers.parallel.AxisReorderVisualization.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

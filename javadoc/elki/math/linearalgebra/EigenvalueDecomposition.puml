@@ -1,0 +1,36 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>EigenvalueDecomposition\n<size:10>elki.math.linearalgebra" as elki.math.linearalgebra.EigenvalueDecomposition [[EigenvalueDecomposition.html]] {
+        -n: int
+        -d: double[]
+        -e: double[]
+        -V: double[]
+        -H: double[]
+        -ort: double[]
+        +EigenvalueDecomposition(double[])
+        -tred2(): void
+        -tred2AccumulateTransformations(): void
+        -tql2(): void
+        -tql2ComputeImplicitShift(int): double
+        -tql2ImplicitQL(int, int, double): void
+        -sortEigen(): void
+        -orthes(): void
+        {static} -cdiv(double, double, double, double, double[], int): void
+        -hqr2(): void
+        {static} -modifyQP(double[], int, double, double): void
+        {static} -modifyQR(double[], int, boolean, double, double, double, double, double): void
+        -hqr2BacksubstituteReal(int, double, double): void
+        -hqr2BacksubstituteComplex(int, double, double, double): void
+        -hqr2BackTransformation(int, int, int): void
+        +getV(): double[]
+        +getRealEigenvalues(): double[]
+        +getImagEigenvalues(): double[]
+        +getD(): double[]
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

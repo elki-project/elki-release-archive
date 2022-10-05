@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>BestOfMultipleKMeans.Par\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.BestOfMultipleKMeans.Par<V extends NumberVector, M extends MeanModel> {
+        {static} +TRIALS_ID: OptionID
+        {static} +KMEANS_ID: OptionID
+        {static} +QUALITYMEASURE_ID: OptionID
+        #trials: int
+        #kMeansVariant: KMeans<V extends NumberVector, M extends MeanModel>
+        #qualityMeasure: KMeansQualityMeasure<? super NumberVector>
+        +configure(Parameterization): void
+        +make(): BestOfMultipleKMeans<V extends NumberVector, M extends MeanModel>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>BestOfMultipleKMeans\n<size:10>elki.clustering.kmeans" as elki.clustering.kmeans.BestOfMultipleKMeans<V extends NumberVector, M extends MeanModel> [[BestOfMultipleKMeans.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.kmeans.BestOfMultipleKMeans.Par
+    elki.clustering.kmeans.BestOfMultipleKMeans +-- elki.clustering.kmeans.BestOfMultipleKMeans.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="249px" preserveAspectRatio="none" style="width:209px;height:249px;background:#FFFFFF;" version="1.1" viewBox="0 0 209 249" width="209px" zoomAndPan="magnify"><defs/><g><!--MD5=[5b82de86b22204e8c5f7b3f31eb541c8]
+class elki.svm.qmatrix.SVC_Q--><a href="SVC_Q.html" target="_top" title="SVC_Q.html" xlink:actuate="onRequest" xlink:href="SVC_Q.html" xlink:show="new" xlink:title="SVC_Q.html" xlink:type="simple"><g id="elem_elki.svm.qmatrix.SVC_Q"><rect codeLine="6" fill="#F1F1F1" height="119.125" id="elki.svm.qmatrix.SVC_Q" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="195" x="7" y="105"/><ellipse cx="60.25" cy="123.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M63.2188,129.6094 Q62.6406,129.9063 62,130.0469 Q61.3594,130.2031 60.6563,130.2031 Q58.1563,130.2031 56.8281,128.5625 Q55.5156,126.9063 55.5156,123.7813 Q55.5156,120.6563 56.8281,119 Q58.1563,117.3438 60.6563,117.3438 Q61.3594,117.3438 62,117.5 Q62.6563,117.6563 63.2188,117.9531 L63.2188,120.6719 Q62.5938,120.0938 62,119.8281 Q61.4063,119.5469 60.7813,119.5469 Q59.4375,119.5469 58.75,120.625 Q58.0625,121.6875 58.0625,123.7813 Q58.0625,125.875 58.75,126.9531 Q59.4375,128.0156 60.7813,128.0156 Q61.4063,128.0156 62,127.75 Q62.5938,127.4688 63.2188,126.8906 L63.2188,129.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="97.75" y="122.9951">SVC_Q</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="80" x="80.75" y="135.5791">elki.svm.qmatrix</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="201" y1="142.9375" y2="142.9375"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="153.5859"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="27" y="159.9326">y: byte[]</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="201" y1="167.2344" y2="167.2344"/><ellipse cx="18" cy="180.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159" x="27" y="184.2295">SVC_Q(DataSet, byte[])</text><ellipse cx="18" cy="197.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="167" x="27" y="200.5264">similarity(int, int): double</text><ellipse cx="18" cy="213.4766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169" x="27" y="216.8232">swap_index(int, int): void</text></g></a><!--MD5=[eaf53934a613dd212f434ed561853fa8]
+class elki.svm.qmatrix.Kernel--><a href="Kernel.html" target="_top" title="Kernel.html" xlink:actuate="onRequest" xlink:href="Kernel.html" xlink:show="new" xlink:title="Kernel.html" xlink:type="simple"><g id="elem_elki.svm.qmatrix.Kernel"><rect codeLine="13" fill="#F1F1F1" height="37.9375" id="elki.svm.qmatrix.Kernel" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="112" x="48.5" y="7"/><ellipse cx="63.5" cy="25.9688" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M66.4688,31.6094 Q65.8906,31.9063 65.25,32.0469 Q64.6094,32.2031 63.9063,32.2031 Q61.4063,32.2031 60.0781,30.5625 Q58.7656,28.9063 58.7656,25.7813 Q58.7656,22.6563 60.0781,21 Q61.4063,19.3438 63.9063,19.3438 Q64.6094,19.3438 65.25,19.5 Q65.9063,19.6563 66.4688,19.9531 L66.4688,22.6719 Q65.8438,22.0938 65.25,21.8281 Q64.6563,21.5469 64.0313,21.5469 Q62.6875,21.5469 62,22.625 Q61.3125,23.6875 61.3125,25.7813 Q61.3125,27.875 62,28.9531 Q62.6875,30.0156 64.0313,30.0156 Q64.6563,30.0156 65.25,29.75 Q65.8438,29.4688 66.4688,28.8906 L66.4688,31.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="44" x="95.5" y="24.9951">Kernel</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="80" x="77.5" y="37.5791">elki.svm.qmatrix</text></g></a><!--MD5=[ab1a9ccbdb765af01c469d6d9003b962]
+reverse link elki.svm.qmatrix.Kernel to elki.svm.qmatrix.SVC_Q--><g id="link_elki.svm.qmatrix.Kernel_elki.svm.qmatrix.SVC_Q"><path codeLine="15" d="M104.5,65.5 C104.5,77.69 104.5,91.46 104.5,104.73 " fill="none" id="elki.svm.qmatrix.Kernel-backto-elki.svm.qmatrix.SVC_Q" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="97.5,65.13,104.5,45.13,111.5,65.13,97.5,65.13" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="4.5" y="230.125"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="4.5" y="239.4072">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[0d078393e8390a2eae812ce962dc48b1]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SVC_Q\n<size:10>elki.svm.qmatrix" as elki.svm.qmatrix.SVC_Q [[SVC_Q.html]] {
+        -y: byte[]
+        +SVC_Q(DataSet, byte[])
+        +similarity(int, int): double
+        +swap_index(int, int): void
+    }
+
+    class "<size:14>Kernel\n<size:10>elki.svm.qmatrix" as elki.svm.qmatrix.Kernel [[Kernel.html]]
+
+    elki.svm.qmatrix.Kernel <|- - elki.svm.qmatrix.SVC_Q
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

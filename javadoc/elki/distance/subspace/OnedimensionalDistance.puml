@@ -1,0 +1,39 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OnedimensionalDistance\n<size:10>elki.distance.subspace" as elki.distance.subspace.OnedimensionalDistance [[OnedimensionalDistance.html]] {
+        -dim: int
+        +OnedimensionalDistance(int)
+        +distance(NumberVector, NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+        +norm(NumberVector): double
+        +getSelectedDimension(): int
+        +--getSelectedDimensions--(): long[]
+        +--setSelectedDimensions--(long[]): void
+        +getInputTypeRestriction(): VectorTypeInformation<? super NumberVector>
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    interface "<size:14>SpatialPrimitiveDistance\n<size:10>elki.distance" as elki.distance.SpatialPrimitiveDistance<NumberVector> [[../SpatialPrimitiveDistance.html]] {
+        {abstract} +minDist(SpatialComparable, SpatialComparable): double
+    }
+    interface "<size:14>DimensionSelectingSubspaceDistance\n<size:10>elki.distance.subspace" as elki.distance.subspace.DimensionSelectingSubspaceDistance<NumberVector> [[DimensionSelectingSubspaceDistance.html]] {
+        {abstract} +getSelectedDimensions(): long[]
+        {abstract} +setSelectedDimensions(long[]): void
+    }
+    interface "<size:14>Norm\n<size:10>elki.distance" as elki.distance.Norm<NumberVector> [[../Norm.html]] {
+        {abstract} +norm(NumberVector): double
+    }
+    class "<size:14>OnedimensionalDistance.Par\n<size:10>elki.distance.subspace" as elki.distance.subspace.OnedimensionalDistance.Par [[OnedimensionalDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.subspace.OnedimensionalDistance
+    elki.distance.SpatialPrimitiveDistance <|.. elki.distance.subspace.OnedimensionalDistance
+    elki.distance.subspace.DimensionSelectingSubspaceDistance <|.. elki.distance.subspace.OnedimensionalDistance
+    elki.distance.Norm <|.. elki.distance.subspace.OnedimensionalDistance
+    elki.distance.subspace.OnedimensionalDistance +-- elki.distance.subspace.OnedimensionalDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

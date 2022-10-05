@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OnlineLOF.LOFKNNListener\n<size:10>elki.outlier.lof" as elki.outlier.lof.OnlineLOF.LOFKNNListener [[OnlineLOF.LOFKNNListener.html]] {
+        -firstEventReceived: KNNChangeEvent
+        -lofResult: LOFResult<O>
+        +LOFKNNListener(LOFResult<O>)
+        +kNNsChanged(KNNChangeEvent): void
+        -kNNsChanged(KNNChangeEvent, KNNChangeEvent): void
+        -kNNsInserted(DBIDs, DBIDs, DBIDs, LOFResult<O>): void
+        -kNNsRemoved(DBIDs, DBIDs, DBIDs, LOFResult<O>): void
+        -recomputeLOFs(DBIDs, LOFResult<O>): void
+    }
+
+    interface "<size:14>KNNListener\n<size:10>elki.index.preprocessed.knn" as elki.index.preprocessed.knn.KNNListener [[../../index/preprocessed/knn/KNNListener.html]] {
+        {abstract} +kNNsChanged(KNNChangeEvent): void
+    }
+    class "<size:14>OnlineLOF\n<size:10>elki.outlier.lof" as elki.outlier.lof.OnlineLOF<O> [[OnlineLOF.html]]
+
+    elki.index.preprocessed.knn.KNNListener <|.. elki.outlier.lof.OnlineLOF.LOFKNNListener
+    elki.outlier.lof.OnlineLOF +-- elki.outlier.lof.OnlineLOF.LOFKNNListener
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

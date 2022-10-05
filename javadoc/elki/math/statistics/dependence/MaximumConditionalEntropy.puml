@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MaximumConditionalEntropy\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.MaximumConditionalEntropy [[MaximumConditionalEntropy.html]] {
+        {static} +STATIC: MaximumConditionalEntropy
+        {static} +TARGET: int
+        +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+        -buildPartitions(NumberArrayAdapter<?, A>, A, int, int): ArrayList<int[]>
+        -divide(int[], double[], ArrayList<int[]>, int, int, int): void
+        -intersectionMatrix(int[], ArrayList<int[]>, ArrayList<int[]>, int): void
+        -intersectionSize(int[], int[]): int
+        -getMCEntropy(int[], ArrayList<int[]>, ArrayList<int[]>, int, int, double): double
+    }
+
+    interface "<size:14>Dependence\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.Dependence [[Dependence.html]] {
+        {abstract} +dependence(NumberArrayAdapter<?, A>, A, NumberArrayAdapter<?, B>, B): double
+    }
+    class "<size:14>MaximumConditionalEntropy.Par\n<size:10>elki.math.statistics.dependence" as elki.math.statistics.dependence.MaximumConditionalEntropy.Par [[MaximumConditionalEntropy.Par.html]]
+
+    elki.math.statistics.dependence.Dependence <|.. elki.math.statistics.dependence.MaximumConditionalEntropy
+    elki.math.statistics.dependence.MaximumConditionalEntropy +-- elki.math.statistics.dependence.MaximumConditionalEntropy.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

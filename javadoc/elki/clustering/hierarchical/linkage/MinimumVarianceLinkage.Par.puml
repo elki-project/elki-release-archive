@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>MinimumVarianceLinkage.Par\n<size:10>elki.clustering.hierarchical.linkage" as elki.clustering.hierarchical.linkage.MinimumVarianceLinkage.Par [[MinimumVarianceLinkage.Par.html]] {
+        +make(): MinimumVarianceLinkage
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>MinimumVarianceLinkage\n<size:10>elki.clustering.hierarchical.linkage" as elki.clustering.hierarchical.linkage.MinimumVarianceLinkage [[MinimumVarianceLinkage.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.clustering.hierarchical.linkage.MinimumVarianceLinkage.Par
+    elki.clustering.hierarchical.linkage.MinimumVarianceLinkage +-- elki.clustering.hierarchical.linkage.MinimumVarianceLinkage.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ParallelCore\n<size:10>elki.parallel" as elki.parallel.ParallelCore [[ParallelCore.html]] {
+        {static} +ALL_PROCESSORS: int
+        {static} -STATIC: ParallelCore
+        -executor: ThreadPoolExecutor
+        -connected: int
+        -processors: int
+        #ParallelCore(int)
+        {static} +getCore(): ParallelCore
+        +getParallelism(): int
+        +submit(Callable<T>): Future<T>
+        +connect(): void
+        +disconnect(): void
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

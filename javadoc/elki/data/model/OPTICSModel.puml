@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>OPTICSModel\n<size:10>elki.data.model" as elki.data.model.OPTICSModel [[OPTICSModel.html]] {
+        -startIndex: int
+        -endIndex: int
+        +OPTICSModel(int, int)
+        +getStartIndex(): int
+        +getEndIndex(): int
+    }
+
+    interface "<size:14>Model\n<size:10>elki.data.model" as elki.data.model.Model [[Model.html]]
+
+    elki.data.model.Model <|.. elki.data.model.OPTICSModel
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

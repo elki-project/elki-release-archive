@@ -1,0 +1,28 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>UpdatableHeap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.UpdatableHeap<O> [[UpdatableHeap.html]] {
+        {static} #NO_VALUE: int
+        {static} #IN_TIES: int
+        #index: Object2IntOpenHashMap<Object>
+        +UpdatableHeap()
+        +UpdatableHeap(int)
+        +UpdatableHeap(Comparator<? super O>)
+        +UpdatableHeap(int, Comparator<? super O>)
+        +clear(): void
+        +add(O): void
+        #offerAt(int, O): void
+        +poll(): O
+        #heapifyUp(int, Object): void
+        #heapifyDown(int, Object): boolean
+    }
+
+    class "<size:14>Heap\n<size:10>elki.utilities.datastructures.heap" as elki.utilities.datastructures.heap.Heap<O> [[Heap.html]]
+
+    elki.utilities.datastructures.heap.Heap <|-- elki.utilities.datastructures.heap.UpdatableHeap
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

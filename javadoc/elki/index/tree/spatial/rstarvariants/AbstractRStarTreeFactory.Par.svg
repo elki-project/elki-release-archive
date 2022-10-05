@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="72px" preserveAspectRatio="none" style="width:1068px;height:72px;background:#FFFFFF;" version="1.1" viewBox="0 0 1068 72" width="1068px" zoomAndPan="magnify"><defs/><g><!--MD5=[1db08512a1ad1dc11c8dff14bbe43dde]
+class elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory--><a href="AbstractRStarTreeFactory.html" target="_top" title="AbstractRStarTreeFactory.html" xlink:actuate="onRequest" xlink:href="AbstractRStarTreeFactory.html" xlink:show="new" xlink:title="AbstractRStarTreeFactory.html" xlink:type="simple"><g id="elem_elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory"><rect codeLine="22" fill="#F1F1F1" height="37.9375" id="elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="1050" x="7" y="10"/><ellipse cx="22" cy="28.9688" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M22.1094,24.3125 L20.9531,29.3906 L23.2813,29.3906 L22.1094,24.3125 Z M20.625,22.0781 L23.6094,22.0781 L26.9688,34.4688 L24.5156,34.4688 L23.75,31.4063 L20.4688,31.4063 L19.7188,34.4688 L17.2813,34.4688 L20.625,22.0781 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="180" x="36" y="27.9951">AbstractRStarTreeFactory</text><text fill="#000000" font-family="sans-serif" font-size="10" font-style="italic" lengthAdjust="spacing" textLength="173" x="39.5" y="40.5791">elki.index.tree.spatial.rstarvariants</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="836" x="224" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="834" x="225" y="19.1387">O extends NumberVector, N extends AbstractRStarTreeNode&lt;N, E extends SpatialEntry&gt;, E extends SpatialEntry, S extends RTreeSettings</text></g></a><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="434" y="52.9375"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="434" y="62.2197">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[fc95be1cc54801d805ace37ebbf87c13]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractRStarTreeFactory.Par\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par<O extends NumberVector, S extends RTreeSettings> {
+        {static} +INSERTION_STRATEGY_ID: OptionID
+        {static} +SPLIT_STRATEGY_ID: OptionID
+        {static} +BULK_SPLIT_ID: OptionID
+        {static} +MINIMUM_FILL_ID: OptionID
+        {static} +OVERFLOW_STRATEGY_ID: OptionID
+        #settings: S extends RTreeSettings
+        {abstract} #createSettings(): S extends RTreeSettings
+        +configure(Parameterization): void
+        #configBulkLoad(Parameterization): void
+        {abstract} +make(): AbstractRStarTreeFactory<O extends NumberVector, ?, ?, ?>
+    }
+
+    abstract class "<size:14>PagedIndexFactory.Par\n<size:10>elki.index" as elki.index.PagedIndexFactory.Par<O extends NumberVector> [[../../../PagedIndexFactory.Par.html]] {
+        {abstract} +make(): PagedIndexFactory<O>
+    }
+    abstract class "<size:14>AbstractRStarTreeFactory\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory<O extends NumberVector, N extends AbstractRStarTreeNode<N, E extends SpatialEntry>, E extends SpatialEntry, S extends RTreeSettings> [[AbstractRStarTreeFactory.html]]
+
+    elki.index.PagedIndexFactory.Par <|- - elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par
+    elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory +- - elki.index.tree.spatial.rstarvariants.AbstractRStarTreeFactory.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

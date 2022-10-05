@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="531px" preserveAspectRatio="none" style="width:2639px;height:531px;background:#FFFFFF;" version="1.1" viewBox="0 0 2639 531" width="2639px" zoomAndPan="magnify"><defs/><g><!--MD5=[dd51beea48c3444cbedb4495eb5c4856]
+cluster elki.application--><g id="cluster_elki.application"><path d="M8.5,6 L126.5,6 A3.75,3.75 0 0 1 129,8.5 L136,28.2969 L2629.5,28.2969 A2.5,2.5 0 0 1 2632,30.7969 L2632,503.5 A2.5,2.5 0 0 1 2629.5,506 L8.5,506 A2.5,2.5 0 0 1 6,503.5 L6,8.5 A2.5,2.5 0 0 1 8.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="136" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="117" x="10" y="20.9951">elki.application</text></g><!--MD5=[d9c6d92d454d1ca350cf0d5d88ec4ce0]
+class elki.application.ELKILauncher--><a href="ELKILauncher.html" target="_top" title="ELKILauncher.html" xlink:actuate="onRequest" xlink:href="ELKILauncher.html" xlink:show="new" xlink:title="ELKILauncher.html" xlink:type="simple"><g id="elem_elki.application.ELKILauncher"><rect codeLine="4" fill="#F1F1F1" height="80.5938" id="elki.application.ELKILauncher" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="458" x="1806" y="106"/><ellipse cx="1984.75" cy="122" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1987.7188,127.6406 Q1987.1406,127.9375 1986.5,128.0781 Q1985.8594,128.2344 1985.1563,128.2344 Q1982.6563,128.2344 1981.3281,126.5938 Q1980.0156,124.9375 1980.0156,121.8125 Q1980.0156,118.6875 1981.3281,117.0313 Q1982.6563,115.375 1985.1563,115.375 Q1985.8594,115.375 1986.5,115.5313 Q1987.1563,115.6875 1987.7188,115.9844 L1987.7188,118.7031 Q1987.0938,118.125 1986.5,117.8594 Q1985.9063,117.5781 1985.2813,117.5781 Q1983.9375,117.5781 1983.25,118.6563 Q1982.5625,119.7188 1982.5625,121.8125 Q1982.5625,123.9063 1983.25,124.9844 Q1983.9375,126.0469 1985.2813,126.0469 Q1985.9063,126.0469 1986.5,125.7813 Q1987.0938,125.5 1987.7188,124.9219 L1987.7188,127.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="2005.25" y="126.8467">ELKILauncher</text><line style="stroke:#181818;stroke-width:0.5;" x1="1807" x2="2263" y1="138" y2="138"/><ellipse cx="1817" cy="151.6484" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="432" x="1826" y="154.9951">DEFAULT_APPLICATION: Class&lt;? extends AbstractApplication&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="1807" x2="2263" y1="162.2969" y2="162.2969"/><ellipse cx="1817" cy="175.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="130" x="1826" y="179.292">main(String[]): void</text></g></a><!--MD5=[8ca7b5d743125948cb650269531cc307]
+class elki.application.KDDCLIApplication--><a href="KDDCLIApplication.html" target="_top" title="KDDCLIApplication.html" xlink:actuate="onRequest" xlink:href="KDDCLIApplication.html" xlink:show="new" xlink:title="KDDCLIApplication.html" xlink:type="simple"><g id="elem_elki.application.KDDCLIApplication"><rect codeLine="9" fill="#F1F1F1" height="113.1875" id="elki.application.KDDCLIApplication" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="226" x="22" y="344.5"/><ellipse cx="67.75" cy="360.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M70.7188,366.1406 Q70.1406,366.4375 69.5,366.5781 Q68.8594,366.7344 68.1563,366.7344 Q65.6563,366.7344 64.3281,365.0938 Q63.0156,363.4375 63.0156,360.3125 Q63.0156,357.1875 64.3281,355.5313 Q65.6563,353.875 68.1563,353.875 Q68.8594,353.875 69.5,354.0313 Q70.1563,354.1875 70.7188,354.4844 L70.7188,357.2031 Q70.0938,356.625 69.5,356.3594 Q68.9063,356.0781 68.2813,356.0781 Q66.9375,356.0781 66.25,357.1563 Q65.5625,358.2188 65.5625,360.3125 Q65.5625,362.4063 66.25,363.4844 Q66.9375,364.5469 68.2813,364.5469 Q68.9063,364.5469 69.5,364.2813 Q70.0938,364 70.7188,363.4219 L70.7188,366.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="88.25" y="365.3467">KDDCLIApplication</text><line style="stroke:#181818;stroke-width:0.5;" x1="23" x2="247" y1="376.5" y2="376.5"/><polygon fill="none" points="33,386.1484,29,392.1484,37,392.1484" style="stroke:#1963A0;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102" x="42" y="393.4951">task: KDDTask</text><line style="stroke:#181818;stroke-width:0.5;" x1="23" x2="247" y1="400.7969" y2="400.7969"/><ellipse cx="33" cy="414.4453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="200" x="42" y="417.792">KDDCLIApplication(KDDTask)</text><ellipse cx="33" cy="430.7422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="42" y="434.0889">run(): void</text><ellipse cx="33" cy="447.0391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="130" x="42" y="450.3857">main(String[]): void</text></g></a><!--MD5=[1288925f9d93613b4c3e6c6f3adf3153]
+class elki.application.AbstractDistanceBasedApplication--><a href="AbstractDistanceBasedApplication.html" target="_top" title="AbstractDistanceBasedApplication.html" xlink:actuate="onRequest" xlink:href="AbstractDistanceBasedApplication.html" xlink:show="new" xlink:title="AbstractDistanceBasedApplication.html" xlink:type="simple"><g id="elem_elki.application.AbstractDistanceBasedApplication"><rect codeLine="22" fill="#F1F1F1" height="96.8906" id="elki.application.AbstractDistanceBasedApplication" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="499" x="283.5" y="352.5"/><ellipse cx="400.75" cy="368.5" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M400.8594,363.8438 L399.7031,368.9219 L402.0313,368.9219 L400.8594,363.8438 Z M399.375,361.6094 L402.3594,361.6094 L405.7188,374 L403.2656,374 L402.5,370.9375 L399.2188,370.9375 L398.4688,374 L396.0313,374 L399.375,361.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="244" x="421.25" y="373.3467">AbstractDistanceBasedApplication</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="775.5" y="349.5"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="776.5" y="361.6387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="284.5" x2="781.5" y1="384.5" y2="384.5"/><polygon fill="none" points="294.5,393.1484,298.5,397.1484,294.5,401.1484,290.5,397.1484" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="219" x="303.5" y="401.4951">distance: Distance&lt;? super O&gt;</text><polygon fill="none" points="294.5,409.4453,298.5,413.4453,294.5,417.4453,290.5,413.4453" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="142" x="303.5" y="417.792">inputstep: InputStep</text><line style="stroke:#181818;stroke-width:0.5;" x1="284.5" x2="781.5" y1="425.0938" y2="425.0938"/><ellipse cx="294.5" cy="438.7422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="473" x="303.5" y="442.0889">AbstractDistanceBasedApplication(InputStep, Distance&lt;? super O&gt;)</text></g></a><!--MD5=[fe4ab20d6ffe8229cac2b01c4aa05850]
+class elki.application.ClassifierHoldoutEvaluationTask--><a href="ClassifierHoldoutEvaluationTask.html" target="_top" title="ClassifierHoldoutEvaluationTask.html" xlink:actuate="onRequest" xlink:href="ClassifierHoldoutEvaluationTask.html" xlink:show="new" xlink:title="ClassifierHoldoutEvaluationTask.html" xlink:type="simple"><g id="elem_elki.application.ClassifierHoldoutEvaluationTask"><rect codeLine="34" fill="#F1F1F1" height="178.375" id="elki.application.ClassifierHoldoutEvaluationTask" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="855" x="817.5" y="312"/><ellipse cx="1125.75" cy="328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1128.7188,333.6406 Q1128.1406,333.9375 1127.5,334.0781 Q1126.8594,334.2344 1126.1563,334.2344 Q1123.6563,334.2344 1122.3281,332.5938 Q1121.0156,330.9375 1121.0156,327.8125 Q1121.0156,324.6875 1122.3281,323.0313 Q1123.6563,321.375 1126.1563,321.375 Q1126.8594,321.375 1127.5,321.5313 Q1128.1563,321.6875 1128.7188,321.9844 L1128.7188,324.7031 Q1128.0938,324.125 1127.5,323.8594 Q1126.9063,323.5781 1126.2813,323.5781 Q1124.9375,323.5781 1124.25,324.6563 Q1123.5625,325.7188 1123.5625,327.8125 Q1123.5625,329.9063 1124.25,330.9844 Q1124.9375,332.0469 1126.2813,332.0469 Q1126.9063,332.0469 1127.5,331.7813 Q1128.0938,331.5 1128.7188,330.9219 L1128.7188,333.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="218" x="1146.25" y="332.8467">ClassifierHoldoutEvaluationTask</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="10" x="1665.5" y="309"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="8" x="1666.5" y="321.1387">O</text><line style="stroke:#181818;stroke-width:0.5;" x1="818.5" x2="1671.5" y1="344" y2="344"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="825.5" y="354.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="837.5" y="360.9951">LOG: Logging</text><polygon fill="none" points="828.5,368.9453,832.5,372.9453,828.5,376.9453,824.5,372.9453" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="299" x="837.5" y="377.292">databaseConnection: DatabaseConnection</text><polygon fill="none" points="828.5,385.2422,832.5,389.2422,828.5,393.2422,824.5,389.2422" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="390" x="837.5" y="393.5889">indexFactories: Collection&lt;? extends IndexFactory&lt;?&gt;&gt;</text><polygon fill="none" points="828.5,401.5391,832.5,405.5391,828.5,409.5391,824.5,405.5391" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169" x="837.5" y="409.8857">algorithm: Classifier&lt;O&gt;</text><polygon fill="none" points="828.5,417.8359,832.5,421.8359,828.5,425.8359,824.5,421.8359" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="837.5" y="426.1826">holdout: Holdout</text><line style="stroke:#181818;stroke-width:0.5;" x1="818.5" x2="1671.5" y1="433.4844" y2="433.4844"/><ellipse cx="828.5" cy="447.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="829" x="837.5" y="450.4795">ClassifierHoldoutEvaluationTask(DatabaseConnection, Collection&lt;? extends IndexFactory&lt;?&gt;&gt;, Classifier&lt;O&gt;, Holdout)</text><ellipse cx="828.5" cy="463.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="837.5" y="466.7764">run(): void</text><ellipse cx="828.5" cy="479.7266" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="130" x="837.5" y="483.0732">main(String[]): void</text></g></a><!--MD5=[a2305ffafd78aa55cec0498b295639c2]
+class elki.application.GeneratorXMLSpec--><a href="GeneratorXMLSpec.html" target="_top" title="GeneratorXMLSpec.html" xlink:actuate="onRequest" xlink:href="GeneratorXMLSpec.html" xlink:show="new" xlink:title="GeneratorXMLSpec.html" xlink:type="simple"><g id="elem_elki.application.GeneratorXMLSpec"><rect codeLine="55" fill="#F1F1F1" height="178.375" id="elki.application.GeneratorXMLSpec" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="456" x="1708" y="312"/><ellipse cx="1864.25" cy="328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1867.2188,333.6406 Q1866.6406,333.9375 1866,334.0781 Q1865.3594,334.2344 1864.6563,334.2344 Q1862.1563,334.2344 1860.8281,332.5938 Q1859.5156,330.9375 1859.5156,327.8125 Q1859.5156,324.6875 1860.8281,323.0313 Q1862.1563,321.375 1864.6563,321.375 Q1865.3594,321.375 1866,321.5313 Q1866.6563,321.6875 1867.2188,321.9844 L1867.2188,324.7031 Q1866.5938,324.125 1866,323.8594 Q1865.4063,323.5781 1864.7813,323.5781 Q1863.4375,323.5781 1862.75,324.6563 Q1862.0625,325.7188 1862.0625,327.8125 Q1862.0625,329.9063 1862.75,330.9844 Q1863.4375,332.0469 1864.7813,332.0469 Q1865.4063,332.0469 1866,331.7813 Q1866.5938,331.5 1867.2188,330.9219 L1867.2188,333.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135" x="1884.75" y="332.8467">GeneratorXMLSpec</text><line style="stroke:#181818;stroke-width:0.5;" x1="1709" x2="2163" y1="344" y2="344"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1716" y="354.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="1728" y="360.9951">LOG: Logging</text><ellipse cx="1719" cy="373.9453" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="170" x="1728" y="377.292">LINE_SEPARATOR: String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1716" y="387.2422"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="1728" y="393.5889">outputFile: Path</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1716" y="403.5391"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="323" x="1728" y="409.8857">generator: GeneratorXMLDatabaseConnection</text><line style="stroke:#181818;stroke-width:0.5;" x1="1709" x2="2163" y1="417.1875" y2="417.1875"/><ellipse cx="1719" cy="430.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="430" x="1728" y="434.1826">GeneratorXMLSpec(Path, GeneratorXMLDatabaseConnection)</text><ellipse cx="1719" cy="447.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="1728" y="450.4795">run(): void</text><ellipse cx="1719" cy="463.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="399" x="1728" y="466.7764">writeClusters(BufferedWriter, MultipleObjectsBundle): void</text><ellipse cx="1719" cy="479.7266" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="130" x="1728" y="483.0732">main(String[]): void</text></g></a><!--MD5=[ac7e1a0a1d07f77f33f4ae583ef94f91]
+class elki.application.ConvertToBundleApplication--><a href="ConvertToBundleApplication.html" target="_top" title="ConvertToBundleApplication.html" xlink:actuate="onRequest" xlink:href="ConvertToBundleApplication.html" xlink:show="new" xlink:title="ConvertToBundleApplication.html" xlink:type="simple"><g id="elem_elki.application.ConvertToBundleApplication"><rect codeLine="73" fill="#F1F1F1" height="145.7813" id="elki.application.ConvertToBundleApplication" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="417" x="2199.5" y="328"/><ellipse cx="2305.75" cy="344" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2308.7188,349.6406 Q2308.1406,349.9375 2307.5,350.0781 Q2306.8594,350.2344 2306.1563,350.2344 Q2303.6563,350.2344 2302.3281,348.5938 Q2301.0156,346.9375 2301.0156,343.8125 Q2301.0156,340.6875 2302.3281,339.0313 Q2303.6563,337.375 2306.1563,337.375 Q2306.8594,337.375 2307.5,337.5313 Q2308.1563,337.6875 2308.7188,337.9844 L2308.7188,340.7031 Q2308.0938,340.125 2307.5,339.8594 Q2306.9063,339.5781 2306.2813,339.5781 Q2304.9375,339.5781 2304.25,340.6563 Q2303.5625,341.7188 2303.5625,343.8125 Q2303.5625,345.9063 2304.25,346.9844 Q2304.9375,348.0469 2306.2813,348.0469 Q2306.9063,348.0469 2307.5,347.7813 Q2308.0938,347.5 2308.7188,346.9219 L2308.7188,349.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="196" x="2326.25" y="348.8467">ConvertToBundleApplication</text><line style="stroke:#181818;stroke-width:0.5;" x1="2200.5" x2="2615.5" y1="360" y2="360"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2207.5" y="370.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="2219.5" y="376.9951">LOG: Logging</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2207.5" y="386.9453"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="190" x="2219.5" y="393.292">input: DatabaseConnection</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2207.5" y="403.2422"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="82" x="2219.5" y="409.5889">outfile: Path</text><line style="stroke:#181818;stroke-width:0.5;" x1="2200.5" x2="2615.5" y1="416.8906" y2="416.8906"/><ellipse cx="2210.5" cy="430.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="391" x="2219.5" y="433.8857">ConvertToBundleApplication(DatabaseConnection, Path)</text><ellipse cx="2210.5" cy="446.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="2219.5" y="450.1826">run(): void</text><ellipse cx="2210.5" cy="463.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="130" x="2219.5" y="466.4795">main(String[]): void</text></g></a><!--MD5=[3d4de60bdc1b25a9f289ffb57f6f1e3f]
+class elki.application.AbstractApplication--><a href="AbstractApplication.html" target="_top" title="AbstractApplication.html" xlink:actuate="onRequest" xlink:href="AbstractApplication.html" xlink:show="new" xlink:title="AbstractApplication.html" xlink:type="simple"><g id="elem_elki.application.AbstractApplication"><rect codeLine="90" fill="#F1F1F1" height="210.9688" id="elki.application.AbstractApplication" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="347" x="1071.5" y="41"/><ellipse cx="1171.75" cy="57" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1171.8594,52.3438 L1170.7031,57.4219 L1173.0313,57.4219 L1171.8594,52.3438 Z M1170.375,50.1094 L1173.3594,50.1094 L1176.7188,62.5 L1174.2656,62.5 L1173.5,59.4375 L1170.2188,59.4375 L1169.4688,62.5 L1167.0313,62.5 L1170.375,50.1094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="138" x="1192.25" y="61.8467">AbstractApplication</text><line style="stroke:#181818;stroke-width:0.5;" x1="1072.5" x2="1417.5" y1="73" y2="73"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1079.5" y="83.6484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="93" x="1091.5" y="89.9951">LOG: Logging</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1079.5" y="99.9453"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="110" x="1091.5" y="106.292">NEWLINE: String</text><ellipse cx="1082.5" cy="119.2422" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="110" x="1091.5" y="122.5889">VERSION: String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1079.5" y="132.5391"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="201" x="1091.5" y="138.8857">REFERENCE_VERSION: String</text><ellipse cx="1082.5" cy="151.8359" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="133" x="1091.5" y="155.1826">REFERENCE: String</text><line style="stroke:#181818;stroke-width:0.5;" x1="1072.5" x2="1417.5" y1="162.4844" y2="162.4844"/><ellipse cx="1082.5" cy="176.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="291" x="1091.5" y="179.4795">runCLIApplication(Class&lt;?&gt;, String[]): void</text><ellipse cx="1082.5" cy="192.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="321" x="1091.5" y="195.7764">usage(Collection&lt;TrackedParameter&gt;): String</text><polygon fill="#FFFF44" points="1082.5,203.7266,1086.5,207.7266,1082.5,211.7266,1078.5,207.7266" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="242" x="1091.5" y="212.0732">printErrorMessage(Exception): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1079.5" y="222.0234"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="225" x="1091.5" y="228.3701">printDescription(Class&lt;?&gt;): void</text><ellipse cx="1082.5" cy="241.3203" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="72" x="1091.5" y="244.667">run(): void</text></g></a><!--MD5=[60b755bdcbb980a454c6cc51f0979803]
+reverse link elki.application.AbstractApplication to elki.application.KDDCLIApplication--><g id="link_elki.application.AbstractApplication_elki.application.KDDCLIApplication"><path codeLine="122" d="M1051.4,155.93 C849.1,170.2 525.62,208.61 266,312 C245.38,320.21 224.7,332.04 206.05,344.37 " fill="none" id="elki.application.AbstractApplication-backto-elki.application.KDDCLIApplication" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1051.07,148.93,1071.5,154.56,1052.02,162.9,1051.07,148.93" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[53d4868e65062e39c9c435eec4ae7450]
+reverse link elki.application.AbstractApplication to elki.application.AbstractDistanceBasedApplication--><g id="link_elki.application.AbstractApplication_elki.application.AbstractDistanceBasedApplication"><path codeLine="125" d="M1052.38,215.81 C930.42,259.06 775.78,313.9 667.07,352.45 " fill="none" id="elki.application.AbstractApplication-backto-elki.application.AbstractDistanceBasedApplication" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1050.09,209.19,1071.28,209.11,1054.77,222.39,1050.09,209.19" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[ee939c41781ff397ea39ecb9cebfe042]
+reverse link elki.application.AbstractApplication to elki.application.ClassifierHoldoutEvaluationTask--><g id="link_elki.application.AbstractApplication_elki.application.ClassifierHoldoutEvaluationTask"><path codeLine="128" d="M1245,272.16 C1245,285.49 1245,298.84 1245,311.63 " fill="none" id="elki.application.AbstractApplication-backto-elki.application.ClassifierHoldoutEvaluationTask" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1238,272.02,1245,252.02,1252,272.02,1238,272.02" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[3a748da23e449245fa9d005522defcb5]
+reverse link elki.application.AbstractApplication to elki.application.GeneratorXMLSpec--><g id="link_elki.application.AbstractApplication_elki.application.GeneratorXMLSpec"><path codeLine="131" d="M1437.94,218 C1521.7,248.61 1620.44,284.69 1707.82,316.62 " fill="none" id="elki.application.AbstractApplication-backto-elki.application.GeneratorXMLSpec" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1435.3,224.49,1418.92,211.05,1440.11,211.34,1435.3,224.49" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[896a33c13a0e983eef8812528ac23dc5]
+reverse link elki.application.AbstractApplication to elki.application.ConvertToBundleApplication--><g id="link_elki.application.AbstractApplication_elki.application.ConvertToBundleApplication"><path codeLine="134" d="M1438.36,186.51 C1542.15,206.98 1672.36,231.9 1789,252 C1963.12,282 2011.31,266.34 2182,312 C2199.08,316.57 2216.64,322.01 2234.07,327.91 " fill="none" id="elki.application.AbstractApplication-backto-elki.application.ConvertToBundleApplication" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1436.9,193.36,1418.64,182.61,1439.61,179.62,1436.9,193.36" style="stroke:#181818;stroke-width:1.0;"/></g><rect fill="none" height="11.6406" style="stroke:none;stroke-width:1.0;" width="186" x="1219.5" y="512"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="1219.5" y="521.2822">UMLDoclet 2.0.19, PlantUML 1.2022.8</text><!--MD5=[f0b71ff14d722abc19437e47c8851121]
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.application {
+
+        class ELKILauncher [[ELKILauncher.html]] {
+            {static} +DEFAULT_APPLICATION: Class<? extends AbstractApplication>
+            {static} +main(String[]): void
+        }
+
+        class KDDCLIApplication [[KDDCLIApplication.html]] {
+            ~task: KDDTask
+            +KDDCLIApplication(KDDTask)
+            +run(): void
+            {static} +main(String[]): void
+        }
+
+        class elki.application.KDDCLIApplication.Par [[KDDCLIApplication.Par.html]] {
+            #task: KDDTask
+            +configure(Parameterization): void
+            +make(): KDDCLIApplication
+        }
+
+        abstract class AbstractDistanceBasedApplication<O> [[AbstractDistanceBasedApplication.html]] {
+            #distance: Distance<? super O>
+            #inputstep: InputStep
+            +AbstractDistanceBasedApplication(InputStep, Distance<? super O>)
+        }
+
+        abstract class elki.application.AbstractDistanceBasedApplication.Par<O> {
+            #inputstep: InputStep
+            #distance: Distance<? super O>
+            +configure(Parameterization): void
+        }
+
+        class ClassifierHoldoutEvaluationTask<O> [[ClassifierHoldoutEvaluationTask.html]] {
+            {static} -LOG: Logging
+            #databaseConnection: DatabaseConnection
+            #indexFactories: Collection<? extends IndexFactory<?>>
+            #algorithm: Classifier<O>
+            #holdout: Holdout
+            +ClassifierHoldoutEvaluationTask(DatabaseConnection, Collection<? extends IndexFactory<?>>, Classifier<O>, Holdout)
+            +run(): void
+            {static} +main(String[]): void
+        }
+
+        class elki.application.ClassifierHoldoutEvaluationTask.Par<O> [[ClassifierHoldoutEvaluationTask.Par.html]] {
+            {static} +HOLDOUT_ID: OptionID
+            #databaseConnection: DatabaseConnection
+            #indexFactories: Collection<? extends IndexFactory<?>>
+            #algorithm: Classifier<O>
+            #holdout: Holdout
+            +configure(Parameterization): void
+            +make(): ClassifierHoldoutEvaluationTask<O>
+        }
+
+        class GeneratorXMLSpec [[GeneratorXMLSpec.html]] {
+            {static} -LOG: Logging
+            {static} +LINE_SEPARATOR: String
+            -outputFile: Path
+            -generator: GeneratorXMLDatabaseConnection
+            +GeneratorXMLSpec(Path, GeneratorXMLDatabaseConnection)
+            +run(): void
+            +writeClusters(BufferedWriter, MultipleObjectsBundle): void
+            {static} +main(String[]): void
+        }
+
+        class elki.application.GeneratorXMLSpec.Par [[GeneratorXMLSpec.Par.html]] {
+            -outputFile: Path
+            -generator: GeneratorXMLDatabaseConnection
+            +configure(Parameterization): void
+            +make(): GeneratorXMLSpec
+        }
+
+        class ConvertToBundleApplication [[ConvertToBundleApplication.html]] {
+            {static} -LOG: Logging
+            -input: DatabaseConnection
+            -outfile: Path
+            +ConvertToBundleApplication(DatabaseConnection, Path)
+            +run(): void
+            {static} +main(String[]): void
+        }
+
+        class elki.application.ConvertToBundleApplication.Par [[ConvertToBundleApplication.Par.html]] {
+            {static} +DATABASE_CONNECTION_ID: OptionID
+            -input: DatabaseConnection
+            -outfile: Path
+            +configure(Parameterization): void
+            +make(): ConvertToBundleApplication
+        }
+
+        abstract class AbstractApplication [[AbstractApplication.html]] {
+            {static} -LOG: Logging
+            {static} -NEWLINE: String
+            {static} +VERSION: String
+            {static} -REFERENCE_VERSION: String
+            {static} +REFERENCE: String
+            {static} +runCLIApplication(Class<?>, String[]): void
+            {static} +usage(Collection<TrackedParameter>): String
+            {static} #printErrorMessage(Exception): void
+            {static} -printDescription(Class<?>): void
+            {abstract} +run(): void
+        }
+
+        abstract class elki.application.AbstractApplication.Par [[AbstractApplication.Par.html]] {
+            {static} +OUTPUT_ID: OptionID
+            {static} +INPUT_ID: OptionID
+            {static} +DATABASE_ID: OptionID
+            {static} +HELP_ID: OptionID
+            {static} +HELP_LONG_ID: OptionID
+            {static} +DESCRIPTION_ID: OptionID
+            {static} +DEBUG_ID: OptionID
+            {static} +VERBOSE_ID: OptionID
+            {static} +parseVerbose(Parameterization): Level
+            {static} +parseDebugParameter(Parameterization): String[]
+            {static} +applyLoggingLevels(String[]): void
+            #getParameterOutputFile(Parameterization): Path
+            #getParameterOutputFile(Parameterization, String): Path
+            #getParameterInputFile(Parameterization): URI
+            #getParameterInputFile(Parameterization, String): URI
+            {abstract} +make(): AbstractApplication
+        }
+
+        AbstractApplication <|- - KDDCLIApplication
+        elki.application.AbstractApplication.Par <|- - elki.application.KDDCLIApplication.Par
+        KDDCLIApplication +- - elki.application.KDDCLIApplication.Par
+        AbstractApplication <|- - AbstractDistanceBasedApplication
+        elki.application.AbstractApplication.Par <|- - elki.application.AbstractDistanceBasedApplication.Par
+        AbstractDistanceBasedApplication +- - elki.application.AbstractDistanceBasedApplication.Par
+        AbstractApplication <|- - ClassifierHoldoutEvaluationTask
+        elki.application.AbstractApplication.Par <|- - elki.application.ClassifierHoldoutEvaluationTask.Par
+        ClassifierHoldoutEvaluationTask +- - elki.application.ClassifierHoldoutEvaluationTask.Par
+        AbstractApplication <|- - GeneratorXMLSpec
+        elki.application.AbstractApplication.Par <|- - elki.application.GeneratorXMLSpec.Par
+        GeneratorXMLSpec +- - elki.application.GeneratorXMLSpec.Par
+        AbstractApplication <|- - ConvertToBundleApplication
+        elki.application.AbstractApplication.Par <|- - elki.application.ConvertToBundleApplication.Par
+        ConvertToBundleApplication +- - elki.application.ConvertToBundleApplication.Par
+        elki.utilities.optionhandling.Parameterizer <|.. elki.application.AbstractApplication.Par
+        AbstractApplication +- - elki.application.AbstractApplication.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
+
+PlantUML version 1.2022.8(Sun Sep 25 11:00:33 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>

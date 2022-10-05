@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractFrequentItemsetAlgorithm\n<size:10>elki.itemsetmining" as elki.itemsetmining.AbstractFrequentItemsetAlgorithm [[AbstractFrequentItemsetAlgorithm.html]] {
+        -minsupp: double
+        #minlength: int
+        #maxlength: int
+        +AbstractFrequentItemsetAlgorithm(double, int, int)
+        +AbstractFrequentItemsetAlgorithm(double)
+        +autorun(Database): FrequentItemsetsResult
+        +getMinimumSupport(int): int
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    abstract class "<size:14>AbstractFrequentItemsetAlgorithm.Par\n<size:10>elki.itemsetmining" as elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par [[AbstractFrequentItemsetAlgorithm.Par.html]]
+
+    elki.Algorithm <|.. elki.itemsetmining.AbstractFrequentItemsetAlgorithm
+    elki.itemsetmining.AbstractFrequentItemsetAlgorithm +-- elki.itemsetmining.AbstractFrequentItemsetAlgorithm.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

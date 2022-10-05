@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>AttributeWiseCDFNormalization.Par\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization.Par<V extends NumberVector> [[AttributeWiseCDFNormalization.Par.html]] {
+        {static} +DISTRIBUTIONS_ID: OptionID
+        -estimators: List<? extends DistributionEstimator<?>>
+        +configure(Parameterization): void
+        +make(): AttributeWiseCDFNormalization<V extends NumberVector>
+    }
+
+    interface "<size:14>Parameterizer\n<size:10>elki.utilities.optionhandling" as elki.utilities.optionhandling.Parameterizer [[../../../../utilities/optionhandling/Parameterizer.html]] {
+        {abstract} +make(): Object
+    }
+    class "<size:14>AttributeWiseCDFNormalization\n<size:10>elki.datasource.filter.normalization.columnwise" as elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization<V extends NumberVector> [[AttributeWiseCDFNormalization.html]]
+
+    elki.utilities.optionhandling.Parameterizer <|.. elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization.Par
+    elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization +-- elki.datasource.filter.normalization.columnwise.AttributeWiseCDFNormalization.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

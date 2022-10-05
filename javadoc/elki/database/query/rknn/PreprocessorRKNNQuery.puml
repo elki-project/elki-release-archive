@@ -1,0 +1,23 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PreprocessorRKNNQuery\n<size:10>elki.database.query.rknn" as elki.database.query.rknn.PreprocessorRKNNQuery<O> [[PreprocessorRKNNQuery.html]] {
+        #relation: Relation<? extends O>
+        -preprocessor: MaterializeKNNAndRKNNPreprocessor<O>
+        -warned: boolean
+        +PreprocessorRKNNQuery(Relation<O>, MaterializeKNNAndRKNNPreprocessor<O>)
+        +PreprocessorRKNNQuery(Relation<O>, Factory<O>)
+        +getRKNN(DBIDRef, int): DoubleDBIDList
+    }
+
+    interface "<size:14>RKNNSearcher\n<size:10>elki.database.query.rknn" as elki.database.query.rknn.RKNNSearcher<DBIDRef> [[RKNNSearcher.html]] {
+        {abstract} +getRKNN(DBIDRef, int): DoubleDBIDList
+    }
+
+    elki.database.query.rknn.RKNNSearcher <|.. elki.database.query.rknn.PreprocessorRKNNQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ObjectParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.ObjectParameter<C> [[ObjectParameter.html]] {
+        -instance: C
+        +ObjectParameter(OptionID, Class<?>, Class<?>)
+        +ObjectParameter(OptionID, Class<?>, T extends C)
+        +ObjectParameter(OptionID, Class<?>)
+        #parseValue(Object): Class<? extends C>
+        +setValue(Object): void
+        +setOptional(boolean): ObjectParameter<C>
+        +getSyntax(): String
+        +instantiateClass(Parameterization): C
+    }
+
+    class "<size:14>ClassParameter\n<size:10>elki.utilities.optionhandling.parameters" as elki.utilities.optionhandling.parameters.ClassParameter<C> [[ClassParameter.html]]
+
+    elki.utilities.optionhandling.parameters.ClassParameter <|-- elki.utilities.optionhandling.parameters.ObjectParameter
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

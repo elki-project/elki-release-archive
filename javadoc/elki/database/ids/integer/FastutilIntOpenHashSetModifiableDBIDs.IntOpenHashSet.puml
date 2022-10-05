@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>FastutilIntOpenHashSetModifiableDBIDs.IntOpenHashSet\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.IntOpenHashSet [[FastutilIntOpenHashSetModifiableDBIDs.IntOpenHashSet.html]] {
+        {static} -serialVersionUID: long
+        -c: int
+        +IntOpenHashSet()
+        +IntOpenHashSet(int)
+        +popInt(): int
+    }
+
+    class "<size:14>IntOpenHashSet\n<size:10>it.unimi.dsi.fastutil.ints" as it.unimi.dsi.fastutil.ints.IntOpenHashSet
+    class "<size:14>FastutilIntOpenHashSetModifiableDBIDs\n<size:10>elki.database.ids.integer" as elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs [[FastutilIntOpenHashSetModifiableDBIDs.html]]
+
+    it.unimi.dsi.fastutil.ints.IntOpenHashSet <|-- elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.IntOpenHashSet
+    elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs +-- elki.database.ids.integer.FastutilIntOpenHashSetModifiableDBIDs.IntOpenHashSet
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

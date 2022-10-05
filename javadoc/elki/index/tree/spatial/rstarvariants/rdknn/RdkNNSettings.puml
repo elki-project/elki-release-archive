@@ -1,0 +1,18 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>RdkNNSettings\n<size:10>elki.index.tree.spatial.rstarvariants.rdknn" as elki.index.tree.spatial.rstarvariants.rdknn.RdkNNSettings [[RdkNNSettings.html]] {
+        ~k_max: int
+        ~distance: SpatialPrimitiveDistance<NumberVector>
+        +RdkNNSettings(int, SpatialPrimitiveDistance<NumberVector>)
+    }
+
+    class "<size:14>RTreeSettings\n<size:10>elki.index.tree.spatial.rstarvariants" as elki.index.tree.spatial.rstarvariants.RTreeSettings [[../RTreeSettings.html]]
+
+    elki.index.tree.spatial.rstarvariants.RTreeSettings <|-- elki.index.tree.spatial.rstarvariants.rdknn.RdkNNSettings
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

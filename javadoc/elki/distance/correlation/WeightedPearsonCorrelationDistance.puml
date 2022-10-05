@@ -1,0 +1,22 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WeightedPearsonCorrelationDistance\n<size:10>elki.distance.correlation" as elki.distance.correlation.WeightedPearsonCorrelationDistance [[WeightedPearsonCorrelationDistance.html]] {
+        -weights: double[]
+        +WeightedPearsonCorrelationDistance(double[])
+        +distance(NumberVector, NumberVector): double
+    }
+
+    abstract class "<size:14>AbstractNumberVectorDistance\n<size:10>elki.distance" as elki.distance.AbstractNumberVectorDistance [[../AbstractNumberVectorDistance.html]]
+    interface "<size:14>WeightedNumberVectorDistance\n<size:10>elki.distance" as elki.distance.WeightedNumberVectorDistance<NumberVector> [[../WeightedNumberVectorDistance.html]]
+    class "<size:14>WeightedPearsonCorrelationDistance.Par\n<size:10>elki.distance.correlation" as elki.distance.correlation.WeightedPearsonCorrelationDistance.Par [[WeightedPearsonCorrelationDistance.Par.html]]
+
+    elki.distance.AbstractNumberVectorDistance <|-- elki.distance.correlation.WeightedPearsonCorrelationDistance
+    elki.distance.WeightedNumberVectorDistance <|.. elki.distance.correlation.WeightedPearsonCorrelationDistance
+    elki.distance.correlation.WeightedPearsonCorrelationDistance +-- elki.distance.correlation.WeightedPearsonCorrelationDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

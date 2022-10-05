@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>PROCLUS.DoubleIntInt\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PROCLUS.DoubleIntInt [[PROCLUS.DoubleIntInt.html]] {
+        #first: double
+        #dimi: int
+        #dimj: int
+        +DoubleIntInt(double, int, int)
+        +compareTo(DoubleIntInt): int
+    }
+
+    interface "<size:14>Comparable\n<size:10>java.lang" as java.lang.Comparable<DoubleIntInt> {
+        {abstract} +compareTo(DoubleIntInt): int
+    }
+    class "<size:14>PROCLUS\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.PROCLUS [[PROCLUS.html]]
+
+    java.lang.Comparable <|.. elki.clustering.subspace.PROCLUS.DoubleIntInt
+    elki.clustering.subspace.PROCLUS +-- elki.clustering.subspace.PROCLUS.DoubleIntInt
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

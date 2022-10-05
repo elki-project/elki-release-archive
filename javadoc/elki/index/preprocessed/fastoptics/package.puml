@@ -1,0 +1,45 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    namespace elki.index.preprocessed.fastoptics {
+
+        class RandomProjectedNeighborsAndDensities [[RandomProjectedNeighborsAndDensities.html]] {
+            {static} -LOG: Logging
+            {static} -PREFIX: String
+            {static} -logOProjectionConst: int
+            {static} -sizeTolerance: float
+            ~minSplitSize: int
+            ~points: Relation<? extends NumberVector>
+            ~splitsets: ArrayList<ArrayDBIDs>
+            ~projectedPoints: DoubleDataStore[]
+            ~rnd: RandomFactory
+            ~distanceComputations: long
+            +RandomProjectedNeighborsAndDensities(RandomFactory)
+            +computeSetsBounds(Relation<? extends NumberVector>, int, DBIDs): void
+            +splitupNoSort(ArrayModifiableDBIDs, int, int, int, Random): void
+            +splitRandomly(ArrayModifiableDBIDs, int, int, DoubleDataStore, Random): int
+            +splitByDistance(ArrayModifiableDBIDs, int, int, DoubleDataStore, Random): int
+            +getNeighs(): DataStore<DBIDs>
+            +computeAverageDistInSet(): DoubleDataStore
+            +logStatistics(): void
+        }
+
+        class elki.index.preprocessed.fastoptics.RandomProjectedNeighborsAndDensities.Par [[RandomProjectedNeighborsAndDensities.Par.html]] {
+            {static} +RANDOM_ID: OptionID
+            ~rnd: RandomFactory
+            +configure(Parameterization): void
+            +make(): RandomProjectedNeighborsAndDensities
+        }
+
+        elki.utilities.optionhandling.Parameterizer <|.. elki.index.preprocessed.fastoptics.RandomProjectedNeighborsAndDensities.Par
+        RandomProjectedNeighborsAndDensities +-- elki.index.preprocessed.fastoptics.RandomProjectedNeighborsAndDensities.Par
+    }
+
+    namespace elki.utilities.optionhandling {
+        interface Parameterizer [[../../../utilities/optionhandling/Parameterizer.html]] {
+            +configure(Parameterization): void
+            {abstract} +make(): Object
+        }
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

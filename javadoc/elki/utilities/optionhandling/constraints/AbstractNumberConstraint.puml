@@ -1,0 +1,20 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractNumberConstraint\n<size:10>elki.utilities.optionhandling.constraints" as elki.utilities.optionhandling.constraints.AbstractNumberConstraint [[AbstractNumberConstraint.html]] {
+        ~constraintValue: Number
+        +AbstractNumberConstraint(Number)
+    }
+
+    interface "<size:14>ParameterConstraint\n<size:10>elki.utilities.optionhandling.constraints" as elki.utilities.optionhandling.constraints.ParameterConstraint<Number> [[ParameterConstraint.html]] {
+        {abstract} +test(Number): void
+        {abstract} +getDescription(String): String
+    }
+
+    elki.utilities.optionhandling.constraints.ParameterConstraint <|.. elki.utilities.optionhandling.constraints.AbstractNumberConstraint
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

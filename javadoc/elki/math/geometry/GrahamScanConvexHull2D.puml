@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>GrahamScanConvexHull2D\n<size:10>elki.math.geometry" as elki.math.geometry.GrahamScanConvexHull2D [[GrahamScanConvexHull2D.html]] {
+        -points: List<double[]>
+        -minmaxX: DoubleMinMax
+        -minmaxY: DoubleMinMax
+        -ok: boolean
+        -factor: double
+        +add(double...): void
+        -computeConvexHull(): void
+        -findStartingPoint(): void
+        -getRX(double[], double[]): double
+        -getRY(double[], double[]): double
+        #isLeft(double[], double[], double[]): int
+        -mdist(double[], double[]): double
+        -isConvex(double[], double[], double[]): boolean
+        -grahamScan(): void
+        +getHull(): Polygon
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

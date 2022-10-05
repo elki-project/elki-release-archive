@@ -1,0 +1,21 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>KuhnMunkresStern\n<size:10>elki.utilities.datastructures" as elki.utilities.datastructures.KuhnMunkresStern [[KuhnMunkresStern.html]] {
+        -cptr: int[]
+        -cmin: double[]
+        +run(double[]): int[]
+        #initUncoveredMinimum(): void
+        #findUncoveredMinimum(): double
+        #removeCost(double): void
+    }
+
+    class "<size:14>KuhnMunkresWong\n<size:10>elki.utilities.datastructures" as elki.utilities.datastructures.KuhnMunkresWong [[KuhnMunkresWong.html]]
+
+    elki.utilities.datastructures.KuhnMunkresWong <|-- elki.utilities.datastructures.KuhnMunkresStern
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

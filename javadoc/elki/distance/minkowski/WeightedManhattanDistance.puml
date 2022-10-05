@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>WeightedManhattanDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.WeightedManhattanDistance [[WeightedManhattanDistance.html]] {
+        +WeightedManhattanDistance(double[])
+        -preDistance(NumberVector, NumberVector, int, int): double
+        -preDistanceVM(NumberVector, SpatialComparable, int, int): double
+        -preDistanceMBR(SpatialComparable, SpatialComparable, int, int): double
+        -preNorm(NumberVector, int, int): double
+        -preNormMBR(SpatialComparable, int, int): double
+        +distance(NumberVector, NumberVector): double
+        +norm(NumberVector): double
+        +minDist(SpatialComparable, SpatialComparable): double
+    }
+
+    class "<size:14>WeightedLPNormDistance\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.WeightedLPNormDistance [[WeightedLPNormDistance.html]]
+    class "<size:14>WeightedManhattanDistance.Par\n<size:10>elki.distance.minkowski" as elki.distance.minkowski.WeightedManhattanDistance.Par [[WeightedManhattanDistance.Par.html]]
+
+    elki.distance.minkowski.WeightedLPNormDistance <|-- elki.distance.minkowski.WeightedManhattanDistance
+    elki.distance.minkowski.WeightedManhattanDistance +-- elki.distance.minkowski.WeightedManhattanDistance.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

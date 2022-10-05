@@ -1,0 +1,35 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>HiSC.Instance\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.HiSC.Instance [[HiSC.Instance.html]] {
+        #preferenceVectors: WritableDataStore<long[]>
+        -clusterOrder: ArrayModifiableDBIDs
+        -relation: Relation<? extends NumberVector>
+        -correlationValue: WritableIntegerDataStore
+        -commonPreferenceVectors: WritableDataStore<long[]>
+        +Instance(Relation<? extends NumberVector>)
+        +run(): CorrelationClusterOrder
+        -determinePreferenceVector(DBIDRef, DBIDs): long[]
+        #buildResult(): CorrelationClusterOrder
+        #initialDBID(DBIDRef): void
+        #expandDBID(DBIDRef): void
+        +compare(DBIDRef, DBIDRef): int
+        #getLogger(): Logging
+    }
+
+    abstract class "<size:14>GeneralizedOPTICS.Instance\n<size:10>elki.clustering.optics" as elki.clustering.optics.GeneralizedOPTICS.Instance<CorrelationClusterOrder> [[../optics/GeneralizedOPTICS.Instance.html]] {
+        {abstract} #initialDBID(DBIDRef): void
+        {abstract} #expandDBID(DBIDRef): void
+        {abstract} #buildResult(): CorrelationClusterOrder
+        {abstract} #getLogger(): Logging
+    }
+    class "<size:14>HiSC\n<size:10>elki.clustering.subspace" as elki.clustering.subspace.HiSC [[HiSC.html]]
+
+    elki.clustering.optics.GeneralizedOPTICS.Instance <|-- elki.clustering.subspace.HiSC.Instance
+    elki.clustering.subspace.HiSC +-- elki.clustering.subspace.HiSC.Instance
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

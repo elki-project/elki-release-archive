@@ -1,0 +1,27 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SigniTrendChangeDetection\n<size:10>elki.timeseries" as elki.timeseries.SigniTrendChangeDetection [[SigniTrendChangeDetection.html]] {
+        -alpha: double
+        -bias: double
+        -minsigma: double
+        +SigniTrendChangeDetection(double, double, double)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<NumberVector>): ChangePoints
+    }
+
+    interface "<size:14>Algorithm\n<size:10>elki" as elki.Algorithm [[../Algorithm.html]] {
+        {abstract} +getInputTypeRestriction(): TypeInformation[]
+    }
+    class "<size:14>SigniTrendChangeDetection.Instance\n<size:10>elki.timeseries" as elki.timeseries.SigniTrendChangeDetection.Instance [[SigniTrendChangeDetection.Instance.html]]
+    class "<size:14>SigniTrendChangeDetection.Par\n<size:10>elki.timeseries" as elki.timeseries.SigniTrendChangeDetection.Par [[SigniTrendChangeDetection.Par.html]]
+
+    elki.Algorithm <|.. elki.timeseries.SigniTrendChangeDetection
+    elki.timeseries.SigniTrendChangeDetection +-- elki.timeseries.SigniTrendChangeDetection.Instance
+    elki.timeseries.SigniTrendChangeDetection +-- elki.timeseries.SigniTrendChangeDetection.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

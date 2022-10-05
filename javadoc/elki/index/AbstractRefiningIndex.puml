@@ -1,0 +1,26 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    abstract class "<size:14>AbstractRefiningIndex\n<size:10>elki.index" as elki.index.AbstractRefiningIndex<O> [[AbstractRefiningIndex.html]] {
+        #relation: Relation<O>
+        -refinements: Counter
+        +AbstractRefiningIndex(Relation<O>)
+        {abstract} +getLogger(): Logging
+        #countRefinements(int): void
+        +logStatistics(): void
+        #refine(DBID): O
+    }
+
+    interface "<size:14>Index\n<size:10>elki.index" as elki.index.Index [[Index.html]] {
+        {abstract} +initialize(): void
+    }
+    abstract class "<size:14>AbstractRefiningIndex.AbstractRefiningQuery\n<size:10>elki.index" as elki.index.AbstractRefiningIndex.AbstractRefiningQuery [[AbstractRefiningIndex.AbstractRefiningQuery.html]]
+
+    elki.index.Index <|.. elki.index.AbstractRefiningIndex
+    elki.index.AbstractRefiningIndex +-- elki.index.AbstractRefiningIndex.AbstractRefiningQuery
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

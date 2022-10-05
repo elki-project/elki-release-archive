@@ -1,0 +1,29 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>ConfusionMatrix\n<size:10>elki.evaluation.classification" as elki.evaluation.classification.ConfusionMatrix [[ConfusionMatrix.html]] {
+        -confusion: int[]
+        -labels: ArrayList<ClassLabel>
+        +ConfusionMatrix(ArrayList<ClassLabel>, int[])
+        +truePositiveRate(): double
+        +falsePositiveRate(int): double
+        +falsePositiveRate(): double
+        +positivePredictedValue(int): double
+        +positivePredictedValue(): double
+        +truePositives(): int
+        +truePositives(int): int
+        +truePositiveRate(int): double
+        +trueNegatives(int): int
+        +falsePositives(int): int
+        +falseNegatives(int): int
+        +totalInstances(): int
+        +rowSum(int): int
+        +colSum(int): int
+        +value(int, int): int
+    }
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml

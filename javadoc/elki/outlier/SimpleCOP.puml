@@ -1,0 +1,24 @@
+@startuml
+    remove .*\.(Instance|Par|Parameterizer|Factory)$
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>SimpleCOP\n<size:10>elki.outlier" as elki.outlier.SimpleCOP<V extends NumberVector> [[SimpleCOP.html]] {
+        {static} -LOG: Logging
+        #distance: Distance<? super NumberVector>
+        #kplus: int
+        #dependencyDerivator: DependencyDerivator<V extends NumberVector>
+        +SimpleCOP(Distance<? super NumberVector>, int, PCARunner, EigenPairFilter)
+        +getInputTypeRestriction(): TypeInformation[]
+        +run(Relation<V extends NumberVector>): OutlierResult
+    }
+
+    interface "<size:14>OutlierAlgorithm\n<size:10>elki.outlier" as elki.outlier.OutlierAlgorithm [[OutlierAlgorithm.html]]
+    class "<size:14>SimpleCOP.Par\n<size:10>elki.outlier" as elki.outlier.SimpleCOP.Par<V extends NumberVector> [[SimpleCOP.Par.html]]
+
+    elki.outlier.OutlierAlgorithm <|.. elki.outlier.SimpleCOP
+    elki.outlier.SimpleCOP +-- elki.outlier.SimpleCOP.Par
+
+    center footer UMLDoclet 2.0.19, PlantUML 1.2022.8
+@enduml
